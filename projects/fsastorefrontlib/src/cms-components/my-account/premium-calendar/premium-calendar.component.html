@@ -1,15 +1,14 @@
 <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
   {{ 'premiumCalendar.premiumCalendar' | cxTranslate }}
 </h2>
-<ng-container *ngIf="policies$ | async as policies; else noPolicies">
-  <ng-container *ngIf="policiesLoaded$ | async; else loading">
+<ng-container *ngIf="policiesLoaded$ | async; else loading">
+  <ng-container *ngIf="policies$ | async as policies">
     <ng-container
       *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies"
     >
-      <div class="container-fluid d-none d-lg-block">
-        <!-- Desktop Layout-->
-        <div class="section-header-heading row">
-          <h5 class="col">{{ 'policy.policy' | cxTranslate }}</h5>
+      <div class="container-fluid">
+        <div class="section-header-heading row d-none d-lg-flex text-left">
+          <h5 class="col text-center">{{ 'policy.policy' | cxTranslate }}</h5>
           <h5 class="col">{{ 'fscommon.paymentFrequency' | cxTranslate }}</h5>
           <h5 class="col">{{ 'premiumCalendar.dueDate' | cxTranslate }}</h5>
           <h5 class="col">{{ 'fscommon.premium' | cxTranslate }}</h5>
@@ -17,17 +16,17 @@
         </div>
         <div *ngFor="let policy of policies.insurancePolicies; let i = index">
           <div
-            class="premium-data-row row border boder-color-3"
+            class="premium-data-row row border background-color-4 text-center text-lg-left"
             (click)="toggleActiveAccordion(i)"
             [ngClass]="{
               clickable: policy.billingData?.length > 1,
               active: selectedIndexes.includes(i)
             }"
           >
-            <div class="col">
+            <div class="col align-self-stretch p-4 px-lg-3 py-lg-0">
               <div class="row">
-                <div class="col-4">
-                  <div class="image-wrapper">
+                <div class="col-4 justify-content-center pb-4 pb-lg-0">
+                  <div class="image-wrapper small">
                     <img
                       class="image-item"
                       [src]="
@@ -38,23 +37,29 @@
                     />
                   </div>
                 </div>
-                <div class="col-8">
+                <div class="col-lg-8">
                   {{ policy.categoryData?.name }} <br />
                   {{ policy.contractNumber }}
                 </div>
               </div>
             </div>
             <div class="col">
+              <h5 class="d-lg-none">
+                {{ 'fscommon.paymentFrequency' | cxTranslate }}
+              </h5>
               {{ policy.paymentFrequency }}
             </div>
             <div
-              class="col"
+              class="col text-left align-self-stretch background-color-4"
               [ngClass]="
                 policy.billingData[0]?.paymentStatus == 'Overdue'
                   ? 'warn'
                   : 'notice'
               "
             >
+              <h5 class="d-lg-none align-self-end">
+                {{ 'premiumCalendar.dueDate' | cxTranslate }}
+              </h5>
               {{ policy.billingData[0]?.dueDate | cxDate: 'dd MMM yyyy' }}
               <div
                 class="warn"
@@ -64,16 +69,23 @@
               </div>
             </div>
             <div
-              class="col"
+              class="col text-left align-self-stretch background-color-4"
               [ngClass]="
                 policy.billingData[0]?.paymentStatus == 'Overdue'
                   ? 'warn'
                   : 'notice'
               "
             >
+              <h5 class="d-lg-none align-self-end">
+                {{ 'fscommon.premium' | cxTranslate }}
+              </h5>
+              <span
+                class="d-lg-none fs-icon icon-triangle-bottom"
+                [ngClass]="selectedIndexes.includes(i) ? 'rotate' : ''"
+              ></span>
               {{ policy.policyPremium?.formattedValue }}
             </div>
-            <div class="col">
+            <div class="col d-none d-lg-block">
               <ng-container *ngIf="policy.paymentMethod; else NA">
                 {{ policy.paymentMethod.cardType?.code | uppercase }}
                 {{ policy.paymentMethod?.cardNumber }}
@@ -85,17 +97,17 @@
             *ngIf="policy.billingData?.length > 1"
             [ngClass]="selectedIndexes.includes(i) ? 'opened' : ''"
           >
-            <div class="container-fluid">
+            <div class="container-fluid border-right border-left">
               <ng-container
                 *ngFor="let dueDate of policy.billingData | slice: 1"
               >
-                <div class="row">
+                <div class="row border-bottom">
                   <div class="col"></div>
                   <div class="col"></div>
-                  <div class="col color-dot">
+                  <div class="col color-dot text-left mw-md-100">
                     {{ dueDate.dueDate | cxDate: 'dd MMM yyyy' }}
                   </div>
-                  <div class="col color-dot">
+                  <div class="col color-dot text-left">
                     {{ dueDate.paymentAmount }}
                   </div>
                   <div class="col"></div>
@@ -103,146 +115,15 @@
               </ng-container>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- End of Desktop Layout-->
-      <div class="container-fluid">
-        <!-- Mobile layout-->
-        <div class="row">
-          <ng-container
-            *ngFor="let policy of policies.insurancePolicies; let i = index"
-          >
-            <div class="col-12 col-sm-6 d-block d-lg-none">
-              <div class="cards__wrapper">
-                <div class="cards__title cards__title--gradient-background">
-                  <span
-                    class="images images__wrapper images__wrapper--white-bck"
-                  >
-                    <img
-                      class="image-item"
-                      [src]="
-                        getBaseUrl() +
-                        policy.mainProduct.coverageProduct.images[0]?.url
-                      "
-                      alt=""
-                    />
-                  </span>
-                  <h4 class="cards__caption cards__caption--color-white">
-                    {{ policy.categoryData?.name }}
-                  </h4>
-                  <div class="cards__info cards__info--color-white">
-                    {{ policy.policyNumber }}
-                  </div>
-                </div>
-                <div class="cards__details-wrapper">
-                  <div class="cards__data border-bottom border-color-3">
-                    <span class="title">
-                      {{ 'fscommon.paymentFrequency' | cxTranslate }}
-                    </span>
-                    <span class="value">
-                      {{ policy.paymentFrequency }}
-                    </span>
-                  </div>
-                  <div
-                    class="container cards__data border-bottom border-color-3"
-                    (click)="toggleActiveAccordion(i)"
-                    [ngClass]="{
-                      clickable: policy.billingData.length > 1,
-                      active: selectedIndexes.includes(i)
-                    }"
-                  >
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="title">
-                          <div
-                            class="cell-text text-left d-flex justify-content-around"
-                          >
-                            {{ 'premiumCalendar.dueDate' | cxTranslate }}
-                          </div>
-                        </div>
-                        <div
-                          class="title text-left d-flex justify-content-around"
-                          [ngClass]="
-                            policy.billingData[0]?.paymentStatus == 'Overdue'
-                              ? 'warn'
-                              : 'notice'
-                          "
-                        >
-                          {{
-                            policy.billingData[0]?.dueDate
-                              | cxDate: 'dd MMM yyyy'
-                          }}
-                          <div
-                            class="warn"
-                            *ngIf="
-                              policy.billingData[0]?.paymentStatus == 'Overdue'
-                            "
-                          >
-                            {{ 'premiumCalendar.overdue' | cxTranslate }}
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div
-                          class="title text-left d-flex justify-content-around"
-                        >
-                          <div class="cell-text">
-                            {{ 'fscommon.premium' | cxTranslate }}
-                          </div>
-                        </div>
-                        <div
-                          class="title text-left d-flex justify-content-around"
-                          [ngClass]="
-                            policy.billingData[0]?.paymentStatus == 'Overdue'
-                              ? 'warn'
-                              : 'notice'
-                          "
-                        >
-                          {{ policy.billingData[0]?.paymentAmount }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <ng-container *ngIf="policy.billingData.length > 1">
-                    <div
-                      class="accordion container"
-                      [ngClass]="selectedIndexes.includes(i) ? 'opened' : ''"
-                    >
-                      <ul class="list-data">
-                        <ng-container
-                          *ngFor="let dueDate of policy.billingData | slice: 1"
-                        >
-                          <li
-                            class="row list-item border-bottom border-color-3"
-                          >
-                            <div
-                              class="col-6 text-left d-flex justify-content-around"
-                            >
-                              {{ dueDate.dueDate | cxDate: 'dd MMM yyyy' }}
-                            </div>
-                            <div
-                              class="col-6 text-left d-flex justify-content-around"
-                            >
-                              {{ dueDate.paymentAmount }}
-                            </div>
-                          </li>
-                        </ng-container>
-                      </ul>
-                    </div>
-                  </ng-container>
-                  <div class="cards__data">
-                    <span class="title">
-                      {{ 'fscommon.paymentMethod' | cxTranslate }}
-                    </span>
-                    <ng-container *ngIf="policy.paymentMethod; else NA">
-                      {{ policy.paymentMethod.cardType?.code | uppercase }}
-                      {{ policy.paymentMethod?.cardNumber }}
-                    </ng-container>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-container>
+          <div class="col d-lg-none border border-top-0 text-center">
+            <h5>
+              {{ 'fscommon.paymentMethod' | cxTranslate }}
+            </h5>
+            <span *ngIf="policy.paymentMethod; else NA">
+              {{ policy.paymentMethod.cardType?.code | uppercase }}
+              {{ policy.paymentMethod?.cardNumber }}
+            </span>
+          </div>
         </div>
       </div>
     </ng-container>
