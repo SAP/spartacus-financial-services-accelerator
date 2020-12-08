@@ -1,4 +1,4 @@
-import { GlobalMessageConfig, GlobalMessageType } from "@spartacus/core";
+import { GlobalMessageConfig, GlobalMessageType } from '@spartacus/core';
 
 export function defaultFSGlobalMessageConfigFactory(): GlobalMessageConfig {
   return {

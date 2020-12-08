@@ -1,7 +1,11 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { translationChunksConfig, translations } from '@spartacus/assets';
-import { ConfigModule, provideConfig, provideDefaultConfigFactory } from '@spartacus/core';
+import {
+  ConfigModule,
+  provideConfig,
+  provideDefaultConfigFactory,
+} from '@spartacus/core';
 import {
   B2cStorefrontModule,
   defaultCmsContentConfig,
@@ -102,7 +106,10 @@ export class FSStorefrontModule {
   ): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
-      providers: [provideConfig(config), provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory)],
+      providers: [
+        provideConfig(config),
+        provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory),
+      ],
     };
   }
 }
