@@ -86,6 +86,7 @@ context('Homeowners Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('homeownersFinalReview');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {

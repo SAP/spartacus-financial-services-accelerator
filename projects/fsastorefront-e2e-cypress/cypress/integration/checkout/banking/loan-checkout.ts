@@ -27,7 +27,6 @@ context('Loan Checkout', () => {
     cy.get('.action-button').click();
     loan.checkMiniCartFirstStep();
     checkout.clickContinueButton();
-    checkout.waitForAddOptions();
   });
 
   it('Should check optional products', () => {

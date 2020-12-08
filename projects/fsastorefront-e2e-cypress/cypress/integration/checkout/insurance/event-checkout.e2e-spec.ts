@@ -76,6 +76,7 @@ context('Event Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('threeAccordions');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {

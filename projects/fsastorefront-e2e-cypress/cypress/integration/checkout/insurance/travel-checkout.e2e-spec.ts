@@ -62,6 +62,7 @@ context('Travel Insurance Checkout', () => {
 
   it('Place order on final review pages', () => {
     checkout.placeOrderOnFinalReview();
+    cy.wait(200000);
   });
 
   it('Check order confirmation', () => {

@@ -79,6 +79,7 @@ context('FNOL for sample data user', () => {
 
   it('Check order confirmation', () => {
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Should update policy details', () => {

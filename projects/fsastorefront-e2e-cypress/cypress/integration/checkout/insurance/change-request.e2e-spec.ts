@@ -67,6 +67,7 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Should check my policies and policy details page', () => {

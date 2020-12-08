@@ -83,6 +83,7 @@ context('Savings Insurance Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('savingsFinalReview');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {

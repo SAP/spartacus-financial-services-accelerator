@@ -3,7 +3,6 @@ import { waitForPage } from '../generalHelpers';
 export function checkPageContent() {
   cy.get('cx-fs-premium-calendar').should('be.visible');
   cy.get('h2').contains('Premium Calendar');
-  cy.get('.container-fluid.d-lg-block').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
 }
 
