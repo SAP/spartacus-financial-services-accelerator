@@ -6,7 +6,6 @@ import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
-import * as inbox from '../../../helpers/my-account/inbox';
 
 context('Change Request for new user', () => {
   before(() => {

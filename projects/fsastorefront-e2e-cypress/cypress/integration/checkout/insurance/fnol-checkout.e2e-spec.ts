@@ -10,7 +10,6 @@ import {
 } from '../../../helpers/my-account/policies';
 import {
   waitForPage,
-  waitForCreateAsset,
 } from '../../../helpers/generalHelpers';
 
 context('FNOL for sample data user', () => {
@@ -41,7 +40,6 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should continue in add options and quote review pages', () => {
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoBronze();
     const personalDetails = waitForPage('personal-details', 'personalDetails');

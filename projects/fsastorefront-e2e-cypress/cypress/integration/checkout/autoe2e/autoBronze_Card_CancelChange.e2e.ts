@@ -8,7 +8,6 @@ import * as myPolicies from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
 import {
-  checkChangedMileagePremium,
   checkChangedMileagePremiumCancelled,
 } from '../../../helpers/checkout/insurance/policyChange_integration';
 
