@@ -96,7 +96,6 @@ const routes: Routes = [
     ClaimModule,
     PremiumCalendarModule,
     UserRequestStoreModule,
-    RouterModule,
     RouterModule.forChild(routes),
     FSOrderModule,
     ConfigModule.withConfig(<CmsConfig>{

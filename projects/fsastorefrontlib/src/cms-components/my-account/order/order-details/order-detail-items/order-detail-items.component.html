@@ -1,57 +1,56 @@
 <ng-container *ngIf="order$ | async as order">
-  <!-- <ng-container
-    *ngIf="order.consignments?.length || order.unconsignedEntries?.length"
-  >
-    <ng-container *ngIf="orderPromotions$ | async as orderPromotions">
-      <cx-promotions [promotions]="orderPromotions"></cx-promotions>
-    </ng-container>
-  </ng-container> -->
-
-  <!-- consigned entries -->
-  <ng-container *ngIf="order.consignments?.length">
-    <cx-order-consigned-entries
-      *ngIf="others$ | async as others"
-      [order]="order"
-      [consignments]="others"
-    ></cx-order-consigned-entries>
-
-    <cx-order-consigned-entries
-      *ngIf="completed$ | async as completed"
-      [order]="order"
-      [consignments]="completed"
-    ></cx-order-consigned-entries>
-
-    <cx-order-consigned-entries
-      *ngIf="cancel$ | async as cancel"
-      [order]="order"
-      [consignments]="cancel"
-    ></cx-order-consigned-entries>
-  </ng-container>
-
-  <!-- unconsigned entries OR any entries -->
-  <ng-container
-    *ngIf="
-      order?.unconsignedEntries?.length ||
-      (order?.entries && order?.replenishmentOrderCode)
-    "
-  >
-    <div class="cx-list row">
-      <div *ngIf="order?.statusDisplay" class="cx-list-header col-12">
-        <div class="cx-list-status">
-          {{
-            'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate
-          }}
+  <ng-container *ngIf="order?.entries?.length > 0">
+    <ng-container *ngIf="order?.entries as entries">
+      <div class="row d-none d-md-flex d-lg-flex d-xl-flex">
+        <div class="col-7 text-center">
+          {{ 'cartItems.description' | cxTranslate }}
         </div>
+        <div class="col-3">{{ 'fscommon.paymentFrequency' | cxTranslate }}</div>
+        <div class="col-2">{{ 'cartItems.itemPrice' | cxTranslate }}</div>
       </div>
-      <div class="cx-list-item col-12">
-        <cx-cart-item-list
-          [items]="
-            order?.unconsignedEntries ? order.unconsignedEntries : order.entries
-          "
-          [readonly]="true"
-          [promotionLocation]="promotionLocation"
-        ></cx-cart-item-list>
-      </div>
-    </div>
+      <ng-container *ngFor="let entry of entries">
+        <div class="row">
+          <ng-container
+            *ngIf="
+              entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
+            "
+          >
+            <div class="col d-flex justify-content-end">
+              <button class="btn btn-action ml-auto" type="button">
+                {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
+              </button>
+            </div>
+          </ng-container>
+        </div>
+        <div class="row">
+          <div class="col-2">
+            <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
+          </div>
+          <div class="col-5">
+            <div>{{ entry.product?.name }}</div>
+            <div>
+              {{ entry.product?.code }}
+            </div>
+          </div>
+          <div class="col-3">
+            <ng-container
+              *ngIf="order.insuranceQuote.paymentFrequency; else na"
+              >{{ order.insuranceQuote.paymentFrequency }}</ng-container
+            >
+          </div>
+          <div class="col-2">{{ entry.product?.name }}</div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #na>
+      {{ 'fscommon.notAvailable' | cxTranslate }}
+    </ng-template>
+
+    <hr />
+    <br />
+    <cx-order-consigned-entries
+      [order]="order.consignments[0]?.entries"
+      [consignments]="order.consignments"
+    ></cx-order-consigned-entries>
   </ng-container>
 </ng-container>

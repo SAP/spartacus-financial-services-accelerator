@@ -14,10 +14,10 @@ import {
   SpinnerModule,
   OrderOverviewModule,
   OrderDetailsModule,
+  MediaModule,
 } from '@spartacus/storefront';
 import { FSConsignmentTrackingComponent } from './order-detail-items';
 import { FSTrackingEventsComponent } from './order-detail-items/consignment-tracking/tracking-events/tracking-events.component';
-import { FSOrderConsignedEntriesComponent } from './order-detail-items/order-consigned-entries/order-consigned-entries.component';
 import { FSOrderDetailItemsComponent } from './order-detail-items/order-detail-items.component';
 import { FSOrderDetailShippingComponent } from './order-detail-shipping/order-detail-shipping.component';
 import { FSOrderDetailTotalsComponent } from './order-detail-totals/order-detail-totals.component';
@@ -28,7 +28,6 @@ const moduleComponents = [
   FSOrderDetailTotalsComponent,
   FSTrackingEventsComponent,
   FSConsignmentTrackingComponent,
-  FSOrderConsignedEntriesComponent,
 ];
 
 @NgModule({
@@ -42,6 +41,7 @@ const moduleComponents = [
     SpinnerModule,
     OrderOverviewModule,
     OrderDetailsModule,
+    MediaModule,
   ],
   providers: [
     provideDefaultConfig(<CmsConfig | FeaturesConfig>{
