@@ -1,45 +1,71 @@
 <ng-container *ngIf="order$ | async as order">
+  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+    {{ 'orderDetails.orderId' | cxTranslate }} {{ order?.code }}
+  </h2>
   <ng-container *ngIf="order?.entries?.length > 0">
     <ng-container *ngIf="order?.entries as entries">
-      <div class="row d-none d-md-flex d-lg-flex d-xl-flex text-uppercase">
-        <h6 class="col-7">
-          {{ 'cartItems.description' | cxTranslate }}
-        </h6>
-        <h6 class="col-3">{{ 'fscommon.paymentFrequency' | cxTranslate }}</h6>
-        <h6 class="col-2">{{ 'cartItems.itemPrice' | cxTranslate }}</h6>
-      </div>
-      <ng-container *ngFor="let entry of entries">
-        <div class="row border-bottom py-3">
-          <div
-            *ngIf="
-              entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
-            "
-            class="col-12 pb-3"
-          >
-            <div class="text-right">
-              <button class="btn btn-action" type="button">
-                {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
-              </button>
-            </div>
+      <div class="container-fluid">
+        <div class="row d-none d-md-flex d-lg-flex d-xl-flex text-uppercase">
+          <div class="title col-6">
+            {{ 'cartItems.description' | cxTranslate }}
           </div>
-          <div class="col-2">
-            <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
+          <div class="title col-4">
+            {{ 'fscommon.paymentFrequency' | cxTranslate }}
           </div>
-          <div class="col-5">
-            <div>{{ entry.product?.name }}</div>
-            <div>
-              {{ entry.product?.code }}
-            </div>
+          <div class="title col-2 text-right">
+            {{ 'fscommon.price' | cxTranslate }}
           </div>
-          <div class="col-3">
-            <ng-container
-              *ngIf="order.insuranceQuote.paymentFrequency; else na"
-              >{{ order.insuranceQuote.paymentFrequency }}</ng-container
-            >
-          </div>
-          <div class="col-2">{{ entry.product?.name }}</div>
         </div>
-      </ng-container>
+        <ng-container *ngFor="let entry of entries">
+          <div class="row border-bottom py-3 align-items-center">
+            <div
+              *ngIf="
+                entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
+              "
+              class="col-12 text-right text-uppercase semi-bold"
+            >
+              <a href="/">
+                <span
+                  class="h2 d-inline d-md-none d-lg-none d-xl-none fs-icon icon-selected-item"
+                ></span>
+                <span class="d-none d-md-inline d-lg-inline d-xl-inline">
+                  {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
+                </span>
+              </a>
+            </div>
+            <div class="col-2">
+              <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
+            </div>
+            <div class="col-6 col-md-8 col-lg-8 col-xl-8 text-break">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                  <div class="title semi-bold">{{ entry.product?.name }}</div>
+                  <div>
+                    {{ entry.product?.code }}
+                  </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 col-xl-6">
+                  <div class="d-block d-md-none d-lg-none d-xl-none semi-bold">
+                    {{ 'fscommon.paymentFrequency' | cxTranslate }}:
+                  </div>
+                  <div>
+                    <ng-container
+                      *ngIf="order.insuranceQuote.paymentFrequency; else na"
+                      >{{ order.insuranceQuote.paymentFrequency }}</ng-container
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-md-2 col-lg-2 col-xl-2 text-right text-break">
+              <div class="d-inline d-md-none d-lg-none d-xl-none semi-bold">
+                {{ 'fscommon.price' | cxTranslate }}:
+              </div>
+              <div>{{ entry?.totalPrice?.formattedValue }}</div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </ng-container>
     <ng-template #na>
       {{ 'fscommon.notAvailable' | cxTranslate }}
