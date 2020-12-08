@@ -97,4 +97,18 @@ describe('OccFileAdapter', () => {
     expect(mockReq.cancelled).toBeFalsy();
     mockReq.flush('');
   });
+
+  it('should be able to get files', () => {
+    occFileAdapter
+      .getFilesForCodes(OCC_USER_ID_CURRENT, Array.from(mockFileCode))
+      .subscribe();
+    const mockReq = httpMock.expectOne(req => {
+      return req.method === 'GET';
+    });
+    expect(occEnpointsService.getUrl).toHaveBeenCalledWith('getFiles', {
+      userId: OCC_USER_ID_CURRENT,
+    });
+    expect(mockReq.cancelled).toBeFalsy();
+    mockReq.flush('');
+  });
 });

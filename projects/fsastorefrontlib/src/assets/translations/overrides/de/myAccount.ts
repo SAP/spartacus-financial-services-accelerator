@@ -1,11 +1,11 @@
 export const myAccount = {
   consentManagementForm: {
-    clearAll: '[DE] Clear all',
-    selectAll: '[DE] Select all',
+    clearAll: 'Alles löschen',
+    selectAll: 'Alles auswählen',
     message: {
       success: {
-        given: '[DE] Consent successfully given.',
-        withdrawn: '[DE] Consent successfully withdrawn.',
+        given: 'Zustimmung zur Datenverarbeitung erteilt.',
+        withdrawn: 'Zustimmung zur Datenverarbeitet abgelehnt.',
       },
     },
   },

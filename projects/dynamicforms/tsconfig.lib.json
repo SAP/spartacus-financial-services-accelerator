@@ -3,13 +3,19 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "target": "es2015",
+    "module": "es2020",
+    "moduleResolution": "node",
     "declaration": true,
     "inlineSources": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
     "types": [],
-    "lib": ["dom", "es2018"]
+    "lib": ["es2020", "dom"],
+    "paths": {
+      "@fsa/dynamicforms": ["dist/dynamicforms"]
+    }
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,

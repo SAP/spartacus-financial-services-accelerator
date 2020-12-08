@@ -21,6 +21,6 @@ export class DatePickerComponent extends AbstractFormComponent {
   }
 
   getDateFormat() {
-    return this.dateConfig.date.format || '';
+    return this.dateConfig?.date?.format || '';
   }
 }

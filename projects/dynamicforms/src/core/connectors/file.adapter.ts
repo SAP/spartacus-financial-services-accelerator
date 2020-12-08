@@ -14,6 +14,16 @@ export abstract class FileAdapter {
     fileType: string
   ): Observable<any>;
   /**
+   * Abstract method used to fetch files by codes
+   *
+   * @param userId The user id
+   * @param fileCodes The file codes
+   */
+  abstract getFilesForCodes(
+    userId: string,
+    fileCodes: Array<string>
+  ): Observable<any>;
+  /**
    * Abstract method used to upload file
    *
    * @param userId The user id
