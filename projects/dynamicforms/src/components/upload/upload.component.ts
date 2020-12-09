@@ -26,8 +26,6 @@ import { FormDataService } from '../../core/services';
   templateUrl: './upload.component.html',
 })
 export class UploadComponent extends AbstractFormComponent implements OnInit {
-  protected readonly fileSizeSymbols = ['Bytes', 'KB', 'MB'];
-
   fileList: File[] = [];
   uploadControl: AbstractControl;
   individualProgress = {};
@@ -106,11 +104,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   convertFileSize(bytes: number) {
+    const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
-      return `${bytes} ${this.fileSizeSymbols[i]}`;
+      return `${bytes} ${sizes[i]}`;
     }
-    return `${(bytes / 1024 ** i).toFixed(1)} ${this.fileSizeSymbols[i]}`;
+    return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   }
 
   uploadFiles(files: File[]) {
