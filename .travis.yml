@@ -12,4 +12,4 @@ script:
   - yarn run build:ci
   - yarn run ng lint
   - yarn prettier
-  - yarn run test --watch=false
+  - yarn run test --watch=false --code-coverage

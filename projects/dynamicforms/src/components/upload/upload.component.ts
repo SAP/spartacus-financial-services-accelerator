@@ -209,12 +209,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
   }
 
-  protected checkFileSize(event): Boolean {
+  protected checkFileSize(event): boolean {
     const files: File[] = Array.from(event.target.files);
     const maxExceeded = files.filter(
       file => file.size > this.config.maxFileSize
     );
-    return !(maxExceeded.length > 0);
+    return maxExceeded.length <= 0;
   }
 
   protected setValueAndValidate(value: File[]) {

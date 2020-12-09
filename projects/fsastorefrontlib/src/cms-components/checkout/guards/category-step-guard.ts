@@ -6,7 +6,6 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
-import { FSCheckoutStep } from '../../../occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
@@ -24,13 +23,9 @@ export class CategoryStepGuard implements CanActivate {
       route
     );
 
-    const currentStep = <FSCheckoutStep>(
-      this.fsCheckoutConfigService.steps[currentStepIndex]
-    );
+    const currentStep = this.fsCheckoutConfigService.steps[currentStepIndex];
 
-    const nextStep = <FSCheckoutStep>(
-      this.fsCheckoutConfigService.steps[currentStepIndex + 1]
-    );
+    const nextStep = this.fsCheckoutConfigService.steps[currentStepIndex + 1];
 
     const nextStepUrl = this.routingConfigService.getRouteConfig(
       nextStep.routeName
