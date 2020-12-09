@@ -109,6 +109,22 @@
   border-top: 3px solid var(--cx-color-primary);
   background-color: var(--cx-color-4);
 }
+@mixin headline-style {
+  font-size: var(--cx-h2-font-size);
+  color: var(--cx-color-text);
+  font-weight: var(--cx-font-weight-semi);
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 3px solid var(--cx-color-primary);
+    width: 7rem;
+  }
+}
 @mixin status {
   &::before,
   &::after {

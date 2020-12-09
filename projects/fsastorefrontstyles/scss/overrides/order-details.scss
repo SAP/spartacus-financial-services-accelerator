@@ -1,0 +1,10 @@
+@import '../theme/fs/variables';
+
+%cx-fs-order-details-totals {
+  @include media-breakpoint-up(md) {
+    background-color: var(--cx-color-background);
+  }
+  cx-order-summary {
+    padding-top: 1.9rem;
+  }
+}
