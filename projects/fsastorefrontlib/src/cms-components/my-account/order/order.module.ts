@@ -14,15 +14,14 @@ import {
   SpinnerModule,
   MediaModule,
   CardModule,
+  OrderOverviewModule,
 } from '@spartacus/storefront';
 import { FSOrderDetailItemsComponent } from './order-details/order-detail-items/order-detail-items.component';
 import { FSOrderDetailTotalsComponent } from './order-details/order-detail-totals/order-detail-totals.component';
-import { FSOrderOverviewComponent } from './order-details/order-overview/order-overview.component';
 
 const moduleComponents = [
   FSOrderDetailItemsComponent,
   FSOrderDetailTotalsComponent,
-  FSOrderOverviewComponent,
 ];
 
 @NgModule({
@@ -36,6 +35,7 @@ const moduleComponents = [
     SpinnerModule,
     MediaModule,
     CardModule,
+    OrderOverviewModule,
   ],
   providers: [
     provideDefaultConfig(<CmsConfig | FeaturesConfig>{
