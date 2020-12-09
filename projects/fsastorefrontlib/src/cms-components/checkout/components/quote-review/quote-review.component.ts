@@ -33,7 +33,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
-  activeCategory$: Observable<String>;
+  activeCategory$: Observable<string>;
 
   constructor(
     protected cartService: FSCartService,

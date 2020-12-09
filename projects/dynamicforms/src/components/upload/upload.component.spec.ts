@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import {
   AuthService,
+  GlobalMessage,
+  GlobalMessageService,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
@@ -108,7 +110,6 @@ class MockFileUpladService {
   removeAllFiles() {}
 }
 
-class MockOccValueListService {}
 class MockLanguageService {
   getActive() {
     return of('en');
@@ -130,6 +131,9 @@ class MockAuthService {
     return of(OCC_USER_ID_CURRENT);
   }
 }
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
 
 describe('UploadComponent', () => {
   let formService: FormService;
@@ -137,6 +141,7 @@ describe('UploadComponent', () => {
   let fixture: ComponentFixture<UploadComponent>;
   let mockfileUpladService: FileService;
   let mockAuthService: AuthService;
+  let mockGlobalMessageService: GlobalMessageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -156,12 +161,14 @@ describe('UploadComponent', () => {
           { provide: FormService, useClass: MockFormService },
           { provide: FormDataService, useClass: MockFormDataService },
           { provide: AuthService, useClass: MockAuthService },
+          { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         ],
       }).compileComponents();
       fixture = TestBed.createComponent(UploadComponent);
       formService = TestBed.inject(FormService);
       mockfileUpladService = TestBed.inject(FileService);
       mockAuthService = TestBed.inject(AuthService);
+      mockGlobalMessageService = TestBed.inject(GlobalMessageService);
     })
   );
 

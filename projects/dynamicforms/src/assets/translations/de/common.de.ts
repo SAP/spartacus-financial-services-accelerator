@@ -11,6 +11,8 @@ export const dynamicforms = {
     validationErrors: 'Es liegen Validierungsfehler vor',
     definitionLoadError:
       'Ein Fehler ist aufgetreten. Das Formular konnte nicht geladen werden.',
+    documentUploadError:
+      '[DE] An error occurred during the documents upload. Please try again.',
     fillOutProperly:
       'Bitte Versuchen Sie es erneut, sobald alle Felder ordnugsgemäß',
   },
