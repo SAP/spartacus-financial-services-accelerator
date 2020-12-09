@@ -4,6 +4,9 @@
 language: node_js
 node_js:
   - 12.19.0
+env:
+  global:
+   - NODE_OPTIONS=--max-old-space-size=4096
 install:
   - yarn install
 script:
