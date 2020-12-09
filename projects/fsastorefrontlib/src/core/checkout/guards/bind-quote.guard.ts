@@ -9,10 +9,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import {
-  BindingStateType,
-  FSCart,
-} from './../../../occ/occ-models/occ.models';
+import { BindingStateType, FSCart } from './../../../occ/occ-models/occ.models';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
 
 @Injectable({
