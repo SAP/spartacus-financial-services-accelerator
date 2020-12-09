@@ -34,7 +34,7 @@ export class OccFormAdapter implements FormAdapter {
     if (formData.id) {
       const formDataId = formData.id;
       const updateUrl = this.occEndpointService.getUrl('formData', {
-        userId: OCC_USER_ID_CURRENT,
+        userId: userId,
         formDataId,
       });
       return this.http
