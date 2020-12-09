@@ -12,7 +12,6 @@ import { filter, map, take } from 'rxjs/operators';
 import {
   BindingStateType,
   FSCart,
-  FSCheckoutStep,
 } from './../../../occ/occ-models/occ.models';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
 
