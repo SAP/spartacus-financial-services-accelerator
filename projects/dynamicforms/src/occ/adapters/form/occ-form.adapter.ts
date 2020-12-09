@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccEndpointsService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FormAdapter } from '../../../core/connectors/form.adapter';
