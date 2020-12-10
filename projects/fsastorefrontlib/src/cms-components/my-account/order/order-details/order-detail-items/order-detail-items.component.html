@@ -5,7 +5,7 @@
   <ng-container *ngIf="order?.entries?.length > 0">
     <ng-container *ngIf="order?.entries as entries">
       <div class="container-fluid">
-        <div class="row d-none d-md-flex d-lg-flex d-xl-flex text-uppercase">
+        <div class="row d-none d-md-flex text-uppercase">
           <div class="title col-6">
             {{ 'cartItems.description' | cxTranslate }}
           </div>
@@ -26,9 +26,9 @@
             >
               <a href="/">
                 <span
-                  class="h2 d-inline d-md-none d-lg-none d-xl-none fs-icon icon-selected-item"
+                  class="h2 d-inline d-md-none fs-icon icon-selected-item"
                 ></span>
-                <span class="d-none d-md-inline d-lg-inline d-xl-inline">
+                <span class="d-none d-md-inline">
                   {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
                 </span>
               </a>
@@ -36,16 +36,16 @@
             <div class="col-2">
               <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
             </div>
-            <div class="col-6 col-md-8 col-lg-8 col-xl-8 text-break">
+            <div class="col-6 col-md-8 text-break">
               <div class="row align-items-center">
-                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="col-12 col-md-6">
                   <div class="title semi-bold">{{ entry.product?.name }}</div>
                   <div>
                     {{ entry.product?.code }}
                   </div>
                 </div>
-                <div class="col-12 col-md-3 col-lg-3 col-xl-6">
-                  <div class="d-block d-md-none d-lg-none d-xl-none semi-bold">
+                <div class="col-12 col-md-6">
+                  <div class="d-block d-md-none semi-bold">
                     {{ 'fscommon.paymentFrequency' | cxTranslate }}:
                   </div>
                   <div>
@@ -57,8 +57,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-4 col-md-2 col-lg-2 col-xl-2 text-right text-break">
-              <div class="d-inline d-md-none d-lg-none d-xl-none semi-bold">
+            <div class="col-4 col-md-2 text-right text-break">
+              <div class="d-inline d-md-none semi-bold">
                 {{ 'fscommon.price' | cxTranslate }}:
               </div>
               <div>{{ entry?.totalPrice?.formattedValue }}</div>
