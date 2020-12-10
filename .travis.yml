@@ -4,6 +4,9 @@
 language: node_js
 node_js:
   - 12.19.0
+env:
+  global:
+   - NODE_OPTIONS=--max-old-space-size=4096
 install:
   - yarn install
 script:
@@ -13,3 +16,11 @@ script:
   - yarn run ng lint
   - yarn prettier
   - yarn run test --watch=false --code-coverage
+  - sonar-scanner
+addons:
+  sonarcloud:
+    organization: "sap-1"
+    token:
+      secure: "ZbOLRTFChiLcp3ne9YWJZ8IdVFVBz1imk0kP04aC078L+bawzt/TmZZFwr1yDPeUQS/eQPHmw1ay+4p7iN+fUzGD1OF4qCdJmCI5qlSh+uiKPonUmo6Rq+8olgfO8KK8VrkSFY605TFu6P7CWUzkcuMOeIqtMQFQKU85aAjAbqziAU+Of+P826ai+uGyatXQ/GK8WKcHtjujPpNRNJgIBiue57n/0bGutmDhLUHr+CxHAnzBwlQrbHhZs2+BBX3hzZ+jv3usPNS1F4+xk0QQK89GipH7/1bxwqRAntVPzhe361AMYFpRG4M+ZLKojcQ4Pld5Kj8dDCdaNj9SyffhoQkJR/7Y8u7lflU5mE84IDan4NQ/9Czven1t6gFmo1UVBhBuJTbM8zXpWY33awY4psNylaHDm0uFmI0mHZbE2fv6dfpKcLMZw10FekgT+qLCqOwC7vj1/W8LbhM27dNN3fGIbSof5ifqL3J29Bnw0qY0c5txifARMD7AqsB5O+zYTiXVw5zR5Mg/4PIth86AetefH/L7XsX5XmQSrkqqPnX/1UVzcKky2PTUjl2G/FhVnc72Yb+rWLvZ2ZfJReHn1iOAl6+X3ThAjen4KOen/TuirB1Tzd6ySNuS7G6AleHuzYdez0yC8f1y2pA5zJGXvFPSl3lCkpeoyRUmdA2KqA8="
+
+
