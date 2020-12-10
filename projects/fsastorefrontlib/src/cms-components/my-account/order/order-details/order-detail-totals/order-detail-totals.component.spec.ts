@@ -1,21 +1,8 @@
-import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { Cart, Order } from '@spartacus/core';
-
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nTestingModule, Order } from '@spartacus/core';
 import { of } from 'rxjs';
-
 import { OrderDetailsService } from '@spartacus/storefront';
 import { FSOrderDetailTotalsComponent } from './order-detail-totals.component';
-
-@Component({
-  selector: 'cx-order-summary',
-  template: '',
-})
-class MockOrderSummaryComponent {
-  @Input()
-  cart: Cart;
-}
 
 const mockOrder: Order = {
   code: '1',
@@ -64,27 +51,27 @@ describe('FSOrderDetailTotalsComponent', () => {
   let component: FSOrderDetailTotalsComponent;
   let fixture: ComponentFixture<FSOrderDetailTotalsComponent>;
   let mockOrderDetailsService: OrderDetailsService;
-  let el: DebugElement;
 
-  beforeEach(async(() => {
-    mockOrderDetailsService = <OrderDetailsService>{
-      getOrderDetails() {
-        return of(mockOrder);
-      },
-    };
+  beforeEach(
+    waitForAsync(() => {
+      mockOrderDetailsService = <OrderDetailsService>{
+        getOrderDetails() {
+          return of(mockOrder);
+        },
+      };
 
-    TestBed.configureTestingModule({
-      providers: [
-        { provide: OrderDetailsService, useValue: mockOrderDetailsService },
-      ],
-      declarations: [FSOrderDetailTotalsComponent, MockOrderSummaryComponent],
-    }).compileComponents();
-  }));
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        providers: [
+          { provide: OrderDetailsService, useValue: mockOrderDetailsService },
+        ],
+        declarations: [FSOrderDetailTotalsComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FSOrderDetailTotalsComponent);
-    el = fixture.debugElement;
-
     component = fixture.componentInstance;
     component.ngOnInit();
   });
@@ -102,11 +89,5 @@ describe('FSOrderDetailTotalsComponent', () => {
       })
       .unsubscribe();
     expect(order).toEqual(mockOrder);
-  });
-
-  it('should order details order summary be rendered', () => {
-    fixture.detectChanges();
-    const element: DebugElement = el.query(By.css('cx-order-summary'));
-    expect(element).toBeTruthy();
   });
 });

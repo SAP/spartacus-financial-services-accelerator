@@ -1,18 +1,7 @@
-import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import {
-  Consignment,
-  FeaturesConfig,
-  FeaturesConfigModule,
-  I18nTestingModule,
-  Order,
-  PromotionLocation,
-} from '@spartacus/core';
-import { CardModule } from '@spartacus/storefront';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nTestingModule, Order } from '@spartacus/core';
+import { OrderDetailsService } from '@spartacus/storefront';
 import { of } from 'rxjs';
-import { OrderDetailsService } from '../order-details.service';
-import { FSOrderConsignedEntriesComponent } from './order-consigned-entries/order-consigned-entries.component';
 import { FSOrderDetailItemsComponent } from './order-detail-items.component';
 
 const mockProduct = { product: { code: 'test' } };
@@ -92,85 +81,33 @@ const mockOrder: Order = {
   ],
 };
 
-@Component({
-  selector: 'cx-cart-item-list',
-  template: '',
-})
-class MockCartItemListComponent {
-  @Input()
-  readonly = false;
-  @Input()
-  hasHeader = true;
-  @Input()
-  items = [];
-  @Input()
-  cartIsLoading = false;
-  @Input()
-  promotionLocation: PromotionLocation = PromotionLocation.Order;
-}
-
-@Component({
-  selector: 'cx-consignment-tracking',
-  template: '',
-})
-class MockConsignmentTrackingComponent {
-  @Input()
-  consignment: Consignment;
-  @Input()
-  orderCode: string;
-}
-
-class MockPromotionService {
-  getOrderPromotions(): void {}
-  getOrderPromotionsFromCart(): void {}
-  getOrderPromotionsFromCheckout(): void {}
-  getOrderPromotionsFromOrder(): void {}
-  getProductPromotionForEntry(): void {}
-}
-
 describe('FSOrderDetailItemsComponent', () => {
   let component: FSOrderDetailItemsComponent;
   let fixture: ComponentFixture<FSOrderDetailItemsComponent>;
   let mockOrderDetailsService: OrderDetailsService;
-  let el: DebugElement;
 
-  beforeEach(async(() => {
-    mockOrderDetailsService = <OrderDetailsService>{
-      getOrderDetails() {
-        return of(mockOrder);
-      },
-    };
+  beforeEach(
+    waitForAsync(() => {
+      mockOrderDetailsService = <OrderDetailsService>{
+        getOrderDetails() {
+          return of(mockOrder);
+        },
+      };
 
-    TestBed.configureTestingModule({
-      imports: [CardModule, I18nTestingModule, FeaturesConfigModule],
-      providers: [
-        { provide: OrderDetailsService, useValue: mockOrderDetailsService },
-        {
-          provide: FeaturesConfig,
-          useValue: {
-            features: { level: '1.4', consignmentTracking: true },
-          },
-        },
-        {
-          provide: PromotionService,
-          useClass: MockPromotionService,
-        },
-      ],
-      declarations: [
-        FSOrderDetailItemsComponent,
-        MockCartItemListComponent,
-        MockConsignmentTrackingComponent,
-        FSOrderConsignedEntriesComponent,
-      ],
-    }).compileComponents();
-  }));
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        providers: [
+          { provide: OrderDetailsService, useValue: mockOrderDetailsService },
+        ],
+        declarations: [FSOrderDetailItemsComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FSOrderDetailItemsComponent);
-    el = fixture.debugElement;
-
     component = fixture.componentInstance;
-    component.ngOnInit();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -186,61 +123,5 @@ describe('FSOrderDetailItemsComponent', () => {
       })
       .unsubscribe();
     expect(order).toEqual(mockOrder);
-  });
-
-  it('should initialize others and check if it does not allow valid consignment status', () => {
-    fixture.detectChanges();
-    let others: Consignment[];
-    component.others$
-      .subscribe(value => {
-        others = value;
-      })
-      .unsubscribe();
-
-    expect(others).not.toContain(mockOrder.consignments[1]);
-    expect(others).not.toContain(mockOrder.consignments[2]);
-    expect(others).not.toContain(mockOrder.consignments[3]);
-  });
-
-  it('should initialize others and check if it contains any consignment status', () => {
-    fixture.detectChanges();
-    let others: Consignment[];
-    component.others$
-      .subscribe(value => {
-        others = value;
-      })
-      .unsubscribe();
-
-    expect(others).toContain(mockOrder.consignments[0]);
-    expect(others).toContain(mockOrder.consignments[4]);
-  });
-
-  it('should initialize completed', () => {
-    fixture.detectChanges();
-    let completed: Consignment[];
-    component.completed$
-      .subscribe(value => {
-        completed = value;
-      })
-      .unsubscribe();
-
-    expect(completed).toContain(mockOrder.consignments[1]);
-    expect(completed).toContain(mockOrder.consignments[2]);
-  });
-
-  it('should initialize cancel', () => {
-    fixture.detectChanges();
-    let cancel: Consignment[];
-    component.cancel$
-      .subscribe(value => {
-        cancel = value;
-      })
-      .unsubscribe();
-    expect(cancel).toContain(mockOrder.consignments[3]);
-  });
-
-  it('should order details item be rendered', () => {
-    fixture.detectChanges();
-    expect(el.query(By.css('.cx-list'))).toBeTruthy();
   });
 });
