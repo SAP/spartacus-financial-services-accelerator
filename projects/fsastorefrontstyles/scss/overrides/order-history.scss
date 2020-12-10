@@ -1,0 +1,22 @@
+@import '../theme/fs/variables';
+
+%cx-order-history {
+  .cx-order-history-header {
+    @include headline-style;
+    padding: 1rem 0;
+    margin: 1rem auto 3rem;
+    text-align: center;
+  }
+  .table {
+    tr {
+      cursor: pointer;
+    }
+  }
+  .cx-order-history-no-order {
+    text-align: center;
+    justify-content: center;
+    .btn.btn-primary.btn-block.active {
+      margin-top: 2rem;
+    }
+  }
+}

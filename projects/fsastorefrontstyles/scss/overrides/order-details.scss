@@ -1,0 +1,26 @@
+@import '../theme/fs/variables';
+
+%cx-fs-order-details-totals {
+  @include media-breakpoint-up(md) {
+    background-color: var(--cx-color-background);
+  }
+  .card-wrapper {
+    border-right: 1px dashed var(--cx-color-3);
+    @include media-breakpoint-down(sm) {
+      border-right: none;
+    }
+  }
+  .card {
+    border: transparent;
+    background-color: transparent;
+    @include media-breakpoint-down(sm) {
+      background-color: var(--cx-color-background);
+    }
+    .card-body {
+      padding: 0 1rem;
+      @include media-breakpoint-down(sm) {
+        padding: 1.5rem 1rem;
+      }
+    }
+  }
+}

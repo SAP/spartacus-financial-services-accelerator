@@ -42,7 +42,10 @@
 
   // Carousel & Homepage headings
   cx-fs-category-carousel h3 {
-    @extend .heading-headline, .py-3, .mt-3, .mb-5, .text-center;
+    @include headline-style;
+    padding: 1rem 0;
+    margin: 1rem auto 3rem;
+    text-align: center;
   }
 
   //Get a quote section
