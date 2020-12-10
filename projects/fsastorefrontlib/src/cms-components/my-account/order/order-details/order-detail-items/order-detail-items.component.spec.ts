@@ -8,23 +8,6 @@ const mockProduct = { product: { code: 'test' } };
 
 const mockOrder: Order = {
   code: '1',
-  statusDisplay: 'Shipped',
-  deliveryAddress: {
-    firstName: 'John',
-    lastName: 'Smith',
-    line1: 'Buckingham Street 5',
-    line2: '1A',
-    phone: '(+11) 111 111 111',
-    postalCode: 'MA8902',
-    town: 'London',
-    country: {
-      isocode: 'UK',
-    },
-  },
-  deliveryMode: {
-    name: 'Standard order-detail-shipping',
-    description: '3-5 days',
-  },
   paymentInfo: {
     accountHolderName: 'John Smith',
     cardNumber: '************6206',
@@ -58,25 +41,7 @@ const mockOrder: Order = {
       code: 'a00000343',
       status: 'DELIVERY_COMPLETED',
       statusDate: new Date('2019-02-11T13:05:12+0000'),
-      entries: [{ orderEntry: mockProduct, quantity: 4, shippedQuantity: 4 }],
-    },
-    {
-      code: 'a00000348',
-      status: 'PICKUP_COMPLETE',
-      statusDate: new Date('2019-02-11T13:05:12+0000'),
-      entries: [{ orderEntry: {}, quantity: 4, shippedQuantity: 4 }],
-    },
-    {
-      code: 'a00000342',
-      status: 'CANCELLED',
-      statusDate: new Date('2019-02-11T13:05:12+0000'),
-      entries: [{ orderEntry: {}, quantity: 0, shippedQuantity: 0 }],
-    },
-    {
-      code: 'a00000349',
-      status: 'OTHERS',
-      statusDate: new Date('2019-02-11T13:05:12+0000'),
-      entries: [{ orderEntry: {}, quantity: 1, shippedQuantity: 1 }],
+      entries: [{ orderEntry: mockProduct, quantity: 1, shippedQuantity: 4 }],
     },
   ],
 };
