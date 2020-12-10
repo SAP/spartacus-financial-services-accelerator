@@ -1,6 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -17,8 +17,8 @@ const mockedPolicy = {
   contractId: contractId,
 };
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -26,10 +26,10 @@ class MockAuthService {
 describe('PolicyServiceTest', () => {
   let service: PolicyService;
   let store: Store<StateWithMyAccount>;
-  let authService: MockAuthService;
+  let userIdService: MockUserIdService;
 
   beforeEach(() => {
-    authService = new MockAuthService();
+    userIdService = new MockUserIdService();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -38,7 +38,7 @@ describe('PolicyServiceTest', () => {
       providers: [
         PolicyService,
         reducerProvider,
-        { provide: AuthService, useClass: MockAuthService },
+        { provide: UserIdService, useClass: MockUserIdService },
       ],
     });
 

@@ -1,5 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileService } from '@fsa/dynamicforms';
+
 import {
   I18nTestingModule,
   OccConfig,

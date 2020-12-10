@@ -8,6 +8,7 @@ import {
   GlobalMessageService,
   RoutingService,
   UserService,
+  AuthConfigService,
 } from '@spartacus/core';
 import { RegisterComponent } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
@@ -27,7 +28,8 @@ export class FSRegisterComponent extends RegisterComponent
     protected router: RoutingService,
     protected anonymousConsentsService: AnonymousConsentsService,
     protected anonymousConsentsConfig: AnonymousConsentsConfig,
-    protected config: DateConfig
+    protected config: DateConfig,
+    protected authConfigService: AuthConfigService
   ) {
     super(
       userService,
@@ -35,7 +37,8 @@ export class FSRegisterComponent extends RegisterComponent
       fb,
       router,
       anonymousConsentsService,
-      anonymousConsentsConfig
+      anonymousConsentsConfig,
+      authConfigService
     );
   }
 

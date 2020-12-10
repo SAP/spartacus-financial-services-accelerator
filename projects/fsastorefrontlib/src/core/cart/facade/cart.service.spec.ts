@@ -1,12 +1,12 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  AuthService,
   OCC_USER_ID_CURRENT,
   MultiCartService,
   StateWithMultiCart,
   OCC_USER_ID_ANONYMOUS,
   OCC_CART_ID_CURRENT,
+  UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './cart.service';
@@ -34,8 +34,8 @@ class MultiCartServiceStub {
   }
 }
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -43,7 +43,7 @@ class MockAuthService {
 describe('FSCartServiceTest', () => {
   let service: FSCartService;
   let multiCartService: MultiCartService;
-  let authService: AuthService;
+  let userIdService: UserIdService;
   let store: Store<StateWithMultiCart>;
 
   beforeEach(() => {
@@ -53,14 +53,14 @@ describe('FSCartServiceTest', () => {
         FSCartService,
         { provide: MultiCartService, useClass: MultiCartServiceStub },
         {
-          provide: AuthService,
-          useClass: MockAuthService,
+          provide: UserIdService,
+          useClass: MockUserIdService,
         },
       ],
     });
     service = TestBed.inject(FSCartService);
     multiCartService = TestBed.inject(MultiCartService);
-    authService = TestBed.inject(AuthService);
+    userIdService = TestBed.inject(UserIdService);
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
   });
@@ -89,7 +89,7 @@ describe('FSCartServiceTest', () => {
 
   it('should start bundle for product when active cart does not exist and user is anonymous', () => {
     spyOn(service, 'getActiveCartId').and.returnValue(of(undefined));
-    spyOn(authService, 'getOccUserId').and.returnValue(
+    spyOn(userIdService, 'getUserId').and.returnValue(
       of(OCC_USER_ID_ANONYMOUS)
     );
     service.createCartForProduct(productCode, bundleCode, 1, {});

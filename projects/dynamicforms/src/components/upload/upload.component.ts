@@ -8,10 +8,10 @@ import {
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import {
-  AuthService,
   GlobalMessageService,
   GlobalMessageType,
   LanguageService,
+  UserIdService,
 } from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { filter, map, switchMap, take } from 'rxjs/operators';
@@ -41,7 +41,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected formDataService: FormDataService,
     protected fileUploadService: FileService,
     protected cd: ChangeDetectorRef,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected globalMessageService: GlobalMessageService
   ) {
     super(appConfig, languageService, injector, formService);
@@ -151,8 +151,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   removeFile(index, uploadField) {
     // Execute Http.Delete request to backend
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(
           take(1),
           map(occUserId => {
@@ -175,8 +175,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   removeAll(uploadField) {
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(
           take(1),
           map(occUserId => {

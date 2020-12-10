@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from '@spartacus/core';
+import { UserIdService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 
@@ -13,7 +13,7 @@ export class DeleteClaimDialogComponent implements OnInit {
   constructor(
     protected service: ClaimService,
     protected fb: FormBuilder,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     public activeModal: NgbActiveModal
   ) {}
 
@@ -34,8 +34,8 @@ export class DeleteClaimDialogComponent implements OnInit {
   }
 
   deleteClaim() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId) {

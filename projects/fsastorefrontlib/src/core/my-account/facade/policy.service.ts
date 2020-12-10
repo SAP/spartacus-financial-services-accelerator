@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
-import { AuthService } from '@spartacus/core';
+import { UserIdService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
 import { StateWithMyAccount } from '../store/my-account-state';
 
@@ -11,7 +11,7 @@ import { StateWithMyAccount } from '../store/my-account-state';
 export class PolicyService {
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected authService: AuthService
+    protected userIdService: UserIdService
   ) {}
 
   getPolicies(): Observable<any> {
@@ -27,8 +27,8 @@ export class PolicyService {
   }
 
   loadPolicies() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -41,8 +41,8 @@ export class PolicyService {
   }
 
   loadClaimPolicies(policyCategoryCode: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -56,8 +56,8 @@ export class PolicyService {
   }
 
   loadPremiumCalendar() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -78,8 +78,8 @@ export class PolicyService {
   }
 
   loadPolicyDetails(policyId, contractId) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(

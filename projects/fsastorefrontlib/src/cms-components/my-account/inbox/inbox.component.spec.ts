@@ -6,7 +6,6 @@ import {
   AuthService,
   CmsService,
   I18nTestingModule,
-  UserToken,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -48,8 +47,8 @@ const mockedCMSInboxTab: InboxTab = {
 };
 
 class MockAuthService {
-  getUserToken(): Observable<UserToken> {
-    return of({ access_token: 'test' } as UserToken);
+  isUserLoggedIn(): Observable<boolean> {
+    return of(true);
   }
 }
 
