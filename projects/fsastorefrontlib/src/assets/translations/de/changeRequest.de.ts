@@ -16,6 +16,6 @@ export const changeRequest = {
         'Ihre Änderunge wurde erfolgreich übermittelt. Die Verarbeitung von E-Mails finden Sie in der',
       inbox: 'Posteingang',
     },
-    autoInformation: 'Automatische Informationen',
+    autoInformation: 'Fahrzeug Informationen',
   },
 };

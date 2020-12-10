@@ -37,7 +37,7 @@ export const user = {
     dontHaveAccount: 'Sie haben noch kein Konto?',
     guestCheckout: 'Fortfahren als Gast',
     emailAddress: {
-      label: 'Email address',
+      label: 'E-Mail Addresse',
       placeholder: 'Email eingeben',
     },
     password: {
@@ -57,7 +57,7 @@ export const user = {
     signIn: 'Ich besitze bereits ein Konto - Login',
     register: 'Registrieren',
     confirmNewPassword: 'Neues Passwort bestätigen',
-    resetPassword: 'Reset Password',
+    resetPassword: 'Passwort zurücksetzen',
     createAccount: 'Konto erstellen',
     title: 'Titel',
     firstName: {

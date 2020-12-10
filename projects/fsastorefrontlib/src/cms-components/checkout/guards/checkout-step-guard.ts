@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
 import { FSProduct } from '../../../occ/occ-models';
-import { FSCheckoutStep } from '../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 
 @Injectable({
@@ -27,12 +26,8 @@ export class CheckoutStepGuard implements CanActivate {
     const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
       route
     );
-    const currentStep = <FSCheckoutStep>(
-      this.fsCheckoutConfigService.steps[currentStepIndex]
-    );
-    const nextStep = <FSCheckoutStep>(
-      this.fsCheckoutConfigService.steps[currentStepIndex + 1]
-    );
+    const currentStep = this.fsCheckoutConfigService.steps[currentStepIndex];
+    const nextStep = this.fsCheckoutConfigService.steps[currentStepIndex + 1];
     return this.cartService.getActive().pipe(
       filter(cart => !!cart.code),
       take(1),

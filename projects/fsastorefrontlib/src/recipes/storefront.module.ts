@@ -1,6 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { translationChunksConfig, translations } from '@spartacus/assets';
-import { ConfigModule, provideConfig } from '@spartacus/core';
+import {
+  ConfigModule,
+  provideConfig,
+  provideDefaultConfigFactory,
+} from '@spartacus/core';
 import {
   B2cStorefrontModule,
   PageComponentModule,
@@ -23,6 +27,7 @@ import {
   dynamicformsTranslations,
   dynamicformsTranslationsDe,
 } from '@fsa/dynamicforms';
+import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
 
 @NgModule({
   imports: [
@@ -96,7 +101,10 @@ export class FSStorefrontModule {
   ): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
-      providers: [provideConfig(config)],
+      providers: [
+        provideConfig(config),
+        provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory),
+      ],
     };
   }
 }

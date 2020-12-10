@@ -9,11 +9,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import {
-  BindingStateType,
-  FSCart,
-  FSCheckoutStep,
-} from './../../../occ/occ-models/occ.models';
+import { BindingStateType, FSCart } from './../../../occ/occ-models/occ.models';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
 
 @Injectable({
@@ -36,9 +32,7 @@ export class BindQuoteGuard implements CanActivate {
     const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
       route
     );
-    const sourceStep = <FSCheckoutStep>(
-      this.fsCheckoutConfigService.steps[currentStepIndex - 1]
-    );
+    const sourceStep = this.fsCheckoutConfigService.steps[currentStepIndex - 1];
     if (
       sourceStep &&
       !this.CART_CREATION_CHECKOUT_STEPS.includes(sourceStep.id)

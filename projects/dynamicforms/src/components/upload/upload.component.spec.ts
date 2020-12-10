@@ -7,6 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import {
+  GlobalMessage,
+  GlobalMessageService,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
@@ -108,7 +110,6 @@ class MockFileUpladService {
   removeAllFiles() {}
 }
 
-class MockOccValueListService {}
 class MockLanguageService {
   getActive() {
     return of('en');
@@ -130,6 +131,9 @@ class MockUserIdService {
     return of(OCC_USER_ID_CURRENT);
   }
 }
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
 
 describe('UploadComponent', () => {
   let formService: FormService;
@@ -137,6 +141,7 @@ describe('UploadComponent', () => {
   let fixture: ComponentFixture<UploadComponent>;
   let mockfileUpladService: FileService;
   let mockUserIdService: UserIdService;
+  let mockGlobalMessageService: GlobalMessageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -156,12 +161,14 @@ describe('UploadComponent', () => {
           { provide: FormService, useClass: MockFormService },
           { provide: FormDataService, useClass: MockFormDataService },
           { provide: UserIdService, useClass: MockUserIdService },
+          { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         ],
       }).compileComponents();
       fixture = TestBed.createComponent(UploadComponent);
       formService = TestBed.inject(FormService);
       mockfileUpladService = TestBed.inject(FileService);
       mockUserIdService = TestBed.inject(UserIdService);
+      mockGlobalMessageService = TestBed.inject(GlobalMessageService);
     })
   );
 
