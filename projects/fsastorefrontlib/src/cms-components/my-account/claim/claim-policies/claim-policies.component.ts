@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthService, OccConfig, TranslationService } from '@spartacus/core';
+import { OccConfig, TranslationService, UserIdService } from '@spartacus/core';
 import { Card } from '@spartacus/storefront';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -24,7 +24,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   constructor(
     protected claimService: ClaimService,
     protected config: OccConfig,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected domSanitizer: DomSanitizer,
     protected translation: TranslationService,
     protected policyService: PolicyService
@@ -47,8 +47,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   selectPolicy(index, policyId, contractId) {
     this.selectedIndex = this.selectedIndex === index ? -1 : index;
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(take(1))
         .subscribe(occUserId => {
           if (this.selectedPolicyId !== policyId) {

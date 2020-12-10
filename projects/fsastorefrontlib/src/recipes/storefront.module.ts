@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { translationChunksConfig, translations } from '@spartacus/assets';
 import {
   ConfigModule,
@@ -8,7 +7,6 @@ import {
 } from '@spartacus/core';
 import {
   B2cStorefrontModule,
-  defaultCmsContentConfig,
   PageComponentModule,
   StorefrontConfig,
 } from '@spartacus/storefront';
@@ -37,9 +35,7 @@ import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-conf
     B2cStorefrontModule,
     CmsLibModule,
     CheckoutModule,
-    ConfigModule.forRoot(),
     OccModule,
-    StoreModule.forRoot({}),
     ConfigModule.withConfig({
       i18n: {
         resources: {
@@ -75,7 +71,6 @@ import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-conf
       },
     }),
     ConfigModule.withConfig(layoutConfig),
-    ConfigModule.withConfigFactory(defaultCmsContentConfig),
     ConfigModule.withConfig(routingConfig),
     ConfigModule.withConfig(checkoutConfig),
     ConfigModule.withConfig(occProductConfig),

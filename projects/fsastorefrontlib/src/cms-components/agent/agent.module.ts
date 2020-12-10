@@ -10,7 +10,6 @@ import {
 } from '@spartacus/core';
 import {
   MediaModule,
-  StoreFinderModule,
   ListNavigationModule,
   IconModule,
   PageLayoutComponent,
@@ -24,6 +23,8 @@ import { AgentSearchListComponent } from './agent-search-list/agent-search-list.
 import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-form.component';
 
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
+import { StoreFinderComponentsModule } from '@spartacus/misc/storefinder/components';
+import { StoreFinderModule } from '@spartacus/misc';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
     UrlModule,
     IconModule,
     StoreFinderModule,
+    StoreFinderComponentsModule,
     ReactiveFormsModule,
     ListNavigationModule,
     RouterModule.forChild([

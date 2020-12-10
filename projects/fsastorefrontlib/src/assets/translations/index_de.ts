@@ -6,7 +6,6 @@ import { fscommon } from './de/common.de';
 import { configureProduct } from './de/configureProduct.de';
 import { forms } from './de/forms.de';
 import { orderConfirmation } from './de/orderConfirmation.de';
-import { miniCart } from './overrides/de/miniCart';
 import { payment } from './overrides/de/payment';
 import { myAccount } from './overrides/de/myAccount';
 import { policy } from './de/policy.de';
@@ -36,7 +35,6 @@ export const fstranslationsDe: TranslationResources = {
 export const fsOverridesDe: TranslationResources = {
   user,
   payment,
-  miniCart,
   common,
   myAccount,
   address,

@@ -35,7 +35,7 @@
       }
     }
   }
-  cx-page-slot:not(.Section1) {
+  main cx-page-slot:not(.Section1) {
     @include contentWidth();
     padding: 3rem 1.5rem 0 1.5rem;
   }

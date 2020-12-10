@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { OCC_USER_ID_ANONYMOUS, UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
@@ -12,7 +12,7 @@ import * as fromSelector from '../store/selectors';
 export class ProductAssignmentService {
   constructor(
     protected store: Store<StateWithProductAssignment>,
-    protected authService: AuthService
+    protected userIdService: UserIdService
   ) {}
 
   user: string;
@@ -24,8 +24,8 @@ export class ProductAssignmentService {
     currentPage?: number,
     sort?: string
   ) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId && occUserId !== OCC_USER_ID_ANONYMOUS) {
@@ -46,8 +46,8 @@ export class ProductAssignmentService {
   }
 
   loadPotentialProductAssignments(orgUnitId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId && occUserId !== OCC_USER_ID_ANONYMOUS) {

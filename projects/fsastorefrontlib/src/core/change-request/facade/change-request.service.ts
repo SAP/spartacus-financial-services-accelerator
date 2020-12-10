@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Store, select } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
+import { AuthService, UserIdService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
@@ -17,20 +17,18 @@ export class ChangeRequestService {
 
   constructor(
     protected store: Store<StateWithChangeRequest>,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected userIdService: UserIdService
   ) {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
-      this.authService.getUserToken(),
+      this.authService.isUserLoggedIn(),
     ])
-      .subscribe(([changeRequest, userToken]) => {
+      .subscribe(([changeRequest, userloggedIn]) => {
         if (changeRequest) {
           this.requestId = changeRequest.requestId;
         }
-        if (
-          !this.isCreated(changeRequest) &&
-          this.isLoggedIn(userToken.userId)
-        ) {
+        if (!this.isCreated(changeRequest) && userloggedIn) {
           this.loadChangeRequest();
         }
       })
@@ -42,8 +40,8 @@ export class ChangeRequestService {
     contractId: string,
     changeRequestType: string
   ) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -69,8 +67,8 @@ export class ChangeRequestService {
   }
 
   loadChangeRequest() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         if (this.requestId) {
@@ -87,8 +85,8 @@ export class ChangeRequestService {
 
   simulateChangeRequest(changeRequest, stepIndex) {
     const stepData = this.buildStepData(changeRequest, stepIndex);
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -103,8 +101,8 @@ export class ChangeRequestService {
       .unsubscribe();
   }
   cancelChangeRequest(requestId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -123,8 +121,8 @@ export class ChangeRequestService {
 
   updateChangeRequest(changeRequest, stepIndex) {
     const stepData = this.buildStepData(changeRequest, stepIndex);
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(

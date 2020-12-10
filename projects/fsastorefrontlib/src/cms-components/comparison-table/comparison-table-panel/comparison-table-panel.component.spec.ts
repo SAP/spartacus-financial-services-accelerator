@@ -1,10 +1,5 @@
 import { Component, DebugElement, Input } from '@angular/core';
-import {
-  waitForAsync,
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-} from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -22,7 +17,6 @@ import { PricingService } from './../../../core/product-pricing/facade/pricing.s
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
-import createSpy = jasmine.createSpy;
 
 @Component({
   // tslint:disable

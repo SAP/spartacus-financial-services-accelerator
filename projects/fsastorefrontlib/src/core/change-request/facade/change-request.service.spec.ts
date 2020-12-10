@@ -1,7 +1,11 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
-import { Observable, of, ReplaySubject } from 'rxjs';
+import {
+  AuthService,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import * as fromAction from '../store/actions';
 import { StateWithChangeRequest } from '../store/change-request-state';
 import { reducerProvider, reducerToken } from '../store/reducers';
@@ -31,24 +35,25 @@ const stepData = {
   status: 'COMPLETED',
 };
 
-const userToken$ = new ReplaySubject<UserToken>();
-
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
-  getUserToken(): Observable<UserToken> {
-    return userToken$.asObservable();
+}
+class MockAuthService {
+  isUserLoggedIn() {
+    return true;
   }
 }
-
 describe('ChangeRequestServiceTest', () => {
   let service: ChangeRequestService;
   let store: Store<StateWithChangeRequest>;
   let authService: MockAuthService;
+  let userIdService: MockUserIdService;
 
   beforeEach(() => {
     authService = new MockAuthService();
+    userIdService = new MockUserIdService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -59,6 +64,7 @@ describe('ChangeRequestServiceTest', () => {
         ChangeRequestService,
         reducerProvider,
         { provide: AuthService, useValue: authService },
+        { provide: UserIdService, useValue: userIdService },
       ],
     });
     service = TestBed.inject(ChangeRequestService);

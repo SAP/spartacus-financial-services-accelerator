@@ -1,7 +1,11 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
-import { Observable, of, ReplaySubject } from 'rxjs';
+import {
+  AuthService,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { ClaimDataService } from '../services/claim-data.service';
 import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -23,22 +27,22 @@ const claimPolicies = {
   loaded: false,
 };
 
-const userToken$ = new ReplaySubject<UserToken>();
-
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
-  getUserToken(): Observable<UserToken> {
-    return userToken$.asObservable();
+}
+class MockAuthService {
+  isUserLoggedIn() {
+    return true;
   }
 }
-
 describe('ClaimServiceTest', () => {
   let service: ClaimService;
   let store: Store<StateWithMyAccount>;
   let claimData: ClaimDataServiceStub;
   let authService: MockAuthService;
+  let userIdService: MockUserIdService;
 
   class ClaimDataServiceStub {
     userId = userId;
@@ -47,6 +51,7 @@ describe('ClaimServiceTest', () => {
 
   beforeEach(() => {
     authService = new MockAuthService();
+    userIdService = new MockUserIdService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -58,6 +63,7 @@ describe('ClaimServiceTest', () => {
         reducerProvider,
         { provide: ClaimDataService, useClass: ClaimDataServiceStub },
         { provide: AuthService, useValue: authService },
+        { provide: UserIdService, useValue: userIdService },
       ],
     });
 
