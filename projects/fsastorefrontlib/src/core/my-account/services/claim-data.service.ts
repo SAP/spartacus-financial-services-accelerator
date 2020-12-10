@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import {
-  AuthService,
-  OCC_USER_ID_ANONYMOUS,
-  UserIdService,
-} from '@spartacus/core';
+import { OCC_USER_ID_ANONYMOUS, UserIdService } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Claim } from '../../../occ/occ-models';
 import { StateWithMyAccount } from '../store/my-account-state';

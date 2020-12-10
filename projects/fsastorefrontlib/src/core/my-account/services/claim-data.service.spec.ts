@@ -56,6 +56,10 @@ describe('ClaimDataService', () => {
       (userId as BehaviorSubject<string>).next(OCC_USER_ID_ANONYMOUS);
       expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
     });
+    it('should return anonymous userId when userId is empty', () => {
+      (userId as BehaviorSubject<string>).next('');
+      expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
+    });
   });
 
   describe('claim', () => {
@@ -66,6 +70,10 @@ describe('ClaimDataService', () => {
         })
       );
       expect(service.claimData).toEqual(testClaim);
+    });
+    it('should set and get claims', () => {
+      service.claims = [{}];
+      expect(service.claims.length).toEqual(1);
     });
   });
 });

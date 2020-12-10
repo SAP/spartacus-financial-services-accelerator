@@ -51,5 +51,9 @@ describe('InboxDataService', () => {
       (userId as BehaviorSubject<string>).next(OCC_USER_ID_ANONYMOUS);
       expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
     });
+    it('should return anonymous userId when userId is empty', () => {
+      (userId as BehaviorSubject<string>).next('');
+      expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
+    });
   });
 });
