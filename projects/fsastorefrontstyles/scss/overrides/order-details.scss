@@ -7,13 +7,15 @@
   .card-wrapper {
     border-right: 1px dashed var(--cx-color-3);
     @include media-breakpoint-down(sm) {
-      background-color: var(--cx-color-background);
       border-right: none;
     }
   }
   .card {
     border: transparent;
     background-color: transparent;
+    @include media-breakpoint-down(sm) {
+      background-color: var(--cx-color-background);
+    }
     .card-body {
       padding: 0 1rem;
       @include media-breakpoint-down(sm) {
