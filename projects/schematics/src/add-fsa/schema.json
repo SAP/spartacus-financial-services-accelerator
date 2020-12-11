@@ -50,6 +50,15 @@
       "type": "boolean",
       "description": "Consignment tracking on or off",
       "default": true
+    },
+    "overwriteAppComponent": {
+      "type": "boolean",
+      "description": "Overwrite application component",
+      "default": true
+    },
+    "useMetaTags": {
+      "type": "boolean",
+      "description": "Configure baseUrl via meta tag in index.html"
     }
   },
   "required": []
