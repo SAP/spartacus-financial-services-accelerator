@@ -10,18 +10,29 @@ import {
 import { getProjectStyleFile } from '@angular/cdk/schematics';
 import { isImported } from '@schematics/angular/utility/ast-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
+import { version } from '../../package.json';
 
 import {
   addImport,
   getTsSourceFile,
-  getProjectTargets,
   addToModuleImportsAndCommitChanges,
 } from '@spartacus/schematics';
-
-import { FS_STOREFRONT_MODULE, FSA_STOREFRONTLIB } from '../shared/constants';
+import {
+  FS_STOREFRONT_MODULE,
+  FSA_DYNAMIC_FORMS,
+  FSA_STOREFRONT,
+  FSA_STOREFRONT_STYLES,
+} from '../shared/constants';
 import { parseCSV } from '../shared/utils/transform-utils';
 import { getProjectFromWorkspace } from '../shared/utils/workspace-utils';
 import { Schema as FsOptions } from './schema';
+import { getProjectTargets } from '@schematics/angular/utility/project-targets';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import {
+  addPackageJsonDependency,
+  NodeDependency,
+  NodeDependencyType,
+} from '@schematics/angular/utility/dependencies';
 
 function prepareSiteContextConfig(options: FsOptions): string {
   const currency = parseCSV(options.currency, ['USD']).toUpperCase();
@@ -41,6 +52,49 @@ function prepareSiteContextConfig(options: FsOptions): string {
       },`;
 
   return context;
+}
+
+function addPackageJsonDependencies(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    const spartacusVersion = version;
+
+    const dependencies: NodeDependency[] = [
+      {
+        type: NodeDependencyType.Default,
+        version: spartacusVersion,
+        name: FSA_STOREFRONT,
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: spartacusVersion,
+        name: FSA_STOREFRONT_STYLES,
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: spartacusVersion,
+        name: FSA_DYNAMIC_FORMS,
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: '^2.0.2',
+        name: 'file-saver',
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: '^2.0.2',
+        name: 'blob-util',
+      },
+    ];
+
+    dependencies.forEach(dependency => {
+      addPackageJsonDependency(tree, dependency);
+      context.logger.info(
+        `✅️ Added '${dependency.name}' into ${dependency.type}`
+      );
+    });
+
+    return tree;
+  };
 }
 
 function getStorefrontConfig(options: FsOptions): string {
@@ -78,9 +132,9 @@ function updateAppModule(options: FsOptions): Rule {
     const modulePath = getAppModulePath(host, mainPath);
     context.logger.debug(`main module path: ${modulePath}`);
     const moduleSource = getTsSourceFile(host, modulePath);
-    if (!isImported(moduleSource, FS_STOREFRONT_MODULE, FSA_STOREFRONTLIB)) {
+    if (!isImported(moduleSource, FS_STOREFRONT_MODULE, FSA_STOREFRONT)) {
       // add imports
-      addImport(host, modulePath, FS_STOREFRONT_MODULE, FSA_STOREFRONTLIB);
+      addImport(host, modulePath, FS_STOREFRONT_MODULE, FSA_STOREFRONT);
 
       addToModuleImportsAndCommitChanges(
         host,
@@ -147,14 +201,23 @@ function installStyles(project: experimental.workspace.WorkspaceProject): Rule {
     host.commitUpdate(recorder);
   };
 }
+function installPackageJsonDependencies(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    context.addTask(new NodePackageInstallTask());
+    context.logger.log('info', `🔍 Installing packages...`);
+    return tree;
+  };
+}
 
 export function addFsa(options: FsOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const project = getProjectFromWorkspace(tree, options);
 
-    return chain([updateAppModule(options), installStyles(project)])(
-      tree,
-      context
-    );
+    return chain([
+      addPackageJsonDependencies(),
+      updateAppModule(options),
+      installStyles(project),
+      installPackageJsonDependencies(),
+    ])(tree, context);
   };
 }

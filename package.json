@@ -1,6 +1,6 @@
 {
-  "name": "fsastorefrontlib",
-  "version": "0.0.0",
+  "name": "fsastorefrontapp",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,7 +21,7 @@
     "prettier": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\"",
     "prettier-fix": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\" --write"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~9.1.0",
     "@angular/common": "~9.1.0",
@@ -54,10 +54,10 @@
     "ts-loader": "^6.0.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2",
-    "@spartacus/assets": "2.0.0-rc.3",
-    "@spartacus/core": "2.0.0-rc.3",
-    "@spartacus/storefront": "2.0.0-rc.3",
-    "@spartacus/styles": "2.0.0-rc.3"
+    "@spartacus/assets": "^2.1.1",
+    "@spartacus/core": "^2.1.1",
+    "@spartacus/storefront": "^2.1.1",
+    "@spartacus/styles": "^2.1.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.0",

@@ -1,6 +1,7 @@
 {
-  "name": "@fsa/fsastorefrontlib",
-  "version": "0.0.1",
+  "name": "@fsa/fsastorefront",
+  "description": "Financial Services Accelerator Spartacus Storefront",
+  "version": "1.0.0",
   "author": "FSA",
   "peerDependencies": {
     "@angular/common": "^9.0.0",
