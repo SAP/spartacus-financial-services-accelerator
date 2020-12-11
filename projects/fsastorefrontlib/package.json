@@ -3,6 +3,10 @@
   "description": "Financial Services Accelerator Spartacus Storefront",
   "version": "1.0.0",
   "author": "FSA",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",
