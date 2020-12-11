@@ -1,7 +1,11 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  OCC_USER_ID_ANONYMOUS,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -42,8 +46,8 @@ const cartWithoutEntries = {
   deliveryOrderGroups: [],
 };
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -102,11 +106,11 @@ describe('QuoteServiceTest', () => {
   let store: Store<StateWithMyAccount>;
   let cartService: FSCartService;
   let formDataService: MockFormDataService;
-  let authService: MockAuthService;
+  let userIdService: UserIdService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
-    authService = new MockAuthService();
+    //  userIdService = new UserIdService();
     formDataService = new MockFormDataService();
 
     TestBed.configureTestingModule({
@@ -119,7 +123,7 @@ describe('QuoteServiceTest', () => {
         reducerProvider,
         { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
-        { provide: AuthService, useValue: authService },
+        { provide: UserIdService, useClass: MockUserIdService },
         {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
@@ -130,6 +134,7 @@ describe('QuoteServiceTest', () => {
     service = TestBed.inject(QuoteService);
     cartService = TestBed.inject(FSCartService);
     store = TestBed.inject(Store);
+    userIdService = TestBed.inject(UserIdService);
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
 
     spyOn(store, 'dispatch').and.callThrough();

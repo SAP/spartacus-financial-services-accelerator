@@ -1,20 +1,17 @@
-import { Pipe, PipeTransform, Component } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Pipe, PipeTransform } from '@angular/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  AuthRedirectService,
   AuthService,
   FeaturesConfigModule,
   GlobalMessageService,
   I18nTestingModule,
-  UserToken,
   WindowRef,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSLoginFormComponent } from './login-form.component';
 import createSpy = jasmine.createSpy;
-import { FormErrorsModule } from '@spartacus/storefront';
 
 @Pipe({
   name: 'cxUrl',
@@ -23,23 +20,15 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
-@Component({
-  // tslint:disable
-  selector: 'cx-login-register',
-  template: '',
-})
-class MockLoginRegisterComponent {}
-
-class MockAuthService {
-  authorize = createSpy();
-  getUserToken(): Observable<UserToken> {
-    return of({ access_token: 'test' } as UserToken);
+class MockAuthService implements Partial<AuthService> {
+  loginWithCredentials() {
+    return Promise.resolve();
+  }
+  isUserLoggedIn(): Observable<boolean> {
+    return of(true);
   }
 }
 
-class MockRedirectAfterAuthService {
-  redirect = createSpy('AuthRedirectService.redirect');
-}
 class MockGlobalMessageService {
   remove = createSpy();
 }
@@ -47,42 +36,32 @@ class MockGlobalMessageService {
 describe('FSLoginFormComponent', () => {
   let component: FSLoginFormComponent;
   let fixture: ComponentFixture<FSLoginFormComponent>;
-
   let authService: AuthService;
-  let authRedirectService: AuthRedirectService;
   let windowRef: WindowRef;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        RouterTestingModule,
-        I18nTestingModule,
-        FeaturesConfigModule,
-        FormErrorsModule,
-      ],
-      declarations: [
-        FSLoginFormComponent,
-        MockLoginRegisterComponent,
-        MockUrlPipe,
-      ],
-      providers: [
-        WindowRef,
-        { provide: AuthService, useClass: MockAuthService },
-        {
-          provide: AuthRedirectService,
-          useClass: MockRedirectAfterAuthService,
-        },
-        { provide: GlobalMessageService, useClass: MockGlobalMessageService },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          ReactiveFormsModule,
+          RouterTestingModule,
+          I18nTestingModule,
+          FeaturesConfigModule,
+        ],
+        declarations: [FSLoginFormComponent, MockUrlPipe],
+        providers: [
+          WindowRef,
+          { provide: AuthService, useClass: MockAuthService },
+          { provide: GlobalMessageService, useClass: MockGlobalMessageService },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FSLoginFormComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthService);
-    authRedirectService = TestBed.inject(AuthRedirectService);
     windowRef = TestBed.inject(WindowRef);
   });
 
@@ -119,6 +98,10 @@ describe('FSLoginFormComponent', () => {
   });
 
   describe('login()', () => {
+    beforeEach(() => {
+      spyOn(authService, 'loginWithCredentials').and.callThrough();
+    });
+
     it('should login and redirect to return url after auth', () => {
       const email = 'test@email.com';
       const password = 'secret';
@@ -127,8 +110,10 @@ describe('FSLoginFormComponent', () => {
       component.loginForm.controls['password'].setValue(password);
       component.submitForm();
 
-      expect(authService.authorize).toHaveBeenCalledWith(email, password);
-      expect(authRedirectService.redirect).toHaveBeenCalled();
+      expect(authService.loginWithCredentials).toHaveBeenCalledWith(
+        email,
+        password
+      );
     });
 
     it('should not login when form not valid', () => {
@@ -137,8 +122,7 @@ describe('FSLoginFormComponent', () => {
       component.loginForm.controls['userId'].setValue(email);
       component.submitForm();
 
-      expect(authService.authorize).not.toHaveBeenCalled();
-      expect(authRedirectService.redirect).not.toHaveBeenCalled();
+      expect(authService.loginWithCredentials).not.toHaveBeenCalled();
     });
 
     it('should handle changing email to lowercase', () => {
@@ -150,7 +134,7 @@ describe('FSLoginFormComponent', () => {
       component.loginForm.controls['password'].setValue(password);
       component.submitForm();
 
-      expect(authService.authorize).toHaveBeenCalledWith(
+      expect(authService.loginWithCredentials).toHaveBeenCalledWith(
         email_lowercase,
         password
       );

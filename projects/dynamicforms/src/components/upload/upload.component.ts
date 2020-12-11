@@ -7,7 +7,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { AuthService, LanguageService } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  LanguageService,
+  UserIdService,
+} from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
@@ -36,7 +41,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected formDataService: FormDataService,
     protected fileUploadService: FileService,
     protected cd: ChangeDetectorRef,
-    protected authService: AuthService
+    protected userIdService: UserIdService,
+    protected globalMessageService: GlobalMessageService
   ) {
     super(appConfig, languageService, injector, formService);
   }
@@ -112,22 +118,32 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.setValueAndValidate(this.fileList);
     files.forEach((file, index) => {
       this.subscription.add(
-        this.fileUploadService.uploadFile(file).subscribe(event => {
-          if (event?.type === HttpEventType.UploadProgress) {
-            this.individualProgress[index] = Math.round(
-              (100 * event.loaded) / event.total
+        this.fileUploadService.uploadFile(file).subscribe(
+          event => {
+            if (event?.type === HttpEventType.UploadProgress) {
+              this.individualProgress[index] = Math.round(
+                (100 * event.loaded) / event.total
+              );
+              this.cd.detectChanges();
+            }
+            if (event instanceof HttpResponse) {
+              this.setFileCode(file, event);
+              this.handleFileResponse(event);
+            }
+            // when all files are finished uploading show the remove all button
+            this.removeAllDisable = !!this.overallProgressFinished(
+              this.individualProgress
             );
-            this.cd.detectChanges();
+          },
+          error => {
+            this.globalMessageService.add(
+              {
+                key: 'dynamicforms.documentUploadError',
+              },
+              GlobalMessageType.MSG_TYPE_ERROR
+            );
           }
-          if (event instanceof HttpResponse) {
-            this.setFileCode(file, event);
-            this.handleFileResponse(event);
-          }
-          // when all files are finished uploading show the remove all button
-          this.removeAllDisable = !!this.overallProgressFinished(
-            this.individualProgress
-          );
-        })
+        )
       );
     });
   }
@@ -135,8 +151,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   removeFile(index, uploadField) {
     // Execute Http.Delete request to backend
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(
           take(1),
           map(occUserId => {
@@ -159,8 +175,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   removeAll(uploadField) {
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(
           take(1),
           map(occUserId => {
@@ -193,12 +209,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
   }
 
-  protected checkFileSize(event): Boolean {
+  protected checkFileSize(event): boolean {
     const files: File[] = Array.from(event.target.files);
     const maxExceeded = files.filter(
       file => file.size > this.config.maxFileSize
     );
-    return !(maxExceeded.length > 0);
+    return maxExceeded.length <= 0;
   }
 
   protected setValueAndValidate(value: File[]) {

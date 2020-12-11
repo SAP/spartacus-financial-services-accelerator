@@ -7,10 +7,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import {
-  AuthService,
+  GlobalMessage,
+  GlobalMessageService,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
+  UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
@@ -18,7 +20,7 @@ import { FieldConfig } from '../../core/models/form-config.interface';
 import { FileService } from '../../core/services/file/file.service';
 import { FormService } from './../../core/services/form/form.service';
 import { UploadComponent } from './upload.component';
-import { FormDataService, YFormData } from '../../core';
+import { FormDataService } from '../../core';
 
 @Component({
   // tslint:disable
@@ -108,7 +110,6 @@ class MockFileUpladService {
   removeAllFiles() {}
 }
 
-class MockOccValueListService {}
 class MockLanguageService {
   getActive() {
     return of('en');
@@ -125,10 +126,13 @@ class MockFormDataService {
     return of(formData);
   }
 }
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
+}
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
 }
 
 describe('UploadComponent', () => {
@@ -136,7 +140,8 @@ describe('UploadComponent', () => {
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
   let mockfileUpladService: FileService;
-  let mockAuthService: AuthService;
+  let mockUserIdService: UserIdService;
+  let mockGlobalMessageService: GlobalMessageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -155,13 +160,15 @@ describe('UploadComponent', () => {
           },
           { provide: FormService, useClass: MockFormService },
           { provide: FormDataService, useClass: MockFormDataService },
-          { provide: AuthService, useClass: MockAuthService },
+          { provide: UserIdService, useClass: MockUserIdService },
+          { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         ],
       }).compileComponents();
       fixture = TestBed.createComponent(UploadComponent);
       formService = TestBed.inject(FormService);
       mockfileUpladService = TestBed.inject(FileService);
-      mockAuthService = TestBed.inject(AuthService);
+      mockUserIdService = TestBed.inject(UserIdService);
+      mockGlobalMessageService = TestBed.inject(GlobalMessageService);
     })
   );
 

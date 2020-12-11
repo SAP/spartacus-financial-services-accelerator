@@ -2,9 +2,9 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
-  AuthService,
   I18nTestingModule,
   OCC_USER_ID_CURRENT,
+  UserIdService,
 } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -15,8 +15,8 @@ class MockModalService {
   dismissActiveModal(): void {}
 }
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -29,7 +29,7 @@ describe('DeleteClaimDialogComponent', () => {
   let component: DeleteClaimDialogComponent;
   let fixture: ComponentFixture<DeleteClaimDialogComponent>;
   let claimService: ClaimService;
-  let authService: AuthService;
+  let userIdService: UserIdService;
 
   beforeEach(
     waitForAsync(() => {
@@ -46,8 +46,8 @@ describe('DeleteClaimDialogComponent', () => {
             useClass: MockClaimService,
           },
           {
-            provide: AuthService,
-            useClass: MockAuthService,
+            provide: UserIdService,
+            useClass: MockUserIdService,
           },
           { provide: NgbActiveModal, useValue: { open: () => {} } },
         ],
@@ -59,7 +59,7 @@ describe('DeleteClaimDialogComponent', () => {
     fixture = TestBed.createComponent(DeleteClaimDialogComponent);
     component = fixture.componentInstance;
     claimService = TestBed.inject(ClaimService);
-    authService = TestBed.inject(AuthService);
+    userIdService = TestBed.inject(UserIdService);
     fixture.detectChanges();
   });
 
@@ -75,7 +75,7 @@ describe('DeleteClaimDialogComponent', () => {
 
   it('should not be able to delete claim', () => {
     spyOn(claimService, 'removeClaim').and.stub();
-    spyOn(authService, 'getOccUserId').and.returnValue(of(null));
+    spyOn(userIdService, 'getUserId').and.returnValue(of(null));
     component.deleteClaim();
   });
 });

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
 import { FormDataStorageService } from '@fsa/dynamicforms';
 import { Observable } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models';
@@ -11,7 +10,6 @@ import * as fromSelector from '../store/selectors/user-request.selector';
 export class UserRequestService {
   constructor(
     protected store: Store<FSUserRequestState>,
-    protected authService: AuthService,
     protected formDataStorageService: FormDataStorageService
   ) {}
 

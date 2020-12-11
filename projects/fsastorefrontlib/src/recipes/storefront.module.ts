@@ -1,10 +1,12 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { translationChunksConfig, translations } from '@spartacus/assets';
-import { ConfigModule, provideConfig } from '@spartacus/core';
+import {
+  ConfigModule,
+  provideConfig,
+  provideDefaultConfigFactory,
+} from '@spartacus/core';
 import {
   B2cStorefrontModule,
-  defaultCmsContentConfig,
   PageComponentModule,
   StorefrontConfig,
 } from '@spartacus/storefront';
@@ -25,6 +27,7 @@ import {
   dynamicformsTranslations,
   dynamicformsTranslationsDe,
 } from '@fsa/dynamicforms';
+import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
 
 @NgModule({
   imports: [
@@ -32,9 +35,7 @@ import {
     B2cStorefrontModule,
     CmsLibModule,
     CheckoutModule,
-    ConfigModule.forRoot(),
     OccModule,
-    StoreModule.forRoot({}),
     ConfigModule.withConfig({
       i18n: {
         resources: {
@@ -70,7 +71,6 @@ import {
       },
     }),
     ConfigModule.withConfig(layoutConfig),
-    ConfigModule.withConfigFactory(defaultCmsContentConfig),
     ConfigModule.withConfig(routingConfig),
     ConfigModule.withConfig(checkoutConfig),
     ConfigModule.withConfig(occProductConfig),
@@ -101,7 +101,10 @@ export class FSStorefrontModule {
   ): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
-      providers: [provideConfig(config)],
+      providers: [
+        provideConfig(config),
+        provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory),
+      ],
     };
   }
 }

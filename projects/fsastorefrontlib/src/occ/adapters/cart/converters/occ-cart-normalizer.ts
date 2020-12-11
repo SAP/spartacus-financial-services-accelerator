@@ -1,4 +1,4 @@
-import { Converter, Cart } from '@spartacus/core';
+import { Converter } from '@spartacus/core';
 import { Injectable } from '@angular/core';
 import { FSCart } from './../../../occ-models/occ.models';
 

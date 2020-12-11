@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { AuthService, OrderEntry } from '@spartacus/core';
+import { OrderEntry, UserIdService } from '@spartacus/core';
 import { filter, map, take } from 'rxjs/operators';
 import {
   FSCart,
@@ -19,14 +19,14 @@ export class QuoteService {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected cartService: FSCartService,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService
   ) {}
 
   loadQuotes() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -47,8 +47,8 @@ export class QuoteService {
   }
 
   retrieveQuote(quote: any) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId) {
@@ -119,8 +119,8 @@ export class QuoteService {
   }
 
   bindQuote(cartId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -135,8 +135,8 @@ export class QuoteService {
   }
 
   underwriteQuote(cartId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -151,8 +151,8 @@ export class QuoteService {
   }
 
   updateQuote(cartId: string, priceAttributes: any) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(

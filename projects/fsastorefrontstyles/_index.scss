@@ -1,12 +1,11 @@
 //Spartacus styling
 @import '~@spartacus/styles/index';
+@import '~@spartacus/misc/storefinder/index';
 //FSA styling
 @import 'scss/root.scss';
 @import 'scss/fs-mixins';
 @import 'scss/overrides';
 @import 'scss/base';
-
-@import 'scss/theme';
 @import 'scss/fonts';
 
 // components

@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import {
-  GlobalMessageService,
-  WindowRef,
-  AuthRedirectService,
-  AuthService,
-} from '@spartacus/core';
+import { GlobalMessageService, WindowRef, AuthService } from '@spartacus/core';
 import { LoginFormComponent } from '@spartacus/storefront';
 
 @Component({
@@ -17,9 +12,8 @@ export class FSLoginFormComponent extends LoginFormComponent {
     protected auth: AuthService,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
-    protected authRedirectService: AuthRedirectService,
     protected winRef: WindowRef
   ) {
-    super(auth, globalMessageService, fb, authRedirectService, winRef);
+    super(auth, globalMessageService, fb, winRef);
   }
 }

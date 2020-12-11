@@ -6,6 +6,7 @@ import {
   I18nTestingModule,
   OCC_USER_ID_ANONYMOUS,
   OCC_USER_ID_CURRENT,
+  UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import * as fromAction from '../../store/actions';
@@ -33,8 +34,8 @@ const mockFormData: YFormData = {
   },
 };
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -42,7 +43,7 @@ class MockAuthService {
 describe('FormDataService', () => {
   let service: FormDataService;
   let store: Store<StateWithForm>;
-  let mockAuthService: AuthService;
+  let mockUserIdService: UserIdService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -54,14 +55,14 @@ describe('FormDataService', () => {
       providers: [
         FormDataService,
         reducerProvider,
-        { provide: AuthService, useClass: MockAuthService },
+        { provide: UserIdService, useClass: MockUserIdService },
       ],
     });
 
     service = TestBed.inject(FormDataService);
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
-    mockAuthService = TestBed.inject(AuthService);
+    mockUserIdService = TestBed.inject(UserIdService);
   });
 
   it('should be created', () => {
@@ -135,7 +136,7 @@ describe('FormDataService', () => {
   });
 
   it('should save form data when user is anonymous', () => {
-    spyOn(mockAuthService, 'getOccUserId').and.returnValue(
+    spyOn(mockUserIdService, 'getUserId').and.returnValue(
       of(OCC_USER_ID_ANONYMOUS)
     );
     service.saveFormData(mockFormData);

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   ActiveCartService,
-  AuthService,
   Cart,
   MultiCartService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
   StateUtils,
   StateWithMultiCart,
+  UserIdService,
 } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -19,10 +19,10 @@ import * as fromAction from './../../checkout/store/actions/index';
 export class FSCartService extends ActiveCartService {
   constructor(
     protected store: Store<StateWithMultiCart>,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected multiCartService: MultiCartService
   ) {
-    super(store, authService, multiCartService);
+    super(store, multiCartService, userIdService);
   }
 
   createCartForProduct(
@@ -31,7 +31,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     pricingData: PricingData
   ) {
-    combineLatest([this.getActiveCartId(), this.authService.getOccUserId()])
+    combineLatest([this.getActiveCartId(), this.userIdService.getUserId()])
       .pipe(
         take(1),
         map(([activeCartId, userId]) => {
@@ -102,7 +102,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     entryNumber: string
   ): void {
-    combineLatest([this.getActiveCartId(), this.authService.getOccUserId()])
+    combineLatest([this.getActiveCartId(), this.userIdService.getUserId()])
       .pipe(take(1))
       .subscribe(([activeCartId, userId]) => {
         this.store.dispatch(

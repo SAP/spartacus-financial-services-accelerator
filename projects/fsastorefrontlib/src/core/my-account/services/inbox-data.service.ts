@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SearchConfig, AuthService } from '@spartacus/core';
+import { SearchConfig, UserIdService } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 
@@ -29,13 +29,13 @@ export interface InboxMessage {
 export class InboxDataService {
   private _userId = OCC_USER_ID_ANONYMOUS;
 
-  constructor(protected auth: AuthService) {
-    this.auth
-      .getUserToken()
-      .pipe(filter(userToken => this.userId !== userToken.userId))
-      .subscribe(userToken => {
-        if (Object.keys(userToken).length !== 0) {
-          this.userId = userToken.userId;
+  constructor(protected userIdService: UserIdService) {
+    this.userIdService
+      .getUserId()
+      .pipe(filter(userId => this.userId !== userId))
+      .subscribe(userId => {
+        if (Object.keys(userId).length !== 0) {
+          this.userId = userId;
         } else {
           this.userId = OCC_USER_ID_ANONYMOUS;
         }

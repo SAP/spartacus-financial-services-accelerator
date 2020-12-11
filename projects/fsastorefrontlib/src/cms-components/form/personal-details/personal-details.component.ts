@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  ActiveCartService,
-  OCC_USER_ID_ANONYMOUS,
-  AuthService,
-} from '@spartacus/core';
+import { ActiveCartService, AuthService } from '@spartacus/core';
 import { filter, map, take } from 'rxjs/operators';
 import {
   FormCMSComponent,
@@ -37,14 +33,12 @@ export class PersonalDetailsComponent extends FormCMSComponent {
     this.subscription.add(
       combineLatest([
         this.cartService.getActive(),
-        this.authService.getUserToken(),
+        this.authService.isUserLoggedIn(),
       ])
         .pipe(
           filter(
-            ([cart, userToken]) =>
-              cart.entries &&
-              cart.entries.length > 0 &&
-              userToken.userId !== OCC_USER_ID_ANONYMOUS
+            ([cart, loggedInUser]) =>
+              cart.entries && cart.entries.length > 0 && loggedInUser
           ),
           take(1),
           map(([cart]) => {

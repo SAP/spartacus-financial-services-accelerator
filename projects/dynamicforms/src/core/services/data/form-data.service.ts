@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
+import { UserIdService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
@@ -14,7 +14,7 @@ export class FormDataService {
 
   constructor(
     protected store: Store<StateWithForm>,
-    protected authService: AuthService
+    protected userIdService: UserIdService
   ) {}
 
   submit(form: YFormData) {
@@ -30,8 +30,8 @@ export class FormDataService {
   }
 
   saveFormData(formData: YFormData) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -63,8 +63,8 @@ export class FormDataService {
   }
 
   loadFormData(formDataId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
