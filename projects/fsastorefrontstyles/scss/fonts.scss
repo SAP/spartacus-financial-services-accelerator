@@ -1,11 +1,12 @@
 @font-face {
   font-family: 'fs-font';
-  src: url('~/assets/fonts/fs-font.eot?k1dky6');
-  src: url('~/assets/fonts/fs-font.eot?k1dky6#iefix')
+  src: url('~@fsa/fsastorefrontstyles/fonts/fs-font.eot?k1dky6');
+  src: url('~@fsa/fsastorefrontstyles/fonts/fs-font.eot?k1dky6#iefix')
       format('embedded-opentype'),
-    url('~/assets/fonts/fs-font.ttf?k1dky6') format('truetype'),
-    url('~/assets/fonts/fs-font.woff?k1dky6') format('woff'),
-    url('~/assets/fonts/fs-font.svg?k1dky6#fs-font') format('svg');
+    url('~@fsa/fsastorefrontstyles/fonts/fs-font.ttf?k1dky6') format('truetype'),
+    url('~@fsa/fsastorefrontstyles/fonts/fs-font.woff?k1dky6') format('woff'),
+    url('~@fsa/fsastorefrontstyles/fonts/fs-font.svg?k1dky6#fs-font')
+      format('svg');
   font-weight: normal;
   font-style: normal;
 }
