@@ -225,3 +225,7 @@
     text-align: center;
   }
 }
+.vertical-center-left {
+  @include vertical-center;
+  left: 0;
+}
