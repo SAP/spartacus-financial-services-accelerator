@@ -14,8 +14,7 @@ import { CmsFormSubmitComponent } from '../../../occ/occ-models';
   selector: 'cx-fs-cms-form-submit',
   templateUrl: './cms-form-submit.component.html',
 })
-export class CMSFormSubmitComponent extends FormCMSComponent
-  implements OnInit, OnDestroy {
+export class CMSFormSubmitComponent extends FormCMSComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,

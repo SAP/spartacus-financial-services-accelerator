@@ -1,6 +1,6 @@
 {
   "name": "@fsa/fsastorefrontstyles",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "FSA",
   "description": "Style library containing global styles",
   "homepage": "https://github.com/SAP/spartacus",
@@ -12,6 +12,9 @@
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "postinstall": "cp -r ./fonts $INIT_CWD/src/assets"
   },
   "devDependencies": {
     "sass": "^1.25.0"

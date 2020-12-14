@@ -1,7 +1,12 @@
 {
   "name": "@fsa/dynamicforms",
-  "version": "0.0.1",
+  "description": "Library for creating dynamic forms, designed to work with Spartacus application",
+  "version": "1.0.0",
   "author": "FSA",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",
@@ -17,8 +22,6 @@
     "@spartacus/storefront": "^2.0.0-rc.3",
     "bootstrap": "^4.2.1",
     "rxjs": "^6.5.4",
-    "zone.js": "^0.10.2",
-    "file-saver": "^2.0.2",
-    "blob-util": "^2.0.2"
+    "zone.js": "^0.10.2"
   }
 }

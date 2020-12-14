@@ -47,7 +47,7 @@ export class FormDataEffects {
 
   @Effect({ dispatch: false })
   clearFormData$ = this.actions$.pipe(
-    ofType(AuthActions.LOGOUT),
+    ofType(AuthActions.LOGOUT, AuthActions.LOGIN),
     tap(_ => {
       this.formDataStorageService.clearFormDataLocalStorage();
     })

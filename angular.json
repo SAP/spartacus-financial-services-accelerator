@@ -139,6 +139,11 @@
           "options": {
             "tsConfig": "projects/fsastorefrontlib/tsconfig.lib.json",
             "project": "projects/fsastorefrontlib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/fsastorefrontlib/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
