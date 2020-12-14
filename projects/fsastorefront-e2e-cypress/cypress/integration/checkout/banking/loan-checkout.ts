@@ -27,7 +27,6 @@ context('Loan Checkout', () => {
     cy.get('.action-button').click();
     loan.checkMiniCartFirstStep();
     checkout.clickContinueButton();
-    checkout.waitForAddOptions();
   });
 
   it('Should check optional products', () => {
@@ -72,7 +71,6 @@ context('Loan Checkout', () => {
 
   it('Should complete User Identification page', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
-    banking.checkProgressBarLoanAndFTD();
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('Legal Identification');
     checkout.clickContinueButton();

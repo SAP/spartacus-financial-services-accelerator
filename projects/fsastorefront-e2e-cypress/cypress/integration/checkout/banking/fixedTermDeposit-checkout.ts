@@ -29,7 +29,6 @@ context('Fixed Term Deposit Checkout', () => {
     cy.get('.action-button').click();
     ftd.checkMiniCartFirstStep();
     checkout.clickContinueButton();
-    checkout.waitForAddOptions();
   });
 
   it('Should check optional products', () => {
