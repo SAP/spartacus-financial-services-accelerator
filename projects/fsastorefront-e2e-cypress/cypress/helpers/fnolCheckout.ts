@@ -246,7 +246,6 @@ export function checkClaimReplication() {
     .within(() => {
       cy.get('.info-card-data').within(() => {
         cy.get('.value').should('contain.text', 'Collision');
-        cy.get('.label').should('contain.text', 'Status');
         cy.get('.value').should('contain.text', 'PROCESSING');
       });
     });

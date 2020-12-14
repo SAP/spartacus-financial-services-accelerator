@@ -119,7 +119,6 @@ export function selectAutoBronze() {
     .eq(0)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Auto Bronze');
-      cy.get('.table-header-value').should('have.text', '€4.98');
       cy.get('.primary-button').click();
     });
 }

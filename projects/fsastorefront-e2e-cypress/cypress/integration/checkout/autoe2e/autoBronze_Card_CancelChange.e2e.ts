@@ -7,15 +7,13 @@ import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
-import {
-  checkChangedMileagePremiumCancelled,
-} from '../../../helpers/checkout/insurance/policyChange_integration';
 
 Cypress.config('defaultCommandTimeout', 500000);
+const currentDate = Cypress.moment().format('DD-MM-YYYY');
 
 context('Auto Bronze Checkout with cancel change', () => {
   before(() => {
-    cy.visit('http://10.27.241.80/financial/en/EUR/');
+    cy.visit('/');
   });
 
   it('Should register a new user', () => {
@@ -36,14 +34,12 @@ context('Auto Bronze Checkout with cancel change', () => {
 
   it('Should check comparison table and select main product', () => {
     const addToCart = waitForCreateAsset('carts', 'addToCart');
-    autoIntegration.checkAutoComparisonTableTesla();
     autoIntegration.selectAutoBronze();
     cy.wait(`@${addToCart}`).then(result => {
       const body = <any>result.response.body;
       const cartId = body.code;
-      autoIntegration.addPaymentMethod(registrationUser.email, cartId);
+      payment.addPaymentMethod(registrationUser.email, cartId);
     });
-    autoIntegration.checkAutoBronzeMiniCart();
     auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();
   });
@@ -56,14 +52,12 @@ context('Auto Bronze Checkout with cancel change', () => {
     auto.populateMainDriverData();
     auto.populateAdditionalData();
     auto.populateAdditionalDriver2ata();
-    autoIntegration.checkAutoBronzeMiniCartBug();
     checkout.clickContinueButton();
   });
 
   it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
-    autoIntegration.checkAutoBronzeMiniCartBug();
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
@@ -80,16 +74,13 @@ context('Auto Bronze Checkout with cancel change', () => {
 
   it('Should check my policies and policy details page', () => {
     //waiting for replication process to be completed
-    cy.wait(35000);
+    cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedBronzePolicy();
+    autoIntegration.checkReplicatedPolicy('Bronze');
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('integrationPolicyDetails');
   });
 
   it('Should cancel change policy request', () => {
-    myPolicies.checkMyPoliciesPage();
-    myPolicies.checkAutoChangedPolicy();
     changeRequest.startChangeMileage();
     checkout.waitForChangeMileage();
     //check change car details - first step
@@ -98,10 +89,9 @@ context('Auto Bronze Checkout with cancel change', () => {
     checkout.clickContinueButton();
     //check change preview - cancel
     changeRequest.checkChangeMileageSteps();
-    checkChangedMileagePremiumCancelled();
+    cy.get('.offset-1').contains(currentDate);
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('integrationPolicyDetails');
   });
 });
