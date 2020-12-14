@@ -1,9 +1,7 @@
 <ng-container *ngIf="order$ | async as order">
   <div class="d-flex align-items-center">
     <a class="h5 py-3 mt-3 mb-5" routerLink="/my-account/orders/"
-      ><span class="d-none d-md-block">{{
-        'common.back' | cxTranslate
-      }}</span>
+      ><span class="d-none d-md-block">{{ 'common.back' | cxTranslate }}</span>
       <span class="h6 d-md-none fas fa-arrow-left"></span
     ></a>
     <h2 class="heading-headline py-3 mt-3 mb-5 text-center col-11">
