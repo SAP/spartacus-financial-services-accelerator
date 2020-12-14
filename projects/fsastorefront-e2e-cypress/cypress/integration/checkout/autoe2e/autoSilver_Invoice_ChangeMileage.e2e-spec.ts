@@ -6,12 +6,16 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
+import {
+  checkChangedMileagePremium,
+  enterNewMileage,
+} from '../../../helpers/checkout/insurance/policyChange_integration';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
 context('Auto Silver Checkout with change mileage', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
 
   it('Should register a new user', () => {
@@ -30,7 +34,9 @@ context('Auto Silver Checkout with change mileage', () => {
   });
 
   it('Should check comparison table and select main product', () => {
+    autoIntegration.checkAutoComparisonTableAudi();
     autoIntegration.selectAutoSilver();
+    autoIntegration.checkAutoSilverMiniCart();
     auto.checkOptionalProductsSilver();
     checkout.clickContinueButton();
   });
@@ -41,12 +47,14 @@ context('Auto Silver Checkout with change mileage', () => {
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
     auto.populateAdditionalData();
+    autoIntegration.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
   });
 
   it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
+    autoIntegration.checkAutoSilverMiniCart();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
@@ -62,10 +70,11 @@ context('Auto Silver Checkout with change mileage', () => {
 
   it('Should check my policies and policy details page', () => {
     //waiting for replication process to be completed
-    cy.wait(200000);
+    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedPolicy('Silver');
+    autoIntegration.checkReplicatedSilverPolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    checkout.checkAccordions('integrationPolicyDetails');
   });
 
   it('Should complete change mileage checkout', () => {
@@ -73,10 +82,11 @@ context('Auto Silver Checkout with change mileage', () => {
     checkout.waitForChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
-    changeRequest.enterNewMileage();
+    enterNewMileage();
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
+    checkChangedMileagePremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
   });

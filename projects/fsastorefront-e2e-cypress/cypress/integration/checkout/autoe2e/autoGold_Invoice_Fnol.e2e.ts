@@ -11,7 +11,7 @@ Cypress.config('defaultCommandTimeout', 500000);
 
 context('Auto Gold Checkout with FNOL', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
 
   it('Should register a new user', () => {
@@ -29,7 +29,9 @@ context('Auto Gold Checkout with FNOL', () => {
   });
 
   it('Should check comparison table and select Gold Product', () => {
+    autoIntegration.checkAutoComparisonTableGolf();
     autoIntegration.selectAutoGold();
+    autoIntegration.checkAutoGoldMiniCart();
     auto.checkOptionalProductsGold();
     checkout.clickContinueButton();
   });
@@ -39,12 +41,14 @@ context('Auto Gold Checkout with FNOL', () => {
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
+    autoIntegration.checkAutoGoldMiniCart();
     checkout.clickContinueButton();
   });
 
   it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
+    autoIntegration.checkAutoGoldMiniCart();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
@@ -60,9 +64,9 @@ context('Auto Gold Checkout with FNOL', () => {
 
   it('Should check my policies and policy details page', () => {
     //waiting for replication process to be completed
-    cy.wait(200000);
+    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.startFnolCheckout('Gold');
+    autoIntegration.checkReplicatedGoldPolicyAndStartFnol();
   });
 
   it('Should check and populate Incident Information page', () => {
@@ -113,7 +117,7 @@ context('Auto Gold Checkout with FNOL', () => {
   it('Should check claim confirmation page', () => {
     fnol.checkConfirmationPage();
     //replication proces to be completed
-    cy.wait(3000);
+    cy.wait(2000);
   });
 
   it('Should check claim replication', () => {

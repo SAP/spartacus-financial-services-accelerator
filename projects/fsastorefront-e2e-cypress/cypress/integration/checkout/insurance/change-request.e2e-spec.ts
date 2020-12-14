@@ -1,21 +1,15 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
-import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
-import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
-import {
-  checkChangedMileagePremiumCancelled,
-} from '../../../helpers/checkout/insurance/policyChange_integration';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
-Cypress.config('defaultCommandTimeout', 500000);
-
-context('Auto Bronze Checkout with cancel change', () => {
+context('Change Request for new user', () => {
   before(() => {
-    cy.visit('http://10.27.241.80/financial/en/EUR/');
+    cy.visit('/');
   });
 
   it('Should register a new user', () => {
@@ -24,50 +18,46 @@ context('Auto Bronze Checkout with cancel change', () => {
     checkout.waitForHomepage();
   });
 
-  it('Should complete first auto step with two additional drivers', () => {
+  it('Should complete first auto step with additional driver', () => {
     checkout.startInsuranceCheckout('Auto');
-    auto.populateAutoAnnuallyTesla();
+    auto.populateAutoMonthlyAudi();
     auto.populateMainDriverInfo();
-    cy.get('[name=noOfDrivers]').select('2');
+    cy.get('[name=noOfDrivers]').select('1');
     auto.populateAdditionalDriverInfo();
-    auto.populateSecondAdditionalDriverInfo();
     checkout.clickContinueButton();
   });
 
   it('Should check comparison table and select main product', () => {
     const addToCart = waitForCreateAsset('carts', 'addToCart');
-    autoIntegration.checkAutoComparisonTableTesla();
-    autoIntegration.selectAutoBronze();
+    auto.checkAutoComparisonTable();
+    auto.selectAutoSilver();
     cy.wait(`@${addToCart}`).then(result => {
       const body = <any>result.response.body;
       const cartId = body.code;
-      autoIntegration.addPaymentMethod(registrationUser.email, cartId);
+      payment.addPaymentMethod(registrationUser.email, cartId);
     });
-    autoIntegration.checkAutoBronzeMiniCart();
-    auto.checkOptionalProductsBronze();
+    auto.checkAutoSilverMiniCart();
+    auto.checkOptionalProductsSilver();
     checkout.clickContinueButton();
   });
 
   it('Should populate personal details page', () => {
-    checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkPersonalDetailsPage();
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
     auto.populateAdditionalData();
-    auto.populateAdditionalDriver2ata();
-    autoIntegration.checkAutoBronzeMiniCartBug();
+    auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
   });
 
   it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
-    autoIntegration.checkAutoBronzeMiniCartBug();
-    checkout.checkAccordions('generalQuoteAccordions');
+    auto.checkAutoSilverMiniCart();
+    checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    cy.get('.section-header-heading').should('be.visible');
     checkout.clickContinueButton();
   });
 
@@ -76,32 +66,64 @@ context('Auto Bronze Checkout with cancel change', () => {
     checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Should check my policies and policy details page', () => {
-    //waiting for replication process to be completed
-    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedBronzePolicy();
+    myPolicies.checkAutoPolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('integrationPolicyDetails');
+    checkout.checkAccordions('policyDetails');
+  });
+
+  it('Should complete change mileage checkout', () => {
+    changeRequest.startChangeMileage();
+    checkout.waitForChangeMileage();
+    //check change car details - first step
+    changeRequest.checkChangeMileageSteps();
+    changeRequest.enterNewMileage();
+    checkout.clickContinueButton();
+    //check change preview - second step
+    changeRequest.checkChangeMileageSteps();
+    changeRequest.checkChangedPolicyPremium();
+    cy.get('.primary-button').should('contain', 'Submit').click();
+    changeRequest.checkChangeRequestConfirmation();
+  });
+
+  it('Should complete change coverage checkout', () => {
+    myPolicies.checkMyPoliciesPage();
+    myPolicies.checkAutoPolicy();
+    changeRequest.startChangeCoverage();
+    //check change coverage - first step
+    changeRequest.checkChangeCoverageSteps();
+    changeRequest.checkOptionalExtras();
+    //check continue button is disabled if coverage is not added
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
+    changeRequest.addRoadsideAssistance();
+    checkout.clickContinueButton();
+    //check change preview - second step
+    changeRequest.checkChangeCoverageSteps();
+    changeRequest.checkChangedPolicyPremium();
+    cy.get('.primary-button').should('contain', 'Submit').click();
+    changeRequest.checkChangeRequestConfirmation();
   });
 
   it('Should cancel change policy request', () => {
     myPolicies.checkMyPoliciesPage();
     myPolicies.checkAutoChangedPolicy();
     changeRequest.startChangeMileage();
-    checkout.waitForChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
     cy.get('[name="vehicleAnnualMileage"]').type('80000');
     checkout.clickContinueButton();
-    //check change preview - cancel
+    //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    checkChangedMileagePremiumCancelled();
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('integrationPolicyDetails');
+    cy.get('.overview-section-title').should(
+      'contain.text',
+      'Auto Insurance Policy'
+    );
+    checkout.checkAccordions('policyDetails');
   });
 });
