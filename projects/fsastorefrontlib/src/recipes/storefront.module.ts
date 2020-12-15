@@ -88,7 +88,7 @@ import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-conf
     }),
     ConfigModule.withConfig({
       date: {
-        format: 'yyyy-mm-dd',
+        format: 'dd/MM/yyyy',
       },
     }),
   ],

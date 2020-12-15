@@ -10,6 +10,7 @@ import {
   YFormData,
   FormDataService,
   FormDataStorageService,
+  FormDateConfig,
 } from '@fsa/dynamicforms';
 import { map, take, filter } from 'rxjs/operators';
 import { RequestType } from './../../../occ/occ-models';
@@ -27,7 +28,8 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
     protected globalMessageService: GlobalMessageService,
     protected changePolicyService: ChangePolicyService,
     protected formDataService: FormDataService,
-    protected formDataStoragetService: FormDataStorageService
+    protected formDataStoragetService: FormDataStorageService,
+    protected dateConfig: FormDateConfig
   ) {
     super(
       userRequestNavigationService,
@@ -35,7 +37,8 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
       activatedRoute,
       routingService,
       globalMessageService,
-      changePolicyService
+      changePolicyService,
+      dateConfig
     );
   }
 

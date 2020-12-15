@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormDateConfig } from '@fsa/dynamicforms';
 import {
   GlobalMessageService,
   GlobalMessageType,
@@ -24,7 +25,8 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
-    protected changePolicyService: ChangePolicyService
+    protected changePolicyService: ChangePolicyService,
+    protected dateConfig: FormDateConfig
   ) {}
 
   configurationSteps: FSStepData[];
@@ -118,6 +120,10 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         cxRoute: '/',
       });
     }
+  }
+
+  getDateFormat() {
+    return this.dateConfig?.date?.format || '';
   }
 
   ngOnDestroy() {
