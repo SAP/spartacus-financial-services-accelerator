@@ -1,8 +1,7 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
-import { CmsComponent, CmsComponentConnector } from '@spartacus/core';
+import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { CmsFormSubmitComponent } from './../../../occ/occ-models/cms-component.models';
@@ -49,12 +48,6 @@ const formDefinition = {
   formId: 'formId',
 };
 
-class MockCmsComponentConnector {
-  get() {
-    return of(componentData);
-  }
-}
-
 class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
@@ -77,13 +70,11 @@ describe('CMSFormSubmitComponent', () => {
   let formSubmitComponent: CMSFormSubmitComponent;
   let fixture: ComponentFixture<CMSFormSubmitComponent>;
   let el: DebugElement;
-  let mockCmsComponentConnector: CmsComponentConnector;
   let mockFormDataService: FormDataService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
       declarations: [
         CMSFormSubmitComponent,
         MockFormComponent,
@@ -95,10 +86,6 @@ describe('CMSFormSubmitComponent', () => {
           useValue: MockCmsComponentData,
         },
         {
-          provide: CmsComponentConnector,
-          useClass: MockCmsComponentConnector,
-        },
-        {
           provide: FormDataService,
           useClass: MockFormDataService,
         },
@@ -108,7 +95,6 @@ describe('CMSFormSubmitComponent', () => {
         },
       ],
     }).compileComponents();
-    mockCmsComponentConnector = TestBed.inject(CmsComponentConnector);
     mockFormDataService = TestBed.inject(FormDataService);
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
   }));
@@ -124,10 +110,8 @@ describe('CMSFormSubmitComponent', () => {
   });
 
   it('should load component data', () => {
-    spyOn(mockCmsComponentConnector, 'get').and.callThrough();
     spyOn(mockFormDataService, 'loadFormDefinition').and.callThrough();
     formSubmitComponent.ngOnInit();
     expect(mockFormDataService.loadFormDefinition).toHaveBeenCalled();
-    expect(mockCmsComponentConnector.get).toHaveBeenCalled();
   });
 });
