@@ -28,6 +28,7 @@ import {
   dynamicformsTranslationsDe,
 } from '@fsa/dynamicforms';
 import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
+import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
 
 @NgModule({
   imports: [
@@ -86,11 +87,6 @@ import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-conf
         },
       },
     }),
-    ConfigModule.withConfig({
-      date: {
-        format: 'dd/MM/yyyy',
-      },
-    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],
@@ -104,6 +100,7 @@ export class FSStorefrontModule {
       providers: [
         provideConfig(config),
         provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory),
+        provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
       ],
     };
   }
