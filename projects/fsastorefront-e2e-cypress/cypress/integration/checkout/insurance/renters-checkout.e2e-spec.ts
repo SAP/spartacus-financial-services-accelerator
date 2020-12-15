@@ -2,10 +2,7 @@ import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
@@ -68,14 +65,15 @@ context('Renters Checkout', () => {
     renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('generalQuoteAccordions');
-    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
+    payment.addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodCard();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review page', () => {
@@ -85,6 +83,7 @@ context('Renters Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('rentersFinalReview');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {
@@ -95,9 +94,5 @@ context('Renters Checkout', () => {
   it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
-    checkout.checkMyAccountEmptyPages(
-      'Quotes & Applications',
-      'You have no Quotes or Applications!'
-    );
   });
 });

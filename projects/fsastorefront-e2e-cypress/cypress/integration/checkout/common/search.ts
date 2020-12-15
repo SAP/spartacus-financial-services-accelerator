@@ -21,7 +21,6 @@ context('Search', () => {
 
   it('Should check buttons on search results', () => {
     search.searchSavingsProducts();
-    cy.wait(1500);
     search.seachResultsButtons();
     search.clickMoreInfoButton();
     productCategory.checkComponents();

@@ -182,6 +182,6 @@ export function addSecondPerson() {
   });
   cy.get('p.label').contains('Choose a Cover').click();
   cy.wait(500);
-  cy.get('[name=lifeWhoCovered]').eq(`1`).click();
+  cy.get('[name=lifeWhoCovered]').eq('1').should('be.visible').click();
   cy.wait(500);
 }

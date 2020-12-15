@@ -3,7 +3,6 @@ import { waitForPage } from '../generalHelpers';
 export function checkPageContent() {
   cy.get('cx-fs-premium-calendar').should('be.visible');
   cy.get('h2').contains('Premium Calendar');
-  cy.get('.container-fluid.d-lg-block').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
 }
 
@@ -29,7 +28,7 @@ export function checkSavingsData() {
 }
 
 export function checkCloseAccountPage() {
-  cy.get('.heading-headline').contains('Close Account');
+  cy.get('.heading-headline').should('contain.text', 'Close Account');
   cy.get('cx-paragraph').contains('When you close your account, your');
   cy.get('.item-details')
     .should('be.visible')
