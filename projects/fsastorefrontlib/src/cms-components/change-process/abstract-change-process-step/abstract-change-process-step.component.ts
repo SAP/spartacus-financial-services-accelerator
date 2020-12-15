@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDateConfig } from '@fsa/dynamicforms';
 import {
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
 } from '@spartacus/core';
+import { DateConfig } from 'projects/fsastorefrontlib/src/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
@@ -26,7 +26,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
     protected changePolicyService: ChangePolicyService,
-    protected dateConfig: FormDateConfig
+    protected dateConfig: DateConfig
   ) {}
 
   configurationSteps: FSStepData[];

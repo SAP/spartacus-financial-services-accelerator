@@ -1,9 +1,6 @@
-import { FormDateConfig } from '@fsa/dynamicforms';
 import { DateConfig } from './date-config';
 
-export function fsDefaultDateFormatConfigFactory():
-  | DateConfig
-  | FormDateConfig {
+export function fsDefaultDateFormatConfigFactory(): DateConfig {
   return {
     date: {
       format: 'dd/MM/yyyy',
