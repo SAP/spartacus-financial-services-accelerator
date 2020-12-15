@@ -12,7 +12,7 @@
           {{ 'forms.effectiveDate' | cxTranslate }} :
         </div>
         <div class="notice small pl-2 pl-md-0 d-inline-flex d-md-flex">
-          {{ currentDate }}
+          {{ currentDate | date: 'dd/MM/yyyy' }}
         </div>
       </div>
     </div>
