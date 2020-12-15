@@ -1,5 +1,9 @@
 import { Accordions } from './accordions';
-import { waitForPage, waitForFormDefinition } from '../generalHelpers';
+import {
+  waitForPage,
+  waitForFormDefinition,
+  waitForCMSComponent,
+} from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('p.label').should('have.length', 7).eq(0).contains('Choose a Cover');
@@ -32,21 +36,19 @@ export function bindQuotePopup() {
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
-  cy.wait(1000);
 }
 
 export function clickContinueButton() {
   cy.get('.primary-button').should('contain.text', 'Continue').click();
 }
 
+export function clickBackButton() {
+  cy.get('.action-button').should('contain.text', 'Back').click();
+}
+
 export function checkBackAndContinueButtons() {
   cy.get('.action-button').should('contain.text', 'Back');
   cy.get('.primary-button').should('contain.text', 'Continue');
-}
-
-export function clickResumeButton() {
-  cy.get('.secondary-button').should('contain.text', 'Resume').click();
-  cy.wait(1000);
 }
 
 export function checkOrderConfirmationBanking() {
@@ -86,9 +88,11 @@ export function placeOrderOnFinalReview() {
 }
 
 export function checkOrderConfirmation() {
-  cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5').eq(0).should('have.text', ' Thank you! ');
-  });
+  cy.get('cx-fs-order-confirmation-message')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h5').eq(0).should('have.text', ' Thank you! ');
+    });
   cy.get('cx-fs-order-confirmation').should('be.visible');
   cy.get('.short-overview').should('be.visible');
 }
@@ -124,9 +128,8 @@ export function checkMyAccountEmptyPages(myAccountPage, emptyPageMessage) {
     menuOption: 'My Account',
     dropdownItem: myAccountPage,
   });
-  cy.wait(1000);
-  cy.get('h2').contains(myAccountPage);
-  cy.get('h3').contains(emptyPageMessage);
+  cy.get('h2').should('contain.text', myAccountPage);
+  cy.get('h3').should('contain.text', emptyPageMessage);
 }
 
 export function checkFirstCheckoutStep(mainProduct) {
@@ -216,4 +219,17 @@ export function waitForPersonalDetailsForm() {
     'formDefinition'
   );
   cy.wait(`@${formDefinition}`).its('status').should('eq', 200);
+}
+
+export function waitForChangeMileage() {
+  const changeCarDetails = waitForCMSComponent(
+    'ChangeCarDetailsFormComponent',
+    'changeCarDetails'
+  );
+  cy.wait(`@${changeCarDetails}`).its('status').should('eq', 200);
+}
+
+export function waitForPolicyDetails() {
+  const policyDetails = waitForPage('policy-details', 'policyDetails');
+  cy.wait(`@${policyDetails}`).its('status').should('eq', 200);
 }

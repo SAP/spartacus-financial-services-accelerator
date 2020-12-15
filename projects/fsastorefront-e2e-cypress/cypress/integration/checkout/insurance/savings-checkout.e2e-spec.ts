@@ -2,10 +2,7 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as savings from '../../../helpers/checkout/insurance/savings-checkout';
 import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as policies from '../../../helpers/my-account/policies';
 import * as premiumCalendar from '../../../helpers/my-account/myAccountPages';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
@@ -68,14 +65,15 @@ context('Savings Insurance Checkout', () => {
     checkout.checkProgressBarInsurance();
     savings.checkMiniCart();
     checkout.checkAccordions('savingsQuoteReview');
-    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
+    payment.addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodCard();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review page', () => {
@@ -85,6 +83,7 @@ context('Savings Insurance Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('savingsFinalReview');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {
