@@ -25,27 +25,4 @@ export class CMSFormSubmitComponent extends FormCMSComponent
   ) {
     super(componentData, formDataService, formDataStorageService);
   }
-
-  routeParamId = 'formCode';
-  pageContext: PageContext;
-
-  ngOnInit() {
-    this.subscription.add(
-      this.activatedRoute.params
-        .pipe(
-          map(routeParam => {
-            this.pageContext = new PageContext(
-              routeParam[this.routeParamId],
-              PageType.CATEGORY_PAGE
-            );
-            return (this.component$ = this.cmsComponentConnector.get(
-              this.componentData.uid,
-              this.pageContext
-            ));
-          })
-        )
-        .subscribe()
-    );
-    this.loadForm();
-  }
 }
