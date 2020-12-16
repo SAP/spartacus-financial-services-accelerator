@@ -15,7 +15,7 @@
     ],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@fsa/storefront": [
+      "@spartacus/fsa-storefront": [
         "projects/fsastorefrontlib/src/public_api"
       ],
       "fsastorefrontlib": [
@@ -30,7 +30,7 @@
       "dynamicforms/*": [
         "dist/dynamicforms/*"
       ],
-      "@fsa/dynamicforms": [
+      "@spartacus/dynamicforms": [
         "projects/dynamicforms/public_api"
       ]
     }

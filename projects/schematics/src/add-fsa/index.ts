@@ -282,7 +282,7 @@ function installStyles(project: experimental.workspace.WorkspaceProject): Rule {
     }
 
     const htmlContent = buffer.toString();
-    const insertion = `\n@import '~@fsa/fsastorefrontstyles/index';\n`;
+    const insertion = `\n@import '~@spartacus/fsa-storefrontstyles/index';\n`;
 
     if (htmlContent.includes(insertion)) {
       return;
