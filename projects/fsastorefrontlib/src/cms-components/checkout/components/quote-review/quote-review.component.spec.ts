@@ -1,6 +1,12 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import {
+  GlobalMessage,
+  GlobalMessageService,
+  I18nTestingModule,
+  OccConfig,
+  RoutingService,
+} from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { of, Observable } from 'rxjs';
 import { FSCart, FSSteps } from '../../../../occ/occ-models';
@@ -44,8 +50,23 @@ class MockCategoryService {
   }
 }
 
+const mockCart: FSCart = {
+  code: 'test001',
+  insuranceQuote: {
+    quoteId: 'testQuote001',
+    state: {
+      code: 'BIND',
+    },
+    quoteWorkflowStatus: {
+      code: 'REFERRED',
+    },
+  },
+};
+
 class FSCartServiceStub {
-  getActive() {}
+  getActive() {
+    return of(mockCart);
+  }
   isStable() {}
 }
 
@@ -64,6 +85,10 @@ class MockFSTranslationService {
   getTranslationValue() {}
 }
 
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
+
 const modalInstance: any = {
   componentInstance: {
     cartCode: '',
@@ -79,6 +104,7 @@ describe('Quote Review Component', () => {
   let fixture: ComponentFixture<QuoteReviewComponent>;
   let routingService: RoutingService;
   let translationService: FSTranslationService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -122,6 +148,10 @@ describe('Quote Review Component', () => {
             provide: FSCheckoutService,
             useClass: MockFSCheckoutService,
           },
+          {
+            provide: GlobalMessageService,
+            useClass: MockGlobalMessageService,
+          },
         ],
       }).compileComponents();
     })
@@ -133,6 +163,7 @@ describe('Quote Review Component', () => {
     fixture.detectChanges();
     routingService = TestBed.inject(RoutingService);
     translationService = TestBed.inject(FSTranslationService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
     spyOn(routingService, 'go').and.stub();
     component.ngOnInit();
   });
