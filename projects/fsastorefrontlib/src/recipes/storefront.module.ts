@@ -24,7 +24,7 @@ import { layoutConfig } from './config/default-layout-config';
 import {
   dynamicformsTranslations,
   dynamicformsTranslationsDe,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 
 @NgModule({
   imports: [

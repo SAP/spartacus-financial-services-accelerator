@@ -1,5 +1,8 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';

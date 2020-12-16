@@ -14,10 +14,7 @@
   },
   "github": {
     "release": true,
-    "assets": [
-      "../../docs.tar.gz",
-      "../../docs.zip"
-    ],
+    "assets": ["../../docs.tar.gz", "../../docs.zip"],
     "releaseName": "@spartacus/dynamicforms@${version}"
   }
 }

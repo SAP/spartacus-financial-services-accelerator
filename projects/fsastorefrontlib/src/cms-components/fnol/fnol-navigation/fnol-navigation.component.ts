@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';

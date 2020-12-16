@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService } from '@spartacus/dynamicforms';
 import { Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';

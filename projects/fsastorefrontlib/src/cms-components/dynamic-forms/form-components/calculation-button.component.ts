@@ -6,7 +6,7 @@ import {
   FormDataStorageService,
   FormService,
   YFormData,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { LanguageService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';

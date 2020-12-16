@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DefaultFormValidators } from '@fsa/dynamicforms';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';

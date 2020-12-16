@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormDataStorageService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { ModalService } from '@spartacus/storefront';
 import { combineLatest, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
