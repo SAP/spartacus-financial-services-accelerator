@@ -1,6 +1,7 @@
 {
   "name": "fsastorefrontapp",
   "version": "1.0.0",
+  "license": "Apache-2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,7 +20,12 @@
     "e2e:cy:start-open": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:open",
     "e2e:cy:start-run": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:run",
     "prettier": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\"",
-    "prettier-fix": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\" --write"
+    "prettier-fix": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\" --write",
+    "generate:docs": "npx @compodoc/compodoc -p tsconfig.compodoc.json && . ./scripts/zip-docs.sh",
+    "release:dynamicforms": "cd projects/dynamicforms && release-it && cd ../..",
+    "release:fsastorefrontstyles": "cd projects/fsastorefrontstyles && release-it && cd ../..",
+    "release:fsastorefront": "cd projects/fsastorefrontlib && release-it && cd ../..",
+    "release:schematics": "cd projects/schematics && release-it && cd ../.."
   },
   "private": false,
   "dependencies": {

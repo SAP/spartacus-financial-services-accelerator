@@ -10,10 +10,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
-    "lib": ["es2020", "dom"],
-    "paths": {
-      "@fsa/dynamicforms": ["dist/dynamicforms"]
-    }
+    "lib": ["es2020", "dom"]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
