@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   FormCMSComponent,
@@ -14,7 +14,8 @@ import { CmsFormSubmitComponent } from '../../../occ/occ-models';
   selector: 'cx-fs-cms-form-submit',
   templateUrl: './cms-form-submit.component.html',
 })
-export class CMSFormSubmitComponent extends FormCMSComponent implements OnInit {
+export class CMSFormSubmitComponent extends FormCMSComponent
+  implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
@@ -29,6 +30,7 @@ export class CMSFormSubmitComponent extends FormCMSComponent implements OnInit {
   pageContext: PageContext;
 
   ngOnInit() {
+    super.ngOnInit();
     this.subscription.add(
       this.activatedRoute.params
         .pipe(
@@ -45,6 +47,11 @@ export class CMSFormSubmitComponent extends FormCMSComponent implements OnInit {
         )
         .subscribe()
     );
-    this.loadForm();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
