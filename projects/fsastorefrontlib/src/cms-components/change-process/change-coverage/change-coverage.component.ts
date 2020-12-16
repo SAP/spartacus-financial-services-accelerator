@@ -17,7 +17,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.currentDate = new Date().toISOString().substr(0, 10);
+    this.currentDate = new Date();
     this.subscription.add(
       this.changeRequest$
         .pipe(

@@ -5,6 +5,7 @@ import {
   GlobalMessageType,
   RoutingService,
 } from '@spartacus/core';
+import { DateConfig } from 'projects/fsastorefrontlib/src/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
@@ -24,7 +25,8 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
-    protected changePolicyService: ChangePolicyService
+    protected changePolicyService: ChangePolicyService,
+    protected dateConfig: DateConfig
   ) {}
 
   configurationSteps: FSStepData[];
@@ -118,6 +120,10 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         cxRoute: '/',
       });
     }
+  }
+
+  getDateFormat() {
+    return this.dateConfig?.date?.format || '';
   }
 
   ngOnDestroy() {
