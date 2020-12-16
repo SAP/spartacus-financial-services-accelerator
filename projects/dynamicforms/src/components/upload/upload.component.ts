@@ -20,6 +20,7 @@ import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
 import { FormDataService } from '../../core/services';
+import { FieldConfig } from '../../core';
 
 @Component({
   selector: 'cx-upload',
@@ -53,12 +54,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
+    const filteredFiles = this.filterFiles(this.config, event.target.files);
     if (
       this.config.accept.toString() === event.target.accept &&
-      this.config.multiple === event.target.multiple &&
-      this.checkFileSize(event)
+      this.config.multiple === event.target.multiple
     ) {
-      this.fileList = Array.from(event.target.files);
+      this.fileList = Array.from(filteredFiles);
       this.fileList.splice(this.config.maxUploads);
       this.setValueAndValidate(this.fileList);
     } else {
@@ -101,6 +102,19 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         )
         .subscribe()
     );
+  }
+
+  protected filterFiles(config: FieldConfig, files: FileList) {
+    const filtedFiles = [];
+    Array.from(files).forEach(file => {
+      if (
+        config.accept.includes(file.type) &&
+        file.size <= this.config.maxFileSize
+      ) {
+        filtedFiles.push(file);
+      }
+    });
+    return filtedFiles;
   }
 
   convertFileSize(bytes: number) {
@@ -207,14 +221,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return (
       Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
     );
-  }
-
-  protected checkFileSize(event): boolean {
-    const files: File[] = Array.from(event.target.files);
-    const maxExceeded = files.filter(
-      file => file.size > this.config.maxFileSize
-    );
-    return maxExceeded.length <= 0;
   }
 
   protected setValueAndValidate(value: File[]) {
