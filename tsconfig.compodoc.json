@@ -15,9 +15,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@fsa/dynamicforms": ["projects/dynamicforms/public_api"],
-      "@fsa/fsastorefront": ["projects/fsastorefrontlib/src/public_api"],
-      "@fsa/schematics": ["projects/schematics/src/public_api"],
+      "@spartacus/dynamicforms": ["projects/dynamicforms/public_api"],
+      "@spartacus/fsa-storefront": ["projects/fsastorefrontlib/src/public_api"],
+      "@spartacus/fsa-schematics": ["projects/schematics/src/public_api"],
     }
   },
   "exclude": [

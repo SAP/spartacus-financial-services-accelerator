@@ -3,8 +3,8 @@
     "requireCleanWorkingDir": true,
     "requireUpstream": false,
     "tagName": "fsastorefrontstyles-${version}",
-    "commitMessage": "Bumping styles version to ${version}",
-    "tagAnnotation": "Bumping styles version to ${version}"
+    "commitMessage": "Bumping fsastorefrontstyles version to ${version}",
+    "tagAnnotation": "Bumping fsastorefrontstyles version to ${version}"
   },
   "github": {
     "release": true,

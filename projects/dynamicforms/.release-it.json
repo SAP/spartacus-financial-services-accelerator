@@ -3,8 +3,8 @@
     "requireCleanWorkingDir": true,
     "requireUpstream": false,
     "tagName": "dynamicforms-${version}",
-    "commitMessage": "Bumping core version to ${version}",
-    "tagAnnotation": "Bumping core version to ${version}"
+    "commitMessage": "Bumping dynamicforms version to ${version}",
+    "tagAnnotation": "Bumping dynamicforms version to ${version}"
   },
   "npm": {
     "publishPath": "./../../dist/dynamicforms"
