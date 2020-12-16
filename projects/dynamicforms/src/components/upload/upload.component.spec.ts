@@ -74,9 +74,13 @@ const mockFile2 = <File>blob2;
 
 const mockManipulatedTarget = {
   target: {
-    accept: '*',
+    files: [mockFile, mockFile2],
+    multiple: true,
+    accept: 'image/png',
+    value: 'test',
   },
 };
+
 const formData = {
   formDataId: 'id',
   content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
@@ -191,6 +195,7 @@ describe('UploadComponent', () => {
   });
 
   it('should not select files when accept is manipulated', () => {
+    component.ngOnInit();
     component.handleFiles(mockManipulatedTarget);
     expect(component.uploadControl.value).toBe(null);
   });
