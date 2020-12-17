@@ -73,5 +73,9 @@ export const quoteReview = {
       postcode: 'Postleitzahl',
       country: 'Land',
     },
+    status: {
+      pending:
+        'Ihr Antrag wird zur Zeit bearbeitet. Bitte wenden Sie sich an einen Makler.',
+    },
   },
 };

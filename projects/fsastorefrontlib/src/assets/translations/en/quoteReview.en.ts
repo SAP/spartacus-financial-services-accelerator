@@ -73,5 +73,8 @@ export const quoteReview = {
       postcode: 'Postcode',
       country: 'Country',
     },
+    status: {
+      pending: 'Your quote is in status pending. Please contact an agent.',
+    },
   },
 };
