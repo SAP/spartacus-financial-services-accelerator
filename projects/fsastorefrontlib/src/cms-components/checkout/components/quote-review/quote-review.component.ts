@@ -40,6 +40,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   activeCategory$: Observable<string>;
+  displayQuoteStatusPendingMessage: void;
 
   constructor(
     protected cartService: FSCartService,
@@ -60,7 +61,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.activeCategory$ = this.categoryService.getActiveCategory();
-    this.displayQuoteStatusPendingMessage();
+    this.displayQuoteStatusPendingMessage = this.globalMessageService.add(
+      { key: 'quoteReview.status.pending' },
+      GlobalMessageType.MSG_TYPE_INFO
+    );
   }
 
   getBaseUrl() {
@@ -149,26 +153,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         cart.deliveryOrderGroups[0].entries[0].formData[0].content
       );
     }
-  }
-
-  private displayQuoteStatusPendingMessage() {
-    this.subscription.add(
-      this.cart$
-        .pipe(
-          map(cart => {
-            if (
-              (<FSCart>cart).insuranceQuote?.quoteWorkflowStatus?.code ===
-              QuoteWorkflowStatusType.PENDING
-            ) {
-              this.globalMessageService.add(
-                { key: 'quoteReview.status.pending' },
-                GlobalMessageType.MSG_TYPE_INFO
-              );
-            }
-          })
-        )
-        .subscribe()
-    );
   }
 
   ngOnDestroy() {
