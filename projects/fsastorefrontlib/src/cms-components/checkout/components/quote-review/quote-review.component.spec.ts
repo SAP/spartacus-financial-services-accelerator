@@ -3,13 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessage,
   GlobalMessageService,
-  GlobalMessageType,
   I18nTestingModule,
   OccConfig,
   RoutingService,
 } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
-import { of, Observable, Subject } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { FSCart, FSSteps } from '../../../../occ/occ-models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -21,7 +20,6 @@ import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 const formDataContent = '{"content":"formContent"}';
-import createSpy = jasmine.createSpy;
 
 class MockActivatedRoute {
   params = of();
