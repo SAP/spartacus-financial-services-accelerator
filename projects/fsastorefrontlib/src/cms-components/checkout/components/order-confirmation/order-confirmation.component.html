@@ -23,8 +23,8 @@
                       class="image-item"
                       [src]="
                         getBaseUrl() +
-                        ((order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.images)[1]?.url
+                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
+                          ?.defaultCategory?.image?.url
                       "
                       [alt]="
                         (order.deliveryOrderGroups[0]?.entries)[0]?.product
