@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, OccConfig, RoutingService } from '@spartacus/core';
+import {
+  Cart,
+  GlobalMessageService,
+  GlobalMessageType,
+  OccConfig,
+  RoutingService,
+} from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -34,6 +40,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   activeCategory$: Observable<string>;
+  displayQuoteStatusPendingMessage: void;
 
   constructor(
     protected cartService: FSCartService,
@@ -44,7 +51,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
     protected translationService: FSTranslationService,
-    protected checkoutService: FSCheckoutService
+    protected checkoutService: FSCheckoutService,
+    protected globalMessageService: GlobalMessageService
   ) {}
 
   ngOnInit() {
@@ -53,6 +61,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.activeCategory$ = this.categoryService.getActiveCategory();
+    this.displayQuoteStatusPendingMessage = this.globalMessageService.add(
+      { key: 'quoteReview.status.pending' },
+      GlobalMessageType.MSG_TYPE_INFO
+    );
   }
 
   getBaseUrl() {
