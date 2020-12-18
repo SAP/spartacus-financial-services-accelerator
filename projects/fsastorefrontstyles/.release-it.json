@@ -2,7 +2,7 @@
   "git": {
     "requireCleanWorkingDir": true,
     "requireUpstream": false,
-    "tagName": "fsastorefrontstyles-${version}",
+    "tagName": "fsa-styles-${version}",
     "commitMessage": "Bumping fsastorefrontstyles version to ${version}",
     "tagAnnotation": "Bumping fsastorefrontstyles version to ${version}"
   },

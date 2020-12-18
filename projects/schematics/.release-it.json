@@ -2,7 +2,7 @@
   "git": {
     "requireCleanWorkingDir": true,
     "requireUpstream": false,
-    "tagName": "schematics-${version}",
+    "tagName": "fsa-schematics-${version}",
     "commitMessage": "Bumping fsa schematics version to ${version}",
     "tagAnnotation": "Bumping fsa schematics version to ${version}"
   },
