@@ -27,6 +27,15 @@ To get up and running with Financial Spartacus Storefront, the recommended appro
 
 For complete setup instructions, see [Building the Financial Spartacus Storefront from Libraries](https://sap.github.io/spartacus-docs/building-the-fsa-storefront-from-libraries/).
 
+# API Documentation
+
+The FSA Spartacus API documentation is hosted here: [https://sap.github.io/spartacus-financial-services-accelerator/](https://sap.github.io/spartacus-financial-services-accelerator/)
+
+The API documentation is versioned and is included in the **Assets** folder of each and every FSA Spartacus library. You can download the API documentation for a particular version by accessing the **Assets** folder of any FSA Spartacus library from that particular release, and then clicking on `docs.tar.gz` or `docs.zip`.
+
+
+**Note:** The FSA Spartacus API is separate from the FSA Commerce OCC REST APIs that FSA Spartacus consumes. 
+
 # Limitations
 
 Beta version of Financial Spartacus is recommended to use with SAP Commerce 2005.5 and Financial Services Accelerator 2008.2 version. 
