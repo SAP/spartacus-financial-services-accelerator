@@ -268,7 +268,7 @@ describe('ComparisonTablePanelItemComponent', () => {
   });
 
   it('should get base url', () => {
-    const baseUrl = comparisonTablePanelItemComponent.getBaseUrl();
+    const baseUrl = comparisonTablePanelItemComponent.baseUrl;
     expect(baseUrl).toEqual('base-url');
   });
 });

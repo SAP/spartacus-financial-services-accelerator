@@ -90,7 +90,7 @@ describe('QuotesComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should get base url', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
   it('should not retrieve quote', () => {
     component.retrieveQuote({});

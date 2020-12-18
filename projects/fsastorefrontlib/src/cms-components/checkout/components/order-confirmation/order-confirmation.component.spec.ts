@@ -70,7 +70,7 @@ describe('OrderConfirmationComponent', () => {
   });
 
   it('should get base url', () => {
-    const baseUrl = component.getBaseUrl();
+    const baseUrl = component.baseUrl;
     expect(baseUrl).toEqual('');
   });
 });

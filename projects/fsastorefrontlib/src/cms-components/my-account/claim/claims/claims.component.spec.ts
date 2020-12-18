@@ -191,6 +191,7 @@ describe('ClaimsComponent', () => {
   });
 
   it('should return base Url from config', () => {
-    expect(component.getBaseUrl()).toEqual(testBaseUrl);
+    component.ngOnInit();
+    expect(component.baseUrl).toEqual(testBaseUrl);
   });
 });

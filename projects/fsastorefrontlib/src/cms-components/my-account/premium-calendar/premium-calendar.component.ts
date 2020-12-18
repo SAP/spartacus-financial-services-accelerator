@@ -22,6 +22,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
   policies$;
   policiesLoaded$;
   selectedIndexes: number[] = [];
+  baseUrl: string;
 
   private subscription = new Subscription();
 
@@ -29,10 +30,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
     this.policyService.loadPremiumCalendar();
     this.policies$ = this.policyService.getPremiumCalendar();
     this.policiesLoaded$ = this.policyService.getPremiumCalendarLoaded();
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   toggleActiveAccordion(index: number) {

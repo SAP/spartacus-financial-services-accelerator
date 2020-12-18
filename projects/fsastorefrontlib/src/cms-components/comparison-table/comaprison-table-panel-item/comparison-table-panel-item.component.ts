@@ -31,6 +31,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   @Input()
   pricingData: PricingData;
   productPrice: string;
+  baseUrl: string;
 
   constructor(
     protected cartService: FSCartService,
@@ -48,6 +49,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getProductData();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   getProductData() {
@@ -150,10 +152,6 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   ngOnDestroy() {

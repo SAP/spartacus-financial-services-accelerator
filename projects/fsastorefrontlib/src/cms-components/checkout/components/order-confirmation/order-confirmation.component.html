@@ -22,7 +22,7 @@
                     <img
                       class="image-item"
                       [src]="
-                        getBaseUrl() +
+                        baseUrl +
                         (order.deliveryOrderGroups[0]?.entries)[0]?.product
                           ?.defaultCategory?.image?.url
                       "

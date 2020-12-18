@@ -6,7 +6,7 @@
     >
       <img
         class="image-item"
-        [src]="getBaseUrl() + policy.mainProduct.coverageProduct.images[0].url"
+        [src]="baseUrl + policy.mainProduct.coverageProduct.images[0].url"
         alt=""
       />
     </span>
@@ -453,7 +453,7 @@
           <div class="content-box col-xs-10 col-sm-4 col-md-3">
             <img
               class="circle-image"
-              [src]="getBaseUrl() + policy.responsibleAgent?.thumbnail?.url"
+              [src]="baseUrl + policy.responsibleAgent?.thumbnail?.url"
               [alt]="policy.responsibleAgent?.displayName"
             />
             <p class="content-box-info">

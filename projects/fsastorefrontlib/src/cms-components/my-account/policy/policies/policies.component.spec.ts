@@ -112,7 +112,7 @@ describe('PoliciesComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should get base url', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
   it('should call create claim', () => {
     spyOn(claimService, 'createClaim').and.stub();
