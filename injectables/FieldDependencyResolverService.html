@@ -1,0 +1,650 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fsastorefrontapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fsastorefrontapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>FieldDependencyResolverService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeControlEnabled">changeControlEnabled</a>
+                            </li>
+                            <li>
+                                <a href="#geValidationsForCondition">geValidationsForCondition</a>
+                            </li>
+                            <li>
+                                <a href="#resolveFormControlDependencies">resolveFormControlDependencies</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formValidationService: <a href="../injectables/FormValidationService.html">FormValidationService</a>, formService: <a href="../injectables/FormService.html">FormService</a>, fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts:16</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formValidationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormValidationService.html" target="_self" >FormValidationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormService.html" target="_self" >FormService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeControlEnabled"></a>
+                    <span class="name">
+                        <b>
+                            changeControlEnabled
+                        </b>
+                        <a href="#changeControlEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeControlEnabled(dependentControl: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, controlConfig: <a href="../interfaces/DynamicFormGroup.html">DynamicFormGroup</a>, enabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="81"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts:81</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method used to enable/disable control based on input parameter and form configuration value.
+In case control is from group, check is done for nested controls to see if any of them has configuration set to disabled.
+If any field config has disabled property set to true, dynamic condition cannot change that.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dependentControl</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The dependent field control for which dependencies are resolved</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>controlConfig</td>
+                                    <td>
+                                                <code><a href="../interfaces/DynamicFormGroup.html" target="_self" >DynamicFormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The dependent field config for which dependencies are resolved (control or group)</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>enabled</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The enabled flag which indicates if parent control conditions are met.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="geValidationsForCondition"></a>
+                    <span class="name">
+                        <b>
+                            geValidationsForCondition
+                        </b>
+                        <a href="#geValidationsForCondition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>geValidationsForCondition(dependencyFn: <a href="../interfaces/ControlDependency.html">ControlDependency</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts:101</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dependencyFn</td>
+                                    <td>
+                                                <code><a href="../interfaces/ControlDependency.html" target="_self" >ControlDependency</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>ValidatorFn[]</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolveFormControlDependencies"></a>
+                    <span class="name">
+                        <b>
+                            resolveFormControlDependencies
+                        </b>
+                        <a href="#resolveFormControlDependencies"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resolveFormControlDependencies(controlConfig: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, dependentControl: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>, formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts:30</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method used to enable/disable dependent control based on conditions defined at master control</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>controlConfig</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The dependent field config for which dependencies are resolved</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>dependentControl</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The dependent field control for which dependencies are resolved</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The form group which tracks value and validity of master form controls</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+} from &#x27;@angular/forms&#x27;;
+import { FormService } from &#x27;../form/form.service&#x27;;
+import {
+  ControlDependency,
+  DynamicFormGroup,
+} from &#x27;./../../models/form-config.interface&#x27;;
+import { FormValidationService } from &#x27;./../form-validation/form-validation.service&#x27;;
+
+@Injectable()
+export class FieldDependencyResolverService {
+  constructor(
+    protected formValidationService: FormValidationService,
+    protected formService: FormService,
+    protected fb: FormBuilder
+  ) {}
+
+  /**
+   * Method used to enable/disable dependent control based on conditions defined at master control
+   *
+   * @param controlConfig The dependent field config for which dependencies are resolved
+   * @param dependentControl The dependent field control for which dependencies are resolved
+   * @param formGroup The form group which tracks value and validity of master form controls
+   */
+  resolveFormControlDependencies(
+    controlConfig: any,
+    dependentControl: AbstractControl,
+    formGroup: FormGroup
+  ) {
+    controlConfig.dependsOn.controls.forEach(condition &#x3D;&gt; {
+      const masterFormControl &#x3D; this.formService.getFormControlForCode(
+        condition.controlName,
+        formGroup
+      );
+      if (masterFormControl) {
+        if (!masterFormControl.value) {
+          if (controlConfig.dependsOn.hide &#x3D;&#x3D;&#x3D; true) {
+            controlConfig.hidden &#x3D; true;
+          }
+          this.changeControlEnabled(dependentControl, controlConfig, false);
+        }
+        masterFormControl.valueChanges.subscribe(fieldValue &#x3D;&gt; {
+          const dependencyValidations &#x3D; this.geValidationsForCondition(
+            condition
+          );
+          const dependancyControl &#x3D; this.fb.control(
+            { disabled: false, value: fieldValue },
+            dependencyValidations
+          );
+
+          if (dependancyControl.valid) {
+            if (controlConfig.dependsOn.hide &#x3D;&#x3D;&#x3D; true) {
+              controlConfig.hidden &#x3D; false;
+            }
+            this.changeControlEnabled(dependentControl, controlConfig, true);
+          } else {
+            if (controlConfig.dependsOn.hide &#x3D;&#x3D;&#x3D; true) {
+              controlConfig.hidden &#x3D; true;
+            }
+            this.changeControlEnabled(dependentControl, controlConfig, false);
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Method used to enable/disable control based on input parameter and form configuration value.
+   * In case control is from group, check is done for nested controls to see if any of them has configuration set to disabled.
+   * If any field config has disabled property set to true, dynamic condition cannot change that.
+   *
+   * @param dependentControl The dependent field control for which dependencies are resolved
+   * @param controlConfig The dependent field config for which dependencies are resolved (control or group)
+   * @param enabled The enabled flag which indicates if parent control conditions are met.
+   */
+  changeControlEnabled(
+    dependentControl: any,
+    controlConfig: DynamicFormGroup,
+    enabled: boolean
+  ) {
+    if (enabled) {
+      if (dependentControl.controls &amp;&amp; controlConfig.fieldConfigs) {
+        controlConfig.fieldConfigs.forEach(childConfig &#x3D;&gt; {
+          childConfig.disabled
+            ? dependentControl.controls[childConfig.name].disable()
+            : dependentControl.controls[childConfig.name].enable();
+        });
+      } else {
+        dependentControl.enable();
+      }
+    } else {
+      dependentControl.disable();
+    }
+  }
+
+  geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {
+    const dependencyFunctions: ValidatorFn[] &#x3D; [];
+    if (dependencyFn &amp;&amp; dependencyFn.conditions) {
+      dependencyFn.conditions.forEach(conditionFunction &#x3D;&gt; {
+        dependencyFunctions.push(
+          this.formValidationService.getValidatorForFunction(conditionFunction)
+        );
+      });
+    }
+    return dependencyFunctions;
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'FieldDependencyResolverService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

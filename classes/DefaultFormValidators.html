@@ -1,0 +1,1676 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fsastorefrontapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fsastorefrontapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>DefaultFormValidators</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>projects/dynamicforms/src/util/validators/default-form-validators.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/api/forms/Validators" target="_blank" >Validators</a></code>
+            </p>
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#passwordRegex">passwordRegex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#phoneNumberRegex">phoneNumberRegex</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#postalCodeRegex">postalCodeRegex</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#alphanumeric">alphanumeric</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#checkValue">checkValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#compareAgeToDOB">compareAgeToDOB</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#compareDates">compareDates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#compareDOBtoAge">compareDOBtoAge</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#compareNumbers">compareNumbers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#compareToCurrentDate">compareToCurrentDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#dateOfBirthValidator">dateOfBirthValidator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#getFormControlForCode">getFormControlForCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#matchFields">matchFields</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#number">number</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#regexValidator">regexValidator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#shouldContainValue">shouldContainValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#valueComparison">valueComparison</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="passwordRegex"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Static</span>
+                            passwordRegex</b>
+                            <a href="#passwordRegex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>/^(?&#x3D;.*?[A-Z])(?&#x3D;.*?[0-9])(?&#x3D;.*?[!@#$%^*()_\-+{};:.,]).{6,}$/</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:10</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="phoneNumberRegex"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Static</span>
+                            phoneNumberRegex</b>
+                            <a href="#phoneNumberRegex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>/^(?:\d{6,20})?$/</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:11</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="postalCodeRegex"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Static</span>
+                            postalCodeRegex</b>
+                            <a href="#postalCodeRegex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>/^(?&#x3D;.*[0-9])[A-Za-z0-9\s]+$/</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:12</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alphanumeric"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            alphanumeric
+                        </b>
+                        <a href="#alphanumeric"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>alphanumeric(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="210"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:210</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{ pattern: { requiredPattern: {}; actualValue: any; }; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkValue"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            checkValue
+                        </b>
+                        <a href="#checkValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkValue(allowedValues: string[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="227"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:227</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>allowedValues</td>
+                                    <td>
+                                            <code>string[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareAgeToDOB"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            compareAgeToDOB
+                        </b>
+                        <a href="#compareAgeToDOB"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compareAgeToDOB(comparisonField: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, operator: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:103</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comparisonField</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>operator</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareDates"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            compareDates
+                        </b>
+                        <a href="#compareDates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compareDates(comparisonField: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, operator: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:144</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comparisonField</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>operator</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareDOBtoAge"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            compareDOBtoAge
+                        </b>
+                        <a href="#compareDOBtoAge"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compareDOBtoAge(comparisonField: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, operator: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comparisonField</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>operator</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareNumbers"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            compareNumbers
+                        </b>
+                        <a href="#compareNumbers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compareNumbers(comparisonField: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, operator: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="126"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:126</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>comparisonField</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>operator</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compareToCurrentDate"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            compareToCurrentDate
+                        </b>
+                        <a href="#compareToCurrentDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compareToCurrentDate(operator)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:162</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>operator</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dateOfBirthValidator"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            dateOfBirthValidator
+                        </b>
+                        <a href="#dateOfBirthValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dateOfBirthValidator(minAge: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:70</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>minAge</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFormControlForCode"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            getFormControlForCode
+                        </b>
+                        <a href="#getFormControlForCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getFormControlForCode(formControlCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, formGroup: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:29</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formControlCode</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>formGroup</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matchFields"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            matchFields
+                        </b>
+                        <a href="#matchFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>matchFields(controlName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, controlName2: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:62</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>controlName</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>controlName2</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; { NotEqual: boolean; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="number"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            number
+                        </b>
+                        <a href="#number"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>number(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:193</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{ pattern: { requiredPattern: {}; actualValue: any; }; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="regexValidator"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            regexValidator
+                        </b>
+                        <a href="#regexValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>regexValidator(regex)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:52</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>regex</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shouldContainValue"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            shouldContainValue
+                        </b>
+                        <a href="#shouldContainValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>shouldContainValue(value)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="234"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:234</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>(control: any) &#x3D;&gt; any</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valueComparison"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            valueComparison
+                        </b>
+                        <a href="#valueComparison"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>valueComparison(baseValue: number | Date, comparisonValue: number | Date, operator: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="14"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:14</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>baseValue</td>
+                                    <td>
+                                            <code>number | Date</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>comparisonValue</td>
+                                    <td>
+                                            <code>number | Date</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>operator</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{ valueConflict: boolean; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AbstractControl,
+  ValidationErrors,
+  Validators,
+  FormGroup,
+} from &#x27;@angular/forms&#x27;;
+
+// @dynamic
+export class DefaultFormValidators extends Validators {
+  static passwordRegex &#x3D; /^(?&#x3D;.*?[A-Z])(?&#x3D;.*?[0-9])(?&#x3D;.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
+  static phoneNumberRegex &#x3D; /^(?:\d{6,20})?$/;
+  static postalCodeRegex &#x3D; /^(?&#x3D;.*[0-9])[A-Za-z0-9\s]+$/;
+
+  static valueComparison(
+    baseValue: number | Date,
+    comparisonValue: number | Date,
+    operator: string
+  ) {
+    if (baseValue &amp;&amp; comparisonValue) {
+      switch (operator) {
+        case &#x27;shouldBeGreater&#x27;:
+          return baseValue &gt; comparisonValue ? null : { valueConflict: true };
+        case &#x27;shouldBeLess&#x27;:
+          return baseValue &lt; comparisonValue ? null : { valueConflict: true };
+      }
+    }
+  }
+
+  static getFormControlForCode(
+    formControlCode: string,
+    formGroup: FormGroup
+  ): AbstractControl {
+    let abstractFormControl;
+    for (const key of Object.keys(formGroup.controls)) {
+      const nestedFormGroup &#x3D; formGroup.get(key);
+      if (key &#x3D;&#x3D;&#x3D; formControlCode) {
+        abstractFormControl &#x3D; formGroup.get(key);
+        break;
+      } else if (nestedFormGroup instanceof FormGroup) {
+        abstractFormControl &#x3D; this.getFormControlForCode(
+          formControlCode,
+          nestedFormGroup
+        );
+        if (abstractFormControl !&#x3D;&#x3D; undefined) {
+          break;
+        }
+      }
+    }
+    return abstractFormControl;
+  }
+
+  static regexValidator(regex) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      const field &#x3D; control.value as string;
+      if (field) {
+        return field.match(regex) ? null : { InvalidFormat: true };
+      }
+      return null;
+    };
+  }
+
+  static matchFields(controlName: string, controlName2: string) {
+    return (control: AbstractControl): { NotEqual: boolean } &#x3D;&gt; {
+      if (control.get(controlName).value !&#x3D;&#x3D; control.get(controlName2).value) {
+        return { NotEqual: true };
+      }
+    };
+  }
+
+  static dateOfBirthValidator(minAge: number) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      const userAge &#x3D; new Date(control.value as string);
+      const today &#x3D; new Date();
+      const age &#x3D; new Date(
+        today.getFullYear() - minAge,
+        today.getMonth(),
+        today.getDate()
+      );
+      return userAge &lt; age ? null : { InvalidDate: true };
+    };
+  }
+
+  static compareDOBtoAge(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      const userAge &#x3D; new Date(control.value as string);
+      const today &#x3D; new Date();
+      if (control.parent) {
+        const compareToField &#x3D; DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          &lt;FormGroup&gt;control.root
+        );
+        const targetAge &#x3D; compareToField.value;
+        const age &#x3D; new Date(
+          today.getFullYear() - targetAge,
+          today.getMonth(),
+          today.getDate()
+        );
+        return DefaultFormValidators.valueComparison(userAge, age, operator);
+      }
+    };
+  }
+
+  static compareAgeToDOB(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      if (control.parent) {
+        const compareToField &#x3D; DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          &lt;FormGroup&gt;control.root
+        );
+        const compareToFieldParsed &#x3D; compareToField.value;
+        const DOBtoYear &#x3D; Number(
+          new Date(compareToFieldParsed as string).getFullYear()
+        );
+        const currentYear &#x3D; Number(new Date().getFullYear());
+        const currentAge &#x3D; Number(control.value);
+        const calculatedAge &#x3D; currentYear - DOBtoYear;
+        return DefaultFormValidators.valueComparison(
+          calculatedAge,
+          currentAge,
+          operator
+        );
+      }
+    };
+  }
+
+  static compareNumbers(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      if (control.parent) {
+        const currentField &#x3D; Number(control.value);
+        const compareToField &#x3D; DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          &lt;FormGroup&gt;control.root
+        );
+        const compareToFieldParsed &#x3D; Number(compareToField.value);
+        return DefaultFormValidators.valueComparison(
+          currentField,
+          compareToFieldParsed,
+          operator
+        );
+      }
+    };
+  }
+
+  static compareDates(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      if (control.parent) {
+        const currentField &#x3D; Date.parse(control.value);
+        const compareToField &#x3D; DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          &lt;FormGroup&gt;control.root
+        );
+        const compareToFieldParsed &#x3D; Date.parse(compareToField.value);
+        return DefaultFormValidators.valueComparison(
+          compareToFieldParsed,
+          currentField,
+          operator
+        );
+      }
+    };
+  }
+
+  static compareToCurrentDate(operator) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      const inputVal &#x3D; new Date(control.value as string);
+      inputVal.setHours(0, 0, 0, 0);
+      const today &#x3D; new Date();
+      today.setHours(0, 0, 0, 0);
+      switch (operator) {
+        case &#x27;shouldBeEqual&#x27;:
+          return inputVal.getTime() &#x3D;&#x3D;&#x3D; today.getTime()
+            ? null
+            : { InvalidDate: true };
+        case &#x27;shouldBeGreater&#x27;:
+          return inputVal.getTime() &gt; today.getTime()
+            ? null
+            : { InvalidDate: true };
+        case &#x27;shouldBeLess&#x27;:
+          return inputVal.getTime() &lt; today.getTime()
+            ? null
+            : { InvalidDate: true };
+        case &#x27;shouldBeGreaterOrEqual&#x27;:
+          return inputVal.getTime() &gt;&#x3D; today.getTime()
+            ? null
+            : { InvalidDate: true };
+        case &#x27;shouldBeLessOrEqual&#x27;:
+          return inputVal.getTime() &lt;&#x3D; today.getTime()
+            ? null
+            : { InvalidDate: true };
+      }
+    };
+  }
+
+  static number(control: AbstractControl) {
+    const field: string &#x3D; control.value;
+    const numberRegex &#x3D; /^[0-9]*$/;
+    if (field) {
+      const valid &#x3D; numberRegex.test(field);
+      return valid
+        ? null
+        : {
+            pattern: {
+              requiredPattern: numberRegex,
+              actualValue: control.value,
+            },
+          };
+    }
+    return null;
+  }
+
+  static alphanumeric(control: AbstractControl) {
+    const field: string &#x3D; control.value;
+    const postalCodeRegex &#x3D; /^(?&#x3D;.*[0-9])[A-Za-z0-9\s]+$/;
+    if (field) {
+      const valid &#x3D; postalCodeRegex.test(field);
+      return valid
+        ? null
+        : {
+            pattern: {
+              requiredPattern: postalCodeRegex,
+              actualValue: control.value,
+            },
+          };
+    }
+    return null;
+  }
+
+  static checkValue(allowedValues: string[]) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      const valid &#x3D; allowedValues.indexOf(control.value) !&#x3D;&#x3D; -1;
+      return valid ? null : { valueConflict: true };
+    };
+  }
+
+  static shouldContainValue(value) {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      const valid &#x3D; control.value.indexOf(value) !&#x3D;&#x3D; -1;
+      return valid ? null : { valueConflict: true };
+    };
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'DefaultFormValidators.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
