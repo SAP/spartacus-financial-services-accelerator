@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessage,
   GlobalMessageService,
+  GlobalMessageType,
   I18nTestingModule,
   OccConfig,
   RoutingService,
@@ -63,7 +64,7 @@ const mockCart: FSCart = {
   },
 };
 
-class FSCartServiceStub {
+class MockCartService {
   getActive() {
     return of(mockCart);
   }
@@ -105,6 +106,7 @@ describe('Quote Review Component', () => {
   let routingService: RoutingService;
   let translationService: FSTranslationService;
   let globalMessageService: GlobalMessageService;
+  let mockCartService: FSCartService;
 
   beforeEach(
     waitForAsync(() => {
@@ -130,7 +132,7 @@ describe('Quote Review Component', () => {
           },
           {
             provide: FSCartService,
-            useClass: FSCartServiceStub,
+            useClass: MockCartService,
           },
           {
             provide: ModalService,
@@ -164,6 +166,7 @@ describe('Quote Review Component', () => {
     routingService = TestBed.inject(RoutingService);
     translationService = TestBed.inject(FSTranslationService);
     globalMessageService = TestBed.inject(GlobalMessageService);
+    mockCartService = TestBed.inject(FSCartService);
     spyOn(routingService, 'go').and.stub();
     component.ngOnInit();
   });
@@ -306,5 +309,27 @@ describe('Quote Review Component', () => {
   it('step should not be editable if quote status id BIND', () => {
     const result = component.isEditable('BIND');
     expect(result).toEqual(false);
+  });
+
+  it('should display message when quote is in state PENDING', () => {
+    const cart: FSCart = {
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'BIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'PENDING',
+        },
+      },
+    };
+    spyOn(globalMessageService, 'add').and.stub();
+    spyOn(mockCartService, 'getActive').and.returnValue(of(cart));
+    component.ngOnInit();
+    component.displayQuoteStatusPendingMessage();
+    expect(globalMessageService.add).toHaveBeenCalledWith(
+      { key: 'quoteReview.status.pending' },
+      GlobalMessageType.MSG_TYPE_INFO
+    );
   });
 });
