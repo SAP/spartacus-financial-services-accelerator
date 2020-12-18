@@ -88,8 +88,9 @@
                   <img
                     class="image-item"
                     [src]="
-                      getBaseUrl() +
-                      (policy.mainProduct?.coverageProduct?.images)[0]?.url
+                      baseUrl +
+                      policy.mainProduct?.coverageProduct?.defaultCategory
+                        ?.image?.url
                     "
                     [alt]="policy.mainProduct?.coverageProduct?.name"
                   />

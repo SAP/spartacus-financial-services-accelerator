@@ -41,6 +41,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   nextCheckoutStep$: Observable<FSSteps>;
   activeCategory$: Observable<string>;
   displayQuoteStatusPendingMessage: void;
+  baseUrl: string;
 
   constructor(
     protected cartService: FSCartService,
@@ -65,10 +66,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       { key: 'quoteReview.status.pending' },
       GlobalMessageType.MSG_TYPE_INFO
     );
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   navigateBack(previousStep: FSSteps) {

@@ -9,6 +9,7 @@ import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 })
 export class LegalDocumentsComponent implements OnInit {
   cart$: Observable<Cart>;
+  baseUrl: string;
 
   constructor(
     protected cartService: FSCartService,
@@ -17,8 +18,6 @@ export class LegalDocumentsComponent implements OnInit {
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
-  }
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 }
