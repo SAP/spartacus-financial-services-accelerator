@@ -2,11 +2,6 @@
   <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="showContent$ | async; else loading">
       <ng-container *ngIf="cart.deliveryOrderGroups?.length > 0; else noQuotes">
-        <ng-container
-          *ngIf="cart.insuranceQuote?.quoteWorkflowStatus?.code === 'PENDING'"
-        >
-          {{ displayQuoteStatusPendingMessage }}
-        </ng-container>
         <div class="accordion">
           <h2 class="row no-gutters section-header-heading">
             <div class="col-12 col-md-2">
