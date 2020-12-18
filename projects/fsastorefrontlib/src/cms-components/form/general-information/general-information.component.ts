@@ -7,9 +7,9 @@ import {
   YFormCmsComponent,
 } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
-import { FSCartService } from '../../../../src/core/cart/facade/cart.service';
 import { map } from 'rxjs/operators';
 import { FormDefinitionType, FSCart } from '../../../occ/occ-models';
+import { FSCartService } from '../../../core/cart/facade/cart.service';
 
 @Component({
   selector: 'cx-fs-general-information',
