@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   FormCMSComponent,
@@ -7,24 +7,34 @@ import {
   YFormCmsComponent,
 } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
+import { FSCartService } from '../../../../src/core/cart/facade/cart.service';
 import { map } from 'rxjs/operators';
-import { FormDefinitionType } from '../../../occ/occ-models';
+import { FormDefinitionType, FSCart } from '../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-general-information',
   templateUrl: './general-information.component.html',
 })
-export class GeneralInformationComponent extends FormCMSComponent {
+export class GeneralInformationComponent extends FormCMSComponent
+  implements OnInit {
   constructor(
     protected componentData: CmsComponentData<YFormCmsComponent>,
     protected formDataService: FormDataService,
     protected activatedRoute: ActivatedRoute,
-    protected formDataStorageService: FormDataStorageService
+    protected formDataStorageService: FormDataStorageService,
+    protected cartService: FSCartService
   ) {
     super(componentData, formDataService, formDataStorageService);
   }
 
   formCategory: string;
+
+  ngOnInit() {
+    super.ngOnInit();
+    if (!this.formDataId) {
+      this.loadFormData();
+    }
+  }
 
   loadFormDefinition() {
     this.subscription.add(
@@ -36,6 +46,27 @@ export class GeneralInformationComponent extends FormCMSComponent {
               this.formCategory,
               FormDefinitionType.PRODUCT_CONFIGURE
             );
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  loadFormData() {
+    this.subscription.add(
+      this.cartService
+        .getActive()
+        .pipe(
+          map(cart => {
+            if (cart.code) {
+              const chooseCoverFormId = <any>(
+                (<FSCart>cart).insuranceQuote?.quoteDetails?.formId
+              );
+              if (chooseCoverFormId) {
+                this.formDataService.loadFormData(chooseCoverFormId);
+                this.formData$ = this.formDataService.getFormData();
+              }
+            }
           })
         )
         .subscribe()
