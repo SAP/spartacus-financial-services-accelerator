@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DynamicFormModule } from '@fsa/dynamicforms';
+import { DynamicFormModule } from '@spartacus/dynamicforms';
 import {
   CmsConfig,
   ConfigModule,

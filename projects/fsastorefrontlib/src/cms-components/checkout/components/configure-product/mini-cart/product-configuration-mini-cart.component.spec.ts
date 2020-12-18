@@ -1,6 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { I18nTestingModule, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { of } from 'rxjs';

@@ -1,12 +1,19 @@
 {
-  "name": "@fsa/dynamicforms",
+  "name": "@spartacus/dynamicforms",
   "description": "Library for creating dynamic forms, designed to work with Spartacus application",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "FSA",
+  "repository": "https://github.com/SAP/spartacus-financial-services-accelerator/tree/develop/projects/dynamicforms",
+  "homepage": "https://github.com/SAP/spartacus-financial-services-accelerator",
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "fsa",
+    "dynamicforms",
+    "spartacus"
+  ],
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",

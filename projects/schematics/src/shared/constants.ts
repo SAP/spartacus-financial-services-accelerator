@@ -1,7 +1,7 @@
 /***** Imports start *****/
-export const FSA_STOREFRONT = '@fsa/fsastorefront';
-export const FSA_STOREFRONT_STYLES = '@fsa/fsastorefrontstyles';
-export const FSA_DYNAMIC_FORMS = '@fsa/dynamicforms';
+export const FSA_STOREFRONT = '@spartacus/fsa-storefront';
+export const FSA_STOREFRONT_STYLES = '@spartacus/fsa-styles';
+export const FSA_DYNAMIC_FORMS = '@spartacus/dynamicforms';
 /***** Imports end *****/
 
 /***** Classes start *****/

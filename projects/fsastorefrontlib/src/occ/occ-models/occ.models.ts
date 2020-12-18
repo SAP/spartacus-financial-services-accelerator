@@ -1,4 +1,4 @@
-import { YFormData } from '@fsa/dynamicforms';
+import { YFormData } from '@spartacus/dynamicforms';
 import {
   Cart,
   Category,

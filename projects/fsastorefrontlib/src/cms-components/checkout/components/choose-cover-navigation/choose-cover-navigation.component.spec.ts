@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChooseCoverNavigationComponent } from './choose-cover-navigation.component';

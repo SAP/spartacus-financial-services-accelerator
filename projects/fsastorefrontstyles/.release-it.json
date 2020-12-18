@@ -1,0 +1,14 @@
+{
+  "git": {
+    "requireCleanWorkingDir": true,
+    "requireUpstream": false,
+    "tagName": "fsastorefrontstyles-${version}",
+    "commitMessage": "Bumping fsastorefrontstyles version to ${version}",
+    "tagAnnotation": "Bumping fsastorefrontstyles version to ${version}"
+  },
+  "github": {
+    "release": true,
+    "assets": ["../../docs.tar.gz", "../../docs.zip"],
+    "releaseName": "@spartacus/fsa-styles@${version}"
+  }
+}

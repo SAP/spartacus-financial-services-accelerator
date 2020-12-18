@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DefaultFormValidators } from '@fsa/dynamicforms';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,

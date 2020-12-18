@@ -3,7 +3,7 @@ import {
   AbstractFormComponent,
   DynamicFormsConfig,
   FormService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { Observable, of } from 'rxjs';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormDataStorageService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { CartActions, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';

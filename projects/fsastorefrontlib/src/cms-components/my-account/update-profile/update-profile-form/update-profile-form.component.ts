@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DefaultFormValidators } from '@fsa/dynamicforms';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { FSUser } from '../../../../occ/occ-models';
 import { DateConfig } from './../../../../core/date-config/date-config';
