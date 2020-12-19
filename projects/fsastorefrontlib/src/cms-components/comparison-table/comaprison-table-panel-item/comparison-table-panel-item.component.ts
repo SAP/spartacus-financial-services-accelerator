@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CmsConfig, RoutingService } from '@spartacus/core';
+import { OccConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCartService } from '../../../core/cart/facade';
@@ -35,7 +35,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
 
   constructor(
     protected cartService: FSCartService,
-    protected config: CmsConfig,
+    protected config: OccConfig,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
