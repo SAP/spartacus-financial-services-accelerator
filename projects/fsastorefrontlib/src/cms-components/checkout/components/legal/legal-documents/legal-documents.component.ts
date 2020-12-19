@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CmsConfig } from '@spartacus/core';
+import { Cart, OccConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 
@@ -13,7 +13,7 @@ export class LegalDocumentsComponent implements OnInit {
 
   constructor(
     protected cartService: FSCartService,
-    protected config: CmsConfig
+    protected config: OccConfig
   ) {}
 
   ngOnInit() {
