@@ -3,7 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  CmsConfig,
+  OccConfig,
   I18nTestingModule,
   Product,
   RoutingService,
@@ -85,10 +85,11 @@ class MockCartService {
   createCartForProduct(): void {}
 }
 
-const mockCmsConfig: CmsConfig = {
+const testBaseUrl = '';
+const mockCmsConfig: OccConfig = {
   backend: {
     occ: {
-      baseUrl: 'base-url',
+      baseUrl: testBaseUrl,
       prefix: '/rest/v2/',
     },
   },
@@ -130,8 +131,6 @@ describe('ComparisonTablePanelItemComponent', () => {
   let comparisonTablePanelItemComponent: ComparisonTablePanelItemComponent;
   let fixture: ComponentFixture<ComparisonTablePanelItemComponent>;
   let mockCartService: FSCartService;
-  let mockRoutingService: RoutingService;
-  let mockCheckoutConfigService: FSCheckoutConfigService;
   let mockProductService: FSProductService;
 
   let el: DebugElement;
@@ -151,7 +150,7 @@ describe('ComparisonTablePanelItemComponent', () => {
             useClass: MockCartService,
           },
           {
-            provide: CmsConfig,
+            provide: OccConfig,
             useValue: mockCmsConfig,
           },
           {
@@ -174,8 +173,6 @@ describe('ComparisonTablePanelItemComponent', () => {
         declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
       }).compileComponents();
       mockCartService = TestBed.inject(FSCartService);
-      mockRoutingService = TestBed.inject(RoutingService);
-      mockCheckoutConfigService = TestBed.inject(FSCheckoutConfigService);
       mockProductService = TestBed.inject(FSProductService);
     })
   );
@@ -268,7 +265,7 @@ describe('ComparisonTablePanelItemComponent', () => {
   });
 
   it('should get base url', () => {
-    const baseUrl = comparisonTablePanelItemComponent.getBaseUrl();
-    expect(baseUrl).toEqual('base-url');
+    const baseUrl = comparisonTablePanelItemComponent.baseUrl;
+    expect(baseUrl).toEqual(testBaseUrl);
   });
 });

@@ -161,7 +161,7 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should return baseUrl', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
 
   it('should create change request for policy', () => {

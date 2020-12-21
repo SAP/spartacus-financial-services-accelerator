@@ -33,11 +33,13 @@ export class ClaimsComponent implements OnInit, OnDestroy {
   claims$: Observable<StateWithMyAccount>;
   claimsLoaded$: Observable<boolean>;
   modalInstance: any;
+  baseUrl: string;
 
   ngOnInit() {
     this.claimService.loadClaims();
     this.claims$ = this.claimService.getClaims();
     this.claimsLoaded$ = this.claimService.getLoaded();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
 
     this.subscription.add(
       this.claimService
@@ -67,10 +69,6 @@ export class ClaimsComponent implements OnInit, OnDestroy {
       size: 'lg',
     }).componentInstance;
     this.modalInstance.claimNumber = claimNumber;
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   resumeClaim(claimNumber: string) {

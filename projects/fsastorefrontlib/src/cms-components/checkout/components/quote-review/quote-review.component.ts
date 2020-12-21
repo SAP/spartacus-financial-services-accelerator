@@ -40,6 +40,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   activeCategory$: Observable<string>;
+  baseUrl: string;
 
   constructor(
     protected cartService: FSCartService,
@@ -60,11 +61,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.activeCategory$ = this.categoryService.getActiveCategory();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
     this.displayQuoteStatusPendingMessage();
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   navigateBack(previousStep: FSSteps) {

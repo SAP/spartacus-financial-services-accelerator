@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CmsConfig, RoutingService } from '@spartacus/core';
+import { OccConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCartService } from '../../../core/cart/facade';
@@ -31,10 +31,11 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   @Input()
   pricingData: PricingData;
   productPrice: string;
+  baseUrl: string;
 
   constructor(
     protected cartService: FSCartService,
-    protected config: CmsConfig,
+    protected config: OccConfig,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
@@ -48,6 +49,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getProductData();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   getProductData() {
@@ -150,10 +152,6 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   ngOnDestroy() {

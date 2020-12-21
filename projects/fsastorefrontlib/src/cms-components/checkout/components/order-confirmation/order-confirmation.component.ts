@@ -17,6 +17,7 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 export class OrderConfirmationComponent implements OnInit, OnDestroy {
   order$: Observable<Order>;
   orderPlaced = this.checkoutService.orderPlaced;
+  baseUrl: string;
 
   constructor(
     protected checkoutService: FSCheckoutService,
@@ -26,10 +27,9 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.order$ = this.checkoutService.getOrderDetails();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
-  }
+
   ngOnDestroy() {
     this.checkoutService.orderPlaced = false;
     this.checkoutService.clearCheckoutData();

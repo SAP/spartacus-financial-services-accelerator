@@ -31,6 +31,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   policy$;
   subscription = new Subscription();
+  baseUrl: string;
 
   ngOnInit(): void {
     this.subscription.add(
@@ -48,10 +49,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
     this.policy$ = this.policyService.getPolicyDetails();
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   isChangeAllowed(

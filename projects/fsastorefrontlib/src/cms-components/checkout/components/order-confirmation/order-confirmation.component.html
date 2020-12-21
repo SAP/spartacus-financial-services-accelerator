@@ -22,9 +22,9 @@
                     <img
                       class="image-item"
                       [src]="
-                        getBaseUrl() +
-                        ((order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.images)[1]?.url
+                        baseUrl +
+                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
+                          ?.defaultCategory?.image?.url
                       "
                       [alt]="
                         (order.deliveryOrderGroups[0]?.entries)[0]?.product
@@ -33,7 +33,7 @@
                     />
                   </span>
                 </div>
-                <div class="ccol-12 col-md-8">
+                <div class="col-12 col-md-8">
                   {{ order.entries[0]?.product?.defaultCategory?.name }}
                 </div>
               </h2>

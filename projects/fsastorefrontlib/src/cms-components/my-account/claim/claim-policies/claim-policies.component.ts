@@ -36,12 +36,14 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   claimPoliciesLoaded$;
   selectedPolicyId;
   selectedIndex: number;
+  baseUrl: string;
 
   ngOnInit() {
     // TODO: handle loading claims for every category
     this.policyService.loadClaimPolicies('insurances_auto');
     this.claimData$ = this.claimService.getClaimPolicies();
     this.claimPoliciesLoaded$ = this.claimService.getClaimPoliciesLoaded();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   selectPolicy(index, policyId, contractId) {
@@ -112,10 +114,6 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
 
   getImagelink() {
     return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   ngOnDestroy() {

@@ -70,7 +70,7 @@ describe('PremiumCalendarComponent', () => {
   });
 
   it('should get base url', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
 
   it('should open and close policy accordion', () => {

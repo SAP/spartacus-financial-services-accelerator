@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CmsConfig } from '@spartacus/core';
+import { Cart, OccConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 
@@ -9,16 +9,15 @@ import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 })
 export class LegalDocumentsComponent implements OnInit {
   cart$: Observable<Cart>;
+  baseUrl: string;
 
   constructor(
     protected cartService: FSCartService,
-    protected config: CmsConfig
+    protected config: OccConfig
   ) {}
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
-  }
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 }

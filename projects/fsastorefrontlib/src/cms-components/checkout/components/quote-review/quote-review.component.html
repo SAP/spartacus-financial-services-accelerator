@@ -15,9 +15,9 @@
                 <img
                   class="image-item"
                   [src]="
-                    getBaseUrl() +
-                    ((cart.deliveryOrderGroups[0]?.entries)[0]?.product
-                      ?.images)[1]?.url
+                    baseUrl +
+                    (cart.deliveryOrderGroups[0]?.entries)[0]?.product
+                      ?.defaultCategory?.image?.url
                   "
                   [alt]="
                     (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.name

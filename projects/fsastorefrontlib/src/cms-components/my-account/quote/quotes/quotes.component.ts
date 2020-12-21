@@ -25,11 +25,13 @@ export class QuotesComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   quotes$;
   quotesLoaded$;
+  baseUrl: string;
 
   ngOnInit() {
     this.quoteService.loadQuotes();
     this.quotes$ = this.quoteService.getQuotes();
     this.quotesLoaded$ = this.quoteService.getQuotesLoaded();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   retrieveQuote(quote: any) {
@@ -54,10 +56,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   ngOnDestroy() {
