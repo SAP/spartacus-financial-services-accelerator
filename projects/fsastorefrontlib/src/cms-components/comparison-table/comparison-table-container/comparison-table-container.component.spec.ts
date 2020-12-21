@@ -1,5 +1,5 @@
 import { DebugElement, Directive, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
@@ -48,26 +48,28 @@ describe('ComparisonTableContainerComponent', () => {
     uid: 'test',
   };
 
-  beforeEach(async(() => {
-    mockComparisonTableService = new MockComparisonTableService();
-    TestBed.configureTestingModule({
-      imports: [NgbTabsetModule],
-      declarations: [
-        ComparisonTableContainerComponent,
-        MockComponentWrapperDirective,
-      ],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: mockCmsComponentData,
-        },
-        {
-          provide: ComparisonTableService,
-          useValue: mockComparisonTableService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockComparisonTableService = new MockComparisonTableService();
+      TestBed.configureTestingModule({
+        imports: [NgbTabsetModule],
+        declarations: [
+          ComparisonTableContainerComponent,
+          MockComponentWrapperDirective,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: mockCmsComponentData,
+          },
+          {
+            provide: ComparisonTableService,
+            useValue: mockComparisonTableService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTableContainerComponent);

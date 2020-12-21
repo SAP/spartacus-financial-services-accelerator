@@ -1,6 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import {
+  GlobalMessage,
+  GlobalMessageService,
+  GlobalMessageType,
+  I18nTestingModule,
+  OccConfig,
+  RoutingService,
+} from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { of, Observable } from 'rxjs';
 import { FSCart, FSSteps } from '../../../../occ/occ-models';
@@ -12,6 +19,7 @@ import { AccordionModule } from './../../../../shared/accordion/accordion.module
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 const formDataContent = '{"content":"formContent"}';
 
 class MockActivatedRoute {
@@ -32,7 +40,9 @@ const MockOccModuleConfig: OccConfig = {
     },
   },
 };
-
+class MockFSCheckoutService {
+  filterRemoveableEntries() {}
+}
 class MockCategoryService {
   setActiveCategory(category: string) {}
 
@@ -41,8 +51,23 @@ class MockCategoryService {
   }
 }
 
-class FSCartServiceStub {
-  getActive() {}
+const mockCart: FSCart = {
+  code: 'test001',
+  insuranceQuote: {
+    quoteId: 'testQuote001',
+    state: {
+      code: 'BIND',
+    },
+    quoteWorkflowStatus: {
+      code: 'REFERRED',
+    },
+  },
+};
+
+class MockCartService {
+  getActive() {
+    return of(mockCart);
+  }
   isStable() {}
 }
 
@@ -61,6 +86,10 @@ class MockFSTranslationService {
   getTranslationValue() {}
 }
 
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
+
 const modalInstance: any = {
   componentInstance: {
     cartCode: '',
@@ -76,47 +105,59 @@ describe('Quote Review Component', () => {
   let fixture: ComponentFixture<QuoteReviewComponent>;
   let routingService: RoutingService;
   let translationService: FSTranslationService;
+  let globalMessageService: GlobalMessageService;
+  let mockCartService: FSCartService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SpinnerModule, AccordionModule, I18nTestingModule],
-      declarations: [QuoteReviewComponent],
-      providers: [
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: MockActivatedRoute,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useClass: FSCheckoutConfigServiceStub,
-        },
-        {
-          provide: OccConfig,
-          useValue: MockOccModuleConfig,
-        },
-        {
-          provide: FSCartService,
-          useClass: FSCartServiceStub,
-        },
-        {
-          provide: ModalService,
-          useValue: modalService,
-        },
-        {
-          provide: FSTranslationService,
-          useClass: MockFSTranslationService,
-        },
-        {
-          provide: CategoryService,
-          useClass: MockCategoryService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SpinnerModule, AccordionModule, I18nTestingModule],
+        declarations: [QuoteReviewComponent],
+        providers: [
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: MockActivatedRoute,
+          },
+          {
+            provide: FSCheckoutConfigService,
+            useClass: FSCheckoutConfigServiceStub,
+          },
+          {
+            provide: OccConfig,
+            useValue: MockOccModuleConfig,
+          },
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: ModalService,
+            useValue: modalService,
+          },
+          {
+            provide: FSTranslationService,
+            useClass: MockFSTranslationService,
+          },
+          {
+            provide: CategoryService,
+            useClass: MockCategoryService,
+          },
+          {
+            provide: FSCheckoutService,
+            useClass: MockFSCheckoutService,
+          },
+          {
+            provide: GlobalMessageService,
+            useClass: MockGlobalMessageService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuoteReviewComponent);
@@ -124,6 +165,8 @@ describe('Quote Review Component', () => {
     fixture.detectChanges();
     routingService = TestBed.inject(RoutingService);
     translationService = TestBed.inject(FSTranslationService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    mockCartService = TestBed.inject(FSCartService);
     spyOn(routingService, 'go').and.stub();
     component.ngOnInit();
   });
@@ -266,5 +309,27 @@ describe('Quote Review Component', () => {
   it('step should not be editable if quote status id BIND', () => {
     const result = component.isEditable('BIND');
     expect(result).toEqual(false);
+  });
+
+  it('should display message when quote is in state PENDING', () => {
+    const cart: FSCart = {
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'BIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'PENDING',
+        },
+      },
+    };
+    spyOn(globalMessageService, 'add').and.stub();
+    spyOn(mockCartService, 'getActive').and.returnValue(of(cart));
+    component.ngOnInit();
+    component.displayQuoteStatusPendingMessage();
+    expect(globalMessageService.add).toHaveBeenCalledWith(
+      { key: 'quoteReview.status.pending' },
+      GlobalMessageType.MSG_TYPE_INFO
+    );
   });
 });

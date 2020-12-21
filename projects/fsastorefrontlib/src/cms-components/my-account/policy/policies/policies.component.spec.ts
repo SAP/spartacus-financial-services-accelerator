@@ -1,5 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FileService } from '@spartacus/dynamicforms';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -49,6 +50,18 @@ const MockOccConfig: OccConfig = {
     },
   },
 };
+
+class MockFileService {
+  uploadFile(file: File): Observable<any> {
+    return of();
+  }
+  resetFiles(): void {}
+  setFileInStore(body: any) {}
+  getUploadedDocuments(): Observable<any> {
+    return of();
+  }
+}
+
 const contractNumber = '01';
 describe('PoliciesComponent', () => {
   let component: PoliciesComponent;
@@ -56,31 +69,35 @@ describe('PoliciesComponent', () => {
   let policyService: PolicyService;
   let claimService: ClaimService;
   let routingService: RoutingService;
+  let mockFileService: FileService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-      declarations: [PoliciesComponent],
-      providers: [
-        {
-          provide: PolicyService,
-          useClass: MockPolicyService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: OccConfig,
-          useValue: MockOccConfig,
-        },
-        {
-          provide: ClaimService,
-          useClass: MockClaimService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
+        declarations: [PoliciesComponent],
+        providers: [
+          {
+            provide: PolicyService,
+            useClass: MockPolicyService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: OccConfig,
+            useValue: MockOccConfig,
+          },
+          {
+            provide: ClaimService,
+            useClass: MockClaimService,
+          },
+          { provide: FileService, useClass: MockFileService },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PoliciesComponent);
@@ -88,6 +105,7 @@ describe('PoliciesComponent', () => {
     fixture.detectChanges();
     policyService = TestBed.inject(PolicyService);
     claimService = TestBed.inject(ClaimService);
+    mockFileService = TestBed.inject(FileService);
     routingService = TestBed.inject(RoutingService);
   });
   it('should create', () => {

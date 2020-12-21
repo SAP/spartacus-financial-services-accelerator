@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { I18nTestingModule, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -81,38 +81,40 @@ describe('ProductConfigurationMiniCartComponent', () => {
   let fsProductService: FSProductService;
   let translationService: FSTranslationService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ProductConfigurationMiniCartComponent],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: CurrentProductService,
-          useClass: MockCurrentProductService,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: PricingService,
-          useClass: MockPricingService,
-        },
-        {
-          provide: FSProductService,
-          useClass: MockFSProductService,
-        },
-        {
-          provide: FSTranslationService,
-          useClass: MockFSTranslationService,
-        },
-      ],
-    }).compileComponents();
-    currentProductService = TestBed.inject(CurrentProductService);
-    formDataService = TestBed.inject(FormDataService);
-    pricingService = TestBed.inject(PricingService);
-    fsProductService = TestBed.inject(FSProductService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ProductConfigurationMiniCartComponent],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: CurrentProductService,
+            useClass: MockCurrentProductService,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: PricingService,
+            useClass: MockPricingService,
+          },
+          {
+            provide: FSProductService,
+            useClass: MockFSProductService,
+          },
+          {
+            provide: FSTranslationService,
+            useClass: MockFSTranslationService,
+          },
+        ],
+      }).compileComponents();
+      currentProductService = TestBed.inject(CurrentProductService);
+      formDataService = TestBed.inject(FormDataService);
+      pricingService = TestBed.inject(PricingService);
+      fsProductService = TestBed.inject(FSProductService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductConfigurationMiniCartComponent);

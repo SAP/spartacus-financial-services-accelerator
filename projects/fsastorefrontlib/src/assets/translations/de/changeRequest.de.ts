@@ -2,6 +2,9 @@ export const changeRequest = {
   changeRequest: {
     false: 'Nicht enthalten',
     true: 'Beinhaltet',
+    added: 'Hinzugefügt',
+    notAdded: 'Nicht hinzugefügt',
+    existing: 'Vorhanden',
     description: 'Beschreibung',
     currentSelection: 'Aktuelle Auswahl',
     newSelection: 'Neue Auswahl',

@@ -50,7 +50,7 @@ p {
   font-size: var(--cx-text-font-size);
 }
 a {
-  @include transition();
+  @include fs-transition();
   &:hover {
     text-decoration: none;
   }
@@ -69,8 +69,8 @@ button:focus {
 .link {
   cursor: pointer;
   font-weight: var(--cx-font-weight-semi);
-  text-decoration: underline;
   text-transform: uppercase;
+  text-decoration: underline;
   color: var(--cx-color-primary);
   &:hover {
     text-decoration: underline;

@@ -30,7 +30,7 @@
     }
   }
   .cx-product-image-container img {
-    @include transition;
+    @include fs-transition;
     background-color: var(--cx-color-1);
     border-radius: 50%;
   }
@@ -43,11 +43,5 @@
   }
   cx-pagination {
     display: inline-flex;
-  }
-  .cx-store-map {
-    @include media-breakpoint-down(md) {
-      height: 30rem;
-      width: 100%;
-    }
   }
 }

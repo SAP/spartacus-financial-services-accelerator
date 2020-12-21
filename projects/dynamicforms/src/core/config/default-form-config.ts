@@ -10,8 +10,10 @@ import { DefaultFormValidators } from './../../util/validators/default-form-vali
 import { DynamicFormsConfig } from './form-config';
 import { SeparatorComponent } from '../../components/separator/separator.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
-import { UserPrefillResolver } from '../resolver/user-prefill-resolver';
+import { UserPrefillResolver } from '../resolvers/user-prefill-resolver';
 import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
+import { UploadComponent } from '../../components/upload/upload.component';
+import { CurrentDatePrefillResolver } from '../resolvers/current-date-prefill-resolver';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -48,6 +50,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       dataHolder: {
         component: DataHolderComponent,
+      },
+      upload: {
+        component: UploadComponent,
       },
     },
     validators: {
@@ -100,6 +105,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
     prefill: {
       user: {
         prefillResolver: UserPrefillResolver,
+      },
+      currentDate: {
+        prefillResolver: CurrentDatePrefillResolver,
       },
     },
   },

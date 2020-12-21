@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
@@ -27,22 +27,24 @@ describe('FSUpdateProfileFormComponent', () => {
   let fixture: ComponentFixture<FSUpdateProfileFormComponent>;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      declarations: [FSUpdateProfileFormComponent],
-      providers: [
-        {
-          provide: FormBuilder,
-          useClass: FormBuilder,
-        },
-        {
-          provide: DateConfig,
-          useValue: MockDateConfig,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        declarations: [FSUpdateProfileFormComponent],
+        providers: [
+          {
+            provide: FormBuilder,
+            useClass: FormBuilder,
+          },
+          {
+            provide: DateConfig,
+            useValue: MockDateConfig,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FSUpdateProfileFormComponent);

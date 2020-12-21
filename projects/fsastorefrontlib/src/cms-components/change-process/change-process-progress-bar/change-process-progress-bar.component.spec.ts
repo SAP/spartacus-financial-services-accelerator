@@ -1,5 +1,5 @@
 import { Component, Input, Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -54,19 +54,21 @@ describe('ChangeProcessProgressBarComponent', () => {
   let component: ChangeProcessProgressBarComponent;
   let fixture: ComponentFixture<ChangeProcessProgressBarComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule],
-      providers: [
-        { provide: ChangeRequestService, useClass: MockChangeRequestService },
-      ],
-      declarations: [
-        MockUrlPipe,
-        ChangeProcessProgressBarComponent,
-        MockProgressBarComponent,
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule],
+        providers: [
+          { provide: ChangeRequestService, useClass: MockChangeRequestService },
+        ],
+        declarations: [
+          MockUrlPipe,
+          ChangeProcessProgressBarComponent,
+          MockProgressBarComponent,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChangeProcessProgressBarComponent);

@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormDataService,
   FormDataStorageService,
@@ -103,33 +103,35 @@ describe('ProductConfigurationFormComponent', () => {
   let formDataService: FormDataService;
   let currentProductService: CurrentProductService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ProductConfigurationFormComponent,
-        MockFormComponent,
-        MockSpinnerComponent,
-      ],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: CurrentProductService,
-          useClass: MockCurrentProductService,
-        },
-      ],
-    }).compileComponents();
-    currentProductService = TestBed.inject(CurrentProductService);
-    formDataService = TestBed.inject(FormDataService);
-    formDataStorageService = TestBed.inject(FormDataStorageService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ProductConfigurationFormComponent,
+          MockFormComponent,
+          MockSpinnerComponent,
+        ],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: CurrentProductService,
+            useClass: MockCurrentProductService,
+          },
+        ],
+      }).compileComponents();
+      currentProductService = TestBed.inject(CurrentProductService);
+      formDataService = TestBed.inject(FormDataService);
+      formDataStorageService = TestBed.inject(FormDataStorageService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductConfigurationFormComponent);

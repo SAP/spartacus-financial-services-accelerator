@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {} from '@angular/router/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
@@ -58,29 +58,31 @@ describe('ActiveProductAssignmentsComponent', () => {
   let mockedProductAssignmentService: ProductAssignmentService;
   let mockRoutingService: RoutingService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ActiveProductAssignmentsComponent,
-        ProductAssignmentItemComponent,
-      ],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useClass: ActivatedRouteMock,
-        },
-        {
-          provide: ProductAssignmentService,
-          useClass: MockedProductAssignmentService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ActiveProductAssignmentsComponent,
+          ProductAssignmentItemComponent,
+        ],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useClass: ActivatedRouteMock,
+          },
+          {
+            provide: ProductAssignmentService,
+            useClass: MockedProductAssignmentService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);

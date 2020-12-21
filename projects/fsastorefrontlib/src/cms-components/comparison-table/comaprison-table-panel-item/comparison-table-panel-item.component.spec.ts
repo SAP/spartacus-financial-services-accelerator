@@ -1,5 +1,5 @@
 import { DebugElement, Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
@@ -136,47 +136,49 @@ describe('ComparisonTablePanelItemComponent', () => {
 
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        I18nTestingModule,
-        SpinnerModule,
-        MediaModule,
-        RouterTestingModule,
-      ],
-      providers: [
-        {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
-          provide: CmsConfig,
-          useValue: mockCmsConfig,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useClass: MockFSCheckoutConfigService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: mockActivatedRoute,
-        },
-        {
-          provide: FSProductService,
-          useClass: MockFSProductService,
-        },
-      ],
-      declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
-    }).compileComponents();
-    mockCartService = TestBed.inject(FSCartService);
-    mockRoutingService = TestBed.inject(RoutingService);
-    mockCheckoutConfigService = TestBed.inject(FSCheckoutConfigService);
-    mockProductService = TestBed.inject(FSProductService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          I18nTestingModule,
+          SpinnerModule,
+          MediaModule,
+          RouterTestingModule,
+        ],
+        providers: [
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: CmsConfig,
+            useValue: mockCmsConfig,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: FSCheckoutConfigService,
+            useClass: MockFSCheckoutConfigService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: mockActivatedRoute,
+          },
+          {
+            provide: FSProductService,
+            useClass: MockFSProductService,
+          },
+        ],
+        declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
+      }).compileComponents();
+      mockCartService = TestBed.inject(FSCartService);
+      mockRoutingService = TestBed.inject(RoutingService);
+      mockCheckoutConfigService = TestBed.inject(FSCheckoutConfigService);
+      mockProductService = TestBed.inject(FSProductService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTablePanelItemComponent);

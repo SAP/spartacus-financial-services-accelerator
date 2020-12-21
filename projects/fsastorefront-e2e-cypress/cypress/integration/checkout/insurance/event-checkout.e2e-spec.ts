@@ -2,10 +2,7 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import * as myAccount from '../../../helpers/my-account/myAccountPages';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
@@ -14,6 +11,7 @@ let cartId;
 context('Event Checkout', () => {
   before(() => {
     cy.visit('/');
+    cy.get('cx-fs-enriched-responsive-banner').should('be.visible');
   });
 
   it('Should register a new user', () => {
@@ -27,7 +25,7 @@ context('Event Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    event.checkCheckoutPage();
+    checkout.checkCheckoutStep('Your Event Insurance', '6');
     event.checkProgressBarEvent();
     checkout.checkInsuranceComparisonPage('4');
     event.checkEventComparisonTable();
@@ -39,7 +37,7 @@ context('Event Checkout', () => {
   });
 
   it('Should check add options page', () => {
-    event.checkCheckoutPage();
+    checkout.checkCheckoutStep('Your Event Insurance', '6');
     event.checkOptionalProducts();
     event.checkMiniCart();
     checkout.removeOptionalProduct('Excess Waiver');
@@ -48,26 +46,27 @@ context('Event Checkout', () => {
   });
 
   it('Should populate personal details page', () => {
-    event.checkCheckoutPage();
+    checkout.checkCheckoutStep('Your Event Insurance', '6');
     checkout.checkPersonalDetailsPage();
     event.populatePersonalDetails();
-    //registration process to be completed
-    cy.wait(500);
+    event.checkMiniCartRemovedProduct();
     checkout.clickContinueButton();
   });
+
   it('Should check quote review page', () => {
-    event.checkCheckoutPage();
+    checkout.checkCheckoutStep('Your Event Insurance', '6');
     event.checkProgressBarEvent();
     event.checkMiniCartRemovedProduct();
     checkout.checkAccordions('threeAccordions');
-    addPaymentMethod(registrationUser.email, cartId);
+    payment.addPaymentMethod(registrationUser.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodCard();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review page', () => {
@@ -77,6 +76,7 @@ context('Event Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('threeAccordions');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {
@@ -89,7 +89,6 @@ context('Event Checkout', () => {
       menuOption: 'My Account',
       dropdownItem: 'Close Account',
     });
-    cy.wait(500);
     myAccount.checkCloseAccountPage();
     myAccount.closeAccount();
   });

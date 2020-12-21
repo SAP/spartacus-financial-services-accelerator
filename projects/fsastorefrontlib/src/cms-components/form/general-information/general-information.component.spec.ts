@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
   FormDataService,
@@ -69,32 +69,34 @@ describe('GeneralInformationComponent', () => {
   let fixture: ComponentFixture<GeneralInformationComponent>;
   let mockFormDataService: FormDataService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SpinnerModule, I18nTestingModule],
-      declarations: [MockFormComponent, GeneralInformationComponent],
-      providers: [
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: ActivatedRoute,
-          useClass: MockActivatedRoute,
-        },
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SpinnerModule, I18nTestingModule],
+        declarations: [MockFormComponent, GeneralInformationComponent],
+        providers: [
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: ActivatedRoute,
+            useClass: MockActivatedRoute,
+          },
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+        ],
+      }).compileComponents();
 
-    mockFormDataService = TestBed.inject(FormDataService);
-  }));
+      mockFormDataService = TestBed.inject(FormDataService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GeneralInformationComponent);

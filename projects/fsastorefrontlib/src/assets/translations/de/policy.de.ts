@@ -3,6 +3,7 @@ export const policy = {
     policies: 'Policen',
     policy: 'Police',
     policyId: 'Policen ID',
+    expiredPolicyId: '[DE] Expired Policy ID',
     policyNo: 'Policennr.',
     myPolicy: 'Meine Policen',
     policyNumberIs: 'Versicherungsnummer',

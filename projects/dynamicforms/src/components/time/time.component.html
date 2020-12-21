@@ -10,7 +10,7 @@
       <input
         class="form-control"
         type="time"
-        [formControlName]="config.name"
+        formControlName="{{ config.name }}"
         [attr.name]="config.name"
         [step]="1"
         [attr.readonly]="config.readonly"

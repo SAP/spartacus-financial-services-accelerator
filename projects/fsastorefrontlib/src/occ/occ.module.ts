@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Config, OccConfig } from '@spartacus/core';
-import { DocumentOccModule } from './adapters';
 import { AgentOccModule } from './adapters/agent/agent-occ.module';
 import { BillingTimeOccModule } from './adapters/billing-time/billing-time-occ.module';
 import { FsCartOccModule } from './adapters/cart/cart-occ.module';
@@ -36,7 +35,6 @@ import { OccValueListService } from './services/value-list/occ-value-list.servic
     QuoteOccModule,
     UserRequestOccModule,
     CsTicketOccModule,
-    DocumentOccModule,
     FSUserOccModule,
   ],
   providers: [OccValueListService, { provide: OccConfig, useExisting: Config }],

@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccCheckoutAdapter } from './occ-checkout.adapter';
 
@@ -47,20 +47,25 @@ describe('OccCheckoutAdapter', () => {
   });
 
   describe('setIdentificationType', () => {
-    it('should set user identification type', async(() => {
-      service
-        .setIdentificationType(identificationType, cartId, userId)
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === userIdentificationEndpoint && req.method === 'PATCH';
-      }, `PATCH method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        userIdentificationEndpoint,
-        {
-          userId,
-          cartId,
-        }
-      );
-    }));
+    it(
+      'should set user identification type',
+      waitForAsync(() => {
+        service
+          .setIdentificationType(identificationType, cartId, userId)
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === userIdentificationEndpoint && req.method === 'PATCH'
+          );
+        }, `PATCH method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          userIdentificationEndpoint,
+          {
+            userId,
+            cartId,
+          }
+        );
+      })
+    );
   });
 });

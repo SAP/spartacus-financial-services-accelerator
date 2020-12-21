@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccProductAssignmentAdapter } from './occ-product-assignment.adapter';
 
@@ -60,131 +60,148 @@ describe('OccProductAssignmentAdapter', () => {
   });
 
   describe('Load Product Assignments For Unit', () => {
-    it('should load ', async(() => {
-      productAssignmentAdapter
-        .loadProductAssignmentsForUnit(
-          payload.userId,
-          payload.orgUnitId,
-          payload.active,
-          payload.pageSize,
-          payload.currentPage,
-          payload.sort
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
+    it(
+      'should load ',
+      waitForAsync(() => {
+        productAssignmentAdapter
+          .loadProductAssignmentsForUnit(
+            payload.userId,
+            payload.orgUnitId,
+            payload.active,
+            payload.pageSize,
+            payload.currentPage,
+            payload.sort
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
+          );
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          loadProductAssignmentsEndpoint,
+          {
+            userId,
+            orgUnitId,
+          }
         );
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        loadProductAssignmentsEndpoint,
-        {
-          userId,
-          orgUnitId,
-        }
-      );
-    }));
+      })
+    );
   });
 
   describe('Create Product Assignment', () => {
-    it('should create product assignments', async(() => {
-      productAssignmentAdapter
-        .createProductAssignment(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productCode
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === createProductAssignmentsEndpoint && req.method === 'POST'
+    it(
+      'should create product assignments',
+      waitForAsync(() => {
+        productAssignmentAdapter
+          .createProductAssignment(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productCode
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === createProductAssignmentsEndpoint &&
+            req.method === 'POST'
+          );
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          createProductAssignmentsEndpoint,
+          {
+            userId,
+            orgUnitId,
+          }
         );
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        createProductAssignmentsEndpoint,
-        {
-          userId,
-          orgUnitId,
-        }
-      );
-    }));
+      })
+    );
   });
   describe('Remove Product Assignment', () => {
-    it('should remove product assignments', async(() => {
-      productAssignmentAdapter
-        .removeProductAssignment(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productCode
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === removeProductAssignmentsEndpoint &&
-          req.method === 'DELETE'
+    it(
+      'should remove product assignments',
+      waitForAsync(() => {
+        productAssignmentAdapter
+          .removeProductAssignment(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productCode
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === removeProductAssignmentsEndpoint &&
+            req.method === 'DELETE'
+          );
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          removeProductAssignmentsEndpoint,
+          {
+            userId,
+            orgUnitId,
+            fsProductAssignmentCode,
+          }
         );
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        removeProductAssignmentsEndpoint,
-        {
-          userId,
-          orgUnitId,
-          fsProductAssignmentCode,
-        }
-      );
-    }));
+      })
+    );
   });
   describe('Change Active Status', () => {
-    it('should change active status', async(() => {
-      productAssignmentAdapter
-        .changeActiveStatus(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productCode,
-          payload.active
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === updateProductAssignmentsEndpoint && req.method === 'PATCH'
+    it(
+      'should change active status',
+      waitForAsync(() => {
+        productAssignmentAdapter
+          .changeActiveStatus(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productCode,
+            payload.active
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === updateProductAssignmentsEndpoint &&
+            req.method === 'PATCH'
+          );
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          updateProductAssignmentsEndpoint,
+          {
+            userId,
+            orgUnitId,
+            fsProductAssignmentCode,
+          }
         );
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        updateProductAssignmentsEndpoint,
-        {
-          userId,
-          orgUnitId,
-          fsProductAssignmentCode,
-        }
-      );
-    }));
+      })
+    );
   });
 
   describe('Fails to Load Product Assignments For Unit', () => {
-    it('should not load payload', async(() => {
-      userId = undefined;
-      orgUnitId = undefined;
-      productAssignmentAdapter
-        .loadProductAssignmentsForUnit(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
+    it(
+      'should not load payload',
+      waitForAsync(() => {
+        userId = undefined;
+        orgUnitId = undefined;
+        productAssignmentAdapter
+          .loadProductAssignmentsForUnit(
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
+          );
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          loadProductAssignmentsEndpoint,
+          {
+            userId,
+            orgUnitId,
+          }
         );
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        loadProductAssignmentsEndpoint,
-        {
-          userId,
-          orgUnitId,
-        }
-      );
-    }));
+      })
+    );
   });
 });

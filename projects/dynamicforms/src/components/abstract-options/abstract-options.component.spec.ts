@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AbstractOptionsComponent } from './abstract-options.component';
 import {
@@ -68,20 +68,22 @@ describe('AbstractOptionsComponent', () => {
   let fixture: ComponentFixture<AbstractOptionsComponent>;
   let formService: FormService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AbstractOptionsComponent],
-      imports: [ReactiveFormsModule],
-      providers: [
-        { provide: LanguageService, useClass: MockLanguageService },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
-        },
-        { provide: FormService, useClass: MockFormService },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AbstractOptionsComponent],
+        imports: [ReactiveFormsModule],
+        providers: [
+          { provide: LanguageService, useClass: MockLanguageService },
+          {
+            provide: DynamicFormsConfig,
+            useValue: mockDynamicFormsConfig,
+          },
+          { provide: FormService, useClass: MockFormService },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AbstractOptionsComponent);

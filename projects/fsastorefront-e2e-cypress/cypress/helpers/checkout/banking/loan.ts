@@ -55,10 +55,47 @@ export function configureLoan() {
   cy.get('[name=loanPurpose]').select('purchasing-a-car');
 }
 
+export function checkMiniCartFirstStep() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €172.64 ',
+    products: [
+      {
+        title: 'Number of Applicants:',
+        value: ' 2 ',
+      },
+      {
+        title: 'Loan Amount:',
+        value: ' 18001 ',
+      },
+      {
+        title: 'Loan Start Date:',
+        value: ' 2021-12-12 ',
+      },
+      {
+        title: 'Loan Term:',
+        value: ' 6-year ',
+      },
+      {
+        title: 'Repayment Frequency:',
+        value: ' biweekly ',
+      },
+      {
+        title: 'Loan Purpose:',
+        value: ' purchasing-a-car ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
     price: ' €187.76 ',
     products: [
+      {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2021 ',
+      },
       {
         title: 'Loan Amount:',
         value: ' 18001 ',
@@ -70,10 +107,6 @@ export function checkMiniCart() {
       {
         title: 'Loan Purpose:',
         value: ' purchasing-a-car ',
-      },
-      {
-        title: 'Loan Start Date:',
-        value: ' 2021-12-12 ',
       },
       {
         title: 'Number Of Applicants:',

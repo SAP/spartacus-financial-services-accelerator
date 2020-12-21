@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import createSpy = jasmine.createSpy;
 import { Observable, of } from 'rxjs';
@@ -64,18 +64,20 @@ describe('FNOLSummaryComponent', () => {
   let mockRoutingService: MockRoutingService;
   let mockClaimService: MockClaimService;
 
-  beforeEach(async(() => {
-    mockRoutingService = new MockRoutingService();
-    mockClaimService = new MockClaimService();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, AccordionModule],
-      providers: [
-        { provide: RoutingService, useValue: mockRoutingService },
-        { provide: ClaimService, useValue: mockClaimService },
-      ],
-      declarations: [FNOLSummaryComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockRoutingService = new MockRoutingService();
+      mockClaimService = new MockClaimService();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, AccordionModule],
+        providers: [
+          { provide: RoutingService, useValue: mockRoutingService },
+          { provide: ClaimService, useValue: mockClaimService },
+        ],
+        declarations: [FNOLSummaryComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FNOLSummaryComponent);

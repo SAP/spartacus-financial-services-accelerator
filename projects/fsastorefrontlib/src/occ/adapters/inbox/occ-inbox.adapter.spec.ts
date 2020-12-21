@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccInboxAdapter } from './occ-inbox.adapter';
 
@@ -45,16 +45,22 @@ describe('OccInboxAdapter', () => {
   });
 
   describe('getMessagesForMessageGroup', () => {
-    it('should fetch user messages for specified group', async(() => {
-      adapter
-        .getSiteMessagesForUserAndGroup(userId, messageGroup, {})
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === messagesEndPoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(messagesEndPoint, {
-        userId,
-      });
-    }));
+    it(
+      'should fetch user messages for specified group',
+      waitForAsync(() => {
+        adapter
+          .getSiteMessagesForUserAndGroup(userId, messageGroup, {})
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === messagesEndPoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          messagesEndPoint,
+          {
+            userId,
+          }
+        );
+      })
+    );
   });
 });

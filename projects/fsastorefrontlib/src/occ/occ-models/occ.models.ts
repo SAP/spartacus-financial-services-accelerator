@@ -57,7 +57,9 @@ export interface B2BAdministrator {
 
 export interface FSOrderEntry extends OrderEntry {
   configurationInfos?: any[];
+  removeable?: boolean;
 }
+
 export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
   entries?: FSOrderEntry[];
@@ -94,6 +96,11 @@ export interface QuoteStatus {
   code?: string;
 }
 
+export enum FSPaymentTypeEnum {
+  INVOICE = 'INVOICE',
+  CARD = 'CARD',
+}
+
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',
@@ -114,6 +121,7 @@ export enum FormDefinitionType {
 }
 export enum RequestType {
   INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
+  INSURED_OBJECT_ADD = 'FSINSUREDOBJECT_ADD',
   COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
   FSCLAIM = 'FSCLAIM',
 }
@@ -216,6 +224,8 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
+  documents?: any;
+  properties?: any;
 }
 
 export interface AllowedFSRequestType {

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
 import { CmsCategoryFeatureCarouselComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -53,26 +53,28 @@ describe('CategoryCarouselComponent', () => {
     uid: 'test',
   };
 
-  beforeEach(async(() => {
-    mockCmsService = new MockCmsService();
-    TestBed.configureTestingModule({
-      declarations: [
-        CategoryFeatureCarouselComponent,
-        MockCarouselComponent,
-        MockComponentWrapperDirective,
-      ],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: CmsService,
-          useValue: mockCmsService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockCmsService = new MockCmsService();
+      TestBed.configureTestingModule({
+        declarations: [
+          CategoryFeatureCarouselComponent,
+          MockCarouselComponent,
+          MockComponentWrapperDirective,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: CmsService,
+            useValue: mockCmsService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureCarouselComponent);

@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
+import { PrefillResolver } from '../../core/resolvers/prefill-resolver.interface';
 import { FormService } from '../../core/services/form/form.service';
 
 @Component({ template: '' })
@@ -25,6 +25,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
 
   @HostBinding('class') hostComponentClass: string;
   label: string;
+  placeHolder: string;
   config: FieldConfig;
   group: FormGroup;
   subscription = new Subscription();
@@ -32,7 +33,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setHostComponentClass();
-    this.setActiveLanguageLabels();
+    this.setLocalizedProperties();
     this.controlPrefill();
     this.interDependancyValueCheck();
   }
@@ -45,16 +46,21 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected setActiveLanguageLabels() {
+  protected setLocalizedProperties() {
     this.subscription.add(
       this.languageService
         .getActive()
         .pipe(
           map(lang => {
-            if (this.config && this.config.label) {
+            if (this.config?.label) {
               this.label = this.config.label[lang]
                 ? this.config.label[lang]
                 : this.config.label.default;
+            }
+            if (this.config?.placeholder) {
+              this.placeHolder = this.config.placeholder[lang]
+                ? this.config.placeholder[lang]
+                : this.config.placeholder.default;
             }
           })
         )

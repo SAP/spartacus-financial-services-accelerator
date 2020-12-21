@@ -22,12 +22,12 @@ export function checkAgentLocatorPage() {
 export function checkAgentList() {
   cy.get('.agent-list-item')
     .should('have.length', 10)
-    .eq(0)
+    .eq(1)
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
-      cy.get('.agent-name').should('contain.text', ' Kai Ratliff');
-      cy.get('.mb-3').contains(' Event Insurance ');
-      cy.get('.action-button').contains(' Contact ');
+      cy.get('.agent-name').should('contain.text', 'Kai Ratliff');
+      cy.get('.mb-3').should('contain.text', 'Event Insurance');
+      cy.get('.action-button').should('contain.text', 'Contact');
     });
   cy.get('.cx-store-map').should('be.visible');
 }
@@ -41,9 +41,9 @@ export function searchSavingAgents() {
     .eq(0)
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
-      cy.get('.agent-name').contains(' Burton Franco ');
-      cy.get('.mb-3').contains(' Savings ');
-      cy.get('.action-button').contains(' Contact ');
+      cy.get('.agent-name').should('contain.text', 'Burton Franco');
+      cy.get('.mb-3').should('contain.text', 'Savings');
+      cy.get('.action-button').should('contain.text', 'Contact');
     });
 }
 
@@ -51,8 +51,8 @@ export function checkContactAgentPage() {
   cy.get('cx-fs-contact-agent-form')
     .should('be.visible')
     .within(() => {
-      cy.get('h2').should('have.text', ' Contact Aladdin Gentry ');
-      cy.get('.btn-primary').contains(' Send ').should('be.disabled');
+      cy.get('h2').should('contain.text', 'Contact Aladdin Gentry');
+      cy.get('.btn-primary').contains('Send').should('be.disabled');
     });
 }
 
@@ -64,7 +64,7 @@ export function populateContactAgentForm() {
   cy.get('[name="message"]').type(
     'I just received email that my quote is rejected. I want to know the reason!'
   );
-  cy.get('.btn-primary').contains(' Send ').click();
+  cy.get('.btn-primary').contains('Send').click();
 }
 
 export function checkListViewPage() {
@@ -112,7 +112,7 @@ export function contactAgentByName(agentName) {
     .contains(agentName)
     .parent()
     .within(() => {
-      cy.get('.action-button').click();
+      cy.get('.action-button').should('be.visible').click();
     });
 }
 
@@ -133,12 +133,14 @@ export function locateSavingsAgent() {
 }
 
 export function backButtonDisplayed() {
-  cy.get('.action-button').contains(' Back ').should('be.visible');
+  cy.get('.action-button')
+    .should('be.visible')
+    .should('contain.text', ' Back ');
 }
 
 export function checkIndira() {
   cy.get('.cx-product-image-container').should('be.visible');
   cy.get('.agent-name').contains(' Idira Duffy ');
   cy.get('.mb-3').contains(' Event Insurance ');
-  cy.get('.action-button').contains(' Contact ');
+  cy.get('.action-button').should('contain.text', 'Contact');
 }

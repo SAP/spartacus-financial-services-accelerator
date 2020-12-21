@@ -1,0 +1,20 @@
+<ng-container *ngIf="changeRequest$ | async as changeRequest">
+  <div class="row mt-5">
+    <div class="col-12 col-md-5 mb-3">
+      <button
+        class="action-button btn-block"
+        (click)="cancelChangeRequest(changeRequest.requestId)"
+      >
+        {{ 'common.cancel' | cxTranslate }}
+      </button>
+    </div>
+    <div class="col-12 col-md-5 ml-auto">
+      <button
+        class="primary-button btn-block"
+        (click)="simulateChanges(changeRequest)"
+      >
+        {{ 'common.continue' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</ng-container>

@@ -1,11 +1,5 @@
 import { InjectionToken, Provider } from '@angular/core';
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  MemoizedSelector,
-  ActionReducer,
-  MetaReducer,
-} from '@ngrx/store';
+import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import * as fromClaimPoliciesReducer from './claim-policies.reducer';
 import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';

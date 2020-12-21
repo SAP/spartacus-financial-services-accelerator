@@ -1,18 +1,23 @@
-import { Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FileService } from '@spartacus/dynamicforms';
+
+import {
+  I18nTestingModule,
+  OccConfig,
+  RouterState,
+  RoutingService,
+} from '@spartacus/core';
 import * as FileSaver from 'file-saver';
 import { Observable, of } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
-import { DocumentService } from './../../../../core/document/facade/document.service';
+import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
-import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -83,14 +88,15 @@ const policyId = 'policyId';
 const contractId = 'contractId';
 const startDate = '2020-07-30T06:00:04+0000';
 const documentId = 'documentId';
-const documentName = 'document';
+const documentMime = 'mockMimeType';
 
 const document = {
-  id: documentId,
+  code: documentId,
+  mime: documentMime,
 };
 
-class MockDocumentService {
-  getDocumentById(id) {
+class MockFileService {
+  getFile(code, mime) {
     return of(document);
   }
 }
@@ -103,31 +109,31 @@ describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
   let changeRequestService: MockChangeRequestService;
-  let routingService: MockRoutingService;
+  let routingService: RoutingService;
   let policyService: PolicyService;
-  let documentService: MockDocumentService;
+  let fileService: MockFileService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [AccordionModule, I18nTestingModule],
-      providers: [
-        { provide: RoutingService, useClass: MockRoutingService },
-        { provide: PolicyService, useClass: MockPolicyService },
-        { provide: OccConfig, useValue: mockOccModuleConfig },
-        { provide: ChangeRequestService, useClass: MockChangeRequestService },
-        { provide: DocumentService, useClass: MockDocumentService },
-        { provide: FSTranslationService, useClass: MockFSTranslationService },
-      ],
-      declarations: [PolicyDetailsComponent],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [AccordionModule, I18nTestingModule],
+        providers: [
+          { provide: RoutingService, useClass: MockRoutingService },
+          { provide: PolicyService, useClass: MockPolicyService },
+          { provide: OccConfig, useValue: mockOccModuleConfig },
+          { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          { provide: FileService, useClass: MockFileService },
+          { provide: FSTranslationService, useClass: MockFSTranslationService },
+        ],
+        declarations: [PolicyDetailsComponent],
+      }).compileComponents();
 
-    changeRequestService = TestBed.get(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
-    documentService = TestBed.get(DocumentService as Type<DocumentService>);
-  }));
+      changeRequestService = TestBed.inject(ChangeRequestService);
+      routingService = TestBed.inject(RoutingService);
+      policyService = TestBed.inject(PolicyService);
+      fileService = TestBed.inject(FileService);
+    })
+  );
 
   beforeEach(() => {
     spyOn(FileSaver, 'saveAs').and.stub();
@@ -148,7 +154,7 @@ describe('PolicyDetailsComponent', () => {
         state: {
           params: {},
         },
-      })
+      } as RouterState)
     );
     component.ngOnInit();
     expect(policyService.loadPolicyDetails).not.toHaveBeenCalled();
@@ -181,7 +187,7 @@ describe('PolicyDetailsComponent', () => {
       contractId,
       RequestType.INSURED_OBJECT_CHANGE
     );
-    expect(routingService.go).not.toHaveBeenCalledWith();
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 
   it('should check if request type is allowed', () => {
@@ -211,8 +217,33 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should test get document', () => {
-    spyOn(documentService, 'getDocumentById').and.callThrough();
-    component.getDocument(documentId, documentName, mockEvent);
-    expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
+    spyOn(fileService, 'getFile').and.callThrough();
+    component.getDocument(document, mockEvent);
+    expect(fileService.getFile).toHaveBeenCalledWith(documentId, documentMime);
+  });
+
+  it('should check if adding of new insured object is allowed', () => {
+    const insuredObject = {
+      childInsuredObjectList: {
+        insuredObjects: [
+          {
+            insuredObjectId: '001',
+            insuredObjectType: 'TEST_TYPE',
+          },
+          {
+            insuredObjectId: '002',
+            insuredObjectType: 'TEST_TYPE',
+          },
+        ],
+      },
+    };
+    const allowed = component.isAddingOfInsuredObjectAllowed(insuredObject, 3);
+    const notAllowed = component.isAddingOfInsuredObjectAllowed(
+      insuredObject,
+      2
+    );
+
+    expect(allowed).toBe(true);
+    expect(notAllowed).toBe(false);
   });
 });

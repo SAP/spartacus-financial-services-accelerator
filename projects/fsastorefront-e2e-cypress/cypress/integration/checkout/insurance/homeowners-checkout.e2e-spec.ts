@@ -2,10 +2,7 @@ import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as homeowners from '../../../helpers/checkout/insurance/homeowners-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
@@ -57,7 +54,7 @@ context('Homeowners Checkout', () => {
 
   it('Should check add options page', () => {
     homeowners.checkOptionalProducts();
-    //homeowners.checkMiniCartHomeowners();
+    homeowners.checkMiniCartHomeowners();
     checkout.clickContinueButton();
   });
 
@@ -70,16 +67,16 @@ context('Homeowners Checkout', () => {
   it('Should check quote review page', () => {
     checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
     checkout.checkProgressBarInsurance();
-    //homeowners.checkMiniCartHomeowners();
+    homeowners.checkMiniCartHomeowners();
     checkout.checkAccordions('generalQuoteAccordions');
-    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodInvoice();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review page', () => {
@@ -89,6 +86,7 @@ context('Homeowners Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('homeownersFinalReview');
     checkout.checkOrderConfirmation();
+    cy.wait(200000);
   });
 
   it('Check my policies page', () => {
@@ -98,5 +96,9 @@ context('Homeowners Checkout', () => {
 
   it('Should validate phone number', () => {
     register.validatePhoneNumber('');
+    checkout.checkMyAccountEmptyPages(
+      'Quotes & Applications',
+      'You have no Quotes or Applications!'
+    );
   });
 });

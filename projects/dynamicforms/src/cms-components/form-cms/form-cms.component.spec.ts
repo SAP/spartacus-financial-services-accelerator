@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -81,27 +81,33 @@ describe('FormCMSComponent', () => {
   let mockFormDataService: FormDataService;
   let mockFormDataStorageService: FormDataStorageService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [FormCMSComponent, MockFormComponent, MockSpinnerComponent],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-      ],
-    }).compileComponents();
-    mockFormDataService = TestBed.inject(FormDataService);
-    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          FormCMSComponent,
+          MockFormComponent,
+          MockSpinnerComponent,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+        ],
+      }).compileComponents();
+      mockFormDataService = TestBed.inject(FormDataService);
+      mockFormDataStorageService = TestBed.inject(FormDataStorageService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormCMSComponent);

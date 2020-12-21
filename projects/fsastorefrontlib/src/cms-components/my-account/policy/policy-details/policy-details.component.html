@@ -41,6 +41,14 @@
             {{ policy.contractNumber }}
           </div>
         </li>
+        <li *ngIf="policy.expiredPolicyNumber" class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'policy.expiredPolicyId' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.expiredPolicyNumber }}
+          </div>
+        </li>
         <li class="accordion-list-item row">
           <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.product' | cxTranslate }}
@@ -49,7 +57,7 @@
             {{ policy.mainProduct?.coverageProduct?.name }}
           </div>
         </li>
-        <li class="accordion-list-item row">
+        <li *ngIf="policy.paymentFrequency" class="accordion-list-item row">
           <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentFrequency' | cxTranslate }}
           </div>
@@ -62,7 +70,9 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="policy.paymentMethod?.paymentOption; else na">
+            <ng-container
+              *ngIf="policy.paymentMethod?.paymentOption; else defaultPayment"
+            >
               {{ policy.paymentMethod?.paymentOption }}
             </ng-container>
           </div>
@@ -227,6 +237,35 @@
                       </li>
                     </ng-container>
                   </ng-container>
+                  <ng-container
+                    *ngIf="
+                      isChangeAllowed(
+                        policy.categoryData?.allowedFSRequestTypes,
+                        'FSINSUREDOBJECT_ADD',
+                        policy.startDate
+                      ) &&
+                      isAddingOfInsuredObjectAllowed(
+                        insuredObject,
+                        childInsuredObject.maxNumberOfInsuredObjects
+                      ) &&
+                      insuredObject.childInsuredObjectList.insuredObjects
+                        .length ===
+                        i + 1
+                    "
+                  >
+                    <button
+                      class="action-button btn-block mt-4"
+                      (click)="
+                        changePolicyDetails(
+                          policy.policyNumber,
+                          policy.contractNumber,
+                          'FSINSUREDOBJECT_ADD'
+                        )
+                      "
+                    >
+                      {{ 'fscommon.add' | cxTranslate }}
+                    </button>
+                  </ng-container>
                 </ul>
               </ng-container>
             </ng-container>
@@ -296,26 +335,23 @@
             {{ 'fscommon.edit' | cxTranslate }}
           </p>
         </ng-container>
-        <li
-          *ngFor="let optionalCoverage of policy.optionalProducts"
-          class="accordion-list-item row"
-        >
-          <div class="col-6 col-sm-5 item-label">
-            {{ optionalCoverage.coverageProduct.name }}
-          </div>
-          <div
-            *ngIf="optionalCoverage.coverageIsIncluded"
-            class="col-6 col-sm-5 value notice"
-          >
-            {{ 'fscommon.included' | cxTranslate }}
-          </div>
-          <div
-            *ngIf="!optionalCoverage.coverageIsIncluded"
-            class="col-6 col-sm-5 value notice"
-          >
-            {{ 'fscommon.notIncluded' | cxTranslate }}
-          </div>
-        </li>
+        <ng-container *ngFor="let optionalCoverage of policy.optionalProducts">
+          <ng-container *ngIf="!optionalCoverage.isMandatory">
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ optionalCoverage.coverageProduct.name }}
+              </div>
+              <div
+                class="col-6 col-sm-5 value notice"
+                [innerText]="
+                  optionalCoverage.coverageIsIncluded
+                    ? ('fscommon.included' | cxTranslate)
+                    : ('fscommon.notIncluded' | cxTranslate)
+                "
+              ></div>
+            </li>
+          </ng-container>
+        </ng-container>
       </ul>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
@@ -369,7 +405,9 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="policy.paymentMethod?.paymentOption; else na">
+            <ng-container
+              *ngIf="policy.paymentMethod?.paymentOption; else defaultPayment"
+            >
               {{ policy.paymentMethod?.paymentOption }}
             </ng-container>
           </div>
@@ -395,7 +433,7 @@
               <a
                 href="#"
                 class="document-link d-block text-truncate"
-                (click)="getDocument(document.code, document.altText, $event)"
+                (click)="getDocument(document, $event)"
                 >{{ document.altText }}</a
               >
             </div>
@@ -416,6 +454,7 @@
             <img
               class="circle-image"
               [src]="getBaseUrl() + policy.responsibleAgent?.thumbnail?.url"
+              [alt]="policy.responsibleAgent?.displayName"
             />
             <p class="content-box-info">
               {{ policy.responsibleAgent?.displayName }}
@@ -426,6 +465,6 @@
     </cx-fs-accordion-item>
   </div>
 </ng-container>
-<ng-template #na>
-  {{ 'fscommon.notAvailable' | cxTranslate }}
+<ng-template #defaultPayment>
+  {{ 'fscommon.invoice' | cxTranslate }}
 </ng-template>

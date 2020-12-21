@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormDataService } from '@spartacus/dynamicforms';
+import { FileService, FormDataService } from '@spartacus/dynamicforms';
 import {
   GlobalMessageService,
   I18nTestingModule,
@@ -54,52 +54,64 @@ export class MockUserRequestNavigationService {
   }
 }
 
+export class MockFileService {
+  getUploadedDocuments() {}
+}
+
 describe('FNOLNavigationComponent', () => {
   let component: FNOLNavigationComponent;
   let fixture: ComponentFixture<FNOLNavigationComponent>;
   let mockUserRequestService: MockUserRequestService;
   let mockClaimService: MockClaimService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
+  let mockFileService: MockFileService;
 
-  beforeEach(async(() => {
-    mockUserRequestService = new MockUserRequestService();
-    mockClaimService = new MockClaimService();
-    mockUserRequestNavigationService = new MockUserRequestNavigationService();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule],
-      declarations: [FNOLNavigationComponent],
-      providers: [
-        {
-          provide: UserRequestService,
-          useValue: mockUserRequestService,
-        },
-        {
-          provide: ClaimService,
-          useValue: mockClaimService,
-        },
-        {
-          provide: UserRequestNavigationService,
-          useValue: mockUserRequestNavigationService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: mockActivatedRoute,
-        },
-        {
-          provide: FormDataService,
-          useValue: FormDataService,
-        },
-        {
-          provide: GlobalMessageService,
-          useValue: GlobalMessageService,
-        },
-        {
-          provide: RoutingService,
-          useValue: RoutingService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockUserRequestService = new MockUserRequestService();
+      mockClaimService = new MockClaimService();
+      mockUserRequestNavigationService = new MockUserRequestNavigationService();
+      mockFileService = new MockFileService();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule],
+        declarations: [FNOLNavigationComponent],
+        providers: [
+          {
+            provide: UserRequestService,
+            useValue: mockUserRequestService,
+          },
+          {
+            provide: ClaimService,
+            useValue: mockClaimService,
+          },
+          {
+            provide: UserRequestNavigationService,
+            useValue: mockUserRequestNavigationService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: mockActivatedRoute,
+          },
+          {
+            provide: FormDataService,
+            useValue: FormDataService,
+          },
+          {
+            provide: FileService,
+            useValue: mockFileService,
+          },
+          {
+            provide: GlobalMessageService,
+            useValue: GlobalMessageService,
+          },
+          {
+            provide: RoutingService,
+            useValue: RoutingService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FNOLNavigationComponent);

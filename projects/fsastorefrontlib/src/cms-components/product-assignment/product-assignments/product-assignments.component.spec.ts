@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -61,25 +61,27 @@ describe('ProductAssignmentsComponent', () => {
   let fixture: ComponentFixture<ProductAssignmentsComponent>;
   let mockedProductAssignmentService: ProductAssignmentService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ProductAssignmentsComponent,
-        ProductAssignmentItemComponent,
-      ],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useClass: ActivatedRouteMock,
-        },
-        {
-          provide: ProductAssignmentService,
-          useClass: MockedProductAssignmentService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          ProductAssignmentsComponent,
+          ProductAssignmentItemComponent,
+        ],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useClass: ActivatedRouteMock,
+          },
+          {
+            provide: ProductAssignmentService,
+            useClass: MockedProductAssignmentService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentsComponent);

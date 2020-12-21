@@ -1,11 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { AuthActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import { FormConnector } from '../../connectors/form-connector';
+import { FormConnector } from '../../connectors/form.connector';
 import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
 import * as fromActions from '../actions';
 import { YFormData } from './../../models/form-occ.models';
@@ -119,16 +119,19 @@ describe('Form Data Effects', () => {
       expect(effects.saveFormData$).toBeObservable(expected);
     });
 
-    it('should call clearFormDataLocalStorage', async () => {
-      const spy = spyOn(
-        mockFromDataStorageService,
-        'clearFormDataLocalStorage'
-      );
-      const action = new AuthActions.Logout();
-      actions$ = hot('-a', { a: action });
-      effects.clearFormData$.subscribe(() => {
-        expect(spy).toHaveBeenCalled();
-      });
-    });
+    it(
+      'should call clearFormDataLocalStorage',
+      waitForAsync(() => {
+        const spy = spyOn(
+          mockFromDataStorageService,
+          'clearFormDataLocalStorage'
+        );
+        const action = new AuthActions.Logout();
+        actions$ = hot('-a', { a: action });
+        effects.clearFormData$.subscribe(() => {
+          expect(spy).toHaveBeenCalled();
+        });
+      })
+    );
   });
 });

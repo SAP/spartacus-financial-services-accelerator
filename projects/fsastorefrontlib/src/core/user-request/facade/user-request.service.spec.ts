@@ -1,8 +1,8 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
-import { Observable, of, ReplaySubject } from 'rxjs';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
@@ -17,26 +17,12 @@ class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
 
-const userToken$ = new ReplaySubject<UserToken>();
-
-class MockAuthService {
-  getOccUserId(): Observable<string> {
-    return of(OCC_USER_ID_CURRENT);
-  }
-  getUserToken(): Observable<UserToken> {
-    return userToken$.asObservable();
-  }
-}
-
 describe('UserRequestServiceTest', () => {
   let service: UserRequestService;
   let store: Store<FSUserRequestState>;
-  let authService: MockAuthService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
-    authService = new MockAuthService();
-
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -45,7 +31,6 @@ describe('UserRequestServiceTest', () => {
       providers: [
         UserRequestService,
         reducerProvider,
-        { provide: AuthService, useValue: authService },
         {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,

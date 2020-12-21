@@ -23,6 +23,7 @@ export const fscommon = {
     information: 'Information',
     duration: 'Dauer',
     included: 'Inbegriffen',
+    notIncluded: 'Nicht enthalten',
     excluded: 'Ausgeschlossen',
     activate: 'Aktivieren',
     deactivate: 'Deaktivieren',
@@ -92,6 +93,10 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: 'Rechnung',
+    payment: {
+      CARD: 'Kreditkarte',
+      INVOICE: 'Rechnung',
+    },
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:

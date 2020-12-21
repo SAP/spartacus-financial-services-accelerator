@@ -1,2 +1,2 @@
 export * from './form.adapter';
-export * from './form-connector';
+export * from './form.connector';

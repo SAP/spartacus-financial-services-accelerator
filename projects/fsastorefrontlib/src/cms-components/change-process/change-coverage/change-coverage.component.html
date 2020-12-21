@@ -12,26 +12,15 @@
           {{ 'forms.effectiveDate' | cxTranslate }} :
         </div>
         <div class="notice small pl-2 pl-md-0 d-inline-flex d-md-flex">
-          {{ currentDate }}
+          {{ currentDate | date: getDateFormat() }}
         </div>
       </div>
     </div>
-    <ng-container *ngFor="let includedCoverage of includedCoverages">
+    <ng-container *ngFor="let optionalCoverage of optionalCoverages">
       <ng-container
-        [ngTemplateOutlet]="addOption"
+        [ngTemplateOutlet]="changeOption"
         [ngTemplateOutletContext]="{
-          coverage: includedCoverage,
-          changable: false
-        }"
-      >
-      </ng-container>
-    </ng-container>
-    <ng-container *ngFor="let potentialCoverage of potentialCoverages">
-      <ng-container
-        [ngTemplateOutlet]="addOption"
-        [ngTemplateOutletContext]="{
-          coverage: potentialCoverage,
-          changable: true
+          coverage: optionalCoverage
         }"
       >
       </ng-container>
@@ -58,7 +47,7 @@
   </div>
 </ng-container>
 
-<ng-template #addOption let-coverage="coverage" let-changable="changable">
+<ng-template #changeOption let-coverage="coverage">
   <div
     class="row mx-3 py-3 no-gutters position-relative"
     *ngIf="coverage.coverageProduct"
@@ -92,10 +81,13 @@
       <h6>{{ coverage.coverageProduct?.name }}</h6>
     </div>
     <div class="col-12 col-md-3 align-self-center text-center">
-      <ng-container *ngIf="coverage.coverageIsIncluded && !changable">
-        <div class="semi-bold">
-          {{ 'fscommon.included' | cxTranslate }}
-        </div>
+      <ng-container *ngIf="coverage.coverageIsIncluded">
+        <button
+          class="secondary-button btn-block text-capitalize"
+          (click)="removeCoverage(coverage)"
+        >
+          {{ 'common.remove' | cxTranslate }}
+        </button>
       </ng-container>
       <ng-container *ngIf="!coverage.coverageIsIncluded">
         <button
@@ -103,14 +95,6 @@
           (click)="addCoverage(coverage)"
         >
           {{ 'fscommon.add' | cxTranslate }}
-        </button>
-      </ng-container>
-      <ng-container *ngIf="coverage.coverageIsIncluded && changable">
-        <button
-          class="secondary-button btn-block text-capitalize"
-          (click)="removeCoverage(coverage)"
-        >
-          {{ 'common.remove' | cxTranslate }}
         </button>
       </ng-container>
     </div>

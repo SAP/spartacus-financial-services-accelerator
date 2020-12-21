@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
@@ -85,44 +85,48 @@ describe('DynamicFormComponent', () => {
   let mockFormDataService: MockFormDataService;
   let mockFormComponentService: MockFormComponentService;
 
-  beforeEach(async(() => {
-    mockFormBuilderService = new MockFormBuilderService();
-    mockFormDataService = new MockFormDataService();
-    mockFormComponentService = new MockFormComponentService();
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [DynamicFormComponent, MockDynamicFieldDirective],
-      providers: [
-        {
-          provide: FormBuilderService,
-          useValue: mockFormBuilderService,
-        },
-        {
-          provide: FormDataService,
-          useValue: mockFormDataService,
-        },
-        {
-          provide: FormComponentService,
-          useValue: mockFormComponentService,
-        },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockFormBuilderService = new MockFormBuilderService();
+      mockFormDataService = new MockFormDataService();
+      mockFormComponentService = new MockFormComponentService();
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule],
+        declarations: [DynamicFormComponent, MockDynamicFieldDirective],
+        providers: [
+          {
+            provide: FormBuilderService,
+            useValue: mockFormBuilderService,
+          },
+          {
+            provide: FormDataService,
+            useValue: mockFormDataService,
+          },
+          {
+            provide: FormComponentService,
+            useValue: mockFormComponentService,
+          },
+          {
+            provide: DynamicFormsConfig,
+            useValue: mockDynamicFormsConfig,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(DynamicFormComponent);
-    component = fixture.componentInstance;
-    component.config = config;
-    component.formData = of(formData);
-    mockFormGroup = new FormGroup({
-      testGroupCode: new FormControl('', Validators.required),
-    });
-    fixture.detectChanges();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      fixture = TestBed.createComponent(DynamicFormComponent);
+      component = fixture.componentInstance;
+      component.config = config;
+      component.formData = of(formData);
+      mockFormGroup = new FormGroup({
+        testGroupCode: new FormControl('', Validators.required),
+      });
+      fixture.detectChanges();
+    })
+  );
 
   it('should create form with defintion but without data', () => {
     component.formData = undefined;

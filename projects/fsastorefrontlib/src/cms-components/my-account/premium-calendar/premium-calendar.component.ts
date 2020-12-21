@@ -7,6 +7,7 @@ import {
 import { OccConfig } from '@spartacus/core';
 import { PolicyService } from '../../../core/my-account/facade';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'cx-fs-premium-calendar',
   templateUrl: './premium-calendar.component.html',
@@ -21,6 +22,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
   policies$;
   policiesLoaded$;
   selectedIndexes: number[] = [];
+
   private subscription = new Subscription();
 
   ngOnInit() {

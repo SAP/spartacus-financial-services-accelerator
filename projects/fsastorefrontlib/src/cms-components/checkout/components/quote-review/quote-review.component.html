@@ -19,6 +19,9 @@
                     ((cart.deliveryOrderGroups[0]?.entries)[0]?.product
                       ?.images)[1]?.url
                   "
+                  [alt]="
+                    (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.name
+                  "
                 />
               </span>
             </div>
@@ -137,9 +140,7 @@
               </div>
             </div>
           </cx-fs-accordion-item>
-          <ng-container
-            *ngIf="(cart.deliveryOrderGroups[0]?.entries | slice: 1).length > 0"
-          >
+          <ng-container *ngIf="checkIfRemoveableEntriesExists(cart)">
             <cx-fs-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
               <div class="container">
                 <div class="row justify-content-center">
@@ -150,11 +151,13 @@
                           | slice: 1
                       "
                     >
-                      <li class="accordion-list-item row">
-                        <div class="col-12 item-label">
-                          {{ item.product?.name }}
-                        </div>
-                      </li>
+                      <ng-container *ngIf="item.removeable">
+                        <li class="accordion-list-item row">
+                          <div class="col-12 item-label">
+                            {{ item.product?.cartDisplayName }}
+                          </div>
+                        </li>
+                      </ng-container>
                     </ng-container>
                   </ul>
                   <ng-container

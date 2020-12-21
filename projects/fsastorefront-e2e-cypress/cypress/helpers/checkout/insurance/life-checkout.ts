@@ -70,6 +70,22 @@ export function checkLifeBasicMiniCart() {
     price: ' €9.75 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 25 Sep 2022 ',
+      },
+      {
+        title: 'Coverage Period:',
+        value: ' 24 ',
+      },
+      {
+        title: 'Coverage Amount:',
+        value: ' 30000 ',
+      },
+      {
+        title: 'Insured:',
+        value: ' yourself ',
+      },
+      {
         title: ' Basic Life Insurance: ',
         value: ' €7.69 ',
       },
@@ -125,6 +141,22 @@ export function checkLifeBasicMiniCartSecondPerson() {
     price: ' €22.15 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 25 Sep 2022 ',
+      },
+      {
+        title: 'Coverage Period:',
+        value: ' 24 ',
+      },
+      {
+        title: 'Coverage Amount:',
+        value: ' 30000 ',
+      },
+      {
+        title: 'Insured:',
+        value: ' yourself and second person ',
+      },
+      {
         title: ' Basic Life Insurance: ',
         value: ' €22.15 ',
       },
@@ -150,6 +182,6 @@ export function addSecondPerson() {
   });
   cy.get('p.label').contains('Choose a Cover').click();
   cy.wait(500);
-  cy.get('[name=lifeWhoCovered]').eq(`1`).click();
+  cy.get('[name=lifeWhoCovered]').eq('1').should('be.visible').click();
   cy.wait(500);
 }

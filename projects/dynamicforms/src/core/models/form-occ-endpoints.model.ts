@@ -21,4 +21,24 @@ export interface FormOccEndpoints extends OccEndpoints {
    *
    */
   createFormData?: string;
+  /**
+   * Upload file
+   *
+   */
+  uploadFile?: string;
+  /**
+   * Remove file
+   *
+   */
+  removeFile?: string;
+  /**
+   * Get file
+   *
+   */
+  getFile?: string;
+  /**
+   * Get files
+   *
+   */
+  getFiles?: string;
 }

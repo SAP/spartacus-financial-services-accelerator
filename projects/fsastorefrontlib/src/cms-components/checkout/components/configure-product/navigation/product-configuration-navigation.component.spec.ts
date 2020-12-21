@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormDataService,
   FormDataStorageService,
@@ -92,43 +92,45 @@ describe('ProductConfigurationNavigationComponent', () => {
   let currentProductService: CurrentProductService;
   let cartService: FSCartService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ProductConfigurationNavigationComponent],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: PricingService,
-          useClass: MockPricingService,
-        },
-        {
-          provide: CurrentProductService,
-          useClass: MockCurrentProductService,
-        },
-        {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
-          provide: RoutingService,
-          useValue: { go: jasmine.createSpy() },
-        },
-      ],
-    }).compileComponents();
-    currentProductService = TestBed.inject(CurrentProductService);
-    formDataService = TestBed.inject(FormDataService);
-    formDataStorageService = TestBed.inject(FormDataStorageService);
-    pricingService = TestBed.inject(PricingService);
-    cartService = TestBed.inject(FSCartService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ProductConfigurationNavigationComponent],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: PricingService,
+            useClass: MockPricingService,
+          },
+          {
+            provide: CurrentProductService,
+            useClass: MockCurrentProductService,
+          },
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: RoutingService,
+            useValue: { go: jasmine.createSpy() },
+          },
+        ],
+      }).compileComponents();
+      currentProductService = TestBed.inject(CurrentProductService);
+      formDataService = TestBed.inject(FormDataService);
+      formDataStorageService = TestBed.inject(FormDataStorageService);
+      pricingService = TestBed.inject(PricingService);
+      cartService = TestBed.inject(FSCartService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductConfigurationNavigationComponent);

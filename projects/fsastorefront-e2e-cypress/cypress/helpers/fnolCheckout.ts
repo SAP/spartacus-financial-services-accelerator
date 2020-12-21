@@ -50,6 +50,7 @@ export function populateIncidentInformationStep() {
       .type('my tesla S was stolen while I was in the shopping center');
   });
 }
+
 export function updateIncidentType() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=whatHappened]').select('Glass Damage');
@@ -63,9 +64,12 @@ export function populateIncidentReportStep() {
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('[name=responsibleForAccident]').type('me');
-  cy.get('[name=policeInformed]').eq(0).click();
-  cy.get('[name=witnesses]').eq(1).click();
+  cy.get('[name=phFault]').select('3rdParty');
+  cy.get('[name=reportedToPolice]').eq(0).click();
+  cy.get('[name=witnessExist]').eq(1).click();
+  cy.get('[name=entitledToDriveVehicle]').eq(1).click();
+  cy.get('[name=vehicleParked]').eq(1).click();
+  cy.get('[name=otherVehicleInvolved]').eq(1).click();
 }
 
 export function checkSummaryPage() {
@@ -92,7 +96,7 @@ export function checkIncidentReportAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(1)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '1');
+      cy.get('.accordion-list-item').should('have.length', '2');
     });
   cy.get('.accordion-list-item').contains('while buying tesla coils');
 }
@@ -104,8 +108,9 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(2)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '3');
+      cy.get('.accordion-list-item').should('have.length', '6');
     });
+  cy.get('.accordion-list-item').contains('3rdParty');
 }
 
 export function checkConfirmationPage() {
@@ -138,20 +143,19 @@ export function startClaimFromHomepage() {
 
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
-  cy.get('h3.section-header-heading').contains('Which car has been damaged?');
+  cy.get('h3').contains('Which car has been damaged?');
   cy.get('cx-fs-cms-custom-container').within(() => {
     cy.get('.cx-payment-card-inner').should('be.visible');
   });
 }
 
 export function selectPolicyOnEntryPage() {
-  cy.get('.form-check-input').click();
   cy.get('.cx-payment-card')
     .eq(0)
     .within(() => {
-      cy.get('.cx-card-link');
-    })
-    .click();
+      cy.get('.cx-card-link').click();
+    });
+  cy.get('.form-check-input').click();
 }
 
 export function checkAndResumeSpecificClaim() {
@@ -175,7 +179,14 @@ export function deleteClaimFromDialog() {
     dropdownItem: 'Claims',
   });
   cy.wait(`@${claims}`).its('status').should('eq', 200);
-  cy.contains('.info-card', claimNumber);
+  cy.contains('.info-card', claimNumber).within(() => {
+    cy.get('a.fs-icon').should('be.visible').click({ force: true });
+  });
+  cy.get('h3').should('contain.text', 'Delete started claim process');
+  cy.get('p').contains('The following claim process will be deleted');
+  cy.get('cx-fs-deleted-claim-dialog').within(() => {
+    cy.get('.primary-button').click();
+  });
 }
 
 export function clickContinueAndGetNewClaimID() {
@@ -183,7 +194,8 @@ export function clickContinueAndGetNewClaimID() {
     'AutoClaimIncidentFormComponent',
     'incidentInfoForm'
   );
-  cy.get('.primary-button').should('contain', 'Continue').click();
+  cy.get('h3').contains('Which car has been damaged?');
+  cy.get('.primary-button').should('be.visible').click();
   cy.wait(`@${incidentInfoForm}`)
     .its('status')
     .should('eq', 200)
@@ -192,10 +204,49 @@ export function clickContinueAndGetNewClaimID() {
     });
 }
 
+export function populateIncidentInformationSecondClaim() {
+  cy.get('[name=whatHappened]').select('AutoTheft');
+  cy.get('[name=whenHappened]').clear().type('2019-01-01');
+  cy.get('[name=whatTime]').clear().type('12:12:12');
+  cy.get('[name=country]').select('Serbia');
+  cy.get('[name=city]').clear().type('Belgräde');
+  cy.get('[name=postcode]').clear().type('11040');
+  cy.get('[name=address]').clear().type('Omladinskih Brigada 90g');
+  cy.get('[name=description]')
+    .clear()
+    .type('my tesla S was stolen while I was in the shopping center');
+}
+
 export function waitForIncidentReportStep() {
   const incidentForm = waitForCMSComponent(
     'AutoClaimIncidentReportFormComponent',
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
+}
+
+export function waitForfnolGeneralInformationStep() {
+  const generalInfoPage = waitForPage('fnolGeneralInfoPage', 'generalInfoPage');
+  cy.get('.Section4 cx-banner').eq(1).click();
+  cy.wait(`@${generalInfoPage}`).its('status').should('eq', 200);
+}
+
+export function populateIncidentRpeportStep() {
+  const filePath = 'fsaImageTest.png';
+  cy.get('[name=howAccidentOccurred]').type(
+    'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
+  );
+  cy.get('.custom-file-input').attachFile(filePath);
+  cy.get('.btn-primary').click();
+}
+
+export function checkClaimReplication() {
+  cy.get('.info-card')
+    .should('have.length', 1)
+    .within(() => {
+      cy.get('.info-card-data').within(() => {
+        cy.get('.value').should('contain.text', 'Collision');
+        cy.get('.value').should('contain.text', 'PROCESSING');
+      });
+    });
 }

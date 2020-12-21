@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
-import { DocumentService } from './../../../../core/document/facade/document.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../core/i18n/facade';
+import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -25,8 +25,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected config: OccConfig,
     protected changeRequestService: ChangeRequestService,
-    protected documentService: DocumentService,
-    protected translationService: FSTranslationService
+    protected translationService: FSTranslationService,
+    protected fileService: FileService
   ) {}
 
   policy$;
@@ -95,14 +95,14 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getDocument(documentId, documentName, event) {
+  getDocument(document, event) {
     event.preventDefault();
     this.subscription.add(
-      this.documentService
-        .getDocumentById(documentId)
+      this.fileService
+        .getFile(document.code, document.mime)
         .pipe(
-          map(document => {
-            saveAs(document, documentName + '.pdf');
+          map(downloadedFile => {
+            saveAs(downloadedFile, document.altText);
           })
         )
         .subscribe()
@@ -114,6 +114,15 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       ['policy.details', translationGroup],
       translationKey
     );
+  }
+
+  isAddingOfInsuredObjectAllowed(
+    insuredObject: any,
+    maxNumberOfInsuredObjects: number
+  ): boolean {
+    const currentNumberOfInsuredObjects =
+      insuredObject?.childInsuredObjectList?.insuredObjects?.length;
+    return maxNumberOfInsuredObjects > currentNumberOfInsuredObjects;
   }
 
   ngOnDestroy() {

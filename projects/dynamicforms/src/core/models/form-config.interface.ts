@@ -19,7 +19,7 @@ export interface FieldConfig {
   cssClass?: string;
   gridClass?: string;
   apiValue?: ApiConfig;
-  placeholder?: string;
+  placeholder?: LocalizedString;
   fieldType: string;
   value?: any;
   hidden?: boolean;
@@ -28,6 +28,10 @@ export interface FieldConfig {
   dependsOn?: DependsOn;
   prefillValue?: PrefillValue;
   readonly?: boolean;
+  maxUploads?: number;
+  accept?: string[];
+  maxFileSize?: number;
+  multiple?: boolean;
 }
 export interface DependsOn {
   hide?: boolean;

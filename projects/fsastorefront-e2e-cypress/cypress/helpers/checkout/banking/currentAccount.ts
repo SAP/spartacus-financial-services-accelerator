@@ -57,6 +57,18 @@ export function checkMiniCartCurrentAccount() {
     price: ' €9.99 ',
     products: [
       {
+        title: 'Number of Applicants:',
+        value: ' 1 ',
+      },
+      {
+        title: 'Debit Card:',
+        value: ' yes ',
+      },
+      {
+        title: 'Debit Card Design:',
+        value: ' black ',
+      },
+      {
         title: ' Family Account: ',
         value: ' €4.99 ',
       },

@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, OccConfig, RoutingService } from '@spartacus/core';
+import {
+  Cart,
+  GlobalMessageService,
+  GlobalMessageType,
+  OccConfig,
+  RoutingService,
+} from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,6 +24,7 @@ import {
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -32,7 +39,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
-  activeCategory$: Observable<String>;
+  activeCategory$: Observable<string>;
 
   constructor(
     protected cartService: FSCartService,
@@ -42,7 +49,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
-    protected translationService: FSTranslationService
+    protected translationService: FSTranslationService,
+    protected checkoutService: FSCheckoutService,
+    protected globalMessageService: GlobalMessageService
   ) {}
 
   ngOnInit() {
@@ -51,6 +60,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.activeCategory$ = this.categoryService.getActiveCategory();
+    this.displayQuoteStatusPendingMessage();
   }
 
   getBaseUrl() {
@@ -128,12 +138,37 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
+  checkIfRemoveableEntriesExists(cart: FSCart) {
+    const filteredEntries = this.checkoutService.filterRemoveableEntries(cart);
+    return filteredEntries.length > 0;
+  }
+
   getFormContent(cart: any): any {
     if (cart?.deliveryOrderGroups[0]?.entries[0]?.formData?.length > 0) {
       return JSON.parse(
         cart.deliveryOrderGroups[0].entries[0].formData[0].content
       );
     }
+  }
+
+  displayQuoteStatusPendingMessage() {
+    this.subscription.add(
+      this.cart$
+        .pipe(
+          map(cart => {
+            if (
+              (<FSCart>cart).insuranceQuote?.quoteWorkflowStatus?.code ===
+              QuoteWorkflowStatusType.PENDING
+            ) {
+              this.globalMessageService.add(
+                { key: 'quoteReview.status.pending' },
+                GlobalMessageType.MSG_TYPE_INFO
+              );
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy() {

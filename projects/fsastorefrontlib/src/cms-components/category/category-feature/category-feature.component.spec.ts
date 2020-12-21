@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryFeatureComponent } from './category-feature.component';
 import { Component, Input, PipeTransform, Pipe } from '@angular/core';
@@ -49,22 +49,28 @@ describe('CategoryFeatureComponent', () => {
   let component: CategoryFeatureComponent;
   let fixture: ComponentFixture<CategoryFeatureComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule],
-      declarations: [CategoryFeatureComponent, MockMediaComponent, MockUrlPipe],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: CmsService,
-          useValue: MockCmsService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule],
+        declarations: [
+          CategoryFeatureComponent,
+          MockMediaComponent,
+          MockUrlPipe,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: CmsService,
+            useValue: MockCmsService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureComponent);

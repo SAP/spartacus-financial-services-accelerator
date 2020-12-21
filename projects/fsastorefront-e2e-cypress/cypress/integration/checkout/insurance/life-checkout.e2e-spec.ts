@@ -18,34 +18,33 @@ context('Life Insurance Checkout', () => {
     checkout.checkProgressBarInsurance();
   });
 
-  it('Should complete life checkout', () => {
-    //populate first step
+  it('Should select main and optional products', () => {
     life.populateFirstStep();
     checkout.clickContinueButton();
-    //check comparison table
     life.checkLifeComparisonTable();
     life.selectBasicLifeProduct();
     //check and add optional products
     life.checkOptionalProductsAddRenewalOption();
-    //life.checkLifeBasicMiniCart();
+    life.checkLifeBasicMiniCart();
     checkout.clickContinueButton();
-    //register new user in checkout
+  });
+
+  it('Should register user in checkout and add second person', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
     life.addSecondPerson();
     life.populateSecondPerson();
   });
 
-  it('Should continue in checkout', () => {
+  it('Should select main product', () => {
     checkout.clickContinueButton();
-    //check comparison table when second person is added
     life.checkLifeComparisonTableSecondPerson();
     life.selectBasicLifeProduct();
   });
 
   it('Should check optional products', () => {
     life.checkOptionalProductsSecond();
-    //life.checkLifeBasicMiniCartSecondPerson();
+    life.checkLifeBasicMiniCartSecondPerson();
     checkout.clickContinueButton();
   });
 
@@ -58,7 +57,7 @@ context('Life Insurance Checkout', () => {
   it('Should check quote review step', () => {
     checkout.checkCheckoutStep('Your Life Insurance', '7');
     checkout.checkProgressBarInsurance();
-    //life.checkLifeBasicMiniCartSecondPerson();
+    life.checkLifeBasicMiniCartSecondPerson();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     cy.get('.primary-button').should('not.be.visible');
   });

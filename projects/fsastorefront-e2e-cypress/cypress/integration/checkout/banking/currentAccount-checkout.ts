@@ -32,6 +32,7 @@ context('Current Account Checkout', () => {
   it('Should check optional products for Current Account', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     currentAccount.checkOptionalProductsAddTransactionChest();
+    checkout.clickContinueButton();
   });
 
   it('Should register user in checkout', () => {
@@ -40,11 +41,11 @@ context('Current Account Checkout', () => {
   });
 
   it('Should complete personal details step', () => {
-    checkout.waitForPersonalDetailsForm();
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     checkout.checkPersonalDetailsPage();
     banking.populatePersonalDetailsLoanAndCA();
     currentAccount.populatePersonalDetails();
+    currentAccount.checkMiniCartCurrentAccount();
     //Waiting for registration process to be completed
     cy.wait(5000);
     checkout.clickContinueButton();
