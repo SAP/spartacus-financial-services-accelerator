@@ -30,7 +30,6 @@ import {
 import { parseCSV } from '../shared/utils/transform-utils';
 import { getProjectFromWorkspace } from '../shared/utils/workspace-utils';
 import { FSSchema as FsOptions } from './schema';
-import { getProjectTargets } from '@schematics/angular/utility/project-targets';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import {
   addPackageJsonDependency,
@@ -41,6 +40,7 @@ import { getIndexHtmlPath } from '@spartacus/schematics/src/shared/utils/file-ut
 import {
   ANGULAR_LOCALIZE,
   DEFAULT_NGRX_VERSION,
+  getProjectTargets,
   SPARTACUS_ASSETS,
   SPARTACUS_CORE,
   SPARTACUS_STOREFRONTLIB,

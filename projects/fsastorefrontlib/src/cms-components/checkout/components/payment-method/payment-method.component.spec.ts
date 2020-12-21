@@ -17,10 +17,8 @@ import { Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import createSpy = jasmine.createSpy;
-import {
-  FSCheckoutConfigService,
-  FSCheckoutService,
-} from 'fsastorefrontlib/core';
+import { FSCheckoutConfigService, FSCheckoutService } from '../../../../core';
+import { FSSteps } from '../../../../occ';
 
 const mockPaymentDetails: PaymentDetails = {
   id: 'mock payment id',
