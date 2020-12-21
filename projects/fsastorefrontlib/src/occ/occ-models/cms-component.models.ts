@@ -4,7 +4,7 @@ import {
   CmsBannerComponentMedia,
   CmsComponent,
 } from '@spartacus/core';
-import { YFormCmsComponent } from '@fsa/dynamicforms';
+import { YFormCmsComponent } from '@spartacus/dynamicforms';
 
 export interface CmsProductFeatureComponent extends CmsComponent {
   title?: string;

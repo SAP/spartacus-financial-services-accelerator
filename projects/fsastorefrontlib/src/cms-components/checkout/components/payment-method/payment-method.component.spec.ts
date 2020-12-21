@@ -15,12 +15,10 @@ import { CheckoutStepService, ICON_TYPE } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {
-  FSCheckoutConfigService,
-  FSCheckoutService,
-  FSSteps,
-} from '@fsa/storefront';
+
 import createSpy = jasmine.createSpy;
+import { FSCheckoutConfigService, FSCheckoutService } from '../../../../core';
+import { FSSteps } from '../../../../occ';
 
 const mockPaymentDetails: PaymentDetails = {
   id: 'mock payment id',

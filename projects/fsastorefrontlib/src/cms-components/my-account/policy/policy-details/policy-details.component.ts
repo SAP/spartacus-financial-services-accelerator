@@ -12,7 +12,7 @@ import { PolicyService } from '../../../../core/my-account/facade/policy.service
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../core/i18n/facade';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-policy-details',

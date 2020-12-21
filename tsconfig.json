@@ -13,12 +13,24 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@fsa/storefront": ["projects/fsastorefrontlib/src/public_api"],
-      "fsastorefrontlib": ["dist/fsastorefrontlib"],
-      "fsastorefrontlib/*": ["dist/fsastorefrontlib/*"],
-      "dynamicforms": ["dist/dynamicforms"],
-      "dynamicforms/*": ["dist/dynamicforms/*"],
-      "@fsa/dynamicforms": ["projects/dynamicforms/public_api"]
+      "@spartacus/fsa-storefront": [
+        "projects/fsastorefrontlib/src/public_api"
+      ],
+      "fsastorefrontlib": [
+        "dist/fsastorefrontlib"
+      ],
+      "fsastorefrontlib/*": [
+        "dist/fsastorefrontlib/*"
+      ],
+      "dynamicforms": [
+        "dist/dynamicforms"
+      ],
+      "dynamicforms/*": [
+        "dist/dynamicforms/*"
+      ],
+      "@spartacus/dynamicforms": [
+        "projects/dynamicforms/public_api"
+      ]
     }
   }
 }

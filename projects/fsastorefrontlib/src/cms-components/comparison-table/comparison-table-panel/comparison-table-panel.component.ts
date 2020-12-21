@@ -5,7 +5,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';

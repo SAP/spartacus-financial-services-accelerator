@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { FormDefinitionType } from '@fsa/storefront';
 import { Store, StoreModule } from '@ngrx/store';
 import {
   AuthService,
@@ -104,12 +103,12 @@ describe('FormDataService', () => {
     );
   });
   it('should load form definition by category', () => {
-    service.loadFormDefinitions(category, FormDefinitionType.PERSONAL_DETAILS);
+    service.loadFormDefinitions(category, 'PERSONAL_DETAILS');
 
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadFormDefinition({
         categoryCode: category,
-        formDefinitionType: FormDefinitionType.PERSONAL_DETAILS,
+        formDefinitionType: 'PERSONAL_DETAILS',
       })
     );
   });

@@ -1,0 +1,20 @@
+{
+  "git": {
+    "requireCleanWorkingDir": true,
+    "requireUpstream": false,
+    "tagName": "fsa-storefront-${version}",
+    "commitMessage": "Bumping fsastorefront version to ${version}",
+    "tagAnnotation": "Bumping fsastorefront version to ${version}"
+  },
+  "npm": {
+    "publishPath": "./../../dist/fsastorefrontlib"
+  },
+  "hooks": {
+    "after:version:bump": "cd ../.. && ng build fsastorefrontlib --prod"
+  },
+  "github": {
+    "release": true,
+    "assets": ["../../docs.tar.gz", "../../docs.zip"],
+    "releaseName": "@spartacus/fsa-storefront@${version}"
+  }
+}

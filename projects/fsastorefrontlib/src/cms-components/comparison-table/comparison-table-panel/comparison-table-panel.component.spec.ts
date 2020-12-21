@@ -6,7 +6,7 @@ import {
   FormDataService,
   FormDataStorageService,
   YFormData,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData, MediaModule } from '@spartacus/storefront';

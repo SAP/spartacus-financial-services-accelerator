@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PrefillResolver } from '@fsa/dynamicforms';
+import { PrefillResolver } from '@spartacus/dynamicforms';
 import { UserService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';

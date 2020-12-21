@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
+
 import {
   ActiveCartService,
   AuthService,

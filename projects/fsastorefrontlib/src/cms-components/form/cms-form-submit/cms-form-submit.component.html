@@ -1,14 +1,15 @@
-<ng-container *ngIf="component$ | async as component; else loading">
-  <ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
+<ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
+  <ng-container *ngIf="component$ | async as component; else loading">
     <cx-form-component
       *ngIf="formConfig"
-      [formId]="component.formId"
+      [formId]="formDefinition.formId"
       [formSubject]="formDefinition.subject"
       [formConfig]="formConfig"
-      [applicationId]="component.applicationId"
-      [formCategoryCode]="component.category"
+      [applicationId]="formDefinition.applicationId"
       [formData]="formData$"
-    ></cx-form-component>
+      [formCategoryCode]="component.category"
+    >
+    </cx-form-component>
   </ng-container>
 </ng-container>
 <ng-template #loading>

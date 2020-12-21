@@ -3,7 +3,7 @@ import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { CreateClaimComponent } from './create-claim.component';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 import { StoreModule } from '@ngrx/store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SelectedPolicy } from '../../../../core/my-account/services';

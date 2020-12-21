@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 
 import {
   I18nTestingModule,

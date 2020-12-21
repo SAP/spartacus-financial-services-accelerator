@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, of, Subscription, combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import {
 } from '../../../core/user-request/facade';
 import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-fnol-navigation',

@@ -1,7 +1,7 @@
 import { DebugElement } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormDataStorageService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { of } from 'rxjs';

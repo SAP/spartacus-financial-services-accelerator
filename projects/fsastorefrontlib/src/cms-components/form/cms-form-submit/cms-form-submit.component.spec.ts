@@ -1,7 +1,10 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
 import { CmsComponent, CmsComponentConnector } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';

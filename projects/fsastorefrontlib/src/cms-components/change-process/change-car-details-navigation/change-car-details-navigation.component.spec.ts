@@ -17,7 +17,7 @@ import {
   FormDataService,
   YFormData,
   FormDataStorageService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 
 const requestId = 'request1';
 

@@ -5,7 +5,7 @@ import {
   FormDataService,
   FormDataStorageService,
   YFormCmsComponent,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
 import { FormDefinitionType, FSCart } from '../../../occ/occ-models';

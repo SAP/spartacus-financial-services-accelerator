@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';

@@ -26,9 +26,9 @@ import { layoutConfig } from './config/default-layout-config';
 import {
   dynamicformsTranslations,
   dynamicformsTranslationsDe,
-} from '@fsa/dynamicforms';
-import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
+} from '@spartacus/dynamicforms';
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
+import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
 
 @NgModule({
   imports: [

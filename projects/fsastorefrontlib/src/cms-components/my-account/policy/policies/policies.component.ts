@@ -5,7 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 import {
   ClaimService,
   PolicyService,

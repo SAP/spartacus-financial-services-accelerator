@@ -1,6 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';

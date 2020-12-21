@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   FormCMSComponent,
   FormDataService,
   FormDataStorageService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
@@ -30,6 +30,7 @@ export class CMSFormSubmitComponent extends FormCMSComponent
   pageContext: PageContext;
 
   ngOnInit() {
+    super.ngOnInit();
     this.subscription.add(
       this.activatedRoute.params
         .pipe(
@@ -46,6 +47,11 @@ export class CMSFormSubmitComponent extends FormCMSComponent
         )
         .subscribe()
     );
-    this.loadForm();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

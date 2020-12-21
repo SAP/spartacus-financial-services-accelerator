@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormDataStorageService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { Observable } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { FSUserRequestState } from '../store/user-request-state';
