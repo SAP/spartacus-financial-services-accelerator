@@ -35,17 +35,9 @@
     }
     &-link {
       @include vertical-center;
-      right: 48px;
+      right: 0;
       background: transparent;
       color: var(--cx-color-secondary);
-      &:before {
-        @include fs-transition;
-        float: right;
-        font-size: 20px;
-      }
-      @include media-breakpoint-down(md) {
-        right: 11px;
-      }
     }
   }
 

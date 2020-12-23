@@ -6,7 +6,10 @@
     >
       <img
         class="image-item"
-        [src]="baseUrl + policy.mainProduct.coverageProduct.images[0].url"
+        [src]="
+          baseUrl +
+          policy.mainProduct?.coverageProduct?.defaultCategory?.image?.url
+        "
         alt=""
       />
     </span>
@@ -24,8 +27,9 @@
       class="overview-section-link"
       routerLink="/my-account/my-policies/"
       routerLinkActive="active"
-      >{{ 'common.back' | cxTranslate }}</a
-    >
+      ><span class="d-none d-md-block">{{ 'common.back' | cxTranslate }}</span>
+      <span class="d-md-none fas fa-arrow-left"></span
+    ></a>
   </div>
   <div class="accordion">
     <cx-fs-accordion-item
