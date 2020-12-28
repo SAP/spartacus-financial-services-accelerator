@@ -96,6 +96,7 @@ export class FieldDependencyResolverService {
     } else {
       dependentControl.disable();
     }
+    dependentControl.updateValueAndValidity({ emitEvent: false });
   }
 
   geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {

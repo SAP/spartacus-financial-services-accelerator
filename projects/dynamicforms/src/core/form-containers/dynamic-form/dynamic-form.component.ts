@@ -106,7 +106,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            if (this.checkInvalidControls(form)) {
+            if (form && this.checkInvalidControls(form)) {
               this.formComponentService.isPopulatedFormInvalidSource.next(true);
               this.markInvalidControls(this.form);
               this.changeDetectorRef.detectChanges();
@@ -146,6 +146,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   private checkInvalidControls(formData: YFormData): boolean {
     return !!(formData && !this.valid);
   }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
