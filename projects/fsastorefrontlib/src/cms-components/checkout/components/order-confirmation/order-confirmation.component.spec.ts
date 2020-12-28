@@ -17,7 +17,6 @@ const MockOccModuleConfig: OccConfig = {
     occ: {
       baseUrl: '',
       prefix: '',
-      legacy: false,
     },
   },
 };
