@@ -88,8 +88,16 @@
             <div class="col d-none d-lg-block">
               <ng-container *ngIf="policy.paymentMethod; else NA">
                 {{ policy.paymentMethod.cardType?.code | uppercase }}
-                {{ policy.paymentMethod?.cardNumber }}
+                {{
+                  policy.paymentMethod?.cardNumber
+                    ? policy.paymentMethod?.cardNumber
+                    : policy.paymentMethod?.paymentOption
+                }}
               </ng-container>
+              <span
+                class="fs-icon icon-triangle-bottom"
+                [ngClass]="selectedIndexes.includes(i) ? 'rotate' : ''"
+              ></span>
             </div>
           </div>
           <div
@@ -121,7 +129,11 @@
             </h5>
             <span *ngIf="policy.paymentMethod; else NA">
               {{ policy.paymentMethod.cardType?.code | uppercase }}
-              {{ policy.paymentMethod?.cardNumber }}
+              {{
+                policy.paymentMethod?.cardNumber
+                  ? policy.paymentMethod?.cardNumber
+                  : policy.paymentMethod?.paymentOption
+              }}
             </span>
           </div>
         </div>
