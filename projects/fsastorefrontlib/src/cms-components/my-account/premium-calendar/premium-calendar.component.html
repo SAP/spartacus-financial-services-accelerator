@@ -26,12 +26,13 @@
             <div class="col align-self-stretch p-4 px-lg-3 py-lg-0">
               <div class="row">
                 <div class="col-4 justify-content-center pb-4 pb-lg-0">
-                  <div class="image-wrapper small">
+                  <div class="image-wrapper small p-2">
                     <img
                       class="image-item"
                       [src]="
                         baseUrl +
-                        policy.mainProduct.coverageProduct.images[0]?.url
+                        policy.mainProduct?.coverageProduct?.defaultCategory
+                          ?.image?.url
                       "
                       alt=""
                     />
@@ -80,6 +81,7 @@
                 {{ 'fscommon.premium' | cxTranslate }}
               </h5>
               <span
+                *ngIf="policy.billingData?.length > 1"
                 class="d-lg-none fs-icon icon-triangle-bottom"
                 [ngClass]="selectedIndexes.includes(i) ? 'rotate' : ''"
               ></span>
@@ -87,9 +89,13 @@
             </div>
             <div class="col d-none d-lg-block">
               <ng-container *ngIf="policy.paymentMethod; else NA">
-                {{ policy.paymentMethod.cardType?.code | uppercase }}
-                {{ policy.paymentMethod?.cardNumber }}
+                <ng-container *ngTemplateOutlet="paymentMethod"></ng-container>
               </ng-container>
+              <span
+                *ngIf="policy.billingData?.length > 1"
+                class="fs-icon icon-triangle-bottom"
+                [ngClass]="selectedIndexes.includes(i) ? 'rotate' : ''"
+              ></span>
             </div>
           </div>
           <div
@@ -115,15 +121,24 @@
               </ng-container>
             </div>
           </div>
-          <div class="col d-lg-none border border-top-0 text-center">
+          <div
+            class="col d-lg-none border border-top-0 text-center payment-container"
+          >
             <h5>
               {{ 'fscommon.paymentMethod' | cxTranslate }}
             </h5>
             <span *ngIf="policy.paymentMethod; else NA">
-              {{ policy.paymentMethod.cardType?.code | uppercase }}
-              {{ policy.paymentMethod?.cardNumber }}
+              <ng-container *ngTemplateOutlet="paymentMethod"></ng-container>
             </span>
           </div>
+          <ng-template #paymentMethod>
+            {{ policy.paymentMethod.cardType?.code | uppercase }}
+            {{
+              policy.paymentMethod?.cardNumber
+                ? policy.paymentMethod?.cardNumber
+                : policy.paymentMethod?.paymentOption
+            }}
+          </ng-template>
         </div>
       </div>
     </ng-container>
