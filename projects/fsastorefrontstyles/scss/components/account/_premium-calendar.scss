@@ -70,9 +70,17 @@
       right: 5%;
       top: 5%;
       @include fs-transition;
+      @include media-breakpoint-down(md) {
+        color: var(--cx-color-6);
+        @include vertical-center;
+      }
       &.rotate {
         transform: translateY(-5%) rotateZ(180deg);
         -webkit-transform: translateY(-5%) rotateZ(180deg);
+        @include media-breakpoint-down(md) {
+          transform: translateY(-50%) rotateZ(180deg);
+          -webkit-transform: translateY(-50%) rotateZ(180deg);
+        }
       }
     }
   }
@@ -85,16 +93,6 @@
     h5 {
       @include media-breakpoint-down(md) {
         color: var(--cx-color-6);
-      }
-    }
-    .icon-triangle-bottom {
-      @include media-breakpoint-down(md) {
-        color: var(--cx-color-6);
-        @include vertical-center;
-      }
-      &.rotate {
-        transform: translateY(-50%) rotateZ(180deg);
-        -webkit-transform: translateY(-50%) rotateZ(180deg);
       }
     }
   }

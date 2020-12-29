@@ -87,12 +87,15 @@
             </div>
             <div class="col d-none d-lg-block">
               <ng-container *ngIf="policy.paymentMethod; else NA">
-                {{ policy.paymentMethod.cardType?.code | uppercase }}
-                {{
-                  policy.paymentMethod?.cardNumber
-                    ? policy.paymentMethod?.cardNumber
-                    : policy.paymentMethod?.paymentOption
-                }}
+                <ng-container
+                  *ngIf="
+                    policy.paymentMethod?.cardType?.code;
+                    else invoicePaymentMethod
+                  "
+                >
+                  {{ policy.paymentMethod.cardType?.code | uppercase }}
+                  {{ policy.paymentMethod?.cardNumber }}
+                </ng-container>
               </ng-container>
               <span
                 class="fs-icon icon-triangle-bottom"
@@ -128,14 +131,20 @@
               {{ 'fscommon.paymentMethod' | cxTranslate }}
             </h5>
             <span *ngIf="policy.paymentMethod; else NA">
-              {{ policy.paymentMethod.cardType?.code | uppercase }}
-              {{
-                policy.paymentMethod?.cardNumber
-                  ? policy.paymentMethod?.cardNumber
-                  : policy.paymentMethod?.paymentOption
-              }}
+              <ng-container
+                *ngIf="
+                  policy.paymentMethod?.cardType?.code;
+                  else invoicePaymentMethod
+                "
+              >
+                {{ policy.paymentMethod.cardType?.code | uppercase }}
+                {{ policy.paymentMethod?.cardNumber }}
+              </ng-container>
             </span>
           </div>
+          <ng-template #invoicePaymentMethod>
+            {{ policy.paymentMethod?.paymentOption }}
+          </ng-template>
         </div>
       </div>
     </ng-container>
