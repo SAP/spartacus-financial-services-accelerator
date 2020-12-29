@@ -90,7 +90,7 @@
             <div class="col d-none d-lg-block">
               <ng-container *ngIf="policy.paymentMethod; else NA">
                 <ng-container
-                  *ngTemplateOutlet="invoicePaymentMethod"
+                  *ngTemplateOutlet="paymentMethod"
                 ></ng-container>
               </ng-container>
               <span
@@ -131,11 +131,11 @@
             </h5>
             <span *ngIf="policy.paymentMethod; else NA">
               <ng-container
-                *ngTemplateOutlet="invoicePaymentMethod"
+                *ngTemplateOutlet="paymentMethod"
               ></ng-container>
             </span>
           </div>
-          <ng-template #invoicePaymentMethod>
+          <ng-template #paymentMethod>
             {{ policy.paymentMethod.cardType?.code | uppercase }}
             {{
               policy.paymentMethod?.cardNumber
