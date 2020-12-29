@@ -18,7 +18,7 @@
         margin: 0;
       }
     }
-    .accordion + .col {
+    .payment-container {
       padding: 1.25rem 0.94rem;
       height: 6.125rem;
       font-size: var(--cx-h6-font-size);
@@ -66,21 +66,15 @@
       }
     }
     .icon-triangle-bottom {
-      position: absolute;
       right: 5%;
-      top: 5%;
       @include fs-transition;
+      @include vertical-center;
       @include media-breakpoint-down(md) {
         color: var(--cx-color-6);
-        @include vertical-center;
       }
       &.rotate {
-        transform: translateY(-5%) rotateZ(180deg);
-        -webkit-transform: translateY(-5%) rotateZ(180deg);
-        @include media-breakpoint-down(md) {
-          transform: translateY(-50%) rotateZ(180deg);
-          -webkit-transform: translateY(-50%) rotateZ(180deg);
-        }
+        transform: translateY(-50%) rotateZ(180deg);
+        -webkit-transform: translateY(-50%) rotateZ(180deg);
       }
     }
   }
