@@ -20,7 +20,7 @@
     <span class="checkbox-text fs-icon icon-ok"></span>
   </label>
   <div class="row mt-5">
-    <div class="col-6">
+    <div class="col-12 col-md-6 mb-3">
       <ng-container
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
         ><button
@@ -31,7 +31,7 @@
         </button></ng-container
       >
     </div>
-    <div class="col-6">
+    <div class="col-12 col-md-6">
       <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
         ><button
           [disabled]="!form.valid || !form.dirty"

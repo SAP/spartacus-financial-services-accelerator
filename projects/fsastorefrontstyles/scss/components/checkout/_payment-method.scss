@@ -22,6 +22,11 @@
     .cx-payment-form-billing-address {
       color: var(--cx-color-primary);
     }
+    .col-md-12 {
+      @include media-breakpoint-down(md) {
+        padding: 0 15px;
+      }
+    }
     .col-md-12.col-xl-10 {
       flex: 0 0 100%;
       max-width: 100%;
