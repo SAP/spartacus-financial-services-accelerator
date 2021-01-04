@@ -13,7 +13,6 @@ import {
 } from '@spartacus/dynamicforms';
 import { map, take, filter } from 'rxjs/operators';
 import { RequestType } from './../../../occ/occ-models';
-import { DateConfig } from 'projects/fsastorefrontlib/src/core';
 
 @Component({
   selector: 'cx-fs-change-car-details-navigation',
@@ -28,8 +27,7 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
     protected globalMessageService: GlobalMessageService,
     protected changePolicyService: ChangePolicyService,
     protected formDataService: FormDataService,
-    protected formDataStoragetService: FormDataStorageService,
-    protected dateConfig: DateConfig
+    protected formDataStoragetService: FormDataStorageService
   ) {
     super(
       userRequestNavigationService,
@@ -37,8 +35,7 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
       activatedRoute,
       routingService,
       globalMessageService,
-      changePolicyService,
-      dateConfig
+      changePolicyService
     );
   }
 
