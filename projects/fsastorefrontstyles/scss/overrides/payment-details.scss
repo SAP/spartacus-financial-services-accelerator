@@ -13,6 +13,8 @@
   text-align: center;
 }
 
-cx-payment-methods .cx-header {
-  padding: 0;
+%cx-payment-methods {
+  .cx-header {
+    padding: 0;
+  }
 }
