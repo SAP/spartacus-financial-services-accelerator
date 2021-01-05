@@ -3,10 +3,16 @@
 
 .cx-msg {
   margin-bottom: 30px;
+  font-size: var(--cx-h3-font-size);
+  font-weight: var(--cx-font-weight-semi);
 }
 .cx-header h3 {
   @include headline-style;
   padding: 1rem 0;
   margin: 1rem auto 3rem;
   text-align: center;
+}
+
+cx-payment-methods .cx-header {
+  padding: 0;
 }
