@@ -34,6 +34,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   envelopState = false;
   mainCheckboxChecked = false;
+  messageCheckboxChecked = false;
 
   @Input() initialGroup: string;
   @Input() mobileTabs: string[];
@@ -60,6 +61,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
               group.messageGroup !== this.messageGroup
             ) {
               this.clearSearchData();
+              this.envelopState = false;
+              this.mainCheckboxChecked = false;
+              this.messageCheckboxChecked = false;
             }
             this.messageGroup =
               group && group.messageGroup
@@ -133,11 +137,16 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     if (!checked) {
       this.mainCheckboxChecked = false;
     }
+    let checkedMassagesCounter = 0;
     this.loadedMessages.forEach(message => {
       if (message.uid === messageUid) {
         message.checked = checked;
       }
+      message.checked ? checkedMassagesCounter++ : (checkedMassagesCounter = 0);
     });
+    checkedMassagesCounter > 0
+      ? (this.messageCheckboxChecked = true)
+      : (this.messageCheckboxChecked = false);
   }
 
   checkAllCheckboxes(checked: boolean) {
@@ -148,7 +157,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   changeSelectedMessages(toRead: boolean) {
-    this.envelopState = !this.envelopState;
     const selectedMessages = this.loadedMessages
       .filter(message => message.checked)
       .map(message => {
@@ -157,6 +165,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         return message.uid;
       });
     if (selectedMessages.length > 0) {
+      this.envelopState = !this.envelopState;
       this.subscription.add(
         this.inboxService.setMessagesState(selectedMessages, toRead).subscribe()
       );

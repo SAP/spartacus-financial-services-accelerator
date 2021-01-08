@@ -2,7 +2,17 @@
 <div
   class="fs-icon m-4"
   (click)="changeSelectedMessages(!envelopState)"
-  [ngClass]="envelopState ? 'icon-envelope-open' : 'icon-envelope'"
+  [title]="
+    !mainCheckboxChecked && !messageCheckboxChecked
+      ? ('fscommon.envelopeIconTitle' | cxTranslate)
+      : ''
+  "
+  [ngClass]="{
+    'icon-envelope-open': envelopState,
+    'icon-envelope-not-allowed':
+      !mainCheckboxChecked && !messageCheckboxChecked,
+    'icon-envelope': !envelopState
+  }"
 ></div>
 <div class="section-header-heading p-4 position-relative container-fluid">
   <div class="row d-none d-md-flex">

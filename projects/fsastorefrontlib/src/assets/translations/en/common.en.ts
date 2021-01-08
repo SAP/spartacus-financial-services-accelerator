@@ -167,6 +167,7 @@ export const fscommon = {
     },
     attachments: 'Attachments',
     pageNotFoundMessage:
-      'Whoops! Sorry, we couldn\'t find that way! Try getting back.' // prettier-ignore
+      'Whoops! Sorry, we couldn\'t find that way! Try getting back.', // prettier-ignore
+    envelopeIconTitle: 'Select messages',
   },
 };

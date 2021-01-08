@@ -165,5 +165,6 @@ export const fscommon = {
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
     },
+    envelopeIconTitle: '[DE] Select messages',
   },
 };
