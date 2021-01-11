@@ -16,7 +16,7 @@ import {
   MediaModule,
   PageLayoutComponent,
 } from '@spartacus/storefront';
-import { DateModule } from '../../shared/util/helpers/date.module';
+import { DateFormatConfigurationModule } from '../../shared/util/helpers/dateFormatConfiguration.module';
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
 import { ChangeRequestSubmissionGuard } from './../../core/change-request/guards/change-request-submission.guard';
 import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
@@ -75,7 +75,7 @@ const routes: Routes = [
     MediaModule,
     NgbTooltipModule,
     ProgressBarModule,
-    DateModule,
+    DateFormatConfigurationModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {

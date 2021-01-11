@@ -6,4 +6,4 @@ import { ParseDatePipe } from './parseDate.pipe';
   declarations: [FormatDatePipe, ParseDatePipe],
   exports: [FormatDatePipe, ParseDatePipe],
 })
-export class DateModule {}
+export class DateFormatConfigurationModule {}

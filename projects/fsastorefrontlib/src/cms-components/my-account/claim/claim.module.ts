@@ -26,7 +26,7 @@ import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
-import { DateModule } from '../../../shared/util/helpers/date.module';
+import { DateFormatConfigurationModule } from '../../../shared/util/helpers/dateFormatConfiguration.module';
 
 const routes: Routes = [
   {
@@ -67,7 +67,7 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     CardModule,
-    DateModule,
+    DateFormatConfigurationModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
