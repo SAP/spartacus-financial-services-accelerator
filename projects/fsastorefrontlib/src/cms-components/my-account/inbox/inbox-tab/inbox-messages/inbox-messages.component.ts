@@ -142,7 +142,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       if (message.uid === messageUid) {
         message.checked = checked;
       }
-      message.checked ? checkedMassagesCounter++ : (checkedMassagesCounter = 0);
+      if (message.checked) {
+        checkedMassagesCounter++;
+      }
     });
     checkedMassagesCounter > 0
       ? (this.messageCheckboxChecked = true)
