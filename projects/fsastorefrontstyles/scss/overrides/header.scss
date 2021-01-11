@@ -125,6 +125,7 @@ header {
     }
   }
   .SearchBox {
+    z-index: 1;
     label {
       background: var(--cx-color-1);
       border: 1px solid var(--cx-color-3);
