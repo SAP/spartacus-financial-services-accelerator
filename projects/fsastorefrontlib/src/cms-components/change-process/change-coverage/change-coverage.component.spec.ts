@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -105,6 +105,13 @@ class MockRoutingService {
   go = createSpy();
 }
 
+@Pipe({
+  name: 'cxFormatDate',
+})
+class MockDatePipe implements PipeTransform {
+  transform() {}
+}
+
 class GlobalMessageServiceMock {}
 
 class MockChangePolicyService {}
@@ -148,7 +155,11 @@ describe('ChangeCoverageComponent', () => {
             },
           },
         ],
-        declarations: [ChangeCoverageComponent, MockMediaComponent],
+        declarations: [
+          ChangeCoverageComponent,
+          MockMediaComponent,
+          MockDatePipe,
+        ],
       }).compileComponents();
 
       mockUserRequestNavigationService = TestBed.inject(

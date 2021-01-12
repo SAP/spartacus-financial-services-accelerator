@@ -23,10 +23,10 @@ import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
-import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
+import { DateFormatConfigurationModule } from '../../../shared/util/helpers/dateFormatConfiguration.module';
 
 const routes: Routes = [
   {
@@ -67,6 +67,7 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     CardModule,
+    DateFormatConfigurationModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -85,7 +86,6 @@ const routes: Routes = [
     }),
   ],
   declarations: [
-    ParseDatePipe,
     ClaimsComponent,
     DeleteClaimDialogComponent,
     ClaimPoliciesComponent,
@@ -95,7 +95,6 @@ const routes: Routes = [
     ClaimsComponent,
     ClaimPoliciesComponent,
     DeleteClaimDialogComponent,
-    ParseDatePipe,
   ],
   providers: [
     ClaimService,
