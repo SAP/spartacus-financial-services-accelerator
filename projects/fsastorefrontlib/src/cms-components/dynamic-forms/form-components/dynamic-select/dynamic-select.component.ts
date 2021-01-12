@@ -16,6 +16,7 @@ import { map, switchMap } from 'rxjs/operators';
 export class DynamicSelectComponent extends AbstractFormComponent
   implements OnInit {
   options$: Observable<any>;
+  options: any;
 
   constructor(
     protected occValueListService: OccValueListService,
@@ -83,6 +84,5 @@ export class DynamicSelectComponent extends AbstractFormComponent
   assignOptions(options: any[]) {
     this.options$ = of(options);
     this.changeDetectorRef.detectChanges();
-    this.group.get(this.config.name).setValue(null);
   }
 }
