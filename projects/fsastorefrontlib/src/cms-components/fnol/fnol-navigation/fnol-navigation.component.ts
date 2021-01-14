@@ -59,33 +59,6 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
   }
 
   next(currentStep: number, claimData: any): void {
-    this.subscription.add(
-      this.userRequestService
-        .getUserRequest()
-        .pipe(
-          filter(payload => payload !== undefined),
-          map(request => {
-            if (
-              request.configurationSteps &&
-              request.configurationSteps[currentStep].status ===
-                StepStatus.COMPLETED
-            ) {
-              this.userRequestNavigationService.continue(
-                this.configurationSteps,
-                currentStep
-              );
-            }
-            if (
-              request.requestStatus === ClaimStatus.SUBMITTED &&
-              request.fsStepGroupDefinition
-            ) {
-              this.router.go(request.fsStepGroupDefinition.confirmationUrl);
-            }
-          })
-        )
-        .subscribe()
-    );
-
     if (!this.configurationSteps[this.activeStepIndex].summaryStep) {
       const formData: YFormData = {};
       if (this.activeStepData.yformConfigurator) {
@@ -106,9 +79,10 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.formDataService.getSubmittedForm(),
         this.fileService.getUploadedDocuments(),
+        this.userRequestService.getUserRequest(),
       ])
         .pipe(
-          map(([submittedFormData, uploadedContent]) => {
+          map(([submittedFormData, uploadedContent, userRequest]) => {
             if (submittedFormData && submittedFormData.content) {
               claimData.configurationSteps[
                 this.activeStepIndex
@@ -121,6 +95,22 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
                 this.activeStepIndex,
                 StepStatus.COMPLETED
               );
+              if (
+                userRequest.configurationSteps &&
+                userRequest.configurationSteps[currentStep].status ===
+                  StepStatus.COMPLETED
+              ) {
+                this.userRequestNavigationService.continue(
+                  this.configurationSteps,
+                  currentStep
+                );
+              }
+            }
+            if (
+              userRequest.requestStatus === ClaimStatus.SUBMITTED &&
+              userRequest.fsStepGroupDefinition
+            ) {
+              this.router.go(userRequest.fsStepGroupDefinition.confirmationUrl);
             }
             return of(null);
           })
