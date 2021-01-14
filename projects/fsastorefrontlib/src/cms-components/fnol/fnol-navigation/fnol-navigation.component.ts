@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, of, Subscription, combineLatest } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import {
   UserRequestNavigationService,
