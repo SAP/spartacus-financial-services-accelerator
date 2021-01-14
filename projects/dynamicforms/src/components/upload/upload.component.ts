@@ -61,6 +61,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     ) {
       this.fileList = Array.from(filteredFiles);
       this.fileList.splice(this.config.maxUploads);
+      if (this.fileList.length === 0) {
+        this.setValueAndValidate(this.fileList);
+      }
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
       // or files are violating config rules
