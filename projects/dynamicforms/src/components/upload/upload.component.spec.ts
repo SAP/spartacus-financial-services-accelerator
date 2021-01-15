@@ -5,10 +5,12 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import {
   GlobalMessage,
   GlobalMessageService,
+  GlobalMessageType,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
@@ -21,6 +23,7 @@ import { FileService } from '../../core/services/file/file.service';
 import { FormService } from './../../core/services/form/form.service';
 import { UploadComponent } from './upload.component';
 import { FormDataService } from '../../core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   // tslint:disable
@@ -59,17 +62,19 @@ const mockField: FieldConfig = {
 const formControl = new FormControl('formValue');
 
 const mockFormGroup = new FormGroup({
-  testUpload: new FormControl(),
+  testUpload: new FormControl('', Validators.required),
 });
 
 const blob1 = new Blob([''], { type: 'application/pdf' });
 blob1['lastModifiedDate'] = '';
 blob1['name'] = 'testFile1';
+blob1['code'] = 'DOC00002012';
 const mockFile = <File>blob1;
 
 const blob2 = new Blob([''], { type: 'image/jpeg' });
 blob2['lastModifiedDate'] = '';
 blob2['name'] = 'testFile2';
+blob2['code'] = 'DOC00002011';
 const mockFile2 = <File>blob2;
 
 const mockManipulatedTarget = {
@@ -85,6 +90,7 @@ const formData = {
   formDataId: 'id',
   content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
 };
+
 const mockEvent = {
   target: {
     files: [mockFile, mockFile2],
@@ -97,10 +103,10 @@ const mockEvent = {
 const mockFiles = {
   documents: [
     {
-      code: ['DOC00002012', 'DOC00002011']
-    }
-  ]
-}
+      code: 'DOC00002012',
+    },
+  ],
+};
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
@@ -204,24 +210,28 @@ describe('UploadComponent', () => {
     expect(component.fileList.length).toEqual(2);
   });
 
-  it('should populate uploaded files if there is form data content', () => {
-    // const form = {
-    //   formDataId: 'id',
-    //   content: '{"relevantFiles":["DOC00002012"]}',
-    // }
-    // const files = {
-    //     documents: [
-    //       {
-    //         code: ['DOC00002012', 'DOC00002011']
-    //       }
-    //     ]
-    // }
-    // spyOn(mockFormDataService, 'getFormData').and.returnValue(of(form));
-    // spyOn(mockfileUpladService, 'getFiles').and.returnValue(of(mockFiles));
+  it('should not upload file with not supported types', () => {
+    const blob = new Blob([''], { type: 'application/xml' });
+    const mockNotSupportedFile = {
+      target: {
+        files: [<File>blob],
+        multiple: true,
+        accept: 'application/pdf,image/jpeg',
+        value: 'test',
+      },
+    };
     component.ngOnInit();
-    component.populateUploadedFiles();
-    expect(component.files.length).toEqual(1);
-    expect(component.uploadControl).toEqual(component.files)
+    component.handleFiles(mockNotSupportedFile);
+    fixture.detectChanges();
+    expect(component.uploadControl.value).toBe(null);
+    expect(component.uploadControl.valid).toBeFalsy();
+    expect(component.fileList.length).toEqual(0);
+  });
+
+  it('should reset upload control if there is no files', () => {
+    spyOn(mockfileUpladService, 'getFiles').and.returnValue(of({}));
+    component.ngOnInit();
+    expect(component.uploadControl.value).toBe(null);
   });
 
   it('should not select files when accept is manipulated', () => {
@@ -253,15 +263,4 @@ describe('UploadComponent', () => {
     component.removeAll(mockField);
     expect(component.fileList.length).toEqual(0);
   });
-
-  // it('should populate uploaded files if there is form data content', () => {
-  //   const form = {
-  //     formDataId: 'id',
-  //     content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
-  //   }
-  //   spyOn(mockFormDataService, 'getFormData').and.returnValue(of(form));
-  //   component.ngOnInit();
-  //   component.populateUploadedFiles();
-  //   expect(component.files.length).toEqual(2);
-  // });
 });
