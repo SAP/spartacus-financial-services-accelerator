@@ -51,6 +51,9 @@ export class DynamicSelectComponent extends AbstractFormComponent
           .subscribe()
       );
     } else {
+      /**
+       * Assign options to dynamic select component which have dependancy on another form control (masterFormControl)
+       */
       const masterFormControl = this.formService.getFormControlForCode(
         this.config.apiValue.param,
         this.group
@@ -90,10 +93,11 @@ export class DynamicSelectComponent extends AbstractFormComponent
   }
 
   assignOptions(options: any[]) {
+    const dynamicSelectField = this.group.get(this.config.name);
     this.options$ = of(options);
     this.changeDetectorRef.detectChanges();
-    if (this.isSelectComponentDependant) {
-      this.group.get(this.config.name).setValue(null);
+    if (!dynamicSelectField?.value || this.isSelectComponentDependant) {
+      dynamicSelectField.setValue(null);
     }
   }
 }
