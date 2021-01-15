@@ -77,7 +77,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.populateUploadedFiles();
   }
 
-  protected populateUploadedFiles() {
+  populateUploadedFiles() {
     this.subscription.add(
       this.formDataService
         .getFormData()
@@ -88,7 +88,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           switchMap(codes => {
             return this.fileUploadService.getFiles(codes).pipe(
               map(files => {
-                if (files && files.documents) {
+                if (files?.documents) {
                   this.fileList = files.documents;
                   if (this.files.length === 0) {
                     files.documents.forEach(file => {

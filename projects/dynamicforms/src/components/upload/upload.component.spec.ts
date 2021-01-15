@@ -94,6 +94,14 @@ const mockEvent = {
   },
 };
 
+const mockFiles = {
+  documents: [
+    {
+      code: ['DOC00002012', 'DOC00002011']
+    }
+  ]
+}
+
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
@@ -103,7 +111,7 @@ class MockFileUpladService {
     return of(mockInProgressHttpResponse);
   }
   getFiles(codes) {
-    return of();
+    return of(mockFiles);
   }
   setFileInStore(_body: any) {}
   getUploadedDocuments() {
@@ -146,6 +154,7 @@ describe('UploadComponent', () => {
   let mockfileUpladService: FileService;
   let mockUserIdService: UserIdService;
   let mockGlobalMessageService: GlobalMessageService;
+  let mockFormDataService: FormDataService;
 
   beforeEach(
     waitForAsync(() => {
@@ -173,6 +182,7 @@ describe('UploadComponent', () => {
       mockfileUpladService = TestBed.inject(FileService);
       mockUserIdService = TestBed.inject(UserIdService);
       mockGlobalMessageService = TestBed.inject(GlobalMessageService);
+      mockFormDataService = TestBed.inject(FormDataService);
     })
   );
 
@@ -192,6 +202,26 @@ describe('UploadComponent', () => {
     component.handleFiles(mockEvent);
     fixture.detectChanges();
     expect(component.fileList.length).toEqual(2);
+  });
+
+  it('should populate uploaded files if there is form data content', () => {
+    // const form = {
+    //   formDataId: 'id',
+    //   content: '{"relevantFiles":["DOC00002012"]}',
+    // }
+    // const files = {
+    //     documents: [
+    //       {
+    //         code: ['DOC00002012', 'DOC00002011']
+    //       }
+    //     ]
+    // }
+    // spyOn(mockFormDataService, 'getFormData').and.returnValue(of(form));
+    // spyOn(mockfileUpladService, 'getFiles').and.returnValue(of(mockFiles));
+    component.ngOnInit();
+    component.populateUploadedFiles();
+    expect(component.files.length).toEqual(1);
+    expect(component.uploadControl).toEqual(component.files)
   });
 
   it('should not select files when accept is manipulated', () => {
@@ -223,4 +253,15 @@ describe('UploadComponent', () => {
     component.removeAll(mockField);
     expect(component.fileList.length).toEqual(0);
   });
+
+  // it('should populate uploaded files if there is form data content', () => {
+  //   const form = {
+  //     formDataId: 'id',
+  //     content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
+  //   }
+  //   spyOn(mockFormDataService, 'getFormData').and.returnValue(of(form));
+  //   component.ngOnInit();
+  //   component.populateUploadedFiles();
+  //   expect(component.files.length).toEqual(2);
+  // });
 });
