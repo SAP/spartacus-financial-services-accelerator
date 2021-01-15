@@ -61,7 +61,6 @@ export class DynamicSelectComponent extends AbstractFormComponent
       this.subscription.add(
         masterFormControl.valueChanges
           .pipe(
-            filter(value => value),
             switchMap(value => {
               this.isSelectComponentDependant = true;
               if (value) {
