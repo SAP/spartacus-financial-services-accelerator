@@ -10,7 +10,6 @@ import {
 import {
   GlobalMessage,
   GlobalMessageService,
-  GlobalMessageType,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
@@ -23,7 +22,6 @@ import { FileService } from '../../core/services/file/file.service';
 import { FormService } from './../../core/services/form/form.service';
 import { UploadComponent } from './upload.component';
 import { FormDataService } from '../../core';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   // tslint:disable
