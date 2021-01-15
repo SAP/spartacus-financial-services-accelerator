@@ -7,7 +7,7 @@ import {
 import { LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-dynamic-select',
@@ -28,6 +28,8 @@ export class DynamicSelectComponent extends AbstractFormComponent
     super(formConfig, languageService, injector, formService);
   }
 
+  isSelectComponentDependant = false;
+
   ngOnInit() {
     super.ngOnInit();
     if (this.config.apiValue) {
@@ -40,7 +42,12 @@ export class DynamicSelectComponent extends AbstractFormComponent
       this.subscription.add(
         this.occValueListService
           .getValuesFromAPI(this.config.apiValue.url)
-          .pipe(map(result => this.assignResultToOptions(result)))
+          .pipe(
+            filter(result => result.values),
+            map(result => {
+              this.assignResultToOptions(result);
+            })
+          )
           .subscribe()
       );
     } else {
@@ -51,7 +58,9 @@ export class DynamicSelectComponent extends AbstractFormComponent
       this.subscription.add(
         masterFormControl.valueChanges
           .pipe(
+            filter(value => value),
             switchMap(value => {
+              this.isSelectComponentDependant = true;
               if (value) {
                 return this.occValueListService
                   .getValuesFromAPI(this.config.apiValue.url, value)
@@ -83,5 +92,8 @@ export class DynamicSelectComponent extends AbstractFormComponent
   assignOptions(options: any[]) {
     this.options$ = of(options);
     this.changeDetectorRef.detectChanges();
+    if (this.isSelectComponentDependant) {
+      this.group.get(this.config.name).setValue(null);
+    }
   }
 }
