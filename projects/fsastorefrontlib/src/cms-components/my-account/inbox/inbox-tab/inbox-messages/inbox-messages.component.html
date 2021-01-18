@@ -61,7 +61,7 @@
   </div>
 
   <div class="mobile-heading row d-md-none">
-    <div class="col-2">
+    <div class="col-1">
       <label class="checkbox-label">
         <input
           type="checkbox"
@@ -71,17 +71,38 @@
         <span class="checkbox-text fs-icon icon-ok"></span>
       </label>
     </div>
-    <div
-      class="col-8 text-center"
-      (click)="displayMobileGroups = !displayMobileGroups"
+    <ng-container
+      *ngIf="{
+        subject: defaultSortOrder,
+        content: defaultSortOrder,
+        sentDate: defaultSortOrder
+      } as sorts"
     >
-      {{ mobileGroupTitle }}
-    </div>
-    <div class="col-2">
-      <span
-        class="filter position-absolute fs-icon icon-triangle-bottom"
-      ></span>
-    </div>
+      <div class="col-6 text-left">
+        <div (click)="displayMobileGroups = !displayMobileGroups">
+          {{ mobileGroupTitle }}
+        </div>
+        <span
+          class="filter position-absolute fs-icon icon-triangle-bottom"
+          (click)="
+            sorts.subject = sorts.subject === 'desc' ? 'asc' : 'desc';
+            sortMessages('subject', sorts.subject)
+          "
+          [ngClass]="sorts.subject === 'asc' ? 'rotate' : ''"
+        ></span>
+      </div>
+      <div class="col-4">
+        {{ 'fscommon.date' | cxTranslate }}
+        <span
+          class="filter position-absolute fs-icon icon-triangle-bottom"
+          (click)="
+            sorts.sentDate = sorts.sentDate === 'desc' ? 'asc' : 'desc';
+            sortMessages('sentdate', sorts.sentDate)
+          "
+          [ngClass]="sorts.sentDate === 'asc' ? 'rotate' : ''"
+        ></span>
+      </div>
+    </ng-container>
   </div>
   <div
     class="select d-md-none"
