@@ -32,8 +32,25 @@
   }
   .section-header-heading {
     font-weight: var(--cx-font-weight-semi);
+    .icon-triangle-bottom {
+      @include fs-transition;
+      @include vertical-center;
+      &.rotate {
+        transform: translateY(-50%) rotateZ(180deg);
+        -webkit-transform: translateY(-50%) rotateZ(180deg);
+      }
+    }
   }
   .cursor-default {
     cursor: default;
+  }
+  .heading-dropdown {
+    border: 2px solid var(--cx-color-3);
+    border-radius: 3px;
+    background-color: var(--cx-color-1);
+    color: var(--cx-color-primary);
+    .fa-chevron-down {
+      color: var(--cx-color-primary);
+    }
   }
 }
