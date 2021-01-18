@@ -1,4 +1,5 @@
 import * as shared from '../shared-checkout';
+const startDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
 
 export function checkComparisonPage() {
   cy.get('cx-fs-comparison-table-panel').should('be.visible');
@@ -13,15 +14,15 @@ export function checkSavingsComparisonTable() {
     mainProducts: [
       {
         name: 'Safe and Steady',
-        price: '€199.39',
+        price: '€181.10',
       },
       {
         name: 'Balanced Deal',
-        price: '€270.39',
+        price: '€240.22',
       },
       {
         name: 'Flexi-Max',
-        price: '€488.71',
+        price: '€414.40',
       },
     ],
   };
@@ -78,7 +79,7 @@ export function populateCoverageInformation() {
   cy.get('[name=contributionFrequency]').select('Half_Yearly');
   cy.get('[name=contribution]').type('779');
   cy.get('[name=annualContributionIncrease]').select('1');
-  cy.get('[name=startDate]').type('2020-12-12');
+  cy.get('[name=startDate]').type('2022-12-12');
   cy.get('[name=retirementAge]').type('67');
   cy.get('[name=dateOfBirth]').type('1981-11-12');
 }
@@ -96,11 +97,11 @@ export function checkInvestmentDetails() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €817.23 ',
+    price: ' €822.19 ',
     products: [
       {
         title: ' Start Date: ',
-        value: ' 12 Dec 2020 ',
+        value: ' 12 Dec 2022 ',
       },
       {
         title: 'Annual Contribution Increase:',
@@ -116,7 +117,7 @@ export function checkMiniCart() {
       },
       {
         title: ' Survivor Pension: ',
-        value: ' €35.24 ',
+        value: ' €40.20 ',
       },
       {
         title: ' Dependent Children Pension: ',

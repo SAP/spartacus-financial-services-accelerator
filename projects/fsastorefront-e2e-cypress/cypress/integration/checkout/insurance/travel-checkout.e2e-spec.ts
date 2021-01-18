@@ -6,13 +6,11 @@ import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
-let cartId;
 context('Travel Insurance Checkout', () => {
   before(() => {
     cy.visit('/');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
   });
 
   it('Should open travel category page', () => {
@@ -26,12 +24,8 @@ context('Travel Insurance Checkout', () => {
   });
 
   it('Add main product to the cart', () => {
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
     travelCheckout.checkTravelComparisonTable();
     travelCheckout.selectSingleBudgetPlan();
-    cy.wait(`@${addToCart}`).then(result => {
-      cartId = (<any>result.response.body).code;
-    });
   });
 
   it('Add optional product to the cart', () => {

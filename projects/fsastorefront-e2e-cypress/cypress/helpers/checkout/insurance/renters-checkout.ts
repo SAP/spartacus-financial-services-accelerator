@@ -1,5 +1,7 @@
 import * as shared from '../shared-checkout';
 
+const tomorrowsDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
+
 export function checkRentersComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {
     mainProducts: [
@@ -30,7 +32,7 @@ export function checkOptionalProducts() {
     title: 'Your Renters Insurance',
     items: [
       {
-        name: 'Temporary Accomodation Cover',
+        name: 'Temporary Accommodation Cover',
         available: true,
         shouldAdd: true,
       },
@@ -55,7 +57,7 @@ export function checkMiniCartRenters() {
     products: [
       {
         title: ' Start Date: ',
-        value: ' 12 Dec 2020 ',
+        value: tomorrowsDate,
       },
       {
         title: 'Property Address:',
@@ -70,7 +72,7 @@ export function checkMiniCartRenters() {
         value: ' €31.50 ',
       },
       {
-        title: ' Temporary Accomodation Cover: ',
+        title: ' Temporary Accommodation Cover: ',
         value: ' €7.93 ',
       },
       {
@@ -92,7 +94,7 @@ export function checkMiniCartRentersRemovedProduct() {
     products: [
       {
         title: ' Start Date: ',
-        value: ' 12 Dec 2020 ',
+        value: tomorrowsDate,
       },
       {
         title: 'Property Address:',
@@ -107,7 +109,7 @@ export function checkMiniCartRentersRemovedProduct() {
         value: ' €31.50 ',
       },
       {
-        title: ' Temporary Accomodation Cover: ',
+        title: ' Temporary Accommodation Cover: ',
         value: ' €7.93 ',
       },
       {

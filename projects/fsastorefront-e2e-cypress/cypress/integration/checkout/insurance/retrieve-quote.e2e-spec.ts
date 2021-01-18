@@ -11,7 +11,6 @@ context('Retrieve Quote', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
   });
 
   it('Should open travel category page', () => {

@@ -1,5 +1,6 @@
 import * as shared from '../shared-checkout';
 import * as sharedCheckout from '../shared-checkout.interface';
+const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
 
 export function checkProgressBarEvent() {
   cy.get('p.label').should('have.length', 6).eq(0).contains("What's Included");
@@ -69,7 +70,7 @@ export function checkOptionalProducts() {
 export function populatePersonalDetails() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name="eventCountry"]').select('UK');
-    cy.get('[name="eventDate"]').type('2020-12-12');
+    cy.get('[name="eventDate"]').type(tomorrowsDate);
     cy.get('[name="eventVenue"]').type('my Birthday party');
     cy.get('[name="eventVenueAddress"]').type('Oxford Street 23b');
     cy.get('[name="eventVenueCity"]').type('London');

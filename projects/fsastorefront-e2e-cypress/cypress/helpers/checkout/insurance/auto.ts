@@ -70,19 +70,21 @@ export function populateAutoAnnuallyBMW() {
 }
 
 export function populateAutoMonthlyOpel() {
-  cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=coverageStartDate]').type(todaysDate);
-    cy.get('[name="paymentFrequency"]').select('MONTHLY');
-    cy.get('[name="vehicleMake"]').select('Opel');
-    cy.get('[name="vehicleModel"]').select('GT');
-    cy.get('[name="vehicleType"]').select('OPELGT2008');
-    cy.get('[name="vehicleYear"]').select('2007');
-    cy.get('[name="vehicleAnnualMileage"]').type('90000');
-    cy.get('[name="vehicleValue"]').type('5000');
-    cy.get('[name="vehicleUsage"]').select('Personal');
-    cy.get('[name="vehiclePurchaseDate"]').type('2018-01-01');
-    cy.get('[name="vehicleOwnerPostalCode"]').type('11090');
-  });
+  cy.get('cx-dynamic-form')
+    .should('be.visible')
+    .within(() => {
+      cy.get('[name=coverageStartDate]').type(todaysDate);
+      cy.get('[name="paymentFrequency"]').select('MONTHLY');
+      cy.get('[name="vehicleMake"]').select('Opel');
+      cy.get('[name="vehicleModel"]').select('GT');
+      cy.get('[name="vehicleType"]').select('OPELGT2008');
+      cy.get('[name="vehicleYear"]').select('2007');
+      cy.get('[name="vehicleAnnualMileage"]').type('90000');
+      cy.get('[name="vehicleValue"]').type('5000');
+      cy.get('[name="vehicleUsage"]').select('Personal');
+      cy.get('[name="vehiclePurchaseDate"]').type('2018-01-01');
+      cy.get('[name="vehicleOwnerPostalCode"]').type('11090');
+    });
 }
 
 export function populateMainDriverInfo() {

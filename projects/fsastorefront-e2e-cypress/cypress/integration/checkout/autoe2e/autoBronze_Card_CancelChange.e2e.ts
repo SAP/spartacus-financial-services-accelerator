@@ -8,8 +8,8 @@ import * as myPolicies from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
 
-Cypress.config('defaultCommandTimeout', 500000);
-const currentDate = Cypress.moment().format('DD-MM-YYYY');
+//Cypress.config('defaultCommandTimeout', 500000);
+const currentDate = Cypress.moment().format('DD/MM/YYYY');
 
 context('Auto Bronze Checkout with cancel change', () => {
   before(() => {
@@ -19,7 +19,6 @@ context('Auto Bronze Checkout with cancel change', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
   });
 
   it('Should complete first auto step with two additional drivers', () => {
@@ -35,11 +34,6 @@ context('Auto Bronze Checkout with cancel change', () => {
   it('Should check comparison table and select main product', () => {
     const addToCart = waitForCreateAsset('carts', 'addToCart');
     autoIntegration.selectAutoBronze();
-    cy.wait(`@${addToCart}`).then(result => {
-      const body = <any>result.response.body;
-      const cartId = body.code;
-      payment.addPaymentMethod(registrationUser.email, cartId);
-    });
     auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();
   });
@@ -66,8 +60,8 @@ context('Auto Bronze Checkout with cancel change', () => {
   });
 
   it('Select default payment details and place an order', () => {
-    payment.selectPaymentMethodCard();
-    checkout.clickContinueButton();
+    checkout.populatePaymentDetails();
+    checkout.populateBillingAddress();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
   });

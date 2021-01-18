@@ -1,4 +1,5 @@
 import * as shared from '../shared-checkout';
+const tomorrowsDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
 
 export function checkHomeownersComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {
@@ -34,7 +35,7 @@ export function checkOptionalProducts() {
         available: true,
       },
       {
-        name: 'Temporary Accomodation Cover',
+        name: 'Temporary Accommodation Cover',
         available: true,
       },
       {
@@ -57,7 +58,7 @@ export function checkMiniCartHomeowners() {
     products: [
       {
         title: ' Start Date: ',
-        value: ' 12 Dec 2020 ',
+        value: tomorrowsDate,
       },
       {
         title: 'Property Address:',

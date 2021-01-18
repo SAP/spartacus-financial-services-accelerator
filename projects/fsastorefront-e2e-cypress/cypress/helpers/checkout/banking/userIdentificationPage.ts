@@ -13,6 +13,10 @@ export function selectUserIdentification(identification) {
   cy.get('cx-fs-cms-custom-container')
     .should('be.visible')
     .within(() => {
-      cy.get('p').contains(identification).click({ force: true }).wait(1000);
+      cy.get('p')
+        .contains(identification)
+        .should('not.be.disabled')
+        .click({ force: true })
+        .wait(500);
     });
 }

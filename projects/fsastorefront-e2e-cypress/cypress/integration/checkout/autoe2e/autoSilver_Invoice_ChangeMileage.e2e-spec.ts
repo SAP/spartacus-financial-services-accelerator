@@ -17,7 +17,6 @@ context('Auto Silver Checkout with change mileage', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
   });
 
   it('Should complete first auto step with additional driver', () => {
