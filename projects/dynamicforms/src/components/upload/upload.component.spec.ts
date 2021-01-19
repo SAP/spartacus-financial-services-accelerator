@@ -5,6 +5,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import {
   GlobalMessage,
@@ -59,18 +60,22 @@ const mockField: FieldConfig = {
 const formControl = new FormControl('formValue');
 
 const mockFormGroup = new FormGroup({
-  testUpload: new FormControl(),
+  testUpload: new FormControl('', Validators.required),
 });
 
 const blob1 = new Blob([''], { type: 'application/pdf' });
 blob1['lastModifiedDate'] = '';
 blob1['name'] = 'testFile1';
+blob1['code'] = 'DOC00002012';
 const mockFile = <File>blob1;
 
 const blob2 = new Blob([''], { type: 'image/jpeg' });
 blob2['lastModifiedDate'] = '';
 blob2['name'] = 'testFile2';
+blob2['code'] = 'DOC00002011';
 const mockFile2 = <File>blob2;
+
+const blob3 = new Blob([''], { type: 'application/xml' });
 
 const mockManipulatedTarget = {
   target: {
@@ -81,10 +86,20 @@ const mockManipulatedTarget = {
   },
 };
 
+const mockNotSupportedFile = {
+  target: {
+    files: [<File>blob3],
+    multiple: true,
+    accept: 'application/pdf,image/jpeg',
+    value: 'test',
+  },
+};
+
 const formData = {
   formDataId: 'id',
   content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
 };
+
 const mockEvent = {
   target: {
     files: [mockFile, mockFile2],
@@ -92,6 +107,14 @@ const mockEvent = {
     accept: 'application/pdf,image/jpeg',
     value: 'test',
   },
+};
+
+const mockFiles = {
+  documents: [
+    {
+      code: 'DOC00002012',
+    },
+  ],
 };
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
@@ -103,7 +126,7 @@ class MockFileUpladService {
     return of(mockInProgressHttpResponse);
   }
   getFiles(codes) {
-    return of();
+    return of(mockFiles);
   }
   setFileInStore(_body: any) {}
   getUploadedDocuments() {
@@ -146,6 +169,7 @@ describe('UploadComponent', () => {
   let mockfileUpladService: FileService;
   let mockUserIdService: UserIdService;
   let mockGlobalMessageService: GlobalMessageService;
+  let mockFormDataService: FormDataService;
 
   beforeEach(
     waitForAsync(() => {
@@ -173,6 +197,7 @@ describe('UploadComponent', () => {
       mockfileUpladService = TestBed.inject(FileService);
       mockUserIdService = TestBed.inject(UserIdService);
       mockGlobalMessageService = TestBed.inject(GlobalMessageService);
+      mockFormDataService = TestBed.inject(FormDataService);
     })
   );
 
@@ -190,8 +215,21 @@ describe('UploadComponent', () => {
   it('should select files', () => {
     component.ngOnInit();
     component.handleFiles(mockEvent);
-    fixture.detectChanges();
     expect(component.fileList.length).toEqual(2);
+  });
+
+  it('should not upload file with not supported types', () => {
+    component.ngOnInit();
+    component.handleFiles(mockNotSupportedFile);
+    expect(component.uploadControl.value).toBe(null);
+    expect(component.uploadControl.valid).toBeFalsy();
+    expect(component.fileList.length).toEqual(0);
+  });
+
+  it('should reset upload control if there is no files', () => {
+    spyOn(mockfileUpladService, 'getFiles').and.returnValue(of({}));
+    component.ngOnInit();
+    expect(component.uploadControl.value).toBe(null);
   });
 
   it('should not select files when accept is manipulated', () => {
