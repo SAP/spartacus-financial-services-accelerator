@@ -197,7 +197,9 @@ const routes: Routes = [
     UrlModule,
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
-    RouterModule.forChild(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
