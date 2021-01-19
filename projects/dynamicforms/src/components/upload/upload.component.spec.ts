@@ -75,11 +75,22 @@ blob2['name'] = 'testFile2';
 blob2['code'] = 'DOC00002011';
 const mockFile2 = <File>blob2;
 
+const blob3 = new Blob([''], { type: 'application/xml' });
+
 const mockManipulatedTarget = {
   target: {
     files: [mockFile, mockFile2],
     multiple: true,
     accept: 'image/png',
+    value: 'test',
+  },
+};
+
+const mockNotSupportedFile = {
+  target: {
+    files: [<File>blob3],
+    multiple: true,
+    accept: 'application/pdf,image/jpeg',
     value: 'test',
   },
 };
@@ -204,23 +215,12 @@ describe('UploadComponent', () => {
   it('should select files', () => {
     component.ngOnInit();
     component.handleFiles(mockEvent);
-    fixture.detectChanges();
     expect(component.fileList.length).toEqual(2);
   });
 
   it('should not upload file with not supported types', () => {
-    const blob = new Blob([''], { type: 'application/xml' });
-    const mockNotSupportedFile = {
-      target: {
-        files: [<File>blob],
-        multiple: true,
-        accept: 'application/pdf,image/jpeg',
-        value: 'test',
-      },
-    };
     component.ngOnInit();
     component.handleFiles(mockNotSupportedFile);
-    fixture.detectChanges();
     expect(component.uploadControl.value).toBe(null);
     expect(component.uploadControl.valid).toBeFalsy();
     expect(component.fileList.length).toEqual(0);
