@@ -38,12 +38,7 @@
     .icon-triangle-bottom {
       cursor: pointer;
       right: 10px;
-      @include fs-transition;
-      @include vertical-center;
-      &.rotate {
-        transform: translateY(-50%) rotateZ(180deg);
-        -webkit-transform: translateY(-50%) rotateZ(180deg);
-      }
+      @include vertical-center-rotate;
     }
     .select {
       display: none;
@@ -77,10 +72,6 @@
     color: var(--cx-color-primary);
     .fa-chevron-down {
       color: var(--cx-color-primary);
-      &::before {
-        display: inline-block;
-        vertical-align: middle;
-      }
     }
   }
   .icon-envelope,
