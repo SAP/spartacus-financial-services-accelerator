@@ -23,8 +23,8 @@ import { AgentSearchListComponent } from './agent-search-list/agent-search-list.
 import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-form.component';
 
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
-import { StoreFinderComponentsModule } from '@spartacus/misc/storefinder/components';
-import { StoreFinderModule } from '@spartacus/misc';
+import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
+import { StoreFinderModule } from '@spartacus/storefinder';
 
 @NgModule({
   imports: [
