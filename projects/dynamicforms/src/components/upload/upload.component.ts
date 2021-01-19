@@ -19,7 +19,7 @@ import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
-import { FormDataService } from '../../core/services';
+import { FormDataService } from '../../core/services/data/form-data.service';
 import { FieldConfig } from '../../core';
 
 @Component({
