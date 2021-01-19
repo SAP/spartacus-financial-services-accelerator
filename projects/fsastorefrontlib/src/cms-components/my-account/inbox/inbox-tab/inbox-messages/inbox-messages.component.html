@@ -72,24 +72,16 @@
         <span class="checkbox-text fs-icon icon-ok"></span>
       </label>
     </div>
-    <ng-container
-      *ngIf="{
-        subject: defaultSortOrder,
-        content: defaultSortOrder,
-        sentDate: defaultSortOrder
-      } as sorts"
+    <div
+      class="col-9 text-left ml-4 heading-dropdown"
+      (click)="displayMobileGroups = !displayMobileGroups"
     >
-      <div
-        class="col-9 text-left ml-4 heading-dropdown"
-        (click)="displayMobileGroups = !displayMobileGroups"
-      >
-        <span>{{ mobileGroupTitle }}</span>
-        <span
-          class="fas fa-chevron-down icon-triangle-bottom"
-          [ngClass]="displayMobileGroups ? 'rotate' : ''"
-        ></span>
-      </div>
-    </ng-container>
+      <span>{{ mobileGroupTitle }}</span>
+      <span
+        class="fas fa-chevron-down icon-triangle-bottom"
+        [ngClass]="displayMobileGroups ? 'rotate' : ''"
+      ></span>
+    </div>
   </div>
   <div
     class="select position-absolute w-100 d-md-none"
