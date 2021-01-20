@@ -128,7 +128,7 @@ describe('Product Assignment Reducer', () => {
   describe('UPDATE_PRODUCT_ASSIGNMENT_SUCCESS', () => {
     it('should update product assignment state', () => {
       const updatedProductAssignment = {
-        active: false,
+        active: true,
         code: 'testOne',
         product: {
           code: 'testProduct',
