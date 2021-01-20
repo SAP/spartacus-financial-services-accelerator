@@ -27,9 +27,9 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
             );
             if (optionalProducts && !this.isSimulated(changeRequestData)) {
               optionalProducts.map((coverage, index) => {
-                const newCoverage = { ...coverage, index };
-                this.optionalCoverages.push(newCoverage);
-                this.initialOptionalCoverages.push({ ...newCoverage });
+                const coverageCopy = { ...coverage, index };
+                this.optionalCoverages.push(coverageCopy);
+                this.initialOptionalCoverages.push({ ...coverageCopy });
               });
             }
           })

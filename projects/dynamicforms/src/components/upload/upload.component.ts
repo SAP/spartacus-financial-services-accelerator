@@ -61,7 +61,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     ) {
       this.fileList = Array.from(filteredFiles);
       this.fileList.splice(this.config.maxUploads);
-      this.setValueAndValidate(this.fileList);
+      if (this.fileList.length === 0) {
+        this.setValueAndValidate(null);
+      }
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
       // or files are violating config rules
@@ -85,17 +87,18 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           map(formData => JSON.parse(formData.content).relevantFiles),
           switchMap(codes => {
             return this.fileUploadService.getFiles(codes).pipe(
-              filter(files => !!files.documents),
               map(files => {
-                this.fileList = files.documents;
-                if (this.files.length === 0) {
+                if (files?.documents) {
+                  this.fileList = files.documents;
                   files.documents.forEach(file => {
                     this.files.push(file.code);
                   });
                   this.uploadControl?.setValue(this.files);
+                  this.uploadDisable = true;
+                  this.cd.detectChanges();
+                } else {
+                  this.uploadControl?.setValue(null);
                 }
-                this.uploadDisable = true;
-                this.cd.detectChanges();
               })
             );
           })
@@ -173,6 +176,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             const fileCode = (<any>this.fileList[index])?.code;
             if (fileCode) {
               this.fileUploadService.removeFileForCode(occUserId, fileCode);
+              this.setValueAndValidate(null);
             }
           })
         )
