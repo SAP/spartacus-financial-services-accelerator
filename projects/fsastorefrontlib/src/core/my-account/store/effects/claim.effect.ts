@@ -102,7 +102,7 @@ export class ClaimEffects {
         payload.stepData.stepContent &&
         payload.stepData.stepContent.contentData
       ) {
-        updateClaimData = payload.stepData.stepContent.contentData;
+        updateClaimData = { ...payload.stepData.stepContent.contentData };
         if (payload.claimData?.documents) {
           Object.assign(updateClaimData, {
             documents: payload.claimData.documents,

@@ -99,7 +99,7 @@ export function reducer(
 
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
-      const productAssignmentContent = state.content;
+      const productAssignmentContent = { ...state.content };
       if (content && content.code) {
         productAssignmentContent.assignments = productAssignmentContent.assignments.map(
           assignment => {
