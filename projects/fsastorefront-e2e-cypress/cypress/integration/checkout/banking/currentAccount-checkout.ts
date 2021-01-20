@@ -46,8 +46,6 @@ context('Current Account Checkout', () => {
     banking.populatePersonalDetailsLoanAndCA();
     currentAccount.populatePersonalDetails();
     currentAccount.checkMiniCartCurrentAccount();
-    //Waiting for registration process to be completed
-    cy.wait(5000);
     checkout.clickContinueButton();
   });
 
