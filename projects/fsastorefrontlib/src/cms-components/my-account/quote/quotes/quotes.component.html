@@ -55,12 +55,11 @@
                 </div>
               </div>
               <div class="info-card-image">
-                <span class="image-wrapper">
-                  <img
+                <span class="image-wrapper text-center">
+                  <cx-media
                     class="image-item"
-                    [src]="baseUrl + quote.defaultCategory.image?.url"
-                    alt=""
-                  />
+                    [container]="quote.defaultCategory.image"
+                  ></cx-media>
                 </span>
               </div>
             </div>
