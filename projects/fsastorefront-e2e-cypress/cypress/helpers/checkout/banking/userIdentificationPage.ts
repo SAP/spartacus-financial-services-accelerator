@@ -1,3 +1,5 @@
+import { waitForRequest } from '../../generalHelpers';
+
 export function checkUserIdentificationPage() {
   cy.get('.section-header-heading').should('have.text', 'User Identification');
   cy.get('cx-fs-cms-custom-container')
@@ -10,13 +12,17 @@ export function checkUserIdentificationPage() {
 }
 
 export function selectUserIdentification(identification) {
+  const cartContent = waitForRequest(
+    'users/current/carts',
+    'GET',
+    'cartContent'
+  );
+  cy.get('.primary-button').should('be.disabled');
   cy.get('cx-fs-cms-custom-container')
     .should('be.visible')
     .within(() => {
-      cy.get('p')
-        .contains(identification)
-        .should('not.be.disabled')
-        .click({ force: true })
-        .wait(500);
+      cy.get('p').contains(identification).click({ force: true });
     });
+  cy.get('.primary-button').should('not.be.disabled');
+  cy.wait(`@${cartContent}`).its('status').should('eq', 200);
 }

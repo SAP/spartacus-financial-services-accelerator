@@ -90,12 +90,14 @@ export function placeOrderOnFinalReview() {
 }
 
 export function checkOrderConfirmation() {
-  cy.get('cx-fs-order-confirmation-message')
+  cy.get('.heading-headline')
     .should('be.visible')
-    .within(() => {
-      cy.get('h5').eq(0).should('have.text', ' Thank you! ');
-    });
+    .should('contain', 'Confirmation');
   cy.get('cx-fs-order-confirmation').should('be.visible');
+  cy.get('cx-fs-order-confirmation-message').should('be.visible');
+  cy.get('cx-fs-order-confirmation-message').within(() => {
+    cy.get('h5').eq(0).should('have.text', ' Thank you! ');
+  });
   cy.get('.short-overview').should('be.visible');
 }
 
