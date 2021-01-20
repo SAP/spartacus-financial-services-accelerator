@@ -67,14 +67,9 @@
     }
     .icon-triangle-bottom {
       right: 5%;
-      @include fs-transition;
-      @include vertical-center;
+      @include vertical-center-rotate;
       @include media-breakpoint-down(md) {
         color: var(--cx-color-6);
-      }
-      &.rotate {
-        transform: translateY(-50%) rotateZ(180deg);
-        -webkit-transform: translateY(-50%) rotateZ(180deg);
       }
     }
   }

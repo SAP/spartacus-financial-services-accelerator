@@ -6,46 +6,36 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({}, {
-      // Disabled until compatibility issue with NgRx and Angular Version 9 is resolved
-      runtimeChecks: {
-        strictStateImmutability: false,
-        strictActionImmutability: false,
-      },
-    }),
     FSStorefrontModule.withConfig({
       backend: {
         occ: {
           prefix: '/occ/v2/',
-          baseUrl: environment.occBaseUrl
-        }
+          baseUrl: environment.occBaseUrl,
+        },
       },
       context: {
-        baseSite: [
-          'financial',
-        ],
+        baseSite: ['financial'],
         language: ['en', 'de'],
         currency: ['EUR'],
         urlParameters: ['baseSite', 'language', 'currency'],
       },
       authentication: {
         client_id: 'financial_customer',
-        client_secret: 'secret'
+        client_secret: 'secret',
       },
       features: {
         consignmentTracking: true,
-      }
+      },
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-    })
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

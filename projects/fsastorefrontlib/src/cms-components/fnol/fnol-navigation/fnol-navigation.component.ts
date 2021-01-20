@@ -83,15 +83,21 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
       ])
         .pipe(
           map(([submittedFormData, uploadedContent, userRequest]) => {
+            let claimCopy = { ...claimData };
             if (submittedFormData && submittedFormData.content) {
-              claimData.configurationSteps[
-                this.activeStepIndex
-              ].stepContent.contentData = submittedFormData;
+              let contentDataCopy = {
+                ...claimData.configurationSteps[this.activeStepIndex]
+                  .stepContent.contentData,
+              };
+              contentDataCopy = submittedFormData;
               if (uploadedContent) {
-                claimData.documents = uploadedContent.files;
+                claimCopy = {
+                  ...claimCopy,
+                  documents: uploadedContent.files,
+                };
               }
               this.claimService.updateClaim(
-                claimData,
+                claimCopy,
                 this.activeStepIndex,
                 StepStatus.COMPLETED
               );

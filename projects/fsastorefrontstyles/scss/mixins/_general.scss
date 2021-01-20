@@ -153,3 +153,11 @@
     transform: translateY(-50%) rotateZ(0deg);
   }
 }
+@mixin vertical-center-rotate {
+  @include fs-transition;
+  @include vertical-center;
+  &.rotate {
+    transform: translateY(-50%) rotateZ(180deg);
+    -webkit-transform: translateY(-50%) rotateZ(180deg);
+  }
+}
