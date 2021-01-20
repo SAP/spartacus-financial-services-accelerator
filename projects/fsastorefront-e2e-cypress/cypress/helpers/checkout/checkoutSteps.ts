@@ -5,6 +5,8 @@ import {
   waitForCMSComponent,
 } from '../generalHelpers';
 
+const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
+
 export function checkProgressBarInsurance() {
   cy.get('p.label').should('have.length', 7).eq(0).contains('Choose a Cover');
   cy.get('p.label').eq(1).contains("What's Included");
@@ -88,12 +90,14 @@ export function placeOrderOnFinalReview() {
 }
 
 export function checkOrderConfirmation() {
-  cy.get('cx-fs-order-confirmation-message')
+  cy.get('.heading-headline')
     .should('be.visible')
-    .within(() => {
-      cy.get('h5').eq(0).should('have.text', ' Thank you! ');
-    });
+    .should('contain', 'Confirmation');
   cy.get('cx-fs-order-confirmation').should('be.visible');
+  cy.get('cx-fs-order-confirmation-message').should('be.visible');
+  cy.get('cx-fs-order-confirmation-message').within(() => {
+    cy.get('h5').eq(0).should('have.text', ' Thank you! ');
+  });
   cy.get('.short-overview').should('be.visible');
 }
 
@@ -139,7 +143,7 @@ export function checkFirstCheckoutStep(mainProduct) {
 
 export function populatePropertyDetails() {
   cy.get('h4').contains('General Information');
-  cy.get('[name=propertyDetailsStartDate]').type('2020-12-12');
+  cy.get('[name=propertyDetailsStartDate]').type(tomorrowsDate);
   cy.get('h4').contains('Property Details');
   cy.get('[name=propertyType]').select('House');
   cy.get('[name=ccaBuiltYear]').type('1983');
@@ -174,7 +178,10 @@ export function startInsuranceCheckout(mainProduct) {
     dropdownItem: mainProduct,
     nextPageUrlPart: 'Insurance',
   });
-  cy.get('.enriched-banner-styled-text').eq(0).contains(' Get a Quote').click();
+  cy.get('.enriched-banner-styled-text')
+    .eq(0)
+    .should('have.text', ' Get a Quote')
+    .click();
 }
 
 export function waitForPersonalDetailsPage() {
@@ -185,6 +192,11 @@ export function waitForPersonalDetailsPage() {
 export function waitForHomepage() {
   const homepage = waitForPage('homepage', 'homepage');
   cy.wait(`@${homepage}`).its('status').should('eq', 200);
+}
+
+export function waitForConsent() {
+  const consent = waitForUserAssets('consenttemplates', 'consent');
+  cy.wait(`@${consent}`).its('status').should('eq', 200);
 }
 
 export function waitForAddOptions() {
@@ -232,4 +244,26 @@ export function waitForChangeMileage() {
 export function waitForPolicyDetails() {
   const policyDetails = waitForPage('policy-details', 'policyDetails');
   cy.wait(`@${policyDetails}`).its('status').should('eq', 200);
+}
+
+export function populatePaymentDetails() {
+  cy.get('h4').should('be.visible').should('contain.text', 'Payment method');
+  cy.get('#paymentType-CARD').click();
+  cy.get('[formcontrolname=code]').ngSelect('Visa');
+  cy.get('[formcontrolname=accountHolderName]').type('Alex More');
+  cy.get('[formcontrolname=cardNumber]').type('2349234923492349');
+  cy.get('[formcontrolname=expiryMonth]').ngSelect('11');
+  cy.get('[formcontrolname=expiryYear]').ngSelect('2029');
+  cy.get('[formcontrolname=cvn]').type('4532');
+  cy.get('input[type="checkbox"]').click();
+}
+
+export function populateBillingAddress() {
+  cy.get('[formcontrolname=isocode]').ngSelect('Serbia');
+  cy.get('[formcontrolname=firstName]').type('Aleks');
+  cy.get('[formcontrolname=lastName]').type('Moore');
+  cy.get('[formcontrolname=line1]').type('Omladinskih Brigada');
+  cy.get('[formcontrolname=town]').type('Belgrade');
+  cy.get('[formcontrolname=postalCode]').type('11000');
+  cy.get('.btn-block').contains('Continue').click();
 }

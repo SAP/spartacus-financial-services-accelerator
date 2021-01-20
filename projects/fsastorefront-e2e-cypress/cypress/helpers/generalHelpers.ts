@@ -1,5 +1,15 @@
 export const apiUrl = Cypress.env('API_URL');
 
+export function waitForRequest(
+  asset: string,
+  request: string,
+  alias: string
+): string {
+  cy.server();
+  cy.route(request, `/occ/v2/financial/${asset}/*`).as(alias);
+  return alias;
+}
+
 export function waitForPage(page: string, alias: string): string {
   cy.server();
   cy.route('GET', `/occ/v2/financial/cms/pages?*${page}*`).as(alias);

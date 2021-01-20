@@ -45,7 +45,7 @@ context('Homepage', () => {
       cy.get('cx-generic-link').should('have.length', 17);
       cy.get('.cx-notice').should(
         'have.text',
-        'Copyright © 2020 SAP SE or an SAP affiliate company. All rights reserved.'
+        'Copyright © 2021 SAP SE or an SAP affiliate company. All rights reserved.'
       );
     });
   });

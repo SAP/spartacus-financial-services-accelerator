@@ -4,9 +4,7 @@ import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
-import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
-let cartId;
 context('Renters Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -18,7 +16,6 @@ context('Renters Checkout', () => {
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    checkout.waitForHomepage();
   });
 
   it('Should open renters category page', () => {
@@ -39,11 +36,7 @@ context('Renters Checkout', () => {
     checkout.checkCheckoutStep('Your Renters Insurance', '7');
     checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
     renters.selectRentersMonthly();
-    cy.wait(`@${addToCart}`).then(result => {
-      cartId = (<any>result.response.body).code;
-    });
   });
 
   it('Should check add options page', () => {
@@ -65,15 +58,14 @@ context('Renters Checkout', () => {
     renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('generalQuoteAccordions');
-    payment.addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    payment.selectPaymentMethodCard();
-    checkout.clickContinueButton();
+    checkout.populatePaymentDetails();
+    checkout.populateBillingAddress();
   });
 
   it('Place order on final review page', () => {

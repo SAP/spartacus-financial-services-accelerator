@@ -5,9 +5,7 @@ import * as event from '../../../helpers/checkout/insurance/event-checkout';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import * as myAccount from '../../../helpers/my-account/myAccountPages';
-import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
-let cartId;
 context('Event Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -17,7 +15,6 @@ context('Event Checkout', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
   });
 
   it('Should open event category page', () => {
@@ -29,11 +26,7 @@ context('Event Checkout', () => {
     event.checkProgressBarEvent();
     checkout.checkInsuranceComparisonPage('4');
     event.checkEventComparisonTable();
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
     event.selectTwoStarEvent();
-    cy.wait(`@${addToCart}`).then(result => {
-      cartId = (<any>result.response.body).code;
-    });
   });
 
   it('Should check add options page', () => {
@@ -58,15 +51,14 @@ context('Event Checkout', () => {
     event.checkProgressBarEvent();
     event.checkMiniCartRemovedProduct();
     checkout.checkAccordions('threeAccordions');
-    payment.addPaymentMethod(registrationUser.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    payment.selectPaymentMethodCard();
-    checkout.clickContinueButton();
+    checkout.populatePaymentDetails();
+    checkout.populateBillingAddress();
   });
 
   it('Place order on final review page', () => {

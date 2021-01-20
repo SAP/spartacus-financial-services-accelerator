@@ -181,7 +181,5 @@ export function addSecondPerson() {
     cy.get('h2').should('have.text', ' Your Life Insurance ');
   });
   cy.get('p.label').contains('Choose a Cover').click();
-  cy.wait(500);
-  cy.get('[name=lifeWhoCovered]').eq('1').should('be.visible').click();
-  cy.wait(500);
+  cy.get('[name=lifeWhoCovered]').eq(1).should('be.visible').click();
 }
