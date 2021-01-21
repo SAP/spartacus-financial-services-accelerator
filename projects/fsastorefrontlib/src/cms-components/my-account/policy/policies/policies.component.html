@@ -84,16 +84,15 @@
                 </div>
               </div>
               <div class="info-card-image">
-                <span class="image-wrapper">
-                  <img
+                <span class="image-wrapper text-center">
+                  <cx-media
                     class="image-item"
-                    [src]="
-                      baseUrl +
+                    [container]="
                       policy.mainProduct?.coverageProduct?.defaultCategory
-                        ?.image?.url
+                        ?.image
                     "
                     [alt]="policy.mainProduct?.coverageProduct?.name"
-                  />
+                  ></cx-media>
                 </span>
               </div>
             </div>

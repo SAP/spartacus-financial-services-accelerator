@@ -27,15 +27,12 @@
               <div class="row">
                 <div class="col-4 justify-content-center pb-4 pb-lg-0">
                   <div class="image-wrapper small p-2">
-                    <img
-                      class="image-item"
-                      [src]="
-                        baseUrl +
+                    <cx-media
+                      [container]="
                         policy.mainProduct?.coverageProduct?.defaultCategory
-                          ?.image?.url
+                          ?.image
                       "
-                      alt=""
-                    />
+                    ></cx-media>
                   </div>
                 </div>
                 <div class="col-lg-8">

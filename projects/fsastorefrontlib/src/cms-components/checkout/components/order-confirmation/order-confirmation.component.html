@@ -19,18 +19,16 @@
                     "
                     class="image-wrapper"
                   >
-                    <img
-                      class="image-item"
-                      [src]="
-                        baseUrl +
+                    <cx-media
+                      [container]="
                         (order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.defaultCategory?.image?.url
+                          ?.defaultCategory?.image
                       "
                       [alt]="
                         (order.deliveryOrderGroups[0]?.entries)[0]?.product
                           ?.name
                       "
-                    />
+                    ></cx-media>
                   </span>
                 </div>
                 <div class="col-12 col-md-8">

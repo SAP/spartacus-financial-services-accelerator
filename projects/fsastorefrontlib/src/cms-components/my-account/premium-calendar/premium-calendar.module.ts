@@ -5,6 +5,7 @@ import {
   CmsPageGuard,
   SpinnerModule,
   PageLayoutComponent,
+  MediaModule,
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -33,6 +34,7 @@ const routes: Routes = [
     CommonModule,
     I18nModule,
     SpinnerModule,
+    MediaModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
