@@ -16,7 +16,6 @@ context('Fixed Term Deposit Checkout', () => {
   it('Should register a new user and start FTD checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
     banking.startBankingCheckout('Fixed Term Deposit');
   });
 

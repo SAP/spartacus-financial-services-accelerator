@@ -23,6 +23,7 @@ context('Auto Silver - Referred Quote', () => {
 
   it('Should complete first auto step without additonal driver', () => {
     checkout.startInsuranceCheckout('Auto');
+    cy.wait(500);
     auto.populateAutoMonthlyOpel();
     auto.populateMainDriverInfo();
     cy.get('[name=noOfDrivers]').select('0');
@@ -30,9 +31,7 @@ context('Auto Silver - Referred Quote', () => {
   });
 
   it('Should check comparison table and select main product', () => {
-    autoIntegration.checkAutoComparisonTableOpel();
-    autoIntegration.selectAutoSilverReferred();
-    autoIntegration.checkAutoSilverReferredMiniCart();
+    autoIntegration.selectAutoSilver();
     auto.checkOptionalProductsSilver();
     checkout.clickContinueButton();
   });
@@ -42,14 +41,12 @@ context('Auto Silver - Referred Quote', () => {
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
-    autoIntegration.checkAutoSilverReferredMiniCart();
     checkout.clickContinueButton();
   });
 
   it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
-    autoIntegration.checkAutoSilverReferredMiniCart();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();

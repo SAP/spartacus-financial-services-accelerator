@@ -5,9 +5,7 @@ import * as register from '../../../helpers/register';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as policies from '../../../helpers/my-account/policies';
 import * as premiumCalendar from '../../../helpers/my-account/myAccountPages';
-import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
-let cartId;
 context('Savings Insurance Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -19,7 +17,10 @@ context('Savings Insurance Checkout', () => {
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    checkout.waitForHomepage();
+    checkout.checkMyAccountEmptyPages(
+      'Premium Calendar',
+      'You have no premiums awaiting payment'
+    );
   });
 
   it('Should start Savings checkout', () => {
@@ -38,11 +39,7 @@ context('Savings Insurance Checkout', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
     savings.checkComparisonPage();
     savings.checkSavingsComparisonTable();
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
     savings.selecBalancedDeal();
-    cy.wait(`@${addToCart}`).then(result => {
-      cartId = (<any>result.response.body).code;
-    });
   });
 
   it('Should check add options page', () => {
@@ -65,15 +62,14 @@ context('Savings Insurance Checkout', () => {
     checkout.checkProgressBarInsurance();
     savings.checkMiniCart();
     checkout.checkAccordions('savingsQuoteReview');
-    payment.addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    payment.selectPaymentMethodCard();
-    checkout.clickContinueButton();
+    checkout.populatePaymentDetails();
+    checkout.populateBillingAddress();
   });
 
   it('Place order on final review page', () => {

@@ -21,7 +21,6 @@ context('ASM', () => {
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    checkout.waitForHomepage();
   });
 
   it('should login as agent', () => {

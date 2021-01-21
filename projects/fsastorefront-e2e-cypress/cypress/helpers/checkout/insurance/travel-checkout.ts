@@ -1,10 +1,13 @@
 import * as shared from '../shared-checkout';
+const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
+const returnDate = Cypress.moment().add(10, 'day').format('YYYY-MM-DD');
+const startDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
 
 export function populateInsuranceInfoForm() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=tripDestination]').select('Europe');
-    cy.get('[name="tripStartDate"]').type('2021-01-01');
-    cy.get('[name="tripEndDate"]').type('2021-01-10');
+    cy.get('[name="tripStartDate"]').type(tomorrowsDate);
+    cy.get('[name="tripEndDate"]').type(returnDate);
     cy.get('[name="costOfTrip"]').type('3000');
     cy.get('[name="Travellers"]').select('1');
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
@@ -85,7 +88,7 @@ export function checkTravelMiniCart() {
     products: [
       {
         title: ' Start Date: ',
-        value: ' 01 Jan 2021 ',
+        value: startDate,
       },
       {
         title: 'Number of Travelers:',
