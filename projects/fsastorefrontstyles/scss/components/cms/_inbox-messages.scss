@@ -80,13 +80,4 @@
     font-size: var(--cx-h5-font-size);
     cursor: pointer;
   }
-  .tab {
-    cursor: pointer;
-    margin-right: 5px;
-    border-bottom: none;
-    @include media-breakpoint-down(sm) {
-      border-top: none;
-      margin-right: 0;
-    }
-  }
 }
