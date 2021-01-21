@@ -87,14 +87,6 @@ import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-conf
         },
       },
     }),
-    ConfigModule.withConfig({
-      mediaFormats: {
-        mobile: { width: 480 },
-        tablet: { width: 770 },
-        desktop: { width: 960 },
-        widescreen: { width: 1920 },
-      },
-    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],
