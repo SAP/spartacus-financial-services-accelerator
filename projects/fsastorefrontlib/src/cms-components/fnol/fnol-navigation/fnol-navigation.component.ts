@@ -83,6 +83,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
       ])
         .pipe(
           map(([submittedFormData, uploadedContent, userRequest]) => {
+            // needed to deep clone claimData object
             const claimCopy = JSON.parse(JSON.stringify(claimData));
             if (submittedFormData && submittedFormData.content) {
               claimCopy.configurationSteps[
