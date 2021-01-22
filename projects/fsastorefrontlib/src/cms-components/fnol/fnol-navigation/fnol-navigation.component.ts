@@ -12,6 +12,7 @@ import {
 import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
 import { FileService } from '@spartacus/dynamicforms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'cx-fs-fnol-navigation',
@@ -83,18 +84,13 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
       ])
         .pipe(
           map(([submittedFormData, uploadedContent, userRequest]) => {
-            let claimCopy = { ...claimData };
+            const claimCopy = _.cloneDeep(claimData);
             if (submittedFormData && submittedFormData.content) {
-              let contentDataCopy = {
-                ...claimData.configurationSteps[this.activeStepIndex]
-                  .stepContent.contentData,
-              };
-              contentDataCopy = submittedFormData;
+              claimCopy.configurationSteps[
+                this.activeStepIndex
+              ].stepContent.contentData = submittedFormData;
               if (uploadedContent) {
-                claimCopy = {
-                  ...claimCopy,
-                  documents: uploadedContent.files,
-                };
+                claimCopy.documents = uploadedContent.files;
               }
               this.claimService.updateClaim(
                 claimCopy,
