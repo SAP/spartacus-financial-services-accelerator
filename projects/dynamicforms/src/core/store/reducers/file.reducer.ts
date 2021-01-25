@@ -27,8 +27,11 @@ export function reducer(
       };
     }
     case fromAction.REMOVE_FILE_SUCCESS: {
-      const fileContent = { ...state.content };
-      const removedFileCode = { ...action.payload };
+      // needed to deep clone state.content object
+      const fileContent = JSON.parse(JSON.stringify(state.content));
+      const removedFileCode = action.payload;
+      console.log(fileContent);
+      console.log(removedFileCode);
       fileContent.files.forEach((file, index) => {
         if ((<any>file).code === removedFileCode) {
           fileContent.files.splice(index, 1);
