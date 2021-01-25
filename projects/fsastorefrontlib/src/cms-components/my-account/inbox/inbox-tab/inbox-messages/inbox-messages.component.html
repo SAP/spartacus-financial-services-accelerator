@@ -87,7 +87,7 @@
     class="select position-absolute w-100"
     [ngClass]="{ opened: displayMobileGroups, '': displayMobileGroups }"
   >
-    <ul>
+    <ul role="tablist" class="nav-tabs">
       <li
         class="tab"
         *ngFor="let tab of mobileTabs; let i = index"

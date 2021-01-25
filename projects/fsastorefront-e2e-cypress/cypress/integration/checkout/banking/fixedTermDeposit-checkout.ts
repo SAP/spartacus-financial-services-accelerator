@@ -5,7 +5,6 @@ import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps
 import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 import * as ftd from '../../../helpers/checkout/banking/fixedTermDeposit';
 import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
-import * as life from '../../../helpers/checkout/insurance/life-checkout';
 import * as policies from '../../../helpers/my-account/policies';
 
 context('Fixed Term Deposit Checkout', () => {

@@ -4,7 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
+import {
+  SpinnerModule,
+  PageLayoutComponent,
+  MediaModule,
+} from '@spartacus/storefront';
 import {
   AuthGuard,
   I18nModule,
@@ -53,6 +57,7 @@ const routes: Routes = [
     SpinnerModule,
     AccordionModule,
     ChangeRequestStoreModule,
+    MediaModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

@@ -4,14 +4,11 @@
       *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct"
       class="image-wrapper"
     >
-      <img
-        class="image-item"
-        [src]="
-          baseUrl +
-          policy.mainProduct?.coverageProduct?.defaultCategory?.image?.url
+      <cx-media
+        [container]="
+          policy.mainProduct?.coverageProduct?.defaultCategory?.image
         "
-        alt=""
-      />
+      ></cx-media>
     </span>
     <h4>
       <span *ngIf="policy.categoryData" class="overview-section-title">
