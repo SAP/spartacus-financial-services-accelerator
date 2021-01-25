@@ -4,7 +4,7 @@
       <ng-container
         *ngIf="
           results.pagination.totalCount > 1 &&
-          (!selectedAgent$ || screenSize === 0)
+          (!selectedAgent$ || navigator.maxTouchPoints === 0)
         "
       >
         <div class="col-lg-6 col-12 mb-5 text-center">

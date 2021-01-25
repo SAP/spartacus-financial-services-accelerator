@@ -18,7 +18,6 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   pagination: PaginationModel;
   initialActiveAgent: any;
   navigator: Navigator = window.navigator;
-  screenSize: number;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -26,7 +25,6 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.screenSize = this.navigator.maxTouchPoints;
     this.subscription.add(
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
