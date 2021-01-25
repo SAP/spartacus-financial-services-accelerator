@@ -16,6 +16,9 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   selectedAgent$: Observable<any>;
   selectedIndex = 0;
   pagination: PaginationModel;
+  initialActiveAgent: any;
+  navigator: Navigator = window.navigator;
+  screenSize: number;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -23,6 +26,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.screenSize = this.navigator.maxTouchPoints;
     this.subscription.add(
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
@@ -30,6 +34,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
     this.searchResults$ = this.agentSearchService.getResults().pipe(
       tap(agents => {
         if (agents) {
+          this.initialActiveAgent = agents.agents[0];
           this.pagination = {
             currentPage: agents.pagination.page,
             pageSize: agents.pagination.count,
@@ -49,6 +54,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   showDetails(agent) {
+    this.initialActiveAgent = null;
     this.selectedAgent$ = this.agentSearchService.getAgentByID(agent.email);
   }
 
@@ -57,10 +63,20 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   setActiveAgentIndex(selectedIndex: number) {
+    if (selectedIndex === -1) {
+      this.searchQuery = '';
+      this.selectedAgent$ = null;
+      this.getAgents('');
+    }
     this.selectedIndex = selectedIndex;
   }
 
+  getAgents(searchValue: string) {
+    this.agentSearchService.search(searchValue, 0);
+  }
+
   ngOnDestroy() {
+    this.agentSearchService.agents.next(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

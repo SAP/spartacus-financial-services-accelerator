@@ -164,6 +164,7 @@ export const fscommon = {
       contact: 'Contact',
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
+      backToList: 'BACK TO LIST',
     },
     attachments: 'Attachments',
     pageNotFoundMessage:

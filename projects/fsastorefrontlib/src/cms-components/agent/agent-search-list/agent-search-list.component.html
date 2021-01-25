@@ -1,7 +1,12 @@
-<ng-container *ngIf="searchResults$ | async as results">
+<ng-container *ngIf="searchResults$ | async as results; else loading">
   <div class="mt-5">
     <div class="row">
-      <ng-container *ngIf="results.pagination.totalCount > 0">
+      <ng-container
+        *ngIf="
+          results.pagination.totalCount > 1 &&
+          (!selectedAgent$ || screenSize === 0)
+        "
+      >
         <div class="col-lg-6 col-12 mb-5 text-center">
           <cx-pagination
             *ngIf="pagination"
@@ -17,13 +22,17 @@
           {{ pagination.totalResults }}
         </div>
       </ng-container>
-      <ng-container *ngIf="selectedIndex > -1">
+      <ng-container
+        *ngIf="
+          selectedIndex > -1 && (selectedAgent$ || results.agents.length === 1)
+        "
+      >
         <div class="col-12 mb-5 d-lg-none">
           <button
             class="action-button btn-block"
             (click)="setActiveAgentIndex(-1)"
           >
-            {{ 'common.back' | cxTranslate }}
+            {{ 'fscommon.agentLocator.backToList' | cxTranslate }}
           </button>
         </div>
       </ng-container>
@@ -33,7 +42,9 @@
             <div
               class="row no-gutters agent-list-item py-3 px-4 border-bottom border-color-3"
               [ngClass]="{
-                active: selectedIndex === i,
+                'initial-active': initialActiveAgent && selectedIndex === i,
+                active: selectedAgent$ && selectedIndex === i,
+                'not-active': !selectedAgent$ && selectedIndex !== i,
                 'd-flex': selectedIndex === -1
               }"
             >
@@ -132,4 +143,8 @@
   <cx-store-finder-map
     [locations]="agent.pointsOfService"
   ></cx-store-finder-map>
+</ng-template>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
 </ng-template>
