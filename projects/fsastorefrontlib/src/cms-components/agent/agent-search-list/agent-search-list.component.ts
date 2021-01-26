@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PaginationModel } from '@spartacus/core';
-import { Observable, of, Subscription } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   private initialize(queryParams: Params) {
     if (queryParams.query) {
-      this.searchQuery = queryParams.query
+      this.searchQuery = queryParams.query;
     }
     this.agentSearchService.search(this.searchQuery, 0);
   }
