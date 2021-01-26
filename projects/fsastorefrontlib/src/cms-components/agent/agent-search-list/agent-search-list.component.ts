@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PaginationModel } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
+import { tap, filter } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   selectedIndex = 0;
   pagination: PaginationModel;
   initialActiveAgent: any;
-  navigator: Navigator = window.navigator;
+  navigator: Navigator = globalThis.navigator;
+  selectedAgentState = false;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -28,7 +29,6 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
-
     this.searchResults$ = this.agentSearchService.getResults().pipe(
       tap(agents => {
         if (agents) {
@@ -39,6 +39,9 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
             totalPages: agents.pagination.totalPages,
             totalResults: agents.pagination.totalCount,
           };
+          if (this.initialActiveAgent?.email === this.searchQuery) {
+            this.searchQuery = '';
+          }
         }
       })
     );
@@ -46,13 +49,14 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   private initialize(queryParams: Params) {
     if (queryParams.query) {
-      this.searchQuery = queryParams.query;
+      this.searchQuery = queryParams.query
     }
     this.agentSearchService.search(this.searchQuery, 0);
   }
 
   showDetails(agent) {
     this.initialActiveAgent = null;
+    this.selectedAgentState = true;
     this.selectedAgent$ = this.agentSearchService.getAgentByID(agent.email);
   }
 
@@ -62,9 +66,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   setActiveAgentIndex(selectedIndex: number) {
     if (selectedIndex === -1) {
-      this.searchQuery = '';
-      this.selectedAgent$ = null;
-      this.getAgents('');
+      this.selectedAgentState = false;
+      this.getAgents(this.searchQuery);
     }
     this.selectedIndex = selectedIndex;
   }

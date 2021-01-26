@@ -4,7 +4,7 @@
       <ng-container
         *ngIf="
           results.pagination.totalCount > 1 &&
-          (!selectedAgent$ || navigator.maxTouchPoints === 0)
+          (!selectedAgentState || navigator.maxTouchPoints === 0)
         "
       >
         <div class="col-lg-6 col-12 mb-5 text-center">
@@ -24,7 +24,8 @@
       </ng-container>
       <ng-container
         *ngIf="
-          selectedIndex > -1 && (selectedAgent$ || results.agents.length === 1)
+          selectedIndex > -1 &&
+          (selectedAgentState || results.agents.length === 1)
         "
       >
         <div class="col-12 mb-5 d-lg-none">
@@ -42,9 +43,8 @@
             <div
               class="row no-gutters agent-list-item py-3 px-4 border-bottom border-color-3"
               [ngClass]="{
-                'initial-active': initialActiveAgent && selectedIndex === i,
-                active: selectedAgent$ && selectedIndex === i,
-                'not-active': !selectedAgent$ && selectedIndex !== i,
+                active: selectedIndex === i,
+                'd-none d-lg-flex': !initialActiveAgent && selectedIndex !== i,
                 'd-flex': selectedIndex === -1
               }"
             >
@@ -123,7 +123,7 @@
       </div>
       <div
         class="col-lg-6 col-12 mb-5"
-        *ngIf="!selectedAgent$ && results && results.agents[0]"
+        *ngIf="!selectedAgentState && results && results.agents[0]"
       >
         <ng-container
           *ngTemplateOutlet="
