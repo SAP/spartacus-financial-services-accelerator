@@ -91,7 +91,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
                 if (files?.documents) {
                   this.fileList = files.documents;
                   files.documents.forEach(file => {
-                    this.files.push(file.code);
+                    this.files = [...this.files, file.code];
                   });
                   this.uploadControl?.setValue(this.files);
                   this.uploadDisable = true;
