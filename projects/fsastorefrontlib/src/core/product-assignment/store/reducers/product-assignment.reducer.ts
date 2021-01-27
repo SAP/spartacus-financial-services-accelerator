@@ -31,7 +31,7 @@ export function reducer(
 
     case fromAction.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS: {
       let content = { ...action.payload };
-      const assignmentsContent = state.content;
+      const assignmentsContent = JSON.parse(JSON.stringify(state.content));
       if (content && content.assignments.length > 0) {
         assignmentsContent.potentialAssignments = content.assignments;
       }
@@ -74,7 +74,9 @@ export function reducer(
 
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT: {
       let content = { ...action.payload };
-      const productAssignmentContent = state.content;
+      const productAssignmentContent = JSON.parse(
+        JSON.stringify(state.content)
+      );
       if (content && content.productAssignmentCode) {
         const assignments = productAssignmentContent.assignments.find(
           currentProductAssignment =>
