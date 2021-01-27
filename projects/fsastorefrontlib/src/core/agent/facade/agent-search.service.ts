@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GeoPoint, WindowRef } from '@spartacus/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AgentConnector } from '../connectors/agent.connector';
 
@@ -14,6 +14,7 @@ export class AgentSearchService {
   ) {}
 
   agents = new BehaviorSubject<any>(null);
+  resetSearchValue = new Subject<any>();
 
   private geolocationWatchId: number = null;
 
@@ -71,5 +72,13 @@ export class AgentSearchService {
       );
       this.geolocationWatchId = null;
     }
+  }
+
+  getResetSearchValue(): Observable<any> {
+    return this.resetSearchValue.asObservable();
+  }
+
+  setResetSearchValue(isReset: boolean): void {
+    return this.resetSearchValue.next(isReset);
   }
 }

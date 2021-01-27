@@ -4,7 +4,7 @@
       <ng-container
         *ngIf="
           results.pagination.totalCount > 1 &&
-          (!selectedAgentState || navigator.maxTouchPoints === 0)
+          (initialActiveAgent || navigator.maxTouchPoints === 0)
         "
       >
         <div class="col-lg-6 col-12 mb-5 text-center">
@@ -25,12 +25,12 @@
       <ng-container
         *ngIf="
           selectedIndex > -1 &&
-          (selectedAgentState || results.agents.length === 1)
+          (!initialActiveAgent || results.agents.length === 1)
         "
       >
         <div class="col-12 mb-5 d-lg-none">
           <button
-            class="action-button btn-block"
+            class="action-button btn-block text-uppercase"
             (click)="setActiveAgentIndex(-1)"
           >
             {{ 'fscommon.agentLocator.backToList' | cxTranslate }}
@@ -44,8 +44,7 @@
               class="row no-gutters agent-list-item py-3 px-4 border-bottom border-color-3"
               [ngClass]="{
                 active: selectedIndex === i,
-                'd-none d-lg-flex': !initialActiveAgent && selectedIndex !== i,
-                'd-flex': selectedIndex === -1
+                'd-none d-lg-flex': !initialActiveAgent && selectedIndex !== i
               }"
             >
               <div class="col-12 col-sm-3 position-relative text-center mb-3">
@@ -123,7 +122,7 @@
       </div>
       <div
         class="col-lg-6 col-12 mb-5"
-        *ngIf="!selectedAgentState && results && results.agents[0]"
+        *ngIf="results && results.agents[0]"
       >
         <ng-container
           *ngTemplateOutlet="

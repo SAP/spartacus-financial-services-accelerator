@@ -18,7 +18,6 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   pagination: PaginationModel;
   initialActiveAgent: any;
   navigator: Navigator = globalThis.navigator;
-  selectedAgentState = false;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -30,35 +29,27 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
     this.searchResults$ = this.agentSearchService.getResults().pipe(
-      tap(agents => {
-        if (agents) {
-          this.initialActiveAgent = agents.agents[0];
+      tap(searchResult => {
+        if (searchResult) {
+          this.initialActiveAgent = searchResult.agents[0];
           this.pagination = {
-            currentPage: agents.pagination.page,
-            pageSize: agents.pagination.count,
-            totalPages: agents.pagination.totalPages,
-            totalResults: agents.pagination.totalCount,
+            currentPage: searchResult.pagination.page,
+            pageSize: searchResult.pagination.count,
+            totalPages: searchResult.pagination.totalPages,
+            totalResults: searchResult.pagination.totalCount,
           };
-          // Reset searchQuery in case user search agent from the List view clicking on the location icon
-          // This ensures getting appropriate list by clicking on Back to list button
-          if (this.initialActiveAgent?.email === this.searchQuery) {
-            this.searchQuery = '';
-          }
         }
       })
     );
   }
 
   private initialize(queryParams: Params) {
-    if (queryParams.query) {
-      this.searchQuery = queryParams.query;
-    }
+    queryParams.query ? this.searchQuery = queryParams.query : this.searchQuery = '';
     this.agentSearchService.search(this.searchQuery, 0);
   }
 
   showDetails(agent) {
     this.initialActiveAgent = null;
-    this.selectedAgentState = true;
     this.selectedAgent$ = this.agentSearchService.getAgentByID(agent.email);
   }
 
@@ -67,11 +58,13 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   setActiveAgentIndex(selectedIndex: number) {
+    console.log(this.searchQuery, 'searchQuery')
     if (selectedIndex === -1) {
-      this.selectedAgentState = false;
       this.agentSearchService.search(this.searchQuery, 0);
+      // reset search value on the Back to list button
+      this.agentSearchService.setResetSearchValue(true);
     }
-    this.selectedIndex = selectedIndex;
+    this.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
   }
 
   ngOnDestroy() {
