@@ -1,6 +1,13 @@
 import * as shared from '../shared-checkout';
-import * as sharedCheckout from '../shared-checkout.interface';
-const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
+import * as addOptionsPage from '../shared-checkout.interface';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
 
 export function checkProgressBarEvent() {
   cy.get('p.label').should('have.length', 6).eq(0).contains("What's Included");

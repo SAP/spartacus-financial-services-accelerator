@@ -57,12 +57,6 @@ export function updateIncidentType() {
   });
 }
 
-export function populateIncidentReportStep() {
-  cy.get('[name=howAccidentOccurred]').type(
-    'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
-  );
-}
-
 export function populateGeneralInformationStep() {
   cy.get('[name=phFault]').select('3rdParty');
   cy.get('[name=reportedToPolice]').eq(0).click();
@@ -217,27 +211,22 @@ export function populateIncidentInformationSecondClaim() {
     .type('my tesla S was stolen while I was in the shopping center');
 }
 
-export function waitForIncidentReportStep() {
-  const incidentForm = waitForCMSComponent(
-    'AutoClaimIncidentReportFormComponent',
-    'incidentForm'
-  );
-  cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
-}
-
 export function waitForfnolGeneralInformationStep() {
   const generalInfoPage = waitForPage('fnolGeneralInfoPage', 'generalInfoPage');
   cy.get('.Section4 cx-banner').eq(1).click();
   cy.wait(`@${generalInfoPage}`).its('status').should('eq', 200);
 }
 
-export function populateIncidentRpeportStep() {
+export function populateIncidentReportStep() {
   const filePath = 'fsaImageTest.png';
   cy.get('[name=howAccidentOccurred]').type(
     'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
   );
   cy.get('.custom-file-input').attachFile(filePath);
-  cy.get('.btn-primary').click();
+  cy.get('.btn-primary')
+    .should('contain.text', 'Upload')
+    .eq(0)
+    .click({ force: true });
 }
 
 export function checkClaimReplication() {

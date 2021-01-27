@@ -20,6 +20,7 @@ context('Auto Silver Checkout with change mileage', () => {
   });
 
   it('Should complete first auto step with additional driver', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
     auto.populateAutoMonthlyAudi();
     auto.populateMainDriverInfo();

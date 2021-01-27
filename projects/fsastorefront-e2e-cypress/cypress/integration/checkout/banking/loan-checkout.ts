@@ -14,6 +14,7 @@ context('Loan Checkout', () => {
   it('Should register a new user and start Loan checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitConsent();
     banking.startBankingCheckout('Loan');
   });
 

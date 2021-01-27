@@ -24,5 +24,7 @@ export function selectUserIdentification(identification) {
       cy.get('p').contains(identification).click({ force: true });
     });
   cy.get('.primary-button').should('not.be.disabled');
-  cy.wait(`@${cartContent}`).its('status').should('eq', 200);
+  cy.wait(`@${cartContent}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }

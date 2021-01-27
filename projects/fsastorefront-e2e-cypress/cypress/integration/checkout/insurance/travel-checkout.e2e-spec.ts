@@ -3,8 +3,8 @@ import * as travelCheckout from '../../../helpers/checkout/insurance/travel-chec
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
-import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
-import { waitForCreateAsset } from '../../../helpers/generalHelpers';
+import * as inbox from '../../../helpers/my-account/inbox';
+import * as orderHistory from '../../../helpers/my-account/myAccountPages';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -14,6 +14,7 @@ context('Travel Insurance Checkout', () => {
   });
 
   it('Should open travel category page', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Travel');
   });
 
@@ -56,7 +57,6 @@ context('Travel Insurance Checkout', () => {
 
   it('Place order on final review pages', () => {
     checkout.placeOrderOnFinalReview();
-    cy.wait(200000);
   });
 
   it('Check order confirmation', () => {
@@ -64,8 +64,17 @@ context('Travel Insurance Checkout', () => {
     checkout.checkAccordions('travelFinalReview');
   });
 
-  it('Check my policies page', () => {
-    checkMyPoliciesPage();
-    cy.get('.title').contains('Travel Insurance');
+  it('Check inbox', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Inbox',
+    });
+    inbox.checkInboxComponets();
+    inbox.checkGeneralTab();
+  });
+
+  it('Check Order history page', () => {
+    orderHistory.orderHistoryPage();
+    orderHistory.checkOrderHistoryContent('€99.00');
   });
 });

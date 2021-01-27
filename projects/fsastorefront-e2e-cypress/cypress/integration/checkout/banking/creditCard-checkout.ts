@@ -14,6 +14,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should register a new user and start Credit Card checkout', () => {
+    checkout.waitConsent();
     banking.startBankingCheckout('Credit Card');
   });
 

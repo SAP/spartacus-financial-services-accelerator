@@ -20,6 +20,7 @@ context('Auto Gold Checkout with FNOL', () => {
   });
 
   it('Should complete first auto step without additional drivers', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
     auto.populateAutoAnnuallyBMW();
     auto.populateMainDriverInfo();
@@ -74,15 +75,7 @@ context('Auto Gold Checkout with FNOL', () => {
   });
 
   it('Should check and populate Incident Report page', () => {
-    const filePath = 'fsaImageTest.png';
-    cy.get('[name=howAccidentOccurred]').type(
-      'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
-    );
-    cy.get('.custom-file-input').attachFile(filePath);
-    cy.get('.btn-primary')
-      .should('contain.text', 'Upload')
-      .eq(0)
-      .click({ force: true });
+    fnol.populateIncidentReportStep();
     checkout.checkBackAndContinueButtons();
     cy.get('.primary-button').should('contain.text', 'Continue').click();
     cy.wait(500);
