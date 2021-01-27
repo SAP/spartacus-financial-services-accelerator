@@ -39,6 +39,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
             totalPages: agents.pagination.totalPages,
             totalResults: agents.pagination.totalCount,
           };
+          // Reset searchQuery in case user search agent from the List view clicking on the location icon
+          // This ensures getting appropriate list by clicking on Back to list button
           if (this.initialActiveAgent?.email === this.searchQuery) {
             this.searchQuery = '';
           }
