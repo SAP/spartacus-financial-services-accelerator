@@ -4,7 +4,6 @@ import { StoreFinderSearchComponent } from '@spartacus/storefinder/components';
 import { Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
-export let browserRefresh = false;
 @Component({
   selector: 'cx-fs-agent-search-box',
   templateUrl: './agent-search-box.component.html',
