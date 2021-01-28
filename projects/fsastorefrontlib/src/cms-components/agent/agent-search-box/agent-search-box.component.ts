@@ -37,7 +37,7 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
     }
   }
 
-  private resetSearchValueAndRouteParams() {
+  protected resetSearchValueAndRouteParams() {
     this.subscription.add(
       this.agentSearchService.resetSearchValue.subscribe(isReset => {
         if (isReset) {
