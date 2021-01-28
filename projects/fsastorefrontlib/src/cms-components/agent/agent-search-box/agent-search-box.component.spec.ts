@@ -2,7 +2,7 @@ import { Component, Input, Type } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { AgentSearchBoxComponent } from './agent-search-box.component';
 
@@ -23,9 +23,7 @@ class MockIconComponent {
 }
 
 class MockAgentSearchService {
-  getResetSearchValue() {
-    return new BehaviorSubject(true);
-  }
+  resetSearchValue = of(true);
 }
 
 describe('AgentSearchBoxComponent', () => {

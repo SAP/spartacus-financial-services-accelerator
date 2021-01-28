@@ -14,7 +14,8 @@ export class AgentSearchService {
   ) {}
 
   agents = new BehaviorSubject<any>(null);
-  resetSearchValue = new Subject<any>();
+  resetSearchValueSource = new Subject<boolean>();
+  resetSearchValue = this.resetSearchValueSource.asObservable();
 
   private geolocationWatchId: number = null;
 
@@ -74,11 +75,7 @@ export class AgentSearchService {
     }
   }
 
-  getResetSearchValue(): Observable<any> {
-    return this.resetSearchValue.asObservable();
-  }
-
-  setResetSearchValue(isReset: boolean): void {
-    return this.resetSearchValue.next(isReset);
+  setResetSearchValue(isReset: boolean) {
+    this.resetSearchValueSource.next(isReset);
   }
 }
