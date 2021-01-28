@@ -48,6 +48,7 @@ class MockAgentSearchService {
   getAgentByID() {
     return of(agent);
   }
+  setResetSearchValue() {}
 }
 
 @Component({

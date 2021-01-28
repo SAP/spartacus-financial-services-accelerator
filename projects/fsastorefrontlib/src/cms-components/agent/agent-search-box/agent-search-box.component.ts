@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { StoreFinderSearchComponent } from '@spartacus/storefinder/components';
 import { Subscription } from 'rxjs';
-import { AgentSearchService } from '../../../core';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 export let browserRefresh = false;
 @Component({
@@ -13,8 +13,10 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
   implements OnInit, OnDestroy {
   subscription = new Subscription();
 
-  constructor(protected fsRoutingService: RoutingService,
-    protected agentSearchService: AgentSearchService) {
+  constructor(
+    protected fsRoutingService: RoutingService,
+    protected agentSearchService: AgentSearchService
+  ) {
     super(fsRoutingService);
   }
 

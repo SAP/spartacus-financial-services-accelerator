@@ -2,6 +2,8 @@ import { Component, Input, Type } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
+import { BehaviorSubject } from 'rxjs';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { AgentSearchBoxComponent } from './agent-search-box.component';
 
 const query = 'autoAgent';
@@ -20,16 +22,27 @@ class MockIconComponent {
   queryParams: string;
 }
 
+class MockAgentSearchService {
+  getResetSearchValue() {
+    return new BehaviorSubject(true);
+  }
+}
+
 describe('AgentSearchBoxComponent', () => {
   let component: AgentSearchBoxComponent;
   let fixture: ComponentFixture<AgentSearchBoxComponent>;
   let routingService: RoutingService;
+  let mockSearchService: AgentSearchService;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, ReactiveFormsModule],
         providers: [
+          {
+            provide: AgentSearchService,
+            useClass: MockAgentSearchService,
+          },
           {
             provide: RoutingService,
             useValue: { go: jasmine.createSpy() },
@@ -44,7 +57,9 @@ describe('AgentSearchBoxComponent', () => {
     fixture = TestBed.createComponent(AgentSearchBoxComponent);
     component = fixture.componentInstance;
     routingService = TestBed.inject(RoutingService as Type<RoutingService>);
-
+    mockSearchService = TestBed.inject(
+      AgentSearchService as Type<AgentSearchService>
+    );
     fixture.detectChanges();
   });
 

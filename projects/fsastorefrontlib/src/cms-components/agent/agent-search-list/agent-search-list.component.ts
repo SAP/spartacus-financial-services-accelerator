@@ -44,7 +44,9 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   private initialize(queryParams: Params) {
-    queryParams.query ? this.searchQuery = queryParams.query : this.searchQuery = '';
+    queryParams.query
+      ? (this.searchQuery = queryParams.query)
+      : (this.searchQuery = '');
     this.agentSearchService.search(this.searchQuery, 0);
   }
 
@@ -58,12 +60,11 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   setActiveAgentIndex(selectedIndex: number) {
-    console.log(this.searchQuery, 'searchQuery')
     if (selectedIndex === -1) {
       this.agentSearchService.search(this.searchQuery, 0);
-      // reset search value on the Back to list button
       this.agentSearchService.setResetSearchValue(true);
     }
+    // after clicking on the Back to list first in the list should be selected
     this.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
   }
 
