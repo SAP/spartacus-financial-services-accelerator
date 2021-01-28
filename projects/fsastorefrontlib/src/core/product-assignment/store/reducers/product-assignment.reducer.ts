@@ -51,7 +51,9 @@ export function reducer(
 
     case fromAction.CREATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
-      const productAssignmentContent = state.content;
+      const productAssignmentContent = JSON.parse(
+        JSON.stringify(state.content)
+      );
       if (content && content.code) {
         productAssignmentContent.assignments = [
           ...productAssignmentContent.assignments,
@@ -101,7 +103,9 @@ export function reducer(
 
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
-      const productAssignmentContent = { ...state.content };
+      const productAssignmentContent = JSON.parse(
+        JSON.stringify(state.content)
+      );
       if (content && content.code) {
         productAssignmentContent.assignments = productAssignmentContent.assignments.map(
           assignment => {
