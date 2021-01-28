@@ -75,13 +75,7 @@ context('Renters Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('rentersFinalReview');
     checkout.checkOrderConfirmation();
-    //cy.wait(200000);
   });
-
-  /*   it('Check my policies page', () => {
-    checkMyPoliciesPage();
-    renters.checkRentersPolicy();
-  }); */
 
   it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
