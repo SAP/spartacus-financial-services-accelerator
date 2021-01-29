@@ -39,10 +39,13 @@ import {
 import { getIndexHtmlPath } from '@spartacus/schematics/src/shared/utils/file-utils';
 import {
   ANGULAR_LOCALIZE,
+  ANGULAR_OAUTH2_OIDC,
+  DEFAULT_ANGULAR_OAUTH2_OIDC_VERSION,
   DEFAULT_NGRX_VERSION,
   getProjectTargets,
   SPARTACUS_ASSETS,
   SPARTACUS_CORE,
+  SPARTACUS_STOREFINDER,
   SPARTACUS_STOREFRONTLIB,
   SPARTACUS_STYLES,
 } from '@spartacus/schematics/src/shared';
@@ -82,6 +85,11 @@ function addPackageJsonDependencies(): Rule {
         type: NodeDependencyType.Default,
         version: spartacusSchematicsVersion,
         name: SPARTACUS_CORE,
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: spartacusSchematicsVersion,
+        name: SPARTACUS_STOREFINDER,
       },
       {
         type: NodeDependencyType.Default,
@@ -151,6 +159,11 @@ function addPackageJsonDependencies(): Rule {
         type: NodeDependencyType.Default,
         version: '^8.0.0',
         name: 'ngx-infinite-scroll',
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: DEFAULT_ANGULAR_OAUTH2_OIDC_VERSION,
+        name: ANGULAR_OAUTH2_OIDC,
       },
       {
         type: NodeDependencyType.Default,
@@ -335,12 +348,9 @@ function updateMainComponent(
     return host;
   };
 }
-function updateIndexFile(
-  project: experimental.workspace.WorkspaceProject,
-  options: FsOptions
-): Rule {
+function updateIndexFile(tree: Tree, options: FsOptions): Rule {
   return (host: Tree) => {
-    const projectIndexHtmlPath = getIndexHtmlPath(project);
+    const projectIndexHtmlPath = getIndexHtmlPath(tree);
     const baseUrl = options.baseUrl || 'OCC_BACKEND_BASE_URL_VALUE';
 
     const metaTags = [
@@ -364,7 +374,7 @@ export function addFsa(options: FsOptions): Rule {
       updateAppModule(options),
       installStyles(project),
       updateMainComponent(project, options),
-      options.useMetaTags ? updateIndexFile(project, options) : noop(),
+      options.useMetaTags ? updateIndexFile(tree, options) : noop(),
       installPackageJsonDependencies(),
     ])(tree, context);
   };
