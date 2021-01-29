@@ -1,21 +1,19 @@
 %cx-fs-agent-search-list {
   .agent-list {
     border: 1px solid var(--cx-color-3);
-    max-height: 700px;
-    overflow-y: auto;
+    @include media-breakpoint-up(md) {
+      max-height: 700px;
+      overflow-y: auto;
+    }
     .agent-list-item {
-      &.active {
+      &.active,
+      &.initial-active {
         background-color: var(--cx-color-4);
         .cx-product-image-container img {
           border: 1px solid var(--cx-color-primary);
         }
         .agent-name {
           text-decoration: underline;
-        }
-      }
-      @include media-breakpoint-down(md) {
-        &:not(.active) {
-          display: none;
         }
       }
       .agent-name {

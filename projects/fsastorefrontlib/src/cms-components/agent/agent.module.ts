@@ -14,6 +14,7 @@ import {
   IconModule,
   PageLayoutComponent,
   CmsPageGuard,
+  SpinnerModule,
 } from '@spartacus/storefront';
 import { AgentRootComponent } from './agent-root/agent-root.component';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
@@ -38,6 +39,7 @@ import { StoreFinderModule } from '@spartacus/storefinder';
     StoreFinderComponentsModule,
     ReactiveFormsModule,
     ListNavigationModule,
+    SpinnerModule,
     RouterModule.forChild([
       {
         path: null,

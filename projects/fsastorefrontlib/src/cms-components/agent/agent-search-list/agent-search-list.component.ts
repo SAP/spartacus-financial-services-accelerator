@@ -16,6 +16,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   selectedAgent$: Observable<any>;
   selectedIndex = 0;
   pagination: PaginationModel;
+  initialActiveAgent: any;
+  navigator: Navigator = globalThis.navigator;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -26,15 +28,15 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
-
     this.searchResults$ = this.agentSearchService.getResults().pipe(
-      tap(agents => {
-        if (agents) {
+      tap(searchResult => {
+        if (searchResult) {
+          this.initialActiveAgent = searchResult.agents[0];
           this.pagination = {
-            currentPage: agents.pagination.page,
-            pageSize: agents.pagination.count,
-            totalPages: agents.pagination.totalPages,
-            totalResults: agents.pagination.totalCount,
+            currentPage: searchResult.pagination.page,
+            pageSize: searchResult.pagination.count,
+            totalPages: searchResult.pagination.totalPages,
+            totalResults: searchResult.pagination.totalCount,
           };
         }
       })
@@ -42,13 +44,14 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   private initialize(queryParams: Params) {
-    if (queryParams.query) {
-      this.searchQuery = queryParams.query;
-    }
+    queryParams.query
+      ? (this.searchQuery = queryParams.query)
+      : (this.searchQuery = '');
     this.agentSearchService.search(this.searchQuery, 0);
   }
 
   showDetails(agent) {
+    this.initialActiveAgent = null;
     this.selectedAgent$ = this.agentSearchService.getAgentByID(agent.email);
   }
 
@@ -57,10 +60,16 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   setActiveAgentIndex(selectedIndex: number) {
-    this.selectedIndex = selectedIndex;
+    if (selectedIndex === -1) {
+      this.agentSearchService.search(this.searchQuery, 0);
+      this.agentSearchService.setResetSearchValue(true);
+    }
+    // after clicking on the Back to list first in the list should be selected
+    this.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
   }
 
   ngOnDestroy() {
+    this.agentSearchService.agents.next(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

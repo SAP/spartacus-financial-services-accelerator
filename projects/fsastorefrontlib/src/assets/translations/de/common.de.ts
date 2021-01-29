@@ -164,6 +164,7 @@ export const fscommon = {
       contact: 'Kontakt',
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
+      backToList: '[DE] Back to list',
     },
   },
 };

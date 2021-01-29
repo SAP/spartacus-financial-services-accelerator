@@ -1,7 +1,12 @@
-<ng-container *ngIf="searchResults$ | async as results">
+<ng-container *ngIf="searchResults$ | async as results; else loading">
   <div class="mt-5">
     <div class="row">
-      <ng-container *ngIf="results.pagination.totalCount > 0">
+      <ng-container
+        *ngIf="
+          results.pagination.totalCount > 1 &&
+          (initialActiveAgent || navigator.maxTouchPoints === 0)
+        "
+      >
         <div class="col-lg-6 col-12 mb-5 text-center">
           <cx-pagination
             *ngIf="pagination"
@@ -17,13 +22,18 @@
           {{ pagination.totalResults }}
         </div>
       </ng-container>
-      <ng-container *ngIf="selectedIndex > -1">
+      <ng-container
+        *ngIf="
+          selectedIndex > -1 &&
+          (!initialActiveAgent || results.agents.length === 1)
+        "
+      >
         <div class="col-12 mb-5 d-lg-none">
           <button
-            class="action-button btn-block"
+            class="action-button btn-block text-uppercase"
             (click)="setActiveAgentIndex(-1)"
           >
-            {{ 'common.back' | cxTranslate }}
+            {{ 'fscommon.agentLocator.backToList' | cxTranslate }}
           </button>
         </div>
       </ng-container>
@@ -34,7 +44,7 @@
               class="row no-gutters agent-list-item py-3 px-4 border-bottom border-color-3"
               [ngClass]="{
                 active: selectedIndex === i,
-                'd-flex': selectedIndex === -1
+                'd-none d-lg-flex': !initialActiveAgent && selectedIndex !== i
               }"
             >
               <div class="col-12 col-sm-3 position-relative text-center mb-3">
@@ -110,10 +120,7 @@
         >
         </ng-container>
       </div>
-      <div
-        class="col-lg-6 col-12 mb-5"
-        *ngIf="!selectedAgent$ && results && results.agents[0]"
-      >
+      <div class="col-lg-6 col-12 mb-5" *ngIf="results && results.agents[0]">
         <ng-container
           *ngTemplateOutlet="
             agentMap;
@@ -132,4 +139,8 @@
   <cx-store-finder-map
     [locations]="agent.pointsOfService"
   ></cx-store-finder-map>
+</ng-template>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
 </ng-template>
