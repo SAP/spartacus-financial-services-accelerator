@@ -2,8 +2,6 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import * as payment from '../../../helpers/checkout/insurance/payment';
-import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import * as myAccount from '../../../helpers/my-account/myAccountPages';
 
 context('Event Checkout', () => {
@@ -15,6 +13,11 @@ context('Event Checkout', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+  });
+
+  it('Should check empty order history page', () => {
+    myAccount.orderHistoryPage();
+    myAccount.checkEmptyOrderHistoryPage();
   });
 
   it('Should open event category page', () => {
@@ -68,12 +71,6 @@ context('Event Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('threeAccordions');
     checkout.checkOrderConfirmation();
-    cy.wait(200000);
-  });
-
-  it('Check my policies page', () => {
-    checkMyPoliciesPage();
-    event.checkEventPolicy();
   });
 
   it('Close account for user', () => {

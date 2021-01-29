@@ -1,5 +1,3 @@
-import { waitForPage } from '../generalHelpers';
-
 export function checkPageContent() {
   cy.get('cx-fs-premium-calendar').should('be.visible');
   cy.get('h2').contains('Premium Calendar');
@@ -60,4 +58,29 @@ export function checkPersonalDetails() {
   cy.get('[formcontrolname="firstName"]').should('have.value', 'Alex');
   cy.get('[formcontrolname="lastName"]').should('have.value', 'Moore');
   cy.get('[formcontrolname="dateOfBirth"]').should('have.value', '1990-12-12');
+}
+
+export function orderHistoryPage() {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Order History',
+  });
+}
+
+export function checkEmptyOrderHistoryPage() {
+  cy.get('cx-order-history').should('be.visible');
+  cy.get('h3').contains('Order history');
+  cy.get('div').contains('We have no order records for this account.');
+}
+
+export function checkOrderHistoryContent(price) {
+  cy.get('.cx-order-history-body')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.cx-order-history-thead-mobile').should('be.visible');
+      cy.get('.cx-order-history-code').should('be.visible');
+      cy.get('.cx-order-history-placed').should('be.visible');
+      cy.get('.cx-order-history-status').contains('Pending');
+      cy.get('.cx-order-history-total').contains(price);
+    });
 }

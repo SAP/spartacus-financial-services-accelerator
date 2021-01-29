@@ -1,6 +1,12 @@
 import * as shared from '../shared-checkout';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-const tomorrowsDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
 
 export function checkRentersComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {

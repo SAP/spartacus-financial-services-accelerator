@@ -48,8 +48,13 @@ Cypress.Commands.add(
     dropdownItem: string;
     nextPageUrlPart: string;
   }) => {
-    cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
-    cy.findAllByText(dropdownItem).click({ multiple: true, force: true });
+    cy.get('header [aria-label="' + menuOption + '"]')
+      .should('be.visible')
+      .invoke('mouseover')
+      .next('.wrapper')
+      .within(() => {
+        cy.findAllByText(dropdownItem).click({ force: true });
+      });
     if (nextPageUrlPart) {
       cy.location('pathname', { timeout: 10000 }).should(
         'include',

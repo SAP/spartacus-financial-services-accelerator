@@ -17,7 +17,9 @@ export function waitForBoundQuote() {
     'potentialProductPromotions',
     'boundQuote'
   );
-  cy.wait(`@${boundQuote}`).its('status').should('eq', 200);
+  cy.wait(`@${boundQuote}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function checkReplicatedPolicy(Product) {
@@ -72,7 +74,9 @@ export function waitForIncidentInfoForm() {
     'auto_claim_incident_info_form',
     'incidentInfo'
   );
-  cy.wait(`@${incidentInfo}`).its('status').should('eq', 200);
+  cy.wait(`@${incidentInfo}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function waitForIncidentReportForm() {
@@ -80,7 +84,9 @@ export function waitForIncidentReportForm() {
     'auto_claim_incident_report_form',
     'incidentReport'
   );
-  cy.wait(`@${incidentReport}`).its('status').should('eq', 200);
+  cy.wait(`@${incidentReport}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function waitForGeneralInfoForm() {
@@ -88,7 +94,9 @@ export function waitForGeneralInfoForm() {
     'auto_claim_general_form',
     'generalInfo'
   );
-  cy.wait(`@${generalInfo}`).its('status').should('eq', 200);
+  cy.wait(`@${generalInfo}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function checkIncidentInformationAccordion() {

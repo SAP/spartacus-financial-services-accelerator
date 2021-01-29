@@ -14,6 +14,7 @@ context('Retrieve Quote', () => {
   });
 
   it('Should open travel category page', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Travel');
   });
 

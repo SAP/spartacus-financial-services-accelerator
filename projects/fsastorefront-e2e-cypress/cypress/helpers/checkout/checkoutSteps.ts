@@ -3,9 +3,16 @@ import {
   waitForPage,
   waitForFormDefinition,
   waitForCMSComponent,
+  waitForUserAssets,
 } from '../generalHelpers';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
 
 export function checkProgressBarInsurance() {
   cy.get('p.label').should('have.length', 7).eq(0).contains('Choose a Cover');
@@ -86,7 +93,9 @@ export function placeOrderOnFinalReview() {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
-  cy.wait(`@${confirmationPage}`).its('status').should('eq', 200);
+  cy.wait(`@${confirmationPage}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function checkOrderConfirmation() {
@@ -184,29 +193,18 @@ export function startInsuranceCheckout(mainProduct) {
     .click();
 }
 
-export function waitForPersonalDetailsPage() {
-  const personalDetails = waitForPage('personal-details', 'personalDetails');
-  cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
-}
-
-export function waitForHomepage() {
-  const homepage = waitForPage('homepage', 'homepage');
-  cy.wait(`@${homepage}`).its('status').should('eq', 200);
-}
-
-export function waitForConsent() {
-  const consent = waitForUserAssets('consenttemplates', 'consent');
-  cy.wait(`@${consent}`).its('status').should('eq', 200);
-}
-
 export function waitForAddOptions() {
   const addOptions = waitForPage('add-options', 'addOptions');
-  cy.wait(`@${addOptions}`).its('status').should('eq', 200);
+  cy.wait(`@${addOptions}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function waitForConfirmation() {
   const confirmation = waitForPage('orderConfirmationPage', 'confirmation');
-  cy.wait(`@${confirmation}`).its('status').should('eq', 200);
+  cy.wait(`@${confirmation}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
@@ -222,7 +220,9 @@ export function checkPersonalDetailsPage() {
 
 export function waitForQuoteReviewPage() {
   const quoteReview = waitForPage('quote-review', 'quoteReview');
-  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
+  cy.wait(`@${quoteReview}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function waitForPersonalDetailsForm() {
@@ -230,7 +230,9 @@ export function waitForPersonalDetailsForm() {
     'banking_current_account',
     'formDefinition'
   );
-  cy.wait(`@${formDefinition}`).its('status').should('eq', 200);
+  cy.wait(`@${formDefinition}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function waitForChangeMileage() {
@@ -238,12 +240,16 @@ export function waitForChangeMileage() {
     'ChangeCarDetailsFormComponent',
     'changeCarDetails'
   );
-  cy.wait(`@${changeCarDetails}`).its('status').should('eq', 200);
+  cy.wait(`@${changeCarDetails}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function waitForPolicyDetails() {
   const policyDetails = waitForPage('policy-details', 'policyDetails');
-  cy.wait(`@${policyDetails}`).its('status').should('eq', 200);
+  cy.wait(`@${policyDetails}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }
 
 export function populatePaymentDetails() {
@@ -266,4 +272,18 @@ export function populateBillingAddress() {
   cy.get('[formcontrolname=town]').type('Belgrade');
   cy.get('[formcontrolname=postalCode]').type('11000');
   cy.get('.btn-block').contains('Continue').click();
+}
+
+export function waitConsent() {
+  const consent = waitForUserAssets('consenttemplates', 'consent');
+  cy.wait(`@${consent}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
+}
+
+export function waitForOrder() {
+  const order = waitForUserAssets('orders', 'order');
+  cy.wait(`@${order}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
 }

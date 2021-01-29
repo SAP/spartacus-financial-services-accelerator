@@ -20,6 +20,7 @@ context('Auto Bronze Checkout with change coverage', () => {
   });
 
   it('Should complete first auto step with additional driver', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
     auto.populateAutoMonthlyAudi();
     auto.populateMainDriverInfo();

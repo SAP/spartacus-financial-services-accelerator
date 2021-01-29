@@ -3,9 +3,7 @@ import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
-import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
 
 //Cypress.config('defaultCommandTimeout', 500000);
@@ -22,6 +20,7 @@ context('Auto Bronze Checkout with cancel change', () => {
   });
 
   it('Should complete first auto step with two additional drivers', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
     auto.populateAutoAnnuallyTesla();
     auto.populateMainDriverInfo();
@@ -32,7 +31,6 @@ context('Auto Bronze Checkout with cancel change', () => {
   });
 
   it('Should check comparison table and select main product', () => {
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
     autoIntegration.selectAutoBronze();
     auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();

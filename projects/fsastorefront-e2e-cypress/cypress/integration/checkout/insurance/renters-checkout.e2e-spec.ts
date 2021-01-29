@@ -2,8 +2,7 @@ import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as payment from '../../../helpers/checkout/insurance/payment';
-import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import * as orderHistory from '../../../helpers/my-account/myAccountPages';
 
 context('Renters Checkout', () => {
   before(() => {
@@ -19,6 +18,7 @@ context('Renters Checkout', () => {
   });
 
   it('Should open renters category page', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Renters');
   });
 
@@ -75,16 +75,15 @@ context('Renters Checkout', () => {
   it('Check order confirmation', () => {
     checkout.checkAccordions('rentersFinalReview');
     checkout.checkOrderConfirmation();
-    cy.wait(200000);
-  });
-
-  it('Check my policies page', () => {
-    checkMyPoliciesPage();
-    renters.checkRentersPolicy();
   });
 
   it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
+  });
+
+  it('Check Order history page', () => {
+    orderHistory.orderHistoryPage();
+    orderHistory.checkOrderHistoryContent('€54.61');
   });
 });
