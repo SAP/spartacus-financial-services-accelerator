@@ -16,11 +16,6 @@ export class OccClaimAdapter implements ClaimAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  protected getClaimsEndpoint(userId: string) {
-    const claimsEndpoint = '/users/' + userId + '/claims';
-    return this.occEndpointService.getBaseEndpoint() + claimsEndpoint;
-  }
-
   getClaims(userId: string): Observable<any> {
     const url = this.occEndpointService.getUrl('claims', { userId });
     const params = new HttpParams({ fromString: FULL_PARAMS });
