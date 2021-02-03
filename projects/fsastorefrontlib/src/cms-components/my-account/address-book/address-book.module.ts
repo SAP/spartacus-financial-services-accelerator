@@ -40,18 +40,10 @@ import { FSAddressFormComponent } from './address-form/address-form.component';
       cmsComponents: {
         AccountAddressBookComponent: {
           component: FSAddressBookComponent,
-          providers: [
-            {
-              provide: AddressBookComponentService,
-              useClass: AddressBookComponentService,
-              deps: [UserAddressService],
-            },
-          ],
           guards: [AuthGuard],
         },
       },
     }),
-    UserAddressService,
   ],
   entryComponents: [FSAddressBookComponent, FSAddressFormComponent],
 })
