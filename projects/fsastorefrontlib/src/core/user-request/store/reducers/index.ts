@@ -43,7 +43,7 @@ export function clearUserRequestState(
     if (
       action.type === AuthActions.LOGOUT ||
       action.type === fromClaimAction.CREATE_CLAIM ||
-      action.type === fromClaimAction.LOAD_CURRENT_CLAIM
+      action.type === fromClaimAction.LOAD_CLAIM_BY_ID
     ) {
       state = undefined;
     }

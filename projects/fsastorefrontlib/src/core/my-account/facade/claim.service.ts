@@ -28,21 +28,21 @@ export class ClaimService {
       .subscribe(([claim, userLoggedIn]) => {
         this.currentClaimId = claim.claimNumber;
         if (this.isCreated(claim) && userLoggedIn) {
-          this.loadCurrentClaim();
+          this.loadClaimById(this.currentClaimId);
         }
       })
       .unsubscribe();
   }
 
-  loadCurrentClaim() {
+  loadClaimById(claimId) {
     this.userIdService
       .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
-          new fromAction.LoadCurrentClaim({
+          new fromAction.LoadClaimById({
             userId: occUserId,
-            claimId: this.currentClaimId,
+            claimId: claimId,
           })
         );
       })
@@ -137,7 +137,7 @@ export class ClaimService {
       .subscribe(occUserId => {
         this.currentClaimId = claimNumber;
         this.store.dispatch(
-          new fromAction.LoadCurrentClaim({
+          new fromAction.LoadClaimById({
             userId: occUserId,
             claimId: claimNumber,
           })

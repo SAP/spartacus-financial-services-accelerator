@@ -29,6 +29,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   updatePasswordComp: { paths: ['my-account/update-password'] },
   closeAccount: { paths: ['my-account/close-account'] },
   claims: { paths: ['my-account/my-insurance-claims'] },
+  claimDetails: { paths: ['my-account/my-insurance-claims/:claimId'] },
   noClaims: { paths: ['noClaims'] },
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },

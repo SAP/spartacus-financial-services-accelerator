@@ -10,12 +10,14 @@ import {
   I18nModule,
   RoutesConfig,
   RoutingConfig,
+  UrlModule,
 } from '@spartacus/core';
 import {
   CmsPageGuard,
   PageLayoutComponent,
   SpinnerModule,
   CardModule,
+  MediaModule,
 } from '@spartacus/storefront';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimPoliciesComponent } from './claim-policies/claim-policies.component';
@@ -27,6 +29,8 @@ import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
 import { DateFormatConfigurationModule } from '../../../shared/util/helpers/dateFormatConfiguration.module';
+import { ClaimDetailsComponent } from './claim-details/claim-details.component';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
 
 const routes: Routes = [
   {
@@ -56,6 +60,15 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'claimDetails',
+      pageLabel: 'claim-details',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -67,6 +80,9 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     CardModule,
+    UrlModule,
+    MediaModule,
+    AccordionModule,
     DateFormatConfigurationModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
@@ -82,6 +98,9 @@ const routes: Routes = [
           component: CreateClaimComponent,
           guards: [AuthGuard],
         },
+        AccountClaimDetailsFlex: {
+          component: ClaimDetailsComponent,
+        },
       },
     }),
   ],
@@ -90,11 +109,13 @@ const routes: Routes = [
     DeleteClaimDialogComponent,
     ClaimPoliciesComponent,
     CreateClaimComponent,
+    ClaimDetailsComponent,
   ],
   exports: [
     ClaimsComponent,
     ClaimPoliciesComponent,
     DeleteClaimDialogComponent,
+    ClaimDetailsComponent,
   ],
   providers: [
     ClaimService,
@@ -107,6 +128,7 @@ const routes: Routes = [
     DeleteClaimDialogComponent,
     ClaimPoliciesComponent,
     CreateClaimComponent,
+    ClaimDetailsComponent,
   ],
 })
 export class ClaimModule {}

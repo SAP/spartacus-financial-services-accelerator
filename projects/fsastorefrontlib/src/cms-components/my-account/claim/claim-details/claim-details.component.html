@@ -1,0 +1,147 @@
+<ng-container *ngIf="claim$ | async as claim">
+  <div class="overview-section mb-5">
+    <span class="image-wrapper">
+      <cx-media [container]="claim.incidentType?.icon"></cx-media>
+    </span>
+    <h4>
+      <span class="overview-section-title">
+        {{ claim.insurancePolicy?.categoryData?.name }}
+        {{ 'claim.claim' | cxTranslate }}
+        <br />
+        <!-- {{ claim.insurancePolicy?.categoryData?.name }} -->
+      </span>
+      <span class="overview-section-value border-bottom border-color-3">
+        {{ claim.claimNumber }}
+        <!-- {{ claim.insurancePolicy?.policyNumber }} -->
+      </span>
+    </h4>
+    <a
+      class="overview-section-link"
+      routerLink="/my-account/my-insurance-claims/"
+      routerLinkActive="active"
+      ><span class="d-none d-md-block">{{ 'common.back' | cxTranslate }}</span>
+      <span class="d-md-none fas fa-arrow-left"></span
+    ></a>
+  </div>
+  <div class="accordion">
+    <cx-fs-accordion-item
+      [opened]="true"
+      [title]="'claim.generalInformation' | cxTranslate"
+    >
+      <ul class="accordion-list container-fluid">
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.incidentType' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ claim.incidentType?.incidentName }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.claimNo' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ claim.claimNumber }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'policy.policyNo' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ claim.insurancePolicy?.policyNumber }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.dateOfLoss' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container *ngIf="claim.dateOfLoss != undefined; else na">
+              {{ claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy' }}
+            </ng-container>
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.claimHandler' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container
+              *ngIf="claim.claimHandler?.displayName != undefined; else na"
+            >
+              {{ claim.claimHandler.displayName }}</ng-container
+            >
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.emailAddress' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container
+              *ngIf="claim.claimHandler?.email != undefined; else na"
+              >{{ claim.claimHandler.email }}</ng-container
+            >
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.status' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container *ngIf="claim.claimStatus != undefined; else na">
+              {{ claim.claimStatus }}
+            </ng-container>
+          </div>
+        </li>
+      </ul>
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
+      *ngIf="claim.documents && claim.documents.length > 0"
+      [title]="'fscommon.documents' | cxTranslate"
+    >
+      <ul class="accordion-list container-fluid documents">
+        <li class="accordion-list-item row">
+          <div class="col-3">
+            {{ 'policy.documentName' | cxTranslate }}
+          </div>
+          <div class="col-3 value">
+            {{ 'claim.created' | cxTranslate }}
+          </div>
+          <div class="col-3 value">
+            {{ 'claim.documentType' | cxTranslate }}
+          </div>
+          <div class="col-3 value">
+            {{ 'claim.uploadedByMe' | cxTranslate }}
+          </div>
+        </li>
+        <ng-container *ngFor="let document of claim.documents">
+          <li class="accordion-list-item row">
+            <div class="col-3">
+              <a
+                href="#"
+                class="document-link d-block text-truncate"
+                (click)="getDocument(document, $event)"
+                >{{ document.name }}</a
+              >
+            </div>
+            <div class="col-3 document-title text-right text-sm-left">
+              <!-- should display when document is created -->
+            </div>
+            <div class="col-3 document-title text-right text-sm-left">
+              <!-- should display document type (type of content) -->
+            </div>
+            <div class="col-3 document-title text-right text-sm-left">
+              <!-- should display if document is uploaded by user -->
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </cx-fs-accordion-item>
+  </div>
+</ng-container>
+<ng-template #na>
+  {{ 'fscommon.notAvailable' | cxTranslate }}
+</ng-template>
