@@ -34,6 +34,7 @@ export class ProductConfigurationMiniCartComponent
     protected translationService: FSTranslationService
   ) {}
 
+  private readonly paynowBillingTimeCode = 'paynow';
   subscription = new Subscription();
   product$: Observable<Product> = this.currentProductService.getProduct();
   productId: string;
@@ -80,6 +81,16 @@ export class ProductConfigurationMiniCartComponent
       [translationGroup],
       translationKey
     );
+  }
+
+  getPaynowFormattedPrice(oneTimeChargeEntries: any): string {
+    let paynowFormattedPrice: string;
+    oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
+      if (oneTimeChargeEntry.billingTime.code === this.paynowBillingTimeCode) {
+        paynowFormattedPrice = oneTimeChargeEntry.price.formattedValue;
+      }
+    });
+    return paynowFormattedPrice;
   }
 
   ngOnDestroy() {
