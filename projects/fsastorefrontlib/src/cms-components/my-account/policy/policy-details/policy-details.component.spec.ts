@@ -96,7 +96,7 @@ const document = {
 };
 
 class MockFileService {
-  getFile(code, mime) {
+  getDocument(file, event) {
     return of(document);
   }
 }
@@ -111,7 +111,7 @@ describe('PolicyDetailsComponent', () => {
   let changeRequestService: MockChangeRequestService;
   let routingService: RoutingService;
   let policyService: PolicyService;
-  let fileService: MockFileService;
+  let fileService: FileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -217,9 +217,9 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should test get document', () => {
-    spyOn(fileService, 'getFile').and.callThrough();
+    spyOn(fileService, 'getDocument').and.callThrough();
     component.getDocument(document, mockEvent);
-    expect(fileService.getFile).toHaveBeenCalledWith(documentId, documentMime);
+    expect(fileService.getDocument).toHaveBeenCalledWith(document, mockEvent);
   });
 
   it('should check if adding of new insured object is allowed', () => {

@@ -42,7 +42,7 @@ class MockRoutingService {
 }
 
 class MockFileService {
-  getFile(code, mime) {
+  getDocument(file, event) {
     return of(document);
   }
 }
@@ -52,7 +52,7 @@ describe('ClaimDetailsComponent', () => {
   let fixture: ComponentFixture<ClaimDetailsComponent>;
   let mockRoutingService: RoutingService;
   let mockClaimService: ClaimService;
-  let mockfileService: FileService;
+  let mockFileService: FileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -68,7 +68,7 @@ describe('ClaimDetailsComponent', () => {
 
       mockRoutingService = TestBed.inject(RoutingService);
       mockClaimService = TestBed.inject(ClaimService);
-      mockfileService = TestBed.inject(FileService);
+      mockFileService = TestBed.inject(FileService);
     })
   );
 
@@ -97,11 +97,11 @@ describe('ClaimDetailsComponent', () => {
   });
 
   it('should test get document', () => {
-    spyOn(mockfileService, 'getFile').and.callThrough();
+    spyOn(mockFileService, 'getDocument').and.callThrough();
     component.getDocument(document, mockEvent);
-    expect(mockfileService.getFile).toHaveBeenCalledWith(
-      documentId,
-      documentMime
+    expect(mockFileService.getDocument).toHaveBeenCalledWith(
+      document,
+      mockEvent
     );
   });
 });

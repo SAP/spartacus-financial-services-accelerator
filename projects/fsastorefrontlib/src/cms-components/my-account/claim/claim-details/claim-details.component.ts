@@ -38,16 +38,8 @@ export class ClaimDetailsComponent implements OnInit, OnDestroy {
   }
 
   getDocument(document, event) {
-    event.preventDefault();
     this.subscription.add(
-      this.fileService
-        .getFile(document.code, document.mime)
-        .pipe(
-          map(downloadedFile => {
-            saveAs(downloadedFile, document.altText);
-          })
-        )
-        .subscribe()
+      this.fileService.getDocument(document, event).subscribe()
     );
   }
 
