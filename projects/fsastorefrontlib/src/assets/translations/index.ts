@@ -13,6 +13,7 @@ import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
 import { common } from './overrides/en/common';
 import { payment } from './overrides/en/payment';
+import { address } from './overrides/en/address';
 
 export const fstranslations: TranslationResources = {
   b2b,
@@ -32,4 +33,5 @@ export const fstranslations: TranslationResources = {
 export const fsOverrides: TranslationResources = {
   payment,
   common,
+  address,
 };
