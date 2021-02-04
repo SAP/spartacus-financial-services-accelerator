@@ -218,7 +218,7 @@ describe('PolicyDetailsComponent', () => {
 
   it('should test get document', () => {
     spyOn(fileService, 'getDocument').and.callThrough();
-    component.getDocument(document, mockEvent);
+    component.getDocument(document);
     expect(fileService.getDocument).toHaveBeenCalledWith(document);
   });
 
