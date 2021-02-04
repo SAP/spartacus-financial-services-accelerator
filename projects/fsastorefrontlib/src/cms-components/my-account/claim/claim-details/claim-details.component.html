@@ -118,11 +118,10 @@
         <ng-container *ngFor="let document of claim.documents">
           <li class="accordion-list-item row">
             <div class="col-3">
-              <a
-                href="#"
-                class="document-link d-block text-truncate"
+              <span
+                class="document-link d-block text-truncate pointer"
                 (click)="getDocument(document, $event)"
-                >{{ document.name }}</a
+                >{{ document.name }}</span
               >
             </div>
             <div class="col-3 document-title text-right text-sm-left">

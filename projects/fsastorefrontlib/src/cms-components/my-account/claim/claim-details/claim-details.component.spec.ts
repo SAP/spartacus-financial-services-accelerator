@@ -12,9 +12,6 @@ import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { FileService } from '@spartacus/dynamicforms';
 import * as FileSaver from 'file-saver';
 
-const mockEvent = {
-  preventDefault() {},
-};
 const documentId = 'documentId';
 const documentMime = 'mockMimeType';
 const document = {
@@ -98,7 +95,7 @@ describe('ClaimDetailsComponent', () => {
 
   it('should test get document', () => {
     spyOn(mockFileService, 'getDocument').and.callThrough();
-    component.getDocument(document, mockEvent);
+    component.getDocument(document);
     expect(mockFileService.getDocument).toHaveBeenCalledWith(document);
   });
 });
