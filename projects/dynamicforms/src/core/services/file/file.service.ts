@@ -80,8 +80,7 @@ export class FileService {
     }
   }
 
-  getDocument(document, event) {
-    event.preventDefault();
+  getDocument(document) {
     return this.getFile(document.code, document.mime).pipe(
       map(downloadedFile => {
         saveAs(downloadedFile, document.altText);

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { ClaimService } from '../../../../core/my-account/facade';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { FileService } from '@spartacus/dynamicforms';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'cx-fs-claim-details',
@@ -38,9 +37,8 @@ export class ClaimDetailsComponent implements OnInit, OnDestroy {
   }
 
   getDocument(document, event) {
-    this.subscription.add(
-      this.fileService.getDocument(document, event).subscribe()
-    );
+    event.preventDefault();
+    this.subscription.add(this.fileService.getDocument(document).subscribe());
   }
 
   ngOnDestroy() {

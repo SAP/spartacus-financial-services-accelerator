@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { saveAs } from 'file-saver';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
@@ -94,9 +93,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   }
 
   getDocument(document, event) {
-    this.subscription.add(
-      this.fileService.getDocument(document, event).subscribe()
-    );
+    event.preventDefault();
+    this.subscription.add(this.fileService.getDocument(document).subscribe());
   }
 
   getTranslation(translationGroup: string, translationKey: string): string {

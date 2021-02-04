@@ -96,7 +96,7 @@ const document = {
 };
 
 class MockFileService {
-  getDocument(file, event) {
+  getDocument(file) {
     return of(document);
   }
 }
@@ -219,7 +219,7 @@ describe('PolicyDetailsComponent', () => {
   it('should test get document', () => {
     spyOn(fileService, 'getDocument').and.callThrough();
     component.getDocument(document, mockEvent);
-    expect(fileService.getDocument).toHaveBeenCalledWith(document, mockEvent);
+    expect(fileService.getDocument).toHaveBeenCalledWith(document);
   });
 
   it('should check if adding of new insured object is allowed', () => {

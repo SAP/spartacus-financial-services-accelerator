@@ -4,7 +4,7 @@ import {
   RouterState,
   RoutingService,
 } from '@spartacus/core';
-import { ClaimService } from '../../../../core/my-account/facade';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { Observable, of } from 'rxjs';
 
 import { ClaimDetailsComponent } from './claim-details.component';
@@ -42,7 +42,7 @@ class MockRoutingService {
 }
 
 class MockFileService {
-  getDocument(file, event) {
+  getDocument(file) {
     return of(document);
   }
 }
@@ -84,7 +84,7 @@ describe('ClaimDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check if claimId is not provided', () => {
+  it('should not load claim when claimId is not provided', () => {
     spyOn(mockClaimService, 'loadClaimById').and.stub();
     spyOn(mockRoutingService, 'getRouterState').and.returnValue(
       of({
@@ -99,9 +99,6 @@ describe('ClaimDetailsComponent', () => {
   it('should test get document', () => {
     spyOn(mockFileService, 'getDocument').and.callThrough();
     component.getDocument(document, mockEvent);
-    expect(mockFileService.getDocument).toHaveBeenCalledWith(
-      document,
-      mockEvent
-    );
+    expect(mockFileService.getDocument).toHaveBeenCalledWith(document);
   });
 });
