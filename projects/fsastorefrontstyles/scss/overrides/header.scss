@@ -165,8 +165,9 @@ header {
         }
       }
       cx-link {
-        padding-left: 20px;
+        padding-left: 15px;
         text-decoration: underline;
+        white-space: nowrap;
       }
     }
     cx-login {
@@ -216,10 +217,14 @@ header {
       }
     }
     .HeaderLinks {
+      cx-navigation {
+        order: 2;
+      }
       cx-link {
-        position: absolute;
-        top: 12px;
-        right: 20px;
+        position: relative;
+        text-align: right;
+        padding-right: 15px;
+        top: -25px;
       }
       cx-login-greet {
         margin-bottom: 0;

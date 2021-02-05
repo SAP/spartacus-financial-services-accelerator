@@ -58,5 +58,8 @@ export const layoutConfig: LayoutConfig = {
         'Section6',
       ],
     },
+    CompanyPageTemplate: {
+      slots: ['TopContent', 'BodyContent'],
+    },
   },
 };

@@ -1,0 +1,90 @@
+cx-storefront.CompanyPageTemplate {
+  cx-breadcrumb h1 {
+    display: none;
+  }
+}
+
+cx-page-layout.CompanyPageTemplate {
+  max-width: var(--cx-page-width-max);
+
+  margin: auto;
+  margin-bottom: 40px;
+  @include media-breakpoint-down(sm) {
+    cx-page-slot {
+      margin: 0;
+    }
+  }
+
+  .BodyContent {
+    justify-content: space-evenly;
+    @include media-breakpoint-up(sm) {
+      margin: 0 10px;
+    }
+  }
+
+  // the current rotating banner styles are very opinionated, hence we revert it all.
+  cx-banner p {
+    all: unset;
+  }
+
+  cx-banner {
+    flex: 100%;
+
+    margin-top: 20px;
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 calc(33% - 10px);
+    }
+    @include media-breakpoint-down(md) {
+      flex: calc(50% - 40px);
+      margin-inline-start: 10px;
+      margin-inline-end: 10px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      flex: 100%;
+      margin-inline-start: 20px;
+      margin-inline-end: 20px;
+    }
+
+    cx-generic-link,
+    a {
+      height: 100%;
+    }
+
+    a {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-template-rows: min-content 1fr;
+      gap: 3% 30px;
+      grid-template-areas: 'media .' 'media .';
+      padding: 25px 25px 25px 30px;
+      border: solid 1px var(--cx-color-light);
+      @include fs-box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
+      &:hover {
+        text-decoration: none;
+        border-color: var(--cx-color-4);
+        background: var(--cx-color-4);
+        box-shadow: none;
+      }
+
+      cx-media {
+        grid-area: media;
+        img {
+          filter: var(--cx-img-filter);
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      p {
+        color: var(--cx-color-text);
+        &.headline {
+          margin-bottom: 1.5rem;
+          font-weight: var(--cx-font-weight-semi);
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
