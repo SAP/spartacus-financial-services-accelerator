@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
+  AuthGuard,
   CmsConfig,
   ConfigModule,
   I18nModule,
@@ -13,6 +14,7 @@ import {
   MediaModule,
   PageLayoutComponent,
 } from '@spartacus/storefront';
+import { AdminGuard } from '@spartacus/organization/administration/core';
 import { ProductAssignmentStoreModule } from './../../core/product-assignment/store/product-assignments-store.module';
 import { ActiveProductAssignmentsComponent } from './active-product-assignments/active-product-assignments.component';
 import { ProductAssignmentItemComponent } from './product-assignment-item/product-assignment-item.component';
@@ -60,12 +62,15 @@ import { PotentialProductAssignmentsComponent } from './potential-product-assign
       cmsComponents: {
         ProductAssignmentsFlex: {
           component: ProductAssignmentsComponent,
+          guards: [AuthGuard, AdminGuard],
         },
         PotentialProductAssignmentsFlex: {
           component: PotentialProductAssignmentsComponent,
+          guards: [AuthGuard, AdminGuard],
         },
         ActiveProductAssignmentsFlex: {
           component: ActiveProductAssignmentsComponent,
+          guards: [AuthGuard, AdminGuard],
         },
       },
     }),

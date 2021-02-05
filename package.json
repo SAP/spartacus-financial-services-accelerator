@@ -51,6 +51,7 @@
     "@nguniversal/express-engine": "^10.1.0",
     "@spartacus/assets": "3.0.0",
     "@spartacus/core": "3.0.0",
+    "@spartacus/organization": "3.0.0",
     "@spartacus/storefinder": "3.0.0",
     "@spartacus/storefront": "3.0.0",
     "@spartacus/styles": "3.0.0",
