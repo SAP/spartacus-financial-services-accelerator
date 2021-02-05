@@ -132,28 +132,28 @@ describe('Claim Effects', () => {
   });
 
   it('should return claim', () => {
-    const action = new fromActions.LoadCurrentClaim({
+    const action = new fromActions.LoadClaimById({
       userId: OCC_USER_ID_CURRENT,
       claimId: claimId1,
     });
-    const completion = new fromActions.LoadCurrentClaimSuccess(claim1);
+    const completion = new fromActions.LoadClaimByIdSuccess(claim1);
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
-    expect(effects.loadCurrentClaim$).toBeObservable(expected);
+    expect(effects.loadClaimById$).toBeObservable(expected);
   });
 
   it('should fail to return claim', () => {
     spyOn(mockClaimConnector, 'getClaim').and.returnValue(throwError('Error'));
-    const action = new fromActions.LoadCurrentClaim({
+    const action = new fromActions.LoadClaimById({
       userId: OCC_USER_ID_CURRENT,
       claimId: claimId1,
     });
-    const completion = new fromActions.LoadCurrentClaimFail(
+    const completion = new fromActions.LoadClaimByIdFail(
       JSON.stringify('Error')
     );
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
-    expect(effects.loadCurrentClaim$).toBeObservable(expected);
+    expect(effects.loadClaimById$).toBeObservable(expected);
   });
 
   describe('removeClaim$', () => {
