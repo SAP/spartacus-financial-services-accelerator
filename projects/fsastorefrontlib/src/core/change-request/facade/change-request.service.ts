@@ -145,8 +145,4 @@ export class ChangeRequestService {
   private isCreated(changeRequest: any): boolean {
     return changeRequest && changeRequest.configurationSteps !== undefined;
   }
-
-  private isLoggedIn(userId: string): boolean {
-    return typeof userId !== undefined;
-  }
 }

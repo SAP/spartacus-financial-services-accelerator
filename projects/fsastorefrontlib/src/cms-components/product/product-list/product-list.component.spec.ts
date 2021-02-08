@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FSProductListComponent } from './product-list.component';
-import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
+import { Component, Input, PipeTransform, Pipe } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';

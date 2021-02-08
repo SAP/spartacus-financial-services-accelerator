@@ -8,10 +8,8 @@ import {
   CmsConfig,
   I18nModule,
   provideDefaultConfig,
-  UserAddressService,
 } from '@spartacus/core';
 import {
-  AddressBookComponentService,
   CardModule,
   FormErrorsModule,
   IconModule,
