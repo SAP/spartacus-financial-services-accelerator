@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -60,6 +60,13 @@ class MockRoutingService {
 
 class MockCheckoutConfigService {}
 
+@Pipe({
+  name: 'cxSortByName',
+})
+class MockSortPipe implements PipeTransform {
+  transform() {}
+}
+
 describe('AddOptionsComponent', () => {
   let component: AddOptionsComponent;
   let fixture: ComponentFixture<AddOptionsComponent>;
@@ -77,7 +84,7 @@ describe('AddOptionsComponent', () => {
           MediaModule,
           NgbTooltipModule,
         ],
-        declarations: [AddOptionsComponent],
+        declarations: [AddOptionsComponent, MockSortPipe],
         providers: [
           {
             provide: FSCartService,
