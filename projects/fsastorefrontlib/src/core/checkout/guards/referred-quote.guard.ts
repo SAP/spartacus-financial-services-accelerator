@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, UrlTree } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import {
   ActiveCartService,
   GlobalMessageService,

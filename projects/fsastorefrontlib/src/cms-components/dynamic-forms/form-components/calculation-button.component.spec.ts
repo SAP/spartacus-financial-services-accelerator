@@ -36,8 +36,6 @@ const mockField: FieldConfig = {
   },
 };
 
-class MockOccValueListService {}
-
 class MockLanguageService {
   getActive() {
     return of('en');

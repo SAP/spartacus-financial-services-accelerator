@@ -11,9 +11,8 @@ import {
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
-import { CheckoutStepService, ICON_TYPE } from '@spartacus/storefront';
+import { CheckoutStepService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
-import { Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import createSpy = jasmine.createSpy;
@@ -37,10 +36,6 @@ const mockCategoryAndStep: FSSteps = {
   stepParameter: 'insurances_auto',
   step: 'category',
 };
-
-class MockCxIconComponent {
-  @Input() type: ICON_TYPE;
-}
 
 class MockCheckoutDeliveryService {
   getDeliveryAddress(): Observable<PaymentDetails> {

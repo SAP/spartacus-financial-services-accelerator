@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {
   Address,
@@ -78,9 +77,6 @@ describe('FSAddressFormComponent', () => {
   let userService: UserService;
   let mockGlobalMessageService: any;
   let mockModalService: MockModalService;
-
-  const defaultAddressCheckbox = (): DebugElement =>
-    fixture.debugElement.query(By.css('[formcontrolname=defaultAddress]'));
 
   beforeEach(
     waitForAsync(() => {

@@ -1,6 +1,9 @@
 {
     "extends": "../tslint.json",
     "rules": {
+        "no-unused-variable": true,
+        "no-unused-imports": true,
+        "no-conditional-assignment": true,
         "directive-selector": [
             true,
             "attribute",

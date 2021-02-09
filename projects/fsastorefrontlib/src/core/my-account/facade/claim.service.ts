@@ -186,8 +186,4 @@ export class ClaimService {
   private isCreated(claim: any): boolean {
     return claim && claim.claimNumber !== undefined;
   }
-
-  private isLoggedIn(userId: string): boolean {
-    return typeof userId !== undefined;
-  }
 }

@@ -5,7 +5,7 @@ import {
   OCC_USER_ID_CURRENT,
   UserIdService,
 } from '@spartacus/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Claim } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';

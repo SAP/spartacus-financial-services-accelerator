@@ -16,7 +16,6 @@ import { FSCheckoutService } from './checkout.service';
 
 const identificationType = 'idType';
 
-const userId = 'userId';
 const paymentType = 'paymentCode';
 
 class CheckoutDeliveryServiceStub {
