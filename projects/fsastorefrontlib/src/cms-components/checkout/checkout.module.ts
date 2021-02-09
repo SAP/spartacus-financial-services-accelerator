@@ -77,7 +77,7 @@ const routes: Routes = [
     canActivate: [CmsPageGuard, BindQuoteGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'add-options', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+      pageLabel: 'add-options', // LABEL for ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent, // SPA LAYOUT Component you're targeting
   },
