@@ -1,6 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { I18nTestingModule, OrderEntry, OccConfig } from '@spartacus/core';
+import { I18nTestingModule, OccConfig } from '@spartacus/core';
 import { FSCart, FSProduct } from '../../../../../occ/occ-models/occ.models';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../../../../core/cart/facade/cart.service';
@@ -12,12 +12,6 @@ const mockProduct: FSProduct = {
   },
   configurable: false,
 };
-
-const mockEntries: OrderEntry[] = [
-  {
-    product: mockProduct,
-  },
-];
 
 const mockCart: FSCart = {
   deliveryOrderGroups: [

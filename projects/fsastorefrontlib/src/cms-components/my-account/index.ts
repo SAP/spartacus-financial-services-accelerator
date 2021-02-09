@@ -6,3 +6,4 @@ export * from './quote/index';
 export * from './update-profile/index';
 export * from './myaccount.module';
 export * from './order/index';
+export * from './address-book/index';

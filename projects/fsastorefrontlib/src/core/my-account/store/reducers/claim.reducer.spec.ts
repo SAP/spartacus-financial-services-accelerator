@@ -28,7 +28,7 @@ describe('Claim Reducer', () => {
 
   describe('LOAD_CURRENT_CLAIM_SUCCESS', () => {
     it('should load current claim', () => {
-      const action = new fromAction.LoadCurrentClaimSuccess(mockedClaim);
+      const action = new fromAction.LoadClaimByIdSuccess(mockedClaim);
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockedClaim);
       expect(state.loaded).toEqual(true);

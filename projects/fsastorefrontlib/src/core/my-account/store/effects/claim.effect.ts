@@ -74,16 +74,16 @@ export class ClaimEffects {
   );
 
   @Effect()
-  loadCurrentClaim$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.LOAD_CURRENT_CLAIM),
-    map((action: fromActions.LoadCurrentClaim) => action.payload),
+  loadClaimById$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_CLAIM_BY_ID),
+    map((action: fromActions.LoadClaimById) => action.payload),
     switchMap(payload => {
       return this.claimConnector.getClaim(payload.userId, payload.claimId).pipe(
         map((claims: any) => {
-          return new fromActions.LoadCurrentClaimSuccess(claims);
+          return new fromActions.LoadClaimByIdSuccess(claims);
         }),
         catchError(error =>
-          of(new fromActions.LoadCurrentClaimFail(JSON.stringify(error)))
+          of(new fromActions.LoadClaimByIdFail(JSON.stringify(error)))
         )
       );
     })

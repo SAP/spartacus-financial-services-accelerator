@@ -29,9 +29,7 @@
             {{ 'fscommon.totalPrice' | cxTranslate }}:
           </div>
           <div class="short-overview-value col-6">
-            {{
-              (product.price?.oneTimeChargeEntries)[0]?.price?.formattedValue
-            }}
+            {{ getPaynowFormattedPrice(product.price?.oneTimeChargeEntries) }}
           </div>
         </div>
       </ng-container>

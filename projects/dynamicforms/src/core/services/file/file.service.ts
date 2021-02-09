@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { FileConnector } from '../../connectors/file.connector';
 import * as fromAction from '../../store/actions';
 import * as uploadSelector from '../../store/selectors/upload.selector';
 import { StateWithForm } from '../../store/state';
+import { saveAs } from 'file-saver';
 
 @Injectable()
 export class FileService {
@@ -77,5 +78,13 @@ export class FileService {
         }
       });
     }
+  }
+
+  getDocument(document) {
+    return this.getFile(document.code, document.mime).pipe(
+      map(downloadedFile => {
+        saveAs(downloadedFile, document.altText);
+      })
+    );
   }
 }

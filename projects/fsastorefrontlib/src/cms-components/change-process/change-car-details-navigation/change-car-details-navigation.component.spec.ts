@@ -25,11 +25,6 @@ const changeRequest = {
   requestId: requestId,
 };
 
-const mockChangeCarDetailsForm = {
-  effectiveDate: '10/10/2020',
-  vehicleAnnualMileage: '10000',
-};
-
 const addedInsuredObject = {
   insuredObjectItems: [
     {

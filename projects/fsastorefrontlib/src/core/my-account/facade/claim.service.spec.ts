@@ -94,9 +94,7 @@ describe('ClaimServiceTest', () => {
   });
 
   it('should be able to get current claim', () => {
-    store.dispatch(
-      new fromAction.LoadCurrentClaimSuccess({ claimId: claimId })
-    );
+    store.dispatch(new fromAction.LoadClaimByIdSuccess({ claimId: claimId }));
     let claimResponse;
     service
       .getCurrentClaim()
@@ -109,9 +107,9 @@ describe('ClaimServiceTest', () => {
 
   it('should be able to load claim by id', () => {
     service.currentClaimId = claimId;
-    service.loadCurrentClaim();
+    service.loadClaimById(service.currentClaimId);
     expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadCurrentClaim({ userId: userId, claimId: claimId })
+      new fromAction.LoadClaimById({ userId: userId, claimId: claimId })
     );
   });
 
@@ -191,7 +189,7 @@ describe('ClaimServiceTest', () => {
   it('should be able to resume claim', () => {
     service.resumeClaim(claimId);
     expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadCurrentClaim({ userId: userId, claimId: claimId })
+      new fromAction.LoadClaimById({ userId: userId, claimId: claimId })
     );
   });
 

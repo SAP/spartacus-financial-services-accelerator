@@ -3,22 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { FSCart } from '../../../../occ/occ-models/occ.models';
 import { ReferredQuoteDialogComponent } from './referred-quote-dialog.component';
-import createSpy = jasmine.createSpy;
-
-const mockCart: FSCart = {
-  code: 'test001',
-  insuranceQuote: {
-    quoteId: 'testQuote001',
-    state: {
-      code: 'BIND',
-    },
-    quoteWorkflowStatus: {
-      code: 'REFERRED',
-    },
-  },
-};
 
 class MockModalService {
   dismissActiveModal(): void {}

@@ -22,5 +22,9 @@ export const claim = {
       questionsOrConcerns:
         'Wenn Sie weitere Fragen haben, wenden Sie sich bitte an Ihren Sachbearbeiter. Um Ihren Status online zu überprüfen, besuchen Sie den Bereich Schadensfälle.',
     },
+    generalInformation: 'Allgemeine Informationen',
+    created: 'Erstellt',
+    documentType: 'Dokumenttyp',
+    uploadedByMe: '[DE] Uploaded by me',
   },
 };

@@ -28,21 +28,39 @@ export class ClaimService {
       .subscribe(([claim, userLoggedIn]) => {
         this.currentClaimId = claim.claimNumber;
         if (this.isCreated(claim) && userLoggedIn) {
-          this.loadCurrentClaim();
+          this.loadClaimById(this.currentClaimId);
         }
       })
       .unsubscribe();
   }
 
+  /**
+   * @deprecated The method should not be used. Use loadClaimById instead
+   */
   loadCurrentClaim() {
     this.userIdService
       .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
-          new fromAction.LoadCurrentClaim({
+          new fromAction.LoadClaimById({
             userId: occUserId,
             claimId: this.currentClaimId,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  loadClaimById(claimId) {
+    this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.LoadClaimById({
+            userId: occUserId,
+            claimId: claimId,
           })
         );
       })
@@ -137,7 +155,7 @@ export class ClaimService {
       .subscribe(occUserId => {
         this.currentClaimId = claimNumber;
         this.store.dispatch(
-          new fromAction.LoadCurrentClaim({
+          new fromAction.LoadClaimById({
             userId: occUserId,
             claimId: claimNumber,
           })
@@ -167,9 +185,5 @@ export class ClaimService {
 
   private isCreated(claim: any): boolean {
     return claim && claim.claimNumber !== undefined;
-  }
-
-  private isLoggedIn(userId: string): boolean {
-    return typeof userId !== undefined;
   }
 }

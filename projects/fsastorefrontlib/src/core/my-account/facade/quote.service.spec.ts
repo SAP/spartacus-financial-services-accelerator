@@ -4,11 +4,7 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
-import {
-  OCC_USER_ID_ANONYMOUS,
-  OCC_USER_ID_CURRENT,
-  UserIdService,
-} from '@spartacus/core';
+import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -19,35 +15,6 @@ import { QuoteService } from './quote.service';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
-const formId = 'formId';
-const formDefinitionId = 'formDefinitionId';
-
-const mockFormData = {
-  id: formId,
-  formDefinition: {
-    formId: formDefinitionId,
-  },
-};
-
-const cartWithOneEntry = {
-  deliveryOrderGroups: [
-    {
-      entries: [
-        {
-          product: {
-            defaultCategory: {
-              code: 'testCategory',
-            },
-          },
-        },
-      ],
-    },
-  ],
-};
-
-const cartWithoutEntries = {
-  deliveryOrderGroups: [],
-};
 
 class MockUserIdService {
   getUserId(): Observable<string> {
@@ -66,35 +33,6 @@ class MockFormDataService {
 class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
-
-const mockCart = {
-  deliveryOrderGroups: [
-    {
-      entries: [
-        {
-          formData: [
-            {
-              id: 'formDataId',
-              formDefinition: {
-                formId: 'formDefinitionId',
-              },
-            },
-          ],
-          product: {
-            defaultCategory: {
-              code: 'category',
-            },
-          },
-        },
-      ],
-    },
-  ],
-  insuranceQuote: {
-    quoteDetails: {
-      entry: [{ key: 'formId', value: 'testFormId' }],
-    },
-  },
-};
 
 class MockCartService {
   cart;

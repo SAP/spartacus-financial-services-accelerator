@@ -183,8 +183,11 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         .subscribe()
     );
     this.fileList.splice(index, 1);
-    this.files.splice(index, 1);
-    this.setValueAndValidate(this.files);
+    if (this.files.length !== 0) {
+      this.files.splice(index, 1);
+      this.setValueAndValidate(this.files);
+    }
+
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
       uploadField.value = null;

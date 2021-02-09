@@ -23,7 +23,7 @@ export function reducer(
       };
     }
 
-    case fromAction.LOAD_CURRENT_CLAIM_SUCCESS: {
+    case fromAction.LOAD_CLAIM_BY_ID_SUCCESS: {
       const content = { ...action.payload };
       return {
         ...state,

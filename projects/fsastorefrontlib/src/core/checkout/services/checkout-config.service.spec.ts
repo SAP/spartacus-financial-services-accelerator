@@ -1,11 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import {
-  OrderEntry,
-  Product,
-  RoutesConfig,
-  RoutingConfigService,
-} from '@spartacus/core';
+import { Product, RoutesConfig, RoutingConfigService } from '@spartacus/core';
 import {
   CheckoutConfig,
   CheckoutStepService,
@@ -22,19 +17,6 @@ import { FSCheckoutConfigService } from './checkout-config.service';
 const mockCheckoutSteps: Array<FSCheckoutStep> = checkoutConfig.checkout.steps;
 
 const mockCheckoutConfig: CheckoutConfig = checkoutConfig;
-
-const product: FSProduct = {
-  defaultCategory: {
-    code: 'insurances_auto',
-  },
-  configurable: false,
-};
-
-const mockEntries: OrderEntry[] = [
-  {
-    product: product,
-  },
-];
 
 const mockCart = {
   deliveryOrderGroups: [
