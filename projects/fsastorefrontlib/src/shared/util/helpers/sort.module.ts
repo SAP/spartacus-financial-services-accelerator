@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { SortByProductNamePipe } from './sortByProductName.pipe';
+import { SortByNamePipe } from './sortByName.pipe';
 
 @NgModule({
-  declarations: [SortByProductNamePipe],
-  exports: [SortByProductNamePipe],
-  providers: [SortByProductNamePipe],
+  declarations: [SortByNamePipe],
+  exports: [SortByNamePipe],
+  providers: [SortByNamePipe],
 })
 export class SortModule {}

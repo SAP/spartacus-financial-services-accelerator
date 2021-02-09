@@ -61,7 +61,7 @@ class MockRoutingService {
 class MockCheckoutConfigService {}
 
 @Pipe({
-  name: 'cxSortByProductName',
+  name: 'cxSortByName',
 })
 class MockSortPipe implements PipeTransform {
   transform() {}

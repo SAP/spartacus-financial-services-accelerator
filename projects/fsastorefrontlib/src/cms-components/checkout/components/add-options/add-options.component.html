@@ -7,7 +7,7 @@
   <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="entries$ | async as entries">
       <ng-container
-        *ngFor="let orderEntryData of entries | slice: 1 | cxSortByProductName"
+        *ngFor="let orderEntryData of entries | slice: 1 | cxSortByName: 'product':'name'"
       >
         <div
           class="row mx-3 py-3 no-gutters position-relative"
