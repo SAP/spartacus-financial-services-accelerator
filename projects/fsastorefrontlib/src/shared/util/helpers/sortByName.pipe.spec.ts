@@ -42,10 +42,8 @@ describe('SortByProductNamePipe', () => {
     {
       product: productA,
     },
-    {
-    },
-    {
-    },
+    {},
+    {},
   ];
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -57,15 +55,21 @@ describe('SortByProductNamePipe', () => {
 
   describe('transform', () => {
     it('should sort unsorted entries', () => {
-      expect(pipe.transform(mockEntriesUnsorted, 'product', 'name')).toEqual(mockEntriesSorted);
+      expect(pipe.transform(mockEntriesUnsorted, 'product', 'name')).toEqual(
+        mockEntriesSorted
+      );
     });
 
     it('sorted entries should stay the same', () => {
-      expect(pipe.transform(mockEntriesSorted, 'product', 'name')).toEqual(mockEntriesSorted);
+      expect(pipe.transform(mockEntriesSorted, 'product', 'name')).toEqual(
+        mockEntriesSorted
+      );
     });
 
     it('sorted entries should stay the same', () => {
-      expect(pipe.transform(mockEntriesWithoutProducts, 'product', 'name')).toEqual(mockEntriesWithoutProducts);
+      expect(
+        pipe.transform(mockEntriesWithoutProducts, 'product', 'name')
+      ).toEqual(mockEntriesWithoutProducts);
     });
   });
 });

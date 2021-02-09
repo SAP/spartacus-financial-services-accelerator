@@ -4,6 +4,8 @@ import { OrderEntry } from '@spartacus/core';
 @Pipe({ name: 'cxSortByName' })
 export class SortByNamePipe implements PipeTransform {
   transform(input: OrderEntry[], prop1: string, prop2: string): any {
-    return input.sort((a, b) => a[prop1]?.[prop2].localeCompare(b[prop1]?.[prop2]));
+    return input.sort((a, b) =>
+      a[prop1]?.[prop2].localeCompare(b[prop1]?.[prop2])
+    );
   }
 }
