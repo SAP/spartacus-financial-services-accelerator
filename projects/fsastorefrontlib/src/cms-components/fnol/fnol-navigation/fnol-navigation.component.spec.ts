@@ -48,7 +48,7 @@ const claimRequest = {
       stepContent: {
         contentData: {
           entry: [
-            { key: 'howAccidentOccurred', value: 'sfds' },
+            { key: 'howAccidentOccurred', value: 'testValue' },
             { key: 'relevantFiles', value: '[DOC00001000]' },
           ],
         },
@@ -210,7 +210,7 @@ describe('FNOLNavigationComponent', () => {
     );
   });
 
-  it('should redirect to the summary claim page', () => {
+  it('should redirect to the claim confirmation page', () => {
     userRequest.requestStatus = 'SUBMITTED';
     spyOn(mockUserRequestService, 'getUserRequest').and.returnValue(
       of(userRequest)
