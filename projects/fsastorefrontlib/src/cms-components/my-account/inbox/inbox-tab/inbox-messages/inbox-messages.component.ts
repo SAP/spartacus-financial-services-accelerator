@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import {
   FSSearchConfig,
@@ -43,6 +43,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   activeTabIndex = 0;
   defaultSortOrder = 'desc';
+  ghostData: any;
 
   ngOnInit() {
     this.loadCurrentMessageGroup();
@@ -80,7 +81,12 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.inboxService
         .getMessages(this.messageGroup, this.searchConfig)
         .pipe(
-          tap(response => {
+          tap((response: any) => {
+            this.ghostData = response;
+            this.inboxService.messagesSource.next(false);
+          }),
+          filter((response: any) => !response.values),
+          map((response: any) => {
             if (response) {
               this.pagination = {
                 currentPage: response.pagination.page,
@@ -89,8 +95,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
                 totalResults: response.pagination.totalCount,
               };
             }
-          }),
-          map(response => {
             this.inboxService.messagesSource.next(response);
             if (response.sorts.length > 0 && response.pagination) {
               this.searchConfig.currentPage = response.pagination.page;
