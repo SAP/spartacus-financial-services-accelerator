@@ -62,6 +62,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
             ) {
               this.clearSearchData();
             }
+            this.loadedMessages = null;
             this.messageGroup =
               group && group.messageGroup
                 ? group.messageGroup
@@ -81,12 +82,12 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.inboxService
         .getMessages(this.messageGroup, this.searchConfig)
         .pipe(
-          tap((response: any) => {
+          tap(response => {
             this.ghostData = response;
             this.inboxService.messagesSource.next(false);
           }),
-          filter((response: any) => !response.values),
-          map((response: any) => {
+          filter(response => !response.values),
+          map(response => {
             if (response) {
               this.pagination = {
                 currentPage: response.pagination.page,

@@ -80,7 +80,7 @@
   }
   .ghost .ghost-row {
     height: 4.375rem;
-    div[class^='col'] {
+    & > * {
       padding: 1.5rem;
       &:before {
         content: '';
