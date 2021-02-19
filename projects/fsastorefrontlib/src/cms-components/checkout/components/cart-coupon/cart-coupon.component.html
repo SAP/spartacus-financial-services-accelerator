@@ -1,0 +1,32 @@
+<ng-container *ngIf="cart$ | async as cart">
+  <ng-container
+    *ngIf="cart.insuranceQuote?.state?.code !== 'BIND' && isUserRegistered"
+  >
+    <div class="cx-cart-coupon-title pt-4 pb-1">
+      {{ 'miniCart.voucherCode' | cxTranslate }}
+    </div>
+    <div class="form-group">
+      <form [formGroup]="couponForm">
+        <div class="cx-cart-coupon-container d-flex">
+          <input
+            type="text"
+            class="form-control input-coupon-code mb-0 w-50"
+            formControlName="couponCode"
+          />
+          <button
+            (click)="applyVoucher()"
+            class="primary-button btn-block ml-4 w-25"
+            type="button"
+            [disabled]="cartIsLoading$ | async"
+            [class.disabled]="cartIsLoading$ | async"
+          >
+            {{ 'voucher.apply' | cxTranslate }}
+          </button>
+        </div>
+        <cx-form-errors
+          [control]="couponForm.get('couponCode')"
+        ></cx-form-errors>
+      </form>
+    </div>
+  </ng-container>
+</ng-container>

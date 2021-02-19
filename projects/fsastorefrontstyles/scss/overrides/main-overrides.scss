@@ -19,6 +19,10 @@ cx-page-layout {
       padding: 3rem 1.5rem 0 1.5rem;
     }
   }
+  &.MultiStepCheckoutSummaryPageTemplate cx-page-slot.SideContent {
+    flex-direction: row;
+    height: max-content;
+  }
 }
 
 // TODO: Keep until we refactor the way we implement HTML content in impex files!
