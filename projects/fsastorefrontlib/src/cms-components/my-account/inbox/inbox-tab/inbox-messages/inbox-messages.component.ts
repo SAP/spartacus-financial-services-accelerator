@@ -88,14 +88,12 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
           }),
           filter(response => !response.values),
           map(response => {
-            if (response) {
-              this.pagination = {
-                currentPage: response.pagination.page,
-                pageSize: response.pagination.count,
-                totalPages: response.pagination.totalPages,
-                totalResults: response.pagination.totalCount,
-              };
-            }
+            this.pagination = {
+              currentPage: response.pagination.page,
+              pageSize: response.pagination.count,
+              totalPages: response.pagination.totalPages,
+              totalResults: response.pagination.totalCount,
+            };
             this.inboxService.messagesSource.next(response);
             if (response.sorts.length > 0 && response.pagination) {
               this.searchConfig.currentPage = response.pagination.page;
