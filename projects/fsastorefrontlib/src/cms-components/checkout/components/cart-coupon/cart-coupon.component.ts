@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {
   ActiveCartService,
-  AuthGuard,
   CartVoucherService,
   CustomerCouponService,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
 } from '@spartacus/core';
 import { CartCouponComponent } from '@spartacus/storefront';
+import { Observable } from 'rxjs';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 
 @Component({
@@ -14,8 +16,9 @@ import { FSCartService } from '../../../../core/cart/facade/cart.service';
   templateUrl: './cart-coupon.component.html',
 })
 export class FSCartCouponComponent extends CartCouponComponent
-  implements OnInit {
-  isUserRegistered;
+  implements OnInit, OnDestroy {
+  currentUser;
+  userRegistered$: Observable<any>;
 
   constructor(
     protected cartVoucherService: CartVoucherService,
@@ -23,25 +26,14 @@ export class FSCartCouponComponent extends CartCouponComponent
     protected customerCouponService: CustomerCouponService,
     protected activeCartService: ActiveCartService,
     protected cartService: FSCartService,
-    protected authGuard: AuthGuard
+    protected userIdService: UserIdService
   ) {
     super(cartVoucherService, formBuilder, customerCouponService, cartService);
+    this.currentUser = OCC_USER_ID_CURRENT;
   }
 
   ngOnInit(): void {
     super.ngOnInit();
-    this.authGuard
-      .canActivate()
-      .subscribe(data => (this.isUserRegistered = data));
-    this.couponForm = this.formBuilder.group({
-      couponCode: [''],
-    });
-  }
-
-  applyVoucher() {
-    if (!this.couponForm.get('couponCode').value) {
-      return;
-    }
-    super.applyVoucher();
+    this.userRegistered$ = this.userIdService.getUserId();
   }
 }

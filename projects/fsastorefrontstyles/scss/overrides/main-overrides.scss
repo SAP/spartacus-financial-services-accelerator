@@ -22,7 +22,7 @@ cx-page-layout {
   &.MultiStepCheckoutSummaryPageTemplate cx-page-slot {
     &.SideContent {
       flex-direction: row;
-      height: max-content;
+      align-content: flex-start;
     }
   }
 }

@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CmsConfig, I18nModule, provideDefaultConfig } from '@spartacus/core';
+import {
+  AuthGuard,
+  CmsConfig,
+  I18nModule,
+  provideDefaultConfig,
+} from '@spartacus/core';
 import { FSCartCouponComponent } from './cart-coupon.component';
 import { FormErrorsModule } from '@spartacus/storefront';
 
@@ -20,7 +25,6 @@ import { FormErrorsModule } from '@spartacus/storefront';
       cmsComponents: {
         CartCouponFlex: {
           component: FSCartCouponComponent,
-          // guards: [AuthGuard],
         },
       },
     }),
