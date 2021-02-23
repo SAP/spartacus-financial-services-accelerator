@@ -19,7 +19,10 @@ export class OccFileAdapter implements FileAdapter {
     const url = this.occEndpointService.getUrl('uploadFile', {
       userId: userId,
     });
-    const params: HttpParams = new HttpParams().set('fields', FULL_PARAMS);
+    const params: HttpParams = new HttpParams()
+      .set('fileSize', file.size.toString())
+      .set('fields', FULL_PARAMS);
+
     const data: FormData = new FormData();
     data.append('file', file);
 
