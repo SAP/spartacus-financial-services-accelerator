@@ -6,6 +6,7 @@ import {
   CartVoucherService,
   CustomerCouponService,
   I18nTestingModule,
+  UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
@@ -76,6 +77,12 @@ class MockCartService {
   }
 }
 
+class MockUserIdService {
+  getUserId() {
+    return of('current');
+  }
+}
+
 class MockAuthGuard {
   canActivate = jasmine
     .createSpy('AuthGuard.canActivate')
@@ -87,6 +94,7 @@ describe('FSCartCouponComponent', () => {
   let fixture: ComponentFixture<FSCartCouponComponent>;
   let input: HTMLInputElement;
   let mockFSCartService: FSCartService;
+  let userIdService: UserIdService;
   let mockAuthGaurd: AuthGuard;
   let el: DebugElement;
 
@@ -102,6 +110,7 @@ describe('FSCartCouponComponent', () => {
             useValue: mockCustomerCouponService,
           },
           { provide: FSCartService, useClass: MockCartService },
+          { provide: UserIdService, useClass: MockUserIdService },
           { provide: AuthGuard, useClass: MockAuthGuard },
         ],
         declarations: [FSCartCouponComponent],
@@ -124,6 +133,7 @@ describe('FSCartCouponComponent', () => {
     fixture = TestBed.createComponent(FSCartCouponComponent);
     component = fixture.componentInstance;
     mockFSCartService = TestBed.inject(FSCartService);
+    userIdService = TestBed.inject(UserIdService);
     mockAuthGaurd = TestBed.inject(AuthGuard);
     el = fixture.debugElement;
     fixture.detectChanges();

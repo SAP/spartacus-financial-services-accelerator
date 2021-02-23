@@ -19,8 +19,8 @@ cx-page-layout {
       padding: 3rem 1.5rem 0 1.5rem;
     }
   }
-  &.MultiStepCheckoutSummaryPageTemplate cx-page-slot {
-    &.SideContent {
+  &.MultiStepCheckoutSummaryPageTemplate {
+    cx-page-slot.SideContent {
       flex-direction: row;
       align-content: flex-start;
     }

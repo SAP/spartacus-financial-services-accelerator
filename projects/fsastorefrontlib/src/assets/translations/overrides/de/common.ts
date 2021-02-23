@@ -77,6 +77,6 @@ export const common = {
       'term-amount': 'Investment Betrag',
       'deposit-term': 'Einzahlungsdauer',
     },
-    voucherCode: '[DE] Voucher code',
+    voucherCode: 'Gutscheincode',
   },
 };
