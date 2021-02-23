@@ -61,6 +61,7 @@ import { UserIdentificationModule } from './components/user-identification/user-
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
+import { FSCartCouponModule } from './components/cart-coupon/cart-coupon.module';
 
 const routes: Routes = [
   {
@@ -197,6 +198,7 @@ const routes: Routes = [
     UrlModule,
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
+    FSCartCouponModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
