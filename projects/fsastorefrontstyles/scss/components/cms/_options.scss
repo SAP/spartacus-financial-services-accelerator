@@ -7,6 +7,9 @@
     @include media-breakpoint-down(sm) {
       text-align: center;
     }
+    img {
+      width: 50px;
+    }
     h6 {
       margin: 0;
       padding: 0 3rem 0 0.5rem;

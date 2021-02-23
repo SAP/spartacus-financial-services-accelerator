@@ -2,7 +2,7 @@
   <ng-container
     *ngIf="
       cart.insuranceQuote?.state?.code !== 'BIND' &&
-      (userRegistered$ | async) === currentUser
+      (userRegistered$ | async) === 'current'
     "
   >
     <div class="cx-cart-coupon-title pt-4 pb-1">

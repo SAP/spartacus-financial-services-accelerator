@@ -29,7 +29,6 @@ export class FSCartCouponComponent extends CartCouponComponent
     protected userIdService: UserIdService
   ) {
     super(cartVoucherService, formBuilder, customerCouponService, cartService);
-    this.currentUser = OCC_USER_ID_CURRENT;
   }
 
   ngOnInit(): void {
