@@ -4,7 +4,6 @@ import {
   ActiveCartService,
   CartVoucherService,
   CustomerCouponService,
-  OCC_USER_ID_CURRENT,
   UserIdService,
 } from '@spartacus/core';
 import { CartCouponComponent } from '@spartacus/storefront';
