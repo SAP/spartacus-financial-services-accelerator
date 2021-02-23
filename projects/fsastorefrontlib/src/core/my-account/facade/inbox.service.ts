@@ -3,6 +3,9 @@ import { SearchConfig } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InboxDataService, InboxTab } from '../services/inbox-data.service';
 import { InboxConnector } from '../connectors/inbox.connector';
+import { startWith } from 'rxjs/operators';
+
+export const GHOST_DATA = { values: new Array(5) };
 
 @Injectable()
 export class InboxService {
@@ -22,11 +25,13 @@ export class InboxService {
   }
 
   getMessages(messageGroup, searchConfig: SearchConfig): Observable<any> {
-    return this.adapter.getSiteMessagesForUserAndGroup(
-      this.inboxData.userId,
-      messageGroup,
-      searchConfig
-    );
+    return this.adapter
+      .getSiteMessagesForUserAndGroup(
+        this.inboxData.userId,
+        messageGroup,
+        searchConfig
+      )
+      .pipe(startWith(GHOST_DATA));
   }
 
   setMessagesState(uidList, read): Observable<any> {

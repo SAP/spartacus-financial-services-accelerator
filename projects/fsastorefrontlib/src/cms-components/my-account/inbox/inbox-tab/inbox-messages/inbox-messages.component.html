@@ -102,7 +102,9 @@
 
 <!--  TABLE HEADER  END -->
 
-<ng-container *ngIf="messagesObject$ | async as messagesObj">
+<ng-container
+  *ngIf="messagesObject$ | async as messagesObj; else ghostMessages"
+>
   <div class="messages">
     <div
       class="message accordion border-bottom border-color-3"
@@ -187,7 +189,19 @@
     </cx-pagination>
   </div>
 </ng-container>
-
+<ng-template #ghostMessages>
+  <div *ngIf="ghostData?.values; else noMessages" class="ghost container-fluid">
+    <div
+      class="row ghost-row border border-top-0 border-color-3"
+      *ngFor="let data of ghostData.values"
+    >
+      <div class="col-1"></div>
+      <div class="col-6 col-md-3"></div>
+      <div class="col-md-6 d-none d-md-flex"></div>
+      <div class="col-3 col-md-2 col-sm-4"></div>
+    </div>
+  </div>
+</ng-template>
 <ng-template #noMessages>
   <p class="p-4 border-bottom border-color-3">
     {{ 'fscommon.noMessagesForGroup' | cxTranslate }}

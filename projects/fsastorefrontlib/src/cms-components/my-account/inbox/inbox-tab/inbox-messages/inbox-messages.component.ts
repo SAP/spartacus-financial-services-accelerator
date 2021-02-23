@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import {
   FSSearchConfig,
@@ -43,6 +43,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   activeTabIndex = 0;
   defaultSortOrder = 'desc';
+  ghostData: any;
 
   ngOnInit() {
     this.loadCurrentMessageGroup();
@@ -61,6 +62,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
             ) {
               this.clearSearchData();
             }
+            this.loadedMessages = null;
             this.messageGroup =
               group && group.messageGroup
                 ? group.messageGroup
@@ -81,16 +83,17 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         .getMessages(this.messageGroup, this.searchConfig)
         .pipe(
           tap(response => {
-            if (response) {
-              this.pagination = {
-                currentPage: response.pagination.page,
-                pageSize: response.pagination.count,
-                totalPages: response.pagination.totalPages,
-                totalResults: response.pagination.totalCount,
-              };
-            }
+            this.ghostData = response;
+            this.inboxService.messagesSource.next(false);
           }),
+          filter(response => !response.values),
           map(response => {
+            this.pagination = {
+              currentPage: response.pagination.page,
+              pageSize: response.pagination.count,
+              totalPages: response.pagination.totalPages,
+              totalResults: response.pagination.totalCount,
+            };
             this.inboxService.messagesSource.next(response);
             if (response.sorts.length > 0 && response.pagination) {
               this.searchConfig.currentPage = response.pagination.page;
