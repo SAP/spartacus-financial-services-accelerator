@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {
@@ -18,6 +18,7 @@ import {
 import { FormErrorsModule, ModalService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSAddressFormComponent } from './address-form.component';
+import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import createSpy = jasmine.createSpy;
 
 class MockUserService {
@@ -55,10 +56,17 @@ const mockAddress: Address = {
   country: { isocode: 'JP' },
   defaultAddress: true,
 };
+const country = { key: 'AU', value: 'Austria' };
+
 class MockModalService {
   open(): any {}
 }
 
+class MockOccValueListService {
+  getValuesFromAPI(): any {
+    return of({ results: [country] });
+  }
+}
 class MockCheckoutDeliveryService {
   clearAddressVerificationResults = createSpy();
   verifyAddress = createSpy();
@@ -100,6 +108,7 @@ describe('FSAddressFormComponent', () => {
             useClass: MockCheckoutDeliveryService,
           },
           { provide: UserService, useClass: MockUserService },
+          { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: UserAddressService, useClass: MockUserAddressService },
           { provide: GlobalMessageService, useValue: mockGlobalMessageService },
           { provide: ModalService, useClass: MockModalService },
@@ -148,6 +157,13 @@ describe('FSAddressFormComponent', () => {
     expect(component.addressForm.get('lastName').value).toEqual(
       mockUser.lastName
     );
+
+    component.countries$
+      .subscribe(countries => {
+        expect(countries.length).toEqual(1);
+        expect(countries[0].isocode).toEqual(country.key);
+      })
+      .unsubscribe();
   });
 
   it('should call ngOnInit without setting initial values for first & last name', () => {
