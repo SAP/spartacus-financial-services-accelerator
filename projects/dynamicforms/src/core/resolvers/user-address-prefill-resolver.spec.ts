@@ -9,12 +9,14 @@ const lastName = 'Moore';
 const street = 'Omladinskih brigada';
 const streetNumber = '2';
 
-const mockAddress = {
-  firstName: firstName,
-  lastName: lastName,
-  line1: street,
-  line2: streetNumber,
-};
+const mockAddress = [
+  {
+    firstName: firstName,
+    lastName: lastName,
+    line1: street,
+    line2: streetNumber,
+  },
+];
 class MockUserAddressService {
   getAddresses() {
     return of(mockAddress);
@@ -52,7 +54,7 @@ describe('UserAddressPrefillResolver', () => {
   });
 
   it('should resolve undefined address line', () => {
-    spyOn(userAddressService, 'getAddresses').and.returnValue(of());
+    spyOn(userAddressService, 'getAddresses').and.returnValue(of([]));
     userAddressesPrefillResolver
       .getPrefillValue(mockFieldPath)
       .subscribe(value => {
