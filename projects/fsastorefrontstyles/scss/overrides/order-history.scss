@@ -17,6 +17,13 @@
     justify-content: center;
     .btn.btn-primary.btn-block.active {
       margin-top: 2rem;
+      filter: none;
+    }
+  }
+  .cx-order-history-body .col-sm-12 {
+    & > div {
+      font-size: var(--cx-h3-font-size);
+      font-weight: var(--cx-font-weight-semi);
     }
   }
 }
