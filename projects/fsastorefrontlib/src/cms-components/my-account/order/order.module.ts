@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
+  AuthGuard,
   CmsConfig,
   FeaturesConfig,
   FeaturesConfigModule,
@@ -15,13 +16,16 @@ import {
   MediaModule,
   CardModule,
   OrderOverviewModule,
+  ListNavigationModule,
 } from '@spartacus/storefront';
 import { FSOrderDetailItemsComponent } from './order-details/order-detail-items/order-detail-items.component';
 import { FSOrderDetailTotalsComponent } from './order-details/order-detail-totals/order-detail-totals.component';
+import { FSOrderHistoryComponent } from './order-history/order-history.component';
 
 const moduleComponents = [
   FSOrderDetailItemsComponent,
   FSOrderDetailTotalsComponent,
+  FSOrderHistoryComponent,
 ];
 
 @NgModule({
@@ -34,6 +38,7 @@ const moduleComponents = [
     UrlModule,
     SpinnerModule,
     MediaModule,
+    ListNavigationModule,
     CardModule,
     OrderOverviewModule,
   ],
@@ -42,9 +47,15 @@ const moduleComponents = [
       cmsComponents: {
         AccountOrderDetailsItemsComponent: {
           component: FSOrderDetailItemsComponent,
+          guards: [AuthGuard],
         },
         AccountOrderDetailsTotalsComponent: {
           component: FSOrderDetailTotalsComponent,
+          guards: [AuthGuard],
+        },
+        AccountOrderHistoryComponent: {
+          component: FSOrderHistoryComponent,
+          guards: [AuthGuard],
         },
       },
       features: {

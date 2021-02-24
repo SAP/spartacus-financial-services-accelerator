@@ -1,12 +1,7 @@
 @import '../theme/fs/variables';
 
-%cx-order-history {
-  .cx-order-history-header {
-    @include headline-style;
-    padding: 1rem 0;
-    margin: 1rem auto 3rem;
-    text-align: center;
-  }
+%cx-fs-order-history {
+  @extend %cx-order-history;
   .table {
     tr {
       cursor: pointer;

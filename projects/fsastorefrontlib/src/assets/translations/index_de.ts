@@ -7,7 +7,7 @@ import { configureProduct } from './de/configureProduct.de';
 import { forms } from './de/forms.de';
 import { orderConfirmation } from './de/orderConfirmation.de';
 import { payment } from './overrides/de/payment';
-import { myAccount } from './overrides/de/myAccount';
+import { myAccount } from './overrides/de/my-account';
 import { policy } from './de/policy.de';
 import { premiumCalendar } from './de/premiumCalendar.de';
 import { quote } from './de/quote.de';
