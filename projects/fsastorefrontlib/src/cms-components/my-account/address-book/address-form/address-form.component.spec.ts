@@ -56,7 +56,7 @@ const mockAddress: Address = {
   country: { isocode: 'JP' },
   defaultAddress: true,
 };
-const country = { key: 'AU', value: 'Austria' };
+const country = { key: 'AT', value: 'Austria' };
 
 class MockModalService {
   open(): any {}

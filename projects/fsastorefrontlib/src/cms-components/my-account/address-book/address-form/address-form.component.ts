@@ -14,7 +14,6 @@ import {
   UserService,
 } from '@spartacus/core';
 import { AddressFormComponent, ModalService } from '@spartacus/storefront';
-import { of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 
