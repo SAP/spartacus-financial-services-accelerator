@@ -103,16 +103,16 @@
       <ul class="accordion-list container-fluid documents">
         <li class="accordion-list-item row">
           <div class="col-3">
-            {{ 'policy.documentName' | cxTranslate }}
+            {{ 'document.name' | cxTranslate }}
           </div>
           <div class="col-3 value">
-            {{ 'claim.created' | cxTranslate }}
+            {{ 'document.creationDate' | cxTranslate }}
           </div>
           <div class="col-3 value">
-            {{ 'claim.documentType' | cxTranslate }}
+            {{ 'document.documentType' | cxTranslate }}
           </div>
           <div class="col-3 value">
-            {{ 'claim.uploadedByMe' | cxTranslate }}
+            {{ 'document.uploadedByMe' | cxTranslate }}
           </div>
         </li>
         <ng-container *ngFor="let document of claim.documents">
@@ -125,7 +125,7 @@
               >
             </div>
             <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display when document is created -->
+              {{ document.creationTime | cxDate: 'dd MMM yyyy' }}
             </div>
             <div class="col-3 document-title text-right text-sm-left">
               <!-- should display document type (type of content) -->

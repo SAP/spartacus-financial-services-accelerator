@@ -10,7 +10,7 @@ class MockFileAdapter implements FileAdapter {
   ).and.callFake((userId, fileCode, fileType) =>
     of('getFileForCodeAndType' + userId + fileCode + fileType)
   );
-  getFilesForCodes = createSpy(
+  getFilesForUser = createSpy(
     'FileAdapter.getFilesForCodes'
   ).and.callFake((userId, fileCodes) =>
     of('getFilesForCodes' + userId + fileCodes)
@@ -56,9 +56,9 @@ describe('FileConnector', () => {
     );
   });
 
-  it('should call adapter for getFilesForCodes', () => {
+  it('should call adapter for getFilesForUser', () => {
     fileConnector.getFiles(user, documentCodes);
-    expect(fileAdapter.getFilesForCodes).toHaveBeenCalledWith(
+    expect(fileAdapter.getFilesForUser).toHaveBeenCalledWith(
       user,
       documentCodes
     );

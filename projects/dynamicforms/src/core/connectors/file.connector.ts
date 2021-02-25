@@ -12,8 +12,8 @@ export class FileConnector {
     return this.uploadAdapter.getFileForCodeAndType(userId, fileCode, fileType);
   }
 
-  getFiles(userId: string, fileCode: Array<string>): Observable<any> {
-    return this.uploadAdapter.getFilesForCodes(userId, fileCode);
+  getFiles(userId: string, fileCode?: Array<string>): Observable<any> {
+    return this.uploadAdapter.getFilesForUser(userId, fileCode);
   }
 
   uploadFile(userId: string, file: File): Observable<any> {

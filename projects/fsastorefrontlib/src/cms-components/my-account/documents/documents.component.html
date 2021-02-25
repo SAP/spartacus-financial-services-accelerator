@@ -1,0 +1,52 @@
+<ng-container *ngIf="documentList$ | async as documentList; else loading">
+  <div *ngIf="(documentList | json) != '{}'; else noDocuments">
+    <!-- ng-container needs check if documents are uploaded by user or they came from external system -->
+    <ng-container>
+      <h6 class="accordion-heading active">
+        {{ 'document.uploadedDocuments' | cxTranslate }}
+      </h6>
+      <ul class="accordion-list container-fluid documents">
+        <li class="accordion-list-item row">
+          <div class="col-3">
+            {{ 'document.name' | cxTranslate }}
+          </div>
+          <div class="col-3 value">
+            {{ 'document.creationDate' | cxTranslate }}
+          </div>
+          <div class="col-3 value">
+            {{ 'document.referredInsuranceObject' | cxTranslate }}
+          </div>
+          <div class="col-3 value">
+            {{ 'document.documentType' | cxTranslate }}
+          </div>
+        </li>
+        <ng-container *ngFor="let document of documentList.documents">
+          <li class="accordion-list-item row">
+            <div class="col-3">
+              <span
+                class="document-link d-block text-truncate pointer"
+                (click)="downloadDocument(document)"
+                >{{ document.name }}</span
+              >
+            </div>
+            <div class="col-3 document-title text-right text-sm-left">
+              {{ document.creationTime | cxDate: 'dd MMM yyyy' }}
+            </div>
+            <div class="col-3 document-title text-right text-sm-left">
+              {{ getReferredInsuranceObjects(document) }}
+            </div>
+            <div class="col-3 document-title text-right text-sm-left">
+              <!-- should display document type (type of content) -->
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template #noDocuments>
+  <h3>{{ 'document.youHaveNoDocuments' | cxTranslate }}</h3>
+</ng-template>

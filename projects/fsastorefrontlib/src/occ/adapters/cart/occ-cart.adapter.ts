@@ -55,7 +55,7 @@ export class OccCartAdapter implements CartAdapter {
       .set('bundleTemplateId', bundleTemplateId)
       .set('productCode', productCode)
       .set('quantity', quantity.toString())
-      .set('fields', 'FULL');
+      .set('fields', 'DEFAULT');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

@@ -12,6 +12,7 @@ import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { FSAddressBookModule } from './address-book';
 import { ClaimModule } from './claim/claim.module';
+import { DocumentModule } from './documents';
 import { InboxModule } from './inbox/inbox.module';
 import { FSOrderModule } from './order';
 import { PolicyModule } from './policy/policy.module';
@@ -92,6 +93,15 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'myDocuments',
+      pageLabel: 'my-documents',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -106,6 +116,7 @@ const routes: Routes = [
     ClaimModule,
     PremiumCalendarModule,
     FSAddressBookModule,
+    DocumentModule,
     UserRequestStoreModule,
     RouterModule.forChild(routes),
     FSOrderModule,

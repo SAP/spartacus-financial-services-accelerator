@@ -19,9 +19,9 @@ export abstract class FileAdapter {
    * @param userId The user id
    * @param fileCodes The file codes
    */
-  abstract getFilesForCodes(
+  abstract getFilesForUser(
     userId: string,
-    fileCodes: Array<string>
+    fileCodes?: Array<string>
   ): Observable<any>;
   /**
    * Abstract method used to upload file

@@ -23,8 +23,5 @@ export const claim = {
     createFailed: 'Claim for given policy cannot be created.',
     alreadySubmitted: 'Your Claim is already submitted.',
     generalInformation: 'General Information',
-    created: 'Created',
-    documentType: 'Document type',
-    uploadedByMe: 'Uploaded by me',
   },
 };
