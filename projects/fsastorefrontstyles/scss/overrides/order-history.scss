@@ -3,6 +3,19 @@
 %cx-fs-order-history {
   @extend %cx-order-history;
   .table {
+    th,
+    td {
+      color: var(--cx-color-secondary);
+      &:last-of-type {
+        padding-right: 1.25rem;
+      }
+      &:first-of-type {
+        padding-left: 1.25rem;
+      }
+    }
+    thead {
+      background-color: var(--cx-color-4);
+    }
     tr {
       cursor: pointer;
     }
@@ -20,5 +33,9 @@
       font-size: var(--cx-h3-font-size);
       font-weight: var(--cx-font-weight-semi);
     }
+  }
+  .cx-order-history-value {
+    font-size: var(--cx-text-font-size);
+    font-weight: var(--cx-font-weight-normal);
   }
 }
