@@ -6,9 +6,9 @@
     <div class="card-wrapper col-12 col-md-4 my-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">
+          <h6 class="card-title">
             {{ 'fscommon.paymentDetails' | cxTranslate }}
-          </h5>
+          </h6>
           <p class="card-text">{{ order.paymentInfo?.accountHolderName }}</p>
           <p class="card-text">{{ order.paymentInfo?.cardNumber }}</p>
           <p class="card-text">
@@ -23,17 +23,17 @@
     <div class="card-wrapper col-12 col-md-4 my-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">
+          <h6 class="card-title">
             {{ 'checkoutOrderConfirmation.orderNumber' | cxTranslate }}
-          </h5>
+          </h6>
           <p class="card-text">{{ order.code }}</p>
-          <h5 class="card-title">
+          <h6 class="card-title">
             {{ 'checkoutOrderConfirmation.placedOn' | cxTranslate }}
-          </h5>
+          </h6>
           <p class="card-text">{{ order.created | cxDate: 'longDate' }}</p>
-          <h5 class="card-title">
+          <h6 class="card-title">
             {{ 'checkoutOrderConfirmation.status' | cxTranslate }}
-          </h5>
+          </h6>
           <p class="card-text">{{ order.status }}</p>
         </div>
       </div>

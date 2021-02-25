@@ -24,21 +24,6 @@
         </div>
         <ng-container *ngFor="let entry of entries">
           <div class="row border-bottom py-3 align-items-center">
-            <div
-              *ngIf="
-                entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
-              "
-              class="col-12 text-right text-uppercase semi-bold"
-            >
-              <a href="/">
-                <span
-                  class="h2 d-inline d-md-none fs-icon icon-selected-item"
-                ></span>
-                <span class="d-none d-md-inline">
-                  {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
-                </span>
-              </a>
-            </div>
             <div class="col-2">
               <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
             </div>
@@ -65,6 +50,19 @@
                 {{ 'fscommon.price' | cxTranslate }}:
               </div>
               <div>{{ entry?.totalPrice?.formattedValue }}</div>
+            </div>
+            <div
+              *ngIf="
+                entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
+              "
+              class="col-3 text-right text-uppercase semi-bold ml-auto"
+            >
+              <span
+                class="h2 d-inline d-md-none fs-icon icon-selected-item"
+              ></span>
+              <button class="d-none d-md-block action-button btn-block">
+                {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
+              </button>
             </div>
           </div>
         </ng-container>

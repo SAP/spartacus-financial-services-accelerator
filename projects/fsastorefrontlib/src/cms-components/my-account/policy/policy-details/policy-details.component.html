@@ -1,32 +1,22 @@
 <ng-container *ngIf="policy$ | async as policy">
   <div class="overview-section mb-5">
-    <span
-      *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct"
-      class="image-wrapper"
-    >
-      <cx-media
-        [container]="
-          policy.mainProduct?.coverageProduct?.defaultCategory?.image
-        "
-      ></cx-media>
-    </span>
-    <h4>
-      <span *ngIf="policy.categoryData" class="overview-section-title">
-        {{ policy.categoryData.name }} {{ 'policy.policy' | cxTranslate }}
-        <br />
-        {{ policy.mainProduct.coverageProduct.name }}
-      </span>
-      <span class="overview-section-value border-bottom border-color-3">
-        {{ policy.policyNumber }}
-      </span>
-    </h4>
     <a
       class="overview-section-link"
       routerLink="/my-account/my-policies/"
       routerLinkActive="active"
-      ><span class="d-none d-md-block">{{ 'common.back' | cxTranslate }}</span>
-      <span class="d-md-none fas fa-arrow-left"></span
+    >
+      <span class="fas fa-arrow-left"></span
     ></a>
+    <h2 class="heading-headline p-3 mt-3 mb-5 text-center">
+      <span *ngIf="policy.categoryData">
+        {{ policy.mainProduct.coverageProduct.name }}
+        {{ 'policy.policy' | cxTranslate }}
+      </span>
+      <br />
+      <span>
+        {{ policy.policyNumber }}
+      </span>
+    </h2>
   </div>
   <div class="accordion">
     <cx-fs-accordion-item
