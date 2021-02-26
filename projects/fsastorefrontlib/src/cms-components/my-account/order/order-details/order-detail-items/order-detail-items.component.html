@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <!-- DESKTOP TABLE HEAD START-->
         <div
-          class="row d-none d-md-flex text-uppercase py-4 background-color-4 border-bottom border-top"
+          class="row d-none d-md-flex text-uppercase py-4 background-color-4 border-color-3 border-bottom border-top"
         >
           <div class="title col-6">
             {{ 'cartItems.description' | cxTranslate }}
@@ -26,7 +26,7 @@
         </div>
         <!-- DESKTOP TABLE HEAD END-->
         <ng-container *ngFor="let entry of entries">
-          <div class="row border-bottom py-3 align-items-center">
+          <div class="row border-bottom border-color-3 py-3 align-items-center">
             <div class="col-12 col-md-2 text-center text-md-left">
               <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
             </div>
@@ -38,9 +38,14 @@
                 </div>
                 <div class="col-6 d-none d-md-block">
                   <ng-container
-                    *ngIf="order.insuranceQuote.paymentFrequency; else na"
-                    >{{ order.insuranceQuote.paymentFrequency }}</ng-container
+                    *ngIf="
+                      entry.product?.fulfilmentType?.code ===
+                        'FINANCIAL_3RD_PARTY';
+                      else paymentFrequency
+                    "
                   >
+                    {{ 'fscommon.oneTimeCharge' | cxTranslate }}
+                  </ng-container>
                 </div>
               </div>
             </div>
@@ -54,7 +59,7 @@
                 <div class="col-6">
                   {{ 'cartItems.description' | cxTranslate }}:
                 </div>
-                <div class="text-right col-6">
+                <div class="col-6 text-right">
                   {{ entry.product?.name }}
                 </div>
               </div>
@@ -62,13 +67,16 @@
                 <div class="col-6">
                   {{ 'fscommon.paymentFrequency' | cxTranslate }}:
                 </div>
-                <div class="text-right col-6">
+                <div class="col-6 text-right">
                   <ng-container
-                    *ngIf="order.insuranceQuote.paymentFrequency; else na"
-                    ><div>
-                      {{ order.insuranceQuote.paymentFrequency }}
-                    </div></ng-container
+                    *ngIf="
+                      entry.product?.fulfilmentType?.code ===
+                        'FINANCIAL_3RD_PARTY';
+                      else paymentFrequency
+                    "
                   >
+                    {{ 'fscommon.oneTimeCharge' | cxTranslate }}
+                  </ng-container>
                 </div>
               </div>
               <div class="row">
@@ -95,6 +103,11 @@
         </ng-container>
       </div>
     </ng-container>
+    <ng-template #paymentFrequency>
+      <span *ngIf="order.insuranceQuote.paymentFrequency; else na">
+        {{ order.insuranceQuote.paymentFrequency }}
+      </span>
+    </ng-template>
     <ng-template #na>
       {{ 'fscommon.notAvailable' | cxTranslate }}
     </ng-template>

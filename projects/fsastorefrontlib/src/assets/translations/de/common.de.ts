@@ -52,6 +52,7 @@ export const fscommon = {
     finalReview: 'Abschließende Prüfung',
     paymentDetails: 'Zahlungsdetails',
     paymentFrequency: 'Zahlungsrythmus',
+    oneTimeCharge: '[DE] One Time Charge',
     paymentMethod: 'Zahlungsmethode',
     confirmAndAgree:
       'Hiermit bestätige ich, dass ich die Datenschutzbestimmungen gelesen habe und damit einverstanden bin.',

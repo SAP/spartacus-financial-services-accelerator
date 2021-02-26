@@ -3,6 +3,7 @@
 %cx-fs-order-history {
   @extend %cx-order-history;
   .table {
+    border-color: var(--cx-color-3);
     th,
     td {
       color: var(--cx-color-secondary);
