@@ -65,7 +65,7 @@ const mockOrderHistoryList$ = new BehaviorSubject<OrderHistoryList | Cart>(
 
 @Component({
   template: '',
-  selector: 'cx-pagination',
+  selector: 'cx-fs-pagination',
 })
 class MockPaginationComponent {
   @Input() pagination;
@@ -73,7 +73,7 @@ class MockPaginationComponent {
 }
 @Component({
   template: '',
-  selector: 'cx-sorting',
+  selector: 'cx-fs-sorting',
 })
 class MockSortingComponent {
   @Input() sortOptions;
