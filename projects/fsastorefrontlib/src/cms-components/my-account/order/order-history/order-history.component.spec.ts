@@ -12,7 +12,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
   OrderHistoryList,
-  ReplenishmentOrder,
   RoutingService,
   TranslationService,
   UserOrderService,
@@ -45,17 +44,7 @@ const mockEmptyOrderList: OrderHistoryList = {
   pagination: { totalResults: 0, totalPages: 1 },
 };
 
-const mockReplenishmentOrder: ReplenishmentOrder = {
-  active: true,
-  purchaseOrderNumber: 'test-po',
-  replenishmentOrderCode: 'test-repl-order',
-  entries: [{ entryNumber: 0, product: { name: 'test-product' } }],
-};
-
 const mockOrderHistoryList$ = new BehaviorSubject<OrderHistoryList>(mockOrders);
-const mockReplenishmentOrder$ = new BehaviorSubject<ReplenishmentOrder>(
-  mockReplenishmentOrder
-);
 
 @Component({
   template: '',
@@ -111,8 +100,8 @@ class MockTranslationService {
 }
 
 class MockUserReplenishmentOrderService {
-  getReplenishmentOrderDetails(): Observable<ReplenishmentOrder> {
-    return mockReplenishmentOrder$.asObservable();
+  getReplenishmentOrderDetails(): Observable<any> {
+    return of();
   }
 }
 
@@ -231,77 +220,5 @@ describe('FSOrderHistoryComponent', () => {
 
     component.ngOnDestroy();
     expect(userService.clearOrderList).toHaveBeenCalledWith();
-  });
-
-  describe('when replenishment does NOT exist', () => {
-    beforeEach(() => {
-      mockReplenishmentOrder$.next({});
-    });
-
-    it('should display history title', () => {
-      fixture.detectChanges();
-
-      const element = fixture.debugElement.query(
-        By.css('.cx-order-history-header')
-      );
-
-      expect(element.nativeElement.textContent).toContain(
-        'orderHistory.orderHistory'
-      );
-
-      expect(element.nativeElement.textContent).not.toContain(
-        'orderHistory.replenishmentHistory'
-      );
-    });
-
-    it('should display no orders found page if no orders are found', () => {
-      mockOrderHistoryList$.next(mockEmptyOrderList);
-      fixture.detectChanges();
-
-      expect(
-        fixture.debugElement.query(By.css('.cx-order-history-no-order'))
-      ).not.toBeNull();
-      expect(
-        fixture.debugElement.query(
-          By.css('.cx-replenishment-details-order-history-no-order')
-        )
-      ).toBeNull();
-    });
-  });
-
-  describe('when replenishment does exist', () => {
-    beforeEach(() => {
-      mockReplenishmentOrder$.next(mockReplenishmentOrder);
-    });
-
-    it('should display replenishment details history title', () => {
-      fixture.detectChanges();
-
-      const element = fixture.debugElement.query(
-        By.css('.cx-replenishment-details-order-history-header')
-      );
-
-      expect(element.nativeElement.textContent).toContain(
-        'orderHistory.replenishmentHistory'
-      );
-
-      expect(element.nativeElement.textContent).not.toContain(
-        'orderHistory.orderHistory'
-      );
-    });
-
-    it('should display no orders found page if no orders are found', () => {
-      mockOrderHistoryList$.next(mockEmptyOrderList);
-      fixture.detectChanges();
-
-      expect(
-        fixture.debugElement.query(By.css('.cx-order-history-no-order'))
-      ).toBeNull();
-      expect(
-        fixture.debugElement.query(
-          By.css('.cx-replenishment-details-order-history-no-order')
-        )
-      ).not.toBeNull();
-    });
   });
 });
