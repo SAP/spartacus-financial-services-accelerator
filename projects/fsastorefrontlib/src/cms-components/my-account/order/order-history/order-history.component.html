@@ -76,7 +76,16 @@
                   <div class="d-md-none cx-order-history-label">
                     {{ 'fscommon.product' | cxTranslate }}
                   </div>
-                  {{ (order?.entries)[0]?.product?.name }}
+                  <a
+                    [routerLink]="
+                      {
+                        cxRoute: 'orderDetails',
+                        params: order
+                      } | cxUrl
+                    "
+                    class="cx-order-history-value"
+                    >{{ (order?.entries)[0]?.product?.name }}</a
+                  >
                 </td>
                 <td class="cx-order-history-placed">
                   <div class="d-md-none cx-order-history-label">
