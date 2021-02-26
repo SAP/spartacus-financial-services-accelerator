@@ -10,6 +10,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
+  Cart,
   I18nTestingModule,
   OrderHistoryList,
   RoutingService,
@@ -20,19 +21,33 @@ import {
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSOrderHistoryComponent } from './order-history.component';
 
-const mockOrders: OrderHistoryList = {
+const mockOrders: OrderHistoryList | Cart = <OrderHistoryList | Cart>{
   orders: [
     {
       code: '1',
       placed: new Date('2018-01-01'),
       statusDisplay: 'test',
       total: { formattedValue: '1' },
+      entries: [
+        {
+          product: {
+            name: 'Test Product',
+          },
+        },
+      ],
     },
     {
       code: '2',
       placed: new Date('2018-01-02'),
       statusDisplay: 'test2',
       total: { formattedValue: '2' },
+      entries: [
+        {
+          product: {
+            name: 'Test Product 2',
+          },
+        },
+      ],
     },
   ],
   pagination: { totalResults: 1, totalPages: 2, sort: 'byDate' },
@@ -44,7 +59,9 @@ const mockEmptyOrderList: OrderHistoryList = {
   pagination: { totalResults: 0, totalPages: 1 },
 };
 
-const mockOrderHistoryList$ = new BehaviorSubject<OrderHistoryList>(mockOrders);
+const mockOrderHistoryList$ = new BehaviorSubject<OrderHistoryList | Cart>(
+  mockOrders
+);
 
 @Component({
   template: '',
@@ -74,7 +91,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 class MockUserOrderService {
-  getOrderHistoryList(): Observable<OrderHistoryList> {
+  getOrderHistoryList(): Observable<OrderHistoryList | Cart> {
     return mockOrderHistoryList$.asObservable();
   }
   getOrderHistoryListLoaded(): Observable<boolean> {
@@ -144,31 +161,6 @@ describe('FSOrderHistoryComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should read order list', () => {
-    let orders: OrderHistoryList;
-    component.orders$
-      .subscribe(value => {
-        orders = value;
-      })
-      .unsubscribe();
-    expect(orders).toEqual(mockOrders);
-  });
-
-  it('should redirect when clicking on order id', () => {
-    spyOn(routingService, 'go').and.stub();
-
-    fixture.detectChanges();
-    const rows = fixture.debugElement.queryAll(
-      By.css('.cx-order-history-table tbody tr')
-    );
-    rows[1].triggerEventHandler('click', null);
-
-    expect(routingService.go).toHaveBeenCalledWith({
-      cxRoute: 'orderDetails',
-      params: mockOrders.orders[1],
-    });
   });
 
   it('should set correctly sort code', () => {
