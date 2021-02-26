@@ -14,6 +14,7 @@ import { UserPrefillResolver } from '../resolvers/user-prefill-resolver';
 import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
 import { UploadComponent } from '../../components/upload/upload.component';
 import { CurrentDatePrefillResolver } from '../resolvers/current-date-prefill-resolver';
+import { UserAddressPrefillResolver } from '../resolvers/user-address-prefill-resolver';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -103,6 +104,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
     },
     prefill: {
+      address: {
+        prefillResolver: UserAddressPrefillResolver,
+      },
       user: {
         prefillResolver: UserPrefillResolver,
       },

@@ -11,6 +11,7 @@ import {
   Cart,
   CmsComponent,
   I18nTestingModule,
+  UserAddressService,
 } from '@spartacus/core';
 import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -85,6 +86,9 @@ class MockActiveCartService {
     return of();
   }
 }
+class MockUserAddressService {
+  loadAddresses() {}
+}
 const componentData = {
   uid: 'TestPersonalDetailsComponent',
   typeCode: 'PersonalDetailsComponent',
@@ -116,6 +120,10 @@ describe('PersonalDetailsComponent', () => {
           {
             provide: ActiveCartService,
             useClass: MockActiveCartService,
+          },
+          {
+            provide: UserAddressService,
+            useClass: MockUserAddressService,
           },
           {
             provide: CmsComponentData,
