@@ -85,7 +85,7 @@
                     {{ 'fscommon.product' | cxTranslate }}
                   </div>
                   <!-- {{ type.orderHistory | json }} -->
-                  BLA
+                  {{ (order?.entries)[0]?.product?.name }}
                 </td>
                 <td class="cx-order-history-placed">
                   <div class="d-md-none cx-order-history-label">
