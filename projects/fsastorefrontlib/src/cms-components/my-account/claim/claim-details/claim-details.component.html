@@ -117,8 +117,8 @@
           <tbody>
             <tr *ngFor="let document of claim.documents">
               <td class="pointer">
-                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-                  {{ 'document.name' | cxTranslate }}:
+                <div class="d-md-none w-50 semi-bold mr-2">
+                  {{ 'document.name' | cxTranslate }}
                 </div>
                 <span
                   class="td-value text-right notice"
@@ -127,22 +127,22 @@
                 >
               </td>
               <td>
-                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-                  {{ 'document.creationDate' | cxTranslate }}:
+                <div class="d-md-none w-50 semi-bold mr-2">
+                  {{ 'document.creationDate' | cxTranslate }}
                 </div>
                 <span class="td-value text-right">{{
                   document.creationTime | cxDate: 'dd MMM yyyy'
                 }}</span>
               </td>
               <td>
-                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-                  {{ 'document.referredInsuranceObject' | cxTranslate }}:
+                <div class="d-md-none w-50 semi-bold mr-2">
+                  {{ 'document.referredInsuranceObject' | cxTranslate }}
                 </div>
                 <span class="td-value text-right"></span>
               </td>
               <td>
-                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-                  {{ 'document.documentType' | cxTranslate }}:
+                <div class="d-md-none w-50 semi-bold mr-2">
+                  {{ 'document.documentType' | cxTranslate }}
                 </div>
               </td>
             </tr>
