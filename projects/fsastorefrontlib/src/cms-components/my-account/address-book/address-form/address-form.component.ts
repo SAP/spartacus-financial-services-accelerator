@@ -7,12 +7,15 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   CheckoutDeliveryService,
+  Country,
   GlobalMessageService,
   User,
   UserAddressService,
   UserService,
 } from '@spartacus/core';
 import { AddressFormComponent, ModalService } from '@spartacus/storefront';
+import { filter, map } from 'rxjs/operators';
+import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 
 @Component({
   selector: 'cx-fs-address-form',
@@ -40,13 +43,16 @@ export class FSAddressFormComponent extends AddressFormComponent
     defaultAddress: [true],
   });
 
+  countriesURL = '/catalogs/financialProductCatalog/valueLists/country';
+
   constructor(
     protected fb: FormBuilder,
     protected checkoutDeliveryService: CheckoutDeliveryService,
     protected userService: UserService,
     protected userAddressService: UserAddressService,
     protected globalMessageService: GlobalMessageService,
-    protected modalService: ModalService
+    protected modalService: ModalService,
+    protected occValueListService: OccValueListService
   ) {
     super(
       fb,
@@ -66,6 +72,21 @@ export class FSAddressFormComponent extends AddressFormComponent
     if (this.user?.lastName) {
       this.addressForm.controls.lastName.setValue(this.user.lastName);
     }
+    this.countries$ = this.occValueListService
+      .getValuesFromAPI(this.countriesURL)
+      .pipe(
+        filter(result => result.values),
+        map(result => {
+          const options: Country[] = [];
+          result.values.forEach(item => {
+            options.push({
+              name: item.value,
+              isocode: item.key,
+            });
+          });
+          return options;
+        })
+      );
   }
 
   verifyAddress(): void {
