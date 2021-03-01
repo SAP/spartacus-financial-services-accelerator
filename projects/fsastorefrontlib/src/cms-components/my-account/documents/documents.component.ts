@@ -1,9 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { FileService } from '@spartacus/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
+  selector: 'cx-fs-documents',
   templateUrl: './documents.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
   documentList$: Observable<any>;

@@ -39,7 +39,7 @@ class MockRoutingService {
 }
 
 class MockFileService {
-  getDocument(file) {
+  downloadDocument(file) {
     return of(document);
   }
 }
@@ -94,8 +94,8 @@ describe('ClaimDetailsComponent', () => {
   });
 
   it('should test get document', () => {
-    spyOn(mockFileService, 'getDocument').and.callThrough();
-    component.getDocument(document);
-    expect(mockFileService.getDocument).toHaveBeenCalledWith(document);
+    spyOn(mockFileService, 'downloadDocument').and.callThrough();
+    component.downloadDocument(document);
+    expect(mockFileService.downloadDocument).toHaveBeenCalledWith(document);
   });
 });

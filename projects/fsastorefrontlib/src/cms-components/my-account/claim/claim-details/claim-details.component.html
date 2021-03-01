@@ -100,42 +100,55 @@
       *ngIf="claim.documents && claim.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
-      <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
-          <div class="col-3">
-            {{ 'document.name' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'document.creationDate' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'document.documentType' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'document.uploadedByMe' | cxTranslate }}
-          </div>
-        </li>
-        <ng-container *ngFor="let document of claim.documents">
-          <li class="accordion-list-item row">
-            <div class="col-3">
-              <span
-                class="document-link d-block text-truncate pointer"
-                (click)="getDocument(document)"
-                >{{ document.name }}</span
-              >
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              {{ document.creationTime | cxDate: 'dd MMM yyyy' }}
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display document type (type of content) -->
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display if document is uploaded by user -->
-            </div>
-          </li>
-        </ng-container>
-      </ul>
+      <div class="accordion-list">
+        <table class="table">
+          <thead class="d-none d-md-table-row">
+            <th scope="col">
+              {{ 'document.name' | cxTranslate }}
+            </th>
+            <th scope="col">
+              {{ 'document.creationDate' | cxTranslate }}
+            </th>
+            <th scope="col">
+              {{ 'document.referredInsuranceObject' | cxTranslate }}
+            </th>
+            <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let document of claim.documents">
+              <td class="pointer">
+                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+                  {{ 'document.name' | cxTranslate }}:
+                </div>
+                <span
+                  class="td-value text-right notice"
+                  (click)="downloadDocument(document)"
+                  >{{ document.name }}</span
+                >
+              </td>
+              <td>
+                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+                  {{ 'document.creationDate' | cxTranslate }}:
+                </div>
+                <span class="td-value text-right">{{
+                  document.creationTime | cxDate: 'dd MMM yyyy'
+                }}</span>
+              </td>
+              <td>
+                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+                  {{ 'document.referredInsuranceObject' | cxTranslate }}:
+                </div>
+                <span class="td-value text-right"></span>
+              </td>
+              <td>
+                <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+                  {{ 'document.documentType' | cxTranslate }}:
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </cx-fs-accordion-item>
   </div>
 </ng-container>

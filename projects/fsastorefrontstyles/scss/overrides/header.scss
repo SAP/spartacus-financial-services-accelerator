@@ -51,7 +51,10 @@ header {
     cx-site-context-selector {
       flex: none;
       select {
-        cursor: pointer;
+        @include media-breakpoint-up(lg) {
+          background-color: var(--cx-color-secondary);
+          cursor: pointer;
+        }
       }
     }
     cx-link {
@@ -182,22 +185,6 @@ header {
           padding: 0.5rem 0 0.5rem;
         }
       }
-    }
-  }
-  cx-site-context-selector {
-    margin-right: 10px;
-    span {
-      display: none;
-    }
-    select {
-      padding-right: 6px;
-      option {
-        background: var(--cx-color-text);
-        color: var(--cx-color-1);
-      }
-    }
-    cx-icon {
-      margin-left: 0;
     }
   }
   // Mobile Navigation
