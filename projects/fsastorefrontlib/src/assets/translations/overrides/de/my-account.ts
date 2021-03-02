@@ -1,4 +1,7 @@
 export const myAccount = {
+  orderDetails: {
+    orderId: 'Bestellung',
+  },
   consentManagementForm: {
     clearAll: 'Alles löschen',
     selectAll: 'Alles auswählen',

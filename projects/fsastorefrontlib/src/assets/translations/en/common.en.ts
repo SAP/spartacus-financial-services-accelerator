@@ -54,6 +54,7 @@ export const fscommon = {
     finalReview: 'Final Review',
     paymentDetails: 'Payment Details',
     paymentFrequency: 'Payment frequency',
+    oneTimeCharge: 'One Time Charge',
     paymentMethod: 'Payment method',
     confirmAndAgree: 'I confirm that I have read and agree with the',
     termsConditions: 'Terms & Conditions',
