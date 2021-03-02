@@ -11,6 +11,7 @@ import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
 import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
+import { document } from './en/document.en';
 import { common } from './overrides/en/common';
 import { payment } from './overrides/en/payment';
 import { myAccount } from './overrides/en/my-account';
@@ -25,6 +26,7 @@ export const fstranslations: TranslationResources = {
   policy,
   premiumCalendar,
   userRequest,
+  document,
   changeRequest,
   configureProduct,
   quoteReview,

@@ -36,10 +36,6 @@ export class ClaimDetailsComponent implements OnInit, OnDestroy {
     this.claim$ = this.claimService.getCurrentClaim();
   }
 
-  getDocument(document) {
-    this.subscription.add(this.fileService.getDocument(document).subscribe());
-  }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

@@ -16,8 +16,6 @@ export const policy = {
     finishQuoteToGetPolicy:
       'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',
     noValidPolicies: 'Sie haben keine gültigen Policen!',
-    documentName: 'Name',
-    documentIssueDate: 'Erstelldatum',
     policyCanceled:
       'Ihr Antrag zur Änderung der Police wurde erfolgreich storniert.',
     changeError:

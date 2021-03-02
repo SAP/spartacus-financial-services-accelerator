@@ -14,6 +14,7 @@ export abstract class FileAdapter {
     fileType: string
   ): Observable<any>;
   /**
+   * @deprecated The method should not be used. Use getFilesForUser instead
    * Abstract method used to fetch files by codes
    *
    * @param userId The user id
@@ -22,6 +23,16 @@ export abstract class FileAdapter {
   abstract getFilesForCodes(
     userId: string,
     fileCodes: Array<string>
+  ): Observable<any>;
+  /**
+   * Abstract method used to fetch files for yser
+   *
+   * @param userId The user id
+   * @param fileCodes The file codes
+   */
+  abstract getFilesForUser(
+    userId: string,
+    fileCodes?: Array<string>
   ): Observable<any>;
   /**
    * Abstract method used to upload file

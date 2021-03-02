@@ -92,42 +92,11 @@
       *ngIf="claim.documents && claim.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
-      <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
-          <div class="col-3">
-            {{ 'policy.documentName' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'claim.created' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'claim.documentType' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'claim.uploadedByMe' | cxTranslate }}
-          </div>
-        </li>
-        <ng-container *ngFor="let document of claim.documents">
-          <li class="accordion-list-item row">
-            <div class="col-3">
-              <span
-                class="document-link d-block text-truncate pointer"
-                (click)="getDocument(document)"
-                >{{ document.name }}</span
-              >
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display when document is created -->
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display document type (type of content) -->
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display if document is uploaded by user -->
-            </div>
-          </li>
-        </ng-container>
-      </ul>
+      <div class="accordion-list">
+        <cx-fs-documents-table
+          [documentSource]="claim.documents"
+        ></cx-fs-documents-table>
+      </div>
     </cx-fs-accordion-item>
   </div>
 </ng-container>

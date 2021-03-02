@@ -12,6 +12,7 @@ import { policy } from './de/policy.de';
 import { premiumCalendar } from './de/premiumCalendar.de';
 import { quote } from './de/quote.de';
 import { quoteReview } from './de/quoteReview.de';
+import { document } from './de/document.de';
 import { userRequest } from './de/userRequest.de';
 import { common } from './overrides/de/common';
 import { user } from './overrides/de/user';
@@ -30,6 +31,7 @@ export const fstranslationsDe: TranslationResources = {
   configureProduct,
   quoteReview,
   orderConfirmation,
+  document,
 };
 
 export const fsOverridesDe: TranslationResources = {

@@ -92,10 +92,4 @@ describe('ClaimDetailsComponent', () => {
     );
     expect(mockClaimService.loadClaimById).not.toHaveBeenCalled();
   });
-
-  it('should test get document', () => {
-    spyOn(mockFileService, 'getDocument').and.callThrough();
-    component.getDocument(document);
-    expect(mockFileService.getDocument).toHaveBeenCalledWith(document);
-  });
 });
