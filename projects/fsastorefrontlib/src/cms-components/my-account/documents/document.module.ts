@@ -7,22 +7,23 @@ import {
   provideDefaultConfig,
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
-import { DocumentsComponent } from './documents.component';
+import { DocumentsOverviewComponent } from './documents-overview/documents-overview.component';
+import { DocumentsTableModule } from './documents-table/documents-table.module';
 
 @NgModule({
-  imports: [CommonModule, SpinnerModule, I18nModule],
-  declarations: [DocumentsComponent],
-  exports: [DocumentsComponent],
+  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule],
+  declarations: [DocumentsOverviewComponent],
+  exports: [DocumentsOverviewComponent],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
         AccountMyDocumentsFlex: {
-          component: DocumentsComponent,
+          component: DocumentsOverviewComponent,
           guards: [AuthGuard],
         },
       },
     }),
   ],
-  entryComponents: [DocumentsComponent],
+  entryComponents: [DocumentsOverviewComponent],
 })
 export class DocumentModule {}

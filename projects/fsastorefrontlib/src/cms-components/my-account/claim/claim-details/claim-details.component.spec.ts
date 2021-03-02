@@ -39,7 +39,7 @@ class MockRoutingService {
 }
 
 class MockFileService {
-  downloadDocument(file) {
+  getDocument(file) {
     return of(document);
   }
 }
@@ -91,11 +91,5 @@ describe('ClaimDetailsComponent', () => {
       } as RouterState)
     );
     expect(mockClaimService.loadClaimById).not.toHaveBeenCalled();
-  });
-
-  it('should test get document', () => {
-    spyOn(mockFileService, 'downloadDocument').and.callThrough();
-    component.downloadDocument(document);
-    expect(mockFileService.downloadDocument).toHaveBeenCalledWith(document);
   });
 });

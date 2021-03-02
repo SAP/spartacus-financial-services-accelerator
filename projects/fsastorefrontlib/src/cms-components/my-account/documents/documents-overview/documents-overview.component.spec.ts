@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
-import { DocumentsComponent } from './documents.component';
+import { DocumentsOverviewComponent } from './documents-overview.component';
 import { of } from 'rxjs';
 
 const mockDocument = {
@@ -26,23 +26,23 @@ class MockFileService {
     return of(mockDocument);
   }
 }
-describe('DocumentsComponent', () => {
-  let component: DocumentsComponent;
-  let fixture: ComponentFixture<DocumentsComponent>;
+describe('DocumentsOverviewComponent', () => {
+  let component: DocumentsOverviewComponent;
+  let fixture: ComponentFixture<DocumentsOverviewComponent>;
   let mockFileService: FileService;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule],
-        declarations: [DocumentsComponent],
+        declarations: [DocumentsOverviewComponent],
         providers: [{ provide: FileService, useClass: MockFileService }],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DocumentsComponent);
+    fixture = TestBed.createComponent(DocumentsOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 

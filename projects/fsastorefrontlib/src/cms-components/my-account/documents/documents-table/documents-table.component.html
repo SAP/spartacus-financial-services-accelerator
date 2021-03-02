@@ -1,0 +1,53 @@
+<table class="table">
+  <thead class="d-none d-md-table-row">
+    <th scope="col">
+      {{ 'document.name' | cxTranslate }}
+    </th>
+    <th scope="col">
+      {{ 'document.creationDate' | cxTranslate }}
+    </th>
+    <th scope="col">
+      {{ 'document.referredInsuranceObject' | cxTranslate }}
+    </th>
+    <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let document of documentSource.documents">
+      <td class="pointer">
+        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+          {{ 'document.name' | cxTranslate }}:
+        </div>
+        <span
+          class="td-value text-right notice"
+          (click)="downloadDocument(document)"
+          >{{ document.name }}</span
+        >
+      </td>
+      <td>
+        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+          {{ 'document.creationDate' | cxTranslate }}:
+        </div>
+        <span class="td-value text-right">{{
+          document.creationTime | cxDate: 'dd MMM yyyy'
+        }}</span>
+      </td>
+      <td>
+        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+          {{ 'document.referredInsuranceObject' | cxTranslate }}:
+        </div>
+        <span
+          *ngIf="document?.insurancePolicy || document?.claim"
+          class="td-value text-right"
+        >
+          {{ document?.insurancePolicy.policyNumber }},
+          {{ document?.claim.claimNumber }}
+        </span>
+      </td>
+      <td>
+        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+          {{ 'document.documentType' | cxTranslate }}:
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

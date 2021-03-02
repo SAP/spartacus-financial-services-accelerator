@@ -419,30 +419,11 @@
       *ngIf="policy.documents && policy.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
-      <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
-          <div class="col-6">
-            {{ 'document.name' | cxTranslate }}
-          </div>
-          <div class="col-6 value">
-            {{ 'document.issueDate' | cxTranslate }}
-          </div>
-        </li>
-        <ng-container *ngFor="let document of policy.documents">
-          <li class="accordion-list-item row">
-            <div class="col-6">
-              <span
-                class="document-link d-block text-truncate pointer"
-                (click)="getDocument(document)"
-                >{{ document.altText }}</span
-              >
-            </div>
-            <div class="col-6 document-title text-right text-sm-left">
-              {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}
-            </div>
-          </li>
-        </ng-container>
-      </ul>
+      <div class="accordion-list">
+        <cx-fs-documents-table
+          [documentSource]="policy"
+        ></cx-fs-documents-table>
+      </div>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
       *ngIf="policy.responsibleAgent"

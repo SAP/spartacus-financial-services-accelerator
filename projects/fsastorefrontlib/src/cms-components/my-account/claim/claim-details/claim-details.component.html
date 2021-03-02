@@ -101,53 +101,7 @@
       [title]="'fscommon.documents' | cxTranslate"
     >
       <div class="accordion-list">
-        <table class="table">
-          <thead class="d-none d-md-table-row">
-            <th scope="col">
-              {{ 'document.name' | cxTranslate }}
-            </th>
-            <th scope="col">
-              {{ 'document.creationDate' | cxTranslate }}
-            </th>
-            <th scope="col">
-              {{ 'document.referredInsuranceObject' | cxTranslate }}
-            </th>
-            <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let document of claim.documents">
-              <td class="pointer">
-                <div class="d-md-none w-50 semi-bold mr-2">
-                  {{ 'document.name' | cxTranslate }}
-                </div>
-                <span
-                  class="td-value text-right notice"
-                  (click)="downloadDocument(document)"
-                  >{{ document.name }}</span
-                >
-              </td>
-              <td>
-                <div class="d-md-none w-50 semi-bold mr-2">
-                  {{ 'document.creationDate' | cxTranslate }}
-                </div>
-                <span class="td-value text-right">{{
-                  document.creationTime | cxDate: 'dd MMM yyyy'
-                }}</span>
-              </td>
-              <td>
-                <div class="d-md-none w-50 semi-bold mr-2">
-                  {{ 'document.referredInsuranceObject' | cxTranslate }}
-                </div>
-                <span class="td-value text-right"></span>
-              </td>
-              <td>
-                <div class="d-md-none w-50 semi-bold mr-2">
-                  {{ 'document.documentType' | cxTranslate }}
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <cx-fs-documents-table [documentSource]="claim"></cx-fs-documents-table>
       </div>
     </cx-fs-accordion-item>
   </div>
