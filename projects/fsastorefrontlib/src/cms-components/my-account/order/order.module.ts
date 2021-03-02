@@ -47,15 +47,12 @@ const moduleComponents = [
       cmsComponents: {
         AccountOrderDetailsItemsComponent: {
           component: FSOrderDetailItemsComponent,
-          guards: [AuthGuard],
         },
         AccountOrderDetailsTotalsComponent: {
           component: FSOrderDetailTotalsComponent,
-          guards: [AuthGuard],
         },
         AccountOrderHistoryComponent: {
           component: FSOrderHistoryComponent,
-          guards: [AuthGuard],
         },
       },
       features: {
