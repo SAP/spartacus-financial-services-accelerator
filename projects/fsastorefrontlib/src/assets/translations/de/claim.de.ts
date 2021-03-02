@@ -26,5 +26,6 @@ export const claim = {
     created: 'Erstellt',
     documentType: 'Dokumenttyp',
     uploadedByMe: '[DE] Uploaded by me',
+    loadingFailed: '[DE] Claim can not be loaded.',
   },
 };
