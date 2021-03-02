@@ -111,6 +111,7 @@ describe('Claim Effects', () => {
     });
     effects = TestBed.inject(fromEffects.ClaimEffects);
     globalMessageService = TestBed.inject(GlobalMessageService);
+    routingService = TestBed.inject(RoutingService);
   });
 
   describe('loadClaims$', () => {
