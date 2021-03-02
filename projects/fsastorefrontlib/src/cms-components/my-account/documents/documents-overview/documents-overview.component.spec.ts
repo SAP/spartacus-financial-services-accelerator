@@ -1,3 +1,4 @@
+import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
@@ -22,10 +23,17 @@ class MockFileService {
   getFiles() {
     return of(mockFiles);
   }
-  getDocument() {
-    return of(mockDocument);
-  }
 }
+
+@Component({
+  template: '',
+  selector: 'cx-fs-documents-table',
+})
+class MockDocumentsTableComponent {
+  @Input()
+  documentSource: any;
+}
+
 describe('DocumentsOverviewComponent', () => {
   let component: DocumentsOverviewComponent;
   let fixture: ComponentFixture<DocumentsOverviewComponent>;
@@ -35,7 +43,7 @@ describe('DocumentsOverviewComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule],
-        declarations: [DocumentsOverviewComponent],
+        declarations: [DocumentsOverviewComponent, MockDocumentsTableComponent],
         providers: [{ provide: FileService, useClass: MockFileService }],
       }).compileComponents();
     })
@@ -45,37 +53,10 @@ describe('DocumentsOverviewComponent', () => {
     fixture = TestBed.createComponent(DocumentsOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
     mockFileService = TestBed.inject(FileService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should download document', () => {
-    spyOn(mockFileService, 'getDocument').and.callThrough();
-    component.downloadDocument(mockDocument);
-    expect(mockFileService.getDocument).toHaveBeenCalledWith(mockDocument);
-  });
-
-  it('should get referred insurance objects', () => {
-    const mockPolicyNumber = 'testPolicy';
-    const mockClaimNumber = 'testClaim';
-    const testDocument = {
-      code: 'TestDocument',
-      name: 'Test Document',
-      creationTime: '2021-02-24T13:13:54+0000',
-      insurancePolicy: {
-        policyNumber: mockPolicyNumber,
-      },
-      claim: {
-        claimNumber: mockClaimNumber,
-      },
-    };
-    expect(component.getReferredInsuranceObjects(testDocument)).toEqual([
-      mockPolicyNumber,
-      mockClaimNumber,
-    ]);
   });
 });

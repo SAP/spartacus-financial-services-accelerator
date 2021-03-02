@@ -101,7 +101,9 @@
       [title]="'fscommon.documents' | cxTranslate"
     >
       <div class="accordion-list">
-        <cx-fs-documents-table [documentSource]="claim"></cx-fs-documents-table>
+        <cx-fs-documents-table
+          [documentSource]="claim.documents"
+        ></cx-fs-documents-table>
       </div>
     </cx-fs-accordion-item>
   </div>

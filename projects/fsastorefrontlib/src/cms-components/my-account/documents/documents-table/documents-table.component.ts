@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FileService } from '@spartacus/dynamicforms';
 
@@ -7,7 +12,7 @@ import { FileService } from '@spartacus/dynamicforms';
   templateUrl: './documents-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentsTableComponent {
+export class DocumentsTableComponent implements OnDestroy {
   @Input()
   documentSource: any;
   subscription = new Subscription();
@@ -16,5 +21,11 @@ export class DocumentsTableComponent {
 
   downloadDocument(document) {
     this.subscription.add(this.fileService.getDocument(document).subscribe());
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

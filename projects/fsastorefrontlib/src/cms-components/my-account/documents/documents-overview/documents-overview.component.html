@@ -2,7 +2,7 @@
   <!-- ng-container needs check if documents are uploaded by user or they came from external system -->
   <ng-container *ngIf="(documentList | json) != '{}'; else noDocuments">
     <cx-fs-documents-table
-      [documentSource]="documentList"
+      [documentSource]="documentList?.documents"
     ></cx-fs-documents-table>
   </ng-container>
 </ng-container>
