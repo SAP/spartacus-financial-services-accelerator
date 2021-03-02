@@ -25,6 +25,7 @@ import { PolicyDetailsComponent } from './policy-details/policy-details.componen
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
+import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
 
 const routes: Routes = [
   {
@@ -58,6 +59,7 @@ const routes: Routes = [
     AccordionModule,
     ChangeRequestStoreModule,
     MediaModule,
+    DocumentsTableModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

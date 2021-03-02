@@ -31,6 +31,7 @@ import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
 import { DateFormatConfigurationModule } from '../../../shared/util/helpers/dateFormatConfiguration.module';
 import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
+import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
 
 const routes: Routes = [
   {
@@ -84,6 +85,7 @@ const routes: Routes = [
     MediaModule,
     AccordionModule,
     DateFormatConfigurationModule,
+    DocumentsTableModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

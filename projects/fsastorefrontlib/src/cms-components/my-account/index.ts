@@ -7,3 +7,4 @@ export * from './update-profile/index';
 export * from './myaccount.module';
 export * from './order/index';
 export * from './address-book/index';
+export * from './documents/index';

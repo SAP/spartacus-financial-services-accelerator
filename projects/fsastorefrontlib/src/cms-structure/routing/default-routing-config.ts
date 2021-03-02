@@ -34,6 +34,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   noClaims: { paths: ['noClaims'] },
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
+  myDocuments: { paths: ['my-account/my-documents'] },
   // productActivation: { paths: ['organization/:orgUnitId/productActivation'] },
   // productAssignment: { paths: ['organization/:orgUnitId/productAssignments'] },
   // unitDetails: { paths: ['organization/:orgUnitId'] },

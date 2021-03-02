@@ -24,8 +24,5 @@ export const claim = {
     loadingFailed: 'Claim can not be loaded.',
     alreadySubmitted: 'Your Claim is already submitted.',
     generalInformation: 'General Information',
-    created: 'Created',
-    documentType: 'Document type',
-    uploadedByMe: 'Uploaded by me',
   },
 };

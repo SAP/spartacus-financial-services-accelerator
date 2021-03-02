@@ -26,7 +26,7 @@ export class FileService {
     );
   }
 
-  getFiles(fileCodes: Array<string>): Observable<any> {
+  getFiles(fileCodes?: Array<string>): Observable<any> {
     return this.userIdService.getUserId().pipe(
       take(1),
       switchMap(occUserId => {

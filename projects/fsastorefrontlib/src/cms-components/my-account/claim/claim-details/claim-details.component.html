@@ -1,25 +1,17 @@
 <ng-container *ngIf="claim$ | async as claim">
   <div class="overview-section mb-5">
-    <span class="image-wrapper">
-      <cx-media [container]="claim.incidentType?.icon"></cx-media>
-    </span>
-    <h4>
-      <span class="overview-section-title">
-        {{ claim.insurancePolicy?.categoryData?.name }}
-        {{ 'claim.claim' | cxTranslate }}
-        <br />
-      </span>
-      <span class="overview-section-value border-bottom border-color-3">
-        {{ claim.claimNumber }}
-      </span>
-    </h4>
     <a
-      class="overview-section-link"
+      class="h4 overview-section-link"
       routerLink="/my-account/my-insurance-claims/"
-      routerLinkActive="active"
-      ><span class="d-none d-md-block">{{ 'common.back' | cxTranslate }}</span>
-      <span class="d-md-none fas fa-arrow-left"></span
+    >
+      <span class="fas fa-arrow-left"></span
     ></a>
+    <h2 class="heading-headline p-3 mt-3 mb-5 text-center">
+      {{ claim.insurancePolicy?.categoryData?.name }}
+      {{ 'claim.claim' | cxTranslate }}
+      <br />
+      {{ claim.claimNumber }}
+    </h2>
   </div>
   <div class="accordion">
     <cx-fs-accordion-item
@@ -100,42 +92,11 @@
       *ngIf="claim.documents && claim.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
-      <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
-          <div class="col-3">
-            {{ 'policy.documentName' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'claim.created' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'claim.documentType' | cxTranslate }}
-          </div>
-          <div class="col-3 value">
-            {{ 'claim.uploadedByMe' | cxTranslate }}
-          </div>
-        </li>
-        <ng-container *ngFor="let document of claim.documents">
-          <li class="accordion-list-item row">
-            <div class="col-3">
-              <span
-                class="document-link d-block text-truncate pointer"
-                (click)="getDocument(document)"
-                >{{ document.name }}</span
-              >
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display when document is created -->
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display document type (type of content) -->
-            </div>
-            <div class="col-3 document-title text-right text-sm-left">
-              <!-- should display if document is uploaded by user -->
-            </div>
-          </li>
-        </ng-container>
-      </ul>
+      <div class="accordion-list">
+        <cx-fs-documents-table
+          [documentSource]="claim.documents"
+        ></cx-fs-documents-table>
+      </div>
     </cx-fs-accordion-item>
   </div>
 </ng-container>
