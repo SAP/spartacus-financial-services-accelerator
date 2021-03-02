@@ -13,6 +13,7 @@ import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
 import { common } from './overrides/en/common';
 import { payment } from './overrides/en/payment';
+import { myAccount } from './overrides/en/my-account';
 import { address } from './overrides/en/address';
 
 export const fstranslations: TranslationResources = {
@@ -36,5 +37,6 @@ export const fstranslations: TranslationResources = {
 export const fsOverrides: TranslationResources = {
   payment,
   common,
+  myAccount,
   address,
 };

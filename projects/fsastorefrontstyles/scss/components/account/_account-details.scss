@@ -3,26 +3,7 @@
   width: 100%;
   .overview-section {
     color: var(--cx-color-secondary);
-    font-size: $h4-font-size;
-    text-align: center;
     position: relative;
-    .image-wrapper {
-      @include vertical-center;
-      left: 0;
-      background-color: transparent;
-      width: 46px;
-      height: 46px;
-    }
-    &-title {
-      display: block;
-      color: var(--cx-color-text);
-      font-weight: var(--cx-font-weight-semi);
-      @include media-breakpoint-down(md) {
-        line-height: 30px;
-        width: 70%;
-        margin: 0 auto;
-      }
-    }
     &-value {
       display: block;
       color: var(--cx-color-text);
@@ -34,9 +15,9 @@
     }
     &-link {
       @include vertical-center;
-      right: 0;
+      left: 0;
       background: transparent;
-      color: var(--cx-color-secondary);
+      z-index: 1;
     }
   }
   .content-box {

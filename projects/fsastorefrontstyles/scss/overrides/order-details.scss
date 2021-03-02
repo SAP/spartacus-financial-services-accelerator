@@ -1,5 +1,10 @@
 @import '../theme/fs/variables';
 
+%cx-fs-order-details-items {
+  img {
+    width: 50px;
+  }
+}
 %cx-fs-order-details-totals {
   @include media-breakpoint-up(md) {
     background-color: var(--cx-color-background);
@@ -22,5 +27,11 @@
         padding: 1.5rem 1rem;
       }
     }
+  }
+  cx-order-summary {
+    padding-bottom: 16px;
+  }
+  .cx-summary-total + .cx-summary-row {
+    display: none;
   }
 }
