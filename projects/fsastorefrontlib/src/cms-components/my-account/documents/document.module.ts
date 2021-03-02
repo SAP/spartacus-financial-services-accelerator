@@ -19,7 +19,6 @@ import { DocumentsTableModule } from './documents-table/documents-table.module';
       cmsComponents: {
         AccountMyDocumentsFlex: {
           component: DocumentsOverviewComponent,
-          guards: [AuthGuard],
         },
       },
     }),
