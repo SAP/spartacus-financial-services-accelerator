@@ -1,4 +1,7 @@
-<table class="table">
+<table
+  class="table"
+  [attr.aria-label]="'document.uploadedDocuments' | cxTranslate"
+>
   <thead class="d-none d-md-table-row">
     <th scope="col">
       {{ 'document.name' | cxTranslate }}
