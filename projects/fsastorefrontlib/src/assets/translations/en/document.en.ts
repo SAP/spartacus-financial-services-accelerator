@@ -6,7 +6,7 @@ export const document = {
     uploadedByMe: 'Uploaded by me',
     referredInsuranceObject: 'Belonging to',
     issueDate: 'Issue Date',
-    uploadedDocuments: 'Uploaded Documents:',
+    uploadedDocuments: 'Uploaded Documents',
     youHaveNoDocuments: 'You have no Documents.',
   },
 };
