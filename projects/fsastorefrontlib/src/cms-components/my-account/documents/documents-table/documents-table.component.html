@@ -42,8 +42,8 @@
           *ngIf="document?.insurancePolicy || document?.claim"
           class="td-value text-right"
         >
-          {{ document?.insurancePolicy.policyNumber }},
-          {{ document?.claim.claimNumber }}
+          {{ document?.insurancePolicy?.policyNumber }},
+          {{ document?.claim?.claimNumber }}
         </span>
       </td>
       <td>
