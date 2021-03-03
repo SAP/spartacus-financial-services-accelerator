@@ -7,7 +7,11 @@ import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
 import { ClaimConnector } from '../../connectors/claim.connector';
-import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from '@spartacus/core';
 
 @Injectable()
 export class ClaimEffects {
@@ -82,9 +86,14 @@ export class ClaimEffects {
         map((claims: any) => {
           return new fromActions.LoadClaimByIdSuccess(claims);
         }),
-        catchError(error =>
-          of(new fromActions.LoadClaimByIdFail(JSON.stringify(error)))
-        )
+        catchError(error => {
+          this.showGlobalMessage(
+            'claim.loadingFailed',
+            GlobalMessageType.MSG_TYPE_ERROR
+          );
+          this.routingService.go({ cxRoute: 'home' });
+          return of(new fromActions.LoadClaimByIdFail(JSON.stringify(error)));
+        })
       );
     })
   );
@@ -156,6 +165,7 @@ export class ClaimEffects {
     private actions$: Actions,
     private claimConnector: ClaimConnector,
     private claimServiceData: ClaimDataService,
-    private globalMessageService: GlobalMessageService
+    private globalMessageService: GlobalMessageService,
+    private routingService: RoutingService
   ) {}
 }

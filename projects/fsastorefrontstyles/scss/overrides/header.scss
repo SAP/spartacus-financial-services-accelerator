@@ -154,7 +154,7 @@ header {
     padding: 0;
     .HeaderLinks {
       flex-wrap: nowrap;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         flex-wrap: wrap;
       }
       cx-navigation-ui {

@@ -2,7 +2,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { GlobalMessageService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
@@ -79,6 +83,7 @@ describe('Claim Effects', () => {
   let mockClaimConnector: MockClaimConnector;
   let mockClaimDataService: MockClaimDataService;
   let globalMessageService: GlobalMessageService;
+  let routingService: RoutingService;
 
   beforeEach(() => {
     mockClaimConnector = new MockClaimConnector();
@@ -96,12 +101,17 @@ describe('Claim Effects', () => {
           provide: ClaimDataService,
           useValue: mockClaimDataService,
         },
+        {
+          provide: RoutingService,
+          useValue: { go: jasmine.createSpy() },
+        },
         fromEffects.ClaimEffects,
         provideMockActions(() => actions$),
       ],
     });
     effects = TestBed.inject(fromEffects.ClaimEffects);
     globalMessageService = TestBed.inject(GlobalMessageService);
+    routingService = TestBed.inject(RoutingService);
   });
 
   describe('loadClaims$', () => {

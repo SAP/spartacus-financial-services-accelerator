@@ -21,6 +21,7 @@ export const claim = {
         'If you have any questions, do not hesitate to contact your claim handler.',
     },
     createFailed: 'Claim for given policy cannot be created.',
+    loadingFailed: 'Claim can not be loaded.',
     alreadySubmitted: 'Your Claim is already submitted.',
     generalInformation: 'General Information',
   },
