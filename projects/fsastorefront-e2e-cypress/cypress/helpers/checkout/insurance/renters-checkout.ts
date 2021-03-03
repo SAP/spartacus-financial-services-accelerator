@@ -38,7 +38,7 @@ export function checkOptionalProducts() {
     title: 'Your Renters Insurance',
     items: [
       {
-        name: 'Temporary Accommodation Cover',
+        name: 'Bicycles Cover',
         available: true,
         shouldAdd: true,
       },
@@ -48,7 +48,7 @@ export function checkOptionalProducts() {
         shouldAdd: true,
       },
       {
-        name: 'Bicycles Cover',
+        name: 'Temporary Accommodation Cover',
         available: true,
         shouldAdd: true,
       },
@@ -78,16 +78,16 @@ export function checkMiniCartRenters() {
         value: ' €31.50 ',
       },
       {
-        title: ' Temporary Accommodation Cover: ',
-        value: ' €7.93 ',
+        title: ' Bicycles Cover: ',
+        value: ' €12.02 ',
       },
       {
         title: ' Jewelry and Watches Cover: ',
         value: ' €15.17 ',
       },
       {
-        title: ' Bicycles Cover: ',
-        value: ' €12.02 ',
+        title: ' Temporary Accommodation Cover: ',
+        value: ' €7.93 ',
       },
     ],
   };
@@ -115,12 +115,12 @@ export function checkMiniCartRentersRemovedProduct() {
         value: ' €31.50 ',
       },
       {
-        title: ' Temporary Accommodation Cover: ',
-        value: ' €7.93 ',
-      },
-      {
         title: ' Jewelry and Watches Cover: ',
         value: ' €15.17 ',
+      },
+      {
+        title: ' Temporary Accommodation Cover: ',
+        value: ' €7.93 ',
       },
     ],
   };

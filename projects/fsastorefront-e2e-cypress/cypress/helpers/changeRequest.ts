@@ -65,9 +65,9 @@ export function checkOptionalExtrasBronze() {
     .within(() => {
       cy.get('.section-header-heading').contains(' Optional Extras ');
       cy.get('.row.mx-3').should('have.length', 3);
-      cy.get('h6').eq(0).contains('Collision Coverage');
-      cy.get('h6').eq(1).contains('Uninsured Coverage');
-      cy.get('h6').eq(2).contains('Trailer Liability');
+      cy.get('h6').contains('Collision Coverage');
+      cy.get('h6').contains('Uninsured Coverage');
+      cy.get('h6').contains('Trailer Liability');
     });
 }
 

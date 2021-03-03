@@ -1,12 +1,11 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as inbox from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as creditCard from '../../../helpers/checkout/banking/creditCard';
 import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 
-context('Credit Card Checkout', () => {
+context('Banking Checkout Steps Reload', () => {
   before(() => {
     cy.visit('/');
     register.registerUser(registrationUser);
@@ -16,77 +15,80 @@ context('Credit Card Checkout', () => {
   it('Should register a new user and start Credit Card checkout', () => {
     checkout.waitConsent();
     banking.startBankingCheckout('Credit Card');
-  });
-
-  it('Should check comparison page', () => {
+    //comparison table
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     banking.checkBankingProgressBar();
+    cy.reload();
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
     banking.checkBankingComparisonPage();
-  });
-
-  it('Should check prices in comparison table and select Premium Card', () => {
     creditCard.checkCreditCardComparisonTable();
     creditCard.selectPremiumCard();
-  });
-
-  it('Should configure a Credit Card', () => {
+    //Configure a Product
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    banking.checkConfigureStep();
+    cy.get('.cx-cart-coupon-container').should('not.exist');
+    cy.reload();
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     banking.checkConfigureStep();
     creditCard.populateConfigureStep();
+    cy.get('.cx-cart-coupon-container').should('not.exist');
     checkout.clickContinueButton();
-  });
-
-  it('Should check optional products for Credit Card', () => {
+    //Add Options
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    creditCard.checkOptionalProducts();
+    checkout.checkCouponsFields();
+    cy.reload();
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     creditCard.checkOptionalProducts();
     creditCard.checkMiniCartCreditCard();
+    checkout.checkCouponsFields();
+    checkout.checkBackAndContinueButtons();
     checkout.clickContinueButton();
-  });
-
-  it('Should populate Personal Details page', () => {
+    //Personal Details
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     checkout.checkPersonalDetailsPage();
+    checkout.checkCouponsFields();
+    cy.reload();
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkPersonalDetailsPage();
+    checkout.checkCouponsFields();
     banking.populatePersonalDetailsCCandLoan();
     banking.populateAdditionalApplicantCCandLoan();
     checkout.clickContinueButton();
-  });
-
-  it('Should check Quote Review page', () => {
+    //Quote Review
     banking.checkBankingProgressBar();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     creditCard.checkMiniCartCreditCard();
-  });
-
-  it('Should bind Quote', () => {
+    checkout.checkCouponsFields();
+    cy.reload();
+    banking.checkBankingProgressBar();
+    checkout.checkAccordions('quoteReviewWithoutOptional');
+    creditCard.checkMiniCartCreditCard();
+    checkout.checkCouponsFields();
+    checkout.checkBackAndContinueButtons();
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-  });
-
-  it('Should check Legal Information page', () => {
+    //Legal Information
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    banking.checkLegalInformationPage();
+    cy.reload();
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     banking.checkLegalInformationPage();
     checkout.clickContinueButton();
-  });
-
-  it('Should complete User Identification page', () => {
+    //User Identification
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    userIdentification.checkUserIdentificationPage();
+    cy.reload();
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('At the Nearest Branch');
     checkout.clickContinueButton();
-  });
-
-  it('Should check order confirmation', () => {
+    //Order Confirmation
     checkout.checkOrderConfirmation();
     checkout.checkAccordions('creditCardConfirmation');
-  });
-
-  it('Should check Pending message is received', () => {
-    cy.wait(22000);
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Inbox',
-    });
-    inbox.checkInboxComponets();
-    inbox.checkBankingTabs();
+    cy.reload();
+    //User is redirected to homepage
+    cy.get('.SiteLogo').should('be.visible');
+    cy.get('cx-fs-enriched-responsive-banner').should('be.visible');
   });
 });

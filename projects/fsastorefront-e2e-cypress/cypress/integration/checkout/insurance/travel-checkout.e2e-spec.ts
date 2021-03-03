@@ -11,10 +11,13 @@ context('Travel Insurance Checkout', () => {
     cy.visit('/');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.checkMyAccountEmptyPages(
+      'Premium Calendar',
+      'You have no premiums awaiting payment'
+    );
   });
 
   it('Should open travel category page', () => {
-    checkout.waitConsent();
     checkout.startInsuranceCheckout('Travel');
   });
 
@@ -22,6 +25,7 @@ context('Travel Insurance Checkout', () => {
     checkout.checkCheckoutStep('Your Travel Insurance', '7');
     checkout.checkProgressBarInsurance();
     travelCheckout.populateInsuranceInfoForm();
+    checkout.clickContinueButton();
   });
 
   it('Add main product to the cart', () => {
@@ -47,7 +51,6 @@ context('Travel Insurance Checkout', () => {
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

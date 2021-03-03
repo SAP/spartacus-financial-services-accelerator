@@ -6,7 +6,7 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
 
-//Cypress.config('defaultCommandTimeout', 500000);
+Cypress.config('defaultCommandTimeout', 500000);
 const currentDate = Cypress.moment().format('DD/MM/YYYY');
 
 context('Auto Bronze Checkout with cancel change', () => {
@@ -53,7 +53,6 @@ context('Auto Bronze Checkout with cancel change', () => {
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    cy.get('.section-header-heading').should('be.visible');
     checkout.clickContinueButton();
   });
 

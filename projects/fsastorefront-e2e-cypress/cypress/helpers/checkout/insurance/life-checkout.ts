@@ -27,6 +27,10 @@ export function checkOptionalProductsAddRenewalOption() {
     title: 'Your Life Insurance',
     items: [
       {
+        name: 'Payment Protection Benefit',
+        available: false,
+      },
+      {
         name: 'Premium Protection',
         available: true,
       },
@@ -34,10 +38,6 @@ export function checkOptionalProductsAddRenewalOption() {
         name: 'Renewal Option',
         available: true,
         shouldAdd: true,
-      },
-      {
-        name: 'Payment Protection Benefit',
-        available: false,
       },
     ],
   };
@@ -49,16 +49,16 @@ export function checkOptionalProductsSecond() {
     title: 'Your Life Insurance',
     items: [
       {
+        name: 'Payment Protection Benefit',
+        available: false,
+      },
+      {
         name: 'Premium Protection',
         available: true,
       },
       {
         name: 'Renewal Option',
         available: true,
-      },
-      {
-        name: 'Payment Protection Benefit',
-        available: false,
       },
     ],
   };

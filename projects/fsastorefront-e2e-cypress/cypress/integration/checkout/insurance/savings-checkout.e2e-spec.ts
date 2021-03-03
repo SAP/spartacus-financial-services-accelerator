@@ -37,6 +37,7 @@ context('Savings Insurance Checkout', () => {
 
   it('Should check comparison table', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
+    checkout.checkProgressBarInsurance();
     savings.checkComparisonPage();
     savings.checkSavingsComparisonTable();
     savings.selecBalancedDeal();
@@ -45,6 +46,7 @@ context('Savings Insurance Checkout', () => {
   it('Should check add options page', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
     savings.checkOptionalProducts();
+    savings.checkMiniCart();
     checkout.clickContinueButton();
   });
 
@@ -64,7 +66,6 @@ context('Savings Insurance Checkout', () => {
     checkout.checkAccordions('savingsQuoteReview');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

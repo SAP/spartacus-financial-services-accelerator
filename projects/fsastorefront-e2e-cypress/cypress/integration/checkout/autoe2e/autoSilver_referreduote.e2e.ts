@@ -12,7 +12,7 @@ Cypress.config('defaultCommandTimeout', 500000);
 
 context('Auto Silver - Referred Quote', () => {
   before(() => {
-    cy.visit('http://10.27.241.80/financial/en/EUR/');
+    cy.visit('/');
   });
 
   it('Should register a new user', () => {
@@ -21,6 +21,7 @@ context('Auto Silver - Referred Quote', () => {
   });
 
   it('Should complete first auto step without additonal driver', () => {
+    checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
     cy.wait(500);
     auto.populateAutoMonthlyOpel();

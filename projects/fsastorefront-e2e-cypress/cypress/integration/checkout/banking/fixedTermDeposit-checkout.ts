@@ -33,6 +33,7 @@ context('Fixed Term Deposit Checkout', () => {
   it('Should check optional products', () => {
     checkout.checkCheckoutStep('Your Fixed Term Deposit Application', '6');
     ftd.checkOptionalProducts();
+    ftd.checkMiniCart();
     checkout.clickContinueButton();
   });
 
@@ -46,8 +47,8 @@ context('Fixed Term Deposit Checkout', () => {
   it('Should retrieve not bind quote', () => {
     cy.get('.link').contains('Retrieve').click({ force: true });
     checkout.waitForAddOptions();
-    checkout.checkCheckoutStep('Your Fixed Term Deposit Application', '6');
     cy.get('h2').contains('Add Options');
+    ftd.checkMiniCart();
     checkout.clickContinueButton();
   });
 
@@ -64,8 +65,8 @@ context('Fixed Term Deposit Checkout', () => {
     banking.checkProgressBarLoanAndFTD();
     ftd.checkMiniCart();
     checkout.checkAccordions('generalQuoteAccordions');
-    checkout.bindQuotePopup();
     checkout.clickContinueButton();
+    checkout.ConfirmBindQuote();
   });
 
   it('Should check Legal Information page', () => {

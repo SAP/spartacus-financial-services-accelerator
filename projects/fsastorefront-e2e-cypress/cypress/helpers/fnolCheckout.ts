@@ -218,7 +218,7 @@ export function waitForfnolGeneralInformationStep() {
 }
 
 export function populateIncidentReportStep() {
-  const filePath = 'fsaImageTest.png';
+  const filePath = 'Claim.pdf';
   cy.get('[name=howAccidentOccurred]').type(
     'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
   );
@@ -226,7 +226,8 @@ export function populateIncidentReportStep() {
   cy.get('.btn-primary')
     .should('contain.text', 'Upload')
     .eq(0)
-    .click({ force: true });
+    .click({ force: true })
+    .wait(1000);
 }
 
 export function checkClaimReplication() {
