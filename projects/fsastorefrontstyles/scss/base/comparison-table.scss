@@ -12,7 +12,7 @@ cx-fs-comparison-table-container {
     border-top: none;
     .table-tab {
       flex: 0 1 100%;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         overflow: hidden;
       }
     }
@@ -29,14 +29,14 @@ cx-fs-comparison-table-container {
       float: left;
       width: 25%;
       padding-right: 5px;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         width: 46%;
       }
     }
     .slide-column-wrapper {
       float: left;
       width: 75%;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         overflow-y: hidden;
         overflow-x: auto;
         width: 54%;
