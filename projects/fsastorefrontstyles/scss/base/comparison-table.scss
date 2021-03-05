@@ -5,7 +5,8 @@ cx-fs-comparison-table-container {
   width: 100%;
 }
 .products-wrapper {
-  ngb-tabset {
+  .nav-tabs,
+  .tab-content {
     flex: 0 1 100%;
   }
   cx-fs-comparison-table-tab {

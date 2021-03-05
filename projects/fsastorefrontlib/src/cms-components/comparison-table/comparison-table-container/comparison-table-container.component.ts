@@ -23,6 +23,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
 
   component$: Observable<CmsMultiComparisonTabContainer>;
   tabs$;
+  active = 0;
 
   private subscription = new Subscription();
 
