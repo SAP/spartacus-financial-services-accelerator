@@ -78,10 +78,10 @@ export class OccFileAdapter implements FileAdapter {
     const url = this.occEndpointService.getUrl('getFiles', {
       userId,
     });
-    const params: HttpParams = new HttpParams().set('fields', FULL_PARAMS);
+    let params: HttpParams = new HttpParams().set('fields', FULL_PARAMS);
 
     if (fileCodes) {
-      params.set('documentCodes', fileCodes.toString());
+      params = params.set('documentCodes', fileCodes.toString());
     }
     return this.http
       .get<any>(url, { params })
