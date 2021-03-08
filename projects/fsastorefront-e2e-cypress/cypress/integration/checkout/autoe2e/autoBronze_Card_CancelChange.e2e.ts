@@ -68,7 +68,7 @@ context('Auto Bronze Checkout with cancel change', () => {
     cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedPolicy('Bronze');
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
   });
 
   it('Should cancel change policy request', () => {
@@ -83,6 +83,6 @@ context('Auto Bronze Checkout with cancel change', () => {
     cy.get('.offset-1').contains(currentDate);
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
   });
 });

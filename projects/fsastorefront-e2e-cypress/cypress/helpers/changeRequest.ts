@@ -41,7 +41,7 @@ export function startChangeCoverage() {
 }
 
 export function checkChangeCoverageSteps() {
-  cy.get('h2').contains(' Change Auto Insurance Policy ');
+  cy.get('h2').should('contain.text', ' Change Auto Insurance Policy ');
   cy.get('.action-button').should('contain', 'Cancel');
   cy.get('.progress-inner-wrapper')
     .should('have.length', 2)

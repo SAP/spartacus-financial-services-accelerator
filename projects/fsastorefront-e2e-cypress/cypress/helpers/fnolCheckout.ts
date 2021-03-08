@@ -226,8 +226,8 @@ export function populateIncidentReportStep() {
   cy.get('.btn-primary')
     .should('contain.text', 'Upload')
     .eq(0)
-    .click({ force: true })
-    .wait(1000);
+    .click({ force: true });
+  cy.wait(1000);
 }
 
 export function checkClaimReplication() {

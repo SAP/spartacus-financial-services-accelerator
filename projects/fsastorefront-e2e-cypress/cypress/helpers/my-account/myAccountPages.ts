@@ -40,7 +40,7 @@ export function checkCloseAccountPage() {
 }
 
 export function closeAccount() {
-  cy.get('.btn-primary').click();
+  cy.get('.btn-primary').contains('CLOSE MY ACCOUNT').click();
   cy.get('cx-close-account-modal')
     .should('be.visible')
     .within(() => {
@@ -66,8 +66,8 @@ export function orderHistoryPage() {
 }
 
 export function checkEmptyOrderHistoryPage() {
-  cy.get('cx-order-history').should('be.visible');
-  cy.get('h3').contains('Order history');
+  cy.get('cx-fs-order-history').should('be.visible');
+  cy.get('h2').contains('Order history');
   cy.get('div').contains('We have no order records for this account.');
 }
 
