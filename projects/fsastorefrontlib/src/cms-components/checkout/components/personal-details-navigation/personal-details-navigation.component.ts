@@ -1,10 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import {
-  Address,
-  RoutingService,
-  UserService,
-} from '@spartacus/core';
+import { Address, RoutingService, UserService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
@@ -12,7 +8,7 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
-import { AddressService } from 'projects/fsastorefrontlib/src/core/product-pricing/facade/address.service';
+import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { FSProduct } from 'fsastorefrontlib/occ';
 
 @Component({
@@ -28,7 +24,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected quoteService: QuoteService,
     protected pricingService: PricingService,
     protected userService: UserService,
-    protected addressService: AddressService
+    protected addressService: FSAddressService
   ) {}
 
   subscription = new Subscription();
@@ -49,17 +45,18 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           filter(([_, user]) => Boolean(user.customerId)),
           take(1),
           switchMap(([cart, user]) => {
-            if (cart && cart.code && cart.entries && cart.entries.length > 0) {
+            if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
               };
               yFormData.id =
-                entry?.formData?.length > 0 ? entry.formData[0].id : null;
+                entry?.formData?.length > 0 ? entry?.formData[0].id : null;
               this.formService.submit(yFormData);
             }
-            const isProductConfigurable = (<FSProduct>cart.entries[0]?.product).configurable;
+            const isProductConfigurable = (<FSProduct>cart?.entries[0]?.product)
+              ?.configurable;
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {

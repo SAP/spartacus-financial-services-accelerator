@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {
   Address,
   CheckoutDeliveryService,
+  StateWithProcess,
+  StateWithUser,
   User,
   UserAddressService,
-  UserService,
+  UserIdService,
 } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class AddressService {
+export class FSAddressService extends UserAddressService {
   constructor(
-    protected userAddressService: UserAddressService,
+    protected store: Store<StateWithUser | StateWithProcess<void>>,
+    protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService
-  ) {}
+  ) {
+    super(store, userIdService);
+    this.loadAddresses();
+  }
 
   protected readonly PERSONAL_DETAILS_FORM_GROUP = 'personalDetails';
   protected readonly STREET_NAME = 'street';
@@ -24,15 +31,14 @@ export class AddressService {
   protected readonly PHONE_NUMBER = 'phoneNumber';
 
   createAddressData(formData: { [name: string]: Object }, user: User) {
-    if (Boolean(user.defaultAddress)) {
+    if (!!user.defaultAddress) {
       this.checkoutDeliveryService.setDeliveryAddress(user.defaultAddress);
     } else {
       const address: Address = {};
       const countryIsocode =
         formData[this.PERSONAL_DETAILS_FORM_GROUP][this.COUNTRY];
-      this.userAddressService.loadDeliveryCountries();
-      this.userAddressService
-        .getCountry(countryIsocode)
+      this.loadDeliveryCountries();
+      this.getCountry(countryIsocode)
         .pipe(
           map(country => {
             if (country) {
@@ -50,8 +56,8 @@ export class AddressService {
               address.phone =
                 formData[this.PERSONAL_DETAILS_FORM_GROUP][this.PHONE_NUMBER];
               address.defaultAddress = true;
-              address.shippingAddress= true;
-              if (Boolean(address)) {
+              address.shippingAddress = true;
+              if (!!address) {
                 this.checkoutDeliveryService.createAndSetAddress(address);
               }
             }
