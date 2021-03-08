@@ -3,13 +3,16 @@ import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { Address, RoutingService, UserService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
-import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
+import {
+  FSOrderEntry,
+  FSProduct,
+  FSSteps,
+} from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
-import { FSProduct } from 'fsastorefrontlib/occ';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
