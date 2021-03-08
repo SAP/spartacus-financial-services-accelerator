@@ -72,19 +72,7 @@ describe('FSAddressService', () => {
 
   it('should create delivery address', () => {
     spyOn(checkoutDeliveryService, 'createAndSetAddress').and.callThrough();
-    const mockCountry = {
-      isocode: 'RS',
-      name: 'Serbia',
-    };
-    spyOn(service, 'getCountry').and.returnValue(of(mockCountry));
     service.createAddressData(formContent, user);
     expect(checkoutDeliveryService.createAndSetAddress).toHaveBeenCalled();
-  });
-
-  it('should not create delivery address when country can not be fetched', () => {
-    spyOn(checkoutDeliveryService, 'createAndSetAddress').and.callThrough();
-    spyOn(service, 'getCountry').and.returnValue(of(null));
-    service.createAddressData(formContent, user);
-    expect(checkoutDeliveryService.createAndSetAddress).not.toHaveBeenCalled();
   });
 });

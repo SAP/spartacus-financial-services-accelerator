@@ -9,7 +9,6 @@ import {
   UserAddressService,
   UserIdService,
 } from '@spartacus/core';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FSAddressService extends UserAddressService {
@@ -34,36 +33,22 @@ export class FSAddressService extends UserAddressService {
     if (!!user.defaultAddress) {
       this.checkoutDeliveryService.setDeliveryAddress(user.defaultAddress);
     } else {
-      const address: Address = {};
-      const countryIsocode =
-        formData[this.PERSONAL_DETAILS_FORM_GROUP][this.COUNTRY];
-      this.loadDeliveryCountries();
-      this.getCountry(countryIsocode)
-        .pipe(
-          map(country => {
-            if (country) {
-              address.country = country;
-              address.firstName = user.firstName;
-              address.lastName = user.lastName;
-              address.line1 =
-                formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NAME];
-              address.line2 =
-                formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NUMBER];
-              address.town =
-                formData[this.PERSONAL_DETAILS_FORM_GROUP][this.CITY];
-              address.postalCode =
-                formData[this.PERSONAL_DETAILS_FORM_GROUP][this.POSTAL_CODE];
-              address.phone =
-                formData[this.PERSONAL_DETAILS_FORM_GROUP][this.PHONE_NUMBER];
-              address.defaultAddress = true;
-              address.shippingAddress = true;
-              if (!!address) {
-                this.checkoutDeliveryService.createAndSetAddress(address);
-              }
-            }
-          })
-        )
-        .subscribe();
+      const address: Address = {
+        country: {
+          isocode: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.COUNTRY],
+        },
+        firstName: user.firstName,
+        lastName: user.lastName,
+        line1: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NAME],
+        line2: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NUMBER],
+        town: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.CITY],
+        postalCode:
+          formData[this.PERSONAL_DETAILS_FORM_GROUP][this.POSTAL_CODE],
+        phone: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.PHONE_NUMBER],
+        defaultAddress: true,
+        shippingAddress: true,
+      };
+      this.checkoutDeliveryService.createAndSetAddress(address);
     }
   }
 }
