@@ -227,7 +227,12 @@ export function populateIncidentReportStep() {
     .should('contain.text', 'Upload')
     .eq(0)
     .click({ force: true });
-  cy.wait(1000);
+}
+
+export function checkDownloadButton() {
+  cy.get('cx-upload').within(() => {
+    cy.get('.fa-download');
+  });
 }
 
 export function checkClaimReplication() {
