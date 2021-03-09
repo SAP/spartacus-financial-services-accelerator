@@ -7,7 +7,7 @@ import {
   FormDataStorageService,
   YFormData,
 } from '@spartacus/dynamicforms';
-import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData, MediaModule } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -106,7 +106,7 @@ describe('ComparisonTablePanelComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NgbTabsetModule, NgbTooltipModule, MediaModule],
+        imports: [NgbNavModule, NgbTooltipModule, MediaModule],
         providers: [
           {
             provide: CmsComponentData,
