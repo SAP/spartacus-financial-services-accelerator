@@ -39,6 +39,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+    this.userService.load();
   }
 
   navigateNext(nextStep: FSSteps) {
