@@ -1,7 +1,7 @@
 import { DebugElement, Directive, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -32,7 +32,7 @@ class MockComparisonTableService {
 }
 
 describe('ComparisonTableContainerComponent', () => {
-  let comaparisonTableContainer: ComparisonTableContainerComponent;
+  let comparisonTableContainer: ComparisonTableContainerComponent;
   let mockComparisonTableService: MockComparisonTableService;
   let fixture: ComponentFixture<ComparisonTableContainerComponent>;
   let el: DebugElement;
@@ -52,7 +52,7 @@ describe('ComparisonTableContainerComponent', () => {
     waitForAsync(() => {
       mockComparisonTableService = new MockComparisonTableService();
       TestBed.configureTestingModule({
-        imports: [NgbTabsetModule],
+        imports: [NgbNavModule],
         declarations: [
           ComparisonTableContainerComponent,
           MockComponentWrapperDirective,
@@ -73,16 +73,16 @@ describe('ComparisonTableContainerComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTableContainerComponent);
-    comaparisonTableContainer = fixture.componentInstance;
+    comparisonTableContainer = fixture.componentInstance;
     el = fixture.debugElement;
   });
 
   it('should create comparison table container', () => {
-    expect(comaparisonTableContainer).toBeTruthy();
+    expect(comparisonTableContainer).toBeTruthy();
   });
 
   it('should contain tabs', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('ngb-tabset'))).toBeTruthy();
+    expect(el.query(By.css('.tab-content'))).toBeTruthy();
   });
 });
