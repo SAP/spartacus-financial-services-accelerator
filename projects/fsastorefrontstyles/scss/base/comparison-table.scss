@@ -1,11 +1,9 @@
-@import '../fs-mixins';
-@import '../theme';
-
 cx-fs-comparison-table-container {
   width: 100%;
 }
 .products-wrapper {
-  ngb-tabset {
+  .nav-tabs,
+  .tab-content {
     flex: 0 1 100%;
   }
   cx-fs-comparison-table-tab {
@@ -15,7 +13,7 @@ cx-fs-comparison-table-container {
     border-top: none;
     .table-tab {
       flex: 0 1 100%;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         overflow: hidden;
       }
     }
@@ -32,16 +30,16 @@ cx-fs-comparison-table-container {
       float: left;
       width: 25%;
       padding-right: 5px;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         width: 46%;
       }
     }
     .slide-column-wrapper {
       float: left;
       width: 75%;
-      overflow-y: hidden;
-      overflow-x: auto;
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
+        overflow-y: hidden;
+        overflow-x: auto;
         width: 54%;
         border-left: 1px solid var(--cx-color-3);
       }
@@ -71,11 +69,17 @@ cx-fs-comparison-table-container {
     }
   }
   .table-header {
-    min-height: 200px;
+    min-height: 180px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    opacity: 0.95;
+    padding-top: 10px;
+    background-color: var(--cx-color-1);
     &-title {
       font-size: var(--cx-h6-font-size);
       font-weight: var(--cx-font-weight-semi);
-      min-height: 50px;
+      min-height: 45px;
       @include media-breakpoint-down(sm) {
         min-height: 60px;
         font-size: 18px;

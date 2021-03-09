@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModule,
+  NgbNavModule,
+  NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import {
   CmsConfig,
   CmsModule,
@@ -29,7 +33,7 @@ import { ComparisonTableService } from './comparison-table.service';
     I18nModule,
     SpinnerModule,
     CmsModule,
-    NgbTabsetModule,
+    NgbNavModule,
     NgbTooltipModule,
     UrlModule,
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
@@ -45,6 +49,7 @@ import { ComparisonTableService } from './comparison-table.service';
         },
       },
     }),
+    NgbModule,
   ],
   declarations: [
     ComparisonTableContainerComponent,

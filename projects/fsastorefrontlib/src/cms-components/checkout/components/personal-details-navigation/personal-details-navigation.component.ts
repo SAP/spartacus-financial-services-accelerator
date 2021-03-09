@@ -1,14 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Cart, RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
+import { Address, RoutingService, UserService } from '@spartacus/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
+import {
+  FSOrderEntry,
+  FSProduct,
+  FSSteps,
+} from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
+import { FSAddressService } from './../../../../core/user/facade/address.service';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -18,17 +22,19 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected cartService: FSCartService,
     protected formService: FormDataService,
-    protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected quoteService: QuoteService,
-    protected pricingService: PricingService
+    protected pricingService: PricingService,
+    protected userService: UserService,
+    protected addressService: FSAddressService
   ) {}
 
   subscription = new Subscription();
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   cartId: string;
+  addressData: Address;
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
@@ -37,24 +43,32 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
 
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
-      this.cartService
-        .getActive()
+      combineLatest([this.cartService.getActive(), this.userService.get()])
         .pipe(
+          filter(([_, user]) => Boolean(user.customerId)),
           take(1),
-          switchMap((cart: Cart) => {
-            if (cart && cart.code && cart.entries && cart.entries.length > 0) {
+          switchMap(([cart, user]) => {
+            if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
               };
               yFormData.id =
-                entry?.formData?.length > 0 ? entry.formData[0].id : null;
+                entry?.formData?.length > 0 ? entry?.formData[0].id : null;
               this.formService.submit(yFormData);
             }
+            const isProductConfigurable = (<FSProduct>cart?.entries[0]?.product)
+              ?.configurable;
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
+                  if (!isProductConfigurable) {
+                    this.addressService.createAddressData(
+                      JSON.parse(formData.content),
+                      user
+                    );
+                  }
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(
                     this.cartId,
