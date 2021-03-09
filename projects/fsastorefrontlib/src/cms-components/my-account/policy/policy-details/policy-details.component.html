@@ -81,10 +81,9 @@
           <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.status' | cxTranslate }}
           </div>
-          <div class="col-6 col-sm-5 value notice">
+          <div class="col-6 col-sm-5 value notice text-capitalize">
             {{
-              policy.policyStatus.charAt(0).toUpperCase() +
-                policy.policyStatus.toLowerCase().slice(1)
+              policy.policyStatus.toLowerCase()
             }}
           </div>
         </li>
