@@ -65,7 +65,7 @@ context('Auto Silver Checkout with change mileage', () => {
     cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedPolicy('Silver');
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.heading-headline').should('contain.text', 'Auto Silver Policy');
   });
 
   it('Should complete change mileage checkout', () => {

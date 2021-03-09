@@ -41,7 +41,7 @@ export function startChangeCoverage() {
 }
 
 export function checkChangeCoverageSteps() {
-  cy.get('h2').contains(' Change Auto Insurance Policy ');
+  cy.get('h2').should('contain.text', ' Change Auto Insurance Policy ');
   cy.get('.action-button').should('contain', 'Cancel');
   cy.get('.progress-inner-wrapper')
     .should('have.length', 2)
@@ -65,9 +65,9 @@ export function checkOptionalExtrasBronze() {
     .within(() => {
       cy.get('.section-header-heading').contains(' Optional Extras ');
       cy.get('.row.mx-3').should('have.length', 3);
-      cy.get('h6').eq(0).contains('Collision Coverage');
-      cy.get('h6').eq(1).contains('Uninsured Coverage');
-      cy.get('h6').eq(2).contains('Trailer Liability');
+      cy.get('h6').contains('Collision Coverage');
+      cy.get('h6').contains('Uninsured Coverage');
+      cy.get('h6').contains('Trailer Liability');
     });
 }
 

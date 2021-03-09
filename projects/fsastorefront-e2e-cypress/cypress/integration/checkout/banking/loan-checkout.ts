@@ -48,8 +48,8 @@ context('Loan Checkout', () => {
     banking.checkProgressBarLoanAndFTD();
     loan.checkMiniCart();
     checkout.checkAccordions('generalQuoteAccordions');
-    checkout.bindQuotePopup();
     checkout.clickContinueButton();
+    checkout.ConfirmBindQuote();
   });
 
   it('Should retrieve bind quote', () => {

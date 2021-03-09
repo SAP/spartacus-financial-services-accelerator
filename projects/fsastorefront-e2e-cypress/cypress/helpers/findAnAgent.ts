@@ -133,9 +133,7 @@ export function locateSavingsAgent() {
 }
 
 export function backButtonDisplayed() {
-  cy.get('.action-button')
-    .should('be.visible')
-    .should('contain.text', ' Back ');
+  cy.get('.action-button').eq(0).should('have.text', ' Back to list ');
 }
 
 export function checkIndira() {

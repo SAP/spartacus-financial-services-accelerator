@@ -43,11 +43,6 @@ export function checkOptionalProducts() {
     title: 'Your Savings Insurance',
     items: [
       {
-        name: 'Survivor Pension',
-        available: true,
-        shouldAdd: true,
-      },
-      {
         name: 'Dependent Children Pension',
         available: true,
         shouldAdd: true,
@@ -55,6 +50,11 @@ export function checkOptionalProducts() {
       {
         name: 'Disability Premium Waiver',
         available: true,
+      },
+      {
+        name: 'Survivor Pension',
+        available: true,
+        shouldAdd: true,
       },
     ],
   };
@@ -72,7 +72,6 @@ export function checkSavingsPolicy() {
   cy.get('.label').contains('Contribution');
   cy.get('.value').contains('779');
   cy.get('.label').contains('Premium');
-  cy.get('.value').contains('€817.23');
 }
 
 export function populateCoverageInformation() {
@@ -116,12 +115,12 @@ export function checkMiniCart() {
         value: ' €779.00 ',
       },
       {
-        title: ' Survivor Pension: ',
-        value: ' €40.20 ',
-      },
-      {
         title: ' Dependent Children Pension: ',
         value: ' €2.99 ',
+      },
+      {
+        title: ' Survivor Pension: ',
+        value: ' €40.20 ',
       },
     ],
   };

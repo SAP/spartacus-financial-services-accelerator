@@ -233,15 +233,16 @@ export function checkOptionalProductsSilver() {
         mandatory: true,
       },
       {
-        name: 'Uninsured Coverage',
-        available: true,
-      },
-      {
         name: 'Roadside Assistance',
         available: true,
       },
       {
         name: 'Trailer Liability',
+        available: true,
+      },
+
+      {
+        name: 'Uninsured Coverage',
         available: true,
       },
       {
@@ -266,13 +267,13 @@ export function checkOptionalProductsBronze() {
         shouldAdd: true,
       },
       {
+        name: 'Trailer Liability',
+        available: true,
+      },
+      {
         name: 'Uninsured Coverage',
         available: true,
         shouldAdd: true,
-      },
-      {
-        name: 'Trailer Liability',
-        available: true,
       },
       {
         name: 'Winter Tires',
@@ -299,16 +300,16 @@ export function checkOptionalProductsGold() {
         mandatory: true,
       },
       {
-        name: 'Uninsured Coverage',
-        mandatory: true,
-      },
-      {
         name: 'Roadside Assistance',
         mandatory: true,
       },
       {
         name: 'Trailer Liability',
         available: true,
+      },
+      {
+        name: 'Uninsured Coverage',
+        mandatory: true,
       },
       {
         name: 'Winter Tires',

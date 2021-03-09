@@ -65,7 +65,7 @@ context('Auto Bronze Checkout with change coverage', () => {
     cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedPolicy('Bronze');
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
     //This should be included for integration tests
     //checkout.checkAccordions('integrationPolicyDetails');
   });

@@ -38,13 +38,13 @@ export function checkOptionalProductsAddTransactionChest() {
         available: false,
       },
       {
-        name: 'Transaction Pouch',
-        available: true,
-      },
-      {
         name: 'Transaction Chest',
         available: true,
         shouldAdd: true,
+      },
+      {
+        name: 'Transaction Pouch',
+        available: true,
       },
     ],
   };

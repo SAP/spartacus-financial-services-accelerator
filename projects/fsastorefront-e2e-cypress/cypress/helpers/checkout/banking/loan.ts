@@ -5,14 +5,6 @@ export function checkOptionalProducts() {
     title: 'Your Loan Application',
     items: [
       {
-        name: 'Service Fee',
-        mandatory: true,
-      },
-      {
-        name: 'Life Cover',
-        available: true,
-      },
-      {
         name: 'Critical Illness Cover',
         available: true,
         shouldAdd: true,
@@ -26,13 +18,21 @@ export function checkOptionalProducts() {
         available: true,
         shouldAdd: true,
       },
+      {
+        name: 'Life Cover',
+        available: true,
+      },
+      {
+        name: 'Service Fee',
+        mandatory: true,
+      },
     ],
   };
   shared.checkAddOptionsPageContent(addOptionsContent);
 }
 
 export function checkLegalInformationLoan() {
-  cy.get('.section-header-heading').should('have.text', 'Legal information');
+  cy.get('.section-header-heading').should('have.text', 'Legal Information');
   cy.get('cx-fs-legal-documents > .border-color-3')
     .should('be.visible')
     .within(() => {

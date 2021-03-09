@@ -38,6 +38,7 @@ context('Homeowners Checkout', () => {
 
   it('Should check comparison table', () => {
     checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
+    checkout.checkProgressBarInsurance();
     checkout.checkInsuranceComparisonPage('2');
     homeowners.checkHomeownersComparisonTable();
     homeowners.selectHomeownersAnnually();
