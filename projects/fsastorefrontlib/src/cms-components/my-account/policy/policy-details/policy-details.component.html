@@ -82,7 +82,10 @@
             {{ 'fscommon.status' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            {{ policy.policyStatus.charAt(0).toUpperCase() + policy.policyStatus.toLowerCase().slice(1) }}
+            {{
+              policy.policyStatus.charAt(0).toUpperCase() +
+                policy.policyStatus.toLowerCase().slice(1)
+            }}
           </div>
         </li>
       </ul>
