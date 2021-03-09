@@ -86,7 +86,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {
           const formGroup = this.form.get(groupCode);
-          if (formGroup) {
+          if (formGroup && formData[groupCode][controlName] !== ' ') {
             if (formGroup.get(controlName)) {
               formGroup
                 .get(controlName)
