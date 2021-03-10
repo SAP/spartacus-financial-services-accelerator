@@ -108,6 +108,7 @@ class MockUserService {
   get() {
     return of(mockUser);
   }
+  load() {}
 }
 
 class MockFSAddressService {

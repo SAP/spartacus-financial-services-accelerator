@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FSPaymentMethodComponent } from './payment-method.component';
 import {
   ActiveCartService,
+  Cart,
   CheckoutDeliveryService,
   CheckoutPaymentService,
   GlobalMessageService,
@@ -71,11 +72,19 @@ class MockCheckoutService {
   getPaymentType(): Observable<string> {
     return of('invoice');
   }
+  loadCheckoutDetails() {}
 }
+
+const mockCart: Cart = {
+  code: 'test001',
+};
 
 class MockActiveCartService {
   isGuestCart(): boolean {
     return false;
+  }
+  getActive() {
+    return of(mockCart);
   }
 }
 
