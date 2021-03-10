@@ -5,34 +5,32 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
-import { ProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
-  selector: 'cx-fs-active-products',
-  templateUrl: './active-product-assignments.component.html',
+  selector: 'cx-fs-product-assignments',
+  templateUrl: './product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
+export class ProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
-    protected productAssignmentService: ProductAssignmentService,
     protected route: ActivatedRoute,
-    protected routingService: RoutingService
+    protected productAssignmentService: ProductAssignmentService
   ) {}
 
   private subscription = new Subscription();
-  productAssignments$: Observable<any>;
   userId: string;
   orgUnitId: string;
+  productAssignments$: Observable<any>;
 
   ngOnInit() {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
         this.productAssignmentService.loadProductAssignmentsForUnit(
-          this.orgUnitId,
-          true
+          this.orgUnitId
         )
       );
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
@@ -42,13 +40,6 @@ export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
     if (params) {
       this.orgUnitId = params.orgUnitId;
     }
-  }
-
-  navigateTo() {
-    this.routingService.go({
-      cxRoute: 'productActivation',
-      params: { orgUnitId: this.orgUnitId },
-    });
   }
 
   ngOnDestroy() {

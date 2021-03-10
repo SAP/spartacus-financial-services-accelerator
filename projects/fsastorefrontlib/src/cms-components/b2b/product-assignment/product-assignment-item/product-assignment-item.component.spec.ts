@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
-import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 import { ProductAssignmentItemComponent } from './product-assignment-item.component';
 
 @Pipe({

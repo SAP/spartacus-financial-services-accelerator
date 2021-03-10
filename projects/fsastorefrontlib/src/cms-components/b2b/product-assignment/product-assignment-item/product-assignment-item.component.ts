@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ProductAssignmentService } from '../../../core/product-assignment/facade';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade';
 
 @Component({
   selector: 'cx-fs-product-assignment-item',

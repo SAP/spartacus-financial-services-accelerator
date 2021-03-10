@@ -3,7 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 import { ProductAssignmentsComponent } from './product-assignments.component';
 
 @Component({

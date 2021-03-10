@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {} from '@angular/router/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 import { ActiveProductAssignmentsComponent } from './active-product-assignments.component';
 import createSpy = jasmine.createSpy;
 

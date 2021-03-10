@@ -16,7 +16,7 @@ import {
 } from '@spartacus/storefront';
 import { AdministrationModule } from '@spartacus/organization';
 import { AdminGuard } from '@spartacus/organization/administration/core';
-import { ProductAssignmentStoreModule } from './../../core/product-assignment/store/product-assignments-store.module';
+import { ProductAssignmentStoreModule } from '../../../core/product-assignment/store/product-assignments-store.module';
 import { ActiveProductAssignmentsComponent } from './active-product-assignments/active-product-assignments.component';
 import { ProductAssignmentItemComponent } from './product-assignment-item/product-assignment-item.component';
 import { ProductAssignmentsComponent } from './product-assignments/product-assignments.component';

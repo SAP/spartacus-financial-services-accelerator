@@ -11,7 +11,6 @@ import { ComparisonTableModule } from './comparison-table/comparison-table.modul
 import { CustomContainerModule } from './container/cms-custom-container.module';
 import { FnolModule } from './fnol/fnol.module';
 import { MyAccountModule } from './my-account/myaccount.module';
-import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
 import { ProductModule } from './product/product.module';
 import { ProgressBarModule } from './progress-bar/progress-bar.module';
 import { FSRegisterModule } from './user/register/register.module';
@@ -37,7 +36,6 @@ import { FSLoginFormModule } from './user/login-form/login-form.module';
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
-    ProductAssignmentModule,
     NotFoundModule,
     PersonalDetailsModule,
     GeneralInformationModule,
@@ -56,7 +54,6 @@ import { FSLoginFormModule } from './user/login-form/login-form.module';
     ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
-    ProductAssignmentModule,
     ProgressBarModule,
     NotFoundModule,
     PersonalDetailsModule,

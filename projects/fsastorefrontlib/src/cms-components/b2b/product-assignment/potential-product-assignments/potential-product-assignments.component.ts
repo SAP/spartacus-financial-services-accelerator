@@ -9,8 +9,8 @@ import { UserService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { ProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
-import { B2BAdministrator } from '../../../occ/occ-models';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
+import { B2BAdministrator } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-potential-product-assignments',

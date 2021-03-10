@@ -5,32 +5,34 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
-import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
+import { RoutingService } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
-  selector: 'cx-fs-product-assignments',
-  templateUrl: './product-assignments.component.html',
+  selector: 'cx-fs-active-products',
+  templateUrl: './active-product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductAssignmentsComponent implements OnInit, OnDestroy {
+export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
+    protected productAssignmentService: ProductAssignmentService,
     protected route: ActivatedRoute,
-    protected productAssignmentService: ProductAssignmentService
+    protected routingService: RoutingService
   ) {}
 
   private subscription = new Subscription();
+  productAssignments$: Observable<any>;
   userId: string;
   orgUnitId: string;
-  productAssignments$: Observable<any>;
 
   ngOnInit() {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
         this.productAssignmentService.loadProductAssignmentsForUnit(
-          this.orgUnitId
+          this.orgUnitId,
+          true
         )
       );
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
@@ -40,6 +42,13 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
     if (params) {
       this.orgUnitId = params.orgUnitId;
     }
+  }
+
+  navigateTo() {
+    this.routingService.go({
+      cxRoute: 'productActivation',
+      params: { orgUnitId: this.orgUnitId },
+    });
   }
 
   ngOnDestroy() {
