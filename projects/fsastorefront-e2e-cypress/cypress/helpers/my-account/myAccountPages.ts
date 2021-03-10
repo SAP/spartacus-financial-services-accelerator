@@ -18,11 +18,9 @@ export function checkSavingsData() {
   cy.get('.premium-data-row').within(() => {
     cy.contains('Savings Insurance');
     cy.contains('Half-yearly');
-    cy.contains('€817.23');
   });
   cy.get('.premium-data-row').click({ force: true });
   cy.get('.container-fluid').should('be.visible');
-  cy.get('.color-dot').contains('€817.23');
 }
 
 export function checkCloseAccountPage() {

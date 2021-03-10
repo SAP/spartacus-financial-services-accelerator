@@ -72,7 +72,6 @@ export function checkSavingsPolicy() {
   cy.get('.label').contains('Contribution');
   cy.get('.value').contains('779');
   cy.get('.label').contains('Premium');
-  cy.get('.value').contains('€817.23');
 }
 
 export function populateCoverageInformation() {
