@@ -45,6 +45,7 @@ context('Event Checkout', () => {
     checkout.checkCheckoutStep('Your Event Insurance', '6');
     checkout.checkPersonalDetailsPage();
     event.populatePersonalDetails();
+    checkout.populatePersonalDetailsPage();
     event.checkMiniCartRemovedProduct();
     checkout.clickContinueButton();
   });
@@ -56,7 +57,6 @@ context('Event Checkout', () => {
     checkout.checkAccordions('threeAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

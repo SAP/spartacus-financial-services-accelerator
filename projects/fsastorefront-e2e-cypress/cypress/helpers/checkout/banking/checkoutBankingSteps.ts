@@ -19,7 +19,7 @@ export function checkBankingProgressBar() {
 }
 
 export function checkLegalInformationPage() {
-  cy.get('.section-header-heading').should('have.text', 'Legal information');
+  cy.get('.section-header-heading').should('have.text', 'Legal Information');
   cy.get('cx-fs-legal-documents > .border-color-3')
     .should('be.visible')
     .within(() => {

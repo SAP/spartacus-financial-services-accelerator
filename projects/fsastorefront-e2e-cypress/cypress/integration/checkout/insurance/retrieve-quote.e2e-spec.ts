@@ -20,6 +20,7 @@ context('Retrieve Quote', () => {
 
   it('Should populate insurance information form', () => {
     travelCheckout.populateInsuranceInfoForm();
+    checkout.clickContinueButton();
   });
 
   it('Add main product to the cart', () => {

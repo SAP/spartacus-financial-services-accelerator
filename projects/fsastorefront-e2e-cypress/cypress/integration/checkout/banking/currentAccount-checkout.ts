@@ -57,8 +57,8 @@ context('Current Account Checkout', () => {
   });
 
   it('Should bind Quote', () => {
-    checkout.bindQuotePopup();
     checkout.clickContinueButton();
+    checkout.ConfirmBindQuote();
   });
 
   it('Should check Legal Information page', () => {

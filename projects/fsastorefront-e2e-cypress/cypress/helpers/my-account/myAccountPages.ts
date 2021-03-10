@@ -18,11 +18,9 @@ export function checkSavingsData() {
   cy.get('.premium-data-row').within(() => {
     cy.contains('Savings Insurance');
     cy.contains('Half-yearly');
-    cy.contains('€817.23');
   });
   cy.get('.premium-data-row').click({ force: true });
   cy.get('.container-fluid').should('be.visible');
-  cy.get('.color-dot').contains('€817.23');
 }
 
 export function checkCloseAccountPage() {
@@ -42,7 +40,7 @@ export function checkCloseAccountPage() {
 }
 
 export function closeAccount() {
-  cy.get('.btn-primary').click();
+  cy.get('.btn-primary').contains('CLOSE MY ACCOUNT').click();
   cy.get('cx-close-account-modal')
     .should('be.visible')
     .within(() => {
@@ -68,8 +66,8 @@ export function orderHistoryPage() {
 }
 
 export function checkEmptyOrderHistoryPage() {
-  cy.get('cx-order-history').should('be.visible');
-  cy.get('h3').contains('Order history');
+  cy.get('cx-fs-order-history').should('be.visible');
+  cy.get('h2').contains('Order history');
   cy.get('div').contains('We have no order records for this account.');
 }
 

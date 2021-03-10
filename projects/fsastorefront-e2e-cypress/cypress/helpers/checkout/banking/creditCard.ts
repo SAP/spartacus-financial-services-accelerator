@@ -10,12 +10,12 @@ export function checkOptionalProducts() {
         available: true,
       },
       {
-        name: 'Special Support',
-        available: true,
-      },
-      {
         name: 'Overseas Insurance',
         available: false,
+      },
+      {
+        name: 'Special Support',
+        available: true,
       },
     ],
   };

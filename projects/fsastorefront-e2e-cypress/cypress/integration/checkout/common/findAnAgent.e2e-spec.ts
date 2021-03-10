@@ -35,7 +35,6 @@ context('Find An Agent', () => {
     cy.reload();
     cy.viewport(375, 812);
     findAnAgent.checkAgentLocatorPage();
-    findAnAgent.backButtonDisplayed();
     findAnAgent.checkIndira();
     findAnAgent.searchFrancoAgent();
     findAnAgent.backButtonDisplayed();

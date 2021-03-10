@@ -6,7 +6,7 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
 
-//Cypress.config('defaultCommandTimeout', 500000);
+Cypress.config('defaultCommandTimeout', 500000);
 const currentDate = Cypress.moment().format('DD/MM/YYYY');
 
 context('Auto Bronze Checkout with cancel change', () => {
@@ -53,7 +53,6 @@ context('Auto Bronze Checkout with cancel change', () => {
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    cy.get('.section-header-heading').should('be.visible');
     checkout.clickContinueButton();
   });
 
@@ -69,7 +68,7 @@ context('Auto Bronze Checkout with cancel change', () => {
     cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedPolicy('Bronze');
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
   });
 
   it('Should cancel change policy request', () => {
@@ -84,6 +83,6 @@ context('Auto Bronze Checkout with cancel change', () => {
     cy.get('.offset-1').contains(currentDate);
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
   });
 });

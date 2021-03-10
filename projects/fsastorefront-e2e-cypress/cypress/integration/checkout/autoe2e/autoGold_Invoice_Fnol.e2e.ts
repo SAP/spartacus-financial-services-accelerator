@@ -76,9 +76,8 @@ context('Auto Gold Checkout with FNOL', () => {
 
   it('Should check and populate Incident Report page', () => {
     fnol.populateIncidentReportStep();
+    fnol.checkDownloadButton();
     checkout.checkBackAndContinueButtons();
-    cy.get('.primary-button').should('contain.text', 'Continue').click();
-    cy.wait(500);
     checkout.clickContinueButton();
     autoIntegration.waitForGeneralInfoForm();
   });

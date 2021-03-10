@@ -62,6 +62,7 @@ import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
 import { FSCartCouponModule } from './components/cart-coupon/cart-coupon.module';
+import { FSAddressService } from '../../core/user/facade/address.service';
 
 const routes: Routes = [
   {
@@ -285,6 +286,7 @@ const routes: Routes = [
     CartConnector,
     QuoteConnector,
     CategoryService,
+    FSAddressService,
     reducerProvider,
   ],
 })

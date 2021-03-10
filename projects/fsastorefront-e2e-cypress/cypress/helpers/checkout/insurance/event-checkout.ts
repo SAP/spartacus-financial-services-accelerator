@@ -81,9 +81,6 @@ export function populatePersonalDetails() {
     cy.get('[name="eventVenue"]').type('my Birthday party');
     cy.get('[name="eventVenueAddress"]').type('Oxford Street 23b');
     cy.get('[name="eventVenueCity"]').type('London');
-    cy.get('[name="address1"]').type('Omladinskih Brigada');
-    cy.get('[name="postcode"]').type('111111');
-    cy.get('[name=city]').type('Belgrade');
   });
 }
 

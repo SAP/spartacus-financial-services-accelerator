@@ -31,11 +31,11 @@ export function checkOptionalProducts() {
     title: 'Your Homeowners Insurance',
     items: [
       {
-        name: 'Flood Cover',
+        name: 'Bicycles Cover',
         available: true,
       },
       {
-        name: 'Temporary Accommodation Cover',
+        name: 'Flood Cover',
         available: true,
       },
       {
@@ -44,7 +44,7 @@ export function checkOptionalProducts() {
         shouldAdd: true,
       },
       {
-        name: 'Bicycles Cover',
+        name: 'Temporary Accommodation Cover',
         available: true,
       },
     ],

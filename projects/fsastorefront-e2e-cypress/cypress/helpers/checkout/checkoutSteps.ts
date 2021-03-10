@@ -27,7 +27,8 @@ export function checkProgressBarInsurance() {
 export function populatePersonalDetailsPage() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name="phoneNumber"]').type('111111');
-    cy.get('[name="address1"]').type('Omladinskih Brigada');
+    cy.get('[name="street"]').type('Omladinskih Brigada');
+    cy.get('[name="streetNumber"]').type('90 G');
     cy.get('[name="city"]').type('Belgrade');
     cy.get('[name="postcode"]').type('111111');
     cy.get('[name=country]').select('Serbia');
@@ -38,17 +39,12 @@ export function ConfirmBindQuote() {
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
-}
-
-export function bindQuotePopup() {
-  cy.get('.primary-button').should('contain.text', 'Continue').click();
-  cy.get('cx-fs-bind-quote-dialog').within(() => {
-    cy.get('.primary-button').click();
-  });
+  cy.get('.primary-button').should('be.visible');
+  cy.contains('Continue').click();
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button').should('contain.text', 'Continue').click();
+  cy.get('.primary-button').contains('Continue').click();
 }
 
 export function clickBackButton() {
@@ -286,4 +282,30 @@ export function waitForOrder() {
   cy.wait(`@${order}`).then(({ response }) => {
     expect(response.statusCode).to.eq(200);
   });
+}
+
+export function waitFinalReview() {
+  const finalReview = waitForPage('final-review', 'finalReview');
+  cy.wait(`@${finalReview}`).then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+  });
+}
+
+export function checkCouponsFields() {
+  cy.get('.cx-cart-coupon-container')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.form-control').should('be.visible');
+      cy.get('.primary-button').should('contain.text', 'Apply');
+    });
+}
+
+export function checkFinalReviewComponents() {
+  cy.get('cx-fs-final-review').should('be.visible');
+  cy.get('.form-check-input').should('be.visible');
+  cy.get('cx-fs-mini-cart')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.section-header-heading').contains('Travel Insurance');
+    });
 }

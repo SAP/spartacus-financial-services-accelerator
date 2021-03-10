@@ -12,7 +12,6 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="Travellers"]').select('1');
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
   });
-  cy.get('cx-fs-choose-cover-navigation').findByText('Continue').click();
 }
 
 export function checkTravelComparisonTable() {
@@ -50,16 +49,19 @@ export function checkOptionalProductsAndPick() {
     title: 'Your Travel Insurance',
     items: [
       {
-        name: 'Winter Sports Cover',
+        name: 'Business Cover',
+        available: false,
+      },
+      {
+        name: 'Excess waiver',
         available: true,
-        shouldAdd: true,
       },
       {
         name: 'Golf Cover',
         available: false,
       },
       {
-        name: 'Business Cover',
+        name: 'Hazardous Activities',
         available: false,
       },
       {
@@ -67,12 +69,9 @@ export function checkOptionalProductsAndPick() {
         available: true,
       },
       {
-        name: 'Hazardous Activities',
-        available: false,
-      },
-      {
-        name: 'Excess waiver',
+        name: 'Winter Sports Cover',
         available: true,
+        shouldAdd: true,
       },
     ],
   };
@@ -105,4 +104,52 @@ export function checkTravelMiniCart() {
     ],
   };
   shared.checkMiniCart(miniCartContent);
+}
+
+export function checkOptionalProducts() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Travel Insurance',
+    items: [
+      {
+        name: 'Business Cover',
+      },
+      {
+        name: 'Excess waiver',
+      },
+      {
+        name: 'Golf Cover',
+      },
+      {
+        name: 'Hazardous Activities',
+      },
+      {
+        name: 'Valuables Extension',
+      },
+      {
+        name: 'Winter Sports Cover',
+      },
+    ],
+  };
+
+  shared.checkAddOptionsPageContent(addOptionsContent);
+
+  cy.get('.primary-button').should('be.visible').contains('Continue').click();
+}
+
+export function checkPageComponenth2(checkoutStep) {
+  cy.get('.section-header-heading').should('be.visible').contains(checkoutStep);
+  cy.get('cx-fs-mini-cart')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.section-header-heading').contains('Travel Insurance');
+    });
+}
+
+export function checkPageComponenth3(checkoutStep) {
+  cy.get('h3').should('be.visible').contains(checkoutStep);
+  cy.get('cx-fs-mini-cart')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h2').contains('Travel Insurance');
+    });
 }

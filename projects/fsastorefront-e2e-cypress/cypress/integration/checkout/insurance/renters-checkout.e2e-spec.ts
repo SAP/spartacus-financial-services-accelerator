@@ -60,7 +60,6 @@ context('Renters Checkout', () => {
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
