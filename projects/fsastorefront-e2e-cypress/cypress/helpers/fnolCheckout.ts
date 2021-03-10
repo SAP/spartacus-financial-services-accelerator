@@ -229,6 +229,12 @@ export function populateIncidentReportStep() {
     .click({ force: true });
 }
 
+export function checkDownloadButton() {
+  cy.get('cx-upload').within(() => {
+    cy.get('.fa-download');
+  });
+}
+
 export function checkClaimReplication() {
   cy.get('.info-card')
     .should('have.length', 1)
