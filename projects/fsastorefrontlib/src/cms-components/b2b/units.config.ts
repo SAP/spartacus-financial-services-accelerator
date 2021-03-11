@@ -37,10 +37,18 @@ import {
   UnitItemService,
   UnitListService,
 } from '@spartacus/organization/administration/components';
-import {
-  MAX_OCC_INTEGER_VALUE,
-  ROUTE_PARAMS,
-} from '@spartacus/organization/administration/components/constants';
+
+export const ROUTE_PARAMS = {
+  budgetCode: 'budgetCode',
+  unitCode: 'unitCode',
+  costCenterCode: 'costCenterCode',
+  userCode: 'userCode',
+  userGroupCode: 'userGroupCode',
+  permissionCode: 'permissionCode',
+  addressCode: 'addressId',
+};
+
+export const MAX_OCC_INTEGER_VALUE = 2147483647;
 
 const listPath = `organization/units/:${ROUTE_PARAMS.unitCode}`;
 const paramsMapping: ParamsMapping = {
@@ -291,9 +299,6 @@ export const unitsTableConfig: TableConfig = {
     [OrganizationTableType.UNIT_USERS]: {
       cells: ['name', 'roles'],
       options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
         cells: {
           roles: {
             dataComponent: UnitUserRolesCellComponent,
@@ -305,9 +310,6 @@ export const unitsTableConfig: TableConfig = {
     [OrganizationTableType.UNIT_CHILDREN]: {
       cells: ['name', 'active'],
       options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
         cells: {
           active: {
             dataComponent: StatusCellComponent,
@@ -335,9 +337,6 @@ export const unitsTableConfig: TableConfig = {
     [OrganizationTableType.UNIT_ASSIGNED_APPROVERS]: {
       cells: ['name', 'orgUnit', 'actions'],
       options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
         cells: {
           actions: {
             dataComponent: AssignCellComponent,
@@ -352,19 +351,11 @@ export const unitsTableConfig: TableConfig = {
 
     [OrganizationTableType.UNIT_COST_CENTERS]: {
       cells: ['name'],
-      options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
-      },
     },
 
     [OrganizationTableType.UNIT_ADDRESS]: {
       cells: ['formattedAddress'],
       options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
         cells: {
           formattedAddress: {
             dataComponent: LinkCellComponent,
