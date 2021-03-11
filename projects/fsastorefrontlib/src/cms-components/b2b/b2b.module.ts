@@ -5,6 +5,7 @@ import {
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import { ProductAssignmentModule } from './product-assignment';
+import { FSUnitDetailsModule } from './unit/details';
 import {
   unitsTableConfigFactory,
   unitsCmsConfig,
@@ -19,7 +20,7 @@ import {
   imports: [
     CommonModule,
     ProductAssignmentModule,
-    // CxUnitDetailsModule,
+    FSUnitDetailsModule,
     // CxUnitAssignmentsModule,
     // CxUnitPotentialAssignmentsModule,
   ],
@@ -28,6 +29,6 @@ import {
     provideDefaultConfig(unitsRoutingConfig),
     provideDefaultConfig(unitsCmsConfig),
   ],
-  exports: [ProductAssignmentModule],
+  exports: [ProductAssignmentModule, FSUnitDetailsModule],
 })
 export class B2bModule {}

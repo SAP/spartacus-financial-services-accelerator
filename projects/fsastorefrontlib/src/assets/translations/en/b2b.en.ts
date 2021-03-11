@@ -8,6 +8,8 @@ export const b2b = {
 
 export const organization = {
   organization: {
+    productActivation: 'Product Activation',
+    productAssignment: 'Product Assignment',
     enabled: 'Active',
     disabled: 'Disabled',
     enable: 'Enable',

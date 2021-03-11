@@ -6,8 +6,6 @@ import {
 } from '@spartacus/core';
 import { AdminGuard } from '@spartacus/organization/administration/core';
 import { BREAKPOINT, TableConfig, TableLayout } from '@spartacus/storefront';
-// import { UnitAddressRoutePageMetaResolver } from './services/unit-address-route-page-meta.resolver';
-// import { UnitRoutePageMetaResolver } from './services/unit-route-page-meta.resolver';
 import {
   ItemService,
   ListService,
@@ -16,7 +14,6 @@ import {
   StatusCellComponent,
   UnitCellComponent,
   OrganizationTableType,
-  UnitDetailsComponent,
   UnitFormComponent,
   UnitAddressDetailsComponent,
   UnitAddressFormComponent,
@@ -37,6 +34,7 @@ import {
   UnitItemService,
   UnitListService,
 } from '@spartacus/organization/administration/components';
+import { FSUnitDetailsComponent } from './unit/details/unit-details.component';
 
 export const ROUTE_PARAMS = {
   budgetCode: 'budgetCode',
@@ -149,7 +147,6 @@ export const unitsCmsConfig: CmsConfig = {
           data: {
             cxPageMeta: {
               breadcrumb: 'orgUnit.breadcrumbs.list',
-              // resolver: UnitRoutePageMetaResolver,
             },
           },
         },
@@ -160,7 +157,7 @@ export const unitsCmsConfig: CmsConfig = {
           },
           {
             path: `:${ROUTE_PARAMS.unitCode}`,
-            component: UnitDetailsComponent,
+            component: FSUnitDetailsComponent,
             data: {
               cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.details' },
             },
