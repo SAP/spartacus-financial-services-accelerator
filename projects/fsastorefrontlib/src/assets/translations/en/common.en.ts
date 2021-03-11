@@ -169,6 +169,8 @@ export const fscommon = {
     },
     attachments: 'Attachments',
     pageNotFoundMessage:
-      'Whoops! Sorry, we couldn\'t find that way! Try getting back.' // prettier-ignore
+      'Whoops! Sorry, we couldn\'t find that way! Try getting back.', // prettier-ignore
+    priceCalculationError:
+      'There has been an error with price calculation, please try again.',
   },
 };
