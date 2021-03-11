@@ -14,13 +14,23 @@ import {
   InboxDataService,
   InboxTab,
 } from '../../../core/my-account/services/inbox-data.service';
-import {
-  CmsInboxComponent,
-  CmsInboxTabComponent,
-} from './../../../occ/occ-models/cms-component.models';
+import { CmsInboxTabComponent } from './../../../occ/occ-models/cms-component.models';
 import { InboxComponent } from './inbox.component';
 
 import createSpy = jasmine.createSpy;
+
+const mockedCMSInboxTab = {
+  title: 'testTab1',
+  messageGroup: 'TestGeneralMessageGroup',
+};
+const mockTabComponents = 'TestGeneralMessageGroup GeneralInboxTabComponent';
+const inboxTabComponents = {
+  tabComponents: mockTabComponents,
+};
+const mockCmsComponentData = {
+  data$: of(inboxTabComponents),
+  uid: 'test',
+};
 
 @Component({
   template: '',
@@ -40,12 +50,6 @@ class InboxMessagesComponent {
   @Input() mobileTabs: string[];
   @Input() mobileInitialTab: string;
 }
-
-const mockedCMSInboxTab: InboxTab = {
-  title: 'testTab1',
-  messageGroup: 'TestGeneralMessageGroup',
-};
-
 class MockAuthService {
   isUserLoggedIn(): Observable<boolean> {
     return of(true);
@@ -53,8 +57,8 @@ class MockAuthService {
 }
 
 class MockCmsService {
-  getComponentData(): Observable<CmsInboxTabComponent>[] {
-    return [of(mockedCMSInboxTab)];
+  getComponentData(): Observable<CmsInboxTabComponent> {
+    return of(mockedCMSInboxTab);
   }
 }
 
@@ -65,32 +69,21 @@ class MockRedirectAfterAuthService {
 class MockInboxService {
   activeMessageGroupAndTitle: Observable<InboxTab> = of(mockedCMSInboxTab);
 }
+
 class MockInboxDataService {
   userId = 'current';
 }
 
 describe('InboxComponent', () => {
   let inboxComponent: InboxComponent;
-  let mockInboxService: MockInboxService;
+  let mockInboxService: InboxService;
   let mockInboxDataService: MockInboxDataService;
   let mockCmsService: MockCmsService;
   let fixture: ComponentFixture<InboxComponent>;
   let el: DebugElement;
 
-  const componentData: CmsInboxComponent = {
-    uid: 'TestCmsInboxComponent',
-    typeCode: 'CMSInboxComponent',
-    tabComponents: 'testTab1',
-  };
-
-  const MockCmsComponentData = <CmsComponentData<CmsInboxComponent>>{
-    data$: of(componentData),
-    uid: 'test',
-  };
-
   beforeEach(
     waitForAsync(() => {
-      mockInboxService = new MockInboxService();
       mockCmsService = new MockCmsService();
       mockInboxDataService = new MockInboxDataService();
 
@@ -104,11 +97,11 @@ describe('InboxComponent', () => {
         providers: [
           {
             provide: CmsComponentData,
-            useValue: MockCmsComponentData,
+            useValue: mockCmsComponentData,
           },
           {
             provide: InboxService,
-            useValue: mockInboxService,
+            useClass: MockInboxService,
           },
           {
             provide: InboxDataService,
@@ -125,6 +118,7 @@ describe('InboxComponent', () => {
           },
         ],
       }).compileComponents();
+      mockInboxService = TestBed.inject(InboxService);
     })
   );
 
@@ -136,5 +130,16 @@ describe('InboxComponent', () => {
 
   it('should create', () => {
     expect(inboxComponent).toBeTruthy();
+  });
+
+  it('should initialize inbox tabs', () => {
+    inboxComponent.ngOnInit();
+    expect(inboxComponent.initialGroupName).toEqual('TestGeneralMessageGroup');
+  });
+
+  it('should not initialize inbox tabs when tab components do not exist', () => {
+    mockCmsComponentData.data$ = of(null);
+    inboxComponent.ngOnInit();
+    expect(inboxComponent.tabs).toEqual([]);
   });
 });
