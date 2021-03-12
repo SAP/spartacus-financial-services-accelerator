@@ -21,6 +21,7 @@ import { ActiveProductAssignmentsComponent } from './active-product-assignments/
 import { ProductAssignmentItemComponent } from './product-assignment-item/product-assignment-item.component';
 import { ProductAssignmentsComponent } from './product-assignments/product-assignments.component';
 import { PotentialProductAssignmentsComponent } from './potential-product-assignments/potential-product-assignments.component';
+import { SubListModule } from '@spartacus/organization/administration/components';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { PotentialProductAssignmentsComponent } from './potential-product-assign
     ReactiveFormsModule,
     ProductAssignmentStoreModule,
     AdministrationModule,
+    SubListModule,
     RouterModule.forChild([
       {
         path: null,
@@ -89,11 +91,11 @@ import { PotentialProductAssignmentsComponent } from './potential-product-assign
     ActiveProductAssignmentsComponent,
     ProductAssignmentItemComponent,
   ],
-  entryComponents: [
-    ProductAssignmentsComponent,
-    PotentialProductAssignmentsComponent,
-    ActiveProductAssignmentsComponent,
-    ProductAssignmentItemComponent,
-  ],
+  // entryComponents: [
+  //   ProductAssignmentsComponent,
+  //   PotentialProductAssignmentsComponent,
+  //   ActiveProductAssignmentsComponent,
+  //   ProductAssignmentItemComponent,
+  // ],
 })
 export class ProductAssignmentModule {}

@@ -11,19 +11,10 @@ import {
   unitsCmsConfig,
   unitsRoutingConfig,
 } from './units.config';
-// import { CxUnitAssignmentsModule } from './cx-unit-assignments/cx-unit-assignments.module';
-// import { CxUnitDetailsModule } from './cx-unit-details/cx-unit-details.module';
-// import { CxUnitPotentialAssignmentsModule } from './cx-unit-potential-assignments/cx-unit-potential-assignments.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    ProductAssignmentModule,
-    FSUnitDetailsModule,
-    // CxUnitAssignmentsModule,
-    // CxUnitPotentialAssignmentsModule,
-  ],
+  imports: [CommonModule, ProductAssignmentModule, FSUnitDetailsModule],
   providers: [
     provideDefaultConfigFactory(unitsTableConfigFactory),
     provideDefaultConfig(unitsRoutingConfig),
