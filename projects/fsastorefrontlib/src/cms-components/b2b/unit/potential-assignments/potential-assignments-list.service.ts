@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { EntitiesModel, PaginationModel } from '@spartacus/core';
-import { ProductAssignmentService } from '@spartacus/fsa-storefront';
 import {
   OrganizationTableType,
   SubListService,
@@ -8,11 +7,12 @@ import {
 import { TableService } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FSSubListService extends SubListService<any> {
+export class PotentialAssingmensListService extends SubListService<any> {
   constructor(
     protected tableService: TableService,
     protected productAssignmentService: ProductAssignmentService
@@ -20,25 +20,26 @@ export class FSSubListService extends SubListService<any> {
     super(tableService);
   }
 
-  protected tableType = OrganizationTableType.COST_CENTER;
+  protected tableType = OrganizationTableType.COST_CENTER_BUDGETS;
 
   protected load(
     pagination: PaginationModel,
     ...args: any
   ): Observable<EntitiesModel<any>> {
-    const assignedList = this.productAssignmentService
-      .getProductAssignments()
-      .pipe(map(raw => this.convertProductAssignments(raw, true)));
-    return assignedList;
+    return this.productAssignmentService
+      .getPotentialProductAssignments()
+      .pipe(map(raw => this.convertProductAssignments(raw)));
   }
 
-  protected convertProductAssignments(assignments, added): EntitiesModel<any> {
-    const products = assignments.map((assignment: any) => ({
-      name: assignment.product.name,
-      active: assignment.active,
-      assignmentCode: assignment.code,
-      added,
-    }));
+  protected convertProductAssignments(assignments): EntitiesModel<any> {
+    let products;
+
+    if (assignments) {
+      products = assignments.map((assignment: any) => ({
+        name: assignment.product.name,
+        code: assignment.product.code,
+      }));
+    }
 
     return {
       values: products,

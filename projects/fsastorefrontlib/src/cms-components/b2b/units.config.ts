@@ -62,7 +62,7 @@ export const unitsRoutingConfig: RoutingConfig = {
         paramsMapping,
       },
       orgUnitProductAssign: {
-        paths: [`${listPath}/unitProductAssignments/assing`],
+        paths: [`${listPath}/unitProductAssignments/assign`],
         paramsMapping,
       },
     },

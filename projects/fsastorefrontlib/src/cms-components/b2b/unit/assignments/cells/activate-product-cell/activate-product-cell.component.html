@@ -1,0 +1,10 @@
+<div class="custom-control custom-switch">
+  <input
+    type="checkbox"
+    class="custom-control-input"
+    (click)="changeActiveStatus()"
+    [checked]="model.active"
+    id="{{ model.assignmentCode }}"
+  />
+  <label class="custom-control-label" for="{{ model.assignmentCode }}"></label>
+</div>
