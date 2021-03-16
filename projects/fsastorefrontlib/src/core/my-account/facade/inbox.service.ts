@@ -19,6 +19,8 @@ export class InboxService {
 
   messagesSource = new BehaviorSubject<boolean>(false);
   messages = this.messagesSource.asObservable();
+  unreadMessagesStateSource = new BehaviorSubject<boolean>(false);
+  unreadMessagesState = this.unreadMessagesStateSource.asObservable();
 
   setTitleAndMessageGroup(messageGroup: string, title: string) {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
@@ -36,5 +38,13 @@ export class InboxService {
 
   setMessagesState(uidList, read): Observable<any> {
     return this.adapter.setMessagesState(this.inboxData.userId, uidList, read);
+  }
+
+  getNumberOfUnreadMessages(): Observable<any> {
+    return this.adapter.getNumberOfUnreadMessages(this.inboxData.userId);
+  }
+
+  setUnreadMessageState(isMessageRead: boolean) {
+    this.unreadMessagesStateSource.next(isMessageRead);
   }
 }

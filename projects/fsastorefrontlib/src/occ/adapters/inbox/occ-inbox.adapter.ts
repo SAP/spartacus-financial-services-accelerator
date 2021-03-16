@@ -61,4 +61,13 @@ export class OccInboxAdapter implements InboxAdapter {
       .put<any>(url, params, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
+  getNumberOfUnreadMessages(userId: string): Observable<any> {
+    const url = this.occEndpointService.getUrl('numberOfMessages', {
+      userId,
+    });
+    return this.http
+      .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
 }

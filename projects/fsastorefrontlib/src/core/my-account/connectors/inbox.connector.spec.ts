@@ -15,6 +15,9 @@ class MockInboxAdapter implements InboxAdapter {
   ).and.callFake((userId, messagesUidList, readStatus) =>
     of('setMessagesState' + userId + messagesUidList + readStatus)
   );
+  getNumberOfUnreadMessages = createSpy(
+    'InboxAdapter.getNumberOfUnreadMessages'
+  ).and.callFake(userId => of('getNumberOfUnreadMessages' + userId));
 }
 const user = 'user';
 const messageGroup = 'messageGroupId';

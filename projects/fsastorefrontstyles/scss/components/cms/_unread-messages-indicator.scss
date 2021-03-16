@@ -1,0 +1,30 @@
+cx-fs-unread-messages-indicator {
+  .message-indicator-container {
+    position: absolute;
+    right: 5px;
+    .icon-envelope {
+      color: var(--cx-color-secondary);
+    }
+  }
+  flex: 0;
+  position: absolute;
+  top: 59px;
+  font-size: 24px;
+  @include media-breakpoint-down(md) {
+    top: -6px;
+    color: var(--cx-color-1);
+  }
+  .message-indicator-counter {
+    position: absolute;
+    top: -7px;
+    right: -10px;
+    padding: 0px 6px;
+    border-radius: 50%;
+    background: var(--cx-color-primary);
+    color: var(--cx-color-1);
+    font-size: var(--cx-xs-font-size);
+  }
+  .higher-indicator {
+    padding: 0px 3px;
+  }
+}

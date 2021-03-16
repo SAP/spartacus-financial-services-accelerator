@@ -116,7 +116,11 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       if (!msg.read && msg.uid === message.uid) {
         msg.read = true;
         this.subscription.add(
-          this.inboxService.setMessagesState([msg.uid], true).subscribe()
+          this.inboxService
+            .setMessagesState([msg.uid], true)
+            .subscribe(data =>
+              this.inboxService.setUnreadMessageState(msg.read)
+            )
         );
       }
     });
@@ -161,7 +165,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       });
     if (selectedMessages.length > 0) {
       this.subscription.add(
-        this.inboxService.setMessagesState(selectedMessages, toRead).subscribe()
+        this.inboxService
+          .setMessagesState(selectedMessages, toRead)
+          .subscribe(data => this.inboxService.setUnreadMessageState(true))
       );
     }
   }

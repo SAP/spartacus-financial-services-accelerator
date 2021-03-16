@@ -15,10 +15,11 @@ export const layoutConfig: LayoutConfig = {
           'SiteLogo',
           'SearchBox',
           'SiteLogin',
+          'SiteLinks',
           'NavigationBar',
         ],
       },
-      slots: ['PreHeader', 'SiteLogo', 'SearchBox'],
+      slots: ['PreHeader', 'SiteLogo', 'SiteLinks', 'SearchBox'],
     },
     navigation: {
       xs: {

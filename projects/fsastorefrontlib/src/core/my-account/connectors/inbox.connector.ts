@@ -28,4 +28,8 @@ export class InboxConnector {
   ): Observable<any> {
     return this.adapter.setMessagesState(userId, messagesUidList, readStatus);
   }
+
+  getNumberOfUnreadMessages(userId: string): Observable<any> {
+    return this.adapter.getNumberOfUnreadMessages(userId);
+  }
 }

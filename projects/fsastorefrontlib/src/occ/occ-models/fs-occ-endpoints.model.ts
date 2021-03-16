@@ -157,4 +157,8 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   disableUser?: string;
+  /**
+   * Get a number of unread site message
+   */
+  numberOfMessages?: string;
 }
