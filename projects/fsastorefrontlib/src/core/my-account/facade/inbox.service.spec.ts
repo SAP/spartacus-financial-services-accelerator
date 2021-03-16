@@ -9,6 +9,7 @@ const userId = 'testUser';
 const messageGroup = 'testGroup';
 const messageTitle = 'testTitle';
 const messageUid = '00001';
+const isMessageRead = true;
 
 describe('InboxServiceTest', () => {
   let service: InboxService;
@@ -119,5 +120,16 @@ describe('InboxServiceTest', () => {
       })
       .unsubscribe();
     expect(numberOfUnreadMessages).toEqual(2);
+  });
+
+  it('test set unread message state', () => {
+    service.setUnreadMessageState(isMessageRead);
+    let readMessage: boolean;
+    service.unreadMessagesState
+      .subscribe(isRead => {
+        readMessage = isRead;
+      })
+      .unsubscribe();
+    expect(readMessage).toEqual(true);
   });
 });
