@@ -52,6 +52,6 @@ export const common = {
       'term-amount': 'Investment Amount',
       'deposit-term': 'Deposit Term',
     },
-    voucherCode: 'Voucher code',
+    voucherCode: 'Coupon code',
   },
 };
