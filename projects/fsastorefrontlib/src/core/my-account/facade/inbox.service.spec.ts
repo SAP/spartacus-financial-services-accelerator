@@ -35,6 +35,9 @@ describe('InboxServiceTest', () => {
         ],
       });
     }
+    getNumberOfUnreadMessages(userid) {
+      return of(2);
+    }
   }
 
   beforeEach(() => {
@@ -104,5 +107,17 @@ describe('InboxServiceTest', () => {
       messageGroup: messageGroup,
       title: messageTitle,
     });
+  });
+
+  it('test get number of unread messages', () => {
+    service.getNumberOfUnreadMessages();
+    let numberOfUnreadMessages: number;
+    service
+      .getNumberOfUnreadMessages()
+      .subscribe(unreadMessages => {
+        numberOfUnreadMessages = unreadMessages;
+      })
+      .unsubscribe();
+    expect(numberOfUnreadMessages).toEqual(2);
   });
 });

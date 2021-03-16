@@ -38,6 +38,7 @@ describe('InboxConnector', () => {
   it('should be created', () => {
     expect(inboxConnector).toBeTruthy();
   });
+
   it('should call adapter for getSiteMessagesForUserAndGroup', () => {
     inboxConnector.getSiteMessagesForUserAndGroup(user, messageGroup, {});
     expect(inboxAdapter.getSiteMessagesForUserAndGroup).toHaveBeenCalledWith(
@@ -46,8 +47,14 @@ describe('InboxConnector', () => {
       {}
     );
   });
+
   it('should call adapter for setMessagesState', () => {
     inboxConnector.setMessagesState(user, [], true);
     expect(inboxAdapter.setMessagesState).toHaveBeenCalledWith(user, [], true);
+  });
+
+  it('should call adapter for getNumberOfUnreadMessages', () => {
+    inboxConnector.getNumberOfUnreadMessages(user);
+    expect(inboxAdapter.getNumberOfUnreadMessages).toHaveBeenCalledWith(user);
   });
 });
