@@ -30,7 +30,6 @@ import {
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
 import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
 import { defaultCmsContentProviders } from './config/messages-cms-structure';
-import { occMessagesConfig } from '../occ/services/default-occ-messages-config';
 
 @NgModule({
   imports: [
@@ -78,7 +77,6 @@ import { occMessagesConfig } from '../occ/services/default-occ-messages-config';
     ConfigModule.withConfig(checkoutConfig),
     ConfigModule.withConfig(occProductConfig),
     ConfigModule.withConfig(occUserConfig),
-    ConfigModule.withConfig(occMessagesConfig),
     ConfigModule.withConfig({
       icon: {
         symbols: {

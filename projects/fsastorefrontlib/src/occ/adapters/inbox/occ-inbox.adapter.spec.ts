@@ -10,7 +10,7 @@ import { OccInboxAdapter } from './occ-inbox.adapter';
 const userId = '123';
 const messageGroup = 'autoGroup';
 const messagesEndPoint = 'siteMessages';
-const unreadMessagesEndpoint = 'numberOfMessages';
+const unreadMessagesEndpoint = 'numberOfUnread';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {

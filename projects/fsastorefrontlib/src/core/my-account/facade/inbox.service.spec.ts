@@ -111,7 +111,6 @@ describe('InboxServiceTest', () => {
   });
 
   it('test get number of unread messages', () => {
-    service.getNumberOfUnreadMessages();
     let numberOfUnreadMessages: number;
     service
       .getNumberOfUnreadMessages()

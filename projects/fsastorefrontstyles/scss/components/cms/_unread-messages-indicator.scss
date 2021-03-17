@@ -4,6 +4,9 @@ cx-fs-unread-messages-indicator {
     right: 5px;
     .icon-envelope {
       color: var(--cx-color-secondary);
+      @include media-breakpoint-down(md) {
+        color: var(--cx-color-1);
+      }
     }
   }
   flex: 0;
@@ -12,7 +15,6 @@ cx-fs-unread-messages-indicator {
   font-size: 24px;
   @include media-breakpoint-down(md) {
     top: -6px;
-    color: var(--cx-color-1);
   }
   .message-indicator-counter {
     position: absolute;

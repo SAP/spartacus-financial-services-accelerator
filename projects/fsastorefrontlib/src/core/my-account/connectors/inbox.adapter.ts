@@ -33,5 +33,5 @@ export abstract class InboxAdapter {
    *
    * * @param userId The user id
    */
-  abstract getNumberOfUnreadMessages(userId: string): Observable<any>;
+  abstract getNumberOfUnreadMessages(userId: string): Observable<number>;
 }
