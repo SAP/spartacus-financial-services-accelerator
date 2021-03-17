@@ -6,9 +6,9 @@ import {
 } from '@spartacus/core';
 import { FSUnitDetailsModule } from './unit/details';
 import {
-  unitsTableConfigFactory,
   unitsCmsConfig,
   unitsRoutingConfig,
+  unitsTableConfigFactoryFactory,
 } from './units.config';
 import { AssignmentsModule } from './unit/assignments/assignments.module';
 import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
@@ -22,7 +22,7 @@ import { PotentialAssignmentsModule } from './unit/potential-assignments/potenti
     PotentialAssignmentsModule,
   ],
   providers: [
-    provideDefaultConfigFactory(unitsTableConfigFactory),
+    provideDefaultConfigFactory(unitsTableConfigFactoryFactory),
     provideDefaultConfig(unitsRoutingConfig),
     provideDefaultConfig(unitsCmsConfig),
   ],

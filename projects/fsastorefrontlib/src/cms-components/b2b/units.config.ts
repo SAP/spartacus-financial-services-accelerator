@@ -4,37 +4,36 @@ import {
   ParamsMapping,
   RoutingConfig,
 } from '@spartacus/core';
-import { AdminGuard } from '@spartacus/organization/administration/core';
-import { BREAKPOINT, TableConfig, TableLayout } from '@spartacus/storefront';
 import {
+  CellComponent,
   ItemService,
   ListService,
-  AssignCellComponent,
-  CellComponent,
-  StatusCellComponent,
-  UnitCellComponent,
   OrganizationTableType,
-  UnitFormComponent,
-  UnitAddressDetailsComponent,
-  UnitAddressFormComponent,
-  LinkCellComponent,
-  UnitAddressListComponent,
-  UnitAssignedApproverListComponent,
-  UnitApproverListComponent,
+  StatusCellComponent,
+  ToggleLinkCellComponent,
   UnitChildCreateComponent,
   UnitChildrenComponent,
-  UnitCostCenterListComponent,
   UnitCostCenterCreateComponent,
-  UnitUserCreateComponent,
-  UnitUserRolesCellComponent,
-  UnitUserListComponent,
-  UnitUserRolesFormComponent,
-  ToggleLinkCellComponent,
-  UnitListComponent,
+  UnitCostCenterListComponent,
+  UnitDetailsComponent,
+  UnitFormComponent,
   UnitItemService,
+  UnitListComponent,
   UnitListService,
+  UnitUserCreateComponent,
+  UnitUserListComponent,
+  UnitUserRolesCellComponent,
+  UnitUserRolesFormComponent,
 } from '@spartacus/organization/administration/components';
-import { FSUnitDetailsComponent } from './unit/details/unit-details.component';
+import { AdminGuard } from '@spartacus/organization/administration/core';
+import { BREAKPOINT, TableConfig, TableLayout } from '@spartacus/storefront';
+import { AssignmentsComponent } from './unit/assignments';
+import { AssignProductCellComponent } from './unit/potential-assignments/cells/assign-product-cell/assign-product-cell.component';
+import { PotentialAssignmentsComponent } from './unit/potential-assignments/potential-assignments.component';
+import { ActivateProductCellComponent } from './unit/assignments/cells/activate-product-cell/activate-product-cell.component';
+import { RemoveProductCellComponent } from './unit/assignments/cells/remove-product-cell/remove-product-cell.component';
+
+export const MAX_OCC_INTEGER_VALUE = 2147483647;
 
 export const ROUTE_PARAMS = {
   budgetCode: 'budgetCode',
@@ -46,9 +45,8 @@ export const ROUTE_PARAMS = {
   addressCode: 'addressId',
 };
 
-export const MAX_OCC_INTEGER_VALUE = 2147483647;
-
 const listPath = `organization/units/:${ROUTE_PARAMS.unitCode}`;
+
 const paramsMapping: ParamsMapping = {
   unitCode: 'uid',
   userCode: 'customerId',
@@ -57,8 +55,42 @@ const paramsMapping: ParamsMapping = {
 export const unitsRoutingConfig: RoutingConfig = {
   routing: {
     routes: {
-      productAssignment: {
-        paths: [`${listPath}/productAssignment`],
+      orgUnits: {
+        paths: ['organization/units'],
+      },
+      orgUnitCreate: {
+        paths: ['organization/units/create'],
+      },
+      orgUnitDetails: {
+        paths: [listPath],
+        paramsMapping,
+      },
+      orgUnitEdit: {
+        paths: [`${listPath}/edit`],
+        paramsMapping,
+      },
+      orgUnitChildren: {
+        paths: [`${listPath}/children`],
+        paramsMapping,
+      },
+      orgUnitCreateChild: {
+        paths: [`${listPath}/children/create`],
+        paramsMapping,
+      },
+      orgUnitUserList: {
+        paths: [`${listPath}/users`],
+        paramsMapping,
+      },
+      orgUnitCreateUser: {
+        paths: [`${listPath}/users/create`],
+        paramsMapping,
+      },
+      orgUnitUserRoles: {
+        paths: [`${listPath}/users/:userCode/roles`],
+        paramsMapping,
+      },
+      orgUnitProductAssignment: {
+        paths: [`${listPath}/unitProductAssignments`],
         paramsMapping,
       },
       orgUnitProductAssign: {
@@ -98,7 +130,7 @@ export const unitsCmsConfig: CmsConfig = {
           },
           {
             path: `:${ROUTE_PARAMS.unitCode}`,
-            component: FSUnitDetailsComponent,
+            component: UnitDetailsComponent,
             data: {
               cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.details' },
             },
@@ -117,22 +149,6 @@ export const unitsCmsConfig: CmsConfig = {
                   {
                     path: 'create',
                     component: UnitChildCreateComponent,
-                  },
-                ],
-              },
-              {
-                path: 'approvers',
-                data: {
-                  cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.approvers' },
-                },
-                children: [
-                  {
-                    path: '',
-                    component: UnitAssignedApproverListComponent,
-                  },
-                  {
-                    path: 'assign',
-                    component: UnitApproverListComponent,
                   },
                 ],
               },
@@ -167,33 +183,20 @@ export const unitsCmsConfig: CmsConfig = {
                 ],
               },
               {
-                path: 'addresses',
-                component: UnitAddressListComponent,
+                path: 'unitProductAssignments',
                 data: {
                   cxPageMeta: {
-                    breadcrumb: 'orgUnit.breadcrumbs.addresses',
+                    breadcrumb: 'orgUnit.breadcrumbs.productAssignment',
                   },
                 },
                 children: [
                   {
-                    path: 'create',
-                    component: UnitAddressFormComponent,
-                  },
-                  {
-                    path: `:${ROUTE_PARAMS.addressCode}`,
-                    data: {
-                      cxPageMeta: {
-                        breadcrumb: 'orgUnit.breadcrumbs.addressDetails',
-                      },
-                    },
+                    path: '',
+                    component: AssignmentsComponent,
                     children: [
                       {
-                        path: '',
-                        component: UnitAddressDetailsComponent,
-                      },
-                      {
-                        path: 'edit',
-                        component: UnitAddressFormComponent,
+                        path: 'assign',
+                        component: PotentialAssignmentsComponent,
                       },
                     ],
                   },
@@ -208,11 +211,7 @@ export const unitsCmsConfig: CmsConfig = {
   },
 };
 
-export function unitsTableConfigFactory(): TableConfig {
-  return unitsTableConfig;
-}
-
-export const unitsTableConfig: TableConfig = {
+export const unitsTableConfigFactory: TableConfig = {
   table: {
     [OrganizationTableType.UNIT]: {
       cells: ['name'],
@@ -237,6 +236,9 @@ export const unitsTableConfig: TableConfig = {
     [OrganizationTableType.UNIT_USERS]: {
       cells: ['name', 'roles'],
       options: {
+        pagination: {
+          pageSize: MAX_OCC_INTEGER_VALUE,
+        },
         cells: {
           roles: {
             dataComponent: UnitUserRolesCellComponent,
@@ -248,6 +250,9 @@ export const unitsTableConfig: TableConfig = {
     [OrganizationTableType.UNIT_CHILDREN]: {
       cells: ['name', 'active'],
       options: {
+        pagination: {
+          pageSize: MAX_OCC_INTEGER_VALUE,
+        },
         cells: {
           active: {
             dataComponent: StatusCellComponent,
@@ -256,50 +261,32 @@ export const unitsTableConfig: TableConfig = {
         },
       },
     },
-
-    [OrganizationTableType.UNIT_APPROVERS]: {
-      cells: ['name', 'orgUnit', 'actions'],
-      options: {
-        cells: {
-          actions: {
-            dataComponent: AssignCellComponent,
-          },
-          orgUnit: {
-            dataComponent: UnitCellComponent,
-            linkable: false,
-          },
-        },
-      },
-    },
-
-    [OrganizationTableType.UNIT_ASSIGNED_APPROVERS]: {
-      cells: ['name', 'orgUnit', 'actions'],
-      options: {
-        cells: {
-          actions: {
-            dataComponent: AssignCellComponent,
-          },
-          orgUnit: {
-            dataComponent: UnitCellComponent,
-            linkable: false,
-          },
-        },
-      },
-    },
-
     [OrganizationTableType.UNIT_COST_CENTERS]: {
-      cells: ['name'],
-    },
-
-    [OrganizationTableType.UNIT_ADDRESS]: {
-      cells: ['formattedAddress'],
+      cells: ['name', 'activate', 'deassign'],
       options: {
         cells: {
-          formattedAddress: {
-            dataComponent: LinkCellComponent,
+          activate: {
+            dataComponent: ActivateProductCellComponent,
+          },
+          deassign: {
+            dataComponent: RemoveProductCellComponent,
+          },
+        },
+      },
+    },
+    [OrganizationTableType.COST_CENTER_BUDGETS]: {
+      cells: ['name', 'assign'],
+      options: {
+        cells: {
+          assign: {
+            dataComponent: AssignProductCellComponent,
           },
         },
       },
     },
   },
 };
+
+export function unitsTableConfigFactoryFactory(): TableConfig {
+  return unitsTableConfigFactory;
+}

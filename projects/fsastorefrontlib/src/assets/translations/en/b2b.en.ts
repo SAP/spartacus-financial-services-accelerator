@@ -138,6 +138,7 @@ export const orgUnit = {
       },
     },
     breadcrumbs: {
+      productAssignment: 'Product Assignment',
       list: 'All units',
       details: '{{name}}',
       children: 'Child units',
@@ -147,6 +148,46 @@ export const orgUnit = {
       addressDetails: '{{formattedAddress}}',
       costCenters: 'Cost Centers',
     },
+  },
+};
+
+export const orgCostCenter = {
+  orgCostCenter: {
+    title: 'Asssigned Products',
+    subtitle: 'Products already assigned to the unit.',
+  },
+};
+
+export const orgCostCenterBudgets = {
+  orgCostCenterBudgets: {
+    title: 'Potential Products',
+    subtitle: 'Products which can be assigned to the unit.',
+  },
+};
+
+export const orgUnitUsers = {
+  orgUnitUsers: {
+    title: 'Members',
+    subtitle: 'List of unti members.',
+    info: {
+      disabledDisable: 'Disable',
+    },
+  },
+};
+
+export const orgUnitChildren = {
+  orgUnitChildren: {
+    title: 'Child Units',
+    subtitle: 'List of child units members.',
+  },
+};
+
+export const orgUnitAssignments = {
+  orgUnitAssignments: {
+    title: 'Product Assignments',
+    assign: 'Assign',
+    remove: 'Remove',
+    add: 'Add',
   },
 };
 
