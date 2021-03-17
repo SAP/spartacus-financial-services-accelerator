@@ -125,7 +125,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: <a href="../interfaces/StateWithMyAccount.html">Store<StateWithMyAccount></a>, auth: AuthService)</code>
+<code>constructor(store: <a href="../interfaces/StateWithMyAccount.html">Store<StateWithMyAccount></a>, userIdService: UserIdService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -160,10 +160,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>auth</td>
+                                                        <td>userIdService</td>
                                                   
                                                         <td>
-                                                                    <code>AuthService</code>
+                                                                    <code>UserIdService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -438,7 +438,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { select, Store } from &#x27;@ngrx/store&#x27;;
-import { AuthService, OCC_USER_ID_ANONYMOUS } from &#x27;@spartacus/core&#x27;;
+import { OCC_USER_ID_ANONYMOUS, UserIdService } from &#x27;@spartacus/core&#x27;;
 import { filter } from &#x27;rxjs/operators&#x27;;
 import { Claim } from &#x27;../../../occ/occ-models&#x27;;
 import { StateWithMyAccount } from &#x27;../store/my-account-state&#x27;;
@@ -458,14 +458,14 @@ export class ClaimDataService {
 
   constructor(
     protected store: Store&lt;StateWithMyAccount&gt;,
-    protected auth: AuthService
+    protected userIdService: UserIdService
   ) {
-    this.auth
-      .getUserToken()
-      .pipe(filter(userToken &#x3D;&gt; this.userId !&#x3D;&#x3D; userToken.userId))
+    this.userIdService
+      .getUserId()
+      .pipe(filter(userToken &#x3D;&gt; this.userId !&#x3D;&#x3D; userToken))
       .subscribe(userToken &#x3D;&gt; {
         if (Object.keys(userToken).length !&#x3D;&#x3D; 0) {
-          this.userId &#x3D; userToken.userId;
+          this.userId &#x3D; userToken;
         } else {
           this.userId &#x3D; OCC_USER_ID_ANONYMOUS;
         }

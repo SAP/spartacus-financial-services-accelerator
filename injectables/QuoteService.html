@@ -122,7 +122,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: <a href="../interfaces/StateWithMyAccount.html">Store<StateWithMyAccount></a>, cartService: <a href="../injectables/FSCartService.html">FSCartService</a>, authService: AuthService, formDataService: <a href="../injectables/FormDataService.html">FormDataService</a>, formDataStorageService: <a href="../injectables/FormDataStorageService.html">FormDataStorageService</a>)</code>
+<code>constructor(store: <a href="../interfaces/StateWithMyAccount.html">Store<StateWithMyAccount></a>, cartService: <a href="../injectables/FSCartService.html">FSCartService</a>, userIdService: UserIdService, formDataService: <a href="../injectables/FormDataService.html">FormDataService</a>, formDataStorageService: <a href="../injectables/FormDataStorageService.html">FormDataStorageService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -169,10 +169,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>userIdService</td>
                                                   
                                                         <td>
-                                                                    <code>AuthService</code>
+                                                                    <code>UserIdService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -795,7 +795,7 @@ import {
   FormDataStorageService,
 } from &#x27;@spartacus/dynamicforms&#x27;;
 import { select, Store } from &#x27;@ngrx/store&#x27;;
-import { AuthService, OrderEntry } from &#x27;@spartacus/core&#x27;;
+import { OrderEntry, UserIdService } from &#x27;@spartacus/core&#x27;;
 import { filter, map, take } from &#x27;rxjs/operators&#x27;;
 import {
   FSCart,
@@ -813,14 +813,14 @@ export class QuoteService {
   constructor(
     protected store: Store&lt;StateWithMyAccount&gt;,
     protected cartService: FSCartService,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService
   ) {}
 
   loadQuotes() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt;
         this.store.dispatch(
@@ -841,8 +841,8 @@ export class QuoteService {
   }
 
   retrieveQuote(quote: any) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt; {
         if (occUserId) {
@@ -913,8 +913,8 @@ export class QuoteService {
   }
 
   bindQuote(cartId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt;
         this.store.dispatch(
@@ -929,8 +929,8 @@ export class QuoteService {
   }
 
   underwriteQuote(cartId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt;
         this.store.dispatch(
@@ -945,8 +945,8 @@ export class QuoteService {
   }
 
   updateQuote(cartId: string, priceAttributes: any) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt;
         this.store.dispatch(

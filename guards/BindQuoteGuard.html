@@ -120,7 +120,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/guards/bind-quote.guard.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/guards/bind-quote.guard.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -221,8 +221,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/guards/bind-quote.guard.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/guards/bind-quote.guard.ts:31</a></div>
                 </td>
             </tr>
 
@@ -285,11 +285,7 @@ import {
 } from &#x27;@spartacus/core&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { filter, map, take } from &#x27;rxjs/operators&#x27;;
-import {
-  BindingStateType,
-  FSCart,
-  FSCheckoutStep,
-} from &#x27;./../../../occ/occ-models/occ.models&#x27;;
+import { BindingStateType, FSCart } from &#x27;./../../../occ/occ-models/occ.models&#x27;;
 import { FSCheckoutConfigService } from &#x27;../../../core/checkout/services&#x27;;
 
 @Injectable({
@@ -312,9 +308,7 @@ export class BindQuoteGuard implements CanActivate {
     const currentStepIndex &#x3D; this.fsCheckoutConfigService.getCurrentStepIndex(
       route
     );
-    const sourceStep &#x3D; &lt;FSCheckoutStep&gt;(
-      this.fsCheckoutConfigService.steps[currentStepIndex - 1]
-    );
+    const sourceStep &#x3D; this.fsCheckoutConfigService.steps[currentStepIndex - 1];
     if (
       sourceStep &amp;&amp;
       !this.CART_CREATION_CHECKOUT_STEPS.includes(sourceStep.id)

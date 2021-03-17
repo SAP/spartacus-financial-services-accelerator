@@ -38,7 +38,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>OccDocumentAdapter</li>
+  <li>FilesEffect</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/fsastorefrontlib/src/occ/adapters/document/occ-document-adapter.ts</code>
+            <code>projects/dynamicforms/src/core/store/effects/file.effect.ts</code>
         </p>
 
 
@@ -66,21 +66,21 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getDocument">getDocument</a>
+                                <a href="#removeFile$">removeFile$</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+
 
 
 
@@ -96,12 +96,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, occEndpointService: OccEndpointsService)</code>
+<code>constructor(actions$: Actions, fileConnector: <a href="../injectables/FileConnector.html">FileConnector</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/document/occ-document-adapter.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/dynamicforms/src/core/store/effects/file.effect.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -119,10 +119,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>http</td>
+                                                        <td>actions$</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                                    <code>Actions</code>
                                                         </td>
                                                   
                                                     <td>
@@ -131,10 +131,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>occEndpointService</td>
+                                                        <td>fileConnector</td>
                                                   
                                                         <td>
-                                                                    <code>OccEndpointsService</code>
+                                                                        <code><a href="../injectables/FileConnector.html" target="_self" >FileConnector</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -151,124 +151,101 @@
         </table>
 </section>
 
+
             <section>
     
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getDocument"></a>
-                    <span class="name">
-                        <b>
-                            getDocument
-                        </b>
-                        <a href="#getDocument"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getDocument(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, documentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="removeFile$"></a>
+                        <span class="name">
+                            <b>
+                            removeFile$</b>
+                            <a href="#removeFile$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.actions$.pipe(
+    ofType(fromActions.REMOVE_FILE),
+    map((action: fromActions.RemoveFile) &#x3D;&gt; action.payload),
+    mergeMap(payload &#x3D;&gt; {
+      return this.fileConnector.removeFile(payload.user, payload.fileCode).pipe(
+        map(() &#x3D;&gt; {
+          return new fromActions.RemoveFileSuccess(payload.fileCode);
+        }),
+        catchError(error &#x3D;&gt; {
+          return of(new fromActions.RemoveFileFail(JSON.stringify(error)));
+        })
+      );
+    })
+  )</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @Effect()<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/dynamicforms/src/core/store/effects/file.effect.ts:11</a></div>
+                            </td>
+                        </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/document/occ-document-adapter.ts:16</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>userId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>documentId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 </section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { Injectable } from &#x27;@angular/core&#x27;;
-import { OccEndpointsService } from &#x27;@spartacus/core&#x27;;
-import { throwError } from &#x27;rxjs&#x27;;
-import { catchError, map } from &#x27;rxjs/operators&#x27;;
-import { DocumentAdapter } from &#x27;./../../../core/document/connectors/document.adapter&#x27;;
-import { base64StringToBlob } from &#x27;blob-util&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { catchError, map, mergeMap } from &#x27;rxjs/operators&#x27;;
+import * as fromActions from &#x27;../actions&#x27;;
+import { FileConnector } from &#x27;../../connectors/file.connector&#x27;;
 
 @Injectable()
-export class OccDocumentAdapter implements DocumentAdapter {
-  constructor(
-    protected http: HttpClient,
-    protected occEndpointService: OccEndpointsService
-  ) {}
+export class FilesEffect {
+  @Effect()
+  removeFile$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
+    ofType(fromActions.REMOVE_FILE),
+    map((action: fromActions.RemoveFile) &#x3D;&gt; action.payload),
+    mergeMap(payload &#x3D;&gt; {
+      return this.fileConnector.removeFile(payload.user, payload.fileCode).pipe(
+        map(() &#x3D;&gt; {
+          return new fromActions.RemoveFileSuccess(payload.fileCode);
+        }),
+        catchError(error &#x3D;&gt; {
+          return of(new fromActions.RemoveFileFail(JSON.stringify(error)));
+        })
+      );
+    })
+  );
 
-  getDocument(userId: string, documentId: string) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;documents&#x27;, {
-      userId,
-      documentId,
-    });
-    return this.http.get&lt;string&gt;(url).pipe(
-      map(document &#x3D;&gt; base64StringToBlob(document, &#x27;application/pdf&#x27;)),
-      catchError((error: any) &#x3D;&gt; throwError(error.json()))
-    );
-  }
+  constructor(
+    private actions$: Actions,
+    private fileConnector: FileConnector
+  ) {}
 }
 </code></pre>
     </div>
@@ -303,7 +280,7 @@ export class OccDocumentAdapter implements DocumentAdapter {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'OccDocumentAdapter.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'FilesEffect.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

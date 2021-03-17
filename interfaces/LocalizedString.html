@@ -102,7 +102,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/dynamicforms/src/core/models/form-config.interface.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/dynamicforms/src/core/models/form-config.interface.ts:56</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -171,7 +171,7 @@ export interface FieldConfig {
   cssClass?: string;
   gridClass?: string;
   apiValue?: ApiConfig;
-  placeholder?: string;
+  placeholder?: LocalizedString;
   fieldType: string;
   value?: any;
   hidden?: boolean;
@@ -180,6 +180,10 @@ export interface FieldConfig {
   dependsOn?: DependsOn;
   prefillValue?: PrefillValue;
   readonly?: boolean;
+  maxUploads?: number;
+  accept?: string[];
+  maxFileSize?: number;
+  multiple?: boolean;
 }
 export interface DependsOn {
   hide?: boolean;

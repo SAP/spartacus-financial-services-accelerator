@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content class">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -36,13 +36,9 @@
 
 
 
-
-
-
-
 <ol class="breadcrumb">
-  <li>Classes</li>
-  <li>DocumentAdapter</li>
+  <li>Injectables</li>
+  <li>CurrentDatePrefillResolver</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,9 +56,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/fsastorefrontlib/src/core/document/connectors/document.adapter.ts</code>
+            <code>projects/dynamicforms/src/core/resolvers/current-date-prefill-resolver.ts</code>
         </p>
-
 
 
 
@@ -81,8 +76,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#getDocument">getDocument</a>
+                                <a href="#getPrefillValue">getPrefillValue</a>
                             </li>
                         </ul>
                     </td>
@@ -96,7 +90,54 @@
     </table>
 </section>
 
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(datePipe: <a href="https://angular.io/api/common/DatePipe" target="_blank">DatePipe</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">projects/dynamicforms/src/core/resolvers/current-date-prefill-resolver.ts:9</a></div>
+                            </td>
+                        </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>datePipe</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/DatePipe" target="_blank" >DatePipe</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section>
     
@@ -107,92 +148,36 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getDocument"></a>
+                    <a name="getPrefillValue"></a>
                     <span class="name">
                         <b>
-                            <span class="modifier">Abstract</span>
-                            getDocument
+                            getPrefillValue
                         </b>
-                        <a href="#getDocument"><span class="icon ion-ios-link"></span></a>
+                        <a href="#getPrefillValue"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getDocument(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, documentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>getPrefillValue()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="10"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/document/connectors/document.adapter.ts:10</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="11"
+                            class="link-to-prism">projects/dynamicforms/src/core/resolvers/current-date-prefill-resolver.ts:11</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Abstract method used to fetch document by Id.</p>
-</div>
 
                     <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>userId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>The user id</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>documentId</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>The document id</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -200,28 +185,32 @@
     </table>
 </section>
 
-
-
-
-
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable } from &#x27;rxjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { DatePipe } from &#x27;@angular/common&#x27;;
+import { PrefillResolver } from &#x27;./prefill-resolver.interface&#x27;;
+import { of } from &#x27;rxjs&#x27;;
 
-export abstract class DocumentAdapter {
-  /**
-   * Abstract method used to fetch document by Id.
-   *
-   * @param userId The user id
-   * @param documentId The document id
-   */
-  abstract getDocument(userId: string, documentId: string): Observable&lt;any&gt;;
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class CurrentDatePrefillResolver implements PrefillResolver {
+  constructor(private datePipe: DatePipe) {}
+  getPrefillValue() {
+    return of(this.datePipe.transform(Date.now(), &#x27;yyyy-MM-dd&#x27;));
+  }
 }
 </code></pre>
     </div>
+
 </div>
+
+
+
+
 
 
 
@@ -246,8 +235,8 @@ export abstract class DocumentAdapter {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'DocumentAdapter.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CurrentDatePrefillResolver.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

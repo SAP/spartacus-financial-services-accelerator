@@ -182,8 +182,13 @@ Cypress.Commands.add(
     dropdownItem: string;
     nextPageUrlPart: string;
   }) &#x3D;&gt; {
-    cy.get(&#x27;[aria-label&#x3D;&quot;&#x27; + menuOption + &#x27;&quot;]&#x27;).invoke(&#x27;mouseover&#x27;);
-    cy.findAllByText(dropdownItem).click({ multiple: true, force: true });
+    cy.get(&#x27;header [aria-label&#x3D;&quot;&#x27; + menuOption + &#x27;&quot;]&#x27;)
+      .should(&#x27;be.visible&#x27;)
+      .invoke(&#x27;mouseover&#x27;)
+      .next(&#x27;.wrapper&#x27;)
+      .within(() &#x3D;&gt; {
+        cy.findAllByText(dropdownItem).click({ force: true });
+      });
     if (nextPageUrlPart) {
       cy.location(&#x27;pathname&#x27;, { timeout: 10000 }).should(
         &#x27;include&#x27;,

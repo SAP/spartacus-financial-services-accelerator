@@ -1,0 +1,1366 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fsastorefrontapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fsastorefrontapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>FSPaymentMethodComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code>PaymentMethodComponent</code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>cx-fs-payment-method</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./payment-method.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#creditCard">creditCard</a>
+                            </li>
+                            <li>
+                                <a href="#nextCheckoutStep$">nextCheckoutStep$</a>
+                            </li>
+                            <li>
+                                <a href="#NOT_ALLOWED_PAYMENTS">NOT_ALLOWED_PAYMENTS</a>
+                            </li>
+                            <li>
+                                <a href="#paymentDetails$">paymentDetails$</a>
+                            </li>
+                            <li>
+                                <a href="#paymentType$">paymentType$</a>
+                            </li>
+                            <li>
+                                <a href="#paymentTypes$">paymentTypes$</a>
+                            </li>
+                            <li>
+                                <a href="#previousCheckoutStep$">previousCheckoutStep$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription">subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changeType">changeType</a>
+                            </li>
+                            <li>
+                                <a href="#navigateBack">navigateBack</a>
+                            </li>
+                            <li>
+                                <a href="#navigateNext">navigateNext</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#showNavigation">showNavigation</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userPaymentService: UserPaymentService, checkoutService: <a href="../injectables/FSCheckoutService.html">FSCheckoutService</a>, checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, globalMessageService: GlobalMessageService, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, translation: TranslationService, activeCartService: ActiveCartService, checkoutStepService: CheckoutStepService, checkoutConfigService: <a href="../injectables/FSCheckoutConfigService.html">FSCheckoutConfigService</a>, paymentTypeService: PaymentTypeService, routingService: RoutingService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userPaymentService</td>
+                                                  
+                                                        <td>
+                                                                    <code>UserPaymentService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>checkoutService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FSCheckoutService.html" target="_self" >FSCheckoutService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>checkoutDeliveryService</td>
+                                                  
+                                                        <td>
+                                                                    <code>CheckoutDeliveryService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>checkoutPaymentService</td>
+                                                  
+                                                        <td>
+                                                                    <code>CheckoutPaymentService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>globalMessageService</td>
+                                                  
+                                                        <td>
+                                                                    <code>GlobalMessageService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activatedRoute</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translation</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activeCartService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActiveCartService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>checkoutStepService</td>
+                                                  
+                                                        <td>
+                                                                    <code>CheckoutStepService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>checkoutConfigService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FSCheckoutConfigService.html" target="_self" >FSCheckoutConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>paymentTypeService</td>
+                                                  
+                                                        <td>
+                                                                    <code>PaymentTypeService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>routingService</td>
+                                                  
+                                                        <td>
+                                                                    <code>RoutingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changeType"></a>
+                    <span class="name">
+                        <b>
+                            changeType
+                        </b>
+                        <a href="#changeType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changeType(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>code</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateBack"></a>
+                    <span class="name">
+                        <b>
+                            navigateBack
+                        </b>
+                        <a href="#navigateBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateBack(previousStep: <a href="../interfaces/FSSteps.html">FSSteps</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>previousStep</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSSteps.html" target="_self" >FSSteps</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateNext"></a>
+                    <span class="name">
+                        <b>
+                            navigateNext
+                        </b>
+                        <a href="#navigateNext"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateNext(nextStep: <a href="../interfaces/FSSteps.html">FSSteps</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="95"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:95</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>nextStep</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSSteps.html" target="_self" >FSSteps</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:118</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:66</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNavigation"></a>
+                    <span class="name">
+                        <b>
+                            showNavigation
+                        </b>
+                        <a href="#showNavigation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showNavigation(cards: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, newPaymentFormManuallyOpened: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, payment: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:125</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>cards</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>newPaymentFormManuallyOpened</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>payment</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="creditCard"></a>
+                        <span class="name">
+                            <b>
+                            creditCard</b>
+                            <a href="#creditCard"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>FSPaymentTypeEnum.CARD</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:64</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nextCheckoutStep$"></a>
+                        <span class="name">
+                            <b>
+                            nextCheckoutStep$</b>
+                            <a href="#nextCheckoutStep$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FSSteps.html" target="_self" >Observable&lt;FSSteps&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:61</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="NOT_ALLOWED_PAYMENTS"></a>
+                        <span class="name">
+                            <b>
+                            NOT_ALLOWED_PAYMENTS</b>
+                            <a href="#NOT_ALLOWED_PAYMENTS"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&#x27;ACCOUNT&#x27;]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:57</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paymentDetails$"></a>
+                        <span class="name">
+                            <b>
+                            paymentDetails$</b>
+                            <a href="#paymentDetails$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Observable&lt;PaymentDetails&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:63</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paymentType$"></a>
+                        <span class="name">
+                            <b>
+                            paymentType$</b>
+                            <a href="#paymentType$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Observable&lt;string&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paymentTypes$"></a>
+                        <span class="name">
+                            <b>
+                            paymentTypes$</b>
+                            <a href="#paymentTypes$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Observable&lt;PaymentType[]&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:58</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="previousCheckoutStep$"></a>
+                        <span class="name">
+                            <b>
+                            previousCheckoutStep$</b>
+                            <a href="#previousCheckoutStep$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/FSSteps.html" target="_self" >Observable&lt;FSSteps&gt;</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subscription"></a>
+                        <span class="name">
+                            <b>
+                            subscription</b>
+                            <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Subscription()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/payment-method/payment-method.component.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import {
+  CheckoutStepService,
+  PaymentMethodComponent,
+} from &#x27;@spartacus/storefront&#x27;;
+import {
+  ActiveCartService,
+  CheckoutDeliveryService,
+  CheckoutPaymentService,
+  GlobalMessageService,
+  PaymentDetails,
+  PaymentType,
+  PaymentTypeService,
+  RoutingService,
+  TranslationService,
+  UserPaymentService,
+} from &#x27;@spartacus/core&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { Observable, Subscription } from &#x27;rxjs&#x27;;
+import { FSPaymentTypeEnum, FSSteps } from &#x27;../../../../occ/occ-models&#x27;;
+import { FSCheckoutConfigService } from &#x27;../../../../core/checkout/services&#x27;;
+import { filter, map, take, tap } from &#x27;rxjs/operators&#x27;;
+import { FSCheckoutService } from &#x27;../../../../core/checkout/facade&#x27;;
+
+@Component({
+  selector: &#x27;cx-fs-payment-method&#x27;,
+  templateUrl: &#x27;./payment-method.component.html&#x27;,
+})
+export class FSPaymentMethodComponent extends PaymentMethodComponent
+  implements OnInit, OnDestroy {
+  constructor(
+    protected userPaymentService: UserPaymentService,
+    protected checkoutService: FSCheckoutService,
+    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected checkoutPaymentService: CheckoutPaymentService,
+    protected globalMessageService: GlobalMessageService,
+    protected activatedRoute: ActivatedRoute,
+    protected translation: TranslationService,
+    protected activeCartService: ActiveCartService,
+    protected checkoutStepService: CheckoutStepService,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected paymentTypeService: PaymentTypeService,
+    protected routingService: RoutingService
+  ) {
+    super(
+      userPaymentService,
+      checkoutService,
+      checkoutDeliveryService,
+      checkoutPaymentService,
+      globalMessageService,
+      activatedRoute,
+      translation,
+      activeCartService,
+      checkoutStepService
+    );
+  }
+  NOT_ALLOWED_PAYMENTS &#x3D; [&#x27;ACCOUNT&#x27;];
+  paymentTypes$: Observable&lt;PaymentType[]&gt;;
+  paymentType$: Observable&lt;string&gt;;
+  previousCheckoutStep$: Observable&lt;FSSteps&gt;;
+  nextCheckoutStep$: Observable&lt;FSSteps&gt;;
+  subscription &#x3D; new Subscription();
+  paymentDetails$: Observable&lt;PaymentDetails&gt;;
+  creditCard &#x3D; FSPaymentTypeEnum.CARD;
+
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.paymentTypeService.loadPaymentTypes();
+    this.previousCheckoutStep$ &#x3D; this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ &#x3D; this.checkoutConfigService.nextStep;
+    this.paymentDetails$ &#x3D; this.checkoutPaymentService
+      .getPaymentDetails()
+      .pipe(filter(payment &#x3D;&gt; !!payment));
+
+    this.paymentTypes$ &#x3D; this.paymentTypeService.getPaymentTypes().pipe(
+      filter(paymentTypes &#x3D;&gt; paymentTypes.length &gt; 0),
+      take(1),
+      map(paymentTypes &#x3D;&gt; {
+        const filteredPayments &#x3D; paymentTypes.filter(
+          item &#x3D;&gt; !this.NOT_ALLOWED_PAYMENTS.some(key &#x3D;&gt; key &#x3D;&#x3D;&#x3D; item.code)
+        );
+        return filteredPayments;
+      })
+    );
+    this.paymentType$ &#x3D; this.checkoutService.getPaymentType();
+  }
+
+  navigateBack(previousStep: FSSteps) {
+    this.routingService.go({
+      cxRoute: previousStep.step,
+      params: { code: previousStep.stepParameter },
+    });
+  }
+
+  navigateNext(nextStep: FSSteps) {
+    this.subscription.add(
+      this.checkoutPaymentService
+        .getPaymentDetails()
+        .pipe(
+          filter(payment &#x3D;&gt; !!payment),
+          tap(_ &#x3D;&gt; {
+            this.routingService.go({
+              cxRoute: nextStep.step,
+            });
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  changeType(code: string) {
+    this.checkoutService.setPaymentType(code);
+    if (code &#x3D;&#x3D;&#x3D; FSPaymentTypeEnum.INVOICE) {
+      this.selectPaymentMethod({ id: code });
+    }
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  showNavigation(
+    cards: any,
+    newPaymentFormManuallyOpened: boolean,
+    payment: any
+  ) {
+    return (
+      (cards?.length &gt; 0 &amp;&amp; !newPaymentFormManuallyOpened) ||
+      ((!newPaymentFormManuallyOpened || payment.paymentDetails.id) &amp;&amp;
+        payment.paymentType !&#x3D;&#x3D; this.creditCard) ||
+      (!newPaymentFormManuallyOpened &amp;&amp;
+        payment.paymentType &#x3D;&#x3D;&#x3D; this.creditCard &amp;&amp;
+        payment.paymentDetails?.cardNumber)
+    );
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;cards$ | async as cards&quot;&gt;
+  &lt;div class&#x3D;&quot;box-shadow mb-5&quot;&gt;
+    &lt;h3 class&#x3D;&quot;section-header-heading text-center&quot;&gt;
+      {{ &#x27;paymentForm.payment&#x27; | cxTranslate }}
+    &lt;/h3&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;!(isLoading$ | async); else loading&quot;&gt;
+      &lt;div class&#x3D;&quot;py-3 px-4&quot;&gt;
+        &lt;h4 class&#x3D;&quot;mb-4&quot;&gt;
+          {{ &#x27;fscommon.paymentMethod&#x27; | cxTranslate }}
+        &lt;/h4&gt;
+        &lt;form&gt;
+          &lt;div class&#x3D;&quot;form-check&quot; *ngFor&#x3D;&quot;let type of paymentTypes$ | async&quot;&gt;
+            &lt;input
+              id&#x3D;&quot;paymentType-{{ type.code }}&quot;
+              class&#x3D;&quot;form-check-input&quot;
+              type&#x3D;&quot;radio&quot;
+              name&#x3D;&quot;paymentMethod&quot;
+              [attr.aria-checked]&#x3D;&quot;type.code &#x3D;&#x3D;&#x3D; (paymentType$ | async)&quot;
+              (click)&#x3D;&quot;changeType(type.code)&quot;
+              [value]&#x3D;&quot;type.code&quot;
+              [checked]&#x3D;&quot;type.code &#x3D;&#x3D;&#x3D; (paymentType$ | async)&quot;
+            /&gt;
+            &lt;label class&#x3D;&quot;pl-3 pt-1&quot;&gt;
+              {{ &#x27;fscommon.payment.&#x27; + type.code | cxTranslate }}
+            &lt;/label&gt;
+          &lt;/div&gt;
+        &lt;/form&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;(paymentType$ | async) &#x3D;&#x3D;&#x3D; creditCard&quot;&gt;
+          &lt;div class&#x3D;&quot;my-4&quot;&gt;
+            &lt;hr /&gt;
+          &lt;/div&gt;
+          &lt;ng-container
+            *ngIf&#x3D;&quot;
+              cards?.length &amp;&amp; !newPaymentFormManuallyOpened;
+              else newPaymentForm
+            &quot;
+          &gt;
+            &lt;div class&#x3D;&quot;row mb-4&quot;&gt;
+              &lt;div class&#x3D;&quot;col-md-12 col-lg-6&quot;&gt;
+                &lt;button
+                  class&#x3D;&quot;btn btn-block btn-action&quot;
+                  (click)&#x3D;&quot;showNewPaymentForm()&quot;
+                &gt;
+                  {{ &#x27;paymentForm.addNewPayment&#x27; | cxTranslate }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;row&quot;&gt;
+              &lt;div
+                class&#x3D;&quot;cx-payment-card col-md-12 col-lg-6&quot;
+                *ngFor&#x3D;&quot;let card of cards&quot;
+              &gt;
+                &lt;div class&#x3D;&quot;cx-payment-card-inner&quot;&gt;
+                  &lt;cx-card
+                    [border]&#x3D;&quot;true&quot;
+                    [fitToContainer]&#x3D;&quot;true&quot;
+                    [content]&#x3D;&quot;card.content&quot;
+                    (sendCard)&#x3D;&quot;selectPaymentMethod(card.paymentMethod)&quot;
+                  &gt;&lt;/cx-card&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/ng-container&gt;
+        &lt;/ng-container&gt;
+      &lt;/div&gt;
+    &lt;/ng-container&gt;
+  &lt;/div&gt;
+  &lt;ng-container
+    *ngIf&#x3D;&quot;{
+      paymentDetails: paymentDetails$ | async,
+      paymentType: paymentType$ | async
+    } as payment&quot;
+  &gt;
+    &lt;div
+      *ngIf&#x3D;&quot;showNavigation(cards, newPaymentFormManuallyOpened, payment)&quot;
+      class&#x3D;&quot;row&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;col-md-12 col-lg-6 mb-3 mb-lg-0&quot;&gt;
+        &lt;ng-container
+          *ngIf&#x3D;&quot;previousCheckoutStep$ | async as previousCheckoutStep&quot;
+          &gt;&lt;button
+            class&#x3D;&quot;action-button btn-block&quot;
+            (click)&#x3D;&quot;navigateBack(previousCheckoutStep)&quot;
+          &gt;
+            {{ &#x27;common.back&#x27; | cxTranslate }}
+          &lt;/button&gt;&lt;/ng-container
+        &gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col-md-12 col-lg-6&quot;&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;nextCheckoutStep$ | async as nextCheckoutStep&quot;
+          &gt;&lt;button
+            class&#x3D;&quot;primary-button btn-block&quot;
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;navigateNext(nextCheckoutStep)&quot;
+            [disabled]&#x3D;&quot;
+              !(paymentType$ | async) ||
+              ((paymentType$ | async) &#x3D;&#x3D;&#x3D; creditCard &amp;&amp;
+                !(paymentDetails$ | async)?.cardNumber)
+            &quot;
+          &gt;
+            {{ &#x27;common.continue&#x27; | cxTranslate }}
+          &lt;/button&gt;&lt;/ng-container
+        &gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-template #newPaymentForm&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;previousCheckoutStep$ | async as previousCheckoutStep&quot;&gt;
+      &lt;cx-payment-form
+        (setPaymentDetails)&#x3D;&quot;setPaymentDetails($event)&quot;
+        (closeForm)&#x3D;&quot;hideNewPaymentForm()&quot;
+        (goBack)&#x3D;&quot;navigateBack(previousCheckoutStep)&quot;
+        [paymentMethodsCount]&#x3D;&quot;cards?.length || 0&quot;
+        [setAsDefaultField]&#x3D;&quot;!isGuestCheckout&quot;
+      &gt;&lt;/cx-payment-form&gt;
+    &lt;/ng-container&gt;
+  &lt;/ng-template&gt;
+&lt;/ng-container&gt;
+
+&lt;ng-template #loading&gt;
+  &lt;div class&#x3D;&quot;cx-spinner&quot;&gt;&lt;cx-spinner&gt;&lt;/cx-spinner&gt;&lt;/div&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="cards$ | async as cards">  <div class="box-shadow mb-5">    <h3 class="section-header-heading text-center">      {{ \'paymentForm.payment\' | cxTranslate }}    </h3>    <ng-container *ngIf="!(isLoading$ | async); else loading">      <div class="py-3 px-4">        <h4 class="mb-4">          {{ \'fscommon.paymentMethod\' | cxTranslate }}        </h4>        <form>          <div class="form-check" *ngFor="let type of paymentTypes$ | async">            <input              id="paymentType-{{ type.code }}"              class="form-check-input"              type="radio"              name="paymentMethod"              [attr.aria-checked]="type.code === (paymentType$ | async)"              (click)="changeType(type.code)"              [value]="type.code"              [checked]="type.code === (paymentType$ | async)"            />            <label class="pl-3 pt-1">              {{ \'fscommon.payment.\' + type.code | cxTranslate }}            </label>          </div>        </form>        <ng-container *ngIf="(paymentType$ | async) === creditCard">          <div class="my-4">            <hr />          </div>          <ng-container            *ngIf="              cards?.length && !newPaymentFormManuallyOpened;              else newPaymentForm            "          >            <div class="row mb-4">              <div class="col-md-12 col-lg-6">                <button                  class="btn btn-block btn-action"                  (click)="showNewPaymentForm()"                >                  {{ \'paymentForm.addNewPayment\' | cxTranslate }}                </button>              </div>            </div>            <div class="row">              <div                class="cx-payment-card col-md-12 col-lg-6"                *ngFor="let card of cards"              >                <div class="cx-payment-card-inner">                  <cx-card                    [border]="true"                    [fitToContainer]="true"                    [content]="card.content"                    (sendCard)="selectPaymentMethod(card.paymentMethod)"                  ></cx-card>                </div>              </div>            </div>          </ng-container>        </ng-container>      </div>    </ng-container>  </div>  <ng-container    *ngIf="{      paymentDetails: paymentDetails$ | async,      paymentType: paymentType$ | async    } as payment"  >    <div      *ngIf="showNavigation(cards, newPaymentFormManuallyOpened, payment)"      class="row"    >      <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">        <ng-container          *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"          ><button            class="action-button btn-block"            (click)="navigateBack(previousCheckoutStep)"          >            {{ \'common.back\' | cxTranslate }}          </button></ng-container        >      </div>      <div class="col-md-12 col-lg-6">        <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"          ><button            class="primary-button btn-block"            type="button"            (click)="navigateNext(nextCheckoutStep)"            [disabled]="              !(paymentType$ | async) ||              ((paymentType$ | async) === creditCard &&                !(paymentDetails$ | async)?.cardNumber)            "          >            {{ \'common.continue\' | cxTranslate }}          </button></ng-container        >      </div>    </div>  </ng-container>  <ng-template #newPaymentForm>    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep">      <cx-payment-form        (setPaymentDetails)="setPaymentDetails($event)"        (closeForm)="hideNewPaymentForm()"        (goBack)="navigateBack(previousCheckoutStep)"        [paymentMethodsCount]="cards?.length || 0"        [setAsDefaultField]="!isGuestCheckout"      ></cx-payment-form>    </ng-container>  </ng-template></ng-container><ng-template #loading>  <div class="cx-spinner"><cx-spinner></cx-spinner></div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+    var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
+    var ACTUAL_COMPONENT = {'name': 'FSPaymentMethodComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FSPaymentMethodComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

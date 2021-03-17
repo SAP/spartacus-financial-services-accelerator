@@ -99,7 +99,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#filterRemoveableEntries">filterRemoveableEntries</a>
+                            </li>
+                            <li>
                                 <a href="#getLegalInformation">getLegalInformation</a>
+                            </li>
+                            <li>
+                                <a href="#getPaymentType">getPaymentType</a>
                             </li>
                             <li>
                                 <a href="#mockDeliveryMode">mockDeliveryMode</a>
@@ -109,6 +115,9 @@
                             </li>
                             <li>
                                 <a href="#setLegalInformation">setLegalInformation</a>
+                            </li>
+                            <li>
+                                <a href="#setPaymentType">setPaymentType</a>
                             </li>
                         </ul>
                     </td>
@@ -128,12 +137,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fsStore: <a href="../interfaces/FSStateWithCheckout.html">Store<FSStateWithCheckout></a>, activeCartService: ActiveCartService, authService: AuthService, checkoutDeliveryService: CheckoutDeliveryService)</code>
+<code>constructor(fsStore: <a href="../interfaces/FSStateWithCheckout.html">Store<FSStateWithCheckout></a>, activeCartService: ActiveCartService, userIdService: UserIdService, checkoutDeliveryService: CheckoutDeliveryService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -175,10 +184,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>userIdService</td>
                                                   
                                                         <td>
-                                                                    <code>AuthService</code>
+                                                                    <code>UserIdService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -216,6 +225,76 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="filterRemoveableEntries"></a>
+                    <span class="name">
+                        <b>
+                            filterRemoveableEntries
+                        </b>
+                        <a href="#filterRemoveableEntries"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filterRemoveableEntries(cart: <a href="../interfaces/FSCart.html">FSCart | Order</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>cart</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSCart.html" target="_self" >FSCart | Order</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getLegalInformation"></a>
                     <span class="name">
                         <b>
@@ -234,8 +313,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="55"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:55</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:63</a></div>
                 </td>
             </tr>
 
@@ -245,6 +324,45 @@
 
                     <div class="io-description">
                         <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaymentType"></a>
+                    <span class="name">
+                        <b>
+                            getPaymentType
+                        </b>
+                        <a href="#getPaymentType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPaymentType()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="67"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:67</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;string&gt;</code>
 
                     </div>
                 </td>
@@ -273,8 +391,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:59</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:71</a></div>
                 </td>
             </tr>
 
@@ -312,8 +430,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -382,8 +500,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:49</a></div>
                 </td>
             </tr>
 
@@ -394,6 +512,76 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setPaymentType"></a>
+                    <span class="name">
+                        <b>
+                            setPaymentType
+                        </b>
+                        <a href="#setPaymentType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setPaymentType(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:56</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>code</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -430,7 +618,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -457,7 +645,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/facade/checkout.service.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -474,23 +662,25 @@
 import { select, Store } from &#x27;@ngrx/store&#x27;;
 import {
   ActiveCartService,
-  AuthService,
   CheckoutDeliveryService,
   CheckoutService,
+  Order,
+  UserIdService,
 } from &#x27;@spartacus/core&#x27;;
 import { combineLatest, Observable } from &#x27;rxjs&#x27;;
 import { CheckoutSelectors, FSStateWithCheckout } from &#x27;../store&#x27;;
 import * as fromFSAction from &#x27;../store/actions/index&#x27;;
+import { FSCart, FSOrderEntry } from &#x27;../../../occ/occ-models&#x27;;
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
   constructor(
     protected fsStore: Store&lt;FSStateWithCheckout&gt;,
     protected activeCartService: ActiveCartService,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
-    super(fsStore, authService, activeCartService);
+    super(fsStore, activeCartService, userIdService);
   }
 
   orderPlaced: boolean;
@@ -499,7 +689,7 @@ export class FSCheckoutService extends CheckoutService {
   setIdentificationType(identificationType: string) {
     combineLatest([
       this.activeCartService.getActiveCartId(),
-      this.authService.getOccUserId(),
+      this.userIdService.getUserId(),
     ])
       .subscribe(([activeCartCode, occUserId]) &#x3D;&gt; {
         if (activeCartCode &amp;&amp; occUserId) {
@@ -523,13 +713,30 @@ export class FSCheckoutService extends CheckoutService {
       })
     );
   }
-
+  setPaymentType(code: string) {
+    this.fsStore.dispatch(
+      new fromFSAction.SetPaymentTypeSuccess({
+        code,
+      })
+    );
+  }
   getLegalInformation(): Observable&lt;boolean&gt; {
     return this.fsStore.pipe(select(CheckoutSelectors.getLegalInformation));
   }
 
+  getPaymentType(): Observable&lt;string&gt; {
+    return this.fsStore.pipe(select(CheckoutSelectors.getPaymentType));
+  }
+
   mockDeliveryMode() {
     this.checkoutDeliveryService.setDeliveryMode(this.mockedDeliveryMode);
+  }
+
+  filterRemoveableEntries(cart: FSCart | Order) {
+    const cartEntries: FSOrderEntry[] &#x3D; cart?.deliveryOrderGroups[0]?.entries;
+    if (cartEntries?.length &gt; 0) {
+      return cartEntries.filter(item &#x3D;&gt; item.removeable);
+    }
   }
 }
 </code></pre>

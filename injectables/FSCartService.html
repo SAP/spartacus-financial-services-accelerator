@@ -116,7 +116,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: Store<StateWithMultiCart>, authService: AuthService, multiCartService: MultiCartService)</code>
+<code>constructor(store: Store<StateWithMultiCart>, userIdService: UserIdService, multiCartService: MultiCartService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -151,10 +151,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>userIdService</td>
                                                   
                                                         <td>
-                                                                    <code>AuthService</code>
+                                                                    <code>UserIdService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -684,13 +684,13 @@
 import { Store } from &#x27;@ngrx/store&#x27;;
 import {
   ActiveCartService,
-  AuthService,
   Cart,
   MultiCartService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
   StateUtils,
   StateWithMultiCart,
+  UserIdService,
 } from &#x27;@spartacus/core&#x27;;
 import { combineLatest } from &#x27;rxjs&#x27;;
 import { filter, map, take } from &#x27;rxjs/operators&#x27;;
@@ -701,10 +701,10 @@ import * as fromAction from &#x27;./../../checkout/store/actions/index&#x27;;
 export class FSCartService extends ActiveCartService {
   constructor(
     protected store: Store&lt;StateWithMultiCart&gt;,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected multiCartService: MultiCartService
   ) {
-    super(store, authService, multiCartService);
+    super(store, multiCartService, userIdService);
   }
 
   createCartForProduct(
@@ -713,7 +713,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     pricingData: PricingData
   ) {
-    combineLatest([this.getActiveCartId(), this.authService.getOccUserId()])
+    combineLatest([this.getActiveCartId(), this.userIdService.getUserId()])
       .pipe(
         take(1),
         map(([activeCartId, userId]) &#x3D;&gt; {
@@ -784,7 +784,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     entryNumber: string
   ): void {
-    combineLatest([this.getActiveCartId(), this.authService.getOccUserId()])
+    combineLatest([this.getActiveCartId(), this.userIdService.getUserId()])
       .pipe(take(1))
       .subscribe(([activeCartId, userId]) &#x3D;&gt; {
         this.store.dispatch(

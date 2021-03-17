@@ -75,10 +75,28 @@ import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
 import { EffectsModule } from &#x27;@ngrx/effects&#x27;;
 import { StoreModule } from &#x27;@ngrx/store&#x27;;
-import { StateModule } from &#x27;@spartacus/core&#x27;;
+import {
+  ConfigModule,
+  StateConfig,
+  StateModule,
+  StorageSyncType,
+} from &#x27;@spartacus/core&#x27;;
 import { effects } from &#x27;./effects/index&#x27;;
 import { metaReducers, reducerProvider, reducerToken } from &#x27;./reducers/index&#x27;;
 import { FORM_FEATURE } from &#x27;./state&#x27;;
+
+export function fileConfigFactory(): StateConfig {
+  const config: StateConfig &#x3D; {
+    state: {
+      storageSync: {
+        keys: {
+          [&#x60;${FORM_FEATURE}.uploadedFiles.content.files&#x60;]: StorageSyncType.LOCAL_STORAGE,
+        },
+      },
+    },
+  };
+  return config;
+}
 
 @NgModule({
   imports: [
@@ -89,6 +107,7 @@ import { FORM_FEATURE } from &#x27;./state&#x27;;
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
+    ConfigModule.withConfigFactory(fileConfigFactory),
   ],
   providers: [reducerProvider],
 })

@@ -27,7 +27,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -36,9 +36,13 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>DocumentConnector</li>
+  <li>Classes</li>
+  <li>UploadFileSuccess</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,31 +60,43 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/fsastorefrontlib/src/core/document/connectors/document.connector.ts</code>
+            <code>projects/dynamicforms/src/core/store/actions/file.action.ts</code>
         </p>
 
 
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code>Action</code>
+            </p>
 
 
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getDocument">getDocument</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#payload">payload</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#type">type</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+
 
 
 
@@ -96,12 +112,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(documentAdapter: <a href="../classes/DocumentAdapter.html">DocumentAdapter</a>)</code>
+<code>constructor(payload: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/fsastorefrontlib/src/core/document/connectors/document.connector.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/dynamicforms/src/core/store/actions/file.action.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -119,10 +135,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>documentAdapter</td>
+                                                        <td>payload</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../classes/DocumentAdapter.html" target="_self" >DocumentAdapter</a></code>
+                                                                        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -141,112 +157,118 @@
 
             <section>
     
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getDocument"></a>
-                    <span class="name">
-                        <b>
-                            getDocument
-                        </b>
-                        <a href="#getDocument"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getDocument(userId, documentId)</code>
-                </td>
-            </tr>
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="payload"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            payload</b>
+                            <a href="#payload"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/dynamicforms/src/core/store/actions/file.action.ts:11</a></div>
+                            </td>
+                        </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="11"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/document/connectors/document.connector.ts:11</a></div>
-                </td>
-            </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Readonly</span>
+                            type</b>
+                            <a href="#type"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>UPLOAD_FILE_SUCCESS</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/dynamicforms/src/core/store/actions/file.action.ts:10</a></div>
+                            </td>
+                        </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>userId</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>documentId</td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 </section>
+
+
+
+
+
+
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
-import { DocumentAdapter } from &#x27;./document.adapter&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Action } from &#x27;@ngrx/store&#x27;;
 
-@Injectable({
-  providedIn: &#x27;root&#x27;,
-})
-export class DocumentConnector {
-  constructor(protected documentAdapter: DocumentAdapter) {}
+export const UPLOAD_FILE_SUCCESS &#x3D; &#x27;[File] Upload file Success&#x27;;
+export const RESET_FILE_SUCCESS &#x3D; &#x27;[File] Reset file Success&#x27;;
+export const REMOVE_FILE &#x3D; &#x27;[File] Remove File&#x27;;
+export const REMOVE_FILE_SUCCESS &#x3D; &#x27;[File] Remove File Success&#x27;;
+export const REMOVE_FILE_FAIL &#x3D; &#x27;[File] Remove File Fail&#x27;;
 
-  getDocument(userId, documentId): Observable&lt;any&gt; {
-    return this.documentAdapter.getDocument(userId, documentId);
-  }
+export class UploadFileSuccess implements Action {
+  readonly type &#x3D; UPLOAD_FILE_SUCCESS;
+  constructor(public payload: any) {}
 }
+
+export class ResetFileSuccess implements Action {
+  readonly type &#x3D; RESET_FILE_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class RemoveFile implements Action {
+  readonly type &#x3D; REMOVE_FILE;
+  constructor(public payload: any) {}
+}
+
+export class RemoveFileSuccess implements Action {
+  readonly type &#x3D; REMOVE_FILE_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class RemoveFileFail implements Action {
+  readonly type &#x3D; REMOVE_FILE_FAIL;
+  constructor(public payload: any) {}
+}
+
+export type FileAction &#x3D;
+  | UploadFileSuccess
+  | ResetFileSuccess
+  | RemoveFile
+  | RemoveFileSuccess
+  | RemoveFileFail;
 </code></pre>
     </div>
-
 </div>
-
-
-
-
 
 
 
@@ -271,8 +293,8 @@ export class DocumentConnector {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'DocumentConnector.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'UploadFileSuccess.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

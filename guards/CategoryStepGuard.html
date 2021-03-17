@@ -104,7 +104,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/guards/category-step-guard.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/guards/category-step-guard.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -193,8 +193,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/guards/category-step-guard.ts:21</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/guards/category-step-guard.ts:20</a></div>
                 </td>
             </tr>
 
@@ -254,7 +254,6 @@ import {
 } from &#x27;@spartacus/core&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { FSCheckoutConfigService } from &#x27;../../../core/checkout/services&#x27;;
-import { FSCheckoutStep } from &#x27;../../../occ/occ-models/occ.models&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -272,13 +271,9 @@ export class CategoryStepGuard implements CanActivate {
       route
     );
 
-    const currentStep &#x3D; &lt;FSCheckoutStep&gt;(
-      this.fsCheckoutConfigService.steps[currentStepIndex]
-    );
+    const currentStep &#x3D; this.fsCheckoutConfigService.steps[currentStepIndex];
 
-    const nextStep &#x3D; &lt;FSCheckoutStep&gt;(
-      this.fsCheckoutConfigService.steps[currentStepIndex + 1]
-    );
+    const nextStep &#x3D; this.fsCheckoutConfigService.steps[currentStepIndex + 1];
 
     const nextStepUrl &#x3D; this.routingConfigService.getRouteConfig(
       nextStep.routeName

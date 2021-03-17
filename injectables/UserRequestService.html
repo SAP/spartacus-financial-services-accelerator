@@ -99,12 +99,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: Store<FSUserRequestState>, authService: AuthService, formDataStorageService: <a href="../injectables/FormDataStorageService.html">FormDataStorageService</a>)</code>
+<code>constructor(store: Store<FSUserRequestState>, formDataStorageService: <a href="../injectables/FormDataStorageService.html">FormDataStorageService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/facade/user-request.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/facade/user-request.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -126,18 +126,6 @@
                                                   
                                                         <td>
                                                                     <code>Store&lt;FSUserRequestState&gt;</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>authService</td>
-                                                  
-                                                        <td>
-                                                                    <code>AuthService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -193,8 +181,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/facade/user-request.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/facade/user-request.service.ts:26</a></div>
                 </td>
             </tr>
 
@@ -232,8 +220,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/facade/user-request.service.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/facade/user-request.service.ts:16</a></div>
                 </td>
             </tr>
 
@@ -288,7 +276,6 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { AuthService } from &#x27;@spartacus/core&#x27;;
 import { FormDataStorageService } from &#x27;@spartacus/dynamicforms&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { FSUserRequest } from &#x27;../../../occ/occ-models&#x27;;
@@ -299,7 +286,6 @@ import * as fromSelector from &#x27;../store/selectors/user-request.selector&#x2
 export class UserRequestService {
   constructor(
     protected store: Store&lt;FSUserRequestState&gt;,
-    protected authService: AuthService,
     protected formDataStorageService: FormDataStorageService
   ) {}
 

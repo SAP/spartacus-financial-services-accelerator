@@ -117,7 +117,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/actions/checkout.action.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/actions/checkout.action.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -181,7 +181,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/actions/checkout.action.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/actions/checkout.action.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -208,7 +208,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/actions/checkout.action.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/actions/checkout.action.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -236,6 +236,7 @@ export const SET_IDENTIFICATION_TYPE_FAIL &#x3D;
   &#x27;[Cart] Set Identification Type Fail&#x27;;
 export const SET_LEGAL_INFORMATION_SUCCESS &#x3D;
   &#x27;[Cart] Set Legal Information Success&#x27;;
+export const SET_PAYMENT_TYPE_SUCCESS &#x3D; &#x27;[Cart] Set Payment Type Success&#x27;;
 
 export class SetIdentificationType implements Action {
   readonly type &#x3D; SET_IDENTIFICATION_TYPE;
@@ -257,11 +258,16 @@ export class SetLegalInformationSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class SetPaymentTypeSuccess implements Action {
+  readonly type &#x3D; SET_PAYMENT_TYPE_SUCCESS;
+  constructor(public payload: any) {}
+}
 export type CheckoutAction &#x3D;
   | SetIdentificationType
   | SetIdentificationTypeSuccess
   | SetIdentificationTypeFail
-  | SetLegalInformationSuccess;
+  | SetLegalInformationSuccess
+  | SetPaymentTypeSuccess;
 </code></pre>
     </div>
 </div>

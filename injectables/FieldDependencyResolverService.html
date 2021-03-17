@@ -307,8 +307,8 @@ If any field config has disabled property set to true, dynamic condition cannot 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/form-dependencies/field-dependency-resolver.service.ts:102</a></div>
                 </td>
             </tr>
 
@@ -568,6 +568,7 @@ export class FieldDependencyResolverService {
     } else {
       dependentControl.disable();
     }
+    dependentControl.updateValueAndValidity({ emitEvent: false });
   }
 
   geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {

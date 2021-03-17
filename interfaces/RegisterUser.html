@@ -366,8 +366,8 @@ export function validatePhoneNumber(expectedValue: string) {
 }
 
 export function login(username: string, password: string) {
-  cy.get(&#x27;cx-login-form&#x27;).should(&#x27;be.visible&#x27;);
-  cy.get(&#x27;cx-login-form&#x27;).within(() &#x3D;&gt; {
+  cy.get(&#x27;cx-fs-login-form form&#x27;).should(&#x27;be.visible&#x27;);
+  cy.get(&#x27;cx-fs-login-form form&#x27;).within(() &#x3D;&gt; {
     cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).clear().type(username);
     cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).clear().type(password);
     cy.get(&#x27;button[type&#x3D;submit]&#x27;).click();
@@ -380,8 +380,8 @@ export function logout() {
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
-  cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).clear().type(username);
-  cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).clear().type(password);
+  cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).eq(0).type(username);
+  cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).type(password);
   cy.get(&#x27;button[type&#x3D;submit]&#x27;).click();
 }
 </code></pre>

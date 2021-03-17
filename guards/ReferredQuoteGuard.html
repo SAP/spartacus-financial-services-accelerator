@@ -203,7 +203,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Observable&lt;boolean | UrlTree&gt;</code>
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                     </div>
                 </td>
@@ -224,7 +224,7 @@ import {
   RoutingService,
 } from &#x27;@spartacus/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
+import { filter, map, take } from &#x27;rxjs/operators&#x27;;
 import {
   FSCart,
   QuoteWorkflowStatusType,
@@ -240,23 +240,22 @@ export class ReferredQuoteGuard implements CanActivate {
     protected globalMessageService: GlobalMessageService
   ) {}
 
-  canActivate(): Observable&lt;boolean | UrlTree&gt; {
+  canActivate(): Observable&lt;boolean&gt; {
     return this.cartService.getActive().pipe(
+      filter(cart &#x3D;&gt; !!cart.code),
+      take(1),
       map(cart &#x3D;&gt; {
-        if ((&lt;FSCart&gt;cart).insuranceQuote) {
-          const quoteWorkflowStatus &#x3D; (&lt;FSCart&gt;cart).insuranceQuote
-            .quoteWorkflowStatus;
-          if (quoteWorkflowStatus.code &#x3D;&#x3D;&#x3D; QuoteWorkflowStatusType.REFERRED) {
-            this.globalMessageService.add(
-              { key: &#x27;quote.referredQuoteDescription&#x27; },
-              GlobalMessageType.MSG_TYPE_INFO
-            );
-            this.routingService.go({ cxRoute: &#x27;home&#x27; });
-            return false;
-          } else {
-            return true;
-          }
+        const quoteWorkflowStatus &#x3D; (&lt;FSCart&gt;cart)?.insuranceQuote
+          ?.quoteWorkflowStatus;
+        if (quoteWorkflowStatus.code &#x3D;&#x3D;&#x3D; QuoteWorkflowStatusType.REFERRED) {
+          this.globalMessageService.add(
+            { key: &#x27;quote.referredQuoteDescription&#x27; },
+            GlobalMessageType.MSG_TYPE_INFO
+          );
+          this.routingService.go({ cxRoute: &#x27;home&#x27; });
+          return false;
         }
+        return true;
       })
     );
   }

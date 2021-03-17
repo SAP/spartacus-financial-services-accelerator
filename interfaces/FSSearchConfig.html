@@ -177,7 +177,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { SearchConfig, AuthService } from &#x27;@spartacus/core&#x27;;
+import { SearchConfig, UserIdService } from &#x27;@spartacus/core&#x27;;
 import { filter } from &#x27;rxjs/operators&#x27;;
 import { OCC_USER_ID_ANONYMOUS } from &#x27;@spartacus/core&#x27;;
 
@@ -207,13 +207,13 @@ export interface InboxMessage {
 export class InboxDataService {
   private _userId &#x3D; OCC_USER_ID_ANONYMOUS;
 
-  constructor(protected auth: AuthService) {
-    this.auth
-      .getUserToken()
-      .pipe(filter(userToken &#x3D;&gt; this.userId !&#x3D;&#x3D; userToken.userId))
-      .subscribe(userToken &#x3D;&gt; {
-        if (Object.keys(userToken).length !&#x3D;&#x3D; 0) {
-          this.userId &#x3D; userToken.userId;
+  constructor(protected userIdService: UserIdService) {
+    this.userIdService
+      .getUserId()
+      .pipe(filter(userId &#x3D;&gt; this.userId !&#x3D;&#x3D; userId))
+      .subscribe(userId &#x3D;&gt; {
+        if (Object.keys(userId).length !&#x3D;&#x3D; 0) {
+          this.userId &#x3D; userId;
         } else {
           this.userId &#x3D; OCC_USER_ID_ANONYMOUS;
         }

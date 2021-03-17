@@ -134,7 +134,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: <a href="../interfaces/StateWithForm.html">Store<StateWithForm></a>, authService: AuthService)</code>
+<code>constructor(store: <a href="../interfaces/StateWithForm.html">Store<StateWithForm></a>, userIdService: UserIdService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -169,10 +169,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>userIdService</td>
                                                   
                                                         <td>
-                                                                    <code>AuthService</code>
+                                                                    <code>UserIdService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -795,7 +795,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { AuthService } from &#x27;@spartacus/core&#x27;;
+import { UserIdService } from &#x27;@spartacus/core&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { filter, switchMap, take } from &#x27;rxjs/operators&#x27;;
 import { YFormData, YFormDefinition } from &#x27;../../models&#x27;;
@@ -809,7 +809,7 @@ export class FormDataService {
 
   constructor(
     protected store: Store&lt;StateWithForm&gt;,
-    protected authService: AuthService
+    protected userIdService: UserIdService
   ) {}
 
   submit(form: YFormData) {
@@ -825,8 +825,8 @@ export class FormDataService {
   }
 
   saveFormData(formData: YFormData) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt; {
         this.store.dispatch(
@@ -858,8 +858,8 @@ export class FormDataService {
   }
 
   loadFormData(formDataId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt; {
         this.store.dispatch(

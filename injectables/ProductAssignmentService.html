@@ -128,7 +128,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: <a href="../interfaces/StateWithProductAssignment.html">Store<StateWithProductAssignment></a>, authService: AuthService)</code>
+<code>constructor(store: <a href="../interfaces/StateWithProductAssignment.html">Store<StateWithProductAssignment></a>, userIdService: UserIdService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -163,10 +163,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>userIdService</td>
                                                   
                                                         <td>
-                                                                    <code>AuthService</code>
+                                                                    <code>UserIdService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -765,7 +765,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
-import { AuthService, OCC_USER_ID_ANONYMOUS } from &#x27;@spartacus/core&#x27;;
+import { OCC_USER_ID_ANONYMOUS, UserIdService } from &#x27;@spartacus/core&#x27;;
 import { Observable } from &#x27;rxjs/internal/Observable&#x27;;
 import { filter, switchMap, take } from &#x27;rxjs/operators&#x27;;
 import * as fromAction from &#x27;../store/actions&#x27;;
@@ -777,7 +777,7 @@ import * as fromSelector from &#x27;../store/selectors&#x27;;
 export class ProductAssignmentService {
   constructor(
     protected store: Store&lt;StateWithProductAssignment&gt;,
-    protected authService: AuthService
+    protected userIdService: UserIdService
   ) {}
 
   user: string;
@@ -789,8 +789,8 @@ export class ProductAssignmentService {
     currentPage?: number,
     sort?: string
   ) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt; {
         if (occUserId &amp;&amp; occUserId !&#x3D;&#x3D; OCC_USER_ID_ANONYMOUS) {
@@ -811,8 +811,8 @@ export class ProductAssignmentService {
   }
 
   loadPotentialProductAssignments(orgUnitId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId &#x3D;&gt; {
         if (occUserId &amp;&amp; occUserId !&#x3D;&#x3D; OCC_USER_ID_ANONYMOUS) {

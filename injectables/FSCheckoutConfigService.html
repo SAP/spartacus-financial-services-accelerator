@@ -111,6 +111,9 @@
                                 <a href="#getCurrentStepIndex">getCurrentStepIndex</a>
                             </li>
                             <li>
+                                <a href="#getPreviousCheckoutStepUrl">getPreviousCheckoutStepUrl</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#getUrlFromActivatedRoute">getUrlFromActivatedRoute</a>
                             </li>
@@ -155,12 +158,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fsCheckoutConfig: CheckoutConfig, fsRoutingConfigService: RoutingConfigService, cartService: <a href="../injectables/FSCartService.html">FSCartService</a>)</code>
+<code>constructor(fsCheckoutConfig: CheckoutConfig, fsRoutingConfigService: RoutingConfigService, checkoutStepService: CheckoutStepService, cartService: <a href="../injectables/FSCartService.html">FSCartService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -194,6 +197,18 @@
                                                   
                                                         <td>
                                                                     <code>RoutingConfigService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>checkoutStepService</td>
+                                                  
+                                                        <td>
+                                                                    <code>CheckoutStepService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -249,8 +264,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:42</a></div>
                 </td>
             </tr>
 
@@ -301,6 +316,76 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getPreviousCheckoutStepUrl"></a>
+                    <span class="name">
+                        <b>
+                            getPreviousCheckoutStepUrl
+                        </b>
+                        <a href="#getPreviousCheckoutStepUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPreviousCheckoutStepUrl(activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:109</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>activatedRoute</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getUrlFromActivatedRoute"></a>
                     <span class="name">
                         <b>
@@ -321,8 +406,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="104"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:104</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:118</a></div>
                 </td>
             </tr>
 
@@ -393,8 +478,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="128"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:128</a></div>
                 </td>
             </tr>
 
@@ -465,8 +550,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="118"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:118</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="132"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:132</a></div>
                 </td>
             </tr>
 
@@ -535,8 +620,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:38</a></div>
                 </td>
             </tr>
 
@@ -617,8 +702,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:35</a></div>
                 </td>
             </tr>
 
@@ -699,8 +784,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="96"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:96</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:102</a></div>
                 </td>
             </tr>
 
@@ -781,8 +866,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:56</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:61</a></div>
                 </td>
             </tr>
 
@@ -851,8 +936,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="90"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:90</a></div>
                 </td>
             </tr>
 
@@ -936,7 +1021,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -962,7 +1047,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -988,7 +1073,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -1014,7 +1099,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -1046,7 +1131,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/checkout-config.service.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -1065,7 +1150,11 @@ import {
   CmsActivatedRouteSnapshot,
   RoutingConfigService,
 } from &#x27;@spartacus/core&#x27;;
-import { CheckoutConfig, CheckoutConfigService } from &#x27;@spartacus/storefront&#x27;;
+import {
+  CheckoutConfig,
+  CheckoutConfigService,
+  CheckoutStepService,
+} from &#x27;@spartacus/storefront&#x27;;
 import { BehaviorSubject } from &#x27;rxjs&#x27;;
 import { FSSteps, FSCart, FSCheckoutStep, FSProduct } from &#x27;../../../occ&#x27;;
 import { FSCartService } from &#x27;../../cart&#x27;;
@@ -1077,9 +1166,10 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   constructor(
     protected fsCheckoutConfig: CheckoutConfig,
     protected fsRoutingConfigService: RoutingConfigService,
+    protected checkoutStepService: CheckoutStepService,
     protected cartService: FSCartService
   ) {
-    super(fsCheckoutConfig, fsRoutingConfigService);
+    super(fsCheckoutConfig);
   }
 
   steps: FSCheckoutStep[] &#x3D; this.fsCheckoutConfig.checkout.steps;
@@ -1117,6 +1207,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   triggerPreviousNextStepSet(activatedRoute: ActivatedRoute) {
     let activeParamType: string;
     const previousUrl &#x3D; this.getPreviousCheckoutStepUrl(activatedRoute);
+
     if (previousUrl) {
       const paramType &#x3D; previousUrl.substring(previousUrl.lastIndexOf(&#x27;:&#x27;) + 1);
       this.cartService
@@ -1159,6 +1250,14 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     if (this.steps[nextStepNumber]) {
       this.setNextStep(activeParamType, this.steps[nextStepNumber].routeName);
     }
+  }
+
+  getPreviousCheckoutStepUrl(activatedRoute: ActivatedRoute): string {
+    const stepIndex &#x3D; this.getCurrentStepIndex(activatedRoute);
+
+    return stepIndex &gt;&#x3D; 0 &amp;&amp; this.steps[stepIndex - 1]
+      ? this.getUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+      : null;
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.

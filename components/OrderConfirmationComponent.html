@@ -128,6 +128,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#baseUrl">baseUrl</a>
+                            </li>
+                            <li>
                                 <a href="#order$">order$</a>
                             </li>
                             <li>
@@ -146,7 +149,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getBaseUrl">getBaseUrl</a>
+                                <a href="#checkIfRemoveableEntriesExists">checkIfRemoveableEntriesExists</a>
                             </li>
                             <li>
                                 <a href="#getFormContent">getFormContent</a>
@@ -183,7 +186,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -258,26 +261,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getBaseUrl"></a>
+                    <a name="checkIfRemoveableEntriesExists"></a>
                     <span class="name">
                         <b>
-                            getBaseUrl
+                            checkIfRemoveableEntriesExists
                         </b>
-                        <a href="#getBaseUrl"><span class="icon ion-ios-link"></span></a>
+                        <a href="#checkIfRemoveableEntriesExists"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getBaseUrl()</code>
+<code>checkIfRemoveableEntriesExists(order: Order)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:56</a></div>
                 </td>
             </tr>
 
@@ -286,8 +289,39 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>order</td>
+                                    <td>
+                                            <code>Order</code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -506,8 +540,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:28</a></div>
                 </td>
             </tr>
 
@@ -529,6 +563,33 @@
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="baseUrl"></a>
+                        <span class="name">
+                            <b>
+                            baseUrl</b>
+                            <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/order-confirmation/order-confirmation.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -607,6 +668,7 @@ import { FSTranslationService } from &#x27;./../../../../core/i18n/facade/transl
 export class OrderConfirmationComponent implements OnInit, OnDestroy {
   order$: Observable&lt;Order&gt;;
   orderPlaced &#x3D; this.checkoutService.orderPlaced;
+  baseUrl: string;
 
   constructor(
     protected checkoutService: FSCheckoutService,
@@ -616,10 +678,9 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.order$ &#x3D; this.checkoutService.getOrderDetails();
+    this.baseUrl &#x3D; this.config.backend.occ.baseUrl || &#x27;&#x27;;
   }
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || &#x27;&#x27;;
-  }
+
   ngOnDestroy() {
     this.checkoutService.orderPlaced &#x3D; false;
     this.checkoutService.clearCheckoutData();
@@ -641,6 +702,11 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
       [&#x27;orderConfirmation&#x27;, translationGroup],
       translationKey
     );
+  }
+
+  checkIfRemoveableEntriesExists(order: Order) {
+    const filteredEntries &#x3D; this.checkoutService.filterRemoveableEntries(order);
+    return filteredEntries.length &gt; 0;
   }
 }
 </code></pre>
@@ -668,17 +734,19 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
                     &quot;
                     class&#x3D;&quot;image-wrapper&quot;
                   &gt;
-                    &lt;img
-                      class&#x3D;&quot;image-item&quot;
-                      [src]&#x3D;&quot;
-                        getBaseUrl() +
-                        ((order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.images)[1]?.url
+                    &lt;cx-media
+                      [container]&#x3D;&quot;
+                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
+                          ?.defaultCategory?.image
                       &quot;
-                    /&gt;
+                      [alt]&#x3D;&quot;
+                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
+                          ?.name
+                      &quot;
+                    &gt;&lt;/cx-media&gt;
                   &lt;/span&gt;
                 &lt;/div&gt;
-                &lt;div class&#x3D;&quot;ccol-12 col-md-8&quot;&gt;
+                &lt;div class&#x3D;&quot;col-12 col-md-8&quot;&gt;
                   {{ order.entries[0]?.product?.defaultCategory?.name }}
                 &lt;/div&gt;
               &lt;/h2&gt;
@@ -734,42 +802,40 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
                             ?.product?.price?.oneTimeChargeEntries
                         &quot;
                       &gt;
-                        &lt;li class&#x3D;&quot;accordion-list-item row&quot;&gt;
-                          &lt;div class&#x3D;&quot;col-6 item-label&quot;&gt;
-                            {{ item.billingTime?.name }}
-                          &lt;/div&gt;
-                          &lt;div class&#x3D;&quot;col-6 value notice&quot;&gt;
-                            &lt;ng-container
-                              *ngIf&#x3D;&quot;
-                                item.price.value &gt; 0;
-                                then formattedPrice;
-                                else item.chargeInformation
-                                  ? chargeInfo
-                                  : iconOk
-                              &quot;
-                            &gt;
-                            &lt;/ng-container&gt;
-                            &lt;ng-template #formattedPrice
-                              &gt;{{ item.price.formattedValue }}
-                            &lt;/ng-template&gt;
-                            &lt;ng-template #chargeInfo&gt;{{
-                              item.chargeInformation
-                            }}&lt;/ng-template&gt;
-                            &lt;ng-template #iconOk
-                              &gt;&lt;span class&#x3D;&quot;fs-icon icon-ok&quot;&gt;&lt;/span&gt;
-                            &lt;/ng-template&gt;
-                          &lt;/div&gt;
-                        &lt;/li&gt;
+                        &lt;ng-container *ngIf&#x3D;&quot;item.mandatory&quot;&gt;
+                          &lt;li class&#x3D;&quot;accordion-list-item row&quot;&gt;
+                            &lt;div class&#x3D;&quot;col-6 item-label&quot;&gt;
+                              {{ item.billingTime?.name }}
+                            &lt;/div&gt;
+                            &lt;div class&#x3D;&quot;col-6 value notice&quot;&gt;
+                              &lt;ng-container
+                                *ngIf&#x3D;&quot;
+                                  item.price?.value &gt; 0 ||
+                                    item.chargeInformation;
+                                  else iconOk
+                                &quot;
+                              &gt;
+                                &lt;ng-container
+                                  *ngTemplateOutlet&#x3D;&quot;
+                                    itemValue;
+                                    context: {
+                                      value:
+                                        item.price.value &gt; 0
+                                          ? item.price.formattedValue
+                                          : item.chargeInformation
+                                    }
+                                  &quot;
+                                &gt;&lt;/ng-container&gt;
+                              &lt;/ng-container&gt;
+                            &lt;/div&gt;
+                          &lt;/li&gt;
+                        &lt;/ng-container&gt;
                       &lt;/ng-container&gt;
                     &lt;/ul&gt;
                   &lt;/div&gt;
                 &lt;/div&gt;
               &lt;/cx-fs-accordion-item&gt;
-              &lt;ng-container
-                *ngIf&#x3D;&quot;
-                  (order.deliveryOrderGroups[0]?.entries | slice: 1).length &gt; 0
-                &quot;
-              &gt;
+              &lt;ng-container *ngIf&#x3D;&quot;checkIfRemoveableEntriesExists(order)&quot;&gt;
                 &lt;cx-fs-accordion-item
                   [title]&#x3D;&quot;&#x27;fscommon.addedByYou&#x27; | cxTranslate&quot;
                 &gt;
@@ -782,11 +848,13 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
                               | slice: 1
                           &quot;
                         &gt;
-                          &lt;li class&#x3D;&quot;accordion-list-item row&quot;&gt;
-                            &lt;div class&#x3D;&quot;col-12 item-label&quot;&gt;
-                              {{ item.product?.name }}
-                            &lt;/div&gt;
-                          &lt;/li&gt;
+                          &lt;ng-container *ngIf&#x3D;&quot;item.removeable&quot;&gt;
+                            &lt;li class&#x3D;&quot;accordion-list-item row&quot;&gt;
+                              &lt;div class&#x3D;&quot;col-12 item-label&quot;&gt;
+                                {{ item.product?.cartDisplayName }}
+                              &lt;/div&gt;
+                            &lt;/li&gt;
+                          &lt;/ng-container&gt;
                         &lt;/ng-container&gt;
                       &lt;/ul&gt;
                     &lt;/div&gt;
@@ -904,7 +972,8 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
                       {{
                         categoryCode.indexOf(&#x27;banking&#x27;) &gt; -1
                           ? (&#x27;fscommon.application.applicationID&#x27; | cxTranslate)
-                          : (&#x27;policy.policyId&#x27; | cxTranslate)
+                          : (&#x27;checkoutOrderConfirmation.orderNumber&#x27;
+                            | cxTranslate)
                       }}
                       :
                     &lt;/div&gt;
@@ -992,6 +1061,10 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
     &lt;/ng-container&gt;
   &lt;/ng-container&gt;
 &lt;/ng-template&gt;
+&lt;ng-template #itemValue let-value&#x3D;&quot;value&quot;&gt;
+  {{ value }}
+&lt;/ng-template&gt;
+&lt;ng-template #iconOk&gt;&lt;span class&#x3D;&quot;fs-icon icon-ok&quot;&gt;&lt;/span&gt; &lt;/ng-template&gt;
 </code></pre>
     </div>
 
@@ -1021,8 +1094,8 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="orderPlaced">  <ng-container *ngIf="order$ | async as order">    <ng-container *ngIf="order.code; else loading">      <ng-container        *ngIf="          (order.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory            ?.code as categoryCode        "      >        <div class="row">          <div class="col-12 col-md-8 mb-5 mb-md-0">            <div class="accordion">              <h2 class="row no-gutters section-header-heading">                <div class="col-12 col-md-2">                  <span                    *ngIf="                      (order.deliveryOrderGroups[0]?.entries)[0]?.product                        ?.images?.length > 0                    "                    class="image-wrapper"                  >                    <img                      class="image-item"                      [src]="                        getBaseUrl() +                        ((order.deliveryOrderGroups[0]?.entries)[0]?.product                          ?.images)[1]?.url                      "                    />                  </span>                </div>                <div class="ccol-12 col-md-8">                  {{ order.entries[0]?.product?.defaultCategory?.name }}                </div>              </h2>              <div #ref>                <ng-container                  *ngIf="                    order?.insuranceQuote?.quoteType !== \'EVENT\' &&                    (order?.entries)[0]?.product                      ?.defaultCategory as defaultCategory                  "                >                  <cx-fs-accordion-item                    [opened]="true"                    [title]="                      order.entries[0]?.product?.defaultCategory?.name +                      \' \' +                      (\'fscommon.information\' | cxTranslate)                    "                  >                    <div class="container">                      <div class="row justify-content-center">                        <ul class="col-12 accordion-list">                          <ng-container                            *ngTemplateOutlet="                              orderDetails;                              context: {                                valueList: !(order?.entries)[0]?.product                                  ?.configurable                                  ? order?.insuranceQuote?.quoteDetails?.entry                                  : ((order?.entries)[0]?.configurationInfos)[0]                                      ?.configurationValues.entry,                                defaultCategory: defaultCategory                              }                            "                          >                          </ng-container>                        </ul>                      </div>                    </div>                  </cx-fs-accordion-item>                </ng-container>              </div>              <cx-fs-accordion-item                [opened]="ref.children.length > 0 ? false : true"                [title]="\'fscommon.whatsIncluded\' | cxTranslate"              >                <div class="container">                  <div class="row justify-content-center">                    <ul class="col-12 accordion-list">                      <ng-container                        *ngFor="                          let item of (order.deliveryOrderGroups[0]?.entries)[0]                            ?.product?.price?.oneTimeChargeEntries                        "                      >                        <li class="accordion-list-item row">                          <div class="col-6 item-label">                            {{ item.billingTime?.name }}                          </div>                          <div class="col-6 value notice">                            <ng-container                              *ngIf="                                item.price.value > 0;                                then formattedPrice;                                else item.chargeInformation                                  ? chargeInfo                                  : iconOk                              "                            >                            </ng-container>                            <ng-template #formattedPrice                              >{{ item.price.formattedValue }}                            </ng-template>                            <ng-template #chargeInfo>{{                              item.chargeInformation                            }}</ng-template>                            <ng-template #iconOk                              ><span class="fs-icon icon-ok"></span>                            </ng-template>                          </div>                        </li>                      </ng-container>                    </ul>                  </div>                </div>              </cx-fs-accordion-item>              <ng-container                *ngIf="                  (order.deliveryOrderGroups[0]?.entries | slice: 1).length > 0                "              >                <cx-fs-accordion-item                  [title]="\'fscommon.addedByYou\' | cxTranslate"                >                  <div class="container">                    <div class="row justify-content-center">                      <ul class="col-12 accordion-list">                        <ng-container                          *ngFor="                            let item of order.deliveryOrderGroups[0]?.entries                              | slice: 1                          "                        >                          <li class="accordion-list-item row">                            <div class="col-12 item-label">                              {{ item.product?.name }}                            </div>                          </li>                        </ng-container>                      </ul>                    </div>                  </div>                </cx-fs-accordion-item>              </ng-container>              <ng-container                *ngIf="                  order.deliveryOrderGroups[0]?.entries.length > 0 &&                  (order.deliveryOrderGroups[0]?.entries)[0]?.product                    ?.investments                "              >                <cx-fs-accordion-item                  [title]="\'fscommon.investementDetails\' | cxTranslate"                >                  <div class="container">                    <div class="row justify-content-center">                      <ul class="col-12 accordion-list">                        <ng-container                          *ngFor="                            let item of order.deliveryOrderGroups[0]?.entries                          "                        >                          <ng-container                            *ngFor="                              let investmentDetail of item.product?.investments                            "                          >                            <li class="accordion-list-item row">                              <div class="col-12">                                {{ investmentDetail.investmentType?.fundName }}:                                {{ investmentDetail.distributionPercentage }}%                              </div>                              <div class="col-12">                                ISIN:                                {{ investmentDetail.investmentType?.isin }}                              </div>                              <div class="col-12">                                5                                {{ \'fscommon.yearPerformanse\' | cxTranslate }}                                :                                {{                                  investmentDetail.investmentType                                    ?.fiveYearPerformance                                }}                              </div>                              <div class="col-12">                                {{                                  \'fscommon.riskAndReturningRate\' | cxTranslate                                }}:                                {{                                  investmentDetail.investmentType                                    ?.riskReturningRating                                }}                              </div>                            </li>                          </ng-container>                        </ng-container>                      </ul>                    </div>                  </div>                </cx-fs-accordion-item>              </ng-container>              <cx-fs-accordion-item                [title]="\'fscommon.personalDetails\' | cxTranslate"              >                <div class="container">                  <div class="row justify-content-center">                    <ul                      *ngIf="(order?.entries)[0]?.formData"                      class="col-12 accordion-list"                    >                      <ng-container                        *ngFor="                          let formEntry of getFormContent(order)                            ?.personalDetails | keyvalue                        "                      >                        <ng-container                          *ngIf="                            getTranslation(                              \'personalDetails\',                              formEntry.key                            ) as label                          "                        >                          <li class="accordion-list-item row">                            <div class="col-6 item-label">{{ label }}:</div>                            <div class="col-6 value notice">                              {{ formEntry.value }}                            </div>                          </li>                        </ng-container>                      </ng-container>                    </ul>                  </div>                </div>              </cx-fs-accordion-item>            </div>          </div>          <div class="col-12 col-md-4">            <div class="short-overview-wrapper">              <div class="short-overview">                <h2 class="section-header-heading mb-0 position-relative">                  {{                    categoryCode.indexOf(\'banking\') > -1                      ? (\'fscommon.application.myApplication\' | cxTranslate)                      : (\'policy.myPolicy\' | cxTranslate)                  }}                </h2>                <div class="short-overview-content">                  <div class="short-overview-item row">                    <div class="short-overview-title col-7">                      {{                        categoryCode.indexOf(\'banking\') > -1                          ? (\'fscommon.application.applicationID\' | cxTranslate)                          : (\'policy.policyId\' | cxTranslate)                      }}                      :                    </div>                    <div class="short-overview-value col-5">                      <ng-container                        *ngIf="order.insuranceQuote?.policyId; else orderCode"                      >                        {{ order.insuranceQuote.policyId }}                      </ng-container>                      <ng-template #orderCode>                        {{ order.code }}                      </ng-template>                    </div>                  </div>                  <ng-container *ngIf="order.insuranceQuote?.paymentFrequency">                    <div class="short-overview-item row">                      <div class="short-overview-title col-7">                        {{ \'fscommon.paymentFrequency\' | cxTranslate }}:                      </div>                      <div class="short-overview-value col-5">                        {{ order.insuranceQuote?.paymentFrequency }}                      </div>                    </div></ng-container                  >                  <ng-container *ngIf="order.insuranceQuote?.startDate"                    ><div class="short-overview-item row">                      <div class="short-overview-title col-7">                        {{ \'fscommon.startDate\' | cxTranslate }}:                      </div>                      <div class="short-overview-value col-5">                        {{                          order.insuranceQuote?.startDate                            | cxDate: \'dd MMM yyyy\'                        }}                      </div>                    </div></ng-container                  >                  <ng-container                    *ngFor="let entry of order.deliveryOrderGroups[0]?.entries"                  >                    <div class="short-overview-item row">                      <div class="short-overview-title col-7">                        {{ entry.product.name }}:                      </div>                      <div class="short-overview-value col-5">                        {{ entry.totalPrice.formattedValue }}                      </div>                    </div>                  </ng-container>                  <div class="highlighted border-top border-color-3 row">                    <div class="short-overview-title col-6">                      {{ \'fscommon.orderTotal\' | cxTranslate }}:                    </div>                    <div class="short-overview-value col-6">                      {{ order.totalPrice?.formattedValue }}                    </div>                  </div>                </div>              </div>            </div>          </div>        </div>      </ng-container>    </ng-container>  </ng-container></ng-container><ng-template #loading>  <cx-spinner></cx-spinner></ng-template><ng-template  #orderDetails  let-valueList="valueList"  let-defaultCategory="defaultCategory">  <ng-container *ngFor="let item of valueList">    <ng-container      *ngIf="getTranslation(defaultCategory.code, item.key) as label"    >      <li class="accordion-list-item row">        <div class="col-6 item-label">{{ label }}:</div>        <div class="col-6 value notice">          {{ item.value }}        </div>      </li>    </ng-container>  </ng-container></ng-template></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsFormComponent', 'selector': 'cx-fs-change-car-details-form'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'}];
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="orderPlaced">  <ng-container *ngIf="order$ | async as order">    <ng-container *ngIf="order.code; else loading">      <ng-container        *ngIf="          (order.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory            ?.code as categoryCode        "      >        <div class="row">          <div class="col-12 col-md-8 mb-5 mb-md-0">            <div class="accordion">              <h2 class="row no-gutters section-header-heading">                <div class="col-12 col-md-2">                  <span                    *ngIf="                      (order.deliveryOrderGroups[0]?.entries)[0]?.product                        ?.images?.length > 0                    "                    class="image-wrapper"                  >                    <cx-media                      [container]="                        (order.deliveryOrderGroups[0]?.entries)[0]?.product                          ?.defaultCategory?.image                      "                      [alt]="                        (order.deliveryOrderGroups[0]?.entries)[0]?.product                          ?.name                      "                    ></cx-media>                  </span>                </div>                <div class="col-12 col-md-8">                  {{ order.entries[0]?.product?.defaultCategory?.name }}                </div>              </h2>              <div #ref>                <ng-container                  *ngIf="                    order?.insuranceQuote?.quoteType !== \'EVENT\' &&                    (order?.entries)[0]?.product                      ?.defaultCategory as defaultCategory                  "                >                  <cx-fs-accordion-item                    [opened]="true"                    [title]="                      order.entries[0]?.product?.defaultCategory?.name +                      \' \' +                      (\'fscommon.information\' | cxTranslate)                    "                  >                    <div class="container">                      <div class="row justify-content-center">                        <ul class="col-12 accordion-list">                          <ng-container                            *ngTemplateOutlet="                              orderDetails;                              context: {                                valueList: !(order?.entries)[0]?.product                                  ?.configurable                                  ? order?.insuranceQuote?.quoteDetails?.entry                                  : ((order?.entries)[0]?.configurationInfos)[0]                                      ?.configurationValues.entry,                                defaultCategory: defaultCategory                              }                            "                          >                          </ng-container>                        </ul>                      </div>                    </div>                  </cx-fs-accordion-item>                </ng-container>              </div>              <cx-fs-accordion-item                [opened]="ref.children.length > 0 ? false : true"                [title]="\'fscommon.whatsIncluded\' | cxTranslate"              >                <div class="container">                  <div class="row justify-content-center">                    <ul class="col-12 accordion-list">                      <ng-container                        *ngFor="                          let item of (order.deliveryOrderGroups[0]?.entries)[0]                            ?.product?.price?.oneTimeChargeEntries                        "                      >                        <ng-container *ngIf="item.mandatory">                          <li class="accordion-list-item row">                            <div class="col-6 item-label">                              {{ item.billingTime?.name }}                            </div>                            <div class="col-6 value notice">                              <ng-container                                *ngIf="                                  item.price?.value > 0 ||                                    item.chargeInformation;                                  else iconOk                                "                              >                                <ng-container                                  *ngTemplateOutlet="                                    itemValue;                                    context: {                                      value:                                        item.price.value > 0                                          ? item.price.formattedValue                                          : item.chargeInformation                                    }                                  "                                ></ng-container>                              </ng-container>                            </div>                          </li>                        </ng-container>                      </ng-container>                    </ul>                  </div>                </div>              </cx-fs-accordion-item>              <ng-container *ngIf="checkIfRemoveableEntriesExists(order)">                <cx-fs-accordion-item                  [title]="\'fscommon.addedByYou\' | cxTranslate"                >                  <div class="container">                    <div class="row justify-content-center">                      <ul class="col-12 accordion-list">                        <ng-container                          *ngFor="                            let item of order.deliveryOrderGroups[0]?.entries                              | slice: 1                          "                        >                          <ng-container *ngIf="item.removeable">                            <li class="accordion-list-item row">                              <div class="col-12 item-label">                                {{ item.product?.cartDisplayName }}                              </div>                            </li>                          </ng-container>                        </ng-container>                      </ul>                    </div>                  </div>                </cx-fs-accordion-item>              </ng-container>              <ng-container                *ngIf="                  order.deliveryOrderGroups[0]?.entries.length > 0 &&                  (order.deliveryOrderGroups[0]?.entries)[0]?.product                    ?.investments                "              >                <cx-fs-accordion-item                  [title]="\'fscommon.investementDetails\' | cxTranslate"                >                  <div class="container">                    <div class="row justify-content-center">                      <ul class="col-12 accordion-list">                        <ng-container                          *ngFor="                            let item of order.deliveryOrderGroups[0]?.entries                          "                        >                          <ng-container                            *ngFor="                              let investmentDetail of item.product?.investments                            "                          >                            <li class="accordion-list-item row">                              <div class="col-12">                                {{ investmentDetail.investmentType?.fundName }}:                                {{ investmentDetail.distributionPercentage }}%                              </div>                              <div class="col-12">                                ISIN:                                {{ investmentDetail.investmentType?.isin }}                              </div>                              <div class="col-12">                                5                                {{ \'fscommon.yearPerformanse\' | cxTranslate }}                                :                                {{                                  investmentDetail.investmentType                                    ?.fiveYearPerformance                                }}                              </div>                              <div class="col-12">                                {{                                  \'fscommon.riskAndReturningRate\' | cxTranslate                                }}:                                {{                                  investmentDetail.investmentType                                    ?.riskReturningRating                                }}                              </div>                            </li>                          </ng-container>                        </ng-container>                      </ul>                    </div>                  </div>                </cx-fs-accordion-item>              </ng-container>              <cx-fs-accordion-item                [title]="\'fscommon.personalDetails\' | cxTranslate"              >                <div class="container">                  <div class="row justify-content-center">                    <ul                      *ngIf="(order?.entries)[0]?.formData"                      class="col-12 accordion-list"                    >                      <ng-container                        *ngFor="                          let formEntry of getFormContent(order)                            ?.personalDetails | keyvalue                        "                      >                        <ng-container                          *ngIf="                            getTranslation(                              \'personalDetails\',                              formEntry.key                            ) as label                          "                        >                          <li class="accordion-list-item row">                            <div class="col-6 item-label">{{ label }}:</div>                            <div class="col-6 value notice">                              {{ formEntry.value }}                            </div>                          </li>                        </ng-container>                      </ng-container>                    </ul>                  </div>                </div>              </cx-fs-accordion-item>            </div>          </div>          <div class="col-12 col-md-4">            <div class="short-overview-wrapper">              <div class="short-overview">                <h2 class="section-header-heading mb-0 position-relative">                  {{                    categoryCode.indexOf(\'banking\') > -1                      ? (\'fscommon.application.myApplication\' | cxTranslate)                      : (\'policy.myPolicy\' | cxTranslate)                  }}                </h2>                <div class="short-overview-content">                  <div class="short-overview-item row">                    <div class="short-overview-title col-7">                      {{                        categoryCode.indexOf(\'banking\') > -1                          ? (\'fscommon.application.applicationID\' | cxTranslate)                          : (\'checkoutOrderConfirmation.orderNumber\'                            | cxTranslate)                      }}                      :                    </div>                    <div class="short-overview-value col-5">                      <ng-container                        *ngIf="order.insuranceQuote?.policyId; else orderCode"                      >                        {{ order.insuranceQuote.policyId }}                      </ng-container>                      <ng-template #orderCode>                        {{ order.code }}                      </ng-template>                    </div>                  </div>                  <ng-container *ngIf="order.insuranceQuote?.paymentFrequency">                    <div class="short-overview-item row">                      <div class="short-overview-title col-7">                        {{ \'fscommon.paymentFrequency\' | cxTranslate }}:                      </div>                      <div class="short-overview-value col-5">                        {{ order.insuranceQuote?.paymentFrequency }}                      </div>                    </div></ng-container                  >                  <ng-container *ngIf="order.insuranceQuote?.startDate"                    ><div class="short-overview-item row">                      <div class="short-overview-title col-7">                        {{ \'fscommon.startDate\' | cxTranslate }}:                      </div>                      <div class="short-overview-value col-5">                        {{                          order.insuranceQuote?.startDate                            | cxDate: \'dd MMM yyyy\'                        }}                      </div>                    </div></ng-container                  >                  <ng-container                    *ngFor="let entry of order.deliveryOrderGroups[0]?.entries"                  >                    <div class="short-overview-item row">                      <div class="short-overview-title col-7">                        {{ entry.product.name }}:                      </div>                      <div class="short-overview-value col-5">                        {{ entry.totalPrice.formattedValue }}                      </div>                    </div>                  </ng-container>                  <div class="highlighted border-top border-color-3 row">                    <div class="short-overview-title col-6">                      {{ \'fscommon.orderTotal\' | cxTranslate }}:                    </div>                    <div class="short-overview-value col-6">                      {{ order.totalPrice?.formattedValue }}                    </div>                  </div>                </div>              </div>            </div>          </div>        </div>      </ng-container>    </ng-container>  </ng-container></ng-container><ng-template #loading>  <cx-spinner></cx-spinner></ng-template><ng-template  #orderDetails  let-valueList="valueList"  let-defaultCategory="defaultCategory">  <ng-container *ngFor="let item of valueList">    <ng-container      *ngIf="getTranslation(defaultCategory.code, item.key) as label"    >      <li class="accordion-list-item row">        <div class="col-6 item-label">{{ label }}:</div>        <div class="col-6 value notice">          {{ item.value }}        </div>      </li>    </ng-container>  </ng-container></ng-template><ng-template #itemValue let-value="value">  {{ value }}</ng-template><ng-template #iconOk><span class="fs-icon icon-ok"></span> </ng-template></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'OrderConfirmationComponent'};
 </script>

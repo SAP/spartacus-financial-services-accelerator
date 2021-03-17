@@ -128,7 +128,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:149</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:153</a></div>
                             </td>
                         </tr>
 
@@ -231,8 +231,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="146"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:146</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="150"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:150</a></div>
                 </td>
             </tr>
 
@@ -559,8 +559,12 @@
         payload.stepData.stepContent &amp;&amp;
         payload.stepData.stepContent.contentData
       ) {
-        updateClaimData &#x3D; payload.stepData.stepContent.contentData;
-
+        updateClaimData &#x3D; { ...payload.stepData.stepContent.contentData };
+        if (payload.claimData?.documents) {
+          Object.assign(updateClaimData, {
+            documents: payload.claimData.documents,
+          });
+        }
         if (this.claimServiceData.claimData.locationOfLoss !&#x3D;&#x3D; undefined) {
           claimDataWithLocation &#x3D; Object.assign(updateClaimData, {
             locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
@@ -729,8 +733,12 @@ export class ClaimEffects {
         payload.stepData.stepContent &amp;&amp;
         payload.stepData.stepContent.contentData
       ) {
-        updateClaimData &#x3D; payload.stepData.stepContent.contentData;
-
+        updateClaimData &#x3D; { ...payload.stepData.stepContent.contentData };
+        if (payload.claimData?.documents) {
+          Object.assign(updateClaimData, {
+            documents: payload.claimData.documents,
+          });
+        }
         if (this.claimServiceData.claimData.locationOfLoss !&#x3D;&#x3D; undefined) {
           claimDataWithLocation &#x3D; Object.assign(updateClaimData, {
             locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,

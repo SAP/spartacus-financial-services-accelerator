@@ -128,6 +128,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#baseUrl">baseUrl</a>
+                            </li>
+                            <li>
                                 <a href="#quotes$">quotes$</a>
                             </li>
                             <li>
@@ -149,9 +152,6 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                <a href="#getBaseUrl">getBaseUrl</a>
-                            </li>
                             <li>
                                 <a href="#ngOnDestroy">ngOnDestroy</a>
                             </li>
@@ -271,45 +271,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getBaseUrl"></a>
-                    <span class="name">
-                        <b>
-                            getBaseUrl
-                        </b>
-                        <a href="#getBaseUrl"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getBaseUrl()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:59</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
                         <b>
@@ -328,8 +289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:61</a></div>
                 </td>
             </tr>
 
@@ -367,8 +328,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:30</a></div>
                 </td>
             </tr>
 
@@ -406,8 +367,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:37</a></div>
                 </td>
             </tr>
 
@@ -460,6 +421,33 @@
         <h3 id="inputs">
             Properties
         </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="baseUrl"></a>
+                        <span class="name">
+                            <b>
+                            baseUrl</b>
+                            <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/quote/quotes/quotes.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -562,11 +550,13 @@ export class QuotesComponent implements OnInit, OnDestroy {
   private subscription &#x3D; new Subscription();
   quotes$;
   quotesLoaded$;
+  baseUrl: string;
 
   ngOnInit() {
     this.quoteService.loadQuotes();
     this.quotes$ &#x3D; this.quoteService.getQuotes();
     this.quotesLoaded$ &#x3D; this.quoteService.getQuotesLoaded();
+    this.baseUrl &#x3D; this.config.backend.occ.baseUrl || &#x27;&#x27;;
   }
 
   retrieveQuote(quote: any) {
@@ -591,10 +581,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || &#x27;&#x27;;
   }
 
   ngOnDestroy() {
@@ -664,12 +650,11 @@ export class QuotesComponent implements OnInit, OnDestroy {
                 &lt;/div&gt;
               &lt;/div&gt;
               &lt;div class&#x3D;&quot;info-card-image&quot;&gt;
-                &lt;span class&#x3D;&quot;image-wrapper&quot;&gt;
-                  &lt;img
+                &lt;span class&#x3D;&quot;image-wrapper text-center&quot;&gt;
+                  &lt;cx-media
                     class&#x3D;&quot;image-item&quot;
-                    [src]&#x3D;&quot;getBaseUrl() + quote.defaultCategory.image?.url&quot;
-                    alt&#x3D;&quot;&quot;
-                  /&gt;
+                    [container]&#x3D;&quot;quote.defaultCategory.image&quot;
+                  &gt;&lt;/cx-media&gt;
                 &lt;/span&gt;
               &lt;/div&gt;
             &lt;/div&gt;
@@ -726,8 +711,8 @@ export class QuotesComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h2 class="heading-headline py-3 mt-3 mb-5 text-center">  {{ \'fscommon.quotesAndApplications\' | cxTranslate }}</h2><ng-container *ngIf="quotes$ | async as quotes">  <ng-container *ngIf="quotesLoaded$ | async; else loading">    <div class="row" *ngIf="quotes.length > 0; else noQuotes">      <div *ngFor="let quote of quotes" class="col-12 col-md-6 d-flex">        <div class="info-card">          <h6 class="title background-color-4">            {{ quote.defaultCategory?.name }}          </h6>          <div class="info-card-wrapper">            <div class="info-card-content">              <div class="info-card-details">                <div class="info-card-data">                  <span class="label">{{ quote.planName }}</span                  >:                  <span class="value">{{ quote.quoteId }}</span>                </div>                <ng-container *ngIf="quote.quoteWorkflowStatus">                  <div class="info-card-data">                    <span class="label">{{                      \'quote.quoteWorkflowStatus.title\' | cxTranslate                    }}</span                    >:                    <span class="value">                      {{                        \'quote.quoteWorkflowStatus.\' +                          quote.quoteWorkflowStatus.code | cxTranslate                      }}                    </span>                  </div>                </ng-container>                <div class="info-card-data">                  <span class="label">{{                    \'fscommon.expiryDate\' | cxTranslate                  }}</span                  >:                  <span *ngIf="quote.expiryDate" class="value">{{                    quote.expiryDate | cxDate: \'dd MMM yyyy\'                  }}</span>                  <span *ngIf="!quote.expiryDate" class="value">{{                    \'fscommon.expiryNotConfirmed\' | cxTranslate                  }}</span>                </div>                <div class="info-card-data">                  <span class="label">{{ \'fscommon.price\' | cxTranslate }}</span                  >:                  <span class="value"                    >{{ quote.quotePrice }}                    <ng-container *ngIf="quote.paymentFrequency">                      / {{ quote.paymentFrequency }}</ng-container                    ></span                  >                </div>              </div>              <div class="info-card-image">                <span class="image-wrapper">                  <img                    class="image-item"                    [src]="getBaseUrl() + quote.defaultCategory.image?.url"                    alt=""                  />                </span>              </div>            </div>            <ng-container              *ngIf="                !quote.isExpired &&                quote.quoteWorkflowStatus.code !== \'REFERRED\'              "            >              <div class="info-card-links">                <a class="link" (click)="retrieveQuote(quote)">                  {{ \'fscommon.retrieve\' | cxTranslate }}                </a>              </div>            </ng-container>          </div>        </div>      </div>    </div>  </ng-container></ng-container><ng-template #noQuotes>  <h3>{{ \'quote.youHaveNoQuotes\' | cxTranslate }}!</h3></ng-template><ng-template #loading>  <cx-spinner></cx-spinner></ng-template></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsFormComponent', 'selector': 'cx-fs-change-car-details-form'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'}];
+        var COMPONENT_TEMPLATE = '<div><h2 class="heading-headline py-3 mt-3 mb-5 text-center">  {{ \'fscommon.quotesAndApplications\' | cxTranslate }}</h2><ng-container *ngIf="quotes$ | async as quotes">  <ng-container *ngIf="quotesLoaded$ | async; else loading">    <div class="row" *ngIf="quotes.length > 0; else noQuotes">      <div *ngFor="let quote of quotes" class="col-12 col-md-6 d-flex">        <div class="info-card">          <h6 class="title background-color-4">            {{ quote.defaultCategory?.name }}          </h6>          <div class="info-card-wrapper">            <div class="info-card-content">              <div class="info-card-details">                <div class="info-card-data">                  <span class="label">{{ quote.planName }}</span                  >:                  <span class="value">{{ quote.quoteId }}</span>                </div>                <ng-container *ngIf="quote.quoteWorkflowStatus">                  <div class="info-card-data">                    <span class="label">{{                      \'quote.quoteWorkflowStatus.title\' | cxTranslate                    }}</span                    >:                    <span class="value">                      {{                        \'quote.quoteWorkflowStatus.\' +                          quote.quoteWorkflowStatus.code | cxTranslate                      }}                    </span>                  </div>                </ng-container>                <div class="info-card-data">                  <span class="label">{{                    \'fscommon.expiryDate\' | cxTranslate                  }}</span                  >:                  <span *ngIf="quote.expiryDate" class="value">{{                    quote.expiryDate | cxDate: \'dd MMM yyyy\'                  }}</span>                  <span *ngIf="!quote.expiryDate" class="value">{{                    \'fscommon.expiryNotConfirmed\' | cxTranslate                  }}</span>                </div>                <div class="info-card-data">                  <span class="label">{{ \'fscommon.price\' | cxTranslate }}</span                  >:                  <span class="value"                    >{{ quote.quotePrice }}                    <ng-container *ngIf="quote.paymentFrequency">                      / {{ quote.paymentFrequency }}</ng-container                    ></span                  >                </div>              </div>              <div class="info-card-image">                <span class="image-wrapper text-center">                  <cx-media                    class="image-item"                    [container]="quote.defaultCategory.image"                  ></cx-media>                </span>              </div>            </div>            <ng-container              *ngIf="                !quote.isExpired &&                quote.quoteWorkflowStatus.code !== \'REFERRED\'              "            >              <div class="info-card-links">                <a class="link" (click)="retrieveQuote(quote)">                  {{ \'fscommon.retrieve\' | cxTranslate }}                </a>              </div>            </ng-container>          </div>        </div>      </div>    </div>  </ng-container></ng-container><ng-template #noQuotes>  <h3>{{ \'quote.youHaveNoQuotes\' | cxTranslate }}!</h3></ng-template><ng-template #loading>  <cx-spinner></cx-spinner></ng-template></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'QuotesComponent'};
 </script>

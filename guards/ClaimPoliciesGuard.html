@@ -250,8 +250,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/claim/guards/claim-policies-guard.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/my-account/claim/guards/claim-policies-guard.ts:45</a></div>
                 </td>
             </tr>
 
@@ -275,7 +275,7 @@
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, OnDestroy } from &#x27;@angular/core&#x27;;
 import { CanActivate } from &#x27;@angular/router&#x27;;
 import { RoutingService } from &#x27;@spartacus/core&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
+import { map, take } from &#x27;rxjs/operators&#x27;;
 import { Observable, of, Subscription } from &#x27;rxjs&#x27;;
 import { PolicyService } from &#x27;../../../../core/my-account/facade&#x27;;
 import { ClaimService } from &#x27;./../../../../core/my-account/&#x27;;
@@ -299,6 +299,7 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
     this.subscription &#x3D; this.claimService
       .getClaimPolicies()
       .pipe(
+        take(1),
         map(claimData &#x3D;&gt; {
           if (
             claimData &amp;&amp;
