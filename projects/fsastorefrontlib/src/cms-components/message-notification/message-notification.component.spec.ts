@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { InboxService } from '../../../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../core/my-account/facade/inbox.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { UnreadMessagesIndicatorComponent } from './unread-messages-indicator.component';
+import { MessageNotificationComponent } from './message-notification.component';
 import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import createSpy = jasmine.createSpy;
 import { AuthService, UserService } from '@spartacus/core';
-import { FSUser } from '../../../../occ/occ-models/occ.models';
+import { FSUser } from '../../occ/occ-models/occ.models';
 
 const mockUser: FSUser = {
   name: 'testUser',
@@ -37,16 +37,16 @@ class MockAuthService {
   }
 }
 
-describe('UnreadMessagesIndicatorComponent', () => {
-  let component: UnreadMessagesIndicatorComponent;
-  let fixture: ComponentFixture<UnreadMessagesIndicatorComponent>;
+describe('MessageNotificationComponent', () => {
+  let component: MessageNotificationComponent;
+  let fixture: ComponentFixture<MessageNotificationComponent>;
   let mockInboxService: InboxService;
   let mockUserService: UserService;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [UnreadMessagesIndicatorComponent, MockUrlPipe],
+        declarations: [MessageNotificationComponent, MockUrlPipe],
         providers: [
           {
             provide: InboxService,
@@ -70,7 +70,7 @@ describe('UnreadMessagesIndicatorComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnreadMessagesIndicatorComponent);
+    fixture = TestBed.createComponent(MessageNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     mockInboxService = TestBed.inject(InboxService);
@@ -79,11 +79,5 @@ describe('UnreadMessagesIndicatorComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should get number of unread messages', () => {
-    spyOn(mockInboxService, 'getNumberOfUnreadMessages').and.stub();
-    component.ngOnInit();
-    expect(mockInboxService.getNumberOfUnreadMessages).toHaveBeenCalled();
   });
 });

@@ -64,14 +64,3 @@ cx-fs-cms-custom-container {
   padding: 0;
   box-shadow: none;
 }
-
-header .SiteLinks {
-  @include media-breakpoint-down(md) {
-    background-color: inherit;
-    position: absolute;
-    right: 7%;
-  }
-  @include media-breakpoint-down(sm) {
-    right: 13%;
-  }
-}

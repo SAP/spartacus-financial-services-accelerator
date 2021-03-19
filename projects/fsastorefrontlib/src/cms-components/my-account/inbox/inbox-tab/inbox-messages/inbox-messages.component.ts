@@ -118,7 +118,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         this.subscription.add(
           this.inboxService
             .setMessagesState([msg.uid], true)
-            .pipe(map(() => this.inboxService.setUnreadMessageState(msg.read)))
+            .pipe(tap(() => this.inboxService.setUnreadMessageState(msg.read)))
             .subscribe()
         );
       }

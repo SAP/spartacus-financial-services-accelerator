@@ -20,7 +20,7 @@ export class InboxService {
   messagesSource = new BehaviorSubject<boolean>(false);
   messages = this.messagesSource.asObservable();
   unreadMessagesStateSource = new BehaviorSubject<boolean>(false);
-  unreadMessagesState = this.unreadMessagesStateSource.asObservable();
+  unreadMessagesState$ = this.unreadMessagesStateSource.asObservable();
 
   setTitleAndMessageGroup(messageGroup: string, title: string) {
     this.messageGroupAndTitleSource.next({ messageGroup, title });

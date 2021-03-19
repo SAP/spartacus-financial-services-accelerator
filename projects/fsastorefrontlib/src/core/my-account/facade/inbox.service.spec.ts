@@ -124,7 +124,7 @@ describe('InboxServiceTest', () => {
   it('test set unread message state', () => {
     service.setUnreadMessageState(isMessageRead);
     let readMessage: boolean;
-    service.unreadMessagesState
+    service.unreadMessagesState$
       .subscribe(isRead => {
         readMessage = isRead;
       })

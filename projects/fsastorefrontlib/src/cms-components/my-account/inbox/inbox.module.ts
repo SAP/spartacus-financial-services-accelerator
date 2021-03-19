@@ -25,7 +25,6 @@ import { InboxComponent } from './inbox.component';
 import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../core/my-account/facade/inbox.service';
 import { InboxConnector } from '../../../core/my-account/connectors/inbox.connector';
-import { UnreadMessagesIndicatorModule } from './unread-messages-indicator/unread-messages-indicator.module';
 
 const routes: Routes = [
   {
@@ -48,7 +47,6 @@ const routes: Routes = [
     SpinnerModule,
     CmsModule,
     ListNavigationModule,
-    UnreadMessagesIndicatorModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

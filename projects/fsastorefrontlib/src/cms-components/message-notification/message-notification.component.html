@@ -1,0 +1,19 @@
+<a
+  [routerLink]="
+    {
+      cxRoute: 'inbox'
+    } | cxUrl
+  "
+  *ngIf="user$ | async"
+>
+  <div class="fs-icon icon-envelope"></div>
+  <ng-container
+    *ngIf="numberOfUnreadMessages$ | async as numberOfUnreadMessages"
+  >
+    <span
+      class="message-indicator-counter normal-weight"
+      [ngClass]="{ 'py-0 px-1': numberOfUnreadMessages > 9 }"
+      >{{ numberOfUnreadMessages > 9 ? '9+' : numberOfUnreadMessages }}</span
+    >
+  </ng-container>
+</a>
