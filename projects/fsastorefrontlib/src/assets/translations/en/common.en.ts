@@ -168,7 +168,8 @@ export const fscommon = {
       backToList: 'Back to list',
     },
     httpHandlers: {
-      existingCouponCodeProvided: 'This coupon code is already applied to the current cart.',
+      existingCouponCodeProvided:
+        'This coupon code is already applied to the current cart.',
     },
     attachments: 'Attachments',
     pageNotFoundMessage:
