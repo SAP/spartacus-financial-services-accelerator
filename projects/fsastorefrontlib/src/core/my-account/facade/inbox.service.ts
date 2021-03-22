@@ -40,10 +40,6 @@ export class InboxService {
     return this.adapter.setMessagesState(this.inboxData.userId, uidList, read);
   }
 
-  getNumberOfUnreadMessages(): Observable<number> {
-    return this.adapter.getNumberOfUnreadMessages(this.inboxData.userId);
-  }
-
   setUnreadMessageState(isMessageRead: boolean) {
     this.unreadMessagesStateSource.next(isMessageRead);
   }

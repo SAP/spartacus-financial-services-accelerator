@@ -10,7 +10,6 @@ import { OccInboxAdapter } from './occ-inbox.adapter';
 const userId = '123';
 const messageGroup = 'autoGroup';
 const messagesEndPoint = 'siteMessages';
-const unreadMessagesEndpoint = 'numberOfUnread';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -57,22 +56,6 @@ describe('OccInboxAdapter', () => {
         }, `GET method and url`);
         expect(occEndpointService.getUrl).toHaveBeenCalledWith(
           messagesEndPoint,
-          {
-            userId,
-          }
-        );
-      })
-    );
-
-    it(
-      'should fetch number of unread inbox messages',
-      waitForAsync(() => {
-        adapter.getNumberOfUnreadMessages(userId).subscribe();
-        httpMock.expectOne((req: HttpRequest<any>) => {
-          return req.url === unreadMessagesEndpoint && req.method === 'GET';
-        }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-          unreadMessagesEndpoint,
           {
             userId,
           }

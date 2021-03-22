@@ -7,8 +7,6 @@ export const defaultOccInboxConfig: FSOccConfig = {
         siteMessages: 'users/${userId}/notifications/fssitemessages',
         updateMessages:
           'users/${userId}/notifications/fssitemessages/read-unread',
-        numberOfUnread:
-          'users/${userId}/notifications/fssitemessages/numberOfUnread',
       },
     },
   },

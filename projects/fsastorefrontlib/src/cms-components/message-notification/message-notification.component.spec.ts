@@ -20,9 +20,6 @@ class MockUrlPipe implements PipeTransform {
 
 class MockInboxService {
   unreadMessagesState = new BehaviorSubject<any>(true);
-  getNumberOfUnreadMessages(): Observable<number> {
-    return of(2);
-  }
 }
 
 class MockUserService {

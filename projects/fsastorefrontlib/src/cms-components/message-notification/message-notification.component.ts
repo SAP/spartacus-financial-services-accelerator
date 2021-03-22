@@ -9,6 +9,7 @@ import { AuthService, UserService } from '@spartacus/core';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { InboxService } from '../../core/my-account/facade/inbox.service';
+import { FSSearchConfig } from '../../core/my-account/services/inbox-data.service';
 
 @Component({
   selector: 'cx-fs-message-notification',
@@ -16,8 +17,11 @@ import { InboxService } from '../../core/my-account/facade/inbox.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageNotificationComponent implements OnInit, OnDestroy {
-  numberOfUnreadMessages$: Observable<number>;
+  messagesObject$: Observable<any>;
   user$: Observable<boolean>;
+  searchConfig: FSSearchConfig = {
+    currentPage: 0,
+  };
   subscription = new Subscription();
 
   constructor(
@@ -37,7 +41,10 @@ export class MessageNotificationComponent implements OnInit, OnDestroy {
         .pipe(
           filter(([isMessageRead, user]) => Object.keys(user).length !== 0),
           tap(() => {
-            this.numberOfUnreadMessages$ = this.inboxService.getNumberOfUnreadMessages();
+            this.messagesObject$ = this.inboxService.getMessages(
+              '',
+              this.searchConfig
+            );
             this.changeDetectorRef.detectChanges();
           })
         )

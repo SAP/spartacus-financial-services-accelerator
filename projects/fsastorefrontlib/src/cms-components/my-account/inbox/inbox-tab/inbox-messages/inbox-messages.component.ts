@@ -46,6 +46,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   ghostData: any;
 
   ngOnInit() {
+    this.messageGroup = 'generalMessageGroup';
     this.loadCurrentMessageGroup();
     this.messagesObject$ = this.inboxService.messages;
   }

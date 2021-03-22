@@ -27,11 +27,4 @@ export abstract class InboxAdapter {
     messagesUidList: Array<string>,
     readStatus: boolean
   ): Observable<any>;
-
-  /**
-   * Abstract method used to get number of unread inbox messages
-   *
-   * * @param userId The user id
-   */
-  abstract getNumberOfUnreadMessages(userId: string): Observable<number>;
 }
