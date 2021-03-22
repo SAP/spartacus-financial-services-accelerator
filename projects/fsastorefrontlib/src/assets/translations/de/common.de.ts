@@ -167,6 +167,10 @@ export const fscommon = {
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
       backToList: '[DE] Back to list',
     },
+    httpHandlers: {
+      existingCouponCodeProvided:
+        '[DE] This coupon code is already applied to the current cart.',
+    },
     priceCalculationError:
       'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',
   },
