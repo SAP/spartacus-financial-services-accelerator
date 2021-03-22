@@ -1,7 +1,7 @@
 export const userRequest = {
   userRequest: {
     country: 'Land',
-    address: 'Adresse',
+    address: 'Straße',
     city: 'Stadt',
     postcode: 'Postleitzahl',
     whatHappened: 'Was ist passiert',

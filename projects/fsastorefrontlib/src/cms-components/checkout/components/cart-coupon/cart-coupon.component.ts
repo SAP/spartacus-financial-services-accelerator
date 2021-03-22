@@ -16,7 +16,6 @@ import { FSCartService } from '../../../../core/cart/facade/cart.service';
 })
 export class FSCartCouponComponent extends CartCouponComponent
   implements OnInit, OnDestroy {
-  currentUser;
   userRegistered$: Observable<any>;
 
   constructor(
