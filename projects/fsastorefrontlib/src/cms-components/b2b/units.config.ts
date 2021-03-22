@@ -15,7 +15,6 @@ import {
   UnitChildrenComponent,
   UnitCostCenterCreateComponent,
   UnitCostCenterListComponent,
-  UnitDetailsComponent,
   UnitFormComponent,
   UnitItemService,
   UnitListComponent,
@@ -32,6 +31,7 @@ import { AssignProductCellComponent } from './unit/potential-assignments/cells/a
 import { PotentialAssignmentsComponent } from './unit/potential-assignments/potential-assignments.component';
 import { ActivateProductCellComponent } from './unit/assignments/cells/activate-product-cell/activate-product-cell.component';
 import { RemoveProductCellComponent } from './unit/assignments/cells/remove-product-cell/remove-product-cell.component';
+import { FSUnitDetailsComponent } from './unit/details';
 
 export const MAX_OCC_INTEGER_VALUE = 2147483647;
 
@@ -130,7 +130,7 @@ export const unitsCmsConfig: CmsConfig = {
           },
           {
             path: `:${ROUTE_PARAMS.unitCode}`,
-            component: UnitDetailsComponent,
+            component: FSUnitDetailsComponent,
             data: {
               cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.details' },
             },
@@ -211,6 +211,10 @@ export const unitsCmsConfig: CmsConfig = {
   },
 };
 
+export function unitsTableConfigFactoryFactory(): TableConfig {
+  return unitsTableConfigFactory;
+}
+
 export const unitsTableConfigFactory: TableConfig = {
   table: {
     [OrganizationTableType.UNIT]: {
@@ -286,7 +290,3 @@ export const unitsTableConfigFactory: TableConfig = {
     },
   },
 };
-
-export function unitsTableConfigFactoryFactory(): TableConfig {
-  return unitsTableConfigFactory;
-}

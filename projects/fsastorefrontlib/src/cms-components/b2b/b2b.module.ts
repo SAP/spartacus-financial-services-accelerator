@@ -4,12 +4,12 @@ import {
   provideDefaultConfig,
   provideDefaultConfigFactory,
 } from '@spartacus/core';
-import { FSUnitDetailsModule } from './unit/details';
 import {
   unitsCmsConfig,
   unitsRoutingConfig,
   unitsTableConfigFactoryFactory,
 } from './units.config';
+import { FSUnitDetailsModule } from './unit/details';
 import { AssignmentsModule } from './unit/assignments/assignments.module';
 import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
 
