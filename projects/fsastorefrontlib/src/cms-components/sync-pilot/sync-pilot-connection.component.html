@@ -1,0 +1,12 @@
+<ng-container *ngIf="component$ | async as component">
+  <div class="row">
+    <button
+      class="primary-button col-12 col-md-3 m-auto btn-block"
+      (click)="
+        establishConnection(component.url, component.channel, component.action)
+      "
+    >
+      {{ component.linkName }}
+    </button>
+  </div>
+</ng-container>

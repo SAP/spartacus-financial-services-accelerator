@@ -20,6 +20,7 @@ import { CmsFormSubmitModule } from './form/cms-form-submit/cms-form-submit.modu
 import { PersonalDetailsModule } from './form/personal-details/personal-details.module';
 import { GeneralInformationModule } from './form/general-information/general-information.module';
 import { FSLoginFormModule } from './user/login-form/login-form.module';
+import { SyncPilotModule } from './sync-pilot';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { FSLoginFormModule } from './user/login-form/login-form.module';
     NotFoundModule,
     PersonalDetailsModule,
     GeneralInformationModule,
+    SyncPilotModule,
   ],
   providers: [reducerProvider],
 })
