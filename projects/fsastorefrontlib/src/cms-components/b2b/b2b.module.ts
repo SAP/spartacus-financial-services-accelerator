@@ -4,6 +4,7 @@ import {
   provideDefaultConfig,
   provideDefaultConfigFactory,
 } from '@spartacus/core';
+import { AdministrationModule } from '@spartacus/organization';
 import {
   unitsCmsConfig,
   unitsRoutingConfig,
@@ -12,7 +13,7 @@ import {
 import { FSUnitDetailsModule } from './unit/details';
 import { AssignmentsModule } from './unit/assignments/assignments.module';
 import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
-import { AdministrationModule } from '@spartacus/organization';
+import { ProductAssignmentStoreModule } from '../../core/product-assignment/store/product-assignments-store.module';
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { AdministrationModule } from '@spartacus/organization';
     AssignmentsModule,
     PotentialAssignmentsModule,
     AdministrationModule,
+    ProductAssignmentStoreModule,
   ],
   providers: [
     provideDefaultConfigFactory(unitsTableConfigFactoryFactory),

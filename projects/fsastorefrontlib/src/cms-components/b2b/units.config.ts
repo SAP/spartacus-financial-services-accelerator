@@ -50,40 +50,6 @@ const paramsMapping: ParamsMapping = {
 export const unitsRoutingConfig: RoutingConfig = {
   routing: {
     routes: {
-      orgUnits: {
-        paths: ['organization/units'],
-      },
-      orgUnitCreate: {
-        paths: ['organization/units/create'],
-      },
-      orgUnitDetails: {
-        paths: [listPath],
-        paramsMapping,
-      },
-      orgUnitEdit: {
-        paths: [`${listPath}/edit`],
-        paramsMapping,
-      },
-      orgUnitChildren: {
-        paths: [`${listPath}/children`],
-        paramsMapping,
-      },
-      orgUnitCreateChild: {
-        paths: [`${listPath}/children/create`],
-        paramsMapping,
-      },
-      orgUnitUserList: {
-        paths: [`${listPath}/users`],
-        paramsMapping,
-      },
-      orgUnitCreateUser: {
-        paths: [`${listPath}/users/create`],
-        paramsMapping,
-      },
-      orgUnitUserRoles: {
-        paths: [`${listPath}/users/:userCode/roles`],
-        paramsMapping,
-      },
       orgUnitProductAssignment: {
         paths: [`${listPath}/unitProductAssignments`],
         paramsMapping,
