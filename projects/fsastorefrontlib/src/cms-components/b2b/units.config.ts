@@ -5,35 +5,23 @@ import {
   RoutingConfig,
 } from '@spartacus/core';
 import {
-  AssignCellComponent,
-  CellComponent,
   ItemService,
   ListService,
   OrganizationTableType,
-  StatusCellComponent,
-  ToggleLinkCellComponent,
-  UnitAddressDetailsComponent,
-  UnitAddressFormComponent,
-  UnitAddressListComponent,
   UnitApproverListComponent,
   UnitAssignedApproverListComponent,
-  UnitCellComponent,
   UnitChildCreateComponent,
   UnitChildrenComponent,
-  UnitCostCenterCreateComponent,
-  UnitCostCenterListComponent,
-  UnitDetailsComponent,
   UnitFormComponent,
   UnitItemService,
   UnitListComponent,
   UnitListService,
   UnitUserCreateComponent,
   UnitUserListComponent,
-  UnitUserRolesCellComponent,
   UnitUserRolesFormComponent,
 } from '@spartacus/organization/administration/components';
 import { AdminGuard } from '@spartacus/organization/administration/core';
-import { BREAKPOINT, TableConfig, TableLayout } from '@spartacus/storefront';
+import { TableConfig } from '@spartacus/storefront';
 import { AssignmentsComponent } from './unit/assignments';
 import { AssignProductCellComponent } from './unit/potential-assignments/cells/assign-product-cell/assign-product-cell.component';
 import { PotentialAssignmentsComponent } from './unit/potential-assignments/potential-assignments.component';
@@ -193,19 +181,6 @@ export const unitsCmsConfig: CmsConfig = {
                 ],
               },
               {
-                path: 'cost-centers',
-                component: UnitCostCenterListComponent,
-                data: {
-                  cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.costCenters' },
-                },
-                children: [
-                  {
-                    path: 'create',
-                    component: UnitCostCenterCreateComponent,
-                  },
-                ],
-              },
-              {
                 path: 'unitProductAssignments',
                 data: {
                   cxPageMeta: {
@@ -240,70 +215,7 @@ export function unitsTableConfigFactoryFactory(): TableConfig {
 
 export const unitsTableConfigFactory: TableConfig = {
   table: {
-    [OrganizationTableType.UNIT]: {
-      cells: ['name'],
-      options: {
-        layout: TableLayout.VERTICAL,
-        cells: {
-          name: {
-            dataComponent: ToggleLinkCellComponent,
-          },
-          active: {
-            dataComponent: StatusCellComponent,
-          },
-          uid: {
-            dataComponent: CellComponent,
-          },
-        },
-      },
-      [BREAKPOINT.lg]: {
-        cells: ['name', 'active', 'uid'],
-      },
-    },
-    [OrganizationTableType.UNIT_USERS]: {
-      cells: ['name', 'roles'],
-      options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
-        cells: {
-          roles: {
-            dataComponent: UnitUserRolesCellComponent,
-          },
-        },
-      },
-    },
-
-    [OrganizationTableType.UNIT_CHILDREN]: {
-      cells: ['name', 'active'],
-      options: {
-        pagination: {
-          pageSize: MAX_OCC_INTEGER_VALUE,
-        },
-        cells: {
-          active: {
-            dataComponent: StatusCellComponent,
-            linkable: false,
-          },
-        },
-      },
-    },
-
-    [OrganizationTableType.UNIT_APPROVERS]: {
-      cells: ['name', 'orgUnit', 'actions'],
-      options: {
-        cells: {
-          actions: {
-            dataComponent: AssignCellComponent,
-          },
-          orgUnit: {
-            dataComponent: UnitCellComponent,
-            linkable: false,
-          },
-        },
-      },
-    },
-    [OrganizationTableType.UNIT_COST_CENTERS]: {
+    [OrganizationTableType.COST_CENTER]: {
       cells: ['name', 'activate', 'deassign'],
       options: {
         cells: {

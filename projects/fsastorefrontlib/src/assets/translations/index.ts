@@ -3,9 +3,14 @@ import {
   b2b,
   organization,
   orgUnit,
+  orgCostCenter,
+  orgCostCenterBudgets,
+  orgUnitUsers,
+  orgUnitChildren,
   orgUser,
   orgUnitAssignedApprovers,
   orgUnitApprovers,
+  orgUnitAssignments,
 } from './en/b2b.en';
 import { changeRequest } from './en/changeRequest.en';
 import { claim } from './en/claim.en';
@@ -40,9 +45,14 @@ export const fstranslations: TranslationResources = {
   orderConfirmation,
   organization,
   orgUnit,
+  orgCostCenter,
+  orgCostCenterBudgets,
+  orgUnitUsers,
+  orgUnitChildren,
   orgUser,
   orgUnitAssignedApprovers,
   orgUnitApprovers,
+  orgUnitAssignments,
 };
 
 export const fsOverrides: TranslationResources = {

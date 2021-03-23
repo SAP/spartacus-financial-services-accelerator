@@ -87,7 +87,9 @@
       </a>
       <a
         class="link"
-        [routerLink]="{ cxRoute: 'productAssignment', params: model } | cxUrl"
+        [routerLink]="
+          { cxRoute: 'orgUnitProductAssignment', params: model } | cxUrl
+        "
         routerLinkActive="is-current"
       >
         {{ 'organization.productAssignment' | cxTranslate }}
