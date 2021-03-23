@@ -12,6 +12,7 @@ import {
 import { FSUnitDetailsModule } from './unit/details';
 import { AssignmentsModule } from './unit/assignments/assignments.module';
 import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
+import { AdministrationModule } from '@spartacus/organization';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,7 @@ import { PotentialAssignmentsModule } from './unit/potential-assignments/potenti
     FSUnitDetailsModule,
     AssignmentsModule,
     PotentialAssignmentsModule,
+    AdministrationModule,
   ],
   providers: [
     provideDefaultConfigFactory(unitsTableConfigFactoryFactory),

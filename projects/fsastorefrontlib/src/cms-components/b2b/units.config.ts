@@ -5,16 +5,24 @@ import {
   RoutingConfig,
 } from '@spartacus/core';
 import {
+  AssignCellComponent,
   CellComponent,
   ItemService,
   ListService,
   OrganizationTableType,
   StatusCellComponent,
   ToggleLinkCellComponent,
+  UnitAddressDetailsComponent,
+  UnitAddressFormComponent,
+  UnitAddressListComponent,
+  UnitApproverListComponent,
+  UnitAssignedApproverListComponent,
+  UnitCellComponent,
   UnitChildCreateComponent,
   UnitChildrenComponent,
   UnitCostCenterCreateComponent,
   UnitCostCenterListComponent,
+  UnitDetailsComponent,
   UnitFormComponent,
   UnitItemService,
   UnitListComponent,
@@ -42,7 +50,6 @@ export const ROUTE_PARAMS = {
   userCode: 'userCode',
   userGroupCode: 'userGroupCode',
   permissionCode: 'permissionCode',
-  addressCode: 'addressId',
 };
 
 const listPath = `organization/units/:${ROUTE_PARAMS.unitCode}`;
@@ -149,6 +156,22 @@ export const unitsCmsConfig: CmsConfig = {
                   {
                     path: 'create',
                     component: UnitChildCreateComponent,
+                  },
+                ],
+              },
+              {
+                path: 'approvers',
+                data: {
+                  cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.approvers' },
+                },
+                children: [
+                  {
+                    path: '',
+                    component: UnitAssignedApproverListComponent,
+                  },
+                  {
+                    path: 'assign',
+                    component: UnitApproverListComponent,
                   },
                 ],
               },
@@ -260,6 +283,21 @@ export const unitsTableConfigFactory: TableConfig = {
         cells: {
           active: {
             dataComponent: StatusCellComponent,
+            linkable: false,
+          },
+        },
+      },
+    },
+
+    [OrganizationTableType.UNIT_APPROVERS]: {
+      cells: ['name', 'orgUnit', 'actions'],
+      options: {
+        cells: {
+          actions: {
+            dataComponent: AssignCellComponent,
+          },
+          orgUnit: {
+            dataComponent: UnitCellComponent,
             linkable: false,
           },
         },
