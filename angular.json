@@ -159,7 +159,7 @@
                 "node_modules/@spartacus/styles/scss"
               ]
             },
-            "codeCoverageExclude": ["**/index.ts", "**/*.de.ts", "**/*.en.ts"]
+            "codeCoverageExclude": ["**/index.ts", "**/*.de.ts", "**/*.en.ts", "**/*store.module.ts"]
           }
         },
         "lint": {

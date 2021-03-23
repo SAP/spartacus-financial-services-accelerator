@@ -28,7 +28,7 @@ import {
   dynamicformsTranslationsDe,
 } from '@spartacus/dynamicforms';
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
-import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
+import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
 
 @NgModule({
   imports: [
@@ -37,6 +37,7 @@ import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-conf
     CmsLibModule,
     CheckoutModule,
     OccModule,
+    FSGlobalMessageModule.forRoot(),
     ConfigModule.withConfig({
       i18n: {
         resources: {
@@ -99,7 +100,6 @@ export class FSStorefrontModule {
       ngModule: FSStorefrontModule,
       providers: [
         provideConfig(config),
-        provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory),
         provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
       ],
     };

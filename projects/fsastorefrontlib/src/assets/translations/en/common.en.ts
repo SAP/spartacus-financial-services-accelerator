@@ -167,8 +167,14 @@ export const fscommon = {
       searchBox: 'Search agent or insurance type',
       backToList: 'Back to list',
     },
+    httpHandlers: {
+      existingCouponCodeProvided:
+        'This coupon code is already applied to the current cart.',
+    },
     attachments: 'Attachments',
     pageNotFoundMessage:
-      'Whoops! Sorry, we couldn\'t find that way! Try getting back.' // prettier-ignore
+      'Whoops! Sorry, we couldn\'t find that way! Try getting back.', // prettier-ignore
+    priceCalculationError:
+      'There has been an error with price calculation, please try again.',
   },
 };

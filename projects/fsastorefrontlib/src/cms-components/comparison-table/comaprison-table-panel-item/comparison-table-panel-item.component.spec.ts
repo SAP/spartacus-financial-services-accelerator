@@ -16,6 +16,7 @@ import { FSCheckoutConfigService } from './../../../core/checkout/services/check
 import { FSProductService } from './../../../core/product-pricing/facade/product.service';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
+import createSpy = jasmine.createSpy;
 
 @Pipe({
   name: 'cxUrl',
@@ -100,7 +101,7 @@ const mockCmsConfig: OccConfig = {
 };
 
 class MockRoutingService {
-  go() {}
+  go = createSpy();
 }
 
 const nextStep = 'nextStep';
@@ -132,7 +133,7 @@ describe('ComparisonTablePanelItemComponent', () => {
   let fixture: ComponentFixture<ComparisonTablePanelItemComponent>;
   let mockCartService: FSCartService;
   let mockProductService: FSProductService;
-
+  let routingService: RoutingService;
   let el: DebugElement;
 
   beforeEach(
@@ -174,6 +175,7 @@ describe('ComparisonTablePanelItemComponent', () => {
       }).compileComponents();
       mockCartService = TestBed.inject(FSCartService);
       mockProductService = TestBed.inject(FSProductService);
+      routingService = TestBed.inject(RoutingService);
     })
   );
 
@@ -254,7 +256,7 @@ describe('ComparisonTablePanelItemComponent', () => {
     expect(result).not.toBeTruthy();
   });
 
-  it('should create and start bundle for product', () => {
+  it('should create and start bundle', () => {
     spyOn(mockCartService, 'createCartForProduct').and.stub();
     comparisonTablePanelItemComponent.createCartAndStartBundleForProduct(
       'TEST_PRODUCT',
@@ -262,6 +264,85 @@ describe('ComparisonTablePanelItemComponent', () => {
     );
 
     expect(mockCartService.createCartForProduct).toHaveBeenCalled();
+  });
+
+  it('should navigate to addOptions step when product is not configurable', () => {
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(product)
+    );
+    spyOn(mockCartService, 'createCartForProduct').and.stub();
+    comparisonTablePanelItemComponent.getProductData();
+    comparisonTablePanelItemComponent.createCartAndStartBundleForProduct(
+      'TEST_PRODUCT',
+      'bundleTemplateId'
+    );
+
+    expect(mockCartService.createCartForProduct).toHaveBeenCalled();
+
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'addOptions',
+      params: Object({ code: undefined }),
+    });
+  });
+
+  it('should navigate to configureProduct step when product is configurable', () => {
+    const mockProduct: FSProduct = {
+      code: productCode,
+      name: productName,
+      configurable: true,
+    };
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(mockProduct)
+    );
+    spyOn(mockCartService, 'createCartForProduct').and.stub();
+    comparisonTablePanelItemComponent.getProductData();
+    comparisonTablePanelItemComponent.createCartAndStartBundleForProduct(
+      'TEST_PRODUCT',
+      'bundleTemplateId'
+    );
+
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'configureProduct',
+      params: Object({ code: 'TEST_PRODUCT' }),
+    });
+  });
+
+  it('should set product price when product has dynamic attributes', () => {
+    const mockProductPrice = '25.00';
+    const mockProduct = {
+      code: productCode,
+      name: productName,
+      price: {
+        currencyIso: currencyIso,
+        oneTimeChargeEntries: [
+          {
+            billingTime: {
+              code: paynow,
+            },
+            price: {
+              value: 25.0,
+              formattedValue: mockProductPrice,
+            },
+          },
+        ],
+      },
+      dynamicAttributes: [
+        {
+          key: 'monthlyAnnuity',
+          value: {
+            formattedValue: mockProductPrice,
+          },
+        },
+      ],
+    };
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(mockProduct)
+    );
+    spyOn(mockCartService, 'createCartForProduct').and.stub();
+    comparisonTablePanelItemComponent.getProductData();
+    expect(comparisonTablePanelItemComponent.productPrice).toEqual(
+      mockProductPrice
+    );
   });
 
   it('should get base url', () => {
