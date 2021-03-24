@@ -9,6 +9,7 @@ import { InboxAdapter } from '../../../core/my-account/connectors/inbox.adapter'
 
 @Injectable()
 export class OccInboxAdapter implements InboxAdapter {
+  MAX_INT_VALUE = '2147483647';
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
@@ -17,7 +18,8 @@ export class OccInboxAdapter implements InboxAdapter {
   getSiteMessagesForUserAndGroup(
     userId: string,
     messageGroup: string,
-    searchConfig: FSSearchConfig
+    searchConfig: FSSearchConfig,
+    read?: boolean
   ): Observable<any> {
     const url = this.occEndpointService.getUrl('siteMessages', {
       userId,
@@ -36,6 +38,11 @@ export class OccInboxAdapter implements InboxAdapter {
 
     if (messageGroup !== '') {
       params = params.set('messagegroup', messageGroup);
+    }
+
+    if (read != null) {
+      params = params.set('read', read.toString());
+      params = params.set('pageSize', this.MAX_INT_VALUE);
     }
     return this.http
       .get(url, { params: params })

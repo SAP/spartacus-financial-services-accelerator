@@ -2,7 +2,7 @@ cx-fs-message-notification {
   position: absolute;
   top: -25px;
   right: 0;
-  font-size: 24px;
+  font-size: var(--cx-h3-font-size);
   @include media-breakpoint-down(md) {
     @include vertical-center;
     right: 60px;

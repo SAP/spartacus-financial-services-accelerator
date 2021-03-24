@@ -43,7 +43,8 @@ export class MessageNotificationComponent implements OnInit, OnDestroy {
           tap(() => {
             this.messagesObject$ = this.inboxService.getMessages(
               '',
-              this.searchConfig
+              this.searchConfig,
+              false
             );
             this.changeDetectorRef.detectChanges();
           })

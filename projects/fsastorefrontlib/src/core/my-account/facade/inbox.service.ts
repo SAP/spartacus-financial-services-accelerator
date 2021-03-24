@@ -26,12 +26,17 @@ export class InboxService {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
 
-  getMessages(messageGroup, searchConfig: SearchConfig): Observable<any> {
+  getMessages(
+    messageGroup,
+    searchConfig: SearchConfig,
+    read?: boolean
+  ): Observable<any> {
     return this.adapter
       .getSiteMessagesForUserAndGroup(
         this.inboxData.userId,
         messageGroup,
-        searchConfig
+        searchConfig,
+        read
       )
       .pipe(startWith(GHOST_DATA));
   }
