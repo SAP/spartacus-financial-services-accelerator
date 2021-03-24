@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, UserService } from '@spartacus/core';
+import { I18nTestingModule, UserService, WindowRef } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
@@ -31,6 +31,7 @@ describe('SyncPilotConnectionComponent', () => {
   let component: SyncPilotConnectionComponent;
   let fixture: ComponentFixture<SyncPilotConnectionComponent>;
   let mockUserService: UserService;
+  let winRef: WindowRef;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -48,6 +49,7 @@ describe('SyncPilotConnectionComponent', () => {
       ],
     }).compileComponents();
     mockUserService = TestBed.inject(UserService);
+    winRef = TestBed.inject(WindowRef);
   }));
 
   beforeEach(() => {
@@ -61,13 +63,13 @@ describe('SyncPilotConnectionComponent', () => {
   });
 
   it('should establish connection with sync pilot', () => {
-    spyOn(window, 'open');
+    spyOn(winRef.nativeWindow, 'open');
     component.establishConnection('testUrl', 'testChannel', 'join');
     expect(window.open).toHaveBeenCalled();
   });
 
   it('should not establish connection with sync pilot', () => {
-    spyOn(window, 'open');
+    spyOn(winRef.nativeWindow, 'open');
     spyOn(mockUserService, 'get').and.returnValue(of({}));
     component.establishConnection('testUrl', 'testChannel', 'join');
     expect(window.open).not.toHaveBeenCalled();

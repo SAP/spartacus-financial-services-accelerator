@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { UserService } from '@spartacus/core';
+import { UserService, WindowRef } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,9 +17,11 @@ import { map } from 'rxjs/operators';
 export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<any>,
-    protected userService: UserService
+    protected userService: UserService,
+    protected winRef?: WindowRef
   ) {}
 
+  protected readonly SYNC_PILOT_WINDOW = 'Sync Pilot Window';
   protected readonly CHANNEL_PARAM = '?c=';
   protected readonly USER_PARAM = '&nick=';
 
@@ -38,14 +40,19 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
         .pipe(
           map(user => {
             if (user?.uid && user?.name) {
-              const syncPilotUrl = targetUrl + action;
-              window.open(
-                syncPilotUrl +
-                  this.CHANNEL_PARAM +
-                  channel +
-                  this.USER_PARAM +
-                  user.name,
-                '_blank'
+              const syncPilotUrl =
+                targetUrl +
+                action +
+                this.CHANNEL_PARAM +
+                channel +
+                this.USER_PARAM +
+                user.name;
+              const syncPilotWindow = this.winRef.nativeWindow;
+              syncPilotWindow.open(
+                syncPilotUrl,
+                this.SYNC_PILOT_WINDOW,
+                null,
+                false
               );
             }
           })
