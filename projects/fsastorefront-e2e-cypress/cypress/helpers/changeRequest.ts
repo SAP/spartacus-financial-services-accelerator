@@ -1,5 +1,3 @@
-const currentDate = Cypress.moment().format('DD-MM-YYYY');
-const todaysDate = Cypress.moment().format('DD MMM YYYY');
 const todaysDateDriver = Cypress.moment().format('YYYY-MM-DD');
 
 export function startChangeMileage() {
@@ -87,7 +85,6 @@ export function addTrailerLiability() {
 export function startAddingDriverCheckout() {
   cy.get('.fs-icon')
     .should('have.length', 2)
-    //.eq(0)
     .parentsUntil()
     .contains(' Who or What Is Insured ')
     .click({ force: true });
