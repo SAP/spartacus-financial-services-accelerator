@@ -17,3 +17,4 @@ export * from './fnol/index';
 export * from './progress-bar/index';
 export * from './not-found/index';
 export * from './message-notification/index';
+export * from './sync-pilot/index';

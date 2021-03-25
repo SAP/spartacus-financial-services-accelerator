@@ -21,6 +21,7 @@ import { PersonalDetailsModule } from './form/personal-details/personal-details.
 import { GeneralInformationModule } from './form/general-information/general-information.module';
 import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { MessageNotificationModule } from './message-notification/message-notification.module';
+import { SyncPilotModule } from './sync-pilot';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { MessageNotificationModule } from './message-notification/message-notifi
     PersonalDetailsModule,
     GeneralInformationModule,
     MessageNotificationModule,
+    SyncPilotModule,
   ],
   providers: [reducerProvider],
 })
