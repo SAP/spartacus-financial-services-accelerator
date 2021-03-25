@@ -106,7 +106,7 @@ describe('MessageNotificationComponent', () => {
 
   it('should return messages', done => {
     component.ngOnInit();
-    component.messagesObject$.subscribe((data) => {
+    component.messagesObject$.subscribe(data => {
       expect(data.messages.length).toEqual(2);
       done();
     });
