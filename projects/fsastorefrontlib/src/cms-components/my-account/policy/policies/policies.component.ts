@@ -16,6 +16,7 @@ import {
 } from './../../../../occ/occ-models/occ.models';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { EChartsOption } from 'echarts';
 
 @Component({
   selector: 'cx-fs-policies',
@@ -34,12 +35,86 @@ export class PoliciesComponent implements OnInit, OnDestroy {
   policies$;
   policiesLoaded$;
   baseUrl: string;
+  chartOption: EChartsOption = {
+    title: {
+      show: true,
+      text: 'Insurance premium amount by policies',
+      left: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        position: 'inside'
+    },
+    legend: {
+        top: 'middle',
+        // align: 'left',
+        left: 'right',
+        // bottom: 20,
+        orient: 'vertical',
+        itemGap: 25,
+        itemWidth: 30
+        // overflow: {
+        //   verticalAlign: 'middle'
+        // }
+        // verticalyAlign: 'middle'
+    },
+    toolbox: {
+      show: true,
+      // left: 'left',
+      // iconStyle: {
+      //   color: '#0066cc'
+      // },
+      feature: {
+          // mark: {show: true},
+          // dataView: {show: true, readOnly: false},
+          // restore: {show: true},
+          saveAsImage: {show: true}
+      }
+  },
+    series: [
+        {
+            name: 'Insurance',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: true,
+                position: 'outside'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '20',
+                    fontWeight: 'bold',
+                    shadowOffsetY: 10,
+                    textShadowOffsetY: 10
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                {value: 1048, name: 'Travel'},
+                {value: 735, name: 'Auto'},
+                {value: 580, name: 'Life'},
+                {value: 484, name: 'Renters'},
+                {value: 300, name: 'Savings'}
+            ]
+        }
+    ]
+};
 
   private subscription = new Subscription();
 
   ngOnInit() {
     this.policyService.loadPolicies();
     this.policies$ = this.policyService.getPolicies();
+    this.policies$.subscribe(data => console.log(data, 'policies'))
     this.policiesLoaded$ = this.policyService.getLoaded();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }

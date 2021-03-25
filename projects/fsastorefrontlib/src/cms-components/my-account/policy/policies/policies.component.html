@@ -1,6 +1,15 @@
 <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
   {{ 'policy.policies' | cxTranslate }}
 </h2>
+<div class="accordion" style="margin-bottom: 20px;">
+  <cx-fs-accordion-item
+    [opened]="false"
+    [title]="'Premium amount by policies graph'"
+  >
+  <div echarts [options]="chartOption" class="demo-chart"></div>
+  </cx-fs-accordion-item>
+</div>
+
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
