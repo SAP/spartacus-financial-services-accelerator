@@ -11,6 +11,28 @@ const mockUser: FSUser = {
   name: 'testUser',
 };
 
+const mockMessages = {
+  sorts: [
+    {
+      code: 'asc',
+    },
+  ],
+  pagination: {
+    page: 1,
+  },
+  messages: [
+    {
+      uid: 'testMsg1',
+      subject: 'testSubject1',
+      readDate: '21-01-2019',
+    },
+    {
+      uid: 'testMsg2',
+      subject: 'testSubject2',
+    },
+  ],
+};
+
 @Pipe({
   name: 'cxUrl',
 })
@@ -19,7 +41,11 @@ class MockUrlPipe implements PipeTransform {
 }
 
 class MockInboxService {
-  unreadMessagesState = new BehaviorSubject<any>(true);
+  unreadMessagesStateSource = new BehaviorSubject<boolean>(true);
+  unreadMessagesState$ = this.unreadMessagesStateSource.asObservable();
+  getMessages() {
+    return of(mockMessages);
+  }
 }
 
 class MockUserService {
@@ -76,5 +102,13 @@ describe('MessageNotificationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should return messages', done => {
+    component.ngOnInit();
+    component.messagesObject$.subscribe((data) => {
+      expect(data.messages.length).toEqual(2);
+      done();
+    });
   });
 });
