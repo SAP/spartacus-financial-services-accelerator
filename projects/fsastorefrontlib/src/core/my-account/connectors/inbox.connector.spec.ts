@@ -7,8 +7,10 @@ import createSpy = jasmine.createSpy;
 class MockInboxAdapter implements InboxAdapter {
   getSiteMessagesForUserAndGroup = createSpy(
     'InboxAdapter.getSiteMessagesForUserAndGroup'
-  ).and.callFake((userId, msgGroup, searchConfig) =>
-    of('getSiteMessagesForUserAndGroup' + userId + msgGroup + searchConfig)
+  ).and.callFake((userId, msgGroup, searchConfig, read) =>
+    of(
+      'getSiteMessagesForUserAndGroup' + userId + msgGroup + searchConfig + read
+    )
   );
   setMessagesState = createSpy(
     'InboxAdapter.setMessagesState'
@@ -35,14 +37,17 @@ describe('InboxConnector', () => {
   it('should be created', () => {
     expect(inboxConnector).toBeTruthy();
   });
+
   it('should call adapter for getSiteMessagesForUserAndGroup', () => {
-    inboxConnector.getSiteMessagesForUserAndGroup(user, messageGroup, {});
+    inboxConnector.getSiteMessagesForUserAndGroup(user, messageGroup, {}, null);
     expect(inboxAdapter.getSiteMessagesForUserAndGroup).toHaveBeenCalledWith(
       user,
       messageGroup,
-      {}
+      {},
+      null
     );
   });
+
   it('should call adapter for setMessagesState', () => {
     inboxConnector.setMessagesState(user, [], true);
     expect(inboxAdapter.setMessagesState).toHaveBeenCalledWith(user, [], true);

@@ -12,12 +12,14 @@ export class InboxConnector {
   getSiteMessagesForUserAndGroup(
     userId: string,
     messageGroup: string,
-    searchConfig: FSSearchConfig
+    searchConfig: FSSearchConfig,
+    read?: boolean
   ): Observable<any> {
     return this.adapter.getSiteMessagesForUserAndGroup(
       userId,
       messageGroup,
-      searchConfig
+      searchConfig,
+      read
     );
   }
 
