@@ -66,17 +66,28 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
   ngOnInit(): void {
     super.ngOnInit();
     // TODO: Remove once the checkout state is updated with delivery address saved on backend
-    this.subscription.add(
-      this.activeCartService
-        .getActive()
-        .pipe(
-          filter(cart => !!cart),
-          map(cart => {
-            this.checkoutService.loadCheckoutDetails(cart.code);
-          })
-        )
-        .subscribe()
-    );
+    this.subscription
+      .add(
+        this.activeCartService
+          .getActive()
+          .pipe(
+            filter(cart => !!cart),
+            map(cart => {
+              this.checkoutService.loadCheckoutDetails(cart.code);
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.checkoutDeliveryService
+          .getDeliveryAddress()
+          .pipe(
+            map(address => {
+              this.deliveryAddress = address;
+            })
+          )
+          .subscribe()
+      );
     this.paymentTypeService.loadPaymentTypes();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
