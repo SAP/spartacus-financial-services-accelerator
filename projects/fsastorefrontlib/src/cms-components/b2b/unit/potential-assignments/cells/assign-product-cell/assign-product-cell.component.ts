@@ -14,7 +14,7 @@ import { ProductAssignmentService } from '../../../../../../core/product-assignm
 @Component({
   selector: 'cx-fs-assign-product-cell',
   templateUrl: './assign-product-cell.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignProductCellComponent<T> extends CellComponent
   implements OnDestroy {

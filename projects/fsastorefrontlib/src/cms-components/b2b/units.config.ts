@@ -21,7 +21,7 @@ import {
   UnitUserRolesFormComponent,
 } from '@spartacus/organization/administration/components';
 import { AdminGuard } from '@spartacus/organization/administration/core';
-import { TableConfig } from '@spartacus/storefront';
+import { TableConfig, TableDataCellComponent } from '@spartacus/storefront';
 import { AssignmentsComponent } from './unit/assignments';
 import { AssignProductCellComponent } from './unit/potential-assignments/cells/assign-product-cell/assign-product-cell.component';
 import { PotentialAssignmentsComponent } from './unit/potential-assignments/potential-assignments.component';
@@ -182,23 +182,26 @@ export function unitsTableConfigFactoryFactory(): TableConfig {
 export const unitsTableConfigFactory: TableConfig = {
   table: {
     [OrganizationTableType.COST_CENTER]: {
-      cells: ['name', 'activate', 'deassign'],
+      cells: ['name', 'activate', 'remove'],
       options: {
         cells: {
+          name: {
+            dataComponent: TableDataCellComponent,
+          },
           activate: {
             dataComponent: ActivateProductCellComponent,
           },
-          deassign: {
+          remove: {
             dataComponent: RemoveProductCellComponent,
           },
         },
       },
     },
     [OrganizationTableType.COST_CENTER_BUDGETS]: {
-      cells: ['name', 'assign'],
+      cells: ['name', 'add'],
       options: {
         cells: {
-          assign: {
+          add: {
             dataComponent: AssignProductCellComponent,
           },
         },

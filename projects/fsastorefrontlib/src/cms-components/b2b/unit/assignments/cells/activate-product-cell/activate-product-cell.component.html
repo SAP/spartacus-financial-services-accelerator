@@ -1,4 +1,4 @@
-<div class="custom-control custom-switch">
+<div class="custom-switch">
   <input
     type="checkbox"
     class="custom-control-input"
@@ -6,5 +6,8 @@
     [checked]="model.active"
     id="{{ model.assignmentCode }}"
   />
-  <label class="custom-control-label" for="{{ model.assignmentCode }}"></label>
+  <label
+    class="custom-control-label pointer"
+    for="{{ model.assignmentCode }}"
+  ></label>
 </div>

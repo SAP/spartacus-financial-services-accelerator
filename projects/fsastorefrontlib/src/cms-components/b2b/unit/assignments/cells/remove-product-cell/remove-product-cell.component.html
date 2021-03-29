@@ -1,7 +1,7 @@
 <ng-container *ngIf="currentUnit$ | async as currentUnit">
   <span
     *ngIf="currentUnit && currentUnit.parentOrgUnit"
-    class="text"
+    class="pointer notice"
     (click)="removeProduct()"
   >
     {{ 'orgUnitAssignments.remove' | cxTranslate }}</span

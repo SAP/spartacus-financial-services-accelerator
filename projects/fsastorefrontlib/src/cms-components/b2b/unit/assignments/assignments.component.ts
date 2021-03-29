@@ -17,7 +17,7 @@ import { AssignmentsListService } from './assignments-list.service';
 @Component({
   selector: 'cx-fs-assignments',
   templateUrl: './assignments.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // tslint:disable-next-line:no-host-metadata-property
   host: { class: 'content-wrapper' },
   providers: [

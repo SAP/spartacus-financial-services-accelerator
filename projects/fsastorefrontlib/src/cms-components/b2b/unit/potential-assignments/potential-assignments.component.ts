@@ -17,7 +17,7 @@ import { PotentialAssingmensListService } from './potential-assignments-list.ser
 @Component({
   selector: 'cx-fs-potential-assignments',
   templateUrl: './potential-assignments.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // tslint:disable-next-line:no-host-metadata-property
   host: { class: 'content-wrapper' },
   providers: [

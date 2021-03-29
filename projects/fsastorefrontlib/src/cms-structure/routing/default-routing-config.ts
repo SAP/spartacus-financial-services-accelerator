@@ -35,11 +35,6 @@ export const storefrontRoutesConfig: RoutesConfig = {
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
   myDocuments: { paths: ['my-account/my-documents'] },
-  // productAssignment: {
-  //   paths: ['organization/units/:orgUnitId/productAssignments'],
-  // },
-  // productActivation: { paths: ['organization/:orgUnitId/productActivation'] },
-  // unitDetails: { paths: ['organization/:orgUnitId'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },
   policyDetails: { paths: ['my-account/my-policies/:policyId/:contractId'] },
