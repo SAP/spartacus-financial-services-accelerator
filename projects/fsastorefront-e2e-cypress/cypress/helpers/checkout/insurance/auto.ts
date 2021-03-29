@@ -207,14 +207,14 @@ export function populateVehicleDetails() {
 }
 
 export function populateMainDriverData() {
-  cy.get('[name=mainDriverFirstName]').type('Johan');
-  cy.get('[name=mainDriverLastName]').type('Grozni');
+  cy.get('[name=mainDriverFirstName]').type('John');
+  cy.get('[name=mainDriverLastName]').type('Moore');
   cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
 }
 
 export function populateAdditionalData() {
   cy.get('[name=additionalDriver1FirstName]').type('Phin');
-  cy.get('[name=additionalDriver1LastName]').type('Jones');
+  cy.get('[name=additionalDriver1LastName]').type('Moore');
   cy.get('[name=additionalDriver1LicenceNumber]').type('BG-234-yy');
 }
 
@@ -314,6 +314,44 @@ export function checkOptionalProductsGold() {
       {
         name: 'Winter Tires',
         available: true,
+      },
+      {
+        name: ' Covered with Third Party Liability ',
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function checkOptionalProductsGoldAddOptional() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Auto Insurance',
+    items: [
+      {
+        name: 'Collision Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Comprehensive Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Roadside Assistance',
+        mandatory: true,
+      },
+      {
+        name: 'Trailer Liability',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: 'Uninsured Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Winter Tires',
+        available: true,
+        shouldAdd: true,
       },
       {
         name: ' Covered with Third Party Liability ',
