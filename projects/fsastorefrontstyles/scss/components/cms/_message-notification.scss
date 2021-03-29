@@ -1,0 +1,26 @@
+%cx-fs-message-notification {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  font-size: var(--cx-h3-font-size);
+  @include media-breakpoint-down(md) {
+    @include vertical-center;
+    right: 60px;
+  }
+  .icon-envelope {
+    color: var(--cx-color-secondary);
+    @include media-breakpoint-down(md) {
+      color: var(--cx-color-1);
+    }
+  }
+  .message-indicator-counter {
+    position: absolute;
+    top: -7px;
+    right: -10px;
+    padding: 0px 6px;
+    border-radius: 50%;
+    background: var(--cx-color-primary);
+    color: var(--cx-color-1);
+    font-size: var(--cx-xs-font-size);
+  }
+}

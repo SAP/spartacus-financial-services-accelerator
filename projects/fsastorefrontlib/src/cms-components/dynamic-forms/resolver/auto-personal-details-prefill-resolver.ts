@@ -4,7 +4,7 @@ import { UserService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCart } from '../../../../src/occ/occ-models/occ.models';
-import { FormsUtils } from '../utils/forms-utils';
+import { FormsUtils } from '@spartacus/dynamicforms';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 
 @Injectable({

@@ -172,6 +172,7 @@ export function populateContentsCover() {
 export function populatePropertyAddress() {
   cy.get('h4').contains('Your Property Address');
   cy.get('[name=property-address-line-1]').type('Omladinskin Brigada');
+  cy.get('[name=property-address-line-2]').type('90 g');
   cy.get('[name=property-address-city]').type('Belgrade');
   cy.get('[name=property-address-postcode]').type('11090');
   cy.get('[name=property-address-country]').select('RS');
@@ -257,7 +258,7 @@ export function populatePaymentDetails() {
   cy.get('[formcontrolname=expiryMonth]').ngSelect('11');
   cy.get('[formcontrolname=expiryYear]').ngSelect('2029');
   cy.get('[formcontrolname=cvn]').type('4532');
-  cy.get('input[type="checkbox"]').click();
+  cy.get('input[type="checkbox"]').eq(0).click();
 }
 
 export function populateBillingAddress() {

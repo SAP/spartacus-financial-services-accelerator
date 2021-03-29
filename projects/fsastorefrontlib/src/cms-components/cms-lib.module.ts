@@ -20,6 +20,8 @@ import { PersonalDetailsModule } from './form/personal-details/personal-details.
 import { GeneralInformationModule } from './form/general-information/general-information.module';
 import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { B2bModule } from './b2b/b2b.module';
+import { MessageNotificationModule } from './message-notification/message-notification.module';
+import { SyncPilotModule } from './sync-pilot';
 
 @NgModule({
   imports: [
@@ -41,6 +43,7 @@ import { B2bModule } from './b2b/b2b.module';
     PersonalDetailsModule,
     GeneralInformationModule,
     B2bModule,
+    MessageNotificationModule,
   ],
   exports: [
     AgentModule,
@@ -61,6 +64,8 @@ import { B2bModule } from './b2b/b2b.module';
     PersonalDetailsModule,
     GeneralInformationModule,
     B2bModule,
+    MessageNotificationModule,
+    SyncPilotModule,
   ],
   providers: [reducerProvider],
 })

@@ -19,22 +19,33 @@ export class InboxService {
 
   messagesSource = new BehaviorSubject<boolean>(false);
   messages = this.messagesSource.asObservable();
+  unreadMessagesStateSource = new BehaviorSubject<boolean>(false);
+  unreadMessagesState$ = this.unreadMessagesStateSource.asObservable();
 
   setTitleAndMessageGroup(messageGroup: string, title: string) {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
 
-  getMessages(messageGroup, searchConfig: SearchConfig): Observable<any> {
+  getMessages(
+    messageGroup,
+    searchConfig: SearchConfig,
+    read?: boolean
+  ): Observable<any> {
     return this.adapter
       .getSiteMessagesForUserAndGroup(
         this.inboxData.userId,
         messageGroup,
-        searchConfig
+        searchConfig,
+        read
       )
       .pipe(startWith(GHOST_DATA));
   }
 
   setMessagesState(uidList, read): Observable<any> {
     return this.adapter.setMessagesState(this.inboxData.userId, uidList, read);
+  }
+
+  setUnreadMessageState(isMessageRead: boolean) {
+    this.unreadMessagesStateSource.next(isMessageRead);
   }
 }

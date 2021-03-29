@@ -1,0 +1,22 @@
+<a
+  [routerLink]="
+    {
+      cxRoute: 'inbox'
+    } | cxUrl
+  "
+  *ngIf="user$ | async"
+>
+  <div class="fs-icon icon-envelope"></div>
+  <ng-container *ngIf="messagesObject$ | async as messagesObject">
+    <span
+      *ngIf="messagesObject.messages?.length > 0"
+      class="message-indicator-counter normal-weight"
+      [ngClass]="{ 'py-0 px-1': messagesObject.messages.length > 9 }"
+      >{{
+        messagesObject.messages.length > 9
+          ? '9+'
+          : messagesObject.messages.length
+      }}</span
+    >
+  </ng-container>
+</a>
