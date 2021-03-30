@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AssignProductCellComponent } from './assign-product-cell.component';
 
 describe('AssignProductCellComponent', () => {
-  let component: AssignProductCellComponent<any>;
-  let fixture: ComponentFixture<AssignProductCellComponent<any>>;
+  let component: AssignProductCellComponent;
+  let fixture: ComponentFixture<AssignProductCellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

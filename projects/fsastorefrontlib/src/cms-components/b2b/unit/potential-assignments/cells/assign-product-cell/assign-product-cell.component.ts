@@ -16,7 +16,7 @@ import { ProductAssignmentService } from '../../../../../../core/product-assignm
   templateUrl: './assign-product-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignProductCellComponent<T> extends CellComponent
+export class AssignProductCellComponent extends CellComponent
   implements OnDestroy {
   constructor(
     protected outlet: OutletContextData<TableDataOutletContext>,

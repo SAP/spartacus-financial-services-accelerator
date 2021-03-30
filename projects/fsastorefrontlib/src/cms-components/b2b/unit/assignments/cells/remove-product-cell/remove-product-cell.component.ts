@@ -16,7 +16,7 @@ import { ProductAssignmentService } from '../../../../../../core/product-assignm
   templateUrl: './remove-product-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RemoveProductCellComponent<T> extends CellComponent
+export class RemoveProductCellComponent extends CellComponent
   implements OnDestroy {
   constructor(
     protected outlet: OutletContextData<TableDataOutletContext>,
@@ -35,6 +35,7 @@ export class RemoveProductCellComponent<T> extends CellComponent
       this.currentUnit$
         .pipe(
           map(unit => {
+            console.log(unit);
             const parentUnitUid = unit.parentOrgUnit
               ? unit.parentOrgUnit.uid
               : unit.uid;
