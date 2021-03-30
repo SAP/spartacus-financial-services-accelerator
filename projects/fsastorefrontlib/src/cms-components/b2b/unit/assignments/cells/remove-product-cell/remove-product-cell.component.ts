@@ -35,7 +35,6 @@ export class RemoveProductCellComponent extends CellComponent
       this.currentUnit$
         .pipe(
           map(unit => {
-            console.log(unit);
             const parentUnitUid = unit.parentOrgUnit
               ? unit.parentOrgUnit.uid
               : unit.uid;

@@ -15,11 +15,6 @@ const mockModel = {
 
 const mockItem: B2BUnit = {
   name: 'Test Company',
-  parentOrgUnit: {
-    active: true,
-    name: 'Test',
-    uid: 'Test',
-  },
   uid: 'TestCompany',
 };
 
@@ -77,6 +72,11 @@ describe('RemoveProductCellComponent', () => {
   });
 
   it('should remove product cell', () => {
+    mockItem.parentOrgUnit = {
+      active: true,
+      name: 'Test',
+      uid: 'Test',
+    };
     component.removeProduct();
     expect(
       productAssignmentService.removeProductAssignment
