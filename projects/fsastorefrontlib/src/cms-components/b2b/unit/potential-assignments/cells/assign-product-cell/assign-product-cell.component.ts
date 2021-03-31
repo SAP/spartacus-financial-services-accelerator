@@ -7,8 +7,7 @@ import {
   OutletContextData,
   TableDataOutletContext,
 } from '@spartacus/storefront';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 import { ProductAssignmentService } from '../../../../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
@@ -27,19 +26,12 @@ export class AssignProductCellComponent extends CellComponent
   }
 
   private subscription = new Subscription();
+  unit$: Observable<string> = this.currentUnitService.b2bUnit$;
 
-  addProduct() {
-    this.subscription.add(
-      this.currentUnitService.b2bUnit$
-        .pipe(
-          map(unit => {
-            this.productAssignmentService.createProductAssignment(
-              unit,
-              this.model.code
-            );
-          })
-        )
-        .subscribe()
+  addProduct(unit: string) {
+    this.productAssignmentService.createProductAssignment(
+      unit,
+      this.model.code
     );
   }
 

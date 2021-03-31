@@ -70,7 +70,7 @@ describe('ActivateProductCellComponent', () => {
   });
 
   it('should activate product cell', () => {
-    component.changeActiveStatus();
+    component.changeActiveStatus(mockUnit);
     expect(productAssignmentService.changeActiveStatus).toHaveBeenCalledWith(
       mockUnit,
       mockModel.assignmentCode,

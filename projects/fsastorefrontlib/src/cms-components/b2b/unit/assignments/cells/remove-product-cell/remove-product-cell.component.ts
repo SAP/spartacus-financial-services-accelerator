@@ -8,7 +8,6 @@ import {
   TableDataOutletContext,
 } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({

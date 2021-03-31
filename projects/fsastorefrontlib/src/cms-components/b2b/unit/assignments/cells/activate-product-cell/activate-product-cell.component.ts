@@ -7,7 +7,7 @@ import {
   OutletContextData,
   TableDataOutletContext,
 } from '@spartacus/storefront';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../../../core/product-assignment/facade/product-assignment.service';
 
@@ -26,21 +26,13 @@ export class ActivateProductCellComponent extends CellComponent
     super(outlet);
   }
   private subscription = new Subscription();
+  unit$: Observable<string> = this.currentUnitService.b2bUnit$;
 
-  changeActiveStatus() {
-    const active = this.model.active;
-    this.subscription.add(
-      this.currentUnitService.b2bUnit$
-        .pipe(
-          map(unit => {
-            this.productAssignmentService.changeActiveStatus(
-              unit,
-              this.model.assignmentCode,
-              !active
-            );
-          })
-        )
-        .subscribe()
+  changeActiveStatus(unit: string) {
+    this.productAssignmentService.changeActiveStatus(
+      unit,
+      this.model.assignmentCode,
+      !this.model.active
     );
   }
 

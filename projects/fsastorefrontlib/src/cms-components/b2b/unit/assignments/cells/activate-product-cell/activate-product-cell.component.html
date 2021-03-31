@@ -1,13 +1,15 @@
-<div class="custom-switch">
-  <input
-    type="checkbox"
-    class="custom-control-input"
-    (click)="changeActiveStatus()"
-    [checked]="model.active"
-    id="{{ model.assignmentCode }}"
-  />
-  <label
-    class="custom-control-label pointer"
-    for="{{ model.assignmentCode }}"
-  ></label>
-</div>
+<ng-container *ngIf="unit$ | async as unit">
+  <div class="custom-switch">
+    <input
+      type="checkbox"
+      class="custom-control-input"
+      (click)="changeActiveStatus(unit)"
+      [checked]="model.active"
+      id="{{ model.assignmentCode }}"
+    />
+    <label
+      class="custom-control-label pointer"
+      for="{{ model.assignmentCode }}"
+    ></label>
+  </div>
+</ng-container>

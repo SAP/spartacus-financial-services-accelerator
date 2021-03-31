@@ -67,7 +67,7 @@ describe('AssignProductCellComponent', () => {
   });
 
   it('should assign product cell', () => {
-    component.addProduct();
+    component.addProduct(mockUnit);
     expect(
       productAssignmentService.createProductAssignment
     ).toHaveBeenCalledWith(mockUnit, mockModel.code);
