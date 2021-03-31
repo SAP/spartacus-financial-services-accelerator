@@ -24,10 +24,9 @@ export class AssignmentsListService extends SubListService<any> {
   protected tableType = OrganizationTableType.COST_CENTER;
 
   protected load(_pagination: PaginationModel): Observable<EntitiesModel<any>> {
-    const assignedList = this.productAssignmentService
+    return this.productAssignmentService
       .getProductAssignments()
       .pipe(map(raw => this.convertProductAssignments(raw, true)));
-    return assignedList;
   }
 
   protected convertProductAssignments(assignments, added): EntitiesModel<any> {
