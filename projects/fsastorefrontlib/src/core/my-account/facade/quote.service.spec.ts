@@ -70,6 +70,11 @@ const mockCart: any = {
     value: 10.0,
   },
 };
+const mockQuote = {
+  state: { code: 'BIND' },
+  cartCode: 'testCode',
+  userId: userId,
+};
 
 class MockUserIdService {
   getUserId(): Observable<string> {
@@ -224,14 +229,12 @@ describe('QuoteServiceTest', () => {
   });
 
   it('should be able to retrieve quotes', () => {
-    let user: string;
-    const quote = {
-      state: { code: 'BIND' },
-      cartCode: 'testCode',
-      userId: userId,
-    };
-    service.retrieveQuote(quote);
-    userIdService.getUserId().subscribe(data => (user = data));
-    expect(user).toEqual(quote.userId);
+    service.retrieveQuote(mockQuote);
+    userIdService
+      .getUserId()
+      .subscribe(data => {
+        expect(data).toEqual(mockQuote.userId);
+      })
+      .unsubscribe();
   });
 });

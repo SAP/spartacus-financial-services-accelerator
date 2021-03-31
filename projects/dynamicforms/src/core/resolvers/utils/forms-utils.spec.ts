@@ -1,5 +1,13 @@
 import { FormsUtils } from './forms-utils';
 
+const testObject = {
+  listAttribute: [
+    {
+      testAttribute: '10-10-1988',
+    },
+  ],
+};
+
 describe('FormsUtils', () => {
   it('should converte to date', () => {
     const date = '29-01-1990';
@@ -28,8 +36,7 @@ describe('FormsUtils', () => {
       },
     };
     expect(FormsUtils.getValueByPath(fieldPath, object)).toEqual(
-      object.insuranceQuote.insuredObjectList.insuredObjects[0]
-        .childInsuredObjectList.insuredObjects[0].dateOfBirth
+      testObject.listAttribute[0].testAttribute
     );
   });
 });

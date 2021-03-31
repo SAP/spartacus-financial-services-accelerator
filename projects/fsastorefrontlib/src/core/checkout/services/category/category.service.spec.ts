@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CategoryService } from './category.service';
 
-const category = 'testCategory';
+const mockCategoryCode = 'testCategory';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -18,9 +18,12 @@ describe('CategoryService', () => {
   });
 
   it('should set active category', () => {
-    let categoryCode;
-    service.setActiveCategory(category);
-    service.getActiveCategory().subscribe(data => (categoryCode = data));
-    expect(categoryCode).toEqual(category);
+    service.setActiveCategory(mockCategoryCode);
+    service
+      .getActiveCategory()
+      .subscribe(data => {
+        expect(data).toEqual(mockCategoryCode);
+      })
+      .unsubscribe();
   });
 });

@@ -164,8 +164,7 @@
               "**/*.de.ts",
               "**/*.en.ts",
               "**/*store.module.ts",
-              "projects/fsastorefrontlib/src/core/date-config/default-date-config.ts",
-              "projects/fsastorefrontlib/src/core/global-message/config/default-global-message-config.ts"
+              "**/*config.ts"
             ]
           }
         },
