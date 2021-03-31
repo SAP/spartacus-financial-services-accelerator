@@ -83,7 +83,7 @@ describe('PotentialAssingmensListService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should load product assignments', () => {
+  it('should load potential product assignments', () => {
     spyOn(
       productAssignmentService,
       'getPotentialProductAssignments'
@@ -113,7 +113,7 @@ describe('PotentialAssingmensListService', () => {
     expect(result.values.length).toEqual(1);
   });
 
-  it('should NOT load product assignments', () => {
+  it('should NOT load potential product assignments', () => {
     spyOn(
       productAssignmentService,
       'getPotentialProductAssignments'

@@ -72,9 +72,12 @@ describe('AssignmentsListService', () => {
   it('should load product assignments', () => {
     spyOn(productAssignmentService, 'getProductAssignments').and.callThrough();
     let result: EntitiesModel<any>;
-    service.getData().subscribe(table => {
-      return (result = table);
-    });
+    service
+      .getData()
+      .subscribe(table => {
+        result = table;
+      })
+      .unsubscribe();
     expect(result.values.length).toEqual(4);
   });
 });

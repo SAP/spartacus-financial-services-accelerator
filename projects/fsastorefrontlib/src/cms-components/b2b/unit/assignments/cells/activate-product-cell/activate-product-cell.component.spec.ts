@@ -10,7 +10,6 @@ const mockModel = {
   active: false,
   added: true,
   assignmentCode: '00004084',
-  name: 'Annual - Budget Plan',
 };
 const mockUnit = 'TestCompany';
 class MockCurrentUnitService {

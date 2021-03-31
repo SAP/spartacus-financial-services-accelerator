@@ -29,26 +29,24 @@ import { PotentialAssingmensListService } from './potential-assignments-list.ser
 })
 export class PotentialAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
-    protected fsProductAssignmentService: ProductAssignmentService,
+    protected productAssignmentService: ProductAssignmentService,
     protected currentUnitService: CurrentUnitService
   ) {}
 
   private subscription = new Subscription();
 
-  unit$: Observable<B2BUnit> = this.currentUnitService
-    ? this.currentUnitService.item$
-    : of({ active: true });
+  unit$: Observable<B2BUnit> = this.currentUnitService.item$;
 
   ngOnInit(): void {
     this.subscription.add(
       this.unit$
         .pipe(
           map(unit => {
-            const parentUnitId = unit.parentOrgUnit
+            const unitId = unit.parentOrgUnit
               ? unit.parentOrgUnit.uid
               : unit.uid;
-            this.fsProductAssignmentService.loadPotentialProductAssignments(
-              parentUnitId
+            this.productAssignmentService.loadPotentialProductAssignments(
+              unitId
             );
           })
         )
