@@ -175,10 +175,6 @@ export const unitsCmsConfig: CmsConfig = {
   },
 };
 
-export function unitsTableConfigFactoryFactory(): TableConfig {
-  return unitsTableConfigFactory;
-}
-
 export const unitsTableConfigFactory: TableConfig = {
   table: {
     [OrganizationTableType.COST_CENTER]: {
@@ -209,3 +205,7 @@ export const unitsTableConfigFactory: TableConfig = {
     },
   },
 };
+
+export function unitsTableConfigFactoryFactory(): TableConfig {
+  return unitsTableConfigFactory;
+}
