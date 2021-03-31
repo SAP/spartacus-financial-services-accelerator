@@ -77,7 +77,7 @@ describe('RemoveProductCellComponent', () => {
       name: 'Test',
       uid: 'Test',
     };
-    component.removeProduct();
+    component.removeProduct(mockItem.uid, mockItem.parentOrgUnit.uid);
     expect(
       productAssignmentService.removeProductAssignment
     ).toHaveBeenCalledWith(
@@ -89,7 +89,7 @@ describe('RemoveProductCellComponent', () => {
 
   it('should remove product cell when there is no parent unit', () => {
     mockItem.parentOrgUnit = undefined;
-    component.removeProduct();
+    component.removeProduct(mockItem.uid, mockItem.uid);
     expect(
       productAssignmentService.removeProductAssignment
     ).toHaveBeenCalledWith(

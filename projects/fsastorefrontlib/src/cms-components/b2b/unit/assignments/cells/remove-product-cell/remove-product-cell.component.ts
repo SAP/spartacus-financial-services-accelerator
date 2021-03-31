@@ -30,22 +30,11 @@ export class RemoveProductCellComponent extends CellComponent
 
   currentUnit$ = this.currentUnitService.item$;
 
-  removeProduct() {
-    this.subscription.add(
-      this.currentUnit$
-        .pipe(
-          map(unit => {
-            const parentUnitUid = unit.parentOrgUnit
-              ? unit.parentOrgUnit.uid
-              : unit.uid;
-            this.productAssignmentService.removeProductAssignment(
-              unit.uid,
-              this.model.assignmentCode,
-              parentUnitUid
-            );
-          })
-        )
-        .subscribe()
+  removeProduct(unitId, parentUintId) {
+    this.productAssignmentService.removeProductAssignment(
+      unitId,
+      this.model.assignmentCode,
+      parentUintId
     );
   }
 

@@ -2,7 +2,7 @@
   <span
     *ngIf="currentUnit && currentUnit.parentOrgUnit"
     class="pointer notice"
-    (click)="removeProduct()"
+    (click)="removeProduct(currentUnit.uid, currentUnit.parentOrgUnit?.uid)"
   >
     {{ 'orgUnitAssignments.remove' | cxTranslate }}</span
   >
