@@ -1,11 +1,15 @@
 import { FormsUtils } from './forms-utils';
 
 const testObject = {
-  listAttribute: [
-    {
-      testAttribute: '10-10-1988',
+  insuranceQuote: {
+    insuredObjectList: {
+      insuredObjects: [
+        {
+          dateOfBirth: '10-10-1988',
+        },
+      ],
     },
-  ],
+  },
 };
 
 describe('FormsUtils', () => {
@@ -16,27 +20,21 @@ describe('FormsUtils', () => {
 
   it('should get value from object by path', () => {
     const fieldPath =
-      'insuranceQuote.insuredObjectList.insuredObjects[0].childInsuredObjectList.insuredObjects[0].dateOfBirth';
+      'insuranceQuote.insuredObjectList.insuredObjects[0].dateOfBirth';
     const object = {
       type: 'cartWsDTO',
       insuranceQuote: {
         insuredObjectList: {
           insuredObjects: [
             {
-              childInsuredObjectList: {
-                insuredObjects: [
-                  {
-                    dateOfBirth: '10-10-1988',
-                  },
-                ],
-              },
+              dateOfBirth: '10-10-1988',
             },
           ],
         },
       },
     };
     expect(FormsUtils.getValueByPath(fieldPath, object)).toEqual(
-      testObject.listAttribute[0].testAttribute
+      testObject.insuranceQuote.insuredObjectList.insuredObjects[0].dateOfBirth
     );
   });
 });
