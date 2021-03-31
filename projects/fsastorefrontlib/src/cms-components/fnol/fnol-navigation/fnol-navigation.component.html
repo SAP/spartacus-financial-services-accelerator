@@ -13,7 +13,10 @@
         class="primary-button btn-block"
         (click)="next(activeStepIndex, claimRequest)"
       >
-        {{ 'common.continue' | cxTranslate }}
+        {{
+          (activeStepData.summaryStep ? 'fscommon.submit' : 'common.continue')
+            | cxTranslate
+        }}
       </button>
     </div>
   </div>
