@@ -129,4 +129,15 @@ describe('Product Assignment Reducer', () => {
       expect(state.loaded).toEqual(true);
     });
   });
+
+  describe('LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS', () => {
+    it('should load potential product assignment', () => {
+      const action = new fromAction.LoadPotentialProductAssignmentsSuccess(
+        mockProductAssignments
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content.potentialAssignments.length).toEqual(2);
+      expect(state.loaded).toEqual(true);
+    });
+  });
 });

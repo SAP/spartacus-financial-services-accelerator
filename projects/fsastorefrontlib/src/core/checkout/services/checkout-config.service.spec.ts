@@ -19,17 +19,13 @@ const mockCheckoutSteps: Array<FSCheckoutStep> = checkoutConfig.checkout.steps;
 const mockCheckoutConfig: CheckoutConfig = checkoutConfig;
 
 const mockCart = {
-  deliveryOrderGroups: [
+  entries: [
     {
-      entries: [
-        {
-          product: {
-            defaultCategory: {
-              code: 'insurances_auto',
-            },
-          },
+      product: {
+        defaultCategory: {
+          code: 'insurances_auto',
         },
-      ],
+      },
     },
   ],
 };
@@ -40,14 +36,16 @@ class MockCartService {
 }
 
 class MockCheckoutStepService {
-  getPreviousCheckoutStepUrl() {}
+  getPreviousCheckoutStepUrl() {
+    return 'checkout/add-options';
+  }
 }
 
 const mockRoutingConfig: RoutesConfig = storefrontRoutesConfig;
 
 class MockRoutingConfigService {
   getRouteConfig(routeName: string) {
-    return mockCheckoutConfig[routeName].paths[0];
+    return mockCheckoutConfig[routeName];
   }
 }
 
@@ -159,5 +157,16 @@ describe('FSCheckoutConfigService', () => {
   it('should return false for non product step', () => {
     spyOn<any>(service, 'getUrlFromStepRoute').and.returnValue('/route/:code');
     expect(service.isProductStep('nonProductPage')).toBe(false);
+  });
+
+  it('should trigger previous and next step', () => {
+    spyOn(routingConfigService, 'getRouteConfig').and.returnValue({
+      paths: ['checkout/configureProduct/:productCode'],
+    });
+    spyOn<any>(service, 'getUrlFromStepRoute').and.callFake(route => {
+      return mockRoutingConfig[route].paths[0];
+    });
+    service.triggerPreviousNextStepSet(activatedRoute);
+    expect(service.getCurrentStepIndex(activatedRoute)).toBe(3);
   });
 });
