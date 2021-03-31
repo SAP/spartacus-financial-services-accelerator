@@ -33,8 +33,8 @@ export class PotentialAssingmensListService extends SubListService<any> {
 
     if (assignments) {
       products = assignments.map((assignment: any) => ({
-        name: assignment.product.name,
-        code: assignment.product.code,
+        name: assignment.product?.name,
+        code: assignment.product?.code,
       }));
     }
 

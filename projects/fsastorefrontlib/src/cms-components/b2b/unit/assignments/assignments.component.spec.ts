@@ -61,14 +61,14 @@ describe('AssignmentsComponent', () => {
     ).and.callThrough();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
   it('should load Product Assignments For Unit', () => {
     component.ngOnInit();
     expect(
       productAssignmentService.loadProductAssignmentsForUnit
     ).toHaveBeenCalledWith(mockItem.uid);
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

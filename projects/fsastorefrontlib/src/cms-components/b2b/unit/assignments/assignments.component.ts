@@ -35,9 +35,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
 
-  unit$: Observable<B2BUnit> = this.currentUnitService
-    ? this.currentUnitService.item$
-    : of({ active: true });
+  unit$: Observable<B2BUnit> = this.currentUnitService.item$;
 
   ngOnInit(): void {
     this.subscription.add(
