@@ -44,9 +44,6 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
       this.unit$
         .pipe(
           map(unit => {
-            const parentUnitId = unit.parentOrgUnit
-              ? unit.parentOrgUnit.uid
-              : unit.uid;
             this.productAssignmentService.loadProductAssignmentsForUnit(
               unit.uid
             );

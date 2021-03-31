@@ -22,10 +22,7 @@ export class PotentialAssingmensListService extends SubListService<any> {
 
   protected tableType = OrganizationTableType.COST_CENTER_BUDGETS;
 
-  protected load(
-    pagination: PaginationModel,
-    ...args: any
-  ): Observable<EntitiesModel<any>> {
+  protected load(_pagination: PaginationModel): Observable<EntitiesModel<any>> {
     return this.productAssignmentService
       .getPotentialProductAssignments()
       .pipe(map(raw => this.convertProductAssignments(raw)));

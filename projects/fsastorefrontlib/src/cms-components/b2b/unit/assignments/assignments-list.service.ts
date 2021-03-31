@@ -23,10 +23,7 @@ export class AssignmentsListService extends SubListService<any> {
 
   protected tableType = OrganizationTableType.COST_CENTER;
 
-  protected load(
-    pagination: PaginationModel,
-    ...args: any
-  ): Observable<EntitiesModel<any>> {
+  protected load(_pagination: PaginationModel): Observable<EntitiesModel<any>> {
     const assignedList = this.productAssignmentService
       .getProductAssignments()
       .pipe(map(raw => this.convertProductAssignments(raw, true)));
@@ -35,9 +32,9 @@ export class AssignmentsListService extends SubListService<any> {
 
   protected convertProductAssignments(assignments, added): EntitiesModel<any> {
     const products = assignments.map((assignment: any) => ({
-      name: assignment.product.name,
-      active: assignment.active,
-      assignmentCode: assignment.code,
+      name: assignment?.product?.name,
+      active: assignment?.active,
+      assignmentCode: assignment?.code,
       added,
     }));
 
