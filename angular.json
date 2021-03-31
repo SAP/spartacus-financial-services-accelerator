@@ -159,7 +159,14 @@
                 "node_modules/@spartacus/styles/scss"
               ]
             },
-            "codeCoverageExclude": ["**/index.ts", "**/*.de.ts", "**/*.en.ts", "**/*store.module.ts"]
+            "codeCoverageExclude": [
+              "**/index.ts",
+              "**/*.de.ts",
+              "**/*.en.ts",
+              "**/*store.module.ts",
+              "projects/fsastorefrontlib/src/core/date-config/default-date-config.ts",
+              "projects/fsastorefrontlib/src/core/global-message/config/default-global-message-config.ts"
+            ]
           }
         },
         "lint": {
