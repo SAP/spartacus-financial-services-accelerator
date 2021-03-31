@@ -14,10 +14,8 @@
         (click)="next(activeStepIndex, claimRequest)"
       >
         {{
-          (activeStepData.name === 'Summary'
-            ? 'fscommon.submit'
-            : 'common.continue'
-          ) | cxTranslate
+          (activeStepData.summaryStep ? 'fscommon.submit' : 'common.continue')
+            | cxTranslate
         }}
       </button>
     </div>
