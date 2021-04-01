@@ -8,8 +8,6 @@ import {
   orgUnitUsers,
   orgUnitChildren,
   orgUser,
-  orgUnitAssignedApprovers,
-  orgUnitApprovers,
   orgUnitAssignments,
 } from './en/b2b.en';
 import { changeRequest } from './en/changeRequest.en';
@@ -50,8 +48,6 @@ export const fstranslations: TranslationResources = {
   orgUnitUsers,
   orgUnitChildren,
   orgUser,
-  orgUnitAssignedApprovers,
-  orgUnitApprovers,
   orgUnitAssignments,
 };
 

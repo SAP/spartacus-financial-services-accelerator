@@ -8,8 +8,6 @@ import {
   ItemService,
   ListService,
   OrganizationTableType,
-  UnitApproverListComponent,
-  UnitAssignedApproverListComponent,
   UnitChildCreateComponent,
   UnitChildrenComponent,
   UnitFormComponent,
@@ -110,22 +108,6 @@ export const unitsCmsConfig: CmsConfig = {
                   {
                     path: 'create',
                     component: UnitChildCreateComponent,
-                  },
-                ],
-              },
-              {
-                path: 'approvers',
-                data: {
-                  cxPageMeta: { breadcrumb: 'orgUnit.breadcrumbs.approvers' },
-                },
-                children: [
-                  {
-                    path: '',
-                    component: UnitAssignedApproverListComponent,
-                  },
-                  {
-                    path: 'assign',
-                    component: UnitApproverListComponent,
                   },
                 ],
               },

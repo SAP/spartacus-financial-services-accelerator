@@ -185,24 +185,6 @@ export const orgUnitChildren = {
   },
 };
 
-export const orgUnitAssignedApprovers = {
-  orgUnitAssignedApprovers: {
-    title: 'Assigned approvers',
-    subtitle: 'Unit: {{item.name}}',
-    assigned: 'User {{item.name}} assigned successfully',
-    unassigned: 'User {{item.name}} unassigned successfully',
-  },
-};
-
-export const orgUnitApprovers = {
-  orgUnitApprovers: {
-    title: 'Manage approvers',
-    subtitle: 'Unit: {{item.name}}',
-    assigned: 'User {{item.name}} assigned successfully',
-    unassigned: 'User {{item.name}} unassigned successfully',
-  },
-};
-
 export const orgUnitAssignments = {
   orgUnitAssignments: {
     title: 'Product Assignments',

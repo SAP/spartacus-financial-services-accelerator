@@ -1,5 +1,15 @@
 import { TranslationResources } from '@spartacus/core';
-import { b2b } from './de/b2b.de';
+import {
+  b2b,
+  organization,
+  orgUnit,
+  orgCostCenter,
+  orgCostCenterBudgets,
+  orgUnitUsers,
+  orgUnitChildren,
+  orgUser,
+  orgUnitAssignments,
+} from './de/b2b.de';
 import { changeRequest } from './de/changeRequest.de';
 import { claim } from './de/claim.de';
 import { fscommon } from './de/common.de';
@@ -31,6 +41,14 @@ export const fstranslationsDe: TranslationResources = {
   configureProduct,
   quoteReview,
   orderConfirmation,
+  organization,
+  orgUnit,
+  orgCostCenter,
+  orgCostCenterBudgets,
+  orgUnitUsers,
+  orgUnitChildren,
+  orgUser,
+  orgUnitAssignments,
   document,
 };
 

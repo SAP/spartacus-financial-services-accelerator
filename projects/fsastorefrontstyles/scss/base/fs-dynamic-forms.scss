@@ -10,41 +10,41 @@
     margin-bottom: 0;
     text-align: center;
   }
-}
-%cx-dynamic-form {
-  form {
-    @extend .content860;
-    padding: 2rem 0;
-  }
-  label {
-    font-weight: var(--cx-font-weight-semi);
-    text-transform: uppercase;
-  }
-  cx-title {
-    margin-bottom: 1rem;
-    h4 {
-      font-size: var(--cx-h6-font-size);
-      color: var(--cx-color-primary);
+  cx-dynamic-form {
+    form {
+      @extend .content860;
+      padding: 2rem 0;
+    }
+    label {
       font-weight: var(--cx-font-weight-semi);
+      text-transform: uppercase;
     }
-  }
-  cx-radio,
-  cx-checkbox {
-    .form-check label {
-      display: inline-flex;
+    cx-title {
+      margin-bottom: 1rem;
+      h4 {
+        font-size: var(--cx-h6-font-size);
+        color: var(--cx-color-primary);
+        font-weight: var(--cx-font-weight-semi);
+      }
+    }
+    cx-radio,
+    cx-checkbox {
+      .form-check label {
+        display: inline-flex;
+        cursor: pointer;
+        font-size: var(--cx-title-font-size);
+        text-transform: none;
+      }
+    }
+    .custom-file-input {
       cursor: pointer;
-      font-size: var(--cx-title-font-size);
-      text-transform: none;
+      &:focus ~ .custom-file-label {
+        border-color: var(--cx-color-secondary);
+        box-shadow: none;
+      }
     }
-  }
-  .custom-file-input {
-    cursor: pointer;
-    &:focus ~ .custom-file-label {
-      border-color: var(--cx-color-secondary);
-      box-shadow: none;
+    *[role='button'] {
+      @include color-flip(--cx-color-1, --cx-color-primary, --cx-color-text);
     }
-  }
-  *[role='button'] {
-    @include color-flip(--cx-color-1, --cx-color-primary, --cx-color-text);
   }
 }
