@@ -153,7 +153,7 @@ export const orgUnit = {
   },
 };
 
-export const orgCostCenter = {
+export const productAssignments = {
   orgCostCenter: {
     title: '[DE] Asssigned Products',
     subtitle: '[DE] Products already assigned to the unit.',
@@ -163,8 +163,8 @@ export const orgCostCenter = {
   },
 };
 
-export const orgCostCenterBudgets = {
-  orgCostCenterBudgets: {
+export const potentialProductAssignments = {
+  potentialProductAssignments: {
     title: '[DE] Potential Products',
     subtitle: '[DE] Products which can be assigned to the unit.',
   },

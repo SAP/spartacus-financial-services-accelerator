@@ -151,8 +151,8 @@ export const orgUnit = {
   },
 };
 
-export const orgCostCenter = {
-  orgCostCenter: {
+export const productAssignments = {
+  productAssignments: {
     title: 'Asssigned Products',
     subtitle: 'Products already assigned to the unit.',
     header: 'All cost centers ({{count}})',
@@ -161,8 +161,8 @@ export const orgCostCenter = {
   },
 };
 
-export const orgCostCenterBudgets = {
-  orgCostCenterBudgets: {
+export const potentialProductAssignments = {
+  potentialProductAssignments: {
     title: 'Potential Products',
     subtitle: 'Products which can be assigned to the unit.',
   },
