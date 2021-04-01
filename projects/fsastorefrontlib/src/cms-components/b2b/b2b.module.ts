@@ -1,10 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import {
+  ConfigModule,
   provideDefaultConfig,
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import { AdministrationModule } from '@spartacus/organization';
+import {
+  organizationTranslationChunksConfig,
+  organizationTranslations,
+} from '@spartacus/organization/administration/assets';
 import {
   unitsCmsConfig,
   unitsRoutingConfig,
@@ -24,6 +29,13 @@ import { ProductAssignmentStoreModule } from '../../core/product-assignment/stor
     PotentialAssignmentsModule,
     AdministrationModule,
     ProductAssignmentStoreModule,
+    ConfigModule.withConfig({
+      i18n: {
+        resources: organizationTranslations,
+        chunks: organizationTranslationChunksConfig,
+        fallbackLang: 'en',
+      },
+    }),
   ],
   providers: [
     provideDefaultConfigFactory(unitsTableConfigFactoryFactory),

@@ -273,7 +273,10 @@
               class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0"
             >
               <ng-container
-                *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+                *ngIf="
+                  cart.insuranceQuote?.state?.code !== 'BIND' &&
+                  (previousCheckoutStep$ | async) as previousCheckoutStep
+                "
                 ><button
                   class="action-button btn-block"
                   (click)="navigateBack(previousCheckoutStep)"
