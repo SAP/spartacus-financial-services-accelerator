@@ -5,7 +5,7 @@ import { EntitiesModel } from '@spartacus/core';
 import { TableService, TableStructure } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
-import { AssignmentsListService } from './assignments-list.service';
+import { ProductAssignmentsListService } from './product-assignments-list.service';
 
 @Injectable()
 class MockTableService {
@@ -42,15 +42,15 @@ class MockProductAssignmentService {
   }
 }
 
-describe('AssignmentsListService', () => {
-  let service: AssignmentsListService;
+describe('ProductAssignmentsListService', () => {
+  let service: ProductAssignmentsListService;
   let productAssignmentService: ProductAssignmentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       providers: [
-        AssignmentsListService,
+        ProductAssignmentsListService,
         {
           provide: TableService,
           useClass: MockTableService,
@@ -61,7 +61,7 @@ describe('AssignmentsListService', () => {
         },
       ],
     });
-    service = TestBed.inject(AssignmentsListService);
+    service = TestBed.inject(ProductAssignmentsListService);
     productAssignmentService = TestBed.inject(ProductAssignmentService);
   });
 

@@ -13,7 +13,7 @@ import { ProductAssignmentService } from '../../../../core/product-assignment/fa
 @Injectable({
   providedIn: 'root',
 })
-export class AssignmentsListService extends SubListService<any> {
+export class ProductAssignmentsListService extends SubListService<any> {
   constructor(
     protected tableService: TableService,
     protected productAssignmentService: ProductAssignmentService
@@ -30,7 +30,7 @@ export class AssignmentsListService extends SubListService<any> {
   }
 
   protected convertProductAssignments(assignments, added): EntitiesModel<any> {
-    const products = assignments.map((assignment: any) => ({
+    const productAssignments = assignments.map((assignment: any) => ({
       name: assignment?.product?.name,
       active: assignment?.active,
       assignmentCode: assignment?.code,
@@ -38,7 +38,7 @@ export class AssignmentsListService extends SubListService<any> {
     }));
 
     return {
-      values: products,
+      values: productAssignments,
     };
   }
 }

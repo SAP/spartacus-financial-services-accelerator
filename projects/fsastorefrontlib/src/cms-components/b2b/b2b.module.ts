@@ -11,7 +11,7 @@ import {
   unitsTableConfigFactoryFactory,
 } from './units.config';
 import { FSUnitDetailsModule } from './unit/details';
-import { AssignmentsModule } from './unit/assignments/assignments.module';
+import { ProductAssignmentsModule } from './unit/assignments/product-assignments.module';
 import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
 import { ProductAssignmentStoreModule } from '../../core/product-assignment/store/product-assignments-store.module';
 
@@ -20,7 +20,7 @@ import { ProductAssignmentStoreModule } from '../../core/product-assignment/stor
   imports: [
     CommonModule,
     FSUnitDetailsModule,
-    AssignmentsModule,
+    ProductAssignmentsModule,
     PotentialAssignmentsModule,
     AdministrationModule,
     ProductAssignmentStoreModule,
@@ -30,6 +30,10 @@ import { ProductAssignmentStoreModule } from '../../core/product-assignment/stor
     provideDefaultConfig(unitsRoutingConfig),
     provideDefaultConfig(unitsCmsConfig),
   ],
-  exports: [FSUnitDetailsModule, AssignmentsModule, PotentialAssignmentsModule],
+  exports: [
+    FSUnitDetailsModule,
+    ProductAssignmentsModule,
+    PotentialAssignmentsModule,
+  ],
 })
 export class B2bModule {}

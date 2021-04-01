@@ -18,26 +18,26 @@ class MockTableService {
 const mockAssignments = [
   {
     active: false,
-    code: 'Test code1',
+    code: 'TestCode1',
     product: {
-      name: 'Test1',
-      code: 'Test product code1',
+      name: 'Test product code1',
+      code: 'Test1',
     },
   },
   {
     active: true,
-    code: 'Test code2',
+    code: 'TestCode2',
     product: {
-      name: 'Test2',
-      code: 'Test product code2',
+      name: 'Test product code2',
+      code: 'Test2',
     },
   },
   {
     active: false,
-    code: 'Test code3',
+    code: 'TestCode3',
     product: {
-      name: 'Test3',
-      code: 'Test product code3',
+      name: 'Test product code3',
+      code: 'Test3',
     },
   },
 ];

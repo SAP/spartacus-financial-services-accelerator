@@ -3,11 +3,11 @@ import { B2BUnit, I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { CurrentUnitService } from '@spartacus/organization/administration/components';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
-import { AssignmentsListService } from './assignments-list.service';
+import { ProductAssignmentsListService } from './product-assignments-list.service';
 
-import { AssignmentsComponent } from './assignments.component';
+import { ProductAssignmentsComponent } from './product-assignments.component';
 
-class MockAssignmentsListService {}
+class MockProductAssignmentsListService {}
 
 const mockItem: B2BUnit = {
   name: 'Test Company',
@@ -22,20 +22,20 @@ class MockProductAssignmentService {
   loadProductAssignmentsForUnit() {}
 }
 
-describe('AssignmentsComponent', () => {
-  let component: AssignmentsComponent;
-  let fixture: ComponentFixture<AssignmentsComponent>;
+describe('ProductAssignmentsComponent', () => {
+  let component: ProductAssignmentsComponent;
+  let fixture: ComponentFixture<ProductAssignmentsComponent>;
   let productAssignmentService: ProductAssignmentService;
   let currentUnitService: CurrentUnitService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AssignmentsComponent],
+      declarations: [ProductAssignmentsComponent],
       imports: [I18nTestingModule],
       providers: [
         {
-          provide: AssignmentsListService,
-          useClass: MockAssignmentsListService,
+          provide: ProductAssignmentsListService,
+          useClass: MockProductAssignmentsListService,
         },
         {
           provide: CurrentUnitService,
@@ -50,7 +50,7 @@ describe('AssignmentsComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssignmentsComponent);
+    fixture = TestBed.createComponent(ProductAssignmentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     productAssignmentService = TestBed.inject(ProductAssignmentService);

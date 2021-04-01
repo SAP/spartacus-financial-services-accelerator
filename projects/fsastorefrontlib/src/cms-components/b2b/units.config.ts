@@ -22,7 +22,7 @@ import {
 } from '@spartacus/organization/administration/components';
 import { AdminGuard } from '@spartacus/organization/administration/core';
 import { TableConfig, TableDataCellComponent } from '@spartacus/storefront';
-import { AssignmentsComponent } from './unit/assignments';
+import { ProductAssignmentsComponent } from './unit/assignments';
 import { AssignProductCellComponent } from './unit/potential-assignments/cells/assign-product-cell/assign-product-cell.component';
 import { PotentialAssignmentsComponent } from './unit/potential-assignments/potential-assignments.component';
 import { ActivateProductCellComponent } from './unit/assignments/cells/activate-product-cell/activate-product-cell.component';
@@ -156,7 +156,7 @@ export const unitsCmsConfig: CmsConfig = {
                 children: [
                   {
                     path: '',
-                    component: AssignmentsComponent,
+                    component: ProductAssignmentsComponent,
                     children: [
                       {
                         path: 'assign',
@@ -177,6 +177,9 @@ export const unitsCmsConfig: CmsConfig = {
 
 export const unitsTableConfigFactory: TableConfig = {
   table: {
+    // TO DO:
+    // Consult with Spartacus on is it possible to extend OrganizationTableType enum
+    // to custom values so we can stop using COST_CENTER for PRODUCT_ASSIGNMENTS
     [OrganizationTableType.COST_CENTER]: {
       cells: ['name', 'activate', 'remove'],
       options: {

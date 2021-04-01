@@ -12,22 +12,22 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
-import { AssignmentsListService } from './assignments-list.service';
+import { ProductAssignmentsListService } from './product-assignments-list.service';
 
 @Component({
-  selector: 'cx-fs-assignments',
-  templateUrl: './assignments.component.html',
+  selector: 'cx-fs-product-assignments',
+  templateUrl: './product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   // tslint:disable-next-line:no-host-metadata-property
   host: { class: 'content-wrapper' },
   providers: [
     {
       provide: ListService,
-      useExisting: AssignmentsListService,
+      useExisting: ProductAssignmentsListService,
     },
   ],
 })
-export class AssignmentsComponent implements OnInit, OnDestroy {
+export class ProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
     protected productAssignmentService: ProductAssignmentService,
     protected currentUnitService: CurrentUnitService
