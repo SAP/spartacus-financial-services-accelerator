@@ -11,7 +11,7 @@ export * from './form/general-information/index';
 export * from './form/personal-details/index';
 export * from './my-account/index';
 export * from './product/index';
-export * from './product-assignment/index';
+export * from './b2b/index';
 export * from './user/index';
 export * from './fnol/index';
 export * from './progress-bar/index';

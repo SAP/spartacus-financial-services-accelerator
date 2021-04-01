@@ -12,14 +12,3 @@
   font-weight: var(--cx-font-weight-semi);
   text-transform: uppercase;
 }
-
-.custom-file-input {
-  cursor: pointer;
-  &:focus ~ .custom-file-label {
-    border-color: var(--cx-color-secondary);
-    box-shadow: none;
-  }
-}
-*[role='button'] {
-  @include color-flip(--cx-color-1, --cx-color-primary, --cx-color-text);
-}
