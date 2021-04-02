@@ -1,5 +1,5 @@
 import { TranslationResources } from '@spartacus/core';
-import { b2b, organization, orgUnit, orgUser } from './en/b2b.en';
+import { b2b, organization, orgUnitAssignments } from './en/b2b.en';
 import { changeRequest } from './en/changeRequest.en';
 import { claim } from './en/claim.en';
 import { fscommon } from './en/common.en';
@@ -32,8 +32,7 @@ export const fstranslations: TranslationResources = {
   quoteReview,
   orderConfirmation,
   organization,
-  orgUnit,
-  orgUser,
+  orgUnitAssignments,
 };
 
 export const fsOverrides: TranslationResources = {
