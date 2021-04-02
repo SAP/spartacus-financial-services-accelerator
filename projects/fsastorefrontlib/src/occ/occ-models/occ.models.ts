@@ -85,6 +85,11 @@ export interface InsuranceQuote {
   insuredObjectList?: InsuredObjectList;
 }
 
+export enum OrganizationTableType {
+  PRODUCT_ASSIGNMENTS = 'productAssignments',
+  POTENTIAL_PRODUCT_ASSIGNMENTS = 'potentialProductAssignments',
+}
+
 export interface InsuredObjectList {
   insuredObjects?: any[];
 }

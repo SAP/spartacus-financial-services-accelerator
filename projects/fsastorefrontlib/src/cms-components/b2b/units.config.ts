@@ -7,7 +7,6 @@ import {
 import {
   ItemService,
   ListService,
-  OrganizationTableType,
   UnitChildCreateComponent,
   UnitChildrenComponent,
   UnitFormComponent,
@@ -26,6 +25,7 @@ import { PotentialAssignmentsComponent } from './unit/potential-assignments/pote
 import { ActivateProductCellComponent } from './unit/assignments/cells/activate-product-cell/activate-product-cell.component';
 import { RemoveProductCellComponent } from './unit/assignments/cells/remove-product-cell/remove-product-cell.component';
 import { FSUnitDetailsComponent } from './unit/details';
+import { OrganizationTableType } from '../../occ';
 
 export const MAX_OCC_INTEGER_VALUE = 2147483647;
 
@@ -159,10 +159,7 @@ export const unitsCmsConfig: CmsConfig = {
 
 export const unitsTableConfigFactory: TableConfig = {
   table: {
-    // TO DO:
-    // Consult with Spartacus on is it possible to extend OrganizationTableType enum
-    // to custom values so we can stop using COST_CENTER for PRODUCT_ASSIGNMENTS
-    [OrganizationTableType.COST_CENTER]: {
+    [OrganizationTableType.PRODUCT_ASSIGNMENTS]: {
       cells: ['name', 'activate', 'remove'],
       options: {
         cells: {
@@ -178,7 +175,7 @@ export const unitsTableConfigFactory: TableConfig = {
         },
       },
     },
-    [OrganizationTableType.COST_CENTER_BUDGETS]: {
+    [OrganizationTableType.POTENTIAL_PRODUCT_ASSIGNMENTS]: {
       cells: ['name', 'add'],
       options: {
         cells: {
