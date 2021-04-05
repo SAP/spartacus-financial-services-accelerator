@@ -10,18 +10,20 @@
         </h4>
         <form>
           <div class="form-check" *ngFor="let type of paymentTypes$ | async">
-            <input
-              id="paymentType-{{ type.code }}"
-              class="form-check-input"
-              type="radio"
-              name="paymentMethod"
-              [attr.aria-checked]="type.code === (paymentType$ | async)"
-              (click)="changeType(type.code)"
-              [value]="type.code"
-              [checked]="type.code === (paymentType$ | async)"
-            />
-            <label class="pl-3 pt-1">
-              {{ 'fscommon.payment.' + type.code | cxTranslate }}
+            <label class="pointer">
+              <input
+                id="paymentType-{{ type.code }}"
+                class="form-check-input"
+                type="radio"
+                name="paymentMethod"
+                [attr.aria-checked]="type.code === (paymentType$ | async)"
+                (click)="changeType(type.code)"
+                [value]="type.code"
+                [checked]="type.code === (paymentType$ | async)"
+              />
+              <span class="form-check-label">
+                {{ 'fscommon.payment.' + type.code | cxTranslate }}
+              </span>
             </label>
           </div>
         </form>

@@ -40,7 +40,6 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
-    localStorage.setItem('bindingState', JSON.stringify(true));
     combineLatest([this.cartService.getActive(), this.cartService.isStable()])
       .pipe(
         filter(([_, stable]) => stable),
