@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { EntitiesModel, PaginationModel } from '@spartacus/core';
-import {
-  OrganizationTableType,
-  SubListService,
-} from '@spartacus/organization/administration/components';
+import { SubListService } from '@spartacus/organization/administration/components';
 import { TableService } from '@spartacus/storefront';
+import { OrganizationTableType } from '../../../../occ/occ-models/occ.models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
@@ -20,7 +18,8 @@ export class PotentialAssingmensListService extends SubListService<any> {
     super(tableService);
   }
 
-  protected tableType = OrganizationTableType.COST_CENTER_BUDGETS;
+  protected tableType: any =
+    OrganizationTableType.POTENTIAL_PRODUCT_ASSIGNMENTS;
 
   protected load(_pagination: PaginationModel): Observable<EntitiesModel<any>> {
     return this.productAssignmentService
