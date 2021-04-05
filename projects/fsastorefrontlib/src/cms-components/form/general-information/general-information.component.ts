@@ -8,7 +8,11 @@ import {
 } from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
-import { FormDefinitionType, FSCart } from '../../../occ/occ-models';
+import {
+  BindingStateType,
+  FormDefinitionType,
+  FSCart,
+} from '../../../occ/occ-models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 
 @Component({
@@ -59,12 +63,15 @@ export class GeneralInformationComponent extends FormCMSComponent
         .pipe(
           map(cart => {
             if (cart.code) {
-              const chooseCoverFormId = <any>(
-                (<FSCart>cart).insuranceQuote?.quoteDetails?.formId
-              );
-              if (chooseCoverFormId) {
-                this.formDataService.loadFormData(chooseCoverFormId);
-                this.formData$ = this.formDataService.getFormData();
+              const bindingState = (<FSCart>cart).insuranceQuote.state.code;
+              if (bindingState !== BindingStateType.BIND) {
+                const chooseCoverFormId = <any>(
+                  (<FSCart>cart).insuranceQuote?.quoteDetails?.formId
+                );
+                if (chooseCoverFormId) {
+                  this.formDataService.loadFormData(chooseCoverFormId);
+                  this.formData$ = this.formDataService.getFormData();
+                }
               }
             }
           })
