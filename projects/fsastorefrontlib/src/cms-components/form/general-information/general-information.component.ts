@@ -64,14 +64,11 @@ export class GeneralInformationComponent extends FormCMSComponent
           map(cart => {
             if (cart.code) {
               const bindingState = (<FSCart>cart).insuranceQuote.state.code;
-              if (bindingState !== BindingStateType.BIND) {
-                const chooseCoverFormId = <any>(
-                  (<FSCart>cart).insuranceQuote?.quoteDetails?.formId
-                );
-                if (chooseCoverFormId) {
-                  this.formDataService.loadFormData(chooseCoverFormId);
-                  this.formData$ = this.formDataService.getFormData();
-                }
+              const chooseCoverFormId = (<FSCart>cart).insuranceQuote
+                ?.quoteDetails?.formId;
+              if (bindingState !== BindingStateType.BIND && chooseCoverFormId) {
+                this.formDataService.loadFormData(chooseCoverFormId);
+                this.formData$ = this.formDataService.getFormData();
               }
             }
           })
