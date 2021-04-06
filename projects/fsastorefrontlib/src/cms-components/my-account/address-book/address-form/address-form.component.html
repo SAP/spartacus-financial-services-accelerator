@@ -1,10 +1,10 @@
 <form
   (ngSubmit)="verifyAddress()"
   [formGroup]="addressForm"
-  class="row justify-content-center col-md-12 col-lg-7 m-auto info-container py-4"
+  class="row justify-content-center info-container py-4 px-2"
 >
-  <div class="row col-md-12 col-lg-12">
-    <div class="w-100">
+  <div class="col-md-12 col-lg-12">
+    <div>
       <div class="form-group" formGroupName="country">
         <ng-container *ngIf="countries$ | async as countries">
           <div *ngIf="countries.length !== 0">
@@ -154,20 +154,13 @@
       </div>
     </div>
   </div>
-  <div class="cx-checkout-btns row col-md-12 col-lg-12">
-    <div class="col-md-12 col-lg-6 pl-0" *ngIf="showCancelBtn">
+  <div class="cx-checkout-btns row w-100">
+    <div class="col-md-12 col-lg-6" *ngIf="showCancelBtn">
       <button class="btn btn-block btn-secondary mb-3" (click)="back()">
         {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}
       </button>
     </div>
-    <div
-      class="col-md-12 col-lg-6"
-      [ngClass]="
-        actionBtnLabel === ('addressBook.updateAddress' | cxTranslate)
-          ? 'pr-0'
-          : 'pl-0'
-      "
-    >
+    <div class="col-md-12 col-lg-6">
       <button class="btn btn-block btn-primary" type="submit">
         {{ actionBtnLabel || ('common.continue' | cxTranslate) }}
       </button>
