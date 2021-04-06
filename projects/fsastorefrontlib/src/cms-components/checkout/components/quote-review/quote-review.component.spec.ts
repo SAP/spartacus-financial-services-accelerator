@@ -7,10 +7,11 @@ import {
   I18nTestingModule,
   OccConfig,
   RoutingService,
+  WindowRef,
 } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { of, Observable } from 'rxjs';
-import { FSCart, FSSteps } from '../../../../occ/occ-models';
+import { FSCart, FSOrderEntry, FSSteps } from '../../../../occ/occ-models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -21,6 +22,21 @@ import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 const formDataContent = '{"content":"formContent"}';
+
+const mockOrderEntries: FSOrderEntry[] = [{ removeable: true }];
+
+const mockCart: any = {
+  code: 'test001',
+  insuranceQuote: {
+    quoteId: 'testQuote001',
+    state: {
+      code: 'BIND',
+    },
+    quoteWorkflowStatus: {
+      code: 'REFERRED',
+    },
+  },
+};
 
 class MockActivatedRoute {
   params = of();
@@ -40,7 +56,9 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 class MockFSCheckoutService {
-  filterRemoveableEntries() {}
+  filterRemoveableEntries() {
+    return mockOrderEntries;
+  }
 }
 class MockCategoryService {
   setActiveCategory(category: string) {}
@@ -49,19 +67,6 @@ class MockCategoryService {
     return of('testCategory');
   }
 }
-
-const mockCart: FSCart = {
-  code: 'test001',
-  insuranceQuote: {
-    quoteId: 'testQuote001',
-    state: {
-      code: 'BIND',
-    },
-    quoteWorkflowStatus: {
-      code: 'REFERRED',
-    },
-  },
-};
 
 class MockCartService {
   getActive() {
@@ -106,6 +111,8 @@ describe('Quote Review Component', () => {
   let translationService: FSTranslationService;
   let globalMessageService: GlobalMessageService;
   let mockCartService: FSCartService;
+  let mockCheckoutService: FSCheckoutService;
+  let winRef: WindowRef;
 
   beforeEach(
     waitForAsync(() => {
@@ -166,6 +173,8 @@ describe('Quote Review Component', () => {
     translationService = TestBed.inject(FSTranslationService);
     globalMessageService = TestBed.inject(GlobalMessageService);
     mockCartService = TestBed.inject(FSCartService);
+    mockCheckoutService = TestBed.inject(FSCheckoutService);
+    winRef = TestBed.inject(WindowRef);
     spyOn(routingService, 'go').and.stub();
     component.ngOnInit();
   });
@@ -330,5 +339,12 @@ describe('Quote Review Component', () => {
       { key: 'quoteReview.status.pending' },
       GlobalMessageType.MSG_TYPE_INFO
     );
+  });
+
+  it('should check if removeable entries exists', () => {
+    spyOn(mockCheckoutService, 'filterRemoveableEntries').and.callThrough();
+    const result = component.checkIfRemoveableEntriesExists(mockCart);
+    expect(mockCheckoutService.filterRemoveableEntries).toHaveBeenCalled();
+    expect(result).toEqual(true);
   });
 });

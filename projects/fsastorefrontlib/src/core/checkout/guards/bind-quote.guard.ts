@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanActivate, UrlTree } from '@angular/router';
 import {
   ActiveCartService,
-  CmsActivatedRouteSnapshot,
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
@@ -23,20 +22,9 @@ export class BindQuoteGuard implements CanActivate {
     protected fsCheckoutConfigService: FSCheckoutConfigService
   ) {}
 
-  protected readonly CART_CREATION_CHECKOUT_STEPS = [
-    'comparisonCheckoutStep',
-    'configureProductStep',
-  ];
-
-  canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
-    const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
-      route
-    );
-    const sourceStep = this.fsCheckoutConfigService.steps[currentStepIndex - 1];
-    if (
-      sourceStep &&
-      !this.CART_CREATION_CHECKOUT_STEPS.includes(sourceStep.id)
-    ) {
+  canActivate(): Observable<boolean | UrlTree> {
+    const isQuoteBind = localStorage.getItem('bindingState');
+    if (isQuoteBind) {
       return this.cartService.getActive().pipe(
         filter(cart => !!cart.code),
         take(1),
