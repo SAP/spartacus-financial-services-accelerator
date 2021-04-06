@@ -88,8 +88,8 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'addressBook',
-      pageLabel: 'address-book',
+      cxRoute: 'addressInfo',
+      pageLabel: 'address-info',
     },
     component: PageLayoutComponent,
   },

@@ -31,8 +31,8 @@ export class FSAddressFormComponent extends AddressFormComponent
     country: this.fb.group({
       isocode: [null, Validators.required],
     }),
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    firstName: [{ value: '', disabled: true }, Validators.required],
+    lastName: [{ value: '', disabled: true }, Validators.required],
     line1: ['', Validators.required],
     line2: [''],
     town: ['', Validators.required],
@@ -91,6 +91,8 @@ export class FSAddressFormComponent extends AddressFormComponent
 
   verifyAddress(): void {
     this.preventDOMManipulation();
+    this.addressForm.get('firstName').enable();
+    this.addressForm.get('lastName').enable();
     super.verifyAddress();
   }
 

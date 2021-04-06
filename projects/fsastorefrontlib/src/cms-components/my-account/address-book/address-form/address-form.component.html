@@ -1,6 +1,10 @@
-<form (ngSubmit)="verifyAddress()" [formGroup]="addressForm">
-  <div class="row">
-    <div class="col-md-12 col-lg-9">
+<form
+  (ngSubmit)="verifyAddress()"
+  [formGroup]="addressForm"
+  class="row justify-content-center col-md-12 col-lg-7 m-auto info-container py-4"
+>
+  <div class="row col-md-12 col-lg-12">
+    <div class="w-100">
       <div class="form-group" formGroupName="country">
         <ng-container *ngIf="countries$ | async as countries">
           <div *ngIf="countries.length !== 0">
@@ -16,7 +20,7 @@
                 [items]="countries"
                 bindLabel="name"
                 bindValue="isocode"
-                placeholder="{{ 'addressForm.selectOne' | cxTranslate }}"
+                [placeholder]="'addressForm.selectOne' | cxTranslate"
                 (change)="countrySelected($event)"
               >
               </ng-select>
@@ -35,11 +39,8 @@
           <input
             class="form-control"
             type="text"
-            placeholder="{{
-              'addressForm.firstName.placeholder' | cxTranslate
-            }}"
+            [placeholder]="'addressForm.firstName.placeholder' | cxTranslate"
             formControlName="firstName"
-            disabled
           />
           <cx-form-errors
             [control]="addressForm.get('firstName')"
@@ -54,9 +55,8 @@
           <input
             type="text"
             class="form-control"
-            placeholder="{{ 'addressForm.lastName.placeholder' | cxTranslate }}"
+            [placeholder]="'addressForm.lastName.placeholder' | cxTranslate"
             formControlName="lastName"
-            disabled
           />
           <cx-form-errors
             [control]="addressForm.get('lastName')"
@@ -71,7 +71,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="{{ 'addressForm.streetAddress' | cxTranslate }}"
+            [placeholder]="'addressForm.streetAddress' | cxTranslate"
             formControlName="line1"
           />
           <cx-form-errors [control]="addressForm.get('line1')"></cx-form-errors>
@@ -85,7 +85,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="{{ 'addressForm.aptSuite' | cxTranslate }}"
+            [placeholder]="'addressForm.aptSuite' | cxTranslate"
             formControlName="line2"
           />
         </label>
@@ -99,7 +99,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="{{ 'addressForm.city.placeholder' | cxTranslate }}"
+              [placeholder]="'addressForm.city.placeholder' | cxTranslate"
               formControlName="town"
             />
             <cx-form-errors
@@ -115,9 +115,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="{{
-                'addressForm.zipCode.placeholder' | cxTranslate
-              }}"
+              [placeholder]="'addressForm.zipCode.placeholder' | cxTranslate"
               formControlName="postalCode"
             />
             <cx-form-errors
@@ -141,9 +139,9 @@
                   [searchable]="true"
                   [clearable]="false"
                   [items]="regions"
-                  bindLabel="{{ regions[0].name ? 'name' : 'isocode' }}"
-                  bindValue="{{ regions[0].name ? 'isocode' : 'region' }}"
-                  placeholder="{{ 'addressForm.selectOne' | cxTranslate }}"
+                  [bindLabel]="regions[0].name ? 'name' : 'isocode'"
+                  [bindValue]="regions[0].name ? 'isocode' : 'region'"
+                  [placeholder]="'addressForm.selectOne' | cxTranslate"
                 >
                 </ng-select>
                 <cx-form-errors
@@ -156,13 +154,20 @@
       </div>
     </div>
   </div>
-  <div class="cx-checkout-btns row">
-    <div class="col-md-12 col-lg-6" *ngIf="showCancelBtn">
-      <button class="btn btn-block btn-action" (click)="back()">
+  <div class="cx-checkout-btns row col-md-12 col-lg-12">
+    <div class="col-md-12 col-lg-6 pl-0" *ngIf="showCancelBtn">
+      <button class="btn btn-block btn-secondary mb-3" (click)="back()">
         {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}
       </button>
     </div>
-    <div class="col-md-12 col-lg-6">
+    <div
+      class="col-md-12 col-lg-6"
+      [ngClass]="
+        actionBtnLabel === ('addressBook.updateAddress' | cxTranslate)
+          ? 'pr-0'
+          : 'pl-0'
+      "
+    >
       <button class="btn btn-block btn-primary" type="submit">
         {{ actionBtnLabel || ('common.continue' | cxTranslate) }}
       </button>

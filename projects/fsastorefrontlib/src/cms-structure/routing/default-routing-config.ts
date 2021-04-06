@@ -27,7 +27,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   personalDetails: { paths: ['my-account/fs-update-profile'] },
   updateEmail: { paths: ['my-account/update-email'] },
   updatePasswordComp: { paths: ['my-account/update-password'] },
-  addressBook: { paths: ['my-account/address-book'] },
+  addressInfo: { paths: ['my-account/address-info'] },
   closeAccount: { paths: ['my-account/close-account'] },
   claims: { paths: ['my-account/my-insurance-claims'] },
   claimDetails: { paths: ['my-account/my-insurance-claims/:claimId'] },
