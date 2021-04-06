@@ -85,6 +85,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     pricingData: PricingData
   ) {
+    localStorage.removeItem('bindingState');
     this.store.dispatch(
       new fromAction.StartBundle({
         userId: userId,

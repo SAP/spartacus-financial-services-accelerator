@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   ActiveCartService,
   Cart,
-  CmsActivatedRouteSnapshot,
   GlobalMessageService,
   RoutingService,
 } from '@spartacus/core';
@@ -19,13 +18,6 @@ const mockCart = {
       code: BindingStateType.BIND,
     },
   },
-};
-const mockActivatedRoute = {
-  url: [
-    {
-      path: 'testPath',
-    },
-  ],
 };
 class MockRoutingService {
   go() {}
@@ -94,7 +86,7 @@ describe(`BindQuoteGuard`, () => {
     cartService = TestBed.inject(ActiveCartService);
     routing = TestBed.inject(RoutingService);
     checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
-
+    localStorage.setItem('bindingState', 'true');
     spyOn(routing, 'go').and.stub();
   });
 
@@ -102,7 +94,7 @@ describe(`BindQuoteGuard`, () => {
     mockCart.insuranceQuote.state.code = BindingStateType.BIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
     guard
-      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
+      .canActivate()
       .subscribe(isActive => expect(isActive).toBe(false))
       .unsubscribe();
     expect(routing.go).toHaveBeenCalled();
@@ -112,7 +104,7 @@ describe(`BindQuoteGuard`, () => {
     mockCart.insuranceQuote.state.code = BindingStateType.UNBIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
     guard
-      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
+      .canActivate()
       .subscribe(isActive => expect(isActive).toBe(true))
       .unsubscribe();
     expect(routing.go).not.toHaveBeenCalled();
@@ -121,7 +113,7 @@ describe(`BindQuoteGuard`, () => {
   it(`should not redirect to the homepage when source step is comparisonCheckoutStep`, () => {
     spyOn(checkoutConfigService, 'getCurrentStepIndex').and.returnValue(2);
     guard
-      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
+      .canActivate()
       .subscribe(isActive => expect(isActive).toBe(true))
       .unsubscribe();
     expect(routing.go).not.toHaveBeenCalled();
