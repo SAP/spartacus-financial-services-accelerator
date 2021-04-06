@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   ActiveCartService,
   Cart,
-  CmsActivatedRouteSnapshot,
   GlobalMessageService,
   RoutingService,
 } from '@spartacus/core';
@@ -87,7 +86,7 @@ describe(`BindQuoteGuard`, () => {
     cartService = TestBed.inject(ActiveCartService);
     routing = TestBed.inject(RoutingService);
     checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
-    localStorage.setItem('bindingState', JSON.stringify(true));
+    localStorage.setItem('bindingState', 'true');
     spyOn(routing, 'go').and.stub();
   });
 

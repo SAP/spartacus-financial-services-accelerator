@@ -7,6 +7,7 @@ import {
   I18nTestingModule,
   OccConfig,
   RoutingService,
+  WindowRef,
 } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { of, Observable } from 'rxjs';
@@ -111,6 +112,7 @@ describe('Quote Review Component', () => {
   let globalMessageService: GlobalMessageService;
   let mockCartService: FSCartService;
   let mockCheckoutService: FSCheckoutService;
+  let winRef: WindowRef;
 
   beforeEach(
     waitForAsync(() => {
@@ -172,6 +174,7 @@ describe('Quote Review Component', () => {
     globalMessageService = TestBed.inject(GlobalMessageService);
     mockCartService = TestBed.inject(FSCartService);
     mockCheckoutService = TestBed.inject(FSCheckoutService);
+    winRef = TestBed.inject(WindowRef);
     spyOn(routingService, 'go').and.stub();
     component.ngOnInit();
   });

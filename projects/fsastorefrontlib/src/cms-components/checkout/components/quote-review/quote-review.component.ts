@@ -6,6 +6,7 @@ import {
   GlobalMessageType,
   OccConfig,
   RoutingService,
+  WindowRef,
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
@@ -52,7 +53,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected modalService: ModalService,
     protected translationService: FSTranslationService,
     protected checkoutService: FSCheckoutService,
-    protected globalMessageService: GlobalMessageService
+    protected globalMessageService: GlobalMessageService,
+    protected winRef?: WindowRef
   ) {}
 
   ngOnInit() {
@@ -195,7 +197,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
             if (
               (<FSCart>cart).insuranceQuote.state.code === BindingStateType.BIND
             ) {
-              localStorage.setItem('bindingState', 'true');
+              this.winRef.localStorage.setItem('bindingState', 'true');
             }
           })
         )
