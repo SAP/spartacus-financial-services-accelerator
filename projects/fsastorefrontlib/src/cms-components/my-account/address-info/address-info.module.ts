@@ -15,7 +15,7 @@ import {
   IconModule,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { FSAddressBookComponent } from './address-book.component';
+import { FSAddressInfoComponent } from './address-info.component';
 import { FSAddressFormComponent } from './address-form/address-form.component';
 
 @NgModule({
@@ -31,18 +31,18 @@ import { FSAddressFormComponent } from './address-form/address-form.component';
     SpinnerModule,
     I18nModule,
   ],
-  declarations: [FSAddressBookComponent, FSAddressFormComponent],
-  exports: [FSAddressBookComponent, FSAddressFormComponent],
+  declarations: [FSAddressInfoComponent, FSAddressFormComponent],
+  exports: [FSAddressInfoComponent, FSAddressFormComponent],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
         AccountAddressBookComponent: {
-          component: FSAddressBookComponent,
+          component: FSAddressInfoComponent,
           guards: [AuthGuard],
         },
       },
     }),
   ],
-  entryComponents: [FSAddressBookComponent, FSAddressFormComponent],
+  entryComponents: [FSAddressInfoComponent, FSAddressFormComponent],
 })
 export class FSAddressBookModule {}

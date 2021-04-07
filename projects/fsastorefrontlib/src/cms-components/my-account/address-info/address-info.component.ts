@@ -13,9 +13,9 @@ import {
 import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './address-book.component.html',
+  templateUrl: './address-info.component.html',
 })
-export class FSAddressBookComponent extends AddressBookComponent
+export class FSAddressInfoComponent extends AddressBookComponent
   implements OnInit {
   user$: Observable<User>;
 

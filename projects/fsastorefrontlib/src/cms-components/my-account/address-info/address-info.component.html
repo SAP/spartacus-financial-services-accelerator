@@ -28,9 +28,9 @@
   </ng-container>
 
   <ng-container *ngIf="!(addresses$ | async).length || showAddAddressForm">
-    <section class="col-md-12 col-lg-7 m-auto">
+    <section class="row justify-content-center">
       <cx-fs-address-form
-        class="cx-form"
+        class="cx-form col-md-12 col-lg-6"
         showTitleCode="true"
         [showCancelBtn]="!((addresses$ | async).length === 0)"
         [user]="user$ | async"
@@ -45,9 +45,9 @@
   </ng-container>
 
   <ng-container *ngIf="showEditAddressForm">
-    <section class="col-md-12 col-lg-7 m-auto">
+    <section class="row justify-content-center">
       <cx-fs-address-form
-        class=""
+        class="col-md-12 col-lg-6"
         showTitleCode="true"
         [user]="user$ | async"
         [actionBtnLabel]="'addressBook.updateAddress' | cxTranslate"

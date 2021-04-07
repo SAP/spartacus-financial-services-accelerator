@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
-import { FSAddressBookModule } from './address-book';
+import { FSAddressBookModule } from './address-info';
 import { ClaimModule } from './claim/claim.module';
 import { DocumentModule } from './documents';
 import { InboxModule } from './inbox/inbox.module';

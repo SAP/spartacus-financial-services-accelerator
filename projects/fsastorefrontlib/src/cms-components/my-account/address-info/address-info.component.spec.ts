@@ -22,7 +22,7 @@ import {
   SpinnerModule,
 } from '@spartacus/storefront';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { FSAddressBookComponent } from './address-book.component';
+import { FSAddressInfoComponent } from './address-info.component';
 
 const mockAddress: Address = {
   id: 'addressMockId',
@@ -106,9 +106,9 @@ class MockUserAddressService {
   setAddressAsDefault = jasmine.createSpy();
 }
 
-describe('FSAddressBookComponent', () => {
-  let component: FSAddressBookComponent;
-  let fixture: ComponentFixture<FSAddressBookComponent>;
+describe('FSAddressInfoComponent', () => {
+  let component: FSAddressInfoComponent;
+  let fixture: ComponentFixture<FSAddressInfoComponent>;
   let el: DebugElement;
   let userAddressService: UserAddressService;
   let checkoutDeliveryService: CheckoutDeliveryService;
@@ -133,13 +133,13 @@ describe('FSAddressBookComponent', () => {
             useClass: MockUserService,
           },
         ],
-        declarations: [FSAddressBookComponent, MockAddressFormComponent],
+        declarations: [FSAddressInfoComponent, MockAddressFormComponent],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FSAddressBookComponent);
+    fixture = TestBed.createComponent(FSAddressInfoComponent);
     component = fixture.componentInstance;
     spyOn(component, 'addAddressButtonHandle');
     el = fixture.debugElement;
