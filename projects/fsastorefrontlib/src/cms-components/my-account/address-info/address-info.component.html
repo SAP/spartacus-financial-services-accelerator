@@ -1,4 +1,4 @@
-<div class="cx-section">
+<div class="cx-section container">
   <ng-container
     *ngIf="
       (addresses$ | async).length &&
@@ -11,7 +11,7 @@
     >
       <div
         *ngFor="let address of addresses$ | async"
-        class="col-md-6 cx-address-card"
+        class="col-md-6 cx-address-card cx-payment-card"
       >
         <cx-card
           [border]="true"
@@ -28,17 +28,14 @@
   </ng-container>
 
   <ng-container *ngIf="!(addresses$ | async).length || showAddAddressForm">
-    <section>
-      <p class="cx-section-msg">
-        {{ 'addressBook.addAddress' | cxTranslate }}
-      </p>
+    <section class="row justify-content-center">
       <cx-fs-address-form
-        class="cx-form"
+        class="cx-form col-md-12 col-lg-6"
         showTitleCode="true"
         [showCancelBtn]="!((addresses$ | async).length === 0)"
         [user]="user$ | async"
-        actionBtnLabel="{{ 'addressBook.addAddress' | cxTranslate }}"
-        cancelBtnLabel="{{ 'addressBook.backToAddressList' | cxTranslate }}"
+        [actionBtnLabel]="'addressBook.addAddress' | cxTranslate"
+        [cancelBtnLabel]="'common.back' | cxTranslate"
         [setAsDefaultField]="true"
         (submitAddress)="addAddressSubmit($event)"
         (backToAddress)="addAddressCancel()"
@@ -48,15 +45,13 @@
   </ng-container>
 
   <ng-container *ngIf="showEditAddressForm">
-    <section>
-      <p class="cx-section-msg">
-        {{ 'addressForm.editAddress' | cxTranslate }}
-      </p>
+    <section class="row justify-content-center">
       <cx-fs-address-form
+        class="col-md-12 col-lg-6"
         showTitleCode="true"
         [user]="user$ | async"
-        actionBtnLabel="{{ 'addressBook.updateAddress' | cxTranslate }}"
-        cancelBtnLabel="{{ 'addressBook.backToAddressList' | cxTranslate }}"
+        [actionBtnLabel]="'addressBook.updateAddress' | cxTranslate"
+        [cancelBtnLabel]="'common.back' | cxTranslate"
         [addressData]="currentAddress"
         (submitAddress)="editAddressSubmit($event)"
         (backToAddress)="editAddressCancel()"
