@@ -3,9 +3,9 @@
   [formGroup]="addressForm"
   class="info-container p-4"
 >
-  <div class="form-group" formGroupName="country">
+  <div class="form-group row" formGroupName="country">
     <ng-container *ngIf="countries$ | async as countries">
-      <div *ngIf="countries.length !== 0">
+      <div *ngIf="countries.length !== 0" class="col-md-12">
         <label aria-required="true">
           <span class="label-content required">{{
             'addressForm.country' | cxTranslate
@@ -29,65 +29,74 @@
       </div>
     </ng-container>
   </div>
-  <div class="form-group">
-    <label>
-      <span class="label-content required">{{
-        'addressForm.firstName.label' | cxTranslate
-      }}</span>
-      <input
-        class="form-control"
-        type="text"
-        [placeholder]="'addressForm.firstName.placeholder' | cxTranslate"
-        formControlName="firstName"
-        readonly
-      />
-      <cx-form-errors [control]="addressForm.get('firstName')"></cx-form-errors>
-    </label>
+  <div class="form-group row">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content required">{{
+          'addressForm.firstName.label' | cxTranslate
+        }}</span>
+        <input
+          class="form-control"
+          type="text"
+          [placeholder]="'addressForm.firstName.placeholder' | cxTranslate"
+          formControlName="firstName"
+          readonly
+        />
+        <cx-form-errors [control]="addressForm.get('firstName')"></cx-form-errors>
+      </label>
+    </div>
   </div>
-  <div class="form-group">
-    <label>
-      <span class="label-content required">{{
-        'addressForm.lastName.label' | cxTranslate
-      }}</span>
-      <input
-        type="text"
-        class="form-control"
-        [placeholder]="'addressForm.lastName.placeholder' | cxTranslate"
-        formControlName="lastName"
-        readonly
-      />
-      <cx-form-errors [control]="addressForm.get('lastName')"></cx-form-errors>
-    </label>
+  <div class="form-group row">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content required">{{
+          'addressForm.lastName.label' | cxTranslate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.lastName.placeholder' | cxTranslate"
+          formControlName="lastName"
+          readonly
+        />
+        <cx-form-errors [control]="addressForm.get('lastName')"></cx-form-errors>
+      </label>
+    </div>
+   
   </div>
-  <div class="form-group">
-    <label>
-      <span class="label-content required">{{
-        'addressForm.streetName' | cxTranslate
-      }}</span>
-      <input
-        type="text"
-        class="form-control"
-        [placeholder]="'addressForm.streetAddress' | cxTranslate"
-        formControlName="line1"
-      />
-      <cx-form-errors [control]="addressForm.get('line1')"></cx-form-errors>
-    </label>
+  <div class="form-group row">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content required">{{
+          'addressForm.streetName' | cxTranslate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.streetAddress' | cxTranslate"
+          formControlName="line1"
+        />
+        <cx-form-errors [control]="addressForm.get('line1')"></cx-form-errors>
+      </label>
+    </div>
   </div>
-  <div class="form-group">
-    <label>
-      <span class="label-content">{{
-        'addressForm.streetNumber' | cxTranslate
-      }}</span>
-      <input
-        type="text"
-        class="form-control"
-        [placeholder]="'addressForm.aptSuite' | cxTranslate"
-        formControlName="line2"
-      />
-    </label>
+  <div class="form-group row">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content">{{
+          'addressForm.streetNumber' | cxTranslate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.aptSuite' | cxTranslate"
+          formControlName="line2"
+        />
+      </label>
+    </div>
   </div>
-  <div class="row">
-    <div class="form-group col-md-6">
+  <div class="form-group row">
+    <div class="col-md-6">
       <label>
         <span class="label-content required">{{
           'addressForm.city.label' | cxTranslate
@@ -101,7 +110,7 @@
         <cx-form-errors [control]="addressForm.get('town')"></cx-form-errors>
       </label>
     </div>
-    <div class="form-group col-md-6">
+    <div class="col-md-6">
       <label>
         <span class="label-content required">{{
           'addressForm.zipCode.label' | cxTranslate
@@ -119,7 +128,7 @@
     </div>
     <ng-container *ngIf="regions$ | async as regions" formGroupName="region">
       <ng-container *ngIf="regions.length !== 0">
-        <div class="form-group col-md-6">
+        <div class="col-md-6">
           <label aria-required="true">
             <span class="label-content required">{{
               'addressForm.state' | cxTranslate
@@ -143,7 +152,7 @@
       </ng-container>
     </ng-container>
   </div>
-  <div class="cx-checkout-btns form-group row">
+  <div class="form-group row">
     <div class="col-md-12 col-lg-6" *ngIf="showCancelBtn">
       <button class="btn btn-block btn-secondary mb-3" (click)="back()">
         {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}
