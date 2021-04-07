@@ -166,6 +166,7 @@ export const fscommon = {
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
       backToList: '[DE] Back to list',
+      noSearchResults: '[DE] No search results',
     },
     httpHandlers: {
       existingCouponCodeProvided:

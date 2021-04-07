@@ -1,5 +1,5 @@
 <ng-container *ngIf="searchResults$ | async as results; else loading">
-  <div class="mt-5">
+  <div class="mt-5" *ngIf="results.agents.length > 0; else noSearchResults">
     <div class="row">
       <ng-container
         *ngIf="
@@ -143,4 +143,10 @@
 
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+
+<ng-template #noSearchResults>
+  <h2 class="col-md-6 text-center p-5 normal-weight">
+    {{ 'fscommon.agentLocator.noSearchResults' | cxTranslate }}
+  </h2>
 </ng-template>
