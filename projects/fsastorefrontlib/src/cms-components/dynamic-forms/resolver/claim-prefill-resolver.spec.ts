@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule } from '@spartacus/core';
-import { ClaimService } from 'projects/fsastorefrontlib/src/core';
+import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import { of } from 'rxjs';
 import { ClaimPrefillResolver } from './claim-prefill-resolver';
 
