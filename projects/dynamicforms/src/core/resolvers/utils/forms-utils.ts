@@ -13,7 +13,7 @@ export class FormsUtils {
     let currentValue = object;
     const attributes = fieldPath.split('.');
     for (const attribute of attributes) {
-      currentValue = this.getValueForAttibute(attribute, currentValue);
+      currentValue = this.getValueForAttribute(attribute, currentValue);
       if (!currentValue) {
         break;
       }
@@ -21,11 +21,13 @@ export class FormsUtils {
     return currentValue;
   }
 
-  private static getValueForAttibute(attribute: string, objectValue) {
+  private static getValueForAttribute(attribute: string, objectValue) {
     if (attribute.indexOf('[') !== -1) {
       const attributeName = attribute.split('[')[0];
       const arrayPosition = attribute.split('[')[1].slice(0, 1);
-      return objectValue[attributeName][arrayPosition];
+      if (objectValue[attributeName]) {
+        return objectValue[attributeName][arrayPosition];
+      }
     }
     return objectValue[attribute];
   }
