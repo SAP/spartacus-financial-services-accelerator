@@ -17,6 +17,7 @@ import { FSCartService } from '../../../../core/cart/facade/cart.service';
 export class FSCartCouponComponent extends CartCouponComponent
   implements OnInit, OnDestroy {
   userRegistered$: Observable<any>;
+  isCartStable$: Observable<boolean>;
 
   constructor(
     protected cartVoucherService: CartVoucherService,
@@ -27,6 +28,7 @@ export class FSCartCouponComponent extends CartCouponComponent
     protected userIdService: UserIdService
   ) {
     super(cartVoucherService, formBuilder, customerCouponService, cartService);
+    this.isCartStable$ = this.cartService.isStable();
   }
 
   ngOnInit(): void {

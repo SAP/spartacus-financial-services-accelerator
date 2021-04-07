@@ -195,7 +195,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         .pipe(
           tap(cart => {
             if (
-              (<FSCart>cart).insuranceQuote.state.code === BindingStateType.BIND
+              (<FSCart>cart).insuranceQuote?.state?.code ===
+              BindingStateType.BIND
             ) {
               this.winRef.localStorage.setItem('bindingState', 'true');
             }

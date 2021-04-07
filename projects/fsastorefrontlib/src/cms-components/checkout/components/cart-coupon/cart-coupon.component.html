@@ -1,4 +1,4 @@
-<ng-container *ngIf="cart$ | async as cart">
+<ng-container *ngIf="(isCartStable$ | async) && (cart$ | async) as cart">
   <ng-container
     *ngIf="
       cart.insuranceQuote?.state?.code !== 'BIND' &&
