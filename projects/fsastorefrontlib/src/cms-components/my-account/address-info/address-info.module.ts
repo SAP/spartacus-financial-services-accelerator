@@ -36,7 +36,7 @@ import { FSAddressFormComponent } from './address-form/address-form.component';
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
-        AccountAddressBookComponent: {
+        AccountAddressInfoComponent: {
           component: FSAddressInfoComponent,
           guards: [AuthGuard],
         },
