@@ -27,7 +27,10 @@
                 [attr.data-step]="i + 1"
               ></div>
               <p class="label position-relative mb-2">
-                {{ step.name }}
+                {{
+                  'fscommon.progressBar.step.' + step.pageLabelOrId
+                    | cxTranslate
+                }}
               </p>
             </div>
           </div>
