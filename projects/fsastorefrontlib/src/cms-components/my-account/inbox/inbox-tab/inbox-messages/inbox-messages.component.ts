@@ -63,6 +63,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
             ) {
               this.clearSearchData();
             }
+            this.mainCheckboxChecked = false;
             this.loadedMessages = null;
             this.messageGroup =
               group && group.messageGroup
