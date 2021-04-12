@@ -136,6 +136,7 @@ export const fscommon = {
         changeCarDetailsPage: 'Change Car Details',
         changeSimulationPage: 'Change Preview',
         changeCoveragePage: 'Change Coverage',
+        changeAdditionalDriverPage: 'Driver Information',
       },
     },
     category: {
