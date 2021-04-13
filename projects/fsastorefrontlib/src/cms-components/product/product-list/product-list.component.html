@@ -1,4 +1,17 @@
 <div class="cx-page" *ngIf="model$ | async as model">
+  <div>
+    <cx-product-facet-navigation></cx-product-facet-navigation>
+    <!-- <cx-facet-list
+  *ngIf="isOpen$ | async"
+  [isDialog]="hasTrigger"
+  (closeList)="close()"
+  [class.active]="isActive$ | async"
+  [class.dialog]="hasTrigger"
+></cx-facet-list> -->
+  </div>
+  <ng-container *ngFor="let facet of model.facets">
+    <cx-facet #facetRef [facet]="facet"></cx-facet>
+  </ng-container>
   <ng-container
     *ngTemplateOutlet="
       paginationAndSorting;
