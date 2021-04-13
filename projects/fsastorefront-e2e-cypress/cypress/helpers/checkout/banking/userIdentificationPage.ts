@@ -27,4 +27,6 @@ export function selectUserIdentification(identification) {
   cy.wait(`@${cartContent}`).then(({ response }) => {
     expect(response.statusCode).to.eq(200);
   });
+  cy.get('.primary-button').should('contain.text', 'Continue');
+  cy.get('.primary-button').contains('Continue').click();
 }

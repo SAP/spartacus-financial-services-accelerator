@@ -80,8 +80,6 @@ context('Fixed Term Deposit Checkout', () => {
     banking.checkProgressBarLoanAndFTD();
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('Legal Identification');
-    checkout.clickContinueButton();
-    checkout.waitForConfirmation();
   });
 
   it('Should check order confirmation', () => {

@@ -44,7 +44,8 @@ export function ConfirmBindQuote() {
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button').contains('Continue').click();
+  cy.get('.primary-button').should('be.visible');
+  cy.get('.primary-button').contains('Continue').click({ force: true });
 }
 
 export function clickBackButton() {
@@ -107,14 +108,17 @@ export function checkOrderConfirmation() {
 }
 
 export function checkInsuranceComparisonPage(numberOfProducts) {
-  cy.get('cx-fs-comparison-table-panel').should('be.visible');
-  cy.get('.fixed-column').should('have.length', 1);
-  cy.get('.primary-button')
-    .should('contain', 'Select')
-    .should('have.length', numberOfProducts);
-  cy.get('a.link')
-    .should('contain', 'More Info')
-    .should('have.length', numberOfProducts);
+  cy.get('cx-fs-comparison-table-panel')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.fixed-column').should('have.length', 1);
+      cy.get('.primary-button')
+        .should('contain', 'Select')
+        .should('have.length', numberOfProducts);
+      cy.get('a.link')
+        .should('contain', 'More Info')
+        .should('have.length', numberOfProducts);
+    });
 }
 
 export function removeOptionalProduct(productName) {

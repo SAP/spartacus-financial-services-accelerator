@@ -72,7 +72,6 @@ context('Credit Card Checkout', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('At the Nearest Branch');
-    checkout.clickContinueButton();
   });
 
   it('Should check order confirmation', () => {
