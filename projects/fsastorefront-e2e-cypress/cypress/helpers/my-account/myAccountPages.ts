@@ -90,9 +90,9 @@ export function retrieveQuote(length, product) {
   });
   cy.get('h2').should('contain.text', 'Quotes & Applications');
   cy.get('.info-card').should('have.length', length);
-  cy.get('h6')
+  cy.get('.info-card')
     .contains(product)
-    .parent()
+    .siblings('.info-card-wrapper')
     .within(() => {
       cy.get('.link').contains('Retrieve').click({ force: true });
     });

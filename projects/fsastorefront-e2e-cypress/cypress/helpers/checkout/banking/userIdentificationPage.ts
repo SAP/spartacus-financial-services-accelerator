@@ -28,5 +28,5 @@ export function selectUserIdentification(identification) {
     expect(response.statusCode).to.eq(200);
   });
   cy.get('.primary-button').should('contain.text', 'Continue');
-  cy.get('.primary-button').contains('Continue').click();
+  cy.get('.primary-button').click();
 }
