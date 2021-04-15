@@ -13,6 +13,11 @@
       "description": "Add FSA to Angular project.",
       "factory": "./add-fsa/index#addFsa",
       "schema": "./add-fsa/schema.json"
+    },
+    "add-fonts": {
+      "description": "A blank schematic.",
+      "factory": "./add-fonts/index#addFonts",
+      "schema": "./add-fonts/schema.json"
     }
   }
 }

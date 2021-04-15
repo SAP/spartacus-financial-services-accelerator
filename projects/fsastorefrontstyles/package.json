@@ -14,9 +14,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "postinstall": "cp -r ./fonts $INIT_CWD/src/assets"
-  },
   "devDependencies": {
     "sass": "^1.25.0"
   },
