@@ -24,7 +24,6 @@ import {
     RouterModule,
     MediaModule,
     ListNavigationModule,
-    FacetListModule,
     ProductFacetNavigationModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
