@@ -57,7 +57,7 @@ export function configureLoan() {
 
 export function checkMiniCartFirstStep() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €172.64 ',
+    price: ' €128.83 ',
     products: [
       {
         title: 'Number of Applicants:',
@@ -90,7 +90,7 @@ export function checkMiniCartFirstStep() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €187.76 ',
+    price: ' €140.00 ',
     products: [
       {
         title: ' Start Date: ',
@@ -118,7 +118,7 @@ export function checkMiniCart() {
       },
       {
         title: ' Personal Loan: ',
-        value: ' €168.02 ',
+        value: ' €124.21 ',
       },
       {
         title: ' Service Fee: ',
@@ -126,11 +126,11 @@ export function checkMiniCart() {
       },
       {
         title: ' Critical Illness Cover: ',
-        value: ' €11.76 ',
+        value: ' €8.69 ',
       },
       {
         title: ' Job Loss Cover: ',
-        value: ' €3.36 ',
+        value: ' €2.48 ',
       },
     ],
   };
@@ -144,6 +144,6 @@ export function checkLoanApplication() {
     cy.get('.label').contains('Personal Loan');
     cy.get('.label').contains('Quote status');
     cy.get('.value').contains('Approved');
-    cy.get('.value').contains('€187.76');
+    cy.get('.value').contains('€140.00');
   });
 }

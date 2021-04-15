@@ -82,7 +82,6 @@ context('Banking Checkout Steps Reload', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('At the Nearest Branch');
-    checkout.clickContinueButton();
     //Order Confirmation
     checkout.checkOrderConfirmation();
     checkout.checkAccordions('creditCardConfirmation');
