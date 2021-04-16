@@ -359,8 +359,9 @@ function addFonts(): Rule {
     const projectName = workspace.defaultProject;
     const project = workspace.projects[projectName];
     const rawFontCopiesDir = tree.getDir(`${project.sourceRoot}/assets/fonts`);
+    const nodeModulePath = 'node_modules/@spartacus/fsa-styles/fonts';
     const files: string[] = [];
-    tree.getDir('node_modules/@spartacus/fsa-styles/fonts').visit(filePath => {
+    tree.getDir(nodeModulePath).visit(filePath => {
       const file = filePath.split('/').slice(-1).toString();
       files.push(file);
     });
@@ -374,7 +375,7 @@ function addFonts(): Rule {
     });
     files.forEach(fileName => {
       fs.copyFile(
-        `${rootDir}/node_modules/@spartacus/fsa-styles/fonts/${fileName}`,
+        `${rootDir}/${nodeModulePath}/${fileName}`,
         `${rootDir}${rawFontCopiesDir.path}/${fileName}`,
         (err: any) => {
           if (err) {
