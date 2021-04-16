@@ -1,5 +1,5 @@
 <ng-container *ngIf="orders$ | async as orderHistory">
-  <ng-container *ngIf="orderHistory">
+  <ng-container *ngIf="isLoaded$ | async; else loading">
     <div class="container">
       <!-- HEADING -->
       <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
@@ -162,3 +162,7 @@
     </div>
   </ng-container>
 </ng-container>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

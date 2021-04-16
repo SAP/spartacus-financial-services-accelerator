@@ -3,7 +3,6 @@ import * as register from '../../../helpers/register';
 import * as homeowners from '../../../helpers/checkout/insurance/homeowners-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
-import * as orderHistory from '../../../helpers/my-account/myAccountPages';
 
 context('Homeowners Checkout', () => {
   before(() => {
@@ -90,10 +89,5 @@ context('Homeowners Checkout', () => {
 
   it('Should empty my account policies page', () => {
     checkout.checkMyAccountEmptyPages('Policies', 'You have no Policies!');
-  });
-
-  it('Check Order history page', () => {
-    orderHistory.orderHistoryPage();
-    orderHistory.checkOrderHistoryContent('€491.25');
   });
 });

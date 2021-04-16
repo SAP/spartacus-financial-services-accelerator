@@ -149,6 +149,7 @@ export const fscommon = {
         changeCarDetailsPage: 'Fahrzeugdetails ändern',
         changeSimulationPage: 'Vorschau ändern',
         changeCoveragePage: 'Versicherungsschutz ändern',
+        changeAdditionalDriverPage: 'Fahrerinformationen',
       },
     },
     pleaseSelect: 'Wählen Sie:',

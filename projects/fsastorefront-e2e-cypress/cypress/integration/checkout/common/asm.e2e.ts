@@ -1,5 +1,4 @@
 import * as asm from '../../../helpers/asm';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as register from '../../../helpers/register';
 import {
   amosAgent,

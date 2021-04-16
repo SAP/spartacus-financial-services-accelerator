@@ -31,7 +31,7 @@ context('Insurance Checkout Steps Reload', () => {
     travel.selectSingleBudgetPlan();
     //Add Options Step
     travel.checkOptionalProductsAndPick();
-    travel.checkPageComponenth2('Travel Insurance');
+    travel.checkPageComponenth2('Add Options');
     checkout.checkCouponsFields();
     cy.reload();
     checkout.checkCheckoutStep('Your Travel Insurance', '7');
@@ -39,6 +39,7 @@ context('Insurance Checkout Steps Reload', () => {
     checkout.checkCouponsFields();
     checkout.checkBackAndContinueButtons();
     travel.checkOptionalProducts();
+    checkout.clickContinueButton();
     //Personal Details Step
     travel.checkPageComponenth3('Personal Details');
     checkout.checkBackAndContinueButtons();
@@ -53,7 +54,6 @@ context('Insurance Checkout Steps Reload', () => {
     travel.checkTravelMiniCart();
     checkout.clickContinueButton();
     //Bound a Quote
-    checkout.waitForQuoteReviewPage();
     checkout.checkCheckoutStep('Your Travel Insurance', '7');
     checkout.checkProgressBarInsurance();
     checkout.checkAccordions('generalQuoteAccordions');

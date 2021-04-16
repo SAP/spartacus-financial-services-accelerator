@@ -2,7 +2,6 @@ import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as orderHistory from '../../../helpers/my-account/myAccountPages';
 
 context('Renters Checkout', () => {
   before(() => {
@@ -64,7 +63,7 @@ context('Renters Checkout', () => {
 
   it('Select default payment details', () => {
     checkout.populatePaymentDetails();
-    checkout.populateBillingAddress();
+    cy.get('.btn-primary').contains('Continue').click();
   });
 
   it('Place order on final review page', () => {
@@ -79,10 +78,5 @@ context('Renters Checkout', () => {
   it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
-  });
-
-  it('Check Order history page', () => {
-    orderHistory.orderHistoryPage();
-    orderHistory.checkOrderHistoryContent('€54.61');
   });
 });

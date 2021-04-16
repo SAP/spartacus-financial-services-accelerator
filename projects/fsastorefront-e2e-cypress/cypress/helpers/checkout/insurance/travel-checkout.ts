@@ -75,10 +75,7 @@ export function checkOptionalProductsAndPick() {
       },
     ],
   };
-
   shared.checkAddOptionsPageContent(addOptionsContent);
-
-  cy.get('.primary-button').should('be.visible').click();
 }
 
 export function checkTravelMiniCart() {
@@ -132,8 +129,6 @@ export function checkOptionalProducts() {
   };
 
   shared.checkAddOptionsPageContent(addOptionsContent);
-
-  cy.get('.primary-button').should('be.visible').contains('Continue').click();
 }
 
 export function checkPageComponenth2(checkoutStep) {
