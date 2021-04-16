@@ -348,6 +348,44 @@ function updateMainComponent(
     return host;
   };
 }
+
+function addFonts(): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    const workspaceConfigBuffer = tree.read('angular.json');
+    if (!workspaceConfigBuffer) {
+      throw new SchematicsException('Not an Angular CLI workspace');
+    }
+    const workspace = JSON.parse(workspaceConfigBuffer.toString());
+    const projectName = workspace.defaultProject;
+    const project = workspace.projects[projectName];
+    const rawFontCopiesDir = tree.getDir(`${project.sourceRoot}/assets/fonts`);
+    const files: string[] = [];
+    tree.getDir('node_modules/@spartacus/fsa-styles/fonts').visit(filePath => {
+      const file = filePath.split('/').slice(-1).toString();
+      files.push(file);
+    });
+    const fs = require('fs');
+    const parsedDir = JSON.parse(JSON.stringify(rawFontCopiesDir));
+    const rootDir = parsedDir._tree._backend._root;
+    fs.mkdir(`${rootDir}${rawFontCopiesDir.path}`, (err: any) => {
+      if (err) {
+        throw err;
+      }
+    });
+    files.forEach(fileName => {
+      fs.copyFile(
+        `${rootDir}/node_modules/@spartacus/fsa-styles/fonts/${fileName}`,
+        `${rootDir}${rawFontCopiesDir.path}/${fileName}`,
+        (err: any) => {
+          if (err) {
+            throw err;
+          }
+        }
+      );
+    });
+  };
+}
+
 function updateIndexFile(tree: Tree, options: FsOptions): Rule {
   return (host: Tree) => {
     const projectIndexHtmlPath = getIndexHtmlPath(tree);
@@ -376,6 +414,7 @@ export function addFsa(options: FsOptions): Rule {
       updateMainComponent(project, options),
       options.useMetaTags ? updateIndexFile(tree, options) : noop(),
       installPackageJsonDependencies(),
+      addFonts(),
     ])(tree, context);
   };
 }
