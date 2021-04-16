@@ -34,7 +34,6 @@ context('Travel Insurance Checkout', () => {
 
   it('Add optional product to the cart', () => {
     travelCheckout.checkOptionalProductsAndPick();
-    checkout.clickContinueButton();
   });
 
   it('Populate personal details', () => {
