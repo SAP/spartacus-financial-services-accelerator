@@ -6,6 +6,8 @@ const field2 = 'field2';
 const date1 = 'date1';
 const date2 = 'date2';
 const dateOfBirth = 'dateOfBirth';
+const trip = 'trip';
+const formControlCode = 'testTravellers';
 
 describe('FormValidationService', () => {
   let form: FormGroup;
@@ -17,6 +19,9 @@ describe('FormValidationService', () => {
       dateOfBirth: new FormControl(),
       date1: new FormControl(),
       date2: new FormControl(),
+      trip: new FormGroup({
+        testTravellers: new FormControl(),
+      }),
     });
   });
 
@@ -280,7 +285,7 @@ describe('FormValidationService', () => {
     ).toEqual(null);
   });
 
-  it('should return required error, when field has no value', () => {
+  it('should return error, when field has no value', () => {
     form.get(field1).setValue(' ');
     expect(DefaultFormValidators.required(form.get(field1))).toEqual({
       required: true,
@@ -289,5 +294,22 @@ describe('FormValidationService', () => {
     expect(DefaultFormValidators.required(form.get(field2))).toEqual({
       required: true,
     });
+  });
+
+  it('should not check regex for empty field', () => {
+    const numberLetterRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
+    form.get(field1).setValue('');
+    expect(DefaultFormValidators.number(form.get(field1))).toEqual(null);
+    expect(DefaultFormValidators.alphanumeric(form.get(field1))).toEqual(null);
+    expect(
+      DefaultFormValidators.regexValidator(numberLetterRegex)(form.get(field1))
+    ).toEqual(null);
+  });
+
+  it('should get form control for code', () => {
+    const abstractControlResult = form.get(trip).get(formControlCode);
+    expect(
+      DefaultFormValidators.getFormControlForCode(formControlCode, form)
+    ).toEqual(abstractControlResult);
   });
 });

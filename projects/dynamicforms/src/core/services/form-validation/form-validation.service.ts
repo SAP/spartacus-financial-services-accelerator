@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn, Validators } from '@angular/forms';
+import { ValidatorFn } from '@angular/forms';
 import { DefaultFormValidators } from '../../../util/validators/default-form-validators';
 import { DynamicFormsConfig } from '../../config/form-config';
 import {
