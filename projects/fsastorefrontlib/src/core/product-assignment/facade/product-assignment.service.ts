@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OCC_USER_ID_ANONYMOUS, UserIdService } from '@spartacus/core';
+import {
+  B2BUser,
+  OCC_USER_ID_ANONYMOUS,
+  UserIdService,
+  UserService,
+} from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import { StateWithProductAssignment } from '../store/product-assignments-state';
 import * as fromSelector from '../store/selectors';
@@ -12,7 +17,8 @@ import * as fromSelector from '../store/selectors';
 export class ProductAssignmentService {
   constructor(
     protected store: Store<StateWithProductAssignment>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected userService: UserService
   ) {}
 
   user: string;
@@ -61,6 +67,16 @@ export class ProductAssignmentService {
         }
       })
       .unsubscribe();
+  }
+
+  isUserAdminOfUnit(unitId: string): Observable<boolean> {
+    return this.userService.get().pipe(
+      map(user => {
+        if (user && user.uid !== OCC_USER_ID_ANONYMOUS) {
+          return (<B2BUser>user).orgUnit.uid === unitId;
+        }
+      })
+    );
   }
 
   createProductAssignment(orgUnitId: string, productCode: string) {

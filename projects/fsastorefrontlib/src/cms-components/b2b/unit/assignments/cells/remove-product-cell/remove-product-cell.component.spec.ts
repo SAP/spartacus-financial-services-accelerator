@@ -24,6 +24,9 @@ class MockCurrentUnitService {
 
 class MockProductAssignmentService {
   removeProductAssignment() {}
+  isUserAdminOfUnit() {
+    return of(true);
+  }
 }
 
 describe('RemoveProductCellComponent', () => {
@@ -97,5 +100,14 @@ describe('RemoveProductCellComponent', () => {
       mockModel.assignmentCode,
       mockItem.uid
     );
+  });
+
+  it('should check if provided unit is default organization of user', () => {
+    component
+      .isUnitDefaultOrganizationOfUser(mockItem.uid)
+      .subscribe(result => {
+        expect(result).toEqual(false);
+      })
+      .unsubscribe();
   });
 });
