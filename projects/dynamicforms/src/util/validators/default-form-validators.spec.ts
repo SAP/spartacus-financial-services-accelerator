@@ -279,4 +279,15 @@ describe('FormValidationService', () => {
       )(form.get(dateOfBirth))
     ).toEqual(null);
   });
+
+  it('should return required error, when field has no value', () => {
+    form.get(field1).setValue(' ');
+    expect(DefaultFormValidators.required(form.get(field1))).toEqual({
+      required: true,
+    });
+    form.get(field2).setValue('');
+    expect(DefaultFormValidators.required(form.get(field2))).toEqual({
+      required: true,
+    });
+  });
 });
