@@ -1,0 +1,67 @@
+<div class="cx-section container">
+  <ng-container
+    *ngIf="
+      (addresses$ | async).length &&
+      !(showAddAddressForm || showEditAddressForm)
+    "
+  >
+    <div
+      class="row cx-address-deck"
+      *ngIf="!(addressesStateLoading$ | async); else loading"
+    >
+      <div
+        *ngFor="let address of addresses$ | async"
+        class="col-md-6 cx-address-card cx-payment-card"
+      >
+        <cx-card
+          [border]="true"
+          [fitToContainer]="true"
+          [content]="getCardContent(address) | async"
+          (editCard)="editAddressButtonHandle(address)"
+          (setDefaultCard)="setAddressAsDefault(address.id)"
+          (deleteCard)="setEdit(address.id)"
+          [editMode]="address.id === editCard"
+          (cancelCard)="cancelCard()"
+        ></cx-card>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!(addresses$ | async).length || showAddAddressForm">
+    <section class="row justify-content-center">
+      <cx-fs-address-form
+        class="cx-form col-md-12 col-lg-6"
+        showTitleCode="true"
+        [showCancelBtn]="!((addresses$ | async).length === 0)"
+        [user]="user$ | async"
+        [actionBtnLabel]="'addressBook.addAddress' | cxTranslate"
+        [cancelBtnLabel]="'common.back' | cxTranslate"
+        [setAsDefaultField]="true"
+        (submitAddress)="addAddressSubmit($event)"
+        (backToAddress)="addAddressCancel()"
+        (cancelCard)="cancelCard()"
+      ></cx-fs-address-form>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="showEditAddressForm">
+    <section class="row justify-content-center">
+      <cx-fs-address-form
+        class="col-md-12 col-lg-6"
+        showTitleCode="true"
+        [user]="user$ | async"
+        [actionBtnLabel]="'addressBook.updateAddress' | cxTranslate"
+        [cancelBtnLabel]="'common.back' | cxTranslate"
+        [addressData]="currentAddress"
+        (submitAddress)="editAddressSubmit($event)"
+        (backToAddress)="editAddressCancel()"
+      ></cx-fs-address-form>
+    </section>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <div class="col-md-12 cx-address-spinner">
+    <cx-spinner></cx-spinner>
+  </div>
+</ng-template>

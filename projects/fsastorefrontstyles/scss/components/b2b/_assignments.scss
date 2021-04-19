@@ -1,0 +1,12 @@
+%cx-fs-product-assignments {
+  td.activate {
+    width: 20%;
+  }
+  .custom-control-input:checked ~ .custom-control-label::before {
+    border-color: var(--cx-color-primary);
+    background-color: var(--cx-color-primary);
+  }
+  .custom-control-label {
+    margin: 0 0 15px 5px;
+  }
+}

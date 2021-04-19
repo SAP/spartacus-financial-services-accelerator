@@ -71,7 +71,6 @@ context('Current Account Checkout', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification(' Video Identification ');
-    checkout.clickContinueButton();
   });
 
   it('Should check order confirmation', () => {

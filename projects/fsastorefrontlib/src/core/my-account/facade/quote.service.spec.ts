@@ -8,13 +8,73 @@ import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
-import { QuoteActionType } from './../../../occ/occ-models/occ.models';
+import {
+  FSProduct,
+  QuoteActionType,
+} from './../../../occ/occ-models/occ.models';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
+const mockProduct: FSProduct = {
+  code: 'testProduct',
+  defaultCategory: {
+    code: 'testDefaultCategory',
+    name: 'test category',
+  },
+};
+const mockCart: any = {
+  code: 'testCode',
+  guid: 'testUid',
+  deliveryOrderGroups: [
+    {
+      quantity: 1,
+    },
+  ],
+  insuranceQuote: {
+    state: {
+      code: 'UNBIND',
+    },
+    quoteDetails: {
+      entry: [
+        {
+          key: 'formId',
+          value: 'testValue1',
+        },
+        {
+          key: 'updateQuoteKey2',
+          value: 'testValue2',
+        },
+      ],
+    },
+  },
+  entries: [
+    {
+      product: mockProduct,
+      formData: [
+        {
+          id: 'testId',
+          formDefinition: {
+            formId: 'testFormId',
+            content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
+          },
+        },
+      ],
+    },
+  ],
+  totalItems: 0,
+  totalPrice: {
+    currencyIso: 'USD',
+    value: 10.0,
+  },
+};
+const mockQuote = {
+  state: { code: 'BIND' },
+  cartCode: 'testCode',
+  userId: userId,
+};
 
 class MockUserIdService {
   getUserId(): Observable<string> {
@@ -23,9 +83,8 @@ class MockUserIdService {
 }
 
 class MockFormDataService {
-  formData;
   getFormData() {
-    return of(this.formData);
+    return of(mockCart.entries[0].formData[0]);
   }
   loadFormData(): void {}
 }
@@ -35,9 +94,8 @@ class MockFormDataStorageService {
 }
 
 class MockCartService {
-  cart;
   getActive() {
-    return of(this.cart);
+    return of(mockCart);
   }
   loadCart() {}
 }
@@ -51,7 +109,6 @@ describe('QuoteServiceTest', () => {
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
-    //  userIdService = new UserIdService();
     formDataService = new MockFormDataService();
 
     TestBed.configureTestingModule({
@@ -79,6 +136,7 @@ describe('QuoteServiceTest', () => {
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();
   });
 
   it('should QuoteService is injected', inject(
@@ -155,5 +213,28 @@ describe('QuoteServiceTest', () => {
         action: QuoteActionType.UNDERWRITING,
       })
     );
+  });
+
+  it('should be able to update quote', () => {
+    const priceAttributes = 'testPrice';
+    service.updateQuote(cartId, priceAttributes);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.QuoteProcessAction({
+        userId: userId,
+        cartId: cartId,
+        action: QuoteActionType.UPDATE,
+        body: priceAttributes,
+      })
+    );
+  });
+
+  it('should be able to retrieve quotes', () => {
+    service.retrieveQuote(mockQuote);
+    userIdService
+      .getUserId()
+      .subscribe(data => {
+        expect(data).toEqual(mockQuote.userId);
+      })
+      .unsubscribe();
   });
 });

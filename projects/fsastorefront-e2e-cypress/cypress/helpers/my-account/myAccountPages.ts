@@ -82,3 +82,19 @@ export function checkOrderHistoryContent(price) {
       cy.get('.cx-order-history-total').contains(price);
     });
 }
+
+export function retrieveQuote(length, product) {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Quotes & Applications',
+  });
+  cy.get('h2').should('contain.text', 'Quotes & Applications');
+  cy.get('.info-card').should('have.length', length);
+  cy.get('.info-card')
+    .contains(product)
+    .siblings('.info-card-wrapper')
+    .within(() => {
+      cy.get('.link').contains('Retrieve').click({ force: true });
+    });
+  cy.get('h2').should('contain.text', 'Add Option');
+}

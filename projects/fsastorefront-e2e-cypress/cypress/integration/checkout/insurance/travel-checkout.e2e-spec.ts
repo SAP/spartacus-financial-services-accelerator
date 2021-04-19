@@ -4,7 +4,6 @@ import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as inbox from '../../../helpers/my-account/inbox';
-import * as orderHistory from '../../../helpers/my-account/myAccountPages';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -35,7 +34,6 @@ context('Travel Insurance Checkout', () => {
 
   it('Add optional product to the cart', () => {
     travelCheckout.checkOptionalProductsAndPick();
-    checkout.clickContinueButton();
   });
 
   it('Populate personal details', () => {
@@ -74,10 +72,5 @@ context('Travel Insurance Checkout', () => {
     });
     inbox.checkInboxComponets();
     inbox.checkGeneralTab();
-  });
-
-  it('Check Order history page', () => {
-    orderHistory.orderHistoryPage();
-    orderHistory.checkOrderHistoryContent('€99.00');
   });
 });

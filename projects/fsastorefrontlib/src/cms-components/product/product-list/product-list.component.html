@@ -1,4 +1,7 @@
 <div class="cx-page" *ngIf="model$ | async as model">
+  <div>
+    <cx-product-facet-navigation></cx-product-facet-navigation>
+  </div>
   <ng-container
     *ngTemplateOutlet="
       paginationAndSorting;

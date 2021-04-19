@@ -18,8 +18,16 @@ import { Observable, of } from 'rxjs';
 
 import createSpy = jasmine.createSpy;
 import { FSCheckoutConfigService, FSCheckoutService } from '../../../../core';
-import { FSSteps } from '../../../../occ';
+import { FSPaymentTypeEnum, FSSteps } from '../../../../occ';
 
+const mockPaymentTypes = [
+  {
+    code: 'CARD',
+  },
+  {
+    code: 'INVOICE',
+  },
+];
 const mockPaymentDetails: PaymentDetails = {
   id: 'mock payment id',
   accountHolderName: 'Name',
@@ -126,7 +134,7 @@ class MockPaymentTypeService {
   }
 
   getPaymentTypes() {
-    return of([{}]);
+    return of(mockPaymentTypes);
   }
 }
 
@@ -135,7 +143,7 @@ describe('FSPaymentMethodComponent', () => {
   let fixture: ComponentFixture<FSPaymentMethodComponent>;
   let routingService: RoutingService;
   let checkoutService: FSCheckoutService;
-
+  let paymentService: PaymentTypeService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FSPaymentMethodComponent],
@@ -177,6 +185,7 @@ describe('FSPaymentMethodComponent', () => {
     }).compileComponents();
     routingService = TestBed.inject(RoutingService);
     checkoutService = TestBed.inject(FSCheckoutService);
+    paymentService = TestBed.inject(PaymentTypeService);
   });
 
   beforeEach(() => {
@@ -199,8 +208,44 @@ describe('FSPaymentMethodComponent', () => {
     expect(routingService.go).toHaveBeenCalled();
   });
 
-  it('should changeType', () => {
-    component.changeType('invoice');
+  it('should changeType to INVOICE', () => {
+    component.changeType('INVOICE');
     expect(checkoutService.setPaymentType).toHaveBeenCalled();
+  });
+
+  it('should not select payment method to invoice when code is invalid', () => {
+    spyOn(component, 'selectPaymentMethod').and.callThrough();
+    component.changeType('invalid');
+    expect(component.selectPaymentMethod).not.toHaveBeenCalled();
+  });
+
+  it('test show navigation when payment cards do not exist', () => {
+    const emptyPayment = {
+      paymentDetails: {},
+      paymentType: '',
+    };
+    expect(component.showNavigation([], false, emptyPayment)).toBe(true);
+  });
+
+  it('test show navigation when payment exist', () => {
+    component.creditCard = FSPaymentTypeEnum.CARD;
+    const existingPaymentCard = {
+      content: {
+        text: ['************5555', 'Expires 5/2025'],
+      },
+    };
+    const newPayment = {
+      paymentDetails: {
+        accountHolderName: 'Test User',
+        cardNumber: '************1111',
+        cardType: {
+          code: 'visa',
+        },
+      },
+      paymentType: FSPaymentTypeEnum.CARD,
+    };
+    expect(
+      component.showNavigation([existingPaymentCard], true, newPayment)
+    ).toBe(false);
   });
 });

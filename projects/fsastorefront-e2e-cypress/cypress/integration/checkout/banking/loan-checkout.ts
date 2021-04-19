@@ -73,13 +73,11 @@ context('Loan Checkout', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('Legal Identification');
-    checkout.clickContinueButton();
-    checkout.waitForConfirmation();
   });
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmation();
-    banking.checkOrderTotal('€187.76');
+    banking.checkOrderTotal('€140.00');
     checkout.checkAccordions('LoanConfirmation');
   });
 });

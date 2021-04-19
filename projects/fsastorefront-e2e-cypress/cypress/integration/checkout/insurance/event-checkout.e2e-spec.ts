@@ -61,7 +61,7 @@ context('Event Checkout', () => {
 
   it('Select default payment details', () => {
     checkout.populatePaymentDetails();
-    checkout.populateBillingAddress();
+    cy.get('.btn-primary').contains('Continue').click();
   });
 
   it('Place order on final review page', () => {

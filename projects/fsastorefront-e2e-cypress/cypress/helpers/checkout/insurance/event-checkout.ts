@@ -128,3 +128,13 @@ export function checkMiniCartRemovedProduct() {
   };
   shared.checkMiniCart(miniCartContent);
 }
+
+export function checkEventMiniCart() {
+  cy.get('cx-fs-mini-cart')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h2').should('contain.text', 'Event Insurance');
+      cy.get('.short-overview-item').should('contain.text', 'Two Star');
+      cy.get('.short-overview-value').should('contain.text', '€18.99');
+    });
+}

@@ -44,7 +44,8 @@ export function ConfirmBindQuote() {
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button').contains('Continue').click();
+  cy.get('.primary-button').should('be.visible');
+  cy.get('.primary-button').contains('Continue').click({ force: true });
 }
 
 export function clickBackButton() {
@@ -107,14 +108,17 @@ export function checkOrderConfirmation() {
 }
 
 export function checkInsuranceComparisonPage(numberOfProducts) {
-  cy.get('cx-fs-comparison-table-panel').should('be.visible');
-  cy.get('.fixed-column').should('have.length', 1);
-  cy.get('.primary-button')
-    .should('contain', 'Select')
-    .should('have.length', numberOfProducts);
-  cy.get('a.link')
-    .should('contain', 'More Info')
-    .should('have.length', numberOfProducts);
+  cy.get('cx-fs-comparison-table-panel')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.fixed-column').should('have.length', 1);
+      cy.get('.primary-button')
+        .should('contain', 'Select')
+        .should('have.length', numberOfProducts);
+      cy.get('a.link')
+        .should('contain', 'More Info')
+        .should('have.length', numberOfProducts);
+    });
 }
 
 export function removeOptionalProduct(productName) {
@@ -172,6 +176,7 @@ export function populateContentsCover() {
 export function populatePropertyAddress() {
   cy.get('h4').contains('Your Property Address');
   cy.get('[name=property-address-line-1]').type('Omladinskin Brigada');
+  cy.get('[name=property-address-line-2]').type('90 g');
   cy.get('[name=property-address-city]').type('Belgrade');
   cy.get('[name=property-address-postcode]').type('11090');
   cy.get('[name=property-address-country]').select('RS');
@@ -257,7 +262,7 @@ export function populatePaymentDetails() {
   cy.get('[formcontrolname=expiryMonth]').ngSelect('11');
   cy.get('[formcontrolname=expiryYear]').ngSelect('2029');
   cy.get('[formcontrolname=cvn]').type('4532');
-  cy.get('input[type="checkbox"]').click();
+  cy.get('input[type="checkbox"]').eq(0).click();
 }
 
 export function populateBillingAddress() {

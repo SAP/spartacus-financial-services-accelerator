@@ -8,6 +8,7 @@ import { CartPrefillResolver } from './resolver/cart-prefill-resolver';
 import { AutoPersonalDetailsPrefillResolver } from './resolver/auto-personal-details-prefill-resolver';
 import { CartEntriesPrefillResolver } from './resolver/cart-entries-prefill-resolver';
 import { DynamicSelectComponent } from './form-components/dynamic-select/dynamic-select.component';
+import { ClaimPrefillResolver } from './resolver/claim-prefill-resolver';
 
 @NgModule({
   imports: [
@@ -34,6 +35,9 @@ import { DynamicSelectComponent } from './form-components/dynamic-select/dynamic
           },
           cartEntries: {
             prefillResolver: CartEntriesPrefillResolver,
+          },
+          claim: {
+            prefillResolver: ClaimPrefillResolver,
           },
         },
       },

@@ -11,7 +11,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { FSUser } from '../../../../src/occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
-import { FormsUtils } from '../utils/forms-utils';
+import { FormsUtils } from '@spartacus/dynamicforms';
 
 @Injectable({
   providedIn: 'root',

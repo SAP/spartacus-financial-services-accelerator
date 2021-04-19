@@ -127,6 +127,18 @@ export const fscommon = {
       banking_loans: 'Your Loan Application',
       banking_fixed_term_deposit: 'Your Fixed Term Deposit Application',
     },
+    progressBar: {
+      step: {
+        fnolIncidentPage: 'Incident Information',
+        fnolIncidentReportPage: 'Incident Report',
+        fnolGeneralInfoPage: 'General Information',
+        fnolSummaryPage: 'Summary',
+        changeCarDetailsPage: 'Change Car Details',
+        changeSimulationPage: 'Change Preview',
+        changeCoveragePage: 'Change Coverage',
+        changeAdditionalDriverPage: 'Driver Information',
+      },
+    },
     category: {
       insurances_property_homeowners: 'Homeowners Insurance',
       insurances_property_renters: 'Renters Insurance',
@@ -166,6 +178,7 @@ export const fscommon = {
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
       backToList: 'Back to list',
+      noSearchResults: 'No search results',
     },
     httpHandlers: {
       existingCouponCodeProvided:

@@ -1,5 +1,4 @@
-const currentDate = Cypress.moment().format('DD-MM-YYYY');
-const todaysDate = Cypress.moment().format('DD MMM YYYY');
+const todaysDateDriver = Cypress.moment().format('YYYY-MM-DD');
 
 export function startChangeMileage() {
   cy.get('.fs-icon')
@@ -37,6 +36,7 @@ export function startChangeCoverage() {
     .parentsUntil()
     .contains(' Optional Extras ')
     .click({ force: true });
+  cy.get('.link.position-absolute').should('be.visible');
   cy.get('.link.position-absolute').contains('Edit').click();
 }
 
@@ -80,4 +80,84 @@ export function addTrailerLiability() {
       cy.get('.secondary-button').click();
       cy.get('.secondary-button').contains('Remove');
     });
+}
+
+export function startAddingDriverCheckout() {
+  cy.get('.fs-icon')
+    .should('have.length', 2)
+    .parentsUntil()
+    .contains(' Who or What Is Insured ')
+    .click({ force: true });
+  cy.get('.action-button').should('be.visible');
+  cy.get('.action-button').click();
+}
+
+export function checkAddDriverSteps() {
+  cy.get('h2').should('contain.text', ' Change Auto Insurance Policy ');
+  cy.get('.action-button').should('contain', 'Cancel');
+  cy.get('.progress-inner-wrapper')
+    .should('have.length', 2)
+    .within(() => {
+      cy.get('p.label').eq(0).contains('Driver Information');
+      cy.get('p.label').eq(1).contains('Change Preview');
+    });
+}
+
+export function checkDriverInformationStep() {
+  cy.get('cx-fs-cms-form-submit')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h3').should('contain.text', 'Auto Information');
+    });
+  cy.get('[name="effectiveDate"]').should('have.value', todaysDateDriver);
+  cy.get('h4').should('contain.text', 'Additional Driver');
+}
+
+export function populateAdditionalDriverData() {
+  cy.get('cx-fs-cms-form-submit').within(() => {
+    cy.get('[name=firstName]').type('Sophie');
+    cy.get('[name="lastName"]').type('Digital');
+    cy.get('[name="dateOfBirth"]').type('1992-01-01');
+    cy.get('[name="driverGender"]').select('Not specified');
+    cy.get('[name="driverMaritalStatus"]').select('Single');
+    cy.get('[name="driverCategory"]').select('Occasional');
+    cy.get('[name="driverLicenceNumber"]').type('LN-88882');
+    cy.get('[name="driverLicenceDate"]').type('2019-02-02');
+  });
+}
+
+export function checkDrivers() {
+  cy.get('cx-fs-change-simulation').within(() => {
+    cy.get('.col-4').should('contain.text', 'John Moore');
+    cy.get('.col-4').should('contain.text', 'Phin Moore');
+    cy.get('.col-4').should('contain.text', 'Sophie Digital');
+  });
+}
+
+export function checkOptionalExtrasGold() {
+  cy.get('cx-fs-change-coverage')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.section-header-heading').contains(' Optional Extras ');
+      cy.get('.row.mx-3').should('have.length', 1);
+      cy.get('h6').contains('Trailer Liability');
+    });
+}
+
+export function checkAllDrivers() {
+  cy.get('.col-6').contains('John');
+  cy.get('.col-6').contains('Phin');
+  cy.get('.col-6').should('contain.text', 'Digital');
+}
+
+export function removeCoverage() {
+  cy.get('.primary-button').contains('Continue').should('be.disabled');
+  cy.get('.mx-3').within(() => {
+    cy.get('.secondary-button').should('contain.text', 'Remove');
+  });
+  cy.get('.secondary-button').click();
+  cy.get('.primary-button').contains('Continue').should('not.be.disabled');
+  cy.get('.secondary-button').should('contain.text', 'Add');
+  cy.get('.primary-button').should('contain', 'Continue');
+  cy.get('.primary-button').click();
 }

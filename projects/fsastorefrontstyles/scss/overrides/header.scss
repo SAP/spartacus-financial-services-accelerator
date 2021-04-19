@@ -127,6 +127,11 @@ header {
       }
     }
   }
+  .MessageNotification {
+    @include media-breakpoint-up(lg) {
+      position: relative;
+    }
+  }
   .SearchBox {
     z-index: 1;
     label {

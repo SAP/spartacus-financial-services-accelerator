@@ -2,6 +2,7 @@ import { UserService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { PrefillResolver } from './prefill-resolver.interface';
+import { FormsUtils } from './utils/forms-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,7 @@ export class UserPrefillResolver implements PrefillResolver {
     let currentValue;
     return this.userService.get().pipe(
       map(user => {
-        currentValue = user;
-        attributes.forEach(attribute => {
-          currentValue = currentValue[attribute];
-        });
+        currentValue = FormsUtils.getValueByPath(fieldPath, user);
         return currentValue;
       })
     );

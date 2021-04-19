@@ -6,10 +6,11 @@ import {
   GlobalMessageType,
   OccConfig,
   RoutingService,
+  WindowRef,
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import {
   FSCheckoutConfigService,
   CategoryService,
@@ -52,7 +53,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected modalService: ModalService,
     protected translationService: FSTranslationService,
     protected checkoutService: FSCheckoutService,
-    protected globalMessageService: GlobalMessageService
+    protected globalMessageService: GlobalMessageService,
+    protected winRef?: WindowRef
   ) {}
 
   ngOnInit() {
@@ -63,6 +65,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.activeCategory$ = this.categoryService.getActiveCategory();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
     this.displayQuoteStatusPendingMessage();
+    this.setBindingState();
   }
 
   navigateBack(previousStep: FSSteps) {
@@ -184,5 +187,22 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   isEditable(code: string): boolean {
     return code !== BindingStateType.BIND;
+  }
+
+  setBindingState() {
+    this.subscription.add(
+      this.cart$
+        .pipe(
+          tap(cart => {
+            if (
+              (<FSCart>cart).insuranceQuote?.state?.code ===
+              BindingStateType.BIND
+            ) {
+              this.winRef.localStorage.setItem('bindingState', 'true');
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 }

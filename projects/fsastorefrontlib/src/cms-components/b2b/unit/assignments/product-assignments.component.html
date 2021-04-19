@@ -1,0 +1,10 @@
+<cx-org-sub-list>
+  <a
+    actions
+    class="link"
+    routerLink="assign"
+    [class.disabled]="!(unit$ | async)?.active"
+  >
+    {{ 'productAssignments.assign' | cxTranslate }}
+  </a>
+</cx-org-sub-list>

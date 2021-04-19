@@ -140,6 +140,18 @@ export const fscommon = {
       banking_loans: 'Ihr Kredit Antrag',
       banking_fixed_term_deposit: 'Ihr Festgeld Antrag',
     },
+    progressBar: {
+      step: {
+        fnolIncidentPage: 'Schadensinformationen',
+        fnolIncidentReportPage: 'Schadensmeldung',
+        fnolGeneralInfoPage: 'Allgemeine Informationen',
+        fnolSummaryPage: 'Zusammenfassung',
+        changeCarDetailsPage: 'Fahrzeugdetails ändern',
+        changeSimulationPage: 'Vorschau ändern',
+        changeCoveragePage: 'Versicherungsschutz ändern',
+        changeAdditionalDriverPage: 'Fahrerinformationen',
+      },
+    },
     pleaseSelect: 'Wählen Sie:',
     userIdentification: {
       title: 'User Identifizierung',
@@ -166,6 +178,7 @@ export const fscommon = {
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
       backToList: '[DE] Back to list',
+      noSearchResults: 'Keine Ergebnisse',
     },
     httpHandlers: {
       existingCouponCodeProvided:
