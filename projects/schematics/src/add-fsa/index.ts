@@ -348,6 +348,50 @@ function updateMainComponent(
     return host;
   };
 }
+
+function addFonts(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    const workspaceConfigBuffer = tree.read('angular.json');
+    if (!workspaceConfigBuffer) {
+      throw new SchematicsException('Not an Angular CLI workspace');
+    }
+    const fs = require('fs');
+    const path = require('path');
+    const workspace = JSON.parse(workspaceConfigBuffer.toString());
+    const projectName = workspace.defaultProject;
+    const project = workspace.projects[projectName];
+    const nodeModulePath = '/node_modules/@spartacus/fsa-styles/fonts';
+    const fontTargetPath = '/src/assets/fonts';
+    const files: string[] = [];
+    tree.getDir(nodeModulePath).visit(filePath => {
+      const file = filePath.split('/').slice(-1).toString();
+      files.push(file);
+    });
+    const rootDir = path.dirname(fs.realpathSync(`${project.sourceRoot}`));
+    const fontTargetDir = path.normalize(`${rootDir}${fontTargetPath}`);
+    const nodeModuleRootPath = path.normalize(`${rootDir}${nodeModulePath}`);
+    fs.mkdir(`${fontTargetDir}`, (err: any) => {
+      if (err && !(err.code === 'EEXIST')) {
+        throw err;
+      } else {
+        return;
+      }
+    });
+    files.forEach(fileName => {
+      context.logger.info(`✅️ Copied '${fileName}' to ${fontTargetDir}`);
+      fs.copyFile(
+        `${nodeModuleRootPath}/${fileName}`,
+        `${fontTargetDir}/${fileName}`,
+        (err: any) => {
+          if (err) {
+            throw err;
+          }
+        }
+      );
+    });
+  };
+}
+
 function updateIndexFile(tree: Tree, options: FsOptions): Rule {
   return (host: Tree) => {
     const projectIndexHtmlPath = getIndexHtmlPath(tree);
@@ -376,6 +420,7 @@ export function addFsa(options: FsOptions): Rule {
       updateMainComponent(project, options),
       options.useMetaTags ? updateIndexFile(tree, options) : noop(),
       installPackageJsonDependencies(),
+      addFonts(),
     ])(tree, context);
   };
 }
