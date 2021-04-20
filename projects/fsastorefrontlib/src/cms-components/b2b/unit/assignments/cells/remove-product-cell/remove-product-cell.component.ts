@@ -7,7 +7,8 @@ import {
   OutletContextData,
   TableDataOutletContext,
 } from '@spartacus/storefront';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
@@ -35,6 +36,12 @@ export class RemoveProductCellComponent extends CellComponent
       this.model.assignmentCode,
       parentUintId
     );
+  }
+
+  isUnitDefaultOrganizationOfUser(unitId: string): Observable<boolean> {
+    return this.productAssignmentService
+      .isUserAdminOfUnit(unitId)
+      .pipe(map(isUserAdmin => !isUserAdmin));
   }
 
   ngOnDestroy(): void {

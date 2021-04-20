@@ -4,6 +4,7 @@ import {
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_CURRENT,
   UserIdService,
+  UserService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -12,6 +13,8 @@ import { StateWithProductAssignment } from '../store/product-assignments-state';
 import * as fromReducers from '../store/reducers/index';
 import { PRODUCT_ASSIGNMENT_FEATURE } from './../store/product-assignments-state';
 import { ProductAssignmentService } from './product-assignment.service';
+
+const testUnitId = 'test_unit';
 
 const mockProductAssignments = {
   assignments: [
@@ -59,10 +62,25 @@ class MockUserIdService {
     return of(OCC_USER_ID_CURRENT);
   }
 }
+
+const mockUser = {
+  uid: 'mockuser@email.com',
+  orgUnit: {
+    uid: testUnitId,
+  },
+};
+
+class MockUserService {
+  get() {
+    return of(mockUser);
+  }
+}
+
 describe('ProductAssignmentServiceTest', () => {
   let service: ProductAssignmentService;
   let store: Store<StateWithProductAssignment>;
   let userIdService: UserIdService;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -83,6 +101,10 @@ describe('ProductAssignmentServiceTest', () => {
       ],
       providers: [
         {
+          provide: UserService,
+          useClass: MockUserService,
+        },
+        {
           provide: UserIdService,
           useClass: MockUserIdService,
         },
@@ -92,6 +114,7 @@ describe('ProductAssignmentServiceTest', () => {
     service = TestBed.inject(ProductAssignmentService);
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
+    userService = TestBed.inject(UserService);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });
@@ -212,5 +235,30 @@ describe('ProductAssignmentServiceTest', () => {
       .unsubscribe();
     expect(response[0].code).toEqual('testOne');
     expect(response[0].active).toEqual(false);
+  });
+
+  it('should check if user is admin of provided unit', () => {
+    service
+      .isUserAdminOfUnit(testUnitId)
+      .subscribe(result => {
+        expect(result).toEqual(true);
+      })
+      .unsubscribe();
+  });
+
+  it('should get potential assignments', () => {
+    store.dispatch(
+      new fromAction.LoadPotentialProductAssignmentsSuccess(
+        mockProductAssignments
+      )
+    );
+    let response;
+    service
+      .getPotentialProductAssignments()
+      .subscribe(potentialProductAssignments => {
+        response = potentialProductAssignments;
+      })
+      .unsubscribe();
+    expect(response).toEqual(mockProductAssignments.assignments);
   });
 });
