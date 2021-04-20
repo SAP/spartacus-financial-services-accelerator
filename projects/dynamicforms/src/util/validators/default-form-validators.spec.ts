@@ -8,6 +8,8 @@ const date2 = 'date2';
 const dateOfBirth = 'dateOfBirth';
 const trip = 'trip';
 const formControlCode = 'testTravellers';
+const testNumberRegex = /^[0-9]*$/;
+const testPostalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
 describe('FormValidationService', () => {
   let form: FormGroup;
@@ -90,6 +92,16 @@ describe('FormValidationService', () => {
     expect(DefaultFormValidators.alphanumeric(form.get(field1))).toEqual(null);
   });
 
+  it('should return error, when field contains special caracters besides letters and numbers', () => {
+    form.get(field1).setValue('testValue12#!');
+    expect(DefaultFormValidators.alphanumeric(form.get(field1))).toEqual({
+      pattern: {
+        requiredPattern: testPostalCodeRegex,
+        actualValue: form.get(field1).value,
+      },
+    });
+  });
+
   it('should check field value against regex', () => {
     const numberLetterRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
@@ -107,6 +119,17 @@ describe('FormValidationService', () => {
   it('should not return error, when field contains numbers only', () => {
     form.get(field1).setValue('12345');
     expect(DefaultFormValidators.number(form.get(field1))).toEqual(null);
+  });
+
+  it('should return error, when field contains  none number value', () => {
+    form.get(field1).setValue('12345test');
+    // const numberRegex = /^[0-9]*$/;
+    expect(DefaultFormValidators.number(form.get(field1))).toEqual({
+      pattern: {
+        requiredPattern: testNumberRegex,
+        actualValue: form.get(field1).value,
+      },
+    });
   });
 
   it('should check if date comparison condition is satisfied', () => {
@@ -294,6 +317,15 @@ describe('FormValidationService', () => {
     expect(DefaultFormValidators.required(form.get(field2))).toEqual({
       required: true,
     });
+    form.get(field2).setValue(undefined);
+    expect(DefaultFormValidators.required(form.get(field2))).toEqual({
+      required: true,
+    });
+  });
+
+  it('should not return error, when field has value', () => {
+    form.get(field1).setValue('testField1');
+    expect(DefaultFormValidators.required(form.get(field1))).toEqual(null);
   });
 
   it('should not check regex for empty field', () => {
