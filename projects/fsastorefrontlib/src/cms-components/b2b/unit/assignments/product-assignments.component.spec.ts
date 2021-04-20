@@ -20,6 +20,9 @@ class MockCurrentUnitService {
 
 class MockProductAssignmentService {
   loadProductAssignmentsForUnit() {}
+  isUserAdminOfUnit() {
+    return of(false);
+  }
 }
 
 describe('ProductAssignmentsComponent', () => {
@@ -70,5 +73,14 @@ describe('ProductAssignmentsComponent', () => {
     expect(
       productAssignmentService.loadProductAssignmentsForUnit
     ).toHaveBeenCalledWith(mockItem.uid);
+  });
+
+  it('should check if provided unit is default organization of user', () => {
+    component
+      .isUnitDefaultOrganizationOfUser('childUnitId')
+      .subscribe(result => {
+        expect(result).toEqual(true);
+      })
+      .unsubscribe();
   });
 });

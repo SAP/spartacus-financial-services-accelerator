@@ -1,7 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import {
-  CellComponent,
+  AssignCellComponent,
   CurrentUnitService,
+  ItemService,
+  ListService,
+  MessageService,
 } from '@spartacus/organization/administration/components';
 import {
   OutletContextData,
@@ -15,17 +18,27 @@ import { ProductAssignmentService } from '../../../../../../core/product-assignm
   templateUrl: './assign-product-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssignProductCellComponent extends CellComponent
+export class AssignProductCellComponent<FSProductAssignment>
+  extends AssignCellComponent<FSProductAssignment>
   implements OnDestroy {
   constructor(
     protected outlet: OutletContextData<TableDataOutletContext>,
     protected productAssignmentService: ProductAssignmentService,
-    protected currentUnitService: CurrentUnitService
+    protected currentUnitService: CurrentUnitService,
+    protected organizationItemService: ItemService<FSProductAssignment>,
+    protected messageService: MessageService,
+    protected organizationSubListService: ListService<FSProductAssignment>
   ) {
-    super(outlet);
+    super(
+      outlet,
+      organizationItemService,
+      messageService,
+      organizationSubListService
+    );
   }
 
   private subscription = new Subscription();
+  protected readonly ASSIGNED_STATE = 'assigned';
   unit$: Observable<string> = this.currentUnitService.b2bUnit$;
 
   addProduct(unit: string) {
@@ -33,6 +46,18 @@ export class AssignProductCellComponent extends CellComponent
       unit,
       this.model.code
     );
+    this.notify(this.model, this.ASSIGNED_STATE);
+  }
+
+  protected notify(item, state) {
+    this.messageService.add({
+      message: {
+        key: `${this.organizationSubListService.viewType}.${state}`,
+        params: {
+          item,
+        },
+      },
+    });
   }
 
   ngOnDestroy(): void {

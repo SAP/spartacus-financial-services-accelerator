@@ -51,6 +51,12 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
     );
   }
 
+  isUnitDefaultOrganizationOfUser(unitId: string): Observable<boolean> {
+    return this.productAssignmentService
+      .isUserAdminOfUnit(unitId)
+      .pipe(map(isUserAdmin => !isUserAdmin));
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
