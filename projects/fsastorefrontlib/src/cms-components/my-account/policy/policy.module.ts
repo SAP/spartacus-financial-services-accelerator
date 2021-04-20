@@ -26,6 +26,9 @@ import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
+import { PoliciesChartComponent } from './policies-chart/policies-chart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
 
 const routes: Routes = [
   {
@@ -60,9 +63,15 @@ const routes: Routes = [
     ChangeRequestStoreModule,
     MediaModule,
     DocumentsTableModule,
+    NgxEchartsModule.forRoot({
+      echarts,
+    }),
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
+        AccountMyPoliciesChartFlex: {
+          component: PoliciesChartComponent,
+        },
         AccountMyPoliciesFlex: {
           component: PoliciesComponent,
         },
@@ -72,9 +81,9 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [PoliciesComponent, PolicyDetailsComponent],
-  exports: [PoliciesComponent, PolicyDetailsComponent],
+  declarations: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
+  exports: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
   providers: [PolicyService, ChangeRequestService],
-  entryComponents: [PoliciesComponent, PolicyDetailsComponent],
+  entryComponents: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
 })
 export class PolicyModule {}
