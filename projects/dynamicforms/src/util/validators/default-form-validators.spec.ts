@@ -123,7 +123,6 @@ describe('FormValidationService', () => {
 
   it('should return error, when field contains  none number value', () => {
     form.get(field1).setValue('12345test');
-    // const numberRegex = /^[0-9]*$/;
     expect(DefaultFormValidators.number(form.get(field1))).toEqual({
       pattern: {
         requiredPattern: testNumberRegex,
