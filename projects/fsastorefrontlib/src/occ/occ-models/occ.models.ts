@@ -259,3 +259,10 @@ export interface FSSteps {
   stepParameter: string;
   step: string;
 }
+
+export interface FSProductAssignment {
+  assignmentCode?: string;
+  name?: string;
+  added?: boolean;
+  active?: boolean;
+}

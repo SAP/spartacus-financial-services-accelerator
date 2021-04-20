@@ -25,6 +25,7 @@ export const productAssignments = {
     assign: '[DE] Assign',
     remove: '[DE] Remove',
     add: '[DE] Add',
+    deassigned: '[DE] Product {{ item.name }} unassigned successfully',
   },
 };
 
@@ -32,5 +33,6 @@ export const potentialProductAssignments = {
   potentialProductAssignments: {
     title: '[DE] Potential Products',
     subtitle: '[DE] Products which can be assigned to the unit.',
+    assigned: '[DE] Product {{ item.name }} assigned successfully',
   },
 };
