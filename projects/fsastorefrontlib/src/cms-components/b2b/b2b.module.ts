@@ -14,21 +14,44 @@ import {
   unitsCmsConfig,
   unitsRoutingConfig,
   unitsTableConfigFactoryFactory,
-} from './units.config';
-import { FSUnitDetailsModule } from './unit/details';
+} from './unit/units.config';
+import {
+  userCmsConfig,
+  userRoutingConfig,
+  userTableConfigFactory,
+} from './user/user.config';
+import {
+  ListModule,
+  UserApproverListModule,
+  UserChangePasswordFormModule,
+  UserFormModule,
+  UserPermissionListModule,
+  UserUserGroupsModule,
+} from '@spartacus/organization/administration/components';
+import { FSUserComponentsModule } from './user/user-components.module';
 import { ProductAssignmentsModule } from './unit/assignments/product-assignments.module';
+import { FSUnitDetailsModule } from './unit/details/unit-details.module';
 import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
 import { ProductAssignmentStoreModule } from '../../core/product-assignment/store/product-assignments-store.module';
+import { FSUserDetailsModule } from './user/details/user-details.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    FSUnitDetailsModule,
+    // FSUserComponentsModule,
     ProductAssignmentsModule,
+    FSUnitDetailsModule,
     PotentialAssignmentsModule,
     AdministrationModule,
     ProductAssignmentStoreModule,
+    ListModule,
+    UserChangePasswordFormModule,
+    UserFormModule,
+    UserPermissionListModule,
+    UserUserGroupsModule,
+    UserApproverListModule,
+    FSUserDetailsModule,
     ConfigModule.withConfig({
       i18n: {
         resources: organizationTranslations,
@@ -41,11 +64,17 @@ import { ProductAssignmentStoreModule } from '../../core/product-assignment/stor
     provideDefaultConfigFactory(unitsTableConfigFactoryFactory),
     provideDefaultConfig(unitsRoutingConfig),
     provideDefaultConfig(unitsCmsConfig),
+    provideDefaultConfig(userRoutingConfig),
+    provideDefaultConfig(userCmsConfig),
+    provideDefaultConfigFactory(userTableConfigFactory),
   ],
   exports: [
-    FSUnitDetailsModule,
+    // FSUserComponentsModule,
+    FSUserDetailsModule,
     ProductAssignmentsModule,
+    FSUnitDetailsModule,
     PotentialAssignmentsModule,
+    ProductAssignmentStoreModule,
   ],
 })
 export class B2bModule {}
