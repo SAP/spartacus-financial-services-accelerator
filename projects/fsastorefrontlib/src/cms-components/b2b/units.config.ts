@@ -162,6 +162,7 @@ export const unitsTableConfigFactory: TableConfig = {
     [OrganizationTableType.PRODUCT_ASSIGNMENTS]: {
       cells: ['name', 'activate', 'remove'],
       options: {
+        pagination: { pageSize: 7 },
         cells: {
           name: {
             dataComponent: TableDataCellComponent,
@@ -178,6 +179,7 @@ export const unitsTableConfigFactory: TableConfig = {
     [OrganizationTableType.POTENTIAL_PRODUCT_ASSIGNMENTS]: {
       cells: ['name', 'add'],
       options: {
+        pagination: { pageSize: 7 },
         cells: {
           add: {
             dataComponent: AssignProductCellComponent,
