@@ -57,6 +57,14 @@
                   format="thumbnail"
                 >
                 </cx-media>
+                <ng-container *ngIf="agent.participationStatus; else offline">
+                  <div class="mt-3 notice">
+                    <span class="mr-1 fas fa-comment"></span>
+                    <span>
+                      {{ 'fscommon.agentLocator.online' | cxTranslate }}
+                    </span>
+                  </div>
+                </ng-container>
               </div>
               <div class="col-12 col-sm-9">
                 <h5
@@ -149,4 +157,11 @@
   <h2 class="col-md-6 text-center p-5 normal-weight">
     {{ 'fscommon.agentLocator.noSearchResults' | cxTranslate }}
   </h2>
+</ng-template>
+
+<ng-template #offline>
+  <div class="mt-3 text-secondary">
+    <span class="mr-1 fas fa-comment-slash"></span>
+    <span>{{ 'fscommon.agentLocator.offline' | cxTranslate }} </span>
+  </div>
 </ng-template>
