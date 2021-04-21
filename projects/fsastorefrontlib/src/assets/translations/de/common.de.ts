@@ -178,6 +178,8 @@ export const fscommon = {
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
       backToList: '[DE] Back to list',
+      online: '[DE] Online',
+      offline: '[DE] Offline',
       noSearchResults: 'Keine Ergebnisse',
     },
     httpHandlers: {

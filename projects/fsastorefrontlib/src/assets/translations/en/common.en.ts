@@ -178,6 +178,8 @@ export const fscommon = {
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
       backToList: 'Back to list',
+      online: 'Online',
+      offline: 'Offline',
       noSearchResults: 'No search results',
     },
     httpHandlers: {
