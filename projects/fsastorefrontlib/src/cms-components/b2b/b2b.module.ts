@@ -1,57 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-  ConfigModule,
-  provideDefaultConfig,
-  provideDefaultConfigFactory,
-} from '@spartacus/core';
+import { ConfigModule } from '@spartacus/core';
 import { AdministrationModule } from '@spartacus/organization';
 import {
   organizationTranslationChunksConfig,
   organizationTranslations,
 } from '@spartacus/organization/administration/assets';
-import {
-  unitsCmsConfig,
-  unitsRoutingConfig,
-  unitsTableConfigFactoryFactory,
-} from './unit/units.config';
-import {
-  userCmsConfig,
-  userRoutingConfig,
-  userTableConfigFactory,
-} from './user/user.config';
-import {
-  ListModule,
-  UserApproverListModule,
-  UserChangePasswordFormModule,
-  UserFormModule,
-  UserPermissionListModule,
-  UserUserGroupsModule,
-} from '@spartacus/organization/administration/components';
 import { FSUserComponentsModule } from './user/user-components.module';
-import { ProductAssignmentsModule } from './unit/assignments/product-assignments.module';
-import { FSUnitDetailsModule } from './unit/details/unit-details.module';
-import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
+import { FSUnitsComponentsModule } from './unit/units-components.module';
 import { ProductAssignmentStoreModule } from '../../core/product-assignment/store/product-assignments-store.module';
-import { FSUserDetailsModule } from './user/details/user-details.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    // FSUserComponentsModule,
-    ProductAssignmentsModule,
-    FSUnitDetailsModule,
-    PotentialAssignmentsModule,
+    FSUserComponentsModule,
+    FSUnitsComponentsModule,
     AdministrationModule,
     ProductAssignmentStoreModule,
-    ListModule,
-    UserChangePasswordFormModule,
-    UserFormModule,
-    UserPermissionListModule,
-    UserUserGroupsModule,
-    UserApproverListModule,
-    FSUserDetailsModule,
     ConfigModule.withConfig({
       i18n: {
         resources: organizationTranslations,
@@ -60,20 +26,9 @@ import { FSUserDetailsModule } from './user/details/user-details.module';
       },
     }),
   ],
-  providers: [
-    provideDefaultConfigFactory(unitsTableConfigFactoryFactory),
-    provideDefaultConfig(unitsRoutingConfig),
-    provideDefaultConfig(unitsCmsConfig),
-    provideDefaultConfig(userRoutingConfig),
-    provideDefaultConfig(userCmsConfig),
-    provideDefaultConfigFactory(userTableConfigFactory),
-  ],
   exports: [
-    // FSUserComponentsModule,
-    FSUserDetailsModule,
-    ProductAssignmentsModule,
-    FSUnitDetailsModule,
-    PotentialAssignmentsModule,
+    FSUserComponentsModule,
+    FSUnitsComponentsModule,
     ProductAssignmentStoreModule,
   ],
 })

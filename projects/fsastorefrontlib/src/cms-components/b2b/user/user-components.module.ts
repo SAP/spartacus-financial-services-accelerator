@@ -1,37 +1,10 @@
 import { NgModule } from '@angular/core';
-import {
-  provideDefaultConfig,
-  provideDefaultConfigFactory,
-} from '@spartacus/core';
-import {
-  ListModule,
-  UserApproverListModule,
-  UserChangePasswordFormModule,
-  UserFormModule,
-  UserPermissionListModule,
-  UserUserGroupsModule,
-} from '@spartacus/organization/administration/components';
+import { provideDefaultConfig } from '@spartacus/core';
+import { UserComponentsModule } from '@spartacus/organization/administration/components';
 import { FSUserDetailsModule } from './details/user-details.module';
-import {
-  userCmsConfig,
-  userRoutingConfig,
-  userTableConfigFactory,
-} from './user.config';
+import { userCmsConfig } from './user.config';
 @NgModule({
-  imports: [
-    ListModule,
-    UserChangePasswordFormModule,
-    UserFormModule,
-    UserPermissionListModule,
-    UserUserGroupsModule,
-    UserApproverListModule,
-    FSUserDetailsModule,
-  ],
-  providers: [
-    provideDefaultConfig(userRoutingConfig),
-    provideDefaultConfig(userCmsConfig),
-    provideDefaultConfigFactory(userTableConfigFactory),
-  ],
-  exports: [FSUserDetailsModule],
+  imports: [UserComponentsModule, FSUserDetailsModule],
+  providers: [provideDefaultConfig(userCmsConfig)],
 })
 export class FSUserComponentsModule {}

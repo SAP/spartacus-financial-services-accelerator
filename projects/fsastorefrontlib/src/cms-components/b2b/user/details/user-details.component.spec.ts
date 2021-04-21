@@ -1,17 +1,17 @@
+import { Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
+import {
+  ItemExistsDirective,
+  ItemService,
+  MessageService,
+  ToggleStatusModule,
+} from '@spartacus/organization/administration/components';
 import { Budget } from '@spartacus/organization/administration/core';
-import { UrlTestingModule } from 'projects/core/src/routing/configurable-routes/url-translation/testing/url-testing.module';
 import { of, Subject } from 'rxjs';
-import { CardTestingModule } from '../../shared/card/card.testing.module';
-import { ToggleStatusModule } from '../../shared/detail/toggle-status-action/toggle-status.module';
-import { ItemService } from '../../shared/item.service';
-import { MessageTestingModule } from '../../shared/message/message.testing.module';
-import { MessageService } from '../../shared/message/services/message.service';
-import { ItemExistsDirective } from '../../shared/item-exists.directive';
-import { UserDetailsComponent } from './user-details.component';
+import { FSUserDetailsComponent } from './user-details.component';
 import createSpy = jasmine.createSpy;
 
 const mockCode = 'c1';
@@ -22,6 +22,13 @@ class MockUserItemService implements Partial<ItemService<Budget>> {
   error$ = of(false);
 }
 
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform(): any {}
+}
+
 class MockMessageService {
   add() {
     return new Subject();
@@ -30,10 +37,9 @@ class MockMessageService {
   close() {}
 }
 
-describe('UserDetailsComponent', () => {
-  let component: UserDetailsComponent;
-  let fixture: ComponentFixture<UserDetailsComponent>;
-  let itemService: ItemService<Budget>;
+describe('FSUserDetailsComponent', () => {
+  let component: FSUserDetailsComponent;
+  let fixture: ComponentFixture<FSUserDetailsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -41,15 +47,12 @@ describe('UserDetailsComponent', () => {
         CommonModule,
         RouterTestingModule,
         I18nTestingModule,
-        UrlTestingModule,
-        CardTestingModule,
-        MessageTestingModule,
         ToggleStatusModule,
       ],
-      declarations: [UserDetailsComponent, ItemExistsDirective],
+      declarations: [FSUserDetailsComponent, ItemExistsDirective, MockUrlPipe],
       providers: [{ provide: ItemService, useClass: MockUserItemService }],
     })
-      .overrideComponent(UserDetailsComponent, {
+      .overrideComponent(FSUserDetailsComponent, {
         set: {
           providers: [
             {
@@ -61,18 +64,12 @@ describe('UserDetailsComponent', () => {
       })
       .compileComponents();
 
-    itemService = TestBed.inject(ItemService);
-
-    fixture = TestBed.createComponent(UserDetailsComponent);
+    fixture = TestBed.createComponent(FSUserDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should trigger reload of model on each code change', () => {
-    expect(itemService.load).toHaveBeenCalledWith(mockCode);
   });
 });
