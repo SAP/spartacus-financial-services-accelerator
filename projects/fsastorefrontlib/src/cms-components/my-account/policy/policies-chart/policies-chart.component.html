@@ -1,45 +1,44 @@
 <div class="row">
-    <div class="info-card col-12 m-4">
-      <div class="d-flex justify-content-between">
-        <h6 class="title">Total Purchase Order Value</h6>
-        <button class="background-color-primary mr-3" [disabled]="!selectedFrequency" style="color: white; width: 70px;" (click)="toggleChartVisibility()">
-            {{isChartVisbible ? 'HIDE' : 'SHOW'}}
-          </button>
-      </div>
-      <div class="ml-3" style="color: lightgray;">Q1 and Q2 | EUR</div>
-      <div
-        class="d-flex justify-content-between pb-3"
-        [ngClass]="{ 'border-bottom': isChartVisbible }"
-      >
-        <span
-          class="d-inline-block ml-3"
-          style="color: lightgray; font-size: 24px;"
-          >850k</span
+  <div class="info-card col-12 m-4 pt-2">
+    <div class="d-flex justify-content-between pt-1">
+      <h6 class="accordion-heading">
+        {{ 'policy.policyChartTitle' | cxTranslate }}
+      </h6>
+      <a class="link" (click)="toggleChartVisibility()">
+        {{
+          isChartVisible
+            ? ('policy.showLess' | cxTranslate)
+            : ('policy.showMore' | cxTranslate)
+        }}
+      </a>
+    </div>
+    <div
+      class="pb-3 notice"
+      [ngClass]="{ 'border-bottom': isChartVisible }"
+    >
+      {{premiumSumByPaymentFrequency}} | {{policyCurrency}}
+    </div>
+    <div *ngIf="isChartVisible" class="chart-container">
+      <label class="pt-3">
+        <span class="label-content">{{
+          'fscommon.paymentFrequency' | cxTranslate
+        }}</span>
+        <select
+          [(ngModel)]="selectedFrequency"
+          class="form-control"
+          (change)="selectPaymentFrequency()"
         >
-        <label class="col-3">
-          <span class="label-content">{{
-            'fscommon.paymentFrequency' | cxTranslate
-          }}</span>
-          <select
-            [(ngModel)]="selectedFrequency"
-            class="form-control"
-            (change)="selectPaymentFrequency()"
-          >
-            <option [selected]="true" disabled value="null">{{
-              'fscommon.pleaseSelect' | cxTranslate
-            }}</option>
-            <option *ngFor="let option of options" value="{{ option.name }}">
-              {{ option.label }}
-            </option>
-          </select>
-        </label>
+          <option [selected]="true" disabled value="null">{{
+            'fscommon.pleaseSelect' | cxTranslate
+          }}</option>
+          <option *ngFor="let option of options" value="{{ option.name }}">
+            {{ option.label }}
+          </option>
+        </select>
+      </label>
+      <div>
+        <div echarts [options]="chartOption"></div>
       </div>
-      <div
-        *ngIf="isChartVisbible"
-        echarts
-        [options]="chartOption"
-        [merge]="dynamicData"
-        class="demo-chart"
-      ></div>
     </div>
   </div>
+</div>
