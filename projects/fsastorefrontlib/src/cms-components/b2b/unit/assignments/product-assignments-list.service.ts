@@ -6,7 +6,7 @@ import { OrganizationTableType } from '../../../../occ/occ-models/occ.models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
-import { PaginationHelper } from '../../../../shared/util/helpers/PaginationHelper';
+import { PaginationHelper } from '../../../../shared/util/helpers/pagination/PaginationHelper';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { OrderEntry } from '@spartacus/core';
 import { SortByNamePipe } from './sortByName.pipe';
-import { FSProduct } from './../../../occ/occ-models/occ.models';
+import { FSProduct } from '../../../../occ/occ-models/occ.models';
 
 describe('SortByProductNamePipe', () => {
   let pipe: SortByNamePipe;
