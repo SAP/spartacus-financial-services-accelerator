@@ -1,32 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-  ConfigModule,
-  provideDefaultConfig,
-  provideDefaultConfigFactory,
-} from '@spartacus/core';
+import { ConfigModule } from '@spartacus/core';
 import { AdministrationModule } from '@spartacus/organization';
 import {
   organizationTranslationChunksConfig,
   organizationTranslations,
 } from '@spartacus/organization/administration/assets';
-import {
-  unitsCmsConfig,
-  unitsRoutingConfig,
-  unitsTableConfigFactoryFactory,
-} from './units.config';
-import { FSUnitDetailsModule } from './unit/details';
-import { ProductAssignmentsModule } from './unit/assignments/product-assignments.module';
-import { PotentialAssignmentsModule } from './unit/potential-assignments/potential-assignments.module';
+import { FSUserComponentsModule } from './user/user-components.module';
+import { FSUnitsComponentsModule } from './unit/units-components.module';
 import { ProductAssignmentStoreModule } from '../../core/product-assignment/store/product-assignments-store.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    FSUnitDetailsModule,
-    ProductAssignmentsModule,
-    PotentialAssignmentsModule,
+    FSUserComponentsModule,
+    FSUnitsComponentsModule,
     AdministrationModule,
     ProductAssignmentStoreModule,
     ConfigModule.withConfig({
@@ -37,15 +26,10 @@ import { ProductAssignmentStoreModule } from '../../core/product-assignment/stor
       },
     }),
   ],
-  providers: [
-    provideDefaultConfigFactory(unitsTableConfigFactoryFactory),
-    provideDefaultConfig(unitsRoutingConfig),
-    provideDefaultConfig(unitsCmsConfig),
-  ],
   exports: [
-    FSUnitDetailsModule,
-    ProductAssignmentsModule,
-    PotentialAssignmentsModule,
+    FSUserComponentsModule,
+    FSUnitsComponentsModule,
+    ProductAssignmentStoreModule,
   ],
 })
 export class B2bModule {}
