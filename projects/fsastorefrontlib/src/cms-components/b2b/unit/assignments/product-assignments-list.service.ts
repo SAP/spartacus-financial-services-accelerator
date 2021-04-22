@@ -39,8 +39,7 @@ export class ProductAssignmentsListService extends SubListService<any> {
       added,
     }));
     return PaginationHelper.getPaginationResults(
-      pagination.pageSize,
-      pagination.currentPage,
+      pagination,
       productAssignments
     );
   }

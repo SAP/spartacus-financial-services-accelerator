@@ -1,23 +1,30 @@
+import { PaginationModel } from '@spartacus/core';
+
 export class PaginationHelper {
-  public static getPaginationResults(pageSize, currentPageParam, collection) {
+  public static getPaginationResults(pagination: PaginationModel, collection) {
     let paginatedCollection;
     const totalResults: number = collection.length;
-    let totalPages: number = Math.floor(totalResults / pageSize);
-    if (totalResults % pageSize > 0) {
+    let totalPages: number = Math.floor(totalResults / pagination.pageSize);
+    if (totalResults % pagination.pageSize > 0) {
       totalPages++;
     }
-    const currentPage = !!currentPageParam ? currentPageParam : 0;
+    let currentPage = !!pagination.currentPage ? pagination.currentPage : 0;
+    if (pagination.pageSize === totalResults && currentPage !== 0) {
+      currentPage--;
+      pagination.currentPage = currentPage;
+    }
+
     if (currentPage === 0) {
-      paginatedCollection = collection.slice(0, pageSize);
+      paginatedCollection = collection.slice(0, pagination.pageSize);
     } else {
       paginatedCollection = collection.slice(
-        currentPage * pageSize,
-        pageSize + currentPage * pageSize
+        currentPage * pagination.pageSize,
+        pagination.pageSize + currentPage * pagination.pageSize
       );
     }
     const paginationData = {
       currentPage: currentPage,
-      pageSize: pageSize,
+      pageSize: pagination.pageSize,
       totalPages: totalPages,
       totalResults: totalResults,
     };

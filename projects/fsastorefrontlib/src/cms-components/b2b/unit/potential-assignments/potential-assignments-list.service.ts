@@ -38,11 +38,7 @@ export class PotentialAssignmentsListService extends SubListService<any> {
         name: assignment.product?.name,
         code: assignment.product?.code,
       }));
-      return PaginationHelper.getPaginationResults(
-        pagination.pageSize,
-        pagination.currentPage,
-        products
-      );
+      return PaginationHelper.getPaginationResults(pagination, products);
     }
   }
 }
