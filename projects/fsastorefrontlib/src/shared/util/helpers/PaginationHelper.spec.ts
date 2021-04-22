@@ -5,6 +5,7 @@ describe('PaginationHelper', () => {
   let paginationHelper: PaginationHelper;
   const mockCollection = ['0', '1', '2'];
   const mockCollection2 = ['0', '1', '2', '3', '4', '5'];
+  const mockCollection3 = ['0', '1'];
   const paginationconfig = {
     pageSize: 2,
     currentPage: 0,
@@ -13,6 +14,7 @@ describe('PaginationHelper', () => {
     pageSize: 2,
     currentPage: 1,
   };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [PaginationHelper],
@@ -41,6 +43,14 @@ describe('PaginationHelper', () => {
     it('should return empty list', () => {
       const results = PaginationHelper.getPaginationResults(paginationconfig, []);
       expect(results.values.length).toBe(0);
+    });
+    it('should return empty list', () => {
+      const results = PaginationHelper.getPaginationResults({
+        pageSize: 2,
+        currentPage: 1,
+      }, mockCollection3);
+      expect(results.values.length).not.toBe(0);
+      expect(results.pagination.currentPage).toBe(0);
     });
   });
 });
