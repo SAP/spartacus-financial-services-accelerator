@@ -309,30 +309,24 @@ describe('FormValidationService', () => {
 
   it('should return error, when field has no value', () => {
     form.get(field1).setValue(' ');
-    expect(DefaultFormValidators.required(form.get(field1))).toEqual({
+    expect(DefaultFormValidators.checkEmptyValue(form.get(field1))).toEqual({
       required: true,
     });
     form.get(field2).setValue('');
-    expect(DefaultFormValidators.required(form.get(field2))).toEqual({
+    expect(DefaultFormValidators.checkEmptyValue(form.get(field2))).toEqual({
       required: true,
     });
     form.get(field2).setValue(undefined);
-    expect(DefaultFormValidators.required(form.get(field2))).toEqual({
-      required: true,
-    });
-    form.get(field2).setValue([]);
-    expect(DefaultFormValidators.required(form.get(field2))).toEqual({
+    expect(DefaultFormValidators.checkEmptyValue(form.get(field2))).toEqual({
       required: true,
     });
   });
 
   it('should not return error, when field has value', () => {
     form.get(field1).setValue('testField1');
-    expect(DefaultFormValidators.required(form.get(field1))).toEqual(null);
-    const blob1 = new Blob([''], { type: 'application/pdf' });
-    const mockFile = <File>blob1;
-    form.get(field1).setValue([mockFile]);
-    expect(DefaultFormValidators.required(form.get(field1))).toEqual(null);
+    expect(DefaultFormValidators.checkEmptyValue(form.get(field1))).toEqual(
+      null
+    );
   });
 
   it('should not check regex for empty field', () => {

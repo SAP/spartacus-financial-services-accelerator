@@ -10,11 +10,8 @@ export class DefaultFormValidators extends Validators {
   static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
 
-  static required(control: AbstractControl) {
-    const valid =
-      typeof control.value === 'object'
-        ? control.value.length > 0
-        : !!control.value?.trim();
+  static checkEmptyValue(control: AbstractControl) {
+    const valid = !!control.value?.trim();
     return valid ? null : { required: true };
   }
 

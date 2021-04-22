@@ -90,8 +90,8 @@ export const defaultFormConfig: DynamicFormsConfig = {
       checkValue: {
         validator: DefaultFormValidators.checkValue,
       },
-      required: {
-        validator: DefaultFormValidators.required,
+      checkEmptyValue: {
+        validator: DefaultFormValidators.checkEmptyValue,
       },
       containsValue: {
         validator: DefaultFormValidators.shouldContainValue,
