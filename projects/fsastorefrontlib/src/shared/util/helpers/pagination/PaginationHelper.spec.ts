@@ -26,7 +26,7 @@ describe('PaginationHelper', () => {
     it('should return results', () => {
       const results = PaginationHelper.getPaginationResults(
         paginationconfig,
-        mockCollection,
+        mockCollection
       );
       expect(results.values).not.toBe(null);
       expect(results.values.length).toEqual(2);
@@ -34,21 +34,27 @@ describe('PaginationHelper', () => {
     it('should return second page of results', () => {
       const results = PaginationHelper.getPaginationResults(
         paginationconfig2,
-        mockCollection2,
+        mockCollection2
       );
       expect(results.values).not.toBe(null);
       expect(results.values[0]).toEqual('2');
       expect(results.values[1]).toEqual('3');
     });
     it('should return empty list', () => {
-      const results = PaginationHelper.getPaginationResults(paginationconfig, []);
+      const results = PaginationHelper.getPaginationResults(
+        paginationconfig,
+        []
+      );
       expect(results.values.length).toBe(0);
     });
     it('should return empty list', () => {
-      const results = PaginationHelper.getPaginationResults({
-        pageSize: 2,
-        currentPage: 1,
-      }, mockCollection3);
+      const results = PaginationHelper.getPaginationResults(
+        {
+          pageSize: 2,
+          currentPage: 1,
+        },
+        mockCollection3
+      );
       expect(results.values.length).not.toBe(0);
       expect(results.pagination.currentPage).toBe(0);
     });

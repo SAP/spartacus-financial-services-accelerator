@@ -4,12 +4,13 @@ export class PaginationHelper {
   public static getPaginationResults(pagination: PaginationModel, collection) {
     let paginatedCollection;
     const totalResults: number = collection.length;
-    let totalPages: number = Math.floor(totalResults / pagination.pageSize);
-    if (totalResults % pagination.pageSize > 0) {
-      totalPages++;
-    }
+    const totalPages: number = Math.ceil(totalResults / pagination.pageSize);
     let currentPage = !!pagination.currentPage ? pagination.currentPage : 0;
-    if (pagination.pageSize === totalResults && currentPage !== 0) {
+    if (
+      currentPage !== 0 &&
+      totalResults % pagination.pageSize === 0 &&
+      totalPages === currentPage
+    ) {
       currentPage--;
       pagination.currentPage = currentPage;
     }
