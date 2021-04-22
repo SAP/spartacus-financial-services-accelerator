@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
-import { DateConfig } from '../../../core';
+import { DateConfig } from '../../../../core';
 
 @Pipe({ name: 'cxFormatDate' })
 export class FormatDatePipe implements PipeTransform {

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { DateConfig } from '../../../core';
+import { DateConfig } from '../../../../core';
 import { FormatDatePipe } from './formatDate.pipe';
 
 const mockDate =

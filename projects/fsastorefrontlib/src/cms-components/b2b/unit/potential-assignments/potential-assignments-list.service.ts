@@ -6,11 +6,12 @@ import { OrganizationTableType } from '../../../../occ/occ-models/occ.models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
+import { PaginationHelper } from '../../../../shared/util/helpers/pagination/PaginationHelper';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PotentialAssingmensListService extends SubListService<any> {
+export class PotentialAssignmentsListService extends SubListService<any> {
   constructor(
     protected tableService: TableService,
     protected productAssignmentService: ProductAssignmentService
@@ -21,24 +22,23 @@ export class PotentialAssingmensListService extends SubListService<any> {
   protected tableType: any =
     OrganizationTableType.POTENTIAL_PRODUCT_ASSIGNMENTS;
 
-  protected load(_pagination: PaginationModel): Observable<EntitiesModel<any>> {
+  protected load(pagination: PaginationModel): Observable<EntitiesModel<any>> {
     return this.productAssignmentService
       .getPotentialProductAssignments()
-      .pipe(map(raw => this.convertProductAssignments(raw)));
+      .pipe(map(raw => this.convertProductAssignments(raw, pagination)));
   }
 
-  protected convertProductAssignments(assignments): EntitiesModel<any> {
+  protected convertProductAssignments(
+    assignments,
+    pagination: PaginationModel
+  ): EntitiesModel<any> {
     let products;
-
     if (assignments) {
       products = assignments.map((assignment: any) => ({
         name: assignment.product?.name,
         code: assignment.product?.code,
       }));
+      return PaginationHelper.getPaginationResults(pagination, products);
     }
-
-    return {
-      values: products,
-    };
   }
 }

@@ -6,7 +6,7 @@ import { TableService, TableStructure } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 
-import { PotentialAssingmensListService } from './potential-assignments-list.service';
+import { PotentialAssignmentsListService } from './potential-assignments-list.service';
 
 @Injectable()
 class MockTableService {
@@ -56,15 +56,15 @@ class MockProductAssignmentService {
   }
 }
 
-describe('PotentialAssingmensListService', () => {
-  let service: PotentialAssingmensListService;
+describe('PotentialAssignmentsListService', () => {
+  let service: PotentialAssignmentsListService;
   let productAssignmentService: ProductAssignmentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       providers: [
-        PotentialAssingmensListService,
+        PotentialAssignmentsListService,
         {
           provide: TableService,
           useClass: MockTableService,
@@ -75,7 +75,7 @@ describe('PotentialAssingmensListService', () => {
         },
       ],
     });
-    service = TestBed.inject(PotentialAssingmensListService);
+    service = TestBed.inject(PotentialAssignmentsListService);
     productAssignmentService = TestBed.inject(ProductAssignmentService);
   });
 
@@ -125,6 +125,6 @@ describe('PotentialAssingmensListService', () => {
         result = table;
       })
       .unsubscribe();
-    expect(result.values).toEqual(undefined);
+    expect(result?.values).toEqual(undefined);
   });
 });

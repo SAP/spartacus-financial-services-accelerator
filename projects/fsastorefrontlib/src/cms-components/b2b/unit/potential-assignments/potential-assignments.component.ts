@@ -12,7 +12,7 @@ import {
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
-import { PotentialAssingmensListService } from './potential-assignments-list.service';
+import { PotentialAssignmentsListService } from './potential-assignments-list.service';
 
 @Component({
   selector: 'cx-fs-potential-assignments',
@@ -23,7 +23,7 @@ import { PotentialAssingmensListService } from './potential-assignments-list.ser
   providers: [
     {
       provide: ListService,
-      useExisting: PotentialAssingmensListService,
+      useExisting: PotentialAssignmentsListService,
     },
   ],
 })
