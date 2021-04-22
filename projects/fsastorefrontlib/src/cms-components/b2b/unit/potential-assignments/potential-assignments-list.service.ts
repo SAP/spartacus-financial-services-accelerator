@@ -22,10 +22,10 @@ export class PotentialAssignmentsListService extends SubListService<any> {
   protected tableType: any =
     OrganizationTableType.POTENTIAL_PRODUCT_ASSIGNMENTS;
 
-  protected load(_pagination: PaginationModel): Observable<EntitiesModel<any>> {
+  protected load(pagination: PaginationModel): Observable<EntitiesModel<any>> {
     return this.productAssignmentService
       .getPotentialProductAssignments()
-      .pipe(map(raw => this.convertProductAssignments(raw, _pagination)));
+      .pipe(map(raw => this.convertProductAssignments(raw, pagination)));
   }
 
   protected convertProductAssignments(
