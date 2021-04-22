@@ -10,8 +10,6 @@ export const USER_ROUTE_PARAMS = {
   userCode: 'userCode',
 };
 
-export const USER_MAX_OCC_INTEGER_VALUE = 2147483647;
-
 export const userCmsConfig: CmsConfig = {
   cmsComponents: {
     ManageUsersListComponent: {
