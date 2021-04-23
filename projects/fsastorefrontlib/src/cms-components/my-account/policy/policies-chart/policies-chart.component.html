@@ -1,7 +1,7 @@
-<div class="row">
-  <div class="info-card col-12 m-4 pt-2">
-    <div class="d-flex justify-content-between pt-1">
-      <h6 class="accordion-heading">
+<div *ngIf="policiesByPaymentFrequency" class="row">
+  <div class="info-card col-12 m-4">
+    <div class="d-flex justify-content-between py-3" [ngClass]="{ 'border-bottom mb-4': isChartVisible }">
+      <h6 class="accordion-heading m-0">
         {{ 'policy.policyChartTitle' | cxTranslate }}
       </h6>
       <a class="link" (click)="toggleChartVisibility()">
@@ -12,14 +12,8 @@
         }}
       </a>
     </div>
-    <div
-      class="pb-3 notice"
-      [ngClass]="{ 'border-bottom': isChartVisible }"
-    >
-      {{premiumSumByPaymentFrequency}} | {{policyCurrency}}
-    </div>
     <div *ngIf="isChartVisible" class="chart-container">
-      <label class="pt-3">
+      <label>
         <span class="label-content">{{
           'fscommon.paymentFrequency' | cxTranslate
         }}</span>

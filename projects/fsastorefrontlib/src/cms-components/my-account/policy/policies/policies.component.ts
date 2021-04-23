@@ -14,7 +14,7 @@ import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models/occ.models';
-import { map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -40,6 +40,14 @@ export class PoliciesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.policyService.loadPolicies();
     this.policies$ = this.policyService.getPolicies();
+    this.subscription.add(
+      this.policies$
+        .pipe(
+          filter((policies: any) => !!policies.insurancePolicies),
+          tap((policies: any) => this.policyService.setPolicies(policies.insurancePolicies))
+        )
+        .subscribe()
+    );
     this.policiesLoaded$ = this.policyService.getLoaded();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }

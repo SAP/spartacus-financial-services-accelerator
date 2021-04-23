@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
 import { UserIdService } from '@spartacus/core';
@@ -9,6 +9,10 @@ import { StateWithMyAccount } from '../store/my-account-state';
 
 @Injectable()
 export class PolicyService {
+
+  policiesSource = new Subject<any>();
+  policies$ = this.policiesSource.asObservable();
+
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected userIdService: UserIdService
@@ -91,5 +95,9 @@ export class PolicyService {
         )
       )
       .unsubscribe();
+  }
+
+  setPolicies(policies: any) {
+    this.policiesSource.next(policies);
   }
 }

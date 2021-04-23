@@ -29,6 +29,7 @@ import { DocumentsTableModule } from '../documents/documents-table/documents-tab
 import { PoliciesChartComponent } from './policies-chart/policies-chart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
+import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
 
 const routes: Routes = [
   {
@@ -83,7 +84,7 @@ const routes: Routes = [
   ],
   declarations: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
   exports: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
-  providers: [PolicyService, ChangeRequestService],
+  providers: [PolicyService, ChangeRequestService, PolicyChartDataService],
   entryComponents: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
 })
 export class PolicyModule {}
