@@ -186,6 +186,10 @@ export const fscommon = {
       existingCouponCodeProvided:
         'This coupon code is already applied to the current cart.',
     },
+    syncPilot: {
+      speakToAgent: 'Speak to an Agent',
+      needHelp: 'Need Help?',
+    },
     attachments: 'Attachments',
     pageNotFoundMessage:
       'Whoops! Sorry, we couldn\'t find that way! Try getting back.', // prettier-ignore

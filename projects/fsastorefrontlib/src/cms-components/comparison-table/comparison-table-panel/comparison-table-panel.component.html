@@ -1,7 +1,9 @@
 <ng-container *ngIf="comparisonPanel$ | async as panel">
   <ng-container *ngIf="billingData$ | async as billingInfo">
     <div class="fixed-column">
-      <div class="table-header"></div>
+      <div class="table-header text-center mb-0">
+        <cx-fs-sync-pilot-connection-component></cx-fs-sync-pilot-connection-component>
+      </div>
       <div class="table-cell-wrapper">
         <div *ngFor="let item of billingInfo.billingTimes" class="table-cell">
           <span class="table-cell-title text-truncate" title="{{ item.name }}">

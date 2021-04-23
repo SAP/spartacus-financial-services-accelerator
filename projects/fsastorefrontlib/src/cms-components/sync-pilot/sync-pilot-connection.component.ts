@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { UserService, WindowRef } from '@spartacus/core';
+import { UserService, WindowRef, User, CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<any>,
     protected userService: UserService,
+    protected cmsService: CmsService,
     protected winRef?: WindowRef
   ) {}
 
@@ -26,17 +27,20 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   protected readonly USER_PARAM = '&nick=';
 
   component$: Observable<any>;
+  user$: Observable<User>;
 
   private subscription = new Subscription();
 
   ngOnInit() {
-    this.component$ = this.componentData.data$;
+    this.component$ = this.cmsService.getComponentData(
+      'SyncPilotConnectionComponent'
+    );
+    this.user$ = this.userService.get();
   }
 
   establishConnection(targetUrl: string, channel: string, action: string) {
     this.subscription.add(
-      this.userService
-        .get()
+      this.user$
         .pipe(
           map(user => {
             if (user?.uid && user?.name) {
