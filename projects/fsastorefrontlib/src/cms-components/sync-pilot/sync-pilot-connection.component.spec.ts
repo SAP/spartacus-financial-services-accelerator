@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   I18nTestingModule,
   UserService,
@@ -39,8 +39,8 @@ describe('SyncPilotConnectionComponent', () => {
   let mockUserService: UserService;
   let winRef: WindowRef;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [SyncPilotConnectionComponent],
       imports: [I18nTestingModule],
       providers: [
@@ -57,7 +57,7 @@ describe('SyncPilotConnectionComponent', () => {
     mockUserService = TestBed.inject(UserService);
     mockCmsService = TestBed.inject(CmsService);
     winRef = TestBed.inject(WindowRef);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SyncPilotConnectionComponent);
