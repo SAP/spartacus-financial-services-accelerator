@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, UserService, WindowRef } from '@spartacus/core';
-import { CmsComponentData } from '@spartacus/storefront';
+import {
+  I18nTestingModule,
+  UserService,
+  WindowRef,
+  CmsService,
+} from '@spartacus/core';
 import { of } from 'rxjs';
 import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 
@@ -16,10 +20,11 @@ const mockUser = {
   name: 'testName',
 };
 
-const MockCmsComponentData = {
-  data$: of(componentData),
-  uid: 'test',
-};
+class MockCmsService {
+  getComponentData() {
+    return of(componentData);
+  }
+}
 
 class MockUserService {
   get() {
@@ -30,6 +35,7 @@ class MockUserService {
 describe('SyncPilotConnectionComponent', () => {
   let component: SyncPilotConnectionComponent;
   let fixture: ComponentFixture<SyncPilotConnectionComponent>;
+  let mockCmsService: CmsService;
   let mockUserService: UserService;
   let winRef: WindowRef;
 
@@ -39,8 +45,8 @@ describe('SyncPilotConnectionComponent', () => {
       imports: [I18nTestingModule],
       providers: [
         {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
+          provide: CmsService,
+          useClass: MockCmsService,
         },
         {
           provide: UserService,
@@ -49,6 +55,7 @@ describe('SyncPilotConnectionComponent', () => {
       ],
     }).compileComponents();
     mockUserService = TestBed.inject(UserService);
+    mockCmsService = TestBed.inject(CmsService);
     winRef = TestBed.inject(WindowRef);
   }));
 
@@ -69,9 +76,8 @@ describe('SyncPilotConnectionComponent', () => {
   });
 
   it('should not establish connection with sync pilot', () => {
+    spyOn(mockCmsService, 'getComponentData').and.returnValue(of({}));
     spyOn(winRef.nativeWindow, 'open');
-    spyOn(mockUserService, 'get').and.returnValue(of({}));
-    component.establishConnection('testUrl', 'testChannel', 'join');
     expect(window.open).not.toHaveBeenCalled();
   });
 });

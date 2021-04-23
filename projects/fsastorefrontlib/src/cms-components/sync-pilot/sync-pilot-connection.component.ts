@@ -16,9 +16,8 @@ import { map } from 'rxjs/operators';
 })
 export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   constructor(
-    protected componentData: CmsComponentData<any>,
-    protected userService: UserService,
     protected cmsService: CmsService,
+    protected userService: UserService,
     protected winRef?: WindowRef
   ) {}
 
