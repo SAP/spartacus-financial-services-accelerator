@@ -14,7 +14,7 @@ import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models/occ.models';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -44,6 +44,7 @@ export class PoliciesComponent implements OnInit, OnDestroy {
       this.policies$
         .pipe(
           filter((policies: any) => !!policies.insurancePolicies),
+          take(1),
           tap((policies: any) => this.policyService.setPolicies(policies.insurancePolicies))
         )
         .subscribe()

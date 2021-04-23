@@ -30,7 +30,7 @@ export class PolicyChartDataService {
       if (policyAmountByCategory) {
         chartOption.series[0].data.push({
           value: policyAmountByCategory,
-          name: category,
+          name: category.split(' ')[0],
         });
       }
     });

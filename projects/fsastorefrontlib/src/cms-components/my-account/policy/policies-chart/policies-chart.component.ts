@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 
 @Component({
@@ -27,7 +27,6 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.policyService.policies$
         .pipe(
-          take(1),
           tap(policies => {
             console.log(policies, 'policies')
             this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
@@ -46,13 +45,18 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
     this.chartOption = {
       title: {
         show: true,
-        text: 'Purchase Order Overview',
+        text: 'Purchase Order',
         left: 'center',
+        textStyle: {
+          fontSize: 16,
+          color: '#000033',
+          fontWeight: 'normal'
+        }
       },
       tooltip: {
         trigger: 'item',
         position: 'inside',
-        formatter: '{b}: {d}%',
+        formatter: '<span class="semi-bold">{b}:</span><br /> {c} ({d}%)',
       },
       legend: {
         top: 'bottom',
@@ -60,10 +64,11 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
       },
       toolbox: {
         show: true,
-        padding: [0, 35, 0, 0],
+        padding: [0, 0, 3, 0],
         feature: {
           saveAsImage: {
             show: true,
+            title: '',
             iconStyle: {
               borderColor: '#0066cc',
               borderWidth: 2,
@@ -91,9 +96,14 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
             show: true,
             formatter: params => {
               let res = '';
-              res += params.name + ': ' + params.value.toLocaleString();
+              res += params.value.toLocaleString();
               return res;
             },
+          },
+          labelLine: {
+            show: true,
+            length: 8,
+            length2: 2,
           },
           emphasis: {
             label: {

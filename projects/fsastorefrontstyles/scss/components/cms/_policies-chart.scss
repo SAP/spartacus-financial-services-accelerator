@@ -1,6 +1,19 @@
 %cx-fs-policies-chart {
-    .chart-container {
-        display: grid;
-        grid-template-columns: 20% 80%;
+  .chart-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 30% 70%;
     }
+    @include media-breakpoint-down(sm) {
+      grid-template-columns: 50% 50%;
+    }
+
+    .policy-chart {
+      @include media-breakpoint-down(md) {
+        padding-top: 20px;
+        grid-column: 1 / 3;
+      }
+    }
+  }
 }
