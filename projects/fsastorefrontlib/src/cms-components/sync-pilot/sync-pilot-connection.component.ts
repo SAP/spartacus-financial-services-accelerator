@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './sync-pilot-connection.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
+export class SyncPilotConnectionComponent implements OnDestroy {
   constructor(
     protected cmsService: CmsService,
     protected userService: UserService,
@@ -25,17 +25,12 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   protected readonly CHANNEL_PARAM = '?c=';
   protected readonly USER_PARAM = '&nick=';
 
-  component$: Observable<any>;
-  user$: Observable<User>;
+  component$: Observable<any> = this.cmsService.getComponentData(
+    'SyncPilotConnectionComponent'
+  );
+  user$: Observable<User> = this.userService.get();
 
   private subscription = new Subscription();
-
-  ngOnInit() {
-    this.component$ = this.cmsService.getComponentData(
-      'SyncPilotConnectionComponent'
-    );
-    this.user$ = this.userService.get();
-  }
 
   establishConnection(targetUrl: string, channel: string, action: string) {
     this.subscription.add(
