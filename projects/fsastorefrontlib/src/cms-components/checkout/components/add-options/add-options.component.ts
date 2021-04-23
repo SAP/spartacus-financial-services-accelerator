@@ -33,6 +33,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
 
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
+  categoriesForDisplayClassifications = 'insurances_auto';
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
@@ -87,5 +88,14 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  shouldDisplayClassificationFeatures(entry) {
+    const categoryCode = entry.product.defaultCategory.code;
+    return (
+      this.categoriesForDisplayClassifications
+        .split(',')
+        .filter(category => category === categoryCode).length > 0
+    );
   }
 }

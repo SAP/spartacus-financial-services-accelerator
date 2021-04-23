@@ -22,10 +22,18 @@ const product: FSProduct = {
   },
   configurable: false,
 };
-
+const productLife: FSProduct = {
+  defaultCategory: {
+    code: 'insurances_life',
+  },
+  configurable: false,
+};
 const mockEntries: OrderEntry[] = [
   {
     product: product,
+  },
+  {
+    product: productLife,
   },
 ];
 
@@ -190,5 +198,17 @@ describe('AddOptionsComponent', () => {
   it('should set currentCurrency variable to EUR', () => {
     component.ngOnInit();
     expect(component.currentCurrency).toEqual('EUR');
+  });
+  it('should display classification features', () => {
+    component.ngOnInit();
+    expect(
+      component.shouldDisplayClassificationFeatures(mockEntries[0])
+    ).toEqual(true);
+  });
+  it('should not display classification features', () => {
+    component.ngOnInit();
+    expect(
+      component.shouldDisplayClassificationFeatures(mockEntries[1])
+    ).toEqual(false);
   });
 });
