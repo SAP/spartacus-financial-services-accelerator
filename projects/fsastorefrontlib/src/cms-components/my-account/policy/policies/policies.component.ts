@@ -45,7 +45,9 @@ export class PoliciesComponent implements OnInit, OnDestroy {
         .pipe(
           filter((policies: any) => !!policies.insurancePolicies),
           take(1),
-          tap((policies: any) => this.policyService.setPolicies(policies.insurancePolicies))
+          tap((policies: any) =>
+            this.policyService.setPolicies(policies.insurancePolicies)
+          )
         )
         .subscribe()
     );

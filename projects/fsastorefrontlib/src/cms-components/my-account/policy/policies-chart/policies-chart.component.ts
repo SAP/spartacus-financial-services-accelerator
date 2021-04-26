@@ -28,7 +28,6 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
       this.policyService.policies$
         .pipe(
           tap(policies => {
-            console.log(policies, 'policies')
             this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
               policies,
               'paymentFrequency'
@@ -50,13 +49,23 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
         textStyle: {
           fontSize: 16,
           color: '#000033',
-          fontWeight: 'normal'
-        }
+          fontWeight: 'normal',
+        },
       },
       tooltip: {
         trigger: 'item',
         position: 'inside',
-        formatter: '<span class="semi-bold">{b}:</span><br /> {c} ({d}%)',
+        formatter: params => {
+          let res = '';
+          res +=
+            params.data['name'] +
+            ': ' +
+            params.data['currancyValue'] +
+            ' (' +
+            params.percent +
+            '%)';
+          return res;
+        },
       },
       legend: {
         top: 'bottom',
@@ -96,14 +105,14 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
             show: true,
             formatter: params => {
               let res = '';
-              res += params.value.toLocaleString();
+              res += params.data['currancyValue'];
               return res;
             },
           },
           labelLine: {
             show: true,
             length: 8,
-            length2: 2,
+            length2: 0,
           },
           emphasis: {
             label: {
@@ -149,7 +158,7 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
 
   toggleChartVisibility() {
     this.isChartVisible = !this.isChartVisible;
-    if (!this.isChartVisible) {
+    if (this.isChartVisible) {
       this.selectedFrequency = this.options[0].label;
       this.setChartSeriesData();
     }

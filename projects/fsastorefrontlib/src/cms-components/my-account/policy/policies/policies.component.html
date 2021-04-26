@@ -1,6 +1,3 @@
-<h2 class="heading-headline py-3 mt-3 mb-5 text-center">
-  {{ 'policy.policies' | cxTranslate }}
-</h2>
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">

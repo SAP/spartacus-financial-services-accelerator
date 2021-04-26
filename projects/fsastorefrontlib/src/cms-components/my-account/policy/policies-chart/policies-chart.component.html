@@ -1,8 +1,11 @@
 <div *ngIf="policiesByPaymentFrequency" class="row">
   <div class="col-12">
     <div class="info-card">
-      <div class="d-flex justify-content-between p-3" [ngClass]="{ 'border-bottom mb-4': isChartVisible }">
-        <h6 class="card-title m-0 ">
+      <div
+        class="d-flex justify-content-between p-3"
+        [ngClass]="{ 'border-bottom mb-4': isChartVisible }"
+      >
+        <h6 class="card-title m-0">
           {{ 'policy.policyChartTitle' | cxTranslate }}
         </h6>
         <a class="link" (click)="toggleChartVisibility()">
@@ -37,5 +40,4 @@
       </div>
     </div>
   </div>
-  
 </div>

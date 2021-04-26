@@ -11,7 +11,7 @@
 
     .policy-chart {
       @include media-breakpoint-down(md) {
-        padding-top: 20px;
+        padding-top: 1rem;
         grid-column: 1 / 3;
       }
     }

@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { EChartsOption } from 'echarts';
-import { PolicyService } from '../../my-account/facade/policy.service';
 
 @Injectable()
 export class PolicyChartDataService {
-
-  constructor(protected policyService: PolicyService) {}
+  constructor() {}
 
   groupPoliciesByAttribute(policies: any[], key: string, subkey?: string) {
-    return policies?.reduce((policy, item) => {
+    return policies.reduce((policy, item) => {
       const group = subkey ? item[key][subkey] : item[key];
       policy[group] = policy[group] || [];
       policy[group].push({
@@ -25,12 +23,20 @@ export class PolicyChartDataService {
     Object.keys(policies).forEach(category => {
       const reducer = (sum, policy) => sum + policy.policyPremium.value;
       const initialValue = 0;
-      const policyAmountByCategory = policies[category]
-        .reduce(reducer, initialValue);
+      const policyAmountByCategory = policies[category].reduce(
+        reducer,
+        initialValue
+      );
       if (policyAmountByCategory) {
         chartOption.series[0].data.push({
           value: policyAmountByCategory,
           name: category.split(' ')[0],
+          currancyValue: policyAmountByCategory.toLocaleString('de-DE', {
+            maximumFractionDigits: 2,
+            minimumFractionDigits: 0,
+            style: 'currency',
+            currency: policies[category][0].policyPremium.currencyIso,
+          }),
         });
       }
     });

@@ -82,9 +82,17 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
+  declarations: [
+    PoliciesComponent,
+    PolicyDetailsComponent,
+    PoliciesChartComponent,
+  ],
   exports: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
   providers: [PolicyService, ChangeRequestService, PolicyChartDataService],
-  entryComponents: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
+  entryComponents: [
+    PoliciesComponent,
+    PolicyDetailsComponent,
+    PoliciesChartComponent,
+  ],
 })
 export class PolicyModule {}
