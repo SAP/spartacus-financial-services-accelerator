@@ -91,7 +91,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   }
 
   shouldDisplayClassificationFeatures(entry) {
-    const categoryCode = entry.product.defaultCategory.code;
+    const categoryCode = entry.product?.defaultCategory?.code;
     return (
       this.categoriesForDisplayClassifications
         .split(',')
