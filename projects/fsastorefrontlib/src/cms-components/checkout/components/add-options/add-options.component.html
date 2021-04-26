@@ -31,7 +31,7 @@
             <span>{{ orderEntryData.product?.description }}</span>
             <ng-container
               *ngIf="
-                shouldDisplayClassificationFeatures(entries[0]) &&
+                orderEntryData.product.displayClassifications &&
                 orderEntryData.product.classifications as classifications
               "
             >
@@ -101,7 +101,7 @@
       </ng-container>
       <ng-container
         *ngIf="
-          shouldDisplayClassificationFeatures(entries[0]) &&
+          entries[0].product.displayClassifications &&
           entries[0].product?.classifications
         "
       >
