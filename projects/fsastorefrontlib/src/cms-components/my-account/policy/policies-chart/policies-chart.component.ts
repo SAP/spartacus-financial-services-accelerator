@@ -138,8 +138,7 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
   setChartSeriesData() {
     const policiesByCategory = this.policyChartDataService.groupPoliciesByAttribute(
       this.policiesByPaymentFrequency[this.selectedFrequency],
-      'categoryData',
-      'name'
+      'categoryData.name'
     );
     this.policyChartDataService.calculatePremiumAmountByCategory(
       policiesByCategory,

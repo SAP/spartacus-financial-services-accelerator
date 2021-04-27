@@ -39,6 +39,15 @@ const mockChartOption: EChartsOption = {
   ],
 };
 
+const mockNestedObject = {
+  categoryData: {
+    code: {
+      value: 'Test value',
+    },
+  },
+  paymentFrequency: 'Test1 frequency',
+};
+
 describe('PolicyChartDataService', () => {
   let service: PolicyChartDataService;
   beforeEach(() => {
@@ -59,10 +68,27 @@ describe('PolicyChartDataService', () => {
   it('should calculate premium amount by policy category', () => {
     const groupByCategory = service.groupPoliciesByAttribute(
       mockPolicies,
-      'categoryData',
-      'name'
+      'categoryData.name'
     );
     service.calculatePremiumAmountByCategory(groupByCategory, mockChartOption);
     expect(mockChartOption.series[0].data.length).toEqual(2);
+  });
+
+  it('should get nested object property value', () => {
+    let result = service.getObjectValueByProperty(
+      'categoryData.code.value',
+      mockNestedObject
+    );
+    expect(result).toEqual('Test value');
+    result = service.getObjectValueByProperty(
+      ['categoryData', 'code', 'value'],
+      mockNestedObject
+    );
+    expect(result).toEqual('Test value');
+    result = service.getObjectValueByProperty(
+      'paymentFrequency',
+      mockNestedObject
+    );
+    expect(result).toEqual('Test1 frequency');
   });
 });

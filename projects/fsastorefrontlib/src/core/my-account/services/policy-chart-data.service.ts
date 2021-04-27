@@ -3,13 +3,15 @@ import { EChartsOption } from 'echarts';
 
 @Injectable()
 export class PolicyChartDataService {
+  protected readonly SEPARATOR = '.';
+
   constructor() {}
 
-  groupPoliciesByAttribute(policies: any[], key: string, subkey?: string) {
+  groupPoliciesByAttribute(policies: any[], key: string | string[]) {
     return policies.reduce((policy, item) => {
-      const group = subkey ? item[key][subkey] : item[key];
-      policy[group] = policy[group] || [];
-      policy[group].push({
+      const groupCriteria = this.getObjectValueByProperty(key, item);
+      policy[groupCriteria] = policy[groupCriteria] || [];
+      policy[groupCriteria].push({
         categoryData: item.categoryData,
         policyPremium: item.policyPremium,
         paymentFrequency: item.paymentFrequency,
@@ -40,5 +42,13 @@ export class PolicyChartDataService {
         });
       }
     });
+  }
+
+  getObjectValueByProperty(path: string | string[], object) {
+    const properties = Array.isArray(path) ? path : path.split(this.SEPARATOR);
+    return properties.reduce(
+      (previous, current) => previous && previous[current],
+      object
+    );
   }
 }
