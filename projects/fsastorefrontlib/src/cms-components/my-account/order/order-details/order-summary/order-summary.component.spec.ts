@@ -10,6 +10,7 @@ import { PromotionsModule } from '@spartacus/storefront';
 import { FSOrderSummaryComponent } from './order-summary.component';
 
 @Component({
+  // tslint:disable
   selector: 'cx-applied-coupons',
   template: '',
 })
