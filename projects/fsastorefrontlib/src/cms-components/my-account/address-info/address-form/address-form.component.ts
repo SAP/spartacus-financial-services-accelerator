@@ -26,6 +26,7 @@ export class FSAddressFormComponent extends AddressFormComponent
   implements OnInit {
   @Input()
   user: User;
+  isAddAddressDisabled: boolean;
 
   addressForm: FormGroup = this.fb.group({
     country: this.fb.group({
@@ -90,8 +91,13 @@ export class FSAddressFormComponent extends AddressFormComponent
   }
 
   verifyAddress(): void {
-    this.preventDOMManipulation();
-    super.verifyAddress();
+    if (!this.isAddAddressDisabled) {
+      this.preventDOMManipulation();
+      super.verifyAddress();
+    }
+    if (this.addressForm.valid) {
+      this.isAddAddressDisabled = true;
+    }
   }
 
   protected preventDOMManipulation() {
