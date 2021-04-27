@@ -23,7 +23,7 @@ class MockAppliedCouponsComponent {
   isReadOnly = false;
 }
 
-describe('OrderSummary', () => {
+describe('FSOrderSummaryComponent', () => {
   let component: FSOrderSummaryComponent;
   let fixture: ComponentFixture<FSOrderSummaryComponent>;
 
