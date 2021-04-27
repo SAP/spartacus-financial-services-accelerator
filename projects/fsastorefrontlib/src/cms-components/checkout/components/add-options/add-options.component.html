@@ -30,7 +30,10 @@
           <ng-template #tooltipContent>
             <span>{{ orderEntryData.product?.description }}</span>
             <ng-container
-              *ngIf="orderEntryData.product.classifications as classifications"
+              *ngIf="
+                orderEntryData.product.displayClassifications &&
+                orderEntryData.product.classifications as classifications
+              "
             >
               <hr />
               <div
@@ -96,7 +99,12 @@
           </div>
         </div>
       </ng-container>
-      <ng-container *ngIf="entries[0].product?.classifications">
+      <ng-container
+        *ngIf="
+          entries[0].product.displayClassifications &&
+          entries[0].product?.classifications
+        "
+      >
         <div class="row mx-3 py-3 no-gutters">
           <div class="col-12 col-md-2 align-self-center">
             <cx-media
