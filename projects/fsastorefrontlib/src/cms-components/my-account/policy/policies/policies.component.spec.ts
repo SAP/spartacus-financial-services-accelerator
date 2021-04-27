@@ -134,7 +134,6 @@ describe('PoliciesComponent', () => {
     claimService = TestBed.inject(ClaimService);
     mockFileService = TestBed.inject(FileService);
     routingService = TestBed.inject(RoutingService);
-    // spyOn(policyService, 'getPolicies').and.returnValue(of(mockPolicies));
   });
   it('should create', () => {
     expect(component).toBeTruthy();

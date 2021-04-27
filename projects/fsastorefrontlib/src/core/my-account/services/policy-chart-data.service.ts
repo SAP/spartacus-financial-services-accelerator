@@ -5,8 +5,6 @@ import { EChartsOption } from 'echarts';
 export class PolicyChartDataService {
   protected readonly SEPARATOR = '.';
 
-  constructor() {}
-
   groupPoliciesByAttribute(policies: any[], key: string | string[]) {
     return policies.reduce((policy, item) => {
       const groupCriteria = this.getObjectValueByProperty(key, item);
