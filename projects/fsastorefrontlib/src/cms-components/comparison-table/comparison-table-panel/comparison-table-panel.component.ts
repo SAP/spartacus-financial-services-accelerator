@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { User, UserService } from '@spartacus/core';
 import {
   FormDataService,
   FormDataStorageService,
@@ -38,8 +39,11 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected pricingService: PricingService,
     protected formDataStorageService: FormDataStorageService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute
   ) {}
+
+  user$: Observable<User> = this.userService.get();
 
   ngOnInit() {
     this.comparisonPanel$ = this.componentData.data$;

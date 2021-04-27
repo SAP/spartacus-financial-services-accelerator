@@ -19,13 +19,13 @@ import {
 } from '@spartacus/organization/administration/components';
 import { AdminGuard } from '@spartacus/organization/administration/core';
 import { TableConfig, TableDataCellComponent } from '@spartacus/storefront';
-import { ProductAssignmentsComponent } from './unit/assignments';
-import { AssignProductCellComponent } from './unit/potential-assignments/cells/assign-product-cell/assign-product-cell.component';
-import { PotentialAssignmentsComponent } from './unit/potential-assignments/potential-assignments.component';
-import { ActivateProductCellComponent } from './unit/assignments/cells/activate-product-cell/activate-product-cell.component';
-import { RemoveProductCellComponent } from './unit/assignments/cells/remove-product-cell/remove-product-cell.component';
-import { FSUnitDetailsComponent } from './unit/details';
-import { OrganizationTableType } from '../../occ';
+import { ProductAssignmentsComponent } from './assignments';
+import { AssignProductCellComponent } from './potential-assignments/cells/assign-product-cell/assign-product-cell.component';
+import { PotentialAssignmentsComponent } from './potential-assignments/potential-assignments.component';
+import { ActivateProductCellComponent } from './assignments/cells/activate-product-cell/activate-product-cell.component';
+import { RemoveProductCellComponent } from './assignments/cells/remove-product-cell/remove-product-cell.component';
+import { FSUnitDetailsComponent } from './details';
+import { OrganizationTableType } from '../../../occ';
 
 export const MAX_OCC_INTEGER_VALUE = 2147483647;
 
@@ -162,6 +162,7 @@ export const unitsTableConfigFactory: TableConfig = {
     [OrganizationTableType.PRODUCT_ASSIGNMENTS]: {
       cells: ['name', 'activate', 'remove'],
       options: {
+        pagination: { pageSize: 7 },
         cells: {
           name: {
             dataComponent: TableDataCellComponent,
@@ -178,6 +179,7 @@ export const unitsTableConfigFactory: TableConfig = {
     [OrganizationTableType.POTENTIAL_PRODUCT_ASSIGNMENTS]: {
       cells: ['name', 'add'],
       options: {
+        pagination: { pageSize: 7 },
         cells: {
           add: {
             dataComponent: AssignProductCellComponent,

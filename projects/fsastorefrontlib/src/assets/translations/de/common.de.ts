@@ -178,11 +178,17 @@ export const fscommon = {
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
       backToList: '[DE] Back to list',
+      online: '[DE] Online',
+      offline: '[DE] Offline',
       noSearchResults: 'Keine Ergebnisse',
     },
     httpHandlers: {
       existingCouponCodeProvided:
         '[DE] This coupon code is already applied to the current cart.',
+    },
+    syncPilot: {
+      speakToAgent: '[DE] Speak to an Agent',
+      needHelp: '[DE] Need Help?',
     },
     priceCalculationError:
       'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',

@@ -178,11 +178,17 @@ export const fscommon = {
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
       backToList: 'Back to list',
+      online: 'Online',
+      offline: 'Offline',
       noSearchResults: 'No search results',
     },
     httpHandlers: {
       existingCouponCodeProvided:
         'This coupon code is already applied to the current cart.',
+    },
+    syncPilot: {
+      speakToAgent: 'Speak to an Agent',
+      needHelp: 'Need Help?',
     },
     attachments: 'Attachments',
     pageNotFoundMessage:

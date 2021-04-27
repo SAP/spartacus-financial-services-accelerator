@@ -93,6 +93,9 @@ cx-fs-comparison-table-container {
         font-size: var(--cx-h3-font-size);
       }
     }
+    .fas {
+      line-height: $headings-line-height;
+    }
   }
   .table-cell {
     position: relative;

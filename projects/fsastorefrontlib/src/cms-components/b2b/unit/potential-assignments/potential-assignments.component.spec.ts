@@ -3,7 +3,7 @@ import { B2BUnit, I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { CurrentUnitService } from '@spartacus/organization/administration/components';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
-import { PotentialAssingmensListService } from './potential-assignments-list.service';
+import { PotentialAssignmentsListService } from './potential-assignments-list.service';
 
 import { PotentialAssignmentsComponent } from './potential-assignments.component';
 
@@ -33,7 +33,7 @@ describe('PotentialAssignmentsComponent', () => {
       imports: [I18nTestingModule],
       providers: [
         {
-          provide: PotentialAssingmensListService,
+          provide: PotentialAssignmentsListService,
           useClass: MockAssignmentsListService,
         },
         {

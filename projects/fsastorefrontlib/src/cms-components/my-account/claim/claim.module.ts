@@ -28,7 +28,7 @@ import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
-import { DateFormatConfigurationModule } from '../../../shared/util/helpers/dateFormatConfiguration.module';
+import { DateFormatConfigurationModule } from '../../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
