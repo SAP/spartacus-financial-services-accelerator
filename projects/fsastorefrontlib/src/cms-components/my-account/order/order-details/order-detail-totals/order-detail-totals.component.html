@@ -1,7 +1,7 @@
 <ng-container *ngIf="order$ | async as order">
   <div class="row flex-md-row-reverse flex-lg-row-reverse flex-xl-row-reverse">
     <div class="cx-summary col-12 col-md-4">
-      <cx-order-summary [cart]="order"></cx-order-summary>
+      <cx-fs-order-summary [order]="order"></cx-fs-order-summary>
     </div>
     <div class="card-wrapper col-12 col-md-4 my-3">
       <div class="card">

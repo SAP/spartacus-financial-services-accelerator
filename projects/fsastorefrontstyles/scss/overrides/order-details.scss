@@ -28,10 +28,27 @@
       }
     }
   }
-  cx-order-summary {
-    padding-bottom: 16px;
-  }
-  .cx-summary-total + .cx-summary-row {
-    display: none;
+}
+%cx-fs-order-summary {
+  padding-bottom: 16px;
+  @extend %cx-order-summary;
+  cx-applied-coupons {
+    & > * {
+      display: flex;
+      & > * {
+        flex: 1 1 50%;
+        max-width: 50%;
+      }
+      .coupon-summary.textonly {
+        display: block;
+        background: none;
+        font-weight: var(--cx-font-weight-semi);
+        margin: 0;
+        padding: 0;
+        border: none;
+        text-align: right;
+        line-height: 1.6;
+      }
+    }
   }
 }
