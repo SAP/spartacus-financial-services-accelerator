@@ -13,32 +13,6 @@ import {
 import { PoliciesComponent } from './policies.component';
 import createSpy = jasmine.createSpy;
 
-const policy1 = {
-  categoryData: {
-    name: 'Test1 isurance',
-  },
-  paymentFrequency: 'Test1 frequency',
-  policyPremium: {
-    currencyIso: 'EUR',
-    value: '49',
-  },
-};
-
-const policy2 = {
-  categoryData: {
-    name: 'Test2 isurance',
-  },
-  paymentFrequency: 'Test2 frequency',
-  policyPremium: {
-    currencyIso: 'EUR',
-    value: '55',
-  },
-};
-
-const mockPolicies = {
-  insurancePolicies: [policy1, policy2],
-};
-
 class MockRoutingService {
   go = createSpy();
 }
@@ -62,9 +36,8 @@ class MockClaimService {
 
 class MockPolicyService {
   loadPolicies = createSpy();
-  getPolicies = createSpy().and.returnValue(of(mockPolicies));
+  getPolicies = createSpy();
   getLoaded = createSpy();
-  setPolicies = createSpy();
 }
 const MockOccConfig: OccConfig = {
   context: {

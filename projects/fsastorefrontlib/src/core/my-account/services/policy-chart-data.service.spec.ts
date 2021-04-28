@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { PolicyChartDataService } from '../../my-account/services/policy-chart-data.service';
 import { EChartsOption } from 'echarts';
+import { LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 
 const policy1 = {
   categoryData: {
@@ -48,13 +50,24 @@ const mockNestedObject = {
   paymentFrequency: 'Test1 frequency',
 };
 
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
 describe('PolicyChartDataService', () => {
   let service: PolicyChartDataService;
+  let mockLanguageService: LanguageService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PolicyChartDataService],
+      providers: [
+        PolicyChartDataService,
+        { provide: LanguageService, useClass: MockLanguageService },
+      ],
     });
     service = TestBed.inject(PolicyChartDataService);
+    mockLanguageService = TestBed.inject(LanguageService);
   });
 
   it('should group policies by given criteria', () => {

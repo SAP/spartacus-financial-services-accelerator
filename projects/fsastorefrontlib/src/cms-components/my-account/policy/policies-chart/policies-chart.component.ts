@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
+import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
 
 @Component({
   selector: 'cx-fs-policies-chart',
@@ -12,24 +13,26 @@ import { PolicyChartDataService } from '../../../../core/my-account/services/pol
 export class PoliciesChartComponent implements OnInit, OnDestroy {
   chartOption: EChartsOption;
   options: any[];
-  isChartVisible: boolean;
   selectedFrequency: string;
   policiesByPaymentFrequency;
   private subscription = new Subscription();
 
   constructor(
     protected policyService: PolicyService,
-    protected policyChartDataService: PolicyChartDataService
+    protected policyChartDataService: PolicyChartDataService,
+    protected chartConfig: ChartConfig
   ) {}
 
   ngOnInit(): void {
-    this.initChart();
     this.subscription.add(
-      this.policyService.policies$
+      this.policyService
+        .getPolicies()
         .pipe(
-          tap(policies => {
+          filter((policies: any) => !!policies.insurancePolicies),
+          take(1),
+          tap((policies: any) => {
             this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
-              policies,
+              policies.insurancePolicies,
               'paymentFrequency'
             );
             this.setPaymentFrequencyDropdown();
@@ -38,53 +41,42 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+    this.initChart();
   }
 
   initChart() {
     this.chartOption = {
       title: {
-        show: true,
-        text: 'Purchase Order',
-        left: 'center',
+        show: this.chartConfig.options.title.show,
+        text: this.chartConfig.options.title.text,
+        left: this.chartConfig.options.title.left,
         textStyle: {
-          fontSize: 16,
-          color: '#000033',
+          fontSize: this.chartConfig.options.title.fontSize,
+          color: this.chartConfig.options.title.color,
           fontWeight: 'normal',
         },
       },
       tooltip: {
-        trigger: 'item',
-        position: 'inside',
-        formatter: params => {
-          let res = '';
-          res +=
-            params.data['name'] +
-            ': ' +
-            params.data['currancyValue'] +
-            ' (' +
-            params.percent +
-            '%)';
-          return res;
-        },
+        formatter: this.chartConfig.options.tooltip.formatter,
       },
       legend: {
-        top: 'bottom',
-        padding: 10,
+        top: this.chartConfig.options.legend.top,
       },
       toolbox: {
-        show: true,
+        show: this.chartConfig.options.toolbox.show,
         padding: [0, 0, 3, 0],
         feature: {
           saveAsImage: {
-            show: true,
-            title: '',
+            title: this.chartConfig.options.toolbox.feature.saveAsImage.title,
             iconStyle: {
-              borderColor: '#0066cc',
-              borderWidth: 2,
+              borderColor: this.chartConfig.options.toolbox.feature.saveAsImage
+                .borderColor,
+              borderWidth: this.chartConfig.options.toolbox.feature.saveAsImage
+                .borderWidth,
             },
             emphasis: {
               iconStyle: {
-                color: '#0066cc',
+                color: this.chartConfig.options.toolbox.feature.emphasis.color,
               },
             },
           },
@@ -92,34 +84,20 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
       },
       series: [
         {
-          name: 'Insurance',
           type: 'pie',
-          radius: ['40%', '70%'],
-          avoidLabelOverlap: false,
+          radius: this.chartConfig.options.series.radius,
           itemStyle: {
-            borderRadius: 10,
-            borderColor: '#fff',
-            borderWidth: 2,
+            borderRadius: this.chartConfig.options.series.borderRadius,
+            borderColor: this.chartConfig.options.series.borderColor,
+            borderWidth: this.chartConfig.options.series.borderWidth,
           },
           label: {
-            show: true,
-            formatter: params => {
-              let res = '';
-              res += params.data['currancyValue'];
-              return res;
-            },
+            show: this.chartConfig.options.series.label.show,
+            formatter: this.chartConfig.options.series.label.formatter,
           },
           labelLine: {
-            show: true,
-            length: 8,
-            length2: 0,
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: '18',
-              fontWeight: 'bold',
-            },
+            length: this.chartConfig.options.series.labelLine.length,
+            length2: this.chartConfig.options.series.labelLine.length2,
           },
           data: [],
         },
@@ -148,19 +126,10 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
 
   selectPaymentFrequency() {
     if (!this.selectedFrequency) {
-      this.isChartVisible = false;
       return;
     }
     this.setChartSeriesData();
     this.chartOption = { ...this.chartOption };
-  }
-
-  toggleChartVisibility() {
-    this.isChartVisible = !this.isChartVisible;
-    if (this.isChartVisible) {
-      this.selectedFrequency = this.options[0].label;
-      this.setChartSeriesData();
-    }
   }
 
   ngOnDestroy() {

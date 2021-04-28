@@ -16,6 +16,7 @@ import {
   CmsConfig,
   RoutesConfig,
   RoutingConfig,
+  Config,
 } from '@spartacus/core';
 import { CmsPageGuard } from '@spartacus/storefront';
 
@@ -30,6 +31,8 @@ import { PoliciesChartComponent } from './policies-chart/policies-chart.componen
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
+import { ChartConfig } from '../../../core/chart-config/chart-options.config';
+import { defaultChartOptionsConfig } from '../../../core/chart-config/default-chart-options-config';
 
 const routes: Routes = [
   {
@@ -68,6 +71,7 @@ const routes: Routes = [
       echarts,
     }),
     RouterModule.forChild(routes),
+    ConfigModule.withConfig(defaultChartOptionsConfig),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountMyPoliciesChartFlex: {
@@ -88,7 +92,12 @@ const routes: Routes = [
     PoliciesChartComponent,
   ],
   exports: [PoliciesComponent, PolicyDetailsComponent, PoliciesChartComponent],
-  providers: [PolicyService, ChangeRequestService, PolicyChartDataService],
+  providers: [
+    PolicyService,
+    ChangeRequestService,
+    PolicyChartDataService,
+    { provide: ChartConfig, useExisting: Config },
+  ],
   entryComponents: [
     PoliciesComponent,
     PolicyDetailsComponent,

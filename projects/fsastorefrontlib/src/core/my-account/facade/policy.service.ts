@@ -9,9 +9,6 @@ import { StateWithMyAccount } from '../store/my-account-state';
 
 @Injectable()
 export class PolicyService {
-  policiesSource = new Subject<any>();
-  policies$ = this.policiesSource.asObservable();
-
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected userIdService: UserIdService
@@ -94,9 +91,5 @@ export class PolicyService {
         )
       )
       .unsubscribe();
-  }
-
-  setPolicies(policies: any) {
-    this.policiesSource.next(policies);
   }
 }

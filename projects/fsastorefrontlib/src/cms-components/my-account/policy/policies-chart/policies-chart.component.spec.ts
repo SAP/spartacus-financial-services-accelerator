@@ -7,6 +7,7 @@ import { PolicyChartDataService } from '../../../../core/my-account/services/pol
 import { I18nModule, TranslationService } from '@spartacus/core';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
 
 const policy1 = {
   categoryData: {
@@ -30,15 +31,68 @@ const policy2 = {
   },
 };
 
-const mockPolicies = [policy1, policy2];
+const mockPolicies = {
+  insurancePolicies: [policy1, policy2],
+};
 
 const mockPoliciesByPaymentFrequency = {
   'Test1 frequency': [policy1],
   'Test2 frequency': [policy2],
 };
 
+const mockChartConfig: ChartConfig = {
+  options: {
+    title: {
+      show: true,
+      text: 'Purchase Order',
+      left: 'center',
+      color: '#000033',
+      fontSize: 16,
+    },
+    tooltip: {
+      formatter: params => {
+        return `<span class="semi-bold">${params.data['name']}:</span><br/> ${params.data['currencyValue']} (${params.percent}%)`;
+      },
+    },
+    legend: {
+      top: 'bottom',
+    },
+    toolbox: {
+      show: true,
+      feature: {
+        saveAsImage: {
+          title: '',
+          borderColor: '#0066cc',
+          borderWidth: 2,
+        },
+        emphasis: {
+          color: '#0066cc',
+        },
+      },
+    },
+    series: {
+      radius: ['40%', '70%'],
+      borderRadius: 10,
+      borderColor: '#fff',
+      borderWidth: 2,
+      label: {
+        show: true,
+        formatter: params => {
+          return params.data['currencyValue'];
+        },
+      },
+      labelLine: {
+        length: 8,
+        length2: 0,
+      },
+    },
+  },
+};
+
 class MockPolicyService {
-  policies$ = of(mockPolicies);
+  getPolicies() {
+    return of(mockPolicies);
+  }
 }
 
 class MockPolicyChartDataService {
@@ -79,6 +133,10 @@ describe('PoliciesChartComponent', () => {
             provide: TranslationService,
             useClass: MockTranslationService,
           },
+          {
+            provide: ChartConfig,
+            useValue: mockChartConfig,
+          },
         ],
       }).compileComponents();
     })
@@ -97,46 +155,19 @@ describe('PoliciesChartComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toogle chart visibility when show button is clicked', () => {
-    spyOn(
-      mockPolicyChartDataService,
-      'calculatePremiumAmountByCategory'
-    ).and.callThrough();
-    fixture.detectChanges();
-    el.query(By.css('.link')).nativeElement.click();
-    component.toggleChartVisibility();
-    expect(
-      mockPolicyChartDataService.calculatePremiumAmountByCategory
-    ).toHaveBeenCalled();
-  });
-
   it('should update chart data when payment frequency is selected', () => {
-    component.isChartVisible = true;
-    spyOn(
-      mockPolicyChartDataService,
-      'groupPoliciesByAttribute'
-    ).and.callThrough();
     spyOn(
       mockPolicyChartDataService,
       'calculatePremiumAmountByCategory'
     ).and.callThrough();
-    fixture.detectChanges();
-    const selectEl = el.query(By.css('select')).nativeElement;
-    selectEl.dispatchEvent(new Event('change'));
-    expect(
-      mockPolicyChartDataService.calculatePremiumAmountByCategory
-    ).toHaveBeenCalled();
-    expect(
-      mockPolicyChartDataService.groupPoliciesByAttribute
-    ).toHaveBeenCalled();
-  });
-
-  it('should not update chart data when payment frequency is not selected', () => {
-    component.isChartVisible = true;
     component.selectedFrequency = null;
     fixture.detectChanges();
     const selectEl = el.query(By.css('select')).nativeElement;
     selectEl.dispatchEvent(new Event('change'));
-    expect(component.isChartVisible).toBeFalse();
+    component.selectedFrequency = selectEl.options[1].value;
+    selectEl.dispatchEvent(new Event('change'));
+    expect(
+      mockPolicyChartDataService.calculatePremiumAmountByCategory
+    ).toHaveBeenCalled();
   });
 });

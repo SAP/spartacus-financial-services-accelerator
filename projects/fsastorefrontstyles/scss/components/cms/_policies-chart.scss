@@ -1,19 +1,18 @@
 %cx-fs-policies-chart {
+  .accordion {
+    .accordion-item {
+      margin-top: 0;
+    }
+    .accordion-heading {
+      padding: 8px 16px 12px;
+    }
+    .fa-chart-pie {
+      color: var(--cx-color-primary);
+    }
+  }
   .chart-container {
-    display: grid;
-    grid-template-columns: 20% 80%;
-    @include media-breakpoint-down(md) {
-      grid-template-columns: 30% 70%;
-    }
     @include media-breakpoint-down(sm) {
-      grid-template-columns: 50% 50%;
-    }
-
-    .policy-chart {
-      @include media-breakpoint-down(md) {
-        padding-top: 1rem;
-        grid-column: 1 / 3;
-      }
+      width: 310px;
     }
   }
 }

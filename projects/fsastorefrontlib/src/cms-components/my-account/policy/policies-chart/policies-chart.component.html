@@ -1,43 +1,34 @@
 <div *ngIf="policiesByPaymentFrequency" class="row">
   <div class="col-12">
-    <div class="info-card">
-      <div
-        class="d-flex justify-content-between p-3"
-        [ngClass]="{ 'border-bottom mb-4': isChartVisible }"
+    <div class="accordion mb-4">
+      <cx-fs-accordion-item
+        [opened]="false"
+        [icon]="'fas fa-chart-pie'"
+        [title]="'policy.policyChartTitle' | cxTranslate"
       >
-        <h6 class="card-title m-0">
-          {{ 'policy.policyChartTitle' | cxTranslate }}
-        </h6>
-        <a class="link" (click)="toggleChartVisibility()">
-          {{
-            isChartVisible
-              ? ('policy.showLess' | cxTranslate)
-              : ('policy.showMore' | cxTranslate)
-          }}
-        </a>
-      </div>
-      <div *ngIf="isChartVisible" class="chart-container px-3">
-        <label>
-          <span class="label-content">{{
-            'fscommon.paymentFrequency' | cxTranslate
-          }}</span>
-          <select
-            [(ngModel)]="selectedFrequency"
-            class="form-control"
-            (change)="selectPaymentFrequency()"
-          >
-            <option [selected]="true" disabled value="null">{{
-              'fscommon.pleaseSelect' | cxTranslate
-            }}</option>
-            <option *ngFor="let option of options" value="{{ option.name }}">
-              {{ option.label }}
-            </option>
-          </select>
-        </label>
-        <div class="policy-chart">
-          <div echarts [options]="chartOption"></div>
+        <div class="row">
+          <label class="col-md-3 pr-3 pr-md-0">
+            <span class="label-content">{{
+              'fscommon.paymentFrequency' | cxTranslate
+            }}</span>
+            <select
+              [(ngModel)]="selectedFrequency"
+              class="form-control"
+              (change)="selectPaymentFrequency()"
+            >
+              <option [selected]="true" disabled value="null">{{
+                'fscommon.pleaseSelect' | cxTranslate
+              }}</option>
+              <option *ngFor="let option of options" value="{{ option.name }}">
+                {{ option.label }}
+              </option>
+            </select>
+          </label>
+          <div class="chart-container col-12 col-md-6 mr-auto mt-md-0 mt-4">
+            <div echarts [options]="chartOption"></div>
+          </div>
         </div>
-      </div>
+      </cx-fs-accordion-item>
     </div>
   </div>
 </div>

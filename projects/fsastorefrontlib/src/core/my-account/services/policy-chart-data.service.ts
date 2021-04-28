@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
+import { LanguageService } from '@spartacus/core';
 import { EChartsOption } from 'echarts';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class PolicyChartDataService {
-  protected readonly SEPARATOR = '.';
+  language;
 
+  constructor(protected languageService: LanguageService) {
+    this.languageService
+      .getActive()
+      .pipe(tap(lang => (this.language = lang)))
+      .subscribe();
+  }
   groupPoliciesByAttribute(policies: any[], key: string | string[]) {
     return policies.reduce((policy, item) => {
       const groupCriteria = this.getObjectValueByProperty(key, item);
@@ -21,17 +29,15 @@ export class PolicyChartDataService {
   calculatePremiumAmountByCategory(policies, chartOption: EChartsOption) {
     chartOption.series[0].data = [];
     Object.keys(policies).forEach(category => {
-      const reducer = (sum, policy) => sum + policy.policyPremium.value;
-      const initialValue = 0;
       const policyAmountByCategory = policies[category].reduce(
-        reducer,
-        initialValue
+        (sum, policy) => sum + policy.policyPremium.value,
+        0
       );
       if (policyAmountByCategory) {
         chartOption.series[0].data.push({
           value: policyAmountByCategory,
           name: category.split(' ')[0],
-          currancyValue: policyAmountByCategory.toLocaleString('de-DE', {
+          currencyValue: policyAmountByCategory.toLocaleString(this.language, {
             maximumFractionDigits: 2,
             minimumFractionDigits: 0,
             style: 'currency',
@@ -43,7 +49,7 @@ export class PolicyChartDataService {
   }
 
   getObjectValueByProperty(path: string | string[], object) {
-    const properties = Array.isArray(path) ? path : path.split(this.SEPARATOR);
+    const properties = Array.isArray(path) ? path : path.split('.');
     return properties.reduce(
       (previous, current) => previous && previous[current],
       object
