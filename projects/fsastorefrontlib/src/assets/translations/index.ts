@@ -21,6 +21,7 @@ import { common } from './overrides/en/common';
 import { payment } from './overrides/en/payment';
 import { myAccount } from './overrides/en/my-account';
 import { address } from './overrides/en/address';
+import { cart } from './overrides/en/cart';
 
 export const fstranslations: TranslationResources = {
   b2b,
@@ -46,4 +47,5 @@ export const fsOverrides: TranslationResources = {
   common,
   myAccount,
   address,
+  cart,
 };

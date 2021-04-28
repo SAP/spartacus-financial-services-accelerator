@@ -1,0 +1,60 @@
+<h6>{{ 'orderCost.orderSummary' | cxTranslate }}</h6>
+
+<div class="cx-summary-partials" *ngIf="order">
+  <div class="cx-summary-row">
+    <div class="col-6 cx-summary-label">
+      {{ 'returnRequest.subtotal' | cxTranslate }}
+    </div>
+    <div class="col-6 cx-summary-amount">
+      {{ order.subTotal?.formattedValue }}
+    </div>
+  </div>
+  <div class="cx-summary-row">
+    <div class="col-6 cx-summary-label">
+      {{
+        (order.deliveryCost?.formattedValue
+          ? 'orderCost.shipping'
+          : 'orderCost.estimatedShipping'
+        ) | cxTranslate
+      }}
+    </div>
+    <div class="col-6 cx-summary-amount">
+      {{
+        order.deliveryCost?.formattedValue
+          ? order.deliveryCost.formattedValue
+          : ('orderCost.toBeDetermined' | cxTranslate)
+      }}
+    </div>
+  </div>
+  <div class="cx-summary-row" *ngIf="order.net">
+    <div class="col-6 cx-summary-label">
+      {{ 'orderCost.salesTax' | cxTranslate }}
+    </div>
+    <div class="col-6 cx-summary-amount">
+      {{ order.totalTax?.formattedValue }}
+    </div>
+  </div>
+  <div class="cx-summary-row cx-summary-total">
+    <div class="col-6 cx-summary-label">
+      {{ 'orderCost.total' | cxTranslate }}
+    </div>
+    <div class="col-6 cx-summary-amount">
+      {{ order.totalPriceWithTax?.formattedValue }}
+    </div>
+  </div>
+  <ng-container *ngIf="order.totalDiscounts?.value > 0">
+    <hr class="my-2 border-color-3" />
+    <div class="cx-summary-row">
+      <div class="col-6 cx-summary-label">
+        {{ 'orderCost.discount' | cxTranslate }}
+      </div>
+      <div class="col-6 cx-summary-amount">
+        {{ order.totalDiscounts?.formattedValue }}
+      </div>
+    </div>
+    <cx-applied-coupons
+      [vouchers]="order.appliedVouchers"
+      [isReadOnly]="true"
+    ></cx-applied-coupons>
+  </ng-container>
+</div>
