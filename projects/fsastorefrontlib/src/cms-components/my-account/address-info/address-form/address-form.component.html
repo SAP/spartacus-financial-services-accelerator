@@ -163,7 +163,7 @@
     </div>
     <div class="col-md-12 col-lg-6 ml-auto">
       <button
-        [disabled]="isAddAddressDisabled"
+        *ngIf="buttonVisible"
         class="btn btn-block btn-primary mb-3"
         type="submit"
       >
