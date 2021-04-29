@@ -12,7 +12,6 @@ import {
   CmsMultiComparisonTabContainer,
   ComparisonPanelCMSComponent,
 } from '../../../occ/occ-models';
-import { ComparisonTableService } from '../comparison-table.service';
 
 @Component({
   selector: 'cx-fs-comparison-table-container',
@@ -22,20 +21,24 @@ import { ComparisonTableService } from '../comparison-table.service';
 export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
-    protected comparisonTableService: ComparisonTableService,
     protected cmsService: CmsService
   ) {}
 
   component$: Observable<CmsMultiComparisonTabContainer>;
   tabs$;
   active = 0;
-  initialTabs = [];
+  initialTabs: string[];
   availableTabs = [];
 
   private subscription = new Subscription();
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
+    this.getInitialTabs();
+    this.getAvailableTabs();
+  }
+
+  getInitialTabs() {
     this.subscription.add(
       this.component$
         .pipe(
@@ -47,18 +50,23 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  getAvailableTabs() {
     if (this.initialTabs.length > 0) {
       this.initialTabs.map(activetab => {
         this.tabs$ = this.cmsService.getComponentData(activetab);
-        this.tabs$
-          .pipe(
-            map((availableTab: ComparisonPanelCMSComponent) => {
-              if (availableTab?.uid) {
-                this.availableTabs.push(availableTab);
-              }
-            })
-          )
-          .subscribe();
+        this.subscription.add(
+          this.tabs$
+            .pipe(
+              map((availableTab: ComparisonPanelCMSComponent) => {
+                if (availableTab?.uid) {
+                  this.availableTabs.push(availableTab);
+                }
+              })
+            )
+            .subscribe()
+        );
       });
     }
   }
