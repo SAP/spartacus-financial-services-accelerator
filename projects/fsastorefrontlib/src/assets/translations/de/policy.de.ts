@@ -4,8 +4,6 @@ export const policy = {
     policy: 'Police',
     policyId: 'Policen ID',
     policyChartTitle: '[DE] Total Purchase Order Overview',
-    showLess: '[DE] Show less',
-    showMore: '[DE] Show more',
     expiredPolicyId: '[DE] Expired Policy ID',
     policyNo: 'Policennr.',
     myPolicy: 'Meine Policen',

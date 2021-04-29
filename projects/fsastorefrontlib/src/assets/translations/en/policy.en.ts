@@ -3,8 +3,6 @@ export const policy = {
     policies: 'Policies',
     policy: 'Policy',
     policyChartTitle: 'Total Purchase Order Overview',
-    showLess: 'Show less',
-    showMore: 'Show more',
     policyId: 'Policy ID',
     expiredPolicyId: 'Expired Policy ID',
     policyNo: 'Policy No',
