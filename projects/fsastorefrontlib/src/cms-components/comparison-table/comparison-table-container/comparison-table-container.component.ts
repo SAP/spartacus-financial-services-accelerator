@@ -4,10 +4,14 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
+import {
+  CmsMultiComparisonTabContainer,
+  ComparisonPanelCMSComponent,
+} from '../../../occ/occ-models';
 import { ComparisonTableService } from '../comparison-table.service';
 
 @Component({
@@ -18,12 +22,15 @@ import { ComparisonTableService } from '../comparison-table.service';
 export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
-    protected comparisonTableService: ComparisonTableService
+    protected comparisonTableService: ComparisonTableService,
+    protected cmsService: CmsService
   ) {}
 
   component$: Observable<CmsMultiComparisonTabContainer>;
   tabs$;
   active = 0;
+  initialTabs = [];
+  availableTabs = [];
 
   private subscription = new Subscription();
 
@@ -34,14 +41,26 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
         .pipe(
           map(data => {
             if (data.simpleCMSComponents) {
-              this.tabs$ = this.comparisonTableService.getComparisonTabs(
-                data.simpleCMSComponents.split(' ')
-              );
+              this.initialTabs = data.simpleCMSComponents.split(' ');
             }
           })
         )
         .subscribe()
     );
+    if (this.initialTabs.length > 0) {
+      this.initialTabs.map(activetab => {
+        this.tabs$ = this.cmsService.getComponentData(activetab);
+        this.tabs$
+          .pipe(
+            map((availableTab: ComparisonPanelCMSComponent) => {
+              if (availableTab?.uid) {
+                this.availableTabs.push(availableTab);
+              }
+            })
+          )
+          .subscribe();
+      });
+    }
   }
 
   ngOnDestroy() {

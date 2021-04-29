@@ -1,27 +1,30 @@
 <div class="products-wrapper d-md-flex justify-content-around mb-2">
   <ng-container *ngIf="component$ | async as component">
-    <ul
-      ngbNav
-      #nav="ngbNav"
-      [ngClass]="{ 'hide-tab-heading': tabs$.length === 1 }"
-      class="nav-tabs"
-      [(activeId)]="active"
-    >
-      <ng-container *ngFor="let tabElement of tabs$; let i = index">
-        <li ngbNavItem [ngbNavItem]="i" *ngIf="tabElement | async as tab">
-          <a ngbNavLink> {{ tab.title }}</a>
-          <ng-template ngbNavContent>
-            <ng-template
-              [cxComponentWrapper]="{
-                flexType: 'CMSComparisonTabComponent',
-                uid: tab.uid
-              }"
-            >
-            </ng-template>
-          </ng-template>
-        </li>
+    <ng-container *ngIf="initialTabs.length > 0">
+      <ng-container *ngIf="tabs$ | async">
+        <ul
+          ngbNav
+          #nav="ngbNav"
+          [ngClass]="{ 'hide-tab-heading': availableTabs.length === 1 }"
+          class="nav-tabs"
+        >
+          <ng-container *ngFor="let tabElement of availableTabs; let i = index">
+            <li ngbNavItem [ngbNavItem]="i">
+              <a ngbNavLink> {{ tabElement.title }}</a>
+              <ng-template ngbNavContent>
+                <ng-template
+                  [cxComponentWrapper]="{
+                    flexType: 'CMSComparisonTabComponent',
+                    uid: tabElement.uid
+                  }"
+                >
+                </ng-template>
+              </ng-template>
+            </li>
+          </ng-container>
+          <div [ngbNavOutlet]="nav"></div>
+        </ul>
       </ng-container>
-      <div [ngbNavOutlet]="nav"></div>
-    </ul>
+    </ng-container>
   </ng-container>
 </div>
