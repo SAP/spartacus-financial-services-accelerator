@@ -38,6 +38,9 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
     this.getAvailableTabs();
   }
 
+  /**
+   * Fetches all tabs based on BE configuration
+   */
   getInitialTabs() {
     this.subscription.add(
       this.component$
@@ -52,10 +55,13 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * Fetches only tabs that are not restricted for current user
+   */
   getAvailableTabs() {
     if (this.initialTabs.length > 0) {
-      this.initialTabs.map(activetab => {
-        this.tabs$ = this.cmsService.getComponentData(activetab);
+      this.initialTabs.forEach(potentialTab => {
+        this.tabs$ = this.cmsService.getComponentData(potentialTab);
         this.subscription.add(
           this.tabs$
             .pipe(
