@@ -7,7 +7,7 @@ import {
 import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import {
   CmsMultiComparisonTabContainer,
   ComparisonPanelCMSComponent,
@@ -65,10 +65,9 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
         this.subscription.add(
           this.tabs$
             .pipe(
+              filter(availableTab => !!availableTab.uid),
               map((availableTab: ComparisonPanelCMSComponent) => {
-                if (availableTab?.uid) {
-                  this.availableTabs.push(availableTab);
-                }
+                this.availableTabs.push(availableTab);
               })
             )
             .subscribe()
