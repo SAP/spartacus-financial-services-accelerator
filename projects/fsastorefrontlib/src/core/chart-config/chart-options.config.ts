@@ -1,3 +1,5 @@
+import { EChartsOption } from 'echarts';
+
 export abstract class ChartConfig {
-  options: any;
+  chartOption: EChartsOption;
 }
