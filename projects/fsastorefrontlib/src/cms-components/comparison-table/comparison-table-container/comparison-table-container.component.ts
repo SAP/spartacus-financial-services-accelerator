@@ -25,7 +25,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   component$: Observable<CmsMultiComparisonTabContainer>;
-  tabs$;
+  tabs$: Observable<ComparisonPanelCMSComponent>;
   active = 0;
   initialTabs: string[];
   availableTabs = [];
@@ -39,7 +39,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Fetches all tabs based on BE configuration
+   * Fetches all tabs available from BE configuration
    */
   getInitialTabs() {
     this.subscription.add(
