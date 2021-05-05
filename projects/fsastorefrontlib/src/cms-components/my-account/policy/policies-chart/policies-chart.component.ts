@@ -35,13 +35,13 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
               policies.insurancePolicies,
               'paymentFrequency'
             );
+            this.chartOption = this.chartConfig.chartOption;
             this.setPaymentFrequencyDropdown();
             this.setChartSeriesData();
           })
         )
         .subscribe()
     );
-    this.chartOption = this.chartConfig.chartOption;
   }
 
   setPaymentFrequencyDropdown() {
