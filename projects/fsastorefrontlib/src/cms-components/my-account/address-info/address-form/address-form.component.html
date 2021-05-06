@@ -79,7 +79,13 @@
           [placeholder]="'addressForm.streetAddress' | cxTranslate"
           formControlName="line1"
         />
-        <cx-form-errors [control]="addressForm.get('line1')"></cx-form-errors>
+        <cx-form-errors
+          [control]="addressForm.get('line1')"
+          [translationParams]="{
+            maxLength: addressForm.get('line1')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
       </label>
     </div>
   </div>
@@ -95,6 +101,13 @@
           [placeholder]="'addressForm.aptSuite' | cxTranslate"
           formControlName="line2"
         />
+        <cx-form-errors
+          [control]="addressForm.get('line2')"
+          [translationParams]="{
+            maxLength: addressForm.get('line2')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
       </label>
     </div>
   </div>
@@ -110,7 +123,13 @@
           [placeholder]="'addressForm.city.placeholder' | cxTranslate"
           formControlName="town"
         />
-        <cx-form-errors [control]="addressForm.get('town')"></cx-form-errors>
+        <cx-form-errors
+          [control]="addressForm.get('town')"
+          [translationParams]="{
+            maxLength: addressForm.get('town')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
       </label>
     </div>
     <div class="col-md-6">
@@ -126,6 +145,10 @@
         />
         <cx-form-errors
           [control]="addressForm.get('postalCode')"
+          [translationParams]="{
+            maxLength: addressForm.get('postalCode')?.errors?.maxlength
+              ?.requiredLength
+          }"
         ></cx-form-errors>
       </label>
     </div>

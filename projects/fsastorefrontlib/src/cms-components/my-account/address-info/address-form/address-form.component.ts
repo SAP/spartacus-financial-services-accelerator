@@ -13,6 +13,7 @@ import {
   UserAddressService,
   UserService,
 } from '@spartacus/core';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { AddressFormComponent, ModalService } from '@spartacus/storefront';
 import { filter, map } from 'rxjs/operators';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
@@ -33,13 +34,20 @@ export class FSAddressFormComponent extends AddressFormComponent
     }),
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    line1: ['', Validators.required],
-    line2: [''],
-    town: ['', Validators.required],
+    line1: ['', [Validators.required, Validators.maxLength(50)]],
+    line2: ['', Validators.maxLength(50)],
+    town: ['', [Validators.required, Validators.maxLength(50)]],
     region: this.fb.group({
       isocode: [null, Validators.required],
     }),
-    postalCode: ['', Validators.required],
+    postalCode: [
+      '',
+      [
+        Validators.required,
+        DefaultFormValidators.alphanumeric,
+        Validators.maxLength(15),
+      ],
+    ],
     defaultAddress: [true],
   });
 

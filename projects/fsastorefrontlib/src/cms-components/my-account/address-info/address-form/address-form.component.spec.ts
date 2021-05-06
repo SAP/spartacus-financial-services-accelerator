@@ -57,6 +57,16 @@ const mockAddress: Address = {
   defaultAddress: true,
 };
 const country = { key: 'AT', value: 'Austria' };
+const mockCountries: Country[] = [
+  {
+    isocode: 'AD',
+    name: 'Andorra',
+  },
+  {
+    isocode: 'RS',
+    name: 'Serbia',
+  },
+];
 
 class MockModalService {
   open(): any {}
@@ -141,7 +151,9 @@ describe('FSAddressFormComponent', () => {
   });
 
   it('should call ngOnInit and prepopulate customer data', () => {
-    spyOn(userAddressService, 'getDeliveryCountries').and.returnValue(of([]));
+    spyOn(userAddressService, 'getDeliveryCountries').and.returnValue(
+      of(mockCountries)
+    );
     spyOn(userAddressService, 'loadDeliveryCountries').and.stub();
     spyOn(userAddressService, 'getRegions').and.returnValue(of([]));
     spyOn(userAddressService, 'getAddresses').and.returnValue(of([]));
@@ -187,17 +199,25 @@ describe('FSAddressFormComponent', () => {
   });
 
   it('should call verifyAddress() when address has some changes', () => {
+    spyOn(component, 'verifyAddress').and.callThrough();
     component.ngOnInit();
     component.addressForm.setValue(mockAddress);
     component.addressForm.markAsDirty();
     component.verifyAddress();
-    expect(mockCheckoutDeliveryService.verifyAddress).toHaveBeenCalled();
+    expect(
+      component.addressForm['controls'].region['controls'].isocode.value
+    ).toEqual(mockAddress.region.isocode);
+    expect(component.verifyAddress).toHaveBeenCalled();
   });
 
   it('should not call verifyAddress() when address does not have change', () => {
     component.ngOnInit();
     component.addressForm.setValue(mockAddress);
+    component.addressForm.get('firstName').setValue('firstName');
+    component.addressForm.get('lastName').setValue('lastName');
     component.verifyAddress();
+    expect(component.addressForm.get('firstName').value).toEqual(null);
+    expect(component.addressForm.get('lastName').value).toEqual(null);
     expect(mockCheckoutDeliveryService.verifyAddress).not.toHaveBeenCalled();
   });
 });
