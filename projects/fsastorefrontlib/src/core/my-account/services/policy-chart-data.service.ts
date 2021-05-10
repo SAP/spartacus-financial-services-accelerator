@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LanguageService } from '@spartacus/core';
 import { EChartsOption } from 'echarts';
-import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class PolicyChartDataService {

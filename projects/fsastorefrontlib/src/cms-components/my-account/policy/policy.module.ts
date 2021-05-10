@@ -16,7 +16,6 @@ import {
   CmsConfig,
   RoutesConfig,
   RoutingConfig,
-  Config,
 } from '@spartacus/core';
 import { CmsPageGuard } from '@spartacus/storefront';
 
