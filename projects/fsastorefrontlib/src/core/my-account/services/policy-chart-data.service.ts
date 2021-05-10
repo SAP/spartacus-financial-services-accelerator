@@ -5,14 +5,6 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class PolicyChartDataService {
-  language;
-
-  constructor(protected languageService: LanguageService) {
-    this.languageService
-      .getActive()
-      .pipe(tap(lang => (this.language = lang)))
-      .subscribe();
-  }
   groupPoliciesByAttribute(policies: any[], key: string | string[]) {
     return policies.reduce((policy, item) => {
       const groupCriteria = this.getObjectValueByProperty(key, item);
@@ -26,7 +18,11 @@ export class PolicyChartDataService {
     }, {});
   }
 
-  calculatePremiumAmountByCategory(policies, chartOption: EChartsOption) {
+  calculatePremiumAmountByCategory(
+    policies,
+    chartOption: EChartsOption,
+    language: string
+  ) {
     chartOption.series[0].data = [];
     Object.keys(policies).forEach(category => {
       const policyAmountByCategory = policies[category].reduce(
@@ -37,7 +33,7 @@ export class PolicyChartDataService {
         chartOption.series[0].data.push({
           value: policyAmountByCategory,
           name: category.split(' ')[0],
-          currencyValue: policyAmountByCategory.toLocaleString(this.language, {
+          currencyValue: policyAmountByCategory.toLocaleString(language, {
             maximumFractionDigits: 2,
             minimumFractionDigits: 0,
             style: 'currency',

@@ -4,7 +4,11 @@ import { Observable, of } from 'rxjs';
 
 import { PoliciesChartComponent } from './policies-chart.component';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
-import { I18nModule, TranslationService } from '@spartacus/core';
+import {
+  I18nModule,
+  LanguageService,
+  TranslationService,
+} from '@spartacus/core';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
@@ -122,11 +126,17 @@ class MockTranslationService {
   }
 }
 
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
 describe('PoliciesChartComponent', () => {
   let component: PoliciesChartComponent;
   let fixture: ComponentFixture<PoliciesChartComponent>;
   let mockPolicyService: PolicyService;
-  let mockPolicyChartDataService: PolicyChartDataService;
+  let mockLanguageService: LanguageService;
   let el: DebugElement;
 
   beforeEach(
@@ -140,19 +150,24 @@ describe('PoliciesChartComponent', () => {
             useClass: MockPolicyService,
           },
           {
-            provide: PolicyChartDataService,
-            useClass: MockPolicyChartDataService,
-          },
-          {
             provide: TranslationService,
             useClass: MockTranslationService,
           },
-          {
-            provide: ChartConfig,
-            useValue: mockChartConfig,
-          },
+          { provide: LanguageService, useClass: MockLanguageService },
         ],
-      }).compileComponents();
+      })
+        .overrideComponent(PoliciesChartComponent, {
+          set: {
+            providers: [
+              { provide: ChartConfig, useValue: mockChartConfig },
+              {
+                provide: PolicyChartDataService,
+                useClass: MockPolicyChartDataService,
+              },
+            ],
+          },
+        })
+        .compileComponents();
     })
   );
 
@@ -162,7 +177,7 @@ describe('PoliciesChartComponent', () => {
     el = fixture.debugElement;
     fixture.detectChanges();
     mockPolicyService = TestBed.inject(PolicyService);
-    mockPolicyChartDataService = TestBed.inject(PolicyChartDataService);
+    mockLanguageService = TestBed.inject(LanguageService);
   });
 
   it('should create', () => {
@@ -170,18 +185,13 @@ describe('PoliciesChartComponent', () => {
   });
 
   it('should update chart data when payment frequency is selected', () => {
-    spyOn(
-      mockPolicyChartDataService,
-      'calculatePremiumAmountByCategory'
-    ).and.callThrough();
+    spyOn(component, 'selectPaymentFrequency').and.callThrough();
     component.selectedFrequency = null;
     fixture.detectChanges();
     const selectEl = el.query(By.css('select')).nativeElement;
     selectEl.dispatchEvent(new Event('change'));
     component.selectedFrequency = selectEl.options[1].value;
     selectEl.dispatchEvent(new Event('change'));
-    expect(
-      mockPolicyChartDataService.calculatePremiumAmountByCategory
-    ).toHaveBeenCalled();
+    expect(component.selectPaymentFrequency).toHaveBeenCalled();
   });
 });
