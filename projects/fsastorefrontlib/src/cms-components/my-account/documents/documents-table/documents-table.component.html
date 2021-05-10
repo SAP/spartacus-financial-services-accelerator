@@ -9,7 +9,7 @@
     <th scope="col">
       {{ 'document.creationDate' | cxTranslate }}
     </th>
-    <th scope="col">
+    <th *ngIf="referredObjectColumnVisible" scope="col">
       {{ 'document.referredInsuranceObject' | cxTranslate }}
     </th>
     <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
@@ -34,7 +34,7 @@
           document.creationTime | cxDate: 'dd MMM yyyy'
         }}</span>
       </td>
-      <td>
+      <td *ngIf="referredObjectColumnVisible">
         <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
           {{ 'document.referredInsuranceObject' | cxTranslate }}:
         </div>
