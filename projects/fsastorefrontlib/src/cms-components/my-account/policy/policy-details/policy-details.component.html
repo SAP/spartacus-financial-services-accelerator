@@ -414,12 +414,12 @@
       </ul>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
-      *ngIf="policy.documents && policy.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
       <div class="accordion-list">
         <cx-fs-documents-table
           [documentSource]="policy.documents"
+          [referredObjectColumnVisible]="false"
         ></cx-fs-documents-table>
       </div>
     </cx-fs-accordion-item>

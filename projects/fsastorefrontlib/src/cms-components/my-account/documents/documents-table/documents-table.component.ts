@@ -16,7 +16,7 @@ export class DocumentsTableComponent implements OnDestroy {
   @Input()
   documentSource: any;
   @Input()
-  visibleColumn = true;
+  referredObjectColumnVisible = true;
   subscription = new Subscription();
 
   constructor(protected fileService: FileService) {}
