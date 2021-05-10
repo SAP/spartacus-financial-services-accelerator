@@ -24,6 +24,7 @@ import { ComparisonTablePanelItemComponent } from './comaprison-table-panel-item
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 import { ComparisonTablePanelComponent } from './comparison-table-panel/comparison-table-panel.component';
 import { ComparisonTableTabComponent } from './comparison-table-tab/comparison-table-tab.component';
+import { ComparisonTableService } from './comparison-table.service';
 
 @NgModule({
   imports: [
@@ -64,6 +65,11 @@ import { ComparisonTableTabComponent } from './comparison-table-tab/comparison-t
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent,
   ],
-  providers: [FSCartService, FSProductService, PricingService],
+  providers: [
+    FSCartService,
+    FSProductService,
+    PricingService,
+    ComparisonTableService,
+  ],
 })
 export class ComparisonTableModule {}

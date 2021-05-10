@@ -45,10 +45,9 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.component$
         .pipe(
-          map(data => {
-            if (data.simpleCMSComponents) {
-              this.initialTabs = data.simpleCMSComponents.split(' ');
-            }
+          filter(data => !!data?.simpleCMSComponents),
+          map(components => {
+            this.initialTabs = components.simpleCMSComponents.split(' ');
           })
         )
         .subscribe()
@@ -65,7 +64,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
         this.subscription.add(
           this.tabs$
             .pipe(
-              filter(availableTab => !!availableTab.uid),
+              filter(availableTab => !!availableTab?.uid),
               map((availableTab: ComparisonPanelCMSComponent) => {
                 this.availableTabs.push(availableTab);
               })
