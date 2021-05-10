@@ -162,7 +162,11 @@
       </button>
     </div>
     <div class="col-md-12 col-lg-6 ml-auto">
-      <button class="btn btn-block btn-primary mb-3" type="submit">
+      <button
+        *ngIf="buttonVisible"
+        class="btn btn-block btn-primary mb-3"
+        type="submit"
+      >
         {{ actionBtnLabel || ('common.continue' | cxTranslate) }}
       </button>
     </div>
