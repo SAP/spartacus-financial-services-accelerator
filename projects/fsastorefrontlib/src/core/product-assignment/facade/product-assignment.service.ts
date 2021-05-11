@@ -71,10 +71,9 @@ export class ProductAssignmentService {
 
   isUserAdminOfUnit(unitId: string): Observable<boolean> {
     return this.userService.get().pipe(
+      filter(user => user?.uid !== OCC_USER_ID_ANONYMOUS),
       map(user => {
-        if (user && user.uid !== OCC_USER_ID_ANONYMOUS) {
-          return (<B2BUser>user).orgUnit.uid === unitId;
-        }
+        return (<B2BUser>user).orgUnit?.uid === unitId;
       })
     );
   }

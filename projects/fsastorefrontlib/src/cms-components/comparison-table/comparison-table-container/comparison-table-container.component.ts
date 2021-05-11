@@ -4,11 +4,14 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
-import { ComparisonTableService } from '../comparison-table.service';
+import { filter, map } from 'rxjs/operators';
+import {
+  CmsMultiComparisonTabContainer,
+  ComparisonPanelCMSComponent,
+} from '../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-comparison-table-container',
@@ -18,30 +21,58 @@ import { ComparisonTableService } from '../comparison-table.service';
 export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
-    protected comparisonTableService: ComparisonTableService
+    protected cmsService: CmsService
   ) {}
 
   component$: Observable<CmsMultiComparisonTabContainer>;
-  tabs$;
+  tabs$: Observable<ComparisonPanelCMSComponent>;
   active = 0;
+  initialTabs: string[];
+  availableTabs = [];
 
   private subscription = new Subscription();
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
+    this.getInitialTabs();
+    this.getAvailableTabs();
+  }
+
+  /**
+   * Fetches all tabs available from BE configuration
+   */
+  getInitialTabs() {
     this.subscription.add(
       this.component$
         .pipe(
-          map(data => {
-            if (data.simpleCMSComponents) {
-              this.tabs$ = this.comparisonTableService.getComparisonTabs(
-                data.simpleCMSComponents.split(' ')
-              );
-            }
+          filter(data => !!data?.simpleCMSComponents),
+          map(components => {
+            this.initialTabs = components.simpleCMSComponents.split(' ');
           })
         )
         .subscribe()
     );
+  }
+
+  /**
+   * Fetches only tabs that are not restricted for current user
+   */
+  getAvailableTabs() {
+    if (this.initialTabs.length > 0) {
+      this.initialTabs.forEach(potentialTab => {
+        this.tabs$ = this.cmsService.getComponentData(potentialTab);
+        this.subscription.add(
+          this.tabs$
+            .pipe(
+              filter(availableTab => !!availableTab?.uid),
+              map((availableTab: ComparisonPanelCMSComponent) => {
+                this.availableTabs.push(availableTab);
+              })
+            )
+            .subscribe()
+        );
+      });
+    }
   }
 
   ngOnDestroy() {
