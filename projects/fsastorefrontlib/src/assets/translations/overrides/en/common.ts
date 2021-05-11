@@ -54,4 +54,8 @@ export const common = {
     },
     voucherCode: 'Coupon code',
   },
+  formErrors: {
+    pattern: 'Should contain at least one number, no special characters',
+    maxlength: 'Maximum {{ maxLength }} characters',
+  },
 };
