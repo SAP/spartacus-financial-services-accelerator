@@ -52,14 +52,14 @@ export class DynamicSelectComponent extends AbstractFormComponent
       );
     } else {
       /**
-       * Assign options to dynamic select component which have dependancy on another form control (masterFormControl)
+       * Assign options to dynamic select component which have dependancy on another form control (mainFormControl)
        */
-      const masterFormControl = this.formService.getFormControlForCode(
+      const mainFormControl = this.formService.getFormControlForCode(
         this.config.apiValue.param,
         this.group
       );
       this.subscription.add(
-        masterFormControl.valueChanges
+        mainFormControl.valueChanges
           .pipe(
             switchMap(value => {
               this.isSelectComponentDependant = true;
