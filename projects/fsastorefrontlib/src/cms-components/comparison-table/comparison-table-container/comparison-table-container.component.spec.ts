@@ -2,14 +2,17 @@ import { DebugElement, Directive, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
+import {
+  CmsComponent,
+  ContentSlotComponentData,
+  CmsService,
+} from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import {
   CMSComparisonTabComponent,
   CmsMultiComparisonTabContainer,
 } from '../../../occ/occ-models';
-import { ComparisonTableService } from '../comparison-table.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container.component';
 
 @Directive({
@@ -20,20 +23,23 @@ export class MockComponentWrapperDirective {
   @Input() cxComponentWrapper: ContentSlotComponentData;
 }
 
-const mockedCMSComparisonTabComponent: CMSComparisonTabComponent = {
-  name: 'Test1',
-  title: 'Tab 1',
+const componentData: CMSComparisonTabComponent = {
+  uid: 'testComparisonTab',
+  typeCode: '"CMSComparisonTabComponent"',
+  comparisonPanel: {
+    uid: 'testComparisonPanel',
+    products: 'TEST_PRODUCT_1 TEST_PRODUCT_2',
+  },
 };
 
-class MockComparisonTableService {
-  getComparisonTabs(): Observable<CMSComparisonTabComponent>[] {
-    return [of(mockedCMSComparisonTabComponent)];
+class MockCmsService {
+  getComponentData(): Observable<CMSComparisonTabComponent> {
+    return of(componentData);
   }
 }
 
 describe('ComparisonTableContainerComponent', () => {
   let comparisonTableContainer: ComparisonTableContainerComponent;
-  let mockComparisonTableService: MockComparisonTableService;
   let fixture: ComponentFixture<ComparisonTableContainerComponent>;
   let el: DebugElement;
 
@@ -50,7 +56,6 @@ describe('ComparisonTableContainerComponent', () => {
 
   beforeEach(
     waitForAsync(() => {
-      mockComparisonTableService = new MockComparisonTableService();
       TestBed.configureTestingModule({
         imports: [NgbNavModule],
         declarations: [
@@ -62,10 +67,7 @@ describe('ComparisonTableContainerComponent', () => {
             provide: CmsComponentData,
             useValue: mockCmsComponentData,
           },
-          {
-            provide: ComparisonTableService,
-            useValue: mockComparisonTableService,
-          },
+          { provide: CmsService, useClass: MockCmsService },
         ],
       }).compileComponents();
     })

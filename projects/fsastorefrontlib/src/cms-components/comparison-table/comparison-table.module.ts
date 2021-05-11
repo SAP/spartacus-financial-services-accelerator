@@ -66,10 +66,10 @@ import { ComparisonTableService } from './comparison-table.service';
     ComparisonTablePanelItemComponent,
   ],
   providers: [
-    ComparisonTableService,
     FSCartService,
     FSProductService,
     PricingService,
+    ComparisonTableService,
   ],
 })
 export class ComparisonTableModule {}
