@@ -4,7 +4,7 @@ export const defaultChartOptionsConfig: ChartConfig = {
   chartOption: {
     title: {
       show: true,
-      text: 'Purchase Order',
+      text: 'policy.policyChartTitle',
       left: 'center',
       textStyle: {
         color: '#000033',

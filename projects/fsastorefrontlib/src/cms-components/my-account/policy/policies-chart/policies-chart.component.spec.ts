@@ -9,8 +9,6 @@ import {
   LanguageService,
   TranslationService,
 } from '@spartacus/core';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
 
 const policy1 = {
@@ -42,6 +40,11 @@ const mockPolicies = {
 const mockPoliciesByPaymentFrequency = {
   'Test1 frequency': [policy1],
   'Test2 frequency': [policy2],
+};
+
+const mockFrequencyItem = {
+  name: 'Monthly',
+  frequency: 'Monthly',
 };
 
 const mockChartConfig: ChartConfig = {
@@ -121,8 +124,8 @@ class MockPolicyChartDataService {
 }
 
 class MockTranslationService {
-  translate(): Observable<string> {
-    return of();
+  translate(key): Observable<string> {
+    return of(key);
   }
 }
 
@@ -137,7 +140,7 @@ describe('PoliciesChartComponent', () => {
   let fixture: ComponentFixture<PoliciesChartComponent>;
   let mockPolicyService: PolicyService;
   let mockLanguageService: LanguageService;
-  let el: DebugElement;
+  let mockTranslationService: TranslationService;
 
   beforeEach(
     waitForAsync(() => {
@@ -174,10 +177,10 @@ describe('PoliciesChartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PoliciesChartComponent);
     component = fixture.componentInstance;
-    el = fixture.debugElement;
     fixture.detectChanges();
     mockPolicyService = TestBed.inject(PolicyService);
     mockLanguageService = TestBed.inject(LanguageService);
+    mockTranslationService = TestBed.inject(TranslationService);
   });
 
   it('should create', () => {
@@ -186,12 +189,7 @@ describe('PoliciesChartComponent', () => {
 
   it('should update chart data when payment frequency is selected', () => {
     spyOn(component, 'selectPaymentFrequency').and.callThrough();
-    component.selectedFrequency = null;
-    fixture.detectChanges();
-    const selectEl = el.query(By.css('select')).nativeElement;
-    selectEl.dispatchEvent(new Event('change'));
-    component.selectedFrequency = selectEl.options[1].value;
-    selectEl.dispatchEvent(new Event('change'));
+    component.selectPaymentFrequency(mockFrequencyItem);
     expect(component.selectPaymentFrequency).toHaveBeenCalled();
   });
 });

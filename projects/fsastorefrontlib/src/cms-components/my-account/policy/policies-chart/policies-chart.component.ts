@@ -5,7 +5,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
-import { Config, LanguageService } from '@spartacus/core';
+import { Config, LanguageService, TranslationService } from '@spartacus/core';
 
 @Component({
   selector: 'cx-fs-policies-chart',
@@ -27,6 +27,7 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected policyChartDataService: PolicyChartDataService,
     protected languageService: LanguageService,
+    protected translation: TranslationService,
     protected chartConfig: ChartConfig
   ) {}
 
@@ -35,17 +36,21 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
       combineLatest([
         this.languageService.getActive(),
         this.policyService.getPolicies(),
+        this.translation.translate('policy.policyChartTitle'),
       ])
         .pipe(
-          filter(([lang, policies]) => !!policies.insurancePolicies),
+          filter(
+            ([lang, policies, translatedTitle]) => !!policies.insurancePolicies
+          ),
           take(1),
-          tap(([lang, policies]) => {
+          tap(([lang, policies, translatedTitle]) => {
             this.language = lang;
             this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
               policies.insurancePolicies,
               'paymentFrequency'
             );
             this.chartOption = this.chartConfig.chartOption;
+            this.chartOption.title['text'] = translatedTitle;
             this.setPaymentFrequencyDropdown();
             this.setChartSeriesData();
           })
@@ -57,9 +62,9 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
   setPaymentFrequencyDropdown() {
     this.options = [];
     Object.keys(this.policiesByPaymentFrequency).forEach(key =>
-      this.options.push({ name: key, label: key })
+      this.options.push({ name: key, frequency: key })
     );
-    this.selectedFrequency = this.options[0].label;
+    this.selectedFrequency = this.options[0].frequency;
   }
 
   setChartSeriesData() {
@@ -74,10 +79,8 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
     );
   }
 
-  selectPaymentFrequency() {
-    if (!this.selectedFrequency) {
-      return;
-    }
+  selectPaymentFrequency(selectedItem) {
+    this.selectedFrequency = selectedItem.frequency;
     this.setChartSeriesData();
     this.chartOption = { ...this.chartOption };
   }
