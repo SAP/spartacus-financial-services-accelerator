@@ -190,6 +190,21 @@ function addPackageJsonDependencies(): Rule {
         version: '^2.0.2',
         name: 'blob-util',
       },
+      {
+        type: NodeDependencyType.Default,
+        version: '^5.0.2',
+        name: 'echarts',
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: '^6.0.1',
+        name: 'ngx-echarts',
+      },
+      {
+        type: NodeDependencyType.Default,
+        version: '^1.5.1',
+        name: 'resize-observer-polyfill',
+      },
     ];
 
     dependencies.forEach(dependency => {
