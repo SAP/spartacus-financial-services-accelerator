@@ -79,4 +79,8 @@ export const common = {
     },
     voucherCode: 'Gutscheincode',
   },
+  formErrors: {
+    pattern: '[DE] Should contain at least one number, no special characters',
+    maxlength: '[DE] Maximum {{ maxLength }} characters',
+  },
 };

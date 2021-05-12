@@ -1,0 +1,28 @@
+<div *ngIf="policiesByPaymentFrequency" class="accordion mb-4">
+  <cx-fs-accordion-item
+    [opened]="false"
+    [icon]="'fas fa-chart-pie'"
+    [title]="'policy.policyChartHeader' | cxTranslate"
+  >
+    <div class="row">
+      <label class="col-md-3 pr-3 pr-md-0">
+        <span class="label-content">{{
+          'fscommon.paymentFrequency' | cxTranslate
+        }}</span>
+        <ng-select
+          [searchable]="false"
+          [clearable]="false"
+          [items]="options"
+          bindLabel="name"
+          bindValue="frequency"
+          [placeholder]="selectedFrequency"
+          (change)="selectPaymentFrequency($event)"
+        >
+        </ng-select>
+      </label>
+      <div class="chart-container col-12 col-md-6 mr-auto mt-md-0 mt-4">
+        <div echarts [options]="chartOption"></div>
+      </div>
+    </div>
+  </cx-fs-accordion-item>
+</div>
