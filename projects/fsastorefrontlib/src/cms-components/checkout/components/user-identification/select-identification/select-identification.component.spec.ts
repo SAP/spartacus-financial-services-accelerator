@@ -6,7 +6,7 @@ import { FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
-import { SelectIdentificationTypeComponent } from 'projects/fsastorefrontlib/src/cms-components';
+import { SelectIdentificationTypeComponent } from './select-identification.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
