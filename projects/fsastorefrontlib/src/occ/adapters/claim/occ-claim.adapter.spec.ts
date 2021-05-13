@@ -17,6 +17,12 @@ const claimEndpoint = 'claim';
 const claimsEndpoint = 'claims';
 const createClaimEndpoint = 'createClaim';
 
+const mockClaimData = {
+  content:
+    '{"whatHappened":"AutoTheft","whenHappened":"2021-05-01","whatTime":"15:06:46","country":"RS","city":"Novi Sad","postcode":"21000","address":"AAA, 22","description":"ddfdgf"}',
+  documents: [],
+};
+
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
@@ -111,6 +117,36 @@ describe('OccClaimAdapter', () => {
             userId,
           }
         );
+      })
+    );
+  });
+
+  describe('updateClaim', () => {
+    it(
+      'update claim for specified claimId',
+      waitForAsync(() => {
+        adapter.updateClaim(userId, claimId, mockClaimData).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimEndpoint && req.method === 'PATCH';
+        }, `PATCH method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
+          userId,
+          claimId,
+        });
+      })
+    );
+
+    it(
+      'update claim for specified claimId without passing claim object',
+      waitForAsync(() => {
+        adapter.updateClaim(userId, claimId, {}).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimEndpoint && req.method === 'PATCH';
+        }, `PATCH method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
+          userId,
+          claimId,
+        });
       })
     );
   });
