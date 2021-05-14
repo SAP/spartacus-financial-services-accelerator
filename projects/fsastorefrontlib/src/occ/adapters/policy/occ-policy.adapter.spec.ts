@@ -11,6 +11,7 @@ const userId = '123';
 
 const policyId = '00000023';
 const contractId = '00000023';
+const policyCategoryCode = 'testCategoryCode';
 
 const policiesEndpoint = 'policies';
 const policyEndpoint = 'policy';
@@ -93,6 +94,24 @@ describe('OccPolicyAdapter', () => {
         }, `GET method and url`);
         expect(occEndpointService.getUrl).toHaveBeenCalledWith(
           premiumCalendarEndpoint,
+          {
+            userId,
+          }
+        );
+      })
+    );
+  });
+
+  describe('getPoliciesByCategory', () => {
+    it(
+      'should fetch policies by category',
+      waitForAsync(() => {
+        adapter.getPoliciesByCategory(userId, policyCategoryCode).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === policiesEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          policiesEndpoint,
           {
             userId,
           }
