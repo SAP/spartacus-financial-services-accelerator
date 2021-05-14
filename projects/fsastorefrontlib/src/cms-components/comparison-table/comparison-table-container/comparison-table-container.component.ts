@@ -6,6 +6,8 @@ import {
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
+import { ComparisonTableService } from '../comparison-table.service';
+import { CMSComparisonTabComponent } from 'fsastorefrontlib/occ';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import {
@@ -21,19 +23,22 @@ import {
 export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
-    protected cmsService: CmsService
+    protected cmsService: CmsService,
+    protected comparisonTableService: ComparisonTableService
   ) {}
 
-  component$: Observable<CmsMultiComparisonTabContainer>;
-  tabs$: Observable<ComparisonPanelCMSComponent>;
-  active = 0;
+  component$: Observable<CmsMultiComparisonTabContainer> = this.componentData
+    .data$;
+  availableTabs$: Observable<CMSComparisonTabComponent[]> = this
+    .comparisonTableService.availableTab$;
+
   initialTabs: string[];
-  availableTabs = [];
+  tabs: ComparisonPanelCMSComponent[] = [];
+  active = 0;
 
   private subscription = new Subscription();
 
   ngOnInit() {
-    this.component$ = this.componentData.data$;
     this.getInitialTabs();
     this.getAvailableTabs();
   }
@@ -60,13 +65,15 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   getAvailableTabs() {
     if (this.initialTabs.length > 0) {
       this.initialTabs.forEach(potentialTab => {
-        this.tabs$ = this.cmsService.getComponentData(potentialTab);
         this.subscription.add(
-          this.tabs$
+          this.cmsService
+            .getComponentData(potentialTab)
             .pipe(
               filter(availableTab => !!availableTab?.uid),
               map((availableTab: ComparisonPanelCMSComponent) => {
-                this.availableTabs.push(availableTab);
+                this.tabs.push(availableTab);
+                console.log(this.tabs);
+                this.comparisonTableService.setAvailableTab(this.tabs);
               })
             )
             .subscribe()

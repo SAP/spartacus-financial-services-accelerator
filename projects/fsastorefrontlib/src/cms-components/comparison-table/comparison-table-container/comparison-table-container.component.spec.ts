@@ -8,11 +8,12 @@ import {
   CmsService,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import {
   CMSComparisonTabComponent,
   CmsMultiComparisonTabContainer,
 } from '../../../occ/occ-models';
+import { ComparisonTableService } from '../comparison-table.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container.component';
 
 @Directive({
@@ -36,6 +37,11 @@ class MockCmsService {
   getComponentData(): Observable<CMSComparisonTabComponent> {
     return of(componentData);
   }
+}
+
+class MockComparisonTableService {
+  availableTab = new Subject<CMSComparisonTabComponent[]>();
+  setAvailableTab() {}
 }
 
 describe('ComparisonTableContainerComponent', () => {
@@ -68,6 +74,10 @@ describe('ComparisonTableContainerComponent', () => {
             useValue: mockCmsComponentData,
           },
           { provide: CmsService, useClass: MockCmsService },
+          {
+            provide: ComparisonTableService,
+            useClass: MockComparisonTableService,
+          },
         ],
       }).compileComponents();
     })
@@ -80,11 +90,7 @@ describe('ComparisonTableContainerComponent', () => {
   });
 
   it('should create comparison table container', () => {
-    expect(comparisonTableContainer).toBeTruthy();
-  });
-
-  it('should contain tabs', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('.tab-content'))).toBeTruthy();
+    expect(comparisonTableContainer).toBeTruthy();
   });
 });
