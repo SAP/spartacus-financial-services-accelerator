@@ -1,7 +1,5 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { CmsService } from '@spartacus/core';
-import { doesNotReject } from 'assert';
-import { donnaMooreUser } from 'projects/fsastorefront-e2e-cypress/cypress/sample-data/users';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { CMSComparisonTabComponent } from './../../occ/occ-models/cms-component.models';
