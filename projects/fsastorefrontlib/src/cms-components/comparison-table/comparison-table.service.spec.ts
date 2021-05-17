@@ -1,5 +1,7 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { CmsService } from '@spartacus/core';
+import { doesNotReject } from 'assert';
+import { donnaMooreUser } from 'projects/fsastorefront-e2e-cypress/cypress/sample-data/users';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { CMSComparisonTabComponent } from './../../occ/occ-models/cms-component.models';
@@ -41,14 +43,12 @@ describe('ComparisonTableService', () => {
   ));
 
   it('test set available tabs', () => {
-    service.setAvailableTab([componentData]);
-    let tab: CMSComparisonTabComponent[];
-    service['availableTabSource']
+    service.setAvailableTabs([componentData]);
+    service.availableTab$
       .subscribe(result => {
-        tab = result;
+        expect(result).toBe([componentData]);
       })
       .unsubscribe();
-    expect(tab).toEqual(undefined);
   });
 
   it('should get comparison table tab data', () => {
