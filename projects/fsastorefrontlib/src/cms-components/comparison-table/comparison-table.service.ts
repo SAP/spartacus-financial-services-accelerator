@@ -10,7 +10,7 @@ export class ComparisonTableService {
   private availableTabSource = new Subject<CMSComparisonTabComponent[]>();
   readonly availableTab$ = this.availableTabSource.asObservable();
 
-  setAvailableTab(tabs: CMSComparisonTabComponent[]) {
+  setAvailableTabs(tabs: CMSComparisonTabComponent[]) {
     this.availableTabSource.next(tabs);
   }
 

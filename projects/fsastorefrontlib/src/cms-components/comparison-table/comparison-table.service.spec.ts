@@ -40,6 +40,17 @@ describe('ComparisonTableService', () => {
     }
   ));
 
+  it('test set available tabs', () => {
+    service.setAvailableTab([componentData]);
+    let tab: CMSComparisonTabComponent[];
+    service['availableTabSource']
+      .subscribe(result => {
+        tab = result;
+      })
+      .unsubscribe();
+    expect(tab).toEqual(undefined);
+  });
+
   it('should get comparison table tab data', () => {
     const result: Observable<
       CMSComparisonTabComponent

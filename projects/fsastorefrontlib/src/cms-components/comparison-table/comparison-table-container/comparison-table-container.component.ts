@@ -72,8 +72,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
               filter(availableTab => !!availableTab?.uid),
               map((availableTab: ComparisonPanelCMSComponent) => {
                 this.tabs.push(availableTab);
-                console.log(this.tabs);
-                this.comparisonTableService.setAvailableTab(this.tabs);
+                this.comparisonTableService.setAvailableTabs(this.tabs);
               })
             )
             .subscribe()
