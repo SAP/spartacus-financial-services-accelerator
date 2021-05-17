@@ -54,10 +54,10 @@
         {{ model.orgUnit?.name }}
       </a>
     </div>
-    <div class="property full-width">
+    <div class="property full-width link normal-weight">
       <a
         *ngIf="model.customerId"
-        class="link"
+        class="text-capitalize"
         [class.disabled]="!model.active"
         [routerLink]="
           { cxRoute: 'orgUserChangePassword', params: model } | cxUrl
