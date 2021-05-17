@@ -40,6 +40,15 @@ describe('ComparisonTableService', () => {
     }
   ));
 
+  it('test set available tabs', () => {
+    service.setAvailableTabs([componentData]);
+    service.availableTab$
+      .subscribe(result => {
+        expect(result).toBe([componentData]);
+      })
+      .unsubscribe();
+  });
+
   it('should get comparison table tab data', () => {
     const result: Observable<
       CMSComparisonTabComponent
