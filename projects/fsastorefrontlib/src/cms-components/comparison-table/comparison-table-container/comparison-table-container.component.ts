@@ -7,12 +7,12 @@ import {
 import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ComparisonTableService } from '../comparison-table.service';
-import { CMSComparisonTabComponent } from 'fsastorefrontlib/occ';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import {
   CmsMultiComparisonTabContainer,
   ComparisonPanelCMSComponent,
+  CMSComparisonTabComponent,
 } from '../../../occ/occ-models';
 
 @Component({
