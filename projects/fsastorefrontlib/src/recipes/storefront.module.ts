@@ -30,13 +30,11 @@ import {
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
 import { defaultCmsContentProviders } from './config/messages-cms-structure';
 import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     PageComponentModule,
     B2cStorefrontModule,
-    HttpClientModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
