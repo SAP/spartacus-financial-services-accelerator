@@ -115,9 +115,9 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   }
 
   getInitialStepForCategory(category: string): FSCheckoutStep {
-    return this.fsCheckoutConfig.checkout?.steps?.find(step => {
-      return !(<FSCheckoutStep>step).restrictedCategories.includes(category);
-    });
+    return this.fsCheckoutConfig.checkout?.steps?.find(
+      step => !(<FSCheckoutStep>step).restrictedCategories.includes(category)
+    );
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.
