@@ -114,6 +114,12 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
       : null;
   }
 
+  getInitialStepForCategory(category: string): FSCheckoutStep {
+    return this.fsCheckoutConfig.checkout?.steps?.find(
+      step => !(<FSCheckoutStep>step).restrictedCategories.includes(category)
+    );
+  }
+
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.
   private getUrlFromActivatedRoute(
     activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot

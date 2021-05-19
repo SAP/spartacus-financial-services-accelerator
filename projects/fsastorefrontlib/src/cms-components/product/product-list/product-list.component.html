@@ -58,12 +58,7 @@
                 <button
                   *ngIf="product.defaultCategory"
                   class="btn-block primary-button"
-                  [routerLink]="
-                    {
-                      cxRoute: 'generalInformation',
-                      params: { code: product.defaultCategory.code }
-                    } | cxUrl
-                  "
+                  (click)="startCheckoutForProduct(product)"
                 >
                   {{ 'quote.getQuote' | cxTranslate }}
                 </button>
