@@ -31,7 +31,6 @@ export class FSProductListComponent extends ProductListComponent {
     const initialStep = this.checkoutConfigService.getInitialStepForCategory(
       product.defaultCategory.code
     );
-    console.log(initialStep);
     if (this.categoryBasedSteps.includes(initialStep.id)) {
       routingParam = product.defaultCategory.code;
     } else {
