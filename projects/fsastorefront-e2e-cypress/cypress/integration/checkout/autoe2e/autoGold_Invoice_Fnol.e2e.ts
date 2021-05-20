@@ -91,14 +91,16 @@ context('Auto Gold Checkout with FNOL', () => {
   it('Should check summary page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkSummaryPage();
-    checkout.checkBackAndContinueButtons();
+    cy.get('.action-button').should('contain.text', 'Back');
+    cy.get('.primary-button').should('contain.text', 'Submit');
   });
 
   it('Should check information in accordions on summary page', () => {
     autoIntegration.checkIncidentInformationAccordion();
     fnol.checkIncidentReportAccordion();
     fnol.checkGeneralInformationAccordion();
-    checkout.clickContinueButton();
+    cy.get('.primary-button').should('be.visible');
+    cy.get('.primary-button').contains('Submit').click({ force: true });
   });
 
   it('Should check claim confirmation page', () => {

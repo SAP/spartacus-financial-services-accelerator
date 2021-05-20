@@ -31,3 +31,8 @@ export const amosAgent = {
   email: 'amos.adkins@sapfsa.com',
   password: '1234',
 };
+
+export const rootAdmin = {
+  email: 'thomas.schmidt@sapfsa.com',
+  password: '123123',
+};

@@ -33,11 +33,11 @@ export function checkOptionalProductsAddRenewalOption() {
       {
         name: 'Premium Protection',
         available: true,
+        shouldAdd: true,
       },
       {
         name: 'Renewal Option',
-        available: true,
-        shouldAdd: true,
+        available: false,
       },
     ],
   };
@@ -67,7 +67,7 @@ export function checkOptionalProductsSecond() {
 
 export function checkLifeBasicMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €9.75 ',
+    price: ' €11.54 ',
     products: [
       {
         title: ' Start Date: ',
@@ -90,8 +90,8 @@ export function checkLifeBasicMiniCart() {
         value: ' €7.69 ',
       },
       {
-        title: ' Renewal Option: ',
-        value: ' €2.06 ',
+        title: ' Premium Protection: ',
+        value: ' €3.85 ',
       },
     ],
   };

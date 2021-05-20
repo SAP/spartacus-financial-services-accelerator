@@ -82,18 +82,14 @@ context('Retrieving Banking and Insurance Quotes ', () => {
     event.populatePersonalDetails();
     checkout.populatePersonalDetailsPage();
     checkout.clickContinueButton();
-
     checkout.checkCheckoutStep('Your Event Insurance', '6');
     event.checkProgressBarEvent();
-
     event.checkMiniCart();
     checkout.checkAccordions('threeAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-
-    checkout.populatePaymentDetails();
+    checkout.populatePaymentCreditCard();
     cy.get('.btn-primary').contains('Continue').click();
-
     checkout.placeOrderOnFinalReview();
     checkout.checkAccordions('threeAccordions');
     checkout.checkOrderConfirmation();

@@ -54,6 +54,7 @@ export function logout() {
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
+  cy.get('[formcontrolname="userId"]').should('be.visible');
   cy.get('[formcontrolname="userId"]').eq(0).type(username);
   cy.get('[formcontrolname="password"]').type(password);
   cy.get('button[type=submit]').click();
