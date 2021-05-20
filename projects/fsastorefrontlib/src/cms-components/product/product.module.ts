@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
 import {
   MediaModule,
   ListNavigationModule,
-  FacetListModule,
   ProductFacetNavigationModule,
 } from '@spartacus/storefront';
 

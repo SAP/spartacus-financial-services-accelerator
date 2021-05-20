@@ -68,3 +68,8 @@ export interface CmsFormSubmitComponent extends YFormCmsComponent {
 export interface CmsAgentRootComponent extends CmsComponent {
   agentRootCategory?: string;
 }
+
+export interface FSQuestionnaireCarouselComponent extends CmsComponent {
+  categories: string;
+  title: string;
+}

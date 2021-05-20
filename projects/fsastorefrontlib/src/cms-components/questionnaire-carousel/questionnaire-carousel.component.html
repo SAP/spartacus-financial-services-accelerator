@@ -1,0 +1,64 @@
+<ng-container *ngIf="searchResults$ | async as searchResults">
+  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+    {{ searchResults.component.title }}
+  </h2>
+  <ng-container *ngIf="searchResults.breadcrumbs">
+    <div class="mb-5">
+      <h4 class="mb-4">
+        {{ 'productList.appliedFilter' | cxTranslate }}
+      </h4>
+      <div
+        class="background-color-4 p-2 rounded ml-2 d-inline-block align-top notice"
+        *ngFor="let breadcrumb of searchResults.breadcrumbs | keyvalue"
+      >
+        <span class="semi-bold">{{ breadcrumb.key + ': ' }}</span>
+        <ng-container *ngFor="let value of breadcrumb.value; let i = index">
+          <div>
+            {{ value.facetValueName
+            }}<cx-icon
+              (click)="closeActiveFacets(value)"
+              class="ml-1 pointer"
+              aria-hidden="true"
+              [type]="closeIcon"
+            ></cx-icon>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <!-- <cx-active-facets></cx-active-facets> -->
+  <div class="mb-5 carousel-container">
+    <cx-carousel
+      *ngIf="searchResults.facets; else noFacets"
+      [items]="searchResults.facets"
+      [template]="carouselItem"
+      itemWidth="400px"
+    >
+    </cx-carousel>
+    <ng-template #carouselItem let-item="item">
+      <div class="container d-flex">
+        <div class="row no-gutters box-shadow m-auto w-100 p-3 h-100">
+          <div class="col-12" cx-facet [class.multi-select]="item.multiSelect">
+            <cx-facet
+              class="qustionnaire-facet"
+              [class.multi-select]="item.multiSelect"
+              #facetRef
+              [cxFocus]="{ lock: true, trap: true, autofocus: 'a' }"
+              [facet]="item"
+            ></cx-facet>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-container *ngIf="searchResults.products">
+    <ng-container *ngFor="let product of searchResults.products">
+      <div>{{ product.name }}</div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #noFacets>
+  <h3>Final result</h3>
+</ng-template>
