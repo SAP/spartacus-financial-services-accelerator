@@ -4,6 +4,7 @@ import { FSStorefrontModule } from '@spartacus/fsa-storefront';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
+import { SiteContextModule } from '@spartacus/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { AppComponent } from './app.component';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
+    SiteContextModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
