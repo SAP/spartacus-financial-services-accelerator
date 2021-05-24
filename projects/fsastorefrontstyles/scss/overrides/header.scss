@@ -99,20 +99,35 @@ header {
         .wrapper {
           top: 30px;
         }
-        .childs {
-          .wrapper {
-            opacity: 0;
-            max-height: 0;
-            transition: max-height 600ms ease, opacity 500ms ease;
+        @include media-breakpoint-down(md) {
+          .childs .wrapper {
+            display: none;
+          }
+          &:hover .childs nav:hover .wrapper {
+            display: block;
           }
         }
-        &:hover {
+        @media (hover) {
           .childs {
-            nav:hover {
-              .wrapper {
-                max-height: 2000px;
-                opacity: 1;
-                transition: max-height 600ms ease, opacity 500ms ease;
+            .wrapper {
+              @include fs-box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+              background: var(--cx-color-1);
+              opacity: 0;
+              max-height: 0;
+              width: 100%;
+            }
+          }
+          &:hover {
+            .childs {
+              nav:hover {
+                .wrapper {
+                  position: absolute;
+                  top: 0;
+                  left: 60px;
+                  max-height: 2000px;
+                  opacity: 1;
+                  transition: max-height 600ms ease, opacity 500ms ease;
+                }
               }
             }
           }
@@ -147,6 +162,9 @@ header {
       .childs[columns='1'] {
         display: flex;
         flex-direction: column;
+      }
+      .childs[depth='2'] > nav:not(:only-child):not(:last-child) {
+        padding-inline-end: 0;
       }
     }
     .childs nav:not(:last-child) {

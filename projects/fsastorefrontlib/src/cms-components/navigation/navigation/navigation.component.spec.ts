@@ -72,7 +72,7 @@ describe('CmsNavigationComponent', () => {
   });
 
   it('should add the component styleClass', () => {
-    const navigationUI = element.query(By.css('cx-navigation-ui'));
+    const navigationUI = element.query(By.css('cx-fs-navigation-ui'));
     expect(navigationUI.nativeElement.classList).toContain('footer-styling');
   });
 });

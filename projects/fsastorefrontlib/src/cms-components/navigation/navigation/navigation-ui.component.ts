@@ -24,16 +24,15 @@ export class FSNavigationUIComponent extends NavigationUIComponent {
     super(router, renderer2, elemRef);
   }
 
-  setClassOnWrapper(event): void {
+  setClassOnWrapper(event: UIEvent): void {
     if (!this.wrapper.nativeElement.classList.contains('was-opened')) {
       this.renderer2.addClass(this.wrapper.nativeElement, 'was-opened');
     }
     event.stopPropagation();
   }
-  removeClassOnWrapper(event): void {
-    const wrapper = this.wrapper.nativeElement;
-    if (wrapper.classList.contains('was-opened')) {
-      this.renderer2.removeClass(wrapper, 'was-opened');
+  removeClassOnWrapper(event: UIEvent): void {
+    if (this.wrapper.nativeElement.classList.contains('was-opened')) {
+      this.renderer2.removeClass(this.wrapper.nativeElement, 'was-opened');
     }
     event.stopPropagation();
   }

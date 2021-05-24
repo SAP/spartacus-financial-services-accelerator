@@ -1,4 +1,10 @@
-import { Component, DebugElement, ElementRef, Input } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  ElementRef,
+  Input,
+  Renderer2,
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -77,6 +83,7 @@ describe('Navigation UI Component', () => {
   let fixture: ComponentFixture<FSNavigationUIComponent>;
   let navigationComponent: FSNavigationUIComponent;
   let element: DebugElement;
+  let renderer: Renderer2;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -91,6 +98,7 @@ describe('Navigation UI Component', () => {
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(FSNavigationUIComponent);
+    renderer = fixture.componentRef.injector.get<Renderer2>(Renderer2 as any);
     navigationComponent = fixture.debugElement.componentInstance;
     element = fixture.debugElement;
 
@@ -164,12 +172,6 @@ describe('Navigation UI Component', () => {
       expect(icon).toBeFalsy();
     });
 
-    it('should render all link for root 1', () => {
-      fixture.detectChanges();
-      const allLink: ElementRef[] = element.queryAll(By.css('.wrapper > .all'));
-      expect(allLink.length).toEqual(1);
-    });
-
     it('should render ' + childLength + ' nav elements', () => {
       fixture.detectChanges();
       const nav: ElementRef[] = element.queryAll(By.css('nav'));
@@ -178,7 +180,6 @@ describe('Navigation UI Component', () => {
 
     it('should render 2 root nav elements', () => {
       fixture.detectChanges();
-      // mmm... no `> nav` available in By.css
       let rootNavElementCount = 0;
       (<HTMLElement>element.nativeElement).childNodes.forEach(el => {
         if (el.nodeName === 'NAV') {
@@ -237,6 +238,36 @@ describe('Navigation UI Component', () => {
         By.css('nav div .childs nav')
       );
       expect(child.length).toEqual(7);
+    });
+
+    it('should set was-opened class on wrapper element', () => {
+      fixture.detectChanges();
+      const event = jasmine.createSpyObj('event', ['stopPropagation']);
+      navigationComponent.setClassOnWrapper(event);
+      const wrapper: ElementRef = element.query(By.css('.was-opened'));
+      const el: HTMLElement = wrapper.nativeElement;
+      expect(el).toBeTruthy();
+    });
+
+    it('should remove was-opened class on wrapper element', () => {
+      fixture.detectChanges();
+      const event = jasmine.createSpyObj('event', ['stopPropagation']);
+      navigationComponent.setClassOnWrapper(event);
+      const wrapper: ElementRef = element.query(By.css('.was-opened'));
+      navigationComponent.removeClassOnWrapper(event);
+      const el: HTMLElement = wrapper.nativeElement;
+      const elClass = el.getAttribute('class');
+      expect(elClass).not.toContain('was-opened');
+    });
+
+    it('should not remove was-opened class on wrapper element', () => {
+      fixture.detectChanges();
+      const event = jasmine.createSpyObj('event', ['stopPropagation']);
+      const wrapper: ElementRef = element.query(By.css('.wrapper'));
+      navigationComponent.removeClassOnWrapper(event);
+      const el: HTMLElement = wrapper.nativeElement;
+      const elClass = el.getAttribute('class');
+      expect(elClass).not.toContain('was-opened');
     });
   });
 });
