@@ -169,4 +169,16 @@ describe('FSCheckoutConfigService', () => {
     service.triggerPreviousNextStepSet(activatedRoute);
     expect(service.getCurrentStepIndex(activatedRoute)).toBe(3);
   });
+
+  it('should get initial step for event category', () => {
+    expect(service.getInitialStepForCategory('insurances_event')).toBe(
+      checkoutConfig.checkout.steps[1]
+    );
+  });
+
+  it('should get initial step for loan category', () => {
+    expect(service.getInitialStepForCategory('banking_loans')).toBe(
+      checkoutConfig.checkout.steps[2]
+    );
+  });
 });
