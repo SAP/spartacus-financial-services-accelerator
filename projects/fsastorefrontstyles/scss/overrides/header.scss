@@ -1,6 +1,3 @@
-@import '../fs-mixins';
-@import '../theme';
-
 header {
   color: var(--cx-color-text);
   background-color: var(--cx-color-1);
@@ -79,13 +76,77 @@ header {
       background-color: var(--cx-color-4);
     }
   }
+
+  cx-fs-navigation-ui.flyout,
   cx-navigation-ui.flyout {
     &.accNavComponent {
       nav {
+        &.is-opened,
+        &.is-open {
+          > h5 {
+            display: flex;
+          }
+        }
+        h5 {
+          margin-top: 0;
+          padding: 0 0 10px 0;
+          font-size: var(--cx-title-font-size);
+          @include media-breakpoint-down(md) {
+            padding: 1rem;
+          }
+        }
         position: relative;
         .wrapper {
           top: 30px;
         }
+        .childs {
+          .wrapper {
+            opacity: 0;
+            max-height: 0;
+            transition: max-height 600ms ease, opacity 500ms ease;
+          }
+        }
+        &:hover {
+          .childs {
+            nav:hover {
+              .wrapper {
+                max-height: 2000px;
+                opacity: 1;
+                transition: max-height 600ms ease, opacity 500ms ease;
+              }
+            }
+          }
+        }
+      }
+      // hides sub nav on mobile when it is clicked
+      @include media-breakpoint-down(md) {
+        &.is-open {
+          > nav {
+            display: block;
+            .childs {
+              .back {
+                display: none;
+              }
+              & > nav.is-open {
+                & > h5 {
+                  display: none;
+                }
+              }
+            }
+            // displays back button instead of sub nav
+            &.is-opened {
+              .childs {
+                .back {
+                  display: initial;
+                }
+              }
+            }
+          }
+        }
+      }
+      .childs[columns='1'] {
+        display: flex;
+        flex-direction: column;
       }
     }
     .childs nav:not(:last-child) {
@@ -162,16 +223,6 @@ header {
       @include media-breakpoint-down(md) {
         flex-wrap: wrap;
       }
-      cx-navigation-ui {
-        h5 {
-          margin-top: 0;
-          padding: 0 0 10px 0;
-          font-size: var(--cx-title-font-size);
-          @include media-breakpoint-down(md) {
-            padding: 1rem;
-          }
-        }
-      }
       cx-link {
         padding-left: 15px;
         text-decoration: underline;
@@ -209,7 +260,7 @@ header {
       }
     }
     .HeaderLinks {
-      cx-navigation {
+      cx-fs-navigation {
         order: 2;
       }
       cx-link {
@@ -223,4 +274,7 @@ header {
       }
     }
   }
+}
+%cx-fs-navigation-ui {
+  @extend %cx-navigation-ui;
 }
