@@ -15,6 +15,8 @@ import { Observable, Subscription, combineLatest, of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { FSQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
 import { ActivatedRoute } from '@angular/router';
+import { FSProduct } from '../../occ';
+import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
 
 @Component({
   selector: 'cx-fs-questionnaire-carosel',
@@ -27,6 +29,7 @@ export class QuestionnaireCarouselComponent implements OnInit {
     currentPage: 0,
     sort: 'relevance',
   };
+  readonly BREADCRUMB_GROUP_CRITERIA = 'facetName';
   defaultSearchQuery: string;
   searchResults$: Observable<any>;
   linkParams: { [key: string]: string };
@@ -37,7 +40,8 @@ export class QuestionnaireCarouselComponent implements OnInit {
     protected componentData: CmsComponentData<FSQuestionnaireCarouselComponent>,
     protected route: ActivatedRoute,
     protected facetService: FacetService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected checkoutService: FSCheckoutService
   ) {}
 
   ngOnInit(): void {
@@ -45,9 +49,7 @@ export class QuestionnaireCarouselComponent implements OnInit {
       this.route.queryParams
         .pipe(
           tap(params => {
-            this.defaultSearchQuery = params['query']
-              ? params['query']
-              : 'insurances';
+            this.defaultSearchQuery = params['query'] ? params['query'] : '';
             this.productSearchService.search(
               this.defaultSearchQuery,
               this.config
@@ -60,37 +62,25 @@ export class QuestionnaireCarouselComponent implements OnInit {
       this.componentData.data$,
       this.productSearchService.getResults(),
     ]).pipe(
-      filter(
-        ([component, searchResults]) => Object.keys(searchResults).length !== 0
-      ),
+      filter(([_, searchResults]) => !!searchResults.facets),
       map(([component, searchResults]) => {
-        const breadcrumbs = this.groupBreadcrumbs(
+        const breadcrumbs = this.groupBreadcrumbsByCriteria(
           searchResults.breadcrumbs,
-          'facetName'
+          this.BREADCRUMB_GROUP_CRITERIA
         );
         return {
           component: component,
-          breadcrumbs:
-            searchResults.breadcrumbs.length !== 0 ? breadcrumbs : null,
-          facets:
-            searchResults.facets.length !== 0
-              ? searchResults.facets.map(f => of(f))
-              : null,
+          pagination: searchResults.pagination,
+          breadcrumbs: breadcrumbs,
+          facets: searchResults.facets.map(facet => of(facet)),
           products: searchResults.products.filter(product =>
-            component.categories.includes(product['defaultCategory'].code)
+            component.categories.includes(
+              (<FSProduct>product).defaultCategory?.code
+            )
           ),
         };
       })
     );
-  }
-
-  groupBreadcrumbs(breadcrumbs, key) {
-    return breadcrumbs.reduce((breadcrumb, item) => {
-      const groupCriteria = item[key];
-      breadcrumb[groupCriteria] = breadcrumb[groupCriteria] || [];
-      breadcrumb[groupCriteria].push(item);
-      return breadcrumb;
-    }, {});
   }
 
   closeActiveFacets(breadcrumb: Breadcrumb) {
@@ -98,5 +88,21 @@ export class QuestionnaireCarouselComponent implements OnInit {
       breadcrumb.removeQuery?.query?.value
     );
     this.routingService.go(['questionnaire'], this.linkParams);
+  }
+
+  startCheckout(product: FSProduct) {
+    this.checkoutService.startCheckoutForProduct(product);
+  }
+
+  protected groupBreadcrumbsByCriteria(
+    breadcrumbs: Breadcrumb[],
+    criteria: string
+  ) {
+    return breadcrumbs.reduce((breadcrumb, item) => {
+      const groupCriteria = item[criteria];
+      breadcrumb[groupCriteria] = breadcrumb[groupCriteria] || [];
+      breadcrumb[groupCriteria].push(item);
+      return breadcrumb;
+    }, {});
   }
 }

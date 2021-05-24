@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
 import {
   PageLayoutService,
   ProductListComponent,
@@ -7,7 +6,7 @@ import {
   ViewConfig,
 } from '@spartacus/storefront';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
-import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
+import { FSCheckoutService } from './../../../core/checkout/facade/checkout.service';
 
 @Component({
   selector: 'cx-fs-product-list',
@@ -18,27 +17,12 @@ export class FSProductListComponent extends ProductListComponent {
     pageLayoutService: PageLayoutService,
     productListComponentService: ProductListComponentService,
     scrollConfig: ViewConfig,
-    protected checkoutConfigService: FSCheckoutConfigService,
-    protected routingService: RoutingService
+    protected checkoutService: FSCheckoutService
   ) {
     super(pageLayoutService, productListComponentService, scrollConfig);
   }
 
-  protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
-
-  startCheckoutForProduct(product: FSProduct) {
-    let routingParam;
-    const initialStep = this.checkoutConfigService.getInitialStepForCategory(
-      product.defaultCategory.code
-    );
-    if (this.categoryBasedSteps.includes(initialStep.id)) {
-      routingParam = product.defaultCategory.code;
-    } else {
-      routingParam = product.code;
-    }
-    this.routingService.go({
-      cxRoute: initialStep.routeName,
-      params: { code: routingParam },
-    });
+  startCheckout(product: FSProduct) {
+    this.checkoutService.startCheckoutForProduct(product);
   }
 }

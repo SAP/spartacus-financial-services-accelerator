@@ -30,6 +30,7 @@ const routes: Routes = [
     CommonModule,
     I18nModule,
     RouterModule,
+    MediaModule,
     CarouselModule,
     FacetModule,
     KeyboardFocusModule,

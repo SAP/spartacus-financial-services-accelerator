@@ -2,7 +2,7 @@
   <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
     {{ searchResults.component.title }}
   </h2>
-  <ng-container *ngIf="searchResults.breadcrumbs">
+  <ng-container *ngIf="(searchResults.breadcrumbs | json) != '{}'">
     <div class="mb-5">
       <h4 class="mb-4">
         {{ 'productList.appliedFilter' | cxTranslate }}
@@ -11,7 +11,7 @@
         class="background-color-4 p-2 rounded ml-2 d-inline-block align-top notice"
         *ngFor="let breadcrumb of searchResults.breadcrumbs | keyvalue"
       >
-        <span class="semi-bold">{{ breadcrumb.key + ': ' }}</span>
+        <span class="semi-bold">{{ breadcrumb.key }}</span>
         <ng-container *ngFor="let value of breadcrumb.value; let i = index">
           <div>
             {{ value.facetValueName
@@ -26,7 +26,6 @@
       </div>
     </div>
   </ng-container>
-  <!-- <cx-active-facets></cx-active-facets> -->
   <div class="mb-5 carousel-container">
     <cx-carousel
       *ngIf="searchResults.facets; else noFacets"
@@ -54,7 +53,19 @@
 
   <ng-container *ngIf="searchResults.products">
     <ng-container *ngFor="let product of searchResults.products">
+      <cx-media
+        class="cx-product-image-container"
+        [container]="product?.images?.PRIMARY"
+      ></cx-media>
       <div>{{ product.name }}</div>
+      <div>{{ product.description }}</div>
+      <button
+        *ngIf="product.defaultCategory"
+        class="btn-block primary-button"
+        (click)="startCheckout(product)"
+      >
+        {{ 'quote.getQuote' | cxTranslate }}
+      </button>
     </ng-container>
   </ng-container>
 </ng-container>

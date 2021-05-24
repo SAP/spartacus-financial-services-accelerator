@@ -3,14 +3,13 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import {
   I18nModule,
-  I18nTestingModule,
   ProductSearchService,
   RoutingService,
   CmsComponent,
   TranslationService,
 } from '@spartacus/core';
 import { CmsComponentData, FacetService } from '@spartacus/storefront';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, Type } from '@angular/core';
 import { QuestionnaireCarouselComponent } from './questionnaire-carousel.component';
 import { Input } from '@angular/core';
