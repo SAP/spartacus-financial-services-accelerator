@@ -9,7 +9,7 @@ footer {
   }
   .Footer {
     @include media-breakpoint-down(sm) {
-      cx-navigation-ui {
+      cx-fs-navigation-ui {
         justify-content: space-around;
         flex-wrap: wrap;
         flex-direction: row;
@@ -25,7 +25,7 @@ footer {
       }
     }
     @include media-breakpoint-down(xs) {
-      cx-navigation-ui > nav {
+      cx-fs-navigation-ui > nav {
         flex-basis: 100%;
         padding: 4vw;
       }
