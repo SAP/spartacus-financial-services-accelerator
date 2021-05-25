@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
   ProductSearchService,
   RoutingService,
@@ -9,7 +9,7 @@ import {
 } from '@spartacus/core';
 import { CmsComponentData, FacetService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { QuestionnaireCarouselComponent } from './questionnaire-carousel.component';
 import { Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -33,7 +33,7 @@ const mockSearchResults = {
         query: {
           value: 'insurances:relevance',
         },
-        url: '/search?q=insurances%3Arelevance%3Aterminal_ill%3AYes',
+        url: '/search?q=insurances%3Arelevance',
       },
     },
   ],
@@ -62,15 +62,15 @@ const mockSearchResults = {
   ],
   products: [
     {
-      code: 'LIFE',
+      code: 'TEST_PRODUCT_1',
       defaultCategory: {
-        code: 'insurances_life',
+        code: 'category1',
       },
     },
     {
-      code: 'SAVINGS_SAFE_AND_STEADY',
+      code: 'TEST_PRODUCT_2',
       defaultCategory: {
-        code: 'insurances_savings',
+        code: 'category2',
       },
     },
   ],
@@ -90,8 +90,9 @@ const mockBreadcrumb = {
 const mockLinkParams = {
   query: 'insurances:relevance',
 };
+const mockCategories = 'category1 category2';
 const componentData: FSQuestionnaireCarouselComponent = {
-  categories: 'insurances_savings insurances_life',
+  categories: mockCategories,
   title: 'Test title',
 };
 const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
@@ -132,7 +133,7 @@ class MockProductSearchService {
   }
 }
 class MockActivatedRoute {
-  queryParams = new BehaviorSubject(mockParams).asObservable();
+  queryParams = of(mockParams);
 }
 class MockFacetService {
   getLinkParams() {
@@ -219,13 +220,25 @@ describe('QuestionnaireCarouselComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should close active facets', () => {
-  //   spyOn(mockFacetService, 'getLinkParams').and.callThrough();
-  //   component.closeActiveFacets(mockBreadcrumb);
-  //   expect(routingService.go).toHaveBeenCalledWith(['questionnaire'], {
-  //     query: 'insurances:relevance',
-  //   });
-  // });
+  it('should initialize search results', () => {
+    component.ngOnInit();
+    let searchResult;
+    component.searchResults$
+      .subscribe(data => {
+        searchResult = data;
+      })
+      .unsubscribe();
+    console.log('blaa', searchResult);
+    expect(searchResult.products.length).toEqual(2);
+    expect(searchResult.products[0].code).toEqual('TEST_PRODUCT_1');
+    expect(searchResult.component.categories).toBe(mockCategories);
+  });
+
+  it('should close active facets', () => {
+    spyOn(mockFacetService, 'getLinkParams').and.callThrough();
+    component.closeActiveFacets(mockBreadcrumb);
+    expect(routingService.go).toHaveBeenCalled();
+  });
 
   it('should start checkout for product', () => {
     spyOn(mockCheckoutService, 'startCheckoutForProduct').and.callThrough();
