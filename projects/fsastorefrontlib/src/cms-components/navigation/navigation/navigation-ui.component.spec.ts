@@ -95,6 +95,16 @@ describe('FSNavigation UI Component', () => {
   });
 
   describe('Test adding/removing wrapper class', () => {
+    it('should add was-opened class on wrapper element', () => {
+      fixture.detectChanges();
+      const event = jasmine.createSpyObj('event', ['stopPropagation']);
+      navigationComponent.setClassOnWrapper(event);
+      const wrapper: ElementRef = element.query(By.css('.was-opened'));
+      const el: HTMLElement = wrapper.nativeElement;
+      const elClass = el.getAttribute('class');
+      expect(elClass).toContain('was-opened');
+    });
+
     it('should remove was-opened class on wrapper element', () => {
       fixture.detectChanges();
       const event = jasmine.createSpyObj('event', ['stopPropagation']);
