@@ -3,14 +3,12 @@ import {
   Breadcrumb,
   ProductSearchService,
   RoutingService,
-  SearchConfig,
 } from '@spartacus/core';
 import {
   CmsComponentData,
   FacetService,
   ICON_TYPE,
 } from '@spartacus/storefront';
-import { MAX_OCC_INTEGER_VALUE } from '../b2b/unit/units.config';
 import { Observable, Subscription, combineLatest, of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { FSQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
@@ -24,24 +22,19 @@ import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
 })
 export class QuestionnaireCarouselComponent implements OnInit {
   closeIcon = ICON_TYPE.CLOSE;
-  config: SearchConfig = {
-    pageSize: MAX_OCC_INTEGER_VALUE,
-    currentPage: 0,
-    sort: 'relevance',
-  };
   readonly BREADCRUMB_GROUP_CRITERIA = 'facetName';
   defaultSearchQuery: string;
   searchResults$: Observable<any>;
   linkParams: { [key: string]: string };
-  private subscription = new Subscription();
+  subscription = new Subscription();
 
   constructor(
-    protected productSearchService: ProductSearchService,
     protected componentData: CmsComponentData<FSQuestionnaireCarouselComponent>,
-    protected route: ActivatedRoute,
+    protected productSearchService: ProductSearchService,
     protected facetService: FacetService,
+    protected checkoutService: FSCheckoutService,
     protected routingService: RoutingService,
-    protected checkoutService: FSCheckoutService
+    protected route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -49,11 +42,8 @@ export class QuestionnaireCarouselComponent implements OnInit {
       this.route.queryParams
         .pipe(
           tap(params => {
-            this.defaultSearchQuery = params['query'] ? params['query'] : '';
-            this.productSearchService.search(
-              this.defaultSearchQuery,
-              this.config
-            );
+            this.defaultSearchQuery = params.query ? params.query : '';
+            this.productSearchService.search(this.defaultSearchQuery);
           })
         )
         .subscribe()
@@ -70,7 +60,6 @@ export class QuestionnaireCarouselComponent implements OnInit {
         );
         return {
           component: component,
-          pagination: searchResults.pagination,
           breadcrumbs: breadcrumbs,
           facets: searchResults.facets.map(facet => of(facet)),
           products: searchResults.products.filter(product =>

@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-
 import {
-  I18nModule,
   ProductSearchService,
   RoutingService,
   CmsComponent,
   TranslationService,
+  I18nTestingModule,
 } from '@spartacus/core';
 import { CmsComponentData, FacetService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +14,14 @@ import { QuestionnaireCarouselComponent } from './questionnaire-carousel.compone
 import { Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FSQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
+import { FSCheckoutService } from '../../core';
 
+const mockProduct = {
+  code: 'testProduct',
+  defaultCategory: {
+    code: 'testCategory',
+  },
+};
 const mockSearchResults = {
   breadcrumbs: [
     {
@@ -69,7 +75,6 @@ const mockSearchResults = {
     },
   ],
 };
-
 const mockBreadcrumb = {
   facetCode: 'life_situation',
   facetName: 'Choose one or multiple events',
@@ -82,16 +87,17 @@ const mockBreadcrumb = {
     url: '/search?q=insurances%3Arelevance%3Aterminal_ill%3AYes',
   },
 };
-
 const mockLinkParams = {
   query: 'insurances:relevance',
 };
-
 const componentData: FSQuestionnaireCarouselComponent = {
   categories: 'insurances_savings insurances_life',
   title: 'Test title',
 };
-
+const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
+  data$: of(componentData),
+  uid: 'test',
+};
 const mockParams = '';
 
 @Component({
@@ -125,45 +131,39 @@ class MockProductSearchService {
     return of(mockSearchResults);
   }
 }
-
-const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
-  data$: of(componentData),
-  uid: 'test',
-};
-
 class MockActivatedRoute {
   queryParams = new BehaviorSubject(mockParams).asObservable();
 }
-
 class MockFacetService {
   getLinkParams() {
     return mockLinkParams;
   }
 }
-
 class MockRoutingService {
   go() {}
 }
-
 class MockTranslationService {
   translate(key): Observable<string> {
     return of(key);
   }
+}
+class MockCheckoutService {
+  startCheckoutForProduct() {}
 }
 
 describe('QuestionnaireCarouselComponent', () => {
   let component: QuestionnaireCarouselComponent;
   let fixture: ComponentFixture<QuestionnaireCarouselComponent>;
   let mockProductSearchService: ProductSearchService;
-  let routingService: RoutingService;
   let mockFacetService: FacetService;
   let mockActivatedRoute: ActivatedRoute | MockActivatedRoute;
+  let mockCheckoutService: FSCheckoutService;
+  let routingService: RoutingService;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [I18nModule, RouterTestingModule],
-        // imports: [I18nTestingModule],
+        imports: [I18nTestingModule, RouterTestingModule],
         declarations: [
           QuestionnaireCarouselComponent,
           MockCarouselComponent,
@@ -194,6 +194,10 @@ describe('QuestionnaireCarouselComponent', () => {
             provide: TranslationService,
             useClass: MockTranslationService,
           },
+          {
+            provide: FSCheckoutService,
+            useClass: MockCheckoutService,
+          },
         ],
       }).compileComponents();
     })
@@ -206,7 +210,8 @@ describe('QuestionnaireCarouselComponent', () => {
     mockProductSearchService = TestBed.inject(ProductSearchService);
     routingService = TestBed.inject(RoutingService);
     mockFacetService = TestBed.inject(FacetService);
-    mockActivatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
+    mockActivatedRoute = TestBed.inject(ActivatedRoute);
+    mockCheckoutService = TestBed.inject(FSCheckoutService);
     spyOn(routingService, 'go').and.callThrough();
   });
 
@@ -214,11 +219,17 @@ describe('QuestionnaireCarouselComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should close active facets', () => {
-    spyOn(mockFacetService, 'getLinkParams').and.callThrough();
-    component.closeActiveFacets(mockBreadcrumb);
-    expect(routingService.go).toHaveBeenCalledWith(['questionnaire'], {
-      query: 'insurances:relevance',
-    });
+  // it('should close active facets', () => {
+  //   spyOn(mockFacetService, 'getLinkParams').and.callThrough();
+  //   component.closeActiveFacets(mockBreadcrumb);
+  //   expect(routingService.go).toHaveBeenCalledWith(['questionnaire'], {
+  //     query: 'insurances:relevance',
+  //   });
+  // });
+
+  it('should start checkout for product', () => {
+    spyOn(mockCheckoutService, 'startCheckoutForProduct').and.callThrough();
+    component.startCheckout(mockProduct);
+    expect(mockCheckoutService.startCheckoutForProduct).toHaveBeenCalled();
   });
 });
