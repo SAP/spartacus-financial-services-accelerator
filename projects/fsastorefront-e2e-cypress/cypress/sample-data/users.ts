@@ -17,9 +17,22 @@ export const registrationUserWithoutPhone = {
   dateOfBirth: '1990-12-12',
 };
 
+export const createCustomer = {
+  titleCode: 'Ms.',
+  firstName: generateCustomerName('AKungFu'),
+  lastName: 'Panda',
+  email: generateMail('AKungFu'),
+  password: 'Password1.',
+};
+
 export function generateMail(name: string) {
   const timestamp = Date.now();
   return `user_${name}_${timestamp}@fsatest.com`;
+}
+
+export function generateCustomerName(name: string) {
+  const timestamp = Date.now();
+  return `${name}${timestamp}`;
 }
 
 export const donnaMooreUser = {
