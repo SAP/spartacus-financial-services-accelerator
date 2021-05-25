@@ -32,7 +32,7 @@ const MockCmsNavigationComponent = <CmsComponentData<any>>{
   data$: of(mockCmsComponentData),
 };
 
-describe('CmsNavigationComponent', () => {
+describe('FSNavigationComponent', () => {
   let navigationComponent: FSNavigationComponent;
   let fixture: ComponentFixture<FSNavigationComponent>;
   let element: DebugElement;

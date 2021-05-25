@@ -2,7 +2,6 @@
   <ng-container *ngTemplateOutlet="nav; context: { node: child, depth: 0 }">
   </ng-container>
 </ng-container>
-
 <!-- we generate links in a recursive manner -->
 <ng-template #nav let-node="node" let-depth="depth">
   <nav
@@ -40,7 +39,6 @@
         ></cx-icon>
       </h5>
     </ng-template>
-
     <!-- we add a wrapper to allow for better layout handling in CSS -->
     <div #wrapper class="wrapper" *ngIf="node.children?.length > 0">
       <div
@@ -49,6 +47,7 @@
         [attr.wrap-after]="node.children?.length > wrapAfter ? wrapAfter : null"
         [attr.columns]="getColumnCount(node.children?.length)"
       >
+        <!-- Adding back button for sub menu items that contain children -->
         <div
           *ngIf="flyout && node.children[0]?.children?.length > 1"
           class="back is-open"

@@ -1,10 +1,4 @@
-import {
-  Component,
-  DebugElement,
-  ElementRef,
-  Input,
-  Renderer2,
-} from '@angular/core';
+import { Component, DebugElement, ElementRef, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -30,8 +24,6 @@ class MockGenericLinkComponent {
   @Input() target: string;
   @Input() title: string;
 }
-
-const childLength = 9;
 
 const mockNode: NavigationNode = {
   title: 'test',
@@ -79,11 +71,10 @@ const mockNode: NavigationNode = {
   ],
 };
 
-describe('Navigation UI Component', () => {
+describe('FSNavigation UI Component', () => {
   let fixture: ComponentFixture<FSNavigationUIComponent>;
   let navigationComponent: FSNavigationUIComponent;
   let element: DebugElement;
-  let renderer: Renderer2;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -98,157 +89,12 @@ describe('Navigation UI Component', () => {
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(FSNavigationUIComponent);
-    renderer = fixture.componentRef.injector.get<Renderer2>(Renderer2 as any);
     navigationComponent = fixture.debugElement.componentInstance;
     element = fixture.debugElement;
-
     navigationComponent.node = mockNode;
   });
 
-  describe('calculate columns', () => {
-    beforeEach(() => {
-      navigationComponent.wrapAfter = 5;
-    });
-
-    it('should return 2 for 10', () => {
-      expect(navigationComponent.getColumnCount(10)).toEqual(2);
-    });
-
-    it('should return 2 for 11', () => {
-      expect(navigationComponent.getColumnCount(11)).toEqual(2);
-    });
-
-    it('should return 2 for 12', () => {
-      expect(navigationComponent.getColumnCount(12)).toEqual(2);
-    });
-
-    it('should return 3 for 13', () => {
-      expect(navigationComponent.getColumnCount(13)).toEqual(3);
-    });
-
-    it('should return column count of 3 for 14 items', () => {
-      expect(navigationComponent.getColumnCount(14)).toEqual(3);
-    });
-
-    it('should return column count of 3 for 15 items', () => {
-      expect(navigationComponent.getColumnCount(15)).toEqual(3);
-    });
-  });
-
-  describe('UI tests', () => {
-    it('should be created', () => {
-      expect(navigationComponent).toBeTruthy();
-    });
-
-    it('should render back button for flyout navigation', () => {
-      fixture.detectChanges();
-      const backButton: ElementRef = element.query(By.css('.back'));
-      const link: HTMLLinkElement = backButton.nativeElement;
-
-      expect(link).toBeDefined();
-    });
-
-    it('should not render back button for non-flyout navigation', () => {
-      navigationComponent.flyout = false;
-      fixture.detectChanges();
-      const backButton: ElementRef = element.query(By.css('.back'));
-
-      expect(backButton).toBeFalsy();
-    });
-
-    it('should render cx-icon element for a nav node with children in flyout mode', () => {
-      fixture.detectChanges();
-      const icon: ElementRef = element.query(By.css('h5 > cx-icon'));
-      const link: HTMLLinkElement = icon.nativeElement;
-
-      expect(link).toBeDefined();
-    });
-
-    it('should not render cx-icon element for a nav node with children not in flyout mode', () => {
-      navigationComponent.flyout = false;
-      fixture.detectChanges();
-      const icon: ElementRef = element.query(By.css('h5 > cx-icon'));
-
-      expect(icon).toBeFalsy();
-    });
-
-    it('should render ' + childLength + ' nav elements', () => {
-      fixture.detectChanges();
-      const nav: ElementRef[] = element.queryAll(By.css('nav'));
-      expect(nav.length).toEqual(childLength);
-    });
-
-    it('should render 2 root nav elements', () => {
-      fixture.detectChanges();
-      let rootNavElementCount = 0;
-      (<HTMLElement>element.nativeElement).childNodes.forEach(el => {
-        if (el.nodeName === 'NAV') {
-          rootNavElementCount++;
-        }
-      });
-      expect(rootNavElementCount).toEqual(2);
-    });
-
-    it('should render heading for nav nodes without a URL', () => {
-      fixture.detectChanges();
-
-      const nav: ElementRef = element.query(By.css('nav > h5'));
-      const el: HTMLElement = nav.nativeElement;
-      expect(el.innerText).toEqual('Root 1');
-    });
-
-    it('should render link for nav nodes with a URL', () => {
-      fixture.detectChanges();
-
-      const nav: ElementRef = element.query(By.css('nav > cx-generic-link'));
-      const el: HTMLElement = nav.nativeElement;
-      expect(el).toBeTruthy();
-    });
-
-    it('should render a wrapper container for nav nodes with childs', () => {
-      fixture.detectChanges();
-
-      const wrapper: ElementRef[] = element.queryAll(By.css('nav .wrapper'));
-      expect(wrapper.length).toEqual(3);
-    });
-
-    it('should render a childs container for nav nodes with childs', () => {
-      fixture.detectChanges();
-
-      const child: ElementRef[] = element.queryAll(By.css('nav .childs'));
-      expect(child.length).toEqual(3);
-    });
-
-    it('should render a depth attribute on child containers indicating the depth of the navigation ', () => {
-      fixture.detectChanges();
-
-      const child: ElementRef[] = element.queryAll(By.css('nav .childs'));
-      const first: HTMLElement = child[0].nativeElement;
-      const second: HTMLElement = child[1].nativeElement;
-      const third: HTMLElement = child[2].nativeElement;
-      expect(first.attributes.getNamedItem('depth').value).toEqual('3');
-      expect(second.attributes.getNamedItem('depth').value).toEqual('2');
-      expect(third.attributes.getNamedItem('depth').value).toEqual('1');
-    });
-
-    it('should render child element in the childs container for nav nodes with childs', () => {
-      fixture.detectChanges();
-
-      const child: ElementRef[] = element.queryAll(
-        By.css('nav div .childs nav')
-      );
-      expect(child.length).toEqual(7);
-    });
-
-    it('should set was-opened class on wrapper element', () => {
-      fixture.detectChanges();
-      const event = jasmine.createSpyObj('event', ['stopPropagation']);
-      navigationComponent.setClassOnWrapper(event);
-      const wrapper: ElementRef = element.query(By.css('.was-opened'));
-      const el: HTMLElement = wrapper.nativeElement;
-      expect(el).toBeTruthy();
-    });
-
+  describe('Test adding/removing wrapper class', () => {
     it('should remove was-opened class on wrapper element', () => {
       fixture.detectChanges();
       const event = jasmine.createSpyObj('event', ['stopPropagation']);
