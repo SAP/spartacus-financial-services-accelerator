@@ -44,7 +44,7 @@ describe('ComparisonTableService', () => {
     service.setAvailableTabs([componentData]);
     service.availableTab$
       .subscribe(result => {
-        expect(result).toBe([componentData]);
+        expect(result).toEqual([componentData]);
       })
       .unsubscribe();
   });

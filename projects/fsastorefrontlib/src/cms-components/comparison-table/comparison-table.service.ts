@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-import { Subject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CMSComparisonTabComponent } from '../../occ/occ-models';
 
 @Injectable()
 export class ComparisonTableService {
   constructor(protected cmsService: CmsService) {}
 
-  private availableTabSource = new Subject<CMSComparisonTabComponent[]>();
+  private availableTabSource = new BehaviorSubject<CMSComparisonTabComponent[]>(
+    []
+  );
   readonly availableTab$ = this.availableTabSource.asObservable();
 
   setAvailableTabs(tabs: CMSComparisonTabComponent[]) {
