@@ -95,11 +95,10 @@ const componentData: FSQuestionnaireCarouselComponent = {
   categories: mockCategories,
   title: 'Test title',
 };
-const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
+const mockCmsComponentData = <CmsComponentData<CmsComponent>>{
   data$: of(componentData),
   uid: 'test',
 };
-const mockParams = '';
 
 @Component({
   // tslint:disable
@@ -132,9 +131,9 @@ class MockProductSearchService {
     return of(mockSearchResults);
   }
 }
-class MockActivatedRoute {
-  queryParams = of(mockParams);
-}
+const mockActivatedRoute = {
+  queryParams: of(''),
+};
 class MockFacetService {
   getLinkParams() {
     return mockLinkParams;
@@ -177,7 +176,7 @@ describe('QuestionnaireCarouselComponent', () => {
           },
           {
             provide: CmsComponentData,
-            useValue: MockCmsComponentData,
+            useValue: mockCmsComponentData,
           },
           {
             provide: FacetService,
@@ -189,7 +188,7 @@ describe('QuestionnaireCarouselComponent', () => {
           },
           {
             provide: ActivatedRoute,
-            useClass: MockActivatedRoute,
+            useValue: mockActivatedRoute,
           },
           {
             provide: TranslationService,
@@ -211,7 +210,6 @@ describe('QuestionnaireCarouselComponent', () => {
     mockProductSearchService = TestBed.inject(ProductSearchService);
     routingService = TestBed.inject(RoutingService);
     mockFacetService = TestBed.inject(FacetService);
-    mockActivatedRoute = TestBed.inject(ActivatedRoute);
     mockCheckoutService = TestBed.inject(FSCheckoutService);
     spyOn(routingService, 'go').and.callThrough();
   });
@@ -228,10 +226,24 @@ describe('QuestionnaireCarouselComponent', () => {
         searchResult = data;
       })
       .unsubscribe();
-    console.log('blaa', searchResult);
     expect(searchResult.products.length).toEqual(2);
     expect(searchResult.products[0].code).toEqual('TEST_PRODUCT_1');
     expect(searchResult.component.categories).toBe(mockCategories);
+  });
+
+  it('should initialize search results when initial query is not empty', () => {
+    (mockActivatedRoute as any).queryParams = of({
+      query: 'life_situation:New',
+    });
+    component.ngOnInit();
+    let searchResult;
+    component.searchResults$
+      .subscribe(data => {
+        searchResult = data;
+      })
+      .unsubscribe();
+    expect(searchResult.products.length).toEqual(2);
+    expect(searchResult.products[1].code).toEqual('TEST_PRODUCT_2');
   });
 
   it('should close active facets', () => {
