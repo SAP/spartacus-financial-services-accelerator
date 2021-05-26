@@ -68,8 +68,8 @@ context('Savings Insurance Checkout', () => {
   });
 
   it('Select default payment details', () => {
-    checkout.populatePaymentDetails();
-    checkout.populateBillingAddress();
+    checkout.populatePaymentCreditCard();
+    cy.get('.btn-primary').contains('Continue').click();
   });
 
   it('Place order on final review page', () => {

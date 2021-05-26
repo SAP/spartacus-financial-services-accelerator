@@ -253,7 +253,7 @@ export function waitForPolicyDetails() {
   });
 }
 
-export function populatePaymentDetails() {
+export function populatePaymentCreditCard() {
   cy.get('h4').should('be.visible').should('contain.text', 'Payment method');
   cy.get('#paymentType-CARD').click();
   cy.get('[formcontrolname=code]').ngSelect('Visa');

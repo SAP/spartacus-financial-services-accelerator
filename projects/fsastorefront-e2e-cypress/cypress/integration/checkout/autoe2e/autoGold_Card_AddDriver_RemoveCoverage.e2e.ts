@@ -58,7 +58,7 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
 
   it('Select default payment details and place an order', () => {
     //TODO: Will be replaced with credit card once bug is resolved
-    checkout.populatePaymentDetails();
+    checkout.populatePaymentCreditCard();
     cy.get('.btn-primary').contains('Continue').click();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();

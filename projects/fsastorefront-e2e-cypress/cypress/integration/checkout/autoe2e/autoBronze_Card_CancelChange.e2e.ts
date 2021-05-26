@@ -57,7 +57,7 @@ context('Auto Bronze Checkout with cancel change', () => {
   });
 
   it('Select default payment details and place an order', () => {
-    checkout.populatePaymentDetails();
+    checkout.populatePaymentCreditCard();
     cy.get('.btn-primary').contains('Continue').click();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
