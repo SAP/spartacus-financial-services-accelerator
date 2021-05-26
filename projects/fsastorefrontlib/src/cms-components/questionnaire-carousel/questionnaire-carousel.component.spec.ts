@@ -156,7 +156,6 @@ describe('QuestionnaireCarouselComponent', () => {
   let fixture: ComponentFixture<QuestionnaireCarouselComponent>;
   let mockProductSearchService: ProductSearchService;
   let mockFacetService: FacetService;
-  let mockActivatedRoute: ActivatedRoute | MockActivatedRoute;
   let mockCheckoutService: FSCheckoutService;
   let routingService: RoutingService;
 
