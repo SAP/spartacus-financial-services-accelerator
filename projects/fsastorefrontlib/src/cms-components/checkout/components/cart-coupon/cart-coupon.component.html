@@ -1,10 +1,5 @@
 <ng-container *ngIf="(isCartStable$ | async) && (cart$ | async) as cart">
-  <ng-container
-    *ngIf="
-      cart.insuranceQuote?.state?.code !== 'BIND' &&
-      (userRegistered$ | async) === 'current'
-    "
-  >
+  <ng-container *ngIf="cart.insuranceQuote?.state?.code !== 'BIND'">
     <div class="cx-cart-coupon-title pt-4 pb-1">
       {{ 'miniCart.voucherCode' | cxTranslate }}
     </div>

@@ -14,8 +14,7 @@ import { FSCartService } from '../../../../core/cart/facade/cart.service';
   selector: 'cx-fs-cart-coupon',
   templateUrl: './cart-coupon.component.html',
 })
-export class FSCartCouponComponent extends CartCouponComponent
-  implements OnInit, OnDestroy {
+export class FSCartCouponComponent extends CartCouponComponent {
   userRegistered$: Observable<any>;
   isCartStable$: Observable<boolean>;
 
@@ -24,15 +23,9 @@ export class FSCartCouponComponent extends CartCouponComponent
     protected formBuilder: FormBuilder,
     protected customerCouponService: CustomerCouponService,
     protected activeCartService: ActiveCartService,
-    protected cartService: FSCartService,
-    protected userIdService: UserIdService
+    protected cartService: FSCartService
   ) {
     super(cartVoucherService, formBuilder, customerCouponService, cartService);
     this.isCartStable$ = this.cartService.isStable();
-  }
-
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.userRegistered$ = this.userIdService.getUserId();
   }
 }
