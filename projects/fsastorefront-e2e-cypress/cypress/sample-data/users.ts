@@ -49,3 +49,13 @@ export const rootAdmin = {
   email: 'thomas.schmidt@sapfsa.com',
   password: '123123',
 };
+
+export const carGroupAdmin = {
+  email: 'kathy.liu@sapfsa.com',
+  password: '123123',
+};
+
+export const carGroupCustomer = {
+  email: 'elena.petrova@sapfsa.com',
+  password: '123123',
+};

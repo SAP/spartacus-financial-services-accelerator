@@ -29,13 +29,35 @@ export function selectFamilyAccount() {
     });
 }
 
-export function checkOptionalProductsAddTransactionChest() {
+export function checkOptionalFamilyAccountAddTransactionChest() {
   const addOptionsContent: addOptionsPage.AddOptions = {
     title: 'Your Current Account Application',
     items: [
       {
         name: 'Expense Tracker',
         available: false,
+      },
+      {
+        name: 'Transaction Chest',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: 'Transaction Pouch',
+        available: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function checkOptionalPremiumAccount() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Current Account Application',
+    items: [
+      {
+        name: 'Expense Tracker',
+        available: true,
       },
       {
         name: 'Transaction Chest',

@@ -81,10 +81,7 @@ context('Credit Card Checkout', () => {
 
   it('Should check Pending message is received', () => {
     cy.wait(22000);
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Inbox',
-    });
+    cy.get('cx-fs-message-notification').click();
     inbox.checkInboxComponets();
     inbox.checkBankingTabs();
   });
