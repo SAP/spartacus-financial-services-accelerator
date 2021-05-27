@@ -38,7 +38,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        FSQuestionnaireCarouselComponent: {
+        QuestionnaireCarouselComponent: {
           component: QuestionnaireCarouselComponent,
         },
       },

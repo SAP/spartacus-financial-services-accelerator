@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
 import { QuestionnaireCarouselComponent } from './questionnaire-carousel.component';
 import { Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FSQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
+import { CmsQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
 import { FSCheckoutService } from '../../core';
 
 const mockProduct = {
@@ -91,7 +91,7 @@ const mockLinkParams = {
   query: 'insurances:relevance',
 };
 const mockCategories = 'category1 category2';
-const componentData: FSQuestionnaireCarouselComponent = {
+const componentData: CmsQuestionnaireCarouselComponent = {
   categories: mockCategories,
   title: 'Test title',
 };
