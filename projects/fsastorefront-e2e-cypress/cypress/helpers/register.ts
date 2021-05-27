@@ -8,6 +8,14 @@ export interface RegisterUser {
   password: string;
 }
 
+export interface CreateB2bCustomer {
+  titleCode: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 export function populateRegistrationForm(user: RegisterUser) {
   cy.get('.register').findByText('Register').click({ force: true });
   cy.get('cx-fs-register form').within(() => {
@@ -54,7 +62,18 @@ export function logout() {
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
+  cy.get('[formcontrolname="userId"]').should('be.visible');
   cy.get('[formcontrolname="userId"]').eq(0).type(username);
   cy.get('[formcontrolname="password"]').type(password);
   cy.get('button[type=submit]').click();
+}
+
+export function createB2bCustomer(customer: CreateB2bCustomer) {
+  cy.get('[formcontrolname=titleCode]').ngSelect(customer.titleCode);
+  cy.get('[formcontrolname=firstName]').type(customer.firstName);
+  cy.get('[formcontrolname=lastName]').type(customer.lastName);
+  cy.get('[formcontrolname=email]').type(customer.email);
+  cy.get('input[type="checkbox"]').eq(0).click();
+  cy.get('[formcontrolname=uid]').ngSelect('Panda');
+  cy.get('.button.primary').contains('Save').click();
 }
