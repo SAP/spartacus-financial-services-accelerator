@@ -42,7 +42,6 @@ context('Group Policy Group Admin and Customer Checks', () => {
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    //mozda se menja
     checkout.clickContinueButton();
     loan.checkLegalInformationLoan();
     checkout.clickContinueButton();
