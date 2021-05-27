@@ -22,6 +22,7 @@ import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { B2bModule } from './b2b/b2b.module';
 import { MessageNotificationModule } from './message-notification/message-notification.module';
 import { SyncPilotModule } from './sync-pilot';
+import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 
 @NgModule({
@@ -45,6 +46,7 @@ import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionna
     GeneralInformationModule,
     B2bModule,
     MessageNotificationModule,
+    NavigationModule,
     QuestionnaireCarouselModule,
   ],
   exports: [

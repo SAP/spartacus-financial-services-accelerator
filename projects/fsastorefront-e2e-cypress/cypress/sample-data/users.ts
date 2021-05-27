@@ -17,9 +17,22 @@ export const registrationUserWithoutPhone = {
   dateOfBirth: '1990-12-12',
 };
 
+export const createCustomer = {
+  titleCode: 'Ms.',
+  firstName: generateCustomerName('AKungFu'),
+  lastName: 'Panda',
+  email: generateMail('AKungFu'),
+  password: 'Password1.',
+};
+
 export function generateMail(name: string) {
   const timestamp = Date.now();
   return `user_${name}_${timestamp}@fsatest.com`;
+}
+
+export function generateCustomerName(name: string) {
+  const timestamp = Date.now();
+  return `${name}${timestamp}`;
 }
 
 export const donnaMooreUser = {
@@ -30,4 +43,9 @@ export const donnaMooreUser = {
 export const amosAgent = {
   email: 'amos.adkins@sapfsa.com',
   password: '1234',
+};
+
+export const rootAdmin = {
+  email: 'thomas.schmidt@sapfsa.com',
+  password: '123123',
 };

@@ -90,7 +90,7 @@ export function checkIncidentReportAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(1)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '2');
+      cy.get('.accordion-list-item').should('have.length', '3');
     });
   cy.get('.accordion-list-item').contains('while buying tesla coils');
 }

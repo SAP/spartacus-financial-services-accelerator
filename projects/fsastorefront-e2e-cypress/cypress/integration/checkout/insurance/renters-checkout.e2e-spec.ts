@@ -62,7 +62,7 @@ context('Renters Checkout', () => {
   });
 
   it('Select default payment details', () => {
-    checkout.populatePaymentDetails();
+    checkout.populatePaymentCreditCard();
     cy.get('.btn-primary').contains('Continue').click();
   });
 

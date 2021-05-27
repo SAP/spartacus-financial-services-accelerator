@@ -1,6 +1,3 @@
-@import '../fs-mixins';
-@import '../theme';
-
 header {
   color: var(--cx-color-text);
   background-color: var(--cx-color-1);
@@ -79,6 +76,61 @@ header {
       background-color: var(--cx-color-4);
     }
   }
+
+  // Styling specific to my account section
+  .HeaderLinks .accNavComponent {
+    nav {
+      h5 {
+        font-weight: var(--cx-font-weight-semi);
+        margin-top: 0;
+        padding: 0 0 10px 0;
+        font-size: var(--cx-title-font-size);
+        @include media-breakpoint-down(md) {
+          padding: 1rem;
+        }
+      }
+      // sub menu nodes
+      .childs h5 {
+        font-weight: var(--cx-font-weight-semi);
+        @include media-breakpoint-up(md) {
+          cx-icon {
+            display: block;
+            @include vertical-center;
+            transform: translateY(-50%) rotateZ(-90deg);
+            right: 1rem;
+            padding-inline-start: 0;
+          }
+          padding: 12px 60px 12px 20px;
+        }
+      }
+      @media (hover) {
+        .childs {
+          .wrapper {
+            @include fs-box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+            background: var(--cx-color-1);
+            opacity: 0;
+            max-height: 0;
+            width: 100%;
+          }
+        }
+        &:hover {
+          .childs {
+            nav:hover {
+              .wrapper {
+                position: absolute;
+                top: 30px;
+                left: 60px;
+                max-height: 2000px;
+                opacity: 1;
+                transition: max-height 600ms ease, opacity 500ms ease;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  cx-fs-navigation-ui.flyout,
   cx-navigation-ui.flyout {
     &.accNavComponent {
       nav {
@@ -86,6 +138,46 @@ header {
         .wrapper {
           top: 30px;
         }
+        // Don't hide node title after click on mobile
+        &.is-opened,
+        &.is-open {
+          > h5 {
+            display: flex;
+          }
+        }
+      }
+      // hides sub nav on mobile when it is clicked
+      @include media-breakpoint-down(md) {
+        &.is-open {
+          > nav {
+            display: block;
+            .childs {
+              .back {
+                display: none;
+              }
+              & > nav.is-open {
+                & > h5 {
+                  display: none;
+                }
+              }
+            }
+            // displays back button instead of sub nav
+            &.is-opened {
+              .childs {
+                .back {
+                  display: initial;
+                }
+              }
+            }
+          }
+        }
+      }
+      .childs[columns='1'] {
+        display: flex;
+        flex-direction: column;
+      }
+      .childs[depth='2'] > nav:not(:only-child):not(:last-child) {
+        padding-inline-end: 0;
       }
     }
     .childs nav:not(:last-child) {
@@ -113,17 +205,20 @@ header {
           box-shadow: none;
         }
       }
-      cx-generic-link {
-        border-bottom: none;
-        & > a {
-          padding: 12px 60px 12px 20px;
-          width: 100%;
-          color: var(--cx-color-text);
-          &:hover {
-            background: var(--cx-color-4);
-            color: var(--cx-color-primary);
-          }
-        }
+    }
+    cx-generic-link {
+      border-bottom: none;
+      & > a {
+        padding: 12px 60px 12px 20px;
+      }
+    }
+    cx-generic-link > a,
+    .childs h5 {
+      width: 100%;
+      color: var(--cx-color-text);
+      &:hover {
+        background: var(--cx-color-4);
+        color: var(--cx-color-primary);
       }
     }
   }
@@ -162,16 +257,6 @@ header {
       @include media-breakpoint-down(md) {
         flex-wrap: wrap;
       }
-      cx-navigation-ui {
-        h5 {
-          margin-top: 0;
-          padding: 0 0 10px 0;
-          font-size: var(--cx-title-font-size);
-          @include media-breakpoint-down(md) {
-            padding: 1rem;
-          }
-        }
-      }
       cx-link {
         padding-left: 15px;
         text-decoration: underline;
@@ -209,7 +294,7 @@ header {
       }
     }
     .HeaderLinks {
-      cx-navigation {
+      cx-fs-navigation {
         order: 2;
       }
       cx-link {
@@ -223,4 +308,7 @@ header {
       }
     }
   }
+}
+%cx-fs-navigation-ui {
+  @extend %cx-navigation-ui;
 }
