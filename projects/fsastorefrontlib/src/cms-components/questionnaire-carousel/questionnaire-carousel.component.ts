@@ -17,7 +17,7 @@ import { FSProduct } from '../../occ';
 import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
 
 @Component({
-  selector: 'cx-fs-questionnaire-carosel',
+  selector: 'cx-fs-questionnaire-carousel',
   templateUrl: './questionnaire-carousel.component.html',
 })
 export class QuestionnaireCarouselComponent implements OnInit {
