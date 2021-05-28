@@ -9,7 +9,7 @@
       </h4>
       <div class="filter d-flex">
         <div
-          class="background-color-4 p-3 rounded"
+          class="background-color-4 p-3"
           *ngFor="let breadcrumb of searchResults.breadcrumbs | keyvalue"
         >
           <span class="semi-bold">{{ breadcrumb.key }}</span>
@@ -52,25 +52,33 @@
       </div>
     </ng-template>
   </div>
-
-  <ng-container *ngIf="searchResults.products">
+  <div class="container-fluid" *ngIf="searchResults.products">
     <ng-container *ngFor="let product of searchResults.products">
-      <cx-media
-        class="cx-product-image-container"
-        [container]="product?.images?.PRIMARY"
-      ></cx-media>
-      <div>{{ product.name }}</div>
-      <div [innerHTML]="product.description"></div>
-      <ul class="item-details mb-5" [innerHTML]="product.summary"></ul>
-      <button
-        *ngIf="product.defaultCategory"
-        class="btn-block primary-button"
-        (click)="startCheckout(product)"
-      >
-        {{ 'quote.getQuote' | cxTranslate }}
-      </button>
+      <div class="row border-top border-color-3 pt-5 mb-5 align-items-center">
+        <cx-media
+          class="cx-product-image-container col-md-3"
+          [container]="product?.images?.PRIMARY"
+        ></cx-media>
+        <div class="col-md-6">
+          <h4 class="mb-4">{{ product.name }}</h4>
+          <div class="mb-3" [innerHTML]="product.description"></div>
+          <ul
+            class="item-details mb-5 mb-md-0"
+            [innerHTML]="product.summary"
+          ></ul>
+        </div>
+        <div class="col-md-3">
+          <button
+            *ngIf="product.defaultCategory"
+            class="btn-block primary-button"
+            (click)="startCheckout(product)"
+          >
+            {{ 'fscommon.select' | cxTranslate }}
+          </button>
+        </div>
+      </div>
     </ng-container>
-  </ng-container>
+  </div>
 </ng-container>
 
 <ng-template #noFacets>
