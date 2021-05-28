@@ -11,7 +11,7 @@ import {
 } from '@spartacus/storefront';
 import { Observable, Subscription, combineLatest, of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { FSQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
+import { CmsQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-component.models';
 import { ActivatedRoute } from '@angular/router';
 import { FSProduct } from '../../occ';
 import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
@@ -29,7 +29,9 @@ export class QuestionnaireCarouselComponent implements OnInit {
   subscription = new Subscription();
 
   constructor(
-    protected componentData: CmsComponentData<FSQuestionnaireCarouselComponent>,
+    protected componentData: CmsComponentData<
+      CmsQuestionnaireCarouselComponent
+    >,
     protected productSearchService: ProductSearchService,
     protected facetService: FacetService,
     protected checkoutService: FSCheckoutService,
