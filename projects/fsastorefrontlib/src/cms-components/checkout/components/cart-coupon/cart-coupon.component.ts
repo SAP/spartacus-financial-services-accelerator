@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {
   ActiveCartService,
   CartVoucherService,
   CustomerCouponService,
-  UserIdService,
 } from '@spartacus/core';
 import { CartCouponComponent } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
