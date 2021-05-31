@@ -30,7 +30,7 @@
   </ng-container>
   <div class="mb-5">
     <cx-carousel
-      *ngIf="searchResults.facets; else noFacets"
+      *ngIf="searchResults.facets.length > 0; else noFacets"
       [items]="searchResults.facets"
       [template]="carouselItem"
       itemWidth="400px"
