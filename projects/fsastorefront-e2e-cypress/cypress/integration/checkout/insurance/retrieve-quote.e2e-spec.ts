@@ -28,7 +28,7 @@ context('Retrieving Banking and Insurance Quotes ', () => {
     banking.checkConfigureStep();
     currentAccount.populateConfigureStep();
     checkout.clickContinueButton();
-    currentAccount.checkOptionalProductsAddTransactionChest();
+    currentAccount.checkOptionalFamilyAccountAddTransactionChest();
     checkout.clickContinueButton();
   });
 

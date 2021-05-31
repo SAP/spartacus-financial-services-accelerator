@@ -64,6 +64,10 @@ export const agentListViewAccordions = [
   ' Travel Insurance',
   ' Event Insurance',
   ' Savings Insurance',
+  ' Loan Application',
+  ' Fixed Term Deposit Application',
+  ' Credit Card Application',
+  ' Current Account Application',
 ];
 
 export const finalReviewAccordionHomeowners = [
