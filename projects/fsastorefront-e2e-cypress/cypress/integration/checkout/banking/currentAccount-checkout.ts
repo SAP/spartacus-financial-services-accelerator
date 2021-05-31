@@ -31,7 +31,7 @@ context('Current Account Checkout', () => {
 
   it('Should check optional products for Current Account', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
-    currentAccount.checkOptionalProductsAddTransactionChest();
+    currentAccount.checkOptionalFamilyAccountAddTransactionChest();
     checkout.clickContinueButton();
   });
 

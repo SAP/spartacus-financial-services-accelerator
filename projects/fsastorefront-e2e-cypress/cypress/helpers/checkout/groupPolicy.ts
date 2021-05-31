@@ -1,5 +1,6 @@
 import { createCustomer } from '../../sample-data/users';
 import * as register from '../register';
+import * as shared from './shared-checkout';
 
 export function checkGroupPolicyMainPage() {
   cy.get('h5').should('contain.text', 'My Account');
@@ -76,4 +77,23 @@ export function changePasswordForNewMember() {
   cy.get('[formcontrolname=password]').type('Password1.');
   cy.get('[formcontrolname=confirmPassword]').type('Password1.');
   cy.get('.button.primary').contains('Save').click();
+}
+
+export function checkCurrentAccountComparisonTable() {
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Premium Account',
+        price: '€9.99',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
+}
+
+export function selectPremiumAccount() {
+  cy.get('cx-fs-comparison-table-panel-item').within(() => {
+    cy.get('.table-header-title').should('have.text', 'Premium Account');
+    cy.get('.primary-button').click();
+  });
 }
