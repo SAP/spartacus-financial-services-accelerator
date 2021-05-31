@@ -30,7 +30,7 @@
   </ng-container>
   <div class="mb-5">
     <cx-carousel
-      *ngIf="searchResults.facets.length > 0; else noFacets"
+      *ngIf="searchResults.facets.length > 0; else finalResult"
       [items]="searchResults.facets"
       [template]="carouselItem"
       itemWidth="400px"
@@ -81,6 +81,6 @@
   </div>
 </ng-container>
 
-<ng-template #noFacets>
+<ng-template #finalResult>
   <h3>{{ 'fscommon.finalResult' | cxTranslate }}</h3>
 </ng-template>
