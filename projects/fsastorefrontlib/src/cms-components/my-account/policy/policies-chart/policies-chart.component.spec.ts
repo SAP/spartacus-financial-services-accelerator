@@ -45,6 +45,7 @@ const mockPoliciesByPaymentFrequency = {
 const mockFrequencyItem = {
   name: 'Monthly',
   frequency: 'Monthly',
+  id: 0,
 };
 
 const mockChartConfig: ChartConfig = {
