@@ -14,7 +14,6 @@ import { FSCartService } from '../../../../core/cart/facade/cart.service';
   templateUrl: './cart-coupon.component.html',
 })
 export class FSCartCouponComponent extends CartCouponComponent {
-  userRegistered$: Observable<any>;
   isCartStable$: Observable<boolean>;
 
   constructor(
