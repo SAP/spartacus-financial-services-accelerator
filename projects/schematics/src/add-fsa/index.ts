@@ -49,10 +49,8 @@ import {
   SPARTACUS_STOREFRONTLIB,
   SPARTACUS_STYLES,
 } from '@spartacus/schematics/src/shared';
-import {
-  getAngularVersion,
-  getSpartacusSchematicsVersion,
-} from '@spartacus/schematics/src/shared/utils/package-utils';
+import { getSpartacusSchematicsVersion } from '@spartacus/schematics/src/shared/utils/package-utils';
+import { getAngularVersion } from '../shared/utils/package-utils';
 
 function prepareSiteContextConfig(options: FsOptions): string {
   const currency = parseCSV(options.currency, ['USD']).toUpperCase();
@@ -136,7 +134,7 @@ function addPackageJsonDependencies(): Rule {
 
       {
         type: NodeDependencyType.Default,
-        version: '4.2.1',
+        version: '4.5.0',
         name: 'bootstrap',
       },
       { type: NodeDependencyType.Default, version: '^19.3.4', name: 'i18next' },
