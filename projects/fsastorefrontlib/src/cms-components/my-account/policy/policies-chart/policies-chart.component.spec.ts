@@ -48,6 +48,12 @@ const mockFrequencyItem = {
   id: 0,
 };
 
+const mockSelectedFrequencyItem = {
+  name: 'Test1 frequency',
+  frequency: 'Test1 frequency',
+  id: 0,
+};
+
 const mockChartConfig: ChartConfig = {
   chartOption: {
     title: {
@@ -115,6 +121,7 @@ class MockPolicyService {
   getPolicies() {
     return of(mockPolicies);
   }
+  loadPolicies() {}
 }
 
 class MockPolicyChartDataService {
@@ -172,16 +179,18 @@ describe('PoliciesChartComponent', () => {
           },
         })
         .compileComponents();
+
+      mockPolicyService = TestBed.inject(PolicyService);
+      mockLanguageService = TestBed.inject(LanguageService);
+      mockTranslationService = TestBed.inject(TranslationService);
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PoliciesChartComponent);
     component = fixture.componentInstance;
+    component.language = 'en';
     fixture.detectChanges();
-    mockPolicyService = TestBed.inject(PolicyService);
-    mockLanguageService = TestBed.inject(LanguageService);
-    mockTranslationService = TestBed.inject(TranslationService);
   });
 
   it('should create', () => {
@@ -192,5 +201,11 @@ describe('PoliciesChartComponent', () => {
     spyOn(component, 'selectPaymentFrequency').and.callThrough();
     component.selectPaymentFrequency(mockFrequencyItem);
     expect(component.selectPaymentFrequency).toHaveBeenCalled();
+  });
+
+  it('should set selected frequency', () => {
+    component.selectedFrequency = mockFrequencyItem;
+    component.setPaymentFrequencyDropdown();
+    expect(component.selectedFrequency).toEqual(mockSelectedFrequencyItem);
   });
 });

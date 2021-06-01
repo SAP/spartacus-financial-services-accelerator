@@ -5,7 +5,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
-import { Config, LanguageService, TranslationService } from '@spartacus/core';
+import { Config, LanguageService } from '@spartacus/core';
 
 @Component({
   selector: 'cx-fs-policies-chart',
@@ -27,39 +27,27 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected policyChartDataService: PolicyChartDataService,
     protected languageService: LanguageService,
-    protected translation: TranslationService,
     protected chartConfig: ChartConfig
-  ) {
-    this.subscription.add(
-      this.languageService
-        .getActive()
-        .pipe(
-          tap(lang => {
-            if (this.language && this.language !== lang) {
-              this.policyService.loadPolicies();
-            }
-            this.language = lang;
-          })
-        )
-        .subscribe()
-    );
-  }
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
       combineLatest([
         this.policyService.getPolicies(),
-        this.translation.translate('policy.policyChartTitle'),
+        this.languageService.getActive(),
       ])
         .pipe(
-          filter(([policies, translatedTitle]) => !!policies.insurancePolicies),
-          tap(([policies, translatedTitle]) => {
+          filter(([policies, lang]) => !!policies.insurancePolicies),
+          tap(([policies, lang]) => {
+            if (this.language && this.language !== lang) {
+              this.policyService.loadPolicies();
+            }
+            this.language = lang;
             this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
               policies.insurancePolicies,
               'paymentFrequency'
             );
             this.chartOption = { ...this.chartConfig.chartOption };
-            this.chartOption.title['text'] = translatedTitle;
             this.setPaymentFrequencyDropdown();
             this.setChartSeriesData();
           })
