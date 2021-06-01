@@ -29,6 +29,7 @@ import { PoliciesChartComponent } from './policies-chart/policies-chart.componen
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { defaultChartOptionsConfig } from '../../../core/chart-config/default-chart-options-config';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
     I18nModule,
     NgSelectModule,

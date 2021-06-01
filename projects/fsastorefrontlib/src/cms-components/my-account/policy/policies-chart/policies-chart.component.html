@@ -10,12 +10,12 @@
           'fscommon.paymentFrequency' | cxTranslate
         }}</span>
         <ng-select
+          [(ngModel)]="selectedFrequency.frequency"
           [searchable]="false"
           [clearable]="false"
           [items]="options"
           bindLabel="name"
           bindValue="frequency"
-          [placeholder]="selectedFrequency"
           (change)="selectPaymentFrequency($event)"
         >
         </ng-select>
