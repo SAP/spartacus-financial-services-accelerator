@@ -2,8 +2,7 @@ export const policy = {
   policy: {
     policies: 'Policies',
     policy: 'Policy',
-    policyChartHeader: 'Total Purchase Order Overview',
-    policyChartTitle: 'Purchase Order',
+    policyChartHeader: 'Premium Overview',
     policyId: 'Policy ID',
     expiredPolicyId: 'Expired Policy ID',
     policyNo: 'Policy No',
