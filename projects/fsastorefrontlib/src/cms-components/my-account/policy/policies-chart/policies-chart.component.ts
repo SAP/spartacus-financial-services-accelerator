@@ -37,7 +37,7 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
         this.languageService.getActive(),
       ])
         .pipe(
-          filter(([policies, lang]) => !!policies.insurancePolicies),
+          filter(([policies, _]) => !!policies.insurancePolicies),
           tap(([policies, lang]) => {
             if (this.language && this.language !== lang) {
               this.policyService.loadPolicies();
