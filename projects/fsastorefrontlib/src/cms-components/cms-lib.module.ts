@@ -23,6 +23,7 @@ import { B2bModule } from './b2b/b2b.module';
 import { MessageNotificationModule } from './message-notification/message-notification.module';
 import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
+import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { NavigationModule } from './navigation';
     B2bModule,
     MessageNotificationModule,
     NavigationModule,
+    QuestionnaireCarouselModule,
   ],
   exports: [
     AgentModule,
@@ -68,6 +70,7 @@ import { NavigationModule } from './navigation';
     B2bModule,
     MessageNotificationModule,
     SyncPilotModule,
+    QuestionnaireCarouselModule,
   ],
   providers: [reducerProvider],
 })

@@ -1,7 +1,4 @@
 <div class="cx-page" *ngIf="model$ | async as model">
-  <div>
-    <cx-product-facet-navigation></cx-product-facet-navigation>
-  </div>
   <ng-container
     *ngTemplateOutlet="
       paginationAndSorting;
@@ -58,7 +55,7 @@
                 <button
                   *ngIf="product.defaultCategory"
                   class="btn-block primary-button"
-                  (click)="startCheckoutForProduct(product)"
+                  (click)="startCheckout(product)"
                 >
                   {{ 'quote.getQuote' | cxTranslate }}
                 </button>

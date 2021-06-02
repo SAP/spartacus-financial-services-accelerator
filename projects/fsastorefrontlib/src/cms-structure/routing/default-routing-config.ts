@@ -50,6 +50,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   changeCoveragePage: { paths: ['changeCoveragePage'] },
   changeSimulationPage: { paths: ['changeSimulationPage'] },
   changeAdditionalDriverPage: { paths: ['changeAdditionalDriverPage'] },
+  questionnaire: { paths: ['questionnaire'] },
 };
 
 export const routingConfig: RoutingConfig = {
