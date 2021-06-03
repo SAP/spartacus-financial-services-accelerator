@@ -77,7 +77,7 @@
       text-align: center;
       font-size: var(--cx-h5-font-size);
       @include media-breakpoint-down(sm) {
-        padding: 0;
+        padding: 5px 0;
       }
       cx-generic-link a {
         display: inline-block;
