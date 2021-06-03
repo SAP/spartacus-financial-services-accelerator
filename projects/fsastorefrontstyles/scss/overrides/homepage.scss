@@ -67,14 +67,10 @@
 
   // Need analysis entry point section
   .Section3 {
-    .homepageQuestionnaire {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .homepage-questionnaire {
       border-radius: 2.5rem;
       background-color: var(--cx-color-light);
       padding: 0.5rem 0;
-      text-align: center;
       font-size: var(--cx-h5-font-size);
       @include media-breakpoint-down(sm) {
         padding: 5px 0;

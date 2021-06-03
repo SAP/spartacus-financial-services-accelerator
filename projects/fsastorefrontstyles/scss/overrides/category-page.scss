@@ -102,20 +102,17 @@ cx-page-layout.FSCategoryPageTemplate {
         }
       }
     }
-    cx-fs-cms-custom-container.categoryInnerContainer {
+    cx-fs-cms-custom-container.category-inner-container {
       flex: 1 1 50%;
-      flex-direction: column;
       cx-paragraph {
         @include media-breakpoint-down(sm) {
           padding: 1rem;
         }
       }
       cx-link {
-        order: 2;
         padding: 0 2rem 3.44rem;
         font-size: var(--cx-title-font-size);
         font-weight: var(--cx-font-weight-semi);
-        text-transform: uppercase;
         color: var(--cx-color-primary);
         @include media-breakpoint-down(md) {
           padding-bottom: 1rem;
