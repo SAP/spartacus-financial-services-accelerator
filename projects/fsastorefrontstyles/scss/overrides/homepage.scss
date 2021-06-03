@@ -65,6 +65,47 @@
     }
   }
 
+  // Need analysis entry point section
+  .Section3 {
+    .homepageQuestionnaire {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 2.5rem;
+      background-color: var(--cx-color-light);
+      padding: 0.5rem 0;
+      text-align: center;
+      font-size: var(--cx-h5-font-size);
+      @include media-breakpoint-down(sm) {
+        padding: 0;
+      }
+      cx-generic-link a {
+        display: inline-block;
+        font-weight: var(--cx-font-weight-semi);
+      }
+      &::before, &::after {
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: '\f061';
+        background-color: var(--cx-color-1);
+        color: var(--cx-color-primary);
+        border-radius: 50%;
+        padding: 10px;
+        display: inline-block;
+        width: 3.13rem;
+        height: 3.13rem;
+        font-size: var(--cx-h5-font-size);
+      }
+      &::before {
+        margin-left: 0.5rem;
+      }
+      &::after {
+        margin-right: 0.5rem;
+        transform: rotate(180deg);
+      }
+    }
+  }
+
   //Assistance and support section
   .Section4 {
     cx-banner {

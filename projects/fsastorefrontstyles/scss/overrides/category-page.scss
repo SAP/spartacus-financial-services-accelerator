@@ -74,18 +74,24 @@ cx-page-layout.FSCategoryPageTemplate {
     }
   }
   .Section3 {
+    cx-banner,
+    cx-paragraph {
+      flex: 1 1 50%;
+    }
+    cx-banner {
+      @include media-breakpoint-down(sm) {
+        flex: 1 1 100%;
+        flex-direction: column;
+      }
+    }
     cx-fs-cms-custom-container {
       @include media-breakpoint-down(sm) {
         flex-direction: column;
       }
-      cx-banner,
-      cx-paragraph {
-        flex: 1 1 50%;
-      }
       cx-paragraph {
         display: flex;
         align-items: center;
-        padding: 0.5rem 2rem;
+        padding: 0 2rem;
         text-align: left;
         @include media-breakpoint-down(sm) {
           padding: 2rem;
@@ -93,6 +99,32 @@ cx-page-layout.FSCategoryPageTemplate {
         }
         & > p {
           margin-bottom: 0;
+        }
+      }
+    }
+    cx-fs-cms-custom-container.categoryInnerContainer {
+      flex: 1 1 50%;
+      flex-direction: column;
+      cx-paragraph {
+        @include media-breakpoint-down(sm) {
+          padding: 1rem;
+        }
+      }
+      cx-link {
+        order: 2;
+        padding: 0 2rem 3.44rem;
+        font-size: var(--cx-title-font-size);
+        font-weight: var(--cx-font-weight-semi);
+        text-transform: uppercase;
+        color: var(--cx-color-primary);
+        @include media-breakpoint-down(md) {
+          padding-bottom: 1rem;
+        }
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
+        a:hover {
+          text-decoration: underline;
         }
       }
     }
