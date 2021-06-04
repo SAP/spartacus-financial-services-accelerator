@@ -36,7 +36,7 @@ export class FSAddressFormComponent extends AddressFormComponent
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     line1: ['', [Validators.required, Validators.maxLength(50)]],
-    line2: ['', Validators.maxLength(50)],
+    line2: ['', [Validators.required, Validators.maxLength(50)]],
     town: ['', [Validators.required, Validators.maxLength(50)]],
     region: this.fb.group({
       isocode: [null, Validators.required],
