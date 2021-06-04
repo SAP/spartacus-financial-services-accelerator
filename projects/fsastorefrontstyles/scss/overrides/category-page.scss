@@ -84,6 +84,12 @@ cx-page-layout.FSCategoryPageTemplate {
         flex-direction: column;
       }
     }
+    cx-banner cx-generic-link,
+    cx-banner cx-generic-link > *,
+    cx-banner cx-generic-link a cx-media,
+    cx-banner cx-generic-link a cx-media > * {
+      height: 100%;
+    }
     cx-fs-cms-custom-container {
       @include media-breakpoint-down(sm) {
         flex-direction: column;

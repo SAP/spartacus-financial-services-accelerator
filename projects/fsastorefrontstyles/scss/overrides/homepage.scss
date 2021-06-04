@@ -81,7 +81,7 @@
       &::before,
       &::after {
         @include vertical-center;
-        font-family: 'Font Awesome 5 Free', Arial;
+        font-family: 'Font Awesome 5 Free', sans-serif;
         font-weight: 900;
         content: '\f061';
         background-color: var(--cx-color-1);
