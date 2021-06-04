@@ -6,3 +6,8 @@ export const FSA_DYNAMIC_FORMS = '@spartacus/dynamicforms';
 
 /***** Classes start *****/
 export const FS_STOREFRONT_MODULE = 'FSStorefrontModule';
+/***** Classes end *****/
+
+/***** Overrides start *****/
+export const DEFAULT_ANGULAR_VERSION = '~10.1.0';
+/***** Overrides end *****/
