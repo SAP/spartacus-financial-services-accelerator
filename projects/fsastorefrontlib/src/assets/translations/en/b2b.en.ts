@@ -77,26 +77,11 @@ export const organization = {
   orgUnitUsers: {
     subtitle: 'Organization: {{item.name}}',
   },
-  orgUnitCostCenters: {
-    subtitle: 'Organization: {{item.name}}',
-  },
-  orgUnitAddress: {
-    subtitle: 'Organization: {{item.name}}',
-    details: {
-      subtitle: 'Organization: {{item.name}} (TODO)',
-    },
-    edit: {
-      subtitle: 'Organization: {{ item.name }} (TODO)',
-    },
-    create: {
-      subtitle: 'Organization: {{ item.name }} (TODO)',
-    },
-  },
 };
 export const productAssignments = {
   productAssignments: {
     title: 'Product Assignments',
-    subtitle: 'Products already assigned to the unit.',
+    subtitle: 'Products already assigned to the organization.',
     assign: 'Assign',
     remove: 'Remove',
     add: 'Add',
@@ -107,7 +92,7 @@ export const productAssignments = {
 export const potentialProductAssignments = {
   potentialProductAssignments: {
     title: 'Potential Products',
-    subtitle: 'Products which can be assigned to the unit.',
+    subtitle: 'Products which can be assigned to the organization.',
     assigned: 'Product {{ item.name }} assigned successfully',
   },
 };
