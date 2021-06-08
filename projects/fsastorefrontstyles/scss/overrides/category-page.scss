@@ -1,6 +1,3 @@
-@import '../fs-mixins';
-@import '../theme';
-
 cx-page-layout.FSCategoryPageTemplate {
   .enriched-banner {
     &-text {
@@ -76,19 +73,13 @@ cx-page-layout.FSCategoryPageTemplate {
   .Section3 {
     cx-banner,
     cx-paragraph {
-      flex: 1 1 50%;
+      flex: 0 1 50%;
     }
     cx-banner {
       @include media-breakpoint-down(sm) {
         flex: 1 1 100%;
         flex-direction: column;
       }
-    }
-    cx-banner cx-generic-link,
-    cx-banner cx-generic-link > *,
-    cx-banner cx-generic-link a cx-media,
-    cx-banner cx-generic-link a cx-media > * {
-      height: 100%;
     }
     cx-fs-cms-custom-container {
       @include media-breakpoint-down(sm) {
@@ -110,19 +101,18 @@ cx-page-layout.FSCategoryPageTemplate {
     }
     cx-fs-cms-custom-container.category-inner-container {
       flex: 1 1 50%;
+      justify-content: center;
       cx-paragraph {
         @include media-breakpoint-down(sm) {
           padding: 1rem;
         }
       }
       cx-link {
-        padding: 0 2rem 3.44rem;
+        padding: 0 2rem;
         font-size: var(--cx-title-font-size);
         font-weight: var(--cx-font-weight-semi);
         color: var(--cx-color-primary);
-        @include media-breakpoint-down(md) {
-          padding-bottom: 1rem;
-        }
+        text-transform: uppercase;
         @include media-breakpoint-down(sm) {
           text-align: center;
         }

@@ -73,7 +73,7 @@
       font-size: var(--cx-h5-font-size);
       cx-generic-link {
         display: inline-block;
-        padding: 0 65px;
+        padding: 0 4rem;
       }
       cx-generic-link a {
         font-weight: var(--cx-font-weight-semi);
@@ -91,14 +91,11 @@
         width: 3rem;
       }
       &::before {
-        left: 0;
-        margin-left: 0.5rem;
+        left: 0.5rem;
       }
       &::after {
-        right: 0;
-        margin-right: 0.5rem;
+        right: 0.5rem;
         transform: translateY(-50%) rotateZ(180deg);
-        -webkit-transform: translateY(-50%) rotateZ(180deg);
       }
     }
   }
