@@ -51,7 +51,7 @@ export class ProductConfigurationNavigationComponent
     );
   }
 
-  navigateNext() {
+  navigateNext(event: UIEvent) {
     this.submitFormData();
     this.subscription.add(
       this.formDataService
@@ -76,6 +76,7 @@ export class ProductConfigurationNavigationComponent
         )
         .subscribe()
     );
+    event.stopPropagation();
   }
 
   protected submitFormData() {
