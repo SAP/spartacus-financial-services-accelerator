@@ -12,7 +12,7 @@ export const organization = {
     productAssignment: '[DE] Product Assignment',
   },
   orgUnit: {
-    header: '[DE] All organization ({{count}})',
+    header: '[DE] All organizations ({{count}})',
     unit: '[DE] Organization',
     parentUnit: '[DE] Parent Organization',
     details: {
@@ -56,7 +56,7 @@ export const organization = {
       },
     },
     breadcrumbs: {
-      list: '[DE] All organization',
+      list: '[DE] All organizations',
       children: '[DE] Child organization',
       productAssignment: '[DE] Product Assignment',
     },
@@ -77,6 +77,11 @@ export const organization = {
   orgUnitUsers: {
     title: '[DE] Organization: {{item.name}}',
     subtitle: '[DE] Organization: {{item.name}}',
+  },
+  orgUser: {
+    unit: '[DE] Organization',
+    orgUnit: '[DE] Organization',
+    assignApprover: '[DE] Add the user to approvers for the organization',
   },
 };
 
