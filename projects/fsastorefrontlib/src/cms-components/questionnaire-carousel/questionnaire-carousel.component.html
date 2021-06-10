@@ -1,0 +1,86 @@
+<ng-container *ngIf="searchResults$ | async as searchResults">
+  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+    {{ searchResults.component.title }}
+  </h2>
+  <ng-container *ngIf="(searchResults.breadcrumbs | json) != '{}'">
+    <div class="mb-5">
+      <h4 class="mb-4">
+        {{ 'productList.appliedFilter' | cxTranslate }}
+      </h4>
+      <div class="filter d-flex">
+        <div
+          class="background-color-4 p-3"
+          *ngFor="let breadcrumb of searchResults.breadcrumbs | keyvalue"
+        >
+          <span class="semi-bold">{{ breadcrumb.key }}</span>
+          <ng-container *ngFor="let value of breadcrumb.value; let i = index">
+            <div class="mt-1 notice">
+              {{ value.facetValueName
+              }}<cx-icon
+                (click)="closeActiveFacets(value)"
+                class="ml-1 pointer"
+                aria-hidden="true"
+                [type]="closeIcon"
+              ></cx-icon>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div class="mb-5">
+    <cx-carousel
+      *ngIf="searchResults.facets.length > 0; else finalResult"
+      [items]="searchResults.facets"
+      [template]="carouselItem"
+      itemWidth="400px"
+    >
+    </cx-carousel>
+    <ng-template #carouselItem let-item="item">
+      <div class="container d-flex">
+        <div class="row no-gutters box-shadow flex-grow-1">
+          <div class="p-4 col-12">
+            <cx-facet
+              #facetRef
+              class="qustionnaire-facet expanded"
+              [class.multi-select]="item.multiSelect"
+              [cxFocus]="{ lock: true, trap: true, autofocus: 'a' }"
+              [facet]="item"
+            ></cx-facet>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <div class="container-fluid" *ngIf="searchResults.products">
+    <ng-container *ngFor="let product of searchResults.products">
+      <div class="row border-top border-color-3 pt-5 mb-5 align-items-center">
+        <cx-media
+          class="cx-product-image-container col-md-3"
+          [container]="product?.images?.PRIMARY"
+        ></cx-media>
+        <div class="col-md-6">
+          <h4 class="mb-4">{{ product.name }}</h4>
+          <div class="mb-3" [innerHTML]="product.description"></div>
+          <ul
+            class="item-details mb-5 mb-md-0"
+            [innerHTML]="product.summary"
+          ></ul>
+        </div>
+        <div class="col-md-3">
+          <button
+            *ngIf="product.defaultCategory"
+            class="btn-block primary-button"
+            (click)="startCheckout(product)"
+          >
+            {{ 'fscommon.select' | cxTranslate }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #finalResult>
+  <h3>{{ 'fscommon.finalResult' | cxTranslate }}</h3>
+</ng-template>

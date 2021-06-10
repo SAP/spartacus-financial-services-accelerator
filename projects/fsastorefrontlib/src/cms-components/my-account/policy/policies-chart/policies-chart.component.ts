@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { combineLatest, Subscription } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { ChartConfig } from '../../../../core/chart-config/chart-options.config';
-import { Config, LanguageService, TranslationService } from '@spartacus/core';
+import { Config, LanguageService } from '@spartacus/core';
 
 @Component({
   selector: 'cx-fs-policies-chart',
@@ -18,7 +18,7 @@ import { Config, LanguageService, TranslationService } from '@spartacus/core';
 export class PoliciesChartComponent implements OnInit, OnDestroy {
   chartOption: EChartsOption;
   options: any[];
-  selectedFrequency: string;
+  selectedFrequency: any;
   policiesByPaymentFrequency;
   language: string;
   private subscription = new Subscription();
@@ -27,30 +27,27 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected policyChartDataService: PolicyChartDataService,
     protected languageService: LanguageService,
-    protected translation: TranslationService,
     protected chartConfig: ChartConfig
   ) {}
 
   ngOnInit(): void {
     this.subscription.add(
       combineLatest([
-        this.languageService.getActive(),
         this.policyService.getPolicies(),
-        this.translation.translate('policy.policyChartTitle'),
+        this.languageService.getActive(),
       ])
         .pipe(
-          filter(
-            ([lang, policies, translatedTitle]) => !!policies.insurancePolicies
-          ),
-          take(1),
-          tap(([lang, policies, translatedTitle]) => {
+          filter(([policies, _]) => !!policies.insurancePolicies),
+          tap(([policies, lang]) => {
+            if (this.language && this.language !== lang) {
+              this.policyService.loadPolicies();
+            }
             this.language = lang;
             this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
               policies.insurancePolicies,
               'paymentFrequency'
             );
-            this.chartOption = this.chartConfig.chartOption;
-            this.chartOption.title['text'] = translatedTitle;
+            this.chartOption = { ...this.chartConfig.chartOption };
             this.setPaymentFrequencyDropdown();
             this.setChartSeriesData();
           })
@@ -61,15 +58,17 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
 
   setPaymentFrequencyDropdown() {
     this.options = [];
-    Object.keys(this.policiesByPaymentFrequency).forEach(key =>
-      this.options.push({ name: key, frequency: key })
+    Object.keys(this.policiesByPaymentFrequency).forEach((key, index) =>
+      this.options.push({ name: key, frequency: key, id: index })
     );
-    this.selectedFrequency = this.options[0].frequency;
+    this.selectedFrequency = !this.selectedFrequency
+      ? this.options[0]
+      : this.options[this.selectedFrequency.id];
   }
 
   setChartSeriesData() {
     const policiesByCategory = this.policyChartDataService.groupPoliciesByAttribute(
-      this.policiesByPaymentFrequency[this.selectedFrequency],
+      this.policiesByPaymentFrequency[this.selectedFrequency.frequency],
       'categoryData.name'
     );
     this.policyChartDataService.calculatePremiumAmountByCategory(
@@ -80,7 +79,7 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
   }
 
   selectPaymentFrequency(selectedItem) {
-    this.selectedFrequency = selectedItem.frequency;
+    this.selectedFrequency = selectedItem;
     this.setChartSeriesData();
     this.chartOption = { ...this.chartOption };
   }

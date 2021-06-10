@@ -5,12 +5,14 @@ import {
   CheckoutDeliveryService,
   CheckoutService,
   Order,
+  RoutingService,
   UserIdService,
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
-import { FSCart, FSOrderEntry } from '../../../occ/occ-models';
+import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
+import { FSCheckoutConfigService } from '../services/checkout-config.service';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
@@ -18,10 +20,13 @@ export class FSCheckoutService extends CheckoutService {
     protected fsStore: Store<FSStateWithCheckout>,
     protected activeCartService: ActiveCartService,
     protected userIdService: UserIdService,
-    protected checkoutDeliveryService: CheckoutDeliveryService
+    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected routingService: RoutingService
   ) {
     super(fsStore, activeCartService, userIdService);
   }
+  protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
 
   orderPlaced: boolean;
   mockedDeliveryMode = 'financial-default';
@@ -77,5 +82,21 @@ export class FSCheckoutService extends CheckoutService {
     if (cartEntries?.length > 0) {
       return cartEntries.filter(item => item.removeable);
     }
+  }
+
+  startCheckoutForProduct(product: FSProduct) {
+    let routingParam;
+    const initialStep = this.checkoutConfigService.getInitialStepForCategory(
+      product.defaultCategory.code
+    );
+    if (this.categoryBasedSteps.includes(initialStep.id)) {
+      routingParam = product.defaultCategory.code;
+    } else {
+      routingParam = product.code;
+    }
+    this.routingService.go({
+      cxRoute: initialStep.routeName,
+      params: { code: routingParam },
+    });
   }
 }

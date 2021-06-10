@@ -85,6 +85,7 @@ export const fscommon = {
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',
+    finalResult: 'Final result:',
     vehicleMake: 'Vehicle Make',
     vehicleModel: 'Vehicle Model',
     propertyType: 'Property type',
