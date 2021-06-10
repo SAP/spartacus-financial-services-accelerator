@@ -3,6 +3,7 @@ import {
   Breadcrumb,
   ProductSearchService,
   RoutingService,
+  SearchConfig,
 } from '@spartacus/core';
 import {
   CmsComponentData,
@@ -15,6 +16,7 @@ import { CmsQuestionnaireCarouselComponent } from '../../occ/occ-models/cms-comp
 import { ActivatedRoute } from '@angular/router';
 import { FSProduct } from '../../occ';
 import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
+import { MAX_OCC_INTEGER_VALUE } from '../b2b/unit/units.config';
 
 @Component({
   selector: 'cx-fs-questionnaire-carousel',
@@ -27,6 +29,11 @@ export class QuestionnaireCarouselComponent implements OnInit {
   searchResults$: Observable<any>;
   linkParams: { [key: string]: string };
   subscription = new Subscription();
+  config: SearchConfig = {
+    pageSize: MAX_OCC_INTEGER_VALUE,
+    currentPage: 0,
+    sort: 'relevance',
+  };
 
   constructor(
     protected componentData: CmsComponentData<
@@ -45,7 +52,10 @@ export class QuestionnaireCarouselComponent implements OnInit {
         .pipe(
           tap(params => {
             this.defaultSearchQuery = params.query ? params.query : '';
-            this.productSearchService.search(this.defaultSearchQuery);
+            this.productSearchService.search(
+              this.defaultSearchQuery,
+              this.config
+            );
           })
         )
         .subscribe()
