@@ -25,23 +25,11 @@ export class FSOccProductSearchPageNormalizer extends OccProductSearchPageNormal
       ...target,
       ...(source as any),
     };
-    this.normalizeValues(target);
     if (source.products) {
       target.products = source.products.map(product =>
         this.converter.convert(product, PRODUCT_NORMALIZER)
       );
     }
     return target;
-  }
-
-  protected normalizeValues(target: ProductSearchPage): void {
-    if (target.facets) {
-      target.facets = target.facets.map((facetSource: Facet) => {
-        const { topValues, ...facetTarget } = facetSource;
-        facetTarget.topValueCount =
-          topValues?.length > 0 ? topValues.length : this.DEFAULT_TOP_VALUES;
-        return facetTarget;
-      });
-    }
   }
 }
