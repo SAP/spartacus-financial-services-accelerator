@@ -36,6 +36,7 @@ export const fscommon = {
     contractId: 'ContractId',
     orderTotal: 'Order total',
     orderConfirmation: 'Confirmation',
+    orderNumber: 'Order Number',
     startDate: 'Start Date',
     phoneNumber: 'Phone Number',
     address: 'Address',

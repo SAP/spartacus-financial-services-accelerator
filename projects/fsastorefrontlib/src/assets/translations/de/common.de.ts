@@ -33,6 +33,7 @@ export const fscommon = {
     contractId: 'VertragId',
     orderTotal: 'Gesamtbetrag',
     orderConfirmation: 'Bestellbestätigung',
+    orderNumber: 'Bestellnummer',
     startDate: 'Startdatum',
     phoneNumber: 'Telefonnummer',
     address: 'Adresse',

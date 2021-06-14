@@ -32,6 +32,14 @@
             {{ policy.contractNumber }}
           </div>
         </li>
+        <li class="accordion-list-item row" *ngIf="policy.orderNumber">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.orderNumber' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.orderNumber }}
+          </div>
+        </li>
         <li *ngIf="policy.expiredPolicyNumber" class="accordion-list-item row">
           <div class="col-6 col-sm-5 item-label">
             {{ 'policy.expiredPolicyId' | cxTranslate }}
