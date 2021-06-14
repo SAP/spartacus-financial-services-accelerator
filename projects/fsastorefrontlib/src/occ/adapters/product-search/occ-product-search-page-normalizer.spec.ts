@@ -21,18 +21,15 @@ const mockSource: Occ.ProductSearchPage = {
   ],
 };
 
-const mockPlpWithUselessFacets: Occ.ProductSearchPage = {
-  pagination: {
-    totalResults: 2,
-  },
+const mockFacets: Occ.ProductSearchPage = {
   facets: [
     {
-      name: 'useless-facet',
+      name: 'facet-1',
       values: [{ count: 2 }, { count: 2 }],
     },
     {
-      name: 'useful-facet',
-      values: [{ count: 1 }, { count: 2 }, { count: 1 }],
+      name: 'facet-2',
+      values: [{ count: 2 }, { count: 2 }, { count: 2 }],
     },
   ] as Occ.Facet[],
 };
@@ -71,15 +68,15 @@ describe('FSOccProductSearchPageNormalizer', () => {
   });
 
   describe('not change facet value count', () => {
-    it('should not remove useless facet from facet list', () => {
-      const result = normalizer.convert(mockPlpWithUselessFacets);
+    it('should not remove facet from facet list', () => {
+      const result = normalizer.convert(mockFacets);
       expect(result.facets.length).toEqual(2);
     });
 
     it('should handle empty facets', () => {
-      mockPlpWithUselessFacets.facets = null;
-      const result = normalizer.convert(mockPlpWithUselessFacets);
-      expect(result).toEqual(mockPlpWithUselessFacets as any);
+      mockFacets.facets = null;
+      const result = normalizer.convert(mockFacets);
+      expect(result).toEqual(mockFacets as any);
     });
   });
 });
