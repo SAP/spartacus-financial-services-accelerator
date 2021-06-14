@@ -20,18 +20,10 @@ const mockSource: Occ.ProductSearchPage = {
     } as Occ.Facet,
   ],
 };
-
-const mockFacets: Occ.ProductSearchPage = {
-  facets: [
-    {
-      name: 'facet-1',
-      values: [{ count: 2 }, { count: 2 }],
-    },
-    {
-      name: 'facet-2',
-      values: [{ count: 2 }, { count: 2 }, { count: 2 }],
-    },
-  ] as Occ.Facet[],
+const mockEmptyFacets: Occ.ProductSearchPage = {
+  pagination: {
+    totalResults: 2,
+  }
 };
 
 describe('FSOccProductSearchPageNormalizer', () => {
@@ -54,29 +46,22 @@ describe('FSOccProductSearchPageNormalizer', () => {
   it('should inject ProductImageConverterService', () => {
     expect(normalizer).toBeTruthy();
   });
-
-  it('should apply product image normalizer to products', () => {
-    const converter = TestBed.inject(ConverterService);
-
-    const result = normalizer.convert(mockSource);
-    const expected = [
-      { images: ['images' as any] },
-      { images: ['images' as any] },
-    ] as any;
-    expect(result.products).toEqual(expected);
-    expect(converter.convert).toHaveBeenCalled();
-  });
-
   describe('not change facet value count', () => {
-    it('should not remove facet from facet list', () => {
-      const result = normalizer.convert(mockFacets);
-      expect(result.facets.length).toEqual(2);
+    it('should apply product image normalizer to products', () => {
+      const converter = TestBed.inject(ConverterService);
+      const result = normalizer.convert(mockSource);
+      const expected = [
+        { images: ['images' as any] },
+        { images: ['images' as any] },
+      ] as any;
+      expect(result.products).toEqual(expected);
+      expect(result.facets.length).toEqual(1);
+      expect(converter.convert).toHaveBeenCalled();
     });
 
     it('should handle empty facets', () => {
-      mockFacets.facets = null;
-      const result = normalizer.convert(mockFacets);
-      expect(result).toEqual(mockFacets as any);
+      const result = normalizer.convert(mockEmptyFacets);
+      expect(result).toEqual(mockEmptyFacets as any);
     });
   });
 });
