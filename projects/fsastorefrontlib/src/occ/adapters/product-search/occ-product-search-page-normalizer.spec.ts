@@ -23,7 +23,7 @@ const mockSource: Occ.ProductSearchPage = {
 const mockEmptyFacets: Occ.ProductSearchPage = {
   pagination: {
     totalResults: 2,
-  }
+  },
 };
 
 describe('FSOccProductSearchPageNormalizer', () => {
