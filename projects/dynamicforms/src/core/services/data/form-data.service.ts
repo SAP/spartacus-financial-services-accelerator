@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
@@ -11,11 +12,23 @@ import { StateWithForm } from '../../store/state';
 @Injectable()
 export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
+  formGroupSource = new Subject();
+  formGroup = this.formGroupSource.asObservable();
+  continueToNextStepSource = new BehaviorSubject<boolean>(false);
+  continueToNextStep = this.continueToNextStepSource.asObservable();
 
   constructor(
     protected store: Store<StateWithForm>,
     protected userIdService: UserIdService
   ) {}
+
+  setFormGroup(form: FormGroup) {
+    this.formGroupSource.next(form);
+  }
+
+  setContinueToNextStep(isContinueClicked: boolean) {
+    this.continueToNextStepSource.next(isContinueClicked);
+  }
 
   submit(form: YFormData) {
     this.submittedForm.next(form);

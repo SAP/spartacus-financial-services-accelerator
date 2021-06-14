@@ -7,10 +7,11 @@ import {
 import { RoutingService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { PricingService } from './../../../../../core/product-pricing/facade/pricing.service';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'cx-fs-product-configuration-navigation',
@@ -31,6 +32,8 @@ export class ProductConfigurationNavigationComponent
   productCode: string;
   bundleCode: string;
   categoryCode: string;
+  formGroup: FormGroup;
+  continueToNextStep: boolean;
 
   ngOnInit() {
     this.subscription.add(
@@ -46,6 +49,20 @@ export class ProductConfigurationNavigationComponent
               this.bundleCode = product.bundleTemplates[0].id;
             }
           })
+        )
+        .subscribe()
+    );
+    this.subscription.add(
+      this.formDataService.formGroup
+        .pipe(tap((form: FormGroup) => (this.formGroup = form)))
+        .subscribe()
+    );
+    this.subscription.add(
+      this.formDataService.continueToNextStep
+        .pipe(
+          tap(
+            continueToNextStep => (this.continueToNextStep = continueToNextStep)
+          )
         )
         .subscribe()
     );
@@ -69,9 +86,11 @@ export class ProductConfigurationNavigationComponent
               1,
               pricingData
             );
-            this.routingService.go({
-              cxRoute: 'addOptions',
-            });
+            if (this.formGroup.valid && this.continueToNextStep) {
+              this.routingService.go({
+                cxRoute: 'addOptions',
+              });
+            }
           })
         )
         .subscribe()
@@ -87,6 +106,7 @@ export class ProductConfigurationNavigationComponent
     if (formDataId) {
       formData.id = formDataId;
     }
+    this.formDataService.setContinueToNextStep(true);
     this.formDataService.submit(formData);
   }
 

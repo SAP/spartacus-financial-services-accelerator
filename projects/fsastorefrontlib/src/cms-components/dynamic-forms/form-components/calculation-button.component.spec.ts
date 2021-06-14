@@ -70,6 +70,7 @@ class MockFormService {
 
 class MockFormDataService {
   submit() {}
+  setContinueToNextStep(continueToNextStep) {}
 }
 
 describe('CalculationButtonComponent', () => {
@@ -154,7 +155,7 @@ describe('CalculationButtonComponent', () => {
   });
 
   it('should submit form data', () => {
-    component.onSubmit();
+    component.onSubmit(new UIEvent('click'));
     expect(formDataService.submit).toHaveBeenCalled();
   });
 });

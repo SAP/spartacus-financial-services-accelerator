@@ -63,6 +63,7 @@ export class CalculationButtonComponent extends AbstractFormComponent
     if (formDataId) {
       formData.id = formDataId;
     }
+    this.formDataService.setContinueToNextStep(false);
     this.formDataService.submit(formData);
     event.stopPropagation();
   }

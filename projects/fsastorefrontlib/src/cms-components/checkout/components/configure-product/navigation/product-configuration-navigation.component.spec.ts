@@ -14,6 +14,9 @@ import { PricingService } from './../../../../../core/product-pricing/facade/pri
 import { PricingData } from './../../../../../occ/occ-models/form-pricing.interface';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
 import { ProductConfigurationNavigationComponent } from './product-configuration-navigation.component';
+import { Pipe } from '@angular/core';
+import { PipeTransform } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 const formDataId = 'formDataId';
 const formData: YFormData = {
@@ -60,10 +63,13 @@ class MockCurrentProductService {
 }
 
 export class MockFormDataService {
+  continueToNextStep = of(true);
+  formGroup = of({ valid: true });
   getSubmittedForm() {
     return of();
   }
   submit() {}
+  setContinueToNextStep(continueToNextStep) {}
 }
 
 class MockPricingService {
@@ -82,6 +88,17 @@ class MockCartService {
   createCartForProduct(): void {}
 }
 
+@Pipe({
+  name: 'cxTranslate',
+})
+class MockTranslatePipe implements PipeTransform {
+  transform(): any {}
+}
+
+class MockRoutingService {
+  go() {}
+}
+
 describe('ProductConfigurationNavigationComponent', () => {
   let component: ProductConfigurationNavigationComponent;
   let fixture: ComponentFixture<ProductConfigurationNavigationComponent>;
@@ -91,11 +108,15 @@ describe('ProductConfigurationNavigationComponent', () => {
   let pricingService: PricingService;
   let currentProductService: CurrentProductService;
   let cartService: FSCartService;
+  let routingService: RoutingService;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [ProductConfigurationNavigationComponent],
+        declarations: [
+          ProductConfigurationNavigationComponent,
+          MockTranslatePipe,
+        ],
         imports: [I18nTestingModule],
         providers: [
           {
@@ -120,7 +141,7 @@ describe('ProductConfigurationNavigationComponent', () => {
           },
           {
             provide: RoutingService,
-            useValue: { go: jasmine.createSpy() },
+            useClass: MockRoutingService,
           },
         ],
       }).compileComponents();
@@ -129,6 +150,8 @@ describe('ProductConfigurationNavigationComponent', () => {
       formDataStorageService = TestBed.inject(FormDataStorageService);
       pricingService = TestBed.inject(PricingService);
       cartService = TestBed.inject(FSCartService);
+      routingService = TestBed.inject(RoutingService);
+      spyOn(routingService, 'go').and.callThrough();
     })
   );
 
@@ -168,7 +191,7 @@ describe('ProductConfigurationNavigationComponent', () => {
   it('should build pricing data and create cart for product', () => {
     spyOn(formDataService, 'getSubmittedForm').and.returnValue(of(formData));
     spyOn(cartService, 'createCartForProduct').and.stub();
-    component.navigateNext();
+    component.navigateNext(new UIEvent('click'));
     expect(cartService.createCartForProduct).toHaveBeenCalled();
   });
 
@@ -181,7 +204,7 @@ describe('ProductConfigurationNavigationComponent', () => {
       of(mockFormData)
     );
     spyOn(cartService, 'createCartForProduct').and.stub();
-    component.navigateNext();
+    component.navigateNext(new UIEvent('click'));
     expect(cartService.createCartForProduct).not.toHaveBeenCalled();
   });
 });
