@@ -28,6 +28,13 @@
                   >:
                   <span class="value">{{ policy.policyNumber }}</span>
                 </div>
+                <div class="info-card-data" *ngIf="policy.orderNumber">
+                  <span class="label">{{
+                    'fscommon.orderNumber' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">{{ policy.orderNumber }}</span>
+                </div>
                 <ng-container
                   *ngIf="
                     policy.insuredObjectList?.insuredObjects &&
