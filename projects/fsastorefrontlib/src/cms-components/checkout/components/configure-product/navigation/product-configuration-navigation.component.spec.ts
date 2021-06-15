@@ -63,7 +63,7 @@ class MockCurrentProductService {
 }
 
 export class MockFormDataService {
-  continueToNextStep = of(true);
+  continueToNextStep$ = of(true);
   formGroup = of({ valid: true });
   getSubmittedForm() {
     return of();

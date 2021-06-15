@@ -53,12 +53,7 @@ export class ProductConfigurationNavigationComponent
         .subscribe()
     );
     this.subscription.add(
-      this.formDataService.formGroup
-        .pipe(tap((form: FormGroup) => (this.formGroup = form)))
-        .subscribe()
-    );
-    this.subscription.add(
-      this.formDataService.continueToNextStep
+      this.formDataService.continueToNextStep$
         .pipe(
           tap(
             continueToNextStep => (this.continueToNextStep = continueToNextStep)
@@ -86,7 +81,7 @@ export class ProductConfigurationNavigationComponent
               1,
               pricingData
             );
-            if (this.formGroup.valid && this.continueToNextStep) {
+            if (this.continueToNextStep) {
               this.routingService.go({
                 cxRoute: 'addOptions',
               });
