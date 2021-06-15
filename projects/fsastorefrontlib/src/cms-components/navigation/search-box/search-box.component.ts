@@ -14,7 +14,7 @@ import { FSCheckoutService } from '../../../core/checkout/facade/checkout.servic
 import { FSProduct } from '../../../occ/occ-models';
 
 @Component({
-  selector: 'cx-fs-search-box',
+  selector: 'cx-fs-searchbox',
   templateUrl: './search-box.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,14 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { HighlightPipe } from '@spartacus/storefront';
 
 @Pipe({ name: 'cxFsHighlight' })
-export class FSHighlightPipe implements PipeTransform {
+export class FSHighlightPipe extends HighlightPipe implements PipeTransform {
   transform(text: string, match?: string): string {
-    if (!match) {
-      return text;
-    }
-    return text.replace(
-      match.trim(),
-      `<span class="highlight">${match.trim()}</span>`
-    );
+    return super.transform(text, match);
   }
 }
