@@ -1,0 +1,29 @@
+%cx-searchbox__body {
+  &.searchbox-is-active {
+    &.has-searchbox-results {
+      cx-fs-searchbox {
+        .results {
+          display: block;
+        }
+      }
+    }
+  }
+  &:not(.searchbox-is-active) {
+    @include media-breakpoint-down(sm) {
+      cx-fs-searchbox {
+        input {
+          width: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+%cx-fs-searchbox {
+  @extend %cx-searchbox;
+  .results .products {
+    @include media-breakpoint-down(sm) {
+      display: block;
+    }
+  }
+}

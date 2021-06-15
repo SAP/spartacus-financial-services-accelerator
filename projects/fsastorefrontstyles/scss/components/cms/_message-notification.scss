@@ -2,6 +2,7 @@
   position: absolute;
   top: -25px;
   right: 0;
+  z-index: 2;
   font-size: var(--cx-h3-font-size);
   @include media-breakpoint-down(md) {
     @include vertical-center;

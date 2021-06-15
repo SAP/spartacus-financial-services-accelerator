@@ -24,6 +24,7 @@ import { MessageNotificationModule } from './message-notification/message-notifi
 import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
+import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionna
     MessageNotificationModule,
     NavigationModule,
     QuestionnaireCarouselModule,
+    FSSearchBoxModule,
   ],
   exports: [
     AgentModule,
@@ -71,6 +73,7 @@ import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionna
     MessageNotificationModule,
     SyncPilotModule,
     QuestionnaireCarouselModule,
+    FSSearchBoxModule,
   ],
   providers: [reducerProvider],
 })
