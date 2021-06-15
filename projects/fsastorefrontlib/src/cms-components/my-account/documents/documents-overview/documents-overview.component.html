@@ -1,9 +1,18 @@
 <ng-container *ngIf="documentList$ | async as documentList; else loading">
   <!-- ng-container needs check if documents are uploaded by user or they came from external system -->
   <ng-container *ngIf="(documentList | json) != '{}'; else noDocuments">
-    <cx-fs-documents-table
-      [documentSource]="documentList?.documents"
-    ></cx-fs-documents-table>
+    <ng-container *ngIf="checkDocumentsSource(documentList?.documents, false)">
+      <h4>{{ 'document.uploadedDocuments' | cxTranslate }}</h4>
+      <cx-fs-documents-table
+        [documentSource]="getDocumentsBySource(documentList?.documents, false)"
+      ></cx-fs-documents-table>
+    </ng-container>
+    <ng-container *ngIf="checkDocumentsSource(documentList?.documents, true)">
+      <h4>{{ 'document.receivedDocuments' | cxTranslate }}</h4>
+      <cx-fs-documents-table
+        [documentSource]="getDocumentsBySource(documentList?.documents, true)"
+      ></cx-fs-documents-table>
+    </ng-container>
   </ng-container>
 </ng-container>
 <ng-template #loading>

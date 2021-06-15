@@ -7,6 +7,7 @@ export const document = {
     referredInsuranceObject: 'Belonging to',
     issueDate: 'Issue Date',
     uploadedDocuments: 'Uploaded Documents',
+    receivedDocuments: 'Received documents',
     youHaveNoDocuments: 'You have no Documents.',
   },
 };
