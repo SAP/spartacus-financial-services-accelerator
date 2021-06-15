@@ -232,19 +232,17 @@ header {
     label {
       background: var(--cx-color-1);
       border: 1px solid var(--cx-color-3);
+      @include media-breakpoint-down(sm) {
+        background: transparent;
+        border: none;
+      }
     }
     input {
       color: var(--cx-color-6);
     }
     cx-icon {
       font-size: var(--cx-h4-font-size);
-    }
-    @include media-breakpoint-down(sm) {
-      label {
-        background: var(--cx-color-text);
-        border: none;
-      }
-      cx-icon {
+      @include media-breakpoint-down(sm) {
         color: var(--cx-color-1);
         margin-inline-end: 10px;
       }
