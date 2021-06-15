@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/core';
-import { Component, Optional } from '@angular/core';
+import { Component, Optional, ChangeDetectionStrategy } from '@angular/core';
 import {
   CmsSearchBoxComponent,
   RoutingService,
