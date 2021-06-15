@@ -10,7 +10,7 @@
       ></cx-fs-documents-table>
     </ng-container>
     <ng-container
-      *ngIf="getDocumentsBySource(documentList?.documents, false).length > 0"
+      *ngIf="getDocumentsBySource(documentList?.documents, true).length > 0"
     >
       <h4>{{ 'document.receivedDocuments' | cxTranslate }}</h4>
       <cx-fs-documents-table
