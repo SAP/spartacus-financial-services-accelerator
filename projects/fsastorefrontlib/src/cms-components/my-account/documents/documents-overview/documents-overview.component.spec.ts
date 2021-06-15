@@ -79,10 +79,4 @@ describe('DocumentsOverviewComponent', () => {
     );
     expect(documentsUploadedByCustomer[0]).toBe(mockDocument2);
   });
-
-  it('should check documents source', () => {
-    expect(component.checkDocumentsSource(mockFiles.documents, true)).toBe(
-      mockDocument2
-    );
-  });
 });

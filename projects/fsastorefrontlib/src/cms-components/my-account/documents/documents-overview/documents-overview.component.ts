@@ -25,13 +25,4 @@ export class DocumentsOverviewComponent implements OnInit {
       document => document.createdByExternalSystem === receivedByExternalSystem
     );
   }
-
-  /**
-   * Method used to check source of the documents
-   */
-  checkDocumentsSource(documents, receivedByExternalSystem: boolean) {
-    return documents.find(
-      document => document.createdByExternalSystem === receivedByExternalSystem
-    );
-  }
 }
