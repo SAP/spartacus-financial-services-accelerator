@@ -82,7 +82,7 @@ describe('DocumentsOverviewComponent', () => {
 
   it('should check documents source', () => {
     expect(component.checkDocumentsSource(mockFiles.documents, true)).toBe(
-      true
+      mockDocument2
     );
   });
 });
