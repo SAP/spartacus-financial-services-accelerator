@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CmsConfig, provideConfig } from '@spartacus/core';
-import { MY_ACCOUNT_FEATURE } from 'projects/fsastorefrontlib/src/core';
+import { MY_ACCOUNT_FEATURE } from '../../../core/my-account/store/my-account-state';
 
 @NgModule({
   declarations: [],
