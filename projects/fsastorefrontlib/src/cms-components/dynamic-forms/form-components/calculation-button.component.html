@@ -4,7 +4,7 @@
       class="action-button btn-block"
       [disabled]="config.disabled"
       [attr.name]="config.name"
-      (click)="onSubmit()"
+      (click)="onSubmit($event)"
     >
       {{ label }}
     </button>

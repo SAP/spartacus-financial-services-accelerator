@@ -50,7 +50,7 @@ export class MockFormDataService {
   getFormData() {
     return of(formData);
   }
-  setSubmittedForm() {}
+  submit() {}
 }
 
 export class MockFormDataStorageService {
