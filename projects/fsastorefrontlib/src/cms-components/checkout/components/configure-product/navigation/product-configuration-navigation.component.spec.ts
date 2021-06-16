@@ -14,9 +14,6 @@ import { PricingService } from './../../../../../core/product-pricing/facade/pri
 import { PricingData } from './../../../../../occ/occ-models/form-pricing.interface';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
 import { ProductConfigurationNavigationComponent } from './product-configuration-navigation.component';
-import { Pipe } from '@angular/core';
-import { PipeTransform } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 const formDataId = 'formDataId';
 const formData: YFormData = {
@@ -88,13 +85,6 @@ class MockCartService {
   createCartForProduct(): void {}
 }
 
-@Pipe({
-  name: 'cxTranslate',
-})
-class MockTranslatePipe implements PipeTransform {
-  transform(): any {}
-}
-
 class MockRoutingService {
   go() {}
 }
@@ -113,10 +103,7 @@ describe('ProductConfigurationNavigationComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [
-          ProductConfigurationNavigationComponent,
-          MockTranslatePipe,
-        ],
+        declarations: [ProductConfigurationNavigationComponent],
         imports: [I18nTestingModule],
         providers: [
           {
