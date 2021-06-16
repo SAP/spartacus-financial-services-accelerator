@@ -32,6 +32,12 @@
             <div class="col-6 col-md-12 text-right text-md-left">
               {{ order.code }}
             </div>
+            <div class="col-6 col-md-12 semi-bold">
+              {{ 'policy.policyId' | cxTranslate }}:
+            </div>
+            <div class="col-6 col-md-12 text-right text-md-left">
+              {{ order.insuranceQuote?.policyId }}
+            </div>
           </div>
           <div class="row mb-2">
             <div class="col-6 col-md-12 semi-bold">
