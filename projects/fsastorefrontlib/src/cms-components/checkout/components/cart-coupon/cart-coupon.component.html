@@ -30,7 +30,7 @@
         ></cx-form-errors>
       </form>
     </div>
-    <div *ngIf="cart.appliedVouchers?.length > 0">
+    <ng-container *ngIf="cart.appliedVouchers?.length > 0">
       <div class="cx-cart-coupon-title pt-4 pb-1">
         {{ 'voucher.vouchersApplied' | cxTranslate }}
       </div>
@@ -40,6 +40,6 @@
         [isReadOnly]="false"
       >
       </cx-applied-coupons>
-    </div>
+    </ng-container>
   </ng-container>
 </ng-container>
