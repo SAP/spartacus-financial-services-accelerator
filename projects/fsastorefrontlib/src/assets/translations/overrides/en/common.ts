@@ -57,5 +57,6 @@ export const common = {
   formErrors: {
     pattern: 'Should contain at least one number, no special characters',
     maxlength: 'Maximum {{ maxLength }} characters',
+    InvalidDate: 'Must be over 18 years old',
   },
 };
