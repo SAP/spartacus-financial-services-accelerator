@@ -14,7 +14,7 @@ import {
   B2BUserConnector,
   B2BUserService,
 } from '@spartacus/organization/administration/core';
-import { FSB2BUserService } from '../../core';
+import { FSB2BUserService } from '../../core/user/facade/b2b-user.service';
 
 @NgModule({
   declarations: [],
