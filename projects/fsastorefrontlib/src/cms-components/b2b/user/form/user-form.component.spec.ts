@@ -21,7 +21,6 @@ import { FormErrorsComponent } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSUserFormComponent } from './user-form.component';
 import { DateConfig } from '../../../../core/date-config/date-config';
-import { UserItemService } from '@spartacus/organization/administration/components';
 import { FSUserItemService } from './user-item.service';
 
 const mockForm = new FormGroup({

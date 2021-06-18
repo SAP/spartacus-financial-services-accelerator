@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { B2BUser, B2BUserRole, UserService } from '@spartacus/core';
+import { B2BUser, UserService } from '@spartacus/core';
 import {
   CurrentItemService,
   CurrentUserService,
@@ -46,14 +46,7 @@ export class FSUserFormComponent extends UserFormComponent {
     }
   }
 
-  availableRoles: B2BUserRole[] = this.getAllRoles();
-
   getDateFormat() {
     return this.config.date.format;
-  }
-
-  //prebaciti u servis
-  getAllRoles(): B2BUserRole[] {
-    return [B2BUserRole.CUSTOMER, B2BUserRole.ADMIN];
   }
 }
