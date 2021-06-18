@@ -1,19 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { B2BUser, B2BUserRole, UserService } from '@spartacus/core';
 import {
   CurrentItemService,
   CurrentUserService,
   ItemService,
   UserFormComponent,
-  UserItemService,
 } from '@spartacus/organization/administration/components';
 import {
-  B2BUnitNode,
   B2BUserService,
   OrgUnitService,
 } from '@spartacus/organization/administration/core';
-import { Observable } from 'rxjs';
 import { DateConfig } from '../../../../core/date-config/date-config';
 import { FSUserItemService } from './user-item.service';
 
@@ -53,7 +49,7 @@ export class FSUserFormComponent extends UserFormComponent {
   availableRoles: B2BUserRole[] = this.getAllRoles();
 
   getDateFormat() {
-    return this.config.date.format || '';
+    return this.config.date.format;
   }
 
   //prebaciti u servis
