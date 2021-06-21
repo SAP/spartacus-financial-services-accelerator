@@ -82,7 +82,8 @@
         *ngFor="let role of availableRoles; let i = index"
       >
         <input
-          type="checkbox"
+          type="radio"
+          name="b2bRole"
           class="form-check-input"
           [value]="role"
           [checked]="roles?.value?.includes(role)"
