@@ -1,6 +1,9 @@
 <ng-container *ngIf="product$ | async as product; else loading">
   <ng-container *ngIf="!isLoading; else loading">
-    <div class="table-header">
+    <div
+      class="table-header"
+      [ngClass]="recommendedProduct == product.code ? 'highlight' : ''"
+    >
       <h3 class="table-header-title mb-0">{{ product.name }}</h3>
       <ng-container *ngIf="productPrice; else na">
         <h4 class="table-header-value">{{ productPrice }}</h4>
@@ -109,6 +112,9 @@
     >
       {{ 'fscommon.select' | cxTranslate }}
     </button>
+    <span *ngIf="recommendedProduct == product.code">
+      {{ 'fscommon.recommendedProduct' | cxTranslate }}
+    </span>
   </ng-container>
 </ng-container>
 <ng-template #loading>

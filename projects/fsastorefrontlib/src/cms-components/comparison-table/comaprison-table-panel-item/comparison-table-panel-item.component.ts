@@ -17,6 +17,7 @@ import {
   OneTimeChargeEntry,
   PricingData,
 } from '../../../occ/occ-models';
+import { RECOMMENDED_PRODUCT } from '../../../shared';
 
 @Component({
   selector: 'cx-fs-comparison-table-panel-item',
@@ -44,12 +45,14 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
 
   product$: Observable<FSProduct>;
   isLoading = true;
+  recommendedProduct: string;
   panelItemEntries: OneTimeChargeEntry[] = [];
   private subscription = new Subscription();
 
   ngOnInit() {
     this.getProductData();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
+    this.recommendedProduct = localStorage.getItem(RECOMMENDED_PRODUCT);
   }
 
   getProductData() {
