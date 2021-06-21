@@ -13,7 +13,7 @@ export class QuoteEffects {
     ofType(fromActions.LOAD_QUOTES),
     map((action: fromActions.LoadQuotes) => action.payload),
     switchMap(payload => {
-      return this.adapter.getQuotes(payload.userId).pipe(
+      return this.qouteConnector.getQuotes(payload.userId).pipe(
         map((quotes: any) => {
           return new fromActions.LoadQuotesSuccess(quotes);
         }),
@@ -29,7 +29,7 @@ export class QuoteEffects {
     ofType(fromActions.UPDATE_QUOTE),
     map((action: fromActions.UpdateQuote) => action.payload),
     switchMap(payload => {
-      return this.adapter
+      return this.qouteConnector
         .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
         .pipe(
           map((quote: any) => {
@@ -47,7 +47,7 @@ export class QuoteEffects {
     ofType(fromActions.QUOTE_PROCESS_ACTION),
     map((action: fromActions.QuoteProcessAction) => action.payload),
     mergeMap(payload => {
-      return this.adapter
+      return this.qouteConnector
         .invokeQuoteAction(
           payload.userId,
           payload.cartId,
@@ -70,5 +70,23 @@ export class QuoteEffects {
     })
   );
 
-  constructor(private actions$: Actions, private adapter: QuoteConnector) {}
+  @Effect()
+  loadQuoteDetails$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_QUOTE_DETAILS),
+    map((action: fromActions.LoadQuoteDetails) => action.payload),
+    switchMap(payload => {
+      return this.qouteConnector
+        .getQuote(payload.userId, payload.quoteId)
+        .pipe(
+          map((quote: any) => {
+            return new fromActions.LoadQuoteDetailsSuccess(quote);
+          }),
+          catchError(error =>
+            of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
+          )
+        );
+    })
+  );
+
+  constructor(private actions$: Actions, private qouteConnector: QuoteConnector) {}
 }

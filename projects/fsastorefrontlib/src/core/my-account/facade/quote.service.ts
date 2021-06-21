@@ -4,8 +4,8 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { OrderEntry, UserIdService } from '@spartacus/core';
-import { filter, map, take } from 'rxjs/operators';
+import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
+import { filter, map, take, tap } from 'rxjs/operators';
 import {
   FSCart,
   FSOrderEntry,
@@ -16,6 +16,8 @@ import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Injectable()
 export class QuoteService {
@@ -24,8 +26,11 @@ export class QuoteService {
     protected cartService: FSCartService,
     protected userIdService: UserIdService,
     protected formDataService: FormDataService,
-    protected formDataStorageService: FormDataStorageService
+    protected formDataStorageService: FormDataStorageService,
+    protected routingService: RoutingService
   ) {}
+
+  private subscription = new Subscription();
 
   loadQuotes() {
     this.userIdService
@@ -41,8 +46,27 @@ export class QuoteService {
       .unsubscribe();
   }
 
+  loadQuoteDetails(quoteId) {
+    this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadQuoteDetails({
+            userId: occUserId,
+            quoteId: quoteId
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
   getQuotes() {
     return this.store.pipe(select(fromQuoteStore.getQuotes));
+  }
+
+  getQuoteDetails(): Observable<any> {
+    return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
   }
 
   getQuotesLoaded() {
@@ -79,6 +103,30 @@ export class QuoteService {
         }
       })
       .unsubscribe();
+  }
+
+  retrieveQuoteCheckout(quote: any) {
+    this.retrieveQuote(quote);
+    this.subscription.add(
+      this.cartService
+        .getActive()
+        .pipe(
+          filter(cart => cart.code === quote.cartCode),
+          take(1),
+          tap(_ => {
+            if (quote?.state?.code === 'BIND') {
+              this.routingService.go({
+                cxRoute: 'quoteReview',
+              });
+            } else {
+              this.routingService.go({
+                cxRoute: 'addOptions',
+              });
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   protected loadPersonalDetailsForm(entry: FSOrderEntry) {

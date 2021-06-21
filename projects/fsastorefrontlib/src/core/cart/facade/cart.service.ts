@@ -10,7 +10,7 @@ import {
   StateWithMultiCart,
   UserIdService,
 } from '@spartacus/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import * as fromAction from './../../checkout/store/actions/index';
@@ -129,6 +129,10 @@ export class FSCartService extends ActiveCartService {
         },
       });
     }
+  }
+
+  getCart(cartId: string) : Observable<Cart> {
+      return this.multiCartService.getCart(cartId);
   }
 
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {

@@ -11,6 +11,10 @@ export const UPDATE_QUOTE_FAIL = '[Quote] Update Quote Fail';
 
 export const QUOTE_PROCESS_ACTION = '[Quote] Quote Process Action';
 
+export const LOAD_QUOTE_DETAILS = '[Quote] Load Quote Details'
+export const LOAD_QUOTE_DETAILS_SUCCESS = '[Quote] Load Quote Success';
+export const LOAD_QUOTE_DETAILS_FAIL = '[Quote] Load Quote Fail';
+
 export class LoadQuotes implements Action {
   readonly type = LOAD_QUOTES;
   constructor(public payload: any) {}
@@ -48,10 +52,28 @@ export class QuoteProcessAction extends StateUtils.LoaderLoadAction {
   }
 }
 
+export class LoadQuoteDetails implements Action {
+  readonly type = LOAD_QUOTE_DETAILS;
+  constructor(public payload: any) {}
+}
+
+export class LoadQuoteDetailsSuccess implements Action {
+  readonly type = LOAD_QUOTE_DETAILS_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class LoadQuoteDetailsFail implements Action {
+  readonly type = LOAD_QUOTE_DETAILS_FAIL;
+  constructor(public payload: any) {}
+}
+
 export type QuoteAction =
   | LoadQuotes
   | LoadQuotesSuccess
   | LoadQuotesFail
   | UpdateQuote
   | UpdateQuoteSuccess
-  | QuoteProcessAction;
+  | QuoteProcessAction
+  | LoadQuoteDetails
+  | LoadQuoteDetailsSuccess
+  | LoadQuoteDetailsFail;

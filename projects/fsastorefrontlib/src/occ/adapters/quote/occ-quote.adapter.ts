@@ -61,4 +61,14 @@ export class OccQuoteAdapter implements QuoteAdapter {
       .post(url, bindQuoteAction, { headers })
       .pipe(catchError((error: any) => throwError(error.json)));
   }
+
+  getQuote(userId: string, quoteId: string): Observable<any> {
+    const url = this.occEndpointService.getUrl('quote', {
+      userId,
+      quoteId
+    });
+    return this.http
+      .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
 }

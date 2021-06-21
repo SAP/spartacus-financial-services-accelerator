@@ -34,4 +34,13 @@ export abstract class QuoteAdapter {
     quoteAction: string,
     body: any
   ): Observable<any>;
+
+  /**
+   * Abstract method used to get quote for user
+   *
+   * @param userId The user id
+   * @param quoteId The quote id
+
+   */
+   abstract getQuote(userId: string, quoteId: string): Observable<any>;
 }
