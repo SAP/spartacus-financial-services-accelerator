@@ -75,18 +75,19 @@ export class QuoteEffects {
     ofType(fromActions.LOAD_QUOTE_DETAILS),
     map((action: fromActions.LoadQuoteDetails) => action.payload),
     switchMap(payload => {
-      return this.qouteConnector
-        .getQuote(payload.userId, payload.quoteId)
-        .pipe(
-          map((quote: any) => {
-            return new fromActions.LoadQuoteDetailsSuccess(quote);
-          }),
-          catchError(error =>
-            of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
-          )
-        );
+      return this.qouteConnector.getQuote(payload.userId, payload.quoteId).pipe(
+        map((quote: any) => {
+          return new fromActions.LoadQuoteDetailsSuccess(quote);
+        }),
+        catchError(error =>
+          of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
+        )
+      );
     })
   );
 
-  constructor(private actions$: Actions, private qouteConnector: QuoteConnector) {}
+  constructor(
+    private actions$: Actions,
+    private qouteConnector: QuoteConnector
+  ) {}
 }

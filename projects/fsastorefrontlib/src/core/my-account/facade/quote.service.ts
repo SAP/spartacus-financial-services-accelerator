@@ -54,7 +54,7 @@ export class QuoteService {
         this.store.dispatch(
           new fromAction.LoadQuoteDetails({
             userId: occUserId,
-            quoteId: quoteId
+            quoteId: quoteId,
           })
         )
       )

@@ -11,7 +11,7 @@ export const UPDATE_QUOTE_FAIL = '[Quote] Update Quote Fail';
 
 export const QUOTE_PROCESS_ACTION = '[Quote] Quote Process Action';
 
-export const LOAD_QUOTE_DETAILS = '[Quote] Load Quote Details'
+export const LOAD_QUOTE_DETAILS = '[Quote] Load Quote Details';
 export const LOAD_QUOTE_DETAILS_SUCCESS = '[Quote] Load Quote Success';
 export const LOAD_QUOTE_DETAILS_FAIL = '[Quote] Load Quote Fail';
 

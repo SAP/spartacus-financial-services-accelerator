@@ -43,7 +43,7 @@ const routes: Routes = [
       pageLabel: 'quote-details',
     },
     component: PageLayoutComponent,
-  }
+  },
 ];
 
 @NgModule({
@@ -65,7 +65,7 @@ const routes: Routes = [
         },
         AccountQuoteDetailsFlex: {
           component: QuoteDetailsComponent,
-        }
+        },
       },
     }),
   ],

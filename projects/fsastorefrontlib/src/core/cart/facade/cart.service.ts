@@ -131,8 +131,8 @@ export class FSCartService extends ActiveCartService {
     }
   }
 
-  getCart(cartId: string) : Observable<Cart> {
-      return this.multiCartService.getCart(cartId);
+  getCart(cartId: string): Observable<Cart> {
+    return this.multiCartService.getCart(cartId);
   }
 
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {

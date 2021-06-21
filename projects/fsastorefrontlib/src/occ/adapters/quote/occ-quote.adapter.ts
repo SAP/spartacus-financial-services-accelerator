@@ -65,7 +65,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
   getQuote(userId: string, quoteId: string): Observable<any> {
     const url = this.occEndpointService.getUrl('quote', {
       userId,
-      quoteId
+      quoteId,
     });
     return this.http
       .get(url)

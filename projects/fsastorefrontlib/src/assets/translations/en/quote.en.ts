@@ -40,7 +40,7 @@ export const quote = {
         costOfTrip: 'Cost of Trip',
         NoOfDays: 'Number of Days',
         tripDetailsTravellerAges: 'Main traveler age',
-        tripDetailsTravellerAges2: 'Additional traveler age'
+        tripDetailsTravellerAges2: 'Additional traveler age',
       },
       insurances_savings: {
         contribution: 'Contribution',
@@ -98,6 +98,6 @@ export const quote = {
         propertyType: 'Property Type',
         propertyValue: 'Property Value',
       },
-    }
+    },
   },
 };
