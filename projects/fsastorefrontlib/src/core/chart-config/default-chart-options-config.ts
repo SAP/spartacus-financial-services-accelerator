@@ -1,5 +1,13 @@
 import { ChartConfig } from './chart-options.config';
 
+export function tooltipFormatter(params) {
+  return `<span class="semi-bold">${params.data['name']}:</span><br/> ${params.data['currencyValue']} (${params.percent}%)`;
+}
+
+export function labelFormatter(params) {
+  return params.data['currencyValue'];
+}
+
 export const defaultChartOptionsConfig: ChartConfig = {
   chartOption: {
     title: {
@@ -12,9 +20,7 @@ export const defaultChartOptionsConfig: ChartConfig = {
       },
     },
     tooltip: {
-      formatter: params => {
-        return `<span class="semi-bold">${params.data['name']}:</span><br/> ${params.data['currencyValue']} (${params.percent}%)`;
-      },
+      formatter: tooltipFormatter,
     },
     legend: {
       top: 'bottom',
@@ -48,9 +54,7 @@ export const defaultChartOptionsConfig: ChartConfig = {
         },
         label: {
           show: true,
-          formatter: params => {
-            return params.data['currencyValue'];
-          },
+          formatter: labelFormatter,
         },
         labelLine: {
           length: 8,
