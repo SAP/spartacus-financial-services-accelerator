@@ -2,7 +2,9 @@
   <ng-container *ngIf="!isLoading; else loading">
     <div
       class="table-header"
-      [ngClass]="recommendedProduct == product.code ? 'border border-color-7 notice' : ''"
+      [ngClass]="
+        recommendedProduct == product.code ? 'border border-color-7 notice' : ''
+      "
     >
       <h3 class="table-header-title mb-0">{{ product.name }}</h3>
       <ng-container *ngIf="productPrice; else na">
