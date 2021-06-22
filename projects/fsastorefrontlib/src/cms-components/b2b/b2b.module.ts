@@ -9,6 +9,12 @@ import {
 import { FSUserComponentsModule } from './user/user-components.module';
 import { FSUnitsComponentsModule } from './unit/units-components.module';
 import { ProductAssignmentStoreModule } from '../../core/product-assignment/store/product-assignments-store.module';
+import { FSB2BUserConnector } from '../../core/user/connectors/b2b-user-connector';
+import {
+  B2BUserConnector,
+  B2BUserService,
+} from '@spartacus/organization/administration/core';
+import { FSB2BUserService } from '../../core/user/facade/b2b-user.service';
 
 @NgModule({
   declarations: [],
@@ -25,6 +31,16 @@ import { ProductAssignmentStoreModule } from '../../core/product-assignment/stor
         fallbackLang: 'en',
       },
     }),
+  ],
+  providers: [
+    {
+      provide: B2BUserConnector,
+      useClass: FSB2BUserConnector,
+    },
+    {
+      provide: B2BUserService,
+      useClass: FSB2BUserService,
+    },
   ],
   exports: [
     FSUserComponentsModule,

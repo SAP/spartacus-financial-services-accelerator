@@ -1,10 +1,8 @@
 import { AuthGuard, CmsConfig } from '@spartacus/core';
 import { AdminGuard } from '@spartacus/organization/administration/core';
-import {
-  UserChangePasswordFormComponent,
-  UserFormComponent,
-} from '@spartacus/organization/administration/components';
+import { UserChangePasswordFormComponent } from '@spartacus/organization/administration/components';
 import { FSUserDetailsComponent } from './details/user-details.component';
+import { FSUserFormComponent } from './form/user-form.component';
 
 export const USER_ROUTE_PARAMS = {
   userCode: 'userCode',
@@ -24,7 +22,7 @@ export const userCmsConfig: CmsConfig = {
         children: [
           {
             path: 'create',
-            component: UserFormComponent,
+            component: FSUserFormComponent,
           },
           {
             path: `:${USER_ROUTE_PARAMS.userCode}`,
@@ -35,7 +33,7 @@ export const userCmsConfig: CmsConfig = {
             children: [
               {
                 path: `edit`,
-                component: UserFormComponent,
+                component: FSUserFormComponent,
               },
               {
                 path: `change-password`,
