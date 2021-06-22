@@ -36,7 +36,7 @@ export const quote = {
         tripDestination: 'Destination',
         Travellers: 'Number of Travelers',
         tripStartDate: 'Start Date',
-        traveller: 'Traveler\'s Name', // prettier-ignore
+        traveller: `Traveler\'s Name`,
         costOfTrip: 'Cost of Trip',
         NoOfDays: 'Number of Days',
         tripDetailsTravellerAges: 'Main traveler age',
