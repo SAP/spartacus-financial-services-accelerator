@@ -24,7 +24,7 @@ import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { QuoteDetailsComponent } from './quote-details/quote-details.component';
-import { AccordionModule } from 'projects/fsastorefrontlib/src/shared';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
 const routes: Routes = [
   {
     path: null,
