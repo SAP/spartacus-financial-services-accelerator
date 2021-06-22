@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FSProduct } from '../../occ';
 import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
 import { MAX_OCC_INTEGER_VALUE } from '../b2b/unit/units.config';
+import { RECOMMENDED_PRODUCT } from '../../shared';
 
 @Component({
   selector: 'cx-fs-questionnaire-carousel',
@@ -92,6 +93,7 @@ export class QuestionnaireCarouselComponent implements OnInit {
   }
 
   startCheckout(product: FSProduct) {
+    localStorage.setItem(RECOMMENDED_PRODUCT, product.code);
     this.checkoutService.startCheckoutForProduct(product);
   }
 

@@ -16,41 +16,43 @@
   </thead>
   <tbody>
     <tr *ngFor="let document of documentSource">
-      <td class="pointer">
-        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-          {{ 'document.name' | cxTranslate }}:
-        </div>
-        <span
-          class="td-value text-right notice"
-          (click)="downloadDocument(document)"
-          >{{ document.name }}</span
-        >
-      </td>
-      <td>
-        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-          {{ 'document.creationDate' | cxTranslate }}:
-        </div>
-        <span class="td-value text-right">{{
-          document.creationTime | cxDate: 'dd MMM yyyy'
-        }}</span>
-      </td>
-      <td *ngIf="referredObjectColumnVisible">
-        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-          {{ 'document.referredInsuranceObject' | cxTranslate }}:
-        </div>
-        <span
-          *ngIf="document?.insurancePolicy || document?.claim"
-          class="td-value text-right"
-        >
-          {{ document?.insurancePolicy?.policyNumber }}
-          {{ document?.claim?.claimNumber }}
-        </span>
-      </td>
-      <td>
-        <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
-          {{ 'document.documentType' | cxTranslate }}:
-        </div>
-      </td>
+      <ng-container *ngIf="isDocumentValid(document)">
+        <td class="pointer">
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.name' | cxTranslate }}:
+          </div>
+          <span
+            class="td-value text-right notice"
+            (click)="downloadDocument(document)"
+            >{{ document.name }}</span
+          >
+        </td>
+        <td>
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.creationDate' | cxTranslate }}:
+          </div>
+          <span class="td-value text-right">{{
+            document.creationTime | cxDate: 'dd MMM yyyy'
+          }}</span>
+        </td>
+        <td *ngIf="referredObjectColumnVisible">
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.referredInsuranceObject' | cxTranslate }}:
+          </div>
+          <span
+            *ngIf="document?.insurancePolicy || document?.claim"
+            class="td-value text-right"
+          >
+            {{ document?.insurancePolicy?.policyNumber }}
+            {{ document?.claim?.claimNumber }}
+          </span>
+        </td>
+        <td>
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.documentType' | cxTranslate }}:
+          </div>
+        </td>
+      </ng-container>
     </tr>
   </tbody>
 </table>

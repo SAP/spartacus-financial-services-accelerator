@@ -11,11 +11,17 @@ import { StateWithForm } from '../../store/state';
 @Injectable()
 export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
+  continueToNextStepSource = new BehaviorSubject<boolean>(false);
+  continueToNextStep$ = this.continueToNextStepSource.asObservable();
 
   constructor(
     protected store: Store<StateWithForm>,
     protected userIdService: UserIdService
   ) {}
+
+  setContinueToNextStep(isContinueClicked: boolean) {
+    this.continueToNextStepSource.next(isContinueClicked);
+  }
 
   submit(form: YFormData) {
     this.submittedForm.next(form);
@@ -25,6 +31,10 @@ export class FormDataService {
     return this.submittedForm.asObservable();
   }
 
+  /**
+   * @deprecated since 2.0
+   * Duplicated submit method
+   */
   setSubmittedForm(formData?: YFormData) {
     this.submittedForm.next(formData);
   }

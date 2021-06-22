@@ -60,10 +60,13 @@ class MockCurrentProductService {
 }
 
 export class MockFormDataService {
+  continueToNextStep$ = of(true);
+  formGroup = of({ valid: true });
   getSubmittedForm() {
     return of();
   }
   submit() {}
+  setContinueToNextStep(continueToNextStep) {}
 }
 
 class MockPricingService {
@@ -82,6 +85,10 @@ class MockCartService {
   createCartForProduct(): void {}
 }
 
+class MockRoutingService {
+  go() {}
+}
+
 describe('ProductConfigurationNavigationComponent', () => {
   let component: ProductConfigurationNavigationComponent;
   let fixture: ComponentFixture<ProductConfigurationNavigationComponent>;
@@ -91,6 +98,7 @@ describe('ProductConfigurationNavigationComponent', () => {
   let pricingService: PricingService;
   let currentProductService: CurrentProductService;
   let cartService: FSCartService;
+  let routingService: RoutingService;
 
   beforeEach(
     waitForAsync(() => {
@@ -120,7 +128,7 @@ describe('ProductConfigurationNavigationComponent', () => {
           },
           {
             provide: RoutingService,
-            useValue: { go: jasmine.createSpy() },
+            useClass: MockRoutingService,
           },
         ],
       }).compileComponents();
@@ -129,6 +137,8 @@ describe('ProductConfigurationNavigationComponent', () => {
       formDataStorageService = TestBed.inject(FormDataStorageService);
       pricingService = TestBed.inject(PricingService);
       cartService = TestBed.inject(FSCartService);
+      routingService = TestBed.inject(RoutingService);
+      spyOn(routingService, 'go').and.callThrough();
     })
   );
 
@@ -168,7 +178,7 @@ describe('ProductConfigurationNavigationComponent', () => {
   it('should build pricing data and create cart for product', () => {
     spyOn(formDataService, 'getSubmittedForm').and.returnValue(of(formData));
     spyOn(cartService, 'createCartForProduct').and.stub();
-    component.navigateNext();
+    component.navigateNext(new UIEvent('click'));
     expect(cartService.createCartForProduct).toHaveBeenCalled();
   });
 
@@ -181,7 +191,7 @@ describe('ProductConfigurationNavigationComponent', () => {
       of(mockFormData)
     );
     spyOn(cartService, 'createCartForProduct').and.stub();
-    component.navigateNext();
+    component.navigateNext(new UIEvent('click'));
     expect(cartService.createCartForProduct).not.toHaveBeenCalled();
   });
 });

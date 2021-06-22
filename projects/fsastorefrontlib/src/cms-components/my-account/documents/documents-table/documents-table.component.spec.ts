@@ -7,6 +7,7 @@ import { DocumentsTableComponent } from './documents-table.component';
 const mockDocument = {
   code: 'TestDocument',
   name: 'Test Document',
+  mime: 'application/pdf',
   creationTime: '2021-02-24T13:13:54+0000',
 };
 
@@ -46,5 +47,9 @@ describe('DocumentsTableComponent', () => {
     spyOn(mockFileService, 'getDocument').and.callThrough();
     component.downloadDocument(mockDocument);
     expect(mockFileService.getDocument).toHaveBeenCalledWith(mockDocument);
+  });
+
+  it('should check if document is valid', () => {
+    expect(component.isDocumentValid(mockDocument)).toBe(true);
   });
 });

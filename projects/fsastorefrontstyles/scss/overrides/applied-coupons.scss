@@ -5,4 +5,11 @@
   .form-control {
     height: 40px;
   }
+  .cx-coupon-card.cx-coupon-apply {
+    .close {
+      min-height: auto;
+      padding: 0;
+      margin: 0;
+    }
+  }
 }

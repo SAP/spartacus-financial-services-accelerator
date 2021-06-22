@@ -96,6 +96,7 @@ export const fscommon = {
     contribution: 'Contribution',
     creditCard: 'Credit Card',
     invoice: 'Invoice',
+    recommendedProduct: 'This is your recommended product!',
     payment: {
       CARD: 'Credit Card',
       INVOICE: 'Invoice',
@@ -183,6 +184,11 @@ export const fscommon = {
       online: 'Online',
       offline: 'Offline',
       noSearchResults: 'No search results',
+    },
+    questionnaire: {
+      noResults:
+        'Unfortunately, there is no product that fits all chosen criteria. Please try again with different combination or contact an',
+      agentLink: 'agent.',
     },
     httpHandlers: {
       existingCouponCodeProvided:

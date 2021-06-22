@@ -63,14 +63,14 @@ export class FormComponent implements OnDestroy {
             categoryCode: this.formCategoryCode,
           };
           this.formDataStorageService.setFormDataToLocalStorage(savedForm);
-          this.formDataService.setSubmittedForm(response);
+          this.formDataService.submit(response);
         })
       );
     }
   }
 
   ngOnDestroy() {
-    this.formDataService.setSubmittedForm(null);
+    this.formDataService.submit(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

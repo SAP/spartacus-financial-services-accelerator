@@ -25,6 +25,10 @@ export class DocumentsTableComponent implements OnDestroy {
     this.subscription.add(this.fileService.getDocument(document).subscribe());
   }
 
+  isDocumentValid(document) {
+    return !!document.code && !!document.mime;
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
