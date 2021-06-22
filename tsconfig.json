@@ -20,8 +20,5 @@
       "dynamicforms/*": ["dist/dynamicforms/*"],
       "@spartacus/dynamicforms": ["projects/dynamicforms/public_api"]
     }
-  },
-  "angularCompilerOptions": {
-    "strictTemplates": true
   }
 }
