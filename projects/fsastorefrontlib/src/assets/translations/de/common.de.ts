@@ -185,6 +185,11 @@ export const fscommon = {
       offline: '[DE] Offline',
       noSearchResults: 'Keine Ergebnisse',
     },
+    questionnaire: {
+      noResults:
+        '[DE] Unfortunately, there is no product that fits all chosen criteria. Please try again with different combination or contact an',
+      agentLink: 'kundenbetreuer.',
+    },
     httpHandlers: {
       existingCouponCodeProvided:
         '[DE] This coupon code is already applied to the current cart.',

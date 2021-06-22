@@ -30,7 +30,7 @@
   </ng-container>
   <div class="mb-5">
     <cx-carousel
-      *ngIf="searchResults.facets.length > 0; else finalResult"
+      *ngIf="searchResults.facets.length > 0"
       [items]="searchResults.facets"
       [template]="carouselItem"
       itemWidth="400px"
@@ -52,7 +52,10 @@
       </div>
     </ng-template>
   </div>
-  <div class="container-fluid" *ngIf="searchResults.products">
+  <div
+    class="container-fluid"
+    *ngIf="searchResults.products?.length > 0; else noResults"
+  >
     <ng-container *ngFor="let product of searchResults.products">
       <div class="row border-top border-color-3 pt-5 mb-5 align-items-center">
         <cx-media
@@ -81,6 +84,11 @@
   </div>
 </ng-container>
 
-<ng-template #finalResult>
-  <h3>{{ 'fscommon.finalResult' | cxTranslate }}</h3>
+<ng-template #noResults>
+  <h5 class="notice-text text-center p-4 m-0">
+    {{ 'fscommon.questionnaire.noResults' | cxTranslate }}
+    <a class="link" routerLink="/agent-locator">{{
+      'fscommon.questionnaire.agentLink' | cxTranslate
+    }}</a>
+  </h5>
 </ng-template>
