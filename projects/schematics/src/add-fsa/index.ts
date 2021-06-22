@@ -362,6 +362,26 @@ function updateMainComponent(
   };
 }
 
+/**
+ * Returns clean tsconfig.json file by removing possible comments
+ */
+function cleanAppTsConfig() {
+  return (tree: Tree, _context: SchematicContext) => {
+    const filePath = 'tsconfig.json';
+    const buffer = tree.read(filePath);
+    const recorder = tree.beginUpdate(filePath);
+    if (buffer) {
+      const tsconfigContent = buffer.toString();
+      recorder.remove(0, tsconfigContent.indexOf('{'));
+    }
+    tree.commitUpdate(recorder);
+    return tree;
+  };
+}
+
+/**
+ * Fixes module generation in compilerOptions to es2020
+ */
 function updateAppTsConfig(): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const filePath = 'tsconfig.json';
@@ -457,6 +477,7 @@ export function addFsa(options: FsOptions): Rule {
       updateMainComponent(project, options),
       options.useMetaTags ? updateIndexFile(tree, options) : noop(),
       installPackageJsonDependencies(),
+      cleanAppTsConfig(),
       updateAppTsConfig(),
       addFonts(),
     ])(tree, context);
