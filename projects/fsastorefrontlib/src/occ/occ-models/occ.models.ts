@@ -1,5 +1,6 @@
 import { YFormData } from '@spartacus/dynamicforms';
 import {
+  B2BUser,
   Cart,
   Category,
   Occ,
@@ -180,6 +181,10 @@ export interface BillingTime {
   code?: string;
   name?: string;
   description?: string;
+}
+
+export interface FSB2BUser extends B2BUser {
+  dateOfBirth?: string;
 }
 
 export interface FSUserSignUp extends UserSignUp {
