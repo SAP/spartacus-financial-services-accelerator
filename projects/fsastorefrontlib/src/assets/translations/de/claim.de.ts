@@ -24,5 +24,12 @@ export const claim = {
     },
     generalInformation: 'Allgemeine Informationen',
     loadingFailed: '[DE] Claim can not be loaded.',
+    claimDetails: '[DE] Claim Details ({{ subclaimType }})',
+    subclaim: {
+      statusDescription: '[DE] Status Description',
+      claimant: '[DE] Claimant',
+      paymentInformation: '[DE] Payment Information',
+      paymentDetails: '[DE] paid to {{ payee }} via {{ paymentMethod }} on ',
+    },
   },
 };

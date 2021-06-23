@@ -89,6 +89,64 @@
       </ul>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
+      *ngFor="let subclaim of claim.subclaims"
+      [opened]="true"
+      [title]="
+        'claim.claimDetails' | cxTranslate: { subclaimType: subclaim.type }
+      "
+    >
+      <ul class="accordion-list container-fluid">
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.status' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ subclaim.status }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.subclaim.statusDescription' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ subclaim.status }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.subclaim.claimant' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ subclaim.claimant }}
+          </div>
+        </li>
+      </ul>
+      <ul class="accordion-list container-fluid">
+        <li class="accordion-list-item row sub-title">
+          <div class="col-12">
+            {{ 'claim.subclaim.paymentInformation' | cxTranslate }}
+          </div>
+        </li>
+        <li
+          *ngFor="let payment of subclaim.paymentTransactions"
+          class="accordion-list-item row"
+        >
+          <div class="col-12 value">
+            {{
+              (payment.amount | currency: payment.currencyIsocode) +
+                ('claim.subclaim.paymentDetails'
+                  | cxTranslate
+                    : {
+                        payee: payment.payee,
+                        paymentMethod: payment.paymentMethod
+                      }) +
+                (payment?.time | parseDate | cxDate: 'dd.MM.yyyy')
+            }}
+          </div>
+        </li>
+      </ul>
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="claim.documents && claim.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
