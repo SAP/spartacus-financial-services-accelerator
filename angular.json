@@ -164,8 +164,7 @@
               "**/*.de.ts",
               "**/*.en.ts",
               "**/*store.module.ts",
-              "**/*config.ts",
-              "**/schematics/**"
+              "**/*config.ts"
             ]
           }
         },
