@@ -123,6 +123,7 @@ describe('QuoteServiceTest', () => {
       ],
       providers: [
         QuoteService,
+        RoutingService,
         reducerProvider,
         { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
@@ -139,6 +140,7 @@ describe('QuoteServiceTest', () => {
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
+    routingService = TestBed.inject(RoutingService);
 
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();
