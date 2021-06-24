@@ -4,7 +4,11 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -107,6 +111,7 @@ describe('QuoteServiceTest', () => {
   let formDataService: MockFormDataService;
   let userIdService: UserIdService;
   let mockFormDataStorageService: FormDataStorageService;
+  let routingService: RoutingService;
 
   beforeEach(() => {
     formDataService = new MockFormDataService();

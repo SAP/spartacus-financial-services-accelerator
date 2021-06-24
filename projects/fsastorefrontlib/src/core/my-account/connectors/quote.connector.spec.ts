@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { QuoteActionType } from './../../../occ/occ-models/occ.models';
 import { QuoteAdapter } from './quote.adapter';
 import { QuoteConnector } from './quote.connector';
 import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
-  getQuote = createSpy('QuoteAdapter.getQuote').and.callFake((userId, quoteId) =>
-  of('getQuote' + userId + quoteId)
-  );
+  getQuote = createSpy(
+    'QuoteAdapter.getQuote'
+  ).and.callFake((userId, quoteId) => of('getQuote' + userId + quoteId));
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
@@ -44,8 +44,8 @@ describe('QuoteConnector', () => {
     expect(quoteConnector).toBeTruthy();
   });
   it('should call adapter for getQuote', () => {
-      quoteConnector.getQuote(user, quoteId);
-      expect(quoteAdapter.getQuote).toHaveBeenCalledWith(user, quoteId);
+    quoteConnector.getQuote(user, quoteId);
+    expect(quoteAdapter.getQuote).toHaveBeenCalledWith(user, quoteId);
   });
   it('should call adapter for getQuotes', () => {
     quoteConnector.getQuotes(user);

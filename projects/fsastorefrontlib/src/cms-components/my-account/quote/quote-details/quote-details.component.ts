@@ -12,7 +12,7 @@ import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
   templateUrl: './quote-details.component.html',
 })
 export class QuoteDetailsComponent implements OnInit, OnDestroy {
-  quote$: Observable<InsuranceQuote> = this.quoteService.getQuoteDetails();;
+  quote$: Observable<InsuranceQuote> = this.quoteService.getQuoteDetails();
   cart$: Observable<Cart>;
   subscription = new Subscription();
   userId: string;
