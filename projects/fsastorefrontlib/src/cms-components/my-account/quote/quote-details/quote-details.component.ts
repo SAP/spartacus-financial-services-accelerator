@@ -5,13 +5,14 @@ import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-quote-details',
   templateUrl: './quote-details.component.html',
 })
 export class QuoteDetailsComponent implements OnInit, OnDestroy {
-  quote$: Observable<any>;
+  quote$: Observable<InsuranceQuote> = this.quoteService.getQuoteDetails();;
   cart$: Observable<Cart>;
   subscription = new Subscription();
   userId: string;
@@ -25,6 +26,11 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.loadQuoteDetails();
+    this.getCart();
+  }
+
+  loadQuoteDetails() {
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
@@ -41,7 +47,9 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-    this.quote$ = this.quoteService.getQuoteDetails();
+  }
+
+  getCart() {
     if (this.quote$) {
       this.subscription.add(
         this.quote$
