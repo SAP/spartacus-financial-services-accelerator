@@ -109,7 +109,7 @@
             {{ 'claim.subclaim.statusDescription' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            {{ subclaim.status }}
+            <!-- {{ display statusDescription }} -->
           </div>
         </li>
         <li class="accordion-list-item row">
@@ -121,7 +121,10 @@
           </div>
         </li>
       </ul>
-      <ul class="accordion-list container-fluid">
+      <ul
+        *ngIf="subclaim.paymentTransactions?.length > 0"
+        class="accordion-list container-fluid"
+      >
         <li class="accordion-list-item row sub-title">
           <div class="col-12">
             {{ 'claim.subclaim.paymentInformation' | cxTranslate }}
