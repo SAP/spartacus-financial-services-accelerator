@@ -88,67 +88,124 @@
         </li>
       </ul>
     </cx-fs-accordion-item>
-    <cx-fs-accordion-item
-      *ngFor="let subclaim of claim.subclaims"
-      [opened]="true"
-      [title]="
-        'claim.claimDetails' | cxTranslate: { subclaimType: subclaim.type }
-      "
-    >
-      <ul class="accordion-list container-fluid">
-        <li class="accordion-list-item row">
-          <div class="col-6 col-sm-5 item-label">
-            {{ 'fscommon.status' | cxTranslate }}
-          </div>
-          <div class="col-6 col-sm-5 value notice">
-            {{ subclaim.status }}
-          </div>
-        </li>
-        <li class="accordion-list-item row">
-          <div class="col-6 col-sm-5 item-label">
-            {{ 'claim.subclaim.statusDescription' | cxTranslate }}
-          </div>
-          <div class="col-6 col-sm-5 value notice">
-            <!-- {{ display statusDescription }} -->
-          </div>
-        </li>
-        <li class="accordion-list-item row">
-          <div class="col-6 col-sm-5 item-label">
-            {{ 'claim.subclaim.claimant' | cxTranslate }}
-          </div>
-          <div class="col-6 col-sm-5 value notice">
-            {{ subclaim.claimant }}
-          </div>
-        </li>
-      </ul>
-      <ul
-        *ngIf="subclaim.paymentTransactions?.length > 0"
-        class="accordion-list container-fluid"
+    <ng-container *ngIf="claim.subclaims?.length > 0">
+      <cx-fs-accordion-item
+        *ngFor="let subclaim of claim.subclaims"
+        [title]="
+          'claim.claimDetails' | cxTranslate: { subclaimType: subclaim.type }
+        "
       >
-        <li class="accordion-list-item row sub-title">
-          <div class="col-12">
-            {{ 'claim.subclaim.paymentInformation' | cxTranslate }}
-          </div>
-        </li>
-        <li
-          *ngFor="let payment of subclaim.paymentTransactions"
-          class="accordion-list-item row"
+        <ul class="accordion-list container-fluid">
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.status' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ subclaim.status }}
+            </div>
+          </li>
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'claim.subclaim.statusDescription' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              <!-- {{ display statusDescription }} -->
+            </div>
+          </li>
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'claim.subclaim.claimant' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ subclaim.claimant }}
+            </div>
+          </li>
+        </ul>
+        <ul
+          *ngIf="subclaim.paymentTransactions?.length > 0"
+          class="accordion-list container-fluid"
         >
-          <div class="col-12 value">
-            {{
-              (payment.amount | currency: payment.currencyIsocode) +
-                ('claim.subclaim.paymentDetails'
-                  | cxTranslate
-                    : {
-                        payee: payment.payee,
-                        paymentMethod: payment.paymentMethod
-                      }) +
-                (payment?.time | parseDate | cxDate: 'dd.MM.yyyy')
-            }}
-          </div>
-        </li>
-      </ul>
-    </cx-fs-accordion-item>
+          <li class="accordion-list-item row sub-title">
+            <div class="col-12">
+              {{ 'claim.subclaim.paymentInformation' | cxTranslate }}
+            </div>
+          </li>
+          <li
+            *ngFor="let payment of subclaim.paymentTransactions"
+            class="accordion-list-item row"
+          >
+            <div class="col-12 value">
+              {{
+                (payment.amount | currency: payment.currencyIsocode) +
+                  ('claim.subclaim.paymentDetails'
+                    | cxTranslate
+                      : {
+                          payee: payment.payee,
+                          paymentMethod: payment.paymentMethod
+                        }) +
+                  (payment?.time | parseDate | cxDate: 'dd.MM.yyyy')
+              }}
+            </div>
+          </li>
+        </ul>
+      </cx-fs-accordion-item>
+    </ng-container>
+    <ng-container *ngIf="claim.claimParticipants?.length > 0">
+      <cx-fs-accordion-item
+        [title]="'claim.participants.rolesPersonsInvolved' | cxTranslate"
+      >
+        <ng-container
+          *ngFor="
+            let claimParticipant of claim.claimParticipants;
+            let i = index
+          "
+        >
+          <ng-container>
+            <ul class="accordion-list container-fluid">
+              <li class="accordion-list-item row sub-title">
+                <div class="col-12">
+                  {{
+                    ('claim.participants.participant' | cxTranslate) + (i + 1)
+                  }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'claim.participants.role' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.role }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'claim.participants.name' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.name }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.address' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.address }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.phoneNumber' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.phoneNumber }}
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+        </ng-container>
+      </cx-fs-accordion-item>
+    </ng-container>
     <cx-fs-accordion-item
       *ngIf="claim.documents && claim.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"

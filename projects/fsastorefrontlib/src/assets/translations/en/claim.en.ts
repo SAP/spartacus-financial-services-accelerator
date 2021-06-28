@@ -31,5 +31,11 @@ export const claim = {
       paymentInformation: 'Payment Information',
       paymentDetails: ' paid to {{ payee }} via {{ paymentMethod }} on ',
     },
+    participants: {
+      rolesPersonsInvolved: 'Roles/Persons Involved',
+      participant: 'Participant ',
+      role: 'Role',
+      name: 'Name',
+    },
   },
 };
