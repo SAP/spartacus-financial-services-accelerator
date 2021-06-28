@@ -25,7 +25,7 @@ class MockQuoteAdapter implements QuoteAdapter {
 }
 const user = 'user';
 const cartId = 'cartId';
-const quoteId = 'quoteId';
+const mockQuoteId = 'quoteId';
 
 describe('QuoteConnector', () => {
   let quoteConnector: QuoteConnector;
@@ -44,8 +44,8 @@ describe('QuoteConnector', () => {
     expect(quoteConnector).toBeTruthy();
   });
   it('should call adapter for getQuote', () => {
-    quoteConnector.getQuote(user, quoteId);
-    expect(quoteAdapter.getQuote).toHaveBeenCalledWith(user, quoteId);
+    quoteConnector.getQuote(user, mockQuoteId);
+    expect(quoteAdapter.getQuote).toHaveBeenCalledWith(user, mockQuoteId);
   });
   it('should call adapter for getQuotes', () => {
     quoteConnector.getQuotes(user);
