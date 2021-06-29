@@ -113,6 +113,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   quotes?: string;
   /**
+   * Get quote by id
+   *
+   */
+  quote?: string;
+  /**
    * Updates quote
    *
    */

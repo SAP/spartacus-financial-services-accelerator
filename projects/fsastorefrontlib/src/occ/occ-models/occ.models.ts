@@ -76,6 +76,7 @@ export interface QuoteWorkflowStatus {
 
 export interface InsuranceQuote {
   quoteId?: string;
+  cartCode?: string;
   state?: QuoteBindingState;
   defaultCategory?: Occ.Category;
   quoteStatus?: QuoteStatus;
