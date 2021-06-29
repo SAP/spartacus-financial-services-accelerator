@@ -4,7 +4,11 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -15,6 +19,7 @@ import {
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
+import createSpy = jasmine.createSpy;
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -93,6 +98,10 @@ class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
 
+class MockRoutingService {
+  go = createSpy();
+}
+
 class MockCartService {
   getActive() {
     return of(mockCart);
@@ -107,6 +116,7 @@ describe('QuoteServiceTest', () => {
   let formDataService: MockFormDataService;
   let userIdService: UserIdService;
   let mockFormDataStorageService: FormDataStorageService;
+  let routingService: RoutingService;
 
   beforeEach(() => {
     formDataService = new MockFormDataService();
@@ -122,6 +132,7 @@ describe('QuoteServiceTest', () => {
         { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: UserIdService, useClass: MockUserIdService },
+        { provide: RoutingService, useClass: MockRoutingService },
         {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
@@ -134,6 +145,7 @@ describe('QuoteServiceTest', () => {
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
+    routingService = TestBed.inject(RoutingService);
 
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();

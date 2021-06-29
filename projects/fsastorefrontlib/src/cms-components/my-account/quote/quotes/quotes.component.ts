@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { ActiveCartService, OccConfig, RoutingService } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { filter, take, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -35,27 +34,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   retrieveQuote(quote: any) {
-    this.quoteService.retrieveQuote(quote);
-    this.subscription.add(
-      this.cartService
-        .getActive()
-        .pipe(
-          filter(cart => cart.code === quote.cartCode),
-          take(1),
-          tap(_ => {
-            if (quote?.state?.code === 'BIND') {
-              this.routingService.go({
-                cxRoute: 'quoteReview',
-              });
-            } else {
-              this.routingService.go({
-                cxRoute: 'addOptions',
-              });
-            }
-          })
-        )
-        .subscribe()
-    );
+    this.quoteService.retrieveQuoteCheckout(quote);
   }
 
   ngOnDestroy() {

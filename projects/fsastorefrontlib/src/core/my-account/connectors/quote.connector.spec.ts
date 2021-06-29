@@ -6,6 +6,9 @@ import { QuoteConnector } from './quote.connector';
 import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
+  getQuote = createSpy(
+    'QuoteAdapter.getQuote'
+  ).and.callFake((userId, quoteId) => of('getQuote' + userId + quoteId));
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
@@ -22,6 +25,7 @@ class MockQuoteAdapter implements QuoteAdapter {
 }
 const user = 'user';
 const cartId = 'cartId';
+const mockQuoteId = 'quoteId';
 
 describe('QuoteConnector', () => {
   let quoteConnector: QuoteConnector;
@@ -38,6 +42,10 @@ describe('QuoteConnector', () => {
 
   it('should be created', () => {
     expect(quoteConnector).toBeTruthy();
+  });
+  it('should call adapter for getQuote', () => {
+    quoteConnector.getQuote(user, mockQuoteId);
+    expect(quoteAdapter.getQuote).toHaveBeenCalledWith(user, mockQuoteId);
   });
   it('should call adapter for getQuotes', () => {
     quoteConnector.getQuotes(user);

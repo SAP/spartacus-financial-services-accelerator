@@ -28,4 +28,8 @@ export class QuoteConnector {
   ): Observable<any> {
     return this.adapter.invokeQuoteAction(userId, cartId, action, body);
   }
+
+  getQuote(userId: string, quoteId: string) {
+    return this.adapter.getQuote(userId, quoteId);
+  }
 }
