@@ -19,6 +19,7 @@ import {
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
+import createSpy = jasmine.createSpy;
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -97,6 +98,10 @@ class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
 
+class MockRoutingService {
+  go = createSpy();
+}
+
 class MockCartService {
   getActive() {
     return of(mockCart);
@@ -123,11 +128,11 @@ describe('QuoteServiceTest', () => {
       ],
       providers: [
         QuoteService,
-        RoutingService,
         reducerProvider,
         { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: UserIdService, useClass: MockUserIdService },
+        { provide: RoutingService, useClass: MockRoutingService },
         {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,

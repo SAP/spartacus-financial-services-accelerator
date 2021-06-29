@@ -21,7 +21,7 @@ class MockQuoteService {
   loadQuotes = createSpy();
   getQuotes = createSpy();
   getLoaded = createSpy();
-  retrieveQuote = createSpy();
+  retrieveQuoteCheckout = createSpy();
   getQuotesLoaded = createSpy();
 }
 
@@ -96,14 +96,9 @@ describe('QuotesComponent', () => {
     component.retrieveQuote({});
     expect(routingService.go).not.toHaveBeenCalled();
   });
-  it('should retrieve quote and route to the quote review', () => {
+  it('should retrieve quote', () => {
     const quote = { state: { code: 'BIND' }, cartCode: 'cartCode' };
     component.retrieveQuote(quote);
-    expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'quoteReview' });
-  });
-  it('should retrieve quote and route to add options', () => {
-    const quote = { state: { code: 'OTHER' }, cartCode: 'cartCode' };
-    component.retrieveQuote(quote);
-    expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'addOptions' });
+    expect(quoteService.retrieveQuoteCheckout).toHaveBeenCalled();
   });
 });
