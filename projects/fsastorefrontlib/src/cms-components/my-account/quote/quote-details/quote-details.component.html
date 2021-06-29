@@ -70,12 +70,12 @@
         [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate"
       >
         <ng-container
-          *ngFor="let insuredObject of quote.insuredObjectList.insuredObjects"
+          *ngFor="let insuredObject of quote.insuredObjectList?.insuredObjects"
         >
           <ng-container
             *ngIf="
-              insuredObject.insuredObjectItems &&
-              insuredObject.insuredObjectItems.length > 0
+              insuredObject?.insuredObjectItems &&
+              insuredObject?.insuredObjectItems.length > 0
             "
           >
             <ul class="accordion-list container-fluid">
@@ -94,7 +94,7 @@
               </li>
               <ng-container
                 *ngFor="
-                  let insuredObjectItem of insuredObject.insuredObjectItems
+                  let insuredObjectItem of insuredObject?.insuredObjectItems
                 "
               >
                 <li
@@ -127,7 +127,7 @@
         >
           <li
             *ngFor="
-              let entry of cart.entries[0].product.price.oneTimeChargeEntries
+              let entry of cart.entries[0]?.product.price.oneTimeChargeEntries
             "
             class="accordion-list-item row"
           >
@@ -143,7 +143,7 @@
       <cx-fs-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
         <ul class="accordion-list container-fluid">
           <li
-            *ngFor="let entry of cart.entries; let i = index"
+            *ngFor="let entry of cart?.entries; let i = index"
             class="accordion-list-item row"
           >
             <ng-container *ngIf="i > 0">
