@@ -42,4 +42,11 @@
   cx-pagination {
     display: inline-flex;
   }
+  %cx-store-finder-map {
+    .cx-store-map {
+      @include media-breakpoint-down(md) {
+        height: 30rem;
+      }
+    }
+  }
 }
