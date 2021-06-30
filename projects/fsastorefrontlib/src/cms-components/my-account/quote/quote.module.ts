@@ -17,11 +17,14 @@ import {
   CmsConfig,
   RoutesConfig,
   RoutingConfig,
+  UrlModule,
 } from '@spartacus/core';
 
 import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
+import { QuoteDetailsComponent } from './quote-details/quote-details.component';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
 const routes: Routes = [
   {
     path: null,
@@ -29,6 +32,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'quotes',
       pageLabel: 'my-quotes',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'quoteDetails',
+      pageLabel: 'quote-details',
     },
     component: PageLayoutComponent,
   },
@@ -43,17 +55,22 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     MediaModule,
+    UrlModule,
+    AccordionModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountMyQuotesFlex: {
           component: QuotesComponent,
         },
+        AccountQuoteDetailsFlex: {
+          component: QuoteDetailsComponent,
+        },
       },
     }),
   ],
-  declarations: [QuotesComponent],
-  exports: [QuotesComponent],
+  declarations: [QuotesComponent, QuoteDetailsComponent],
+  exports: [QuotesComponent, QuoteDetailsComponent],
   providers: [QuoteService, QuoteConnector],
   entryComponents: [QuotesComponent],
 })

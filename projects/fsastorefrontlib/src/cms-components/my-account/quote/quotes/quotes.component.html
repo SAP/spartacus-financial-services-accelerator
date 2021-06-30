@@ -70,6 +70,17 @@
               "
             >
               <div class="info-card-links">
+                <a
+                  class="link"
+                  [routerLink]="
+                    {
+                      cxRoute: 'quoteDetails',
+                      params: { quoteId: quote.quoteId }
+                    } | cxUrl
+                  "
+                >
+                  {{ 'fscommon.details' | cxTranslate }}
+                </a>
                 <a class="link" (click)="retrieveQuote(quote)">
                   {{ 'fscommon.retrieve' | cxTranslate }}
                 </a>

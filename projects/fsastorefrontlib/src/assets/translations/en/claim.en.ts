@@ -24,5 +24,18 @@ export const claim = {
     loadingFailed: 'Claim can not be loaded.',
     alreadySubmitted: 'Your Claim is already submitted.',
     generalInformation: 'General Information',
+    claimDetails: 'Claim Details ({{ subclaimType }})',
+    subclaim: {
+      statusDescription: 'Status Description',
+      claimant: 'Claimant',
+      paymentInformation: 'Payment Information',
+      paymentDetails: ' paid to {{ payee }} via {{ paymentMethod }} on ',
+    },
+    participants: {
+      rolesPersonsInvolved: 'Roles/Persons Involved',
+      participant: 'Participant ',
+      role: 'Role',
+      name: 'Name',
+    },
   },
 };
