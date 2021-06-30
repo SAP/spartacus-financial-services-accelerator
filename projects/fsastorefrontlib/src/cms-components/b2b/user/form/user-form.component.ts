@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { B2BUser, UserService } from '@spartacus/core';
 import {
   CurrentItemService,
@@ -44,6 +45,11 @@ export class FSUserFormComponent extends UserFormComponent {
     if (value) {
       this.form?.get('orgUnit.uid').setValue(value);
     }
+  }
+
+  updateRoles(event: MouseEvent) {
+    this.roles.reset();
+    this.roles.push(new FormControl((<HTMLInputElement>event.target).value));
   }
 
   getDateFormat() {
