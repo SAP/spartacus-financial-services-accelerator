@@ -128,7 +128,10 @@
         >
         </ng-container>
       </div>
-      <div class="col-lg-6 col-12 mb-5" *ngIf="results && results.agents[0]">
+      <div
+        class="col-lg-6 col-12 mb-5"
+        *ngIf="results && results.agents[0] && !selectedAgent$"
+      >
         <ng-container
           *ngTemplateOutlet="
             agentMap;
