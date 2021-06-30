@@ -69,7 +69,7 @@ const routes: Routes = [
       },
     }),
     /**
-     * Preparation for final solution for lazy loaded module in libs.
+     * TODO: Preparation for final solution for lazy loaded module in libs.
      * More info in FSA-5818
      */
     ConfigModule.withConfig(<CmsConfig>{
