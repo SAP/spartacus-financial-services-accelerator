@@ -114,7 +114,6 @@ describe('ComparisonTablePanelComponent', () => {
   let mockFormDataService: FormDataService;
   let mockPricingService: PricingService;
   let mockFOrMDataStorageService: FormDataStorageService;
-  let userAccountFacade: UserAccountFacade;
   let el: DebugElement;
 
   beforeEach(
@@ -160,7 +159,6 @@ describe('ComparisonTablePanelComponent', () => {
       mockFormDataService = TestBed.inject(FormDataService);
       mockPricingService = TestBed.inject(PricingService);
       mockFOrMDataStorageService = TestBed.inject(FormDataStorageService);
-      userAccountFacade = TestBed.inject(UserAccountFacade);
     })
   );
 

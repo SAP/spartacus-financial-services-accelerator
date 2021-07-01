@@ -73,7 +73,7 @@ class MockGlobalMessageService {
 describe('ContactAgentFormComponent', () => {
   let component: ContactAgentFormComponent;
   let fixture: ComponentFixture<ContactAgentFormComponent>;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
   let mockedCsTicketService: CsTicketService;
   let mockSearchService: AgentSearchService;
   let globalMessageService: GlobalMessageService;
@@ -118,7 +118,7 @@ describe('ContactAgentFormComponent', () => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
     component = fixture.componentInstance;
     globalMessageService = TestBed.inject(GlobalMessageService);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     mockSearchService = TestBed.inject(AgentSearchService);
     mockedCsTicketService = TestBed.inject(CsTicketService);
     mockRoutingService = TestBed.inject(RoutingService);
@@ -129,15 +129,17 @@ describe('ContactAgentFormComponent', () => {
   });
 
   it('should get the user details', () => {
-    spyOn(userAccountFacade, 'get').and.returnValue(of(mockedUserDetails));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValue(
+      of(mockedUserDetails)
+    );
     fixture.detectChanges();
-    expect(userAccountFacade.get).toHaveBeenCalled();
+    expect(mockedUserAccountFacade.get).toHaveBeenCalled();
   });
 
   it('should NOT get the user details', () => {
-    spyOn(userAccountFacade, 'get').and.returnValue(of(undefined));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValue(of(undefined));
     fixture.detectChanges();
-    expect(userAccountFacade.get).toHaveBeenCalled();
+    expect(mockedUserAccountFacade.get).toHaveBeenCalled();
   });
 
   it('should NOT find agent', () => {

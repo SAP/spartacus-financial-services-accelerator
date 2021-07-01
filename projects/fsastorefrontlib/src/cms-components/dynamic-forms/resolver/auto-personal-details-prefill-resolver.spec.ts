@@ -24,7 +24,7 @@ class MockUserAccountFacade {
 
 describe('AutoPersonalDetailsPrefillResolver', () => {
   let userPrefilResolver: AutoPersonalDetailsPrefillResolver;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
 
   beforeEach(() => {
@@ -37,9 +37,9 @@ describe('AutoPersonalDetailsPrefillResolver', () => {
     });
 
     userPrefilResolver = TestBed.inject(AutoPersonalDetailsPrefillResolver);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
-    spyOn(userAccountFacade, 'get').and.returnValues(of(mockUser));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValues(of(mockUser));
   });
 
   it('should inject user resolver', () => {

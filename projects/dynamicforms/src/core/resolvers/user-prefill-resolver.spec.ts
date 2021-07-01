@@ -23,7 +23,7 @@ const mockFieldPath = 'firstName';
 
 describe('UserPrefilResolver', () => {
   let userPrefilResolver: UserPrefillResolver;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('UserPrefilResolver', () => {
     });
 
     userPrefilResolver = TestBed.inject(UserPrefillResolver);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
   });
 
   it('should inject user resolver', () => {

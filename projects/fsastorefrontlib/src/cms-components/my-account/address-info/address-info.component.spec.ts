@@ -113,7 +113,7 @@ describe('FSAddressInfoComponent', () => {
   let el: DebugElement;
   let userAddressService: UserAddressService;
   let checkoutDeliveryService: CheckoutDeliveryService;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(
     waitForAsync(() => {
@@ -156,7 +156,7 @@ describe('FSAddressInfoComponent', () => {
       CheckoutDeliveryService as Type<CheckoutDeliveryService>
     );
 
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
 
     isLoading.next(false);
     component.ngOnInit();

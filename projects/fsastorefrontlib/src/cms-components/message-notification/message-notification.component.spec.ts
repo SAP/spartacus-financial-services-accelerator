@@ -65,7 +65,7 @@ describe('MessageNotificationComponent', () => {
   let component: MessageNotificationComponent;
   let fixture: ComponentFixture<MessageNotificationComponent>;
   let mockInboxService: InboxService;
-  let userProfileService: UserProfileService;
+  let mockedUserProfileService: UserProfileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -98,7 +98,7 @@ describe('MessageNotificationComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     mockInboxService = TestBed.inject(InboxService);
-    userProfileService = TestBed.inject(UserProfileService);
+    mockedUserProfileService = TestBed.inject(UserProfileService);
   });
 
   it('should create', () => {

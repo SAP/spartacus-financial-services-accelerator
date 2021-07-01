@@ -81,7 +81,7 @@ describe('ProductAssignmentServiceTest', () => {
   let service: ProductAssignmentService;
   let store: Store<StateWithProductAssignment>;
   let userIdService: UserIdService;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -115,7 +115,7 @@ describe('ProductAssignmentServiceTest', () => {
     service = TestBed.inject(ProductAssignmentService);
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });

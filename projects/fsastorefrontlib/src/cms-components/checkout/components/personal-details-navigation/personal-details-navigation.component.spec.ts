@@ -122,7 +122,7 @@ describe('PersonalDetailsNavigationComponent', () => {
   let routingService: RoutingService;
   let quoteService: QuoteService;
   let addressService: FSAddressService;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
   let formService: FormDataService;
 
@@ -181,7 +181,7 @@ describe('PersonalDetailsNavigationComponent', () => {
     fixture.detectChanges();
     routingService = TestBed.inject(RoutingService);
     addressService = TestBed.inject(FSAddressService);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
     formService = TestBed.inject(FormDataService);
     spyOn(routingService, 'go').and.stub();

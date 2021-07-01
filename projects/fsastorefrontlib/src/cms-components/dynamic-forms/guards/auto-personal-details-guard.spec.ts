@@ -34,7 +34,7 @@ describe('AutoPersonalDetailsGuard', () => {
   let guard: AutoPersonalDetailsGuard;
   let routingService: RoutingService;
   let cartService: FSCartService;
-  let userAccountFacade: UserAccountFacade;
+  let mockedUserAccountFacade: UserAccountFacade;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
@@ -51,7 +51,7 @@ describe('AutoPersonalDetailsGuard', () => {
     guard = TestBed.inject(AutoPersonalDetailsGuard);
     routingService = TestBed.inject(RoutingService);
     cartService = TestBed.inject(FSCartService);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     globalMessageService = TestBed.inject(GlobalMessageService);
     spyOn(cartService, 'isStable').and.returnValues(of(true));
   });
