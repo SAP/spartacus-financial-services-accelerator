@@ -24,6 +24,7 @@ import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
+import { PoliciesChartModule } from './policies-chart/policies-chart.module';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
     ChangeRequestStoreModule,
     MediaModule,
     DocumentsTableModule,
+    PoliciesChartModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -65,21 +67,6 @@ const routes: Routes = [
         },
         AccountPolicyDetailsFlex: {
           component: PolicyDetailsComponent,
-        },
-      },
-    }),
-    /**
-     * TODO: Preparation for final solution for lazy loaded module in libs.
-     * More info in FSA-5818
-     */
-    ConfigModule.withConfig(<CmsConfig>{
-      featureModules: {
-        policiesChart: {
-          module: () =>
-            import('./policies-chart/policies-chart.module').then(
-              m => m.PoliciesChartModule
-            ),
-          cmsComponents: ['AccountMyPoliciesChartFlex'],
         },
       },
     }),
