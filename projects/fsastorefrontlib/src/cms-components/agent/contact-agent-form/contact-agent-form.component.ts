@@ -12,12 +12,12 @@ import {
   GlobalMessageType,
   OCC_USER_ID_ANONYMOUS,
   RoutingService,
-  UserService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentData } from './../../../occ/occ-models';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
   selector: 'cx-fs-contact-agent-form',
@@ -27,7 +27,7 @@ import { ContactAgentData } from './../../../occ/occ-models';
 export class ContactAgentFormComponent implements OnInit, OnDestroy {
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected userService: UserService,
+    protected userAccountFacade: UserAccountFacade,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
     protected globalMessageService: GlobalMessageService,
@@ -53,7 +53,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.userService.get().subscribe(user => {
+        this.userAccountFacade.get().subscribe(user => {
           if (user && user.uid) {
             this.userId = user.uid;
             this.contactAgentForm.patchValue({

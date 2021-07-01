@@ -18,6 +18,7 @@ import { FSSteps } from '../../../../occ/occ-models';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import createSpy = jasmine.createSpy;
 import { FSAddressService } from './../../../../core/user/facade/address.service';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const firstName = 'Donna';
 const lastName = 'Moore';
@@ -104,7 +105,7 @@ class MockPricingService {
   }
 }
 
-class MockUserService {
+class MockUserAccountFacade {
   get() {
     return of(mockUser);
   }
@@ -121,7 +122,7 @@ describe('PersonalDetailsNavigationComponent', () => {
   let routingService: RoutingService;
   let quoteService: QuoteService;
   let addressService: FSAddressService;
-  let userService: UserService;
+  let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
   let formService: FormDataService;
 
@@ -164,8 +165,8 @@ describe('PersonalDetailsNavigationComponent', () => {
             useClass: MockFSAddressService,
           },
           {
-            provide: UserService,
-            useClass: MockUserService,
+            provide: UserAccountFacade,
+            useClass: MockUserAccountFacade,
           },
         ],
       }).compileComponents();
@@ -180,7 +181,7 @@ describe('PersonalDetailsNavigationComponent', () => {
     fixture.detectChanges();
     routingService = TestBed.inject(RoutingService);
     addressService = TestBed.inject(FSAddressService);
-    userService = TestBed.inject(UserService);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
     formService = TestBed.inject(FormDataService);
     spyOn(routingService, 'go').and.stub();

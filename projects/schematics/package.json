@@ -31,10 +31,10 @@
     "@nguniversal/express-engine": "^10.1.0",
     "@schematics/angular": "^10.1.0",
     "@schematics/update": "^0.1001.0",
-    "@spartacus/schematics": "3.0.0"
+    "@spartacus/schematics": "3.4.0"
   },
   "devDependencies": {
-    "@spartacus/schematics": "3.0.0",
+    "@spartacus/schematics": "3.4.0",
     "@types/jasmine": "^3.5.0",
     "@types/node": "^12.11.1",
     "@types/shelljs": "^0.8.7",

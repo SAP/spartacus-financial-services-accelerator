@@ -9,5 +9,5 @@ export const FS_STOREFRONT_MODULE = 'FSStorefrontModule';
 /***** Classes end *****/
 
 /***** Overrides start *****/
-export const DEFAULT_ANGULAR_VERSION = '~10.1.0';
+export const DEFAULT_ANGULAR_VERSION = '~10.2.4';
 /***** Overrides end *****/

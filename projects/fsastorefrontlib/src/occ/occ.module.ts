@@ -18,10 +18,12 @@ import { UserRequestOccModule } from './adapters/user-request/user-request-occ.m
 import { FSUserOccModule } from './adapters/user/user-occ.module';
 import { OccValueListService } from './services/value-list/occ-value-list.service';
 import { FSProductOccModule } from './adapters/product-search/product-occ.module';
+import { UserAccountOccModule } from '@spartacus/user/account/occ';
 
 @NgModule({
   imports: [
     AgentOccModule,
+    UserAccountOccModule,
     BillingTimeOccModule,
     CheckoutOccModule,
     ProductPricingOccModule,

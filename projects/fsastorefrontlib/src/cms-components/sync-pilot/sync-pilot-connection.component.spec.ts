@@ -1,12 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  I18nTestingModule,
-  UserService,
-  WindowRef,
-  CmsService,
-} from '@spartacus/core';
+import { I18nTestingModule, WindowRef, CmsService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const componentData: any = {
   uid: 'TestSyncPilotComponent',
@@ -26,7 +22,7 @@ class MockCmsService {
   }
 }
 
-class MockUserService {
+class MockUserAccountFacade {
   get() {
     return of(mockUser);
   }
@@ -36,7 +32,7 @@ describe('SyncPilotConnectionComponent', () => {
   let component: SyncPilotConnectionComponent;
   let fixture: ComponentFixture<SyncPilotConnectionComponent>;
   let mockCmsService: CmsService;
-  let mockUserService: UserService;
+  let mockUserAccountFacade: UserAccountFacade;
   let winRef: WindowRef;
 
   beforeEach(async () => {
@@ -49,12 +45,12 @@ describe('SyncPilotConnectionComponent', () => {
           useClass: MockCmsService,
         },
         {
-          provide: UserService,
-          useClass: MockUserService,
+          provide: UserAccountFacade,
+          useClass: MockUserAccountFacade,
         },
       ],
     }).compileComponents();
-    mockUserService = TestBed.inject(UserService);
+    mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     mockCmsService = TestBed.inject(CmsService);
     winRef = TestBed.inject(WindowRef);
   });

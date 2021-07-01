@@ -4,8 +4,9 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { MessageNotificationComponent } from './message-notification.component';
 import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
 import createSpy = jasmine.createSpy;
-import { AuthService, UserService } from '@spartacus/core';
+import { AuthService } from '@spartacus/core';
 import { FSUser } from '../../occ/occ-models/occ.models';
+import { UserProfileService } from '@spartacus/user/profile/core';
 
 const mockUser: FSUser = {
   name: 'testUser',
@@ -48,7 +49,7 @@ class MockInboxService {
   }
 }
 
-class MockUserService {
+class MockUserProfileService {
   get() {
     return of(mockUser);
   }
@@ -64,7 +65,7 @@ describe('MessageNotificationComponent', () => {
   let component: MessageNotificationComponent;
   let fixture: ComponentFixture<MessageNotificationComponent>;
   let mockInboxService: InboxService;
-  let mockUserService: UserService;
+  let mockedUserProfileService: UserProfileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -80,8 +81,8 @@ describe('MessageNotificationComponent', () => {
             useValue: { markForCheck: createSpy('detectChanges') },
           },
           {
-            provide: UserService,
-            useClass: MockUserService,
+            provide: UserProfileService,
+            useClass: MockUserProfileService,
           },
           {
             provide: AuthService,
@@ -97,7 +98,7 @@ describe('MessageNotificationComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     mockInboxService = TestBed.inject(InboxService);
-    mockUserService = TestBed.inject(UserService);
+    mockedUserProfileService = TestBed.inject(UserProfileService);
   });
 
   it('should create', () => {

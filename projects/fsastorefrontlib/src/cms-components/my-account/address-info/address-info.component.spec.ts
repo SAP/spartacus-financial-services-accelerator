@@ -14,7 +14,6 @@ import {
   User,
   UserAddressService,
   CheckoutDeliveryService,
-  UserService,
 } from '@spartacus/core';
 import {
   AddressBookComponentService,
@@ -23,6 +22,8 @@ import {
 } from '@spartacus/storefront';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSAddressInfoComponent } from './address-info.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const mockAddress: Address = {
   id: 'addressMockId',
@@ -58,7 +59,7 @@ class MockComponentService {
   }
 }
 
-class MockUserService {
+class MockUserAccountFacade {
   get(): Observable<User> {
     return of(mockUser);
   }
@@ -112,12 +113,17 @@ describe('FSAddressInfoComponent', () => {
   let el: DebugElement;
   let userAddressService: UserAddressService;
   let checkoutDeliveryService: CheckoutDeliveryService;
-  let userService: UserService;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [SpinnerModule, I18nTestingModule, CardModule],
+        imports: [
+          SpinnerModule,
+          I18nTestingModule,
+          CardModule,
+          RouterTestingModule,
+        ],
         providers: [
           {
             provide: AddressBookComponentService,
@@ -129,8 +135,8 @@ describe('FSAddressInfoComponent', () => {
             useClass: MockCheckoutDeliveryService,
           },
           {
-            provide: UserService,
-            useClass: MockUserService,
+            provide: UserAccountFacade,
+            useClass: MockUserAccountFacade,
           },
         ],
         declarations: [FSAddressInfoComponent, MockAddressFormComponent],
@@ -150,7 +156,7 @@ describe('FSAddressInfoComponent', () => {
       CheckoutDeliveryService as Type<CheckoutDeliveryService>
     );
 
-    userService = TestBed.inject(UserService as Type<UserService>);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
 
     isLoading.next(false);
     component.ngOnInit();

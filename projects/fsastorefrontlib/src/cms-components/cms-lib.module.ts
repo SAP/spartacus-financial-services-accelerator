@@ -25,6 +25,8 @@ import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserAccountCoreModule } from '@spartacus/user/account/core';
 
 @NgModule({
   imports: [
@@ -35,6 +37,8 @@ import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    UserProfileCoreModule,
+    UserAccountCoreModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,
