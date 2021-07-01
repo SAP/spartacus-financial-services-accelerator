@@ -7,7 +7,7 @@
           (initialActiveAgent || navigator.maxTouchPoints === 0)
         "
       >
-        <div class="col-lg-6 col-12 mb-5 text-center">
+        <div class="col-lg-6 col-12 mb-5 text-center order-lg-1">
           <cx-pagination
             *ngIf="pagination"
             [pagination]="pagination"
@@ -37,7 +37,7 @@
           </button>
         </div>
       </ng-container>
-      <div class="col-lg-6 col-12 mb-5">
+      <div class="col-lg-6 col-12 mb-5 order-lg-3" [class.order-2]="!searchQuery && selectedIndex == 0">
         <div class="agent-list">
           <ng-container *ngFor="let agent of results.agents; let i = index">
             <div
@@ -115,7 +115,7 @@
         </div>
       </div>
       <div
-        class="col-lg-6 col-12 mb-5"
+        class="col-lg-6 col-12 mb-5 order-lg-2"
         *ngIf="selectedAgent$ | async as selectedAgent"
       >
         <ng-container
@@ -129,7 +129,7 @@
         </ng-container>
       </div>
       <div
-        class="col-lg-6 col-12 mb-5"
+        class="col-lg-6 col-12 mb-5 order-lg-2"
         *ngIf="results && results.agents[0] && !selectedAgent$"
       >
         <ng-container
