@@ -8,9 +8,9 @@ import {
   Price,
   Product,
   User,
-  UserSignUp,
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/storefront';
+import { UserSignUp } from '@spartacus/user/profile/root';
 
 export interface ContactAgentData {
   email?: string;

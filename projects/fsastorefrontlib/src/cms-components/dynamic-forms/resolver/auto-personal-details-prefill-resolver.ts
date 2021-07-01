@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@spartacus/dynamicforms';
-import { UserService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCart } from '../../../../src/occ/occ-models/occ.models';
 import { FormsUtils } from '@spartacus/dynamicforms';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +13,14 @@ import { FSCartService } from './../../../core/cart/facade/cart.service';
 export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
   constructor(
     protected cartService: FSCartService,
-    protected userService: UserService
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   getPrefillValue(fieldPath: string) {
     let currentValue;
     return combineLatest([
       this.cartService.getActive(),
-      this.userService.get(),
+      this.userAccountFacade.get(),
     ]).pipe(
       map(([cart, user]) => {
         const fsCart: FSCart = cart;

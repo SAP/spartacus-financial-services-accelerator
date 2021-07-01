@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
-import { I18nTestingModule, UserService } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FSUser } from '../../../occ/occ-models/occ.models';
 import { AutoPersonalDetailsPrefillResolver } from './auto-personal-details-prefill-resolver';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const mockUser: FSUser = {
   dateOfBirth: '1991-12-29',
@@ -15,7 +16,7 @@ class MockCartService {
     return of(true);
   }
 }
-class MockUserService {
+class MockUserAccountFacade {
   get() {
     return of(mockUser);
   }
@@ -23,22 +24,22 @@ class MockUserService {
 
 describe('AutoPersonalDetailsPrefillResolver', () => {
   let userPrefilResolver: AutoPersonalDetailsPrefillResolver;
-  let userService: UserService;
+  let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, StoreModule.forRoot({})],
       providers: [
-        { provide: UserService, useClass: MockUserService },
+        { provide: UserAccountFacade, useClass: MockUserAccountFacade },
         { provide: FSCartService, useClass: MockCartService },
       ],
     });
 
     userPrefilResolver = TestBed.inject(AutoPersonalDetailsPrefillResolver);
-    userService = TestBed.inject(UserService);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
-    spyOn(userService, 'get').and.returnValues(of(mockUser));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValues(of(mockUser));
   });
 
   it('should inject user resolver', () => {

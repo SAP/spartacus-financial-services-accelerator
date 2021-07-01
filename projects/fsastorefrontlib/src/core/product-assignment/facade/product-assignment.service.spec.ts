@@ -13,6 +13,7 @@ import { StateWithProductAssignment } from '../store/product-assignments-state';
 import * as fromReducers from '../store/reducers/index';
 import { PRODUCT_ASSIGNMENT_FEATURE } from './../store/product-assignments-state';
 import { ProductAssignmentService } from './product-assignment.service';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const testUnitId = 'test_unit';
 
@@ -70,7 +71,7 @@ const mockUser = {
   },
 };
 
-class MockUserService {
+class MockUserAccountFacade {
   get() {
     return of(mockUser);
   }
@@ -80,7 +81,7 @@ describe('ProductAssignmentServiceTest', () => {
   let service: ProductAssignmentService;
   let store: Store<StateWithProductAssignment>;
   let userIdService: UserIdService;
-  let userService: UserService;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -101,8 +102,8 @@ describe('ProductAssignmentServiceTest', () => {
       ],
       providers: [
         {
-          provide: UserService,
-          useClass: MockUserService,
+          provide: UserAccountFacade,
+          useClass: MockUserAccountFacade,
         },
         {
           provide: UserIdService,
@@ -114,7 +115,7 @@ describe('ProductAssignmentServiceTest', () => {
     service = TestBed.inject(ProductAssignmentService);
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
-    userService = TestBed.inject(UserService);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });

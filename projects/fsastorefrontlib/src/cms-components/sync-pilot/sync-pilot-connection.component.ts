@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { UserService, WindowRef, User, CmsService } from '@spartacus/core';
+import { WindowRef, User, CmsService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
   selector: 'cx-fs-sync-pilot-connection-component',
@@ -11,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class SyncPilotConnectionComponent implements OnDestroy {
   constructor(
     protected cmsService: CmsService,
-    protected userService: UserService,
+    protected userAccountFacade: UserAccountFacade,
     protected winRef?: WindowRef
   ) {}
 
@@ -22,7 +23,7 @@ export class SyncPilotConnectionComponent implements OnDestroy {
   component$: Observable<any> = this.cmsService.getComponentData(
     'SyncPilotConnectionComponent'
   );
-  user$: Observable<User> = this.userService.get();
+  user$: Observable<User> = this.userAccountFacade.get();
 
   private subscription = new Subscription();
 
