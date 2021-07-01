@@ -39,7 +39,7 @@
       </ng-container>
       <div
         class="col-lg-6 col-12 mb-5 order-lg-3"
-        [class.order-2]="!searchQuery && selectedIndex == 0"
+        [class.order-2]="!searchQuery && selectedIndex === 0"
       >
         <div class="agent-list">
           <ng-container *ngFor="let agent of results.agents; let i = index">
