@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, RoutingService, UserService } from '@spartacus/core';
+import { Address, RoutingService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import {
@@ -13,6 +13,7 @@ import { FSCheckoutConfigService } from './../../../../core/checkout/services/ch
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -26,7 +27,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected quoteService: QuoteService,
     protected pricingService: PricingService,
-    protected userService: UserService,
+    protected userAccountFacade: UserAccountFacade,
     protected addressService: FSAddressService
   ) {}
 
@@ -39,12 +40,15 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-    this.userService.load();
+    this.userAccountFacade.get();
   }
 
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
-      combineLatest([this.cartService.getActive(), this.userService.get()])
+      combineLatest([
+        this.cartService.getActive(),
+        this.userAccountFacade.get(),
+      ])
         .pipe(
           filter(([_, user]) => Boolean(user.customerId)),
           take(1),

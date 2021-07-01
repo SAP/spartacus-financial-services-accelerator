@@ -1,15 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-  GlobalMessageService,
-  RoutingService,
-  UserService,
-} from '@spartacus/core';
+import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FSUser } from '../../../occ/occ-models/occ.models';
 import { AutoPersonalDetailsGuard } from './auto-personal-details-guard';
 import createSpy = jasmine.createSpy;
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const mockUser: FSUser = {
   dateOfBirth: '1991-12-29',
@@ -24,7 +21,7 @@ class MockCartService {
     return of(true);
   }
 }
-class MockUserService {
+class MockUserAccountFacade {
   get() {
     return of(mockUser);
   }
@@ -37,7 +34,7 @@ describe('AutoPersonalDetailsGuard', () => {
   let guard: AutoPersonalDetailsGuard;
   let routingService: RoutingService;
   let cartService: FSCartService;
-  let userService: UserService;
+  let userAccountFacade: UserAccountFacade;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
@@ -46,7 +43,7 @@ describe('AutoPersonalDetailsGuard', () => {
       providers: [
         { provide: RoutingService, useClass: MockRoutingService },
         { provide: FSCartService, useClass: MockCartService },
-        { provide: UserService, useClass: MockUserService },
+        { provide: UserAccountFacade, useClass: MockUserAccountFacade },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
       ],
     }).compileComponents();
@@ -54,10 +51,9 @@ describe('AutoPersonalDetailsGuard', () => {
     guard = TestBed.inject(AutoPersonalDetailsGuard);
     routingService = TestBed.inject(RoutingService);
     cartService = TestBed.inject(FSCartService);
-    userService = TestBed.inject(UserService);
+    userAccountFacade = TestBed.inject(UserAccountFacade);
     globalMessageService = TestBed.inject(GlobalMessageService);
     spyOn(cartService, 'isStable').and.returnValues(of(true));
-    spyOn(userService, 'get').and.returnValues(of(mockUser));
   });
 
   it('should redirect to homepage in case policyHolderSameAsMainDriver is set to true and DOBs are not the same', () => {

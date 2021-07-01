@@ -5,11 +5,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { AuthService, UserService } from '@spartacus/core';
+import { AuthService } from '@spartacus/core';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { InboxService } from '../../core/my-account/facade/inbox.service';
 import { FSSearchConfig } from '../../core/my-account/services/inbox-data.service';
+import { UserProfileService } from '@spartacus/user/profile/core';
 
 @Component({
   selector: 'cx-fs-message-notification',
@@ -28,7 +29,7 @@ export class MessageNotificationComponent implements OnInit, OnDestroy {
     protected inboxService: InboxService,
     protected changeDetectorRef: ChangeDetectorRef,
     protected authService: AuthService,
-    protected userService: UserService
+    protected userProfileService: UserProfileService
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +37,12 @@ export class MessageNotificationComponent implements OnInit, OnDestroy {
     this.subscription.add(
       combineLatest([
         this.inboxService.unreadMessagesState$,
-        this.userService.get(),
+        this.userProfileService.get(),
       ])
         .pipe(
-          filter(([isMessageRead, user]) => Object.keys(user).length !== 0),
+          filter(
+            ([_isMessageRead, user]) => !!user && Object.keys(user).length !== 0
+          ),
           tap(() => {
             this.messagesObject$ = this.inboxService.getMessages(
               '',

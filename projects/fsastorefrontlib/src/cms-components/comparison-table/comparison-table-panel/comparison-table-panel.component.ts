@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User, UserService } from '@spartacus/core';
+import { User } from '@spartacus/core';
 import {
   FormDataService,
   FormDataStorageService,
@@ -19,6 +19,7 @@ import {
   ComparisonPanelCMSComponent,
   PricingData,
 } from '../../../occ/occ-models';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
   selector: 'cx-fs-comparison-table-panel',
@@ -39,11 +40,11 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected pricingService: PricingService,
     protected formDataStorageService: FormDataStorageService,
-    protected userService: UserService,
+    protected userAccountFacade: UserAccountFacade,
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  user$: Observable<User> = this.userService.get();
+  user$: Observable<User> = this.userAccountFacade.get();
 
   ngOnInit() {
     this.comparisonPanel$ = this.componentData.data$;
