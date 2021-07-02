@@ -20,13 +20,18 @@ context('Search', () => {
   });
 
   it('Should check buttons on search results', () => {
-    search.searchSavingsProducts();
+    search.searchTravelProducts();
     search.seachResultsButtons();
     search.clickMoreInfoButton();
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons();
-    productCategory.checksSavingsCategoryPage();
+    productCategory.checkQuoteButtons(' Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryPage(
+      3,
+      'Travel Single Silver',
+      'Travel Single Budget',
+      'Travel Single Gold'
+    );
     search.clickGetAQuoteButton();
-    cy.get('h2').should('contain', 'Your Savings Insurance');
+    cy.get('h2').should('contain', 'Your Travel Insurance');
   });
 });

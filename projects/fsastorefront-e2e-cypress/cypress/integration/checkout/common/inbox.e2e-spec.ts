@@ -21,9 +21,8 @@ context('Inbox Correspondence for sample data user', () => {
   });
 
   it('Should check inbox page', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Inbox',
+    cy.get('cx-fs-message-notification').within(() => {
+      cy.get('.icon-envelope').click();
     });
     inbox.checkInboxComponets();
     inbox.checkBankingTabs();
