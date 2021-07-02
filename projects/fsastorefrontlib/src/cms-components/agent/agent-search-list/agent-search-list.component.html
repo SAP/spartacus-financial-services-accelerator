@@ -7,19 +7,19 @@
           (initialActiveAgent || navigator.maxTouchPoints === 0)
         "
       >
-        <div class="col-lg-6 col-12 mb-5 text-center order-lg-1">
+        <div
+          class="col-lg-6 col-12 mb-5 d-flex justify-content-center align-items-center semi-bold"
+        >
+          {{ 'fscommon.totalResults' | cxTranslate }} :
+          {{ pagination.totalResults }}
+        </div>
+        <div class="col-lg-6 col-12 mb-5 text-center">
           <cx-pagination
             *ngIf="pagination"
             [pagination]="pagination"
             (viewPageEvent)="pageChange($event)"
           >
           </cx-pagination>
-        </div>
-        <div
-          class="col-lg-6 col-12 mb-5 d-flex justify-content-center align-items-center semi-bold"
-        >
-          {{ 'fscommon.totalResults' | cxTranslate }} :
-          {{ pagination.totalResults }}
         </div>
       </ng-container>
       <ng-container
@@ -38,9 +38,35 @@
         </div>
       </ng-container>
       <div
-        class="col-lg-6 col-12 mb-5 order-lg-3"
-        [class.order-2]="!searchQuery && selectedIndex === 0"
+        class="col-lg-6 col-12 mb-5"
+        [class.md-order-change]="singleAgentSelected"
+        *ngIf="selectedAgent$ | async as selectedAgent"
       >
+        <ng-container
+          *ngTemplateOutlet="
+            agentMap;
+            context: {
+              agent: selectedAgent
+            }
+          "
+        >
+        </ng-container>
+      </div>
+      <div
+        class="col-lg-6 col-12 mb-5"
+        *ngIf="results && results.agents[0] && !selectedAgent$"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            agentMap;
+            context: {
+              agent: results.agents[0]
+            }
+          "
+        >
+        </ng-container>
+      </div>
+      <div class="col-lg-6 col-12 mb-5">
         <div class="agent-list">
           <ng-container *ngFor="let agent of results.agents; let i = index">
             <div
@@ -116,34 +142,6 @@
             </div>
           </ng-container>
         </div>
-      </div>
-      <div
-        class="col-lg-6 col-12 mb-5 order-lg-2"
-        *ngIf="selectedAgent$ | async as selectedAgent"
-      >
-        <ng-container
-          *ngTemplateOutlet="
-            agentMap;
-            context: {
-              agent: selectedAgent
-            }
-          "
-        >
-        </ng-container>
-      </div>
-      <div
-        class="col-lg-6 col-12 mb-5 order-lg-2"
-        *ngIf="results && results.agents[0] && !selectedAgent$"
-      >
-        <ng-container
-          *ngTemplateOutlet="
-            agentMap;
-            context: {
-              agent: results.agents[0]
-            }
-          "
-        >
-        </ng-container>
       </div>
     </div>
   </div>

@@ -17,6 +17,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   selectedIndex = 0;
   pagination: PaginationModel;
   initialActiveAgent: any;
+  singleAgentSelected = false;
   navigator: Navigator = globalThis.navigator;
 
   constructor(
@@ -61,8 +62,11 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   setActiveAgentIndex(selectedIndex: number) {
     if (selectedIndex === -1) {
+      this.singleAgentSelected = false;
       this.agentSearchService.search(this.searchQuery, 0);
       this.agentSearchService.setResetSearchValue(true);
+    } else {
+      this.singleAgentSelected = true;
     }
     // after clicking on the Back to list first in the list should be selected
     this.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
