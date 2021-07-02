@@ -110,7 +110,6 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
     productCategory.checkCategoryPage(
-      3,
       'Savings Safe And Steady',
       'Savings Balanced Deal',
       'Savings Flexi-Max'

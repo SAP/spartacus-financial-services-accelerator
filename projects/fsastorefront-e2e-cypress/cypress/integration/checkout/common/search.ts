@@ -26,7 +26,6 @@ context('Search', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons(' Get a Quote', 'Retrieve a Quote');
     productCategory.checkCategoryPage(
-      3,
       'Travel Single Silver',
       'Travel Single Budget',
       'Travel Single Gold'

@@ -26,14 +26,11 @@ export function checkApplicationButtons() {
   cy.get('cx-generic-link a').should('contain', 'Retrieve an Application');
 }
 
-export function checkCategoryPage(
-  numberOfProducts: number,
-  ...headings: string[]
-) {
-  cy.get('div.product-feature-wrapper').should('have.length', numberOfProducts);
+export function checkCategoryPage(...headings: string[]) {
+  cy.get('div.product-feature-wrapper').should('have.length', headings.length);
   headings.forEach(element => {
     cy.get('h3.section-header-heading').should('contain', element);
   });
-  cy.get('.item-details').should('have.length', numberOfProducts);
+  cy.get('.item-details').should('have.length', headings.length);
   cy.go('back');
 }
