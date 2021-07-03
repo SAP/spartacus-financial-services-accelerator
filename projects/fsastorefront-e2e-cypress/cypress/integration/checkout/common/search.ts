@@ -1,11 +1,11 @@
 import * as productCategory from '../../../helpers/productCategoryPage';
 import * as search from '../../../helpers/search';
+import { insuranceButtons } from '../../../helpers/constants';
 
 context('Search', () => {
   before(() => {
     cy.visit('/');
   });
-
   //TODO: Bug FSA-5142
   it('Should search world that will lead to no results page', () => {
     search.searchNoResults();
@@ -24,7 +24,7 @@ context('Search', () => {
     search.seachResultsButtons();
     search.clickMoreInfoButton();
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons(' Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryPage(
       'Travel Single Silver',
       'Travel Single Budget',

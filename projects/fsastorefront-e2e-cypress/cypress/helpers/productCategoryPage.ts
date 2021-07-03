@@ -11,10 +11,10 @@ export function checkComponents() {
   cy.get('cx-fs-cms-custom-container .title');
 }
 
-export function checkQuoteButtons(buttonText, linkText) {
-  cy.get('.enriched-banner-styled-text').contains(buttonText);
+export function checkCategoryBannerButtons(buttonText) {
+  cy.get('.enriched-banner-styled-text').contains(buttonText[0]);
   cy.get('.Section2').within(() => {
-    cy.get('cx-generic-link a').contains(linkText);
+    cy.get('cx-generic-link a').contains(buttonText[1]);
   });
 }
 

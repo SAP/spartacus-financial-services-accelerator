@@ -1,4 +1,5 @@
 import * as productCategory from '../../../helpers/productCategoryPage';
+import { insuranceButtons } from '../../../helpers/constants';
 
 context('ProductCategoryPage', () => {
   before(() => {
@@ -12,7 +13,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Homeowners',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     cy.get('.product-feature-wrapper').should('have.length', 2);
     cy.get('.section-header-heading').should(
       'contain.text',
@@ -31,7 +32,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Renters',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     cy.get('.product-feature-wrapper').should('have.length', 2);
     cy.get('.section-header-heading').should('contain.text', 'Renters Monthly');
     cy.get('.section-header-heading').should(
@@ -47,7 +48,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Auto',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     cy.get('.product-feature-wrapper').should('have.length', 3);
     cy.get('.section-header-heading').should('contain.text', 'Auto Bronze');
     cy.get('.section-header-heading').should('contain.text', 'Auto Silver');
@@ -61,7 +62,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Life',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     cy.get('.product-feature-wrapper').should('have.length', 2);
     cy.get('.section-header-heading').should('contain.text', 'Life Basic');
     cy.get('.section-header-heading').should('contain.text', 'Life Premium');
@@ -74,7 +75,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Travel',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     cy.get('.product-feature-wrapper').should('have.length', 3);
     cy.get('.section-header-heading').should('contain.text', 'Single Budget');
     cy.get('.section-header-heading').should('contain.text', 'Single Silver');
@@ -88,7 +89,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Event',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     cy.get('.product-feature-wrapper').should('have.length', 3);
     cy.get('.section-header-heading').should('contain.text', 'Event Two Stars');
     cy.get('.section-header-heading').should(
@@ -108,7 +109,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Savings',
     });
     productCategory.checkComponents();
-    productCategory.checkQuoteButtons('Get a Quote', 'Retrieve a Quote');
+    productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryPage(
       'Savings Safe And Steady',
       'Savings Balanced Deal',
