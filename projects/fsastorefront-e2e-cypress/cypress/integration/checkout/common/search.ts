@@ -25,11 +25,12 @@ context('Search', () => {
     search.clickMoreInfoButton();
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    productCategory.checkCategoryPage(
+    productCategory.checkCategoryProductHeadings(
       'Travel Single Silver',
       'Travel Single Budget',
       'Travel Single Gold'
     );
+    cy.go('back');
     search.clickGetAQuoteButton();
     cy.get('h2').should('contain', 'Your Travel Insurance');
   });

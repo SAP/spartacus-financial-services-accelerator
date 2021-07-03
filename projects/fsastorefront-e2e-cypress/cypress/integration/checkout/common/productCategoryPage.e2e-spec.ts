@@ -1,5 +1,5 @@
 import * as productCategory from '../../../helpers/productCategoryPage';
-import { insuranceButtons } from '../../../helpers/constants';
+import { insuranceButtons, bankingButtons } from '../../../helpers/constants';
 
 context('ProductCategoryPage', () => {
   before(() => {
@@ -14,16 +14,10 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    cy.get('.product-feature-wrapper').should('have.length', 2);
-    cy.get('.section-header-heading').should(
-      'contain.text',
-      'Homeowners Monthly'
-    );
-    cy.get('.section-header-heading').should(
-      'contain.text',
+    productCategory.checkCategoryProductHeadings(
+      'Homeowners Monthly',
       'Homeowners Annually'
     );
-    cy.get('.item-details').should('have.length', 2);
   });
 
   it('should check renters product category page', () => {
@@ -33,13 +27,10 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    cy.get('.product-feature-wrapper').should('have.length', 2);
-    cy.get('.section-header-heading').should('contain.text', 'Renters Monthly');
-    cy.get('.section-header-heading').should(
-      'contain.text',
+    productCategory.checkCategoryProductHeadings(
+      'Renters Monthly',
       'Renters Annually'
     );
-    cy.get('.item-details').should('have.length', 2);
   });
 
   it('should check Auto product category page', () => {
@@ -49,11 +40,11 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain.text', 'Auto Bronze');
-    cy.get('.section-header-heading').should('contain.text', 'Auto Silver');
-    cy.get('.section-header-heading').should('contain.text', 'Auto Gold');
-    cy.get('.item-details').should('have.length', 3);
+    productCategory.checkCategoryProductHeadings(
+      'Auto Bronze',
+      'Auto Silver',
+      'Auto Gold'
+    );
   });
 
   it('should check Life product category page', () => {
@@ -63,10 +54,7 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    cy.get('.product-feature-wrapper').should('have.length', 2);
-    cy.get('.section-header-heading').should('contain.text', 'Life Basic');
-    cy.get('.section-header-heading').should('contain.text', 'Life Premium');
-    cy.get('.item-details').should('have.length', 2);
+    productCategory.checkCategoryProductHeadings('Life Basic', 'Life Premium');
   });
 
   it('should check Travel product category page', () => {
@@ -76,11 +64,11 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain.text', 'Single Budget');
-    cy.get('.section-header-heading').should('contain.text', 'Single Silver');
-    cy.get('.section-header-heading').should('contain.text', 'Single Gold');
-    cy.get('.item-details').should('have.length', 3);
+    productCategory.checkCategoryProductHeadings(
+      'Single Budget',
+      'Single Silver',
+      'Single Gold'
+    );
   });
 
   it('should check Event product category page', () => {
@@ -90,17 +78,11 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain.text', 'Event Two Stars');
-    cy.get('.section-header-heading').should(
-      'contain.text',
-      'Event Three Stars'
-    );
-    cy.get('.section-header-heading').should(
-      'contain.text',
+    productCategory.checkCategoryProductHeadings(
+      'Event Two Stars',
+      'Event Three Stars',
       'Event Four Stars'
     );
-    cy.get('.item-details').should('have.length', 3);
   });
 
   it('should check Savings product category page', () => {
@@ -110,7 +92,7 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
-    productCategory.checkCategoryPage(
+    productCategory.checkCategoryProductHeadings(
       'Savings Safe And Steady',
       'Savings Balanced Deal',
       'Savings Flexi-Max'
@@ -123,12 +105,12 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Current Account',
     });
     productCategory.checkComponents();
-    productCategory.checkApplicationButtons();
-    cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain.text', 'Basic Account');
-    cy.get('.section-header-heading').should('contain.text', 'Family Account');
-    cy.get('.section-header-heading').should('contain.text', 'Premium Account');
-    cy.get('.item-details').should('have.length', 3);
+    productCategory.checkCategoryBannerButtons(bankingButtons);
+    productCategory.checkCategoryProductHeadings(
+      'Basic Account',
+      'Family Account',
+      'Premium Account'
+    );
   });
 
   it('should check Credit Card product category page', () => {
@@ -137,12 +119,12 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Credit Card',
     });
     productCategory.checkComponents();
-    productCategory.checkApplicationButtons();
-    cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain.text', 'Basic Card');
-    cy.get('.section-header-heading').should('contain.text', 'Premium Card');
-    cy.get('.section-header-heading').should('contain.text', 'Exclusive Card');
-    cy.get('.item-details').should('have.length', 3);
+    productCategory.checkCategoryBannerButtons(bankingButtons);
+    productCategory.checkCategoryProductHeadings(
+      'Basic Card',
+      'Premium Card',
+      'Exclusive Card'
+    );
   });
 
   it('should check Loan product category page', () => {
@@ -151,10 +133,8 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Loan',
     });
     productCategory.checkComponents();
-    productCategory.checkApplicationButtons();
-    cy.get('.product-feature-wrapper').should('have.length', 1);
-    cy.get('.section-header-heading').should('contain.text', 'Personal Loan');
-    cy.get('.item-details').should('have.length', 1);
+    productCategory.checkCategoryBannerButtons(bankingButtons);
+    productCategory.checkCategoryProductHeadings('Personal Loan');
   });
 
   it('should check Fixed Term Deposit product category page', () => {
@@ -163,12 +143,7 @@ context('ProductCategoryPage', () => {
       dropdownItem: 'Fixed Term Deposit',
     });
     productCategory.checkComponents();
-    productCategory.checkApplicationButtons();
-    cy.get('.product-feature-wrapper').should('have.length', 1);
-    cy.get('.section-header-heading').should(
-      'contain.text',
-      'Fixed Term Deposit'
-    );
-    cy.get('.item-details').should('have.length', 1);
+    productCategory.checkCategoryBannerButtons(bankingButtons);
+    productCategory.checkCategoryProductHeadings('Fixed Term Deposit');
   });
 });

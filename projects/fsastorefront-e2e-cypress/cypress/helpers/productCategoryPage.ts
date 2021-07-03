@@ -18,19 +18,10 @@ export function checkCategoryBannerButtons(buttonText) {
   });
 }
 
-export function checkApplicationButtons() {
-  cy.get('a.enriched-banner-styled-text').should(
-    'contain',
-    ' Request a product'
-  );
-  cy.get('cx-generic-link a').should('contain', 'Retrieve an Application');
-}
-
-export function checkCategoryPage(...headings: string[]) {
-  cy.get('div.product-feature-wrapper').should('have.length', headings.length);
+export function checkCategoryProductHeadings(...headings: string[]) {
+  cy.get('.product-feature-wrapper').should('have.length', headings.length);
   headings.forEach(element => {
-    cy.get('h3.section-header-heading').should('contain', element);
+    cy.get('.section-header-heading').should('contain.text', element);
   });
   cy.get('.item-details').should('have.length', headings.length);
-  cy.go('back');
 }
