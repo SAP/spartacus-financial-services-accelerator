@@ -115,6 +115,58 @@
                 </li>
               </ng-container>
             </ul>
+            <ng-container
+              *ngIf="
+                insuredObject.childInsuredObjectList?.insuredObjects?.length > 0
+              "
+            >
+              <ng-container
+                *ngFor="
+                  let childInsuredObject of insuredObject.childInsuredObjectList
+                    .insuredObjects;
+                  let i = index
+                "
+              >
+                <ul class="accordion-list container-fluid">
+                  <li class="accordion-list-item row sub-title">
+                    <div class="col-12">
+                      {{ childInsuredObject.insuredObjectType }} {{ i + 1 }}
+                    </div>
+                  </li>
+                  <ng-container
+                    *ngIf="
+                      childInsuredObject.insuredObjectItems &&
+                      childInsuredObject.insuredObjectItems.length > 0
+                    "
+                  >
+                    <ng-container
+                      *ngFor="
+                        let childInsuredObjectItem of childInsuredObject.insuredObjectItems
+                      "
+                    >
+                      <li
+                        *ngIf="
+                          (childInsuredObjectItem.label !== 'customerId' ||
+                            childInsuredObjectItem.value !== 'false') &&
+                          getTranslation(
+                            quote.defaultCategory?.code,
+                            childInsuredObjectItem.label
+                          ) as childInsuredObjectItemLabel
+                        "
+                        class="accordion-list-item row"
+                      >
+                        <div class="col-6 col-sm-5 item-label">
+                          {{ childInsuredObjectItemLabel }}
+                        </div>
+                        <div class="col-6 col-sm-5 value notice">
+                          {{ childInsuredObjectItem.value }}
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ng-container>
+                </ul>
+              </ng-container>
+            </ng-container>
           </ng-container>
         </ng-container>
       </cx-fs-accordion-item>
@@ -181,14 +233,18 @@
             </div>
           </li>
           <li class="accordion-list-item row">
-            <div class="col-6 col-sm-5 item-label">
-              {{ 'fscommon.paymentMethod' | cxTranslate }}
-            </div>
-            <div class="col-6 col-sm-5 value notice">
-              <ng-container>
-                {{ cart.paymentType?.displayName }}
+            <ng-container *ngIf="cart.paymentInfo">
+              <ng-container
+                *ngIf="cart.paymentInfo.cardNumber; else defaultPayment"
+              >
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.paymentMethod' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ cart.paymentType?.displayName }}
+                </div>
               </ng-container>
-            </div>
+            </ng-container>
           </li>
         </ul>
       </cx-fs-accordion-item>
@@ -203,3 +259,11 @@
     </button>
   </div>
 </ng-container>
+<ng-template #defaultPayment>
+  <div class="col-6 col-sm-5 item-label">
+    {{ 'fscommon.paymentMethod' | cxTranslate }}
+  </div>
+  <div class="col-6 col-sm-5 value notice">
+    {{ 'fscommon.invoice' | cxTranslate }}
+  </div>
+</ng-template>
