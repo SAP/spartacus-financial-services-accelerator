@@ -34,6 +34,7 @@ context('Travel Insurance Checkout', () => {
 
   it('Add optional product to the cart', () => {
     travelCheckout.checkOptionalProductsAndPick();
+    checkout.clickContinueButton();
   });
 
   it('Populate personal details', () => {
@@ -66,9 +67,8 @@ context('Travel Insurance Checkout', () => {
   });
 
   it('Check inbox', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Inbox',
+    cy.get('cx-fs-message-notification').within(() => {
+      cy.get('.icon-envelope').click();
     });
     inbox.checkInboxComponets();
     inbox.checkGeneralTab();

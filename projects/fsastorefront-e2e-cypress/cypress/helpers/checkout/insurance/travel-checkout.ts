@@ -1,4 +1,6 @@
+import * as sharedCheckout from '../shared-checkout.interface';
 import * as shared from '../shared-checkout';
+
 const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
 const returnDate = Cypress.moment().add(10, 'day').format('YYYY-MM-DD');
 const startDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
@@ -15,7 +17,10 @@ export function populateInsuranceInfoForm() {
 }
 
 export function checkTravelComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  cy.get('cx-fs-comparison-table-container').within(() => {
+    cy.get('.nav-link').contains('Single Trip').click();
+  });
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Single - Budget Plan',
@@ -45,7 +50,7 @@ export function selectSingleBudgetPlan() {
 }
 
 export function checkOptionalProductsAndPick() {
-  const addOptionsContent: addOptionsPage.AddOptions = {
+  const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Travel Insurance',
     items: [
       {
@@ -79,7 +84,7 @@ export function checkOptionalProductsAndPick() {
 }
 
 export function checkTravelMiniCart() {
-  const miniCartContent: addOptionsPage.MiniCart = {
+  const miniCartContent: sharedCheckout.MiniCart = {
     price: ' €99.00 ',
     products: [
       {
@@ -104,7 +109,7 @@ export function checkTravelMiniCart() {
 }
 
 export function checkOptionalProducts() {
-  const addOptionsContent: addOptionsPage.AddOptions = {
+  const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Travel Insurance',
     items: [
       {
