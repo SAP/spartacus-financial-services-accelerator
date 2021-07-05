@@ -134,10 +134,7 @@
                     </div>
                   </li>
                   <ng-container
-                    *ngIf="
-                      childInsuredObject.insuredObjectItems &&
-                      childInsuredObject.insuredObjectItems.length > 0
-                    "
+                    *ngIf="childInsuredObject.insuredObjectItems?.length > 0"
                   >
                     <ng-container
                       *ngFor="
