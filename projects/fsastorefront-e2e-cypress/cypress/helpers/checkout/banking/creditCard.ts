@@ -2,7 +2,7 @@ import * as shared from '../shared-checkout';
 import * as sharedCheckout from '../shared-checkout.interface';
 
 export function checkOptionalProducts() {
-  const addOptionsContent: addOptionsPage.AddOptions = {
+  const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Credit Card Application',
     items: [
       {
@@ -23,7 +23,7 @@ export function checkOptionalProducts() {
 }
 
 export function checkMiniCartCreditCard() {
-  const miniCartContent: addOptionsPage.MiniCart = {
+  const miniCartContent: sharedCheckout.MiniCart = {
     price: ' €89.00 ',
     products: [
       {
@@ -44,7 +44,7 @@ export function checkMiniCartCreditCard() {
 }
 
 export function checkCreditCardComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Basic Card',
