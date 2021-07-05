@@ -234,16 +234,16 @@
           </li>
           <li class="accordion-list-item row">
             <ng-container *ngIf="cart.paymentInfo">
-              <ng-container
-                *ngIf="cart.paymentInfo.cardNumber; else defaultPayment"
-              >
-                <div class="col-6 col-sm-5 item-label">
-                  {{ 'fscommon.paymentMethod' | cxTranslate }}
-                </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ cart.paymentType?.displayName }}
-                </div>
-              </ng-container>
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'fscommon.paymentMethod' | cxTranslate }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{
+                  cart.paymentInfo.cardNumber
+                    ? cart.paymentType?.displayName
+                    : ('fscommon.invoice' | cxTranslate)
+                }}
+              </div>
             </ng-container>
           </li>
         </ul>
