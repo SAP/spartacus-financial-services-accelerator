@@ -6,8 +6,8 @@
   "env": {
     "CLIENT_ID": "financial_trusted",
     "CLIENT_SECRET": "secret",
-    "API_URL": "https://10.27.246.242:9012",
-    "API_URL_INT": "https://10.27.241.19:9012"
+    "API_URL": "https://localhost:9012",
+    "API_URL_INT": "https://localhost:9012"
   },
   "video": false,
   "reporter": "mochawesome",
