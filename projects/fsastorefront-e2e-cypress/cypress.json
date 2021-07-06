@@ -1,13 +1,13 @@
 {
   "defaultCommandTimeout": 20000,
-  "baseUrl": "https://localhost:4200",
+  "baseUrl": "http://localhost",
   "requestTimeout": 10000,
   "modifyObstructiveCode": false,
   "env": {
     "CLIENT_ID": "financial_trusted",
     "CLIENT_SECRET": "secret",
-    "API_URL": "https://localhost:4200",
-    "API_URL_INT": "https://localhost:4200"
+    "API_URL": "https://localhost:9012",
+    "API_URL_INT": "https://localhost:9012"
   },
   "video": false,
   "reporter": "mochawesome",
