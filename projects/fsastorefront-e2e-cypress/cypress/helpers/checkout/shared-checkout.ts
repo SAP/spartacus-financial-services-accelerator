@@ -1,4 +1,8 @@
-import { ComparisonTable, AddOptions } from './shared-checkout.interface';
+import {
+  ComparisonTable,
+  AddOptions,
+  MiniCart,
+} from './shared-checkout.interface';
 
 export function checkAddOptionsPageContent(addOptions: AddOptions) {
   cy.get('.heading-headline').contains(addOptions.title);

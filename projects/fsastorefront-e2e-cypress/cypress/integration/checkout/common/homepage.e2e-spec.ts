@@ -19,8 +19,10 @@ context('Homepage', () => {
     cy.get('cx-fs-category-carousel').should('be.visible');
   });
 
-  it('should contain our services banner', () => {
-    cy.get('.Section3 cx-banner').should('be.visible');
+  it('should contain our Find the Right Insurance Cover', () => {
+    cy.get('.Section3 cx-link')
+      .should('be.visible')
+      .should('contain', 'Find the Right Insurance Cover');
   });
 
   it('should have assistance and support paragraph', () => {

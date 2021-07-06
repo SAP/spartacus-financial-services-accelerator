@@ -1,5 +1,5 @@
 import * as shared from '../shared-checkout';
-import * as addOptionsPage from '../shared-checkout.interface';
+import * as sharedCheckout from '../shared-checkout.interface';
 import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -19,7 +19,7 @@ export function checkProgressBarEvent() {
 }
 
 export function checkEventComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Two Star Event Plan',
@@ -52,7 +52,7 @@ export function selectTwoStarEvent() {
 }
 
 export function checkOptionalProducts() {
-  const addOptionsContent: addOptionsPage.AddOptions = {
+  const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Event Insurance',
     items: [
       {
@@ -76,11 +76,11 @@ export function checkOptionalProducts() {
 
 export function populatePersonalDetails() {
   cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name="eventCountry"]').select('UK');
+    cy.get('[name="eventCountry"]').select('FR');
     cy.get('[name="eventDate"]').type(tomorrowsDate);
     cy.get('[name="eventVenue"]').type('my Birthday party');
-    cy.get('[name="eventVenueAddress"]').type('Oxford Street 23b');
-    cy.get('[name="eventVenueCity"]').type('London');
+    cy.get('[name="eventVenueAddress"]').type('Champ de Mars');
+    cy.get('[name="eventVenueCity"]').type('Paris');
   });
 }
 

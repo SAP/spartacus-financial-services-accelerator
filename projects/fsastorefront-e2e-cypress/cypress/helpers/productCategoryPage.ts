@@ -1,5 +1,3 @@
-import { AddOptionItem, AddOptions } from './checkout/shared-checkout';
-
 export function checkComponents() {
   cy.get('.Section1 cx-fs-enriched-responsive-banner');
   cy.get('span.enriched-banner-title').should(
@@ -13,24 +11,17 @@ export function checkComponents() {
   cy.get('cx-fs-cms-custom-container .title');
 }
 
-export function checkQuoteButtons() {
-  cy.get('a.enriched-banner-styled-text').should('contain', 'Get a Quote');
-  cy.get('cx-generic-link a').should('contain', 'Retrieve a Quote');
+export function checkCategoryBannerButtons(buttonText) {
+  cy.get('.enriched-banner-styled-text').contains(buttonText[0]);
+  cy.get('.Section2').within(() => {
+    cy.get('cx-generic-link a').contains(buttonText[1]);
+  });
 }
 
-export function checkApplicationButtons() {
-  cy.get('a.enriched-banner-styled-text').should(
-    'contain',
-    ' Request a product'
-  );
-  cy.get('cx-generic-link a').should('contain', 'Retrieve an Application');
-}
-
-export function checksSavingsCategoryPage() {
-  cy.get('div.product-feature-wrapper').should('have.length', 3);
-  cy.get('h3.section-header-heading').should('contain', 'Safe And Steady');
-  cy.get('h3.section-header-heading').should('contain', 'Balanced Deal');
-  cy.get('h3.section-header-heading').should('contain', 'Flexi-Max');
-  cy.get('.item-details').should('have.length', 3);
-  cy.go('back');
+export function checkCategoryProductHeadings(...headings: string[]) {
+  cy.get('.product-feature-wrapper').should('have.length', headings.length);
+  headings.forEach(element => {
+    cy.get('.section-header-heading').should('contain.text', element);
+  });
+  cy.get('.item-details').should('have.length', headings.length);
 }

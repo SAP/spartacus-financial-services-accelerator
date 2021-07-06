@@ -65,7 +65,7 @@ export function loginInUser(username: string, password: string) {
   cy.get('[formcontrolname="userId"]').should('be.visible');
   cy.get('[formcontrolname="userId"]').eq(0).type(username);
   cy.get('[formcontrolname="password"]').type(password);
-  cy.get('button[type=submit]').click();
+  cy.get('button[type=submit]').eq(0).click();
 }
 
 export function createB2bCustomer(customer: CreateB2bCustomer) {
