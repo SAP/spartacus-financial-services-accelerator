@@ -4,14 +4,16 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { OccConfig, RoutingService } from '@spartacus/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
+import { FileService } from '@spartacus/dynamicforms';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../core/i18n/facade';
-import { FileService } from '@spartacus/dynamicforms';
+import { ORIGIN_POLICIES_PAGE } from '../../../../shared';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -25,30 +27,39 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected changeRequestService: ChangeRequestService,
     protected translationService: FSTranslationService,
-    protected fileService: FileService
+    protected fileService: FileService,
+    protected activatedRoute: ActivatedRoute,
+    private winRef: WindowRef
   ) {}
 
   policy$;
   subscription = new Subscription();
   baseUrl: string;
+  originPolicyPage = this.winRef.sessionStorage.getItem(ORIGIN_POLICIES_PAGE);
 
   ngOnInit(): void {
+    if (!this.originPolicyPage) {
+      this.redirectToChangeCoverage();
+    }
+    this.policy$ = this.policyService.getPolicyDetails();
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
+    this.loadPolicyDetails();
+  }
+
+  loadPolicyDetails() {
     this.subscription.add(
-      this.routingService
-        .getRouterState()
+      this.activatedRoute.params
         .pipe(
+          filter(routingData => routingData.policyId),
           map(routingData => {
-            const policyId = routingData.state.params.policyId;
-            const contractId = routingData.state.params.contractId;
-            if (policyId && contractId) {
-              this.policyService.loadPolicyDetails(policyId, contractId);
-            }
+            this.policyService.loadPolicyDetails(
+              routingData.policyId,
+              routingData.contractId
+            );
           })
         )
         .subscribe()
     );
-    this.policy$ = this.policyService.getPolicyDetails();
-    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   isChangeAllowed(
@@ -89,6 +100,18 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
+    );
+  }
+
+  redirectToChangeCoverage() {
+    this.subscription.add(
+      this.activatedRoute.params.subscribe(params => {
+        this.changePolicyDetails(
+          params.policyId,
+          params.contractId,
+          'FSCOVERAGE_CHANGE'
+        );
+      })
     );
   }
 

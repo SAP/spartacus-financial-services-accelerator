@@ -4,8 +4,10 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { OccConfig, RoutingService } from '@spartacus/core';
+import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
 import { FileService } from '@spartacus/dynamicforms';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import {
   ClaimService,
   PolicyService,
@@ -14,8 +16,7 @@ import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models/occ.models';
-import { map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { ORIGIN_POLICIES_PAGE } from '../../../../shared';
 
 @Component({
   selector: 'cx-fs-policies',
@@ -28,7 +29,8 @@ export class PoliciesComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected routingService: RoutingService,
     protected claimService: ClaimService,
-    protected fileUploadService: FileService
+    protected fileUploadService: FileService,
+    private winRef: WindowRef
   ) {}
 
   policies$;
@@ -63,6 +65,10 @@ export class PoliciesComponent implements OnInit, OnDestroy {
           .subscribe()
       );
     }
+  }
+
+  setPolicyOriginStep() {
+    this.winRef.sessionStorage.setItem(ORIGIN_POLICIES_PAGE, 'true');
   }
 
   isPolicyCategoryAllowed(
