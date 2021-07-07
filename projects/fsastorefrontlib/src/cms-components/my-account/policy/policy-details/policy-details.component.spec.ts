@@ -1,12 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FileService } from '@spartacus/dynamicforms';
 
-import {
-  I18nTestingModule,
-  OccConfig,
-  RouterState,
-  RoutingService,
-} from '@spartacus/core';
+import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import * as FileSaver from 'file-saver';
 import { Observable, of } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
@@ -18,6 +13,33 @@ import {
   RequestType,
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
+const policyId = 'policyId';
+const contractId = 'contractId';
+const startDate = '2020-07-30T06:00:04+0000';
+const documentId = 'documentId';
+const documentMime = 'mockMimeType';
+
+const document = {
+  code: documentId,
+  mime: documentMime,
+};
+
+let mockParams = {
+  policyId: '0123456',
+  contractId: '0123456',
+};
+
+const mockRequest = {
+  requestId: 'requestId',
+  configurationSteps: [
+    {
+      pageLabelOrId: 'testStep',
+    },
+  ],
+};
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -25,18 +47,7 @@ class MockPolicyService {
 }
 
 class MockRoutingService {
-  go = jasmine.createSpy();
-
-  getRouterState(): Observable<any> {
-    return of({
-      state: {
-        params: {
-          policyId: '0000002',
-          contractId: '0000002',
-        },
-      },
-    });
-  }
+  go = jasmine.createSpy('Redirect');
 }
 const mockAllowedFSRequestTypes: AllowedFSRequestType[] = [
   {
@@ -58,14 +69,7 @@ const mockAllowedFSRequestTypes: AllowedFSRequestType[] = [
 
 class MockChangeRequestService {
   getChangeRequest(): Observable<any> {
-    return of({
-      requestId: 'requestId',
-      configurationSteps: [
-        {
-          pageLabelOrId: 'testStep',
-        },
-      ],
-    });
+    return of({});
   }
   createChangeRequest(policy, contract, changeRequest) {}
 }
@@ -83,16 +87,6 @@ const mockOccModuleConfig: OccConfig = {
 };
 const mockEvent = {
   preventDefault() {},
-};
-const policyId = 'policyId';
-const contractId = 'contractId';
-const startDate = '2020-07-30T06:00:04+0000';
-const documentId = 'documentId';
-const documentMime = 'mockMimeType';
-
-const document = {
-  code: documentId,
-  mime: documentMime,
 };
 
 class MockFileService {
@@ -116,7 +110,7 @@ describe('PolicyDetailsComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [AccordionModule, I18nTestingModule],
+        imports: [AccordionModule, I18nTestingModule, RouterTestingModule],
         providers: [
           { provide: RoutingService, useClass: MockRoutingService },
           { provide: PolicyService, useClass: MockPolicyService },
@@ -124,6 +118,7 @@ describe('PolicyDetailsComponent', () => {
           { provide: ChangeRequestService, useClass: MockChangeRequestService },
           { provide: FileService, useClass: MockFileService },
           { provide: FSTranslationService, useClass: MockFSTranslationService },
+          { provide: ActivatedRoute, useValue: { params: of(mockParams) } },
         ],
         declarations: [PolicyDetailsComponent],
       }).compileComponents();
@@ -148,15 +143,11 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should check if policyId and contractId are not provided', () => {
+    mockParams = {
+      policyId: undefined,
+      contractId: undefined,
+    };
     spyOn(policyService, 'loadPolicyDetails').and.stub();
-    spyOn(routingService, 'getRouterState').and.returnValue(
-      of({
-        state: {
-          params: {},
-        },
-      } as RouterState)
-    );
-    component.ngOnInit();
     expect(policyService.loadPolicyDetails).not.toHaveBeenCalled();
   });
 
@@ -166,6 +157,9 @@ describe('PolicyDetailsComponent', () => {
 
   it('should create change request for policy', () => {
     spyOn(changeRequestService, 'createChangeRequest').and.stub();
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
+      of(mockRequest)
+    );
     component.changePolicyDetails(
       policyId,
       contractId,
@@ -180,13 +174,7 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should not redirect if change request is not created', () => {
-    spyOn(changeRequestService, 'createChangeRequest').and.stub();
-    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(of(null));
-    component.changePolicyDetails(
-      policyId,
-      contractId,
-      RequestType.INSURED_OBJECT_CHANGE
-    );
+    spyOn(changeRequestService, 'getChangeRequest').and.stub();
     expect(routingService.go).not.toHaveBeenCalled();
   });
 
