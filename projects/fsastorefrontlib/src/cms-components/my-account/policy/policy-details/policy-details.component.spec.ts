@@ -14,7 +14,6 @@ import {
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
 import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
 const policyId = 'policyId';
 const contractId = 'contractId';
@@ -110,7 +109,7 @@ describe('PolicyDetailsComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [AccordionModule, I18nTestingModule, RouterTestingModule],
+        imports: [AccordionModule, I18nTestingModule],
         providers: [
           { provide: RoutingService, useClass: MockRoutingService },
           { provide: PolicyService, useClass: MockPolicyService },
