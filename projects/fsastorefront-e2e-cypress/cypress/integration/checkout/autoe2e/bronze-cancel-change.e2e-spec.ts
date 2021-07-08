@@ -9,7 +9,7 @@ import * as changeRequest from '../../../helpers/changeRequest';
 Cypress.config('defaultCommandTimeout', 500000);
 const currentDate = Cypress.moment().format('DD/MM/YYYY');
 
-context('Auto Bronze Checkout with cancel change', () => {
+context('Auto Bronze Checkout with Cancel change', () => {
   before(() => {
     cy.visit('/');
   });

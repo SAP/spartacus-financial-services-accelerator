@@ -3,7 +3,6 @@ import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
 const todaysDate = Cypress.moment().format('YYYY-MM-DD');
