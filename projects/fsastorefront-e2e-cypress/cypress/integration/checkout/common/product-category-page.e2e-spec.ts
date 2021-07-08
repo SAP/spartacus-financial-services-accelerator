@@ -1,4 +1,4 @@
-import * as productCategory from '../../../helpers/productCategoryPage';
+import * as productCategory from '../../../helpers/product-category-page';
 import { insuranceButtons, bankingButtons } from '../../../helpers/constants';
 
 context('ProductCategoryPage', () => {

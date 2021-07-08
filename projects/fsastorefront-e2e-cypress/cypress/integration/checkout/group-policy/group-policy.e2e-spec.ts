@@ -1,11 +1,11 @@
 import * as register from '../../../helpers/register';
 import { carGroupAdmin, carGroupCustomer } from '../../../sample-data/users';
-import * as groupPolicy from '../../../helpers/checkout/groupPolicy';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
+import * as groupPolicy from '../../../helpers/checkout/group-policy';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
+import * as banking from '../../../helpers/checkout/banking/checkout-banking';
 import * as loan from '../../../helpers/checkout/banking/loan';
-import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
+import * as userIdentification from '../../../helpers/checkout/banking/user-identification';
+import * as currentAccount from '../../../helpers/checkout/banking/current-account';
 
 context('Group Policy Group Admin and Customer Checks', () => {
   before(() => {

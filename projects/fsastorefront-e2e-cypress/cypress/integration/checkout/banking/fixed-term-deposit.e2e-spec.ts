@@ -1,10 +1,10 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
-import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
-import * as ftd from '../../../helpers/checkout/banking/fixedTermDeposit';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
+import * as banking from '../../../helpers/checkout/banking/checkout-banking';
+import * as userIdentification from '../../../helpers/checkout/banking/user-identification';
+import * as ftd from '../../../helpers/checkout/banking/fixed-term-deposit';
+import * as currentAccount from '../../../helpers/checkout/banking/current-account';
 import * as policies from '../../../helpers/my-account/policies';
 
 context('Fixed Term Deposit Checkout', () => {

@@ -1,7 +1,7 @@
 import * as register from '../../../helpers/register';
 import * as travel from '../../../helpers/checkout/insurance/travel-checkout';
 import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 
 context('Insurance Checkout Steps Reload', () => {

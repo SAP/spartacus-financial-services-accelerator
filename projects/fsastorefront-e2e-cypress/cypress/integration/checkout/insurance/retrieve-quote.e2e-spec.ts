@@ -1,11 +1,11 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
+import * as banking from '../../../helpers/checkout/banking/checkout-banking';
+import * as currentAccount from '../../../helpers/checkout/banking/current-account';
 import * as loan from '../../../helpers/checkout/banking/loan';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import * as myAccount from '../../../helpers/my-account/myAccountPages';
+import * as myAccount from '../../../helpers/my-account/my-account';
 
 context('Retrieving Banking and Insurance Quotes ', () => {
   before(() => {

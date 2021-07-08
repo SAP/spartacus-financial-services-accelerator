@@ -1,14 +1,14 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
-import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
-context('Auto Silver Checkout with change mileage', () => {
+context('Auto Silver Checkout with applying coupons', () => {
   before(() => {
     cy.visit('/');
   });

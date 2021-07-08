@@ -4,7 +4,7 @@ import {
   waitForFormDefinition,
   waitForCMSComponent,
   waitForUserAssets,
-} from '../generalHelpers';
+} from '../general-helpers';
 import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';

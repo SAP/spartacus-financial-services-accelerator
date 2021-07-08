@@ -1,9 +1,9 @@
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as savings from '../../../helpers/checkout/insurance/savings-checkout';
 import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as policies from '../../../helpers/my-account/policies';
-import * as premiumCalendar from '../../../helpers/my-account/myAccountPages';
+import * as premiumCalendar from '../../../helpers/my-account/my-account';
 
 context('Savings Insurance Checkout', () => {
   before(() => {

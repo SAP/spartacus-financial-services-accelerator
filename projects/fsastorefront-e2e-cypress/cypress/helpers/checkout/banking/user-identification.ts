@@ -1,4 +1,4 @@
-import { waitForRequest } from '../../generalHelpers';
+import { waitForRequest } from '../../general-helpers';
 
 export function checkUserIdentificationPage() {
   cy.get('.section-header-heading').should('have.text', 'User Identification');

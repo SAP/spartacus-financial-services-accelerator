@@ -1,9 +1,9 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
+import * as banking from '../../../helpers/checkout/banking/checkout-banking';
 import * as loan from '../../../helpers/checkout/banking/loan';
-import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
+import * as userIdentification from '../../../helpers/checkout/banking/user-identification';
 import * as policies from '../../../helpers/my-account/policies';
 
 context('Loan Checkout', () => {
