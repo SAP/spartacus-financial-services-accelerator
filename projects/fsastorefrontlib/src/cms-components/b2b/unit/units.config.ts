@@ -13,7 +13,6 @@ import {
   UnitItemService,
   UnitListComponent,
   UnitListService,
-  UnitUserCreateComponent,
   UnitUserListComponent,
   UnitUserRolesFormComponent,
 } from '@spartacus/organization/administration/components';
@@ -26,6 +25,7 @@ import { ActivateProductCellComponent } from './assignments/cells/activate-produ
 import { RemoveProductCellComponent } from './assignments/cells/remove-product-cell/remove-product-cell.component';
 import { FSUnitDetailsComponent } from './details';
 import { OrganizationTableType } from '../../../occ';
+import { FSUnitUserCreateComponent } from '../user/create/unit-user-create.component';
 
 export const MAX_OCC_INTEGER_VALUE = 2147483647;
 
@@ -120,7 +120,7 @@ export const unitsCmsConfig: CmsConfig = {
                 children: [
                   {
                     path: 'create',
-                    component: UnitUserCreateComponent,
+                    component: FSUnitUserCreateComponent,
                   },
                   {
                     path: `:${ROUTE_PARAMS.userCode}/roles`,

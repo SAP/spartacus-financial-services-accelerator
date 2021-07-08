@@ -362,6 +362,50 @@ function updateMainComponent(
   };
 }
 
+/**
+ * Returns clean tsconfig.json file by removing possible comments
+ */
+function cleanAppTsConfig() {
+  return (tree: Tree, _context: SchematicContext) => {
+    const filePath = 'tsconfig.json';
+    const buffer = tree.read(filePath);
+    const recorder = tree.beginUpdate(filePath);
+    if (buffer) {
+      const tsconfigContent = buffer.toString();
+      recorder.remove(0, tsconfigContent.indexOf('{'));
+    }
+    tree.commitUpdate(recorder);
+    return tree;
+  };
+}
+
+/**
+ * Fixes module generation in compilerOptions to es2020
+ */
+function updateAppTsConfig(): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    const filePath = 'tsconfig.json';
+    const buffer = tree.read(filePath);
+    const recorder = tree.beginUpdate(filePath);
+    if (buffer) {
+      const tsconfigContent = buffer.toString();
+      const parsedTsconfig = JSON.parse(tsconfigContent);
+      if (parsedTsconfig.compilerOptions.module) {
+        recorder.remove(
+          tsconfigContent.indexOf(parsedTsconfig.compilerOptions.module),
+          parsedTsconfig.compilerOptions.module.length
+        );
+        recorder.insertLeft(
+          tsconfigContent.indexOf(parsedTsconfig.compilerOptions.module),
+          'es2020'
+        );
+      }
+    }
+    tree.commitUpdate(recorder);
+    return tree;
+  };
+}
+
 function addFonts(): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const workspaceConfigBuffer = tree.read('angular.json');
@@ -433,6 +477,8 @@ export function addFsa(options: FsOptions): Rule {
       updateMainComponent(project, options),
       options.useMetaTags ? updateIndexFile(tree, options) : noop(),
       installPackageJsonDependencies(),
+      cleanAppTsConfig(),
+      updateAppTsConfig(),
       addFonts(),
     ])(tree, context);
   };

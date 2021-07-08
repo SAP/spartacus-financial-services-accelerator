@@ -20,6 +20,11 @@ export const getQuotes: MemoizedSelector<
   any
 > = createSelector(getQuotesState, fromQuote.getQuotes);
 
+export const getQuoteDetails: MemoizedSelector<
+  StateWithMyAccount,
+  any
+> = createSelector(getQuotesState, fromQuote.getQuote);
+
 export const getQuotesLoaded: MemoizedSelector<
   StateWithMyAccount,
   boolean

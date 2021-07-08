@@ -27,10 +27,7 @@ export function clearFormDefinitionState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function (state, action) {
-    if (
-      action.type === AuthActions.LOGOUT ||
-      action.type === AuthActions.LOGIN
-    ) {
+    if (action.type === AuthActions.LOGOUT) {
       state = undefined;
       localStorage.removeItem(DYNAMIC_FORMS_LOCAL_STORAGE_KEY);
     }

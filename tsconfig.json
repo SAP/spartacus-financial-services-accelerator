@@ -5,7 +5,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -13,24 +13,12 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@spartacus/fsa-storefront": [
-        "projects/fsastorefrontlib/src/public_api"
-      ],
-      "fsastorefrontlib": [
-        "dist/fsastorefrontlib"
-      ],
-      "fsastorefrontlib/*": [
-        "dist/fsastorefrontlib/*"
-      ],
-      "dynamicforms": [
-        "dist/dynamicforms"
-      ],
-      "dynamicforms/*": [
-        "dist/dynamicforms/*"
-      ],
-      "@spartacus/dynamicforms": [
-        "projects/dynamicforms/public_api"
-      ]
+      "@spartacus/fsa-storefront": ["projects/fsastorefrontlib/src/public_api"],
+      "fsastorefrontlib": ["dist/fsastorefrontlib"],
+      "fsastorefrontlib/*": ["dist/fsastorefrontlib/*"],
+      "dynamicforms": ["dist/dynamicforms"],
+      "dynamicforms/*": ["dist/dynamicforms/*"],
+      "@spartacus/dynamicforms": ["projects/dynamicforms/public_api"]
     }
   }
 }

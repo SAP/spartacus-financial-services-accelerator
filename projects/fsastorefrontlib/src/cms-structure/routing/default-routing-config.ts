@@ -39,6 +39,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   policies: { paths: ['my-account/my-policies'] },
   policyDetails: { paths: ['my-account/my-policies/:policyId/:contractId'] },
   quotes: { paths: ['my-account/my-financial-applications'] },
+  quoteDetails: { paths: ['my-account/my-financial-applications/:quoteId'] },
   premiumCalendar: { paths: ['my-account/premium-calendar'] },
   accountOverview: { paths: ['my-account/account-overview'] },
   fnolIncidentPage: { paths: ['fnolIncidentPage'] },

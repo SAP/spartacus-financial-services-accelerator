@@ -27,6 +27,11 @@
       }
     }
   }
+  .md-order-change {
+    @include media-breakpoint-down(md) {
+      order: 2;
+    }
+  }
   .cx-product-image-container img {
     @include fs-transition;
     background-color: var(--cx-color-1);
@@ -41,5 +46,12 @@
   }
   cx-pagination {
     display: inline-flex;
+  }
+  %cx-store-finder-map {
+    .cx-store-map {
+      @include media-breakpoint-down(md) {
+        height: 30rem;
+      }
+    }
   }
 }

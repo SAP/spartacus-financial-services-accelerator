@@ -2,7 +2,7 @@
   <ng-container *ngIf="billingData$ | async as billingInfo">
     <div class="fixed-column">
       <div class="table-header text-center mb-0">
-        <ng-container *ngIf="(user$ | async).uid">
+        <ng-container *ngIf="(user$ | async)?.uid">
           <cx-fs-sync-pilot-connection-component></cx-fs-sync-pilot-connection-component>
         </ng-container>
       </div>

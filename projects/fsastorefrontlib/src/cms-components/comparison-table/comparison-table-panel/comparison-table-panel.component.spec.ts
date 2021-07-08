@@ -8,7 +8,7 @@ import {
   YFormData,
 } from '@spartacus/dynamicforms';
 import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsComponent, UserService } from '@spartacus/core';
+import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData, MediaModule } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -17,6 +17,7 @@ import { PricingService } from './../../../core/product-pricing/facade/pricing.s
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
   // tslint:disable
@@ -100,7 +101,7 @@ class MockPricingService {
   }
 }
 
-class MockUserService {
+class MockUserAccountFacade {
   get() {
     return of(mockUser);
   }
@@ -113,7 +114,6 @@ describe('ComparisonTablePanelComponent', () => {
   let mockFormDataService: FormDataService;
   let mockPricingService: PricingService;
   let mockFOrMDataStorageService: FormDataStorageService;
-  let mockUserService: UserService;
   let el: DebugElement;
 
   beforeEach(
@@ -146,8 +146,8 @@ describe('ComparisonTablePanelComponent', () => {
             useClass: MockActivatedRoute,
           },
           {
-            provide: UserService,
-            useClass: MockUserService,
+            provide: UserAccountFacade,
+            useClass: MockUserAccountFacade,
           },
         ],
         declarations: [
@@ -159,7 +159,6 @@ describe('ComparisonTablePanelComponent', () => {
       mockFormDataService = TestBed.inject(FormDataService);
       mockPricingService = TestBed.inject(PricingService);
       mockFOrMDataStorageService = TestBed.inject(FormDataStorageService);
-      mockUserService = TestBed.inject(UserService);
     })
   );
 

@@ -1,5 +1,6 @@
 import { YFormData } from '@spartacus/dynamicforms';
 import {
+  B2BUser,
   Cart,
   Category,
   Occ,
@@ -7,9 +8,9 @@ import {
   Price,
   Product,
   User,
-  UserSignUp,
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/storefront';
+import { UserSignUp } from '@spartacus/user/profile/root';
 
 export interface ContactAgentData {
   email?: string;
@@ -75,6 +76,7 @@ export interface QuoteWorkflowStatus {
 
 export interface InsuranceQuote {
   quoteId?: string;
+  cartCode?: string;
   state?: QuoteBindingState;
   defaultCategory?: Occ.Category;
   quoteStatus?: QuoteStatus;
@@ -180,6 +182,10 @@ export interface BillingTime {
   code?: string;
   name?: string;
   description?: string;
+}
+
+export interface FSB2BUser extends B2BUser {
+  dateOfBirth?: string;
 }
 
 export interface FSUserSignUp extends UserSignUp {

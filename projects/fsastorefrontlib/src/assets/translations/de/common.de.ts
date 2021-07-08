@@ -96,6 +96,7 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: 'Rechnung',
+    recommendedProduct: '[DE] This is your recommended product!',
     payment: {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
@@ -183,6 +184,11 @@ export const fscommon = {
       online: '[DE] Online',
       offline: '[DE] Offline',
       noSearchResults: 'Keine Ergebnisse',
+    },
+    questionnaire: {
+      noResults:
+        '[DE] Unfortunately, there is no product that fits all chosen criteria. Please try again with different combination or contact an',
+      agentLink: 'kundenbetreuer.',
     },
     httpHandlers: {
       existingCouponCodeProvided:

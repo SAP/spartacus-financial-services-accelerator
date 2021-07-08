@@ -10,16 +10,16 @@ export function checkGroupPolicyMainPage() {
   cy.get('.heading-headline').contains('My Group');
   cy.get('cx-page-layout.CompanyPageTemplate').within(() => {
     cy.get('cx-generic-link').should('have.length', 2);
-    cy.get('cx-generic-link').should('contain.text', 'Units');
-    cy.get('cx-generic-link').should('contain.text', 'Members');
+    cy.get('cx-generic-link .headline').contains('Organizations');
+    cy.get('cx-generic-link .headline').contains('Members');
   });
 }
 
 export function checkUnitsPage() {
-  cy.get('cx-generic-link').contains('Units').click();
-  cy.get('.heading-headline').should('contain.text', 'Units');
+  cy.get('cx-generic-link').contains('Organizations').click();
+  cy.get('.heading-headline').should('contain.text', 'Organizations');
   cy.get('cx-org-list').should('be.visible');
-  cy.get('.header').should('contain.text', 'All units');
+  cy.get('.header').should('contain.text', 'All organizations');
   cy.get('.actions').should('be.visible');
   cy.get('table').should('be.visible');
   cy.get('.button.primary').should('contain.text', 'Add');
@@ -28,7 +28,7 @@ export function checkUnitsPage() {
 export function checkCreateUnitPage() {
   cy.get('.button.primary').click();
   cy.get('cx-view').should('be.visible');
-  cy.get('h3').should('contain.text', 'Create Unit');
+  cy.get('h3').should('contain.text', 'Create Organization');
   cy.get('.button.primary').should('contain.text', 'Save');
   cy.get('button.link').should('contain.text', 'Cancel');
 }
@@ -80,7 +80,7 @@ export function changePasswordForNewMember() {
 }
 
 export function checkCurrentAccountComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Premium Account',
