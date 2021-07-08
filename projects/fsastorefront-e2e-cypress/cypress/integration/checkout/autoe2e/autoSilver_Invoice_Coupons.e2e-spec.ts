@@ -5,7 +5,6 @@ import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegr
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
-import * as changeRequest from '../../../helpers/changeRequest';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
@@ -35,7 +34,6 @@ context('Auto Silver Checkout with change mileage', () => {
     cy.get('[formcontrolname=couponCode]').type('FSA10DISC');
     cy.get('.primary-button').eq(1).click();
     cy.get('.alert-success').should('be.visible');
-    cy.get('cx-applied-coupons').should('be.visible');
     checkout.clickContinueButton();
   });
 
@@ -44,7 +42,6 @@ context('Auto Silver Checkout with change mileage', () => {
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
-    auto.populateAdditionalData();
     checkout.clickContinueButton();
   });
 
