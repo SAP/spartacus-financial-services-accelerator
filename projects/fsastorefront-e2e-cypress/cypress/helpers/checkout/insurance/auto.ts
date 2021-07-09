@@ -257,6 +257,41 @@ export function checkOptionalProductsSilver() {
   shared.checkAddOptionsPageContent(addOptionsContent);
 }
 
+export function addOptionalProductsSilver() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Auto Insurance',
+    items: [
+      {
+        name: 'Collision Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Roadside Assistance',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: 'Trailer Liability',
+        available: true,
+      },
+
+      {
+        name: 'Uninsured Coverage',
+        available: true,
+      },
+      {
+        name: 'Winter Tires',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: ' Covered with Third Party Liability ',
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
 export function checkOptionalProductsBronze() {
   const addOptionsContent: addOptionsPage.AddOptions = {
     title: 'Your Auto Insurance',

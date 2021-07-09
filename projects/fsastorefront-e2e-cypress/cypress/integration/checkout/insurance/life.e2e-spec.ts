@@ -1,7 +1,7 @@
 import * as life from '../../../helpers/checkout/insurance/life-checkout';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as policies from '../../../helpers/my-account/policies';
 
 context('Life Insurance Checkout', () => {

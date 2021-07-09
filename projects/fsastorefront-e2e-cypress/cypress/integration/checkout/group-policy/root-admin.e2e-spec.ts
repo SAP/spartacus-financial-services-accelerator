@@ -1,6 +1,6 @@
 import * as register from '../../../helpers/register';
 import { rootAdmin, createCustomer } from '../../../sample-data/users';
-import * as groupPolicy from '../../../helpers/checkout/groupPolicy';
+import * as groupPolicy from '../../../helpers/checkout/group-policy';
 
 context('Group Policy Rood Admin Checks', () => {
   before(() => {

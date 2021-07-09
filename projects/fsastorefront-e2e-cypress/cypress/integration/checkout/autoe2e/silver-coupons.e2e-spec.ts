@@ -1,15 +1,14 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
-import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
-import * as changeRequest from '../../../helpers/changeRequest';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
-context('Auto Bronze Checkout with change coverage', () => {
+context('Auto Silver Checkout with applying coupons', () => {
   before(() => {
     cy.visit('/');
   });
@@ -22,16 +21,19 @@ context('Auto Bronze Checkout with change coverage', () => {
   it('Should complete first auto step with additional driver', () => {
     checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
-    auto.populateAutoMonthlyAudi();
+    auto.populateAutoAnnuallyTesla();
     auto.populateMainDriverInfo();
-    cy.get('[name=noOfDrivers]').select('1');
-    auto.populateAdditionalDriverInfo();
+    cy.get('[name=noOfDrivers]').select('0');
     checkout.clickContinueButton();
   });
 
-  it('Should check comparison table and select main and optional products', () => {
-    auto.selectAutoBronze();
-    auto.checkOptionalProductsBronze();
+  it('Should check comparison table and select main product', () => {
+    autoIntegration.selectAutoSilver();
+    cy.get('cx-fs-cart-coupon').should('be.visible');
+    auto.addOptionalProductsSilver();
+    cy.get('[formcontrolname=couponCode]').type('FSA10DISC');
+    cy.get('.primary-button').eq(1).click();
+    cy.get('.alert-success').should('be.visible');
     checkout.clickContinueButton();
   });
 
@@ -40,7 +42,6 @@ context('Auto Bronze Checkout with change coverage', () => {
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
-    auto.populateAdditionalData();
     checkout.clickContinueButton();
   });
 
@@ -64,24 +65,7 @@ context('Auto Bronze Checkout with change coverage', () => {
     //waiting for replication process to be completed
     cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedPolicy('Bronze');
-    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
-    //This should be included for integration tests
-    //checkout.checkAccordions('integrationPolicyDetails');
-  });
-
-  it('Should complete change coverage checkout', () => {
-    changeRequest.startChangeCoverage();
-    //check change coverage - first step
-    changeRequest.checkChangeCoverageSteps();
-    changeRequest.checkOptionalExtrasBronze();
-    //check continue button is disabled if coverage is not added
-    cy.get('.primary-button').contains('Continue').should('be.disabled');
-    changeRequest.addTrailerLiability();
-    checkout.clickContinueButton();
-    //check change preview - second step
-    changeRequest.checkChangeCoverageSteps();
-    cy.get('.primary-button').should('contain', 'Submit').click();
-    changeRequest.checkChangeRequestConfirmation();
+    autoIntegration.checkReplicatedPolicy('Silver');
+    cy.get('.heading-headline').should('contain.text', 'Auto Silver Policy');
   });
 });

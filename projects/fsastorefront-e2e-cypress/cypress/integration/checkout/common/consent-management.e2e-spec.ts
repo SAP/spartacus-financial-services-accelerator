@@ -1,7 +1,7 @@
-import * as consentManagement from '../../../helpers/consentManagement';
+import * as consentManagement from '../../../helpers/consent-management';
 import * as register from '../../../helpers/register';
 import { registrationUserWithoutPhone } from '../../../sample-data/users';
-import * as myAccount from '../../../helpers/my-account/myAccountPages';
+import * as myAccount from '../../../helpers/my-account/my-account';
 
 context('Consent Management', () => {
   before(() => {

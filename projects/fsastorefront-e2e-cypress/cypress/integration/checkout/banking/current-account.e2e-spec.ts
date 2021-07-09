@@ -1,9 +1,9 @@
-import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
+import * as banking from '../../../helpers/checkout/banking/checkout-banking';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
+import * as currentAccount from '../../../helpers/checkout/banking/current-account';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
+import * as userIdentification from '../../../helpers/checkout/banking/user-identification';
 
 context('Current Account Checkout', () => {
   before(() => {

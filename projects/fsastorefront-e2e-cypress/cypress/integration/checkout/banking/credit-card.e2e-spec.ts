@@ -1,10 +1,10 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as inbox from '../../../helpers/my-account/inbox';
-import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
-import * as creditCard from '../../../helpers/checkout/banking/creditCard';
-import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
+import * as banking from '../../../helpers/checkout/banking/checkout-banking';
+import * as creditCard from '../../../helpers/checkout/banking/credit-card';
+import * as userIdentification from '../../../helpers/checkout/banking/user-identification';
 
 context('Credit Card Checkout', () => {
   before(() => {

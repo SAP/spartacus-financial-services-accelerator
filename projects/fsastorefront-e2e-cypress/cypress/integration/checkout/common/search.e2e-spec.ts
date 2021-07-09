@@ -1,4 +1,4 @@
-import * as productCategory from '../../../helpers/productCategoryPage';
+import * as productCategory from '../../../helpers/product-category-page';
 import * as search from '../../../helpers/search';
 import { insuranceButtons } from '../../../helpers/constants';
 

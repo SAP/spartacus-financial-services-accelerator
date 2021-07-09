@@ -1,4 +1,4 @@
-import * as checkout from './checkout/checkoutSteps';
+import * as checkout from './checkout/checkout-steps';
 
 export function navigateToFindAnAgent() {
   cy.get('a').contains('Find an Agent').click();

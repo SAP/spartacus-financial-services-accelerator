@@ -1,15 +1,15 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
-import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
+import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
-import * as changeRequest from '../../../helpers/changeRequest';
+import * as changeRequest from '../../../helpers/change-requests';
 
 Cypress.config('defaultCommandTimeout', 500000);
-const currentDate = Cypress.moment().format('DD/MM/YYYY');
 
-context('Auto Bronze Checkout with cancel change', () => {
+context('Auto Bronze Checkout with change coverage', () => {
   before(() => {
     cy.visit('/');
   });
@@ -19,31 +19,28 @@ context('Auto Bronze Checkout with cancel change', () => {
     register.login(registrationUser.email, registrationUser.password);
   });
 
-  it('Should complete first auto step with two additional drivers', () => {
+  it('Should complete first auto step with additional driver', () => {
     checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
-    auto.populateAutoAnnuallyTesla();
+    auto.populateAutoMonthlyAudi();
     auto.populateMainDriverInfo();
-    cy.get('[name=noOfDrivers]').select('2');
+    cy.get('[name=noOfDrivers]').select('1');
     auto.populateAdditionalDriverInfo();
-    auto.populateSecondAdditionalDriverInfo();
     checkout.clickContinueButton();
   });
 
-  it('Should check comparison table and select main product', () => {
-    autoIntegration.selectAutoBronze();
+  it('Should check comparison table and select main and optional products', () => {
+    auto.selectAutoBronze();
     auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();
   });
 
   it('Should populate personal details page', () => {
-    checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkPersonalDetailsPage();
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
     auto.populateAdditionalData();
-    auto.populateAdditionalDriver2ata();
     checkout.clickContinueButton();
   });
 
@@ -57,8 +54,8 @@ context('Auto Bronze Checkout with cancel change', () => {
   });
 
   it('Select default payment details and place an order', () => {
-    checkout.populatePaymentCreditCard();
-    cy.get('.btn-primary').contains('Continue').click();
+    selectPaymentMethodInvoice();
+    checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
   });
@@ -69,20 +66,22 @@ context('Auto Bronze Checkout with cancel change', () => {
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedPolicy('Bronze');
     cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
+    //This should be included for integration tests
+    //checkout.checkAccordions('integrationPolicyDetails');
   });
 
-  it('Should cancel change policy request', () => {
-    changeRequest.startChangeMileage();
-    checkout.waitForChangeMileage();
-    //check change car details - first step
-    changeRequest.checkChangeMileageSteps();
-    cy.get('[name="vehicleAnnualMileage"]').type('80000');
+  it('Should complete change coverage checkout', () => {
+    changeRequest.startChangeCoverage();
+    //check change coverage - first step
+    changeRequest.checkChangeCoverageSteps();
+    changeRequest.checkOptionalExtrasBronze();
+    //check continue button is disabled if coverage is not added
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
+    changeRequest.addTrailerLiability();
     checkout.clickContinueButton();
-    //check change preview - cancel
-    changeRequest.checkChangeMileageSteps();
-    cy.get('.offset-1').contains(currentDate);
-    cy.get('.action-button').should('contain', 'Cancel').click();
-    //check user is redirected to policy details page
-    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
+    //check change preview - second step
+    changeRequest.checkChangeCoverageSteps();
+    cy.get('.primary-button').should('contain', 'Submit').click();
+    changeRequest.checkChangeRequestConfirmation();
   });
 });

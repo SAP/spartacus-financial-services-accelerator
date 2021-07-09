@@ -1,8 +1,8 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
-import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import {
   checkAutoReferredQuote,
   checkMyQuotesPage,

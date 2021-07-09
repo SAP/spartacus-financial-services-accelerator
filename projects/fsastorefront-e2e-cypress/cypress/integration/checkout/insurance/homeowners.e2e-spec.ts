@@ -1,7 +1,7 @@
 import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as homeowners from '../../../helpers/checkout/insurance/homeowners-checkout';
-import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as payment from '../../../helpers/checkout/insurance/payment';
 
 context('Homeowners Checkout', () => {
