@@ -1,5 +1,8 @@
 import * as shared from '../shared-checkout';
-import { waitForUserAssets, waitForFormDefinition } from '../../general-helpers';
+import {
+  waitForUserAssets,
+  waitForFormDefinition,
+} from '../../general-helpers';
 
 const currentDate = Cypress.moment().format(' DD MMM YYYY ');
 
