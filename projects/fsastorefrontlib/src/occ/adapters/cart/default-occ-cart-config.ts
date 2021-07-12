@@ -6,8 +6,7 @@ export const defaultOccCartConfig: FSOccConfig = {
       endpoints: {
         addToCart: '/users/${userId}/carts/${cartId}/fs-add-to-cart',
         startBundle: '/users/${userId}/carts/${cartId}/fs-start-bundle',
-        cart:
-          '/users/${userId}/carts/${cartId}?fields=DEFAULT,paymentInfo(FULL)',
+        cart: '/users/${userId}/carts/${cartId}?fields=FULL,paymentInfo(FULL)',
       },
     },
   },
