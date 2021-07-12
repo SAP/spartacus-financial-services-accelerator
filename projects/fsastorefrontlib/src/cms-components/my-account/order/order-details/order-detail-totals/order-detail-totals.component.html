@@ -32,6 +32,8 @@
             <div class="col-6 col-md-12 text-right text-md-left">
               {{ order.code }}
             </div>
+          </div>
+          <div class="row mb-2" *ngIf="order.insuranceQuote?.policyId">
             <div class="col-6 col-md-12 semi-bold">
               {{ 'policy.policyId' | cxTranslate }}:
             </div>
