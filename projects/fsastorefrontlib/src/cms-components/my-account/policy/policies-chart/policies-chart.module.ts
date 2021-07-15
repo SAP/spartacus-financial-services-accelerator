@@ -1,4 +1,3 @@
-import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -19,7 +18,6 @@ import { defaultChartOptionsConfig } from '../../../../core/chart-config/default
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     I18nModule,
     NgSelectModule,
     AccordionModule,
