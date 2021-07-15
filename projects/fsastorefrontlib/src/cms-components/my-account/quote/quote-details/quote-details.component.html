@@ -20,7 +20,7 @@
   <div class="accordion">
     <cx-fs-accordion-item
       [opened]="true"
-      [title]="'quote.quoteSummary' | cxTranslate"
+      [title]="'fscommon.summary' | cxTranslate"
     >
       <ul class="accordion-list container-fluid">
         <li class="accordion-list-item row">
@@ -174,28 +174,33 @@
           class="accordion-list container-fluid"
           *ngIf="cart.entries.length > 0"
         >
-          <li
+          <ng-container
             *ngFor="
               let entry of cart.entries[0]?.product.price.oneTimeChargeEntries
             "
-            class="accordion-list-item row"
           >
-            <div class="col-6 col-sm-5 item-label">
-              {{ entry.billingTime.name }}
-            </div>
-            <div class="col-6 col-sm-5 value notice">
-              {{ entry.price.formattedValue }}
-            </div>
-          </li>
+            <li
+              *ngIf="entry.billingTime.code !== 'paynow'"
+              class="accordion-list-item row"
+            >
+              <div class="col-6 col-sm-5 item-label">
+                {{ entry.billingTime.name }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{
+                  entry.price.value > 0
+                    ? entry.price.formattedValue
+                    : ('fscommon.included' | cxTranslate)
+                }}
+              </div>
+            </li>
+          </ng-container>
         </ul>
       </cx-fs-accordion-item>
       <cx-fs-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
         <ul class="accordion-list container-fluid">
-          <li
-            *ngFor="let entry of cart?.entries; let i = index"
-            class="accordion-list-item row"
-          >
-            <ng-container *ngIf="i > 0">
+          <ng-container *ngFor="let entry of cart?.entries; let i = index">
+            <li *ngIf="i > 0" class="accordion-list-item row">
               <div class="col-6 col-sm-5 item-label">
                 {{ entry.product.name }}
               </div>
@@ -207,8 +212,8 @@
                     : ('fscommon.notIncluded' | cxTranslate)
                 "
               ></div>
-            </ng-container>
-          </li>
+            </li>
+          </ng-container>
         </ul>
       </cx-fs-accordion-item>
       <cx-fs-accordion-item [title]="'fscommon.whatDoesItCostMe' | cxTranslate">
@@ -229,8 +234,8 @@
               {{ cart.insuranceQuote?.paymentFrequency }}
             </div>
           </li>
-          <li class="accordion-list-item row">
-            <ng-container *ngIf="cart.paymentInfo">
+          <ng-container *ngIf="cart.paymentInfo">
+            <li class="accordion-list-item row">
               <div class="col-6 col-sm-5 item-label">
                 {{ 'fscommon.paymentMethod' | cxTranslate }}
               </div>
@@ -241,15 +246,15 @@
                     : ('fscommon.invoice' | cxTranslate)
                 }}
               </div>
-            </ng-container>
-          </li>
+            </li>
+          </ng-container>
         </ul>
       </cx-fs-accordion-item>
     </ng-container>
   </div>
-  <div>
+  <div class="mt-5">
     <button
-      class="action-button btn-block text-uppercase mt-4"
+      class="m-auto col-6 btn-primary btn-block text-uppercase"
       (click)="retrieveQuote(quote)"
     >
       {{ 'fscommon.retrieve' | cxTranslate }}
