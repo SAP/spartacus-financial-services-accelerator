@@ -174,19 +174,27 @@
           class="accordion-list container-fluid"
           *ngIf="cart.entries.length > 0"
         >
-          <li
+          <ng-container
             *ngFor="
               let entry of cart.entries[0]?.product.price.oneTimeChargeEntries
             "
-            class="accordion-list-item row"
           >
-            <div class="col-6 col-sm-5 item-label">
-              {{ entry.billingTime.name }}
-            </div>
-            <div class="col-6 col-sm-5 value notice">
-              {{ entry.price.formattedValue }}
-            </div>
-          </li>
+            <li
+              *ngIf="entry.billingTime.code !== 'paynow'"
+              class="accordion-list-item row"
+            >
+              <div class="col-6 col-sm-5 item-label">
+                {{ entry.billingTime.name }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{
+                  entry.price.value > 0
+                    ? entry.price.formattedValue
+                    : ('fscommon.included' | cxTranslate)
+                }}
+              </div>
+            </li>
+          </ng-container>
         </ul>
       </cx-fs-accordion-item>
       <cx-fs-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
