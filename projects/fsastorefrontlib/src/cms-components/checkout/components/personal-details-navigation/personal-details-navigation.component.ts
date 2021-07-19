@@ -48,11 +48,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.cartService.getActive(),
         this.userAccountFacade.get(),
+        this.formService.formGroup,
       ])
         .pipe(
-          filter(([_, user]) => Boolean(user.customerId)),
+          filter(([_, user, formGroup]) => Boolean(user.customerId)),
           take(1),
-          switchMap(([cart, user]) => {
+          switchMap(([cart, user, formGroup]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
@@ -68,7 +69,10 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
-                  if (!isProductConfigurable) {
+                  if (
+                    !isProductConfigurable &&
+                    !formGroup.get('personalDetails.city').disabled
+                  ) {
                     this.addressService.createAddressData(
                       JSON.parse(formData.content),
                       user

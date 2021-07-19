@@ -8,7 +8,7 @@ import {
   RoutingService,
   UserService,
 } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
@@ -19,6 +19,7 @@ import { PricingService } from './../../../../core/product-pricing/facade/pricin
 import createSpy = jasmine.createSpy;
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { FormControl, FormGroup } from '@angular/forms';
 
 const firstName = 'Donna';
 const lastName = 'Moore';
@@ -29,6 +30,12 @@ const defaultAddress: Address = {
   town: 'Belgrade',
   defaultAddress: true,
 };
+
+const mockFormGroup = new FormGroup({
+  personalDetails: new FormGroup({
+    country: new FormControl({ value: 'RS', disabled: true }),
+  }),
+});
 
 const mockUser = {
   customerId: 'testuser',
@@ -93,6 +100,7 @@ class MockCartService {
 
 class MockFormService {
   submit = createSpy();
+  formGroup = new BehaviorSubject<FormGroup>(mockFormGroup).asObservable();
 
   getSubmittedForm() {
     return of(formData);

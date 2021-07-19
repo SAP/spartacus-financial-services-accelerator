@@ -71,6 +71,7 @@ export class MockFormDataService {
   getSubmittedForm() {
     return new BehaviorSubject(formData);
   }
+  setFormGroup() {}
 }
 
 export class MockFormComponentService {

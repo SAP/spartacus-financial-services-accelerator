@@ -106,6 +106,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
+            this.formDataService.setFormGroup(this.form);
             if (this.checkInvalidControls(form)) {
               this.formComponentService.isPopulatedFormInvalidSource.next(true);
               this.markInvalidControls(this.form);
