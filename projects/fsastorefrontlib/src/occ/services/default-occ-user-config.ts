@@ -4,7 +4,7 @@ export const occUserConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
-        user: 'fsusers/${userId}',
+        user: 'users/${userId}',
         userRegister: 'fsusers',
         disableUser: 'users/${userId}',
       },
