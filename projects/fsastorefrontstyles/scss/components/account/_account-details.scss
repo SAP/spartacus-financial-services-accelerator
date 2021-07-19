@@ -1,25 +1,6 @@
 %cx-fs-policy-details,
 %cx-fs-claim-details {
   width: 100%;
-  .overview-section {
-    color: var(--cx-color-secondary);
-    position: relative;
-    &-value {
-      display: block;
-      color: var(--cx-color-text);
-      padding-bottom: 10px;
-      font-weight: var(--cx-font-weight-semi);
-      @include media-breakpoint-down(md) {
-        font-size: $h5-font-size;
-      }
-    }
-    &-link {
-      @include vertical-center;
-      left: 0;
-      background: transparent;
-      z-index: 1;
-    }
-  }
   .content-box {
     text-align: center;
     background-color: var(--cx-color-1);

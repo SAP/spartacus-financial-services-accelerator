@@ -13,7 +13,7 @@ export function reducer(
 ): QuoteState {
   switch (action.type) {
     case fromAction.LOAD_QUOTES_SUCCESS: {
-      const quotes = [...action.payload];
+      const quotes = action.payload ? [...action.payload] : [];
       return {
         ...state,
         quotes,
