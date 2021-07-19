@@ -33,7 +33,7 @@ const defaultAddress: Address = {
 
 const mockFormGroup = new FormGroup({
   personalDetails: new FormGroup({
-    country: new FormControl({ value: 'RS', disabled: true }),
+    city: new FormControl({ value: 'RS', disabled: true }),
   }),
 });
 
