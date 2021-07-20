@@ -246,7 +246,7 @@ describe('PersonalDetailsNavigationComponent', () => {
     expect(addressService.createAddressData).not.toHaveBeenCalled();
   });
 
-  it('should not set delivery address when main product in cart is configurable', () => {
+  it('should set delivery address when main product in cart is configurable', () => {
     spyOn(addressService, 'createAddressData').and.callThrough();
     const testCart = {
       code: 'testCart',
@@ -267,6 +267,6 @@ describe('PersonalDetailsNavigationComponent', () => {
     };
     spyOn(cartService, 'getActive').and.returnValue(of(testCart));
     component.navigateNext(mockCategoryAndStep);
-    expect(addressService.createAddressData).not.toHaveBeenCalled();
+    expect(addressService.createAddressData).toHaveBeenCalled();
   });
 });
