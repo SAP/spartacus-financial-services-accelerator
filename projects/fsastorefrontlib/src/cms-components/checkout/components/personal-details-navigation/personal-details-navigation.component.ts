@@ -3,11 +3,7 @@ import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { Address, RoutingService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
-import {
-  FSOrderEntry,
-  FSProduct,
-  FSSteps,
-} from '../../../../occ/occ-models/occ.models';
+import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
@@ -63,17 +59,13 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                 entry?.formData?.length > 0 ? entry?.formData[0].id : null;
               this.formService.submit(yFormData);
             }
-            const isProductConfigurable = (<FSProduct>cart?.entries[0]?.product)
-              ?.configurable;
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
-                  if (!isProductConfigurable) {
-                    this.addressService.createAddressData(
-                      JSON.parse(formData.content),
-                      user
-                    );
-                  }
+                  this.addressService.createAddressData(
+                    JSON.parse(formData.content),
+                    user
+                  );
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(
                     this.cartId,
