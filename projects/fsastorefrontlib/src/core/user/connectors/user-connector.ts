@@ -1,7 +1,7 @@
 import { OccFSUserAdapter } from '../../../occ/adapters/user/occ-user.adapter';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { OccUserAdapter, UserAdapter, UserConnector } from '@spartacus/core';
+import { OccUserAdapter, UserConnector } from '@spartacus/core';
 
 @Injectable({
   providedIn: 'root',
