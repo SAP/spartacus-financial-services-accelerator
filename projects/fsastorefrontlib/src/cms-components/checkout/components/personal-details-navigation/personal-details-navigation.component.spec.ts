@@ -2,13 +2,14 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import {
+  ActiveCartService,
   Address,
   Cart,
+  CheckoutDeliveryService,
   I18nTestingModule,
   RoutingService,
-  UserService,
 } from '@spartacus/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
@@ -19,7 +20,7 @@ import { PricingService } from './../../../../core/product-pricing/facade/pricin
 import createSpy = jasmine.createSpy;
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 
 const firstName = 'Donna';
 const lastName = 'Moore';
@@ -30,12 +31,6 @@ const defaultAddress: Address = {
   town: 'Belgrade',
   defaultAddress: true,
 };
-
-const mockFormGroup = new FormGroup({
-  personalDetails: new FormGroup({
-    city: new FormControl({ value: 'RS', disabled: true }),
-  }),
-});
 
 const mockUser = {
   customerId: 'testuser',
@@ -100,7 +95,6 @@ class MockCartService {
 
 class MockFormService {
   submit = createSpy();
-  formGroup = new BehaviorSubject<FormGroup>(mockFormGroup).asObservable();
 
   getSubmittedForm() {
     return of(formData);
@@ -124,6 +118,22 @@ class MockFSAddressService {
   createAddressData() {}
 }
 
+class MockCheckoutDeliveryService {
+  getDeliveryAddress(): Observable<Address> {
+    return of(null);
+  }
+}
+
+class MockActiveCartService {
+  getActive() {
+    return of(mockCart);
+  }
+}
+
+class MockFSCheckoutService {
+  loadCheckoutDetails() {}
+}
+
 describe('PersonalDetailsNavigationComponent', () => {
   let component: PersonalDetailsNavigationComponent;
   let fixture: ComponentFixture<PersonalDetailsNavigationComponent>;
@@ -133,6 +143,9 @@ describe('PersonalDetailsNavigationComponent', () => {
   let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
   let formService: FormDataService;
+  let checkoutDeliveryService: CheckoutDeliveryService;
+  let activeCartService: ActiveCartService;
+  let checkoutService: FSCheckoutService;
 
   beforeEach(
     waitForAsync(() => {
@@ -176,6 +189,18 @@ describe('PersonalDetailsNavigationComponent', () => {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
           },
+          {
+            provide: CheckoutDeliveryService,
+            useClass: MockCheckoutDeliveryService,
+          },
+          {
+            provide: ActiveCartService,
+            useClass: MockActiveCartService,
+          },
+          {
+            provide: FSCheckoutService,
+            useClass: MockFSCheckoutService,
+          },
         ],
       }).compileComponents();
 
@@ -192,6 +217,9 @@ describe('PersonalDetailsNavigationComponent', () => {
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
     formService = TestBed.inject(FormDataService);
+    checkoutDeliveryService = TestBed.inject(CheckoutDeliveryService);
+    activeCartService = TestBed.inject(ActiveCartService);
+    checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(routingService, 'go').and.stub();
   });
 

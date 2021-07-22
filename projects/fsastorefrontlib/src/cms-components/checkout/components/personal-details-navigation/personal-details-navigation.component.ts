@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, RoutingService } from '@spartacus/core';
+import {
+  ActiveCartService,
+  Address,
+  CheckoutDeliveryService,
+  RoutingService,
+} from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
@@ -10,6 +15,7 @@ import { QuoteService } from './../../../../core/my-account/facade/quote.service
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -24,7 +30,10 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected quoteService: QuoteService,
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
-    protected addressService: FSAddressService
+    protected addressService: FSAddressService,
+    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected activeCartService: ActiveCartService,
+    protected checkoutService: FSCheckoutService
   ) {}
 
   subscription = new Subscription();
@@ -37,6 +46,17 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.userAccountFacade.get();
+    this.subscription.add(
+      this.activeCartService
+        .getActive()
+        .pipe(
+          filter(cart => !!cart),
+          map(cart => {
+            this.checkoutService.loadCheckoutDetails(cart.code);
+          })
+        )
+        .subscribe()
+    );
   }
 
   navigateNext(nextStep: FSSteps) {
@@ -44,12 +64,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.cartService.getActive(),
         this.userAccountFacade.get(),
-        this.formService.formGroup,
+        this.checkoutDeliveryService.getDeliveryAddress(),
       ])
         .pipe(
-          filter(([_, user, formGroup]) => Boolean(user.customerId)),
+          filter(([_, user, deliveryAddresses]) => Boolean(user.customerId)),
           take(1),
-          switchMap(([cart, user, formGroup]) => {
+          switchMap(([cart, user, deliveryAddresses]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
@@ -63,10 +83,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
-                  this.addressService.createAddressData(
-                    JSON.parse(formData.content),
-                    user
-                  );
+                  if (!deliveryAddresses) {
+                    this.addressService.createAddressData(
+                      JSON.parse(formData.content),
+                      user
+                    );
+                  }
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(
                     this.cartId,
