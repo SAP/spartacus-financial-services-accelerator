@@ -1,13 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import {
-  ActiveCartService,
-  Address,
-  CheckoutDeliveryService,
-  RoutingService,
-} from '@spartacus/core';
+import { Address, RoutingService, UserAddressService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -15,7 +10,6 @@ import { QuoteService } from './../../../../core/my-account/facade/quote.service
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -31,9 +25,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
     protected addressService: FSAddressService,
-    protected checkoutDeliveryService: CheckoutDeliveryService,
-    protected activeCartService: ActiveCartService,
-    protected checkoutService: FSCheckoutService
+    protected userAddressService: UserAddressService
   ) {}
 
   subscription = new Subscription();
@@ -46,17 +38,6 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.userAccountFacade.get();
-    this.subscription.add(
-      this.activeCartService
-        .getActive()
-        .pipe(
-          filter(cart => !!cart),
-          map(cart => {
-            this.checkoutService.loadCheckoutDetails(cart.code);
-          })
-        )
-        .subscribe()
-    );
   }
 
   navigateNext(nextStep: FSSteps) {
@@ -64,12 +45,11 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.cartService.getActive(),
         this.userAccountFacade.get(),
-        this.checkoutDeliveryService.getDeliveryAddress(),
+        this.userAddressService.getAddresses(),
       ])
         .pipe(
-          filter(([_, user, deliveryAddresses]) => Boolean(user.customerId)),
           take(1),
-          switchMap(([cart, user, deliveryAddresses]) => {
+          switchMap(([cart, user, addresses]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
@@ -83,12 +63,15 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
-                  if (!deliveryAddresses) {
-                    this.addressService.createAddressData(
-                      JSON.parse(formData.content),
-                      user
-                    );
-                  }
+                  // TODO: use user.defaultAddress when Spartacus fix bug regarding properly updating defaultAddress
+                  const defaultAddress = addresses.find(
+                    address => address.defaultAddress
+                  );
+                  this.addressService.createAddressData(
+                    JSON.parse(formData.content),
+                    user,
+                    defaultAddress
+                  );
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(
                     this.cartId,

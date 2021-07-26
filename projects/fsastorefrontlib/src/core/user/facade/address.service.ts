@@ -29,9 +29,13 @@ export class FSAddressService extends UserAddressService {
   protected readonly POSTAL_CODE = 'postcode';
   protected readonly PHONE_NUMBER = 'phoneNumber';
 
-  createAddressData(formData: { [name: string]: Object }, user: User) {
-    if (!!user.defaultAddress) {
-      this.checkoutDeliveryService.setDeliveryAddress(user.defaultAddress);
+  createAddressData(
+    formData: { [name: string]: Object },
+    user: User,
+    defaultAddress: Address
+  ) {
+    if (!!defaultAddress) {
+      this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
     } else {
       const address: Address = {
         country: {
