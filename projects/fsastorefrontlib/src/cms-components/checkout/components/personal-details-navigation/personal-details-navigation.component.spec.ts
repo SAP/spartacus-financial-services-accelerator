@@ -6,7 +6,6 @@ import {
   Cart,
   I18nTestingModule,
   RoutingService,
-  UserAddressService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -116,9 +115,6 @@ class MockUserAccountFacade {
 
 class MockFSAddressService {
   createAddressData() {}
-}
-
-class MockUserAddressService {
   getAddresses() {
     return of(mockAddress);
   }
@@ -133,7 +129,6 @@ describe('PersonalDetailsNavigationComponent', () => {
   let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
   let formService: FormDataService;
-  let userAddressService: UserAddressService;
 
   beforeEach(
     waitForAsync(() => {
@@ -177,7 +172,6 @@ describe('PersonalDetailsNavigationComponent', () => {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
           },
-          { provide: UserAddressService, useClass: MockUserAddressService },
         ],
       }).compileComponents();
 
@@ -194,7 +188,6 @@ describe('PersonalDetailsNavigationComponent', () => {
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
     formService = TestBed.inject(FormDataService);
-    userAddressService = TestBed.inject(UserAddressService);
     spyOn(routingService, 'go').and.stub();
   });
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, RoutingService, UserAddressService } from '@spartacus/core';
+import { Address, RoutingService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
@@ -24,8 +24,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected quoteService: QuoteService,
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
-    protected addressService: FSAddressService,
-    protected userAddressService: UserAddressService
+    protected addressService: FSAddressService
   ) {}
 
   subscription = new Subscription();
@@ -45,7 +44,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.cartService.getActive(),
         this.userAccountFacade.get(),
-        this.userAddressService.getAddresses(),
+        this.addressService.getAddresses(),
       ])
         .pipe(
           take(1),
