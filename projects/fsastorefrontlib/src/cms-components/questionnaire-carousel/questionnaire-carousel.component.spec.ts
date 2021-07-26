@@ -154,7 +154,7 @@ class MockCheckoutService {
 
 class MockLanguageService {
   getActive() {
-    return of('en');
+    return of('de');
   }
 }
 
@@ -215,11 +215,12 @@ describe('QuestionnaireCarouselComponent', () => {
     fixture = TestBed.createComponent(QuestionnaireCarouselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    mockLanguageService = TestBed.inject(LanguageService);
     mockProductSearchService = TestBed.inject(ProductSearchService);
     routingService = TestBed.inject(RoutingService);
     mockFacetService = TestBed.inject(FacetService);
     mockCheckoutService = TestBed.inject(FSCheckoutService);
-    mockLanguageService = TestBed.inject(LanguageService);
+    component.language = 'en';
     spyOn(routingService, 'go').and.callThrough();
   });
 

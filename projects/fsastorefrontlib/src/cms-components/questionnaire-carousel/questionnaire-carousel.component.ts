@@ -36,6 +36,7 @@ export class QuestionnaireCarouselComponent implements OnInit {
     currentPage: 0,
     sort: 'relevance',
   };
+  language: string;
 
   constructor(
     protected componentData: CmsComponentData<
@@ -50,7 +51,6 @@ export class QuestionnaireCarouselComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let language: string;
     this.subscription.add(
       this.route.queryParams
         .pipe(
@@ -71,13 +71,13 @@ export class QuestionnaireCarouselComponent implements OnInit {
     ]).pipe(
       filter(([_, searchResults, lang]) => !!searchResults.facets),
       map(([component, searchResults, lang]) => {
-        if (language && language !== lang) {
+        if (this.language && this.language !== lang) {
           this.productSearchService.search(
             this.defaultSearchQuery,
             this.config
           );
         }
-        language = lang;
+        this.language = lang;
         const breadcrumbs = this.groupBreadcrumbsByCriteria(
           searchResults.breadcrumbs,
           this.BREADCRUMB_GROUP_CRITERIA
