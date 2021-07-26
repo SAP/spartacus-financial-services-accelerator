@@ -177,7 +177,9 @@ describe('PersonalDetailsNavigationComponent', () => {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
           },
-          { provide: UserAddressService, useClass: MockUserAddressService },
+          { provide: UserAddressService,
+            useClass: MockUserAddressService
+          },
         ],
       }).compileComponents();
 
