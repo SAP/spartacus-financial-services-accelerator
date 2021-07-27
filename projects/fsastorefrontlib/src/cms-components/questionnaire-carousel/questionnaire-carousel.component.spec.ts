@@ -6,6 +6,7 @@ import {
   CmsComponent,
   TranslationService,
   I18nTestingModule,
+  LanguageService,
 } from '@spartacus/core';
 import { CmsComponentData, FacetService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
@@ -151,6 +152,12 @@ class MockCheckoutService {
   startCheckoutForProduct() {}
 }
 
+class MockLanguageService {
+  getActive() {
+    return of('de');
+  }
+}
+
 describe('QuestionnaireCarouselComponent', () => {
   let component: QuestionnaireCarouselComponent;
   let fixture: ComponentFixture<QuestionnaireCarouselComponent>;
@@ -158,6 +165,7 @@ describe('QuestionnaireCarouselComponent', () => {
   let mockFacetService: FacetService;
   let mockCheckoutService: FSCheckoutService;
   let routingService: RoutingService;
+  let mockLanguageService: LanguageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -197,6 +205,7 @@ describe('QuestionnaireCarouselComponent', () => {
             provide: FSCheckoutService,
             useClass: MockCheckoutService,
           },
+          { provide: LanguageService, useClass: MockLanguageService },
         ],
       }).compileComponents();
     })
@@ -206,10 +215,12 @@ describe('QuestionnaireCarouselComponent', () => {
     fixture = TestBed.createComponent(QuestionnaireCarouselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    mockLanguageService = TestBed.inject(LanguageService);
     mockProductSearchService = TestBed.inject(ProductSearchService);
     routingService = TestBed.inject(RoutingService);
     mockFacetService = TestBed.inject(FacetService);
     mockCheckoutService = TestBed.inject(FSCheckoutService);
+    component.language = 'en';
     spyOn(routingService, 'go').and.callThrough();
   });
 

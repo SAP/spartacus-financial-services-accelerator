@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   Breadcrumb,
+  LanguageService,
   ProductSearchService,
   RoutingService,
   SearchConfig,
@@ -35,6 +36,7 @@ export class QuestionnaireCarouselComponent implements OnInit {
     currentPage: 0,
     sort: 'relevance',
   };
+  language: string;
 
   constructor(
     protected componentData: CmsComponentData<
@@ -44,7 +46,8 @@ export class QuestionnaireCarouselComponent implements OnInit {
     protected facetService: FacetService,
     protected checkoutService: FSCheckoutService,
     protected routingService: RoutingService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected languageService: LanguageService
   ) {}
 
   ngOnInit(): void {
@@ -64,9 +67,17 @@ export class QuestionnaireCarouselComponent implements OnInit {
     this.searchResults$ = combineLatest([
       this.componentData.data$,
       this.productSearchService.getResults(),
+      this.languageService.getActive(),
     ]).pipe(
-      filter(([_, searchResults]) => !!searchResults.facets),
-      map(([component, searchResults]) => {
+      filter(([_, searchResults, lang]) => !!searchResults.facets),
+      map(([component, searchResults, lang]) => {
+        if (this.language && this.language !== lang) {
+          this.productSearchService.search(
+            this.defaultSearchQuery,
+            this.config
+          );
+        }
+        this.language = lang;
         const breadcrumbs = this.groupBreadcrumbsByCriteria(
           searchResults.breadcrumbs,
           this.BREADCRUMB_GROUP_CRITERIA

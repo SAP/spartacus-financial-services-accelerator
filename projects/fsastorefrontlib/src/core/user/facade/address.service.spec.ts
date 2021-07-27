@@ -1,13 +1,7 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { CheckoutDeliveryService, StateWithUser, User } from '@spartacus/core';
-import { of } from 'rxjs';
 import { FSAddressService } from './address.service';
-
-class MockCheckoutDeliveryService {
-  setDeliveryAddress() {}
-  createAndSetAddress() {}
-}
 
 const formContent = {
   personalDetails: {
@@ -24,6 +18,20 @@ const user: User = {
   firstName: 'Mock',
   lastName: 'User',
 };
+
+const mockUser: User = {
+  firstName: 'Mock',
+  lastName: 'User',
+  defaultAddress: {
+    line1: 'Mock address',
+    defaultAddress: true,
+  },
+};
+
+class MockCheckoutDeliveryService {
+  setDeliveryAddress() {}
+  createAndSetAddress() {}
+}
 
 describe('FSAddressService', () => {
   let service: FSAddressService;
@@ -56,15 +64,7 @@ describe('FSAddressService', () => {
 
   it('should set delivery address for cart when user already has it', () => {
     spyOn(checkoutDeliveryService, 'setDeliveryAddress').and.callThrough();
-    const mockUser: User = {
-      firstName: 'Mock',
-      lastName: 'User',
-      defaultAddress: {
-        line1: 'Mock address',
-        defaultAddress: true,
-      },
-    };
-    service.createAddressData(formContent, mockUser);
+    service.createAddressData(formContent, mockUser, mockUser.defaultAddress);
     expect(checkoutDeliveryService.setDeliveryAddress).toHaveBeenCalledWith(
       mockUser.defaultAddress
     );
@@ -72,7 +72,7 @@ describe('FSAddressService', () => {
 
   it('should create delivery address', () => {
     spyOn(checkoutDeliveryService, 'createAndSetAddress').and.callThrough();
-    service.createAddressData(formContent, user);
+    service.createAddressData(formContent, user, null);
     expect(checkoutDeliveryService.createAndSetAddress).toHaveBeenCalled();
   });
 });
