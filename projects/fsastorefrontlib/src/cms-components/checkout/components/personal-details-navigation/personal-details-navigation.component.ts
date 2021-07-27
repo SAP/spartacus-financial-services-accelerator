@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { Address, RoutingService } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -44,11 +44,11 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.cartService.getActive(),
         this.userAccountFacade.get(),
+        this.addressService.getAddresses(),
       ])
         .pipe(
-          filter(([_, user]) => Boolean(user.customerId)),
           take(1),
-          switchMap(([cart, user]) => {
+          switchMap(([cart, user, addresses]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
@@ -62,9 +62,14 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
+                  // TODO: use user.defaultAddress when Spartacus fix bug regarding properly updating defaultAddress
+                  const defaultAddress = addresses.find(
+                    address => address.defaultAddress
+                  );
                   this.addressService.createAddressData(
                     JSON.parse(formData.content),
-                    user
+                    user,
+                    defaultAddress
                   );
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(

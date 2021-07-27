@@ -6,7 +6,6 @@ import {
   Cart,
   I18nTestingModule,
   RoutingService,
-  UserService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -67,6 +66,8 @@ const formData: YFormData = {
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
 };
 
+const mockAddress = [defaultAddress];
+
 class MockActivatedRoute {
   params = of();
 }
@@ -114,6 +115,9 @@ class MockUserAccountFacade {
 
 class MockFSAddressService {
   createAddressData() {}
+  getAddresses() {
+    return of(mockAddress);
+  }
 }
 
 describe('PersonalDetailsNavigationComponent', () => {
