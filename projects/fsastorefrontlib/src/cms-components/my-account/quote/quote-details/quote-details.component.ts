@@ -54,7 +54,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
       this.subscription.add(
         this.quote$
           .pipe(
-            filter(quote => !!quote.quoteId),
+            filter(quote => !!quote?.quoteId),
             map(quoteData => {
               this.cartService.loadCart(quoteData.cartCode, this.userId);
               this.cart$ = this.cartService.getCart(quoteData.cartCode);
