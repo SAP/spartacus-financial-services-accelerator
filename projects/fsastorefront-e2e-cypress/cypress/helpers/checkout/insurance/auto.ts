@@ -1,7 +1,13 @@
 import * as shared from '../shared-checkout';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-const todaysDate = Cypress.moment().format('YYYY-MM-DD');
-const currentDate = Cypress.moment().format(' DD MMM YYYY ');
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const todaysDate = dayjs().format('YYYY-MM-DD');
+const currentDate = dayjs().format(' DD MMM YYYY ');
 
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({

@@ -1,4 +1,11 @@
-const todaysDate = Cypress.moment().format('DD MMM YYYY');
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const todaysDate = dayjs().format('DD MMM YYYY');
 
 export function checkInboxComponets() {
   cy.get('.heading-headline').should('have.text', 'Inbox');

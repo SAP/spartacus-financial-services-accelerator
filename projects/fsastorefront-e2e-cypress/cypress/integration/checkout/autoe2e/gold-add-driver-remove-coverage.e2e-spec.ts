@@ -5,7 +5,14 @@ import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integ
 import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/change-requests';
-const todaysDate = Cypress.moment().format('YYYY-MM-DD');
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const todaysDate = dayjs().format('YYYY-MM-DD');
 
 Cypress.config('defaultCommandTimeout', 500000);
 

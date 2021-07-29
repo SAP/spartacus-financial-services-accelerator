@@ -12,6 +12,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Homeowners',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.homeowners);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -25,6 +26,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Renters',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.renters);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -38,6 +40,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Auto',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.auto);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -52,6 +55,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Life',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.life);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings('Life Basic', 'Life Premium');
@@ -62,6 +66,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Travel',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.travel);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -76,6 +81,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Event',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.event);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -90,6 +96,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Savings',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.savings);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -104,6 +111,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Current Account',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.currentAccount);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings(
@@ -118,6 +126,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Credit Card',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.creditCard);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings(
@@ -132,6 +141,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Loan',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.loan);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings('Personal Loan');
@@ -142,6 +152,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Fixed Term Deposit',
     });
+    productCategory.checkPageURL(productCategory.categoryPage.ftd);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings('Fixed Term Deposit');

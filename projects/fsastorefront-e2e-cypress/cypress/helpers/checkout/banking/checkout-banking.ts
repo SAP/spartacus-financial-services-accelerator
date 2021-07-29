@@ -141,7 +141,6 @@ export function populateAdditionalApplicantCCandLoan() {
   cy.get('[name="numberOfFinancialDependents"]').eq(1).select('1');
   cy.get('[name="sameLocationAsMainApplicant"]').eq(0).click();
   cy.get('[name="employmentStatus-additionalApplicant"]').select('retired');
-  cy.get('[name="employmentStartDate"]').eq(1).type('2000-01-01');
   cy.get('[name="income-frequency"]').select('annually');
   cy.get('[name="netIncomeAmount"]').type('7800');
 }

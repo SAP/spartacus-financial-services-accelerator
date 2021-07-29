@@ -46,6 +46,7 @@ context('Group Policy Group Admin and Customer Checks', () => {
     loan.checkLegalInformationLoan();
     checkout.clickContinueButton();
     userIdentification.checkUserIdentificationPage();
+    banking.checkProgressBarLoanAndFTD();
     userIdentification.selectUserIdentification('Legal Identification');
     checkout.checkOrderConfirmation();
     banking.checkOrderTotal('€140.00');

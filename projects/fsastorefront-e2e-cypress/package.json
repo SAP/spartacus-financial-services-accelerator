@@ -24,7 +24,7 @@
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.0.3",
     "@testing-library/cypress": "^5.0.0",
-    "cypress": "6.3.0",
+    "cypress": "^8.0.0",
     "cypress-file-upload": "^4.1.1",
     "mocha": "5.2.0",
     "mochawesome": "^4.1.0",
