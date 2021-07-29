@@ -199,7 +199,8 @@
       </cx-fs-accordion-item>
       <ng-container
         *ngIf="
-          cart.entries[0]?.product.defaultCategory?.code == 'insurances_savings'
+          cart.entries[0]?.product?.defaultCategory?.code ==
+          'insurances_savings'
         "
       >
         <cx-fs-accordion-item
@@ -207,7 +208,7 @@
         >
           <ul class="accordion-list container-fluid">
             <ng-container
-              *ngFor="let entry of cart.entries[0]?.product.investments"
+              *ngFor="let entry of cart.entries[0]?.product?.investments"
             >
               <li class="accordion-list-item row">
                 <div class="col-6 col-sm-5 item-label">
