@@ -28,10 +28,9 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
         take(1),
         map(claimData => {
           if (
-            claimData &&
-            claimData.loaded &&
             claimData.claimPoliciesData &&
-            !claimData.claimPoliciesData.insurancePolicies
+            (claimData.claimPoliciesData.insurancePolicies?.length === 0 ||
+              Object.keys(claimData.claimPoliciesData)?.length === 0)
           ) {
             this.routingService.go({ cxRoute: 'noClaims' });
             return of(false);
