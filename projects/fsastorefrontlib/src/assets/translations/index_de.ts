@@ -23,6 +23,7 @@ import { common } from './overrides/de/common';
 import { user } from './overrides/de/user';
 import { address } from './overrides/de/address';
 import { cart } from './overrides/en/cart';
+import { product } from './overrides/de/product';
 
 export const fstranslationsDe: TranslationResources = {
   b2b,
@@ -50,4 +51,5 @@ export const fsOverridesDe: TranslationResources = {
   myAccount,
   address,
   cart,
+  product,
 };
