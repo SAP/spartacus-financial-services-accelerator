@@ -22,10 +22,10 @@
     "cypress-report-creation": "npm run merge-reports; npm run generate-full-report"
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^4.0.3",
-    "@testing-library/cypress": "^5.0.0",
+    "@cypress/webpack-preprocessor": "^5.9.1",
+    "@testing-library/cypress": "^8.0.0",
     "cypress": "^8.0.0",
-    "cypress-file-upload": "^4.1.1",
+    "cypress-file-upload": "^5.0.8",
     "mocha": "5.2.0",
     "mochawesome": "^4.1.0",
     "mochawesome-merge": "^2.0.1",
