@@ -44,21 +44,15 @@ context('Auto Silver - Referred Quote', () => {
     checkout.clickContinueButton();
   });
 
-  it('Should bound a quote', () => {
+  it('Should bound a quote and check referred quote is created', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
-  });
-
-  it('Should check contact agent page ', () => {
     autoIntegration.checkReferredQuotePopup();
     cy.get('.heading-headline').should('contain.text', 'Find an Agent');
-  });
-
-  it('Should check referred quote ', () => {
     checkMyQuotesPage();
     checkAutoReferredQuote();
   });
