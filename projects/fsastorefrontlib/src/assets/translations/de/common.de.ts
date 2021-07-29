@@ -187,8 +187,8 @@ export const fscommon = {
     },
     questionnaire: {
       noResults:
-        '[DE] Unfortunately, there is no product that fits all chosen criteria. Please try again with different combination or contact an',
-      agentLink: 'kundenbetreuer.',
+        'Leider gibt es kein Produkt, dass alle ausgewählten Kriterien erfüllt. Bitte versuchen Sie es erneut mit anderen Angaben oder wenden Sie sich an einen',
+      agentLink: 'Agenten.',
     },
     httpHandlers: {
       existingCouponCodeProvided:
