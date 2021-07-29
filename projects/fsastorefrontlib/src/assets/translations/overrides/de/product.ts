@@ -1,5 +1,5 @@
 export const product = {
-    productList: {
-        appliedFilter: 'Angewandter Filter:',
-      },
-}
+  productList: {
+    appliedFilter: 'Angewandter Filter:',
+  },
+};

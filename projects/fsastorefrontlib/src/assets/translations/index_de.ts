@@ -51,5 +51,5 @@ export const fsOverridesDe: TranslationResources = {
   myAccount,
   address,
   cart,
-  product
+  product,
 };
