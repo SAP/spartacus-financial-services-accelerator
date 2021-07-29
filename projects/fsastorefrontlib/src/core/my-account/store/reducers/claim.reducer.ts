@@ -5,7 +5,7 @@ export const initialState: ClaimState = {
   claims: {},
   refresh: false,
   loaded: false,
-  content: {},
+  content: null,
 };
 
 export function reducer(
@@ -24,7 +24,7 @@ export function reducer(
     }
 
     case fromAction.LOAD_CLAIM_BY_ID_SUCCESS: {
-      const content = { ...action.payload };
+      const content = action.payload ? { ...action.payload } : null;
       return {
         ...state,
         content,

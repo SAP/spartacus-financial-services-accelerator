@@ -3,7 +3,7 @@ import { QuoteState } from '../my-account-state';
 
 export const initialState: QuoteState = {
   quotes: [],
-  quoteDetails: {},
+  quoteDetails: null,
   loaded: false,
 };
 
@@ -21,7 +21,7 @@ export function reducer(
       };
     }
     case fromAction.LOAD_QUOTE_DETAILS_SUCCESS: {
-      const quoteDetails = { ...action.payload };
+      const quoteDetails = action.payload ? { ...action.payload } : null;
       return {
         ...state,
         quoteDetails,

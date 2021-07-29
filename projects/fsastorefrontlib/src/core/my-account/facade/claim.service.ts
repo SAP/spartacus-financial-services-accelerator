@@ -26,7 +26,7 @@ export class ClaimService {
       this.authService.isUserLoggedIn(),
     ])
       .subscribe(([claim, userLoggedIn]) => {
-        this.currentClaimId = claim.claimNumber;
+        this.currentClaimId = claim?.claimNumber;
         if (this.isCreated(claim) && userLoggedIn) {
           this.loadClaimById(this.currentClaimId);
         }

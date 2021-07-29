@@ -3,7 +3,7 @@ import { PolicyState } from '../my-account-state';
 
 export const initialState: PolicyState = {
   policies: {},
-  policyDetails: {},
+  policyDetails: null,
   loaded: false,
 };
 
@@ -21,7 +21,7 @@ export function reducer(
       };
     }
     case fromAction.LOAD_POLICY_DETAILS_SUCCESS: {
-      const policyDetails = { ...action.payload };
+      const policyDetails = action.payload ? { ...action.payload } : null;
       return {
         ...state,
         policyDetails,
