@@ -1,5 +1,12 @@
 import * as shared from '../shared-checkout';
-const startDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const startDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
 
 export function checkComparisonPage() {
   cy.get('cx-fs-comparison-table-panel').should('be.visible');

@@ -1,9 +1,15 @@
 import * as sharedCheckout from '../shared-checkout.interface';
 import * as shared from '../shared-checkout';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-const tomorrowsDate = Cypress.moment().add(2, 'day').format('YYYY-MM-DD');
-const returnDate = Cypress.moment().add(10, 'day').format('YYYY-MM-DD');
-const startDate = Cypress.moment().add(2, 'day').format(' DD MMM YYYY ');
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
+const returnDate = dayjs().add(10, 'day').format('YYYY-MM-DD');
+const startDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
 
 export function populateInsuranceInfoForm() {
   cy.get('cx-dynamic-form').within(() => {

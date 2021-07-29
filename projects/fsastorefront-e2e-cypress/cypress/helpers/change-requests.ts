@@ -1,4 +1,11 @@
-const todaysDateDriver = Cypress.moment().format('YYYY-MM-DD');
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const todaysDateDriver = dayjs().format('YYYY-MM-DD');
 
 export function startChangeMileage() {
   cy.get('.fs-icon')

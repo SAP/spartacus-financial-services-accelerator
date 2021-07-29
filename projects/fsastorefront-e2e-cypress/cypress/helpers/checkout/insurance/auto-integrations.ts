@@ -3,8 +3,14 @@ import {
   waitForUserAssets,
   waitForFormDefinition,
 } from '../../general-helpers';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-const currentDate = Cypress.moment().format(' DD MMM YYYY ');
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+const currentDate = dayjs().format(' DD MMM YYYY ');
 
 export function selectAutoSilver() {
   cy.get('cx-fs-comparison-table-panel-item')
