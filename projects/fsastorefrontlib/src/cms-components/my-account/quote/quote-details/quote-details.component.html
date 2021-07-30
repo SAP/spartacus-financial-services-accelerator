@@ -215,7 +215,7 @@
                   {{ 'fscommon.fundName' | cxTranslate }}
                 </div>
                 <div class="col-6 col-sm-5 value notice">
-                  {{ entry.investmentType.factSheetDocument.altText }}
+                  {{ entry.investmentType?.factSheetDocument?.altText }}
                 </div>
               </li>
               <li class="accordion-list-item row">
@@ -223,7 +223,7 @@
                   {{ 'fscommon.isin' | cxTranslate }}
                 </div>
                 <div class="col-6 col-sm-5 value notice">
-                  {{ entry.investmentType.isin }}
+                  {{ entry.investmentType?.isin }}
                 </div>
               </li>
               <li class="accordion-list-item row">
@@ -231,7 +231,7 @@
                   {{ 'fscommon.yearsPerformanse' | cxTranslate }}
                 </div>
                 <div class="col-6 col-sm-5 value notice">
-                  {{ entry.investmentType.fiveYearPerformance }}
+                  {{ entry.investmentType?.fiveYearPerformance }}
                 </div>
               </li>
               <li class="accordion-list-item row">
@@ -239,7 +239,7 @@
                   {{ 'fscommon.riskAndReturningRate' | cxTranslate }}
                 </div>
                 <div class="col-6 col-sm-5 value notice">
-                  {{ entry.investmentType.riskReturningRating }}
+                  {{ entry.investmentType?.riskReturningRating }}
                 </div>
               </li>
             </ng-container>
