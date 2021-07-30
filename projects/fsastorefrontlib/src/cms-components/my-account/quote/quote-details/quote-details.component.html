@@ -197,6 +197,55 @@
           </ng-container>
         </ul>
       </cx-fs-accordion-item>
+      <ng-container
+        *ngIf="
+          cart.entries[0]?.product?.defaultCategory?.code ==
+          'insurances_savings'
+        "
+      >
+        <cx-fs-accordion-item
+          [title]="'fscommon.investementDetails' | cxTranslate"
+        >
+          <ul class="accordion-list container-fluid">
+            <ng-container
+              *ngFor="let entry of cart.entries[0]?.product?.investments"
+            >
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.fundName' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ entry.investmentType?.factSheetDocument?.altText }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.isin' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ entry.investmentType?.isin }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.yearsPerformanse' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ entry.investmentType?.fiveYearPerformance }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.riskAndReturningRate' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ entry.investmentType?.riskReturningRating }}
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+        </cx-fs-accordion-item>
+      </ng-container>
       <cx-fs-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
         <ul class="accordion-list container-fluid">
           <ng-container *ngFor="let entry of cart?.entries; let i = index">

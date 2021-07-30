@@ -72,6 +72,8 @@ export const fscommon = {
     whatsIncluded: 'Was\ist beinhaltet', // prettier-ignore
     addedByYou: 'Hinzugefügt',
     investementDetails: 'Investment Informationen',
+    fundName: 'Name',
+    isin: 'ISIN',
     personalDetails: 'Persönliche Angaben',
     generalDetails: 'Allgemeine Informationen',
     optionalExtras: 'Optionale Extras',
