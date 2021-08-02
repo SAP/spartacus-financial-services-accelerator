@@ -98,7 +98,7 @@ export const fscommon = {
     contribution: 'Contribution',
     creditCard: 'Credit Card',
     invoice: 'Invoice',
-    recommendedProduct: 'This is your recommended product!',
+    recommendedProduct: 'Recommended product',
     payment: {
       CARD: 'Credit Card',
       INVOICE: 'Invoice',

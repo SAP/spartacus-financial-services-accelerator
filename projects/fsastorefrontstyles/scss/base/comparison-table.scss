@@ -132,4 +132,14 @@
       border-left: none;
     }
   }
+  .recommended-product {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    padding: 0 5px;
+    left: 0;
+    bottom: 99.8%;
+    background-color: var(--cx-color-primary);
+    color: #ffffff;
+  }
 }
