@@ -131,35 +131,4 @@
       border-left: none;
     }
   }
-  .ribbon {
-    position: relative;
-    width: calc(100% + 20px);
-    left: -10px;
-    top: 10px;
-    box-shadow: 0 0 0 2px var(--cx-color-primary),
-      0px 21px 5px -18px rgb(0 0 0 / 60%);
-    border-top: 1px dashed;
-    border-bottom: 1px dashed;
-    padding: 5px 0;
-    background-color: var(--cx-color-primary);
-    font-size: 10px;
-    color: var(--cx-color-1);
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      height: 0;
-      width: 0;
-      bottom: -13px;
-      border-top: 10px solid #004a95;
-    }
-    &:before {
-      left: -2px;
-      border-left: 7px solid transparent;
-    }
-    &:after {
-      right: -2px;
-      border-right: 7px solid transparent;
-    }
-  }
 }

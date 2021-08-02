@@ -4,7 +4,7 @@
       <h3 class="table-header-title">
         {{ product.name }}
         <div
-          *ngIf="recommendedProduct == product.code"
+          *ngIf="recommendedProduct === product.code"
           class="text-uppercase ribbon"
         >
           {{ 'fscommon.recommendedProduct' | cxTranslate }}
