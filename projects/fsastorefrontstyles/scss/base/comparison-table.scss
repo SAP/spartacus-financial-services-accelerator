@@ -100,8 +100,6 @@
     padding-right: 5px;
     @include media-breakpoint-down(md) {
       width: 46%;
-    }
-    @include media-breakpoint-down(sm) {
       z-index: 2;
       box-shadow: -28px 5px 1px 29px var(--cx-color-1),
         1px 0px 8px 2px rgba(0, 0, 0, 0.4);
@@ -114,8 +112,6 @@
       overflow-y: hidden;
       overflow-x: auto;
       width: 54%;
-    }
-    @include media-breakpoint-down(sm) {
       border-left: 0;
     }
     .slide-column {
