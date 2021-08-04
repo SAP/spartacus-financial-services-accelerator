@@ -43,11 +43,13 @@
     .table-cell {
       position: relative;
       padding: 15px;
+      border-radius: 4px;
+      font-weight: var(--cx-font-weight-semi);
       &:nth-child(even) {
         background-color: transparent;
       }
       &:nth-child(odd) {
-        background-color: var(--cx-color-5);
+        background-color: var(--cx-color-4);
       }
       .table-cell-title {
         display: inline-block;
@@ -55,7 +57,6 @@
         max-width: calc(100% - 4vw);
         vertical-align: middle;
         text-transform: uppercase;
-        font-weight: var(--cx-font-weight-semi);
       }
       .table-cell-value {
         @include media-breakpoint-down(sm) {
@@ -100,6 +101,11 @@
     @include media-breakpoint-down(md) {
       width: 46%;
     }
+    @include media-breakpoint-down(sm) {
+      position: relative;
+      z-index: 2;
+      box-shadow: 7px 0 4px -5px rgb(0, 0, 0, 0.5);
+    }
   }
   .slide-column-wrapper {
     width: 75%;
@@ -108,6 +114,9 @@
       overflow-x: auto;
       width: 54%;
       border-left: 1px solid var(--cx-color-3);
+    }
+    @include media-breakpoint-down(sm) {
+      border-left: 0;
     }
     .slide-column {
       display: flex;
