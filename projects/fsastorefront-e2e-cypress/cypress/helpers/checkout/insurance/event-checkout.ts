@@ -46,7 +46,10 @@ export function selectTwoStarEvent() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Two Star Event Plan');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Two Star Event Plan'
+      );
       cy.get('.primary-button').click();
     });
 }

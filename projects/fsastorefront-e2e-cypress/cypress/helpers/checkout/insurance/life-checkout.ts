@@ -17,7 +17,10 @@ export function selectBasicLifeProduct() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Basic Life Insurance');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Basic Life Insurance'
+      );
       cy.get('.primary-button').click();
     });
 }

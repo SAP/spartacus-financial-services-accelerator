@@ -93,7 +93,7 @@ export function checkCurrentAccountComparisonTable() {
 
 export function selectPremiumAccount() {
   cy.get('cx-fs-comparison-table-panel-item').within(() => {
-    cy.get('.table-header-title').should('have.text', 'Premium Account');
+    cy.get('.table-header-title').should('contain.text', 'Premium Account');
     cy.get('.primary-button').click();
   });
 }

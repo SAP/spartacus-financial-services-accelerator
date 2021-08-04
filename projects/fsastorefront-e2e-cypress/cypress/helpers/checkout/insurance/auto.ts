@@ -126,7 +126,7 @@ export function selectAutoBronze() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Auto Bronze');
+      cy.get('.table-header-title').should('contain.text', 'Auto Bronze');
       cy.get('.primary-button').click();
     });
 }
@@ -135,8 +135,8 @@ export function selectAutoSilver() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Auto Silver');
-      cy.get('.table-header-value').should('have.text', '€10.95');
+      cy.get('.table-header-title').should('contain.text', 'Auto Silver');
+      cy.get('.table-header-value').should('contain.text', '€10.95');
       cy.get('.primary-button').click();
     });
 }

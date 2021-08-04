@@ -28,7 +28,7 @@ export function selectRentersMonthly() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Renters Monthly');
+      cy.get('.table-header-title').should('contain.text', 'Renters Monthly');
       cy.get('.primary-button').click();
     });
 }
