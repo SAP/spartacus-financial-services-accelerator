@@ -102,18 +102,18 @@
       width: 46%;
     }
     @include media-breakpoint-down(sm) {
-      position: relative;
       z-index: 2;
-      box-shadow: 7px 0 4px -5px rgb(0, 0, 0, 0.5);
+      box-shadow: -28px 5px 1px 29px var(--cx-color-1),
+        1px 0px 8px 2px rgba(0, 0, 0, 0.4);
     }
   }
   .slide-column-wrapper {
     width: 75%;
+    border-left: 1px solid var(--cx-color-3);
     @include media-breakpoint-down(md) {
       overflow-y: hidden;
       overflow-x: auto;
       width: 54%;
-      border-left: 1px solid var(--cx-color-3);
     }
     @include media-breakpoint-down(sm) {
       border-left: 0;
@@ -136,11 +136,6 @@
     }
   }
   &:first-of-type {
-    border-left: 1px solid var(--cx-color-6);
-  }
-  @include media-breakpoint-down(sm) {
-    &:first-of-type {
-      border-left: none;
-    }
+    border-left: none;
   }
 }

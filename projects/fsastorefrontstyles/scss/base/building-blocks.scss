@@ -213,6 +213,8 @@
     0px 8px 8px -3px rgb(0 0 0 / 60%);
   border-top: 1px dashed;
   border-bottom: 1px dashed;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   padding-block: 5px;
   background-color: var(--cx-color-primary);
   font-size: calc(var(--cx-xs-font-size) * 0.95);
