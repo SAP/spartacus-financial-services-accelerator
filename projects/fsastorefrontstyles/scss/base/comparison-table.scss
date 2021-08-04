@@ -4,6 +4,9 @@
     .nav-tabs,
     .tab-content {
       flex: 0 1 100%;
+      @include media-breakpoint-down(md) {
+        display: block;
+      }
     }
     .tab-pane {
       @include fs-box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
@@ -87,12 +90,11 @@
   }
 }
 %cx-fs-comparison-table-panel {
-  display: block;
+  display: flex;
   width: 100%;
-  padding: 0 10px;
+  padding-inline: 10px 0;
   margin: 3.1rem auto;
   .fixed-column {
-    float: left;
     width: 25%;
     padding-right: 5px;
     @include media-breakpoint-down(md) {
@@ -100,7 +102,6 @@
     }
   }
   .slide-column-wrapper {
-    float: left;
     width: 75%;
     @include media-breakpoint-down(md) {
       overflow-y: hidden;
@@ -120,8 +121,10 @@
   padding: 0 5px;
   border-left: 1px dashed var(--cx-color-6);
   text-align: center;
-  &:last-of-type {
-    padding-right: 0;
+  @include media-breakpoint-down(md) {
+    &:last-of-type .ribbon:after {
+      display: none;
+    }
   }
   &:first-of-type {
     border-left: 1px solid var(--cx-color-6);

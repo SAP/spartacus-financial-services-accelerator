@@ -45,14 +45,13 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
 
   product$: Observable<FSProduct>;
   isLoading = true;
-  recommendedProduct: string;
+  recommendedProduct = localStorage.getItem(RECOMMENDED_PRODUCT);
   panelItemEntries: OneTimeChargeEntry[] = [];
   private subscription = new Subscription();
 
   ngOnInit() {
     this.getProductData();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
-    this.recommendedProduct = localStorage.getItem(RECOMMENDED_PRODUCT);
   }
 
   getProductData() {
