@@ -67,7 +67,7 @@ export function selectPremiumCard() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', ' Premium Card ');
+      cy.get('.table-header-title').should('contain.text', 'Premium Card');
       cy.get('.primary-button').click();
     });
 }

@@ -34,7 +34,7 @@ export function searchTravelProducts() {
   cy.get('cx-breadcrumb').should('contain', '9 results for "travel"');
   cy.reload();
   cy.get('.title.background-color-primary').should(
-    'contain',
+    'contain.text',
     ' Backpackers - Gold Plan '
   );
 }
