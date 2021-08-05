@@ -49,8 +49,11 @@ export function selectSingleBudgetPlan() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Single - Budget Plan');
-      cy.get('.table-header-value').should('have.text', '€90.00');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Single - Budget Plan'
+      );
+      cy.get('.table-header-value').should('contain.text', '€90.00');
       cy.get('.primary-button').click();
     });
 }

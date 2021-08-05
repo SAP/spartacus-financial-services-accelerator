@@ -28,7 +28,10 @@ export function selectHomeownersAnnually() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Homeowners Annually');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Homeowners Annually'
+      );
       cy.get('.primary-button').click();
     });
 }

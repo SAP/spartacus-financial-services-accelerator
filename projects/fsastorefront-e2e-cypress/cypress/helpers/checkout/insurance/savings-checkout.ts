@@ -40,7 +40,7 @@ export function selecBalancedDeal() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Balanced Deal');
+      cy.get('.table-header-title').should('contain.text', 'Balanced Deal');
       cy.get('.primary-button').click();
     });
 }

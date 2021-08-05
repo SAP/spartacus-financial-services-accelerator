@@ -24,7 +24,7 @@ export function selectFamilyAccount() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Family Account');
+      cy.get('.table-header-title').should('contain.text', 'Family Account');
       cy.get('.primary-button').click();
     });
 }

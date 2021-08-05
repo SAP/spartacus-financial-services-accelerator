@@ -67,9 +67,12 @@ export function checkComparisonTable(comparisonTable: ComparisonTable) {
     cy.get('cx-fs-comparison-table-panel-item')
       .eq(index)
       .within(() => {
-        cy.get('.table-header-title').should('have.text', mainProductItem.name);
+        cy.get('.table-header-title').should(
+          'contain.text',
+          mainProductItem.name
+        );
         cy.get('.table-header-value').should(
-          'have.text',
+          'contain.text',
           mainProductItem.price
         );
       });
