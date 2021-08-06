@@ -63,7 +63,7 @@ export class GeneralInformationComponent extends FormCMSComponent
         .pipe(
           map(cart => {
             if (cart.code) {
-              const bindingState = (<FSCart>cart).insuranceQuote.state.code;
+              const bindingState = (<FSCart>cart).insuranceQuote?.state?.code;
               const chooseCoverFormId = (<FSCart>cart).insuranceQuote
                 ?.quoteDetails?.formId;
               if (bindingState !== BindingStateType.BIND && chooseCoverFormId) {
