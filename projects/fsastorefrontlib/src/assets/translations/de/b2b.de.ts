@@ -21,7 +21,7 @@ export const organization = {
       title: '[DE] Organization Details',
       subtitle: '[DE] Organization: {{ item.name }}',
       hint:
-        '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling a organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
+        '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling an organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
     },
     edit: {
       title: '[DE] Edit Organization',
@@ -91,7 +91,7 @@ export const organization = {
     orgUnit: '[DE] Organization',
     assignApprover: '[DE] Add the user to approvers for the organization',
     hint:
-      '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to a organization, and they have access to all child organizations of their primary organization.',
+      '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to an organization, and they have access to all child organizations of their primary organization.',
   },
 };
 
