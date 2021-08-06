@@ -21,6 +21,7 @@ context('Credit Card Checkout', () => {
   it('Should check comparison page', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     banking.checkBankingProgressBar();
+    checkout.checkSyncPilotComparisonTable();
     banking.checkBankingComparisonPage();
   });
 

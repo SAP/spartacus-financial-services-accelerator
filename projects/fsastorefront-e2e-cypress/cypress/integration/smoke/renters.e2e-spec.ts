@@ -33,6 +33,7 @@ context('Renters Checkout', () => {
 
   it('Should check comparison table', () => {
     checkout.checkCheckoutStep('Your Renters Insurance', '7');
+    checkout.checkSyncPilotComparisonTable();
     checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
     renters.selectRentersMonthly();

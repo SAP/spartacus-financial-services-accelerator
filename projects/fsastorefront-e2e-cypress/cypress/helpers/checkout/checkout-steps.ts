@@ -264,3 +264,12 @@ export function checkFinalReviewComponents() {
       cy.get('.section-header-heading').contains('Travel Insurance');
     });
 }
+
+export function checkSyncPilotComparisonTable() {
+  cy.get('cx-fs-sync-pilot-connection-component')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h3').should('contain.text', 'Need Help?');
+      cy.get('p.mb-0').should('contain.text', 'Speak to an Agent');
+    });
+}

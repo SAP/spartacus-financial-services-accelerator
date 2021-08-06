@@ -18,6 +18,8 @@ context('Current Account Checkout', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     banking.checkBankingProgressBar();
     banking.checkBankingComparisonPage();
+    //Sync Pilot should not be displayed for anonymous user
+    cy.get('cx-fs-sync-pilot-connection-component').should('not.exist');
     currentAccount.checkCurrentAccountComparisonTable();
     currentAccount.selectFamilyAccount();
   });

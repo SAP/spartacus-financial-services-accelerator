@@ -4,8 +4,6 @@ import * as auto from '../../helpers/checkout/insurance/auto';
 import * as autoIntegration from '../../helpers/checkout/insurance/auto-integrations';
 import * as checkout from '../../helpers/checkout/checkout-steps';
 
-Cypress.config('defaultCommandTimeout', 500000);
-
 context('Policy Holder is Main Driver with main product switch', () => {
   before(() => {
     cy.visit('/');

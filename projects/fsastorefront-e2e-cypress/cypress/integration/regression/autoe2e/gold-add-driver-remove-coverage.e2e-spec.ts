@@ -7,6 +7,7 @@ import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/change-requests';
 import * as dayjs from 'dayjs';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 
 dayjs.extend(customParseFormat);
 
@@ -61,9 +62,8 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
   });
 
   it('Select default payment details and place an order', () => {
-    //TODO: Will be replaced with credit card once bug is resolved
-    checkout.populatePaymentCreditCard();
-    cy.get('.btn-primary').contains('Continue').click();
+    selectPaymentMethodInvoice();
+    checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
   });

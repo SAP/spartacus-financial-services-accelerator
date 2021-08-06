@@ -6,6 +6,7 @@ import * as userIdentification from '../../../helpers/checkout/banking/user-iden
 import * as ftd from '../../../helpers/checkout/banking/fixed-term-deposit';
 import * as currentAccount from '../../../helpers/checkout/banking/current-account';
 import * as policies from '../../../helpers/my-account/policies';
+import * as myAccount from '../../../helpers/my-account/my-account';
 
 context('Fixed Term Deposit Checkout', () => {
   before(() => {
@@ -90,5 +91,10 @@ context('Fixed Term Deposit Checkout', () => {
       .parent()
       .contains('€503,125.00');
     checkout.checkAccordions('FTDConfirmation');
+  });
+
+  it('Should check order history page', () => {
+    myAccount.orderHistoryPage();
+    myAccount.checkOrderHistoryContent('503,125.00');
   });
 });

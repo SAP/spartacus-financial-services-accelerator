@@ -72,13 +72,14 @@ export function checkEmptyOrderHistoryPage() {
 }
 
 export function checkOrderHistoryContent(price) {
+  cy.get('h2').should('contain.text', 'Order history');
   cy.get('.cx-order-history-body')
     .should('be.visible')
     .within(() => {
       cy.get('.cx-order-history-thead-mobile').should('be.visible');
       cy.get('.cx-order-history-code').should('be.visible');
       cy.get('.cx-order-history-placed').should('be.visible');
-      cy.get('.cx-order-history-status').contains('Pending');
+      cy.get('.cx-order-history-status').should('be.visible');
       cy.get('.cx-order-history-total').contains(price);
     });
 }
