@@ -15,13 +15,13 @@ export const organization = {
     header: '[DE] All organizations ({{count}})',
     unit: '[DE] Organization',
     parentUnit: '[DE] Parent Organization',
-    hint:  '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
+    hint:
+      '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
     details: {
       title: '[DE] Organization Details',
       subtitle: '[DE] Organization: {{ item.name }}',
       hint:
-        '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling a organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.'
-
+        '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling a organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
     },
     edit: {
       title: '[DE] Edit Organization',
@@ -70,7 +70,6 @@ export const organization = {
     subtitle: '[DE] Organization: {{item.name}}',
     hint:
       '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members "inherit" child organizations.',
-
   },
   orgUnitApprovers: {
     subtitle: '[DE] Organization: {{item.name}}',
@@ -86,7 +85,6 @@ export const organization = {
     subtitle: '[DE] Organization: {{item.name}}',
     hint:
       '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Members "inherit" child organizations.',
-
   },
   orgUser: {
     unit: '[DE] Organization',
@@ -94,7 +92,6 @@ export const organization = {
     assignApprover: '[DE] Add the user to approvers for the organization',
     hint:
       '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to a organization, and they have access to all child organizations of their primary organization.',
-
   },
 };
 

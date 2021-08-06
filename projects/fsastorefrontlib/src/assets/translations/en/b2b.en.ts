@@ -15,12 +15,13 @@ export const organization = {
     header: 'All organizations ({{count}})',
     unit: 'Organization',
     parentUnit: 'Parent Organization',
-    hint:  'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
+    hint:
+      'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
     details: {
       title: 'Organization Details',
       subtitle: 'Organization: {{ item.name }}',
       hint:
-        'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling a organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.'
+        'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling a organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
     },
     edit: {
       title: 'Edit Organization',
