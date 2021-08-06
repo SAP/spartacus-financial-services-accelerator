@@ -1,31 +1,11 @@
 import * as shared from '../shared-checkout';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
 const todaysDate = dayjs().format('YYYY-MM-DD');
 const currentDate = dayjs().format(' DD MMM YYYY ');
-
-export function openCategoryPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'Insurance',
-    dropdownItem: 'Auto',
-  });
-  cy.get('.enriched-banner-styled-text')
-    .invoke('text')
-    .then(text => {
-      if (text !== ' Get a Quote') {
-        openCategoryPage();
-      }
-    });
-
-  cy.get('.enriched-banner-styled-text')
-    .should('be.visible')
-    .click({ force: true });
-}
 
 export function populateAutoMonthlyAudi() {
   cy.get('cx-dynamic-form').within(() => {
@@ -100,86 +80,6 @@ export function populateMainDriverInfo() {
   cy.get('[name="driverMaritalStatus"]').eq(0).select('Single');
   cy.get('[name="driverCategory"]').eq(0).select('Main');
   cy.get('[name="driverLicenceDate"]').eq(0).type('2018-01-01');
-}
-
-export function checkAutoComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
-    mainProducts: [
-      {
-        name: 'Auto Bronze',
-        price: '€4.98',
-      },
-      {
-        name: 'Auto Silver',
-        price: '€10.95',
-      },
-      {
-        name: 'Auto Gold',
-        price: '€20.74',
-      },
-    ],
-  };
-  shared.checkComparisonTable(comparisonTableContent);
-}
-
-export function selectAutoBronze() {
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(0)
-    .within(() => {
-      cy.get('.table-header-title').should('contain.text', 'Auto Bronze');
-      cy.get('.primary-button').click();
-    });
-}
-
-export function selectAutoSilver() {
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
-    .within(() => {
-      cy.get('.table-header-title').should('contain.text', 'Auto Silver');
-      cy.get('.table-header-value').should('contain.text', '€10.95');
-      cy.get('.primary-button').click();
-    });
-}
-
-export function checkAutoSilverMiniCart() {
-  const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €10.95 ',
-    products: [
-      {
-        title: ' Start Date: ',
-        value: currentDate,
-      },
-      {
-        title: 'Vehicle Make:',
-        value: ' Audi ',
-      },
-      {
-        title: 'Vehicle Model:',
-        value: ' A5 ',
-      },
-      {
-        title: 'Vehicle Type:',
-        value: ' A5 Quattro ',
-      },
-      {
-        title: 'Vehicle Value:',
-        value: ' 12000 ',
-      },
-      {
-        title: 'Vehicle Year:',
-        value: ' 2017 ',
-      },
-      {
-        title: ' Third Party Liability: ',
-        value: ' €9.95 ',
-      },
-      {
-        title: ' Collision Coverage: ',
-        value: ' €1.00 ',
-      },
-    ],
-  };
-  shared.checkMiniCart(miniCartContent);
 }
 
 export function populateAdditionalDriverInfo() {
@@ -400,4 +300,13 @@ export function checkOptionalProductsGoldAddOptional() {
     ],
   };
   shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function updateDateOfBirth() {
+  cy.get('cx-dynamic-form').within(() => {
+    cy.get('[name="vehicleModel"]').select('Golf');
+    cy.get('[name="vehicleType"]').select('GolfCDiesel');
+    cy.get('[name="vehicleYear"]').select('2014');
+    cy.get('[name=dateOfBirth]').eq(0).type('1990-01-12');
+  });
 }

@@ -1,13 +1,10 @@
-import * as shared from '../shared-checkout';
 import {
   waitForUserAssets,
   waitForFormDefinition,
 } from '../../general-helpers';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
 const currentDate = dayjs().format(' DD MMM YYYY ');
@@ -19,16 +16,6 @@ export function selectAutoSilver() {
       cy.get('.table-header-title').should('contain.text', 'Auto Silver');
       cy.get('.primary-button').click();
     });
-}
-
-export function waitForBoundQuote() {
-  const boundQuote = waitForUserAssets(
-    'potentialProductPromotions',
-    'boundQuote'
-  );
-  cy.wait(`@${boundQuote}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
 }
 
 export function checkReplicatedPolicy(Product) {

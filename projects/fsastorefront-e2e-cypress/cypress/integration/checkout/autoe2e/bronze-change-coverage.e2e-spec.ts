@@ -30,7 +30,7 @@ context('Auto Bronze Checkout with change coverage', () => {
   });
 
   it('Should check comparison table and select main and optional products', () => {
-    auto.selectAutoBronze();
+    autoIntegration.selectAutoBronze();
     auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();
   });

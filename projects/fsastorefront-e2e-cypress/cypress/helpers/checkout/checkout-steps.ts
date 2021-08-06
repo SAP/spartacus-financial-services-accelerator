@@ -6,10 +6,8 @@ import {
   waitForUserAssets,
 } from '../general-helpers';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
 const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
@@ -201,13 +199,6 @@ export function waitForAddOptions() {
   });
 }
 
-export function waitForConfirmation() {
-  const confirmation = waitForPage('orderConfirmationPage', 'confirmation');
-  cy.wait(`@${confirmation}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
   cy.get('h2').should('be.visible').should('contain.text', mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
@@ -226,29 +217,12 @@ export function waitForQuoteReviewPage() {
   });
 }
 
-export function waitForPersonalDetailsForm() {
-  const formDefinition = waitForFormDefinition(
-    'banking_current_account',
-    'formDefinition'
-  );
-  cy.wait(`@${formDefinition}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
 export function waitForChangeMileage() {
   const changeCarDetails = waitForCMSComponent(
     'ChangeCarDetailsFormComponent',
     'changeCarDetails'
   );
   cy.wait(`@${changeCarDetails}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
-export function waitForPolicyDetails() {
-  const policyDetails = waitForPage('policy-details', 'policyDetails');
-  cy.wait(`@${policyDetails}`).then(({ response }) => {
     expect(response.statusCode).to.eq(200);
   });
 }
@@ -265,33 +239,9 @@ export function populatePaymentCreditCard() {
   cy.get('input[type="checkbox"]').eq(0).click();
 }
 
-export function populateBillingAddress() {
-  cy.get('[formcontrolname=isocode]').ngSelect('Serbia');
-  cy.get('[formcontrolname=firstName]').type('Aleks');
-  cy.get('[formcontrolname=lastName]').type('Moore');
-  cy.get('[formcontrolname=line1]').type('Omladinskih Brigada');
-  cy.get('[formcontrolname=town]').type('Belgrade');
-  cy.get('[formcontrolname=postalCode]').type('11000');
-  cy.get('.btn-block').contains('Continue').click();
-}
-
 export function waitConsent() {
   const consent = waitForUserAssets('consenttemplates', 'consent');
   cy.wait(`@${consent}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
-export function waitForOrder() {
-  const order = waitForUserAssets('orders', 'order');
-  cy.wait(`@${order}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
-export function waitFinalReview() {
-  const finalReview = waitForPage('final-review', 'finalReview');
-  cy.wait(`@${finalReview}`).then(({ response }) => {
     expect(response.statusCode).to.eq(200);
   });
 }

@@ -6,10 +6,8 @@ import * as checkout from '../../../helpers/checkout/checkout-steps';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/change-requests';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
 Cypress.config('defaultCommandTimeout', 500000);
