@@ -57,6 +57,9 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkPageURL(productCategory.categoryPage.life);
     productCategory.checkComponents();
+    cy.get('cx-fs-cms-custom-container')
+      .eq(1)
+      .should('contain.text', 'Find Best Insurance');
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings('Life Basic', 'Life Premium');
   });
@@ -98,6 +101,9 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkPageURL(productCategory.categoryPage.savings);
     productCategory.checkComponents();
+    cy.get('cx-fs-cms-custom-container')
+      .eq(1)
+      .should('contain.text', 'Find Best Insurance');
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
       'Savings Safe And Steady',

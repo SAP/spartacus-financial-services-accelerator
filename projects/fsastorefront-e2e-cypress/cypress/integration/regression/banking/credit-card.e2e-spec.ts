@@ -5,6 +5,7 @@ import * as inbox from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkout-banking';
 import * as creditCard from '../../../helpers/checkout/banking/credit-card';
 import * as userIdentification from '../../../helpers/checkout/banking/user-identification';
+import * as myAccount from '../../../helpers/my-account/my-account';
 
 context('Credit Card Checkout', () => {
   before(() => {
@@ -85,5 +86,11 @@ context('Credit Card Checkout', () => {
     cy.get('cx-fs-message-notification').click();
     inbox.checkInboxComponets();
     inbox.checkBankingTabs();
+  });
+
+  it('Should check Order History and Order Status', () => {
+    myAccount.orderHistoryPage();
+    myAccount.checkOrderHistoryContent('€89.00');
+    cy.get('.cx-order-history-status').should('contain.text', 'Pending');
   });
 });
