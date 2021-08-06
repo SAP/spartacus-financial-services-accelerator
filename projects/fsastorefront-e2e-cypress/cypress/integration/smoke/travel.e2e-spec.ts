@@ -1,9 +1,9 @@
-import * as register from '../../../helpers/register';
-import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
-import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkout-steps';
-import * as payment from '../../../helpers/checkout/insurance/payment';
-import * as inbox from '../../../helpers/my-account/inbox';
+import * as register from '../../helpers/register';
+import * as travelCheckout from '../../helpers/checkout/insurance/travel-checkout';
+import { registrationUser } from '../../sample-data/users';
+import * as checkout from '../../helpers/checkout/checkout-steps';
+import * as payment from '../../helpers/checkout/insurance/payment';
+import * as inbox from '../../helpers/my-account/inbox';
 
 context('Travel Insurance Checkout', () => {
   before(() => {

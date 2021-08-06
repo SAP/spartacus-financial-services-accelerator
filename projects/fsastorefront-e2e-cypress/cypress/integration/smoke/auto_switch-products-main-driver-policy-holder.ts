@@ -1,15 +1,8 @@
-import { registrationUser } from '../../../sample-data/users';
-import * as register from '../../../helpers/register';
-import * as auto from '../../../helpers/checkout/insurance/auto';
-import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
-import * as checkout from '../../../helpers/checkout/checkout-steps';
-import * as productCategory from '../../../helpers/product-category-page';
-
-import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
-import * as myPolicies from '../../../helpers/my-account/policies';
-import * as changeRequest from '../../../helpers/change-requests';
-import { should } from 'chai';
-import { checkHomeownersComparisonTable } from '../../../helpers/checkout/insurance/homeowners-checkout';
+import { registrationUser } from '../../sample-data/users';
+import * as register from '../../helpers/register';
+import * as auto from '../../helpers/checkout/insurance/auto';
+import * as autoIntegration from '../../helpers/checkout/insurance/auto-integrations';
+import * as checkout from '../../helpers/checkout/checkout-steps';
 
 Cypress.config('defaultCommandTimeout', 500000);
 

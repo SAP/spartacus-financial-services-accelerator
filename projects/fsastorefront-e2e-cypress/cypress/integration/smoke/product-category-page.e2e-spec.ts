@@ -1,5 +1,5 @@
-import * as productCategory from '../../../helpers/product-category-page';
-import { insuranceButtons, bankingButtons } from '../../../helpers/constants';
+import * as productCategory from '../../helpers/product-category-page';
+import { insuranceButtons, bankingButtons } from '../../helpers/constants';
 
 context('ProductCategoryPage', () => {
   before(() => {

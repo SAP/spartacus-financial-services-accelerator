@@ -1,7 +1,7 @@
-import { registrationUserWithoutPhone } from '../../../sample-data/users';
-import * as register from '../../../helpers/register';
-import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
-import * as checkout from '../../../helpers/checkout/checkout-steps';
+import { registrationUserWithoutPhone } from '../../sample-data/users';
+import * as register from '../../helpers/register';
+import * as renters from '../../helpers/checkout/insurance/renters-checkout';
+import * as checkout from '../../helpers/checkout/checkout-steps';
 
 context('Renters Checkout', () => {
   before(() => {

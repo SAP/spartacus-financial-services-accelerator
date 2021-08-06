@@ -1,4 +1,4 @@
-import * as findAnAgent from '../../../helpers/find-an-agent';
+import * as findAnAgent from '../../helpers/find-an-agent';
 
 context('Find An Agent', () => {
   before(() => {
