@@ -1,6 +1,8 @@
 import { waitForRequest } from '../../general-helpers';
+import * as checkout from '../checkout-steps';
 
 export function checkUserIdentificationPage() {
+  checkout.checkPageURL(checkout.categoryPage.userIdentification);
   cy.get('.section-header-heading').should('have.text', 'User Identification');
   cy.get('cx-fs-cms-custom-container')
     .should('be.visible')

@@ -25,23 +25,3 @@ export function checkCategoryProductHeadings(...headings: string[]) {
   });
   cy.get('.item-details').should('have.length', headings.length);
 }
-
-export var categoryPage = {
-  homeowners: 'insurance_main_homeowners',
-  renters: 'insurance_main_renters',
-  auto: 'insurance_main_auto',
-  life: 'insurance_main_life',
-  travel: 'insurance_main_travel',
-  event: 'insurance_main_event',
-  savings: 'insurance_main_savings',
-  currentAccount: 'banking_main_current_account',
-  creditCard: 'banking_main_credit_card',
-  loan: 'banking_main_loans',
-  ftd: 'banking_main_fixed_term_deposits',
-};
-
-export function checkPageURL(page: string) {
-  cy.location().should(loc => {
-    expect(loc.href).to.include(`${page}`);
-  });
-}

@@ -1,4 +1,5 @@
 import * as productCategory from '../../helpers/product-category-page';
+import * as checkout from '../../helpers/checkout/checkout-steps';
 import { insuranceButtons, bankingButtons } from '../../helpers/constants';
 
 context('ProductCategoryPage', () => {
@@ -12,7 +13,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Homeowners',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.homeowners);
+    checkout.checkPageURL(checkout.categoryPage.homeowners);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -26,7 +27,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Renters',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.renters);
+    checkout.checkPageURL(checkout.categoryPage.renters);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -40,7 +41,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Auto',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.auto);
+    checkout.checkPageURL(checkout.categoryPage.auto);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -55,7 +56,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Life',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.life);
+    checkout.checkPageURL(checkout.categoryPage.life);
     productCategory.checkComponents();
     cy.get('cx-fs-cms-custom-container')
       .eq(1)
@@ -69,7 +70,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Travel',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.travel);
+    checkout.checkPageURL(checkout.categoryPage.travel);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -84,7 +85,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Event',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.event);
+    checkout.checkPageURL(checkout.categoryPage.event);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(insuranceButtons);
     productCategory.checkCategoryProductHeadings(
@@ -99,7 +100,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Savings',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.savings);
+    checkout.checkPageURL(checkout.categoryPage.savings);
     productCategory.checkComponents();
     cy.get('cx-fs-cms-custom-container')
       .eq(1)
@@ -117,7 +118,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Current Account',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.currentAccount);
+    checkout.checkPageURL(checkout.categoryPage.currentAccount);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings(
@@ -132,7 +133,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Credit Card',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.creditCard);
+    checkout.checkPageURL(checkout.categoryPage.creditCard);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings(
@@ -147,7 +148,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Loan',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.loan);
+    checkout.checkPageURL(checkout.categoryPage.loan);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings('Personal Loan');
@@ -158,7 +159,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Banking',
       dropdownItem: 'Fixed Term Deposit',
     });
-    productCategory.checkPageURL(productCategory.categoryPage.ftd);
+    checkout.checkPageURL(checkout.categoryPage.ftd);
     productCategory.checkComponents();
     productCategory.checkCategoryBannerButtons(bankingButtons);
     productCategory.checkCategoryProductHeadings('Fixed Term Deposit');

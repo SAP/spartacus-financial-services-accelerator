@@ -81,6 +81,7 @@ context('Group Policy Group Admin and Customer Checks', () => {
     checkout.ConfirmBindQuote();
     banking.checkLegalInformationPage();
     checkout.clickContinueButton();
+    banking.checkBankingProgressBar();
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification(' Video Identification ');
     checkout.checkOrderConfirmationBanking();
