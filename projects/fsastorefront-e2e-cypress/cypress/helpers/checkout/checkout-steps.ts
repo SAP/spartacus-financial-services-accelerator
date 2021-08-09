@@ -274,7 +274,7 @@ export function checkSyncPilotComparisonTable() {
     });
 }
 
-export var categoryPage = {
+export const categoryPage = {
   homeowners: 'insurance_main_homeowners',
   renters: 'insurance_main_renters',
   auto: 'insurance_main_auto',
