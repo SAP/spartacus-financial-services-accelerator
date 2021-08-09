@@ -142,6 +142,11 @@ describe('GeneralInformationComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should load form data', () => {
+    component.ngOnInit();
+    expect(mockFormDataService.loadFormData).toHaveBeenCalled();
+  });
+
   it('should load form definition data', () => {
     spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
     spyOn(mockFormDataService, 'getFormDefinition').and.callThrough();
