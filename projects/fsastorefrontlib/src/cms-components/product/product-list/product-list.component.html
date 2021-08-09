@@ -80,7 +80,7 @@
 <ng-template #paginationAndSorting let-model="model">
   <ng-container *ngIf="model.products.length > 0">
     <div class="row my-5">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 mb-4">
         <div class="cx-pagination" aria-label="product search pagination">
           <cx-pagination
             class="text-center"
@@ -90,7 +90,7 @@
           ></cx-pagination>
         </div>
       </div>
-      <div class="col-12 col-md-4 offset-md-2">
+      <div class="col-12 col-md-4 ml-auto">
         <div class="form-group cx-sort-dropdown">
           <cx-sorting
             [sortOptions]="model.sorts"
