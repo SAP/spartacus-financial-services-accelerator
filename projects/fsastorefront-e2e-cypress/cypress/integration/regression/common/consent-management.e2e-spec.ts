@@ -14,7 +14,7 @@ context('Consent Management', () => {
 
   it('Should check anonymous consent in registration form', () => {
     cy.get('cx-login a').click();
-    cy.get('.register').findByText('Register').click({ force: true });
+    cy.get('.register').contains('Register').click({ force: true });
     cy.get('input[type="checkbox"]').first().should('be.checked');
   });
 

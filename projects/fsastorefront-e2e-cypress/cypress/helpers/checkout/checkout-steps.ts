@@ -6,10 +6,8 @@ import {
   waitForUserAssets,
 } from '../general-helpers';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
 const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
@@ -201,13 +199,6 @@ export function waitForAddOptions() {
   });
 }
 
-export function waitForConfirmation() {
-  const confirmation = waitForPage('orderConfirmationPage', 'confirmation');
-  cy.wait(`@${confirmation}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
   cy.get('h2').should('be.visible').should('contain.text', mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
@@ -226,29 +217,12 @@ export function waitForQuoteReviewPage() {
   });
 }
 
-export function waitForPersonalDetailsForm() {
-  const formDefinition = waitForFormDefinition(
-    'banking_current_account',
-    'formDefinition'
-  );
-  cy.wait(`@${formDefinition}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
 export function waitForChangeMileage() {
   const changeCarDetails = waitForCMSComponent(
     'ChangeCarDetailsFormComponent',
     'changeCarDetails'
   );
   cy.wait(`@${changeCarDetails}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
-export function waitForPolicyDetails() {
-  const policyDetails = waitForPage('policy-details', 'policyDetails');
-  cy.wait(`@${policyDetails}`).then(({ response }) => {
     expect(response.statusCode).to.eq(200);
   });
 }
@@ -265,33 +239,9 @@ export function populatePaymentCreditCard() {
   cy.get('input[type="checkbox"]').eq(0).click();
 }
 
-export function populateBillingAddress() {
-  cy.get('[formcontrolname=isocode]').ngSelect('Serbia');
-  cy.get('[formcontrolname=firstName]').type('Aleks');
-  cy.get('[formcontrolname=lastName]').type('Moore');
-  cy.get('[formcontrolname=line1]').type('Omladinskih Brigada');
-  cy.get('[formcontrolname=town]').type('Belgrade');
-  cy.get('[formcontrolname=postalCode]').type('11000');
-  cy.get('.btn-block').contains('Continue').click();
-}
-
 export function waitConsent() {
   const consent = waitForUserAssets('consenttemplates', 'consent');
   cy.wait(`@${consent}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
-export function waitForOrder() {
-  const order = waitForUserAssets('orders', 'order');
-  cy.wait(`@${order}`).then(({ response }) => {
-    expect(response.statusCode).to.eq(200);
-  });
-}
-
-export function waitFinalReview() {
-  const finalReview = waitForPage('final-review', 'finalReview');
-  cy.wait(`@${finalReview}`).then(({ response }) => {
     expect(response.statusCode).to.eq(200);
   });
 }
@@ -313,4 +263,34 @@ export function checkFinalReviewComponents() {
     .within(() => {
       cy.get('.section-header-heading').contains('Travel Insurance');
     });
+}
+
+export function checkSyncPilotComparisonTable() {
+  cy.get('cx-fs-sync-pilot-connection-component')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h3').should('contain.text', 'Need Help?');
+      cy.get('p.mb-0').should('contain.text', 'Speak to an Agent');
+    });
+}
+
+export const categoryPage = {
+  homeowners: 'insurance_main_homeowners',
+  renters: 'insurance_main_renters',
+  auto: 'insurance_main_auto',
+  life: 'insurance_main_life',
+  travel: 'insurance_main_travel',
+  event: 'insurance_main_event',
+  savings: 'insurance_main_savings',
+  currentAccount: 'banking_main_current_account',
+  creditCard: 'banking_main_credit_card',
+  loan: 'banking_main_loans',
+  ftd: 'banking_main_fixed_term_deposits',
+  userIdentification: 'user-identification',
+};
+
+export function checkPageURL(page: string) {
+  cy.location().should(loc => {
+    expect(loc.href).to.include(`${page}`);
+  });
 }

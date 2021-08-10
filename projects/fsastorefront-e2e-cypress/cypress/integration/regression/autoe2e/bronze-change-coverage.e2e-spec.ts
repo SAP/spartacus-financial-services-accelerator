@@ -3,20 +3,13 @@ import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
 import * as checkout from '../../../helpers/checkout/checkout-steps';
+import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/change-requests';
-import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
-import * as customParseFormat from 'dayjs/plugin/customParseFormat';
-
-dayjs.extend(utc);
-dayjs.extend(customParseFormat);
-
-const todaysDate = dayjs().format('YYYY-MM-DD');
 
 Cypress.config('defaultCommandTimeout', 500000);
 
-context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
+context('Auto Bronze Checkout with change coverage', () => {
   before(() => {
     cy.visit('/');
   });
@@ -26,7 +19,7 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
     register.login(registrationUser.email, registrationUser.password);
   });
 
-  it('Should complete first auto step without additional drivers', () => {
+  it('Should complete first auto step with additional driver', () => {
     checkout.waitConsent();
     checkout.startInsuranceCheckout('Auto');
     auto.populateAutoMonthlyAudi();
@@ -36,9 +29,9 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
     checkout.clickContinueButton();
   });
 
-  it('Should check comparison table and select Gold Product', () => {
-    autoIntegration.selectAutoGold();
-    auto.checkOptionalProductsGoldAddOptional();
+  it('Should check comparison table and select main and optional products', () => {
+    autoIntegration.selectAutoBronze();
+    auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();
   });
 
@@ -48,7 +41,6 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
     auto.populateAdditionalData();
-    cy.get('.primary-button').should('be.visible');
     checkout.clickContinueButton();
   });
 
@@ -56,16 +48,14 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
     checkout.checkAccordions('generalQuoteAccordions');
-    cy.get('.primary-button').should('contain.text', 'Continue');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details and place an order', () => {
-    //TODO: Will be replaced with credit card once bug is resolved
-    checkout.populatePaymentCreditCard();
-    cy.get('.btn-primary').contains('Continue').click();
+    selectPaymentMethodInvoice();
+    checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
   });
@@ -74,46 +64,24 @@ context('Auto Gold Checkout with Adding Driver and Removing Coverage', () => {
     //waiting for replication process to be completed
     cy.wait(200000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedPolicy('Gold');
+    autoIntegration.checkReplicatedPolicy('Bronze');
+    cy.get('.heading-headline').should('contain.text', 'Auto Bronze Policy');
+    //This should be included for integration tests
+    //checkout.checkAccordions('integrationPolicyDetails');
   });
 
-  it('Should Add New Driver', () => {
-    changeRequest.startAddingDriverCheckout();
-    //Driver Information Step
-    changeRequest.checkAddDriverSteps();
-    changeRequest.checkDriverInformationStep();
-    changeRequest.populateAdditionalDriverData();
-    cy.get('.primary-button').should('contain.text', 'Continue').click();
-    //Change Preview Step
-    changeRequest.checkAddDriverSteps();
-    changeRequest.checkDrivers();
-    cy.get('.primary-button').should('contain', 'Submit').click();
-    changeRequest.checkChangeRequestConfirmation();
-    cy.wait(200000);
-  });
-
-  it('Should new driver is added', () => {
-    //waiting for replication process to be completed
-    myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedPolicy('Gold');
-    changeRequest.checkAllDrivers();
-  });
-
-  it('Should Remove Coverage', () => {
+  it('Should complete change coverage checkout', () => {
     changeRequest.startChangeCoverage();
-    //Check change coverage - first step
+    //check change coverage - first step
     changeRequest.checkChangeCoverageSteps();
-    changeRequest.checkOptionalExtrasGold();
-    changeRequest.removeCoverage();
-    //Check Change Preview step
+    changeRequest.checkOptionalExtrasBronze();
+    //check continue button is disabled if coverage is not added
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
+    changeRequest.addTrailerLiability();
+    checkout.clickContinueButton();
+    //check change preview - second step
     changeRequest.checkChangeCoverageSteps();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
-  });
-
-  it('Should new driver is added', () => {
-    myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedPolicy('Gold');
-    changeRequest.checkAllDrivers();
   });
 });

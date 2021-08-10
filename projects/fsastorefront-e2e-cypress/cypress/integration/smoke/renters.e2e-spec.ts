@@ -1,7 +1,7 @@
-import { registrationUserWithoutPhone } from '../../../sample-data/users';
-import * as register from '../../../helpers/register';
-import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
-import * as checkout from '../../../helpers/checkout/checkout-steps';
+import { registrationUserWithoutPhone } from '../../sample-data/users';
+import * as register from '../../helpers/register';
+import * as renters from '../../helpers/checkout/insurance/renters-checkout';
+import * as checkout from '../../helpers/checkout/checkout-steps';
 
 context('Renters Checkout', () => {
   before(() => {
@@ -33,6 +33,7 @@ context('Renters Checkout', () => {
 
   it('Should check comparison table', () => {
     checkout.checkCheckoutStep('Your Renters Insurance', '7');
+    checkout.checkSyncPilotComparisonTable();
     checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
     renters.selectRentersMonthly();

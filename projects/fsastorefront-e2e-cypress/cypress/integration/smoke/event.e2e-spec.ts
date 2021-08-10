@@ -1,8 +1,8 @@
-import * as register from '../../../helpers/register';
-import { registrationUser } from '../../../sample-data/users';
-import * as checkout from '../../../helpers/checkout/checkout-steps';
-import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import * as myAccount from '../../../helpers/my-account/my-account';
+import * as register from '../../helpers/register';
+import { registrationUser } from '../../sample-data/users';
+import * as checkout from '../../helpers/checkout/checkout-steps';
+import * as event from '../../helpers/checkout/insurance/event-checkout';
+import * as myAccount from '../../helpers/my-account/my-account';
 
 context('Event Checkout', () => {
   before(() => {

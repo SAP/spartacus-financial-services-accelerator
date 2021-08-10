@@ -1,10 +1,8 @@
 import * as shared from '../shared-checkout';
 import * as sharedCheckout from '../shared-checkout.interface';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-dayjs.extend(utc);
 dayjs.extend(customParseFormat);
 
 const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
