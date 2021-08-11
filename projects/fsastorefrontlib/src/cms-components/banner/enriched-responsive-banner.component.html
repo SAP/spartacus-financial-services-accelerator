@@ -1,11 +1,41 @@
 <ng-container *ngIf="component.data$ | async as data">
-  <div class="enriched-banner">
+  <div *ngIf="configStyles?.textBox" class="enriched-banner">
     <div class="image-wrapper">
       <cx-media [container]="data.media"></cx-media>
     </div>
-    <div class="enriched-banner-text">
-      <span class="enriched-banner-title">{{ data.headingText }}</span>
-      <span class="enriched-banner-details">
+    <div
+      class="enriched-banner-text"
+      [ngStyle]="bannerStyles"
+      [ngClass]="{
+        'absolute-center':
+          configStyles?.textBoxVerticalPosition === 'middle' &&
+          configStyles?.textBoxHorizontalPosition === 'center',
+        'vertical-center':
+          configStyles?.textBoxVerticalPosition === 'middle' &&
+          configStyles?.textBoxHorizontalPosition !== 'center',
+        'vertical-top': this.configStyles.textBoxVerticalPosition === 'top',
+        'vertical-bottom':
+          this.configStyles.textBoxVerticalPosition === 'bottom',
+        'horizontal-right':
+          configStyles?.textBoxType === 'box' &&
+          configStyles?.textBoxHorizontalPosition === 'right',
+        'horizontal-center':
+          configStyles?.textBoxVerticalPosition !== 'middle' &&
+          configStyles?.textBoxHorizontalPosition === 'center',
+        'horizontal-left':
+          configStyles?.textBoxType === 'box' &&
+          configStyles?.textBoxHorizontalPosition === 'left',
+        'box-size': this.configStyles.textBoxType === 'box',
+        'strip-size': this.configStyles.textBoxType === 'strip'
+      }"
+    >
+      <span *ngIf="configStyles?.textBoxTitle" class="enriched-banner-title">{{
+        data.headingText
+      }}</span>
+      <span
+        *ngIf="configStyles?.textBoxDetails"
+        class="enriched-banner-details"
+      >
         <a class="enriched-banner-styled-text" [routerLink]="data.urlLink">
           {{ data.styledText }}</a
         >

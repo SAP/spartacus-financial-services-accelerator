@@ -2,10 +2,11 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CmsBannerComponent, CmsComponent } from '@spartacus/core';
+import { CmsComponent } from '@spartacus/core';
 import { of } from 'rxjs';
 import { EnrichedResponsiveBannerComponent } from './enriched-responsive-banner.component';
 import { CmsComponentData } from '@spartacus/storefront';
+import { CmsEnrichedResponsiveBannerComponent } from '../../occ/occ-models/cms-component.models';
 
 @Component({
   // tslint:disable
@@ -21,7 +22,7 @@ describe('EnrichedResponsiveBannerComponent', () => {
   let fixture: ComponentFixture<EnrichedResponsiveBannerComponent>;
   let el: DebugElement;
 
-  const componentData: CmsBannerComponent = {
+  const componentData: CmsEnrichedResponsiveBannerComponent = {
     uid: 'SiteLogoComponent',
     typeCode: 'EnrichedResponsiveBannerComponent',
     name: 'Site Logo Component',
@@ -34,6 +35,19 @@ describe('EnrichedResponsiveBannerComponent', () => {
       url: '/medias/logo-fsa.jpg',
     },
     urlLink: '/logo',
+    configStyles: JSON.stringify({
+      config: {
+        textBox: true,
+        textBoxType: 'box',
+        textBoxVerticalPosition: 'middle',
+        textBoxHorizontalPosition: 'left',
+        textBoxMargin: '0 0 0 17%',
+        textBoxPadding: '2vw',
+        textBoxTitle: true,
+        textBoxDetails: true,
+        textBoxTextPosition: 'left',
+      },
+    }),
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{

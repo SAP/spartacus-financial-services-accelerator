@@ -29,6 +29,7 @@ export interface CmsEnrichedResponsiveBannerComponent
   headingText?: string;
   styledText?: string;
   url?: string;
+  configStyles?: string;
 }
 
 export interface CmsInboxComponent extends CmsComponent {
