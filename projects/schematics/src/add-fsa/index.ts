@@ -26,6 +26,9 @@ import {
   FSA_DYNAMIC_FORMS,
   FSA_STOREFRONT,
   FSA_STOREFRONT_STYLES,
+  DEFAULT_NGRX_VERSION,
+  DEFAULT_ANGULAR_OAUTH2_OIDC_VERSION,
+  ANGULAR_LOCALIZE,
 } from '../shared/constants';
 import { parseCSV } from '../shared/utils/transform-utils';
 import { getProjectFromWorkspace } from '../shared/utils/workspace-utils';
@@ -38,10 +41,7 @@ import {
 } from '@schematics/angular/utility/dependencies';
 import { getIndexHtmlPath } from '@spartacus/schematics/src/shared/utils/file-utils';
 import {
-  ANGULAR_LOCALIZE,
   ANGULAR_OAUTH2_OIDC,
-  DEFAULT_ANGULAR_OAUTH2_OIDC_VERSION,
-  DEFAULT_NGRX_VERSION,
   getProjectTargets,
   SPARTACUS_ASSETS,
   SPARTACUS_CORE,
