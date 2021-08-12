@@ -3,14 +3,10 @@ import * as register from '../../../helpers/register';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as autoIntegration from '../../../helpers/checkout/insurance/auto-integrations';
 import * as checkout from '../../../helpers/checkout/checkout-steps';
-import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
-import * as myPolicies from '../../../helpers/my-account/policies';
 import testFilters from '../../../support/filters';
 
-Cypress.config('defaultCommandTimeout', 500000);
-
-testFilters([''], () => {
-  context('Auto Silver Checkout with applying coupons', () => {
+testFilters(['smoke'], () => {
+  context('Policy Holder is Main Driver with main product switch', () => {
     before(() => {
       cy.visit('/');
     });
@@ -23,27 +19,38 @@ testFilters([''], () => {
     it('Should complete first auto step with additional driver', () => {
       checkout.waitConsent();
       checkout.startInsuranceCheckout('Auto');
-      auto.populateAutoAnnuallyTesla();
+      auto.populateAutoAnnuallyBMW();
       auto.populateMainDriverInfo();
       cy.get('[name=noOfDrivers]').select('0');
+      cy.get('#customerIdtrue').check();
       checkout.clickContinueButton();
     });
 
     it('Should check comparison table and select main product', () => {
       autoIntegration.selectAutoSilver();
-      cy.get('cx-fs-cart-coupon').should('be.visible');
       auto.addOptionalProductsSilver();
-      cy.get('[formcontrolname=couponCode]').type('FSA10DISC');
-      cy.get('.primary-button').eq(1).click();
-      cy.get('.alert-success').should('be.visible');
       checkout.clickContinueButton();
     });
 
-    it('Should populate personal details page', () => {
-      checkout.checkPersonalDetailsPage();
+    it('Should return to first step and change date of birth', () => {
+      cy.get('span').should(
+        'contain.text',
+        'Please return to the first step of checkout: “Choose a cover” and check your Date of birth. Policy holder and main driver should have the same Date of birth.'
+      );
+      cy.get('cx-fs-enriched-responsive-banner').should('be.visible');
+      cy.get('cx-fs-category-carousel').should('be.visible');
+      checkout.startInsuranceCheckout('Auto');
+      auto.updateDateOfBirth();
+      checkout.clickContinueButton();
+    });
+
+    it('Change main product from silver to bronze', () => {
+      autoIntegration.selectAutoBronze();
+      auto.checkOptionalProductsBronze();
+      checkout.clickContinueButton();
       auto.populatePersonalDetails();
       auto.populateVehicleDetails();
-      auto.populateMainDriverData();
+      cy.get('[name=mainDriverLicenceNumber]').type('BG-234-YU');
       checkout.clickContinueButton();
     });
 
@@ -57,18 +64,10 @@ testFilters([''], () => {
     });
 
     it('Select default payment details and place an order', () => {
-      selectPaymentMethodInvoice();
-      checkout.clickContinueButton();
+      checkout.populatePaymentCreditCard();
+      cy.get('.btn-primary').contains('Continue').click();
       checkout.placeOrderOnFinalReview();
       checkout.checkOrderConfirmation();
-    });
-
-    it('Should check my policies and policy details page', () => {
-      //waiting for replication process to be completed
-      cy.wait(200000);
-      myPolicies.checkMyPoliciesPage();
-      autoIntegration.checkReplicatedPolicy('Silver');
-      cy.get('.heading-headline').should('contain.text', 'Auto Silver Policy');
     });
   });
 });
