@@ -41,6 +41,7 @@ describe('EnrichedResponsiveBannerComponent', () => {
         textBoxType: 'box',
         textBoxVerticalPosition: 'middle',
         textBoxHorizontalPosition: 'left',
+        textBoxMaxWidth: '410px',
         textBoxMargin: '0 0 0 17%',
         textBoxPadding: '2vw',
         textBoxTitle: true,
@@ -88,6 +89,6 @@ describe('EnrichedResponsiveBannerComponent', () => {
   it('should contain title and text', () => {
     fixture.detectChanges();
     expect(el.query(By.css('.enriched-banner-title'))).toBeTruthy();
-    expect(el.query(By.css('.enriched-banner-styled-text'))).toBeTruthy();
+    expect(el.query(By.css('.enriched-banner-text'))).toBeTruthy();
   });
 });

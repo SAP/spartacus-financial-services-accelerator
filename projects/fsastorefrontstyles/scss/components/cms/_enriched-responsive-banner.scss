@@ -2,37 +2,61 @@
   .enriched-banner {
     position: relative;
     width: 100%;
-    &-text {
-      background-color: rgba(255, 255, 255, 0.7);
-      position: absolute;
+  }
+  .enriched-banner-text {
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+  }
+  .enriched-banner-text-strip {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+  }
+  .enriched-banner-title {
+    font-weight: var(--cx-font-weight-semi);
+  }
+  .box-title {
+    font-size: var(--cx-h1-font-size);
+    color: var(--cx-color-secondary);
+    @include media-breakpoint-down(md) {
+      font-size: 4vw;
     }
-    &-title {
-      font-size: var(--cx-h1-font-size);
-      color: var(--cx-color-secondary);
-      font-weight: var(--cx-font-weight-semi);
-      @include media-breakpoint-down(md) {
-        font-size: 4vw;
-      }
+  }
+  .strip-title {
+    font-size: var(--cx-h3-font-size);
+    color: var(--cx-color-text);
+    padding-bottom: 1.2rem;
+    @include media-breakpoint-down(md) {
+      font-size: var(--cx-title-font-size);
     }
-    &-details {
-      display: block;
-      margin-top: 1vw;
-      pointer-events: none;
-      font-size: var(--cx-h5-font-size);
-      @include media-breakpoint-down(sm) {
-        font-size: 3.5vw;
-      }
+  }
+  .enriched-banner-details-box {
+    display: block;
+    margin-top: 1vw;
+    pointer-events: none;
+    font-size: var(--cx-h5-font-size);
+    @include media-breakpoint-down(sm) {
+      font-size: 3.5vw;
+    }
+  }
+  .enriched-banner-details-strip {
+    display: flex;
+    justify-content: center;
+  }
+  .enriched-banner-styled-text {
+    @extend .primary-button;
+    font-weight: var(--cx-font-weight-semi);
+    padding: 0.5rem 1rem;
+    @include media-breakpoint-down(md) {
+      font-size: var(--cx-xs-font-size);
     }
   }
   /* needed as a fix for Enriched banner not displaying correctly SOMETIMES, when resizing window */
   cx-media img {
     width: 100%;
   }
-  .box-size {
-    max-width: 410px;
-  }
-  .strip-size {
-    width: 100%;
+  .box {
+    width: 60%;
   }
   .absolute-center {
     @include absolute-center;
@@ -40,30 +64,19 @@
   .vertical-center {
     @include vertical-center;
   }
-  .vertical-top {
+  .top {
     top: 0;
   }
-  .vertical-bottom {
+  .bottom {
     bottom: 0;
   }
-  .horizontal-right {
-    left: calc(100% - 410px);
-    min-width: 410px;
-    @include media-breakpoint-down(sm) {
-      left: calc(100% - 225px);
-      min-width: 225px;
-    }
+  .right {
+    right: 0;
   }
   .horizontal-center {
     @include horizontal-center;
-    @include media-breakpoint-down(sm) {
-      min-width: 225px;
-    }
   }
-  .horizontal-left {
-    left: 0%;
-    @include media-breakpoint-down(sm) {
-      width: 225px;
-    }
+  .left {
+    left: 0;
   }
 }

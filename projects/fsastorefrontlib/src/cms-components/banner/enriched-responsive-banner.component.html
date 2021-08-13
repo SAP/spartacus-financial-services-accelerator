@@ -6,37 +6,30 @@
     <div
       class="enriched-banner-text"
       [ngStyle]="bannerStyles"
-      [ngClass]="{
-        'absolute-center':
-          configStyles?.textBoxVerticalPosition === 'middle' &&
-          configStyles?.textBoxHorizontalPosition === 'center',
-        'vertical-center':
-          configStyles?.textBoxVerticalPosition === 'middle' &&
-          configStyles?.textBoxHorizontalPosition !== 'center',
-        'vertical-top': this.configStyles.textBoxVerticalPosition === 'top',
-        'vertical-bottom':
-          this.configStyles.textBoxVerticalPosition === 'bottom',
-        'horizontal-right':
-          configStyles?.textBoxType === 'box' &&
-          configStyles?.textBoxHorizontalPosition === 'right',
-        'horizontal-center':
-          configStyles?.textBoxVerticalPosition !== 'middle' &&
-          configStyles?.textBoxHorizontalPosition === 'center',
-        'horizontal-left':
-          configStyles?.textBoxType === 'box' &&
-          configStyles?.textBoxHorizontalPosition === 'left',
-        'box-size': this.configStyles.textBoxType === 'box',
-        'strip-size': this.configStyles.textBoxType === 'strip'
-      }"
+      [ngClass]="bannerClasses"
     >
-      <span *ngIf="configStyles?.textBoxTitle" class="enriched-banner-title">{{
-        data.headingText
-      }}</span>
+      <span
+        *ngIf="configStyles?.textBoxTitle"
+        [ngClass]="
+          configStyles?.textBoxType === 'box' ? 'box-title' : 'strip-title'
+        "
+        class="enriched-banner-title"
+        >{{ data.headingText }}</span
+      >
       <span
         *ngIf="configStyles?.textBoxDetails"
-        class="enriched-banner-details"
+        [ngClass]="
+          configStyles?.textBoxType === 'box'
+            ? 'enriched-banner-details-box'
+            : 'enriched-banner-details-strip'
+        "
       >
-        <a class="enriched-banner-styled-text" [routerLink]="data.urlLink">
+        <a
+          [class.enriched-banner-styled-text]="
+            configStyles?.textBoxType === 'strip'
+          "
+          [routerLink]="data.urlLink"
+        >
           {{ data.styledText }}</a
         >
       </span>
