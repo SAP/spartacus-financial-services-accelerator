@@ -1,7 +1,6 @@
 import { Accordions } from './accordions';
 import {
   waitForPage,
-  waitForFormDefinition,
   waitForCMSComponent,
   waitForUserAssets,
 } from '../general-helpers';

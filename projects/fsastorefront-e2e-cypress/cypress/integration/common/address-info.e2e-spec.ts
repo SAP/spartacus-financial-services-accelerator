@@ -58,6 +58,8 @@ testFilters([''], () => {
       retrieveQuote('1', 'Savings Insurance');
       checkout.checkPageURL(checkout.categoryPage.addOptions);
       checkout.clickContinueButton();
+      //user was registered with phone number
+      cy.get('[name=phoneNumber]').should('have.value', '66622299');
       addressInfo.checkDisabledFieldsInsurance();
       checkout.clickContinueButton();
       checkout.checkValidationPopUpAndClose();
