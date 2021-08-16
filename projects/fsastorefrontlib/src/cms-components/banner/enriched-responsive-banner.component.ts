@@ -22,9 +22,11 @@ export class EnrichedResponsiveBannerComponent implements OnInit, OnDestroy {
   bannerStyles: { [key: string]: string };
   bannerClasses: string;
   private subscription = new Subscription();
+
   constructor(
     public component: CmsComponentData<CmsEnrichedResponsiveBannerComponent>
   ) {}
+
   ngOnInit() {
     this.subscription.add(
       this.component.data$
