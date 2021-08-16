@@ -46,8 +46,8 @@ export function checkLegalInformationLoan() {
   });
 }
 
-export function configureLoan() {
-  cy.get('[name=numberOfApplicants]').select('2');
+export function configureLoan(numberOfApplicats) {
+  cy.get('[name=numberOfApplicants]').select(numberOfApplicats);
   cy.get('[name=loan-amount]').type('18001');
   cy.get('[name=loanStartDate]').type('2021-12-12');
   cy.get('[name=loan-term]').select('6-year');
