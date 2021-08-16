@@ -1,8 +1,13 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
+  Renderer2,
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '@spartacus/core';
@@ -26,13 +31,15 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
   templateUrl: './comparison-table-panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
+export class ComparisonTablePanelComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   private subscription = new Subscription();
   comparisonPanel$: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
   billingData$: Observable<any>;
   pricingData$: Observable<PricingData>;
   categoryCode: string;
+  @ViewChildren('tableCell') tableCell: QueryList<ElementRef<HTMLElement>>;
 
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
@@ -41,7 +48,8 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected formDataStorageService: FormDataStorageService,
     protected userAccountFacade: UserAccountFacade,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private renderer: Renderer2
   ) {}
 
   user$: Observable<User> = this.userAccountFacade.get();
@@ -88,6 +96,27 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     } else {
       this.pricingData$ = of({});
     }
+  }
+
+  ngAfterViewInit() {
+    this.tableCell.changes.subscribe(
+      (data: QueryList<ElementRef<HTMLElement>>) => {
+        const elementArray = data.toArray();
+        const highestElem = elementArray.sort(
+          (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
+        )[elementArray.length - 1];
+        if (highestElem) {
+          console.log(highestElem);
+          elementArray.forEach(elem => {
+            this.renderer.setStyle(
+              elem.nativeElement,
+              'height',
+              `${highestElem.nativeElement.clientHeight}px`
+            );
+          });
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {

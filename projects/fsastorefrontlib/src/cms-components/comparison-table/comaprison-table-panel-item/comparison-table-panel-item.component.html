@@ -35,7 +35,7 @@
               *ngIf="dynamicAttribute !== undefined; else itemNotIncluded"
             >
               <div
-                class="table-cell-value text-truncate"
+                class="table-cell-value"
                 *ngIf="
                   dynamicAttribute.value &&
                   dynamicAttribute.value.formattedValue
@@ -58,7 +58,7 @@
         <div class="table-cell">
           <ng-container *ngIf="item !== undefined; else itemNotIncluded">
             <div
-              class="table-cell-value text-truncate"
+              class="table-cell-value"
               *ngIf="
                 item.price?.value > 0 || item.chargeInformation;
                 else itemIncluded

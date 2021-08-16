@@ -53,15 +53,8 @@
       }
       .table-cell-title {
         display: inline-block;
-        line-height: 1.2;
-        max-width: calc(100% - 4vw);
-        vertical-align: middle;
-        text-transform: uppercase;
-      }
-      .table-cell-value {
-        @include media-breakpoint-down(sm) {
-          max-width: 100px;
-        }
+        word-break: break-word;
+        padding-inline-end: 15px;
       }
     }
     .special {
