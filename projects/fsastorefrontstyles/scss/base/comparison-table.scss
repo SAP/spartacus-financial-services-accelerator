@@ -41,20 +41,22 @@
       }
     }
     .table-cell {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       position: relative;
-      padding: 15px;
+      padding: 10px;
       border-radius: 4px;
       font-weight: var(--cx-font-weight-semi);
       &:nth-child(even) {
-        background-color: transparent;
+        background-color: var(--cx-color-1);
       }
       &:nth-child(odd) {
         background-color: var(--cx-color-4);
       }
       .table-cell-title {
-        display: inline-block;
         word-break: break-word;
-        padding-inline-end: 15px;
+        padding-inline-end: calc(15px + 5%);
       }
     }
     .special {

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable, QueryList, Renderer2 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { CMSComparisonTabComponent } from '../../occ/occ-models';
 
 @Injectable()
@@ -22,5 +23,28 @@ export class ComparisonTableService {
    */
   getComparisonTabs(tabIds: string[]): Observable<CMSComparisonTabComponent>[] {
     return tabIds.map(tabId => this.cmsService.getComponentData(tabId));
+  }
+
+  calculateHieght(
+    tableCell: QueryList<ElementRef<HTMLElement>>,
+    renderer: Renderer2
+  ): Observable<void> {
+    return tableCell.changes.pipe(
+      map((data: QueryList<ElementRef<HTMLElement>>) => {
+        const elementArray = data.toArray();
+        const highestElem = elementArray.sort(
+          (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
+        )[elementArray.length - 1];
+        if (highestElem) {
+          elementArray.forEach(elem => {
+            renderer.setStyle(
+              elem.nativeElement,
+              'height',
+              `${highestElem.nativeElement.clientHeight}px`
+            );
+          });
+        }
+      })
+    );
   }
 }

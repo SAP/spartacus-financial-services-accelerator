@@ -18,6 +18,7 @@ import {
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ComparisonTableService } from '../comparison-table.service';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
 import {
@@ -49,6 +50,7 @@ export class ComparisonTablePanelComponent
     protected formDataStorageService: FormDataStorageService,
     protected userAccountFacade: UserAccountFacade,
     protected activatedRoute: ActivatedRoute,
+    protected comparisonTableService: ComparisonTableService,
     private renderer: Renderer2
   ) {}
 
@@ -99,23 +101,10 @@ export class ComparisonTablePanelComponent
   }
 
   ngAfterViewInit() {
-    this.tableCell.changes.subscribe(
-      (data: QueryList<ElementRef<HTMLElement>>) => {
-        const elementArray = data.toArray();
-        const highestElem = elementArray.sort(
-          (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
-        )[elementArray.length - 1];
-        if (highestElem) {
-          console.log(highestElem);
-          elementArray.forEach(elem => {
-            this.renderer.setStyle(
-              elem.nativeElement,
-              'height',
-              `${highestElem.nativeElement.clientHeight}px`
-            );
-          });
-        }
-      }
+    this.subscription.add(
+      this.comparisonTableService
+        .calculateHieght(this.tableCell, this.renderer)
+        .subscribe()
     );
   }
 

@@ -30,7 +30,7 @@
         <ng-container
           *ngFor="let dynamicAttribute of product.dynamicAttributes | slice: 1"
         >
-          <div class="table-cell">
+          <div #tableCell class="table-cell">
             <ng-container
               *ngIf="dynamicAttribute !== undefined; else itemNotIncluded"
             >
@@ -55,7 +55,7 @@
         </ng-container>
       </ng-container>
       <ng-container *ngFor="let item of panelItemEntries">
-        <div class="table-cell">
+        <div #tableCell class="table-cell">
           <ng-container *ngIf="item !== undefined; else itemNotIncluded">
             <div
               class="table-cell-value"
