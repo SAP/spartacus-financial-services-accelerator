@@ -9,7 +9,7 @@
       [ngClass]="bannerClasses"
     >
       <span
-        *ngIf="configStyles?.textBoxTitle"
+        *ngIf="data?.headingText"
         [ngClass]="
           configStyles?.textBoxType === 'box' ? 'box-title' : 'strip-title'
         "
@@ -17,7 +17,8 @@
         >{{ data.headingText }}</span
       >
       <span
-        *ngIf="configStyles?.textBoxDetails"
+        *ngIf="data?.styledText"
+        class="mt-3"
         [ngClass]="
           configStyles?.textBoxType === 'box'
             ? 'enriched-banner-details-box'

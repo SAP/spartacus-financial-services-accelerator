@@ -17,27 +17,17 @@
   }
   .box-title {
     font-size: var(--cx-h1-font-size);
-    color: var(--cx-color-secondary);
     @include media-breakpoint-down(md) {
       font-size: 4vw;
     }
   }
   .strip-title {
-    font-size: var(--cx-h3-font-size);
-    color: var(--cx-color-text);
-    padding-bottom: 1.2rem;
-    @include media-breakpoint-down(md) {
-      font-size: var(--cx-title-font-size);
-    }
+    font-size: clamp(var(--cx-title-font-size), 1.5vw, var(--cx-h3-font-size));
   }
   .enriched-banner-details-box {
     display: block;
-    margin-top: 1vw;
     pointer-events: none;
-    font-size: var(--cx-h5-font-size);
-    @include media-breakpoint-down(sm) {
-      font-size: 3.5vw;
-    }
+    font-size: clamp(var(--cx-title-font-size), 3.5vw, var(--cx-h5-font-size));
   }
   .enriched-banner-details-strip {
     display: flex;
