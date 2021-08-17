@@ -16,18 +16,15 @@
     font-weight: var(--cx-font-weight-semi);
   }
   .box-title {
-    font-size: var(--cx-h1-font-size);
-    @include media-breakpoint-down(md) {
-      font-size: 4vw;
-    }
+    font-size: clamp(60%, var(--cx-h1-font-size), 4vw);
   }
   .strip-title {
-    font-size: clamp(var(--cx-title-font-size), 1.5vw, var(--cx-h3-font-size));
+    font-size: clamp(60%, var(--cx-h2-font-size), 4vw);
   }
   .enriched-banner-details-box {
     display: block;
     pointer-events: none;
-    font-size: clamp(var(--cx-title-font-size), 3.5vw, var(--cx-h5-font-size));
+    font-size: clamp(60%, var(--cx-h5-font-size), 3.5vw);
   }
   .enriched-banner-details-strip {
     display: flex;
@@ -35,7 +32,6 @@
   }
   .enriched-banner-styled-text {
     @extend .primary-button;
-    font-weight: var(--cx-font-weight-semi);
     padding: 0.5rem 1rem;
     @include media-breakpoint-down(md) {
       font-size: var(--cx-xs-font-size);
