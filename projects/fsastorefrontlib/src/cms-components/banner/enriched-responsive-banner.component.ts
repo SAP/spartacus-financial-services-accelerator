@@ -52,28 +52,23 @@ export class EnrichedResponsiveBannerComponent implements OnInit, OnDestroy {
   }
 
   getHorizontalClass(config): string {
-    if (!this.verticalCenter(config) && this.horizontalCenter(config)) {
+    if (
+      config?.textBoxVerticalPosition !== 'middle' &&
+      config?.textBoxHorizontalPosition === 'center'
+    ) {
       return 'horizontal-center ';
     }
     return config?.textBoxHorizontalPosition + ' ';
   }
 
   getVerticalClass(config): string {
-    if (this.verticalCenter(config)) {
-      if (this.horizontalCenter(config)) {
+    if (config?.textBoxVerticalPosition === 'middle') {
+      if (config?.textBoxHorizontalPosition === 'center') {
         return 'absolute-center ';
       }
       return 'vertical-center ';
     }
     return config?.textBoxVerticalPosition + ' ';
-  }
-
-  verticalCenter(config): boolean {
-    return config?.textBoxVerticalPosition === 'middle';
-  }
-
-  horizontalCenter(config): boolean {
-    return config?.textBoxHorizontalPosition === 'center';
   }
 
   ngOnDestroy() {
