@@ -31,7 +31,7 @@ export function checkOptionalProductsAddRenewalOption() {
     items: [
       {
         name: 'Payment Protection Benefit',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Premium Protection',
@@ -40,7 +40,7 @@ export function checkOptionalProductsAddRenewalOption() {
       },
       {
         name: 'Renewal Option',
-        available: false,
+        notAvailable: true,
       },
     ],
   };
@@ -53,7 +53,7 @@ export function checkOptionalProductsSecond() {
     items: [
       {
         name: 'Payment Protection Benefit',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Premium Protection',
@@ -61,7 +61,7 @@ export function checkOptionalProductsSecond() {
       },
       {
         name: 'Renewal Option',
-        available: true,
+        notAvailable: true,
       },
     ],
   };
@@ -118,6 +118,7 @@ export function checkLifeComparisonTable() {
 }
 
 export function populateSecondPerson() {
+  cy.get('[name="lifeSecondDob"]').should('be.visible');
   cy.get('[name="lifeSecondDob"]').type('1981-09-25');
   cy.get('[name=lifeSecondSmoke]').eq(0).click();
   cy.get('[name="lifeRelationship"]').select('Civil Partner');
