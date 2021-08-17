@@ -28,7 +28,7 @@ export class ComparisonTableService {
   calculateHieght(
     tableCell: QueryList<ElementRef<HTMLElement>>,
     renderer: Renderer2
-  ): Observable<void> {
+  ): Observable<any> {
     return tableCell.changes.pipe(
       map((data: QueryList<ElementRef<HTMLElement>>) => {
         const elementArray = data.toArray();
