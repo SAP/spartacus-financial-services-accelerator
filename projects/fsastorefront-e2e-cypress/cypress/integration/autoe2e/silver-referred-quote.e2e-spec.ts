@@ -25,7 +25,6 @@ testFilters([''], () => {
     it('Should complete first auto step without additonal driver', () => {
       checkout.waitConsent();
       checkout.startInsuranceCheckout('Auto');
-      cy.wait(500);
       auto.populateAutoMonthlyOpel();
       auto.populateMainDriverInfo();
       cy.get('[name=noOfDrivers]').select('0');
