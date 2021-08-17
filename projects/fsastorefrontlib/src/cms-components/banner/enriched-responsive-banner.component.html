@@ -1,12 +1,36 @@
 <ng-container *ngIf="component.data$ | async as data">
-  <div class="enriched-banner">
+  <div *ngIf="configStyles?.textBox" class="enriched-banner">
     <div class="image-wrapper">
       <cx-media [container]="data.media"></cx-media>
     </div>
-    <div class="enriched-banner-text">
-      <span class="enriched-banner-title">{{ data.headingText }}</span>
-      <span class="enriched-banner-details">
-        <a class="enriched-banner-styled-text" [routerLink]="data.urlLink">
+    <div
+      class="enriched-banner-text"
+      [ngStyle]="bannerStyles"
+      [ngClass]="bannerClasses"
+    >
+      <span
+        *ngIf="data?.headingText"
+        [ngClass]="
+          configStyles?.textBoxType === 'box' ? 'box-title' : 'strip-title'
+        "
+        class="enriched-banner-title"
+        >{{ data.headingText }}</span
+      >
+      <span
+        *ngIf="data?.styledText"
+        class="mt-3"
+        [ngClass]="
+          configStyles?.textBoxType === 'box'
+            ? 'enriched-banner-details-box'
+            : 'enriched-banner-details-strip'
+        "
+      >
+        <a
+          [class.enriched-banner-styled-text]="
+            configStyles?.textBoxType === 'strip'
+          "
+          [routerLink]="data.urlLink"
+        >
           {{ data.styledText }}</a
         >
       </span>

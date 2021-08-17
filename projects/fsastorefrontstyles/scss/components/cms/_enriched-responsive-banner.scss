@@ -3,8 +3,66 @@
     position: relative;
     width: 100%;
   }
+  .enriched-banner-text {
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+  }
+  .enriched-banner-text-strip {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+  }
+  .enriched-banner-title {
+    font-weight: var(--cx-font-weight-semi);
+  }
+  .box-title {
+    font-size: clamp(60%, var(--cx-h1-font-size), 4vw);
+  }
+  .strip-title {
+    font-size: clamp(60%, var(--cx-h2-font-size), 4vw);
+  }
+  .enriched-banner-details-box {
+    display: block;
+    pointer-events: none;
+    font-size: clamp(60%, var(--cx-h5-font-size), 3.5vw);
+  }
+  .enriched-banner-details-strip {
+    display: flex;
+    justify-content: center;
+  }
+  .enriched-banner-styled-text {
+    @extend .primary-button;
+    padding: 0.5rem 1rem;
+    @include media-breakpoint-down(md) {
+      font-size: var(--cx-xs-font-size);
+    }
+  }
   /* needed as a fix for Enriched banner not displaying correctly SOMETIMES, when resizing window */
   cx-media img {
     width: 100%;
+  }
+  .box {
+    width: 60%;
+  }
+  .absolute-center {
+    @include absolute-center;
+  }
+  .vertical-center {
+    @include vertical-center;
+  }
+  .top {
+    top: 0;
+  }
+  .bottom {
+    bottom: 0;
+  }
+  .right {
+    right: 0;
+  }
+  .horizontal-center {
+    @include horizontal-center;
+  }
+  .left {
+    left: 0;
   }
 }
