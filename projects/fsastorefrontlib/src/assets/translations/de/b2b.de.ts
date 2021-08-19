@@ -92,6 +92,21 @@ export const organization = {
     assignApprover: '[DE] Add the user to approvers for the organization',
     hint:
       '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to an organization, and they have access to all child organizations of their primary organization.',
+    header: '[DE] All members ({{count}})',
+    details: {
+      title: '[DE] Member Details',
+      subtitle: '[DE] Member: {{ item.name }}',
+    },
+    breadcrumbs: {
+      list: '[DE] All members',
+    },
+    edit: {
+      title: '[DE] Edit Member',
+      subtitle: '[DE] Member: {{ item.name }}',
+    },
+    create: {
+      title: '[DE] Create Member',
+    },
   },
 };
 
