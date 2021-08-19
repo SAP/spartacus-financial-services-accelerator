@@ -36,13 +36,11 @@ export class ClaimConfirmationGuard implements CanActivate {
         const isClaimFinished = this.claimConfirmationStatuses.includes(
           claim.claimStatus
         );
-        if (!claim || isClaimFinished) {
-          isClaimFinished
-            ? this.globalMessageService.add(
-                { key: 'claim.alreadySubmitted' },
-                GlobalMessageType.MSG_TYPE_INFO
-              )
-            : null;
+        if (isClaimFinished) {
+          this.globalMessageService.add(
+            { key: 'claim.alreadySubmitted' },
+            GlobalMessageType.MSG_TYPE_INFO
+          );
           this.routingService.go({ cxRoute: 'home' });
           return false;
         }
