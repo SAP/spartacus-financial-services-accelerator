@@ -4,6 +4,7 @@ SPDX-FileCopyrightText: 2020 SAP SE or an SAP affiliate company and contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/spartacus-financial-services-accelerator)](https://api.reuse.software/info/github.com/SAP/spartacus-financial-services-accelerator)
 
 # Financial Services Accelerator
 Financial Services Accelerator is storefront based on [Spartacus](https://github.com/SAP/spartacus) framework. This storefront is specialized for insurance and banking services and it's working with 
@@ -62,9 +63,6 @@ Team Spartacus welcomes feedback, ideas, requests, and especially code contribut
 
 Many improvements are coming! All tasks will be posted to our GitHub issue tracking system. As mentioned, some of the improvements will mean breaking changes. While we strive to avoid doing so, we cannot guarantee this will not happen before the first release.
 
-
 # License
 
-Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE](LICENSE) file.
-
+Copyright (c) 2020-2021 SAP SE or an SAP affiliate company and spartacus-financial-services-accelerator contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP/spartacus-financial-services-accelerator).
