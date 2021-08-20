@@ -29,18 +29,6 @@ export interface CmsEnrichedResponsiveBannerComponent
   headingText?: string;
   styledText?: string;
   url?: string;
-  configStyles?: string;
-}
-
-export interface CmsEnrichedBannerConfig {
-  textBox?: boolean;
-  textBoxType?: string;
-  textBoxVerticalPosition?: string;
-  textBoxHorizontalPosition?: string;
-  textBoxMaxWidth?: string;
-  textBoxMargin?: string;
-  textBoxPadding?: string;
-  textBoxTextPosition?: string;
 }
 
 export interface CmsInboxComponent extends CmsComponent {

@@ -2,6 +2,39 @@
 @import '../theme';
 
 .LandingPageTemplate {
+  .enriched-banner {
+    &-text {
+      padding: 2vw;
+      background-color: rgba(255, 255, 255, 0.7);
+      position: absolute;
+      text-align: left;
+      max-width: 410px;
+      top: 50%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      @include media-breakpoint-down(sm) {
+        left: 40%;
+      }
+    }
+    &-title {
+      font-size: var(--cx-h1-font-size);
+      color: var(--cx-color-secondary);
+      font-weight: var(--cx-font-weight-semi);
+      @include media-breakpoint-down(md) {
+        font-size: 4vw;
+      }
+    }
+    &-details {
+      display: block;
+      margin-top: 1vw;
+      pointer-events: none;
+      font-size: var(--cx-h5-font-size);
+      @include media-breakpoint-down(sm) {
+        font-size: 3.5vw;
+      }
+    }
+  }
   main cx-page-slot:not(.Section1) {
     @include contentWidth();
     padding: 3rem 1.5rem 0 1.5rem;
