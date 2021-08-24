@@ -107,11 +107,6 @@ export function populatePersonalDetailsCCandLoan() {
   cy.get('[name="permanentResident"]').eq(0).click();
   cy.get('[name="usCitizen"]').eq(1).click();
   cy.get('[name="residentialStatus"]').eq(0).select('4');
-  cy.get('[name="street"]').eq(0).type('Omladinskih Brigada');
-  cy.get('[name="streetNumber"]').eq(0).type('90g');
-  cy.get('[name="city"]').eq(0).type('Belgrade');
-  cy.get('[name="postcode"]').eq(0).type('11010');
-  cy.get('[name="country"]').eq(0).select('RS');
   cy.get('[name="movedToAddressDate"]').eq(0).type('2002-01-01');
   cy.get('[name="isPostalAddressSame"]').eq(0).click();
   cy.get('[name="employmentStatus"]').eq(0).select('fullTime');
@@ -158,4 +153,18 @@ export function checkOrderTotal(price) {
     .contains('Order total')
     .parent()
     .contains(price);
+}
+
+export function populateAddressInfo() {
+  cy.get('[name="street"]').eq(0).type('Omladinskih Brigada');
+  cy.get('[name="streetNumber"]').eq(0).type('90g');
+  cy.get('[name="city"]').eq(0).type('Belgrade');
+  cy.get('[name="postcode"]').eq(0).type('11010');
+  cy.get('[name="country"]').eq(0).select('RS');
+}
+
+export function populateEmploymentData() {
+  cy.get('[name="employmentStatus"]').select('unemployed');
+  cy.get('[name="incomeFrequency"]').select('yearly');
+  cy.get('[name="netIncomeAmount"]').type('560');
 }

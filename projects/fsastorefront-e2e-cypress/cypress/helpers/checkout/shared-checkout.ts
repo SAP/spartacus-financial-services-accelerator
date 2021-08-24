@@ -15,8 +15,11 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
           .eq(index)
           .within(() => {
             cy.get('h6').should('have.text', item.name);
-            if (item.available === false) {
-              cy.get('.col-md-3').should('contain', ' Not available ');
+            if (item.available) {
+              cy.get('.col-md-3').should('contain.text', 'Add');
+            }
+            if (item.notAvailable) {
+              cy.get('.col-md-3').should('contain.text', ' Not available ');
             }
             if (item.shouldAdd) {
               cy.get('.secondary-button').click();

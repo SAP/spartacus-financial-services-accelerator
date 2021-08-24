@@ -63,7 +63,7 @@ export function checkOptionalProducts() {
       },
       {
         name: 'Increase supplier failure and public liability',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Venue Cover',

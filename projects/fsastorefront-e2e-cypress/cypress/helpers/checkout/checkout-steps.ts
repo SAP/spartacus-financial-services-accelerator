@@ -1,7 +1,6 @@
 import { Accordions } from './accordions';
 import {
   waitForPage,
-  waitForFormDefinition,
   waitForCMSComponent,
   waitForUserAssets,
 } from '../general-helpers';
@@ -287,10 +286,21 @@ export const categoryPage = {
   loan: 'banking_main_loans',
   ftd: 'banking_main_fixed_term_deposits',
   userIdentification: 'user-identification',
+  addressInfo: 'my-account/address-info',
+  addOptions: 'checkout/add-options',
 };
 
 export function checkPageURL(page: string) {
   cy.location().should(loc => {
     expect(loc.href).to.include(`${page}`);
   });
+}
+
+export function checkValidationPopUpAndClose() {
+  cy.get('.popup-content-wrapper')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h3').should('contain.text', 'There are validation errors');
+      cy.get('.close').click();
+    });
 }
