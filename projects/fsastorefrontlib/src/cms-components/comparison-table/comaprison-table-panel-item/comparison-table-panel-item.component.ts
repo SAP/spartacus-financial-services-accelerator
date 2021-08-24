@@ -168,8 +168,16 @@ export class ComparisonTablePanelItemComponent
 
   ngAfterViewInit() {
     this.subscription.add(
-      this.comparisonTableService
-        .calculateHieght(this.tableCell, this.renderer)
+      this.tableCell.changes
+        .pipe(
+          map((data: QueryList<ElementRef<HTMLElement>>) => {
+            const elementArray = data.toArray();
+            this.comparisonTableService.equalizeElementsHeights(
+              elementArray,
+              this.renderer
+            );
+          })
+        )
         .subscribe()
     );
   }

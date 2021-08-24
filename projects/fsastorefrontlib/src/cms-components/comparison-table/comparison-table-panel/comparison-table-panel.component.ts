@@ -10,7 +10,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '@spartacus/core';
+import { User, WindowRef } from '@spartacus/core';
 import {
   FormDataService,
   FormDataStorageService,
@@ -51,7 +51,8 @@ export class ComparisonTablePanelComponent
     protected userAccountFacade: UserAccountFacade,
     protected activatedRoute: ActivatedRoute,
     protected comparisonTableService: ComparisonTableService,
-    private renderer: Renderer2
+    protected renderer: Renderer2,
+    protected winRef: WindowRef
   ) {}
 
   user$: Observable<User> = this.userAccountFacade.get();
@@ -100,10 +101,25 @@ export class ComparisonTablePanelComponent
     }
   }
 
+  getHighestElement(elementArray: ElementRef<HTMLElement>[]) {
+    this.comparisonTableService.highestElement = elementArray.sort(
+      (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
+    )[elementArray.length - 1];
+  }
+
   ngAfterViewInit() {
     this.subscription.add(
-      this.comparisonTableService
-        .calculateHieght(this.tableCell, this.renderer)
+      this.tableCell.changes
+        .pipe(
+          map((data: QueryList<ElementRef<HTMLElement>>) => {
+            const elementArray = data.toArray();
+            this.getHighestElement(elementArray);
+            this.comparisonTableService.equalizeElementsHeights(
+              elementArray,
+              this.renderer
+            );
+          })
+        )
         .subscribe()
     );
   }

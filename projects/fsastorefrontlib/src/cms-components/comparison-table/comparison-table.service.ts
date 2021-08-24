@@ -13,8 +13,23 @@ export class ComparisonTableService {
   );
   readonly availableTab$ = this.availableTabSource.asObservable();
 
+  highestElement: ElementRef<HTMLElement>;
+
   setAvailableTabs(tabs: CMSComparisonTabComponent[]) {
     this.availableTabSource.next(tabs);
+  }
+
+  equalizeElementsHeights(
+    elementArray: ElementRef<HTMLElement>[],
+    renderer: Renderer2
+  ) {
+    elementArray.forEach(elem => {
+      renderer.setStyle(
+        elem.nativeElement,
+        'height',
+        `${this.highestElement.nativeElement.clientHeight}px`
+      );
+    });
   }
 
   /**
@@ -23,28 +38,5 @@ export class ComparisonTableService {
    */
   getComparisonTabs(tabIds: string[]): Observable<CMSComparisonTabComponent>[] {
     return tabIds.map(tabId => this.cmsService.getComponentData(tabId));
-  }
-
-  calculateHieght(
-    tableCell: QueryList<ElementRef<HTMLElement>>,
-    renderer: Renderer2
-  ): Observable<any> {
-    return tableCell.changes.pipe(
-      map((data: QueryList<ElementRef<HTMLElement>>) => {
-        const elementArray = data.toArray();
-        const highestElem = elementArray.sort(
-          (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
-        )[elementArray.length - 1];
-        if (highestElem) {
-          elementArray.forEach(elem => {
-            renderer.setStyle(
-              elem.nativeElement,
-              'height',
-              `${highestElem.nativeElement.clientHeight}px`
-            );
-          });
-        }
-      })
-    );
   }
 }
