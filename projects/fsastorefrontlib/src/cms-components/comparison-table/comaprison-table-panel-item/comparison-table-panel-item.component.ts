@@ -11,7 +11,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OccConfig, RoutingService } from '@spartacus/core';
+import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
@@ -50,7 +50,8 @@ export class ComparisonTablePanelItemComponent
     protected activatedRoute: ActivatedRoute,
     protected productService: FSProductService,
     protected comparisonTableService: ComparisonTableService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    protected winRef: WindowRef
   ) {}
 
   product$: Observable<FSProduct>;
@@ -58,8 +59,18 @@ export class ComparisonTablePanelItemComponent
   recommendedProduct = localStorage.getItem(RECOMMENDED_PRODUCT);
   panelItemEntries: OneTimeChargeEntry[] = [];
   private subscription = new Subscription();
+  elementArray: ElementRef<HTMLElement>[];
 
   ngOnInit() {
+    this.winRef.resize$.subscribe(_ => {
+      if (this.tableCell) {
+        this.elementArray = this.tableCell.toArray();
+        this.comparisonTableService.equalizeElementsHeights(
+          this.elementArray,
+          this.renderer
+        );
+      }
+    });
     this.getProductData();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }

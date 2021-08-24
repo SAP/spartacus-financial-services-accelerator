@@ -26,7 +26,7 @@ export class ComparisonTableService {
     elementArray.forEach(elem => {
       renderer.setStyle(
         elem.nativeElement,
-        'height',
+        'min-height',
         `${this.highestElement.nativeElement.clientHeight}px`
       );
     });

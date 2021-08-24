@@ -56,8 +56,18 @@ export class ComparisonTablePanelComponent
   ) {}
 
   user$: Observable<User> = this.userAccountFacade.get();
+  elementArray: ElementRef<HTMLElement>[];
 
   ngOnInit() {
+    this.winRef.resize$.subscribe(_ => {
+      if (this.tableCell) {
+        this.elementArray = this.tableCell.toArray();
+        this.comparisonTableService.equalizeElementsHeights(
+          this.elementArray,
+          this.renderer
+        );
+      }
+    });
     this.comparisonPanel$ = this.componentData.data$;
     this.subscription
       .add(
@@ -112,10 +122,10 @@ export class ComparisonTablePanelComponent
       this.tableCell.changes
         .pipe(
           map((data: QueryList<ElementRef<HTMLElement>>) => {
-            const elementArray = data.toArray();
-            this.getHighestElement(elementArray);
+            this.elementArray = data.toArray();
+            this.getHighestElement(this.elementArray);
             this.comparisonTableService.equalizeElementsHeights(
-              elementArray,
+              this.elementArray,
               this.renderer
             );
           })
