@@ -7,14 +7,13 @@
           {{ 'dynamicforms.optional' | cxTranslate }}
         </ng-container>
       </label>
-      <div class="currency d-flex">
-        <span
-          class="currencyCode d-flex justify-content-center align-items-center"
-          >{{ currentCurrency$ | async }}</span
-        >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">{{ currentCurrency$ | async }}</span>
+        </div>
         <input
-          class="form-control"
           type="text"
+          class="form-control"
           [attr.placeholder]="placeHolder"
           [formControlName]="config.name"
           [attr.name]="config.name"

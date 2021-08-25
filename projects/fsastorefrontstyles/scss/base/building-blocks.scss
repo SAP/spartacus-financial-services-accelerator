@@ -237,20 +237,3 @@
     border-right: 7px solid transparent;
   }
 }
-
-.currency {
-  .currencyCode {
-    border: 1px solid #d3d6db;
-    border-right: 0;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-    height: 48px;
-    padding: 0 10px;
-    background-color: var(--cx-color-background);
-    color: #495057;
-  }
-  .form-control {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}
