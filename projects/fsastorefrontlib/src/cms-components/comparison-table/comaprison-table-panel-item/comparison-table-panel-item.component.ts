@@ -13,7 +13,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { FSCartService } from '../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
@@ -59,18 +59,26 @@ export class ComparisonTablePanelItemComponent
   recommendedProduct = localStorage.getItem(RECOMMENDED_PRODUCT);
   panelItemEntries: OneTimeChargeEntry[] = [];
   private subscription = new Subscription();
-  elementArray: ElementRef<HTMLElement>[];
 
   ngOnInit() {
-    this.winRef.resize$.subscribe(_ => {
-      if (this.tableCell) {
-        this.elementArray = this.tableCell.toArray();
-        this.comparisonTableService.equalizeElementsHeights(
-          this.elementArray,
-          this.renderer
-        );
-      }
-    });
+    this.subscription.add(
+      this.winRef.resize$
+        .pipe(
+          debounceTime(500),
+          tap(_ => {
+            if (this.tableCell) {
+              const elementArray: ElementRef<
+                HTMLElement
+              >[] = this.tableCell.toArray();
+              this.comparisonTableService.equalizeElementsHeights(
+                elementArray,
+                this.renderer
+              );
+            }
+          })
+        )
+        .subscribe()
+    );
     this.getProductData();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
@@ -179,16 +187,8 @@ export class ComparisonTablePanelItemComponent
 
   ngAfterViewInit() {
     this.subscription.add(
-      this.tableCell.changes
-        .pipe(
-          map((data: QueryList<ElementRef<HTMLElement>>) => {
-            const elementArray = data.toArray();
-            this.comparisonTableService.equalizeElementsHeights(
-              elementArray,
-              this.renderer
-            );
-          })
-        )
+      this.comparisonTableService
+        .calculateHieghts(this.tableCell, this.renderer)
         .subscribe()
     );
   }

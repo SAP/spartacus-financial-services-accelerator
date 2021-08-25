@@ -17,7 +17,7 @@ import {
 } from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
@@ -56,18 +56,27 @@ export class ComparisonTablePanelComponent
   ) {}
 
   user$: Observable<User> = this.userAccountFacade.get();
-  elementArray: ElementRef<HTMLElement>[];
 
   ngOnInit() {
-    this.winRef.resize$.subscribe(_ => {
-      if (this.tableCell) {
-        this.elementArray = this.tableCell.toArray();
-        this.comparisonTableService.equalizeElementsHeights(
-          this.elementArray,
-          this.renderer
-        );
-      }
-    });
+    this.subscription.add(
+      this.winRef.resize$
+        .pipe(
+          debounceTime(500),
+          tap(_ => {
+            if (this.tableCell) {
+              const elementArray: ElementRef<
+                HTMLElement
+              >[] = this.tableCell.toArray();
+              this.getHighestElement(elementArray);
+              this.comparisonTableService.equalizeElementsHeights(
+                elementArray,
+                this.renderer
+              );
+            }
+          })
+        )
+        .subscribe()
+    );
     this.comparisonPanel$ = this.componentData.data$;
     this.subscription
       .add(
@@ -119,17 +128,8 @@ export class ComparisonTablePanelComponent
 
   ngAfterViewInit() {
     this.subscription.add(
-      this.tableCell.changes
-        .pipe(
-          map((data: QueryList<ElementRef<HTMLElement>>) => {
-            this.elementArray = data.toArray();
-            this.getHighestElement(this.elementArray);
-            this.comparisonTableService.equalizeElementsHeights(
-              this.elementArray,
-              this.renderer
-            );
-          })
-        )
+      this.comparisonTableService
+        .calculateHieghts(this.tableCell, this.renderer, this.getHighestElement)
         .subscribe()
     );
   }

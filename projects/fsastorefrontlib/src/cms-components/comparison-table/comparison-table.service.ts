@@ -32,6 +32,20 @@ export class ComparisonTableService {
     });
   }
 
+  calculateHieghts(
+    tableCell: QueryList<ElementRef<HTMLElement>>,
+    renderer: Renderer2,
+    getHighestElement?: Function
+  ): Observable<any> {
+    return tableCell.changes.pipe(
+      map((data: QueryList<ElementRef<HTMLElement>>) => {
+        const elementArray = data.toArray();
+        getHighestElement(elementArray);
+        this.equalizeElementsHeights(elementArray, renderer);
+      })
+    );
+  }
+
   /**
    * @deprecated since 2.0
    * Service is no longer used anywhere, instead, cmsService.getComponentData() method is used directly in the component
