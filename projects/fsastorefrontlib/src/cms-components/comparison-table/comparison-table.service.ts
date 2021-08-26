@@ -49,7 +49,7 @@ export class ComparisonTableService {
     tableCell: QueryList<ElementRef<HTMLElement>>,
     renderer: Renderer2,
     getHighestElement?: Function
-  ) {
+  ): Observable<WindowRef> {
     return winRef.resize$.pipe(
       tap(_ => {
         if (tableCell) {
