@@ -50,7 +50,7 @@ export class ComparisonTablePanelItemComponent
     protected activatedRoute: ActivatedRoute,
     protected productService: FSProductService,
     protected comparisonTableService: ComparisonTableService,
-    private renderer: Renderer2,
+    protected renderer: Renderer2,
     protected winRef: WindowRef
   ) {}
 
