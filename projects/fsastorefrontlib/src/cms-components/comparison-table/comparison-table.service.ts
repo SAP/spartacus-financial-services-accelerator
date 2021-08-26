@@ -19,7 +19,7 @@ export class ComparisonTableService {
     this.availableTabSource.next(tabs);
   }
 
-  equalizeElementsHeights(
+  setEqualElementsHeights(
     elementArray: ElementRef<HTMLElement>[],
     renderer: Renderer2
   ) {
@@ -41,7 +41,7 @@ export class ComparisonTableService {
     if (getHighestElement) {
       getHighestElement(elementArray);
     }
-    this.equalizeElementsHeights(elementArray, renderer);
+    this.setEqualElementsHeights(elementArray, renderer);
   }
 
   setHeightsAtResize(
