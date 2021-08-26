@@ -27,7 +27,7 @@ export class ComparisonTableService {
       renderer.setStyle(
         elem.nativeElement,
         'min-height',
-        `${this.highestElement.nativeElement.clientHeight}px`
+        `${this.highestElement?.nativeElement.clientHeight}px`
       );
     });
   }
@@ -40,7 +40,7 @@ export class ComparisonTableService {
     return tableCell.changes.pipe(
       map((data: QueryList<ElementRef<HTMLElement>>) => {
         const elementArray = data.toArray();
-        getHighestElement(elementArray);
+        getHighestElement?.bind(this, elementArray);
         this.equalizeElementsHeights(elementArray, renderer);
       })
     );

@@ -25,7 +25,6 @@
         min-height: 45px;
         @include media-breakpoint-down(sm) {
           min-height: 60px;
-          font-size: 18px;
         }
       }
       .table-header-value {
@@ -80,7 +79,7 @@
   border-top: none;
   .table-tab {
     flex: 0 1 100%;
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       overflow: hidden;
     }
   }
@@ -93,7 +92,7 @@
   .fixed-column {
     width: 25%;
     padding-right: 5px;
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       width: 46%;
       z-index: 2;
       box-shadow: -28px 5px 1px 29px var(--cx-color-1),
@@ -103,7 +102,7 @@
   .slide-column-wrapper {
     width: 75%;
     border-left: 1px solid var(--cx-color-3);
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       overflow-y: hidden;
       overflow-x: auto;
       width: 54%;
@@ -121,7 +120,7 @@
   padding: 0 5px;
   border-left: 1px dashed var(--cx-color-6);
   text-align: center;
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(sm) {
     &:last-of-type .ribbon:after {
       display: none;
     }
