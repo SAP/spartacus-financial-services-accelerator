@@ -167,38 +167,26 @@ export class ComparisonTablePanelItemComponent
     );
   }
 
-  setRowHeights() {
-    this.subscription.add(
-      this.winRef.resize$
-        .pipe(
-          tap(_ => {
-            if (this.tableCell) {
+  ngAfterViewInit() {
+    this.subscription
+      .add(
+        this.tableCell.changes
+          .pipe(
+            filter(el => el.length > 0),
+            map((elemRef: QueryList<ElementRef<HTMLElement>>) => {
               this.comparisonTableService.calculateHeights(
-                this.tableCell,
+                elemRef,
                 this.renderer
               );
-            }
-          })
-        )
-        .subscribe()
-    );
-  }
-
-  ngAfterViewInit() {
-    this.subscription.add(
-      this.tableCell.changes
-        .pipe(
-          filter(el => el.length > 0),
-          map((elemRef: QueryList<ElementRef<HTMLElement>>) => {
-            this.comparisonTableService.calculateHeights(
-              elemRef,
-              this.renderer
-            );
-          })
-        )
-        .subscribe()
-    );
-    this.setRowHeights();
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.comparisonTableService
+          .setHeightsAtResize(this.winRef, this.tableCell, this.renderer)
+          .subscribe()
+      );
   }
 
   ngOnDestroy() {

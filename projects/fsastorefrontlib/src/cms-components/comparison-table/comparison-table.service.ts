@@ -1,6 +1,7 @@
 import { ElementRef, Injectable, QueryList, Renderer2 } from '@angular/core';
-import { CmsService } from '@spartacus/core';
+import { CmsService, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { CMSComparisonTabComponent } from '../../occ/occ-models';
 
 @Injectable()
@@ -41,6 +42,21 @@ export class ComparisonTableService {
       getHighestElement(elementArray);
     }
     this.equalizeElementsHeights(elementArray, renderer);
+  }
+
+  setHeightsAtResize(
+    winRef: WindowRef,
+    tableCell: QueryList<ElementRef<HTMLElement>>,
+    renderer: Renderer2,
+    getHighestElement?: Function
+  ) {
+    return winRef.resize$.pipe(
+      tap(_ => {
+        if (tableCell) {
+          this.calculateHeights(tableCell, renderer, getHighestElement);
+        }
+      })
+    );
   }
 
   /**
