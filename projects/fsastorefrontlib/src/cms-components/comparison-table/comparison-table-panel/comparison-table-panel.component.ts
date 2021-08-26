@@ -17,7 +17,7 @@ import {
 } from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { debounceTime, map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
@@ -58,25 +58,6 @@ export class ComparisonTablePanelComponent
   user$: Observable<User> = this.userAccountFacade.get();
 
   ngOnInit() {
-    this.subscription.add(
-      this.winRef.resize$
-        .pipe(
-          debounceTime(500),
-          tap(_ => {
-            if (this.tableCell) {
-              const elementArray: ElementRef<
-                HTMLElement
-              >[] = this.tableCell.toArray();
-              this.getHighestElement(elementArray);
-              this.comparisonTableService.equalizeElementsHeights(
-                elementArray,
-                this.renderer
-              );
-            }
-          })
-        )
-        .subscribe()
-    );
     this.comparisonPanel$ = this.componentData.data$;
     this.subscription
       .add(
@@ -126,12 +107,40 @@ export class ComparisonTablePanelComponent
     )[elementArray.length - 1];
   }
 
-  ngAfterViewInit() {
+  setRowHeights() {
     this.subscription.add(
-      this.comparisonTableService
-        .calculateHieghts(this.tableCell, this.renderer, this.getHighestElement)
+      this.winRef.resize$
+        .pipe(
+          tap(_ => {
+            if (this.tableCell) {
+              this.comparisonTableService.calculateHeights(
+                this.tableCell,
+                this.renderer,
+                this.getHighestElement.bind(this)
+              );
+            }
+          })
+        )
         .subscribe()
     );
+  }
+
+  ngAfterViewInit() {
+    this.subscription.add(
+      this.tableCell.changes
+        .pipe(
+          filter(el => el.length > 0),
+          map((elemRef: QueryList<ElementRef<HTMLElement>>) => {
+            this.comparisonTableService.calculateHeights(
+              elemRef,
+              this.renderer,
+              this.getHighestElement.bind(this)
+            );
+          })
+        )
+        .subscribe()
+    );
+    this.setRowHeights();
   }
 
   ngOnDestroy(): void {

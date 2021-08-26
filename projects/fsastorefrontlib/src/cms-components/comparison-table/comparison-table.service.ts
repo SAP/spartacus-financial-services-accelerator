@@ -1,7 +1,6 @@
 import { ElementRef, Injectable, QueryList, Renderer2 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { CMSComparisonTabComponent } from '../../occ/occ-models';
 
 @Injectable()
@@ -32,18 +31,16 @@ export class ComparisonTableService {
     });
   }
 
-  calculateHieghts(
-    tableCell: QueryList<ElementRef<HTMLElement>>,
+  calculateHeights(
+    elemRef: QueryList<ElementRef<HTMLElement>>,
     renderer: Renderer2,
     getHighestElement?: Function
-  ): Observable<any> {
-    return tableCell.changes.pipe(
-      map((data: QueryList<ElementRef<HTMLElement>>) => {
-        const elementArray = data.toArray();
-        getHighestElement?.bind(this, elementArray);
-        this.equalizeElementsHeights(elementArray, renderer);
-      })
-    );
+  ) {
+    const elementArray = elemRef.toArray();
+    if (getHighestElement) {
+      getHighestElement(elementArray);
+    }
+    this.equalizeElementsHeights(elementArray, renderer);
   }
 
   /**

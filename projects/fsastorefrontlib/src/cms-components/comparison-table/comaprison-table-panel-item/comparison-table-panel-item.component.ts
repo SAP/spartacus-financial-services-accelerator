@@ -13,7 +13,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { debounceTime, map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { FSCartService } from '../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
@@ -61,24 +61,6 @@ export class ComparisonTablePanelItemComponent
   private subscription = new Subscription();
 
   ngOnInit() {
-    this.subscription.add(
-      this.winRef.resize$
-        .pipe(
-          debounceTime(500),
-          tap(_ => {
-            if (this.tableCell) {
-              const elementArray: ElementRef<
-                HTMLElement
-              >[] = this.tableCell.toArray();
-              this.comparisonTableService.equalizeElementsHeights(
-                elementArray,
-                this.renderer
-              );
-            }
-          })
-        )
-        .subscribe()
-    );
     this.getProductData();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
@@ -185,12 +167,38 @@ export class ComparisonTablePanelItemComponent
     );
   }
 
-  ngAfterViewInit() {
+  setRowHeights() {
     this.subscription.add(
-      this.comparisonTableService
-        .calculateHieghts(this.tableCell, this.renderer)
+      this.winRef.resize$
+        .pipe(
+          tap(_ => {
+            if (this.tableCell) {
+              this.comparisonTableService.calculateHeights(
+                this.tableCell,
+                this.renderer
+              );
+            }
+          })
+        )
         .subscribe()
     );
+  }
+
+  ngAfterViewInit() {
+    this.subscription.add(
+      this.tableCell.changes
+        .pipe(
+          filter(el => el.length > 0),
+          map((elemRef: QueryList<ElementRef<HTMLElement>>) => {
+            this.comparisonTableService.calculateHeights(
+              elemRef,
+              this.renderer
+            );
+          })
+        )
+        .subscribe()
+    );
+    this.setRowHeights();
   }
 
   ngOnDestroy() {
