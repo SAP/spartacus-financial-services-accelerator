@@ -8,6 +8,7 @@ import { inject, TestBed } from '@angular/core/testing';
 import { CmsService, WindowRef } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { filter, map } from 'rxjs/operators';
 import { CMSComparisonTabComponent } from './../../occ/occ-models/cms-component.models';
 import { ComparisonTableService } from './comparison-table.service';
 
@@ -113,7 +114,7 @@ describe('ComparisonTableService', () => {
       .unsubscribe();
   });
 
-  it('should set the heights of all table-cells to equal', inject(
+  it('should equalize min-height of all table-cells', inject(
     [RendererFactory2],
     (factory: RendererFactory2) => {
       renderer = factory.createRenderer(null, null);
@@ -130,6 +131,55 @@ describe('ComparisonTableService', () => {
         expect(elem.nativeElement.clientHeight).toEqual(
           service.highestElement.nativeElement.clientHeight
         )
+      );
+    }
+  ));
+
+  it('should NOT equalize min-height of all table-cells', inject(
+    [RendererFactory2],
+    (factory: RendererFactory2) => {
+      renderer = factory.createRenderer(null, null);
+      const arrayedElements = tableCells.toArray();
+      service.highestElement = undefined;
+      service.setEqualElementsHeights(arrayedElements, renderer);
+      arrayedElements.map(elem =>
+        expect(elem.nativeElement.style.minHeight).toBe('')
+      );
+    }
+  ));
+
+  it('calculate heights of elements', inject(
+    [RendererFactory2],
+    (factory: RendererFactory2) => {
+      renderer = factory.createRenderer(null, null);
+
+      function getHighestElement(elementArray: ElementRef<HTMLElement>[]) {
+        service.highestElement = elementArray.sort(
+          (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
+        )[elementArray.length - 1];
+      }
+      spyOn(service, 'calculateHeights').and.callThrough();
+      service.calculateHeights(tableCells, renderer, getHighestElement);
+
+      expect(service.calculateHeights).toHaveBeenCalledWith(
+        tableCells,
+        renderer,
+        getHighestElement
+      );
+    }
+  ));
+
+  it('calculate heights of elements without the highest element passed', inject(
+    [RendererFactory2],
+    (factory: RendererFactory2) => {
+      renderer = factory.createRenderer(null, null);
+
+      spyOn(service, 'calculateHeights').and.callThrough();
+      service.calculateHeights(tableCells, renderer);
+
+      expect(service.calculateHeights).toHaveBeenCalledWith(
+        tableCells,
+        renderer
       );
     }
   ));
