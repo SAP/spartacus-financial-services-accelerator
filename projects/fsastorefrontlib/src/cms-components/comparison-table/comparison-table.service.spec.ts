@@ -8,7 +8,6 @@ import { inject, TestBed } from '@angular/core/testing';
 import { CmsService, WindowRef } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { filter, map } from 'rxjs/operators';
 import { CMSComparisonTabComponent } from './../../occ/occ-models/cms-component.models';
 import { ComparisonTableService } from './comparison-table.service';
 
@@ -21,21 +20,7 @@ const componentData: CMSComparisonTabComponent = {
   },
 };
 
-class MockWindowRef {
-  nativeWindow = {
-    innerWidth: 1000,
-  };
-  get resize$(): Observable<any> {
-    return of();
-  }
-}
-const MockWindow = {
-  target: {
-    innerWidth: 0,
-  },
-};
-
-const titleArray = [
+const tableCellTitleArray = [
   'Lorem ipsum',
   'Dolor sit amet',
   'Consectetur adipiscing elit',
@@ -50,10 +35,10 @@ function createTableCells(): QueryList<ElementRef<HTMLElement>> {
   tableCellWrapper.className = 'table-cell-wrapper';
   tableCellWrapper.style.width = '130px';
   document.body.append(tableCellWrapper);
-  for (let i = 0; i < titleArray.length; i++) {
+  for (let i = 0; i < tableCellTitleArray.length; i++) {
     const tableCell = document.createElement('div');
     tableCell.className = `table-cell`;
-    tableCell.innerHTML = `<span class="table-cell-title">${titleArray[i]}</span>`;
+    tableCell.innerHTML = `<span class="table-cell-title">${tableCellTitleArray[i]}</span>`;
     const elementElementRef = new ElementRef(tableCell);
     elementRefs.push(elementElementRef);
     tableCellWrapper.append(tableCell);

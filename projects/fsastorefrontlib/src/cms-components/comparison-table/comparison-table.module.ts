@@ -59,6 +59,12 @@ import { ComparisonTableService } from './comparison-table.service';
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent,
   ],
+  exports: [
+    ComparisonTableContainerComponent,
+    ComparisonTableTabComponent,
+    ComparisonTablePanelComponent,
+    ComparisonTablePanelItemComponent,
+  ],
   entryComponents: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,

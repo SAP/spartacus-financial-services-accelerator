@@ -101,7 +101,7 @@ export class ComparisonTablePanelComponent
     }
   }
 
-  getHighestElement(elementArray: ElementRef<HTMLElement>[]) {
+  protected getHighestElement(elementArray: ElementRef<HTMLElement>[]) {
     this.comparisonTableService.highestElement = elementArray.sort(
       (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
     )[elementArray.length - 1];
