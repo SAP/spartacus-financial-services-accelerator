@@ -1,10 +1,4 @@
-import {
-  DebugElement,
-  ElementRef,
-  Pipe,
-  PipeTransform,
-  QueryList,
-} from '@angular/core';
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
