@@ -148,7 +148,7 @@ describe('ComparisonTableService', () => {
     }
   ));
 
-  it('calculate heights of elements', inject(
+  it('should calculate heights of elements with the highest element passed', inject(
     [RendererFactory2],
     (factory: RendererFactory2) => {
       renderer = factory.createRenderer(null, null);
@@ -169,7 +169,7 @@ describe('ComparisonTableService', () => {
     }
   ));
 
-  it('calculate heights of elements without the highest element passed', inject(
+  it('should calculate heights of elements without the highest element passed', inject(
     [RendererFactory2],
     (factory: RendererFactory2) => {
       renderer = factory.createRenderer(null, null);
@@ -180,6 +180,34 @@ describe('ComparisonTableService', () => {
       expect(service.calculateHeights).toHaveBeenCalledWith(
         tableCells,
         renderer
+      );
+    }
+  ));
+
+  it('should equalize elements at window resize', inject(
+    [RendererFactory2],
+    (factory: RendererFactory2) => {
+      renderer = factory.createRenderer(null, null);
+
+      function getHighestElement(elementArray: ElementRef<HTMLElement>[]) {
+        service.highestElement = elementArray.sort(
+          (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
+        )[elementArray.length - 1];
+      }
+
+      spyOn(service, 'setHeightsAtResize').and.callThrough();
+      service.setHeightsAtResize(
+        windowRef,
+        tableCells,
+        renderer,
+        getHighestElement
+      );
+
+      expect(service.setHeightsAtResize).toHaveBeenCalledWith(
+        windowRef,
+        tableCells,
+        renderer,
+        getHighestElement
       );
     }
   ));
