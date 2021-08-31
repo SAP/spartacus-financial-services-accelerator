@@ -1,5 +1,11 @@
+import {
+  ElementRef,
+  QueryList,
+  Renderer2,
+  RendererFactory2,
+} from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
-import { CmsService } from '@spartacus/core';
+import { CmsService, WindowRef } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { CMSComparisonTabComponent } from './../../occ/occ-models/cms-component.models';
@@ -14,6 +20,47 @@ const componentData: CMSComparisonTabComponent = {
   },
 };
 
+class MockWindowRef {
+  nativeWindow = {
+    innerWidth: 1000,
+  };
+  get resize$(): Observable<any> {
+    return of();
+  }
+}
+const MockWindow = {
+  target: {
+    innerWidth: 0,
+  },
+};
+
+const titleArray = [
+  'Lorem ipsum',
+  'Dolor sit amet',
+  'Consectetur adipiscing elit',
+  'Fusce mollis',
+  'Nibh eu justo',
+];
+
+function createTableCells(): QueryList<ElementRef<HTMLElement>> {
+  const queryList = new QueryList<ElementRef<HTMLElement>>();
+  const elementRefs = [];
+  const tableCellWrapper = document.createElement('div');
+  tableCellWrapper.className = 'table-cell-wrapper';
+  tableCellWrapper.style.width = '130px';
+  document.body.append(tableCellWrapper);
+  for (let i = 0; i < titleArray.length; i++) {
+    const tableCell = document.createElement('div');
+    tableCell.className = `table-cell`;
+    tableCell.innerHTML = `<span class="table-cell-title">${titleArray[i]}</span>`;
+    const elementElementRef = new ElementRef(tableCell);
+    elementRefs.push(elementElementRef);
+    tableCellWrapper.append(tableCell);
+  }
+  queryList.reset(elementRefs);
+  return queryList;
+}
+
 class MockCmsService {
   getComponentData(): Observable<CMSComparisonTabComponent> {
     return of(componentData);
@@ -22,6 +69,9 @@ class MockCmsService {
 
 describe('ComparisonTableService', () => {
   let service: ComparisonTableService;
+  let windowRef: WindowRef;
+  let tableCells: QueryList<ElementRef<HTMLElement>>;
+  let renderer: Renderer2;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,6 +81,8 @@ describe('ComparisonTableService', () => {
       ],
     });
     service = TestBed.inject(ComparisonTableService);
+    windowRef = TestBed.inject(WindowRef);
+    tableCells = createTableCells();
   });
 
   it('should inject CmsService', inject(
@@ -60,4 +112,25 @@ describe('ComparisonTableService', () => {
       )
       .unsubscribe();
   });
+
+  it('should set the heights of all table-cells to equal', inject(
+    [RendererFactory2],
+    (factory: RendererFactory2) => {
+      renderer = factory.createRenderer(null, null);
+
+      const arrayedElements = tableCells.toArray();
+
+      service.highestElement = arrayedElements.sort(
+        (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight
+      )[arrayedElements.length - 1];
+
+      service.setEqualElementsHeights(arrayedElements, renderer);
+
+      arrayedElements.map(elem =>
+        expect(elem.nativeElement.clientHeight).toEqual(
+          service.highestElement.nativeElement.clientHeight
+        )
+      );
+    }
+  ));
 });

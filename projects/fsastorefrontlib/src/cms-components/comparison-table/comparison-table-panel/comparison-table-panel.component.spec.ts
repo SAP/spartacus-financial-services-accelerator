@@ -16,6 +16,7 @@ import { BillingTimeConnector } from './../../../core/product-pricing/connectors
 import { PricingService } from './../../../core/product-pricing/facade/pricing.service';
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
+import { ComparisonTableService } from '../comparison-table.service';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 
@@ -74,6 +75,13 @@ let pricingData: PricingData;
 
 class MockActivatedRoute {
   params = of();
+}
+
+class MockComparisonTableService {
+  setAvailableTabs() {}
+  setHeightsAtResize() {
+    return of();
+  }
 }
 
 class MockFormDataStorageService {
@@ -148,6 +156,10 @@ describe('ComparisonTablePanelComponent', () => {
           {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
+          },
+          {
+            provide: ComparisonTableService,
+            useClass: MockComparisonTableService,
           },
         ],
         declarations: [

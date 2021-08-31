@@ -13,7 +13,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { FSCartService } from '../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
