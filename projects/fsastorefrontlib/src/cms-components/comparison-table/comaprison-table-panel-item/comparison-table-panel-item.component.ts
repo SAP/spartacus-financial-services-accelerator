@@ -1,14 +1,20 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Input,
   OnDestroy,
   OnInit,
+  QueryList,
+  Renderer2,
+  ViewChildren,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OccConfig, RoutingService } from '@spartacus/core';
+import { OccConfig, RoutingService, WindowRef } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { ComparisonTableService } from '../comparison-table.service';
 import { FSCartService } from '../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
 import { FSProductService } from '../../../core/product-pricing/facade/product.service';
@@ -24,7 +30,8 @@ import { RECOMMENDED_PRODUCT } from '../../../shared';
   templateUrl: './comparison-table-panel-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
+export class ComparisonTablePanelItemComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   productCode: string;
   @Input()
@@ -33,6 +40,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   pricingData: PricingData;
   productPrice: string;
   baseUrl: string;
+  @ViewChildren('tableCell') tableCell: QueryList<ElementRef<HTMLElement>>;
 
   constructor(
     protected cartService: FSCartService,
@@ -40,7 +48,10 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected productService: FSProductService
+    protected productService: FSProductService,
+    protected comparisonTableService: ComparisonTableService,
+    protected renderer: Renderer2,
+    protected winRef: WindowRef
   ) {}
 
   product$: Observable<FSProduct>;
@@ -154,6 +165,28 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  ngAfterViewInit() {
+    this.subscription
+      .add(
+        this.tableCell.changes
+          .pipe(
+            filter(el => el.length > 0),
+            map((elemRef: QueryList<ElementRef<HTMLElement>>) => {
+              this.comparisonTableService.calculateHeights(
+                elemRef,
+                this.renderer
+              );
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.comparisonTableService
+          .setHeightsAtResize(this.winRef, this.tableCell, this.renderer)
+          .subscribe()
+      );
   }
 
   ngOnDestroy() {
