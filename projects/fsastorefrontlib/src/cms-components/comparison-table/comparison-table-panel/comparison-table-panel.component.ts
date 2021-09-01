@@ -101,6 +101,11 @@ export class ComparisonTablePanelComponent
     }
   }
 
+  /**
+   * Sets the highest element in an array as a comparisonTableService
+   * property for easier reference
+   * @param elemRef array of elements that will sorted based on their height
+   */
   protected getHighestElement(elementArray: ElementRef<HTMLElement>[]) {
     this.comparisonTableService.highestElement = elementArray.sort(
       (a, b) => a.nativeElement.clientHeight - b.nativeElement.clientHeight

@@ -19,6 +19,12 @@ export class ComparisonTableService {
     this.availableTabSource.next(tabs);
   }
 
+  /**
+   * Sets the min-height property of all elements in array to the highest one
+   *
+   * @param elementArray array of elements that will be resized
+   * @param renderer reference to component's renderer
+   */
   setEqualElementsHeights(
     elementArray: ElementRef<HTMLElement>[],
     renderer: Renderer2
@@ -32,6 +38,13 @@ export class ComparisonTableService {
     });
   }
 
+  /**
+   * Passes the elements for height calculation
+   *
+   * @param elemRef array of elements that will be passed for resizing
+   * @param renderer reference to component's renderer
+   * @param getHighestElement optional method that sets the highest element as a reference
+   */
   calculateHeights(
     elemRef: QueryList<ElementRef<HTMLElement>>,
     renderer: Renderer2,
@@ -44,6 +57,15 @@ export class ComparisonTableService {
     this.setEqualElementsHeights(elementArray, renderer);
   }
 
+  /**
+   * Executes height calculation on window resize
+   *
+   * @param winRef component's window reference
+   * @param tableCell array of elements that will be passed for resizing
+   * @param renderer reference to component's renderer
+   * @param getHighestElement optional method that sets the highest element as a reference
+   * @returns WindowRef observable
+   */
   setHeightsAtResize(
     winRef: WindowRef,
     tableCell: QueryList<ElementRef<HTMLElement>>,
