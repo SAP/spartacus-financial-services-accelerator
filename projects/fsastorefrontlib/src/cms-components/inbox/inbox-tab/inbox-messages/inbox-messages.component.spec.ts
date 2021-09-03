@@ -3,7 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { InboxService } from '../../../../core/inbox/facade/inbox.service';
-import { InboxTab } from '../../../../core/my-account/services/inbox-data.service';
+import { InboxTab } from '../../../../core/inbox/services/inbox-data.service';
 import { InboxMessagesComponent } from './inbox-messages.component';
 
 const mockInboxTab: InboxTab = {

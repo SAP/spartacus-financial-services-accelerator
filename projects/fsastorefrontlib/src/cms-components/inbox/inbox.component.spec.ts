@@ -13,7 +13,7 @@ import { InboxService } from '../../core/inbox/facade/inbox.service';
 import {
   InboxDataService,
   InboxTab,
-} from '../../core/my-account/services/inbox-data.service';
+} from '../../core/inbox/services/inbox-data.service';
 import { CmsInboxTabComponent } from '../../occ/occ-models/cms-component.models';
 import { InboxComponent } from './inbox.component';
 
