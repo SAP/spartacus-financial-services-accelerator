@@ -2,7 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { InboxConnector } from '../connectors/inbox.connector';
 import { InboxDataService, InboxTab } from '../services/inbox-data.service';
-import { reducerProvider } from '../store/reducers/index';
+import { reducerProvider } from '../../my-account/store/reducers/index';
 import { InboxService } from './inbox.service';
 
 const userId = 'testUser';

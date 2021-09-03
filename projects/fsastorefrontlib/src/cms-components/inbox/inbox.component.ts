@@ -8,7 +8,7 @@ import { AuthService, CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { InboxService } from '../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../core/inbox/facade/inbox.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,
@@ -54,8 +54,8 @@ export class InboxComponent implements OnInit, OnDestroy {
               map(initial => {
                 this.mobileGroupTitle = currentTitle?.title
                   ? currentTitle.title
-                  : initial.title;
-                this.initialGroupName = initial.messageGroup;
+                  : initial?.title;
+                this.initialGroupName = initial?.messageGroup;
               })
             )
           )

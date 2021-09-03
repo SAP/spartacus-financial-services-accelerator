@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { provideConfig } from '@spartacus/core';
 import { defaultOccInboxConfig } from './default-occ-inbox-config';
-import { InboxAdapter } from '../../../core/my-account/connectors/inbox.adapter';
+import { InboxAdapter } from '../../../core/inbox/connectors/inbox.adapter';
 import { OccInboxAdapter } from '../inbox/occ-inbox.adapter';
 
 @NgModule({

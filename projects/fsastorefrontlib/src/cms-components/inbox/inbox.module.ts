@@ -22,9 +22,9 @@ import {
 import { InboxMessagesComponent } from './inbox-tab/inbox-messages/inbox-messages.component';
 import { InboxTabComponent } from './inbox-tab/inbox-tab.component';
 import { InboxComponent } from './inbox.component';
-import { InboxDataService } from '../../core/my-account/services/inbox-data.service';
-import { InboxService } from '../../core/my-account/facade/inbox.service';
-import { InboxConnector } from '../../core/my-account/connectors/inbox.connector';
+import { InboxDataService } from '../../core/inbox/services/inbox-data.service';
+import { InboxService } from '../../core/inbox/facade/inbox.service';
+import { InboxConnector } from '../../core/inbox/connectors/inbox.connector';
 
 const routes: Routes = [
   {

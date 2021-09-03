@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { InboxService } from '../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../core/inbox/facade/inbox.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { MessageNotificationComponent } from './message-notification.component';
 import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';

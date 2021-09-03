@@ -5,8 +5,8 @@ import {
   OCC_USER_ID_CURRENT,
   UserIdService,
 } from '@spartacus/core';
-import { StateWithMyAccount } from '../store/my-account-state';
-import * as fromReducers from '../store/reducers';
+import { StateWithMyAccount } from '../../my-account/store/my-account-state';
+import * as fromReducers from '../../my-account/store/reducers';
 import { InboxDataService } from './inbox-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 

@@ -8,11 +8,11 @@ import {
 import { PaginationModel } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { InboxService } from '../../../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../../../core/inbox/facade/inbox.service';
 import {
   FSSearchConfig,
   InboxMessage,
-} from '../../../../core/my-account/services/inbox-data.service';
+} from '../../../../core/inbox/services/inbox-data.service';
 
 @Component({
   selector: 'cx-fs-inbox-messages',

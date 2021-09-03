@@ -4,6 +4,7 @@ export * from './change-request/index';
 export * from './checkout/index';
 export * from './cs-ticket/index';
 export * from './i18n/index';
+export * from './inbox/index';
 export * from './my-account/index';
 export * from './product-assignment/index';
 export * from './product-pricing/index';

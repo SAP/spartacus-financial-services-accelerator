@@ -9,7 +9,7 @@ import {
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { InboxService } from '../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../core/inbox/facade/inbox.service';
 import {
   InboxDataService,
   InboxTab,

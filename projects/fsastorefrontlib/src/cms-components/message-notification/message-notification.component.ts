@@ -8,8 +8,8 @@ import {
 import { AuthService } from '@spartacus/core';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
-import { InboxService } from '../../core/my-account/facade/inbox.service';
-import { FSSearchConfig } from '../../core/my-account/services/inbox-data.service';
+import { InboxService } from '../../core/inbox/facade/inbox.service';
+import { FSSearchConfig } from '../../core/inbox/services/inbox-data.service';
 import { UserProfileService } from '@spartacus/user/profile/core';
 
 @Component({
