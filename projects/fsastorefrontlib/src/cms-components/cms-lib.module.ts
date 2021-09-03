@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserAccountCoreModule } from '@spartacus/user/account/core';
 import { effects } from '../core/my-account/store/effects/index';
 import { reducerProvider } from '../core/my-account/store/reducers/index';
 import { AgentModule } from './agent/agent.module';
@@ -25,8 +27,7 @@ import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
-import { UserProfileCoreModule } from '@spartacus/user/profile/core';
-import { UserAccountCoreModule } from '@spartacus/user/account/core';
+import { InboxModule } from './inbox/inbox.module';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     NavigationModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    InboxModule,
   ],
   exports: [
     AgentModule,
@@ -78,6 +80,7 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     SyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    InboxModule,
   ],
   providers: [reducerProvider],
 })

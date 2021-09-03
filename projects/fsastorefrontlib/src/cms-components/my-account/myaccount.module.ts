@@ -15,7 +15,6 @@ import { UserRequestStoreModule } from '../../core/user-request/store/user-reque
 import { FSAddressBookModule } from './address-info';
 import { ClaimModule } from './claim/claim.module';
 import { DocumentModule } from './documents';
-import { InboxModule } from './inbox/inbox.module';
 import { FSOrderModule } from './order';
 import { PolicyModule } from './policy/policy.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
@@ -115,7 +114,6 @@ const routes: Routes = [
     CmsModule,
     I18nModule,
     UpdateProfileModule,
-    InboxModule,
     PolicyModule,
     QuoteModule,
     ClaimModule,

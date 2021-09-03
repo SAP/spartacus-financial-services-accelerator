@@ -8,11 +8,11 @@ import { AuthService, CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { InboxService } from '../../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../core/my-account/facade/inbox.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,
-} from '../../../occ/occ-models/cms-component.models';
+} from '../../occ/occ-models/cms-component.models';
 
 @Component({
   selector: 'cx-fs-inbox',
@@ -52,10 +52,9 @@ export class InboxComponent implements OnInit, OnDestroy {
           mergeMap(currentTitle =>
             this.initialTab$.pipe(
               map(initial => {
-                this.mobileGroupTitle =
-                  currentTitle && currentTitle.title
-                    ? currentTitle.title
-                    : initial.title;
+                this.mobileGroupTitle = currentTitle?.title
+                  ? currentTitle.title
+                  : initial.title;
                 this.initialGroupName = initial.messageGroup;
               })
             )
@@ -67,6 +66,7 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.subscription) {
+      this.initialGroupName = null;
       this.subscription.unsubscribe();
     }
   }

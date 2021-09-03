@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { BehaviorSubject, of } from 'rxjs';
-import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
-import { InboxTab } from '../../../../../core/my-account/services/inbox-data.service';
+import { InboxService } from '../../../../core/my-account/facade/inbox.service';
+import { InboxTab } from '../../../../core/my-account/services/inbox-data.service';
 import { InboxMessagesComponent } from './inbox-messages.component';
 
 const mockInboxTab: InboxTab = {

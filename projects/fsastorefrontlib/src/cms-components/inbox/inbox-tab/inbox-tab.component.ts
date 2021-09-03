@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-import { InboxService } from '../../../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../../core/my-account/facade/inbox.service';
 
 @Component({
   selector: 'cx-fs-inbox-tab',

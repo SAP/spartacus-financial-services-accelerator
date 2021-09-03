@@ -9,12 +9,12 @@ import {
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { InboxService } from '../../../core/my-account/facade/inbox.service';
+import { InboxService } from '../../core/my-account/facade/inbox.service';
 import {
   InboxDataService,
   InboxTab,
-} from '../../../core/my-account/services/inbox-data.service';
-import { CmsInboxTabComponent } from './../../../occ/occ-models/cms-component.models';
+} from '../../core/my-account/services/inbox-data.service';
+import { CmsInboxTabComponent } from '../../occ/occ-models/cms-component.models';
 import { InboxComponent } from './inbox.component';
 
 import createSpy = jasmine.createSpy;

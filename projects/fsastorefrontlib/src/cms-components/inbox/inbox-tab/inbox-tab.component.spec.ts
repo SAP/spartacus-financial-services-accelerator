@@ -3,8 +3,8 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CmsService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { InboxService } from '../../../../core/my-account/facade/inbox.service';
-import { CmsInboxTabComponent } from './../../../../occ/occ-models/cms-component.models';
+import { InboxService } from '../../../core/my-account/facade/inbox.service';
+import { CmsInboxTabComponent } from '../../../occ/occ-models/cms-component.models';
 import { InboxTabComponent } from './inbox-tab.component';
 
 const componentData: CmsInboxTabComponent = {
