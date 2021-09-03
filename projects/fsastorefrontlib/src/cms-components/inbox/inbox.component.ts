@@ -66,7 +66,6 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.subscription) {
-      this.initialGroupName = null;
       this.subscription.unsubscribe();
     }
   }
