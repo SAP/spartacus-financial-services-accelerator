@@ -24,7 +24,7 @@ Disclaimer: The code in this project may include calls to APIs (“API Calls”)
  you any rights to use or access any SAP External Product, or provide any third
  parties the right to use of access any SAP External Product, through API Calls.
 
-Files: .editorconfig .gitignore .travis.yml karma.conf.js angular.json package.json tsconfig.app.json tsconfig.json tsconfig.spec.json tslint.json projects/* .prettierrc
+Files: .editorconfig .gitignore .travis.yml karma.conf.js angular.json package.json tsconfig.app.json tsconfig.json tsconfig.compodoc.json tsconfig.spec.json tslint.json projects/* .prettierrc sonar-project.properties scripts/*
 Copyright: 2020 SAP SE or an SAP affiliate company and contributors.
 License: CC0-1.0
 

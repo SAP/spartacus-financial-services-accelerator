@@ -20,6 +20,7 @@ import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.com
 import { DataHolderComponent } from './data-holder/data-holder.component';
 import { UploadComponent } from './upload/upload.component';
 import { FormComponentService } from './form-component.service';
+import { CurrencyComponent } from './currency/currency.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -41,6 +42,7 @@ import { FormComponentService } from './form-component.service';
     CheckboxComponent,
     FormPopupErrorComponent,
     UploadComponent,
+    CurrencyComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -57,6 +59,7 @@ import { FormComponentService } from './form-component.service';
     SeparatorComponent,
     CheckboxComponent,
     UploadComponent,
+    CurrencyComponent,
   ],
   exports: [
     FormComponentDirective,
@@ -76,6 +79,7 @@ import { FormComponentService } from './form-component.service';
     CheckboxComponent,
     FormPopupErrorComponent,
     UploadComponent,
+    CurrencyComponent,
   ],
   providers: [FormComponentService],
 })

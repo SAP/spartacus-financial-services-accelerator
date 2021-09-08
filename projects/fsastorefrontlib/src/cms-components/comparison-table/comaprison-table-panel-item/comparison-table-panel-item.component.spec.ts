@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
 import { FSProductService } from './../../../core/product-pricing/facade/product.service';
+import { ComparisonTableService } from '../comparison-table.service';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
 import createSpy = jasmine.createSpy;
@@ -82,6 +83,14 @@ const recurringProduct: FSProduct = {
   },
 };
 
+class MockComparisonTableService {
+  setAvailableTabs() {}
+  calculateHeights() {}
+  setHeightsAtResize() {
+    return of();
+  }
+}
+
 class MockCartService {
   createCartForProduct(): void {}
 }
@@ -133,6 +142,7 @@ describe('ComparisonTablePanelItemComponent', () => {
   let fixture: ComponentFixture<ComparisonTablePanelItemComponent>;
   let mockCartService: FSCartService;
   let mockProductService: FSProductService;
+  let comparisonTableService: ComparisonTableService;
   let routingService: RoutingService;
   let el: DebugElement;
 
@@ -170,11 +180,16 @@ describe('ComparisonTablePanelItemComponent', () => {
             provide: FSProductService,
             useClass: MockFSProductService,
           },
+          {
+            provide: ComparisonTableService,
+            useClass: MockComparisonTableService,
+          },
         ],
         declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
       }).compileComponents();
       mockCartService = TestBed.inject(FSCartService);
       mockProductService = TestBed.inject(FSProductService);
+      comparisonTableService = TestBed.inject(ComparisonTableService);
       routingService = TestBed.inject(RoutingService);
     })
   );

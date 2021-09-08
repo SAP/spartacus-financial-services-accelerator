@@ -7,8 +7,12 @@
         </ng-container>
       </div>
       <div class="table-cell-wrapper">
-        <div *ngFor="let item of billingInfo.billingTimes" class="table-cell">
-          <span class="table-cell-title text-truncate" title="{{ item.name }}">
+        <div
+          *ngFor="let item of billingInfo.billingTimes"
+          class="table-cell"
+          #tableCell
+        >
+          <span class="table-cell-title text-uppercase" title="{{ item.name }}">
             {{ item.name }}
           </span>
           <div

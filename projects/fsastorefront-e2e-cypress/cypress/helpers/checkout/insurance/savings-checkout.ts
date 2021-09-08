@@ -43,7 +43,16 @@ export function selecBalancedDeal() {
     });
 }
 
-export function checkOptionalProducts() {
+export function selecSafeAndSteady() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(0)
+    .within(() => {
+      cy.get('.table-header-title').should('contain.text', 'Safe and Steady');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function checkOptionalProductsBalancedDeal() {
   const addOptionsContent: addOptionsPage.AddOptions = {
     title: 'Your Savings Insurance',
     items: [
@@ -54,7 +63,29 @@ export function checkOptionalProducts() {
       },
       {
         name: 'Disability Premium Waiver',
+        notAvailable: true,
+      },
+      {
+        name: 'Survivor Pension',
         available: true,
+        shouldAdd: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function checkOptionalProductsSafeAndSteady() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Savings Insurance',
+    items: [
+      {
+        name: 'Dependent Children Pension',
+        notAvailable: true,
+      },
+      {
+        name: 'Disability Premium Waiver',
+        notAvailable: true,
       },
       {
         name: 'Survivor Pension',

@@ -15,6 +15,7 @@ import { DataHolderComponent } from '../../components/data-holder/data-holder.co
 import { UploadComponent } from '../../components/upload/upload.component';
 import { CurrentDatePrefillResolver } from '../resolvers/current-date-prefill-resolver';
 import { UserAddressPrefillResolver } from '../resolvers/user-address-prefill-resolver';
+import { CurrencyComponent } from '../../components/currency/currency.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -54,6 +55,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       upload: {
         component: UploadComponent,
+      },
+      currency: {
+        component: CurrencyComponent,
       },
     },
     validators: {

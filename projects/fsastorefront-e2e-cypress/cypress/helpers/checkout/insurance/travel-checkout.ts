@@ -62,7 +62,7 @@ export function checkOptionalProductsAndPick() {
     items: [
       {
         name: 'Business Cover',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Excess waiver',
@@ -70,11 +70,11 @@ export function checkOptionalProductsAndPick() {
       },
       {
         name: 'Golf Cover',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Hazardous Activities',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Valuables Extension',

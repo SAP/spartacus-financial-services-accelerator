@@ -11,7 +11,7 @@ export function checkOptionalProducts() {
       },
       {
         name: 'Overseas Insurance',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Special Support',
