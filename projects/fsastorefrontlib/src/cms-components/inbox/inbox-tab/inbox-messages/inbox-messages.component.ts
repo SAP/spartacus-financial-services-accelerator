@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { InboxService } from '../../../../core/inbox/facade/inbox.service';
 import {
   FSSearchConfig,
@@ -71,8 +71,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
                 : this.initialGroup;
             this.mobileGroupTitle =
               group && group.title ? group.title : this.mobileInitialTab;
-            this.getMessages();
-          })
+          }),
+          switchMap(() => this.getMessages())
         )
         .subscribe()
     );
@@ -80,37 +80,35 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   getMessages() {
     const newMessageList = [];
-    this.subscription.add(
-      this.inboxService
-        .getMessages(this.messageGroup, this.searchConfig)
-        .pipe(
-          tap(response => {
-            this.ghostData = response;
-            this.inboxService.messagesSource.next(false);
-          }),
-          filter(response => !response.values),
-          map(response => {
-            this.pagination = {
-              currentPage: response.pagination.page,
-              pageSize: response.pagination.count,
-              totalPages: response.pagination.totalPages,
-              totalResults: response.pagination.totalCount,
-            };
-            this.inboxService.messagesSource.next(response);
-            if (response.sorts.length > 0 && response.pagination) {
-              this.searchConfig.currentPage = response.pagination.page;
-              this.searchConfig.sortCode = response.sorts[0].code;
-              this.searchConfig.sortOrder =
-                response.sorts[0].asc === true ? 'asc' : 'desc';
-            }
-            response.messages.forEach(message => {
-              newMessageList.push(this.buildDisplayMessage(message));
-            });
-            this.loadedMessages = newMessageList;
-          })
-        )
-        .subscribe()
-    );
+
+    return this.inboxService
+      .getMessages(this.messageGroup, this.searchConfig)
+      .pipe(
+        tap(response => {
+          this.ghostData = response;
+          this.inboxService.messagesSource.next(false);
+        }),
+        filter(response => !response.values),
+        map(response => {
+          this.pagination = {
+            currentPage: response.pagination.page,
+            pageSize: response.pagination.count,
+            totalPages: response.pagination.totalPages,
+            totalResults: response.pagination.totalCount,
+          };
+          this.inboxService.messagesSource.next(response);
+          if (response.sorts.length > 0 && response.pagination) {
+            this.searchConfig.currentPage = response.pagination.page;
+            this.searchConfig.sortCode = response.sorts[0].code;
+            this.searchConfig.sortOrder =
+              response.sorts[0].asc === true ? 'asc' : 'desc';
+          }
+          response.messages.forEach(message => {
+            newMessageList.push(this.buildDisplayMessage(message));
+          });
+          this.loadedMessages = newMessageList;
+        })
+      );
   }
 
   readMessage(message: InboxMessage) {
