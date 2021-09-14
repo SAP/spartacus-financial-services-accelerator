@@ -127,6 +127,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   quoteAction?: string;
+   /**
+   * Compare quotes
+   *
+   */
+  compareQuotes?: string;
   /**
    * Get claims
    *

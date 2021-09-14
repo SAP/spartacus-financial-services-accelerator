@@ -8,6 +8,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError, pluck } from 'rxjs/operators';
 import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
 import { Models } from '../../../model/quote.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {
@@ -69,6 +70,18 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
     return this.http
       .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  compareQuotes(cartCodes: string[], userId: string) {
+    const url = this.occEndpointService.getUrl('compareQuotes', {
+      userId,
+    });
+    const params: HttpParams = new HttpParams()
+      .set('cartCodes', cartCodes.toString())
+      .set('maximumNumberOfCarts', '2');
+    return this.http
+      .get(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

@@ -25,6 +25,7 @@ import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { QuoteDetailsComponent } from './quote-details/quote-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
+import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
 const routes: Routes = [
   {
     path: null,
@@ -41,6 +42,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'quoteDetails',
       pageLabel: 'quote-details',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'quoteCompare',
+      pageLabel: 'quote-compare',
     },
     component: PageLayoutComponent,
   },
@@ -66,11 +76,14 @@ const routes: Routes = [
         AccountQuoteDetailsFlex: {
           component: QuoteDetailsComponent,
         },
+        AccountQuoteCompareFlex: {
+          component: QuoteComparisonComponent,
+        },
       },
     }),
   ],
-  declarations: [QuotesComponent, QuoteDetailsComponent],
-  exports: [QuotesComponent, QuoteDetailsComponent],
+  declarations: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
+  exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
   providers: [QuoteService, QuoteConnector],
   entryComponents: [QuotesComponent],
 })
