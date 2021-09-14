@@ -9,10 +9,10 @@ import {
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { InsuranceQuote } from 'projects/fsastorefrontlib/src/occ/occ-models/occ.models';
+import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteDetailsComponent } from '../../../my-account/quote/quote-details/quote-details.component';
-import { FSCartService } from 'projects/fsastorefrontlib/src/core/cart/facade/cart.service';
+import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import createSpy = jasmine.createSpy;
 
 const insuranceQuote1: any = {
