@@ -102,13 +102,17 @@
 
 <!--  TABLE HEADER  END -->
 
-<ng-container
-  *ngIf="messagesObject$ | async as messagesObj; else ghostMessages"
->
+<!-- <ng-container *ngIf="loadedMessages | async as messages">
+  <ng-container *ngFor="let message of messages">
+    {{ message.body }}
+  </ng-container>
+</ng-container> -->
+
+<ng-container *ngIf="loadedMessages$ | async as messages; else ghostMessages">
   <div class="messages">
     <div
       class="message accordion border-bottom border-color-3"
-      *ngFor="let message of loadedMessages; let i = index"
+      *ngFor="let message of messages; let i = index"
       [ngClass]="{
         read: message.read,
         active: message.opened

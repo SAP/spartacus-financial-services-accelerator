@@ -15,6 +15,13 @@ export function reducer(
 ): InboxState {
   switch (action.type) {
     case fromAction.LOAD_MESSAGES: {
+      // console.log(action.payload);
+      return {
+        ...state,
+        loaded: false,
+      };
+    }
+    case fromAction.LOAD_MESSAGES_SUCCESS: {
       const payload = { ...action.payload };
       return {
         ...state,

@@ -10,14 +10,13 @@ export class InboxEffects {
   @Effect()
   loadMessages$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_MESSAGES),
-    map((action: fromActions.LoadMessages) => action.payload),
-    switchMap(payload => {
+    switchMap((action: fromActions.LoadMessages) => {
       return this.inboxConnector
         .getSiteMessagesForUserAndGroup(
-          payload.userId,
-          payload.messageGroup,
-          payload.searchConfig,
-          payload.read
+          action.payload.userId,
+          action.payload.messageGroup,
+          action.payload.searchConfig,
+          action.payload.read
         )
         .pipe(
           map((messages: any) => {

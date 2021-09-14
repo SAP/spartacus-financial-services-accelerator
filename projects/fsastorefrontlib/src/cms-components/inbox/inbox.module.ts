@@ -22,9 +22,7 @@ import {
 import { InboxMessagesComponent } from './inbox-tab/inbox-messages/inbox-messages.component';
 import { InboxTabComponent } from './inbox-tab/inbox-tab.component';
 import { InboxComponent } from './inbox.component';
-import { InboxDataService } from '../../core/inbox/services/inbox-data.service';
-import { InboxService } from '../../core/inbox/facade/inbox.service';
-import { InboxConnector } from '../../core/inbox/connectors/inbox.connector';
+import { InboxStoreModule } from '../../core/inbox/store/inbox-store.module';
 
 const routes: Routes = [
   {
@@ -47,6 +45,7 @@ const routes: Routes = [
     SpinnerModule,
     CmsModule,
     ListNavigationModule,
+    InboxStoreModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -59,6 +58,5 @@ const routes: Routes = [
   declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   exports: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   entryComponents: [InboxComponent, InboxTabComponent],
-  providers: [InboxConnector, InboxDataService, InboxService],
 })
 export class InboxModule {}

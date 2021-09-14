@@ -42,15 +42,15 @@ export class MessageNotificationComponent implements OnInit, OnDestroy {
         .pipe(
           filter(
             ([_isMessageRead, user]) => !!user && Object.keys(user).length !== 0
-          ),
-          tap(() => {
-            this.messagesObject$ = this.inboxService.getMessages(
-              '',
-              this.searchConfig,
-              false
-            );
-            this.changeDetectorRef.detectChanges();
-          })
+          )
+          // tap(() => {
+          //   this.messagesObject$ = this.inboxService.getMessages(
+          //     '',
+          //     this.searchConfig,
+          //     false
+          //   );
+          //   this.changeDetectorRef.detectChanges();
+          // })
         )
         .subscribe()
     );

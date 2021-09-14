@@ -40,8 +40,7 @@ export class InboxComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription.add(
       this.componentData.data$.subscribe(data => {
-        this.tabs =
-          data && data.tabComponents ? data.tabComponents.split(' ') : [];
+        this.tabs = data?.tabComponents ? data.tabComponents.split(' ') : [];
       })
     );
     this.initialTab$ = this.cmsService.getComponentData(this.tabs[0]);

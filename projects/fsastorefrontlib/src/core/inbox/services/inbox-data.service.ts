@@ -25,7 +25,9 @@ export interface InboxMessage {
   opened?: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class InboxDataService {
   private _userId = OCC_USER_ID_ANONYMOUS;
 
