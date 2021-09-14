@@ -69,6 +69,11 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
     this.quoteService.retrieveQuoteCheckout(quote);
   }
 
+  compareQuote(quote: InsuranceQuote) {
+    this.quoteService.setQuoteForCompare(quote);
+    this.routingService.go({ cxRoute: 'quotes' });
+  }
+
   getTranslation(translationGroup: string, translationKey: string): string {
     return this.translationService.getTranslationValue(
       ['quote.details', translationGroup],
