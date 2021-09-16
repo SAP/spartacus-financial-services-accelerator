@@ -307,7 +307,7 @@
         {{ 'fscommon.retrieve' | cxTranslate }}
       </button>
     </div>
-    <div class="col-12 col-sm-5 mt-3">
+    <div *ngIf="quoteCodeForCompare" class="col-12 col-sm-5 mt-3">
       <button class="primary-button btn-block" (click)="compareQuote(quote)">
         {{ 'quote.compare' | cxTranslate }}
       </button>

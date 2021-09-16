@@ -18,7 +18,7 @@ import { QuotesComponent } from './quotes.component';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
-import { InsuranceQuote } from 'projects/fsastorefrontlib/src/occ/occ-models/occ.models';
+import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 
 const insuranceQuote1: any = {
   cartCode: 'test001',
@@ -196,10 +196,10 @@ describe('QuotesComponent', () => {
 
   it('should select quote', () => {
     spyOn(globalMessageService, 'add').and.stub();
-    component.selectQuote(true, insuranceQuote1);
-    component.selectQuote(true, insuranceQuote2);
+    component.selectQuote(true, insuranceQuote1, quotes);
+    component.selectQuote(true, insuranceQuote2, quotes);
     expect(component.quoteCodesForCompare.length).toBe(2);
-    component.selectQuote(false, insuranceQuote2);
+    component.selectQuote(false, insuranceQuote2, quotes);
     expect(globalMessageService.add).toHaveBeenCalledWith(
       {
         key: 'quote.successfulSelection',
@@ -216,5 +216,11 @@ describe('QuotesComponent', () => {
     component.selectCategory({ name: 'All quotes', code: '' });
     component.selectCategory(selectedCategory);
     expect(quoteService.getQuotes).toHaveBeenCalled();
+  });
+
+  it('should clear selected quotes', () => {
+    component.clearSelectedQuotes();
+    component.selectCategory(selectedCategory);
+    expect(component.quoteCodesForCompare.length).toBe(0);
   });
 });

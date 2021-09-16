@@ -4,7 +4,7 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 
 @Component({
@@ -16,6 +16,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   subscription = new Subscription();
   userId: string;
+  quoteCodeForCompare: string;
 
   constructor(
     protected routingService: RoutingService,
@@ -31,6 +32,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   loadQuoteDetails() {
+    this.quoteCodeForCompare = sessionStorage.getItem('qouteCodeForCompare');
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
@@ -82,6 +84,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    sessionStorage.removeItem('qouteCodeForCompare');
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

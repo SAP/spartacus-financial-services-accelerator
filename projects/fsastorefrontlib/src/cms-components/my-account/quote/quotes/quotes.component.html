@@ -1,15 +1,16 @@
 <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
   {{ 'fscommon.quotesAndApplications' | cxTranslate }}
 </h2>
-<ng-container *ngIf="quotes$ | async as quotes">
-  <ng-container *ngIf="quotesLoaded$ | async; else loading">
-    <div *ngIf="quotes.length > 0; else noQuotes">
-      <div class="row justify-content-between align-items-center mb-5">
-        <div class="col-md-5 d-flex">
-          <label class="col-8 pr-3 px-0">
-            <span class="label-content">{{
-              'quote.productCategory' | cxTranslate
-            }}</span>
+
+<ng-container *ngIf="quotesLoaded$ | async; else loading">
+  <div *ngIf="quotes?.length > 0; else noQuotes">
+    <div class="row mb-5">
+      <div class="col-md-5">
+        <div class="row">
+          <span class="col-12 label-content">{{
+            'quote.productCategory' | cxTranslate
+          }}</span>
+          <label class="col-8 mb-0 align-self-center">
             <ng-select
               placeholder="{{ 'quote.selectCategory' | cxTranslate }}"
               [searchable]="false"
@@ -21,166 +22,149 @@
             >
             </ng-select>
           </label>
-          <button
-            class="btn btn-link cx-action-link notice align-self-end pb-4"
-            (click)="quoteCodesForCompare = []; selectedQuote = null"
-            [disabled]="quoteCodesForCompare?.length === 0"
-          >
-            {{ 'quote.clearAll' | cxTranslate }}
-          </button>
-        </div>
-        <div class="col-12 col-sm-3 mt-4">
-          <button
-            class="primary-button btn-block"
-            (click)="goToComparePage()"
-            [disabled]="quoteCodesForCompare?.length < 2"
-          >
-            {{ 'quote.compareQuotes' | cxTranslate }}
-          </button>
+          <div class="col-4">
+            <button
+              class="btn btn-link notice"
+              (click)="clearSelectedQuotes()"
+              [disabled]="quoteCodesForCompare?.length === 0"
+            >
+              {{ 'quote.clearAll' | cxTranslate }}
+            </button>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div *ngFor="let quote of quotes" class="col-12 col-md-6 d-flex">
-          <div class="info-card">
-            <h6 class="title background-color-4">
-              {{ quote.defaultCategory?.name }}
-            </h6>
-            <div class="info-card-wrapper">
-              <div class="info-card-content">
-                <div class="info-card-details">
-                  <div class="info-card-data">
-                    <span class="label">{{ quote.planName }}</span
-                    >:
-                    <span class="value">{{ quote.quoteId }}</span>
-                  </div>
-                  <ng-container *ngIf="quote.quoteWorkflowStatus">
-                    <div class="info-card-data">
-                      <span class="label">{{
-                        'quote.quoteWorkflowStatus.title' | cxTranslate
-                      }}</span
-                      >:
-                      <span class="value">
-                        {{
-                          'quote.quoteWorkflowStatus.' +
-                            quote.quoteWorkflowStatus.code | cxTranslate
-                        }}
-                      </span>
-                    </div>
-                  </ng-container>
-                  <div class="info-card-data">
-                    <span class="label">{{
-                      'fscommon.expiryDate' | cxTranslate
-                    }}</span
-                    >:
-                    <span *ngIf="quote.expiryDate" class="value">{{
-                      quote.expiryDate | cxDate: 'dd MMM yyyy'
-                    }}</span>
-                    <span *ngIf="!quote.expiryDate" class="value">{{
-                      'fscommon.expiryNotConfirmed' | cxTranslate
-                    }}</span>
-                  </div>
-                  <div class="info-card-data">
-                    <span class="label">{{
-                      'fscommon.price' | cxTranslate
-                    }}</span
-                    >:
-                    <span class="value"
-                      >{{ quote.quotePrice }}
-                      <ng-container *ngIf="quote.paymentFrequency">
-                        / {{ quote.paymentFrequency }}</ng-container
-                      ></span
-                    >
-                  </div>
+      <div class="col-md-3 mt-4 ml-auto">
+        <button
+          class="primary-button btn-block"
+          (click)="goToComparePage()"
+          [disabled]="quoteCodesForCompare?.length < 2"
+        >
+          {{ 'quote.compareQuotes' | cxTranslate }}
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let quote of quotes" class="col-md-6 d-flex">
+        <div class="info-card">
+          <h6 class="title background-color-4">
+            {{ quote.defaultCategory?.name }}
+          </h6>
+          <div class="info-card-wrapper">
+            <div class="info-card-content">
+              <div class="info-card-details">
+                <div class="info-card-data">
+                  <span class="label">{{ quote.planName }}</span
+                  >:
+                  <span class="value">{{ quote.quoteId }}</span>
                 </div>
-                <div class="info-card-image">
-                  <span class="image-wrapper text-center">
-                    <cx-media
-                      class="image-item"
-                      [container]="quote.defaultCategory.image"
-                    ></cx-media>
-                  </span>
+                <ng-container *ngIf="quote.quoteWorkflowStatus">
+                  <div class="info-card-data">
+                    <span class="label">{{
+                      'quote.quoteWorkflowStatus.title' | cxTranslate
+                    }}</span
+                    >:
+                    <span class="value">
+                      {{
+                        'quote.quoteWorkflowStatus.' +
+                          quote.quoteWorkflowStatus.code | cxTranslate
+                      }}
+                    </span>
+                  </div>
+                </ng-container>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.expiryDate' | cxTranslate
+                  }}</span
+                  >:
+                  <span *ngIf="quote.expiryDate" class="value">{{
+                    quote.expiryDate | cxDate: 'dd MMM yyyy'
+                  }}</span>
+                  <span *ngIf="!quote.expiryDate" class="value">{{
+                    'fscommon.expiryNotConfirmed' | cxTranslate
+                  }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{ 'fscommon.price' | cxTranslate }}</span
+                  >:
+                  <span class="value"
+                    >{{ quote.quotePrice }}
+                    <ng-container *ngIf="quote.paymentFrequency">
+                      / {{ quote.paymentFrequency }}</ng-container
+                    ></span
+                  >
                 </div>
               </div>
-              <ng-container
-                *ngIf="
-                  !quote.isExpired &&
-                  quote.quoteWorkflowStatus.code !== 'REFERRED'
-                "
+              <div class="info-card-image">
+                <span class="image-wrapper text-center">
+                  <cx-media
+                    class="image-item"
+                    [container]="quote.defaultCategory.image"
+                  ></cx-media>
+                </span>
+              </div>
+            </div>
+            <ng-container
+              *ngIf="
+                !quote.isExpired &&
+                quote.quoteWorkflowStatus.code !== 'REFERRED'
+              "
+            >
+              <div
+                class="info-card-links justify-content-between align-items-center"
               >
                 <div
-                  class="info-card-links justify-content-between align-items-center"
+                  class="d-flex"
+                  [class.invisible]="
+                    quotesByCategory[quote.defaultCategory.name]?.length < 2
+                  "
                 >
                   <div
-                    class="checkbox-wrapper"
-                    [class.invisible]="
-                      quotesByCategory[quote.defaultCategory.name]?.length < 2
+                    class="form-check d-flex align-items-center mb-0"
+                    [class.opaque]="
+                      disabledQuoteCodes?.includes(quote.cartCode)
                     "
                   >
-                    <div
-                      class="form-check d-flex align-items-center mb-0"
-                      [class.disabled]="
-                        quoteCodesForCompare?.length > 0 &&
-                        (selectedQuote?.defaultCategory?.code !==
-                          quote.defaultCategory.code ||
-                          (quoteCodesForCompare.length === 2 &&
-                            quoteCodesForCompare.indexOf(quote.cartCode) ===
-                              -1))
-                      "
-                    >
-                      <input
-                        #checkbox
-                        (click)="selectQuote(checkbox.checked, quote)"
-                        class="form-check-input"
-                        type="checkbox"
-                        value="{{ quote.cartCode }}"
-                        id="{{ quote.cartCode }}"
-                        [checked]="
-                          quoteCodesForCompare.includes(quote.cartCode)
-                        "
-                      />
-                      <label class="mb-0" for="{{ quote.cartCode }}">{{
-                        'quote.select' | cxTranslate
-                      }}</label>
-                    </div>
-                    <div
-                      class="tooltip-wrapper"
-                      (click)="$event.stopPropagation()"
-                    >
-                      <div
-                        class="fs-tooltip"
-                        [ngbTooltip]="'quote.compareInfo' | cxTranslate"
-                        triggers="click:blur"
-                        placement="top"
-                      >
-                        i
-                      </div>
-                    </div>
+                    <input
+                      #checkbox
+                      (click)="selectQuote(checkbox.checked, quote, quotes)"
+                      class="form-check-input mt-0"
+                      type="checkbox"
+                      value="{{ quote.cartCode }}"
+                      id="{{ quote.cartCode }}"
+                      [disabled]="disabledQuoteCodes?.includes(quote.cartCode)"
+                      [checked]="quoteCodesForCompare.includes(quote.cartCode)"
+                    />
+                    <label class="mb-0" for="{{ quote.cartCode }}">{{
+                      'quote.select' | cxTranslate
+                    }}</label>
                   </div>
-
-                  <div>
-                    <a
-                      class="link"
-                      [routerLink]="
-                        {
-                          cxRoute: 'quoteDetails',
-                          params: { quoteId: quote.quoteId }
-                        } | cxUrl
-                      "
+                  <div class="ml-3">
+                    <div
+                      class="fs-tooltip"
+                      [ngbTooltip]="'quote.compareInfo' | cxTranslate"
+                      triggers="click:blur"
+                      placement="top"
                     >
-                      {{ 'fscommon.details' | cxTranslate }}
-                    </a>
-                    <a class="link" (click)="retrieveQuote(quote)">
-                      {{ 'fscommon.retrieve' | cxTranslate }}
-                    </a>
+                      i
+                    </div>
                   </div>
                 </div>
-              </ng-container>
-            </div>
+
+                <div>
+                  <a class="link" (click)="goToDetailsPage(quote)">
+                    {{ 'fscommon.details' | cxTranslate }}
+                  </a>
+                  <a class="link" (click)="retrieveQuote(quote)">
+                    {{ 'fscommon.retrieve' | cxTranslate }}
+                  </a>
+                </div>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>
     </div>
-  </ng-container>
+  </div>
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>
