@@ -25,7 +25,7 @@ export function reducer(
       return {
         ...state,
         quoteDetails,
-        loaded: true,
+        loaded: false,
       };
     }
   }
