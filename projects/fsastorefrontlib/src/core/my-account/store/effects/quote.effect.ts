@@ -86,6 +86,22 @@ export class QuoteEffects {
     })
   );
 
+  @Effect()
+  loadQuoteComparison$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_QUOTE_COMPARISON),
+    map((action: fromActions.LoadQuoteComparison) => action.payload),
+    switchMap(payload => {
+      return this.qouteConnector.compareQuotes(payload.cartCodes, payload.userId).pipe(
+        map((carts: any) => {
+          return new fromActions.LoadQuoteComparisonSuccess(carts);
+        }),
+        catchError(error =>
+          of(new fromActions.LoadQuoteComparisonFail(JSON.stringify(error)))
+        )
+      );
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private qouteConnector: QuoteConnector
