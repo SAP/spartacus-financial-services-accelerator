@@ -24,7 +24,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(protected inboxService: InboxService) {}
 
   private subscription: Subscription = new Subscription();
-  messagesObject$: Observable<any>;
+  // messagesObject$: Observable<any>;
   messageGroup: string;
   pagination: PaginationModel;
 
@@ -54,8 +54,16 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.messageGroup = 'generalMessageGroup';
     this.loadCurrentMessageGroup();
-    this.messagesObject$ = this.inboxService.messages;
-    this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
+    // this.messagesObject$ = this.inboxService.messages$;
+    this.inboxService
+      .setGhostData()
+      .pipe(
+        tap(response => {
+          this.ghostData = response;
+          this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
+        })
+      )
+      .subscribe();
   }
 
   loadCurrentMessageGroup() {
@@ -63,11 +71,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.inboxService.activeMessageGroupAndTitle
         .pipe(
           map(group => {
-            if (
-              group &&
-              group.messageGroup &&
-              group.messageGroup !== this.messageGroup
-            ) {
+            if (group?.messageGroup !== this.messageGroup) {
               this.clearSearchData();
             }
             this.mainCheckboxChecked = false;
@@ -77,6 +81,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
                 : this.initialGroup;
             this.mobileGroupTitle =
               group && group.title ? group.title : this.mobileInitialTab;
+            this.inboxService.getMessages();
           })
         )
         .subscribe()

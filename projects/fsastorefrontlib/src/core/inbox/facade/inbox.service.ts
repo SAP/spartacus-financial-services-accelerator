@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { InboxDataService, InboxTab } from '../services/inbox-data.service';
 import { InboxConnector } from '../connectors/inbox.connector';
 import { filter, startWith, switchMap, take } from 'rxjs/operators';
+import { Actions, ofType } from '@ngrx/effects';
+import * as InboxActions from '../store/actions/inbox.action';
 import { StateWithInbox } from '../store';
 
 export const GHOST_DATA = { values: new Array(5) };
@@ -18,14 +20,15 @@ export class InboxService {
   constructor(
     protected inboxData: InboxDataService,
     protected adapter: InboxConnector,
-    protected store: Store<StateWithInbox>
+    protected store: Store<StateWithInbox>,
+    private actions$: Actions
   ) {}
 
   messageGroupAndTitleSource = new BehaviorSubject<InboxTab>(null);
   activeMessageGroupAndTitle = this.messageGroupAndTitleSource.asObservable();
 
-  messagesSource = new BehaviorSubject<boolean>(false);
-  messages = this.messagesSource.asObservable();
+  // messagesSource = new BehaviorSubject<boolean>(false);
+  // messages$ = this.messagesSource.asObservable();
   unreadMessagesStateSource = new BehaviorSubject<boolean>(false);
   unreadMessagesState$ = this.unreadMessagesStateSource.asObservable();
 
@@ -33,7 +36,7 @@ export class InboxService {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
 
-  loadMessages(messageGroup, searchConfig: SearchConfig, read?: boolean) {
+  loadMessages(messageGroup, searchConfig: SearchConfig, read?: boolean): void {
     this.store.dispatch(
       new fromAction.LoadMessages({
         userId: this.inboxData.userId,
@@ -41,6 +44,13 @@ export class InboxService {
         searchConfig: searchConfig,
         read: read,
       })
+    );
+  }
+
+  setGhostData(): Observable<any> {
+    return this.actions$.pipe(
+      ofType(InboxActions.LOAD_MESSAGES_SUCCESS),
+      startWith(GHOST_DATA)
     );
   }
 
