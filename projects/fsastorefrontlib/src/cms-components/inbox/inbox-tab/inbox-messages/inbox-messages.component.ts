@@ -55,15 +55,20 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.messageGroup = 'generalMessageGroup';
     this.loadCurrentMessageGroup();
     // this.messagesObject$ = this.inboxService.messages$;
-    this.inboxService
-      .setGhostData()
-      .pipe(
-        tap(response => {
-          this.ghostData = response;
-          this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
-        })
-      )
-      .subscribe();
+    this.subscription.add(
+      this.inboxService
+        .setGhostData()
+        .pipe(
+          tap(response => {
+            this.ghostData = response;
+            this.inboxService.loadMessages(
+              this.messageGroup,
+              this.searchConfig
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   loadCurrentMessageGroup() {

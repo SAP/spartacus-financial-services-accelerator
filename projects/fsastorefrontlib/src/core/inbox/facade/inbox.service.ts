@@ -50,7 +50,8 @@ export class InboxService {
   setGhostData(): Observable<any> {
     return this.actions$.pipe(
       ofType(InboxActions.LOAD_MESSAGES_SUCCESS),
-      startWith(GHOST_DATA)
+      startWith(GHOST_DATA),
+      take(1)
     );
   }
 
