@@ -107,26 +107,18 @@ export class QuotesComponent implements OnInit, OnDestroy {
     }
     this.disableCheckboxes(quotes);
     if (this.quoteCodesForCompare?.length === 2) {
-      this.displayMessage(
-        'successfulSelection',
-        GlobalMessageType.MSG_TYPE_CONFIRMATION,
-        selectedQuote.defaultCategory.name
-      );
+      this.displayMessage(selectedQuote.defaultCategory.name);
     }
   }
 
-  protected displayMessage(
-    messageKey: string,
-    messageType: GlobalMessageType,
-    quoteCategoryName?: string
-  ) {
+  protected displayMessage(category) {
     this.globalMessageService.add(
       {
-        key: `quote.${messageKey}`,
-        params: { category: quoteCategoryName },
+        key: 'quote.successfulSelection',
+        params: { category },
       },
-      messageType,
-      quoteCategoryName ? 5000 : 10000
+      GlobalMessageType.MSG_TYPE_CONFIRMATION,
+      5000
     );
   }
 
@@ -154,7 +146,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
           filter(quotes => quotes.length !== 0),
           tap(quotes => {
             this.quotes = quotes;
-            this.displayMessage('compareInfo', GlobalMessageType.MSG_TYPE_INFO);
             this.getQuotesByCategory(quotes);
             this.setCategoryDropdown();
           })

@@ -4,7 +4,7 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 
 @Component({
