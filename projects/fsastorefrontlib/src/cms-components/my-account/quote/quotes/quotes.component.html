@@ -24,7 +24,7 @@
           </label>
           <div class="col-4">
             <button
-              class="btn btn-link notice"
+              class="bg-transparent notice"
               (click)="clearSelectedQuotes()"
               [disabled]="quoteCodesForCompare?.length === 0"
             >
@@ -109,9 +109,7 @@
                 quote.quoteWorkflowStatus.code !== 'REFERRED'
               "
             >
-              <div
-                class="info-card-links justify-content-between align-items-center"
-              >
+              <div class="info-card-links justify-content-between">
                 <div
                   class="d-flex"
                   [class.invisible]="
@@ -119,7 +117,7 @@
                   "
                 >
                   <div
-                    class="form-check d-flex align-items-center mb-0"
+                    class="form-check mb-0"
                     [class.opaque]="
                       disabledQuoteCodes?.includes(quote.cartCode)
                     "
@@ -150,11 +148,14 @@
                   </div>
                 </div>
 
-                <div>
-                  <a class="link" (click)="goToDetailsPage(quote)">
+                <div class="text-right">
+                  <a
+                    class="link d-inline-block mb-2"
+                    (click)="goToDetailsPage(quote)"
+                  >
                     {{ 'fscommon.details' | cxTranslate }}
                   </a>
-                  <a class="link" (click)="retrieveQuote(quote)">
+                  <a class="link d-inline-block" (click)="retrieveQuote(quote)">
                     {{ 'fscommon.retrieve' | cxTranslate }}
                   </a>
                 </div>
