@@ -25,7 +25,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   // messagesObject$: Observable<any>;
-  messageGroup: string;
+  messageGroup = 'generalMessageGroup';
   pagination: PaginationModel;
 
   searchConfig: FSSearchConfig = {
@@ -54,7 +54,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.messageGroup = 'generalMessageGroup';
-    // this.loadCurrentMessageGroup();
+    this.loadCurrentMessageGroup();
     // this.messagesObject$ = this.inboxService.messages$;
     // this.subscription.add(
     //   this.inboxService
@@ -72,18 +72,17 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     //     )
     //     .subscribe()
     // );
-    this.inboxService
-      .setGhostData()
-      .pipe(
-        tap(response => {
-          this.ghostData = response;
-          this.inboxService.loadMessages(
-            'generalMessageGroup',
-            this.searchConfig
-          );
-        })
-      )
-      .subscribe();
+
+    // this.inboxService
+    //   .setGhostData()
+    //   .pipe(
+    //     tap(response => {
+    //       this.ghostData = response;
+    //       this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
+    //       console.log(this.messageGroup);
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   loadCurrentMessageGroup() {
@@ -101,6 +100,18 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
                 : this.initialGroup;
             this.mobileGroupTitle =
               group && group.title ? group.title : this.mobileInitialTab;
+          }),
+          switchMap(_ => {
+            return this.inboxService.setGhostData().pipe(
+              tap(response => {
+                this.ghostData = response;
+                this.inboxService.loadMessages(
+                  this.messageGroup,
+                  this.searchConfig
+                );
+                console.log(this.messageGroup);
+              })
+            );
           })
         )
         .subscribe()
@@ -161,7 +172,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   clearSearchData() {
-    this.searchConfig.currentPage = 0;
+    // this.searchConfig.currentPage = 0;
   }
 
   checkMessage(messageUid: string, checked: boolean) {

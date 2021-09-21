@@ -17,6 +17,4 @@ export interface InboxDataState {
   messageGroup: string;
   pagination?: Pagination;
   sorts?: Sort[];
-  refresh?: boolean;
-  loaded?: boolean;
 }
