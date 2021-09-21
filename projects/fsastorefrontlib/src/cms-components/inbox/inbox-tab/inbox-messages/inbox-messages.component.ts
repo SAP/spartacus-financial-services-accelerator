@@ -34,8 +34,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   loadedMessages$: Observable<
     InboxMessage[]
   > = this.inboxService.getMessages().pipe(
-    filter(loaded => !!loaded),
-    map(data => data.messages)
+    map(data => {
+      return data.messages;
+    })
   );
 
   envelopState = false;
@@ -52,23 +53,37 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   ghostData: any;
 
   ngOnInit() {
-    this.messageGroup = 'generalMessageGroup';
-    this.loadCurrentMessageGroup();
+    // this.messageGroup = 'generalMessageGroup';
+    // this.loadCurrentMessageGroup();
     // this.messagesObject$ = this.inboxService.messages$;
-    this.subscription.add(
-      this.inboxService
-        .setGhostData()
-        .pipe(
-          tap(response => {
-            this.ghostData = response;
-            this.inboxService.loadMessages(
-              this.messageGroup,
-              this.searchConfig
-            );
-          })
-        )
-        .subscribe()
-    );
+    // this.subscription.add(
+    //   this.inboxService
+    //     .getMessageGroup()
+    //     .pipe(
+    //       switchMap(msgGroup => {
+    //         console.log(msgGroup);
+    //         return this.inboxService.setGhostData().pipe(
+    //           tap(response => {
+    //             this.ghostData = response;
+    //             this.inboxService.loadMessages(msgGroup, this.searchConfig);
+    //           })
+    //         );
+    //       })
+    //     )
+    //     .subscribe()
+    // );
+    this.inboxService
+      .setGhostData()
+      .pipe(
+        tap(response => {
+          this.ghostData = response;
+          this.inboxService.loadMessages(
+            'generalMessageGroup',
+            this.searchConfig
+          );
+        })
+      )
+      .subscribe();
   }
 
   loadCurrentMessageGroup() {
@@ -86,19 +101,11 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
                 : this.initialGroup;
             this.mobileGroupTitle =
               group && group.title ? group.title : this.mobileInitialTab;
-            this.inboxService.getMessages();
           })
         )
         .subscribe()
     );
   }
-
-  // getMessages(): Observable<InboxMessage> {
-  //   return this.inboxService.getMessages().pipe(
-  //     filter(loaded => !!loaded),
-  //     map(data => data)
-  //   );
-  // }
 
   // getMessages() {
   //   const newMessageList = [];

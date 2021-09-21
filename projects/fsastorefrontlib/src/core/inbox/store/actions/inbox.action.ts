@@ -1,4 +1,6 @@
 import { Action } from '@ngrx/store';
+import { StateUtils } from '@spartacus/core';
+import { INBOX_DATA } from '../inbox-state';
 
 export const LOAD_MESSAGES = '[Inbox] Load Messages';
 export const LOAD_MESSAGES_SUCCESS = '[Inbox] Load Messages Success';
@@ -8,34 +10,46 @@ export const UPDATE_MESSAGES = '[Inbox] Update Messages';
 export const UPDATE_MESSAGES_SUCCESS = '[Inbox] Update Messages Success';
 export const UPDATE_MESSAGES_FAIL = '[Inbox] Update Messages Fail';
 
-export class LoadMessages implements Action {
+export class LoadMessages extends StateUtils.LoaderLoadAction {
   readonly type = LOAD_MESSAGES;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(INBOX_DATA);
+  }
 }
 
-export class LoadMessagesSuccess implements Action {
+export class LoadMessagesSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = LOAD_MESSAGES_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(INBOX_DATA);
+  }
 }
 
-export class LoadMessagesFail implements Action {
+export class LoadMessagesFail extends StateUtils.LoaderFailAction {
   readonly type = LOAD_MESSAGES_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(INBOX_DATA, payload);
+  }
 }
 
-export class UpdateMessages implements Action {
+export class UpdateMessages extends StateUtils.LoaderLoadAction {
   readonly type = UPDATE_MESSAGES;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(INBOX_DATA);
+  }
 }
 
-export class UpdateMessagesSuccess implements Action {
+export class UpdateMessagesSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = UPDATE_MESSAGES_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(INBOX_DATA);
+  }
 }
 
-export class UpdateMessagesFail implements Action {
+export class UpdateMessagesFail extends StateUtils.LoaderFailAction {
   readonly type = UPDATE_MESSAGES_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(INBOX_DATA, payload);
+  }
 }
 
 export type InboxAction =

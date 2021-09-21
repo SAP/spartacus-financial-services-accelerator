@@ -1,12 +1,15 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
-import { AuthActions } from '@spartacus/core';
-import { InboxState } from '../inbox-state';
+import { AuthActions, StateUtils } from '@spartacus/core';
+import { InboxState, InboxDataState, INBOX_DATA } from '../inbox-state';
 import * as fromInboxReducer from './inbox.reducer';
 
 export function getReducers(): ActionReducerMap<InboxState> {
   return {
-    messages: fromInboxReducer.reducer,
+    inboxData: StateUtils.loaderReducer<InboxDataState[]>(
+      INBOX_DATA,
+      fromInboxReducer.reducer
+    ),
   };
 }
 

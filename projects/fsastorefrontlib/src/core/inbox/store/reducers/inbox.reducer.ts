@@ -1,36 +1,23 @@
 import * as fromAction from '../actions';
-import { InboxState } from '../inbox-state';
+import { InboxDataState } from '../inbox-state';
 
-export const initialState: InboxState = {
-  messages: {},
-  pagination: {},
-  sorts: [],
-  refresh: false,
-  loaded: false,
-};
+export const initialState: InboxDataState[] = [];
 
 export function reducer(
   state = initialState,
   action: fromAction.InboxAction
-): InboxState {
+): InboxDataState[] {
   switch (action.type) {
-    case fromAction.LOAD_MESSAGES: {
-      // console.log(action.payload);
-      return {
-        ...state,
-        loaded: false,
-      };
-    }
     case fromAction.LOAD_MESSAGES_SUCCESS: {
-      const payload = { ...action.payload };
-      return {
-        ...state,
-        messages: payload.messages,
-        loaded: true,
-      };
+      return action.payload ? action.payload : initialState;
+    }
+    case fromAction.LOAD_MESSAGES_FAIL: {
+      return initialState;
     }
   }
   return state;
 }
 
-export const getMessages = (state: InboxState) => state.messages;
+// export const getMessages = (state: InboxDataState) => state.messages;
+// export const getmessageGroup = (state: InboxDataState) => state.messageGroup;
+// export const getLoaded = (state: InboxDataState) => state.loaded;

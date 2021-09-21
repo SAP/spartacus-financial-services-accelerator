@@ -55,12 +55,25 @@ export class InboxService {
     );
   }
 
-  getMessages(): Observable<any> {
-    return this.store.select(fromSelector.getMessages).pipe(
-      filter(messages => !!messages.loaded),
-      take(1)
-    );
+  getLoaded(): Observable<boolean> {
+    return this.store.pipe(select(fromSelector.getMessagesLoading));
   }
+
+  getMessages(): Observable<any> {
+    return this.store.select(fromSelector.getMessages);
+  }
+
+  // getMessages(): Observable<any> {
+  //   return this.getLoaded().pipe(
+  //     filter(loaded => !!loaded),
+  //     take(1),
+  //     switchMap(_ => this.store.select(fromSelector.getMessages))
+  //   );
+  // }
+
+  // getMessageGroup(): Observable<any> {
+  //   return this.store.select(fromSelector.getMessageGroup);
+  // }
 
   // getMessages(
   //   messageGroup,
