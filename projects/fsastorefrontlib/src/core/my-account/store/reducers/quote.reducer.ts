@@ -26,7 +26,7 @@ export function reducer(
       return {
         ...state,
         quoteDetails,
-        loaded: true,
+        loaded: false,
       };
     }
     case fromAction.LOAD_QUOTE_COMPARISON_SUCCESS: {

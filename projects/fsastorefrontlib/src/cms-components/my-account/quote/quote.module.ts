@@ -26,6 +26,9 @@ import { QuoteConnector } from '../../../core/my-account/connectors/quote.connec
 import { QuoteDetailsComponent } from './quote-details/quote-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
+import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+
 const routes: Routes = [
   {
     path: null,
@@ -67,6 +70,7 @@ const routes: Routes = [
     MediaModule,
     UrlModule,
     AccordionModule,
+    NgbTooltipModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -84,7 +88,7 @@ const routes: Routes = [
   ],
   declarations: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
   exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
-  providers: [QuoteService, QuoteConnector],
+  providers: [QuoteService, QuoteConnector, PolicyChartDataService],
   entryComponents: [QuotesComponent],
 })
 export class QuoteModule {}

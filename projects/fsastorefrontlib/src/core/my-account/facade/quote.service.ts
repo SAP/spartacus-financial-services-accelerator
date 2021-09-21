@@ -10,13 +10,14 @@ import {
   FSCart,
   FSOrderEntry,
   FSProduct,
+  InsuranceQuote,
   QuoteActionType,
 } from '../../../occ/occ-models';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Injectable()
 export class QuoteService {
@@ -29,6 +30,8 @@ export class QuoteService {
     protected routingService: RoutingService
   ) {}
 
+  quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
+  quoteForCompare$ = this.quoteForCompareSource.asObservable();
   private subscription = new Subscription();
 
   loadQuotes() {
@@ -234,5 +237,9 @@ export class QuoteService {
 
   getQuotesComparison() {
     return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
+  }
+  
+  setQuoteForCompare(quote: InsuranceQuote) {
+    this.quoteForCompareSource.next(quote);
   }
 }
