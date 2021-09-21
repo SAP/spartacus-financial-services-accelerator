@@ -301,12 +301,16 @@
       </cx-fs-accordion-item>
     </ng-container>
   </div>
-  <div class="mt-5">
-    <button
-      class="m-auto col-6 btn-primary btn-block text-uppercase"
-      (click)="retrieveQuote(quote)"
-    >
-      {{ 'fscommon.retrieve' | cxTranslate }}
-    </button>
+  <div class="row mt-4 justify-content-center">
+    <div class="col-12 col-sm-5 mt-3">
+      <button class="action-button btn-block" (click)="retrieveQuote(quote)">
+        {{ 'fscommon.retrieve' | cxTranslate }}
+      </button>
+    </div>
+    <div *ngIf="quoteCodeForCompare" class="col-12 col-sm-5 mt-3">
+      <button class="primary-button btn-block" (click)="compareQuote(quote)">
+        {{ 'quote.compare' | cxTranslate }}
+      </button>
+    </div>
   </div>
 </ng-container>

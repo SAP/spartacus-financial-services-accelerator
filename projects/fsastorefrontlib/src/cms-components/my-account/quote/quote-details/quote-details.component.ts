@@ -16,6 +16,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   subscription = new Subscription();
   userId: string;
+  quoteCodeForCompare: string;
 
   constructor(
     protected routingService: RoutingService,
@@ -31,6 +32,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   loadQuoteDetails() {
+    this.quoteCodeForCompare = sessionStorage.getItem('qouteCodeForCompare');
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
@@ -69,6 +71,11 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
     this.quoteService.retrieveQuoteCheckout(quote);
   }
 
+  compareQuote(quote: InsuranceQuote) {
+    this.quoteService.setQuoteForCompare(quote);
+    this.routingService.go({ cxRoute: 'quotes' });
+  }
+
   getTranslation(translationGroup: string, translationKey: string): string {
     return this.translationService.getTranslationValue(
       ['quote.details', translationGroup],
@@ -77,6 +84,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    sessionStorage.removeItem('qouteCodeForCompare');
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
