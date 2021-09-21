@@ -1,1 +1,101 @@
-<p>quote-comparison works!</p>
+<ng-container *ngIf="quotesLoaded$ | async; else loading">
+  <div class="row" *ngIf="comparisonObj; else noQuotes">
+    <div class="col-12">
+      <div class="accordion">
+        <ng-container>
+          <cx-fs-accordion-item
+            [opened]="true"
+            [title]="'Quote Insured Object'"
+          >
+            <ul class="accordion-list container-fluid">
+              <li class="accordion-list-item row sub-title">
+                <div
+                  class="col-{{
+                    12 / (1 + comparisonObj?.formData?.items?.length)
+                  }}"
+                >
+                  {{ 'Form details' }}
+                </div>
+                <div
+                  *ngFor="let title of comparisonObj?.formData?.headerList"
+                  class="col-{{
+                    12 / (1 + comparisonObj?.formData?.items?.length)
+                  }}"
+                >
+                  {{ title }}
+                </div>
+              </li>
+              <ng-container
+                *ngFor="
+                  let label of comparisonObj?.formData?.labels;
+                  index as labelIndex
+                "
+              >
+                <ng-container
+                  *ngIf="categoryConfig.visibleInsuredObjects.includes(label)"
+                >
+                  <li
+                    *ngIf="
+                      getTranslation(
+                        comparisonObj?.formData?.categoryCode,
+                        label
+                      ) as insuredObjectItemLabel
+                    "
+                    class="accordion-list-item row"
+                  >
+                    <div
+                      class="item-label"
+                      class="col-{{
+                        12 / (1 + comparisonObj?.formData?.items?.length)
+                      }}"
+                    >
+                      {{ insuredObjectItemLabel }}
+                    </div>
+                    <ng-container
+                      *ngFor="
+                        let items of comparisonObj?.formData?.items;
+                        index as itemIndex
+                      "
+                    >
+                      <div
+                        class="value notice"
+                        class="col-{{
+                          12 / (1 + comparisonObj?.formData?.items?.length)
+                        }}"
+                      >
+                        {{ items[labelIndex]['value' + itemIndex] }}
+                      </div>
+                    </ng-container>
+                  </li>
+                </ng-container>
+              </ng-container>
+              <li class="accordion-list-item row sub-title">
+                <div
+                  class="col-{{
+                    12 / (1 + comparisonObj?.formData?.items?.length)
+                  }}"
+                >
+                  {{ 'Select Quote No.' }}
+                </div>
+                <div
+                  *ngFor="let cartCode of comparisonObj?.formData?.cartCodes"
+                  class="col-{{
+                    12 / (1 + comparisonObj?.formData?.items?.length)
+                  }}"
+                >
+                  {{ cartCode }}
+                </div>
+              </li>
+            </ul>
+          </cx-fs-accordion-item>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noQuotes>
+  <h3>{{ 'No quotes for comparison' }}</h3>
+</ng-template>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

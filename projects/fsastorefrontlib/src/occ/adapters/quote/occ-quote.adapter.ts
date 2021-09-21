@@ -78,8 +78,8 @@ export class OccQuoteAdapter implements QuoteAdapter {
       userId,
     });
     const params: HttpParams = new HttpParams()
-      .set('cartCodes', cartCodes.toString())
-      .set('maximumNumberOfCarts', '2');
+      .set('cartCodes', cartCodes.toString());
+      // .set('maximumNumberOfCarts', '2');
     return this.http
       .get(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
