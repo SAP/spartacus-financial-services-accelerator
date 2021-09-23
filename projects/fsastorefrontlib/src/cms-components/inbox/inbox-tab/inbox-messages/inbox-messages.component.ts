@@ -48,12 +48,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   loadedMessages$: Observable<
     InboxMessage[]
-  > = this.inboxService.getMessages().pipe(
-    map(data => {
-      console.log(data);
-      return data[this.tabIndex]?.messages;
-    })
-  );
+  > = this.inboxService
+    .getMessages()
+    .pipe(map(msgGroup => msgGroup[this.tabIndex]?.messages));
 
   ngOnInit() {
     // this.messageGroup = 'generalMessageGroup';

@@ -11,17 +11,18 @@ export function reducer(
   switch (action.type) {
     case fromAction.LOAD_MESSAGES_SUCCESS: {
       if (content.length > 0) {
-        if (
+        const uniqueMessageGroup =
           content.findIndex(
-            (msgGroup: InboxDataState) =>
-              msgGroup.messageGroup === action.payload.messageGroup
-          ) === -1
-        ) {
+            (inboxData: InboxDataState) =>
+              inboxData.messageGroup === action.payload.messageGroup
+          ) === -1;
+        if (uniqueMessageGroup) {
           content = [...content, action.payload];
         }
       } else {
         content.push(action.payload);
       }
+      console.log(content);
       return action.payload ? content : { ...state };
     }
     case fromAction.LOAD_MESSAGES_FAIL: {
