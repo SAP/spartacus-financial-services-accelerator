@@ -63,6 +63,10 @@ export class InboxComponent implements OnInit, OnDestroy {
     );
   }
 
+  changeTab(index: number) {
+    this.activeTabIndex = index;
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

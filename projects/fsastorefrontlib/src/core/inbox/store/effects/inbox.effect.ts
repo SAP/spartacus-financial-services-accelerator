@@ -20,7 +20,10 @@ export class InboxEffects {
         )
         .pipe(
           map((messages: any) => {
-            return new fromActions.LoadMessagesSuccess(messages);
+            return new fromActions.LoadMessagesSuccess({
+              ...messages,
+              messageGroup: action.payload.messageGroup,
+            });
           }),
           catchError(error =>
             of(new fromActions.LoadMessagesFail(JSON.stringify(error)))

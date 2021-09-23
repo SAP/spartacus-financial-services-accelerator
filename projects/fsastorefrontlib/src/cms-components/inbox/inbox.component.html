@@ -3,7 +3,7 @@
     <li
       class="tab"
       *ngFor="let tab of tabs; let i = index"
-      (click)="activeTabIndex = i"
+      (click)="changeTab(i)"
     >
       <cx-fs-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
       </cx-fs-inbox-tab>
@@ -15,6 +15,7 @@
     [mobileTabs]="tabs"
     [mobileInitialTab]="mobileGroupTitle"
     [initialGroup]="initialGroupName"
+    [tabIndex]="activeTabIndex"
   >
   </cx-fs-inbox-messages>
 </ng-container>

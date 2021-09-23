@@ -31,13 +31,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   searchConfig: FSSearchConfig = {
     currentPage: 0,
   };
-  loadedMessages$: Observable<
-    InboxMessage[]
-  > = this.inboxService.getMessages().pipe(
-    map(data => {
-      return data.messages;
-    })
-  );
 
   envelopState = false;
   mainCheckboxChecked = false;
@@ -45,6 +38,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   @Input() initialGroup: string;
   @Input() mobileTabs: string[];
   @Input() mobileInitialTab: string;
+  @Input() tabIndex: number;
   mobileGroupTitle: string;
   displayMobileGroups = false;
 
@@ -52,9 +46,18 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   defaultSortOrder = 'desc';
   ghostData: any;
 
+  loadedMessages$: Observable<
+    InboxMessage[]
+  > = this.inboxService.getMessages().pipe(
+    map(data => {
+      console.log(data);
+      return data[this.tabIndex]?.messages;
+    })
+  );
+
   ngOnInit() {
     // this.messageGroup = 'generalMessageGroup';
-    this.loadCurrentMessageGroup();
+    this.setCurrentMessageGroup();
     // this.messagesObject$ = this.inboxService.messages$;
     // this.subscription.add(
     //   this.inboxService
@@ -85,7 +88,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     //   .subscribe();
   }
 
-  loadCurrentMessageGroup() {
+  setCurrentMessageGroup() {
     this.subscription.add(
       this.inboxService.activeMessageGroupAndTitle
         .pipe(
@@ -101,20 +104,18 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
             this.mobileGroupTitle =
               group && group.title ? group.title : this.mobileInitialTab;
           }),
-          switchMap(_ => {
-            return this.inboxService.setGhostData().pipe(
-              tap(response => {
-                this.ghostData = response;
-                this.inboxService.loadMessages(
-                  this.messageGroup,
-                  this.searchConfig
-                );
-                console.log(this.messageGroup);
-              })
-            );
-          })
+          switchMap(_ => this.loadMessageGroup())
         )
         .subscribe()
+    );
+  }
+
+  loadMessageGroup(): Observable<any> {
+    return this.inboxService.setGhostData().pipe(
+      tap(response => {
+        this.ghostData = response;
+        this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
+      })
     );
   }
 
@@ -168,7 +169,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   pageChange(pageNumber: number) {
     this.mainCheckboxChecked = false;
     this.searchConfig.currentPage = pageNumber;
-    // this.loadCurrentMessageGroup();
+    // this.setCurrentMessageGroup();
   }
 
   clearSearchData() {

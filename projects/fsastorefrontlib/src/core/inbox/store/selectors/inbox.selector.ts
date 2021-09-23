@@ -45,8 +45,3 @@ export const getLoadedMessagesSuccess: MemoizedSelector<
     StateUtils.loaderSuccessSelector(state) &&
     !StateUtils.loaderLoadingSelector(state)
 );
-
-// export const getMessageGroup: MemoizedSelector<
-//   StateWithInbox,
-//   any
-// > = createSelector(getInboxDataState, fromInbox.getmessageGroup);
