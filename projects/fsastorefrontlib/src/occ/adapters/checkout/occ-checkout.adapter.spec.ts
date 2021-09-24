@@ -14,7 +14,7 @@ const identificationType = 'video_identification';
 const userIdentificationEndpoint = 'userIdentification';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -39,7 +39,7 @@ describe('OccCheckoutAdapter', () => {
     service = TestBed.inject(OccCheckoutAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -58,7 +58,7 @@ describe('OccCheckoutAdapter', () => {
             req.url === userIdentificationEndpoint && req.method === 'PATCH'
           );
         }, `PATCH method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           userIdentificationEndpoint,
           {
             userId,
