@@ -1,4 +1,4 @@
-import { CheckoutActions, AddressVerificationState } from '@spartacus/core';
+import { CheckoutActions, AddressVerificationState } from '@spartacus/checkout/core';
 
 export const initialState: AddressVerificationState = {
   results: {},
