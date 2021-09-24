@@ -5,7 +5,8 @@ import { InsuranceQuote } from './../../../occ-models/occ.models';
 
 @Injectable({ providedIn: 'root' })
 export class OccQuoteNormalizer
-  implements Converter<InsuranceQuote, Models.InsuranceQuote> {
+  implements Converter<InsuranceQuote, Models.InsuranceQuote>
+{
   constructor() {}
 
   convert(

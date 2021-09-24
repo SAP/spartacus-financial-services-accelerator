@@ -15,9 +15,11 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
   ) {}
 
   getUserRequest(userId: string, requestId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('userRequest', {
-      userId,
-      requestId,
+    const url = this.occEndpointService.buildUrl('userRequest', {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     return this.http
       .get(url)
@@ -29,19 +31,24 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     requestId: string,
     stepData: FSStepData
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('userRequest', {
-      userId,
-      requestId,
+    const url = this.occEndpointService.buildUrl('userRequest', {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
+
     return this.http
       .patch(url, stepData, {})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   submitUserRequest(userId: string, requestId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('submitUserRequest', {
-      userId,
-      requestId,
+    const url = this.occEndpointService.buildUrl('submitUserRequest', {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

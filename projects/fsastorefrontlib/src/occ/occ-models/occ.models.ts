@@ -9,7 +9,7 @@ import {
   Product,
   User,
 } from '@spartacus/core';
-import { CheckoutStep } from '@spartacus/storefront';
+import { CheckoutStep } from '@spartacus/checkout/root';
 import { UserSignUp } from '@spartacus/user/profile/root';
 
 export interface ContactAgentData {

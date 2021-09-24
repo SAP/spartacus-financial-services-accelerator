@@ -17,7 +17,11 @@ export class OccPolicyAdapter implements PolicyAdapter {
   ) {}
 
   getPolicies(userId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('policies', { userId });
+    const url = this.occEndpointService.buildUrl('policies', {
+      urlParams: {
+        userId,
+      },
+    });
     return this.http
       .get(url)
       .pipe(catchError((error: any) => throwError(error.json())));
@@ -32,14 +36,22 @@ export class OccPolicyAdapter implements PolicyAdapter {
       .set('category', policyCategoryCode)
       .set('date', date)
       .set('fields', 'DEFAULT');
-    const url = this.occEndpointService.getUrl('policies', { userId });
+    const url = this.occEndpointService.buildUrl('policies', {
+      urlParams: {
+        userId,
+      },
+    });
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   getPremiumCalendar(userId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('premiumCalendar', { userId });
+    const url = this.occEndpointService.buildUrl('premiumCalendar', {
+      urlParams: {
+        userId,
+      },
+    });
     const params = new HttpParams({ fromString: FULL_PARAMS });
 
     return this.http
@@ -52,10 +64,12 @@ export class OccPolicyAdapter implements PolicyAdapter {
     policyId: string,
     contractId: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('policy', {
-      userId,
-      policyId,
-      contractId,
+    const url = this.occEndpointService.buildUrl('policy', {
+      urlParams: {
+        userId,
+        policyId,
+        contractId,
+      },
     });
     return this.http
       .get(url)

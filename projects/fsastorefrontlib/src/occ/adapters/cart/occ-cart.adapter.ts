@@ -22,9 +22,11 @@ export class OccCartAdapter implements CartAdapter {
     entryNumber: string
   ): Observable<CartModification> {
     const toAdd = JSON.stringify({});
-    const url = this.occEndpointService.getUrl('addToCart', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('addToCart', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     const params: HttpParams = new HttpParams()
       .set('productCode', productCode)
@@ -47,9 +49,11 @@ export class OccCartAdapter implements CartAdapter {
     quantity: number,
     pricingData: PricingData
   ): Observable<CartModification> {
-    const url = this.occEndpointService.getUrl('startBundle', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('startBundle', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     const params: HttpParams = new HttpParams()
       .set('bundleTemplateId', bundleTemplateId)
