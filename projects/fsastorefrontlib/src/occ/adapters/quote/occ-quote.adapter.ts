@@ -18,7 +18,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
   ) {}
 
   getQuotes(userId: string): Observable<Models.InsuranceQuote[]> {
-    const url = this.occEndpointService.getUrl('quotes', { userId });
+    const url = this.occEndpointService.buildUrl('quotes', {
+      urlParams: {
+        userId,
+      },
+    });
     return this.http.get<InsuranceQuoteList>(url).pipe(
       pluck('insuranceQuotes'),
       this.converterService.pipeableMany(QUOTE_NORMALIZER),
@@ -31,9 +35,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
     cartId: string,
     quoteContent: any
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('updateQuote', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('updateQuote', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     return this.http
       .patch(url, quoteContent)
@@ -46,9 +52,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
     quoteAction: string,
     body: any
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('quoteAction', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('quoteAction', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -63,9 +71,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
   }
 
   getQuote(userId: string, quoteId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('quote', {
-      userId,
-      quoteId,
+    const url = this.occEndpointService.buildUrl('quote', {
+      urlParams: {
+        userId,
+        quoteId,
+      },
     });
     return this.http
       .get(url)

@@ -32,7 +32,8 @@ export class FSOccCartNormalizer implements Converter<any, FSCart> {
             );
           }
         );
-        cart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
+        cart.insuranceQuote.insuredObjectList.insuredObjects =
+          serializedInusredObjects;
       }
     }
   }
@@ -48,7 +49,8 @@ export class FSOccCartNormalizer implements Converter<any, FSCart> {
           serilizedConfigurationValues[entry.key] = entry.value;
         }
       );
-      cart.entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
+      cart.entries[0].configurationInfos[0].configurationValues =
+        serilizedConfigurationValues;
     }
   }
 

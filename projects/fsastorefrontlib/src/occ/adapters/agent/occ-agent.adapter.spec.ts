@@ -38,7 +38,7 @@ describe('OccAgentAdapter', () => {
     adapter = TestBed.inject(OccAgentAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -53,7 +53,9 @@ describe('OccAgentAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === agentsEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentsEndpoint);
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          agentsEndpoint
+        );
       })
     );
   });
@@ -66,9 +68,12 @@ describe('OccAgentAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === agentEndpoint && req.method === 'GET';
         }, `GET url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentEndpoint, {
-          id,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          agentEndpoint,
+          {
+            id,
+          }
+        );
       })
     );
   });
@@ -81,7 +86,9 @@ describe('OccAgentAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === agentsEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentsEndpoint);
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          agentsEndpoint
+        );
       })
     );
   });
