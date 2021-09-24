@@ -62,7 +62,6 @@
     "ts-loader": "^6.0.4",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4",
-
     "@spartacus/styles": "4.1.0",
     "@spartacus/storefront": "4.1.0",
     "@spartacus/storefinder": "4.1.0",
@@ -78,7 +77,6 @@
     "@spartacus/asm": "4.1.0",
     "@spartacus/user": "4.1.0",
     "@spartacus/tracking": "4.1.0",
-
     "@angular/localize": "^12.0.5",
     "@compodoc/compodoc": "^1.1.10",
     "blob-util": "^2.0.2",
@@ -154,7 +152,7 @@
     "npm-package-versions": "^1.0.1",
     "postcss": "^8.2.10",
     "postcss-scss": "^3.0.4",
-    "prettier": "~2.4.1",
+    "prettier": "~2.0.5",
     "release-it": "^14.10.0",
     "rimraf": "^3.0.2",
     "sass": "^1.22.10",

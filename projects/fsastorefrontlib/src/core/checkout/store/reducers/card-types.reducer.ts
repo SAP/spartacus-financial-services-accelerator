@@ -1,4 +1,5 @@
-import { CardTypesState, CheckoutActions, CardType } from '@spartacus/core';
+import { CardType } from '@spartacus/core';
+import { CardTypesState, CheckoutActions } from '@spartacus/checkout/core';
 
 export const initialState: CardTypesState = {
   entities: {},
