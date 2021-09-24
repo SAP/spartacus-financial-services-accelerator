@@ -1,4 +1,11 @@
-import { CheckoutStepsState, CheckoutState, StateUtils } from '@spartacus/core';
+import {
+  CheckoutStepsState,
+  CheckoutState,
+} from '@spartacus/checkout/core';
+import {
+  CheckoutConfig,
+} from '@spartacus/checkout/root';
+import { StateUtils } from '@spartacus/core';
 
 export const CHECKOUT_FEATURE = 'checkout';
 
