@@ -1,3 +1,5 @@
+import { Config } from '@spartacus/core';
+
 export interface FormComponentMapping {
   component: any;
 }
@@ -21,7 +23,7 @@ export abstract class PrefillConfig {
   [_: string]: PrefillMapping;
 }
 
-export abstract class DynamicFormsConfig {
+export abstract class DynamicFormsConfig extends Config {
   dynamicForms: {
     components?: FormComponentConfig;
     validators?: ValidatorConfig;

@@ -20,8 +20,10 @@ export class OccFormAdapter implements FormAdapter {
   ) {}
 
   saveFormData(formData: YFormData, userId: string): Observable<YFormData> {
-    const url = this.occEndpointService.getUrl('createFormData', {
-      userId: userId,
+    const url = this.occEndpointService.buildUrl('createFormData', {
+      urlParams: {
+        userId: userId,
+      },
     });
     let params: HttpParams = new HttpParams()
       .set('definitionId', formData.formDefinition.formId)
@@ -33,9 +35,11 @@ export class OccFormAdapter implements FormAdapter {
 
     if (formData.id) {
       const formDataId = formData.id;
-      const updateUrl = this.occEndpointService.getUrl('formData', {
-        userId: userId,
-        formDataId,
+      const updateUrl = this.occEndpointService.buildUrl('formData', {
+        urlParams: {
+          userId: userId,
+          formDataId,
+        },
       });
       return this.http
         .put<YFormData>(updateUrl, formData.content, { params: params })
@@ -48,9 +52,11 @@ export class OccFormAdapter implements FormAdapter {
   }
 
   getFormData(formDataId: string, userId: string): Observable<YFormData> {
-    const url = this.occEndpointService.getUrl('formData', {
-      userId: userId,
-      formDataId,
+    const url = this.occEndpointService.buildUrl('formData', {
+      urlParams: {
+        userId: userId,
+        formDataId,
+      },
     });
     return this.http
       .get<YFormData>(url)
@@ -61,7 +67,7 @@ export class OccFormAdapter implements FormAdapter {
     categoryCode: string,
     formDefinitionType: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('formDefinitions');
+    const url = this.occEndpointService.buildUrl('formDefinitions');
     const params: HttpParams = new HttpParams()
       .set('categoryCode', categoryCode)
       .set('yFormDefinitionType', formDefinitionType)
@@ -75,8 +81,10 @@ export class OccFormAdapter implements FormAdapter {
     applicationId: string,
     formDefinitionId: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('formDefinition', {
-      formDefinitionId,
+    const url = this.occEndpointService.buildUrl('formDefinition', {
+      urlParams: {
+        formDefinitionId,
+      },
     });
     const params: HttpParams = new HttpParams()
       .set('applicationId', applicationId)
