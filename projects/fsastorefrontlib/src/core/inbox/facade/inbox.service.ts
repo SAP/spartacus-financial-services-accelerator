@@ -6,10 +6,10 @@ import * as fromSelector from '../store/selectors';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { InboxDataService, InboxTab } from '../services/inbox-data.service';
 import { InboxConnector } from '../connectors/inbox.connector';
-import { filter, startWith, switchMap, take } from 'rxjs/operators';
+import { filter, map, startWith, switchMap, take } from 'rxjs/operators';
 import { Actions, ofType } from '@ngrx/effects';
 import * as InboxActions from '../store/actions/inbox.action';
-import { StateWithInbox } from '../store';
+import { InboxDataState, StateWithInbox } from '../store/inbox-state';
 
 export const GHOST_DATA = { values: new Array(5) };
 
@@ -36,13 +36,33 @@ export class InboxService {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
 
-  loadMessages(messageGroup, searchConfig: SearchConfig, read?: boolean): void {
-    this.store.dispatch(
-      new fromAction.LoadMessages({
-        userId: this.inboxData.userId,
-        messageGroup: messageGroup,
-        searchConfig: searchConfig,
-        read: read,
+  loadMessages(
+    msgGroup,
+    searchConfig: SearchConfig,
+    read?: boolean
+  ): Observable<InboxDataState[]> {
+    return this.getMessages().pipe(
+      map(inboxData => {
+        const uniqueMessageGroup =
+          inboxData.findIndex(
+            (inboxData: InboxDataState) => inboxData.messageGroup === msgGroup
+          ) === -1;
+        if (uniqueMessageGroup) {
+          console.log('unique');
+          this.store.dispatch(
+            new fromAction.LoadMessages({
+              userId: this.inboxData.userId,
+              messageGroup: msgGroup,
+              searchConfig: searchConfig,
+              read: read,
+            })
+          );
+        } else {
+          // console.log(inboxData);
+          return inboxData.filter(
+            (inboxGroup: InboxDataState) => inboxGroup.messageGroup === msgGroup
+          );
+        }
       })
     );
   }
@@ -55,11 +75,11 @@ export class InboxService {
     );
   }
 
-  getLoaded(): Observable<boolean> {
-    return this.store.pipe(select(fromSelector.getMessagesLoading));
-  }
+  // getLoaded(): Observable<boolean> {
+  //   return this.store.pipe(select(fromSelector.getMessagesLoading));
+  // }
 
-  getMessages(): Observable<any> {
+  getMessages(): Observable<InboxDataState[]> {
     return this.store.select(fromSelector.getMessages);
   }
 
