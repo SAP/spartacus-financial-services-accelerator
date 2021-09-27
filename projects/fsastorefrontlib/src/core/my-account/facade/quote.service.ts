@@ -221,24 +221,23 @@ export class QuoteService {
   }
 
   loadQuotesComparison(quoteCodes: string[]) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
+    return this.userIdService.getUserId().pipe(
+      take(1),
+      map(occUserId => {
         this.store.dispatch(
           new fromAction.LoadQuoteComparison({
             cartCodes: quoteCodes,
             userId: occUserId,
           })
-        )
-      )
-      .unsubscribe();
+        );
+      })
+    );
   }
 
   getQuotesComparison() {
     return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
   }
-  
+
   setQuoteForCompare(quote: InsuranceQuote) {
     this.quoteForCompareSource.next(quote);
   }

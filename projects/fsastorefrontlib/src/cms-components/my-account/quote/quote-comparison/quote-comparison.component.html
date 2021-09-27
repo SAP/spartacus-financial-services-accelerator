@@ -1,5 +1,143 @@
 <ng-container *ngIf="quotesLoaded$ | async; else loading">
-  <div class="row" *ngIf="comparisonObj; else noQuotes">
+  <ng-container *ngIf="categoryConfig; else noQuotes">
+    <div class="row" *ngIf="quotes$ | async as quotes">
+      <div class="col-12">
+        <div class="accordion">
+          <ng-container>
+            <cx-fs-accordion-item
+              [opened]="true"
+              [title]="'Quote Insured Object'"
+            >
+              <ul class="accordion-list container-fluid">
+                <li class="accordion-list-item row sub-title">
+                  <div class="col-4">
+                    {{ 'Form details' }}
+                  </div>
+                  <div *ngFor="let cart of quotes?.carts" class="col-4">
+                    {{
+                      ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
+                        ?.cartDisplayName
+                    }}
+                  </div>
+                </li>
+                <ng-container
+                  *ngFor="
+                    let insuredObjectItem of ((quotes?.carts)[0]?.entries)[0]
+                      ?.product?.configurable
+                      ? (((quotes?.carts)[0]?.entries)[0]
+                          ?.configurationInfos)[0]?.configurationValues?.entry
+                      : ((quotes?.carts)[0].insuranceQuote?.insuredObjectList
+                          ?.insuredObjects)[0]?.insuredObjectItems;
+                    index as labelIndex
+                  "
+                >
+                  <ng-container
+                    *ngIf="
+                      categoryConfig?.visibleInsuredObjects.includes(
+                        insuredObjectItem?.label
+                          ? insuredObjectItem?.label
+                          : insuredObjectItem?.key
+                      )
+                    "
+                  >
+                    <li
+                      *ngIf="
+                        getTranslation(
+                          ((quotes?.carts)[0]?.entries)[0]?.product
+                            ?.configurable
+                            ? 'quoteReview'
+                            : 'quote.details',
+                          (((quotes?.carts)[0]?.deliveryOrderGroups)[0]
+                            ?.entries)[0]?.product?.defaultCategory?.code,
+                          insuredObjectItem?.label
+                            ? insuredObjectItem?.label
+                            : insuredObjectItem?.key
+                        ) as insuredObjectItemLabel
+                      "
+                      class="accordion-list-item row"
+                    >
+                      <div class="item-label" class="col-4">
+                        {{ insuredObjectItemLabel }}
+                      </div>
+                      <ng-container *ngFor="let cart of quotes?.carts">
+                        <div class="col-4 value notice">
+                          {{
+                            (cart?.entries)[0]?.product?.configurable
+                              ? (((cart?.entries)[0]?.configurationInfos)[0]
+                                  ?.configurationValues?.entry)[labelIndex]
+                                  ?.value
+                              : ((cart.insuranceQuote?.insuredObjectList
+                                  ?.insuredObjects)[0]?.insuredObjectItems)[
+                                  labelIndex
+                                ]?.value
+                          }}
+                        </div>
+                      </ng-container>
+                    </li>
+                  </ng-container>
+                </ng-container>
+                <li class="accordion-list-item row sub-title">
+                  <div class="col-4">
+                    {{ 'Select Quote No.' }}
+                  </div>
+                  <div *ngFor="let cart of quotes?.carts" class="col-4">
+                    {{ cart.code }}
+                  </div>
+                </li>
+              </ul>
+            </cx-fs-accordion-item>
+            <cx-fs-accordion-item
+            *ngIf="billingEventsLabels.length > 0"
+              [opened]="false"
+              [title]="'Quote Billing Events'"
+            >
+              <ul class="accordion-list container-fluid">
+                <li class="accordion-list-item row sub-title">
+                  <div class="col-4">
+                    {{ 'Billing Events' }}
+                  </div>
+                  <div *ngFor="let cart of quotes?.carts" class="col-4">
+                    {{
+                      ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
+                        ?.cartDisplayName
+                    }}
+                  </div>
+                </li>
+                <ng-container
+                  *ngFor="let billingEventLabel of billingEventsLabels"
+                >
+                  <li class="accordion-list-item row">
+                    <div class="item-label" class="col-4">
+                      {{ billingEventLabel }}
+                    </div>
+                    <ng-container *ngFor="let cart of quotes?.carts; index as cartIndex">
+                      <!-- <ng-container  *ngFor="let event of cart?.entries[0]?.product?.price?.oneTimeChargeEntries | slice: 1; index as eventIndex"> -->
+                          <!-- <div class="col-4 value notice" *ngIf="event?.billingTime?.code === billingEvent"> -->
+                            <div class="col-4 value notice">
+                            {{ getBillingEventValue(billingEventLabel, cart?.entries[0]?.product?.price?.oneTimeChargeEntries) }}
+                          </div>
+                        <!-- </ng-container> -->
+                      <!-- </ng-container> -->
+                    </ng-container>
+                  </li>
+                </ng-container>
+                <li class="accordion-list-item row sub-title">
+                  <div class="col-4">
+                    {{ 'Select Quote No.' }}
+                  </div>
+                  <div *ngFor="let cart of quotes?.carts" class="col-4">
+                    {{ cart.code }}
+                  </div>
+                </li>
+              </ul>
+            </cx-fs-accordion-item>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- <div class="row" *ngIf="comparisonObj; else noQuotes">
     <div class="col-12">
       <div class="accordion">
         <ng-container>
@@ -32,11 +170,12 @@
                 "
               >
                 <ng-container
-                  *ngIf="categoryConfig.visibleInsuredObjects.includes(label)"
+                  *ngIf="categoryConfig?.visibleInsuredObjects.includes(label)"
                 >
                   <li
                     *ngIf="
                       getTranslation(
+                        comparisonObj?.formData?.configurable ? 'quoteReview' : 'quote.details',
                         comparisonObj?.formData?.categoryCode,
                         label
                       ) as insuredObjectItemLabel
@@ -63,7 +202,7 @@
                           12 / (1 + comparisonObj?.formData?.items?.length)
                         }}"
                       >
-                        {{ items[labelIndex]['value' + itemIndex] }}
+                        {{ items[labelIndex]['value'] }}
                       </div>
                     </ng-container>
                   </li>
@@ -91,11 +230,14 @@
         </ng-container>
       </div>
     </div>
-  </div>
+  </div> -->
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'No quotes for comparison' }}</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template #noEvent>
+  <div class="col-4 value notice">{{'no event'}}</div>
 </ng-template>

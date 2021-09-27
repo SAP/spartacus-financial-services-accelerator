@@ -13,6 +13,13 @@ export function reducer(
   action: fromAction.QuoteAction
 ): QuoteState {
   switch (action.type) {
+    case fromAction.LOAD_QUOTES:
+    case fromAction.LOAD_QUOTE_COMPARISON: {
+      return {
+        ...state,
+        loaded: false,
+      };
+    }
     case fromAction.LOAD_QUOTES_SUCCESS: {
       const quotes = action.payload ? [...action.payload] : [];
       return {
@@ -30,7 +37,7 @@ export function reducer(
       };
     }
     case fromAction.LOAD_QUOTE_COMPARISON_SUCCESS: {
-      const quotesComparison = action.payload ? {...action.payload} : [];
+      const quotesComparison = action.payload ? {...action.payload} : {};
       return {
         ...state,
         quotesComparison,
