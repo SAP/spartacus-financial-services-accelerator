@@ -7,8 +7,6 @@ import {
   CmsModule,
   ConfigModule,
   I18nModule,
-  OccUserAdapter,
-  UserConnector,
 } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
@@ -24,6 +22,8 @@ import { FSUpdateProfileComponent } from './update-profile/update-profile.compon
 import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { FSUserConnector } from '../../core/user/connectors/user-connector';
 import { OccFSUserAdapter } from '../../occ/adapters/user/occ-user.adapter';
+import { UserProfileConnector } from '@spartacus/user/profile/core';
+import { OccUserAccountAdapter } from '@spartacus/user/account/occ';
 
 const routes: Routes = [
   {
@@ -134,10 +134,10 @@ const routes: Routes = [
     }),
   ],
   providers: [
-    OccUserAdapter,
+    OccUserAccountAdapter,
     OccFSUserAdapter,
     {
-      provide: UserConnector,
+      provide: UserProfileConnector,
       useClass: FSUserConnector,
     },
   ],

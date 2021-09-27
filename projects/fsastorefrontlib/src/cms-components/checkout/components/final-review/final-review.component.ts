@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  CheckoutPaymentService,
   PaymentDetails,
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { filter, take } from 'rxjs/operators';
+import { CheckoutPaymentService } from '@spartacus/checkout/core';
 
 @Component({
   selector: 'cx-fs-final-review',
