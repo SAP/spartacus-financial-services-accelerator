@@ -6,5 +6,4 @@ import { LoginFormComponent } from '@spartacus/user/account/components';
   templateUrl: './login-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FSLoginFormComponent extends LoginFormComponent {
-}
+export class FSLoginFormComponent extends LoginFormComponent {}

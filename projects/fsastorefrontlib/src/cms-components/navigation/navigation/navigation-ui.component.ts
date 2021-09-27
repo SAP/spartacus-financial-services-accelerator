@@ -5,7 +5,10 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { NavigationUIComponent } from '@spartacus/storefront';
+import {
+  HamburgerMenuService,
+  NavigationUIComponent,
+} from '@spartacus/storefront';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,11 +22,11 @@ export class FSNavigationUIComponent extends NavigationUIComponent {
   constructor(
     router: Router,
     protected renderer2: Renderer2,
-    elemRef: ElementRef
+    elemRef: ElementRef,
+    protected hamburgerMenuService: HamburgerMenuService
   ) {
-    super(router, renderer2, elemRef);
+    super(router, renderer2, elemRef, hamburgerMenuService);
   }
-
   setClassOnWrapper(event: UIEvent): void {
     if (!this.wrapper.nativeElement.classList.contains('was-opened')) {
       this.renderer2.addClass(this.wrapper.nativeElement, 'was-opened');

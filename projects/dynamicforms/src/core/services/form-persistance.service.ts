@@ -11,8 +11,10 @@ import { filter, map } from 'rxjs/operators';
 import { FormsState, FORM_FEATURE, StateWithForm } from '../store/state';
 import * as fromAction from '../store/actions';
 
-export const getFormsState: MemoizedSelector<StateWithForm, FormsState> =
-  createFeatureSelector<FormsState>(FORM_FEATURE);
+export const getFormsState: MemoizedSelector<
+  StateWithForm,
+  FormsState
+> = createFeatureSelector<FormsState>(FORM_FEATURE);
 
 /**
  * Forms state synced to browser storage.

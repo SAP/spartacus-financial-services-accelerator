@@ -8,11 +8,9 @@ import {
   NotAuthGuard,
   UrlModule,
 } from '@spartacus/core';
-import {
-  PageLayoutComponent,
-  RegisterComponentModule,
-} from '@spartacus/storefront';
+import { PageLayoutComponent } from '@spartacus/storefront';
 import { FSRegisterComponent } from './register.component';
+import { RegisterComponentModule } from '@spartacus/user/profile/components';
 
 const routes: Routes = [
   {
