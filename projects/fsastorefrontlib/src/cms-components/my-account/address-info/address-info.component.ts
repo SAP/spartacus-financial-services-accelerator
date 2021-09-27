@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  CheckoutDeliveryService,
   TranslationService,
   User,
   UserAddressService,
@@ -23,10 +22,9 @@ export class FSAddressInfoComponent extends AddressBookComponent
     public service: AddressBookComponentService,
     protected translation: TranslationService,
     protected userAddressService: UserAddressService,
-    protected checkoutDeliveryService: CheckoutDeliveryService,
     protected userAccountFacade: UserAccountFacade
   ) {
-    super(service, translation, userAddressService, checkoutDeliveryService);
+    super(service, translation);
   }
 
   ngOnInit() {

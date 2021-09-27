@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CheckoutService, Order } from '@spartacus/core';
+import { CheckoutService } from '@spartacus/checkout/core';
+import { Order } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 @Component({

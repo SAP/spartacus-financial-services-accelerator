@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  CheckoutDeliveryService,
   Country,
   GlobalMessageService,
+  TranslationService,
   User,
   UserAddressService,
   UserService,
@@ -56,20 +56,20 @@ export class FSAddressFormComponent extends AddressFormComponent
 
   constructor(
     protected fb: FormBuilder,
-    protected checkoutDeliveryService: CheckoutDeliveryService,
     protected userService: UserService,
     protected userAddressService: UserAddressService,
     protected globalMessageService: GlobalMessageService,
     protected modalService: ModalService,
-    protected occValueListService: OccValueListService
+    protected occValueListService: OccValueListService,
+    protected translation: TranslationService
   ) {
     super(
       fb,
-      checkoutDeliveryService,
       userService,
       userAddressService,
       globalMessageService,
-      modalService
+      modalService,
+      translation
     );
   }
 
