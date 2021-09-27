@@ -10,7 +10,6 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { FormErrorsModule, SpinnerModule } from '@spartacus/storefront';
-import { LoginRegisterModule } from '@spartacus/user/account/components';
 import { FSLoginFormComponent } from './login-form.component';
 import { FSLoginRegisterComponent } from './login-register.component';
 
@@ -24,7 +23,6 @@ import { FSLoginRegisterComponent } from './login-register.component';
     I18nModule,
     FormErrorsModule,
     SpinnerModule,
-    LoginRegisterModule,
   ],
   providers: [
     provideDefaultConfig(<CmsConfig>{

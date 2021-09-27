@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConverterService, normalizeHttpError, OccEndpointsService, User } from '@spartacus/core';
+import {
+  ConverterService,
+  normalizeHttpError,
+  OccEndpointsService,
+  User,
+} from '@spartacus/core';
 import { OccUserAccountAdapter } from '@spartacus/user/account/occ';
 import { throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -24,7 +29,7 @@ export class OccFSUserAdapter extends OccUserAccountAdapter {
       },
     });
     return this.http
-    .delete<User>(url)
-    .pipe(catchError((error) => throwError(normalizeHttpError(error))));
+      .delete<User>(url)
+      .pipe(catchError(error => throwError(normalizeHttpError(error))));
   }
 }

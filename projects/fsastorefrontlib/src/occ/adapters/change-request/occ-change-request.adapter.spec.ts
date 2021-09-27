@@ -78,10 +78,9 @@ describe('OccChangeRequestAdapter', () => {
             req.method === 'POST'
           );
         }, `POST method and url`);
-        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
-          createChangeRequestEndpoint,
-          { userId }
-        );
+        expect(
+          occEndpointService.buildUrl
+        ).toHaveBeenCalledWith(createChangeRequestEndpoint, { userId });
       })
     );
   });

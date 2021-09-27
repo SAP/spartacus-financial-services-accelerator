@@ -1,14 +1,9 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import {
-  AuthActions,
-  CheckoutActions,
-  CHECKOUT_DETAILS,
-  StateUtils,
-} from '@spartacus/core';
+import { CheckoutActions, CHECKOUT_DETAILS } from '@spartacus/checkout/core';
+import { AuthActions, StateUtils } from '@spartacus/core';
 import { FSCheckoutState, FSCheckoutStepsState } from '../checkout-state';
 import * as fromCartAction from './../actions/cart.action';
-import * as fromAddressVerification from './address-verification.reducer';
 import * as fromCardTypes from './card-types.reducer';
 import * as fromCheckout from './checkout.reducer';
 import * as fromOrderTypes from './order-types.reducer';
@@ -21,7 +16,7 @@ export function getReducers(): ActionReducerMap<FSCheckoutState> {
       fromCheckout.reducer
     ),
     cardTypes: fromCardTypes.reducer,
-    addressVerification: fromAddressVerification.reducer,
+    // TODO_UPGRADE: Address verification is removed
     paymentTypes: fromPaymentTypes.reducer,
     orderType: fromOrderTypes.reducer,
   };

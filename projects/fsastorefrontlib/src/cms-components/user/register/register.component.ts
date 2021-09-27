@@ -7,13 +7,13 @@ import {
   ANONYMOUS_CONSENT_STATUS,
   GlobalMessageService,
   RoutingService,
-  UserService,
   AuthConfigService,
 } from '@spartacus/core';
-import { RegisterComponent } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { FSUserSignUp } from '../../../occ/occ-models';
 import { DateConfig } from './../../../core/date-config/date-config';
+import { RegisterComponent } from '@spartacus/user/profile/components';
+import { UserRegisterFacade } from '@spartacus/user/profile/root';
 
 @Component({
   selector: 'cx-fs-register',
@@ -22,7 +22,7 @@ import { DateConfig } from './../../../core/date-config/date-config';
 export class FSRegisterComponent extends RegisterComponent
   implements OnInit, OnDestroy {
   constructor(
-    protected userService: UserService,
+    protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
     protected router: RoutingService,
@@ -32,7 +32,7 @@ export class FSRegisterComponent extends RegisterComponent
     protected authConfigService: AuthConfigService
   ) {
     super(
-      userService,
+      userRegister,
       globalMessageService,
       fb,
       router,

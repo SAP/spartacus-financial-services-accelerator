@@ -14,8 +14,15 @@ import { FSPaymentTypeEnum, FSSteps } from '../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { filter, map, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../core/checkout/facade';
-import { CheckoutStepService, PaymentMethodComponent } from '@spartacus/checkout/components';
-import { CheckoutDeliveryService, CheckoutPaymentService, PaymentTypeService } from '@spartacus/checkout/core';
+import {
+  CheckoutStepService,
+  PaymentMethodComponent,
+} from '@spartacus/checkout/components';
+import {
+  CheckoutDeliveryService,
+  CheckoutPaymentService,
+  PaymentTypeService,
+} from '@spartacus/checkout/core';
 
 @Component({
   selector: 'cx-fs-payment-method',

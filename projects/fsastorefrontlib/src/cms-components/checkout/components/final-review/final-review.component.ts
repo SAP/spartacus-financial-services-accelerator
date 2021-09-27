@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  PaymentDetails,
-  RoutingService,
-} from '@spartacus/core';
+import { PaymentDetails, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { filter, take } from 'rxjs/operators';
