@@ -17,7 +17,7 @@ export class FSAddressService extends UserAddressService {
   constructor(
     protected store: Store<StateWithUser | StateWithProcess<void>>,
     protected userIdService: UserIdService,
-    protected userAddressConnector: UserAddressConnector, 
+    protected userAddressConnector: UserAddressConnector,
     protected command: CommandService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
