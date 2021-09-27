@@ -1,16 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  CheckoutStepService,
-  PaymentMethodComponent,
-} from '@spartacus/storefront';
-import {
   ActiveCartService,
-  CheckoutDeliveryService,
-  CheckoutPaymentService,
   GlobalMessageService,
   PaymentDetails,
   PaymentType,
-  PaymentTypeService,
   RoutingService,
   TranslationService,
   UserPaymentService,
@@ -21,6 +14,8 @@ import { FSPaymentTypeEnum, FSSteps } from '../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { filter, map, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../core/checkout/facade';
+import { CheckoutStepService, PaymentMethodComponent } from '@spartacus/checkout/components';
+import { CheckoutDeliveryService, CheckoutPaymentService, PaymentTypeService } from '@spartacus/checkout/core';
 
 @Component({
   selector: 'cx-fs-payment-method',

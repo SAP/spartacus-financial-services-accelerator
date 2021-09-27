@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CheckoutDeliveryService } from '@spartacus/checkout/core';
 import {
   Address,
-  CheckoutDeliveryService,
+  CommandService,
   StateWithProcess,
   StateWithUser,
   User,
+  UserAddressConnector,
   UserAddressService,
   UserIdService,
 } from '@spartacus/core';
@@ -15,9 +17,11 @@ export class FSAddressService extends UserAddressService {
   constructor(
     protected store: Store<StateWithUser | StateWithProcess<void>>,
     protected userIdService: UserIdService,
+    protected userAddressConnector: UserAddressConnector, 
+    protected command: CommandService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
-    super(store, userIdService);
+    super(store, userIdService, userAddressConnector, command);
     this.loadAddresses();
   }
 
