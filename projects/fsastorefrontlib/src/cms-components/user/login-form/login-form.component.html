@@ -1,4 +1,5 @@
-<form (ngSubmit)="submitForm()" [formGroup]="loginForm">
+<cx-spinner class="overlay" *ngIf="isUpdating$ | async"> </cx-spinner>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
   <div class="form-group">
     <label>
       <span class="label-content">{{
@@ -10,7 +11,7 @@
         formControlName="userId"
         placeholder="{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}"
       />
-      <cx-form-errors [control]="loginForm.get('userId')"></cx-form-errors>
+      <cx-form-errors [control]="form.get('userId')"></cx-form-errors>
     </label>
   </div>
   <div class="form-group">
@@ -24,7 +25,7 @@
         placeholder="{{ 'loginForm.password.placeholder' | cxTranslate }}"
         formControlName="password"
       />
-      <cx-form-errors [control]="loginForm.get('password')"></cx-form-errors>
+      <cx-form-errors [control]="form.get('password')"></cx-form-errors>
     </label>
   </div>
   <p>
@@ -36,8 +37,12 @@
     >
   </p>
 
-  <button type="submit" class="btn btn-block btn-primary">
+  <button
+    type="submit"
+    class="btn btn-block btn-primary"
+    [disabled]="form.disabled"
+  >
     {{ 'loginForm.signIn' | cxTranslate }}
   </button>
 </form>
-<cx-login-register></cx-login-register>
+<cx-fs-login-register></cx-fs-login-register>
