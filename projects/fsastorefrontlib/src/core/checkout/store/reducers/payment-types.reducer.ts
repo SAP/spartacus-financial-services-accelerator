@@ -1,6 +1,4 @@
-import {
-  PaymentType,
-} from '@spartacus/core';
+import { PaymentType } from '@spartacus/core';
 import { CheckoutActions, PaymentTypesState } from '@spartacus/checkout/core';
 
 export const initialState: PaymentTypesState = {

@@ -94,9 +94,7 @@ import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-
   declarations: [],
 })
 export class FSStorefrontModule {
-  static withConfig(
-    config?: Config
-  ): ModuleWithProviders<FSStorefrontModule> {
+  static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
       providers: [
