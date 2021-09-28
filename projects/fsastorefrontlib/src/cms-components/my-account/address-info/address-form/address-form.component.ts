@@ -60,8 +60,8 @@ export class FSAddressFormComponent extends AddressFormComponent
     protected userAddressService: UserAddressService,
     protected globalMessageService: GlobalMessageService,
     protected modalService: ModalService,
-    protected occValueListService: OccValueListService,
-    protected translation: TranslationService
+    protected translationService: TranslationService,
+    protected occValueListService: OccValueListService
   ) {
     super(
       fb,
@@ -69,7 +69,7 @@ export class FSAddressFormComponent extends AddressFormComponent
       userAddressService,
       globalMessageService,
       modalService,
-      translation
+      translationService
     );
   }
 

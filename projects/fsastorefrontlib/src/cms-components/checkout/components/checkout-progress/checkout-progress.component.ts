@@ -5,12 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  CheckoutProgressComponent,
-  CheckoutStepService,
-} from '@spartacus/checkout/components';
+import { CheckoutProgressComponent, CheckoutStepService } from '@spartacus/checkout/components';
 import { CheckoutConfig } from '@spartacus/checkout/root';
-import { CurrentProductService } from '@spartacus/storefront';
+import {
+  CurrentProductService,
+} from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';

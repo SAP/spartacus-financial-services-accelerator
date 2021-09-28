@@ -9,9 +9,9 @@ import {
   provideDefaultConfig,
   UrlModule,
 } from '@spartacus/core';
-import { FormErrorsModule, SpinnerModule } from '@spartacus/storefront';
+import { FormErrorsModule } from '@spartacus/storefront';
+import { LoginRegisterModule } from '@spartacus/user/account/components';
 import { FSLoginFormComponent } from './login-form.component';
-import { FSLoginRegisterComponent } from './login-register.component';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import { FSLoginRegisterComponent } from './login-register.component';
     UrlModule,
     I18nModule,
     FormErrorsModule,
-    SpinnerModule,
+    LoginRegisterModule,
   ],
   providers: [
     provideDefaultConfig(<CmsConfig>{
@@ -34,8 +34,8 @@ import { FSLoginRegisterComponent } from './login-register.component';
       },
     }),
   ],
-  declarations: [FSLoginFormComponent, FSLoginRegisterComponent],
-  exports: [FSLoginFormComponent, FSLoginRegisterComponent],
-  entryComponents: [FSLoginFormComponent, FSLoginRegisterComponent],
+  declarations: [FSLoginFormComponent],
+  exports: [FSLoginFormComponent],
+  entryComponents: [FSLoginFormComponent],
 })
 export class FSLoginFormModule {}

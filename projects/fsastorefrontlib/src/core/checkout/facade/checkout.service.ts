@@ -4,33 +4,29 @@ import {
   ActiveCartService,
   Order,
   RoutingService,
-  StateWithProcess,
   UserIdService,
+  StateWithProcess
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
-import {
-  CheckoutDeliveryService,
-  CheckoutService,
-} from '@spartacus/checkout/core';
+import { CheckoutDeliveryService, CheckoutService } from '@spartacus/checkout/core/facade';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
   constructor(
     protected fsStore: Store<FSStateWithCheckout>,
     protected activeCartService: ActiveCartService,
-    protected processStateStore: Store<StateWithProcess<void>>,
     protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected processStateStore: Store<StateWithProcess<void>>,
   ) {
     super(fsStore, processStateStore, activeCartService, userIdService);
   }
-
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
 
   orderPlaced: boolean;

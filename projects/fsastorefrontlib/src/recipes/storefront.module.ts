@@ -7,7 +7,6 @@ import {
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import {
-  BaseStorefrontModule,
   PageComponentModule,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
@@ -34,7 +33,6 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
 @NgModule({
   imports: [
     PageComponentModule,
-    BaseStorefrontModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
@@ -90,7 +88,8 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
       },
     }),
   ],
-  exports: [BaseStorefrontModule, CmsLibModule],
+  exports: [
+    CmsLibModule],
   declarations: [],
 })
 export class FSStorefrontModule {

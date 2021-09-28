@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import { CheckoutDeliveryService } from '@spartacus/checkout/core/facade';
 import {
   Address,
   CommandService,
@@ -17,11 +17,11 @@ export class FSAddressService extends UserAddressService {
   constructor(
     protected store: Store<StateWithUser | StateWithProcess<void>>,
     protected userIdService: UserIdService,
+    protected checkoutDeliveryService: CheckoutDeliveryService,
     protected userAddressConnector: UserAddressConnector,
-    protected command: CommandService,
-    protected checkoutDeliveryService: CheckoutDeliveryService
+    protected commandService: CommandService
   ) {
-    super(store, userIdService, userAddressConnector, command);
+    super(store, userIdService, userAddressConnector, commandService);
     this.loadAddresses();
   }
 
