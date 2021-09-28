@@ -93,9 +93,7 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
   declarations: [],
 })
 export class FSStorefrontModule {
-  static withConfig(
-    config?: Config
-  ): ModuleWithProviders<FSStorefrontModule> {
+  static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
       providers: [
