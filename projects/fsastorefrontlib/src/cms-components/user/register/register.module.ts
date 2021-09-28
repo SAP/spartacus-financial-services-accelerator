@@ -10,8 +10,10 @@ import {
 } from '@spartacus/core';
 import {
   PageLayoutComponent,
-  RegisterComponentModule,
 } from '@spartacus/storefront';
+import {
+  RegisterComponentModule,
+} from '@spartacus/user/profile/components';
 import { FSRegisterComponent } from './register.component';
 
 const routes: Routes = [

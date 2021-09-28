@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
   ActiveCartService,
-  CheckoutDeliveryService,
-  CheckoutService,
   Order,
   RoutingService,
   UserIdService,
+  StateWithProcess 
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
+import { CheckoutDeliveryService, CheckoutService } from '@spartacus/checkout/core/facade';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
@@ -22,9 +22,10 @@ export class FSCheckoutService extends CheckoutService {
     protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected processStateStore: Store<StateWithProcess<void>>,
   ) {
-    super(fsStore, activeCartService, userIdService);
+    super(fsStore, processStateStore, activeCartService, userIdService);
   }
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
 

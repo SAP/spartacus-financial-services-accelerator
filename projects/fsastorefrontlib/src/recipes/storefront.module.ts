@@ -1,14 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { translationChunksConfig, translations } from '@spartacus/assets';
 import {
+  Config,
   ConfigModule,
   provideConfig,
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import {
-  B2cStorefrontModule,
   PageComponentModule,
-  StorefrontConfig,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
 import {
@@ -34,7 +33,6 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
 @NgModule({
   imports: [
     PageComponentModule,
-    B2cStorefrontModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
@@ -90,12 +88,13 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
       },
     }),
   ],
-  exports: [B2cStorefrontModule, CmsLibModule],
+  exports: [
+    CmsLibModule],
   declarations: [],
 })
 export class FSStorefrontModule {
   static withConfig(
-    config?: StorefrontConfig
+    config?: Config
   ): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,

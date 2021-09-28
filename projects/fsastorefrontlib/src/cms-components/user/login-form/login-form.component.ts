@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { GlobalMessageService, WindowRef, AuthService } from '@spartacus/core';
-import { LoginFormComponent } from '@spartacus/storefront';
+import { LoginFormComponent, LoginFormComponentService } from '@spartacus/user/account/components';
 
 @Component({
   selector: 'cx-fs-login-form',
@@ -9,11 +7,8 @@ import { LoginFormComponent } from '@spartacus/storefront';
 })
 export class FSLoginFormComponent extends LoginFormComponent {
   constructor(
-    protected auth: AuthService,
-    protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder,
-    protected winRef: WindowRef
+    protected loginFormComponentService: LoginFormComponentService
   ) {
-    super(auth, globalMessageService, fb, winRef);
+    super(loginFormComponentService);
   }
 }
