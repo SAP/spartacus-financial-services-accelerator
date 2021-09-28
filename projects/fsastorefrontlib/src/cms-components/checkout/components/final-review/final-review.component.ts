@@ -1,9 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PaymentDetails, RoutingService } from '@spartacus/core';
+import {
+  // CheckoutPaymentService,
+  PaymentDetails,
+  RoutingService,
+} from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { filter, take } from 'rxjs/operators';
-import { CheckoutPaymentService } from '@spartacus/checkout/core';
+import { CheckoutPaymentFacade } from '@spartacus/checkout/root';
 
 @Component({
   selector: 'cx-fs-final-review',
@@ -15,7 +19,7 @@ export class FinalReviewComponent implements OnInit {
   tAndCToggler = false;
   constructor(
     protected checkoutService: FSCheckoutService,
-    protected checkoutPaymentService: CheckoutPaymentService,
+    protected checkoutPaymentService: CheckoutPaymentFacade,
     protected routingService: RoutingService
   ) {}
 

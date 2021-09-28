@@ -3,8 +3,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { errorHandlers } from './http-interceptors/index';
 import { defaultFSGlobalMessageConfigFactory } from './config/default-global-message-config';
 import { provideDefaultConfigFactory } from '@spartacus/core';
-import { GlobalMessageEffect } from '@spartacus/core/src/global-message/store/effects/global-message.effect';
 import { GlobalMessageStoreModule } from '@spartacus/core/src/global-message/store/global-message-store.module';
+import { GlobalMessageEffect } from '@spartacus/core/src/global-message/store/effects/global-message.effect';
 
 @NgModule({
   imports: [

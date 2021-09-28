@@ -7,7 +7,6 @@ import {
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import {
-  BaseStorefrontModule,
   PageComponentModule,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
@@ -35,7 +34,6 @@ import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-
 @NgModule({
   imports: [
     PageComponentModule,
-    BaseStorefrontModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
@@ -91,7 +89,8 @@ import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-
       },
     }),
   ],
-  exports: [BaseStorefrontModule, CmsLibModule],
+  exports: [
+    CmsLibModule],
   declarations: [],
 })
 export class FSStorefrontModule {

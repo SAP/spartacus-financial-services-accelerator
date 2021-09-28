@@ -129,7 +129,6 @@ const routes: Routes = [
       AuthGuard,
       CmsPageGuard,
       CartNotEmptyGuard,
-      // PaymentDetailsSetGuard,
       ReferredQuoteGuard,
     ],
     data: {
@@ -264,9 +263,6 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     ReferredQuoteDialogComponent,
     FinalReviewComponent,
-    ChooseCoverNavigationComponent,
-    PersonalDetailsNavigationComponent,
-    OrderConfirmationMessageComponent,
     OrderConfirmationComponent,
     FSPaymentMethodComponent,
   ],
