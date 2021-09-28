@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import {
-  CHECKOUT_FEATURE,
   ConfigModule,
   StateConfig,
   StateModule,
@@ -12,6 +11,7 @@ import {
 } from '@spartacus/core';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
+import { CHECKOUT_FEATURE } from './checkout-state';
 
 export function checkoutConfigFactory(): StateConfig {
   const config: StateConfig = {
