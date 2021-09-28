@@ -1,14 +1,14 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { translationChunksConfig, translations } from '@spartacus/assets';
 import {
+  Config,
   ConfigModule,
   provideConfig,
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import {
-  B2cStorefrontModule,
+  BaseStorefrontModule,
   PageComponentModule,
-  StorefrontConfig,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
 import {
@@ -35,7 +35,7 @@ import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-
 @NgModule({
   imports: [
     PageComponentModule,
-    B2cStorefrontModule,
+    BaseStorefrontModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
@@ -91,12 +91,12 @@ import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-
       },
     }),
   ],
-  exports: [B2cStorefrontModule, CmsLibModule],
+  exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
 })
 export class FSStorefrontModule {
   static withConfig(
-    config?: StorefrontConfig
+    config?: Config
   ): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
