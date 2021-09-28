@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { EGender, GuestInfo } from '@syncpilot/bpool-guest-lib/models/guestinfo';
+import { GuestEndpoint } from '@syncpilot/bpool-guest-lib/models/guestEndpoint';
 
 @Component({
   selector: 'cx-fs-sync-pilot-connection-component',
@@ -17,7 +18,6 @@ export class SyncPilotConnectionComponent implements OnDestroy {
     protected userAccountFacade: UserAccountFacade,
     protected iService: Service,
     protected winRef?: WindowRef,
-    // protected iSyncService: ISyncService
   ) {
     iService.setConfig({
       stompUrl: 'https://msg.dev.livecontract.net/beraterpoolServer/beraterpoolWS',
@@ -38,7 +38,6 @@ export class SyncPilotConnectionComponent implements OnDestroy {
   private subscription = new Subscription();
 
   establishConnection(targetUrl: string, channel: string, action: string) {
-    this.component$.subscribe(console.log)
     console.log(targetUrl, 'targetUrl')
     console.log(channel, 'channel')
     console.log(action, 'action')
@@ -46,6 +45,7 @@ export class SyncPilotConnectionComponent implements OnDestroy {
       this.user$
         .pipe(
           map(user => {
+            this.connect(user);
             if (user?.uid && user?.name) {
               const syncPilotUrl =
                 targetUrl +
@@ -66,31 +66,22 @@ export class SyncPilotConnectionComponent implements OnDestroy {
         )
         .subscribe()
     );
-    this.connect();
-    this.iService.onRedirect.subscribe((guestEndpoint) => {
+    this.iService.onRedirect.subscribe((guestEndpoint: GuestEndpoint) => {
       console.log('guestEndpoint', guestEndpoint);
-      // if (guestEndpoint['targetChannelAdress']) {// redirect to this page    
-      // }
       if(guestEndpoint.state == 'accepted') {
-        const url = guestEndpoint.targetChannelAddress;
+        const url = guestEndpoint.targetChannelAddress; // redirect to this page
         }
     });
     // this.abort();
-    // this.iService.connect(this.ownerId);
-    // this.iService.onRedirect.subscribe(guestEndpoint => {
-    //   console.log(guestEndpoint, 'guestEndpoint')
-    // })
   }
 
-  async connect() {
-    const name = 'GuestName';
-    const firstName = 'GuestFirstName';
+  async connect(user: User) {
     const gender = 'm';
     const additionalGuestInformation = new Map<string, string>();
     // const guestNotification = '';
     const groupId = 1;
     await this.iService.connect(this.ownerId);
-    this.iService.enterQueue(this.createGuestInfo(firstName , name, gender, additionalGuestInformation), groupId);
+    this.iService.enterQueue(this.createGuestInfo(user.firstName , user.name, gender, additionalGuestInformation), groupId);
   }
 
   createGuestInfo(firstName: string, lastName: string, gender: 'm' | 'w' | 'd', additionalGuestInformation: Map<string, string>): Partial<GuestInfo>{
