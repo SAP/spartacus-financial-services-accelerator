@@ -1,7 +1,8 @@
-import { CheckoutActions, Order } from '@spartacus/core';
+import { Order } from '@spartacus/core';
 import * as fromAction from '../actions';
 import { CheckoutAction } from '../actions/checkout.action';
 import { FSCheckoutStepsState } from '../checkout-state';
+import { CheckoutActions } from '@spartacus/checkout/core';
 
 export const initialState: FSCheckoutStepsState = {
   legalInformation: false,
