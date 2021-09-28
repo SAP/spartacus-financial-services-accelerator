@@ -1,4 +1,5 @@
-import { CheckoutActions, OrderTypesState, ORDER_TYPE } from '@spartacus/core';
+import { ORDER_TYPE } from '@spartacus/core';
+import { CheckoutActions, OrderTypesState } from '@spartacus/checkout/core';
 
 export const initialState: OrderTypesState = {
   selected: ORDER_TYPE.PLACE_ORDER,
