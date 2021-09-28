@@ -3,8 +3,7 @@ import {
   UnitUserCreateComponent,
   UserItemService,
 } from '@spartacus/organization/administration/components';
-// TODO: Fix imports once the files are exported
-import { ɵi as UnitUserItemService } from '@spartacus/organization/administration/components';
+import { UnitUserItemService } from '@spartacus/organization/administration/components/unit/links/users/create/unit-user-item.service';
 
 @Component({
   selector: 'cx-fs-org-unit-user-create',
