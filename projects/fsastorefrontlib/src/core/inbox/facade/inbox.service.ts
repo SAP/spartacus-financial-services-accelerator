@@ -58,7 +58,7 @@ export class InboxService {
             })
           );
         } else {
-          // console.log(inboxData);
+          console.log(inboxData);
           return inboxData.filter(
             (inboxGroup: InboxDataState) => inboxGroup.messageGroup === msgGroup
           );

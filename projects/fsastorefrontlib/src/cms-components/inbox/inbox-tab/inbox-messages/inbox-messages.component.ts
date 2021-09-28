@@ -46,11 +46,13 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   defaultSortOrder = 'desc';
   ghostData: any;
 
-  loadedMessages$: Observable<
-    InboxMessage[]
-  > = this.inboxService
-    .getMessages()
-    .pipe(map(msgGroup => msgGroup[this.tabIndex]?.messages));
+  loadedMessages$: Observable<any> = this.inboxService.getMessages().pipe(
+    filter(data => !!data),
+    map(msgGroup => {
+      console.log(this.tabIndex);
+      return msgGroup[this.tabIndex]?.messages;
+    })
+  );
 
   ngOnInit() {
     // this.messageGroup = 'generalMessageGroup';
@@ -111,8 +113,10 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     return this.inboxService.setGhostData().pipe(
       tap(response => {
         this.ghostData = response;
-        this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
-      })
+      }),
+      switchMap(_ =>
+        this.inboxService.loadMessages(this.messageGroup, this.searchConfig)
+      )
     );
   }
 
