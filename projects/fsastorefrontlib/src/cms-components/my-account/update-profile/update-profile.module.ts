@@ -8,7 +8,8 @@ import {
   I18nModule,
 } from '@spartacus/core';
 import { SpinnerModule, FormErrorsModule } from '@spartacus/storefront';
-import { FSUpdateProfileFormComponent } from './update-profile-form/update-profile-form.component';
+import { UpdateProfileComponentService } from '@spartacus/user/profile/components';
+import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { FSUpdateProfileComponent } from './update-profile.component';
 
 @NgModule({
@@ -19,6 +20,12 @@ import { FSUpdateProfileComponent } from './update-profile.component';
         UpdateProfileSPAComponent: {
           component: FSUpdateProfileComponent,
           guards: [AuthGuard],
+          providers: [
+            {
+              provide: UpdateProfileComponentService,
+              useClass: FSUpdateProfileComponentService,
+            },
+          ],
         },
       },
     }),
@@ -28,8 +35,8 @@ import { FSUpdateProfileComponent } from './update-profile.component';
     I18nModule,
     FormErrorsModule,
   ],
-  declarations: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
-  exports: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
+  declarations: [FSUpdateProfileComponent],
+  exports: [FSUpdateProfileComponent],
   entryComponents: [FSUpdateProfileComponent],
 })
 export class UpdateProfileModule {}
