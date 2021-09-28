@@ -30,6 +30,15 @@ export const quote = {
       na: 'N/A',
     },
     quoteSummary: 'Quote Summary',
+    productCategory: 'Product category',
+    selectCategory: 'Select category',
+    compareQuotes: 'Compare quotes',
+    compare: 'Compare',
+    select: 'Select/Unselect',
+    successfulSelection: 'User successfully selected {{ category }} cards.',
+    compareInfo: 'Select two quotes with the same category for comparison',
+    clearAll: 'Clear all',
+    allQuotes: 'All quotes',
     details: {
       insurances_travel: {
         trip: 'Travel Information',
