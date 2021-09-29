@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -20,7 +21,7 @@ import {
   templateUrl: './inbox-messages.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InboxMessagesComponent implements OnInit, OnDestroy {
+export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   constructor(protected inboxService: InboxService) {}
 
   private subscription: Subscription = new Subscription();
@@ -46,13 +47,17 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   defaultSortOrder = 'desc';
   ghostData: any;
 
-  loadedMessages$: Observable<any> = this.inboxService.getMessages().pipe(
-    filter(data => !!data),
-    map(msgGroup => {
-      console.log(this.tabIndex);
-      return msgGroup[this.tabIndex]?.messages;
-    })
-  );
+  loadedMessages$: Observable<any>;
+
+  ngOnChanges() {
+    this.loadedMessages$ = this.inboxService.getMessages().pipe(
+      filter(data => !!data),
+      map(msgGroup => {
+        console.log(this.tabIndex);
+        return msgGroup[this.tabIndex]?.messages;
+      })
+    );
+  }
 
   ngOnInit() {
     // this.messageGroup = 'generalMessageGroup';

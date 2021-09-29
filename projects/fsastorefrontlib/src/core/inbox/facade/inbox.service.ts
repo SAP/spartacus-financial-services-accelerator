@@ -48,7 +48,6 @@ export class InboxService {
             (inboxData: InboxDataState) => inboxData.messageGroup === msgGroup
           ) === -1;
         if (uniqueMessageGroup) {
-          console.log('unique');
           this.store.dispatch(
             new fromAction.LoadMessages({
               userId: this.inboxData.userId,
@@ -58,7 +57,6 @@ export class InboxService {
             })
           );
         } else {
-          console.log(inboxData);
           return inboxData.filter(
             (inboxGroup: InboxDataState) => inboxGroup.messageGroup === msgGroup
           );
