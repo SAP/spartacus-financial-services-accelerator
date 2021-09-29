@@ -5,15 +5,10 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChange,
   SimpleChanges,
 } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
-import * as e from 'express';
-import {
-  InboxDataState,
-  InboxState,
-} from 'projects/fsastorefrontlib/src/core/inbox/store';
+import { InboxDataState } from 'projects/fsastorefrontlib/src/core/inbox/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { InboxService } from '../../../../core/inbox/facade/inbox.service';
@@ -45,25 +40,33 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   @Input() initialGroup: string;
   @Input() mobileTabs: string[];
   @Input() mobileInitialTab: string;
-  @Input() tabIndex: number;
   mobileGroupTitle: string;
   displayMobileGroups = false;
 
   activeTabIndex = 0;
-  selectedIndex = -1;
+  selectedIndexes: number[] = [];
   defaultSortOrder = 'desc';
   ghostData: any;
+
+  inboxdata$: Observable<InboxDataState[]> = this.inboxService.getMessages();
 
   loadedMessages$: Observable<any>;
 
   ngOnChanges() {
-    this.loadedMessages$ = this.inboxService.getMessages().pipe(
-      filter(data => !!data),
+    this.selectedIndexes = [];
+    this.loadedMessages$ = this.inboxdata$.pipe(
       map(msgGroup => {
         const index = msgGroup.findIndex(
           (inboxData: InboxDataState) =>
             inboxData.messageGroup === this.messageGroup
         );
+        this.pagination = {
+          currentPage: msgGroup[index]?.pagination.page,
+          pageSize: msgGroup[index]?.pagination.count,
+          totalPages: msgGroup[index]?.pagination.totalPages,
+          totalResults: msgGroup[index]?.pagination.totalCount,
+          sort: this.defaultSortOrder,
+        };
         return msgGroup[index]?.messages;
       })
     );
@@ -106,42 +109,11 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
     );
   }
 
-  toggleActiveAccordion(index: number) {
-    this.selectedIndex = this.selectedIndex === index ? -1 : index;
+  toggleMessageAccordion(index: number) {
+    this.selectedIndexes.includes(index)
+      ? this.selectedIndexes.splice(this.selectedIndexes.indexOf(index), 1)
+      : this.selectedIndexes.push(index);
   }
-
-  // getMessages() {
-  //   const newMessageList = [];
-
-  //   return this.inboxService
-  //     .getMessages(this.messageGroup, this.searchConfig)
-  //     .pipe(
-  //       tap(response => {
-  //         this.ghostData = response;
-  //         this.inboxService.messagesSource.next(false);
-  //       }),
-  //       filter(response => !response.values),
-  //       map(response => {
-  //         this.pagination = {
-  //           currentPage: response.pagination.page,
-  //           pageSize: response.pagination.count,
-  //           totalPages: response.pagination.totalPages,
-  //           totalResults: response.pagination.totalCount,
-  //         };
-  //         this.inboxService.messagesSource.next(response);
-  //         if (response.sorts.length > 0 && response.pagination) {
-  //           this.searchConfig.currentPage = response.pagination.page;
-  //           this.searchConfig.sortCode = response.sorts[0].code;
-  //           this.searchConfig.sortOrder =
-  //             response.sorts[0].asc === true ? 'asc' : 'desc';
-  //         }
-  //         response.messages.forEach(message => {
-  //           newMessageList.push(this.buildDisplayMessage(message));
-  //         });
-  //         this.loadedMessages = newMessageList;
-  //       })
-  //     );
-  // }
 
   // readMessage(message: InboxMessage) {
   //   this.loadedMessages.forEach(msg => {
