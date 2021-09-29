@@ -7,5 +7,6 @@ import { FSUnitUserCreateComponent } from './unit-user-create.component';
 @NgModule({
   imports: [CommonModule, UnitUserCreateModule, FSUserFormModule],
   declarations: [FSUnitUserCreateComponent],
+  exports: [FSUnitUserCreateComponent],
 })
 export class FSUnitUserCreateModule {}
