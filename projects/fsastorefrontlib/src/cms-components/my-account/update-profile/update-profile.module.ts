@@ -29,7 +29,7 @@ import { FSUpdateProfileComponent } from './update-profile.component';
     FormErrorsModule,
   ],
   declarations: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
-  exports: [FSUpdateProfileComponent],
+  exports: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
   entryComponents: [FSUpdateProfileComponent],
 })
 export class UpdateProfileModule {}

@@ -115,8 +115,9 @@ const routes: Routes = [
   ],
   exports: [
     ClaimsComponent,
-    ClaimPoliciesComponent,
     DeleteClaimDialogComponent,
+    ClaimPoliciesComponent,
+    CreateClaimComponent,
     ClaimDetailsComponent,
   ],
   providers: [
