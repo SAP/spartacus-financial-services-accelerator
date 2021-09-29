@@ -114,8 +114,8 @@
       class="message accordion border-bottom border-color-3"
       *ngFor="let message of messages; let i = index"
       [ngClass]="{
-        read: message.read,
-        active: message.opened
+        read: message.readDate,
+        active: selectedIndex === i
       }"
     >
       <div class="inbox-header container-fluid">
@@ -132,7 +132,7 @@
           </div>
           <div
             class="col-6 col-md-3 position-relative text-truncate p-4"
-            (click)="message.opened = !message.opened; readMessage(message)"
+            (click)="toggleActiveAccordion(i)"
           >
             {{ message.subject }}
             <ng-container *ngIf="message.documents?.length > 0">
@@ -141,7 +141,7 @@
           </div>
           <div
             class="col-md-6 d-none d-md-block text-truncate p-4"
-            (click)="message.opened = !message.opened; readMessage(message)"
+            (click)="toggleActiveAccordion(i)"
           >
             {{ message.body }}
           </div>
@@ -152,7 +152,7 @@
       </div>
       <div
         class="accordion-item-wrapper"
-        [ngClass]="{ active: message.opened }"
+        [ngClass]="{ active: selectedIndex === i }"
       >
         <div class="box-shadow border border-color-3">
           <div [innerHtml]="message.richContent"></div>

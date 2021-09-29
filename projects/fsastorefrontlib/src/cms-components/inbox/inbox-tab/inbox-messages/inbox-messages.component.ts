@@ -5,9 +5,15 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChange,
+  SimpleChanges,
 } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
-import { InboxState } from 'projects/fsastorefrontlib/src/core/inbox/store';
+import * as e from 'express';
+import {
+  InboxDataState,
+  InboxState,
+} from 'projects/fsastorefrontlib/src/core/inbox/store';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { InboxService } from '../../../../core/inbox/facade/inbox.service';
@@ -44,6 +50,7 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   displayMobileGroups = false;
 
   activeTabIndex = 0;
+  selectedIndex = -1;
   defaultSortOrder = 'desc';
   ghostData: any;
 
@@ -53,43 +60,17 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
     this.loadedMessages$ = this.inboxService.getMessages().pipe(
       filter(data => !!data),
       map(msgGroup => {
-        console.log(this.tabIndex);
-        return msgGroup[this.tabIndex]?.messages;
+        const index = msgGroup.findIndex(
+          (inboxData: InboxDataState) =>
+            inboxData.messageGroup === this.messageGroup
+        );
+        return msgGroup[index]?.messages;
       })
     );
   }
 
   ngOnInit() {
-    // this.messageGroup = 'generalMessageGroup';
     this.setCurrentMessageGroup();
-    // this.messagesObject$ = this.inboxService.messages$;
-    // this.subscription.add(
-    //   this.inboxService
-    //     .getMessageGroup()
-    //     .pipe(
-    //       switchMap(msgGroup => {
-    //         console.log(msgGroup);
-    //         return this.inboxService.setGhostData().pipe(
-    //           tap(response => {
-    //             this.ghostData = response;
-    //             this.inboxService.loadMessages(msgGroup, this.searchConfig);
-    //           })
-    //         );
-    //       })
-    //     )
-    //     .subscribe()
-    // );
-
-    // this.inboxService
-    //   .setGhostData()
-    //   .pipe(
-    //     tap(response => {
-    //       this.ghostData = response;
-    //       this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
-    //       console.log(this.messageGroup);
-    //     })
-    //   )
-    //   .subscribe();
   }
 
   setCurrentMessageGroup() {
@@ -123,6 +104,10 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
         this.inboxService.loadMessages(this.messageGroup, this.searchConfig)
       )
     );
+  }
+
+  toggleActiveAccordion(index: number) {
+    this.selectedIndex = this.selectedIndex === index ? -1 : index;
   }
 
   // getMessages() {
