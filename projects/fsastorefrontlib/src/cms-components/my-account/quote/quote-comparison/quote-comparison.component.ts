@@ -8,6 +8,7 @@ import {
   QuoteComparisonConfig,
 } from 'projects/fsastorefrontlib/src/core/quote-comparison-config/quote-comparison-config';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { OneTimeChargeEntry } from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-quote-comparison',
@@ -19,7 +20,7 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   quotesLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
   quotes$: Observable<any>;
   categoryConfig: CategoryComparisonConfig;
-  billingEventsLabels: string[];
+  billingEventLabels: string[];
   subscription = new Subscription();
 
   constructor(
@@ -29,128 +30,67 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(JSON.parse(sessionStorage.getItem('quoteCodes')), 'quoteCodes');
     this.subscription.add(
       this.quoteService
         .loadQuotesComparison(JSON.parse(sessionStorage.getItem('quoteCodes')))
         .subscribe()
     );
-    this.quotesLoaded$.subscribe(console.log);
     this.quotes$ = this.quoteService.getQuotesComparison();
     this.subscription.add(
       this.quotes$
         .pipe(
           tap(quotes => {
-            this.billingEventsLabels = [];
+            this.billingEventLabels = [];
             console.log(quotes, 'quotes');
             quotes?.carts?.map(cart => {
               cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
-                oneTimeCharge => {
-                  if (
-                    this.paynowBillingTimeCode !==
-                      oneTimeCharge?.billingTime?.code &&
-                    !this.billingEventsLabels.includes(
-                      oneTimeCharge?.billingTime?.name
-                    )
-                  ) {
-                    this.billingEventsLabels.push(
-                      oneTimeCharge?.billingTime?.name
-                    );
-                  }
-                }
+                oneTimeChargeEntry =>
+                  this.getBillingEventLabels(oneTimeChargeEntry)
               );
-              this.categoryConfig = this.quoteComparisonConfig.categoryConfig.find(
-                category =>
-                  category.categoryCode ===
-                  cart?.deliveryOrderGroups[0]?.entries[0]?.product
-                    ?.defaultCategory?.code
+              this.getCategoryConfig(
+                cart?.deliveryOrderGroups[0]?.entries[0]?.product
+                  ?.defaultCategory?.code
               );
             });
           })
         )
         .subscribe()
     );
-
-    // this.subscription.add(
-    //   // this.comparisonObj$ = this.quoteService
-    //   this.quoteService
-    //     .getQuotesComparison()
-    //     .pipe(
-    //       // map(quotes => quotes?.carts),
-    //       map(quotes => {
-    //         // this.comparisonObj = {};
-    //         console.log(quotes, 'quotes')
-    //         quotes?.carts?.map(cart => {
-    //           this.categoryConfig = this.quoteComparisonConfig.categoryConfig.find(
-    //             category =>
-    //               category.categoryCode ===
-    //               cart?.deliveryOrderGroups[0]?.entries[0]?.product
-    //                 ?.defaultCategory?.code
-    //           );
-    //         this.comparisonObj = {
-    //             formData: this.getFormDataAccordion(
-    //               cart,
-    //               items,
-    //               headerList,
-    //               cartCodes,
-    //             ),
-    //           };
-    //           console.log(this.comparisonObj, 'comparisonObj')
-    //         });
-    //       })
-    //     )
-    //     .subscribe()
-    // );
   }
 
-  // getFormDataAccordion(
-  //   cart: any,
-  //   items: any[],
-  //   headerList: string[],
-  //   cartCodes: string[],
-  // ) {
-  //   const insuredObjectListItems = cart?.entries[0]?.product?.configurable ? cart?.entries[0]?.configurationInfos[0]?.configurationValues?.entry : cart.insuranceQuote?.insuredObjectList?.insuredObjects[0]?.insuredObjectItems;
-  //   const insuredItem = insuredObjectListItems.map(
-  //     item => {
-  //       return {
-  //         label: item.key ? item.key : item.label,
-  //         value: item.formattedValue
-  //           ? item.formattedValue
-  //           : item.value
-  //       };
-  //     }
-  //   );
-  //   items.push(insuredItem);
-  //   headerList.push(
-  //     cart?.deliveryOrderGroups[0]?.entries[0]?.product?.cartDisplayName
-  //   );
-  //   cartCodes.push(cart?.code);
-  //   return {
-  //     labels: items[0].map(item => item.label),
-  //     items,
-  //     headerList,
-  //     cartCodes,
-  //     categoryCode:
-  //       cart?.deliveryOrderGroups[0]?.entries[0]?.product?.defaultCategory
-  //         ?.code,
-  //     configurable: cart?.entries[0]?.product?.configurable
-  //   };
-  // }
+  getBillingEventLabels(oneTimeChargeEntry: OneTimeChargeEntry) {
+    if (
+      this.paynowBillingTimeCode !== oneTimeChargeEntry?.billingTime?.code &&
+      !this.billingEventLabels.includes(oneTimeChargeEntry?.billingTime?.name)
+    ) {
+      this.billingEventLabels.push(oneTimeChargeEntry?.billingTime?.name);
+    }
+  }
+
+  getCategoryConfig(cartCategoryCode: string) {
+    this.categoryConfig = this.quoteComparisonConfig.categoryConfig.find(
+      category => category.categoryCode === cartCategoryCode
+    );
+  }
 
   getBillingEventValue(
     billingEventCode: string,
-    billingEventsList: any[]
+    billingEventsList: OneTimeChargeEntry[]
   ): string {
     const billingEvent = billingEventsList.find(
       event => event.billingTime.name === billingEventCode
     );
-    return billingEvent ? billingEvent?.price?.formattedValue : ' - ';
+    return billingEvent?.price?.value
+      ? billingEvent?.price?.formattedValue
+      : !billingEvent?.chargeInformation
+      ? 'Not included'
+      : billingEvent?.chargeInformation;
   }
 
   getTranslation(
     translationChunk: string,
     translationGroup: string,
-    translationKey?: string
+    translationKey: string
   ): string {
     return this.translationService.getTranslationValue(
       [translationChunk, translationGroup],
