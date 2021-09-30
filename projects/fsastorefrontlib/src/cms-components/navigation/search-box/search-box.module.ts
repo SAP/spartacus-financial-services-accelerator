@@ -31,6 +31,6 @@ import { FSSearchBoxComponent } from './search-box.component';
   ],
   declarations: [FSSearchBoxComponent, FSHighlightPipe],
   entryComponents: [FSSearchBoxComponent],
-  exports: [FSSearchBoxComponent],
+  exports: [FSSearchBoxComponent, FSHighlightPipe],
 })
 export class FSSearchBoxModule {}
