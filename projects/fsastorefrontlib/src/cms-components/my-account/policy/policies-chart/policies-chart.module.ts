@@ -34,5 +34,6 @@ import { defaultChartOptionsConfig } from '../../../../core/chart-config/default
     }),
   ],
   declarations: [PoliciesChartComponent],
+  exports: [PoliciesChartComponent],
 })
 export class PoliciesChartModule {}
