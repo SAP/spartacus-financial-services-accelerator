@@ -12,8 +12,6 @@ import { DocumentsTableModule } from './documents-table/documents-table.module';
 
 @NgModule({
   imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule],
-  declarations: [DocumentsOverviewComponent],
-  exports: [DocumentsOverviewComponent],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
@@ -23,6 +21,8 @@ import { DocumentsTableModule } from './documents-table/documents-table.module';
       },
     }),
   ],
+  declarations: [DocumentsOverviewComponent],
+  exports: [DocumentsOverviewComponent],
   entryComponents: [DocumentsOverviewComponent],
 })
 export class DocumentModule {}
