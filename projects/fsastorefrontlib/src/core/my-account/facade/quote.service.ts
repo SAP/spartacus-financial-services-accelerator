@@ -48,19 +48,13 @@ export class QuoteService {
       .unsubscribe();
   }
 
-  loadQuoteDetails(quoteId) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.LoadQuoteDetails({
-            userId: occUserId,
-            quoteId: quoteId,
-          })
-        )
-      )
-      .unsubscribe();
+  loadQuoteDetails(quoteId, occUserId) {
+    this.store.dispatch(
+      new fromAction.LoadQuoteDetails({
+        userId: occUserId,
+        quoteId: quoteId,
+      })
+    );
   }
 
   getQuotes() {

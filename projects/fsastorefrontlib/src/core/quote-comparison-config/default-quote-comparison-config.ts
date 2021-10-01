@@ -22,7 +22,7 @@ export function fsDefaultQuoteComparisonConfigFactory(): QuoteComparisonConfig {
           'tripDestination',
           'tripStartDate',
           'costOfTrip',
-          'tripEndDate'
+          'tripEndDate',
         ],
         billingEvents: true,
         optionalProducts: true,
@@ -43,7 +43,7 @@ export function fsDefaultQuoteComparisonConfigFactory(): QuoteComparisonConfig {
         visibleInsuredObjects: [
           'propertyType',
           'propertyValue',
-          'ccaBuiltYear'
+          'ccaBuiltYear',
         ],
         billingEvents: true,
         optionalProducts: true,
@@ -53,7 +53,7 @@ export function fsDefaultQuoteComparisonConfigFactory(): QuoteComparisonConfig {
         visibleInsuredObjects: [
           'propertyType',
           'propertyValue',
-          'ccaBuiltYear'
+          'ccaBuiltYear',
         ],
         billingEvents: true,
         optionalProducts: true,
@@ -63,26 +63,20 @@ export function fsDefaultQuoteComparisonConfigFactory(): QuoteComparisonConfig {
         visibleInsuredObjects: [
           'lifeCoverageRequire',
           'lifeCoverageLast',
-          'lifeMainDob'
+          'lifeMainDob',
         ],
         billingEvents: true,
         optionalProducts: true,
       },
       {
         categoryCode: 'banking_current_account',
-        visibleInsuredObjects: [
-          'accountType',
-          'debit-card-design',
-        ],
+        visibleInsuredObjects: ['accountType', 'debit-card-design'],
         billingEvents: true,
         optionalProducts: true,
       },
       {
         categoryCode: 'banking_credit_card',
-        visibleInsuredObjects: [
-          'debit-card-design',
-          'minimum-card-amount',
-        ],
+        visibleInsuredObjects: ['debit-card-design', 'minimum-card-amount'],
         billingEvents: true,
         optionalProducts: true,
       },
@@ -106,7 +100,13 @@ export function fsDefaultQuoteComparisonConfigFactory(): QuoteComparisonConfig {
         ],
         billingEvents: true,
         optionalProducts: true,
-      }
+      },
+      {
+        categoryCode: 'insurances_event',
+        visibleInsuredObjects: [],
+        billingEvents: true,
+        optionalProducts: true,
+      },
     ],
   };
 }

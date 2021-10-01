@@ -18,6 +18,7 @@ import {
   RoutesConfig,
   RoutingConfig,
   UrlModule,
+  TranslatePipe,
 } from '@spartacus/core';
 
 import { QuotesComponent } from './quotes/quotes.component';
@@ -28,6 +29,7 @@ import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { BillingEventValuePipe } from './../../../shared/util/helpers/pipe/billing-event-value.pipe';
 
 const routes: Routes = [
   {
@@ -86,9 +88,19 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
+  declarations: [
+    QuotesComponent,
+    QuoteDetailsComponent,
+    QuoteComparisonComponent,
+    BillingEventValuePipe,
+  ],
   exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
-  providers: [QuoteService, QuoteConnector, PolicyChartDataService],
+  providers: [
+    QuoteService,
+    QuoteConnector,
+    PolicyChartDataService,
+    TranslatePipe,
+  ],
   entryComponents: [QuotesComponent],
 })
 export class QuoteModule {}

@@ -14,10 +14,10 @@ export function reducer(
 ): QuoteState {
   switch (action.type) {
     case fromAction.LOAD_QUOTES:
-    case fromAction.LOAD_QUOTE_COMPARISON: {
+    case fromAction.LOAD_QUOTE_COMPARISON:
+    case fromAction.LOAD_QUOTE_DETAILS: {
       return {
-        ...state,
-        loaded: false,
+        ...initialState,
       };
     }
     case fromAction.LOAD_QUOTES_SUCCESS: {
@@ -33,11 +33,11 @@ export function reducer(
       return {
         ...state,
         quoteDetails,
-        loaded: false,
+        loaded: true,
       };
     }
     case fromAction.LOAD_QUOTE_COMPARISON_SUCCESS: {
-      const quotesComparison = action.payload ? {...action.payload} : {};
+      const quotesComparison = action.payload ? { ...action.payload } : null;
       return {
         ...state,
         quotesComparison,
@@ -50,5 +50,6 @@ export function reducer(
 
 export const getQuotes = (state: QuoteState) => state.quotes;
 export const getQuote = (state: QuoteState) => state.quoteDetails;
-export const getQuotesComparison = (state: QuoteState) => state.quotesComparison;
+export const getQuotesComparison = (state: QuoteState) =>
+  state.quotesComparison;
 export const getLoaded = (state: QuoteState) => state.loaded;

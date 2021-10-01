@@ -8,7 +8,16 @@ import {
   QuoteComparisonConfig,
 } from 'projects/fsastorefrontlib/src/core/quote-comparison-config/quote-comparison-config';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { OneTimeChargeEntry } from '../../../../occ/occ-models/occ.models';
+import {
+  FSCart,
+  InsuranceQuote,
+  OneTimeChargeEntry,
+} from '../../../../occ/occ-models/occ.models';
+import {
+  LanguageService,
+  RoutingService,
+  TranslatePipe,
+} from '@spartacus/core';
 
 @Component({
   selector: 'cx-fs-quote-comparison',
@@ -22,26 +31,27 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   categoryConfig: CategoryComparisonConfig;
   billingEventLabels: string[];
   subscription = new Subscription();
+  language: string;
+  quoteCodes: string[];
 
   constructor(
     protected quoteService: QuoteService,
     protected translationService: FSTranslationService,
-    protected quoteComparisonConfig: QuoteComparisonConfig
+    protected quoteComparisonConfig: QuoteComparisonConfig,
+    protected translatePipe: TranslatePipe,
+    protected languageService: LanguageService,
+    protected routingService: RoutingService
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.quoteService
-        .loadQuotesComparison(JSON.parse(sessionStorage.getItem('quoteCodes')))
-        .subscribe()
-    );
+    this.quoteCodes = JSON.parse(sessionStorage.getItem('quoteCodes'));
+    this.loadQuotes();
     this.quotes$ = this.quoteService.getQuotesComparison();
     this.subscription.add(
       this.quotes$
         .pipe(
           tap(quotes => {
             this.billingEventLabels = [];
-            console.log(quotes, 'quotes');
             quotes?.carts?.map(cart => {
               cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
                 oneTimeChargeEntry =>
@@ -55,6 +65,29 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
+    );
+    this.changeLanguage();
+  }
+
+  changeLanguage() {
+    this.subscription.add(
+      this.languageService
+        .getActive()
+        .pipe(
+          tap(lang => {
+            if (this.language && this.language !== lang) {
+              this.loadQuotes();
+            }
+            this.language = lang;
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  loadQuotes() {
+    this.subscription.add(
+      this.quoteService.loadQuotesComparison(this.quoteCodes).subscribe()
     );
   }
 
@@ -73,20 +106,6 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
     );
   }
 
-  getBillingEventValue(
-    billingEventCode: string,
-    billingEventsList: OneTimeChargeEntry[]
-  ): string {
-    const billingEvent = billingEventsList.find(
-      event => event.billingTime.name === billingEventCode
-    );
-    return billingEvent?.price?.value
-      ? billingEvent?.price?.formattedValue
-      : !billingEvent?.chargeInformation
-      ? 'Not included'
-      : billingEvent?.chargeInformation;
-  }
-
   getTranslation(
     translationChunk: string,
     translationGroup: string,
@@ -98,8 +117,15 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
     );
   }
 
+  retrieveQuote(cart: FSCart) {
+    const quote: InsuranceQuote = {
+      ...cart.insuranceQuote,
+      cartCode: cart.code,
+    };
+    this.quoteService.retrieveQuoteCheckout(quote);
+  }
+
   ngOnDestroy() {
-    sessionStorage.removeItem('quoteCodes');
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

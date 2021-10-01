@@ -11,7 +11,7 @@ import {
   LanguageService,
   OccConfig,
   RoutingService,
-  TranslationService,
+  TranslatePipe,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { Subscription } from 'rxjs';
@@ -33,7 +33,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
     protected policyChartDataService: PolicyChartDataService,
     protected languageService: LanguageService,
     protected globalMessageService: GlobalMessageService,
-    protected translation: TranslationService
+    protected translatePipe: TranslatePipe
   ) {}
 
   private subscription = new Subscription();
@@ -51,7 +51,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
     this.quoteService.loadQuotes();
     this.groupQuotesByCategory();
     this.changeLanguage();
-    this.selectedQuoteFromQuoteDetails();
   }
 
   changeLanguage() {
@@ -167,25 +166,18 @@ export class QuotesComponent implements OnInit, OnDestroy {
       });
       return quote;
     }, {});
+    this.selectedQuoteFromQuoteDetails();
   }
 
   protected setCategoryDropdown() {
+    const firstOption = this.translatePipe.transform('quote.allQuotes');
     this.options = [];
-    this.subscription.add(
-      this.translation
-        .translate('quote.allQuotes')
-        .pipe(
-          map(firstOption => {
-            this.options.push({ name: firstOption, code: '' });
-            Object.keys(this.quotesByCategory).forEach(key =>
-              this.options.push({
-                name: key,
-                code: this.quotesByCategory[key][0]?.code,
-              })
-            );
-          })
-        )
-        .subscribe()
+    this.options.push({ name: firstOption, code: '' });
+    Object.keys(this.quotesByCategory).forEach(key =>
+      this.options.push({
+        name: key,
+        code: this.quotesByCategory[key][0]?.code,
+      })
     );
   }
 
@@ -227,7 +219,10 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   goToComparePage() {
-    sessionStorage.setItem('quoteCodes', JSON.stringify(this.quoteCodesForCompare));
+    sessionStorage.setItem(
+      'quoteCodes',
+      JSON.stringify(this.quoteCodesForCompare)
+    );
     this.routingService.go({ cxRoute: 'quoteCompare' });
   }
 

@@ -77,9 +77,10 @@ export class OccQuoteAdapter implements QuoteAdapter {
     const url = this.occEndpointService.getUrl('compareQuotes', {
       userId,
     });
-    const params: HttpParams = new HttpParams()
-      .set('cartCodes', cartCodes.toString());
-      // .set('maximumNumberOfCarts', '2');
+    const params: HttpParams = new HttpParams().set(
+      'cartCodes',
+      cartCodes.toString()
+    );
     return this.http
       .get(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));

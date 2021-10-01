@@ -49,6 +49,7 @@ export class FormDataEffects {
   clearFormData$ = this.actions$.pipe(
     ofType(AuthActions.LOGOUT),
     tap(_ => {
+      sessionStorage.removeItem('quoteCodes');
       this.formDataStorageService.clearFormDataLocalStorage();
     })
   );
