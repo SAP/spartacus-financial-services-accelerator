@@ -104,7 +104,10 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
         this.ghostData = response;
       }),
       switchMap(_ =>
-        this.inboxService.loadMessages(this.messageGroup, this.searchConfig)
+        this.inboxService.setMessagesSource(
+          this.messageGroup,
+          this.searchConfig
+        )
       )
     );
   }
@@ -131,12 +134,14 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
 
   pageChange(pageNumber: number) {
     this.mainCheckboxChecked = false;
-    this.searchConfig.currentPage = pageNumber;
-    // this.setCurrentMessageGroup();
+    this.searchConfig = { ...this.searchConfig, currentPage: pageNumber };
+    this.setCurrentMessageGroup();
+    // this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
+    console.log(this.searchConfig);
   }
 
   clearSearchData() {
-    // this.searchConfig.currentPage = 0;
+    this.searchConfig = { ...this.searchConfig, currentPage: 0 };
   }
 
   checkMessage(messageUid: string, checked: boolean) {

@@ -47,15 +47,19 @@ export class CmsCustomContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.componentData.data$
-      .subscribe(data => {
-        this.styleCss = data.styleClasses ? data.styleClasses : '';
-        this.components$ = this.cmsComponentConnector.getList(
-          data.simpleCMSComponents.split(' '),
-          this.pageContext
-        );
-      })
-      .unsubscribe();
+    this.subscription.add(
+      this.componentData.data$
+        .pipe(
+          map(data => {
+            this.styleCss = data.styleClasses ? data.styleClasses : '';
+            this.components$ = this.cmsComponentConnector.getList(
+              data.simpleCMSComponents.split(' '),
+              this.pageContext
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy() {

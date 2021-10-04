@@ -36,7 +36,7 @@ export class InboxService {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
 
-  loadMessages(
+  setMessagesSource(
     msgGroup,
     searchConfig: SearchConfig,
     read?: boolean
@@ -48,14 +48,7 @@ export class InboxService {
             (inboxData: InboxDataState) => inboxData.messageGroup === msgGroup
           ) === -1;
         if (uniqueMessageGroup) {
-          this.store.dispatch(
-            new fromAction.LoadMessages({
-              userId: this.inboxData.userId,
-              messageGroup: msgGroup,
-              searchConfig: searchConfig,
-              read: read,
-            })
-          );
+          this.loadMessages(msgGroup, searchConfig, read);
         } else {
           return inboxData.filter(
             (inboxGroup: InboxDataState) => inboxGroup.messageGroup === msgGroup
@@ -73,13 +66,23 @@ export class InboxService {
     );
   }
 
-  // getLoaded(): Observable<boolean> {
-  //   return this.store.pipe(select(fromSelector.getMessagesLoading));
-  // }
-
   getMessages(): Observable<InboxDataState[]> {
     return this.store.select(fromSelector.getMessages);
   }
+
+  loadMessages(msgGroup, searchConfig: SearchConfig, read?: boolean) {
+    this.store.dispatch(
+      new fromAction.LoadMessages({
+        userId: this.inboxData.userId,
+        messageGroup: msgGroup,
+        searchConfig: searchConfig,
+        read: read,
+      })
+    );
+  }
+  // getLoaded(): Observable<boolean> {
+  //   return this.store.pipe(select(fromSelector.getMessagesLoading));
+  // }
 
   // getMessages(): Observable<any> {
   //   return this.getLoaded().pipe(
