@@ -42,10 +42,13 @@ export class InboxService {
     read?: boolean
   ): Observable<InboxDataState[]> {
     return this.getMessages().pipe(
+      take(1),
       map(inboxData => {
         const uniqueMessageGroup =
           inboxData.findIndex(
-            (inboxData: InboxDataState) => inboxData.messageGroup === msgGroup
+            (inboxSingleData: InboxDataState) =>
+              inboxSingleData.messageGroup === msgGroup &&
+              !inboxSingleData.pagination['hasNext']
           ) === -1;
         if (uniqueMessageGroup) {
           this.loadMessages(msgGroup, searchConfig, read);

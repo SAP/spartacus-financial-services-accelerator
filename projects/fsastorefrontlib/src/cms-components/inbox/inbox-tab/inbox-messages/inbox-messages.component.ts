@@ -27,7 +27,7 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   // messagesObject$: Observable<any>;
-  messageGroup = 'generalMessageGroup';
+  messageGroup: string;
   pagination: PaginationModel;
 
   searchConfig: FSSearchConfig = {
@@ -103,12 +103,12 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
       tap(response => {
         this.ghostData = response;
       }),
-      switchMap(_ =>
-        this.inboxService.setMessagesSource(
+      switchMap(_ => {
+        return this.inboxService.setMessagesSource(
           this.messageGroup,
           this.searchConfig
-        )
-      )
+        );
+      })
     );
   }
 
@@ -136,8 +136,6 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
     this.mainCheckboxChecked = false;
     this.searchConfig = { ...this.searchConfig, currentPage: pageNumber };
     this.setCurrentMessageGroup();
-    // this.inboxService.loadMessages(this.messageGroup, this.searchConfig);
-    console.log(this.searchConfig);
   }
 
   clearSearchData() {

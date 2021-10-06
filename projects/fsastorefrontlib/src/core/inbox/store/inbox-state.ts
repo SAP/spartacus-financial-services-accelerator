@@ -13,7 +13,7 @@ export interface InboxState {
 }
 
 export interface InboxDataState {
-  messages: {};
+  messages: [{}];
   messageGroup: string;
   pagination?: Pagination;
   sorts?: Sort[];
