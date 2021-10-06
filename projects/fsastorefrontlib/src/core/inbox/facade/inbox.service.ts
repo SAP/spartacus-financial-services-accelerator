@@ -47,10 +47,14 @@ export class InboxService {
         const uniqueMessageGroup =
           inboxData.findIndex(
             (inboxSingleData: InboxDataState) =>
-              inboxSingleData.messageGroup === msgGroup &&
-              !inboxSingleData.pagination['hasNext']
+              inboxSingleData.messageGroup === msgGroup
           ) === -1;
-        if (uniqueMessageGroup) {
+        const moreTotalPages =
+          inboxData.findIndex(
+            (inboxSingleData: InboxDataState) =>
+              inboxSingleData.pagination.totalPages > 1
+          ) > -1;
+        if (uniqueMessageGroup || moreTotalPages) {
           this.loadMessages(msgGroup, searchConfig, read);
         } else {
           return inboxData.filter(
