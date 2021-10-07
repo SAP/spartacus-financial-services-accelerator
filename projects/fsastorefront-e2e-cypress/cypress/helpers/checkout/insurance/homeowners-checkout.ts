@@ -78,7 +78,7 @@ export function checkMiniCartHomeowners() {
       },
       {
         title: 'Property Value:',
-        value: ' 200000 ',
+        value: ' 200,000.00 ',
       },
       {
         title: ' Homeowners Annually: ',
