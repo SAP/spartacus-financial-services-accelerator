@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -43,7 +44,9 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>RegisterUser</li>
+  <li
+  >
+  RegisterUser</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -66,6 +69,7 @@
 
 
 
+
         <section>
             <h3 id="index">Index</h3>
             <table class="table table-sm table-bordered index-table">
@@ -79,26 +83,47 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#dateOfBirth">dateOfBirth</a>
+                                        <a href="#dateOfBirth" 
+>
+                                            dateOfBirth
+                                        </a>
                                 </li>
                                 <li>
-                                        <a href="#email">email</a>
+                                        <a href="#email" 
+>
+                                            email
+                                        </a>
                                 </li>
                                 <li>
-                                        <a href="#firstName">firstName</a>
+                                        <a href="#firstName" 
+>
+                                            firstName
+                                        </a>
                                 </li>
                                 <li>
-                                        <a href="#lastName">lastName</a>
+                                        <a href="#lastName" 
+>
+                                            lastName
+                                        </a>
                                 </li>
                                 <li>
-                                        <a href="#password">password</a>
+                                        <a href="#password" 
+>
+                                            password
+                                        </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#phoneNumber">phoneNumber</a>
+                                        <a href="#phoneNumber" 
+>
+                                            phoneNumber
+                                        </a>
                                 </li>
                                 <li>
-                                        <a href="#titleCode">titleCode</a>
+                                        <a href="#titleCode" 
+>
+                                            titleCode
+                                        </a>
                                 </li>
                             </ul>
                         </td>
@@ -116,7 +141,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="dateOfBirth"></a>
-                                        <span class="name"><b>dateOfBirth</b><a href="#dateOfBirth"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>dateOfBirth</b>
+                                            <a href="#dateOfBirth">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -145,7 +174,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="email"></a>
-                                        <span class="name"><b>email</b><a href="#email"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>email</b>
+                                            <a href="#email">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -174,7 +207,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="firstName"></a>
-                                        <span class="name"><b>firstName</b><a href="#firstName"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>firstName</b>
+                                            <a href="#firstName">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -203,7 +240,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="lastName"></a>
-                                        <span class="name"><b>lastName</b><a href="#lastName"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>lastName</b>
+                                            <a href="#lastName">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -232,7 +273,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="password"></a>
-                                        <span class="name"><b>password</b><a href="#password"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>password</b>
+                                            <a href="#password">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -261,7 +306,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="phoneNumber"></a>
-                                        <span class="name"><b>phoneNumber</b><a href="#phoneNumber"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>phoneNumber</b>
+                                            <a href="#phoneNumber">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -295,7 +344,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="titleCode"></a>
-                                        <span class="name"><b>titleCode</b><a href="#titleCode"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>titleCode</b>
+                                            <a href="#titleCode">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -330,6 +383,14 @@
   lastName: string;
   dateOfBirth: string;
   phoneNumber?: string;
+  email: string;
+  password: string;
+}
+
+export interface CreateB2bCustomer {
+  titleCode: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
@@ -380,23 +441,35 @@ export function logout() {
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
+  cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).should(&#x27;be.visible&#x27;);
   cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).eq(0).type(username);
   cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).type(password);
-  cy.get(&#x27;button[type&#x3D;submit]&#x27;).click();
+  cy.get(&#x27;button[type&#x3D;submit]&#x27;).eq(0).click();
+}
+
+export function createB2bCustomer(customer: CreateB2bCustomer) {
+  cy.get(&#x27;[formcontrolname&#x3D;titleCode]&#x27;).ngSelect(customer.titleCode);
+  cy.get(&#x27;[formcontrolname&#x3D;firstName]&#x27;).type(customer.firstName);
+  cy.get(&#x27;[formcontrolname&#x3D;lastName]&#x27;).type(customer.lastName);
+  cy.get(&#x27;[formcontrolname&#x3D;dateOfBirth]&#x27;).type(&#x27;1991-01-01&#x27;);
+  cy.get(&#x27;[formcontrolname&#x3D;email]&#x27;).type(customer.email);
+  cy.get(&#x27;.form-check-input&#x27;).eq(0).click();
+  cy.get(&#x27;[formcontrolname&#x3D;uid]&#x27;).ngSelect(&#x27;Panda&#x27;);
+  cy.get(&#x27;.button.primary&#x27;).contains(&#x27;Save&#x27;).click();
 }
 </code></pre>
     </div>
 </div>
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -417,9 +490,9 @@ export function loginInUser(username: string, password: string) {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -35,7 +36,9 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>AgentSearchBoxComponent</li>
+  <li
+  >
+  AgentSearchBoxComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,6 +63,7 @@
 <p class="comment">
     <code>projects/fsastorefrontlib/src/cms-components/agent/agent-search-box/agent-search-box.component.ts</code>
 </p>
+
 
 
     <p class="comment">
@@ -130,7 +134,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#subscription">subscription</a>
+                                <a href="#subscription" >subscription</a>
                             </li>
                         </ul>
                     </td>
@@ -145,20 +149,20 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#findAgents">findAgents</a>
+                                <a href="#findAgents" >findAgents</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit">ngOnInit</a>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#onKey">onKey</a>
+                                <a href="#onKey" >onKey</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                <a href="#resetSearchValueAndRouteParams">resetSearchValueAndRouteParams</a>
+                                <a href="#resetSearchValueAndRouteParams" >resetSearchValueAndRouteParams</a>
                             </li>
                         </ul>
                     </td>
@@ -178,7 +182,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fsRoutingService: RoutingService, agentSearchService: <a href="../injectables/AgentSearchService.html">AgentSearchService</a>)</code>
+<code>constructor(fsRoutingService: RoutingService, agentSearchService: <a href="../injectables/AgentSearchService.html" target="_self">AgentSearchService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -248,9 +252,7 @@
                 <td class="col-md-4">
                     <a name="findAgents"></a>
                     <span class="name">
-                        <b>
-                            findAgents
-                        </b>
+                        <span ><b>findAgents</b></span>
                         <a href="#findAgents"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -275,6 +277,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -318,9 +321,7 @@
                 <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <b>
-                            ngOnDestroy
-                        </b>
+                        <span ><b>ngOnDestroy</b></span>
                         <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -357,9 +358,7 @@
                 <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
-                        <b>
-                            ngOnInit
-                        </b>
+                        <span ><b>ngOnInit</b></span>
                         <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -396,9 +395,7 @@
                 <td class="col-md-4">
                     <a name="onKey"></a>
                     <span class="name">
-                        <b>
-                            onKey
-                        </b>
+                        <span ><b>onKey</b></span>
                         <a href="#onKey"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -423,6 +420,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -466,10 +464,8 @@
                 <td class="col-md-4">
                     <a name="resetSearchValueAndRouteParams"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            resetSearchValueAndRouteParams
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>resetSearchValueAndRouteParams</b></span>
                         <a href="#resetSearchValueAndRouteParams"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -504,35 +500,34 @@
 </section>
     <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="subscription"></a>
-                        <span class="name">
-                            <b>
-                            subscription</b>
-                            <a href="#subscription"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>new Subscription()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new Subscription()</code>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/agent/agent-search-box/agent-search-box.component.ts:13</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/agent/agent-search-box/agent-search-box.component.ts:13</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
 </div>
@@ -651,7 +646,7 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="mt-5 pr-md-3">  <div class="searchbox">    <div class="form-group search-wrapper">      <input        #queryInput        [formControl]="searchBox"        (keyup)="onKey($event)"        placeholder="{{ \'fscommon.agentLocator.searchBox\' | cxTranslate }}"      />      <cx-icon        [type]="iconTypes.SEARCH"        aria-label="search"        class="search"        [routerLink]="[\'/agent-locator\']"        [queryParams]="{ query: queryInput.value }"        [ngClass]="{          \'disabled-action\': !(queryInput.value && queryInput.value.length)        }"      ></cx-icon>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotConnectionComponent', 'selector': 'cx-fs-sync-pilot-connection-component'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'AgentSearchBoxComponent'};
 </script>
@@ -666,14 +661,14 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -694,9 +689,9 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

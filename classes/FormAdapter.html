@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -42,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>FormAdapter</li>
+  <li >FormAdapter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -67,6 +68,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -82,19 +84,19 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#getFormData">getFormData</a>
+                                <a href="#getFormData" >getFormData</a>
                             </li>
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#getFormDefinition">getFormDefinition</a>
+                                <a href="#getFormDefinition" >getFormDefinition</a>
                             </li>
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#getFormDefinitions">getFormDefinitions</a>
+                                <a href="#getFormDefinitions" >getFormDefinitions</a>
                             </li>
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#saveFormData">saveFormData</a>
+                                <a href="#saveFormData" >saveFormData</a>
                             </li>
                         </ul>
                     </td>
@@ -121,10 +123,8 @@
                 <td class="col-md-4">
                     <a name="getFormData"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            getFormData
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>getFormData</b></span>
                         <a href="#getFormData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -152,6 +152,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -216,10 +217,8 @@
                 <td class="col-md-4">
                     <a name="getFormDefinition"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            getFormDefinition
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>getFormDefinition</b></span>
                         <a href="#getFormDefinition"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -247,6 +246,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -311,10 +311,8 @@
                 <td class="col-md-4">
                     <a name="getFormDefinitions"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            getFormDefinitions
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>getFormDefinitions</b></span>
                         <a href="#getFormDefinitions"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -342,6 +340,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -406,10 +405,8 @@
                 <td class="col-md-4">
                     <a name="saveFormData"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            saveFormData
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>saveFormData</b></span>
                         <a href="#saveFormData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -417,7 +414,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>saveFormData(formData: <a href="../interfaces/YFormData.html">YFormData</a>, userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>saveFormData(formData: <a href="../interfaces/YFormData.html" target="_self">YFormData</a>, userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -437,6 +434,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -559,14 +557,14 @@ export abstract class FormAdapter {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -587,9 +585,9 @@ export abstract class FormAdapter {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

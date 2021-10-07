@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>InboxService</li>
+  <li >InboxService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -75,16 +77,22 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#activeMessageGroupAndTitle">activeMessageGroupAndTitle</a>
+                                <a href="#activeMessageGroupAndTitle" >activeMessageGroupAndTitle</a>
                             </li>
                             <li>
-                                <a href="#messageGroupAndTitleSource">messageGroupAndTitleSource</a>
+                                <a href="#messageGroupAndTitleSource" >messageGroupAndTitleSource</a>
                             </li>
                             <li>
-                                <a href="#messages">messages</a>
+                                <a href="#messages" >messages</a>
                             </li>
                             <li>
-                                <a href="#messagesSource">messagesSource</a>
+                                <a href="#messagesSource" >messagesSource</a>
+                            </li>
+                            <li>
+                                <a href="#unreadMessagesState$" >unreadMessagesState$</a>
+                            </li>
+                            <li>
+                                <a href="#unreadMessagesStateSource" >unreadMessagesStateSource</a>
                             </li>
                         </ul>
                     </td>
@@ -99,13 +107,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getMessages">getMessages</a>
+                                <a href="#getMessages" >getMessages</a>
                             </li>
                             <li>
-                                <a href="#setMessagesState">setMessagesState</a>
+                                <a href="#setMessagesState" >setMessagesState</a>
                             </li>
                             <li>
-                                <a href="#setTitleAndMessageGroup">setTitleAndMessageGroup</a>
+                                <a href="#setTitleAndMessageGroup" >setTitleAndMessageGroup</a>
+                            </li>
+                            <li>
+                                <a href="#setUnreadMessageState" >setUnreadMessageState</a>
                             </li>
                         </ul>
                     </td>
@@ -125,12 +136,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(inboxData: <a href="../injectables/InboxDataService.html">InboxDataService</a>, adapter: <a href="../injectables/InboxConnector.html">InboxConnector</a>)</code>
+<code>constructor(inboxData: <a href="../injectables/InboxDataService.html" target="_self">InboxDataService</a>, adapter: <a href="../injectables/InboxConnector.html" target="_self">InboxConnector</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -191,24 +202,22 @@
                 <td class="col-md-4">
                     <a name="getMessages"></a>
                     <span class="name">
-                        <b>
-                            getMessages
-                        </b>
+                        <span ><b>getMessages</b></span>
                         <a href="#getMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getMessages(messageGroup, searchConfig: SearchConfig)</code>
+<code>getMessages(messageGroup, searchConfig: SearchConfig, read?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -218,6 +227,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -250,6 +260,18 @@
 
 
                                 </tr>
+                                <tr>
+                                    <td>read</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -272,9 +294,7 @@
                 <td class="col-md-4">
                     <a name="setMessagesState"></a>
                     <span class="name">
-                        <b>
-                            setMessagesState
-                        </b>
+                        <span ><b>setMessagesState</b></span>
                         <a href="#setMessagesState"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -288,8 +308,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:44</a></div>
                 </td>
             </tr>
 
@@ -299,6 +319,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -347,9 +368,7 @@
                 <td class="col-md-4">
                     <a name="setTitleAndMessageGroup"></a>
                     <span class="name">
-                        <b>
-                            setTitleAndMessageGroup
-                        </b>
+                        <span ><b>setTitleAndMessageGroup</b></span>
                         <a href="#setTitleAndMessageGroup"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -363,8 +382,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:25</a></div>
                 </td>
             </tr>
 
@@ -374,6 +393,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -423,116 +443,231 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setUnreadMessageState"></a>
+                    <span class="name">
+                        <span ><b>setUnreadMessageState</b></span>
+                        <a href="#setUnreadMessageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setUnreadMessageState(isMessageRead: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:48</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>isMessageRead</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeMessageGroupAndTitle"></a>
+                    <span class="name">
+                        <span ><b>activeMessageGroupAndTitle</b></span>
+                        <a href="#activeMessageGroupAndTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="activeMessageGroupAndTitle"></a>
-                        <span class="name">
-                            <b>
-                            activeMessageGroupAndTitle</b>
-                            <a href="#activeMessageGroupAndTitle"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>this.messageGroupAndTitleSource.asObservable()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>this.messageGroupAndTitleSource.asObservable()</code>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:18</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:15</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageGroupAndTitleSource"></a>
+                    <span class="name">
+                        <span ><b>messageGroupAndTitleSource</b></span>
+                        <a href="#messageGroupAndTitleSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="messageGroupAndTitleSource"></a>
-                        <span class="name">
-                            <b>
-                            messageGroupAndTitleSource</b>
-                            <a href="#messageGroupAndTitleSource"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>new BehaviorSubject&lt;InboxTab&gt;(null)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;InboxTab&gt;(null)</code>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:17</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:14</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messages"></a>
+                    <span class="name">
+                        <span ><b>messages</b></span>
+                        <a href="#messages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="messages"></a>
-                        <span class="name">
-                            <b>
-                            messages</b>
-                            <a href="#messages"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>this.messagesSource.asObservable()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>this.messagesSource.asObservable()</code>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:21</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:18</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messagesSource"></a>
+                    <span class="name">
+                        <span ><b>messagesSource</b></span>
+                        <a href="#messagesSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="messagesSource"></a>
-                        <span class="name">
-                            <b>
-                            messagesSource</b>
-                            <a href="#messagesSource"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:20</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:17</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unreadMessagesState$"></a>
+                    <span class="name">
+                        <span ><b>unreadMessagesState$</b></span>
+                        <a href="#unreadMessagesState$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.unreadMessagesStateSource.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unreadMessagesStateSource"></a>
+                    <span class="name">
+                        <span ><b>unreadMessagesStateSource</b></span>
+                        <a href="#unreadMessagesStateSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/facade/inbox.service.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -544,6 +679,9 @@ import { SearchConfig } from &#x27;@spartacus/core&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
 import { InboxDataService, InboxTab } from &#x27;../services/inbox-data.service&#x27;;
 import { InboxConnector } from &#x27;../connectors/inbox.connector&#x27;;
+import { startWith } from &#x27;rxjs/operators&#x27;;
+
+export const GHOST_DATA &#x3D; { values: new Array(5) };
 
 @Injectable()
 export class InboxService {
@@ -557,21 +695,34 @@ export class InboxService {
 
   messagesSource &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
   messages &#x3D; this.messagesSource.asObservable();
+  unreadMessagesStateSource &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+  unreadMessagesState$ &#x3D; this.unreadMessagesStateSource.asObservable();
 
   setTitleAndMessageGroup(messageGroup: string, title: string) {
     this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
 
-  getMessages(messageGroup, searchConfig: SearchConfig): Observable&lt;any&gt; {
-    return this.adapter.getSiteMessagesForUserAndGroup(
-      this.inboxData.userId,
-      messageGroup,
-      searchConfig
-    );
+  getMessages(
+    messageGroup,
+    searchConfig: SearchConfig,
+    read?: boolean
+  ): Observable&lt;any&gt; {
+    return this.adapter
+      .getSiteMessagesForUserAndGroup(
+        this.inboxData.userId,
+        messageGroup,
+        searchConfig,
+        read
+      )
+      .pipe(startWith(GHOST_DATA));
   }
 
   setMessagesState(uidList, read): Observable&lt;any&gt; {
     return this.adapter.setMessagesState(this.inboxData.userId, uidList, read);
+  }
+
+  setUnreadMessageState(isMessageRead: boolean) {
+    this.unreadMessagesStateSource.next(isMessageRead);
   }
 }
 </code></pre>
@@ -585,14 +736,14 @@ export class InboxService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -613,9 +764,9 @@ export class InboxService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

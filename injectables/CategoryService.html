@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>CategoryService</li>
+  <li >CategoryService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -75,7 +77,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#currentCategorySource">currentCategorySource</a>
+                                <a href="#currentCategorySource" >currentCategorySource</a>
                             </li>
                         </ul>
                     </td>
@@ -90,10 +92,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getActiveCategory">getActiveCategory</a>
+                                <a href="#getActiveCategory" >getActiveCategory</a>
                             </li>
                             <li>
-                                <a href="#setActiveCategory">setActiveCategory</a>
+                                <a href="#setActiveCategory" >setActiveCategory</a>
                             </li>
                         </ul>
                     </td>
@@ -119,9 +121,7 @@
                 <td class="col-md-4">
                     <a name="getActiveCategory"></a>
                     <span class="name">
-                        <b>
-                            getActiveCategory
-                        </b>
+                        <span ><b>getActiveCategory</b></span>
                         <a href="#getActiveCategory"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -158,9 +158,7 @@
                 <td class="col-md-4">
                     <a name="setActiveCategory"></a>
                     <span class="name">
-                        <b>
-                            setActiveCategory
-                        </b>
+                        <span ><b>setActiveCategory</b></span>
                         <a href="#setActiveCategory"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -185,6 +183,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -225,35 +224,34 @@
 </section>
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentCategorySource"></a>
+                    <span class="name">
+                        <span ><b>currentCategorySource</b></span>
+                        <a href="#currentCategorySource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="currentCategorySource"></a>
-                        <span class="name">
-                            <b>
-                            currentCategorySource</b>
-                            <a href="#currentCategorySource"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string&gt;(&#x27;&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;string&gt;(&#x27;&#x27;)</code>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/category/category.service.ts:6</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/services/category/category.service.ts:6</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -286,14 +284,14 @@ export class CategoryService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -314,9 +312,9 @@ export class CategoryService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -42,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>DefaultFormValidators</li>
+  <li >DefaultFormValidators</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
         <p class="comment">
             <code>projects/dynamicforms/src/util/validators/default-form-validators.ts</code>
         </p>
+
 
 
             <p class="comment">
@@ -87,11 +89,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#passwordRegex">passwordRegex</a>
+                                <a href="#passwordRegex" >passwordRegex</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#phoneNumberRegex">phoneNumberRegex</a>
+                                <a href="#phoneNumberRegex" >phoneNumberRegex</a>
                             </li>
                         </ul>
                     </td>
@@ -107,59 +109,63 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#alphanumeric">alphanumeric</a>
+                                <a href="#alphanumeric" >alphanumeric</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#checkValue">checkValue</a>
+                                <a href="#checkEmptyValue" >checkEmptyValue</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#compareAgeToDOB">compareAgeToDOB</a>
+                                <a href="#checkValue" >checkValue</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#compareDates">compareDates</a>
+                                <a href="#compareAgeToDOB" >compareAgeToDOB</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#compareDOBtoAge">compareDOBtoAge</a>
+                                <a href="#compareDates" >compareDates</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#compareNumbers">compareNumbers</a>
+                                <a href="#compareDOBtoAge" >compareDOBtoAge</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#compareToCurrentDate">compareToCurrentDate</a>
+                                <a href="#compareNumbers" >compareNumbers</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#dateOfBirthValidator">dateOfBirthValidator</a>
+                                <a href="#compareToCurrentDate" >compareToCurrentDate</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#getFormControlForCode">getFormControlForCode</a>
+                                <a href="#dateOfBirthValidator" >dateOfBirthValidator</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#matchFields">matchFields</a>
+                                <a href="#getFormControlForCode" >getFormControlForCode</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#number">number</a>
+                                <a href="#matchFields" >matchFields</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#regexValidator">regexValidator</a>
+                                <a href="#number" >number</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#shouldContainValue">shouldContainValue</a>
+                                <a href="#regexValidator" >regexValidator</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#valueComparison">valueComparison</a>
+                                <a href="#shouldContainValue" >shouldContainValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#valueComparison" >valueComparison</a>
                             </li>
                         </ul>
                     </td>
@@ -176,63 +182,61 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="passwordRegex"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>passwordRegex</b></span>
+                        <a href="#passwordRegex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="passwordRegex"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Static</span>
-                            passwordRegex</b>
-                            <a href="#passwordRegex"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>/^(?&#x3D;.*?[A-Z])(?&#x3D;.*?[0-9])(?&#x3D;.*?[!@#$%^*()_\-+{};:.,]).{6,}$/</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>/^(?&#x3D;.*?[A-Z])(?&#x3D;.*?[0-9])(?&#x3D;.*?[!@#$%^*()_\-+{};:.,]).{6,}$/</code>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:10</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:10</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="phoneNumberRegex"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>phoneNumberRegex</b></span>
+                        <a href="#phoneNumberRegex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="phoneNumberRegex"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Static</span>
-                            phoneNumberRegex</b>
-                            <a href="#phoneNumberRegex"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>/^(?:\d{6,20})?$/</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>/^(?:\d{6,20})?$/</code>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:11</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:11</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
             <section>
@@ -246,10 +250,8 @@
                 <td class="col-md-4">
                     <a name="alphanumeric"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            alphanumeric
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>alphanumeric</b></span>
                         <a href="#alphanumeric"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -264,8 +266,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="209"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:209</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="214"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:214</a></div>
                 </td>
             </tr>
 
@@ -275,6 +277,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -316,12 +319,81 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="checkEmptyValue"></a>
+                    <span class="name">
+                        <span class="modifier">Static</span>
+                        <span ><b>checkEmptyValue</b></span>
+                        <a href="#checkEmptyValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkEmptyValue(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:13</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{ required: boolean; }</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="checkValue"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            checkValue
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>checkValue</b></span>
                         <a href="#checkValue"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -336,8 +408,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="226"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:226</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="231"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:231</a></div>
                 </td>
             </tr>
 
@@ -347,6 +419,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -390,10 +463,8 @@
                 <td class="col-md-4">
                     <a name="compareAgeToDOB"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            compareAgeToDOB
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>compareAgeToDOB</b></span>
                         <a href="#compareAgeToDOB"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -408,8 +479,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="102"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:102</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="107"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:107</a></div>
                 </td>
             </tr>
 
@@ -419,6 +490,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -474,10 +546,8 @@
                 <td class="col-md-4">
                     <a name="compareDates"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            compareDates
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>compareDates</b></span>
                         <a href="#compareDates"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -492,8 +562,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="143"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:143</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="148"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:148</a></div>
                 </td>
             </tr>
 
@@ -503,6 +573,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -558,10 +629,8 @@
                 <td class="col-md-4">
                     <a name="compareDOBtoAge"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            compareDOBtoAge
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>compareDOBtoAge</b></span>
                         <a href="#compareDOBtoAge"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -576,8 +645,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="87"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:87</a></div>
                 </td>
             </tr>
 
@@ -587,6 +656,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -642,10 +712,8 @@
                 <td class="col-md-4">
                     <a name="compareNumbers"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            compareNumbers
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>compareNumbers</b></span>
                         <a href="#compareNumbers"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -660,8 +728,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="125"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:125</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="130"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:130</a></div>
                 </td>
             </tr>
 
@@ -671,6 +739,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -726,10 +795,8 @@
                 <td class="col-md-4">
                     <a name="compareToCurrentDate"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            compareToCurrentDate
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>compareToCurrentDate</b></span>
                         <a href="#compareToCurrentDate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -744,8 +811,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="161"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:161</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="166"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:166</a></div>
                 </td>
             </tr>
 
@@ -755,6 +822,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -794,10 +862,8 @@
                 <td class="col-md-4">
                     <a name="dateOfBirthValidator"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            dateOfBirthValidator
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>dateOfBirthValidator</b></span>
                         <a href="#dateOfBirthValidator"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -812,8 +878,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="69"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:69</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:74</a></div>
                 </td>
             </tr>
 
@@ -823,6 +889,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -866,10 +933,8 @@
                 <td class="col-md-4">
                     <a name="getFormControlForCode"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            getFormControlForCode
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>getFormControlForCode</b></span>
                         <a href="#getFormControlForCode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -884,8 +949,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:33</a></div>
                 </td>
             </tr>
 
@@ -895,6 +960,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -950,10 +1016,8 @@
                 <td class="col-md-4">
                     <a name="matchFields"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            matchFields
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>matchFields</b></span>
                         <a href="#matchFields"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -968,8 +1032,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:66</a></div>
                 </td>
             </tr>
 
@@ -979,6 +1043,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1034,10 +1099,8 @@
                 <td class="col-md-4">
                     <a name="number"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            number
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>number</b></span>
                         <a href="#number"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1052,8 +1115,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="192"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:192</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="197"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:197</a></div>
                 </td>
             </tr>
 
@@ -1063,6 +1126,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1106,10 +1170,8 @@
                 <td class="col-md-4">
                     <a name="regexValidator"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            regexValidator
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>regexValidator</b></span>
                         <a href="#regexValidator"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1124,8 +1186,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="51"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:51</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:56</a></div>
                 </td>
             </tr>
 
@@ -1135,6 +1197,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1174,10 +1237,8 @@
                 <td class="col-md-4">
                     <a name="shouldContainValue"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            shouldContainValue
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>shouldContainValue</b></span>
                         <a href="#shouldContainValue"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1192,8 +1253,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="233"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:233</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="238"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:238</a></div>
                 </td>
             </tr>
 
@@ -1203,6 +1264,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1242,10 +1304,8 @@
                 <td class="col-md-4">
                     <a name="valueComparison"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            valueComparison
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>valueComparison</b></span>
                         <a href="#valueComparison"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1260,8 +1320,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">projects/dynamicforms/src/util/validators/default-form-validators.ts:18</a></div>
                 </td>
             </tr>
 
@@ -1271,6 +1331,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1353,6 +1414,11 @@
 export class DefaultFormValidators extends Validators {
   static passwordRegex &#x3D; /^(?&#x3D;.*?[A-Z])(?&#x3D;.*?[0-9])(?&#x3D;.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   static phoneNumberRegex &#x3D; /^(?:\d{6,20})?$/;
+
+  static checkEmptyValue(control: AbstractControl) {
+    const valid &#x3D; !!control.value?.trim();
+    return valid ? null : { required: true };
+  }
 
   static valueComparison(
     baseValue: number | Date,
@@ -1587,14 +1653,14 @@ export class DefaultFormValidators extends Validators {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -1615,9 +1681,9 @@ export class DefaultFormValidators extends Validators {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

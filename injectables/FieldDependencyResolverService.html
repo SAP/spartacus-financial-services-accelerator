@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>FieldDependencyResolverService</li>
+  <li >FieldDependencyResolverService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,13 +78,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#changeControlEnabled">changeControlEnabled</a>
+                                <a href="#changeControlEnabled" >changeControlEnabled</a>
                             </li>
                             <li>
-                                <a href="#geValidationsForCondition">geValidationsForCondition</a>
+                                <a href="#geValidationsForCondition" >geValidationsForCondition</a>
                             </li>
                             <li>
-                                <a href="#resolveFormControlDependencies">resolveFormControlDependencies</a>
+                                <a href="#resolveFormControlDependencies" >resolveFormControlDependencies</a>
                             </li>
                         </ul>
                     </td>
@@ -102,7 +104,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(formValidationService: <a href="../injectables/FormValidationService.html">FormValidationService</a>, formService: <a href="../injectables/FormService.html">FormService</a>, fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>)</code>
+<code>constructor(formValidationService: <a href="../injectables/FormValidationService.html" target="_self">FormValidationService</a>, formService: <a href="../injectables/FormService.html" target="_self">FormService</a>, fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -180,16 +182,14 @@
                 <td class="col-md-4">
                     <a name="changeControlEnabled"></a>
                     <span class="name">
-                        <b>
-                            changeControlEnabled
-                        </b>
+                        <span ><b>changeControlEnabled</b></span>
                         <a href="#changeControlEnabled"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>changeControlEnabled(dependentControl: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, controlConfig: <a href="../interfaces/DynamicFormGroup.html">DynamicFormGroup</a>, enabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+<code>changeControlEnabled(dependentControl: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, controlConfig: <a href="../interfaces/DynamicFormGroup.html" target="_self">DynamicFormGroup</a>, enabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
@@ -211,6 +211,7 @@ If any field config has disabled property set to true, dynamic condition cannot 
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -291,16 +292,14 @@ If any field config has disabled property set to true, dynamic condition cannot 
                 <td class="col-md-4">
                     <a name="geValidationsForCondition"></a>
                     <span class="name">
-                        <b>
-                            geValidationsForCondition
-                        </b>
+                        <span ><b>geValidationsForCondition</b></span>
                         <a href="#geValidationsForCondition"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>geValidationsForCondition(dependencyFn: <a href="../interfaces/ControlDependency.html">ControlDependency</a>)</code>
+<code>geValidationsForCondition(dependencyFn: <a href="../interfaces/ControlDependency.html" target="_self">ControlDependency</a>)</code>
                 </td>
             </tr>
 
@@ -318,6 +317,7 @@ If any field config has disabled property set to true, dynamic condition cannot 
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -361,9 +361,7 @@ If any field config has disabled property set to true, dynamic condition cannot 
                 <td class="col-md-4">
                     <a name="resolveFormControlDependencies"></a>
                     <span class="name">
-                        <b>
-                            resolveFormControlDependencies
-                        </b>
+                        <span ><b>resolveFormControlDependencies</b></span>
                         <a href="#resolveFormControlDependencies"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -385,11 +383,12 @@ If any field config has disabled property set to true, dynamic condition cannot 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Method used to enable/disable dependent control based on conditions defined at master control</p>
+                    <div class="io-description"><p>Method used to enable/disable dependent control based on conditions defined at main control</p>
 </div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -444,7 +443,7 @@ If any field config has disabled property set to true, dynamic condition cannot 
 
 
                                     <td>
-                                        <p>The form group which tracks value and validity of master form controls</p>
+                                        <p>The form group which tracks value and validity of main form controls</p>
 
                                     </td>
                                 </tr>
@@ -493,11 +492,11 @@ export class FieldDependencyResolverService {
   ) {}
 
   /**
-   * Method used to enable/disable dependent control based on conditions defined at master control
+   * Method used to enable/disable dependent control based on conditions defined at main control
    *
    * @param controlConfig The dependent field config for which dependencies are resolved
    * @param dependentControl The dependent field control for which dependencies are resolved
-   * @param formGroup The form group which tracks value and validity of master form controls
+   * @param formGroup The form group which tracks value and validity of main form controls
    */
   resolveFormControlDependencies(
     controlConfig: any,
@@ -505,18 +504,18 @@ export class FieldDependencyResolverService {
     formGroup: FormGroup
   ) {
     controlConfig.dependsOn.controls.forEach(condition &#x3D;&gt; {
-      const masterFormControl &#x3D; this.formService.getFormControlForCode(
+      const mainFormControl &#x3D; this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
       );
-      if (masterFormControl) {
-        if (!masterFormControl.value) {
+      if (mainFormControl) {
+        if (!mainFormControl.value) {
           if (controlConfig.dependsOn.hide &#x3D;&#x3D;&#x3D; true) {
             controlConfig.hidden &#x3D; true;
           }
           this.changeControlEnabled(dependentControl, controlConfig, false);
         }
-        masterFormControl.valueChanges.subscribe(fieldValue &#x3D;&gt; {
+        mainFormControl.valueChanges.subscribe(fieldValue &#x3D;&gt; {
           const dependencyValidations &#x3D; this.geValidationsForCondition(
             condition
           );
@@ -594,14 +593,14 @@ export class FieldDependencyResolverService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -622,9 +621,9 @@ export class FieldDependencyResolverService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

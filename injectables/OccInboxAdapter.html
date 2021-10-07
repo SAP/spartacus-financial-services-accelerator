@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>OccInboxAdapter</li>
+  <li >OccInboxAdapter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,10 +63,25 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#MAX_INT_VALUE" >MAX_INT_VALUE</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -76,10 +92,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getSiteMessagesForUserAndGroup">getSiteMessagesForUserAndGroup</a>
+                                <a href="#getSiteMessagesForUserAndGroup" >getSiteMessagesForUserAndGroup</a>
                             </li>
                             <li>
-                                <a href="#setMessagesState">setMessagesState</a>
+                                <a href="#setMessagesState" >setMessagesState</a>
                             </li>
                         </ul>
                     </td>
@@ -104,7 +120,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -165,24 +181,22 @@
                 <td class="col-md-4">
                     <a name="getSiteMessagesForUserAndGroup"></a>
                     <span class="name">
-                        <b>
-                            getSiteMessagesForUserAndGroup
-                        </b>
+                        <span ><b>getSiteMessagesForUserAndGroup</b></span>
                         <a href="#getSiteMessagesForUserAndGroup"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getSiteMessagesForUserAndGroup(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, messageGroup: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, searchConfig: <a href="../interfaces/FSSearchConfig.html">FSSearchConfig</a>)</code>
+<code>getSiteMessagesForUserAndGroup(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, messageGroup: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, searchConfig: <a href="../interfaces/FSSearchConfig.html" target="_self">FSSearchConfig</a>, read?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:18</a></div>
                 </td>
             </tr>
 
@@ -192,6 +206,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -237,6 +252,18 @@
 
 
                                 </tr>
+                                <tr>
+                                    <td>read</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -259,9 +286,7 @@
                 <td class="col-md-4">
                     <a name="setMessagesState"></a>
                     <span class="name">
-                        <b>
-                            setMessagesState
-                        </b>
+                        <span ><b>setMessagesState</b></span>
                         <a href="#setMessagesState"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -275,8 +300,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:52</a></div>
                 </td>
             </tr>
 
@@ -286,6 +311,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -348,6 +374,43 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MAX_INT_VALUE"></a>
+                    <span class="name">
+                        <span ><b>MAX_INT_VALUE</b></span>
+                        <a href="#MAX_INT_VALUE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;2147483647&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
     </div>
 
@@ -364,6 +427,7 @@ import { InboxAdapter } from &#x27;../../../core/my-account/connectors/inbox.ada
 
 @Injectable()
 export class OccInboxAdapter implements InboxAdapter {
+  MAX_INT_VALUE &#x3D; &#x27;2147483647&#x27;;
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
@@ -372,7 +436,8 @@ export class OccInboxAdapter implements InboxAdapter {
   getSiteMessagesForUserAndGroup(
     userId: string,
     messageGroup: string,
-    searchConfig: FSSearchConfig
+    searchConfig: FSSearchConfig,
+    read?: boolean
   ): Observable&lt;any&gt; {
     const url &#x3D; this.occEndpointService.getUrl(&#x27;siteMessages&#x27;, {
       userId,
@@ -391,6 +456,11 @@ export class OccInboxAdapter implements InboxAdapter {
 
     if (messageGroup !&#x3D;&#x3D; &#x27;&#x27;) {
       params &#x3D; params.set(&#x27;messagegroup&#x27;, messageGroup);
+    }
+
+    if (read !&#x3D; null) {
+      params &#x3D; params.set(&#x27;read&#x27;, read.toString());
+      params &#x3D; params.set(&#x27;pageSize&#x27;, this.MAX_INT_VALUE);
     }
     return this.http
       .get(url, { params: params })
@@ -428,14 +498,14 @@ export class OccInboxAdapter implements InboxAdapter {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -456,9 +526,9 @@ export class OccInboxAdapter implements InboxAdapter {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

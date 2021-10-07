@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>UserPrefillResolver</li>
+  <li >UserPrefillResolver</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,7 +78,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getPrefillValue">getPrefillValue</a>
+                                <a href="#getPrefillValue" >getPrefillValue</a>
                             </li>
                         </ul>
                     </td>
@@ -96,12 +98,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: UserService)</code>
+<code>constructor(userAccountFacade: UserAccountFacade)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">projects/dynamicforms/src/core/resolvers/user-prefill-resolver.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/dynamicforms/src/core/resolvers/user-prefill-resolver.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -119,10 +121,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userService</td>
+                                                        <td>userAccountFacade</td>
                                                   
                                                         <td>
-                                                                    <code>UserService</code>
+                                                                    <code>UserAccountFacade</code>
                                                         </td>
                                                   
                                                     <td>
@@ -150,9 +152,7 @@
                 <td class="col-md-4">
                     <a name="getPrefillValue"></a>
                     <span class="name">
-                        <b>
-                            getPrefillValue
-                        </b>
+                        <span ><b>getPrefillValue</b></span>
                         <a href="#getPrefillValue"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -166,8 +166,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">projects/dynamicforms/src/core/resolvers/user-prefill-resolver.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">projects/dynamicforms/src/core/resolvers/user-prefill-resolver.ts:13</a></div>
                 </td>
             </tr>
 
@@ -177,6 +177,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -220,26 +221,24 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UserService } from &#x27;@spartacus/core&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { map } from &#x27;rxjs/operators&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { PrefillResolver } from &#x27;./prefill-resolver.interface&#x27;;
+import { FormsUtils } from &#x27;./utils/forms-utils&#x27;;
+import { UserAccountFacade } from &#x27;@spartacus/user/account/root&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class UserPrefillResolver implements PrefillResolver {
-  constructor(protected userService: UserService) {}
+  constructor(protected userAccountFacade: UserAccountFacade) {}
 
   getPrefillValue(fieldPath: string) {
     const attributes &#x3D; fieldPath.split(&#x27;.&#x27;);
     let currentValue;
-    return this.userService.get().pipe(
+    return this.userAccountFacade.get().pipe(
       map(user &#x3D;&gt; {
-        currentValue &#x3D; user;
-        attributes.forEach(attribute &#x3D;&gt; {
-          currentValue &#x3D; currentValue[attribute];
-        });
+        currentValue &#x3D; FormsUtils.getValueByPath(fieldPath, user);
         return currentValue;
       })
     );
@@ -256,14 +255,14 @@ export class UserPrefillResolver implements PrefillResolver {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -284,9 +283,9 @@ export class UserPrefillResolver implements PrefillResolver {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

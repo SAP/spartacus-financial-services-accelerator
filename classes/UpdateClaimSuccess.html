@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -42,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>UpdateClaimSuccess</li>
+  <li >UpdateClaimSuccess</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
         <p class="comment">
             <code>projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts</code>
         </p>
+
 
 
 
@@ -87,11 +89,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#payload">payload</a>
+                                <a href="#payload" >payload</a>
                             </li>
                             <li>
                                     <span class="modifier">Readonly</span>
-                                <a href="#type">type</a>
+                                <a href="#type" >type</a>
                             </li>
                         </ul>
                     </td>
@@ -117,7 +119,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts:129</a></div>
                             </td>
                         </tr>
 
@@ -157,64 +159,62 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="payload"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>payload</b></span>
+                        <a href="#payload"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="payload"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            payload</b>
-                            <a href="#payload"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts:130</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts:95</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="type"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>type</b></span>
+                        <a href="#type"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="type"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Readonly</span>
-                            type</b>
-                            <a href="#type"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>UPDATE_CLAIM_SUCCESS</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>UPDATE_CLAIM_SUCCESS</code>
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts:129</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/actions/claim.action.ts:94</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
 
@@ -237,9 +237,21 @@ export const LOAD_CLAIMS &#x3D; &#x27;[Claim] Load Claims&#x27;;
 export const LOAD_CLAIMS_SUCCESS &#x3D; &#x27;[Claim] Load Claims Success&#x27;;
 export const LOAD_CLAIMS_FAIL &#x3D; &#x27;[Claim] Load Claims Fail&#x27;;
 
+/**
+ * @deprecated The const should not be used. Use LOAD_CLAIM_BY_ID instead
+ */
 export const LOAD_CURRENT_CLAIM &#x3D; &#x27;[Claim] Load Current Claim&#x27;;
+export const LOAD_CLAIM_BY_ID &#x3D; &#x27;[Claim] Load Claim By Id&#x27;;
+/**
+ * @deprecated The const should not be used. Use LOAD_CLAIM_BY_ID_FAIL instead
+ */
 export const LOAD_CURRENT_CLAIM_FAIL &#x3D; &#x27;[Claim] Load Current Claim Fail&#x27;;
+export const LOAD_CLAIM_BY_ID_FAIL &#x3D; &#x27;[Claim] Load Claim By Id Fail&#x27;;
+/**
+ * @deprecated The const should not be used. Use LOAD_CLAIM_BY_ID_SUCCESS instead
+ */
 export const LOAD_CURRENT_CLAIM_SUCCESS &#x3D; &#x27;[Claim] Load Current Claim Success&#x27;;
+export const LOAD_CLAIM_BY_ID_SUCCESS &#x3D; &#x27;[Claim] Load Claim By Id Success&#x27;;
 
 export const CREATE_CLAIM &#x3D; &#x27;[Claim] Create Claim&#x27;;
 export const CREATE_CLAIM_FAIL &#x3D; &#x27;[Claim] Create Claim Fail&#x27;;
@@ -279,18 +291,41 @@ export class LoadClaimsFail implements Action {
   constructor(public payload: any) {}
 }
 
+/**
+ * @deprecated The action should not be used. Use LoadClaimById instead
+ */
 export class LoadCurrentClaim implements Action {
   readonly type &#x3D; LOAD_CURRENT_CLAIM;
   constructor(public payload: any) {}
 }
+export class LoadClaimById implements Action {
+  readonly type &#x3D; LOAD_CLAIM_BY_ID;
+  constructor(public payload: any) {}
+}
 
+/**
+ * @deprecated The action should not be used. Use LoadClaimByIdSuccess instead
+ */
 export class LoadCurrentClaimSuccess implements Action {
   readonly type &#x3D; LOAD_CURRENT_CLAIM_SUCCESS;
   constructor(public payload: any) {}
 }
 
+export class LoadClaimByIdSuccess implements Action {
+  readonly type &#x3D; LOAD_CLAIM_BY_ID_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+/**
+ * @deprecated The action should not be used. Use LoadClaimByIdFail instead
+ */
 export class LoadCurrentClaimFail implements Action {
   readonly type &#x3D; LOAD_CURRENT_CLAIM_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class LoadClaimByIdFail implements Action {
+  readonly type &#x3D; LOAD_CLAIM_BY_ID_FAIL;
   constructor(public payload: any) {}
 }
 
@@ -331,9 +366,9 @@ export type ClaimAction &#x3D;
   | LoadClaims
   | LoadClaimsSuccess
   | LoadClaimsFail
-  | LoadCurrentClaim
-  | LoadCurrentClaimSuccess
-  | LoadCurrentClaimFail
+  | LoadClaimById
+  | LoadClaimByIdSuccess
+  | LoadClaimByIdFail
   | CreateClaim
   | CreateClaimSuccess
   | CreateClaimFail
@@ -346,14 +381,14 @@ export type ClaimAction &#x3D;
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -374,9 +409,9 @@ export type ClaimAction &#x3D;
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

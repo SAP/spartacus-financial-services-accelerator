@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>ProductEffect</li>
+  <li >ProductEffect</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -75,12 +77,27 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getCalculatedProductData$">getCalculatedProductData$</a>
+                                <a href="#getCalculatedProductData$" >getCalculatedProductData$</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showGlobalMessage" >showGlobalMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -96,12 +113,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, productPricingConnector: <a href="../injectables/ProductPricingConnector.html">ProductPricingConnector</a>)</code>
+<code>constructor(actions$: Actions, productPricingConnector: <a href="../injectables/ProductPricingConnector.html" target="_self">ProductPricingConnector</a>, globalMessageService: GlobalMessageService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:43</a></div>
                             </td>
                         </tr>
 
@@ -142,6 +159,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>globalMessageService</td>
+                                                  
+                                                        <td>
+                                                                    <code>GlobalMessageService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -151,68 +180,162 @@
         </table>
 </section>
 
-
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGlobalMessage"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>showGlobalMessage</b></span>
+                        <a href="#showGlobalMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showGlobalMessage(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, messageType: GlobalMessageType)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:40</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>text</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>messageType</td>
+                                    <td>
+                                            <code>GlobalMessageType</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCalculatedProductData$"></a>
+                    <span class="name">
+                        <span ><b>getCalculatedProductData$</b></span>
+                        <a href="#getCalculatedProductData$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="getCalculatedProductData$"></a>
-                        <span class="name">
-                            <b>
-                            getCalculatedProductData$</b>
-                            <a href="#getCalculatedProductData$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
     map((action: fromActions.LoadCalculatedProductData) &#x3D;&gt; action.payload),
     mergeMap(payload &#x3D;&gt; {
       return this.productPricingConnector
         .getCalculatedProductData(payload.productCode, payload.pricingData)
         .pipe(
+          timeout(30000),
           map((product: any) &#x3D;&gt; {
             return new ProductActions.LoadProductSuccess(product);
           }),
-          catchError(error &#x3D;&gt;
-            of(new ProductActions.LoadProductFail(payload.productCode, error))
-          )
+          catchError(error &#x3D;&gt; {
+            this.showGlobalMessage(
+              &#x27;fscommon.priceCalculationError&#x27;,
+              GlobalMessageType.MSG_TYPE_ERROR
+            );
+            return of(
+              new ProductActions.LoadProductFail(payload.productCode, error)
+            );
+          })
         );
     })
   )</code>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:16</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:12</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -221,9 +344,13 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
-import { ProductActions } from &#x27;@spartacus/core&#x27;;
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  ProductActions,
+} from &#x27;@spartacus/core&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
-import { catchError, map, mergeMap } from &#x27;rxjs/operators&#x27;;
+import { catchError, map, mergeMap, timeout } from &#x27;rxjs/operators&#x27;;
 import { ProductPricingConnector } from &#x27;../../../product-pricing/connectors/product-pricing.connector&#x27;;
 import * as fromActions from &#x27;../actions/index&#x27;;
 
@@ -237,19 +364,32 @@ export class ProductEffect {
       return this.productPricingConnector
         .getCalculatedProductData(payload.productCode, payload.pricingData)
         .pipe(
+          timeout(30000),
           map((product: any) &#x3D;&gt; {
             return new ProductActions.LoadProductSuccess(product);
           }),
-          catchError(error &#x3D;&gt;
-            of(new ProductActions.LoadProductFail(payload.productCode, error))
-          )
+          catchError(error &#x3D;&gt; {
+            this.showGlobalMessage(
+              &#x27;fscommon.priceCalculationError&#x27;,
+              GlobalMessageType.MSG_TYPE_ERROR
+            );
+            return of(
+              new ProductActions.LoadProductFail(payload.productCode, error)
+            );
+          })
         );
     })
   );
 
+  private showGlobalMessage(text: string, messageType: GlobalMessageType) {
+    this.globalMessageService.remove(messageType);
+    this.globalMessageService.add({ key: text }, messageType);
+  }
+
   constructor(
     private actions$: Actions,
-    private productPricingConnector: ProductPricingConnector
+    private productPricingConnector: ProductPricingConnector,
+    private globalMessageService: GlobalMessageService
   ) {}
 }
 </code></pre>
@@ -263,14 +403,14 @@ export class ProductEffect {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -291,9 +431,9 @@ export class ProductEffect {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

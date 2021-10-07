@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>OccProductAssignmentAdapter</li>
+  <li >OccProductAssignmentAdapter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,16 +78,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#changeActiveStatus">changeActiveStatus</a>
+                                <a href="#changeActiveStatus" >changeActiveStatus</a>
                             </li>
                             <li>
-                                <a href="#createProductAssignment">createProductAssignment</a>
+                                <a href="#createProductAssignment" >createProductAssignment</a>
                             </li>
                             <li>
-                                <a href="#loadProductAssignmentsForUnit">loadProductAssignmentsForUnit</a>
+                                <a href="#loadProductAssignmentsForUnit" >loadProductAssignmentsForUnit</a>
                             </li>
                             <li>
-                                <a href="#removeProductAssignment">removeProductAssignment</a>
+                                <a href="#removeProductAssignment" >removeProductAssignment</a>
                             </li>
                         </ul>
                     </td>
@@ -171,9 +173,7 @@
                 <td class="col-md-4">
                     <a name="changeActiveStatus"></a>
                     <span class="name">
-                        <b>
-                            changeActiveStatus
-                        </b>
+                        <span ><b>changeActiveStatus</b></span>
                         <a href="#changeActiveStatus"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -198,6 +198,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -277,9 +278,7 @@
                 <td class="col-md-4">
                     <a name="createProductAssignment"></a>
                     <span class="name">
-                        <b>
-                            createProductAssignment
-                        </b>
+                        <span ><b>createProductAssignment</b></span>
                         <a href="#createProductAssignment"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -304,6 +303,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -371,9 +371,7 @@
                 <td class="col-md-4">
                     <a name="loadProductAssignmentsForUnit"></a>
                     <span class="name">
-                        <b>
-                            loadProductAssignmentsForUnit
-                        </b>
+                        <span ><b>loadProductAssignmentsForUnit</b></span>
                         <a href="#loadProductAssignmentsForUnit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -398,6 +396,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -501,9 +500,7 @@
                 <td class="col-md-4">
                     <a name="removeProductAssignment"></a>
                     <span class="name">
-                        <b>
-                            removeProductAssignment
-                        </b>
+                        <span ><b>removeProductAssignment</b></span>
                         <a href="#removeProductAssignment"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -528,6 +525,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -709,14 +707,14 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -737,9 +735,9 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

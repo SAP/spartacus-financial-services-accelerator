@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>UserRequestEffects</li>
+  <li >UserRequestEffects</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -75,10 +77,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#submitUserRequest$">submitUserRequest$</a>
+                                <a href="#submitUserRequest$" >submitUserRequest$</a>
                             </li>
                             <li>
-                                <a href="#updateUserRequest$">updateUserRequest$</a>
+                                <a href="#updateUserRequest$" >updateUserRequest$</a>
                             </li>
                         </ul>
                     </td>
@@ -99,7 +101,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, userRequestConnector: <a href="../injectables/UserRequestConnector.html">UserRequestConnector</a>)</code>
+<code>constructor(actions$: Actions, userRequestConnector: <a href="../injectables/UserRequestConnector.html" target="_self">UserRequestConnector</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -157,30 +159,29 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitUserRequest$"></a>
+                    <span class="name">
+                        <span ><b>submitUserRequest$</b></span>
+                        <a href="#submitUserRequest$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="submitUserRequest$"></a>
-                        <span class="name">
-                            <b>
-                            submitUserRequest$</b>
-                            <a href="#submitUserRequest$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.SUBMIT_USER_REQUEST),
     map((action: fromActions.SubmitUserRequest) &#x3D;&gt; action.payload),
     mergeMap(payload &#x3D;&gt; {
@@ -199,47 +200,46 @@
         );
     })
   )</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:45</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+                    </td>
+                </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="updateUserRequest$"></a>
-                        <span class="name">
-                            <b>
-                            updateUserRequest$</b>
-                            <a href="#updateUserRequest$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:45</a></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateUserRequest$"></a>
+                    <span class="name">
+                        <span ><b>updateUserRequest$</b></span>
+                        <a href="#updateUserRequest$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.UPDATE_USER_REQUEST),
     map((action: fromActions.UpdateUserRequest) &#x3D;&gt; action.payload),
     switchMap(payload &#x3D;&gt; {
@@ -270,26 +270,26 @@
         );
     })
   )</code>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:12</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:12</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -376,14 +376,14 @@ export class UserRequestEffects {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -404,9 +404,9 @@ export class UserRequestEffects {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

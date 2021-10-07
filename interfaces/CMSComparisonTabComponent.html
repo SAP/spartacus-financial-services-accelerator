@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -43,7 +44,9 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>CMSComparisonTabComponent</li>
+  <li
+  >
+  CMSComparisonTabComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -63,6 +66,7 @@
         <p class="comment">
             <code>projects/fsastorefrontlib/src/occ/occ-models/cms-component.models.ts</code>
         </p>
+
 
 
             <p class="comment">
@@ -86,11 +90,17 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#comparisonPanel">comparisonPanel</a>
+                                        <a href="#comparisonPanel" 
+>
+                                            comparisonPanel
+                                        </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#title">title</a>
+                                        <a href="#title" 
+>
+                                            title
+                                        </a>
                                 </li>
                             </ul>
                         </td>
@@ -108,7 +118,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="comparisonPanel"></a>
-                                        <span class="name"><b>comparisonPanel</b><a href="#comparisonPanel"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>comparisonPanel</b>
+                                            <a href="#comparisonPanel">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -142,7 +156,11 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="title"></a>
-                                        <span class="name"><b>title</b><a href="#title"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>title</b>
+                                            <a href="#title">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -246,19 +264,24 @@ export interface CmsFormSubmitComponent extends YFormCmsComponent {
 export interface CmsAgentRootComponent extends CmsComponent {
   agentRootCategory?: string;
 }
+
+export interface CmsQuestionnaireCarouselComponent extends CmsComponent {
+  categories: string;
+  title: string;
+}
 </code></pre>
     </div>
 </div>
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -279,9 +302,9 @@ export interface CmsAgentRootComponent extends CmsComponent {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

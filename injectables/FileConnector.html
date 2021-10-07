@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>FileConnector</li>
+  <li >FileConnector</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,16 +78,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getFile">getFile</a>
+                                <a href="#getFile" >getFile</a>
                             </li>
                             <li>
-                                <a href="#getFiles">getFiles</a>
+                                <a href="#getFiles" >getFiles</a>
                             </li>
                             <li>
-                                <a href="#removeFile">removeFile</a>
+                                <a href="#removeFile" >removeFile</a>
                             </li>
                             <li>
-                                <a href="#uploadFile">uploadFile</a>
+                                <a href="#uploadFile" >uploadFile</a>
                             </li>
                         </ul>
                     </td>
@@ -105,7 +107,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(uploadAdapter: <a href="../classes/FileAdapter.html">FileAdapter</a>)</code>
+<code>constructor(uploadAdapter: <a href="../classes/FileAdapter.html" target="_self">FileAdapter</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -159,9 +161,7 @@
                 <td class="col-md-4">
                     <a name="getFile"></a>
                     <span class="name">
-                        <b>
-                            getFile
-                        </b>
+                        <span ><b>getFile</b></span>
                         <a href="#getFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -186,6 +186,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -253,16 +254,14 @@
                 <td class="col-md-4">
                     <a name="getFiles"></a>
                     <span class="name">
-                        <b>
-                            getFiles
-                        </b>
+                        <span ><b>getFiles</b></span>
                         <a href="#getFiles"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getFiles(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fileCode: Array<string>)</code>
+<code>getFiles(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fileCode?: Array<string>)</code>
                 </td>
             </tr>
 
@@ -280,6 +279,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -308,7 +308,7 @@
                                     </td>
 
                                     <td>
-                                        No
+                                        Yes
                                     </td>
 
 
@@ -335,9 +335,7 @@
                 <td class="col-md-4">
                     <a name="removeFile"></a>
                     <span class="name">
-                        <b>
-                            removeFile
-                        </b>
+                        <span ><b>removeFile</b></span>
                         <a href="#removeFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -362,6 +360,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -417,9 +416,7 @@
                 <td class="col-md-4">
                     <a name="uploadFile"></a>
                     <span class="name">
-                        <b>
-                            uploadFile
-                        </b>
+                        <span ><b>uploadFile</b></span>
                         <a href="#uploadFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -444,6 +441,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -513,8 +511,8 @@ export class FileConnector {
     return this.uploadAdapter.getFileForCodeAndType(userId, fileCode, fileType);
   }
 
-  getFiles(userId: string, fileCode: Array&lt;string&gt;): Observable&lt;any&gt; {
-    return this.uploadAdapter.getFilesForCodes(userId, fileCode);
+  getFiles(userId: string, fileCode?: Array&lt;string&gt;): Observable&lt;any&gt; {
+    return this.uploadAdapter.getFilesForUser(userId, fileCode);
   }
 
   uploadFile(userId: string, file: File): Observable&lt;any&gt; {
@@ -536,14 +534,14 @@ export class FileConnector {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -564,9 +562,9 @@ export class FileConnector {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

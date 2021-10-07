@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -41,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Pipes</li>
-  <li>FormatDatePipe</li>
+  <li >FormatDatePipe</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,8 +61,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/fsastorefrontlib/src/shared/util/helpers/formatDate.pipe.ts</code>
+            <code>projects/fsastorefrontlib/src/shared/util/helpers/pipe/formatDate.pipe.ts</code>
         </p>
+
 
 
 
@@ -88,9 +90,7 @@
                 <td class="col-md-4">
                     <a name="transform"></a>
                     <span class="name">
-                        <b>
-                            transform
-                        </b>
+                        <span ><b>transform</b></span>
                         <a href="#transform"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -105,7 +105,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="9"
-                            class="link-to-prism">projects/fsastorefrontlib/src/shared/util/helpers/formatDate.pipe.ts:9</a></div>
+                            class="link-to-prism">projects/fsastorefrontlib/src/shared/util/helpers/pipe/formatDate.pipe.ts:9</a></div>
                 </td>
             </tr>
 
@@ -115,6 +115,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -160,7 +161,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DatePipe } from &#x27;@angular/common&#x27;;
 import { Pipe, PipeTransform } from &#x27;@angular/core&#x27;;
-import { DateConfig } from &#x27;../../../core&#x27;;
+import { DateConfig } from &#x27;../../../../core&#x27;;
 
 @Pipe({ name: &#x27;cxFormatDate&#x27; })
 export class FormatDatePipe implements PipeTransform {
@@ -179,14 +180,14 @@ export class FormatDatePipe implements PipeTransform {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -207,9 +208,9 @@ export class FormatDatePipe implements PipeTransform {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

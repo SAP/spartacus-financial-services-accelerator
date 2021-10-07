@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>FSCartService</li>
+  <li >FSCartService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -58,6 +59,7 @@
         <p class="comment">
             <code>projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts</code>
         </p>
+
 
 
             <p class="comment">
@@ -82,21 +84,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#addOptionalProduct">addOptionalProduct</a>
+                                <a href="#addOptionalProduct" >addOptionalProduct</a>
                             </li>
                             <li>
-                                <a href="#createCartForProduct">createCartForProduct</a>
+                                <a href="#createCartForProduct" >createCartForProduct</a>
+                            </li>
+                            <li>
+                                <a href="#getCart" >getCart</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#isCartCreated">isCartCreated</a>
+                                <a href="#isCartCreated" >isCartCreated</a>
                             </li>
                             <li>
-                                <a href="#loadCart">loadCart</a>
+                                <a href="#loadCart" >loadCart</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                <a href="#startBundleForCart">startBundleForCart</a>
+                                <a href="#startBundleForCart" >startBundleForCart</a>
                             </li>
                         </ul>
                     </td>
@@ -194,9 +199,7 @@
                 <td class="col-md-4">
                     <a name="addOptionalProduct"></a>
                     <span class="name">
-                        <b>
-                            addOptionalProduct
-                        </b>
+                        <span ><b>addOptionalProduct</b></span>
                         <a href="#addOptionalProduct"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -210,8 +213,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="100"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:100</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="101"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:101</a></div>
                 </td>
             </tr>
 
@@ -221,6 +224,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -288,16 +292,14 @@
                 <td class="col-md-4">
                     <a name="createCartForProduct"></a>
                     <span class="name">
-                        <b>
-                            createCartForProduct
-                        </b>
+                        <span ><b>createCartForProduct</b></span>
                         <a href="#createCartForProduct"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>createCartForProduct(productCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, bundleTemplateId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, quantity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, pricingData: <a href="../interfaces/PricingData.html">PricingData</a>)</code>
+<code>createCartForProduct(productCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, bundleTemplateId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, quantity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, pricingData: <a href="../interfaces/PricingData.html" target="_self">PricingData</a>)</code>
                 </td>
             </tr>
 
@@ -315,6 +317,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -392,12 +395,79 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getCart"></a>
+                    <span class="name">
+                        <span ><b>getCart</b></span>
+                        <a href="#getCart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCart(cartId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:134</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>cartId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;Cart&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="isCartCreated"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            isCartCreated
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span ><b>isCartCreated</b></span>
                         <a href="#isCartCreated"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -412,8 +482,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="133"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:133</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="138"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:138</a></div>
                 </td>
             </tr>
 
@@ -423,6 +493,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -466,9 +537,7 @@
                 <td class="col-md-4">
                     <a name="loadCart"></a>
                     <span class="name">
-                        <b>
-                            loadCart
-                        </b>
+                        <span ><b>loadCart</b></span>
                         <a href="#loadCart"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -482,8 +551,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:121</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/cart/facade/cart.service.ts:122</a></div>
                 </td>
             </tr>
 
@@ -493,6 +562,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -548,10 +618,8 @@
                 <td class="col-md-4">
                     <a name="startBundleForCart"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            startBundleForCart
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>startBundleForCart</b></span>
                         <a href="#startBundleForCart"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -559,7 +627,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>startBundleForCart(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, cartCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, productCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, bundleTemplateId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, quantity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, pricingData: <a href="../interfaces/PricingData.html">PricingData</a>)</code>
+                    <code>startBundleForCart(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, cartCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, productCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, bundleTemplateId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, quantity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, pricingData: <a href="../interfaces/PricingData.html" target="_self">PricingData</a>)</code>
                 </td>
             </tr>
 
@@ -577,6 +645,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -692,7 +761,7 @@ import {
   StateWithMultiCart,
   UserIdService,
 } from &#x27;@spartacus/core&#x27;;
-import { combineLatest } from &#x27;rxjs&#x27;;
+import { combineLatest, Observable } from &#x27;rxjs&#x27;;
 import { filter, map, take } from &#x27;rxjs/operators&#x27;;
 import { PricingData } from &#x27;./../../../occ/occ-models/form-pricing.interface&#x27;;
 import * as fromAction from &#x27;./../../checkout/store/actions/index&#x27;;
@@ -767,6 +836,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     pricingData: PricingData
   ) {
+    localStorage.removeItem(&#x27;bindingState&#x27;);
     this.store.dispatch(
       new fromAction.StartBundle({
         userId: userId,
@@ -812,6 +882,10 @@ export class FSCartService extends ActiveCartService {
     }
   }
 
+  getCart(cartId: string): Observable&lt;Cart&gt; {
+    return this.multiCartService.getCart(cartId);
+  }
+
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState&lt;Cart&gt;) {
     return cartState &amp;&amp; cartState.success &amp;&amp; !cartState.loading;
   }
@@ -827,14 +901,14 @@ export class FSCartService extends ActiveCartService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -855,9 +929,9 @@ export class FSCartService extends ActiveCartService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

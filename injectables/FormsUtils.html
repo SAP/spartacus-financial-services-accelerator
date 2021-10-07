@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>FormsUtils</li>
+  <li >FormsUtils</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -56,8 +57,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/fsastorefrontlib/src/cms-components/dynamic-forms/utils/forms-utils.ts</code>
+            <code>projects/dynamicforms/src/core/resolvers/utils/forms-utils.ts</code>
         </p>
+
 
 
 
@@ -77,16 +79,16 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#convertIfDate">convertIfDate</a>
+                                <a href="#convertIfDate" >convertIfDate</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#getValueByPath">getValueByPath</a>
+                                <a href="#getValueByPath" >getValueByPath</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Static</span>
-                                <a href="#getValueForAttibute">getValueForAttibute</a>
+                                <a href="#getValueForAttribute" >getValueForAttribute</a>
                             </li>
                         </ul>
                     </td>
@@ -112,10 +114,8 @@
                 <td class="col-md-4">
                     <a name="convertIfDate"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            convertIfDate
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>convertIfDate</b></span>
                         <a href="#convertIfDate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -131,7 +131,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="5"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/dynamic-forms/utils/forms-utils.ts:5</a></div>
+                            class="link-to-prism">projects/dynamicforms/src/core/resolvers/utils/forms-utils.ts:5</a></div>
                 </td>
             </tr>
 
@@ -141,6 +141,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -180,10 +181,8 @@
                 <td class="col-md-4">
                     <a name="getValueByPath"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            getValueByPath
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>getValueByPath</b></span>
                         <a href="#getValueByPath"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -199,7 +198,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/dynamic-forms/utils/forms-utils.ts:12</a></div>
+                            class="link-to-prism">projects/dynamicforms/src/core/resolvers/utils/forms-utils.ts:12</a></div>
                 </td>
             </tr>
 
@@ -209,6 +208,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -261,21 +261,19 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getValueForAttibute"></a>
+                    <a name="getValueForAttribute"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Static</span>
-                            getValueForAttibute
-                        </b>
-                        <a href="#getValueForAttibute"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Static</span>
+                        <span ><b>getValueForAttribute</b></span>
+                        <a href="#getValueForAttribute"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getValueForAttibute(attribute: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, objectValue)</code>
+                    <code>getValueForAttribute(attribute: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, objectValue)</code>
                 </td>
             </tr>
 
@@ -283,7 +281,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/dynamic-forms/utils/forms-utils.ts:24</a></div>
+                            class="link-to-prism">projects/dynamicforms/src/core/resolvers/utils/forms-utils.ts:24</a></div>
                 </td>
             </tr>
 
@@ -293,6 +291,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -362,7 +361,7 @@ export class FormsUtils {
     let currentValue &#x3D; object;
     const attributes &#x3D; fieldPath.split(&#x27;.&#x27;);
     for (const attribute of attributes) {
-      currentValue &#x3D; this.getValueForAttibute(attribute, currentValue);
+      currentValue &#x3D; this.getValueForAttribute(attribute, currentValue);
       if (!currentValue) {
         break;
       }
@@ -370,11 +369,13 @@ export class FormsUtils {
     return currentValue;
   }
 
-  private static getValueForAttibute(attribute: string, objectValue) {
+  private static getValueForAttribute(attribute: string, objectValue) {
     if (attribute.indexOf(&#x27;[&#x27;) !&#x3D;&#x3D; -1) {
       const attributeName &#x3D; attribute.split(&#x27;[&#x27;)[0];
       const arrayPosition &#x3D; attribute.split(&#x27;[&#x27;)[1].slice(0, 1);
-      return objectValue[attributeName][arrayPosition];
+      if (objectValue[attributeName]) {
+        return objectValue[attributeName][arrayPosition];
+      }
     }
     return objectValue[attribute];
   }
@@ -390,14 +391,14 @@ export class FormsUtils {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -418,9 +419,9 @@ export class FormsUtils {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

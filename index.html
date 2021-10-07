@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	      <link rel="stylesheet" href="./styles/style.css">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -36,7 +37,7 @@ SPDX-FileCopyrightText: 2020 SAP SE or an SAP affiliate company and contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-
+<p><a href="https://api.reuse.software/info/github.com/SAP/spartacus-financial-services-accelerator"><img src="https://api.reuse.software/badge/github.com/SAP/spartacus-financial-services-accelerator" alt="REUSE status" class="img-responsive"></a></p>
 <h1 id="financial-services-accelerator">Financial Services Accelerator</h1>
 <p>Financial Services Accelerator is storefront based on <a href="https://github.com/SAP/spartacus">Spartacus</a> framework. This storefront is specialized for insurance and banking services and it&#39;s working with 
 SAP Commerce over Commerce REST API.</p>
@@ -76,8 +77,7 @@ SAP Commerce over Commerce REST API.</p>
 <h1 id="to-do">To Do</h1>
 <p>Many improvements are coming! All tasks will be posted to our GitHub issue tracking system. As mentioned, some of the improvements will mean breaking changes. While we strive to avoid doing so, we cannot guarantee this will not happen before the first release.</p>
 <h1 id="license">License</h1>
-<p>Copyright (c) 2020 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the <a href="LICENSE">LICENSE</a> file.</p>
+<p>Copyright (c) 2020-2021 SAP SE or an SAP affiliate company and spartacus-financial-services-accelerator contributors. Please see our <a href="LICENSE">LICENSE</a> for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available <a href="https://api.reuse.software/info/github.com/SAP/spartacus-financial-services-accelerator">via the REUSE tool</a>.</p>
 
 
 
@@ -92,14 +92,14 @@ This file is licensed under the Apache Software License, v. 2 except as noted ot
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -120,9 +120,9 @@ This file is licensed under the Apache Software License, v. 2 except as noted ot
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>FormDataService</li>
+  <li >FormDataService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -75,7 +77,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#submittedForm">submittedForm</a>
+                                <a href="#continueToNextStep$" >continueToNextStep$</a>
+                            </li>
+                            <li>
+                                <a href="#continueToNextStepSource" >continueToNextStepSource</a>
+                            </li>
+                            <li>
+                                <a href="#submittedForm" >submittedForm</a>
                             </li>
                         </ul>
                     </td>
@@ -90,31 +98,34 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getFormData">getFormData</a>
+                                <a href="#getFormData" >getFormData</a>
                             </li>
                             <li>
-                                <a href="#getFormDefinition">getFormDefinition</a>
+                                <a href="#getFormDefinition" >getFormDefinition</a>
                             </li>
                             <li>
-                                <a href="#getSubmittedForm">getSubmittedForm</a>
+                                <a href="#getSubmittedForm" >getSubmittedForm</a>
                             </li>
                             <li>
-                                <a href="#loadFormData">loadFormData</a>
+                                <a href="#loadFormData" >loadFormData</a>
                             </li>
                             <li>
-                                <a href="#loadFormDefinition">loadFormDefinition</a>
+                                <a href="#loadFormDefinition" >loadFormDefinition</a>
                             </li>
                             <li>
-                                <a href="#loadFormDefinitions">loadFormDefinitions</a>
+                                <a href="#loadFormDefinitions" >loadFormDefinitions</a>
                             </li>
                             <li>
-                                <a href="#saveFormData">saveFormData</a>
+                                <a href="#saveFormData" >saveFormData</a>
                             </li>
                             <li>
-                                <a href="#setSubmittedForm">setSubmittedForm</a>
+                                <a href="#setContinueToNextStep" >setContinueToNextStep</a>
                             </li>
                             <li>
-                                <a href="#submit">submit</a>
+                                <a href="#setSubmittedForm" class="deprecated-name">setSubmittedForm</a>
+                            </li>
+                            <li>
+                                <a href="#submit" >submit</a>
                             </li>
                         </ul>
                     </td>
@@ -134,12 +145,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: <a href="../interfaces/StateWithForm.html">Store<StateWithForm></a>, userIdService: UserIdService)</code>
+<code>constructor(store: <a href="../interfaces/StateWithForm.html" target="_self">Store&lt;StateWithForm&gt;</a>, userIdService: UserIdService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -200,9 +211,7 @@
                 <td class="col-md-4">
                     <a name="getFormData"></a>
                     <span class="name">
-                        <b>
-                            getFormData
-                        </b>
+                        <span ><b>getFormData</b></span>
                         <a href="#getFormData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -216,8 +225,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="80"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:80</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="90"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:90</a></div>
                 </td>
             </tr>
 
@@ -239,9 +248,7 @@
                 <td class="col-md-4">
                     <a name="getFormDefinition"></a>
                     <span class="name">
-                        <b>
-                            getFormDefinition
-                        </b>
+                        <span ><b>getFormDefinition</b></span>
                         <a href="#getFormDefinition"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -255,8 +262,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="90"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:90</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:100</a></div>
                 </td>
             </tr>
 
@@ -278,9 +285,7 @@
                 <td class="col-md-4">
                     <a name="getSubmittedForm"></a>
                     <span class="name">
-                        <b>
-                            getSubmittedForm
-                        </b>
+                        <span ><b>getSubmittedForm</b></span>
                         <a href="#getSubmittedForm"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -294,8 +299,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:30</a></div>
                 </td>
             </tr>
 
@@ -317,9 +322,7 @@
                 <td class="col-md-4">
                     <a name="loadFormData"></a>
                     <span class="name">
-                        <b>
-                            loadFormData
-                        </b>
+                        <span ><b>loadFormData</b></span>
                         <a href="#loadFormData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -333,8 +336,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="65"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:65</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:75</a></div>
                 </td>
             </tr>
 
@@ -344,6 +347,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -387,9 +391,7 @@
                 <td class="col-md-4">
                     <a name="loadFormDefinition"></a>
                     <span class="name">
-                        <b>
-                            loadFormDefinition
-                        </b>
+                        <span ><b>loadFormDefinition</b></span>
                         <a href="#loadFormDefinition"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -403,8 +405,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:57</a></div>
                 </td>
             </tr>
 
@@ -414,6 +416,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -469,9 +472,7 @@
                 <td class="col-md-4">
                     <a name="loadFormDefinitions"></a>
                     <span class="name">
-                        <b>
-                            loadFormDefinitions
-                        </b>
+                        <span ><b>loadFormDefinitions</b></span>
                         <a href="#loadFormDefinitions"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -485,8 +486,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:56</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:66</a></div>
                 </td>
             </tr>
 
@@ -496,6 +497,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -551,24 +553,22 @@
                 <td class="col-md-4">
                     <a name="saveFormData"></a>
                     <span class="name">
-                        <b>
-                            saveFormData
-                        </b>
+                        <span ><b>saveFormData</b></span>
                         <a href="#saveFormData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>saveFormData(formData: <a href="../interfaces/YFormData.html">YFormData</a>)</code>
+<code>saveFormData(formData: <a href="../interfaces/YFormData.html" target="_self">YFormData</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:42</a></div>
                 </td>
             </tr>
 
@@ -578,6 +578,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -619,26 +620,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="setSubmittedForm"></a>
+                    <a name="setContinueToNextStep"></a>
                     <span class="name">
-                        <b>
-                            setSubmittedForm
-                        </b>
-                        <a href="#setSubmittedForm"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>setContinueToNextStep</b></span>
+                        <a href="#setContinueToNextStep"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>setSubmittedForm(formData?: <a href="../interfaces/YFormData.html">YFormData</a>)</code>
+<code>setContinueToNextStep(isContinueClicked: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:22</a></div>
                 </td>
             </tr>
 
@@ -648,6 +647,84 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>isContinueClicked</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setSubmittedForm"></a>
+                    <span class="name">
+                        <span class="deprecated-name"><b>setSubmittedForm</b></span>
+                        <a href="#setSubmittedForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4 deprecated">
+                    since 2.0
+Duplicated submit method
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setSubmittedForm(formData?: <a href="../interfaces/YFormData.html" target="_self">YFormData</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:38</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Duplicated submit method</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -691,24 +768,22 @@
                 <td class="col-md-4">
                     <a name="submit"></a>
                     <span class="name">
-                        <b>
-                            submit
-                        </b>
+                        <span ><b>submit</b></span>
                         <a href="#submit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>submit(form: <a href="../interfaces/YFormData.html">YFormData</a>)</code>
+<code>submit(form: <a href="../interfaces/YFormData.html" target="_self">YFormData</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:26</a></div>
                 </td>
             </tr>
 
@@ -718,6 +793,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -758,35 +834,84 @@
 </section>
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="continueToNextStep$"></a>
+                    <span class="name">
+                        <span ><b>continueToNextStep$</b></span>
+                        <a href="#continueToNextStep$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="submittedForm"></a>
-                        <span class="name">
-                            <b>
-                            submittedForm</b>
-                            <a href="#submittedForm"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>this.continueToNextStepSource.asObservable()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new BehaviorSubject&lt;YFormData&gt;(null)</code>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:15</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:13</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="continueToNextStepSource"></a>
+                    <span class="name">
+                        <span ><b>continueToNextStepSource</b></span>
+                        <a href="#continueToNextStepSource"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submittedForm"></a>
+                    <span class="name">
+                        <span ><b>submittedForm</b></span>
+                        <a href="#submittedForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;YFormData&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/dynamicforms/src/core/services/data/form-data.service.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -806,11 +931,17 @@ import { StateWithForm } from &#x27;../../store/state&#x27;;
 @Injectable()
 export class FormDataService {
   submittedForm &#x3D; new BehaviorSubject&lt;YFormData&gt;(null);
+  continueToNextStepSource &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+  continueToNextStep$ &#x3D; this.continueToNextStepSource.asObservable();
 
   constructor(
     protected store: Store&lt;StateWithForm&gt;,
     protected userIdService: UserIdService
   ) {}
+
+  setContinueToNextStep(isContinueClicked: boolean) {
+    this.continueToNextStepSource.next(isContinueClicked);
+  }
 
   submit(form: YFormData) {
     this.submittedForm.next(form);
@@ -820,6 +951,10 @@ export class FormDataService {
     return this.submittedForm.asObservable();
   }
 
+  /**
+   * @deprecated since 2.0
+   * Duplicated submit method
+   */
   setSubmittedForm(formData?: YFormData) {
     this.submittedForm.next(formData);
   }
@@ -903,14 +1038,14 @@ export class FormDataService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -931,9 +1066,9 @@ export class FormDataService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

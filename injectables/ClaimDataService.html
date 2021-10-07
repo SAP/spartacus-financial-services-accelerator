@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>ClaimDataService</li>
+  <li >ClaimDataService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,15 +78,15 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_claimData">_claimData</a>
+                                <a href="#_claimData" >_claimData</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_claims">_claims</a>
+                                <a href="#_claims" >_claims</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#_userId">_userId</a>
+                                <a href="#_userId" >_userId</a>
                             </li>
                         </ul>
                     </td>
@@ -104,13 +106,13 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                    <a href="#userId">userId</a>
+                                    <a href="#userId" >userId</a>
                                 </li>
                                 <li>
-                                    <a href="#claimData">claimData</a>
+                                    <a href="#claimData" >claimData</a>
                                 </li>
                                 <li>
-                                    <a href="#claims">claims</a>
+                                    <a href="#claims" >claims</a>
                                 </li>
                             </ul>
                         </td>
@@ -125,7 +127,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: <a href="../interfaces/StateWithMyAccount.html">Store<StateWithMyAccount></a>, userIdService: UserIdService)</code>
+<code>constructor(store: <a href="../interfaces/StateWithMyAccount.html" target="_self">Store&lt;StateWithMyAccount&gt;</a>, userIdService: UserIdService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -183,92 +185,89 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_claimData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_claimData</b></span>
+                        <a href="#_claimData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_claimData"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _claimData</b>
-                            <a href="#_claimData"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../interfaces/Claim.html" target="_self" >Claim</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Claim.html" target="_self" >Claim</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/services/claim-data.service.ts:19</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/services/claim-data.service.ts:19</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_claims"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_claims</b></span>
+                        <a href="#_claims"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_claims"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _claims</b>
-                            <a href="#_claims"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../interfaces/Claim.html" target="_self" >Claim[]</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Claim.html" target="_self" >Claim[]</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/services/claim-data.service.ts:18</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/services/claim-data.service.ts:18</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_userId"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_userId</b></span>
+                        <a href="#_userId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="_userId"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            _userId</b>
-                            <a href="#_userId"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>OCC_USER_ID_ANONYMOUS</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>OCC_USER_ID_ANONYMOUS</code>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/services/claim-data.service.ts:17</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/services/claim-data.service.ts:17</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
             <section>
@@ -384,7 +383,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>claims(val: [])</code></span>
+                        <span class="accessor"><b>set</b><code>claims(val: <a href="../interfaces/Claim.html" target="_self">Claim[]</a>)</code></span>
                     </td>
                 </tr>
                             <tr>
@@ -410,7 +409,7 @@
                                                             <td>val</td>
                                                     
                                                             <td>
-                                                                        <code>[]</code>
+                                                                            <code><a href="../interfaces/Claim.html" target="_self" >Claim[]</a></code>
                                                             </td>
                                                     
                                                         <td>
@@ -508,14 +507,14 @@ export class ClaimDataService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -536,9 +535,9 @@ export class ClaimDataService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

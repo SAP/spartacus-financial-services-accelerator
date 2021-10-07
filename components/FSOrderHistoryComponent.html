@@ -1,0 +1,413 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fsastorefrontapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fsastorefrontapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  FSOrderHistoryComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/fsastorefrontlib/src/cms-components/my-account/order/order-history/order-history.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+            <code>OrderHistoryComponent</code>
+    </p>
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>cx-fs-order-history</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./order-history.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, OnInit } from &#x27;@angular/core&#x27;;
+import { OrderHistoryComponent } from &#x27;@spartacus/storefront&#x27;;
+
+@Component({
+  selector: &#x27;cx-fs-order-history&#x27;,
+  templateUrl: &#x27;./order-history.component.html&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FSOrderHistoryComponent extends OrderHistoryComponent {}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;orders$ | async as orderHistory&quot;&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;isLoaded$ | async; else loading&quot;&gt;
+    &lt;div class&#x3D;&quot;container&quot;&gt;
+      &lt;!-- HEADING --&gt;
+      &lt;h2 class&#x3D;&quot;heading-headline py-3 mt-3 mb-5 text-center&quot;&gt;
+        {{ &#x27;orderHistory.orderHistory&#x27; | cxTranslate }}
+      &lt;/h2&gt;
+
+      &lt;!-- BODY --&gt;
+      &lt;div class&#x3D;&quot;cx-order-history-body&quot;&gt;
+        &lt;ng-container
+          *ngIf&#x3D;&quot;orderHistory.pagination.totalResults &gt; 0; else noOrder&quot;
+        &gt;
+          &lt;!-- Select Form and Pagination Top --&gt;
+          &lt;div class&#x3D;&quot;cx-order-history-sort top row&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4&quot;
+            &gt;
+              &lt;cx-sorting
+                [sortOptions]&#x3D;&quot;orderHistory.sorts&quot;
+                [sortLabels]&#x3D;&quot;getSortLabels() | async&quot;
+                (sortListEvent)&#x3D;&quot;changeSortCode($event)&quot;
+                [selectedOption]&#x3D;&quot;orderHistory.pagination.sort&quot;
+                placeholder&#x3D;&quot;{{
+                  &#x27;orderHistory.sortByMostRecent&#x27; | cxTranslate
+                }}&quot;
+              &gt;&lt;/cx-sorting&gt;
+            &lt;/div&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;orderHistory.pagination.totalPages &gt; 1&quot;
+              class&#x3D;&quot;cx-order-history-pagination&quot;
+            &gt;
+              &lt;cx-pagination
+                [pagination]&#x3D;&quot;orderHistory.pagination&quot;
+                (viewPageEvent)&#x3D;&quot;pageChange($event)&quot;
+              &gt;&lt;/cx-pagination&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;!-- TABLE --&gt;
+          &lt;table class&#x3D;&quot;table cx-order-history-table&quot;&gt;
+            &lt;thead class&#x3D;&quot;cx-order-history-thead-mobile&quot;&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;
+                {{ &#x27;orderDetails.orderId&#x27; | cxTranslate }}
+              &lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;
+                {{ &#x27;fscommon.product&#x27; | cxTranslate }}
+              &lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;{{ &#x27;orderHistory.date&#x27; | cxTranslate }}&lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;
+                {{ &#x27;orderHistory.status&#x27; | cxTranslate }}
+              &lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;{{ &#x27;orderHistory.total&#x27; | cxTranslate }}&lt;/th&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+              &lt;tr
+                *ngFor&#x3D;&quot;let order of orderHistory.orders&quot;
+                (click)&#x3D;&quot;goToOrderDetail(order)&quot;
+              &gt;
+                &lt;td class&#x3D;&quot;cx-order-history-code&quot;&gt;
+                  &lt;div class&#x3D;&quot;d-md-none cx-order-history-label&quot;&gt;
+                    {{ &#x27;orderDetails.orderId&#x27; | cxTranslate }}
+                  &lt;/div&gt;
+                  &lt;a
+                    [routerLink]&#x3D;&quot;
+                      {
+                        cxRoute: &#x27;orderDetails&#x27;,
+                        params: order
+                      } | cxUrl
+                    &quot;
+                    class&#x3D;&quot;cx-order-history-value&quot;
+                  &gt;
+                    {{ order?.code }}&lt;/a
+                  &gt;
+                &lt;/td&gt;
+                &lt;td class&#x3D;&quot;cx-order-history-product&quot;&gt;
+                  &lt;div class&#x3D;&quot;d-md-none cx-order-history-label&quot;&gt;
+                    {{ &#x27;fscommon.product&#x27; | cxTranslate }}
+                  &lt;/div&gt;
+                  &lt;a
+                    [routerLink]&#x3D;&quot;
+                      {
+                        cxRoute: &#x27;orderDetails&#x27;,
+                        params: order
+                      } | cxUrl
+                    &quot;
+                    class&#x3D;&quot;cx-order-history-value&quot;
+                    &gt;{{ (order?.entries)[0]?.product?.name }}&lt;/a
+                  &gt;
+                &lt;/td&gt;
+                &lt;td class&#x3D;&quot;cx-order-history-placed&quot;&gt;
+                  &lt;div class&#x3D;&quot;d-md-none cx-order-history-label&quot;&gt;
+                    {{ &#x27;orderHistory.date&#x27; | cxTranslate }}
+                  &lt;/div&gt;
+                  &lt;a
+                    [routerLink]&#x3D;&quot;
+                      {
+                        cxRoute: &#x27;orderDetails&#x27;,
+                        params: order
+                      } | cxUrl
+                    &quot;
+                    class&#x3D;&quot;cx-order-history-value&quot;
+                    &gt;{{ order?.placed | cxDate: &#x27;longDate&#x27; }}&lt;/a
+                  &gt;
+                &lt;/td&gt;
+                &lt;td class&#x3D;&quot;cx-order-history-status&quot;&gt;
+                  &lt;div class&#x3D;&quot;d-md-none cx-order-history-label&quot;&gt;
+                    {{ &#x27;orderHistory.status&#x27; | cxTranslate }}
+                  &lt;/div&gt;
+                  &lt;a
+                    [routerLink]&#x3D;&quot;
+                      {
+                        cxRoute: &#x27;orderDetails&#x27;,
+                        params: order
+                      } | cxUrl
+                    &quot;
+                    class&#x3D;&quot;cx-order-history-value&quot;
+                  &gt;
+                    {{
+                      &#x27;orderDetails.statusDisplay_&#x27; + order?.statusDisplay
+                        | cxTranslate
+                    }}&lt;/a
+                  &gt;
+                &lt;/td&gt;
+                &lt;td class&#x3D;&quot;cx-order-history-total&quot;&gt;
+                  &lt;div class&#x3D;&quot;d-md-none cx-order-history-label&quot;&gt;
+                    {{ &#x27;orderHistory.total&#x27; | cxTranslate }}
+                  &lt;/div&gt;
+                  &lt;a
+                    [routerLink]&#x3D;&quot;
+                      {
+                        cxRoute: &#x27;orderDetails&#x27;,
+                        params: order
+                      } | cxUrl
+                    &quot;
+                    class&#x3D;&quot;cx-order-history-value&quot;
+                  &gt;
+                    {{ order?.total.formattedValue }}&lt;/a
+                  &gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+          &lt;!-- Select Form and Pagination Bottom --&gt;
+          &lt;div class&#x3D;&quot;cx-order-history-sort bottom row&quot;&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;orderHistory.pagination.totalPages &gt; 1&quot;
+              class&#x3D;&quot;cx-order-history-pagination&quot;
+            &gt;
+              &lt;cx-pagination
+                [pagination]&#x3D;&quot;orderHistory.pagination&quot;
+                (viewPageEvent)&#x3D;&quot;pageChange($event)&quot;
+              &gt;&lt;/cx-pagination&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/ng-container&gt;
+
+        &lt;!-- NO ORDER CONTAINER --&gt;
+        &lt;ng-template #noOrder&gt;
+          &lt;h3&gt;{{ &#x27;orderHistory.noOrders&#x27; | cxTranslate }}&lt;/h3&gt;
+        &lt;/ng-template&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ng-container&gt;
+&lt;/ng-container&gt;
+
+&lt;ng-template #loading&gt;
+  &lt;cx-spinner&gt;&lt;/cx-spinner&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="orders$ | async as orderHistory">  <ng-container *ngIf="isLoaded$ | async; else loading">    <div class="container">      <!-- HEADING -->      <h2 class="heading-headline py-3 mt-3 mb-5 text-center">        {{ \'orderHistory.orderHistory\' | cxTranslate }}      </h2>      <!-- BODY -->      <div class="cx-order-history-body">        <ng-container          *ngIf="orderHistory.pagination.totalResults > 0; else noOrder"        >          <!-- Select Form and Pagination Top -->          <div class="cx-order-history-sort top row">            <div              class="cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4"            >              <cx-sorting                [sortOptions]="orderHistory.sorts"                [sortLabels]="getSortLabels() | async"                (sortListEvent)="changeSortCode($event)"                [selectedOption]="orderHistory.pagination.sort"                placeholder="{{                  \'orderHistory.sortByMostRecent\' | cxTranslate                }}"              ></cx-sorting>            </div>            <div              *ngIf="orderHistory.pagination.totalPages > 1"              class="cx-order-history-pagination"            >              <cx-pagination                [pagination]="orderHistory.pagination"                (viewPageEvent)="pageChange($event)"              ></cx-pagination>            </div>          </div>          <!-- TABLE -->          <table class="table cx-order-history-table">            <thead class="cx-order-history-thead-mobile">              <th scope="col">                {{ \'orderDetails.orderId\' | cxTranslate }}              </th>              <th scope="col">                {{ \'fscommon.product\' | cxTranslate }}              </th>              <th scope="col">{{ \'orderHistory.date\' | cxTranslate }}</th>              <th scope="col">                {{ \'orderHistory.status\' | cxTranslate }}              </th>              <th scope="col">{{ \'orderHistory.total\' | cxTranslate }}</th>            </thead>            <tbody>              <tr                *ngFor="let order of orderHistory.orders"                (click)="goToOrderDetail(order)"              >                <td class="cx-order-history-code">                  <div class="d-md-none cx-order-history-label">                    {{ \'orderDetails.orderId\' | cxTranslate }}                  </div>                  <a                    [routerLink]="                      {                        cxRoute: \'orderDetails\',                        params: order                      } | cxUrl                    "                    class="cx-order-history-value"                  >                    {{ order?.code }}</a                  >                </td>                <td class="cx-order-history-product">                  <div class="d-md-none cx-order-history-label">                    {{ \'fscommon.product\' | cxTranslate }}                  </div>                  <a                    [routerLink]="                      {                        cxRoute: \'orderDetails\',                        params: order                      } | cxUrl                    "                    class="cx-order-history-value"                    >{{ (order?.entries)[0]?.product?.name }}</a                  >                </td>                <td class="cx-order-history-placed">                  <div class="d-md-none cx-order-history-label">                    {{ \'orderHistory.date\' | cxTranslate }}                  </div>                  <a                    [routerLink]="                      {                        cxRoute: \'orderDetails\',                        params: order                      } | cxUrl                    "                    class="cx-order-history-value"                    >{{ order?.placed | cxDate: \'longDate\' }}</a                  >                </td>                <td class="cx-order-history-status">                  <div class="d-md-none cx-order-history-label">                    {{ \'orderHistory.status\' | cxTranslate }}                  </div>                  <a                    [routerLink]="                      {                        cxRoute: \'orderDetails\',                        params: order                      } | cxUrl                    "                    class="cx-order-history-value"                  >                    {{                      \'orderDetails.statusDisplay_\' + order?.statusDisplay                        | cxTranslate                    }}</a                  >                </td>                <td class="cx-order-history-total">                  <div class="d-md-none cx-order-history-label">                    {{ \'orderHistory.total\' | cxTranslate }}                  </div>                  <a                    [routerLink]="                      {                        cxRoute: \'orderDetails\',                        params: order                      } | cxUrl                    "                    class="cx-order-history-value"                  >                    {{ order?.total.formattedValue }}</a                  >                </td>              </tr>            </tbody>          </table>          <!-- Select Form and Pagination Bottom -->          <div class="cx-order-history-sort bottom row">            <div              *ngIf="orderHistory.pagination.totalPages > 1"              class="cx-order-history-pagination"            >              <cx-pagination                [pagination]="orderHistory.pagination"                (viewPageEvent)="pageChange($event)"              ></cx-pagination>            </div>          </div>        </ng-container>        <!-- NO ORDER CONTAINER -->        <ng-template #noOrder>          <h3>{{ \'orderHistory.noOrders\' | cxTranslate }}</h3>        </ng-template>      </div>    </div>  </ng-container></ng-container><ng-template #loading>  <cx-spinner></cx-spinner></ng-template></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotConnectionComponent', 'selector': 'cx-fs-sync-pilot-connection-component'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+    var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
+    var ACTUAL_COMPONENT = {'name': 'FSOrderHistoryComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FSOrderHistoryComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

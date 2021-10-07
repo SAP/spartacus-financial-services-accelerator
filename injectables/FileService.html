@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>FileService</li>
+  <li >FileService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,28 +78,31 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getFile">getFile</a>
+                                <a href="#getDocument" >getDocument</a>
                             </li>
                             <li>
-                                <a href="#getFiles">getFiles</a>
+                                <a href="#getFile" >getFile</a>
                             </li>
                             <li>
-                                <a href="#getUploadedDocuments">getUploadedDocuments</a>
+                                <a href="#getFiles" >getFiles</a>
                             </li>
                             <li>
-                                <a href="#removeAllFiles">removeAllFiles</a>
+                                <a href="#getUploadedDocuments" >getUploadedDocuments</a>
                             </li>
                             <li>
-                                <a href="#removeFileForCode">removeFileForCode</a>
+                                <a href="#removeAllFiles" >removeAllFiles</a>
                             </li>
                             <li>
-                                <a href="#resetFiles">resetFiles</a>
+                                <a href="#removeFileForCode" >removeFileForCode</a>
                             </li>
                             <li>
-                                <a href="#setFileInStore">setFileInStore</a>
+                                <a href="#resetFiles" >resetFiles</a>
                             </li>
                             <li>
-                                <a href="#uploadFile">uploadFile</a>
+                                <a href="#setFileInStore" >setFileInStore</a>
+                            </li>
+                            <li>
+                                <a href="#uploadFile" >uploadFile</a>
                             </li>
                         </ul>
                     </td>
@@ -117,12 +122,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userIdService: UserIdService, fileConnector: <a href="../injectables/FileConnector.html">FileConnector</a>, store: <a href="../interfaces/StateWithForm.html">Store<StateWithForm></a>)</code>
+<code>constructor(userIdService: UserIdService, fileConnector: <a href="../injectables/FileConnector.html" target="_self">FileConnector</a>, store: <a href="../interfaces/StateWithForm.html" target="_self">Store&lt;StateWithForm&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -193,11 +198,74 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getDocument"></a>
+                    <span class="name">
+                        <span ><b>getDocument</b></span>
+                        <a href="#getDocument"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDocument(document)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>document</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getFile"></a>
                     <span class="name">
-                        <b>
-                            getFile
-                        </b>
+                        <span ><b>getFile</b></span>
                         <a href="#getFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -211,8 +279,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:20</a></div>
                 </td>
             </tr>
 
@@ -222,6 +290,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -277,24 +346,22 @@
                 <td class="col-md-4">
                     <a name="getFiles"></a>
                     <span class="name">
-                        <b>
-                            getFiles
-                        </b>
+                        <span ><b>getFiles</b></span>
                         <a href="#getFiles"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getFiles(fileCodes: Array<string>)</code>
+<code>getFiles(fileCodes?: Array<string>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -304,6 +371,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -320,7 +388,7 @@
                                     </td>
 
                                     <td>
-                                        No
+                                        Yes
                                     </td>
 
 
@@ -347,9 +415,7 @@
                 <td class="col-md-4">
                     <a name="getUploadedDocuments"></a>
                     <span class="name">
-                        <b>
-                            getUploadedDocuments
-                        </b>
+                        <span ><b>getUploadedDocuments</b></span>
                         <a href="#getUploadedDocuments"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -363,8 +429,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:59</a></div>
                 </td>
             </tr>
 
@@ -386,9 +452,7 @@
                 <td class="col-md-4">
                     <a name="removeAllFiles"></a>
                     <span class="name">
-                        <b>
-                            removeAllFiles
-                        </b>
+                        <span ><b>removeAllFiles</b></span>
                         <a href="#removeAllFiles"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -402,8 +466,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:72</a></div>
                 </td>
             </tr>
 
@@ -413,6 +477,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -461,9 +526,7 @@
                 <td class="col-md-4">
                     <a name="removeFileForCode"></a>
                     <span class="name">
-                        <b>
-                            removeFileForCode
-                        </b>
+                        <span ><b>removeFileForCode</b></span>
                         <a href="#removeFileForCode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -477,8 +540,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:63</a></div>
                 </td>
             </tr>
 
@@ -488,6 +551,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -543,9 +607,7 @@
                 <td class="col-md-4">
                     <a name="resetFiles"></a>
                     <span class="name">
-                        <b>
-                            resetFiles
-                        </b>
+                        <span ><b>resetFiles</b></span>
                         <a href="#resetFiles"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -559,8 +621,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:47</a></div>
                 </td>
             </tr>
 
@@ -582,9 +644,7 @@
                 <td class="col-md-4">
                     <a name="setFileInStore"></a>
                     <span class="name">
-                        <b>
-                            setFileInStore
-                        </b>
+                        <span ><b>setFileInStore</b></span>
                         <a href="#setFileInStore"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -598,8 +658,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:51</a></div>
                 </td>
             </tr>
 
@@ -609,6 +669,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -652,9 +713,7 @@
                 <td class="col-md-4">
                     <a name="uploadFile"></a>
                     <span class="name">
-                        <b>
-                            uploadFile
-                        </b>
+                        <span ><b>uploadFile</b></span>
                         <a href="#uploadFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -668,8 +727,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/file/file.service.ts:38</a></div>
                 </td>
             </tr>
 
@@ -679,6 +738,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -726,11 +786,12 @@
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { UserIdService } from &#x27;@spartacus/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { switchMap, take } from &#x27;rxjs/operators&#x27;;
+import { map, switchMap, take } from &#x27;rxjs/operators&#x27;;
 import { FileConnector } from &#x27;../../connectors/file.connector&#x27;;
 import * as fromAction from &#x27;../../store/actions&#x27;;
 import * as uploadSelector from &#x27;../../store/selectors/upload.selector&#x27;;
 import { StateWithForm } from &#x27;../../store/state&#x27;;
+import { saveAs } from &#x27;file-saver&#x27;;
 
 @Injectable()
 export class FileService {
@@ -749,7 +810,7 @@ export class FileService {
     );
   }
 
-  getFiles(fileCodes: Array&lt;string&gt;): Observable&lt;any&gt; {
+  getFiles(fileCodes?: Array&lt;string&gt;): Observable&lt;any&gt; {
     return this.userIdService.getUserId().pipe(
       take(1),
       switchMap(occUserId &#x3D;&gt; {
@@ -802,6 +863,14 @@ export class FileService {
       });
     }
   }
+
+  getDocument(document) {
+    return this.getFile(document.code, document.mime).pipe(
+      map(downloadedFile &#x3D;&gt; {
+        saveAs(downloadedFile, document.altText);
+      })
+    );
+  }
 }
 </code></pre>
     </div>
@@ -814,14 +883,14 @@ export class FileService {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -842,9 +911,9 @@ export class FileService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>ClaimEffects</li>
+  <li >ClaimEffects</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -75,19 +77,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createClaim$">createClaim$</a>
+                                <a href="#createClaim$" >createClaim$</a>
                             </li>
                             <li>
-                                <a href="#loadClaims$">loadClaims$</a>
+                                <a href="#loadClaimById$" >loadClaimById$</a>
                             </li>
                             <li>
-                                <a href="#loadCurrentClaim$">loadCurrentClaim$</a>
+                                <a href="#loadClaims$" >loadClaims$</a>
                             </li>
                             <li>
-                                <a href="#removeClaim$">removeClaim$</a>
+                                <a href="#removeClaim$" >removeClaim$</a>
                             </li>
                             <li>
-                                <a href="#updateClaim$">updateClaim$</a>
+                                <a href="#updateClaim$" >updateClaim$</a>
                             </li>
                         </ul>
                     </td>
@@ -103,7 +105,7 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#showGlobalMessage">showGlobalMessage</a>
+                                <a href="#showGlobalMessage" >showGlobalMessage</a>
                             </li>
                         </ul>
                     </td>
@@ -123,12 +125,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, claimConnector: <a href="../injectables/ClaimConnector.html">ClaimConnector</a>, claimServiceData: <a href="../injectables/ClaimDataService.html">ClaimDataService</a>, globalMessageService: GlobalMessageService)</code>
+<code>constructor(actions$: Actions, claimConnector: <a href="../injectables/ClaimConnector.html" target="_self">ClaimConnector</a>, claimServiceData: <a href="../injectables/ClaimDataService.html" target="_self">ClaimDataService</a>, globalMessageService: GlobalMessageService, routingService: RoutingService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:153</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:162</a></div>
                             </td>
                         </tr>
 
@@ -193,6 +195,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>routingService</td>
+                                                  
+                                                        <td>
+                                                                    <code>RoutingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -213,10 +227,8 @@
                 <td class="col-md-4">
                     <a name="showGlobalMessage"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            showGlobalMessage
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span ><b>showGlobalMessage</b></span>
                         <a href="#showGlobalMessage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -231,8 +243,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="150"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:150</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="159"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:159</a></div>
                 </td>
             </tr>
 
@@ -242,6 +254,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -294,30 +307,29 @@
 </section>
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createClaim$"></a>
+                    <span class="name">
+                        <span ><b>createClaim$</b></span>
+                        <a href="#createClaim$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="createClaim$"></a>
-                        <span class="name">
-                            <b>
-                            createClaim$</b>
-                            <a href="#createClaim$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.CREATE_CLAIM),
     map((action: fromActions.CreateClaim) &#x3D;&gt; action.payload),
     mergeMap(payload &#x3D;&gt; {
@@ -345,47 +357,104 @@
         );
     })
   )</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:47</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+                    </td>
+                </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="loadClaims$"></a>
-                        <span class="name">
-                            <b>
-                            loadClaims$</b>
-                            <a href="#loadClaims$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:51</a></div>
                         </td>
                     </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadClaimById$"></a>
+                    <span class="name">
+                        <span ><b>loadClaimById$</b></span>
+                        <a href="#loadClaimById$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
+    ofType(fromActions.LOAD_CLAIM_BY_ID),
+    map((action: fromActions.LoadClaimById) &#x3D;&gt; action.payload),
+    switchMap(payload &#x3D;&gt; {
+      return this.claimConnector.getClaim(payload.userId, payload.claimId).pipe(
+        map((claims: any) &#x3D;&gt; {
+          return new fromActions.LoadClaimByIdSuccess(claims);
+        }),
+        catchError(error &#x3D;&gt; {
+          this.showGlobalMessage(
+            &#x27;claim.loadingFailed&#x27;,
+            GlobalMessageType.MSG_TYPE_ERROR
+          );
+          this.routingService.go({ cxRoute: &#x27;home&#x27; });
+          return of(new fromActions.LoadClaimByIdFail(JSON.stringify(error)));
+        })
+      );
+    })
+  )</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadClaims$"></a>
+                    <span class="name">
+                        <span ><b>loadClaims$</b></span>
+                        <a href="#loadClaims$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.LOAD_CLAIMS),
     map((action: fromActions.LoadClaims) &#x3D;&gt; action.payload),
     switchMap(payload &#x3D;&gt; {
@@ -399,101 +468,46 @@
       );
     })
   )</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:15</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+                    </td>
+                </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="loadCurrentClaim$"></a>
-                        <span class="name">
-                            <b>
-                            loadCurrentClaim$</b>
-                            <a href="#loadCurrentClaim$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:19</a></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_CURRENT_CLAIM),
-    map((action: fromActions.LoadCurrentClaim) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.claimConnector.getClaim(payload.userId, payload.claimId).pipe(
-        map((claims: any) &#x3D;&gt; {
-          return new fromActions.LoadCurrentClaimSuccess(claims);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadCurrentClaimFail(JSON.stringify(error)))
-        )
-      );
-    })
-  )</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:77</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeClaim$"></a>
+                    <span class="name">
+                        <span ><b>removeClaim$</b></span>
+                        <a href="#removeClaim$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="removeClaim$"></a>
-                        <span class="name">
-                            <b>
-                            removeClaim$</b>
-                            <a href="#removeClaim$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.DELETE_CLAIM),
     map((action: fromActions.DeleteClaim) &#x3D;&gt; action.payload),
     mergeMap(payload &#x3D;&gt;
@@ -507,47 +521,46 @@
       )
     )
   )</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:31</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+                    </td>
+                </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="updateClaim$"></a>
-                        <span class="name">
-                            <b>
-                            updateClaim$</b>
-                            <a href="#updateClaim$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Observable&lt;any&gt;</code>
-
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:35</a></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>this.actions$.pipe(
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateClaim$"></a>
+                    <span class="name">
+                        <span ><b>updateClaim$</b></span>
+                        <a href="#updateClaim$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.actions$.pipe(
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) &#x3D;&gt; action.payload),
     mergeMap(payload &#x3D;&gt; {
@@ -603,26 +616,26 @@
         );
     })
   )</code>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Effect()<br />
+                        </code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <b>Decorators : </b>
-                            <br />
-                            <code>
-                                @Effect()<br />
-                            </code>
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:102</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/claim.effect.ts:93</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -638,7 +651,11 @@ import { Claim } from &#x27;../../../../occ/occ-models&#x27;;
 import * as fromUserRequestActions from &#x27;../../../user-request/store/actions&#x27;;
 import * as fromActions from &#x27;../actions&#x27;;
 import { ClaimConnector } from &#x27;../../connectors/claim.connector&#x27;;
-import { GlobalMessageService, GlobalMessageType } from &#x27;@spartacus/core&#x27;;
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from &#x27;@spartacus/core&#x27;;
 
 @Injectable()
 export class ClaimEffects {
@@ -705,17 +722,22 @@ export class ClaimEffects {
   );
 
   @Effect()
-  loadCurrentClaim$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_CURRENT_CLAIM),
-    map((action: fromActions.LoadCurrentClaim) &#x3D;&gt; action.payload),
+  loadClaimById$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
+    ofType(fromActions.LOAD_CLAIM_BY_ID),
+    map((action: fromActions.LoadClaimById) &#x3D;&gt; action.payload),
     switchMap(payload &#x3D;&gt; {
       return this.claimConnector.getClaim(payload.userId, payload.claimId).pipe(
         map((claims: any) &#x3D;&gt; {
-          return new fromActions.LoadCurrentClaimSuccess(claims);
+          return new fromActions.LoadClaimByIdSuccess(claims);
         }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadCurrentClaimFail(JSON.stringify(error)))
-        )
+        catchError(error &#x3D;&gt; {
+          this.showGlobalMessage(
+            &#x27;claim.loadingFailed&#x27;,
+            GlobalMessageType.MSG_TYPE_ERROR
+          );
+          this.routingService.go({ cxRoute: &#x27;home&#x27; });
+          return of(new fromActions.LoadClaimByIdFail(JSON.stringify(error)));
+        })
       );
     })
   );
@@ -787,7 +809,8 @@ export class ClaimEffects {
     private actions$: Actions,
     private claimConnector: ClaimConnector,
     private claimServiceData: ClaimDataService,
-    private globalMessageService: GlobalMessageService
+    private globalMessageService: GlobalMessageService,
+    private routingService: RoutingService
   ) {}
 }
 </code></pre>
@@ -801,14 +824,14 @@ export class ClaimEffects {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -829,9 +852,9 @@ export class ClaimEffects {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

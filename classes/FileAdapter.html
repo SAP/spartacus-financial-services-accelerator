@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -42,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>FileAdapter</li>
+  <li >FileAdapter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -67,6 +68,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -82,19 +84,23 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#getFileForCodeAndType">getFileForCodeAndType</a>
+                                <a href="#getFileForCodeAndType" >getFileForCodeAndType</a>
                             </li>
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#getFilesForCodes">getFilesForCodes</a>
+                                <a href="#getFilesForCodes" class="deprecated-name">getFilesForCodes</a>
                             </li>
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#removeFileForUserAndCode">removeFileForUserAndCode</a>
+                                <a href="#getFilesForUser" >getFilesForUser</a>
                             </li>
                             <li>
                                     <span class="modifier">Abstract</span>
-                                <a href="#uploadFile">uploadFile</a>
+                                <a href="#removeFileForUserAndCode" >removeFileForUserAndCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#uploadFile" >uploadFile</a>
                             </li>
                         </ul>
                     </td>
@@ -121,10 +127,8 @@
                 <td class="col-md-4">
                     <a name="getFileForCodeAndType"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            getFileForCodeAndType
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>getFileForCodeAndType</b></span>
                         <a href="#getFileForCodeAndType"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -152,6 +156,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -232,12 +237,16 @@
                 <td class="col-md-4">
                     <a name="getFilesForCodes"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            getFilesForCodes
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span class="deprecated-name"><b>getFilesForCodes</b></span>
                         <a href="#getFilesForCodes"><span class="icon ion-ios-link"></span></a>
                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4 deprecated">
+                    The method should not be used. Use getFilesForUser instead
+Abstract method used to fetch files by codes
                 </td>
             </tr>
             <tr>
@@ -250,8 +259,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:23</a></div>
                 </td>
             </tr>
 
@@ -263,6 +272,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -325,12 +335,104 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getFilesForUser"></a>
+                    <span class="name">
+                        <span class="modifier">Abstract</span>
+                        <span ><b>getFilesForUser</b></span>
+                        <a href="#getFilesForUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getFilesForUser(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fileCodes?: Array<string>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:33</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Abstract method used to fetch files for yser</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>userId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The user id</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>fileCodes</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>The file codes</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="removeFileForUserAndCode"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            removeFileForUserAndCode
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>removeFileForUserAndCode</b></span>
                         <a href="#removeFileForUserAndCode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -345,8 +447,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:51</a></div>
                 </td>
             </tr>
 
@@ -358,6 +460,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -422,10 +525,8 @@
                 <td class="col-md-4">
                     <a name="uploadFile"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Abstract</span>
-                            uploadFile
-                        </b>
+                        <span class="modifier">Abstract</span>
+                        <span ><b>uploadFile</b></span>
                         <a href="#uploadFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -440,8 +541,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">projects/dynamicforms/src/core/connectors/file.adapter.ts:43</a></div>
                 </td>
             </tr>
 
@@ -453,6 +554,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -535,6 +637,7 @@ export abstract class FileAdapter {
     fileType: string
   ): Observable&lt;any&gt;;
   /**
+   * @deprecated The method should not be used. Use getFilesForUser instead
    * Abstract method used to fetch files by codes
    *
    * @param userId The user id
@@ -543,6 +646,16 @@ export abstract class FileAdapter {
   abstract getFilesForCodes(
     userId: string,
     fileCodes: Array&lt;string&gt;
+  ): Observable&lt;any&gt;;
+  /**
+   * Abstract method used to fetch files for yser
+   *
+   * @param userId The user id
+   * @param fileCodes The file codes
+   */
+  abstract getFilesForUser(
+    userId: string,
+    fileCodes?: Array&lt;string&gt;
   ): Observable&lt;any&gt;;
   /**
    * Abstract method used to upload file
@@ -569,14 +682,14 @@ export abstract class FileAdapter {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -597,9 +710,9 @@ export abstract class FileAdapter {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>OccFileAdapter</li>
+  <li >OccFileAdapter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,16 +78,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#getFileForCodeAndType">getFileForCodeAndType</a>
+                                <a href="#getFileForCodeAndType" >getFileForCodeAndType</a>
                             </li>
                             <li>
-                                <a href="#getFilesForCodes">getFilesForCodes</a>
+                                <a href="#getFilesForCodes" class="deprecated-name">getFilesForCodes</a>
                             </li>
                             <li>
-                                <a href="#removeFileForUserAndCode">removeFileForUserAndCode</a>
+                                <a href="#getFilesForUser" >getFilesForUser</a>
                             </li>
                             <li>
-                                <a href="#uploadFile">uploadFile</a>
+                                <a href="#removeFileForUserAndCode" >removeFileForUserAndCode</a>
+                            </li>
+                            <li>
+                                <a href="#uploadFile" >uploadFile</a>
                             </li>
                         </ul>
                     </td>
@@ -171,9 +176,7 @@
                 <td class="col-md-4">
                     <a name="getFileForCodeAndType"></a>
                     <span class="name">
-                        <b>
-                            getFileForCodeAndType
-                        </b>
+                        <span ><b>getFileForCodeAndType</b></span>
                         <a href="#getFileForCodeAndType"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -187,8 +190,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:51</a></div>
                 </td>
             </tr>
 
@@ -198,6 +201,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -265,11 +269,14 @@
                 <td class="col-md-4">
                     <a name="getFilesForCodes"></a>
                     <span class="name">
-                        <b>
-                            getFilesForCodes
-                        </b>
+                        <span class="deprecated-name"><b>getFilesForCodes</b></span>
                         <a href="#getFilesForCodes"><span class="icon ion-ios-link"></span></a>
                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4 deprecated">
+                    The method should not be used. Use getFilesForUser instead
                 </td>
             </tr>
             <tr>
@@ -281,8 +288,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:59</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:65</a></div>
                 </td>
             </tr>
 
@@ -292,6 +299,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -345,11 +353,90 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getFilesForUser"></a>
+                    <span class="name">
+                        <span ><b>getFilesForUser</b></span>
+                        <a href="#getFilesForUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFilesForUser(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, fileCodes?: Array<string>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>userId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>fileCodes</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="removeFileForUserAndCode"></a>
                     <span class="name">
-                        <b>
-                            removeFileForUserAndCode
-                        </b>
+                        <span ><b>removeFileForUserAndCode</b></span>
                         <a href="#removeFileForUserAndCode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -363,8 +450,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:38</a></div>
                 </td>
             </tr>
 
@@ -374,6 +461,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -429,9 +517,7 @@
                 <td class="col-md-4">
                     <a name="uploadFile"></a>
                     <span class="name">
-                        <b>
-                            uploadFile
-                        </b>
+                        <span ><b>uploadFile</b></span>
                         <a href="#uploadFile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -456,6 +542,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -531,7 +618,10 @@ export class OccFileAdapter implements FileAdapter {
     const url &#x3D; this.occEndpointService.getUrl(&#x27;uploadFile&#x27;, {
       userId: userId,
     });
-    const params: HttpParams &#x3D; new HttpParams().set(&#x27;fields&#x27;, FULL_PARAMS);
+    const params: HttpParams &#x3D; new HttpParams()
+      .set(&#x27;fileSize&#x27;, file.size.toString())
+      .set(&#x27;fields&#x27;, FULL_PARAMS);
+
     const data: FormData &#x3D; new FormData();
     data.append(&#x27;file&#x27;, file);
 
@@ -568,6 +658,9 @@ export class OccFileAdapter implements FileAdapter {
     );
   }
 
+  /**
+   * @deprecated The method should not be used. Use getFilesForUser instead
+   */
   getFilesForCodes(userId: string, fileCodes: Array&lt;string&gt;) {
     const url &#x3D; this.occEndpointService.getUrl(&#x27;getFiles&#x27;, {
       userId,
@@ -575,6 +668,20 @@ export class OccFileAdapter implements FileAdapter {
     const params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;documentCodes&#x27;, fileCodes.toString())
       .set(&#x27;fields&#x27;, FULL_PARAMS);
+    return this.http
+      .get&lt;any&gt;(url, { params })
+      .pipe(catchError((error: any) &#x3D;&gt; throwError(error.json())));
+  }
+
+  getFilesForUser(userId: string, fileCodes?: Array&lt;string&gt;) {
+    const url &#x3D; this.occEndpointService.getUrl(&#x27;getFiles&#x27;, {
+      userId,
+    });
+    let params: HttpParams &#x3D; new HttpParams().set(&#x27;fields&#x27;, FULL_PARAMS);
+
+    if (fileCodes) {
+      params &#x3D; params.set(&#x27;documentCodes&#x27;, fileCodes.toString());
+    }
     return this.http
       .get&lt;any&gt;(url, { params })
       .pipe(catchError((error: any) &#x3D;&gt; throwError(error.json())));
@@ -591,14 +698,14 @@ export class OccFileAdapter implements FileAdapter {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -619,9 +726,9 @@ export class OccFileAdapter implements FileAdapter {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

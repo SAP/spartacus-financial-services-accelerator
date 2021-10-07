@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -38,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>ClaimConnector</li>
+  <li >ClaimConnector</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +63,7 @@
 
 
 
+
             <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
@@ -76,19 +78,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createClaim">createClaim</a>
+                                <a href="#createClaim" >createClaim</a>
                             </li>
                             <li>
-                                <a href="#deleteClaim">deleteClaim</a>
+                                <a href="#deleteClaim" >deleteClaim</a>
                             </li>
                             <li>
-                                <a href="#getClaim">getClaim</a>
+                                <a href="#getClaim" >getClaim</a>
                             </li>
                             <li>
-                                <a href="#getClaims">getClaims</a>
+                                <a href="#getClaims" >getClaims</a>
                             </li>
                             <li>
-                                <a href="#updateClaim">updateClaim</a>
+                                <a href="#updateClaim" >updateClaim</a>
                             </li>
                         </ul>
                     </td>
@@ -108,7 +110,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(adapter: <a href="../interfaces/Claim.html">ClaimAdapter</a>)</code>
+<code>constructor(adapter: <a href="../interfaces/Claim.html" target="_self">ClaimAdapter</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -162,9 +164,7 @@
                 <td class="col-md-4">
                     <a name="createClaim"></a>
                     <span class="name">
-                        <b>
-                            createClaim
-                        </b>
+                        <span ><b>createClaim</b></span>
                         <a href="#createClaim"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -189,6 +189,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -256,9 +257,7 @@
                 <td class="col-md-4">
                     <a name="deleteClaim"></a>
                     <span class="name">
-                        <b>
-                            deleteClaim
-                        </b>
+                        <span ><b>deleteClaim</b></span>
                         <a href="#deleteClaim"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -283,6 +282,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -338,9 +338,7 @@
                 <td class="col-md-4">
                     <a name="getClaim"></a>
                     <span class="name">
-                        <b>
-                            getClaim
-                        </b>
+                        <span ><b>getClaim</b></span>
                         <a href="#getClaim"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -365,6 +363,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -420,9 +419,7 @@
                 <td class="col-md-4">
                     <a name="getClaims"></a>
                     <span class="name">
-                        <b>
-                            getClaims
-                        </b>
+                        <span ><b>getClaims</b></span>
                         <a href="#getClaims"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -447,6 +444,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -490,9 +488,7 @@
                 <td class="col-md-4">
                     <a name="updateClaim"></a>
                     <span class="name">
-                        <b>
-                            updateClaim
-                        </b>
+                        <span ><b>updateClaim</b></span>
                         <a href="#updateClaim"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -517,6 +513,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -633,14 +630,14 @@ export class ClaimConnector {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -661,9 +658,9 @@ export class ClaimConnector {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

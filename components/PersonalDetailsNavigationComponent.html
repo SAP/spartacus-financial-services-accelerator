@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
@@ -35,7 +36,9 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>PersonalDetailsNavigationComponent</li>
+  <li
+  >
+  PersonalDetailsNavigationComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,6 +63,7 @@
 <p class="comment">
     <code>projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts</code>
 </p>
+
 
 
 
@@ -124,16 +128,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#cartId">cartId</a>
+                                <a href="#addressData" >addressData</a>
                             </li>
                             <li>
-                                <a href="#nextCheckoutStep$">nextCheckoutStep$</a>
+                                <a href="#cartId" >cartId</a>
                             </li>
                             <li>
-                                <a href="#previousCheckoutStep$">previousCheckoutStep$</a>
+                                <a href="#nextCheckoutStep$" >nextCheckoutStep$</a>
                             </li>
                             <li>
-                                <a href="#subscription">subscription</a>
+                                <a href="#previousCheckoutStep$" >previousCheckoutStep$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
                             </li>
                         </ul>
                     </td>
@@ -148,16 +155,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#navigateBack">navigateBack</a>
+                                <a href="#navigateBack" >navigateBack</a>
                             </li>
                             <li>
-                                <a href="#navigateNext">navigateNext</a>
+                                <a href="#navigateNext" >navigateNext</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit">ngOnInit</a>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -177,12 +184,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(cartService: <a href="../injectables/FSCartService.html">FSCartService</a>, formService: <a href="../injectables/FormDataService.html">FormDataService</a>, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, routingService: RoutingService, checkoutConfigService: <a href="../injectables/FSCheckoutConfigService.html">FSCheckoutConfigService</a>, quoteService: <a href="../injectables/QuoteService.html">QuoteService</a>, pricingService: <a href="../injectables/PricingService.html">PricingService</a>)</code>
+<code>constructor(cartService: <a href="../injectables/FSCartService.html" target="_self">FSCartService</a>, formService: <a href="../injectables/FormDataService.html" target="_self">FormDataService</a>, routingService: RoutingService, checkoutConfigService: <a href="../injectables/FSCheckoutConfigService.html" target="_self">FSCheckoutConfigService</a>, quoteService: <a href="../injectables/QuoteService.html" target="_self">QuoteService</a>, pricingService: <a href="../injectables/PricingService.html" target="_self">PricingService</a>, userAccountFacade: UserAccountFacade, addressService: <a href="../injectables/FSAddressService.html" target="_self">FSAddressService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -216,18 +223,6 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/FormDataService.html" target="_self" >FormDataService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>activatedRoute</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -283,6 +278,30 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>userAccountFacade</td>
+                                                  
+                                                        <td>
+                                                                    <code>UserAccountFacade</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>addressService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FSAddressService.html" target="_self" >FSAddressService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -307,24 +326,22 @@
                 <td class="col-md-4">
                     <a name="navigateBack"></a>
                     <span class="name">
-                        <b>
-                            navigateBack
-                        </b>
+                        <span ><b>navigateBack</b></span>
                         <a href="#navigateBack"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>navigateBack(previousStep: <a href="../interfaces/FSSteps.html">FSSteps</a>)</code>
+<code>navigateBack(previousStep: <a href="../interfaces/FSSteps.html" target="_self">FSSteps</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:93</a></div>
                 </td>
             </tr>
 
@@ -334,6 +351,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -377,24 +395,22 @@
                 <td class="col-md-4">
                     <a name="navigateNext"></a>
                     <span class="name">
-                        <b>
-                            navigateNext
-                        </b>
+                        <span ><b>navigateNext</b></span>
                         <a href="#navigateNext"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>navigateNext(nextStep: <a href="../interfaces/FSSteps.html">FSSteps</a>)</code>
+<code>navigateNext(nextStep: <a href="../interfaces/FSSteps.html" target="_self">FSSteps</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:42</a></div>
                 </td>
             </tr>
 
@@ -404,6 +420,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -447,9 +464,7 @@
                 <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <b>
-                            ngOnDestroy
-                        </b>
+                        <span ><b>ngOnDestroy</b></span>
                         <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -463,8 +478,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:83</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="99"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:99</a></div>
                 </td>
             </tr>
 
@@ -486,9 +501,7 @@
                 <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
-                        <b>
-                            ngOnInit
-                        </b>
+                        <span ><b>ngOnInit</b></span>
                         <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -502,8 +515,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:36</a></div>
                 </td>
             </tr>
 
@@ -522,116 +535,138 @@
 </section>
     <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addressData"></a>
+                    <span class="name">
+                        <span ><b>addressData</b></span>
+                        <a href="#addressData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="cartId"></a>
-                        <span class="name">
-                            <b>
-                            cartId</b>
-                            <a href="#cartId"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>    <code>Address</code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:34</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:31</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cartId"></a>
+                    <span class="name">
+                        <span ><b>cartId</b></span>
+                        <a href="#cartId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="nextCheckoutStep$"></a>
-                        <span class="name">
-                            <b>
-                            nextCheckoutStep$</b>
-                            <a href="#nextCheckoutStep$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/FSSteps.html" target="_self" >Observable&lt;FSSteps&gt;</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:33</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:30</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextCheckoutStep$"></a>
+                    <span class="name">
+                        <span ><b>nextCheckoutStep$</b></span>
+                        <a href="#nextCheckoutStep$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="previousCheckoutStep$"></a>
-                        <span class="name">
-                            <b>
-                            previousCheckoutStep$</b>
-                            <a href="#previousCheckoutStep$"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../interfaces/FSSteps.html" target="_self" >Observable&lt;FSSteps&gt;</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/FSSteps.html" target="_self" >Observable&lt;FSSteps&gt;</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:32</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:29</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previousCheckoutStep$"></a>
+                    <span class="name">
+                        <span ><b>previousCheckoutStep$</b></span>
+                        <a href="#previousCheckoutStep$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="subscription"></a>
-                        <span class="name">
-                            <b>
-                            subscription</b>
-                            <a href="#subscription"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../interfaces/FSSteps.html" target="_self" >Observable&lt;FSSteps&gt;</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new Subscription()</code>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:31</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:28</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/personal-details-navigation/personal-details-navigation.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
 </section>
 
 </div>
@@ -639,16 +674,17 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
-import { ActivatedRoute } from &#x27;@angular/router&#x27;;
 import { FormDataService, YFormData } from &#x27;@spartacus/dynamicforms&#x27;;
-import { Cart, RoutingService } from &#x27;@spartacus/core&#x27;;
-import { Observable, Subscription } from &#x27;rxjs&#x27;;
+import { Address, RoutingService } from &#x27;@spartacus/core&#x27;;
+import { combineLatest, Observable, Subscription } from &#x27;rxjs&#x27;;
 import { map, switchMap, take } from &#x27;rxjs/operators&#x27;;
 import { FSOrderEntry, FSSteps } from &#x27;../../../../occ/occ-models/occ.models&#x27;;
 import { FSCartService } from &#x27;./../../../../core/cart/facade/cart.service&#x27;;
 import { FSCheckoutConfigService } from &#x27;./../../../../core/checkout/services/checkout-config.service&#x27;;
 import { QuoteService } from &#x27;./../../../../core/my-account/facade/quote.service&#x27;;
 import { PricingService } from &#x27;./../../../../core/product-pricing/facade/pricing.service&#x27;;
+import { FSAddressService } from &#x27;./../../../../core/user/facade/address.service&#x27;;
+import { UserAccountFacade } from &#x27;@spartacus/user/account/root&#x27;;
 
 @Component({
   selector: &#x27;cx-fs-personal-details-navigation&#x27;,
@@ -658,43 +694,58 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected cartService: FSCartService,
     protected formService: FormDataService,
-    protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected quoteService: QuoteService,
-    protected pricingService: PricingService
+    protected pricingService: PricingService,
+    protected userAccountFacade: UserAccountFacade,
+    protected addressService: FSAddressService
   ) {}
 
   subscription &#x3D; new Subscription();
   previousCheckoutStep$: Observable&lt;FSSteps&gt;;
   nextCheckoutStep$: Observable&lt;FSSteps&gt;;
   cartId: string;
+  addressData: Address;
 
   ngOnInit() {
     this.previousCheckoutStep$ &#x3D; this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ &#x3D; this.checkoutConfigService.nextStep;
+    this.userAccountFacade.get();
   }
 
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
-      this.cartService
-        .getActive()
+      combineLatest([
+        this.cartService.getActive(),
+        this.userAccountFacade.get(),
+        this.addressService.getAddresses(),
+      ])
         .pipe(
           take(1),
-          switchMap((cart: Cart) &#x3D;&gt; {
-            if (cart &amp;&amp; cart.code &amp;&amp; cart.entries &amp;&amp; cart.entries.length &gt; 0) {
+          switchMap(([cart, user, addresses]) &#x3D;&gt; {
+            if (cart?.code &amp;&amp; cart?.entries?.length &gt; 0) {
               this.cartId &#x3D; cart.code;
               const entry: FSOrderEntry &#x3D; cart.entries[0];
               const yFormData: YFormData &#x3D; {
                 refId: cart.code + &#x27;_&#x27; + cart.entries[0].entryNumber,
               };
               yFormData.id &#x3D;
-                entry?.formData?.length &gt; 0 ? entry.formData[0].id : null;
+                entry?.formData?.length &gt; 0 ? entry?.formData[0].id : null;
               this.formService.submit(yFormData);
             }
             return this.formService.getSubmittedForm().pipe(
               map(formData &#x3D;&gt; {
                 if (formData &amp;&amp; formData.content) {
+                  // TODO: use user.defaultAddress when Spartacus fix bug regarding properly updating defaultAddress
+                  const defaultAddress &#x3D; addresses.find(
+                    address &#x3D;&gt; address.defaultAddress
+                  );
+                  this.addressService.createAddressData(
+                    JSON.parse(formData.content),
+                    user,
+                    defaultAddress
+                  );
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(
                     this.cartId,
@@ -784,7 +835,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row mt-5">  <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"      ><button        class="action-button btn-block"        (click)="navigateBack(previousCheckoutStep)"      >        {{ \'common.back\' | cxTranslate }}      </button></ng-container    >  </div>  <div class="col-md-6 col-sm-6 col-xs-12">    <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"      ><button        class="primary-button btn-block"        type="button"        data-checkout-url=""        (click)="navigateNext(nextCheckoutStep)"      >        {{ \'common.continue\' | cxTranslate }}      </button></ng-container    >  </div></div></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActiveProductAssignmentsComponent', 'selector': 'cx-fs-active-products'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialProductAssignmentsComponent', 'selector': 'cx-fs-potential-product-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentItemComponent', 'selector': 'cx-fs-product-assignment-item'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotConnectionComponent', 'selector': 'cx-fs-sync-pilot-connection-component'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'PersonalDetailsNavigationComponent'};
 </script>
@@ -799,14 +850,14 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -827,9 +878,9 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
