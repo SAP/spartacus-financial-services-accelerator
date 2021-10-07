@@ -40,6 +40,7 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
       checkout.checkPersonalDetailsPage();
       banking.populatePersonalDetailsCCandLoan();
+      banking.populateAddressInfo();
       checkout.clickContinueButton();
       banking.checkProgressBarLoanAndFTD();
       checkout.checkAccordions('generalQuoteAccordions');

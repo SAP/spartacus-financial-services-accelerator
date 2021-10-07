@@ -7,6 +7,12 @@ import * as creditCard from '../../helpers/checkout/banking/credit-card';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
 import * as myAccount from '../../helpers/my-account/my-account';
 import testFilters from '../../support/filters';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const todaysDate = dayjs().format('DD MMM YYYY');
 
 testFilters([''], () => {
   context('Credit Card Checkout', () => {
@@ -82,13 +88,15 @@ testFilters([''], () => {
     it('Should check order confirmation', () => {
       checkout.checkOrderConfirmation();
       checkout.checkAccordions('creditCardConfirmation');
+      cy.wait(22000);
     });
 
     it('Should check Pending message is received', () => {
-      cy.wait(22000);
-      cy.get('cx-fs-message-notification').click();
+      inbox.clickOnInbox();
       inbox.checkInboxComponets();
       inbox.checkBankingTabs();
+      inbox.checkGeneralTab();
+      inbox.checkPendingMessage();
     });
 
     it('Should check Order History and Order Status', () => {
