@@ -46,6 +46,8 @@ export const fscommon = {
     postCode: 'Postcode',
     country: 'Country',
     expiryDate: 'Expiry Date',
+    cancellationDate: 'Cancellation Date',
+    cancellationReason: 'Cancellation Reason',
     expiryNotConfirmed: 'Not Confirmed',
     expires: 'Expires',
     myAgent: 'My Agent',

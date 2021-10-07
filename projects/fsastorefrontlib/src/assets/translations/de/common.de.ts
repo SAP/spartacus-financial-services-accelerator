@@ -45,6 +45,8 @@ export const fscommon = {
     country: 'Land',
     expiryDate: 'Verfallsdatum',
     expiryNotConfirmed: 'Nicht bestätigt',
+    cancellationDate: '[DE]Cancellation Date',
+    cancellationReason: '[DE]Cancellation Reason',
     expires: 'Läuft ab',
     myAgent: 'Mein Agent',
     contactAgent: 'Kundenbetreuer kontaktieren',

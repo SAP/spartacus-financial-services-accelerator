@@ -93,6 +93,22 @@
             {{ policy.policyStatus }}
           </div>
         </li>
+        <li *ngIf="policy.cancellationDate" class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.cancellationDate' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.cancellationDate | cxDate: 'dd MMM yyyy' }}
+          </div>
+        </li>
+        <li *ngIf="policy.cancellationReason" class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.cancellationReason' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.cancellationReason }}
+          </div>
+        </li>
       </ul>
     </cx-fs-accordion-item>
     <ng-container *ngIf="policy.insuredObjectList?.insuredObjects?.length > 0">
