@@ -52,7 +52,7 @@ export class InboxService {
         const moreTotalPages =
           inboxData.findIndex(
             (inboxSingleData: InboxDataState) =>
-              inboxSingleData.pagination.totalPages > 1
+              inboxSingleData.pagination.page !== searchConfig.currentPage
           ) > -1;
         if (uniqueMessageGroup || moreTotalPages) {
           this.loadMessages(msgGroup, searchConfig, read);

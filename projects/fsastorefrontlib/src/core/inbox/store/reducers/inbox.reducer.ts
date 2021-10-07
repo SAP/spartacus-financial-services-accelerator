@@ -16,24 +16,28 @@ export function reducer(
             (inboxData: InboxDataState) =>
               inboxData.messageGroup === action.payload.messageGroup
           ) === -1;
-        const samePaginationPage = content.map((inboxData: InboxDataState) =>
-          inboxData.pagination.page === action.payload.pagination.page
-            ? true
-            : false
+        let differentPaginationPage;
+        content.map(
+          (inboxData: InboxDataState) =>
+            (differentPaginationPage =
+              inboxData.pagination.page !== action.payload.pagination.page
+                ? true
+                : false)
         );
         if (uniqueMessageGroup) {
           content = [...content, action.payload];
         }
-        if (samePaginationPage) {
+        if (differentPaginationPage) {
           const paginatedContent = content.filter(
             inboxData => inboxData.messageGroup !== action?.payload.messageGroup
           );
           content = [...paginatedContent, action.payload];
         }
       } else {
-        // populates the state on load
+        // populates the state on initial load
         content.push(action.payload);
       }
+      // console.log(content);
       return action.payload ? content : { ...state };
     }
     case fromAction.LOAD_MESSAGES_FAIL: {

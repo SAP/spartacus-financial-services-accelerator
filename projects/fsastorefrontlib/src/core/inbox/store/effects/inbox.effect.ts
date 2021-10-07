@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { InboxConnector } from '../../connectors/inbox.connector';
 
@@ -10,7 +10,7 @@ export class InboxEffects {
   @Effect()
   loadMessages$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_MESSAGES),
-    switchMap((action: fromActions.LoadMessages) => {
+    exhaustMap((action: fromActions.LoadMessages) => {
       return this.inboxConnector
         .getSiteMessagesForUserAndGroup(
           action.payload.userId,
@@ -19,12 +19,13 @@ export class InboxEffects {
           action.payload.read
         )
         .pipe(
-          map((messages: any) => {
-            return new fromActions.LoadMessagesSuccess({
-              ...messages,
-              messageGroup: action.payload.messageGroup,
-            });
-          }),
+          map(
+            (messages: any) =>
+              new fromActions.LoadMessagesSuccess({
+                ...messages,
+                messageGroup: action.payload.messageGroup,
+              })
+          ),
           catchError(error =>
             of(new fromActions.LoadMessagesFail(JSON.stringify(error)))
           )

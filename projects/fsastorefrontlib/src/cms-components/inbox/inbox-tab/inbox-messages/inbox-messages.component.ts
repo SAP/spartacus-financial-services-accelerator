@@ -5,7 +5,6 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { PaginationModel } from '@spartacus/core';
 import { InboxDataState } from 'projects/fsastorefrontlib/src/core/inbox/store';
@@ -48,13 +47,16 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   defaultSortOrder = 'desc';
   ghostData: any;
 
-  inboxdata$: Observable<InboxDataState[]> = this.inboxService.getMessages();
+  inboxdata$: Observable<
+    InboxDataState[]
+  > = this.inboxService.getMessages().pipe();
 
   loadedMessages$: Observable<any>;
 
   ngOnChanges() {
     this.selectedIndexes = [];
     this.loadedMessages$ = this.inboxdata$.pipe(
+      filter(data => data.length > 0),
       map(msgGroup => {
         const index = msgGroup.findIndex(
           (inboxData: InboxDataState) =>
@@ -82,7 +84,7 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
         .pipe(
           map(group => {
             if (group?.messageGroup !== this.messageGroup) {
-              this.clearSearchData();
+              this.resetPagination();
             }
             this.mainCheckboxChecked = false;
             this.messageGroup =
@@ -138,7 +140,7 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
     this.setCurrentMessageGroup();
   }
 
-  clearSearchData() {
+  resetPagination() {
     this.searchConfig = { ...this.searchConfig, currentPage: 0 };
   }
 

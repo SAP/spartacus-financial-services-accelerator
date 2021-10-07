@@ -4,7 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { CmsService } from '@spartacus/core';
+import { CmsComponent, CmsService } from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { InboxService } from '../../../core/inbox/facade/inbox.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class InboxTabComponent implements OnInit {
     protected inboxService: InboxService
   ) {}
 
-  component$;
+  component$: Observable<CmsComponent>;
   active: boolean;
 
   @Input() tabId: string;
