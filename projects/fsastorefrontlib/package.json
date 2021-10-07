@@ -1,7 +1,7 @@
 {
   "name": "@spartacus/fsa-storefront",
   "description": "Financial Services Accelerator Spartacus Storefront",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "FSA",
   "repository": "https://github.com/SAP/spartacus-financial-services-accelerator/tree/develop/projects/fsastorefrontlib",
   "homepage": "https://github.com/SAP/spartacus-financial-services-accelerator",

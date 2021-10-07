@@ -1,6 +1,6 @@
 {
   "name": "fsastorefront-e2e-cypress",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
