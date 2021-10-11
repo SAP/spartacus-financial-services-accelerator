@@ -13,18 +13,18 @@ import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
 import { CHECKOUT_FEATURE } from './checkout-state';
 
-export function checkoutConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`${CHECKOUT_FEATURE}.steps.value`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
-}
+// export function checkoutConfigFactory(): StateConfig {
+//   const config: StateConfig = {
+//     state: {
+//       storageSync: {
+//         keys: {
+//           [`${CHECKOUT_FEATURE}.steps.value`]: StorageSyncType.LOCAL_STORAGE,
+//         },
+//       },
+//     },
+//   };
+//   return config;
+// }
 
 @NgModule({
   imports: [
@@ -35,7 +35,6 @@ export function checkoutConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(checkoutConfigFactory),
   ],
   providers: [reducerProvider],
 })

@@ -13,18 +13,18 @@ import {
 } from '@spartacus/core';
 import { USER_REQUEST_FEATURE } from './user-request-state';
 
-export function userRequestConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`${USER_REQUEST_FEATURE}.userRequest.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
-}
+// export function userRequestConfigFactory(): StateConfig {
+//   const config: StateConfig = {
+//     state: {
+//       storageSync: {
+//         keys: {
+//           [`${USER_REQUEST_FEATURE}.userRequest.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
+//         },
+//       },
+//     },
+//   };
+//   return config;
+// }
 
 @NgModule({
   imports: [
@@ -35,7 +35,6 @@ export function userRequestConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(userRequestEffects),
-    ConfigModule.withConfigFactory(userRequestConfigFactory),
   ],
   providers: [reducerProvider],
 })
