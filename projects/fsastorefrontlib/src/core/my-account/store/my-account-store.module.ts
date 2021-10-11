@@ -13,19 +13,19 @@ import {
 } from '@spartacus/core';
 import { MY_ACCOUNT_FEATURE } from './my-account-state';
 
-export function claimConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`assets.claims.content.claimNumber`]: StorageSyncType.LOCAL_STORAGE,
-          [`assets.claims.content.claimStatus`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
-}
+// export function claimConfigFactory(): StateConfig {
+//   const config: StateConfig = {
+//     state: {
+//       storageSync: {
+//         keys: {
+//           [`assets.claims.content.claimNumber`]: StorageSyncType.LOCAL_STORAGE,
+//           [`assets.claims.content.claimStatus`]: StorageSyncType.LOCAL_STORAGE,
+//         },
+//       },
+//     },
+//   };
+//   return config;
+// }
 
 @NgModule({
   imports: [
@@ -36,7 +36,6 @@ export function claimConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(claimConfigFactory),
   ],
   providers: [reducerProvider],
 })

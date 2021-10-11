@@ -13,19 +13,19 @@ import { CHANGE_REQUEST_FEATURE } from './change-request-state';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
 
-export function userRequestConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`${CHANGE_REQUEST_FEATURE}.changeRequest.value.content.requestId`]: StorageSyncType.LOCAL_STORAGE,
-          [`${CHANGE_REQUEST_FEATURE}.changeRequest.value.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
-}
+// export function userRequestConfigFactory(): StateConfig {
+//   const config: StateConfig = {
+//     state: {
+//       storageSync: {
+//         keys: {
+//           [`${CHANGE_REQUEST_FEATURE}.changeRequest.value.content.requestId`]: StorageSyncType.LOCAL_STORAGE,
+//           [`${CHANGE_REQUEST_FEATURE}.changeRequest.value.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
+//         },
+//       },
+//     },
+//   };
+//   return config;
+// }
 
 @NgModule({
   imports: [
@@ -36,7 +36,6 @@ export function userRequestConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(userRequestConfigFactory),
   ],
   providers: [reducerProvider],
 })
