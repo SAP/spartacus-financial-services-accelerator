@@ -113,6 +113,7 @@ export function checkReferredQuotePopup() {
     .within(() => {
       cy.get('h3').should('contain.text', 'Customer Info');
       cy.get('.action-button').should('contain.text', 'Cancel');
-      cy.get('.primary-button').should('contain.text', 'Contact Agent').click();
+      cy.get('.primary-button').contains('Contact Agent');
+      cy.get('.primary-button').eq(1).click();
     });
 }
