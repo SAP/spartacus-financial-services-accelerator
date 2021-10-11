@@ -44,7 +44,7 @@ export class MessageNotificationComponent implements OnInit, OnDestroy {
             ([_isMessageRead, user]) => !!user && Object.keys(user).length !== 0
           )
           // tap(() => {
-          //   this.messagesObject$ = this.inboxService.getMessages(
+          //   this.messagesObject$ = this.inboxService.getInboxContent(
           //     '',
           //     this.searchConfig,
           //     false

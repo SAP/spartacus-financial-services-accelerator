@@ -41,7 +41,7 @@ export class InboxService {
     searchConfig: SearchConfig,
     read?: boolean
   ): Observable<InboxDataState[]> {
-    return this.getMessages().pipe(
+    return this.getInboxContent().pipe(
       take(1),
       map(inboxData => {
         const uniqueMessageGroup =
@@ -73,8 +73,8 @@ export class InboxService {
     );
   }
 
-  getMessages(): Observable<InboxDataState[]> {
-    return this.store.select(fromSelector.getMessages);
+  getInboxContent(): Observable<InboxDataState[]> {
+    return this.store.select(fromSelector.getInboxContent);
   }
 
   loadMessages(msgGroup, searchConfig: SearchConfig, read?: boolean) {
@@ -95,7 +95,7 @@ export class InboxService {
   //   return this.getLoaded().pipe(
   //     filter(loaded => !!loaded),
   //     take(1),
-  //     switchMap(_ => this.store.select(fromSelector.getMessages))
+  //     switchMap(_ => this.store.select(fromSelector.getInboxContent))
   //   );
   // }
 

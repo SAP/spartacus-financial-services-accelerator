@@ -37,7 +37,6 @@ export function reducer(
         // populates the state on initial load
         content.push(action.payload);
       }
-      // console.log(content);
       return action.payload ? content : { ...state };
     }
     case fromAction.LOAD_MESSAGES_FAIL: {

@@ -27,6 +27,7 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   // messagesObject$: Observable<any>;
   messageGroup: string;
+  currentTabContent: InboxDataState;
   pagination: PaginationModel;
 
   searchConfig: FSSearchConfig = {
@@ -46,17 +47,17 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   selectedIndexes: number[] = [];
   defaultSortOrder = 'desc';
   ghostData: any;
+  active: boolean;
 
   inboxdata$: Observable<
     InboxDataState[]
-  > = this.inboxService.getMessages().pipe();
+  > = this.inboxService.getInboxContent().pipe(filter(data => data.length > 0));
 
-  loadedMessages$: Observable<any>;
+  loadedMessages$: Observable<InboxMessage[]>;
 
   ngOnChanges() {
     this.selectedIndexes = [];
     this.loadedMessages$ = this.inboxdata$.pipe(
-      filter(data => data.length > 0),
       map(msgGroup => {
         const index = msgGroup.findIndex(
           (inboxData: InboxDataState) =>
@@ -184,7 +185,7 @@ export class InboxMessagesComponent implements OnChanges, OnInit, OnDestroy {
   sortMessages(sortCode, sortOrder) {
     this.searchConfig.sortCode = sortCode;
     this.searchConfig.sortOrder = sortOrder;
-    // this.getMessages();
+    // this.getInboxContent();
   }
 
   buildDisplayMessage(message: any): InboxMessage {

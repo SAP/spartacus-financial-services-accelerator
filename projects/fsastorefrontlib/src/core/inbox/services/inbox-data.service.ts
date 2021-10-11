@@ -23,6 +23,7 @@ export interface InboxMessage {
   read?: boolean;
   checked?: boolean;
   opened?: boolean;
+  readDate?: string;
 }
 
 @Injectable({

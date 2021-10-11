@@ -1,5 +1,6 @@
 import { StateUtils } from '@spartacus/core';
 import { Pagination, Sort } from '@spartacus/core/src/model/unused.model';
+import { InboxMessage } from '../services/inbox-data.service';
 
 export const INBOX_FEATURE = 'inbox';
 export const INBOX_DATA = '[Inbox] Inbox Data';
@@ -13,7 +14,7 @@ export interface InboxState {
 }
 
 export interface InboxDataState {
-  messages: [{}];
+  messages: [InboxMessage];
   messageGroup: string;
   pagination?: Pagination;
   sorts?: Sort[];

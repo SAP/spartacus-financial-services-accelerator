@@ -22,7 +22,7 @@ export const getInboxDataState: MemoizedSelector<
   (inboxState: InboxState) => inboxState.inboxData
 );
 
-export const getMessages: MemoizedSelector<
+export const getInboxContent: MemoizedSelector<
   StateWithInbox,
   InboxDataState[]
 > = createSelector(getInboxDataState, (state: LoaderState<InboxDataState[]>) =>
