@@ -16,14 +16,11 @@ export function reducer(
             (inboxData: InboxDataState) =>
               inboxData.messageGroup === action.payload.messageGroup
           ) === -1;
-        let differentPaginationPage;
-        content.map(
-          (inboxData: InboxDataState) =>
-            (differentPaginationPage =
-              inboxData.pagination.page !== action.payload.pagination.page
-                ? true
-                : false)
-        );
+        const differentPaginationPage =
+          content.findIndex(
+            (inboxSingleData: InboxDataState) =>
+              inboxSingleData.pagination.page !== action.payload.pagination.page
+          ) > -1;
         if (uniqueMessageGroup) {
           content = [...content, action.payload];
         }
