@@ -3,10 +3,16 @@ import { translationChunksConfig, translations } from '@spartacus/assets';
 import {
   Config,
   ConfigModule,
+  I18nConfig,
+  OccConfig,
   provideConfig,
   provideDefaultConfigFactory,
+  RoutingConfig,
 } from '@spartacus/core';
 import {
+  BaseStorefrontModule,
+  IconConfig,
+  LayoutConfig,
   PageComponentModule,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
@@ -30,79 +36,82 @@ import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-da
 import { defaultCmsContentProviders } from './config/messages-cms-structure';
 import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
 import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-config/default-quote-comparison-config';
+import { FSCheckoutConfig } from 'fsastorefrontlib/cms-components';
+import { FSOccConfig } from 'fsastorefrontlib/occ';
 
 @NgModule({
   imports: [
+    BaseStorefrontModule,
     PageComponentModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
     FSGlobalMessageModule.forRoot(),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: translations.en,
-        },
-        chunks: translationChunksConfig,
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: fsOverrides,
-          de: fsOverridesDe,
-        },
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: fstranslations,
-          de: fstranslationsDe,
-        },
-        fallbackLang: 'en',
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: dynamicformsTranslations,
-          de: dynamicformsTranslationsDe,
-        },
-        fallbackLang: 'en',
-      },
-    }),
-    ConfigModule.withConfig(layoutConfig),
-    ConfigModule.withConfig(routingConfig),
-    ConfigModule.withConfig(checkoutConfig),
-    ConfigModule.withConfig(occProductConfig),
-    ConfigModule.withConfig(occUserConfig),
-    ConfigModule.withConfig({
-      icon: {
-        symbols: {
-          PROPERTY: 'fs-icon icon-house',
-          AUTO: 'fs-icon icon-auto',
-          PERSON: 'fs-icon icon-heart',
-          TRIP: 'fs-icon icon-plane',
-          EVENT: 'fs-icon icon-event',
-        },
-      },
-    }),
   ],
-  exports: [
-    CmsLibModule],
+  exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
+  // providers: [
+  //   provideConfig(<I18nConfig>{
+  //     i18n: {
+  //       resources: {
+  //         en: translations.en,
+  //       },
+  //       chunks: translationChunksConfig,
+  //     },
+  //   }),
+  //   provideConfig(<I18nConfig>{
+  //     i18n: {
+  //       resources: {
+  //         en: fsOverrides,
+  //         de: fsOverridesDe,
+  //       },
+  //     },
+  //   }),
+  //   provideConfig(<I18nConfig>{
+  //     i18n: {
+  //       resources: {
+  //         en: fstranslations,
+  //         de: fstranslationsDe,
+  //       },
+  //       fallbackLang: 'en',
+  //     },
+  //   }),
+  //   provideConfig(<I18nConfig>{
+  //     i18n: {
+  //       resources: {
+  //         en: dynamicformsTranslations,
+  //         de: dynamicformsTranslationsDe,
+  //       },
+  //       fallbackLang: 'en',
+  //     },
+  //   }),
+  //   provideConfig(layoutConfig),
+  //   provideConfig(routingConfig),
+  //   provideConfig(checkoutConfig),
+  //   provideConfig(occProductConfig),
+  //   provideConfig(occUserConfig),
+  //   provideConfig(<IconConfig>{
+  //     icon: {
+  //       symbols: {
+  //         PROPERTY: 'fs-icon icon-house',
+  //         AUTO: 'fs-icon icon-auto',
+  //         PERSON: 'fs-icon icon-heart',
+  //         TRIP: 'fs-icon icon-plane',
+  //         EVENT: 'fs-icon icon-event',
+  //       },
+  //     },
+  //   }),
+  // ],
 })
 export class FSStorefrontModule {
-  static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
-    return {
-      ngModule: FSStorefrontModule,
-      providers: [
-        provideConfig(config),
-        provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
-        provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
-        ...defaultCmsContentProviders,
-      ],
-    };
-  }
+  // static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
+  //   return {
+  //     ngModule: FSStorefrontModule,
+  //     providers: [
+  //       provideConfig(config),
+  //       provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+  //       ...defaultCmsContentProviders,
+  //     ],
+  //   };
+  // }
 }
