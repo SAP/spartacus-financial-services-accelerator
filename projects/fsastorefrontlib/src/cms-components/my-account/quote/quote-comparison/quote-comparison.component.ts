@@ -5,6 +5,8 @@ import {
   OnInit,
   QueryList,
   ViewChildren,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
@@ -14,7 +16,6 @@ import {
   CategoryComparisonConfig,
   QuoteComparisonConfig,
 } from '../../../../core/quote-comparison-config/quote-comparison-config';
-import { ChangeDetectionStrategy } from '@angular/core';
 import {
   FSCart,
   InsuranceQuote,
@@ -26,7 +27,6 @@ import {
   TranslatePipe,
   UserIdService,
 } from '@spartacus/core';
-import { ChangeDetectorRef } from '@angular/core';
 import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defalut-general-config';
 import { AccordionItemComponent } from '../../../../shared/accordion/accordion-item.component';
 

@@ -1,5 +1,4 @@
-import { PipeTransform } from '@angular/core';
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { TranslatePipe } from '@spartacus/core';
 import { OneTimeChargeEntry } from '../../../../occ/occ-models/occ.models';
 
@@ -16,9 +15,10 @@ export class BillingEventValuePipe implements PipeTransform {
     const billingEvent = billingEventsList.find(
       event => event.billingTime.name === billingEventLabel
     );
-    return billingEvent?.price?.value
-      ? billingEvent?.price?.formattedValue
-      : !billingEvent?.chargeInformation
+    if (billingEvent?.price?.value) {
+      return billingEvent?.price?.formattedValue;
+    }
+    return !billingEvent?.chargeInformation
       ? this.translatePipe.transform('fscommon.notIncluded')
       : billingEvent?.chargeInformation;
   }

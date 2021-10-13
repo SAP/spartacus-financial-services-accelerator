@@ -1,6 +1,6 @@
 import { QUOTE_NORMALIZER } from '../../../core/my-account/connectors/converters';
 import { InsuranceQuoteList } from './../../occ-models/occ.models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -8,7 +8,6 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError, pluck } from 'rxjs/operators';
 import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
 import { Models } from '../../../model/quote.model';
-import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {
