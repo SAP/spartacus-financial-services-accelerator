@@ -1,12 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 import {
   CategoryComparisonConfig,
   QuoteComparisonConfig,
-} from 'projects/fsastorefrontlib/src/core/quote-comparison-config/quote-comparison-config';
+} from '../../../../core/quote-comparison-config/quote-comparison-config';
 import { ChangeDetectionStrategy } from '@angular/core';
 import {
   FSCart,
@@ -17,22 +24,30 @@ import {
   LanguageService,
   RoutingService,
   TranslatePipe,
+  UserIdService,
 } from '@spartacus/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defalut-general-config';
+import { AccordionItemComponent } from '../../../../shared/accordion/accordion-item.component';
 
 @Component({
   selector: 'cx-fs-quote-comparison',
   templateUrl: './quote-comparison.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuoteComparisonComponent implements OnInit, OnDestroy {
-  private readonly paynowBillingTimeCode = 'paynow';
+export class QuoteComparisonComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   quotesLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
-  quotes$: Observable<any>;
+  quotes$: Observable<any> = this.quoteService.getQuotesComparison();
+  quoteCodes: string[] = JSON.parse(sessionStorage.getItem('quoteCodes'));
+  @ViewChildren('accordion') accordion: QueryList<AccordionItemComponent>;
   categoryConfig: CategoryComparisonConfig;
   billingEventLabels: string[];
   subscription = new Subscription();
   language: string;
-  quoteCodes: string[];
+  userId: string;
+  subheader: string;
+  firstAccordion: AccordionItemComponent;
 
   constructor(
     protected quoteService: QuoteService,
@@ -40,33 +55,62 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
     protected quoteComparisonConfig: QuoteComparisonConfig,
     protected translatePipe: TranslatePipe,
     protected languageService: LanguageService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected userIdService: UserIdService,
+    protected changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.quoteCodes = JSON.parse(sessionStorage.getItem('quoteCodes'));
-    this.loadQuotes();
-    this.quotes$ = this.quoteService.getQuotesComparison();
+    this.subheader = this.quoteCodes?.join(' / ');
+    this.subscription
+      .add(
+        this.quotes$
+          .pipe(
+            tap(quotes => {
+              this.billingEventLabels = [];
+              quotes?.carts?.map(cart => {
+                cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
+                  oneTimeChargeEntry =>
+                    this.getBillingEventLabels(oneTimeChargeEntry)
+                );
+                this.getCategoryConfig(
+                  cart?.deliveryOrderGroups[0]?.entries[0]?.product
+                    ?.defaultCategory?.code
+                );
+              });
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.userIdService
+          .getUserId()
+          .pipe(
+            take(1),
+            tap(occUserId => {
+              this.userId = occUserId;
+              this.quoteService.loadQuotesComparison(
+                this.quoteCodes,
+                this.userId
+              );
+            })
+          )
+          .subscribe()
+      );
+    this.changeLanguage();
+  }
+
+  ngAfterViewInit(): void {
     this.subscription.add(
-      this.quotes$
+      this.accordion.changes
         .pipe(
-          tap(quotes => {
-            this.billingEventLabels = [];
-            quotes?.carts?.map(cart => {
-              cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
-                oneTimeChargeEntry =>
-                  this.getBillingEventLabels(oneTimeChargeEntry)
-              );
-              this.getCategoryConfig(
-                cart?.deliveryOrderGroups[0]?.entries[0]?.product
-                  ?.defaultCategory?.code
-              );
-            });
+          tap((accordion: QueryList<AccordionItemComponent>) => {
+            this.firstAccordion = accordion.first;
+            this.changeDetectorRef.detectChanges();
           })
         )
         .subscribe()
     );
-    this.changeLanguage();
   }
 
   changeLanguage() {
@@ -76,7 +120,10 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
         .pipe(
           tap(lang => {
             if (this.language && this.language !== lang) {
-              this.loadQuotes();
+              this.quoteService.loadQuotesComparison(
+                this.quoteCodes,
+                this.userId
+              );
             }
             this.language = lang;
           })
@@ -85,15 +132,9 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
     );
   }
 
-  loadQuotes() {
-    this.subscription.add(
-      this.quoteService.loadQuotesComparison(this.quoteCodes).subscribe()
-    );
-  }
-
   getBillingEventLabels(oneTimeChargeEntry: OneTimeChargeEntry) {
     if (
-      this.paynowBillingTimeCode !== oneTimeChargeEntry?.billingTime?.code &&
+      PAY_NOW_BILLING_TIME_CODE !== oneTimeChargeEntry?.billingTime?.code &&
       !this.billingEventLabels.includes(oneTimeChargeEntry?.billingTime?.name)
     ) {
       this.billingEventLabels.push(oneTimeChargeEntry?.billingTime?.name);

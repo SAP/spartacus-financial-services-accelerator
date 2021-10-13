@@ -142,7 +142,7 @@ const quoteComparisonConfig: QuoteComparisonConfig = {
     },
   ],
 };
-const quotes = {
+const quoteComparisonCarts = {
   carts: [cart1, cart2],
 };
 class MockRoutingService {
@@ -152,7 +152,7 @@ class MockRoutingService {
 class MockQuoteService {
   retrieveQuoteCheckout = createSpy();
   getQuotesComparison() {
-    return of(quotes);
+    return of(quoteComparisonCarts);
   }
   loadQuotesComparison(quoteCodes) {
     return of();

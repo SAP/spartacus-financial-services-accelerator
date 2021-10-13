@@ -79,6 +79,25 @@ const mockQuote = {
   state: { code: 'BIND' },
   cartCode: 'testCode',
   userId: userId,
+  quoteId: 'testQuote',
+};
+const insuranceQuote1: any = {
+  cartCode: 'test001',
+  defaultCategory: {
+    code: 'testCategory1',
+  },
+  quoteId: 'test001',
+};
+const insuranceQuote2: any = {
+  cartCode: 'test002',
+  defaultCategory: {
+    code: 'testCategory1',
+  },
+  quoteId: 'test002',
+};
+const quoteCodes = ['test001', 'test002'];
+const quoteForComparison = {
+  carts: [insuranceQuote1, insuranceQuote2],
 };
 
 class MockUserIdService {
@@ -248,5 +267,69 @@ describe('QuoteServiceTest', () => {
         expect(data).toEqual(mockQuote.userId);
       })
       .unsubscribe();
+  });
+
+  it('should be able to load quote details', () => {
+    service.loadQuoteDetails(mockQuote.quoteId, userId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadQuoteDetails({
+        userId: userId,
+        quoteId: mockQuote.quoteId,
+      })
+    );
+  });
+
+  it('should be able to load quote details', () => {
+    store.dispatch(new fromAction.LoadQuoteDetailsSuccess(mockQuote));
+    let loadedQuoteDetails;
+    service
+      .getQuoteDetails()
+      .subscribe(response => (loadedQuoteDetails = response))
+      .unsubscribe();
+    expect(loadedQuoteDetails).toEqual(mockQuote);
+  });
+
+  it('should be able to load quote comparison', () => {
+    service.loadQuotesComparison(quoteCodes, userId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadQuoteComparison({
+        cartCodes: quoteCodes,
+        userId: userId,
+      })
+    );
+  });
+
+  it('should be able to load quote comparison', () => {
+    store.dispatch(
+      new fromAction.LoadQuoteComparisonSuccess(quoteForComparison)
+    );
+    let loadedQuoteComparison;
+    service
+      .getQuotesComparison()
+      .subscribe(response => (loadedQuoteComparison = response))
+      .unsubscribe();
+    expect(loadedQuoteComparison).toEqual(quoteForComparison);
+  });
+
+  it('should set qute for compare', () => {
+    service.setQuoteForCompare(insuranceQuote1);
+    let quoteForCompare;
+    service.quoteForCompare$
+      .subscribe(response => (quoteForCompare = response))
+      .unsubscribe();
+    expect(quoteForCompare).toEqual(insuranceQuote1);
+  });
+
+  it('should retrieve quote checkout', () => {
+    service.retrieveQuoteCheckout(mockQuote);
+    expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'quoteReview' });
+    const unbindQuote = {
+      ...mockQuote,
+      state: {
+        code: 'UNBIND',
+      },
+    };
+    service.retrieveQuoteCheckout(unbindQuote);
+    expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'addOptions' });
   });
 });

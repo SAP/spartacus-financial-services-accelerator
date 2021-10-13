@@ -11,7 +11,7 @@ import {
   LanguageService,
   OccConfig,
   RoutingService,
-  TranslatePipe,
+  TranslationService,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { Subscription } from 'rxjs';
@@ -33,7 +33,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
     protected policyChartDataService: PolicyChartDataService,
     protected languageService: LanguageService,
     protected globalMessageService: GlobalMessageService,
-    protected translatePipe: TranslatePipe
+    protected translation: TranslationService
   ) {}
 
   private subscription = new Subscription();
@@ -170,14 +170,22 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   protected setCategoryDropdown() {
-    const firstOption = this.translatePipe.transform('quote.allQuotes');
     this.options = [];
-    this.options.push({ name: firstOption, code: '' });
-    Object.keys(this.quotesByCategory).forEach(key =>
-      this.options.push({
-        name: key,
-        code: this.quotesByCategory[key][0]?.code,
-      })
+    this.subscription.add(
+      this.translation
+        .translate('quote.allQuotes')
+        .pipe(
+          map(firstOption => {
+            this.options.push({ name: firstOption, code: '' });
+            Object.keys(this.quotesByCategory).forEach(key =>
+              this.options.push({
+                name: key,
+                code: this.quotesByCategory[key][0]?.code,
+              })
+            );
+          })
+        )
+        .subscribe()
     );
   }
 
@@ -223,7 +231,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
       'quoteCodes',
       JSON.stringify(this.quoteCodesForCompare)
     );
-    this.routingService.go({ cxRoute: 'quoteCompare' });
+    this.routingService.go({ cxRoute: 'quoteComparison' });
   }
 
   ngOnDestroy() {

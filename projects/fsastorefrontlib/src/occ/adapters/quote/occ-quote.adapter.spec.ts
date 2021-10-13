@@ -10,11 +10,15 @@ import { OccQuoteAdapter } from './occ-quote.adapter';
 
 const userId = '123';
 const cartId = '123';
+const quoteId = '123';
 const quoteContent = {};
+const cartCodes = ['test001', 'test002'];
 
 const quotesEndpoint = 'quotes';
 const updateQuoteEndpoint = 'updateQuote';
 const quoteActionEndpoint = 'quoteAction';
+const quoteEndpoint = 'quote';
+const compareQuotesEndpoint = 'compareQuotes';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -97,6 +101,40 @@ describe('OccQuoteAdapter', () => {
           {
             userId,
             cartId,
+          }
+        );
+      })
+    );
+  });
+
+  describe('getQuote', () => {
+    it(
+      'should fetch Quote',
+      waitForAsync(() => {
+        adapter.getQuote(userId, quoteId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === quoteEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(quoteEndpoint, {
+          userId,
+          quoteId,
+        });
+      })
+    );
+  });
+
+  describe('compareQuotes', () => {
+    it(
+      'should compare quotes',
+      waitForAsync(() => {
+        adapter.compareQuotes(cartCodes, userId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === compareQuotesEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          compareQuotesEndpoint,
+          {
+            userId,
           }
         );
       })

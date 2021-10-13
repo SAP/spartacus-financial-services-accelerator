@@ -8,10 +8,9 @@ import {
   GlobalMessageType,
   I18nTestingModule,
   LanguageService,
-  MockTranslatePipe,
   OccConfig,
   RoutingService,
-  TranslatePipe,
+  TranslationService,
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
@@ -97,6 +96,17 @@ class MockGlobalMessageService {
   add(_message: GlobalMessage): void {}
 }
 
+class MockTranslationService {
+  translate(key: string): Observable<string> {
+    switch (key) {
+      case 'quote.allQuotes':
+        return of('All quotes');
+      default:
+        return of(key);
+    }
+  }
+}
+
 describe('QuotesComponent', () => {
   let component: QuotesComponent;
   let fixture: ComponentFixture<QuotesComponent>;
@@ -106,7 +116,7 @@ describe('QuotesComponent', () => {
   let policyChartDataService: PolicyChartDataService;
   let languageService: LanguageService;
   let globalMessageService: GlobalMessageService;
-  let translatePipe: TranslatePipe;
+  let translationService: TranslationService;
 
   beforeEach(
     waitForAsync(() => {
@@ -143,8 +153,8 @@ describe('QuotesComponent', () => {
             useClass: MockGlobalMessageService,
           },
           {
-            provide: TranslatePipe,
-            useClass: MockTranslatePipe,
+            provide: TranslationService,
+            useClass: MockTranslationService,
           },
         ],
       }).compileComponents();
@@ -161,7 +171,7 @@ describe('QuotesComponent', () => {
     policyChartDataService = TestBed.inject(PolicyChartDataService);
     languageService = TestBed.inject(LanguageService);
     globalMessageService = TestBed.inject(GlobalMessageService);
-    translatePipe = TestBed.inject(TranslatePipe);
+    translationService = TestBed.inject(TranslationService);
     component.language = 'de';
   });
 

@@ -65,7 +65,7 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
   }
 
-  getQuotesLoaded() {
+  getQuotesLoaded(): Observable<boolean> {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
@@ -214,21 +214,16 @@ export class QuoteService {
       .unsubscribe();
   }
 
-  loadQuotesComparison(quoteCodes: string[]) {
-    return this.userIdService.getUserId().pipe(
-      take(1),
-      map(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadQuoteComparison({
-            cartCodes: quoteCodes,
-            userId: occUserId,
-          })
-        );
+  loadQuotesComparison(quoteCodes: string[], occUserId?: string): void {
+    this.store.dispatch(
+      new fromAction.LoadQuoteComparison({
+        cartCodes: quoteCodes,
+        userId: occUserId,
       })
     );
   }
 
-  getQuotesComparison() {
+  getQuotesComparison(): Observable<any> {
     return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
   }
 

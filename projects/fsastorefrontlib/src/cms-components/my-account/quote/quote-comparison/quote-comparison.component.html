@@ -1,5 +1,4 @@
 <ng-container *ngIf="quotesLoaded$ | async; else loading">
-  <!-- <ng-container *ngIf="categoryConfig; else noQuotes"> -->
   <div class="position-relative text-center">
     <a
       class="h4 vertical-center-left"
@@ -22,7 +21,7 @@
       </span>
       <br />
       <span>
-        {{ quoteCodes.join(' / ') }}
+        {{ subheader }}
       </span>
     </h2>
   </div>
@@ -31,12 +30,13 @@
       <div class="accordion">
         <ng-container>
           <cx-fs-accordion-item
-            *ngIf="categoryConfig.visibleInsuredObjects.length > 0"
+            #accordion
+            *ngIf="categoryConfig?.visibleInsuredObjects?.length > 0"
             [opened]="true"
             title="{{ 'quote.quoteGeneralInformation' | cxTranslate }}"
           >
-            <ul class="accordion-list container-fluid">
-              <li class="accordion-list-item row sub-title">
+            <ul class="accordion-list">
+              <li class="accordion-list-item row sub-title text-break">
                 <div class="col-4">
                   {{ 'quote.generalInformation' | cxTranslate }}
                 </div>
@@ -63,7 +63,7 @@
                 "
               >
               </ng-container>
-              <li class="accordion-list-item row sub-title">
+              <li class="accordion-list-item row sub-title text-break">
                 <div class="col-4">
                   {{ 'quote.selectQuoteNo' | cxTranslate }}
                 </div>
@@ -76,14 +76,18 @@
             </ul>
           </cx-fs-accordion-item>
           <cx-fs-accordion-item
+            #accordion
             *ngIf="
-              billingEventLabels.length > 0 && categoryConfig.billingEvents
+              billingEventLabels.length > 0 && categoryConfig?.billingEvents
             "
-            [opened]="false"
+            [opened]="
+              !firstAccordion?.opened &&
+              firstAccordion?.title == accordion.title
+            "
             title="{{ 'quote.quoteBillingEvents' | cxTranslate }}"
           >
-            <ul class="accordion-list container-fluid">
-              <li class="accordion-list-item row sub-title">
+            <ul class="accordion-list">
+              <li class="accordion-list-item row sub-title text-break">
                 <div class="col-4">
                   {{ 'quote.billingEvents' | cxTranslate }}
                 </div>
@@ -102,7 +106,7 @@
                     {{ billingEventLabel }}
                   </div>
                   <ng-container *ngFor="let cart of quotes?.carts">
-                    <div class="col-4 value notice">
+                    <div class="col-4 notice">
                       {{
                         (cart?.entries)[0]?.product?.price
                           ?.oneTimeChargeEntries
@@ -112,7 +116,7 @@
                   </ng-container>
                 </li>
               </ng-container>
-              <li class="accordion-list-item row sub-title">
+              <li class="accordion-list-item row sub-title text-break">
                 <div class="col-4">
                   {{ 'quote.selectQuoteNo' | cxTranslate }}
                 </div>
@@ -125,11 +129,15 @@
             </ul>
           </cx-fs-accordion-item>
           <cx-fs-accordion-item
-            *ngIf="categoryConfig.optionalProducts"
-            [opened]="false"
+            #accordion
+            *ngIf="categoryConfig?.optionalProducts"
+            [opened]="
+              !firstAccordion?.opened &&
+              firstAccordion?.title == accordion.title
+            "
             title="{{ 'quote.quoteOptionalExtras' | cxTranslate }}"
           >
-            <ul class="accordion-list container-fluid">
+            <ul class="accordion-list">
               <ng-container
                 *ngFor="
                   let optionalItem of (quotes?.carts)[0]?.entries | slice: 1;
@@ -146,7 +154,7 @@
                         (cart?.entries)[i + 1]?.removeable &&
                         !(cart?.entries)[i + 1]?.addable
                       "
-                      class="col-4 value notice"
+                      class="col-4 notice"
                     >
                       {{
                         (cart?.entries)[i + 1]?.totalPrice.value
@@ -159,7 +167,7 @@
                         !(cart?.entries)[i + 1]?.removeable &&
                         (cart?.entries)[i + 1]?.addable
                       "
-                      class="col-4 value notice"
+                      class="col-4 notice"
                     >
                       {{ 'fscommon.notIncluded' | cxTranslate }}
                     </div>
@@ -174,7 +182,7 @@
                           (cart?.entries)[i + 1]?.product?.bundleTemplates
                             ?.length == 3
                         "
-                        class="col-4 value notice"
+                        class="col-4 notice"
                       >
                         {{ 'fscommon.included' | cxTranslate }}
                       </div>
@@ -183,7 +191,7 @@
                           (cart?.entries)[i + 1]?.product?.bundleTemplates
                             ?.length !== 3
                         "
-                        class="col-4 value notice"
+                        class="col-4 notice"
                       >
                         {{ 'fscommon.notAvailableFull' | cxTranslate }}
                       </div>
@@ -244,13 +252,12 @@
       </ng-container>
     </ng-template>
   </div>
-  <!-- </ng-container> -->
 </ng-container>
 <ng-template
   #generalInformationQuoteValueComparison
   let-insuredObjectItem="insuredObjectItem"
 >
-  <div class="col-4 value notice">
+  <div class="col-4 notice">
     {{ insuredObjectItem?.formattedValue || insuredObjectItem?.value }}
   </div>
 </ng-template>

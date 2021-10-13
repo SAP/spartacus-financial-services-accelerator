@@ -17,6 +17,7 @@ import {
 } from '../../../../../core/product-pricing/facade';
 import { FSProduct, PricingData } from '../../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../../core/i18n/facade/translation.service';
+import { PAY_NOW_BILLING_TIME_CODE } from './../../../../../core/general-config/defalut-general-config';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
@@ -34,7 +35,6 @@ export class ProductConfigurationMiniCartComponent
     protected translationService: FSTranslationService
   ) {}
 
-  private readonly paynowBillingTimeCode = 'paynow';
   subscription = new Subscription();
   product$: Observable<Product> = this.currentProductService.getProduct();
   productId: string;
@@ -86,7 +86,7 @@ export class ProductConfigurationMiniCartComponent
   getPaynowFormattedPrice(oneTimeChargeEntries: any): string {
     let paynowFormattedPrice: string;
     oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
-      if (oneTimeChargeEntry.billingTime.code === this.paynowBillingTimeCode) {
+      if (oneTimeChargeEntry.billingTime.code === PAY_NOW_BILLING_TIME_CODE) {
         paynowFormattedPrice = oneTimeChargeEntry.price.formattedValue;
       }
     });

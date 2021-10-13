@@ -18,6 +18,7 @@ import { ComparisonTableService } from '../comparison-table.service';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
 import createSpy = jasmine.createSpy;
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../core/general-config/defalut-general-config';
 
 @Pipe({
   name: 'cxUrl',
@@ -26,7 +27,7 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
-const paynow = 'paynow';
+const paynow = PAY_NOW_BILLING_TIME_CODE;
 
 const billingTimes = [
   {

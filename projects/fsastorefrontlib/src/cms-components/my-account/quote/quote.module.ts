@@ -54,8 +54,8 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'quoteCompare',
-      pageLabel: 'quote-compare',
+      cxRoute: 'quoteComparison',
+      pageLabel: 'quote-comparison',
     },
     component: PageLayoutComponent,
   },
@@ -82,7 +82,7 @@ const routes: Routes = [
         AccountQuoteDetailsFlex: {
           component: QuoteDetailsComponent,
         },
-        AccountQuoteCompareFlex: {
+        AccountQuoteComparisonFlex: {
           component: QuoteComparisonComponent,
         },
       },
