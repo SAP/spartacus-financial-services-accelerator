@@ -82,7 +82,7 @@ export function checkLifeBasicMiniCart() {
       },
       {
         title: 'Coverage Amount:',
-        value: ' 30000 ',
+        value: ' 30,000.00 ',
       },
       {
         title: 'Insured:',
@@ -154,7 +154,7 @@ export function checkLifeBasicMiniCartSecondPerson() {
       },
       {
         title: 'Coverage Amount:',
-        value: ' 30000 ',
+        value: ' 30,000.00 ',
       },
       {
         title: 'Insured:',
