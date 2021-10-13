@@ -17,9 +17,9 @@ import { FSModule } from './spartacus/fs.module';
     AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-    }),
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25,
+    // }),
     SiteContextModule.forRoot(),
     FSModule,
   ],

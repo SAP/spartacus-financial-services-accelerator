@@ -9,6 +9,7 @@ import {
   OrderOccModule,
   ProductModule,
   ProductOccModule,
+  UserOccModule,
   UserOccTransitionalModule,
   UserTransitionalModule,
 } from '@spartacus/core';
@@ -61,6 +62,7 @@ import {
   SiteContextSelectorModule,
   StockNotificationModule,
   TabParagraphContainerModule,
+  UserComponentModule,
   WishListModule,
 } from '@spartacus/storefront';
 import { AdministrationFeatureModule } from './features/administration-feature.module';
@@ -76,9 +78,20 @@ import { StorefinderFeatureModule } from './features/storefinder-feature.module'
 import { TrackingFeatureModule } from './features/tracking-feature.module';
 import { UserFeatureModule } from './features/user-feature.module';
 import { VariantsFeatureModule } from './features/variants-feature.module';
+import { UserAccountModule } from '@spartacus/user/account';
+import { UserProfileModule } from '@spartacus/user/profile';
+import { AsmModule } from '@spartacus/asm';
+import { SmartEditModule } from '@spartacus/smartedit';
+import { CheckoutModule } from '@spartacus/checkout';
+import { AsmOccModule } from '@spartacus/asm/occ';
+import { CheckoutOccModule } from '@spartacus/checkout/occ';
+import { OrderConfirmationModule, ReplenishmentOrderConfirmationModule } from '@spartacus/checkout/components';
+import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEmailModule, UpdatePasswordModule, UpdateProfileModule } from '@spartacus/user/profile/components';
 
 @NgModule({
   imports: [
+    AsmModule,
+    SmartEditModule,
     // Auth Core
     AuthModule.forRoot(),
     LogoutModule, // will be come part of auth package
@@ -101,6 +114,8 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
     // User Core
     UserTransitionalModule,
     UserOccTransitionalModule,
+    UserAccountModule,
+    UserProfileModule,
     // User UI
     AddressBookModule,
     PaymentMethodsModule,
@@ -119,6 +134,7 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
     // Product Core
     ProductModule.forRoot(),
     ProductOccModule,
+    CheckoutModule,
 
     // Product UI
     ProductDetailsPageModule,
@@ -132,6 +148,14 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
     ProductImagesModule,
     ProductSummaryModule,
     ProductIntroModule,
+
+    AsmOccModule,
+    CartOccModule,
+    CheckoutOccModule,
+    OrderOccModule,
+    ProductOccModule,
+    UserOccModule,
+    CostCenterOccModule,
 
     // Cart Core
     CartModule.forRoot(),
@@ -179,6 +203,17 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
     AdministrationFeatureModule,
     BulkPricingFeatureModule,
     OrderApprovalFeatureModule,
+
+    // b
+    OrderConfirmationModule,
+    ReplenishmentOrderConfirmationModule,
+    UserComponentModule,
+    CloseAccountModule,
+    UpdateEmailModule,
+    UpdatePasswordModule,
+    UpdateProfileModule,
+    ForgotPasswordModule,
+    ResetPasswordModule,
   ],
 })
 export class FSFeaturesModule {}
