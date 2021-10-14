@@ -1,12 +1,8 @@
 import {
-  AfterViewInit,
   Component,
   OnDestroy,
   OnInit,
-  QueryList,
-  ViewChildren,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
@@ -24,40 +20,33 @@ import {
 import {
   LanguageService,
   RoutingService,
-  TranslatePipe,
   UserIdService,
 } from '@spartacus/core';
 import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defalut-general-config';
-import { AccordionItemComponent } from '../../../../shared/accordion/accordion-item.component';
 
 @Component({
   selector: 'cx-fs-quote-comparison',
   templateUrl: './quote-comparison.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuoteComparisonComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class QuoteComparisonComponent implements OnInit, OnDestroy {
   quotesLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
   quotes$: Observable<any> = this.quoteService.getQuotesComparison();
   quoteCodes: string[] = JSON.parse(sessionStorage.getItem('quoteCodes'));
-  @ViewChildren('accordion') accordion: QueryList<AccordionItemComponent>;
   categoryConfig: CategoryComparisonConfig;
   billingEventLabels: string[];
   subscription = new Subscription();
   language: string;
   userId: string;
   subheader: string;
-  firstAccordion: AccordionItemComponent;
 
   constructor(
     protected quoteService: QuoteService,
     protected translationService: FSTranslationService,
     protected quoteComparisonConfig: QuoteComparisonConfig,
-    protected translatePipe: TranslatePipe,
     protected languageService: LanguageService,
     protected routingService: RoutingService,
-    protected userIdService: UserIdService,
-    protected changeDetectorRef: ChangeDetectorRef
+    protected userIdService: UserIdService
   ) {}
 
   ngOnInit(): void {
@@ -98,19 +87,6 @@ export class QuoteComparisonComponent
           .subscribe()
       );
     this.changeLanguage();
-  }
-
-  ngAfterViewInit(): void {
-    this.subscription.add(
-      this.accordion.changes
-        .pipe(
-          tap((accordion: QueryList<AccordionItemComponent>) => {
-            this.firstAccordion = accordion.first;
-            this.changeDetectorRef.detectChanges();
-          })
-        )
-        .subscribe()
-    );
   }
 
   changeLanguage() {

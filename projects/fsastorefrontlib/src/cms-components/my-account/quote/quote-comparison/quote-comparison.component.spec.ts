@@ -3,13 +3,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
   LanguageService,
-  MockTranslatePipe,
+  OCC_USER_ID_CURRENT,
   RoutingService,
-  TranslatePipe,
+  UserIdService,
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
 import { QuoteComparisonComponent } from './quote-comparison.component';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
@@ -170,14 +170,20 @@ class MockLanguageService {
   }
 }
 
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('QuoteComparisonComponent', () => {
   let component: QuoteComparisonComponent;
   let fixture: ComponentFixture<QuoteComparisonComponent>;
   let quoteService: QuoteService;
   let routingService: RoutingService;
   let languageService: LanguageService;
-  let translatePipe: TranslatePipe;
   let fSTranslationService: FSTranslationService;
+  let userIdService: UserIdService;
 
   beforeEach(
     waitForAsync(() => {
@@ -206,8 +212,8 @@ describe('QuoteComparisonComponent', () => {
             useClass: MockLanguageService,
           },
           {
-            provide: TranslatePipe,
-            useClass: MockTranslatePipe,
+            provide: UserIdService,
+            useClass: MockUserIdService,
           },
         ],
       }).compileComponents();
@@ -222,7 +228,7 @@ describe('QuoteComparisonComponent', () => {
     fSTranslationService = TestBed.inject(FSTranslationService);
     routingService = TestBed.inject(RoutingService);
     languageService = TestBed.inject(LanguageService);
-    translatePipe = TestBed.inject(TranslatePipe);
+    userIdService = TestBed.inject(UserIdService);
   });
 
   it('should create', () => {
