@@ -8,5 +8,6 @@ import { I18nModule } from '@spartacus/core';
 @NgModule({
   imports: [CommonModule, SubListModule, I18nModule],
   declarations: [PotentialAssignmentsComponent, AssignProductCellComponent],
+  exports: [PotentialAssignmentsComponent, AssignProductCellComponent],
 })
 export class PotentialAssignmentsModule {}

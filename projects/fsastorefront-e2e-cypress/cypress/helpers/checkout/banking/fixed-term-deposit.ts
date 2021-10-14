@@ -62,7 +62,7 @@ export function checkMiniCart() {
       },
       {
         title: 'Investment Amount:',
-        value: ' 500000 ',
+        value: ' 500,000.00 ',
       },
       {
         title: ' Fixed Term Deposit: ',

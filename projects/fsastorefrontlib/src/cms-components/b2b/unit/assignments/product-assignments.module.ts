@@ -14,5 +14,10 @@ import { RemoveProductCellComponent } from './cells/remove-product-cell/remove-p
     ActivateProductCellComponent,
     RemoveProductCellComponent,
   ],
+  exports: [
+    ProductAssignmentsComponent,
+    ActivateProductCellComponent,
+    RemoveProductCellComponent,
+  ],
 })
 export class ProductAssignmentsModule {}

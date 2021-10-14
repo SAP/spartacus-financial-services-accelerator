@@ -55,7 +55,7 @@ export function checkMembersPage() {
   cy.get('cx-org-list')
     .should('be.visible')
     .within(() => {
-      cy.get('h3').should('contain.text', 'All users');
+      cy.get('h3').should('contain.text', 'All members');
       cy.get('.button.primary').should('contain.text', 'Add');
     });
 }
