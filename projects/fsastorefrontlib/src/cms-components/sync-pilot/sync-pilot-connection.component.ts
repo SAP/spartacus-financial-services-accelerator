@@ -46,22 +46,22 @@ export class SyncPilotConnectionComponent implements OnDestroy {
         .pipe(
           map(user => {
             this.connect(user);
-            if (user?.uid && user?.name) {
-              const syncPilotUrl =
-                targetUrl +
-                action +
-                this.CHANNEL_PARAM +
-                channel +
-                this.USER_PARAM +
-                user.name;
-              const syncPilotWindow = this.winRef.nativeWindow;
-              syncPilotWindow.open(
-                syncPilotUrl,
-                this.SYNC_PILOT_WINDOW,
-                null,
-                false
-              );
-            }
+            // if (user?.uid && user?.name) {
+            //   const syncPilotUrl =
+            //     targetUrl +
+            //     action +
+            //     this.CHANNEL_PARAM +
+            //     channel +
+            //     this.USER_PARAM +
+            //     user.name;
+            //   const syncPilotWindow = this.winRef.nativeWindow;
+            //   syncPilotWindow.open(
+            //     syncPilotUrl,
+            //     this.SYNC_PILOT_WINDOW,
+            //     null,
+            //     false
+            //   );
+            // }
           })
         )
         .subscribe()
@@ -70,6 +70,9 @@ export class SyncPilotConnectionComponent implements OnDestroy {
       console.log('guestEndpoint', guestEndpoint);
       if(guestEndpoint.state == 'accepted') {
         const url = guestEndpoint.targetChannelAddress; // redirect to this page
+        console.log(url, 'url')
+        const syncPilotWindow = this.winRef.nativeWindow;
+        syncPilotWindow.open(url, '_blank');
         }
     });
     // this.abort();
@@ -95,11 +98,6 @@ export class SyncPilotConnectionComponent implements OnDestroy {
 
   async abort() {
     this.iService.abort();
-  }
-
-  sendMessage() {
-    const text = document.getElementById('message')['value'];
-    this.iService.sendGuestMessage(text);
   }
 
   ngOnDestroy() {
