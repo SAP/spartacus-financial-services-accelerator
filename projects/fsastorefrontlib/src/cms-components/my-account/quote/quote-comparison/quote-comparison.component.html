@@ -27,7 +27,7 @@
   </div>
   <div class="row" *ngIf="quotes$ | async as quotes">
     <div class="col-12">
-      <div class="accordion" #firstAccordion>
+      <div class="accordion" #accordionWrapper>
         <cx-fs-accordion-item
           *ngIf="categoryConfig?.visibleInsuredObjects?.length > 0"
           [opened]="true"
@@ -75,7 +75,7 @@
         </cx-fs-accordion-item>
         <cx-fs-accordion-item
           *ngIf="billingEventLabels.length > 0 && categoryConfig?.billingEvents"
-          [opened]="!firstAccordion.firstChild.tagName"
+          [opened]="!accordionWrapper.firstChild.tagName"
           title="{{ 'quote.quoteBillingEvents' | cxTranslate }}"
         >
           <ul class="accordion-list">
