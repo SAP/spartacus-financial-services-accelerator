@@ -63,8 +63,7 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
                     this.getBillingEventLabels(oneTimeChargeEntry)
                 );
                 this.getCategoryConfig(
-                  cart?.deliveryOrderGroups[0]?.entries[0]?.product
-                    ?.defaultCategory?.code
+                  cart?.entries[0]?.product?.defaultCategory?.code
                 );
               });
             })
