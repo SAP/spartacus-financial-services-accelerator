@@ -22,10 +22,16 @@ class MockQuoteAdapter implements QuoteAdapter {
   ).and.callFake((userId, policyId, contractId) =>
     of('invokeQuoteAction' + userId + policyId + contractId)
   );
+  compareQuotes = createSpy(
+    'QuoteAdapter.invokeQuoteAction'
+  ).and.callFake((cartCodes, userId) =>
+    of('compareQuotes' + cartCodes + userId)
+  );
 }
 const user = 'user';
 const cartId = 'cartId';
 const mockQuoteId = 'quoteId';
+const mockQuoteCodes = ['quote1', 'quote2'];
 
 describe('QuoteConnector', () => {
   let quoteConnector: QuoteConnector;
@@ -73,6 +79,13 @@ describe('QuoteConnector', () => {
       cartId,
       QuoteActionType.UPDATE,
       { attribute: '1' }
+    );
+  });
+  it('should call adapter for getQuote', () => {
+    quoteConnector.compareQuotes(mockQuoteCodes, user);
+    expect(quoteAdapter.compareQuotes).toHaveBeenCalledWith(
+      mockQuoteCodes,
+      user
     );
   });
 });

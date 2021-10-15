@@ -43,4 +43,6 @@ export abstract class QuoteAdapter {
 
    */
   abstract getQuote(userId: string, quoteId: string): Observable<any>;
+
+  abstract compareQuotes(cartCodes: string[], userId: string): Observable<any>;
 }

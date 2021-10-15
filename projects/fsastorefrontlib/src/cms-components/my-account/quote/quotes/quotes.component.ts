@@ -51,7 +51,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
     this.quoteService.loadQuotes();
     this.groupQuotesByCategory();
     this.changeLanguage();
-    this.selectedQuoteFromQuoteDetails();
   }
 
   changeLanguage() {
@@ -167,6 +166,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
       });
       return quote;
     }, {});
+    this.selectedQuoteFromQuoteDetails();
   }
 
   protected setCategoryDropdown() {
@@ -227,7 +227,11 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   goToComparePage() {
-    // redirect to new compare page
+    sessionStorage.setItem(
+      'quoteCodes',
+      JSON.stringify(this.quoteCodesForCompare)
+    );
+    this.routingService.go({ cxRoute: 'quoteComparison' });
   }
 
   ngOnDestroy() {

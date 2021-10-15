@@ -39,6 +39,14 @@ export const quote = {
     compareInfo: 'Select two quotes with the same category for comparison',
     clearAll: 'Clear all',
     allQuotes: 'All quotes',
+    quotesComparison: 'Compare {{ category }} quotes',
+    selectQuoteNo: 'Select Quote No.',
+    quoteBillingEvents: 'Quote Billing Events',
+    quoteOptionalExtras: 'Quote Optional Extras',
+    billingEvents: 'Billing Events',
+    quoteGeneralInformation: 'Quote General Information',
+    generalInformation: 'General Information',
+    noQuotes: 'No quotes for comparison',
     details: {
       insurances_travel: {
         trip: 'Travel Information',

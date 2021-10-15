@@ -22,6 +22,7 @@ export interface Quote {
 export interface QuoteState {
   quotes: Models.InsuranceQuote[];
   quoteDetails: {};
+  quotesComparison: {};
   loaded: boolean;
 }
 
