@@ -24,6 +24,7 @@ import {
   PricingData,
 } from '../../../occ/occ-models';
 import { RECOMMENDED_PRODUCT } from '../../../shared';
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../core/general-config/defalut-general-config';
 
 @Component({
   selector: 'cx-fs-comparison-table-panel-item',
@@ -116,7 +117,10 @@ export class ComparisonTablePanelItemComponent
                 } else {
                   product.price.oneTimeChargeEntries.forEach(
                     oneTimeChargeEntry => {
-                      if (oneTimeChargeEntry.billingTime.code === 'paynow') {
+                      if (
+                        oneTimeChargeEntry.billingTime.code ===
+                        PAY_NOW_BILLING_TIME_CODE
+                      ) {
                         this.productPrice =
                           oneTimeChargeEntry.price.formattedValue;
                       }

@@ -48,19 +48,13 @@ export class QuoteService {
       .unsubscribe();
   }
 
-  loadQuoteDetails(quoteId) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.LoadQuoteDetails({
-            userId: occUserId,
-            quoteId: quoteId,
-          })
-        )
-      )
-      .unsubscribe();
+  loadQuoteDetails(quoteId, occUserId) {
+    this.store.dispatch(
+      new fromAction.LoadQuoteDetails({
+        userId: occUserId,
+        quoteId: quoteId,
+      })
+    );
   }
 
   getQuotes() {
@@ -71,7 +65,7 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
   }
 
-  getQuotesLoaded() {
+  getQuotesLoaded(): Observable<boolean> {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
@@ -218,6 +212,19 @@ export class QuoteService {
         )
       )
       .unsubscribe();
+  }
+
+  loadQuotesComparison(quoteCodes: string[], occUserId?: string): void {
+    this.store.dispatch(
+      new fromAction.LoadQuoteComparison({
+        cartCodes: quoteCodes,
+        userId: occUserId,
+      })
+    );
+  }
+
+  getQuotesComparison(): Observable<any> {
+    return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
   }
 
   setQuoteForCompare(quote: InsuranceQuote) {

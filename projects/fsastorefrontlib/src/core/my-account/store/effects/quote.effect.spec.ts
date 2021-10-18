@@ -50,6 +50,9 @@ const updateQuotePayload: any = {
 const insuranceQuotes = {
   insuranceQuotes: [insuranceQuote1, insuranceQuote2],
 };
+const quoteForComparison = {
+  carts: [insuranceQuote1, insuranceQuote2],
+};
 
 class MockQuoteConnector {
   getQuotes() {
@@ -60,6 +63,12 @@ class MockQuoteConnector {
   }
   invokeQuoteAction() {
     return of(insuranceQuote1);
+  }
+  getQuote() {
+    return of(insuranceQuote1);
+  }
+  compareQuotes() {
+    return of(quoteForComparison);
   }
 }
 
@@ -170,6 +179,72 @@ describe('Quote Effects', () => {
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.bindQuote$).toBeObservable(expected);
+    });
+  });
+
+  describe('loadQuoteDetails$', () => {
+    it('should return quote details', () => {
+      const action = new fromActions.LoadQuoteDetails({
+        userId: OCC_USER_ID_CURRENT,
+        quoteId: 'test001',
+      });
+      const completion = new fromActions.LoadQuoteDetailsSuccess(
+        insuranceQuote1
+      );
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.loadQuoteDetails$).toBeObservable(expected);
+    });
+
+    it('should fail to return quote details', () => {
+      spyOn(mockQuoteConnector, 'getQuote').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.LoadQuoteDetails({
+        userId: OCC_USER_ID_CURRENT,
+        quoteId: 'test001',
+      });
+      const completion = new fromActions.LoadQuoteDetailsFail(
+        JSON.stringify('Error')
+      );
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.loadQuoteDetails$).toBeObservable(expected);
+    });
+  });
+
+  describe('loadQuoteComparison$', () => {
+    it('should return quotes for comparison', () => {
+      const action = new fromActions.LoadQuoteComparison({
+        cartCodes: ['test001', 'test002'],
+        userId: OCC_USER_ID_CURRENT,
+      });
+      const completion = new fromActions.LoadQuoteComparisonSuccess(
+        quoteForComparison
+      );
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.loadQuoteComparison$).toBeObservable(expected);
+    });
+
+    it('should fail to return quotes for comparison', () => {
+      spyOn(mockQuoteConnector, 'compareQuotes').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.LoadQuoteComparison({
+        cartCodes: ['test001', 'test002'],
+        userId: OCC_USER_ID_CURRENT,
+      });
+      const completion = new fromActions.LoadQuoteComparisonFail(
+        JSON.stringify('Error')
+      );
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.loadQuoteComparison$).toBeObservable(expected);
     });
   });
 });
