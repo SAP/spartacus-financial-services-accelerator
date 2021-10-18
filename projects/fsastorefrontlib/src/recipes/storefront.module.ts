@@ -30,6 +30,7 @@ import {
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
 import { defaultCmsContentProviders } from './config/messages-cms-structure';
 import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
+import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-config/default-quote-comparison-config';
 
 @NgModule({
   imports: [
@@ -102,6 +103,7 @@ export class FSStorefrontModule {
       providers: [
         provideConfig(config),
         provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+        provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
         ...defaultCmsContentProviders,
       ],
     };

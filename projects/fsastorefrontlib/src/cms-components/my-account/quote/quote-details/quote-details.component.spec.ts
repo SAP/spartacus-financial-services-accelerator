@@ -45,6 +45,9 @@ class MockQuoteService {
   getQuoteDetails() {
     return of(insuranceQuote1);
   }
+  getQuotesLoaded() {
+    return of(true);
+  }
   loadQuoteDetails() {}
   setQuoteForCompare() {}
 }

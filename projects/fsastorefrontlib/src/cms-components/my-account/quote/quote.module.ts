@@ -18,6 +18,7 @@ import {
   RoutesConfig,
   RoutingConfig,
   UrlModule,
+  TranslatePipe,
 } from '@spartacus/core';
 
 import { QuotesComponent } from './quotes/quotes.component';
@@ -25,8 +26,10 @@ import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { QuoteDetailsComponent } from './quote-details/quote-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
+import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { BillingEventValuePipe } from './../../../shared/util/helpers/pipe/billing-event-value.pipe';
 
 const routes: Routes = [
   {
@@ -44,6 +47,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'quoteDetails',
       pageLabel: 'quote-details',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'quoteComparison',
+      pageLabel: 'quote-comparison',
     },
     component: PageLayoutComponent,
   },
@@ -70,12 +82,25 @@ const routes: Routes = [
         AccountQuoteDetailsFlex: {
           component: QuoteDetailsComponent,
         },
+        AccountQuoteComparisonFlex: {
+          component: QuoteComparisonComponent,
+        },
       },
     }),
   ],
-  declarations: [QuotesComponent, QuoteDetailsComponent],
-  exports: [QuotesComponent, QuoteDetailsComponent],
-  providers: [QuoteService, QuoteConnector, PolicyChartDataService],
+  declarations: [
+    QuotesComponent,
+    QuoteDetailsComponent,
+    QuoteComparisonComponent,
+    BillingEventValuePipe,
+  ],
+  exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
+  providers: [
+    QuoteService,
+    QuoteConnector,
+    PolicyChartDataService,
+    TranslatePipe,
+  ],
   entryComponents: [QuotesComponent],
 })
 export class QuoteModule {}

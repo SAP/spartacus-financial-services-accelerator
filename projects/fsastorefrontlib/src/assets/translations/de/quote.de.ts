@@ -40,6 +40,14 @@ export const quote = {
     compareInfo: '[DE] Select two quotes with the same category for comparison',
     clearAll: '[DE] Clear all',
     allQuotes: '[DE] All quotes',
+    quotesComparison: '[DE] Compare {{ category }} quotes',
+    selectQuoteNo: '[DE] Select Quote No.',
+    quoteBillingEvents: '[DE] Quote Billing Events',
+    quoteOptionalExtras: '[DE] Quote Optional Extras',
+    billingEvents: '[DE] Billing Events',
+    quoteGeneralInformation: '[DE] Quote General Information',
+    generalInformation: '[DE] General Information',
+    noQuotes: '[DE] No quotes for comparison',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',
