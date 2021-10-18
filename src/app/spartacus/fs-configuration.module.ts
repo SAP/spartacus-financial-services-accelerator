@@ -4,6 +4,7 @@ import {
   I18nConfig,
   OccConfig,
   provideConfig,
+  provideDefaultConfigFactory,
   SiteContextConfig,
 } from '@spartacus/core';
 import {
@@ -23,6 +24,7 @@ import {
 import { defaultCmsContentProviders, IconConfig } from '@spartacus/storefront';
 import { environment } from '../../environments/environment';
 import { occUserConfig } from 'projects/fsastorefrontlib/src/occ/services/default-occ-user-config';
+import { fsDefaultDateFormatConfigFactory } from 'projects/fsastorefrontlib/src/core/date-config/default-date-config';
 
 @NgModule({
   providers: [
@@ -98,6 +100,7 @@ import { occUserConfig } from 'projects/fsastorefrontlib/src/occ/services/defaul
     provideConfig(checkoutConfig),
     provideConfig(occProductConfig),
     provideConfig(occUserConfig),
+    provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
   ],
 })
 export class FSConfigurationModule {}
