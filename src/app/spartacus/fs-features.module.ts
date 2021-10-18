@@ -4,6 +4,7 @@ import {
   AuthModule,
   CartModule,
   CartOccModule,
+  CmsOccModule,
   CostCenterOccModule,
   ExternalRoutesModule,
   OrderOccModule,
@@ -26,6 +27,7 @@ import {
   CmsParagraphModule,
   ConsentManagementModule,
   FooterNavigationModule,
+  FormErrorsModule,
   HamburgerMenuModule,
   HomePageEventModule,
   JsonLdBuilderModule,
@@ -87,60 +89,56 @@ import { AsmOccModule } from '@spartacus/asm/occ';
 import { CheckoutOccModule } from '@spartacus/checkout/occ';
 import { OrderConfirmationModule, ReplenishmentOrderConfirmationModule } from '@spartacus/checkout/components';
 import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEmailModule, UpdatePasswordModule, UpdateProfileModule } from '@spartacus/user/profile/components';
+import { UserAccountComponentsModule } from '@spartacus/user/account/components';
 
 @NgModule({
   imports: [
     AsmModule,
     SmartEditModule,
-    // Auth Core
     AuthModule.forRoot(),
-    LogoutModule, // will be come part of auth package
-    LoginRouteModule, // will be come part of auth package
-
-    // Basic Cms Components
+    LogoutModule, 
+    LoginRouteModule,
+    UserAccountComponentsModule,
+    FormErrorsModule,
+    /************************* CMS Modules *************************/
     HamburgerMenuModule,
-    SiteContextSelectorModule,
+    CmsParagraphModule,
     LinkModule,
     BannerModule,
-    CmsParagraphModule,
-    TabParagraphContainerModule,
-    BannerCarouselModule,
     CategoryNavigationModule,
     NavigationModule,
     FooterNavigationModule,
-    PageTitleModule,
     BreadcrumbModule,
+    SearchBoxModule,
+    SiteContextSelectorModule,
+    AddressBookModule,
+    TabParagraphContainerModule,
+    BannerCarouselModule,
+    PageTitleModule,
 
-    // User Core
+    /************************* User Core *************************/
     UserTransitionalModule,
     UserOccTransitionalModule,
     UserAccountModule,
     UserProfileModule,
-    // User UI
-    AddressBookModule,
+
     PaymentMethodsModule,
-    NotificationPreferenceModule,
-    MyInterestsModule,
-    StockNotificationModule,
     ConsentManagementModule,
-    MyCouponsModule,
 
-    // Anonymous Consents Core
+    /************************* Anonymous Consents Core *************************/
     AnonymousConsentsModule.forRoot(),
-    // Anonymous Consents UI
     AnonymousConsentsDialogModule,
-    AnonymousConsentManagementBannerModule,
+    AnonymousConsentManagementBannerModule, 
 
-    // Product Core
+    /************************* Product Core *************************/
     ProductModule.forRoot(),
     ProductOccModule,
     CheckoutModule,
 
-    // Product UI
+    /************************* Product UI  *************************/
     ProductDetailsPageModule,
     ProductListingPageModule,
     ProductListModule,
-    SearchBoxModule,
     ProductFacetNavigationModule,
     ProductTabsModule,
     ProductCarouselModule,
@@ -149,6 +147,7 @@ import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEm
     ProductSummaryModule,
     ProductIntroModule,
 
+    /************************* OCC *************************/
     AsmOccModule,
     CartOccModule,
     CheckoutOccModule,
@@ -156,37 +155,40 @@ import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEm
     ProductOccModule,
     UserOccModule,
     CostCenterOccModule,
+    CmsOccModule,
 
-    // Cart Core
+    /************************* Cart & Order *************************/
     CartModule.forRoot(),
     CartOccModule,
-    // Cart UI
     CartComponentModule,
-    WishListModule,
-
-    // Cost Center
+    MyCouponsModule,
     CostCenterOccModule,
 
-    // Order
     OrderHistoryModule,
     OrderDetailsModule,
     OrderCancellationModule,
     OrderReturnModule,
-    ReturnRequestListModule,
-    ReturnRequestDetailModule,
-    ReplenishmentOrderHistoryModule,
-    ReplenishmentOrderDetailsModule,
     OrderOccModule,
 
-    // Page Events
+    /************************* Page Events *************************/
     NavigationEventModule,
     HomePageEventModule,
     CartPageEventModule,
     ProductPageEventModule,
 
+    /************************* Core My Account *************************/
+    OrderConfirmationModule,
+    UserComponentModule,
+    CloseAccountModule,
+    UpdateEmailModule,
+    UpdatePasswordModule,
+    UpdateProfileModule,
+    ForgotPasswordModule,
+    ResetPasswordModule,
+
     /************************* Opt-in features *************************/
 
-    ExternalRoutesModule.forRoot(), // to opt-in explicitly, is added by default schematics
+    ExternalRoutesModule.forRoot(),
     JsonLdBuilderModule,
 
     /************************* External features *************************/
@@ -204,16 +206,16 @@ import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEm
     BulkPricingFeatureModule,
     OrderApprovalFeatureModule,
 
-    // b
-    OrderConfirmationModule,
-    ReplenishmentOrderConfirmationModule,
-    UserComponentModule,
-    CloseAccountModule,
-    UpdateEmailModule,
-    UpdatePasswordModule,
-    UpdateProfileModule,
-    ForgotPasswordModule,
-    ResetPasswordModule,
+    // Should potential remove
+    ReturnRequestListModule,
+    ReturnRequestDetailModule,
+
+    // NotificationPreferenceModule,
+    // MyInterestsModule,
+    // StockNotificationModule,
+    // ReplenishmentOrderHistoryModule,
+    // ReplenishmentOrderDetailsModule,
+    // ReplenishmentOrderConfirmationModule,
   ],
 })
 export class FSFeaturesModule {}
