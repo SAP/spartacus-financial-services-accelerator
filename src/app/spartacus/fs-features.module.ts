@@ -4,11 +4,13 @@ import {
   AuthModule,
   CartModule,
   CartOccModule,
+  CmsOccModule,
   CostCenterOccModule,
   ExternalRoutesModule,
   OrderOccModule,
   ProductModule,
   ProductOccModule,
+  UserOccModule,
   UserOccTransitionalModule,
   UserTransitionalModule,
 } from '@spartacus/core';
@@ -25,6 +27,7 @@ import {
   CmsParagraphModule,
   ConsentManagementModule,
   FooterNavigationModule,
+  FormErrorsModule,
   HamburgerMenuModule,
   HomePageEventModule,
   JsonLdBuilderModule,
@@ -61,6 +64,7 @@ import {
   SiteContextSelectorModule,
   StockNotificationModule,
   TabParagraphContainerModule,
+  UserComponentModule,
   WishListModule,
 } from '@spartacus/storefront';
 import { AdministrationFeatureModule } from './features/administration-feature.module';
@@ -76,55 +80,65 @@ import { StorefinderFeatureModule } from './features/storefinder-feature.module'
 import { TrackingFeatureModule } from './features/tracking-feature.module';
 import { UserFeatureModule } from './features/user-feature.module';
 import { VariantsFeatureModule } from './features/variants-feature.module';
+import { UserAccountModule } from '@spartacus/user/account';
+import { UserProfileModule } from '@spartacus/user/profile';
+import { AsmModule } from '@spartacus/asm';
+import { SmartEditModule } from '@spartacus/smartedit';
+import { CheckoutModule } from '@spartacus/checkout';
+import { AsmOccModule } from '@spartacus/asm/occ';
+import { CheckoutOccModule } from '@spartacus/checkout/occ';
+import { OrderConfirmationModule, ReplenishmentOrderConfirmationModule } from '@spartacus/checkout/components';
+import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEmailModule, UpdatePasswordModule, UpdateProfileModule } from '@spartacus/user/profile/components';
+import { UserAccountComponentsModule } from '@spartacus/user/account/components';
 
 @NgModule({
   imports: [
-    // Auth Core
+    AsmModule,
+    SmartEditModule,
     AuthModule.forRoot(),
-    LogoutModule, // will be come part of auth package
-    LoginRouteModule, // will be come part of auth package
-
-    // Basic Cms Components
+    LogoutModule, 
+    LoginRouteModule,
+    UserAccountComponentsModule,
+    FormErrorsModule,
+    /************************* CMS Modules *************************/
     HamburgerMenuModule,
-    SiteContextSelectorModule,
+    CmsParagraphModule,
     LinkModule,
     BannerModule,
-    CmsParagraphModule,
-    TabParagraphContainerModule,
-    BannerCarouselModule,
     CategoryNavigationModule,
     NavigationModule,
     FooterNavigationModule,
-    PageTitleModule,
     BreadcrumbModule,
+    SearchBoxModule,
+    SiteContextSelectorModule,
+    AddressBookModule,
+    TabParagraphContainerModule,
+    BannerCarouselModule,
+    PageTitleModule,
 
-    // User Core
+    /************************* User Core *************************/
     UserTransitionalModule,
     UserOccTransitionalModule,
-    // User UI
-    AddressBookModule,
+    UserAccountModule,
+    UserProfileModule,
+
     PaymentMethodsModule,
-    NotificationPreferenceModule,
-    MyInterestsModule,
-    StockNotificationModule,
     ConsentManagementModule,
-    MyCouponsModule,
 
-    // Anonymous Consents Core
+    /************************* Anonymous Consents Core *************************/
     AnonymousConsentsModule.forRoot(),
-    // Anonymous Consents UI
     AnonymousConsentsDialogModule,
-    AnonymousConsentManagementBannerModule,
+    AnonymousConsentManagementBannerModule, 
 
-    // Product Core
+    /************************* Product Core *************************/
     ProductModule.forRoot(),
     ProductOccModule,
+    CheckoutModule,
 
-    // Product UI
+    /************************* Product UI  *************************/
     ProductDetailsPageModule,
     ProductListingPageModule,
     ProductListModule,
-    SearchBoxModule,
     ProductFacetNavigationModule,
     ProductTabsModule,
     ProductCarouselModule,
@@ -133,36 +147,48 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
     ProductSummaryModule,
     ProductIntroModule,
 
-    // Cart Core
+    /************************* OCC *************************/
+    AsmOccModule,
+    CartOccModule,
+    CheckoutOccModule,
+    OrderOccModule,
+    ProductOccModule,
+    UserOccModule,
+    CostCenterOccModule,
+    CmsOccModule,
+
+    /************************* Cart & Order *************************/
     CartModule.forRoot(),
     CartOccModule,
-    // Cart UI
     CartComponentModule,
-    WishListModule,
-
-    // Cost Center
+    MyCouponsModule,
     CostCenterOccModule,
 
-    // Order
     OrderHistoryModule,
     OrderDetailsModule,
     OrderCancellationModule,
     OrderReturnModule,
-    ReturnRequestListModule,
-    ReturnRequestDetailModule,
-    ReplenishmentOrderHistoryModule,
-    ReplenishmentOrderDetailsModule,
     OrderOccModule,
 
-    // Page Events
+    /************************* Page Events *************************/
     NavigationEventModule,
     HomePageEventModule,
     CartPageEventModule,
     ProductPageEventModule,
 
+    /************************* Core My Account *************************/
+    OrderConfirmationModule,
+    UserComponentModule,
+    CloseAccountModule,
+    UpdateEmailModule,
+    UpdatePasswordModule,
+    UpdateProfileModule,
+    ForgotPasswordModule,
+    ResetPasswordModule,
+
     /************************* Opt-in features *************************/
 
-    ExternalRoutesModule.forRoot(), // to opt-in explicitly, is added by default schematics
+    ExternalRoutesModule.forRoot(),
     JsonLdBuilderModule,
 
     /************************* External features *************************/
@@ -179,6 +205,17 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
     AdministrationFeatureModule,
     BulkPricingFeatureModule,
     OrderApprovalFeatureModule,
+
+    // Should potential remove
+    ReturnRequestListModule,
+    ReturnRequestDetailModule,
+
+    // NotificationPreferenceModule,
+    // MyInterestsModule,
+    // StockNotificationModule,
+    // ReplenishmentOrderHistoryModule,
+    // ReplenishmentOrderDetailsModule,
+    // ReplenishmentOrderConfirmationModule,
   ],
 })
 export class FSFeaturesModule {}

@@ -19,8 +19,7 @@ import { UserRegisterFacade } from '@spartacus/user/profile/root';
   selector: 'cx-fs-register',
   templateUrl: './register.component.html',
 })
-export class FSRegisterComponent extends RegisterComponent
-  implements OnInit, OnDestroy {
+export class FSRegisterComponent extends RegisterComponent {
   constructor(
     protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
@@ -94,11 +93,5 @@ export class FSRegisterComponent extends RegisterComponent
 
   getDateFormat() {
     return this.config.date.format || '';
-  }
-
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 }
