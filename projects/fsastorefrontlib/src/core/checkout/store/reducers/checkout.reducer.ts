@@ -48,6 +48,7 @@ export function reducer(
       };
     }
     case fromAction.SET_PAYMENT_TYPE_SUCCESS: {
+      console.log(action);
       return {
         ...state,
         paymentType: action.payload.code,

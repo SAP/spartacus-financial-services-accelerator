@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
@@ -15,8 +15,8 @@ import {
 
 @Injectable()
 export class ClaimEffects {
-  @Effect()
-  loadClaims$: Observable<any> = this.actions$.pipe(
+  
+  loadClaims$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_CLAIMS),
     map((action: fromActions.LoadClaims) => action.payload),
     switchMap(payload => {
@@ -29,10 +29,10 @@ export class ClaimEffects {
         )
       );
     })
-  );
+  ));
 
-  @Effect()
-  removeClaim$: Observable<any> = this.actions$.pipe(
+  
+  removeClaim$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.DELETE_CLAIM),
     map((action: fromActions.DeleteClaim) => action.payload),
     mergeMap(payload =>
@@ -45,10 +45,10 @@ export class ClaimEffects {
         )
       )
     )
-  );
+  ));
 
-  @Effect()
-  createClaim$: Observable<any> = this.actions$.pipe(
+  
+  createClaim$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.CREATE_CLAIM),
     map((action: fromActions.CreateClaim) => action.payload),
     mergeMap(payload => {
@@ -75,10 +75,10 @@ export class ClaimEffects {
           })
         );
     })
-  );
+  ));
 
-  @Effect()
-  loadClaimById$: Observable<any> = this.actions$.pipe(
+  
+  loadClaimById$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_CLAIM_BY_ID),
     map((action: fromActions.LoadClaimById) => action.payload),
     switchMap(payload => {
@@ -96,10 +96,10 @@ export class ClaimEffects {
         })
       );
     })
-  );
+  ));
 
-  @Effect()
-  updateClaim$: Observable<any> = this.actions$.pipe(
+  
+  updateClaim$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
@@ -154,7 +154,7 @@ export class ClaimEffects {
           )
         );
     })
-  );
+  ));
 
   private showGlobalMessage(text: string, messageType: GlobalMessageType) {
     this.globalMessageService.remove(messageType);

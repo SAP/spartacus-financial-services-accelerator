@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
@@ -8,8 +8,8 @@ import * as fromActions from '../actions';
 
 @Injectable()
 export class FormDefinitionEffects {
-  @Effect()
-  loadFormDefinition$: Observable<any> = this.actions$.pipe(
+  
+  loadFormDefinition$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_FORM_DEFINITION),
     map((action: fromActions.LoadFormDefinition) => action.payload),
     mergeMap(payload => {
@@ -44,7 +44,7 @@ export class FormDefinitionEffects {
           })
         );
     })
-  );
+  ));
 
   private showGlobalMessage(text: string) {
     this.globalMessageService.add(

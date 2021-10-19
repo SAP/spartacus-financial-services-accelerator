@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
@@ -7,8 +7,8 @@ import { PolicyConnector } from '../../connectors/policy.connector';
 
 @Injectable()
 export class PolicyEffects {
-  @Effect()
-  loadPolicies$: Observable<any> = this.actions$.pipe(
+  
+  loadPolicies$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_POLICIES),
     map((action: fromActions.LoadPolicies) => action.payload),
     switchMap(payload => {
@@ -21,9 +21,9 @@ export class PolicyEffects {
         )
       );
     })
-  );
-  @Effect()
-  loadPolicyDetails$: Observable<any> = this.actions$.pipe(
+  ));
+  
+  loadPolicyDetails$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_POLICY_DETAILS),
     map((action: fromActions.LoadPolicyDetails) => action.payload),
     switchMap(payload => {
@@ -38,9 +38,9 @@ export class PolicyEffects {
           )
         );
     })
-  );
-  @Effect()
-  loadPremiumCalendar$: Observable<any> = this.actions$.pipe(
+  ));
+  
+  loadPremiumCalendar$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_PREMIUM_CALENDAR),
     map((action: fromActions.LoadPremiumCalendar) => action.payload),
     switchMap(payload => {
@@ -53,7 +53,7 @@ export class PolicyEffects {
         )
       );
     })
-  );
+  ));
 
   constructor(
     private actions$: Actions,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
@@ -8,8 +8,8 @@ import { StepStatus } from '../../../../occ/occ-models';
 
 @Injectable()
 export class UserRequestEffects {
-  @Effect()
-  updateUserRequest$: Observable<any> = this.actions$.pipe(
+  
+  updateUserRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.UPDATE_USER_REQUEST),
     map((action: fromActions.UpdateUserRequest) => action.payload),
     switchMap(payload => {
@@ -39,10 +39,10 @@ export class UserRequestEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  submitUserRequest$: Observable<any> = this.actions$.pipe(
+  
+  submitUserRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.SUBMIT_USER_REQUEST),
     map((action: fromActions.SubmitUserRequest) => action.payload),
     mergeMap(payload => {
@@ -60,7 +60,7 @@ export class UserRequestEffects {
           )
         );
     })
-  );
+  ));
 
   constructor(
     private actions$: Actions,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
@@ -7,8 +7,8 @@ import { FileConnector } from '../../connectors/file.connector';
 
 @Injectable()
 export class FilesEffect {
-  @Effect()
-  removeFile$: Observable<any> = this.actions$.pipe(
+  
+  removeFile$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.REMOVE_FILE),
     map((action: fromActions.RemoveFile) => action.payload),
     mergeMap(payload => {
@@ -21,7 +21,7 @@ export class FilesEffect {
         })
       );
     })
-  );
+  ));
 
   constructor(
     private actions$: Actions,

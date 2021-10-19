@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
@@ -9,8 +9,8 @@ import * as fromActions from '../actions';
 
 @Injectable()
 export class FormDataEffects {
-  @Effect()
-  loadFormData$: Observable<any> = this.actions$.pipe(
+  
+  loadFormData$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_FORM_DATA),
     map((action: fromActions.LoadFormData) => action.payload),
     mergeMap(payload => {
@@ -25,10 +25,10 @@ export class FormDataEffects {
           })
         );
     })
-  );
+  ));
 
-  @Effect()
-  saveFormData$: Observable<any> = this.actions$.pipe(
+  
+  saveFormData$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.SAVE_FORM_DATA),
     map((action: fromActions.SaveFormData) => action.payload),
     mergeMap(payload => {
@@ -43,16 +43,16 @@ export class FormDataEffects {
           })
         );
     })
-  );
+  ));
 
-  @Effect({ dispatch: false })
-  clearFormData$ = this.actions$.pipe(
+  
+  clearFormData$ = createEffect(() => this.actions$.pipe(
     ofType(AuthActions.LOGOUT),
     tap(_ => {
       sessionStorage.removeItem('quoteCodes');
       this.formDataStorageService.clearFormDataLocalStorage();
     })
-  );
+  ), { dispatch: false });
 
   constructor(
     private formDataStorageService: FormDataStorageService,

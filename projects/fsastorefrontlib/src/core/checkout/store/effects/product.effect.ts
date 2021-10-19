@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
   GlobalMessageService,
   GlobalMessageType,
@@ -12,8 +12,8 @@ import * as fromActions from '../actions/index';
 
 @Injectable()
 export class ProductEffect {
-  @Effect()
-  getCalculatedProductData$: Observable<any> = this.actions$.pipe(
+  
+  getCalculatedProductData$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
     map((action: fromActions.LoadCalculatedProductData) => action.payload),
     mergeMap(payload => {
@@ -35,7 +35,7 @@ export class ProductEffect {
           })
         );
     })
-  );
+  ));
 
   private showGlobalMessage(text: string, messageType: GlobalMessageType) {
     this.globalMessageService.remove(messageType);
