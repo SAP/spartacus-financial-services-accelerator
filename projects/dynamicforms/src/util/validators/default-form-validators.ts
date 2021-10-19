@@ -57,6 +57,9 @@ export class DefaultFormValidators extends Validators {
     return (control: AbstractControl): ValidationErrors | null => {
       const field = control.value as string;
       if (field) {
+        if (regex === this.phoneNumberRegex) {
+          return field.match(regex) ? null : { cxInvalidPhoneRegex: true };
+        }
         return field.match(regex) ? null : { InvalidFormat: true };
       }
       return null;

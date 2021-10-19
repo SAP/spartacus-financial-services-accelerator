@@ -14,6 +14,7 @@ import { FSUserSignUp } from '../../../occ/occ-models';
 import { DateConfig } from './../../../core/date-config/date-config';
 import { RegisterComponent } from '@spartacus/user/profile/components';
 import { UserRegisterFacade } from '@spartacus/user/profile/root';
+import { CustomFormValidators } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-register',
@@ -44,19 +45,27 @@ export class FSRegisterComponent extends RegisterComponent {
   sub = new Subscription();
   consentGiven: boolean;
 
-  registerForm = this.fb.group({
-    ...this.registerForm.controls,
-    phoneNumber: [
-      '',
-      DefaultFormValidators.regexValidator(
-        DefaultFormValidators.phoneNumberRegex
+  registerForm = this.fb.group(
+    {
+      ...this.registerForm.controls,
+      phoneNumber: [
+        '',
+        DefaultFormValidators.regexValidator(
+          DefaultFormValidators.phoneNumberRegex
+        ),
+      ],
+      dateOfBirth: [
+        '',
+        [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
+      ],
+    },
+    {
+      validators: CustomFormValidators.passwordsMustMatch(
+        'password',
+        'passwordconf'
       ),
-    ],
-    dateOfBirth: [
-      '',
-      [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
-    ],
-  });
+    }
+  );
 
   ngOnInit() {
     super.ngOnInit();
