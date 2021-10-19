@@ -11,7 +11,7 @@ import {
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { CmsLibModule } from '../cms-components/cms-lib.module';
 import { OccModule } from '../occ/occ.module';
-import { defaultCmsContentProviders } from './config/messages-cms-structure';
+import { defaultFSCmsContentProviders } from './config/messages-cms-structure';
 import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
 
 @NgModule({
@@ -25,12 +25,13 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
   ],
   exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
+  providers: [...defaultFSCmsContentProviders],
 })
 export class FSStorefrontModule {
   static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
-      providers: [provideConfig(config), ...defaultCmsContentProviders],
+      providers: [provideConfig(config), ...defaultFSCmsContentProviders],
     };
   }
 }
