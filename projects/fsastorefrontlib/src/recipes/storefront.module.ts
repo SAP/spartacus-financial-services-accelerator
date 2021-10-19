@@ -25,6 +25,7 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
   ],
   exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
+  providers: [...defaultCmsContentProviders],
 })
 export class FSStorefrontModule {
   static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
