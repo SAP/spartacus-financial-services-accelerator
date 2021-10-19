@@ -6,7 +6,7 @@ import {
   FeaturesConfig,
   FeaturesConfigModule,
   I18nModule,
-  provideDefaultConfig,
+  provideConfig,
   UrlModule,
 } from '@spartacus/core';
 import {
@@ -44,7 +44,7 @@ const moduleComponents = [
     CartCouponModule,
   ],
   providers: [
-    provideDefaultConfig(<CmsConfig | FeaturesConfig>{
+    provideConfig(<CmsConfig | FeaturesConfig>{
       cmsComponents: {
         AccountOrderDetailsItemsComponent: {
           component: FSOrderDetailItemsComponent,

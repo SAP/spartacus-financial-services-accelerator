@@ -27,7 +27,7 @@
         <div class="card-body">
           <div class="row mb-2">
             <div class="col-6 col-md-12 semi-bold">
-              {{ 'checkoutOrderConfirmation.orderNumber' | cxTranslate }}:
+              {{ 'orderDetails.orderNumber' | cxTranslate }}:
             </div>
             <div class="col-6 col-md-12 text-right text-md-left">
               {{ order.code }}
@@ -43,7 +43,7 @@
           </div>
           <div class="row mb-2">
             <div class="col-6 col-md-12 semi-bold">
-              {{ 'checkoutOrderConfirmation.placedOn' | cxTranslate }}:
+              {{ 'orderDetails.placedOn' | cxTranslate }}:
             </div>
             <div class="col-6 col-md-12 text-right text-md-left">
               {{ order.created | cxDate: 'longDate' }}
@@ -51,7 +51,7 @@
           </div>
           <div class="row mb-2">
             <div class="col-6 col-md-12 semi-bold">
-              {{ 'checkoutOrderConfirmation.status' | cxTranslate }}:
+              {{ 'orderDetails.status' | cxTranslate }}:
             </div>
             <div class="col-6 col-md-12 text-right text-md-left">
               {{ order.status }}
