@@ -81,15 +81,9 @@
                 formControlName="dateOfBirth"
                 placeholder="{{ getDateFormat() }}"
               />
-              <div
-                class="invalid-feedback"
-                *ngIf="
-                  registerForm.get('dateOfBirth').invalid &&
-                  registerForm.get('dateOfBirth').dirty
-                "
-              >
-                <span>{{ 'forms.dateOfBirthMinimumAge' | cxTranslate }}</span>
-              </div>
+              <cx-form-errors
+                [control]="registerForm.get('dateOfBirth')"
+              ></cx-form-errors>
             </label>
           </div>
 
@@ -108,17 +102,9 @@
                 name="phoneNumber"
                 formControlName="phoneNumber"
               />
-              <div
-                class="invalid-feedback"
-                *ngIf="
-                  registerForm.get('phoneNumber').invalid &&
-                  registerForm.get('phoneNumber').dirty
-                "
-              >
-                <span>{{
-                  'forms.phoneNumber.lengthValidation' | cxTranslate
-                }}</span>
-              </div>
+              <cx-form-errors
+                [control]="registerForm.get('phoneNumber')"
+              ></cx-form-errors>
             </label>
           </div>
 

@@ -1,12 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { errorHandlers } from './http-interceptors/index';
 import { defaultFSGlobalMessageConfigFactory } from './config/default-global-message-config';
-import { GlobalMessageModule, provideDefaultConfigFactory } from '@spartacus/core';
+import {
+  GlobalMessageModule,
+  provideDefaultConfigFactory,
+} from '@spartacus/core';
 
 @NgModule({
-  imports: [
-    GlobalMessageModule,
-  ],
+  imports: [GlobalMessageModule],
   providers: [provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory)],
 })
 export class FSGlobalMessageModule {
