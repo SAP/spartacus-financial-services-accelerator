@@ -40,6 +40,7 @@ export const organization = {
     },
     links: {
       units: '[DE] Child Organization',
+      users: 'Mitglieder',
     },
     children: {
       create: {

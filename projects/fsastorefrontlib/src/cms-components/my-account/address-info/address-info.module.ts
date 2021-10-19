@@ -31,8 +31,6 @@ import { FSAddressFormComponent } from './address-form/address-form.component';
     SpinnerModule,
     I18nModule,
   ],
-  declarations: [FSAddressInfoComponent, FSAddressFormComponent],
-  exports: [FSAddressInfoComponent, FSAddressFormComponent],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
@@ -43,6 +41,8 @@ import { FSAddressFormComponent } from './address-form/address-form.component';
       },
     }),
   ],
+  declarations: [FSAddressInfoComponent, FSAddressFormComponent],
+  exports: [FSAddressInfoComponent, FSAddressFormComponent],
   entryComponents: [FSAddressInfoComponent, FSAddressFormComponent],
 })
 export class FSAddressBookModule {}

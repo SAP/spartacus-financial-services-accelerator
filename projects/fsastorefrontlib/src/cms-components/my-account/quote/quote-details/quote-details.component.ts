@@ -12,10 +12,12 @@ import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
   templateUrl: './quote-details.component.html',
 })
 export class QuoteDetailsComponent implements OnInit, OnDestroy {
+  quoteLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
   quote$: Observable<InsuranceQuote> = this.quoteService.getQuoteDetails();
   cart$: Observable<Cart>;
   subscription = new Subscription();
   userId: string;
+  quoteCodeForCompare: string;
 
   constructor(
     protected routingService: RoutingService,
@@ -31,6 +33,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   loadQuoteDetails() {
+    this.quoteCodeForCompare = sessionStorage.getItem('qouteCodeForCompare');
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
@@ -38,11 +41,13 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
       ])
         .pipe(
           map(([routingData, userId]) => {
-            const quoteId = routingData.state.params.quoteId;
-            if (quoteId) {
-              this.quoteService.loadQuoteDetails(quoteId);
+            if (!routingData.nextState) {
+              const quoteId = routingData.state.params.quoteId;
+              if (quoteId) {
+                this.quoteService.loadQuoteDetails(quoteId, userId);
+              }
+              this.userId = userId;
             }
-            this.userId = userId;
           })
         )
         .subscribe()
@@ -69,6 +74,11 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
     this.quoteService.retrieveQuoteCheckout(quote);
   }
 
+  compareQuote(quote: InsuranceQuote) {
+    this.quoteService.setQuoteForCompare(quote);
+    this.routingService.go({ cxRoute: 'quotes' });
+  }
+
   getTranslation(translationGroup: string, translationKey: string): string {
     return this.translationService.getTranslationValue(
       ['quote.details', translationGroup],
@@ -77,6 +87,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    sessionStorage.removeItem('qouteCodeForCompare');
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

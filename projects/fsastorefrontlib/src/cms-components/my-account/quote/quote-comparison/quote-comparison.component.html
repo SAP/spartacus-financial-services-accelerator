@@ -1,0 +1,253 @@
+<ng-container *ngIf="quotesLoaded$ | async; else loading">
+  <div class="position-relative text-center">
+    <a
+      class="h4 vertical-center-left"
+      routerLink="/my-account/my-financial-applications/"
+      routerLinkActive="active"
+    >
+      <span class="fas fa-arrow-left"></span
+    ></a>
+    <h2 class="heading-headline p-3 mt-3 mb-5 text-center">
+      <span>
+        {{
+          'quote.quotesComparison'
+            | cxTranslate
+              : {
+                  category:
+                    'fscommon.category.' + categoryConfig?.categoryCode
+                    | cxTranslate
+                }
+        }}
+      </span>
+      <br />
+      <span>
+        {{ subheader }}
+      </span>
+    </h2>
+  </div>
+  <div class="row" *ngIf="quotes$ | async as quotes">
+    <div class="col-12">
+      <div class="accordion" #accordionWrapper>
+        <cx-fs-accordion-item
+          *ngIf="categoryConfig?.visibleInsuredObjects?.length > 0"
+          [opened]="true"
+          title="{{ 'quote.quoteGeneralInformation' | cxTranslate }}"
+        >
+          <ul class="accordion-list">
+            <li class="accordion-list-item row sub-title text-break">
+              <div class="col-4">
+                {{ 'quote.generalInformation' | cxTranslate }}
+              </div>
+              <div *ngFor="let cart of quotes?.carts" class="col-4">
+                {{
+                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
+                    ?.cartDisplayName
+                }}
+              </div>
+            </li>
+            <ng-container
+              *ngTemplateOutlet="
+                generalInformationQuoteComparison;
+                context: {
+                  labelList: ((quotes?.carts)[0]?.entries)[0]?.product
+                    ?.configurable
+                    ? (((quotes?.carts)[0]?.entries)[0]?.configurationInfos)[0]
+                        ?.configurationValues?.entry
+                    : ((quotes?.carts)[0].insuranceQuote?.insuredObjectList
+                        ?.insuredObjects)[0]?.insuredObjectItems,
+                  configurable:
+                    ((quotes?.carts)[0]?.entries)[0]?.product?.configurable
+                }
+              "
+            >
+            </ng-container>
+            <li class="accordion-list-item row sub-title text-break">
+              <div class="col-4">
+                {{ 'quote.selectQuoteNo' | cxTranslate }}
+              </div>
+              <div *ngFor="let cart of quotes?.carts" class="col-4">
+                <span class="link px-0" (click)="retrieveQuote(cart)">
+                  {{ cart.code }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </cx-fs-accordion-item>
+        <cx-fs-accordion-item
+          *ngIf="billingEventLabels.length > 0 && categoryConfig?.billingEvents"
+          [opened]="!accordionWrapper.firstChild.tagName"
+          title="{{ 'quote.quoteBillingEvents' | cxTranslate }}"
+        >
+          <ul class="accordion-list">
+            <li class="accordion-list-item row sub-title text-break">
+              <div class="col-4">
+                {{ 'quote.billingEvents' | cxTranslate }}
+              </div>
+              <div *ngFor="let cart of quotes?.carts" class="col-4">
+                {{
+                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
+                    ?.cartDisplayName
+                }}
+              </div>
+            </li>
+            <ng-container *ngFor="let billingEventLabel of billingEventLabels">
+              <li class="accordion-list-item row">
+                <div class="item-label" class="col-4">
+                  {{ billingEventLabel }}
+                </div>
+                <ng-container *ngFor="let cart of quotes?.carts">
+                  <div class="col-4 notice">
+                    {{
+                      (cart?.entries)[0]?.product?.price?.oneTimeChargeEntries
+                        | cxFsBillingEventValue: billingEventLabel
+                    }}
+                  </div>
+                </ng-container>
+              </li>
+            </ng-container>
+            <li class="accordion-list-item row sub-title text-break">
+              <div class="col-4">
+                {{ 'quote.selectQuoteNo' | cxTranslate }}
+              </div>
+              <div *ngFor="let cart of quotes?.carts" class="col-4">
+                <span class="link px-0" (click)="retrieveQuote(cart)">
+                  {{ cart.code }}
+                </span>
+              </div>
+            </li>
+          </ul>
+        </cx-fs-accordion-item>
+        <cx-fs-accordion-item
+          *ngIf="categoryConfig?.optionalProducts"
+          [opened]="false"
+          title="{{ 'quote.quoteOptionalExtras' | cxTranslate }}"
+        >
+          <ul class="accordion-list">
+            <ng-container
+              *ngFor="
+                let optionalItem of (quotes?.carts)[0]?.entries | slice: 1;
+                index as i
+              "
+            >
+              <li class="accordion-list-item row">
+                <div class="item-label" class="col-4">
+                  {{ optionalItem?.product?.name }}
+                </div>
+                <ng-container *ngFor="let cart of quotes?.carts">
+                  <div
+                    *ngIf="
+                      (cart?.entries)[i + 1]?.removeable &&
+                      !(cart?.entries)[i + 1]?.addable
+                    "
+                    class="col-4 notice"
+                  >
+                    {{
+                      (cart?.entries)[i + 1]?.totalPrice.value
+                        ? (cart?.entries)[i + 1]?.totalPrice.formattedValue
+                        : ('fscommon.notIncluded' | cxTranslate)
+                    }}
+                  </div>
+                  <div
+                    *ngIf="
+                      !(cart?.entries)[i + 1]?.removeable &&
+                      (cart?.entries)[i + 1]?.addable
+                    "
+                    class="col-4 notice"
+                  >
+                    {{ 'fscommon.notIncluded' | cxTranslate }}
+                  </div>
+                  <ng-container
+                    *ngIf="
+                      !(cart?.entries)[i + 1]?.removeable &&
+                      !(cart?.entries)[i + 1]?.addable
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        (cart?.entries)[i + 1]?.product?.bundleTemplates
+                          ?.length == 3
+                      "
+                      class="col-4 notice"
+                    >
+                      {{ 'fscommon.included' | cxTranslate }}
+                    </div>
+                    <div
+                      *ngIf="
+                        (cart?.entries)[i + 1]?.product?.bundleTemplates
+                          ?.length !== 3
+                      "
+                      class="col-4 notice"
+                    >
+                      {{ 'fscommon.notAvailableFull' | cxTranslate }}
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </li>
+            </ng-container>
+          </ul>
+        </cx-fs-accordion-item>
+      </div>
+    </div>
+    <ng-template
+      #generalInformationQuoteComparison
+      let-labelList="labelList"
+      let-configurable="configurable"
+    >
+      <ng-container
+        *ngFor="let insuredObjectItem of labelList; index as labelIndex"
+      >
+        <ng-container
+          *ngIf="
+            categoryConfig?.visibleInsuredObjects.includes(
+              insuredObjectItem?.label || insuredObjectItem?.key
+            )
+          "
+        >
+          <li
+            *ngIf="
+              getTranslation(
+                configurable ? 'quoteReview' : 'quote.details',
+                categoryConfig?.categoryCode,
+                insuredObjectItem?.label || insuredObjectItem?.key
+              ) as insuredObjectItemLabel
+            "
+            class="accordion-list-item row"
+          >
+            <div class="item-label" class="col-4">
+              {{ insuredObjectItemLabel }}
+            </div>
+            <ng-container *ngFor="let cart of quotes?.carts">
+              <ng-container
+                *ngTemplateOutlet="
+                  generalInformationQuoteValueComparison;
+                  context: {
+                    insuredObjectItem: configurable
+                      ? (((cart?.entries)[0]?.configurationInfos)[0]
+                          ?.configurationValues?.entry)[labelIndex]
+                      : ((cart.insuranceQuote?.insuredObjectList
+                          ?.insuredObjects)[0]?.insuredObjectItems)[labelIndex]
+                  }
+                "
+              >
+              </ng-container>
+            </ng-container>
+          </li>
+        </ng-container>
+      </ng-container>
+    </ng-template>
+  </div>
+</ng-container>
+<ng-template
+  #generalInformationQuoteValueComparison
+  let-insuredObjectItem="insuredObjectItem"
+>
+  <div class="col-4 notice">
+    {{ insuredObjectItem?.formattedValue || insuredObjectItem?.value }}
+  </div>
+</ng-template>
+<ng-template #noQuotes>
+  <h3>{{ 'quote.noQuotes' | cxTranslate }}</h3>
+</ng-template>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

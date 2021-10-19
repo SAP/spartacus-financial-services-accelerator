@@ -25,6 +25,11 @@ export const getQuoteDetails: MemoizedSelector<
   any
 > = createSelector(getQuotesState, fromQuote.getQuote);
 
+export const getQuotesComparison: MemoizedSelector<
+  StateWithMyAccount,
+  any
+> = createSelector(getQuotesState, fromQuote.getQuotesComparison);
+
 export const getQuotesLoaded: MemoizedSelector<
   StateWithMyAccount,
   boolean

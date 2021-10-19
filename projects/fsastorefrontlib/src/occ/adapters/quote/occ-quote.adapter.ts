@@ -1,6 +1,6 @@
 import { QUOTE_NORMALIZER } from '../../../core/my-account/connectors/converters';
 import { InsuranceQuoteList } from './../../occ-models/occ.models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -79,6 +79,19 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
     return this.http
       .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  compareQuotes(cartCodes: string[], userId: string) {
+    const url = this.occEndpointService.getUrl('compareQuotes', {
+      userId,
+    });
+    const params: HttpParams = new HttpParams().set(
+      'cartCodes',
+      cartCodes.toString()
+    );
+    return this.http
+      .get(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

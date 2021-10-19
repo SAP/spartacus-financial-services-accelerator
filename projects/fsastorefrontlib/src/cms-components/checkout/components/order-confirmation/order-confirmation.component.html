@@ -75,7 +75,7 @@
                 </ng-container>
               </div>
               <cx-fs-accordion-item
-                [opened]="ref.children.length > 0 ? false : true"
+                [opened]="ref.children.length === 0"
                 [title]="'fscommon.whatsIncluded' | cxTranslate"
               >
                 <div class="container">
