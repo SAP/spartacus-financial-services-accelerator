@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { provideDefaultConfig } from '@spartacus/core';
+import { provideConfig } from '@spartacus/core';
 import { UserComponentsModule } from '@spartacus/organization/administration/components';
 import { FSUnitUserCreateModule } from './create/unit-user-create.module';
 import { FSUserDetailsModule } from './details/user-details.module';
@@ -12,6 +12,6 @@ import { userCmsConfig } from './user.config';
     FSUserFormModule,
     FSUnitUserCreateModule,
   ],
-  providers: [provideDefaultConfig(userCmsConfig)],
+  providers: [provideConfig(userCmsConfig)],
 })
 export class FSUserComponentsModule {}

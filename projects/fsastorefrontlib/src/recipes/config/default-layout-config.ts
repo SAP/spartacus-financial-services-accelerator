@@ -54,6 +54,9 @@ export const layoutConfig: LayoutConfig = {
     CheckoutPageTemplate: {
       slots: ['TopContent', 'BodyContent', 'BottomContent'],
     },
+    MultiStepCheckoutSummaryPageTemplate: {
+      slots: ['TopContent', 'BodyContent', 'SideContent', 'BottomContent'],
+    },
     GeneralPageTemplate: {
       slots: [
         'Section1',
