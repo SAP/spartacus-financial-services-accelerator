@@ -83,8 +83,10 @@ export class OccQuoteAdapter implements QuoteAdapter {
   }
 
   compareQuotes(cartCodes: string[], userId: string) {
-    const url = this.occEndpointService.getUrl('compareQuotes', {
-      userId,
+    const url = this.occEndpointService.buildUrl('compareQuotes', {
+      urlParams: {
+        userId,
+      },
     });
     const params: HttpParams = new HttpParams().set(
       'cartCodes',

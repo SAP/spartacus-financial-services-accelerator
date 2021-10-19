@@ -6,7 +6,7 @@ import {
   CmsConfig,
   I18nModule,
   NotAuthGuard,
-  provideDefaultConfig,
+  provideConfig,
   UrlModule,
 } from '@spartacus/core';
 import { FormErrorsModule, SpinnerModule } from '@spartacus/storefront';
@@ -25,7 +25,7 @@ import { FSLoginRegisterComponent } from './login-register.component';
     SpinnerModule,
   ],
   providers: [
-    provideDefaultConfig(<CmsConfig>{
+    provideConfig(<CmsConfig>{
       cmsComponents: {
         ReturningCustomerLoginComponent: {
           component: FSLoginFormComponent,

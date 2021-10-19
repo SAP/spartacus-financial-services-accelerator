@@ -25,6 +25,7 @@ import { defaultCmsContentProviders, IconConfig } from '@spartacus/storefront';
 import { environment } from '../../environments/environment';
 import { occUserConfig } from 'projects/fsastorefrontlib/src/occ/services/default-occ-user-config';
 import { fsDefaultDateFormatConfigFactory } from 'projects/fsastorefrontlib/src/core/date-config/default-date-config';
+import { fsDefaultQuoteComparisonConfigFactory } from 'projects/fsastorefrontlib/src/core/quote-comparison-config/default-quote-comparison-config';
 
 @NgModule({
   providers: [
@@ -101,6 +102,7 @@ import { fsDefaultDateFormatConfigFactory } from 'projects/fsastorefrontlib/src/
     provideConfig(occProductConfig),
     provideConfig(occUserConfig),
     provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+    provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
   ],
 })
 export class FSConfigurationModule {}
