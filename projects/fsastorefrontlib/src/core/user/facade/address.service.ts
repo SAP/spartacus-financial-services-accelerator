@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CheckoutDeliveryService } from '@spartacus/checkout/core/facade';
+import { CheckoutDeliveryService } from '@spartacus/checkout/core';
 import {
   Address,
   CommandService,

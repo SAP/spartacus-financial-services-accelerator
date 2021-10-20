@@ -22,7 +22,7 @@ import { FSUpdateProfileComponent } from './update-profile/update-profile.compon
 import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { FSUserConnector } from '../../core/user/connectors/user-connector';
 import { OccFSUserAdapter } from '../../occ/adapters/user/occ-user.adapter';
-import { UserProfileConnector } from '@spartacus/user/profile/core/connectors/user-profile.connector';
+import { UserProfileConnector } from '@spartacus/user/profile/core';
 import { OccUserProfileAdapter } from '@spartacus/user/profile/occ';
 
 const routes: Routes = [

@@ -12,7 +12,7 @@ import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
-import { CheckoutDeliveryService, CheckoutService } from '@spartacus/checkout/core/facade';
+import { CheckoutDeliveryService, CheckoutService } from '@spartacus/checkout/core';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
