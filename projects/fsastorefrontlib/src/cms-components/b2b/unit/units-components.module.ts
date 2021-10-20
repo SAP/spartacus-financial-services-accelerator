@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
-  provideDefaultConfig,
-  provideDefaultConfigFactory,
+  provideConfig,
+  provideConfigFactory,
 } from '@spartacus/core';
 import { UnitsComponentsModule } from '@spartacus/organization/administration/components';
 import {
@@ -23,9 +23,9 @@ import { PotentialAssignmentsModule } from './potential-assignments/potential-as
     UnitsComponentsModule,
   ],
   providers: [
-    provideDefaultConfigFactory(unitsTableConfigFactoryFactory),
-    provideDefaultConfig(unitsRoutingConfig),
-    provideDefaultConfig(unitsCmsConfig),
+    provideConfigFactory(unitsTableConfigFactoryFactory),
+    provideConfig(unitsRoutingConfig),
+    provideConfig(unitsCmsConfig),
   ],
 })
 export class FSUnitsComponentsModule {}
