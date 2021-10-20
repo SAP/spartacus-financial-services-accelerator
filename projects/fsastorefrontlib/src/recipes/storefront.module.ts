@@ -27,9 +27,11 @@ import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-da
   ],
   exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
-  providers: [...defaultFSCmsContentProviders,     
+  providers: [
+    ...defaultFSCmsContentProviders,
     provideConfig(occUserConfig),
-    provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory)],
+    provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+  ],
 })
 export class FSStorefrontModule {
   static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {

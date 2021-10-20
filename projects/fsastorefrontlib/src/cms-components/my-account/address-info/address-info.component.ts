@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  TranslationService,
-  User,
-} from '@spartacus/core';
+import { TranslationService, User } from '@spartacus/core';
 import {
   AddressBookComponent,
   AddressBookComponentService,

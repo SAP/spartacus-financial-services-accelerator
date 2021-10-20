@@ -4,7 +4,6 @@ import {
   I18nConfig,
   OccConfig,
   provideConfig,
-  provideDefaultConfigFactory,
   SiteContextConfig,
 } from '@spartacus/core';
 import {
