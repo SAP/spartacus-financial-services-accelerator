@@ -35,10 +35,8 @@ import {
   LoginRouteModule,
   LogoutModule,
   MyCouponsModule,
-  MyInterestsModule,
   NavigationEventModule,
   NavigationModule,
-  NotificationPreferenceModule,
   OrderCancellationModule,
   OrderDetailsModule,
   OrderHistoryModule,
@@ -56,16 +54,12 @@ import {
   ProductReferencesModule,
   ProductSummaryModule,
   ProductTabsModule,
-  ReplenishmentOrderDetailsModule,
-  ReplenishmentOrderHistoryModule,
   ReturnRequestDetailModule,
   ReturnRequestListModule,
   SearchBoxModule,
   SiteContextSelectorModule,
-  StockNotificationModule,
   TabParagraphContainerModule,
   UserComponentModule,
-  WishListModule,
 } from '@spartacus/storefront';
 import { AdministrationFeatureModule } from './features/administration-feature.module';
 import { AsmFeatureModule } from './features/asm-feature.module';
@@ -87,7 +81,7 @@ import { SmartEditModule } from '@spartacus/smartedit';
 import { CheckoutModule } from '@spartacus/checkout';
 import { AsmOccModule } from '@spartacus/asm/occ';
 import { CheckoutOccModule } from '@spartacus/checkout/occ';
-import { OrderConfirmationModule, ReplenishmentOrderConfirmationModule } from '@spartacus/checkout/components';
+import { OrderConfirmationModule } from '@spartacus/checkout/components';
 import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEmailModule, UpdatePasswordModule, UpdateProfileModule } from '@spartacus/user/profile/components';
 import { UserAccountComponentsModule } from '@spartacus/user/account/components';
 
@@ -96,7 +90,7 @@ import { UserAccountComponentsModule } from '@spartacus/user/account/components'
     AsmModule,
     SmartEditModule,
     AuthModule.forRoot(),
-    LogoutModule, 
+    LogoutModule,
     LoginRouteModule,
     UserAccountComponentsModule,
     FormErrorsModule,
@@ -128,7 +122,7 @@ import { UserAccountComponentsModule } from '@spartacus/user/account/components'
     /************************* Anonymous Consents Core *************************/
     AnonymousConsentsModule.forRoot(),
     AnonymousConsentsDialogModule,
-    AnonymousConsentManagementBannerModule, 
+    AnonymousConsentManagementBannerModule,
 
     /************************* Product Core *************************/
     ProductModule.forRoot(),

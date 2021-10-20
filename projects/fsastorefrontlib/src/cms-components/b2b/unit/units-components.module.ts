@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {
-  provideConfig,
-  provideConfigFactory,
-} from '@spartacus/core';
+import { provideConfig, provideConfigFactory } from '@spartacus/core';
 import { UnitsComponentsModule } from '@spartacus/organization/administration/components';
 import {
   unitsCmsConfig,

@@ -69,33 +69,13 @@ export class FormPersistenceService implements OnDestroy {
     );
   }
 
-  //
-  //    * Gets and transforms state from different sources into the form that should
-  //    * be saved in storage.
-  //    */
-  //      protected getUploadedFiles(): Observable<{files:File[]}> {
-  //         this.store.select(uploadSelector.getUploadFiles)
-  //         return this.store.pipe(
-  //             select(uploadSelector.getUploadFiles),
-  //             filter((state) => !!state),
-  //             map((state) => {
-  //                 console.log(state);
-  //                 return {
-  //                     files: state.uploadedFiles.content.files
-  //                 }
-  //             })
-  //         );
-  //       }
-
   /**
    * Function called on each browser storage read.
    * Used to update state from browser -> state.
    */
   protected onRead(state: { files: File[] }) {
     if (state) {
-      state.files.forEach(file => {
-        this.store.dispatch(new fromAction.UploadFileSuccess(file));
-      });
+      this.store.dispatch(new fromAction.SetUploadedFiles(state.files));
     }
   }
 
