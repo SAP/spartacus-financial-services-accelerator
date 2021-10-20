@@ -30,7 +30,7 @@ const formDataNew: YFormData = {
 };
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
 
@@ -58,7 +58,7 @@ describe('OccFormAdapter', () => {
     occFormAdapter = TestBed.inject(OccFormAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -73,11 +73,13 @@ describe('OccFormAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === formDataEndpoint && req.method === 'PUT';
         }, `PUT method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           formDataEndpoint,
           {
-            userId: OCC_USER_ID_CURRENT,
-            formDataId,
+            urlParams: {
+              userId: OCC_USER_ID_CURRENT,
+              formDataId,
+            },
           }
         );
       })
@@ -92,10 +94,12 @@ describe('OccFormAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === createFormDataEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           createFormDataEndpoint,
           {
-            userId: OCC_USER_ID_ANONYMOUS,
+            urlParams: {
+              userId: OCC_USER_ID_ANONYMOUS,
+            },
           }
         );
       })
@@ -112,11 +116,13 @@ describe('OccFormAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === formDataEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           formDataEndpoint,
           {
-            userId: OCC_USER_ID_CURRENT,
-            formDataId,
+            urlParams: {
+              userId: OCC_USER_ID_CURRENT,
+              formDataId,
+            },
           }
         );
       })
@@ -137,10 +143,12 @@ describe('OccFormAdapter', () => {
           return req.url === formDefinitionEndpoint && req.method === 'GET';
         }, `GET method and url`);
 
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           formDefinitionEndpoint,
           {
-            formDefinitionId: formId,
+            urlParams: {
+              formDefinitionId: formId,
+            },
           }
         );
       })
@@ -157,7 +165,7 @@ describe('OccFormAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === formDefinitionsEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           formDefinitionsEndpoint
         );
       })
