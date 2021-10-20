@@ -71,7 +71,6 @@ export class ChangeRequestService {
       .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
-        console.log(occUserId, this.requestId);
         if (this.requestId) {
           this.store.dispatch(
             new fromAction.LoadChangeRequest({
