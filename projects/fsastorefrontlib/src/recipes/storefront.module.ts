@@ -13,6 +13,8 @@ import { CmsLibModule } from '../cms-components/cms-lib.module';
 import { OccModule } from '../occ/occ.module';
 import { defaultFSCmsContentProviders } from './config/messages-cms-structure';
 import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
+import { occUserConfig } from '../occ/services/default-occ-user-config';
+import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
 
 @NgModule({
   imports: [
@@ -25,13 +27,15 @@ import { FSGlobalMessageModule } from '../core/global-message/global-message.mod
   ],
   exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
-  providers: [...defaultFSCmsContentProviders],
+  providers: [...defaultFSCmsContentProviders,     
+    provideConfig(occUserConfig),
+    provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory)],
 })
 export class FSStorefrontModule {
   static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
-      providers: [provideConfig(config), ...defaultFSCmsContentProviders],
+      providers: [provideConfig(config)],
     };
   }
 }
