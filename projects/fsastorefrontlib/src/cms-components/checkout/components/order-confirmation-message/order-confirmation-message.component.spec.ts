@@ -1,15 +1,15 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckoutService } from '@spartacus/core';
+import { CheckoutFacade } from '@spartacus/checkout/root';
 import { OrderConfirmationMessageComponent } from './order-confirmation-message.component';
 
-class MockCheckoutService {
+class MockCheckoutFacade {
   getOrderDetails() {}
 }
 
 describe('OrderConfirmationMessageComponent', () => {
   let component: OrderConfirmationMessageComponent;
   let fixture: ComponentFixture<OrderConfirmationMessageComponent>;
-  let checkoutService: CheckoutService;
+  let checkoutService: CheckoutFacade;
 
   beforeEach(
     waitForAsync(() => {
@@ -17,8 +17,8 @@ describe('OrderConfirmationMessageComponent', () => {
         declarations: [OrderConfirmationMessageComponent],
         providers: [
           {
-            provide: CheckoutService,
-            useClass: MockCheckoutService,
+            provide: CheckoutFacade,
+            useClass: MockCheckoutFacade,
           },
         ],
       }).compileComponents();
@@ -29,7 +29,7 @@ describe('OrderConfirmationMessageComponent', () => {
     fixture = TestBed.createComponent(OrderConfirmationMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    checkoutService = TestBed.inject(CheckoutService);
+    checkoutService = TestBed.inject(CheckoutFacade);
     component.ngOnInit();
   });
 

@@ -1,7 +1,15 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { CheckoutDeliveryService, StateWithUser, User } from '@spartacus/core';
+import {
+  AddressValidation,
+  StateWithUser,
+  User,
+  UserAddressConnector,
+} from '@spartacus/core';
+import { CheckoutDeliveryService } from '@spartacus/checkout/core';
 import { FSAddressService } from './address.service';
+import { of } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
 const formContent = {
   personalDetails: {
@@ -27,10 +35,19 @@ const mockUser: User = {
     defaultAddress: true,
   },
 };
+const mockAddressVerificationResult: AddressValidation = {
+  decision: 'ACCEPT',
+};
 
 class MockCheckoutDeliveryService {
   setDeliveryAddress() {}
   createAndSetAddress() {}
+}
+
+class MockUserAddressConnector implements Partial<UserAddressConnector> {
+  verify = createSpy('MockUserAddressConnector.verify Spy').and.returnValue(
+    of(mockAddressVerificationResult)
+  );
 }
 
 describe('FSAddressService', () => {
@@ -45,6 +62,10 @@ describe('FSAddressService', () => {
         {
           provide: CheckoutDeliveryService,
           useClass: MockCheckoutDeliveryService,
+        },
+        {
+          provide: UserAddressConnector,
+          useClass: MockUserAddressConnector,
         },
       ],
     });

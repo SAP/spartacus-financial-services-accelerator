@@ -15,7 +15,7 @@ const agentsEndpoint = 'agents';
 const agentEndpoint = 'agent';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -71,7 +71,9 @@ describe('OccAgentAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           agentEndpoint,
           {
-            id,
+            urlParams: {
+              id,
+            },
           }
         );
       })

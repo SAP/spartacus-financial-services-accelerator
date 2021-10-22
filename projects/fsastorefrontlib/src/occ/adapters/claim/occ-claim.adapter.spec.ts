@@ -67,7 +67,9 @@ describe('OccClaimAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           claimsEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
@@ -85,8 +87,10 @@ describe('OccClaimAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           claimEndpoint,
           {
-            userId,
-            claimId,
+            urlParams: {
+              userId,
+              claimId,
+            },
           }
         );
       })
@@ -104,8 +108,10 @@ describe('OccClaimAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           claimEndpoint,
           {
-            userId,
-            claimId,
+            urlParams: {
+              userId,
+              claimId,
+            },
           }
         );
       })
@@ -123,7 +129,9 @@ describe('OccClaimAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           createClaimEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
@@ -141,8 +149,10 @@ describe('OccClaimAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           claimEndpoint,
           {
-            userId,
-            claimId,
+            urlParams: {
+              userId,
+              claimId,
+            },
           }
         );
       })
@@ -158,8 +168,10 @@ describe('OccClaimAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           claimEndpoint,
           {
-            userId,
-            claimId,
+            urlParams: {
+              userId,
+              claimId,
+            },
           }
         );
       })

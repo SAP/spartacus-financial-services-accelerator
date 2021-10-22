@@ -78,9 +78,14 @@ describe('OccChangeRequestAdapter', () => {
             req.method === 'POST'
           );
         }, `POST method and url`);
-        expect(
-          occEndpointService.buildUrl
-        ).toHaveBeenCalledWith(createChangeRequestEndpoint, { userId });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          createChangeRequestEndpoint,
+          {
+            urlParams: {
+              userId,
+            },
+          }
+        );
       })
     );
   });
@@ -100,8 +105,10 @@ describe('OccChangeRequestAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           simulateChangeRequestsEndpoint,
           {
-            userId,
-            requestId,
+            urlParams: {
+              userId,
+              requestId,
+            },
           }
         );
       })
@@ -120,8 +127,10 @@ describe('OccChangeRequestAdapter', () => {
       expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
         changeRequestEndpoint,
         {
-          userId,
-          requestId,
+          urlParams: {
+            userId,
+            requestId,
+          },
         }
       );
     })
@@ -149,8 +158,10 @@ describe('OccChangeRequestAdapter', () => {
     expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
       changeRequestEndpoint,
       {
-        userId,
-        requestId,
+        urlParams: {
+          userId,
+          requestId,
+        },
       }
     );
   });
@@ -173,8 +184,10 @@ describe('OccChangeRequestAdapter', () => {
       expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
         cancelChangeRequestsEndpoint,
         {
-          userId,
-          requestId,
+          urlParams: {
+            userId,
+            requestId,
+          },
         }
       );
     })
@@ -204,8 +217,10 @@ describe('OccChangeRequestAdapter', () => {
     expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
       cancelChangeRequestsEndpoint,
       {
-        userId,
-        requestId,
+        urlParams: {
+          userId,
+          requestId,
+        },
       }
     );
   });

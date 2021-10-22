@@ -29,18 +29,12 @@ export class FSUpdateProfileComponent extends UpdateProfileComponent
     super(service);
   }
 
-  user = this.userAccountFacade.get();
+  user$ = this.userAccountFacade.get();
   subscription = new Subscription();
 
   ngOnInit() {
     this.subscription.add(
-      this.user
-        .pipe(
-          map(user => {
-            this.service.patchForm(user);
-          })
-        )
-        .subscribe()
+      this.user$.pipe(map(user => this.service.patchForm(user))).subscribe()
     );
   }
 
