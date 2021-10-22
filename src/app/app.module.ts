@@ -7,6 +7,7 @@ import { SiteContextModule } from '@spartacus/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FSModule } from './spartacus/fs.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,9 @@ import { FSModule } from './spartacus/fs.module';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     SiteContextModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
     FSModule,
   ],
   bootstrap: [AppComponent],
