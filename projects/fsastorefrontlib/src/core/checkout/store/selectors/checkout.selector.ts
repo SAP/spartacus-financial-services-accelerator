@@ -1,6 +1,9 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import { StateUtils } from '@spartacus/core';
-import { FSCheckoutDataState, FSCheckoutState, StateWithFSCheckout } from '..';
+import {
+  FSCheckoutDataState,
+  FSCheckoutState,
+  StateWithFSCheckout,
+} from '../checkout-state';
 
 import * as fromFeature from './feature.selector';
 

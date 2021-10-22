@@ -18,6 +18,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     SiteContextModule.forRoot(),
+    // Store Devtools provides developer tools and instrumentation for Store like Redux DevTools for debugging application's state changes.
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
