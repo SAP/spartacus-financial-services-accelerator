@@ -1,13 +1,13 @@
 import { Action } from '@ngrx/store';
 
-export const SET_IDENTIFICATION_TYPE = '[Cart] Set Identification Type';
+export const SET_IDENTIFICATION_TYPE = '[FSCheckout] Set Identification Type';
 export const SET_IDENTIFICATION_TYPE_SUCCESS =
-  '[Cart] Set Identification Type Success';
+  '[FSCheckout] Set Identification Type Success';
 export const SET_IDENTIFICATION_TYPE_FAIL =
-  '[Cart] Set Identification Type Fail';
+  '[FSCheckout] Set Identification Type Fail';
 export const SET_LEGAL_INFORMATION_SUCCESS =
-  '[Cart] Set Legal Information Success';
-export const SET_PAYMENT_TYPE_SUCCESS = '[Cart] Set Payment Type Success';
+  '[FSCheckout] Set Legal Information Success';
+export const SET_PAYMENT_TYPE_SUCCESS = '[FSCheckout] Set Payment Type Success';
 
 export class SetIdentificationType implements Action {
   readonly type = SET_IDENTIFICATION_TYPE;
