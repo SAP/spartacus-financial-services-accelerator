@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { DateConfig } from './../../../core/date-config/date-config';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'cx-fs-update-profile',
@@ -29,6 +30,7 @@ export class FSUpdateProfileComponent extends UpdateProfileComponent
     super(service);
   }
 
+  form: FormGroup = this.service.form;
   user$ = this.userAccountFacade.get();
   subscription = new Subscription();
 
