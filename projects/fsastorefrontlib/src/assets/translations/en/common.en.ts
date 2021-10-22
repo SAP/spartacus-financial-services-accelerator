@@ -34,6 +34,7 @@ export const fscommon = {
     retrieve: 'Retrieve',
     notAvailable: 'N/A',
     contractId: 'ContractId',
+    title: 'Title',
     orderTotal: 'Order total',
     orderConfirmation: 'Confirmation',
     orderNumber: 'Order Number',
