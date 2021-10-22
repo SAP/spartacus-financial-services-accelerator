@@ -1,31 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { effects } from './effects/index';
 import { reducerProvider, reducerToken, metaReducers } from './reducers/index';
-import {
-  StateConfig,
-  StorageSyncType,
-  StateModule,
-  ConfigModule,
-} from '@spartacus/core';
+import { StateModule } from '@spartacus/core';
 import { MY_ACCOUNT_FEATURE } from './my-account-state';
+import { MyAccountPersistenceService } from '../services/my-account-persistance.service';
 
-// export function claimConfigFactory(): StateConfig {
-//   const config: StateConfig = {
-//     state: {
-//       storageSync: {
-//         keys: {
-//           [`assets.claims.content.claimNumber`]: StorageSyncType.LOCAL_STORAGE,
-//           [`assets.claims.content.claimStatus`]: StorageSyncType.LOCAL_STORAGE,
-//         },
-//       },
-//     },
-//   };
-//   return config;
-// }
+export function claimStatePersistenceFactory(
+  claimPersistenceService: MyAccountPersistenceService
+): () => void {
+  const result = () => claimPersistenceService.initSync();
+  return result;
+}
 
 @NgModule({
   imports: [
@@ -37,6 +26,14 @@ import { MY_ACCOUNT_FEATURE } from './my-account-state';
     }),
     EffectsModule.forFeature(effects),
   ],
-  providers: [reducerProvider],
+  providers: [
+    reducerProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: claimStatePersistenceFactory,
+      deps: [MyAccountPersistenceService],
+      multi: true,
+    },
+  ],
 })
 export class MyAccountStoreModule {}
