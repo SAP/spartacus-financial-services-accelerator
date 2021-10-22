@@ -69,7 +69,7 @@ export class MyAccountPersistenceService implements OnDestroy {
   protected getClaimContent(): Observable<any> {
     return this.store.pipe(
       select(getMyAccountState),
-      filter(state => !!state),
+      filter(state => !!state?.claims?.content),
       map(state => {
         return {
           claimNumber: state.claims.content[this.claimNumber],
