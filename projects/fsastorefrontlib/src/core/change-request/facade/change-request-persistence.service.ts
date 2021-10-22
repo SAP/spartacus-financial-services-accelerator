@@ -8,37 +8,44 @@ import {
 import { StatePersistenceService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { FormsState, FORM_FEATURE, StateWithForm } from '../store/state';
 import * as fromAction from '../store/actions';
+import {
+  ChangeRequestsState,
+  CHANGE_REQUEST_FEATURE,
+  StateWithChangeRequest,
+} from '../store/change-request-state';
 
-export const getFormsState: MemoizedSelector<
-  StateWithForm,
-  FormsState
-> = createFeatureSelector<FormsState>(FORM_FEATURE);
+export const getChangeRequestState: MemoizedSelector<
+  StateWithChangeRequest,
+  ChangeRequestsState
+> = createFeatureSelector<ChangeRequestsState>(CHANGE_REQUEST_FEATURE);
 
 /**
- * Forms state synced to browser storage.
+ * Change Request state synced to browser storage.
  */
-export type SyncedFormsState = Partial<FormsState>;
+export type SyncedChangeRequestState = Partial<ChangeRequestsState>;
 /**
- * Responsible for storing Form state in the browser storage.
+ * Responsible for storing Change Request state in the browser storage.
  * Uses `StatePersistenceService` mechanism.
  */
 @Injectable({
   providedIn: 'root',
 })
-export class FormPersistenceService implements OnDestroy {
+export class ChangeRequestPersistenceService implements OnDestroy {
   protected subscription = new Subscription();
 
   constructor(
     protected statePersistenceService: StatePersistenceService,
-    protected store: Store<StateWithForm>
+    protected store: Store<StateWithChangeRequest>
   ) {}
 
   /**
    * Identifier used for storage key.
    */
-  protected key = 'form';
+  protected key = 'changeRequests';
+
+  protected requestId = 'requestId';
+  protected requestStatus = 'requestStatus';
 
   /**
    * Initializes the synchronization between state and browser storage.
@@ -47,7 +54,7 @@ export class FormPersistenceService implements OnDestroy {
     this.subscription.add(
       this.statePersistenceService.syncWithStorage({
         key: this.key,
-        state$: this.getUploadedFiles(),
+        state$: this.getChangeRequestData(),
         onRead: state => this.onRead(state),
       })
     );
@@ -57,13 +64,14 @@ export class FormPersistenceService implements OnDestroy {
    * Gets and transforms state from different sources into the form that should
    * be saved in storage.
    */
-  protected getUploadedFiles(): Observable<{ files: File[] }> {
+  protected getChangeRequestData(): Observable<any> {
     return this.store.pipe(
-      select(getFormsState),
+      select(getChangeRequestState),
       filter(state => !!state),
       map(state => {
         return {
-          files: state.uploadedFiles.content.files,
+          requestId: state.changeRequest.value.content[this.requestId],
+          requestStatus: state.changeRequest.value.content[this.requestStatus],
         };
       })
     );
@@ -73,9 +81,9 @@ export class FormPersistenceService implements OnDestroy {
    * Function called on each browser storage read.
    * Used to update state from browser -> state.
    */
-  protected onRead(state: { files: File[] }) {
-    if (state) {
-      this.store.dispatch(new fromAction.SetUploadedFiles(state.files));
+  protected onRead(state: any) {
+    if (state && state[this.requestId]) {
+      this.store.dispatch(new fromAction.LoadChangeRequestSuccess(state));
     }
   }
 

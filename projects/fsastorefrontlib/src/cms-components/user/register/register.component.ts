@@ -20,7 +20,7 @@ import { CustomFormValidators } from '@spartacus/storefront';
   selector: 'cx-fs-register',
   templateUrl: './register.component.html',
 })
-export class FSRegisterComponent extends RegisterComponent {
+export class FSRegisterComponent extends RegisterComponent implements OnInit {
   constructor(
     protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
