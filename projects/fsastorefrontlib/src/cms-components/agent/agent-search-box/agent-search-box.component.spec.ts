@@ -67,8 +67,9 @@ describe('AgentSearchBoxComponent', () => {
 
   it('should dispatch new query', () => {
     component.findAgents(query);
-    expect(routingService.go).toHaveBeenCalledWith(['agent-locator'], {
-      query,
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'agent-locator',
+      params: { query },
     });
   });
 });

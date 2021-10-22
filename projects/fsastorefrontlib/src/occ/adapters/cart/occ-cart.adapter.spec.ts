@@ -18,7 +18,7 @@ const pricingData: PricingData = {};
 const addToCartEndpoint = 'addToCart';
 const startBundleEndpoint = 'startBundle';
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -62,8 +62,10 @@ describe('OccCartAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           addToCartEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })
@@ -90,8 +92,10 @@ describe('OccCartAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           startBundleEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })

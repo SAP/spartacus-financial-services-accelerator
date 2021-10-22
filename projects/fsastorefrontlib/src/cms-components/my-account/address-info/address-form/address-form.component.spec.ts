@@ -4,8 +4,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {
   Address,
-  AddressValidation,
-  CheckoutDeliveryService,
   Country,
   GlobalMessageService,
   I18nTestingModule,
@@ -77,20 +75,12 @@ class MockOccValueListService {
     return of({ results: [country] });
   }
 }
-class MockCheckoutDeliveryService {
-  clearAddressVerificationResults = createSpy();
-  verifyAddress = createSpy();
-  getAddressVerificationResults(): Observable<AddressValidation> {
-    return of({ decision: 'ACCEPT' });
-  }
-}
 
 describe('FSAddressFormComponent', () => {
   let component: FSAddressFormComponent;
   let fixture: ComponentFixture<FSAddressFormComponent>;
   let controls: FormGroup['controls'];
 
-  let mockCheckoutDeliveryService: CheckoutDeliveryService;
   let userAddressService: UserAddressService;
   let userService: UserService;
   let mockGlobalMessageService: any;
@@ -113,10 +103,6 @@ describe('FSAddressFormComponent', () => {
         declarations: [FSAddressFormComponent],
         providers: [
           { provide: ModalService, useValue: { open: () => {} } },
-          {
-            provide: CheckoutDeliveryService,
-            useClass: MockCheckoutDeliveryService,
-          },
           { provide: UserService, useClass: MockUserService },
           { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: UserAddressService, useClass: MockUserAddressService },
@@ -131,7 +117,6 @@ describe('FSAddressFormComponent', () => {
 
       userService = TestBed.inject(UserService);
       userAddressService = TestBed.inject(UserAddressService);
-      mockCheckoutDeliveryService = TestBed.inject(CheckoutDeliveryService);
     })
   );
 
@@ -157,10 +142,6 @@ describe('FSAddressFormComponent', () => {
     spyOn(userAddressService, 'loadDeliveryCountries').and.stub();
     spyOn(userAddressService, 'getRegions').and.returnValue(of([]));
     spyOn(userAddressService, 'getAddresses').and.returnValue(of([]));
-    spyOn(
-      mockCheckoutDeliveryService,
-      'getAddressVerificationResults'
-    ).and.returnValue(of({}));
     component.ngOnInit();
 
     expect(component.addressForm.get('firstName').value).toEqual(
@@ -183,10 +164,6 @@ describe('FSAddressFormComponent', () => {
     spyOn(userAddressService, 'loadDeliveryCountries').and.stub();
     spyOn(userAddressService, 'getRegions').and.returnValue(of([]));
     spyOn(userAddressService, 'getAddresses').and.returnValue(of([]));
-    spyOn(
-      mockCheckoutDeliveryService,
-      'getAddressVerificationResults'
-    ).and.returnValue(of({}));
     component.user = null;
     component.ngOnInit();
 
@@ -218,6 +195,5 @@ describe('FSAddressFormComponent', () => {
     component.verifyAddress();
     expect(component.addressForm.get('firstName').value).toEqual(null);
     expect(component.addressForm.get('lastName').value).toEqual(null);
-    expect(mockCheckoutDeliveryService.verifyAddress).not.toHaveBeenCalled();
   });
 });

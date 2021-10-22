@@ -22,7 +22,7 @@ const stepData: FSStepData = {
 };
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -46,7 +46,7 @@ describe('OccUserRequestAdapter', () => {
     adapter = TestBed.inject(OccUserRequestAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -61,11 +61,13 @@ describe('OccUserRequestAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === userRequestEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           userRequestEndpoint,
           {
-            userId,
-            requestId,
+            urlParams: {
+              userId,
+              requestId,
+            },
           }
         );
       })
@@ -83,11 +85,13 @@ describe('OccUserRequestAdapter', () => {
           req.method === 'PATCH'
         );
       }, `PATCH method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+      expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
         userRequestEndpoint,
         {
-          userId,
-          requestId,
+          urlParams: {
+            userId,
+            requestId,
+          },
         }
       );
     })
@@ -101,11 +105,13 @@ describe('OccUserRequestAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === submitUserRequestEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           submitUserRequestEndpoint,
           {
-            userId,
-            requestId,
+            urlParams: {
+              userId,
+              requestId,
+            },
           }
         );
       })

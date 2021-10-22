@@ -10,7 +10,6 @@ import {
 } from '@spartacus/core';
 import {
   FormErrorsModule,
-  IconModule,
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
