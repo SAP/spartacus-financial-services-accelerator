@@ -1,47 +1,37 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { StateUtils } from '@spartacus/core';
-import {
-  FSCheckoutState,
-  FSCheckoutStepsState,
-  FSStateWithCheckout,
-} from '../checkout-state';
-import { getCheckoutState } from './feature.selector';
+import { FSCheckoutDataState, FSCheckoutState, StateWithFSCheckout } from '..';
 
-const getIdentificationTypeSelector = (state: FSCheckoutStepsState) =>
+import * as fromFeature from './feature.selector';
+
+const getIdentificationTypeSelector = (state: FSCheckoutDataState) =>
   state.identificationType;
 
-const getLegalInformationTypeSelector = (state: FSCheckoutStepsState) =>
+const getLegalInformationTypeSelector = (state: FSCheckoutDataState) =>
   state.legalInformation;
 
-const getPaymentTypeSelector = (state: FSCheckoutStepsState) =>
+const getPaymentTypeSelector = (state: FSCheckoutDataState) =>
   state.paymentType;
 
-export const getCheckoutStepsState: MemoizedSelector<
-  FSStateWithCheckout,
-  StateUtils.LoaderState<FSCheckoutStepsState>
+export const getCheckoutState: MemoizedSelector<
+  StateWithFSCheckout,
+  FSCheckoutDataState
 > = createSelector(
-  getCheckoutState,
-  (checkoutState: FSCheckoutState) => checkoutState.steps
-);
-
-export const getCheckoutSteps: MemoizedSelector<
-  FSStateWithCheckout,
-  FSCheckoutStepsState
-> = createSelector(getCheckoutStepsState, state =>
-  StateUtils.loaderValueSelector(state)
+  fromFeature.getCheckoutState,
+  (checkoutState: FSCheckoutState) => checkoutState.fscheckout
 );
 
 export const getIdentificationType: MemoizedSelector<
-  FSStateWithCheckout,
+  StateWithFSCheckout,
   boolean
-> = createSelector(getCheckoutSteps, getIdentificationTypeSelector);
+> = createSelector(getCheckoutState, getIdentificationTypeSelector);
 
 export const getLegalInformation: MemoizedSelector<
-  FSStateWithCheckout,
+  StateWithFSCheckout,
   boolean
-> = createSelector(getCheckoutSteps, getLegalInformationTypeSelector);
+> = createSelector(getCheckoutState, getLegalInformationTypeSelector);
 
 export const getPaymentType: MemoizedSelector<
-  FSStateWithCheckout,
+  StateWithFSCheckout,
   string
-> = createSelector(getCheckoutSteps, getPaymentTypeSelector);
+> = createSelector(getCheckoutState, getPaymentTypeSelector);
