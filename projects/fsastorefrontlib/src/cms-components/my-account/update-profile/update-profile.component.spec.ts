@@ -4,6 +4,8 @@ import {
   EventEmitter,
   Input,
   Output,
+  Pipe,
+  PipeTransform,
 } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockTranslatePipe, RoutingService, Title } from '@spartacus/core';
@@ -32,6 +34,13 @@ const MockDateConfig: DateConfig = {
     format: 'yyyy-mm-dd',
   },
 };
+
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() {}
+}
 
 @Component({
   selector: 'cx-fs-update-profile-form',
@@ -85,6 +94,7 @@ describe('FSUpdateProfileComponent', () => {
           MockUpdateProfileFormComponent,
           MockCxSpinnerComponent,
           MockTranslatePipe,
+          MockUrlPipe,
         ],
         providers: [
           {
