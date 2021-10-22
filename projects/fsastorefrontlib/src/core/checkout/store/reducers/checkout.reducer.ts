@@ -1,7 +1,5 @@
+import { FSCheckoutDataState } from '../checkout-state';
 import * as fromAction from '../actions';
-import { CheckoutAction } from '../actions/checkout.action';
-import { CheckoutActions } from '@spartacus/checkout/core';
-import { FSCheckoutDataState } from '..';
 
 export const initialState: FSCheckoutDataState = {
   legalInformation: false,
@@ -11,11 +9,7 @@ export const initialState: FSCheckoutDataState = {
 
 export function reducer(
   state = initialState,
-  action:
-    | fromAction.CheckoutAction
-    | CheckoutAction
-    | CheckoutActions.CheckoutAction
-    | CheckoutActions.CheckoutClearMiscsData
+  action: fromAction.CheckoutAction
 ): FSCheckoutDataState {
   switch (action.type) {
     case fromAction.SET_IDENTIFICATION_TYPE_SUCCESS: {
