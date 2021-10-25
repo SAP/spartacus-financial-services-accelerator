@@ -8,7 +8,6 @@ import {
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { CHECKOUT_FEATURE, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import * as fromAction from '../store/actions';
 import * as fromReducers from './../store/reducers/index';
@@ -18,7 +17,9 @@ import { FSCheckoutConfigService } from '../../../core/checkout/services/checkou
 
 import createSpy = jasmine.createSpy;
 import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import { StateWithFSCheckout } from '../store/checkout-state';
 
+const fsCheckout = 'fscheckout';
 const identificationType = 'idType';
 const paymentType = 'paymentCode';
 const mockInitialStep: FSCheckoutStep = {
@@ -56,9 +57,9 @@ class MockRoutingService {
   go = createSpy();
 }
 
-describe('FSCheckoutServiceTest', () => {
+describe('FSCheckoutService', () => {
   let service: FSCheckoutService;
-  let store: Store<FSStateWithCheckout>;
+  let store: Store<StateWithFSCheckout>;
   let checkoutDeliveryService: CheckoutDeliveryService;
   let userIdService: UserIdService;
   let cartService: ActiveCartService;
@@ -69,7 +70,7 @@ describe('FSCheckoutServiceTest', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(CHECKOUT_FEATURE, fromReducers.getReducers()),
+        StoreModule.forFeature(fsCheckout, fromReducers.getReducers()),
       ],
       providers: [
         FSCheckoutService,

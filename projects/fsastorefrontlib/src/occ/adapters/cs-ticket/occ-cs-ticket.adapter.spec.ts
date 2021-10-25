@@ -19,7 +19,7 @@ const ticketData = {
 };
 const csTicketEndpoint = 'createCsTicket';
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -45,7 +45,7 @@ describe('OccCsTicketAdapter', () => {
     adapter = TestBed.inject(OccCsTicketAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   describe('createCsTicketForAgent', () => {

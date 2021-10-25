@@ -17,7 +17,7 @@ const updateQuoteEndpoint = 'updateQuote';
 const quoteActionEndpoint = 'quoteAction';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -41,7 +41,7 @@ describe('OccQuoteAdapter', () => {
     adapter = TestBed.inject(OccQuoteAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -56,9 +56,14 @@ describe('OccQuoteAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === quotesEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(quotesEndpoint, {
-          userId,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          quotesEndpoint,
+          {
+            urlParams: {
+              userId,
+            },
+          }
+        );
       })
     );
   });
@@ -71,11 +76,13 @@ describe('OccQuoteAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === updateQuoteEndpoint && req.method === 'PATCH';
         }, `PATCH method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           updateQuoteEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })
@@ -92,11 +99,13 @@ describe('OccQuoteAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === quoteActionEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           quoteActionEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })

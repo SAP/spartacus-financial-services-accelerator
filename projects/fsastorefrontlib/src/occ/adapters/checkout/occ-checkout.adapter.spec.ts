@@ -61,8 +61,10 @@ describe('OccCheckoutAdapter', () => {
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           userIdentificationEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })

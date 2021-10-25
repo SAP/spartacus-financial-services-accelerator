@@ -11,7 +11,7 @@ const productCodes: string[] = ['product1', 'product2'];
 const billingtimeEndpoint = 'billingTime';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {

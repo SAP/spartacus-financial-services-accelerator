@@ -4,21 +4,43 @@ import {
   EventEmitter,
   Input,
   Output,
+  Pipe,
+  PipeTransform,
 } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavigationExtras } from '@angular/router';
-import {
-  GlobalMessage,
-  GlobalMessageService,
-  GlobalMessageType,
-  RoutingService,
-  Title,
-  UrlCommands,
-  UserService,
-} from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { MockTranslatePipe, RoutingService, Title } from '@spartacus/core';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { of } from 'rxjs';
 import { FSUser } from '../../../occ/occ-models';
+import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { FSUpdateProfileComponent } from './update-profile.component';
+import { DateConfig } from './../../../core/date-config/date-config';
+import { FormControl, FormGroup } from '@angular/forms';
+
+const mockUser = {
+  firstName: 'Donna',
+  lastName: 'Moore',
+  dateOfBirth: '10-10-1988',
+  contactInfos: ['3333'],
+};
+const mockForm: FormGroup = new FormGroup({
+  firstName: new FormControl(),
+  lastName: new FormControl(),
+  dateOfBirth: new FormControl(),
+  contactInfos: new FormControl(),
+});
+const MockDateConfig: DateConfig = {
+  date: {
+    format: 'yyyy-mm-dd',
+  },
+};
+
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() {}
+}
 
 @Component({
   selector: 'cx-fs-update-profile-form',
@@ -41,49 +63,28 @@ class MockUpdateProfileFormComponent {
 })
 class MockCxSpinnerComponent {}
 
-class UserServiceMock {
-  get(): Observable<FSUser> {
-    return of();
-  }
-
-  getTitles(): Observable<Title[]> {
-    return of();
-  }
-
-  loadTitles(): void {}
-
-  updatePersonalDetails(): void {}
-
-  resetUpdatePersonalDetailsProcessingState(): void {}
-
-  getUpdatePersonalDetailsResultLoading(): Observable<boolean> {
-    return of(true);
-  }
-
-  getUpdatePersonalDetailsResultSuccess(): Observable<boolean> {
-    return of();
-  }
-}
-class RoutingServiceMock {
-  go(
-    _commands: any[] | UrlCommands,
-    _query?: object,
-    _extras?: NavigationExtras
-  ): void {}
+class MockFSUpdateProfileComponentService {
+  patchForm() {}
+  updateProfile() {}
 }
 
-class GlobalMessageServiceMock {
-  add(_message: GlobalMessage): void {}
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
+  }
+}
+class MockRoutingService {
+  go() {}
 }
 
-describe('UpdateProfileComponent', () => {
+describe('FSUpdateProfileComponent', () => {
   let component: FSUpdateProfileComponent;
   let fixture: ComponentFixture<FSUpdateProfileComponent>;
   let el: DebugElement;
 
-  let userService: UserService;
   let routingService: RoutingService;
-  let globalMessageService: GlobalMessageService;
+  let fSUpdateProfileComponentService: FSUpdateProfileComponentService;
+  let userAccountFacade: UserAccountFacade;
 
   beforeEach(
     waitForAsync(() => {
@@ -92,19 +93,25 @@ describe('UpdateProfileComponent', () => {
           FSUpdateProfileComponent,
           MockUpdateProfileFormComponent,
           MockCxSpinnerComponent,
+          MockTranslatePipe,
+          MockUrlPipe,
         ],
         providers: [
           {
-            provide: UserService,
-            useClass: UserServiceMock,
+            provide: FSUpdateProfileComponentService,
+            useClass: MockFSUpdateProfileComponentService,
+          },
+          {
+            provide: UserAccountFacade,
+            useClass: MockUserAccountFacade,
+          },
+          {
+            provide: DateConfig,
+            useValue: MockDateConfig,
           },
           {
             provide: RoutingService,
-            useClass: RoutingServiceMock,
-          },
-          {
-            provide: GlobalMessageService,
-            useClass: GlobalMessageServiceMock,
+            useClass: MockRoutingService,
           },
         ],
       }).compileComponents();
@@ -116,11 +123,14 @@ describe('UpdateProfileComponent', () => {
     component = fixture.componentInstance;
     el = fixture.debugElement;
 
-    userService = TestBed.inject(UserService);
     routingService = TestBed.inject(RoutingService);
-    globalMessageService = TestBed.inject(GlobalMessageService);
-
+    fSUpdateProfileComponentService = TestBed.inject(
+      FSUpdateProfileComponentService
+    );
+    userAccountFacade = TestBed.inject(UserAccountFacade);
+    component.form = mockForm;
     fixture.detectChanges();
+    spyOn(userAccountFacade, 'get').and.callThrough();
   });
 
   it('should create', () => {
@@ -129,57 +139,13 @@ describe('UpdateProfileComponent', () => {
 
   it('should navigate to home when cancelled', () => {
     spyOn(routingService, 'go').and.stub();
-
     component.onCancel();
     expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'home' });
   });
 
   it('should call updatePersonalDetails on submit', () => {
-    spyOn(userService, 'updatePersonalDetails').and.stub();
-
-    const userUpdates: FSUser = {
-      firstName: 'Donna',
-      dateOfBirth: '12/12/1980',
-    };
-
-    component.onSubmit({ userUpdates });
-    expect(userService.updatePersonalDetails).toHaveBeenCalledWith(userUpdates);
-  });
-
-  it('should call the internal onSuccess() method when the user was successfully updated', () => {
-    spyOn(component, 'onSuccess').and.stub();
-    spyOn(userService, 'getUpdatePersonalDetailsResultSuccess').and.returnValue(
-      of(true)
-    );
-
-    component.ngOnInit();
-    expect(component.onSuccess).toHaveBeenCalled();
-  });
-
-  describe('onSuccess', () => {
-    describe('when the user was successfully updated', () => {
-      it('should add a global message and navigate to a url ', () => {
-        spyOn(globalMessageService, 'add').and.stub();
-        spyOn(routingService, 'go').and.stub();
-
-        component.onSuccess(true);
-        expect(globalMessageService.add).toHaveBeenCalledWith(
-          { key: 'updateProfileForm.profileUpdateSuccess' },
-          GlobalMessageType.MSG_TYPE_CONFIRMATION
-        );
-        expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'home' });
-      });
-    });
-
-    describe('when the user was NOT successfully updated', () => {
-      it('should NOT add a global message and NOT navigate to a url ', () => {
-        spyOn(globalMessageService, 'add').and.stub();
-        spyOn(routingService, 'go').and.stub();
-
-        component.onSuccess(false);
-        expect(routingService.go).not.toHaveBeenCalled();
-        expect(globalMessageService.add).not.toHaveBeenCalled();
-      });
-    });
+    spyOn(fSUpdateProfileComponentService, 'updateProfile').and.callThrough();
+    component.onSubmit();
+    expect(fSUpdateProfileComponentService.updateProfile).toHaveBeenCalled();
   });
 });

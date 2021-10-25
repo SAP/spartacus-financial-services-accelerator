@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { OccUserAdapter } from '@spartacus/core';
 import { OccFSUserAdapter } from '../../../occ/adapters/user/occ-user.adapter';
+import { OccUserProfileAdapter } from '@spartacus/user/profile/occ';
 import { of } from 'rxjs';
 import createSpy = jasmine.createSpy;
 import { FSUserConnector } from '../../user/connectors/user-connector';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-class MockOccUserAdapter extends OccUserAdapter {
-  remove = createSpy('remove').and.returnValue(of({}));
+class MockOccUserProfileAdapter extends OccUserProfileAdapter {
+  close = createSpy('close').and.returnValue(of({}));
 }
 
 class MockOccFSUserAdapter extends OccFSUserAdapter {
@@ -16,20 +16,20 @@ class MockOccFSUserAdapter extends OccFSUserAdapter {
 
 describe('FSUserConnector', () => {
   let service: FSUserConnector;
-  let userAdapter: OccUserAdapter;
+  let userAdapter: OccUserProfileAdapter;
   let adapter: OccFSUserAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        { provide: OccUserAdapter, useClass: MockOccUserAdapter },
+        { provide: OccUserProfileAdapter, useClass: MockOccUserProfileAdapter },
         { provide: OccFSUserAdapter, useClass: MockOccFSUserAdapter },
       ],
     });
 
     service = TestBed.inject(FSUserConnector);
-    userAdapter = TestBed.inject(OccUserAdapter);
+    userAdapter = TestBed.inject(OccUserProfileAdapter);
     adapter = TestBed.inject(OccFSUserAdapter);
   });
 
@@ -38,9 +38,8 @@ describe('FSUserConnector', () => {
   });
 
   it('remove should call adapter', () => {
-    let result;
-    service.remove('user-id').subscribe(res => (result = res));
-    expect(result).toEqual({});
-    expect(adapter.remove).toHaveBeenCalledWith('user-id');
+    spyOn(adapter, 'close').and.callThrough();
+    service.remove('user-id');
+    expect(adapter.close).toHaveBeenCalledWith('user-id');
   });
 });

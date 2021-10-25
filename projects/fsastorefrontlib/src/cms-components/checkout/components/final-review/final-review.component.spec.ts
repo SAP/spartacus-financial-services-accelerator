@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {
-  CheckoutPaymentService,
-  I18nTestingModule,
-  RoutingService,
-} from '@spartacus/core';
+import { I18nTestingModule, RoutingService } from '@spartacus/core';
+import { CheckoutPaymentFacade } from '@spartacus/checkout/root';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FinalReviewComponent } from './final-review.component';
 import { of } from 'rxjs';
@@ -20,7 +17,7 @@ class MockCheckoutService {
   placeOrder() {}
 }
 
-class MockCheckoutPaymentService {
+class MockCheckoutPaymentFacade {
   getPaymentDetails() {
     return of({});
   }
@@ -35,7 +32,7 @@ describe('FinalReviewComponent', () => {
   let component: FinalReviewComponent;
   let fixture: ComponentFixture<FinalReviewComponent>;
   let checkoutService: FSCheckoutService;
-  let checkoutPaymentService: CheckoutPaymentService;
+  let checkoutPaymentService: CheckoutPaymentFacade;
   let routingService: RoutingService;
 
   beforeEach(
@@ -49,8 +46,8 @@ describe('FinalReviewComponent', () => {
             useClass: MockCheckoutService,
           },
           {
-            provide: CheckoutPaymentService,
-            useClass: MockCheckoutPaymentService,
+            provide: CheckoutPaymentFacade,
+            useClass: MockCheckoutPaymentFacade,
           },
           {
             provide: RoutingService,
@@ -70,7 +67,7 @@ describe('FinalReviewComponent', () => {
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutPaymentService = TestBed.inject(CheckoutPaymentService);
+    checkoutPaymentService = TestBed.inject(CheckoutPaymentFacade);
     spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
 
     routingService = TestBed.inject(RoutingService);
