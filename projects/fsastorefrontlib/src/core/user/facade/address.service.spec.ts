@@ -13,7 +13,7 @@ import createSpy = jasmine.createSpy;
 
 const formContent = {
   personalDetails: {
-    phoneNumber: '123456789',
+    phoneNumber: '1234567890',
     street: 'Omladinskih Brigada',
     streetNumber: '90G',
     city: 'Belgrade',
