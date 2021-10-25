@@ -27,7 +27,8 @@
     color: var(--cx-color-primary);
     text-decoration: underline;
   }
-  .cx-card-img-container .fs-icon::before {
+  .cx-card-img-container .fs-icon::before,
+  .cx-icon {
     font-size: var(--cx-font-size, 48px);
   }
 }
