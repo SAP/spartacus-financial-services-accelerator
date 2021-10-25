@@ -135,6 +135,17 @@ export const confirmationAccordionFTD = [
   personalDetails,
 ];
 
+export const compareQuoteAccordion = [
+  'Quote General Information',
+  'Quote Billing Events',
+  'Quote Optional Extras',
+];
+
+export const compareEventQuoteAccordion = [
+  'Quote Billing Events',
+  'Quote Optional Extras',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -208,6 +219,14 @@ export const Accordions = {
     {
       category: 'confirmationCurrentAccount',
       accordionItems: this.confirmationAccordionCurrentAccount,
+    },
+    {
+      category: 'compareQuote',
+      accordionItems: this.compareQuoteAccordion,
+    },
+    {
+      category: 'compareEventQuote',
+      accordionItems: this.compareEventQuoteAccordion,
     },
   ],
 };
