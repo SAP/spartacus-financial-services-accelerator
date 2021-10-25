@@ -1,6 +1,9 @@
 export const myAccount = {
   orderDetails: {
     orderId: 'Bestellung',
+    statusDisplay_pending: {
+      quote: '[DE] Pending Approval',
+    },
   },
   consentManagementForm: {
     clearAll: 'Alles löschen',
