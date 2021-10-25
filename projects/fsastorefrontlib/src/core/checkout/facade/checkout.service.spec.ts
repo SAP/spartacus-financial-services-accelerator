@@ -57,7 +57,7 @@ class MockRoutingService {
   go = createSpy();
 }
 
-describe('FSCheckoutServiceTest', () => {
+describe('FSCheckoutService', () => {
   let service: FSCheckoutService;
   let store: Store<StateWithFSCheckout>;
   let checkoutDeliveryService: CheckoutDeliveryService;
