@@ -39,6 +39,7 @@ export class OccValueListService {
     if (fieldUrl.match(this.httpRegex)) {
       return fieldUrl;
     }
-    return this.occEndpointService.getBaseEndpoint() + fieldUrl;
+    // The `getBaseEndpoint` method was removed. Use `buildUrl` method instead with configurable endpoint or the `getBaseUrl` method.
+    return this.occEndpointService.getBaseUrl() + fieldUrl;
   }
 }

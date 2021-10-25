@@ -18,7 +18,7 @@ const pricingData: PricingData = {};
 const addToCartEndpoint = 'addToCart';
 const startBundleEndpoint = 'startBundle';
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -42,7 +42,7 @@ describe('OccCartAdapter', () => {
     adapter = TestBed.inject(OccCartAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -59,11 +59,13 @@ describe('OccCartAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === addToCartEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           addToCartEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })
@@ -87,11 +89,13 @@ describe('OccCartAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === startBundleEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           startBundleEndpoint,
           {
-            userId,
-            cartId,
+            urlParams: {
+              userId,
+              cartId,
+            },
           }
         );
       })

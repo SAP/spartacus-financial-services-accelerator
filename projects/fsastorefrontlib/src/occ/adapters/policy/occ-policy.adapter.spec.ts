@@ -18,7 +18,7 @@ const policyEndpoint = 'policy';
 const premiumCalendarEndpoint = 'premiumCalendar';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -42,7 +42,7 @@ describe('OccPolicyAdapter', () => {
     adapter = TestBed.inject(OccPolicyAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -57,10 +57,12 @@ describe('OccPolicyAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === policiesEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           policiesEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
@@ -75,11 +77,16 @@ describe('OccPolicyAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === policyEndpoint && req.method === 'GET';
         }, `GET a single policy`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(policyEndpoint, {
-          userId,
-          policyId,
-          contractId,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          policyEndpoint,
+          {
+            urlParams: {
+              userId,
+              policyId,
+              contractId,
+            },
+          }
+        );
       })
     );
   });
@@ -92,10 +99,12 @@ describe('OccPolicyAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === premiumCalendarEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           premiumCalendarEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
@@ -110,10 +119,12 @@ describe('OccPolicyAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === policiesEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           policiesEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })

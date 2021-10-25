@@ -19,7 +19,7 @@ const searchConfig: FSSearchConfig = {
 };
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -44,7 +44,7 @@ describe('OccInboxAdapter', () => {
     adapter = TestBed.inject(OccInboxAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -61,10 +61,12 @@ describe('OccInboxAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === messagesEndPoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           messagesEndPoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
@@ -84,10 +86,12 @@ describe('OccInboxAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === messagesEndPoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           messagesEndPoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
@@ -102,10 +106,12 @@ describe('OccInboxAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === updateMessagesEndPoint && req.method === 'PUT';
         }, `PUT method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           updateMessagesEndPoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })

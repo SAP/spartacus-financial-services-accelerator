@@ -18,8 +18,10 @@ export class OccProductPricingAdapter implements ProductPricingAdapter {
     productCode: string,
     pricingData: PricingData
   ): Observable<Product> {
-    const url = this.occEndpointService.getUrl('calculatePriceForProduct', {
-      productCode,
+    const url = this.occEndpointService.buildUrl('calculatePriceForProduct', {
+      urlParams: {
+        productCode,
+      },
     });
     const params: HttpParams = new HttpParams().set('fields', 'DEFAULT');
 

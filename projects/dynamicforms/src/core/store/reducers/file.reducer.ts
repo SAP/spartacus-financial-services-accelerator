@@ -42,6 +42,17 @@ export function reducer(
         loaded: true,
       };
     }
+    case fromAction.SET_UPLOADED_FILES: {
+      let content = { ...action.payload };
+      const fileContent = { ...state.content };
+      fileContent.files = content;
+      content = { ...fileContent };
+      return {
+        ...state,
+        content,
+        loaded: true,
+      };
+    }
     case fromAction.RESET_FILE_SUCCESS: {
       state = initialState;
     }

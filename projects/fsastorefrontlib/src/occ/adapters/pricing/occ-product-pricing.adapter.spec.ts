@@ -31,7 +31,7 @@ const pricingData: PricingData = {
   priceAttributeGroups: [priceGroup],
 };
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -56,7 +56,7 @@ describe('OccProductPricingAdapter', () => {
     adapter = TestBed.inject(OccProductPricingAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -71,10 +71,12 @@ describe('OccProductPricingAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === pricingEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           pricingEndpoint,
           {
-            productCode,
+            urlParams: {
+              productCode,
+            },
           }
         );
       })

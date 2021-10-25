@@ -1,6 +1,6 @@
 import { QUOTE_NORMALIZER } from '../../../core/my-account/connectors/converters';
 import { InsuranceQuoteList } from './../../occ-models/occ.models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -18,7 +18,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
   ) {}
 
   getQuotes(userId: string): Observable<Models.InsuranceQuote[]> {
-    const url = this.occEndpointService.getUrl('quotes', { userId });
+    const url = this.occEndpointService.buildUrl('quotes', {
+      urlParams: {
+        userId,
+      },
+    });
     return this.http.get<InsuranceQuoteList>(url).pipe(
       pluck('insuranceQuotes'),
       this.converterService.pipeableMany(QUOTE_NORMALIZER),
@@ -31,9 +35,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
     cartId: string,
     quoteContent: any
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('updateQuote', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('updateQuote', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     return this.http
       .patch(url, quoteContent)
@@ -46,9 +52,11 @@ export class OccQuoteAdapter implements QuoteAdapter {
     quoteAction: string,
     body: any
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('quoteAction', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('quoteAction', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -63,12 +71,29 @@ export class OccQuoteAdapter implements QuoteAdapter {
   }
 
   getQuote(userId: string, quoteId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('quote', {
-      userId,
-      quoteId,
+    const url = this.occEndpointService.buildUrl('quote', {
+      urlParams: {
+        userId,
+        quoteId,
+      },
     });
     return this.http
       .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  compareQuotes(cartCodes: string[], userId: string) {
+    const url = this.occEndpointService.buildUrl('compareQuotes', {
+      urlParams: {
+        userId,
+      },
+    });
+    const params: HttpParams = new HttpParams().set(
+      'cartCodes',
+      cartCodes.toString()
+    );
+    return this.http
+      .get(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }
