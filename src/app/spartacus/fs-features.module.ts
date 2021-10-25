@@ -82,7 +82,14 @@ import { CheckoutModule } from '@spartacus/checkout';
 import { AsmOccModule } from '@spartacus/asm/occ';
 import { CheckoutOccModule } from '@spartacus/checkout/occ';
 import { OrderConfirmationModule } from '@spartacus/checkout/components';
-import { CloseAccountModule, ForgotPasswordModule, ResetPasswordModule, UpdateEmailModule, UpdatePasswordModule, UpdateProfileModule } from '@spartacus/user/profile/components';
+import {
+  CloseAccountModule,
+  ForgotPasswordModule,
+  ResetPasswordModule,
+  UpdateEmailModule,
+  UpdatePasswordModule,
+  UpdateProfileModule,
+} from '@spartacus/user/profile/components';
 import { UserAccountComponentsModule } from '@spartacus/user/account/components';
 
 @NgModule({
@@ -199,17 +206,8 @@ import { UserAccountComponentsModule } from '@spartacus/user/account/components'
     AdministrationFeatureModule,
     BulkPricingFeatureModule,
     OrderApprovalFeatureModule,
-
-    // Should potential remove
     ReturnRequestListModule,
     ReturnRequestDetailModule,
-
-    // NotificationPreferenceModule,
-    // MyInterestsModule,
-    // StockNotificationModule,
-    // ReplenishmentOrderHistoryModule,
-    // ReplenishmentOrderDetailsModule,
-    // ReplenishmentOrderConfirmationModule,
   ],
 })
 export class FSFeaturesModule {}
