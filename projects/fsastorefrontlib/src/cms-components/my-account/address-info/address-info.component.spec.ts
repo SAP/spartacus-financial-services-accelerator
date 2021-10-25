@@ -101,8 +101,6 @@ class MockAddressFormComponent {
 class MockUserAddressService {
   deleteUserAddress() {}
   setAddressAsDefault() {}
-  // deleteUserAddress = jasmine.createSpy();
-  // setAddressAsDefault = jasmine.createSpy();
 }
 
 describe('FSAddressInfoComponent', () => {
