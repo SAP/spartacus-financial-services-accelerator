@@ -1,9 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {
-  // CheckoutPaymentService,
-  I18nTestingModule,
-  RoutingService,
-} from '@spartacus/core';
+import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { CheckoutPaymentFacade } from '@spartacus/checkout/root';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FinalReviewComponent } from './final-review.component';

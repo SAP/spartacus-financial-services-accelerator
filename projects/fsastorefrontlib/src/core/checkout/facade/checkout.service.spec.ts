@@ -8,7 +8,6 @@ import {
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { CHECKOUT_FEATURE, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import * as fromAction from '../store/actions';
 import * as fromReducers from './../store/reducers/index';
@@ -18,6 +17,10 @@ import { FSCheckoutConfigService } from '../../../core/checkout/services/checkou
 
 import createSpy = jasmine.createSpy;
 import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import {
+  CHECKOUT_FEATURE,
+  FSStateWithCheckout,
+} from '../../checkout/store/checkout-state';
 
 const identificationType = 'idType';
 const paymentType = 'paymentCode';
