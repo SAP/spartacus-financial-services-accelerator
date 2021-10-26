@@ -201,6 +201,8 @@ export const fscommon = {
     syncPilot: {
       speakToAgent: 'Speak to an Agent',
       needHelp: 'Need Help?',
+      contactAgent: 'Connecting to an agent',
+      waitingAgent: 'Waiting for an agent...',
     },
     attachments: 'Attachments',
     pageNotFoundMessage:

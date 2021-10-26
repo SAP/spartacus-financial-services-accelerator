@@ -1,103 +1,130 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { WindowRef, User, CmsService } from '@spartacus/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { WindowRef, User } from '@spartacus/core';
+import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { EGender, GuestInfo } from '@syncpilot/bpool-guest-lib/models/guestinfo';
+import {
+  EGender,
+  GuestInfo,
+} from '@syncpilot/bpool-guest-lib/models/guestinfo';
 import { GuestEndpoint } from '@syncpilot/bpool-guest-lib/models/guestEndpoint';
+import { SyncPilotDialogComponent } from '../sync-pilot-dialog/sync-pilot-dialog.component';
+import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
+import { SyncPilotGender } from '../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-sync-pilot-connection-component',
   templateUrl: './sync-pilot-connection.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncPilotConnectionComponent implements OnDestroy {
+export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   constructor(
-    protected cmsService: CmsService,
     protected userAccountFacade: UserAccountFacade,
     protected iService: Service,
-    protected winRef?: WindowRef,
-  ) {
-    iService.setConfig({
-      stompUrl: 'https://msg.dev.livecontract.net/beraterpoolServer/beraterpoolWS',
-      serverUrlServer: 'https://msg.dev.livecontract.net/beraterpoolServer/beraterpool/server/v1',
-      fullName: 'API Name'});
-  }
+    protected modalService: ModalService,
+    protected agentService: AgentSearchService,
+    protected winRef?: WindowRef
+  ) {}
 
-  protected readonly SYNC_PILOT_WINDOW = 'Sync Pilot Window';
-  protected readonly CHANNEL_PARAM = '?c=';
-  protected readonly USER_PARAM = '&nick=';
   protected readonly ownerId = 1;
-
-  component$: Observable<any> = this.cmsService.getComponentData(
-    'SyncPilotConnectionComponent'
-  );
   user$: Observable<User> = this.userAccountFacade.get();
+  modalRef: ModalRef;
 
   private subscription = new Subscription();
 
-  establishConnection(targetUrl: string, channel: string, action: string) {
-    console.log(targetUrl, 'targetUrl')
-    console.log(channel, 'channel')
-    console.log(action, 'action')
+  ngOnInit() {
+    this.setConfigurationForSyncPilot();
+    this.redirectToAgent();
+    this.abortConnectionToSyncPilot();
+  }
+
+  setConfigurationForSyncPilot() {
+    this.iService.setConfig({
+      stompUrl:
+        'https://msg.dev.livecontract.net/beraterpoolServer/beraterpoolWS',
+      serverUrlServer:
+        'https://msg.dev.livecontract.net/beraterpoolServer/beraterpool/server/v1',
+      fullName: 'API Name',
+    });
+  }
+
+  establishConnection() {
     this.subscription.add(
       this.user$
         .pipe(
-          map(user => {
-            this.connect(user);
-            // if (user?.uid && user?.name) {
-            //   const syncPilotUrl =
-            //     targetUrl +
-            //     action +
-            //     this.CHANNEL_PARAM +
-            //     channel +
-            //     this.USER_PARAM +
-            //     user.name;
-            //   const syncPilotWindow = this.winRef.nativeWindow;
-            //   syncPilotWindow.open(
-            //     syncPilotUrl,
-            //     this.SYNC_PILOT_WINDOW,
-            //     null,
-            //     false
-            //   );
-            // }
+          map((user: User) => {
+            this.connectToSyncPilot(user);
+            this.modalRef = this.modalService.open(SyncPilotDialogComponent, {
+              centered: true,
+            });
           })
         )
         .subscribe()
     );
-    this.iService.onRedirect.subscribe((guestEndpoint: GuestEndpoint) => {
-      console.log('guestEndpoint', guestEndpoint);
-      if(guestEndpoint.state == 'accepted') {
-        const url = guestEndpoint.targetChannelAddress; // redirect to this page
-        console.log(url, 'url')
-        const syncPilotWindow = this.winRef.nativeWindow;
-        syncPilotWindow.open(url, '_blank');
-        }
-    });
-    // this.abort();
   }
 
-  async connect(user: User) {
-    const gender = 'm';
+  async connectToSyncPilot(user: User) {
     const additionalGuestInformation = new Map<string, string>();
-    // const guestNotification = '';
     const groupId = 1;
     await this.iService.connect(this.ownerId);
-    this.iService.enterQueue(this.createGuestInfo(user.firstName , user.name, gender, additionalGuestInformation), groupId);
+    this.iService.enterQueue(
+      this.createGuestInfo(
+        user.firstName,
+        user.name,
+        SyncPilotGender[user.titleCode],
+        additionalGuestInformation
+      ),
+      groupId
+    );
   }
 
-  createGuestInfo(firstName: string, lastName: string, gender: 'm' | 'w' | 'd', additionalGuestInformation: Map<string, string>): Partial<GuestInfo>{
+  createGuestInfo(
+    firstName: string,
+    lastName: string,
+    gender: 'm' | 'w' | 'd',
+    additionalGuestInformation: Map<string, string>
+  ): Partial<GuestInfo> {
     return {
-          firstName,
-          name: lastName,
-          gender: gender as EGender,
-          additionalGuestInformation
-    } 
-}
+      firstName,
+      name: lastName,
+      gender: gender as EGender,
+      additionalGuestInformation,
+    };
+  }
+
+  redirectToAgent() {
+    this.subscription.add(
+      this.iService.onRedirect
+        .pipe(
+          withLatestFrom((guestEndpoint: GuestEndpoint) => {
+            if (guestEndpoint.state === 'accepted') {
+              const url = guestEndpoint.targetChannelAddress;
+              this.modalService.closeActiveModal();
+              this.winRef.nativeWindow.open(url, '_blank');
+            }
+          })
+        )
+        .subscribe()
+    );
+  }
 
   async abort() {
     this.iService.abort();
+  }
+
+  abortConnectionToSyncPilot() {
+    this.subscription.add(
+      this.agentService.cancelledSyncPilotAgent$
+        .pipe(tap(_ => this.abort()))
+        .subscribe()
+    );
   }
 
   ngOnDestroy() {

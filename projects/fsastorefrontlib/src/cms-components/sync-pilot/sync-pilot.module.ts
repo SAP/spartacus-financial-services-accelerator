@@ -25,6 +25,6 @@ import { Service } from '@syncpilot/bpool-guest-lib';
   declarations: [SyncPilotConnectionComponent],
   exports: [SyncPilotConnectionComponent],
   entryComponents: [SyncPilotConnectionComponent],
-  providers: [Service]
+  providers: [Service],
 })
 export class SyncPilotModule {}

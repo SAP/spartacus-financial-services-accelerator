@@ -1,26 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, WindowRef, CmsService } from '@spartacus/core';
+import { I18nTestingModule, WindowRef } from '@spartacus/core';
 import { of } from 'rxjs';
 import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-
-const componentData: any = {
-  uid: 'TestSyncPilotComponent',
-  url: 'testUrl',
-  channel: 'testChannel',
-  action: 'join',
-};
+import { Service } from '@syncpilot/bpool-guest-lib';
+import { ModalService } from '@spartacus/storefront';
+import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
 
 const mockUser = {
   uid: 'test@email.com',
+  firstName: 'testFirstName',
   name: 'testName',
+  titleCode: 'mr',
 };
-
-class MockCmsService {
-  getComponentData() {
-    return of(componentData);
-  }
-}
+const mockGuestEndpoint = {
+  state: 'accepted',
+  targetChannelAddress: 'https//livecontract.com',
+  groupId: 1,
+  ownerId: 1,
+};
 
 class MockUserAccountFacade {
   get() {
@@ -28,11 +26,30 @@ class MockUserAccountFacade {
   }
 }
 
+class MockModalService {
+  open() {}
+  closeActiveModal() {}
+}
+
+class MockService {
+  onRedirect = of(mockGuestEndpoint);
+  setConfig() {}
+  connect() {}
+  enterQueue() {}
+  abort() {}
+}
+
+class MockAgentSearchService {
+  cancelledSyncPilotAgent$ = of(true);
+}
+
 describe('SyncPilotConnectionComponent', () => {
   let component: SyncPilotConnectionComponent;
   let fixture: ComponentFixture<SyncPilotConnectionComponent>;
-  let mockCmsService: CmsService;
   let mockUserAccountFacade: UserAccountFacade;
+  let service: Service;
+  let modalService: ModalService;
+  let agentSearchService: AgentSearchService;
   let winRef: WindowRef;
 
   beforeEach(async () => {
@@ -41,17 +58,27 @@ describe('SyncPilotConnectionComponent', () => {
       imports: [I18nTestingModule],
       providers: [
         {
-          provide: CmsService,
-          useClass: MockCmsService,
-        },
-        {
           provide: UserAccountFacade,
           useClass: MockUserAccountFacade,
+        },
+        {
+          provide: Service,
+          useClass: MockService,
+        },
+        {
+          provide: ModalService,
+          useClass: MockModalService,
+        },
+        {
+          provide: AgentSearchService,
+          useClass: MockAgentSearchService,
         },
       ],
     }).compileComponents();
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
-    mockCmsService = TestBed.inject(CmsService);
+    service = TestBed.inject(Service);
+    modalService = TestBed.inject(ModalService);
+    agentSearchService = TestBed.inject(AgentSearchService);
     winRef = TestBed.inject(WindowRef);
   });
 
@@ -59,6 +86,9 @@ describe('SyncPilotConnectionComponent', () => {
     fixture = TestBed.createComponent(SyncPilotConnectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    spyOn(service, 'connect').and.stub();
+    spyOn(winRef.nativeWindow, 'open');
+    component.ngOnInit();
   });
 
   it('should create', () => {
@@ -66,14 +96,8 @@ describe('SyncPilotConnectionComponent', () => {
   });
 
   it('should establish connection with sync pilot', () => {
-    spyOn(winRef.nativeWindow, 'open');
-    component.establishConnection('testUrl', 'testChannel', 'join');
+    component.establishConnection();
     expect(window.open).toHaveBeenCalled();
-  });
-
-  it('should not establish connection with sync pilot', () => {
-    spyOn(mockCmsService, 'getComponentData').and.returnValue(of({}));
-    spyOn(winRef.nativeWindow, 'open');
-    expect(window.open).not.toHaveBeenCalled();
+    expect(service.connect).toHaveBeenCalled();
   });
 });
