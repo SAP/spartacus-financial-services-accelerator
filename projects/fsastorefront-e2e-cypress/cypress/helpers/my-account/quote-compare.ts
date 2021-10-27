@@ -1,5 +1,5 @@
 export function checkCompareIsDisabled() {
-  cy.get('div.row').contains('Product category');
+  cy.get('.row').contains('Product category');
   cy.get('button.bg-transparent').contains('Clear all').should('be.disabled');
   cy.get('.btn-block').contains('Compare quotes').should('be.disabled');
 }
