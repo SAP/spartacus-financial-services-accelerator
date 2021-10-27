@@ -15,6 +15,7 @@ import { defaultFSCmsContentProviders } from './config/messages-cms-structure';
 import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
+import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-config/default-quote-comparison-config';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-da
     ...defaultFSCmsContentProviders,
     provideConfig(occUserConfig),
     provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+    provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
   ],
 })
 export class FSStorefrontModule {
