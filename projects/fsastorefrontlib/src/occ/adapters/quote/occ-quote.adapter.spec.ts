@@ -124,10 +124,15 @@ describe('OccQuoteAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === quoteEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(quoteEndpoint, {
-          userId,
-          quoteId,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          quoteEndpoint,
+          {
+            urlParams: {
+              userId,
+              quoteId,
+            },
+          }
+        );
       })
     );
   });
@@ -140,10 +145,12 @@ describe('OccQuoteAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === compareQuotesEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           compareQuotesEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
           }
         );
       })
