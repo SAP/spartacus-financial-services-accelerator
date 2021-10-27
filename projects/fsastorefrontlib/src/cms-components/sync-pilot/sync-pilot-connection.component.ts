@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { WindowRef, User } from '@spartacus/core';
-import { ModalRef, ModalService } from '@spartacus/storefront';
+import { ModalService } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -27,17 +27,15 @@ import { SyncPilotGender } from '../../occ/occ-models/occ.models';
 export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   constructor(
     protected userAccountFacade: UserAccountFacade,
-    protected iService: Service,
+    protected syncPilotService: Service,
     protected modalService: ModalService,
     protected agentService: AgentSearchService,
     protected winRef?: WindowRef
   ) {}
 
+  private subscription = new Subscription();
   protected readonly ownerId = 1;
   user$: Observable<User> = this.userAccountFacade.get();
-  modalRef: ModalRef;
-
-  private subscription = new Subscription();
 
   ngOnInit() {
     this.setConfigurationForSyncPilot();
@@ -46,7 +44,7 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   }
 
   setConfigurationForSyncPilot() {
-    this.iService.setConfig({
+    this.syncPilotService.setConfig({
       stompUrl:
         'https://msg.dev.livecontract.net/beraterpoolServer/beraterpoolWS',
       serverUrlServer:
@@ -61,7 +59,7 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
         .pipe(
           map((user: User) => {
             this.connectToSyncPilot(user);
-            this.modalRef = this.modalService.open(SyncPilotDialogComponent, {
+            this.modalService.open(SyncPilotDialogComponent, {
               centered: true,
             });
           })
@@ -70,11 +68,11 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  async connectToSyncPilot(user: User) {
+  async connectToSyncPilot(user: User): Promise<void> {
     const additionalGuestInformation = new Map<string, string>();
     const groupId = 1;
-    await this.iService.connect(this.ownerId);
-    this.iService.enterQueue(
+    await this.syncPilotService.connect(this.ownerId);
+    this.syncPilotService.enterQueue(
       this.createGuestInfo(
         user.firstName,
         user.name,
@@ -101,7 +99,7 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
 
   redirectToAgent() {
     this.subscription.add(
-      this.iService.onRedirect
+      this.syncPilotService.onRedirect
         .pipe(
           withLatestFrom((guestEndpoint: GuestEndpoint) => {
             if (guestEndpoint.state === 'accepted') {
@@ -115,14 +113,10 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  async abort() {
-    this.iService.abort();
-  }
-
   abortConnectionToSyncPilot() {
     this.subscription.add(
       this.agentService.cancelledSyncPilotAgent$
-        .pipe(tap(_ => this.abort()))
+        .pipe(tap(_ => this.syncPilotService.abort()))
         .subscribe()
     );
   }

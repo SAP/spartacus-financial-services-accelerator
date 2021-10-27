@@ -35,6 +35,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.6.0",
     "zone.js": "~0.10.3",
-    "ngx-infinite-scroll": "^8.0.0"
+    "ngx-infinite-scroll": "^8.0.0",
+    "@syncpilot/bpool-guest-lib": "^0.2.5"
   }
 }
