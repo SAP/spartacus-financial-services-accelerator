@@ -49,7 +49,6 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
         'https://msg.dev.livecontract.net/beraterpoolServer/beraterpoolWS',
       serverUrlServer:
         'https://msg.dev.livecontract.net/beraterpoolServer/beraterpool/server/v1',
-      fullName: 'API Name',
     });
   }
 

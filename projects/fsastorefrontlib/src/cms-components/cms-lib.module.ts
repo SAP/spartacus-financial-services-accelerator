@@ -27,7 +27,6 @@ import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionna
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { UserProfileCoreModule } from '@spartacus/user/profile/core';
 import { UserAccountCoreModule } from '@spartacus/user/account/core';
-import { SyncPilotDialogModule } from './sync-pilot-dialog/sync-pilot-dialog.module';
 
 @NgModule({
   imports: [
@@ -55,7 +54,6 @@ import { SyncPilotDialogModule } from './sync-pilot-dialog/sync-pilot-dialog.mod
     NavigationModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
-    SyncPilotDialogModule,
   ],
   exports: [
     AgentModule,
