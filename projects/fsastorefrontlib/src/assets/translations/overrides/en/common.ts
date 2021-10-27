@@ -58,5 +58,9 @@ export const common = {
     pattern: 'Should contain at least one number, no special characters',
     maxlength: 'Maximum {{ maxLength }} characters',
     InvalidDate: 'Must be over 18 years old',
+    cxInvalidPassword:
+      'Password must be six characters minimum, with one uppercase letter, one number, one symbol',
+    cxInvalidPhoneRegex:
+      'Phone number should be between minimum 6 characters and maximum 20',
   },
 };

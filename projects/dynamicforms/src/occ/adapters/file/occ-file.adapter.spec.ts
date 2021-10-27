@@ -18,7 +18,7 @@ blob1['name'] = 'testFile1';
 const mockFile = <File>blob1;
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -30,7 +30,7 @@ describe('OccFileAdapter', () => {
   let occFileAdapter: OccFileAdapter;
   let httpMock: HttpTestingController;
   let converter: ConverterService;
-  let occEnpointsService: OccEndpointsService;
+  let occEndpointsService: OccEndpointsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,9 +48,9 @@ describe('OccFileAdapter', () => {
     occFileAdapter = TestBed.inject(OccFileAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     converter = TestBed.inject(ConverterService);
-    occEnpointsService = TestBed.inject(OccEndpointsService);
+    occEndpointsService = TestBed.inject(OccEndpointsService);
 
-    spyOn(occEnpointsService, 'getUrl').and.callThrough();
+    spyOn(occEndpointsService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -61,8 +61,10 @@ describe('OccFileAdapter', () => {
     const mockReq = httpMock.expectOne(req => {
       return req.method === 'POST';
     });
-    expect(occEnpointsService.getUrl).toHaveBeenCalledWith('uploadFile', {
-      userId: OCC_USER_ID_CURRENT,
+    expect(occEndpointsService.buildUrl).toHaveBeenCalledWith('uploadFile', {
+      urlParams: {
+        userId: OCC_USER_ID_CURRENT,
+      },
     });
     expect(mockReq.cancelled).toBeFalsy();
     mockReq.flush('');
@@ -75,9 +77,11 @@ describe('OccFileAdapter', () => {
     const mockReq = httpMock.expectOne(req => {
       return req.method === 'DELETE';
     });
-    expect(occEnpointsService.getUrl).toHaveBeenCalledWith('removeFile', {
-      userId: OCC_USER_ID_CURRENT,
-      fileCode: mockFileCode,
+    expect(occEndpointsService.buildUrl).toHaveBeenCalledWith('removeFile', {
+      urlParams: {
+        userId: OCC_USER_ID_CURRENT,
+        fileCode: mockFileCode,
+      },
     });
     expect(mockReq.cancelled).toBeFalsy();
     mockReq.flush('');
@@ -90,9 +94,11 @@ describe('OccFileAdapter', () => {
     const mockReq = httpMock.expectOne(req => {
       return req.method === 'GET';
     });
-    expect(occEnpointsService.getUrl).toHaveBeenCalledWith('getFile', {
-      userId: OCC_USER_ID_CURRENT,
-      fileCode: mockFileCode,
+    expect(occEndpointsService.buildUrl).toHaveBeenCalledWith('getFile', {
+      urlParams: {
+        userId: OCC_USER_ID_CURRENT,
+        fileCode: mockFileCode,
+      },
     });
     expect(mockReq.cancelled).toBeFalsy();
     mockReq.flush('');
@@ -105,8 +111,10 @@ describe('OccFileAdapter', () => {
     const mockReq = httpMock.expectOne(req => {
       return req.method === 'GET';
     });
-    expect(occEnpointsService.getUrl).toHaveBeenCalledWith('getFiles', {
-      userId: OCC_USER_ID_CURRENT,
+    expect(occEndpointsService.buildUrl).toHaveBeenCalledWith('getFiles', {
+      urlParams: {
+        userId: OCC_USER_ID_CURRENT,
+      },
     });
     expect(mockReq.cancelled).toBeFalsy();
     mockReq.flush('');

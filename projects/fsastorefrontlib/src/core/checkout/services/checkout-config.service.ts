@@ -5,10 +5,10 @@ import {
   RoutingConfigService,
 } from '@spartacus/core';
 import {
-  CheckoutConfig,
   CheckoutConfigService,
   CheckoutStepService,
-} from '@spartacus/storefront';
+} from '@spartacus/checkout/components';
+import { CheckoutConfig } from '@spartacus/checkout/root';
 import { BehaviorSubject } from 'rxjs';
 import { FSSteps, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
 import { FSCartService } from '../../cart';

@@ -1,35 +1,22 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import {
-  AuthActions,
-  CheckoutActions,
-  CHECKOUT_DETAILS,
-  StateUtils,
-} from '@spartacus/core';
-import { FSCheckoutState, FSCheckoutStepsState } from '../checkout-state';
+import { CheckoutActions } from '@spartacus/checkout/core';
+import { AuthActions } from '@spartacus/core';
+import { FSCheckoutState } from '../checkout-state';
+import * as fromCheckoutReducer from './checkout.reducer';
 import * as fromCartAction from './../actions/cart.action';
-import * as fromAddressVerification from './address-verification.reducer';
-import * as fromCardTypes from './card-types.reducer';
-import * as fromCheckout from './checkout.reducer';
-import * as fromOrderTypes from './order-types.reducer';
-import * as fromPaymentTypes from './payment-types.reducer';
 
 export function getReducers(): ActionReducerMap<FSCheckoutState> {
   return {
-    steps: StateUtils.loaderReducer<FSCheckoutStepsState>(
-      CHECKOUT_DETAILS,
-      fromCheckout.reducer
-    ),
-    cardTypes: fromCardTypes.reducer,
-    addressVerification: fromAddressVerification.reducer,
-    paymentTypes: fromPaymentTypes.reducer,
-    orderType: fromOrderTypes.reducer,
+    fscheckout: fromCheckoutReducer.reducer,
   };
 }
 
 export const reducerToken: InjectionToken<ActionReducerMap<
   FSCheckoutState
->> = new InjectionToken<ActionReducerMap<FSCheckoutState>>('CheckoutReducers');
+>> = new InjectionToken<ActionReducerMap<FSCheckoutState>>(
+  'FSCheckoutReducers'
+);
 
 export const reducerProvider: Provider = {
   provide: reducerToken,

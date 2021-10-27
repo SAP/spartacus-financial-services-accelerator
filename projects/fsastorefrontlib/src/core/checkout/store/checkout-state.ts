@@ -1,17 +1,15 @@
-import { CheckoutStepsState, CheckoutState, StateUtils } from '@spartacus/core';
+export const FS_CHECKOUT_FEATURE = 'fscheckout';
 
-export const CHECKOUT_FEATURE = 'checkout';
-
-export interface FSStateWithCheckout {
-  [CHECKOUT_FEATURE]: FSCheckoutState;
+export interface StateWithFSCheckout {
+  [FS_CHECKOUT_FEATURE]: FSCheckoutState;
 }
 
-export interface FSCheckoutStepsState extends CheckoutStepsState {
+export interface FSCheckoutState {
+  fscheckout: FSCheckoutDataState;
+}
+
+export interface FSCheckoutDataState {
   legalInformation: boolean;
   identificationType: boolean;
   paymentType: string;
-}
-
-export interface FSCheckoutState extends CheckoutState {
-  steps: StateUtils.LoaderState<FSCheckoutStepsState>;
 }

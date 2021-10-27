@@ -1,8 +1,11 @@
 import { createFeatureSelector, MemoizedSelector } from '@ngrx/store';
-import { CHECKOUT_FEATURE } from '@spartacus/core';
-import { FSCheckoutState, FSStateWithCheckout } from '../checkout-state';
+import {
+  FSCheckoutState,
+  FS_CHECKOUT_FEATURE,
+  StateWithFSCheckout,
+} from '../checkout-state';
 
 export const getCheckoutState: MemoizedSelector<
-  FSStateWithCheckout,
+  StateWithFSCheckout,
   FSCheckoutState
-> = createFeatureSelector<FSCheckoutState>(CHECKOUT_FEATURE);
+> = createFeatureSelector<FSCheckoutState>(FS_CHECKOUT_FEATURE);

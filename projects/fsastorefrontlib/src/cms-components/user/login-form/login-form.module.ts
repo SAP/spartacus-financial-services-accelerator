@@ -6,11 +6,12 @@ import {
   CmsConfig,
   I18nModule,
   NotAuthGuard,
-  provideDefaultConfig,
+  provideConfig,
   UrlModule,
 } from '@spartacus/core';
-import { FormErrorsModule, LoginRegisterModule } from '@spartacus/storefront';
+import { FormErrorsModule, SpinnerModule } from '@spartacus/storefront';
 import { FSLoginFormComponent } from './login-form.component';
+import { FSLoginRegisterComponent } from './login-register.component';
 
 @NgModule({
   imports: [
@@ -21,10 +22,10 @@ import { FSLoginFormComponent } from './login-form.component';
     UrlModule,
     I18nModule,
     FormErrorsModule,
-    LoginRegisterModule,
+    SpinnerModule,
   ],
   providers: [
-    provideDefaultConfig(<CmsConfig>{
+    provideConfig(<CmsConfig>{
       cmsComponents: {
         ReturningCustomerLoginComponent: {
           component: FSLoginFormComponent,
@@ -33,8 +34,8 @@ import { FSLoginFormComponent } from './login-form.component';
       },
     }),
   ],
-  declarations: [FSLoginFormComponent],
-  exports: [FSLoginFormComponent],
-  entryComponents: [FSLoginFormComponent],
+  declarations: [FSLoginFormComponent, FSLoginRegisterComponent],
+  exports: [FSLoginFormComponent, FSLoginRegisterComponent],
+  entryComponents: [FSLoginFormComponent, FSLoginRegisterComponent],
 })
 export class FSLoginFormModule {}

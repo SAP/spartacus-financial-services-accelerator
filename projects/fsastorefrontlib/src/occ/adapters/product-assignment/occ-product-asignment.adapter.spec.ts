@@ -21,7 +21,7 @@ const payload = {
   sort: 'asc',
 };
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -52,7 +52,7 @@ describe('OccProductAssignmentAdapter', () => {
     productAssignmentAdapter = TestBed.inject(OccProductAssignmentAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -78,11 +78,13 @@ describe('OccProductAssignmentAdapter', () => {
             req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
           );
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           loadProductAssignmentsEndpoint,
           {
-            userId,
-            orgUnitId,
+            urlParams: {
+              userId,
+              orgUnitId,
+            },
           }
         );
       })
@@ -106,11 +108,13 @@ describe('OccProductAssignmentAdapter', () => {
             req.method === 'POST'
           );
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           createProductAssignmentsEndpoint,
           {
-            userId,
-            orgUnitId,
+            urlParams: {
+              userId,
+              orgUnitId,
+            },
           }
         );
       })
@@ -133,12 +137,14 @@ describe('OccProductAssignmentAdapter', () => {
             req.method === 'DELETE'
           );
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           removeProductAssignmentsEndpoint,
           {
-            userId,
-            orgUnitId,
-            fsProductAssignmentCode,
+            urlParams: {
+              userId,
+              orgUnitId,
+              fsProductAssignmentCode,
+            },
           }
         );
       })
@@ -162,12 +168,14 @@ describe('OccProductAssignmentAdapter', () => {
             req.method === 'PATCH'
           );
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           updateProductAssignmentsEndpoint,
           {
-            userId,
-            orgUnitId,
-            fsProductAssignmentCode,
+            urlParams: {
+              userId,
+              orgUnitId,
+              fsProductAssignmentCode,
+            },
           }
         );
       })
@@ -194,11 +202,13 @@ describe('OccProductAssignmentAdapter', () => {
             req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
           );
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           loadProductAssignmentsEndpoint,
           {
-            userId,
-            orgUnitId,
+            urlParams: {
+              userId,
+              orgUnitId,
+            },
           }
         );
       })

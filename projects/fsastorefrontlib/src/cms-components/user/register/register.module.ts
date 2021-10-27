@@ -9,10 +9,13 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import {
+  FormErrorsModule,
   PageLayoutComponent,
-  RegisterComponentModule,
+  SpinnerModule,
 } from '@spartacus/storefront';
 import { FSRegisterComponent } from './register.component';
+import { RegisterComponentModule } from '@spartacus/user/profile/components';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const routes: Routes = [
   {
@@ -31,11 +34,15 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
     CommonModule,
-    RegisterComponentModule,
+    ReactiveFormsModule,
+    NgSelectModule,
     I18nModule,
+    FormErrorsModule,
+    SpinnerModule,
+    UrlModule,
+    RouterModule.forChild(routes),
+    RegisterComponentModule,
     ConfigModule.withConfig({
       cmsComponents: {
         RegisterCustomerComponent: {
@@ -44,8 +51,6 @@ const routes: Routes = [
         },
       },
     }),
-    RouterModule,
-    UrlModule,
   ],
   declarations: [FSRegisterComponent],
   exports: [FSRegisterComponent],
