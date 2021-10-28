@@ -2,7 +2,7 @@ import * as life from '../../helpers/checkout/insurance/life-checkout';
 import * as register from '../../helpers/register';
 import { registrationUser } from '../../sample-data/users';
 import * as checkout from '../../helpers/checkout/checkout-steps';
-import * as policies from '../../helpers/my-account/policies';
+import { checkMyQuotesPage } from '../../helpers/my-account/quotes-and-applications';
 import testFilters from '../../support/filters';
 
 testFilters([''], () => {
@@ -67,7 +67,7 @@ testFilters([''], () => {
     });
 
     it('Should check quote review step', () => {
-      policies.checkMyQuotesPage();
+      checkMyQuotesPage();
       life.checkLifeQuote();
     });
   });
