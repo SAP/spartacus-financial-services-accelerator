@@ -11,7 +11,6 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 })
 export class SyncPilotConnectionComponent implements OnDestroy {
   constructor(
-    protected cmsService: CmsService,
     protected userAccountFacade: UserAccountFacade,
     protected winRef?: WindowRef
   ) {}
@@ -20,9 +19,6 @@ export class SyncPilotConnectionComponent implements OnDestroy {
   protected readonly CHANNEL_PARAM = '?c=';
   protected readonly USER_PARAM = '&nick=';
 
-  component$: Observable<any> = this.cmsService.getComponentData(
-    'SyncPilotConnectionComponent'
-  );
   user$: Observable<User> = this.userAccountFacade.get();
 
   private subscription = new Subscription();
@@ -41,12 +37,7 @@ export class SyncPilotConnectionComponent implements OnDestroy {
                 this.USER_PARAM +
                 user.name;
               const syncPilotWindow = this.winRef.nativeWindow;
-              syncPilotWindow.open(
-                syncPilotUrl,
-                this.SYNC_PILOT_WINDOW,
-                null,
-                false
-              );
+              syncPilotWindow.open(syncPilotUrl, this.SYNC_PILOT_WINDOW, null);
             }
           })
         )
