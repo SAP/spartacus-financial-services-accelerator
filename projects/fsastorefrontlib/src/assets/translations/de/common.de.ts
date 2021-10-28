@@ -202,6 +202,8 @@ export const fscommon = {
     syncPilot: {
       speakToAgent: '[DE] Speak to an Agent',
       needHelp: '[DE] Need Help?',
+      contactAgent: '[DE] Connecting to an agent',
+      waitingAgent: '[DE] Waiting for an agent...',
     },
     priceCalculationError:
       'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',
