@@ -14,14 +14,10 @@ import {
 } from '@spartacus/core';
 import {
   CardModule,
-  CartNotEmptyGuard,
   CmsPageGuard,
   MediaModule,
   PageComponentModule,
   PageLayoutComponent,
-  PaymentDetailsSetGuard,
-  PaymentFormModule,
-  PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
@@ -63,6 +59,11 @@ import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
 import { FSCartCouponModule } from './components/cart-coupon/cart-coupon.module';
 import { FSAddressService } from '../../core/user/facade/address.service';
+import {
+  CartNotEmptyGuard,
+  PaymentFormModule,
+  PaymentMethodModule,
+} from '@spartacus/checkout/components';
 
 const routes: Routes = [
   {
@@ -128,7 +129,6 @@ const routes: Routes = [
       AuthGuard,
       CmsPageGuard,
       CartNotEmptyGuard,
-      PaymentDetailsSetGuard,
       ReferredQuoteGuard,
     ],
     data: {
@@ -263,9 +263,6 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     ReferredQuoteDialogComponent,
     FinalReviewComponent,
-    ChooseCoverNavigationComponent,
-    PersonalDetailsNavigationComponent,
-    OrderConfirmationMessageComponent,
     OrderConfirmationComponent,
     FSPaymentMethodComponent,
   ],

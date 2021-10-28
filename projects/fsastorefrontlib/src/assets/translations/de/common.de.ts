@@ -31,6 +31,7 @@ export const fscommon = {
     retrieve: 'Abrufen',
     notAvailable: 'N/V',
     contractId: 'VertragId',
+    title: 'Titel',
     orderTotal: 'Gesamtbetrag',
     orderConfirmation: 'Bestellbestätigung',
     orderNumber: 'Bestellnummer',

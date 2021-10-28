@@ -21,8 +21,10 @@ export class OccInboxAdapter implements InboxAdapter {
     searchConfig: FSSearchConfig,
     read?: boolean
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('siteMessages', {
-      userId,
+    const url = this.occEndpointService.buildUrl('siteMessages', {
+      urlParams: {
+        userId,
+      },
     });
     let params: HttpParams = new HttpParams();
     if (searchConfig.sortCode && searchConfig.sortOrder) {
@@ -54,8 +56,10 @@ export class OccInboxAdapter implements InboxAdapter {
     messagesUidList: Array<string>,
     read: boolean
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('updateMessages', {
-      userId,
+    const url = this.occEndpointService.buildUrl('updateMessages', {
+      urlParams: {
+        userId,
+      },
     });
     const params: HttpParams = new HttpParams()
       .set('messageCodes', messagesUidList.toString())

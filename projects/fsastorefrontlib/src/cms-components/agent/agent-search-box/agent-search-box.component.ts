@@ -24,7 +24,10 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
   }
 
   findAgents(searchQuery: string) {
-    this.fsRoutingService.go(['agent-locator'], { query: searchQuery });
+    this.fsRoutingService.go({
+      cxRoute: 'agent-locator',
+      params: { query: searchQuery },
+    });
   }
 
   onKey(event: any) {

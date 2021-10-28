@@ -19,10 +19,25 @@ cx-page-layout {
       padding: 3rem 1.5rem 0 1.5rem;
     }
   }
-  &.MultiStepCheckoutSummaryPageTemplate cx-page-slot {
-    &.SideContent {
-      flex-direction: row;
-      align-content: flex-start;
+  &.MultiStepCheckoutSummaryPageTemplate {
+    @include media-breakpoint-up(lg) {
+      display: flex;
+    }
+    max-width: 1140px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    cx-page-slot {
+      &.TopContent {
+        flex: 0 100%;
+      }
+      &.BodyContent {
+        flex: 0 63%;
+      }
+      &.SideContent {
+        flex: 0 0 35%;
+        flex-direction: row;
+        align-content: flex-start;
+      }
     }
   }
 }

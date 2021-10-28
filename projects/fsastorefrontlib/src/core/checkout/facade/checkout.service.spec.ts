@@ -2,15 +2,12 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
   ActiveCartService,
-  CheckoutDeliveryService,
-  CHECKOUT_FEATURE,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import * as fromAction from '../store/actions';
 import * as fromReducers from './../store/reducers/index';
@@ -19,7 +16,10 @@ import { FSCheckoutStep } from '../../../occ/occ-models/occ.models';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
 
 import createSpy = jasmine.createSpy;
+import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import { StateWithFSCheckout } from '../store/checkout-state';
 
+const fsCheckout = 'fscheckout';
 const identificationType = 'idType';
 const paymentType = 'paymentCode';
 const mockInitialStep: FSCheckoutStep = {
@@ -57,9 +57,9 @@ class MockRoutingService {
   go = createSpy();
 }
 
-describe('FSCheckoutServiceTest', () => {
+describe('FSCheckoutService', () => {
   let service: FSCheckoutService;
-  let store: Store<FSStateWithCheckout>;
+  let store: Store<StateWithFSCheckout>;
   let checkoutDeliveryService: CheckoutDeliveryService;
   let userIdService: UserIdService;
   let cartService: ActiveCartService;
@@ -70,7 +70,7 @@ describe('FSCheckoutServiceTest', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(CHECKOUT_FEATURE, fromReducers.getReducers()),
+        StoreModule.forFeature(fsCheckout, fromReducers.getReducers()),
       ],
       providers: [
         FSCheckoutService,

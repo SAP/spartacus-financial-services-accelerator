@@ -30,8 +30,8 @@
 }
 .tooltip-wrapper {
   @include vertical-center;
-  right: 30%;
-  z-index: 2;
+  right: 27%;
+  z-index: 2000;
   @include media-breakpoint-down(sm) {
     top: 15%;
     right: 30px;

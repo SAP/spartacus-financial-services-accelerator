@@ -29,7 +29,7 @@ export class AgentSearchService {
       }
 
       this.geolocationWatchId = this.winRef.nativeWindow.navigator.geolocation.watchPosition(
-        (pos: Position) => {
+        pos => {
           position = {
             longitude: pos.coords.longitude,
             latitude: pos.coords.latitude,

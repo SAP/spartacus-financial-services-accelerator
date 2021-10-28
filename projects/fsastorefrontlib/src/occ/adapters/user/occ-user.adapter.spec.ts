@@ -7,7 +7,7 @@ import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { OccFSUserAdapter } from './occ-user.adapter';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -39,7 +39,7 @@ describe('OccFSUserAdapter', () => {
     converter = TestBed.inject(ConverterService);
     occEnpointsService = TestBed.inject(OccEndpointsService);
 
-    spyOn(occEnpointsService, 'getUrl').and.callThrough();
+    spyOn(occEnpointsService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -48,15 +48,17 @@ describe('OccFSUserAdapter', () => {
   describe('remove user account: ', () => {
     it('should be able to close user account', () => {
       occUserAdapter
-        .remove('testUserId')
+        .close('testUserId')
         .subscribe(result => expect(result).toEqual(''));
 
       const mockReq = httpMock.expectOne(req => {
         return req.method === 'DELETE';
       });
 
-      expect(occEnpointsService.getUrl).toHaveBeenCalledWith('disableUser', {
-        userId: 'testUserId',
+      expect(occEnpointsService.buildUrl).toHaveBeenCalledWith('disableUser', {
+        urlParams: {
+          userId: 'testUserId',
+        },
       });
       expect(mockReq.cancelled).toBeFalsy();
       mockReq.flush('');

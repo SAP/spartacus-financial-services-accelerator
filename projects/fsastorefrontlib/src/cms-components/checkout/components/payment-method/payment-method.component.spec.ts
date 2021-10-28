@@ -3,16 +3,18 @@ import { FSPaymentMethodComponent } from './payment-method.component';
 import {
   ActiveCartService,
   Cart,
-  CheckoutDeliveryService,
-  CheckoutPaymentService,
   GlobalMessageService,
   PaymentDetails,
-  PaymentTypeService,
   RoutingService,
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
-import { CheckoutStepService } from '@spartacus/storefront';
+import {
+  CheckoutDeliveryService,
+  CheckoutPaymentService,
+  PaymentTypeService,
+} from '@spartacus/checkout/core';
+import { CheckoutStepService } from '@spartacus/checkout/components';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 

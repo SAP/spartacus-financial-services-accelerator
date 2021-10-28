@@ -6,7 +6,7 @@ import * as checkout from '../../helpers/checkout/checkout-steps';
 import {
   checkAutoReferredQuote,
   checkMyQuotesPage,
-} from '../../helpers/my-account/policies';
+} from '../../helpers/my-account/quotes-and-applications';
 import testFilters from '../../support/filters';
 
 Cypress.config('defaultCommandTimeout', 500000);

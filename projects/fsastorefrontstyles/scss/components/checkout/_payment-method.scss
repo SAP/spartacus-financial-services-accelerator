@@ -1,6 +1,3 @@
-@import '../../fs-mixins';
-@import '../../theme';
-
 %cx-fs-payment-method {
   h4 {
     font-size: var(--cx-h6-font-size);
@@ -19,8 +16,14 @@
         padding: 2rem 0;
       }
     }
+    legend.label-content {
+      font-size: inherit;
+    }
     .cx-payment-form-billing-address {
       color: var(--cx-color-primary);
+      font-size: var(--cx-h6-font-size);
+      font-weight: var(--cx-font-weight-bold);
+      padding: 0.875rem 0 1.25rem;
     }
     .col-md-12 {
       @include media-breakpoint-down(md) {

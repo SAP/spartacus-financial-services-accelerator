@@ -11,7 +11,7 @@ const productCodes: string[] = ['product1', 'product2'];
 const billingtimeEndpoint = 'billingTime';
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -35,7 +35,7 @@ describe('OccBillingTimeAdapter', () => {
     adapter = TestBed.inject(OccBillingTimeAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -50,7 +50,7 @@ describe('OccBillingTimeAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === billingtimeEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           billingtimeEndpoint
         );
       })
