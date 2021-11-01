@@ -6,7 +6,7 @@ export const occUserConfig: FSOccConfig = {
       endpoints: {
         user: 'fsusers/${userId}',
         userRegister: 'fsusers',
-        disableUser: 'users/${userId}',
+        userCloseAccount: 'users/${userId}',
       },
     },
   },
