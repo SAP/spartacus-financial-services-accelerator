@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ChangeRequestConnector } from '../../connectors/change-request.connector';
@@ -14,8 +14,8 @@ import { UserRequestConnector } from '../../../user-request/connectors/user-requ
 
 @Injectable()
 export class ChangeRequestEffects {
-  @Effect()
-  createChangeRequest$: Observable<any> = this.actions$.pipe(
+  
+  createChangeRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.CREATE_CHANGE_REQUEST),
     map((action: fromActions.CreateChangeRequest) => action.payload),
     mergeMap(payload => {
@@ -38,10 +38,10 @@ export class ChangeRequestEffects {
           })
         );
     })
-  );
+  ));
 
-  @Effect()
-  loadChangeRequest$: Observable<any> = this.actions$.pipe(
+  
+  loadChangeRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_CHANGE_REQUEST),
     map((action: fromActions.LoadChangeRequest) => action.payload),
     mergeMap(payload => {
@@ -59,10 +59,10 @@ export class ChangeRequestEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  simulateChangeRequest$: Observable<any> = this.actions$.pipe(
+  
+  simulateChangeRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.SIMULATE_CHANGE_REQUEST),
     map((action: fromActions.SimulateChangeRequest) => action.payload),
     mergeMap(payload => {
@@ -91,10 +91,10 @@ export class ChangeRequestEffects {
           })
         );
     })
-  );
+  ));
 
-  @Effect()
-  cancelChangeRequest$: Observable<any> = this.actions$.pipe(
+  
+  cancelChangeRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.CANCEL_CHANGE_REQUEST),
     map((action: fromActions.CancelChangeRequest) => action.payload),
     mergeMap(payload => {
@@ -109,10 +109,10 @@ export class ChangeRequestEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  submitChangeRequest$: Observable<any> = this.actions$.pipe(
+  
+  submitChangeRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.SUBMIT_CHANGE_REQUEST),
     map((action: fromActions.SubmitChangeRequest) => action.payload),
     mergeMap(payload => {
@@ -133,10 +133,10 @@ export class ChangeRequestEffects {
           })
         );
     })
-  );
+  ));
 
-  @Effect()
-  updateChangeRequest$: Observable<any> = this.actions$.pipe(
+  
+  updateChangeRequest$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.UPDATE_CHANGE_REQUEST),
     map((action: fromActions.UpdateChangeRequest) => action.payload),
     switchMap(payload => {
@@ -166,7 +166,7 @@ export class ChangeRequestEffects {
           )
         );
     })
-  );
+  ));
 
   private showGlobalMessage(text: string) {
     this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);

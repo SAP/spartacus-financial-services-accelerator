@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import {
   catchError,
@@ -13,8 +13,8 @@ import * as fromActions from '../actions';
 
 @Injectable()
 export class ProductAssignmentEffects {
-  @Effect()
-  loadProductAssignments$: Observable<any> = this.actions$.pipe(
+  
+  loadProductAssignments$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_PRODUCT_ASSIGNMENTS),
     map((action: fromActions.LoadProductAssignments) => action.payload),
     mergeMap(payload => {
@@ -42,10 +42,10 @@ export class ProductAssignmentEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  createProductAssignment$: Observable<any> = this.actions$.pipe(
+  
+  createProductAssignment$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
     map((action: fromActions.CreateProductAssignment) => action.payload),
     mergeMap(payload => {
@@ -70,10 +70,10 @@ export class ProductAssignmentEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  removeProductAssignment$: Observable<any> = this.actions$.pipe(
+  
+  removeProductAssignment$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
     map((action: fromActions.RemoveProductAssignment) => action.payload),
     mergeMap(payload => {
@@ -102,10 +102,10 @@ export class ProductAssignmentEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  loadPotentialProductAssignments$: Observable<any> = this.actions$.pipe(
+  
+  loadPotentialProductAssignments$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
     map(
       (action: fromActions.LoadPotentialProductAssignments) => action.payload
@@ -128,10 +128,10 @@ export class ProductAssignmentEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  changeActiveStatus$: Observable<any> = this.actions$.pipe(
+  
+  changeActiveStatus$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
     map((action: fromActions.UpdateProductAssignment) => action.payload),
     concatMap(payload => {
@@ -157,7 +157,7 @@ export class ProductAssignmentEffects {
           )
         );
     })
-  );
+  ));
 
   constructor(
     private actions$: Actions,

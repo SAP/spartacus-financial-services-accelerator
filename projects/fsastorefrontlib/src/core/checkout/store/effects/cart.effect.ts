@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormDataStorageService } from '@spartacus/dynamicforms';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { CartActions, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { from, Observable } from 'rxjs';
@@ -10,8 +10,8 @@ import * as fromQuoteActions from '../../../my-account/store/actions/quote.actio
 import * as fromActions from '../actions/cart.action';
 @Injectable()
 export class CartEffects {
-  @Effect()
-  addOptionalProduct$: Observable<any> = this.actions$.pipe(
+  
+  addOptionalProduct$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.ADD_OPTIONAL_PRODUCT),
     map((action: fromActions.AddOptionalProduct) => action.payload),
     concatMap(payload => {
@@ -42,10 +42,10 @@ export class CartEffects {
           )
         );
     })
-  );
+  ));
 
-  @Effect()
-  startBundle$: Observable<any> = this.actions$.pipe(
+  
+  startBundle$: Observable<any> = createEffect(() => this.actions$.pipe(
     ofType(fromActions.START_BUNDLE),
     map((action: fromActions.StartBundle) => action.payload),
     concatMap(payload => {
@@ -114,7 +114,7 @@ export class CartEffects {
           catchError(error => from([new CartActions.CartAddEntryFail(error)]))
         );
     })
-  );
+  ));
 
   constructor(
     private actions$: Actions,
