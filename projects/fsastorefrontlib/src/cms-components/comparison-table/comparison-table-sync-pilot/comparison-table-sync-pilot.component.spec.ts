@@ -46,19 +46,18 @@ class MockAgentSearchService {
   cancelledSyncPilotAgent$ = of(true);
 }
 
-const MockCmsService = {
-  getComponentData: () => of(componentData),
-};
-
-const componentData: CMSConnectionComponent = {
+const CMScomponentData: CMSConnectionComponent = {
   stompUrl: 'htttttp://stomp-test-url.com',
   url: 'htttttp://test-url.com',
   name: 'Test Root Component',
   uid: 'testUid',
 };
+const MockCmsService = {
+  getComponentData: () => of(CMScomponentData),
+};
 
 class MockCmsComponentData {
-  data$ = of(componentData);
+  data$ = of(CMScomponentData);
 }
 
 describe('ComparisonTableSyncPilotComponent', () => {
