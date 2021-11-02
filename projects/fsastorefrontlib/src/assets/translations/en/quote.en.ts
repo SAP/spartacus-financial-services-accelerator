@@ -40,7 +40,10 @@ export const quote = {
     clearAll: 'Clear all',
     allQuotes: 'All quotes',
     quotesComparison: 'Compare {{ category }} quotes',
-    selectQuoteNo: 'Select Quote No.',
+    definitionLoadQuotesComparisonError:
+      'Error occurred. Quotes could not be loaded.',
+    quoteNo: 'Quote No.',
+    selectQuote: 'Select Quote',
     quoteBillingEvents: 'Quote Billing Events',
     quoteOptionalExtras: 'Quote Optional Extras',
     billingEvents: 'Billing Events',

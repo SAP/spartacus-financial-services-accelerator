@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
-import { Observable, Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import {
   CategoryComparisonConfig,
   QuoteComparisonConfig,
@@ -32,7 +32,8 @@ import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defal
 export class QuoteComparisonComponent implements OnInit, OnDestroy {
   quotesLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
   quotes$: Observable<any> = this.quoteService.getQuotesComparison();
-  quoteCodes: string[] = JSON.parse(sessionStorage.getItem('quoteCodes'));
+  quoteCodes: string[];
+  // quoteCodes: string[] = JSON.parse(sessionStorage.getItem('quoteCodes'));
   categoryConfig: CategoryComparisonConfig;
   billingEventLabels: string[];
   subscription = new Subscription();
@@ -50,41 +51,73 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subheader = this.quoteCodes?.join(' / ');
-    this.subscription
-      .add(
-        this.quotes$
-          .pipe(
-            tap(quotes => {
-              this.billingEventLabels = [];
-              quotes?.carts?.map(cart => {
-                cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
-                  oneTimeChargeEntry =>
-                    this.getBillingEventLabels(oneTimeChargeEntry)
-                );
-                this.getCategoryConfig(
-                  cart?.entries[0]?.product?.defaultCategory?.code
-                );
-              });
-            })
-          )
-          .subscribe()
-      )
-      .add(
-        this.userIdService
-          .getUserId()
-          .pipe(
-            take(1),
-            tap(occUserId => {
+    this.subscription.add(
+      combineLatest([
+        this.routingService.getRouterState(),
+        this.userIdService.getUserId(),
+      ])
+        .pipe(
+          map(([routingData, occUserId]) => {
+            console.log(routingData, 'routingData');
+            if (!routingData.nextState) {
+              // const cartCodes = routingData.state.queryParams.cartCodes;
+              this.quoteCodes = JSON.parse(routingData.state.params.cartCodes);
+              this.subheader = this.quoteCodes?.join(' / ');
+              console.log(this.quoteCodes, 'cartCodes');
               this.userId = occUserId;
               this.quoteService.loadQuotesComparison(
                 this.quoteCodes,
                 this.userId
               );
-            })
-          )
-          .subscribe()
-      );
+              // this.billingEventLabels = [];
+              // quotes?.carts?.map(cart => {
+              //   cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
+              //     oneTimeChargeEntry =>
+              //       this.getBillingEventLabels(oneTimeChargeEntry)
+              //   );
+              //   this.getCategoryConfig(
+              //     cart?.entries[0]?.product?.defaultCategory?.code
+              //   );
+              // });
+            }
+          })
+        )
+        .subscribe()
+    );
+    // this.subheader = this.quoteCodes?.join(' / ');
+    this.subscription.add(
+      this.quotes$
+        .pipe(
+          tap(quotes => {
+            this.billingEventLabels = [];
+            quotes?.carts?.map(cart => {
+              cart?.entries[0]?.product?.price?.oneTimeChargeEntries?.forEach(
+                oneTimeChargeEntry =>
+                  this.getBillingEventLabels(oneTimeChargeEntry)
+              );
+              this.getCategoryConfig(
+                cart?.entries[0]?.product?.defaultCategory?.code
+              );
+            });
+          })
+        )
+        .subscribe()
+    );
+    // .add(
+    //   this.userIdService
+    //     .getUserId()
+    //     .pipe(
+    //       take(1),
+    //       tap(occUserId => {
+    //         this.userId = occUserId;
+    //         this.quoteService.loadQuotesComparison(
+    //           this.quoteCodes,
+    //           this.userId
+    //         );
+    //       })
+    //     )
+    //     .subscribe()
+    // );
     this.changeLanguage();
   }
 

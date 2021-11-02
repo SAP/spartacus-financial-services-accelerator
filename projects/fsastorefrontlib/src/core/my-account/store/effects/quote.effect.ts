@@ -1,4 +1,8 @@
-import { CartActions } from '@spartacus/core';
+import {
+  CartActions,
+  GlobalMessageService,
+  GlobalMessageType,
+} from '@spartacus/core';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
@@ -97,15 +101,26 @@ export class QuoteEffects {
           map((carts: any) => {
             return new fromActions.LoadQuoteComparisonSuccess(carts);
           }),
-          catchError(error =>
-            of(new fromActions.LoadQuoteComparisonFail(JSON.stringify(error)))
-          )
+          catchError(error => {
+            this.showGlobalMessage('quote.definitionLoadQuotesComparisonError');
+            return of(
+              new fromActions.LoadQuoteComparisonFail(JSON.stringify(error))
+            );
+          })
         );
     })
   );
 
+  private showGlobalMessage(text: string) {
+    this.globalMessageService.add(
+      { key: text },
+      GlobalMessageType.MSG_TYPE_ERROR
+    );
+  }
+
   constructor(
     private actions$: Actions,
-    private qouteConnector: QuoteConnector
+    private qouteConnector: QuoteConnector,
+    private globalMessageService: GlobalMessageService
   ) {}
 }

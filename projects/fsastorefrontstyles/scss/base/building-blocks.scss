@@ -237,7 +237,13 @@
     border-right: 7px solid transparent;
   }
 }
-
 .opaque {
   opacity: 0.5;
+}
+.sticky-position {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  opacity: 0.95;
+  background-color: var(--cx-color-1);
 }

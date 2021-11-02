@@ -1,5 +1,5 @@
 <ng-container *ngIf="quotesLoaded$ | async; else loading">
-  <div class="position-relative text-center">
+  <div class="sticky-position text-center">
     <a
       class="h4 vertical-center-left"
       routerLink="/my-account/my-financial-applications/"
@@ -20,9 +20,7 @@
         }}
       </span>
       <br />
-      <span>
-        {{ subheader }}
-      </span>
+      <span>{{ subheader }}</span>
     </h2>
   </div>
   <div class="row" *ngIf="quotes$ | async as quotes">
@@ -35,10 +33,10 @@
         >
           <ul class="accordion-list">
             <li class="accordion-list-item row sub-title text-break">
-              <div class="col-4">
+              <div class="col">
                 {{ 'quote.generalInformation' | cxTranslate }}
               </div>
-              <div *ngFor="let cart of quotes?.carts" class="col-4">
+              <div *ngFor="let cart of quotes?.carts" class="col">
                 {{
                   ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
                     ?.cartDisplayName
@@ -62,12 +60,15 @@
             >
             </ng-container>
             <li class="accordion-list-item row sub-title text-break">
-              <div class="col-4">
-                {{ 'quote.selectQuoteNo' | cxTranslate }}
-              </div>
-              <div *ngFor="let cart of quotes?.carts" class="col-4">
+              <div
+                *ngFor="let cart of quotes?.carts; index as i"
+                class="col"
+                [ngClass]="
+                  i === 0 ? 'offset-' + 12 / (1 + quotes?.carts.length) : ''
+                "
+              >
                 <span class="link px-0" (click)="retrieveQuote(cart)">
-                  {{ cart.code }}
+                  {{ 'quote.selectQuote' | cxTranslate }}
                 </span>
               </div>
             </li>
@@ -80,23 +81,31 @@
         >
           <ul class="accordion-list">
             <li class="accordion-list-item row sub-title text-break">
-              <div class="col-4">
+              <div class="col">
                 {{ 'quote.billingEvents' | cxTranslate }}
               </div>
-              <div *ngFor="let cart of quotes?.carts" class="col-4">
+              <div *ngFor="let cart of quotes?.carts" class="col">
                 {{
                   ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
                     ?.cartDisplayName
                 }}
               </div>
             </li>
+            <li class="accordion-list-item row text-break">
+              <div class="col item-label">
+                {{ 'quote.quoteNo' | cxTranslate }}
+              </div>
+              <div class="col notice" *ngFor="let cart of quotes?.carts">
+                {{ cart.code }}
+              </div>
+            </li>
             <ng-container *ngFor="let billingEventLabel of billingEventLabels">
-              <li class="accordion-list-item row">
-                <div class="item-label" class="col-4">
+              <li class="accordion-list-item row text-break">
+                <div class="col item-label">
                   {{ billingEventLabel }}
                 </div>
                 <ng-container *ngFor="let cart of quotes?.carts">
-                  <div class="col-4 notice">
+                  <div class="col notice">
                     {{
                       (cart?.entries)[0]?.product?.price?.oneTimeChargeEntries
                         | cxFsBillingEventValue: billingEventLabel
@@ -106,12 +115,15 @@
               </li>
             </ng-container>
             <li class="accordion-list-item row sub-title text-break">
-              <div class="col-4">
-                {{ 'quote.selectQuoteNo' | cxTranslate }}
-              </div>
-              <div *ngFor="let cart of quotes?.carts" class="col-4">
+              <div
+                *ngFor="let cart of quotes?.carts; index as i"
+                class="col"
+                [ngClass]="
+                  i === 0 ? 'offset-' + 12 / (1 + quotes?.carts.length) : ''
+                "
+              >
                 <span class="link px-0" (click)="retrieveQuote(cart)">
-                  {{ cart.code }}
+                  {{ 'quote.selectQuote' | cxTranslate }}
                 </span>
               </div>
             </li>
@@ -129,8 +141,8 @@
                 index as i
               "
             >
-              <li class="accordion-list-item row">
-                <div class="item-label" class="col-4">
+              <li class="accordion-list-item row text-break">
+                <div class="col item-label">
                   {{ optionalItem?.product?.name }}
                 </div>
                 <ng-container *ngFor="let cart of quotes?.carts">
@@ -139,7 +151,7 @@
                       (cart?.entries)[i + 1]?.removeable &&
                       !(cart?.entries)[i + 1]?.addable
                     "
-                    class="col-4 notice"
+                    class="col notice"
                   >
                     {{
                       (cart?.entries)[i + 1]?.totalPrice.value
@@ -152,7 +164,7 @@
                       !(cart?.entries)[i + 1]?.removeable &&
                       (cart?.entries)[i + 1]?.addable
                     "
-                    class="col-4 notice"
+                    class="col notice"
                   >
                     {{ 'fscommon.notIncluded' | cxTranslate }}
                   </div>
@@ -167,7 +179,7 @@
                         (cart?.entries)[i + 1]?.product?.bundleTemplates
                           ?.length == 3
                       "
-                      class="col-4 notice"
+                      class="col notice"
                     >
                       {{ 'fscommon.included' | cxTranslate }}
                     </div>
@@ -176,7 +188,7 @@
                         (cart?.entries)[i + 1]?.product?.bundleTemplates
                           ?.length !== 3
                       "
-                      class="col-4 notice"
+                      class="col notice"
                     >
                       {{ 'fscommon.notAvailableFull' | cxTranslate }}
                     </div>
@@ -211,9 +223,9 @@
                 insuredObjectItem?.label || insuredObjectItem?.key
               ) as insuredObjectItemLabel
             "
-            class="accordion-list-item row"
+            class="accordion-list-item row text-break"
           >
-            <div class="item-label" class="col-4">
+            <div class="col item-label">
               {{ insuredObjectItemLabel }}
             </div>
             <ng-container *ngFor="let cart of quotes?.carts">
@@ -241,7 +253,7 @@
   #generalInformationQuoteValueComparison
   let-insuredObjectItem="insuredObjectItem"
 >
-  <div class="col-4 notice">
+  <div class="col notice">
     {{ insuredObjectItem?.formattedValue || insuredObjectItem?.value }}
   </div>
 </ng-template>
