@@ -166,5 +166,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    * Disable user
    *
    */
-  disableUser?: string;
+  userCloseAccount?: string;
+
+  /**
+   * Register user
+   *
+   */
+  userRegister?: string;
 }
