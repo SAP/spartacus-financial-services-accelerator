@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, WindowRef } from '@spartacus/core';
+import { DebugElement } from '@angular/core';
 import { of } from 'rxjs';
 import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { ModalService } from '@spartacus/storefront';
+import { CmsComponentData, ModalService } from '@spartacus/storefront';
+import { CMSConnectionComponent } from '../../occ/occ-models/cms-component.models';
 import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
 
 const mockUser = {
@@ -43,6 +45,17 @@ class MockAgentSearchService {
   cancelledSyncPilotAgent$ = of(true);
 }
 
+const componentData: CMSConnectionComponent = {
+  stompUrl: 'htttttp://stomp-test-url.com',
+  url: 'htttttp://test-url.com',
+  name: 'Test Root Component',
+  uid: 'testUid',
+};
+
+class MockCmsComponentData {
+  data$ = of(componentData);
+}
+
 describe('SyncPilotConnectionComponent', () => {
   let component: SyncPilotConnectionComponent;
   let fixture: ComponentFixture<SyncPilotConnectionComponent>;
@@ -50,7 +63,9 @@ describe('SyncPilotConnectionComponent', () => {
   let service: Service;
   let modalService: ModalService;
   let agentSearchService: AgentSearchService;
+  let componentData: CmsComponentData<CMSConnectionComponent>;
   let winRef: WindowRef;
+  let el: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -73,17 +88,24 @@ describe('SyncPilotConnectionComponent', () => {
           provide: AgentSearchService,
           useClass: MockAgentSearchService,
         },
+        {
+          provide: CmsComponentData,
+          useClass: MockCmsComponentData,
+        },
       ],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SyncPilotConnectionComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);
     agentSearchService = TestBed.inject(AgentSearchService);
     winRef = TestBed.inject(WindowRef);
-  });
+    componentData = TestBed.inject(CmsComponentData);
+    el = fixture.debugElement;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SyncPilotConnectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     spyOn(service, 'connect').and.stub();
