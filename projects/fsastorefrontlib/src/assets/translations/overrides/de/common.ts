@@ -82,6 +82,8 @@ export const common = {
   formErrors: {
     pattern: '[DE] Should contain at least one number, no special characters',
     maxlength: '[DE] Maximum {{ maxLength }} characters',
+    min: '[DE] Minimum value is {{ minValue }} {{ measure }}',
+    max: '[DE] Maximum value is {{maxValue }} {{ measure }}',
     InvalidDate: '[DE] Must be over 18 years old',
     cxInvalidPassword:
       '[DE] Password must be six characters minimum, with one uppercase letter, one number, one symbol',
