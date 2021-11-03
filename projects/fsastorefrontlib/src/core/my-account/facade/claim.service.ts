@@ -183,6 +183,21 @@ export class ClaimService {
       .unsubscribe();
   }
 
+  changeClaim(claim: Claim) {
+    this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.ChangeClaim({
+            userId: occUserId,
+            claimData: claim,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
   private isCreated(claim: any): boolean {
     return claim && claim.claimNumber !== undefined;
   }

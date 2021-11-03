@@ -134,6 +134,18 @@
                 >
                   {{ 'fscommon.details' | cxTranslate }}
                 </a>
+                <br />
+                <a
+                  class="link"
+                  [routerLink]="
+                    {
+                      cxRoute: 'changeClaim',
+                      params: { claimId: claim.claimNumber }
+                    } | cxUrl
+                  "
+                >
+                  <br />{{ 'fscommon.continue' | cxTranslate }}
+                </a>
               </ng-template>
             </div>
           </div>
