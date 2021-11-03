@@ -55,7 +55,6 @@
       [control]="form.get('dateOfBirth')"
       [translationParams]="{
         minValue: form.get('dateOfBirth')?.errors?.min?.min,
-        maxValue: form.get('dateOfBirth')?.errors?.max?.max,
         measure: 'year'
       }"
     ></cx-form-errors>

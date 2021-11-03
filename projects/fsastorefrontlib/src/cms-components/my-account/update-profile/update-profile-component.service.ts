@@ -19,7 +19,11 @@ export class FSUpdateProfileComponentService extends UpdateProfileComponentServi
     titleCode: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', DefaultFormValidators.required),
+    dateOfBirth: new FormControl('', [
+      DefaultFormValidators.required,
+      DefaultFormValidators.dateOfBirthValidator(18),
+      Validators.min(1900),
+    ]),
     contactInfos: new FormGroup({
       code: new FormControl(''),
       phoneNumber: new FormControl(

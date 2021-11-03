@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'cx-fs-update-profile',
@@ -34,9 +33,6 @@ export class FSUpdateProfileComponent extends UpdateProfileComponent
   subscription = new Subscription();
 
   ngOnInit() {
-    this.form
-      .get('dateOfBirth')
-      .setValidators([Validators.min(1900), Validators.max(2100)]);
     this.subscription.add(
       this.user$.pipe(map(user => this.service.patchForm(user))).subscribe()
     );
