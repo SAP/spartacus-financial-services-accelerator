@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { FileService, FormDataService } from '@spartacus/dynamicforms';
-import { ClaimService } from '@spartacus/fsa-storefront';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { combineLatest, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
