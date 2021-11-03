@@ -1,0 +1,14 @@
+<section *ngIf="claim$ | async as claim">
+  <div class="row mt-3 justify-content-end">
+    <div class="col-sm-6 col-xs-12 mb-3">
+      <button class="action-button btn-block" (click)="back()">
+        {{ 'common.back' | cxTranslate }}
+      </button>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <button class="primary-button btn-block" (click)="submit(claim)">
+        {{ 'common.submit' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</section>
