@@ -94,10 +94,4 @@ describe('SyncPilotConnectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should establish connection with sync pilot', () => {
-    component.establishConnection();
-    expect(window.open).toHaveBeenCalled();
-    expect(service.connect).toHaveBeenCalled();
-  });
 });

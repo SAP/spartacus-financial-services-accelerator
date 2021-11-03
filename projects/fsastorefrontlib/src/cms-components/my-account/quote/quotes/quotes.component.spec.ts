@@ -62,6 +62,7 @@ class MockQuoteService {
   loadQuotes() {}
   getLoaded() {}
   getQuotesLoaded() {}
+  setQuoteForCompare() {}
 }
 
 const MockOccConfig: OccConfig = {

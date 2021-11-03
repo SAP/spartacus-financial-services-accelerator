@@ -22,6 +22,7 @@ export const claim = {
     },
     createFailed: 'Claim for given policy cannot be created.',
     loadingFailed: 'Claim can not be loaded.',
+    successfulChangeClaim: 'Claim {{claimNumber}} is successfully updated.',
     alreadySubmitted: 'Your Claim is already submitted.',
     generalInformation: 'General Information',
     claimDetails: 'Claim Details ({{ subclaimType }})',
