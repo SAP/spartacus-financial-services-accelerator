@@ -40,7 +40,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   policyDetails: { paths: ['my-account/my-policies/:policyId/:contractId'] },
   quotes: { paths: ['my-account/my-financial-applications'] },
   quoteDetails: { paths: ['my-account/my-financial-applications/:quoteId'] },
-  quoteComparison: { paths: ['my-account/quote-comparison/:cartCodes'] },
+  quoteComparison: { paths: ['my-account/quote-comparison'] },
   premiumCalendar: { paths: ['my-account/premium-calendar'] },
   accountOverview: { paths: ['my-account/account-overview'] },
   fnolIncidentPage: { paths: ['fnolIncidentPage'] },

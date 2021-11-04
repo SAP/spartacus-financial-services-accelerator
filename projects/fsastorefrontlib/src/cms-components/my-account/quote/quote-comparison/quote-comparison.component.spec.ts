@@ -150,8 +150,8 @@ class MockRoutingService {
   getRouterState(): Observable<any> {
     return of({
       state: {
-        params: {
-          cartCodes: '["00001001","00001000"]',
+        queryParams: {
+          cartCodes: '00001001,00001000',
         },
       },
     });

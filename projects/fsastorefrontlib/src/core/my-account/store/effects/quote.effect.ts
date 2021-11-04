@@ -2,6 +2,7 @@ import {
   CartActions,
   GlobalMessageService,
   GlobalMessageType,
+  RoutingService,
 } from '@spartacus/core';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -102,7 +103,8 @@ export class QuoteEffects {
             return new fromActions.LoadQuoteComparisonSuccess(carts);
           }),
           catchError(error => {
-            this.showGlobalMessage('quote.definitionLoadQuotesComparisonError');
+            this.showGlobalMessage('httpHandlers.cartNotFound');
+            this.routingService.go({ cxRoute: 'quotes' });
             return of(
               new fromActions.LoadQuoteComparisonFail(JSON.stringify(error))
             );
@@ -121,6 +123,7 @@ export class QuoteEffects {
   constructor(
     private actions$: Actions,
     private qouteConnector: QuoteConnector,
-    private globalMessageService: GlobalMessageService
+    private globalMessageService: GlobalMessageService,
+    private routingService: RoutingService
   ) {}
 }
