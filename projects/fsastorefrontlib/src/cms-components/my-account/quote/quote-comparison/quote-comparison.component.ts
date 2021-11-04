@@ -7,7 +7,7 @@ import {
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import {
   CategoryComparisonConfig,
   QuoteComparisonConfig,
@@ -58,18 +58,17 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
           this.userIdService.getUserId(),
         ])
           .pipe(
+            filter(([routingData, _]) => !routingData.nextState),
             map(([routingData, occUserId]) => {
-              if (!routingData.nextState) {
-                this.quoteCodes = routingData.state.queryParams.cartCodes.split(
-                  ','
-                );
-                this.userId = occUserId;
-                this.subheader = this.quoteCodes?.join(' / ');
-                this.quoteService.loadQuotesComparison(
-                  this.quoteCodes,
-                  this.userId
-                );
-              }
+              this.quoteCodes = routingData.state.queryParams.cartCodes.split(
+                ','
+              );
+              this.userId = occUserId;
+              this.subheader = this.quoteCodes?.join(' / ');
+              this.quoteService.loadQuotesComparison(
+                this.quoteCodes,
+                this.userId
+              );
             })
           )
           .subscribe()
