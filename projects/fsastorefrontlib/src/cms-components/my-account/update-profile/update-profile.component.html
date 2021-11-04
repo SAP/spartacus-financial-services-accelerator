@@ -51,7 +51,13 @@
       formControlName="dateOfBirth"
       placeholder="{{ getDateFormat() }}"
     />
-    <cx-form-errors [control]="form.get('dateOfBirth')"></cx-form-errors>
+    <cx-form-errors
+      [control]="form.get('dateOfBirth')"
+      [translationParams]="{
+        minValue: form.get('dateOfBirth')?.errors?.min?.min,
+        measure: 'year'
+      }"
+    ></cx-form-errors>
   </label>
 
   <div class="form-group row" formGroupName="contactInfos">

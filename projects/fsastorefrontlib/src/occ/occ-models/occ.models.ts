@@ -156,6 +156,15 @@ export enum QuoteActionType {
   UPDATE = 'UPDATE',
 }
 
+export enum SyncPilotGender {
+  mr = 'm',
+  mrs = 'w',
+  miss = 'w',
+  ms = 'w',
+  dr = 'd',
+  rev = 'd',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;
