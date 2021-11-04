@@ -224,7 +224,7 @@ describe('ClaimServiceTest', () => {
   });
 
   it('should change claim test', () => {
-    service.changeClaim(claimMock);
+    service.changeClaim(claimMock, OCC_USER_ID_CURRENT);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.ChangeClaim({
         userId: OCC_USER_ID_CURRENT,

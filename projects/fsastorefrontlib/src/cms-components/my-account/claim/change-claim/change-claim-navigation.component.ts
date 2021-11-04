@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
+import { RoutingService, UserIdService } from '@spartacus/core';
 import { FileService, FormDataService } from '@spartacus/dynamicforms';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { combineLatest, Subscription } from 'rxjs';
@@ -14,7 +14,8 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected claimService: ClaimService,
     protected fileService: FileService,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected userIdService: UserIdService
   ) {}
 
   claim$;
@@ -48,14 +49,15 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.formDataService.getSubmittedForm(),
         this.fileService.getUploadedDocuments(),
+        this.userIdService.getUserId(),
       ])
         .pipe(
-          map(([submittedFormData, uploadedContent]) => {
+          map(([submittedFormData, uploadedContent, occUserId]) => {
             // needed to deep clone claimData object
             const claimCopy = JSON.parse(JSON.stringify(claim));
             if (submittedFormData?.content && uploadedContent) {
               claimCopy.documents = uploadedContent.files;
-              this.claimService.changeClaim(claimCopy);
+              this.claimService.changeClaim(claimCopy, occUserId);
             }
           })
         )
