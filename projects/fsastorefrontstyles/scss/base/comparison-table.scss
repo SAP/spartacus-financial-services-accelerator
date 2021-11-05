@@ -13,6 +13,8 @@
     }
     .table-header {
       min-height: 180px;
+      opacity: 0.95;
+      background-color: var(--cx-color-1);
       padding-top: 10px;
       .table-header-title {
         font-size: var(--cx-h6-font-size);
