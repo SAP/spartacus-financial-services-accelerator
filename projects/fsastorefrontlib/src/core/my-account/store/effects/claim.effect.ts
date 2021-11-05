@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
@@ -154,6 +154,39 @@ export class ClaimEffects {
           )
         );
     })
+  );
+
+  changeClaim$: Observable<any> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.CHANGE_CLAIM),
+      map((action: fromActions.ChangeClaim) => action.payload),
+      switchMap(payload => {
+        const claimNumber = payload.claimData.claimNumber;
+        return this.claimConnector
+          .updateClaim(payload.userId, claimNumber, payload.claimData)
+          .pipe(
+            map(claim => {
+              this.routingService.go({
+                cxRoute: 'claimDetails',
+                params: { claimId: claimNumber },
+              });
+              this.globalMessageService.add(
+                {
+                  key: 'claim.successfulChangeClaim',
+                  params: {
+                    claimNumber: claimNumber,
+                  },
+                },
+                GlobalMessageType.MSG_TYPE_CONFIRMATION
+              );
+              return new fromActions.UpdateClaimSuccess(claim);
+            }),
+            catchError(error =>
+              of(new fromActions.UpdateClaimFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
 
   private showGlobalMessage(text: string, messageType: GlobalMessageType) {

@@ -16,7 +16,9 @@ const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
 const contractId = 'CT00001';
 const claimId = 'CL00001';
-
+const claimMock = {
+  claimNumber: claimId,
+};
 const claimPolicies = {
   insurancePolicies: [
     {
@@ -34,7 +36,7 @@ class MockUserIdService {
 }
 class MockAuthService {
   isUserLoggedIn() {
-    return true;
+    return of(true);
   }
 }
 describe('ClaimServiceTest', () => {
@@ -219,5 +221,15 @@ describe('ClaimServiceTest', () => {
       })
       .unsubscribe();
     expect(selectedPolicy).toEqual(null);
+  });
+
+  it('should change claim test', () => {
+    service.changeClaim(claimMock, OCC_USER_ID_CURRENT);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.ChangeClaim({
+        userId: OCC_USER_ID_CURRENT,
+        claimData: claimMock,
+      })
+    );
   });
 });
