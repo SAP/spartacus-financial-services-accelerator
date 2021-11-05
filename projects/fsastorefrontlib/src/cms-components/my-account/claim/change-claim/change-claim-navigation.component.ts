@@ -18,7 +18,7 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
     protected userIdService: UserIdService
   ) {}
 
-  claim$;
+  claim$ = this.claimService.getCurrentClaim();
   subscription = new Subscription();
 
   ngOnInit(): void {
@@ -35,7 +35,6 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-    this.claim$ = this.claimService.getCurrentClaim();
   }
 
   back() {
