@@ -3,7 +3,7 @@ import { RoutingService, UserIdService } from '@spartacus/core';
 import { FileService, FormDataService } from '@spartacus/dynamicforms';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { combineLatest, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-change-claim-navigation',
@@ -26,6 +26,7 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
       this.routingService
         .getRouterState()
         .pipe(
+          filter(routingData => !routingData.nextState),
           tap(routingData => {
             const claimId = routingData.state.params.claimId;
             if (claimId) {
