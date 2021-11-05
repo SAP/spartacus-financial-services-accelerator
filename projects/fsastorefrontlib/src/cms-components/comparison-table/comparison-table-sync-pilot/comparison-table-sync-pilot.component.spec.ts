@@ -123,7 +123,7 @@ describe('ComparisonTableSyncPilotComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should establish connection with sync pilot', () => {
-    component.establishConnection();
+    component.enterQueue();
     expect(service.connect).toHaveBeenCalled();
   });
 });

@@ -1,11 +1,13 @@
 <ng-container *ngIf="component$ | async as component">
-  <h3 class="table-header-title mb-0">
-    {{ 'fscommon.syncPilot.needHelp' | cxTranslate }}
-  </h3>
-  <div class="notice link" (click)="establishConnection()">
-    <h4 class="fas fa-headset table-header-value notice"></h4>
-    <p class="mb-0 notice link text-truncate">
-      {{ 'fscommon.syncPilot.speakToAgent' | cxTranslate }}
-    </p>
-  </div>
+  <ng-container *ngIf="user$ | async as user">
+    <h3 class="table-header-title mb-0">
+      {{ 'fscommon.syncPilot.needHelp' | cxTranslate }}
+    </h3>
+    <div class="notice link" (click)="enterQueue(user, component)">
+      <h4 class="fas fa-headset table-header-value notice"></h4>
+      <p class="mb-0 notice link text-truncate">
+        {{ 'fscommon.syncPilot.speakToAgent' | cxTranslate }}
+      </p>
+    </div>
+  </ng-container>
 </ng-container>

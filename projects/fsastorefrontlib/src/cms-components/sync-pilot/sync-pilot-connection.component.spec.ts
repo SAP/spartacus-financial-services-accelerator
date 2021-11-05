@@ -118,7 +118,7 @@ describe('SyncPilotConnectionComponent', () => {
   });
 
   it('should establish connection with sync pilot', () => {
-    component.establishConnection();
+    component.enterQueue();
     expect(window.open).toHaveBeenCalled();
     expect(service.connect).toHaveBeenCalled();
   });
