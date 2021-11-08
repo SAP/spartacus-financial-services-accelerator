@@ -1,55 +1,56 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { CmsService, User, WindowRef } from '@spartacus/core';
+import { CmsService, WindowRef } from '@spartacus/core';
+import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { Service } from '@syncpilot/bpool-guest-lib';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
+import { SyncPilotConnectionComponent } from '../../sync-pilot/sync-pilot-connection.component';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
-import { SyncPilotService } from '../../sync-pilot/sync-pilot.service';
 
 @Component({
   selector: 'cx-fs-comparison-table-sync-pilot',
   templateUrl: './comparison-table-sync-pilot.component.html',
 })
-export class ComparisonTableSyncPilotComponent implements OnInit, OnDestroy {
+export class ComparisonTableSyncPilotComponent
+  extends SyncPilotConnectionComponent
+  implements OnInit, OnDestroy {
   constructor(
     protected cmsService: CmsService,
     protected userAccountFacade: UserAccountFacade,
-    protected syncPilotService: SyncPilotService,
+    protected syncPilotService: Service,
+    protected modalService: ModalService,
+    protected agentService: AgentSearchService,
+    protected componentData: CmsComponentData<CMSConnectionComponent>,
     protected winRef?: WindowRef
-  ) {}
-
-  protected subscription = new Subscription();
-  user$: Observable<User> = this.userAccountFacade.get();
-  protected readonly ownerId = 1;
-
+  ) {
+    super(
+      userAccountFacade,
+      syncPilotService,
+      modalService,
+      agentService,
+      componentData
+    );
+  }
+  private sub = new Subscription();
   component$: Observable<any> = this.cmsService.getComponentData(
     'ComparisonTableSyncPilotComponent'
   );
 
   ngOnInit(): void {
-    this.redirectToAgent();
-    this.abortConnectionToSyncPilot();
-  }
-
-  enterQueue(user: User, component: CMSConnectionComponent) {
-    this.syncPilotService.setSyncPilotConfig(component);
-    this.subscription.add(
-      this.syncPilotService.enterQueue(this.ownerId, user).subscribe()
-    );
-  }
-
-  redirectToAgent() {
-    this.subscription.add(this.syncPilotService.redirectToAgent().subscribe());
-  }
-
-  abortConnectionToSyncPilot() {
-    this.subscription.add(
-      this.syncPilotService.abortSyncPilotConnection().subscribe()
+    this.sub.add(
+      this.component$.subscribe(data => {
+        this.syncPilotService.setConfig({
+          stompUrl: data.stompUrl,
+          serverUrlServer: data.url,
+        });
+      })
     );
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 }
