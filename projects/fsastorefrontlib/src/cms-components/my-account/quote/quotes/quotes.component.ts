@@ -227,11 +227,10 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   goToComparePage() {
-    sessionStorage.setItem(
-      'quoteCodes',
-      JSON.stringify(this.quoteCodesForCompare)
+    this.routingService.go(
+      { cxRoute: 'quoteComparison' },
+      { queryParams: { cartCodes: this.quoteCodesForCompare.join(',') } }
     );
-    this.routingService.go({ cxRoute: 'quoteComparison' });
   }
 
   ngOnDestroy() {

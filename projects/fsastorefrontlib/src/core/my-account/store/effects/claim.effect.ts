@@ -169,6 +169,39 @@ export class ClaimEffects {
     )
   );
 
+  changeClaim$: Observable<any> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.CHANGE_CLAIM),
+      map((action: fromActions.ChangeClaim) => action.payload),
+      switchMap(payload => {
+        const claimNumber = payload.claimData.claimNumber;
+        return this.claimConnector
+          .updateClaim(payload.userId, claimNumber, payload.claimData)
+          .pipe(
+            map(claim => {
+              this.routingService.go({
+                cxRoute: 'claimDetails',
+                params: { claimId: claimNumber },
+              });
+              this.globalMessageService.add(
+                {
+                  key: 'claim.successfulChangeClaim',
+                  params: {
+                    claimNumber: claimNumber,
+                  },
+                },
+                GlobalMessageType.MSG_TYPE_CONFIRMATION
+              );
+              return new fromActions.UpdateClaimSuccess(claim);
+            }),
+            catchError(error =>
+              of(new fromActions.UpdateClaimFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
+  );
+
   private showGlobalMessage(text: string, messageType: GlobalMessageType) {
     this.globalMessageService.remove(messageType);
     this.globalMessageService.add({ key: text }, messageType);
