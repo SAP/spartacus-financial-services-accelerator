@@ -7,7 +7,6 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { CMSConnectionComponent } from '../../occ/occ-models/cms-component.models';
-import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
 
 const mockUser = {
   uid: 'test@email.com',
@@ -36,13 +35,13 @@ class MockModalService {
 class MockService {
   onRedirect = of(mockGuestEndpoint);
   setConfig() {}
-  connect() {}
-  enterQueue() {}
+  connect(): Promise<void> {
+    return Promise.resolve();
+  }
+  enterQueue(): Promise<void> {
+    return Promise.resolve();
+  }
   abort() {}
-}
-
-class MockAgentSearchService {
-  cancelledSyncPilotAgent$ = of(true);
 }
 
 const CMScomponentData: CMSConnectionComponent = {
@@ -52,9 +51,9 @@ const CMScomponentData: CMSConnectionComponent = {
   uid: 'testUid',
 };
 
-class MockCmsComponentData {
-  data$ = of(CMScomponentData);
-}
+const MockCmsComponentData = <CmsComponentData<CMSConnectionComponent>>{
+  data$: of(CMScomponentData),
+};
 
 describe('SyncPilotConnectionComponent', () => {
   let component: SyncPilotConnectionComponent;
@@ -62,7 +61,6 @@ describe('SyncPilotConnectionComponent', () => {
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
-  let agentSearchService: AgentSearchService;
   let componentData: CmsComponentData<CMSConnectionComponent>;
   let winRef: WindowRef;
   let el: DebugElement;
@@ -85,12 +83,8 @@ describe('SyncPilotConnectionComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: AgentSearchService,
-          useClass: MockAgentSearchService,
-        },
-        {
           provide: CmsComponentData,
-          useClass: MockCmsComponentData,
+          useValue: MockCmsComponentData,
         },
       ],
     }).compileComponents();
@@ -101,14 +95,13 @@ describe('SyncPilotConnectionComponent', () => {
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);
-    agentSearchService = TestBed.inject(AgentSearchService);
     winRef = TestBed.inject(WindowRef);
     componentData = TestBed.inject(CmsComponentData);
     el = fixture.debugElement;
 
     component = fixture.componentInstance;
     fixture.detectChanges();
-    spyOn(service, 'connect').and.stub();
+    spyOn(service, 'connect').and.callThrough();
     spyOn(winRef.nativeWindow, 'open');
     component.ngOnInit();
   });
@@ -118,7 +111,7 @@ describe('SyncPilotConnectionComponent', () => {
   });
 
   it('should establish connection with sync pilot', () => {
-    component.establishConnection();
+    component.establishConnection(mockUser, CMScomponentData);
     expect(window.open).toHaveBeenCalled();
     expect(service.connect).toHaveBeenCalled();
   });

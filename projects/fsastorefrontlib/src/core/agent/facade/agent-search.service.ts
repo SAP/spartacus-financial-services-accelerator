@@ -16,8 +16,6 @@ export class AgentSearchService {
   agents = new BehaviorSubject<any>(null);
   resetSearchValueSource = new Subject<boolean>();
   resetSearchValue = this.resetSearchValueSource.asObservable();
-  cancelledSyncPilotAgentSource = new Subject<boolean>();
-  cancelledSyncPilotAgent$ = this.cancelledSyncPilotAgentSource.asObservable();
 
   private geolocationWatchId: number = null;
 
@@ -79,9 +77,5 @@ export class AgentSearchService {
 
   setResetSearchValue(isReset: boolean) {
     this.resetSearchValueSource.next(isReset);
-  }
-
-  setCancelledSyncPilotAgent(isCancelled: boolean) {
-    this.cancelledSyncPilotAgentSource.next(isCancelled);
   }
 }

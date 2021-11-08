@@ -5,7 +5,6 @@ import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { of } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
 
 import { ComparisonTableSyncPilotComponent } from './comparison-table-sync-pilot.component';
@@ -37,13 +36,13 @@ class MockModalService {
 class MockService {
   onRedirect = of(mockGuestEndpoint);
   setConfig() {}
-  connect() {}
-  enterQueue() {}
+  connect(): Promise<void> {
+    return Promise.resolve();
+  }
+  enterQueue(): Promise<void> {
+    return Promise.resolve();
+  }
   abort() {}
-}
-
-class MockAgentSearchService {
-  cancelledSyncPilotAgent$ = of(true);
 }
 
 const CMScomponentData: CMSConnectionComponent = {
@@ -66,7 +65,6 @@ describe('ComparisonTableSyncPilotComponent', () => {
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
-  let agentSearchService: AgentSearchService;
   let componentData: CmsComponentData<CMSConnectionComponent>;
   let winRef: WindowRef;
   let el: DebugElement;
@@ -88,10 +86,6 @@ describe('ComparisonTableSyncPilotComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: AgentSearchService,
-          useClass: MockAgentSearchService,
-        },
-        {
           provide: CmsService,
           useValue: MockCmsService,
         },
@@ -108,13 +102,13 @@ describe('ComparisonTableSyncPilotComponent', () => {
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);
-    agentSearchService = TestBed.inject(AgentSearchService);
     winRef = TestBed.inject(WindowRef);
     componentData = TestBed.inject(CmsComponentData);
     el = fixture.debugElement;
+
     component = fixture.componentInstance;
     fixture.detectChanges();
-    spyOn(service, 'connect').and.stub();
+    spyOn(service, 'connect').and.callThrough();
     spyOn(winRef.nativeWindow, 'open');
     component.ngOnInit();
   });
@@ -123,7 +117,8 @@ describe('ComparisonTableSyncPilotComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should establish connection with sync pilot', () => {
-    component.establishConnection();
+    component.establishConnection(mockUser, CMScomponentData);
+    expect(window.open).toHaveBeenCalled();
     expect(service.connect).toHaveBeenCalled();
   });
 });
