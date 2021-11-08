@@ -147,6 +147,15 @@ const quoteComparisonCarts = {
 };
 class MockRoutingService {
   go = createSpy();
+  getRouterState(): Observable<any> {
+    return of({
+      state: {
+        queryParams: {
+          cartCodes: '00001001,00001000',
+        },
+      },
+    });
+  }
 }
 
 class MockQuoteService {
@@ -229,6 +238,7 @@ describe('QuoteComparisonComponent', () => {
     routingService = TestBed.inject(RoutingService);
     languageService = TestBed.inject(LanguageService);
     userIdService = TestBed.inject(UserIdService);
+    spyOn(routingService, 'getRouterState').and.callThrough();
   });
 
   it('should create', () => {

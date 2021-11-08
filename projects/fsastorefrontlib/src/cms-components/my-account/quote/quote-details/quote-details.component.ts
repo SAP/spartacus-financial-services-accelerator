@@ -40,14 +40,13 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
         this.userIdService.getUserId(),
       ])
         .pipe(
+          filter(([routingData, _]) => !routingData.nextState),
           map(([routingData, userId]) => {
-            if (!routingData.nextState) {
-              const quoteId = routingData.state.params.quoteId;
-              if (quoteId) {
-                this.quoteService.loadQuoteDetails(quoteId, userId);
-              }
-              this.userId = userId;
+            const quoteId = routingData.state.params.quoteId;
+            if (quoteId) {
+              this.quoteService.loadQuoteDetails(quoteId, userId);
             }
+            this.userId = userId;
           })
         )
         .subscribe()

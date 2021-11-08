@@ -2,13 +2,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { CartActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  CartActions,
+  GlobalMessage,
+  GlobalMessageService,
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { QuoteConnector } from '../../connectors/quote.connector';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './quote.effect';
+import createSpy = jasmine.createSpy;
 
 const insuranceQuote1: any = {
   cartCode: 'test001',
@@ -72,6 +79,14 @@ class MockQuoteConnector {
   }
 }
 
+class MockRoutingService {
+  go = createSpy();
+}
+
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
+
 describe('Quote Effects', () => {
   let actions$: Observable<fromActions.QuoteAction>;
   let effects: fromEffects.QuoteEffects;
@@ -87,6 +102,8 @@ describe('Quote Effects', () => {
       ],
       providers: [
         { provide: QuoteConnector, useValue: mockQuoteConnector },
+        { provide: RoutingService, useClass: MockRoutingService },
+        { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         fromEffects.QuoteEffects,
         provideMockActions(() => actions$),
       ],
