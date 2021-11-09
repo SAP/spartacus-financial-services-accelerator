@@ -36,6 +36,10 @@ testFilters([''], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      cy.get('cx-fs-quote-review').should('be.visible');
+      cy.get('.primary-button').should('be.visible');
+      cy.get('.primary-button').click();
     });
 
     it('Check loan application is Created', () => {

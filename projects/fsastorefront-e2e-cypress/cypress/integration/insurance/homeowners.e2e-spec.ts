@@ -65,6 +65,7 @@ testFilters([''], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
     });
 
@@ -93,7 +94,7 @@ testFilters([''], () => {
     it('Should empty my account policies and order history page', () => {
       checkout.checkMyAccountEmptyPages('Policies', 'You have no Policies!');
       myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('€491.25');
+      myAccount.checkOrderHistoryContent('€491.25', 'Pending Approval');
     });
   });
 });

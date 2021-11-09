@@ -46,6 +46,7 @@ testFilters(['smoke'], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       loan.checkLegalInformationLoan();
       checkout.clickContinueButton();
@@ -85,6 +86,8 @@ testFilters(['smoke'], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
       banking.checkLegalInformationPage();
       checkout.clickContinueButton();
       banking.checkBankingProgressBar();

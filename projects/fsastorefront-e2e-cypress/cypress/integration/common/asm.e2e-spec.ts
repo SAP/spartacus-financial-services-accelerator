@@ -1,4 +1,5 @@
 import * as asm from '../../helpers/asm';
+import { checkPageElements } from '../../helpers/homepage';
 import * as register from '../../helpers/register';
 import {
   amosAgent,
@@ -25,13 +26,13 @@ testFilters([''], () => {
     });
 
     it('should login as agent', () => {
-      register.loginInUser(amosAgent.email, amosAgent.password);
+      register.loginAgent(amosAgent.email, amosAgent.password);
       cy.get('cx-asm-session-timer').should('be.visible');
     });
 
     it('should end the session for user', () => {
-      cy.get('.logout').should('be.visible').click();
-      asm.checkAsmHeader();
+      register.logout();
+      asm.checkAsmHeaderWithoutCustomer();
     });
   });
 });
