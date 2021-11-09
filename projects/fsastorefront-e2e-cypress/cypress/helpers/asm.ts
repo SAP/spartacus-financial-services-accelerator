@@ -9,3 +9,10 @@ export function checkAsmHeader() {
     .should('contain', 'Find an Agent')
     .should('be.visible');
 }
+
+export function checkAsmHeaderWithoutCustomer() {
+  cy.get('.asm-bar').should('be.visible');
+  cy.get('[formcontrolname=searchTerm]').should('be.visible');
+  cy.get('[type=submit]').should('be.visible');
+  cy.get('cx-asm-session-timer').should('be.visible');
+}
