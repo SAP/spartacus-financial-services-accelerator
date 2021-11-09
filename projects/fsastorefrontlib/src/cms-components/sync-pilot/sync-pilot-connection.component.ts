@@ -63,7 +63,6 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
       this.setConnection(this.ownerId)
         .pipe(
           tap(_ => {
-            console.log('connection');
             const guestInfo = this.createGuestInfo(
               user.firstName,
               user.name,
