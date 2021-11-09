@@ -17,7 +17,7 @@ import {
 } from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';

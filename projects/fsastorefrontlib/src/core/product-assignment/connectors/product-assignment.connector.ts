@@ -30,7 +30,7 @@ export class ProductAssignmentConnector {
     userId: string,
     orgUnitId: string,
     productCode: string
-  ) {
+  ): Observable<any> {
     return this.productAssignmentAdapter.createProductAssignment(
       userId,
       orgUnitId,
@@ -42,7 +42,7 @@ export class ProductAssignmentConnector {
     userId: string,
     orgUnitId: string,
     productAssignmentCode: string
-  ) {
+  ): Observable<any> {
     return this.productAssignmentAdapter.removeProductAssignment(
       userId,
       orgUnitId,

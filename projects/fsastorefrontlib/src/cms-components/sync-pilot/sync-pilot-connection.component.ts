@@ -5,19 +5,19 @@ import {
   OnInit,
 } from '@angular/core';
 import { WindowRef, User } from '@spartacus/core';
-import { ModalService } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { CmsComponentData, ModalService } from '@spartacus/storefront';
+import { from, Observable, Subscription } from 'rxjs';
+import { tap, withLatestFrom } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
+import { GuestEndpoint } from '@syncpilot/bpool-guest-lib/models/guestEndpoint';
 import {
   EGender,
   GuestInfo,
 } from '@syncpilot/bpool-guest-lib/models/guestinfo';
-import { GuestEndpoint } from '@syncpilot/bpool-guest-lib/models/guestEndpoint';
-import { SyncPilotDialogComponent } from '../sync-pilot-dialog/sync-pilot-dialog.component';
-import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
 import { SyncPilotGender } from '../../occ/occ-models/occ.models';
+import { SyncPilotDialogComponent } from '../sync-pilot-dialog/sync-pilot-dialog.component';
+import { CMSConnectionComponent } from '../../occ/occ-models/cms-component.models';
 
 @Component({
   selector: 'cx-fs-sync-pilot-connection-component',
@@ -29,56 +29,50 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
     protected userAccountFacade: UserAccountFacade,
     protected syncPilotService: Service,
     protected modalService: ModalService,
-    protected agentService: AgentSearchService,
+    public componentData: CmsComponentData<CMSConnectionComponent>,
     protected winRef?: WindowRef
   ) {}
 
-  private subscription = new Subscription();
+  protected subscription = new Subscription();
   protected readonly ownerId = 1;
   user$: Observable<User> = this.userAccountFacade.get();
 
   ngOnInit() {
-    this.setConfigurationForSyncPilot();
     this.redirectToAgent();
-    this.abortConnectionToSyncPilot();
   }
 
-  setConfigurationForSyncPilot() {
+  setSyncPilotConfig(data: CMSConnectionComponent) {
     this.syncPilotService.setConfig({
-      stompUrl:
-        'https://msg.dev.livecontract.net/beraterpoolServer/beraterpoolWS',
-      serverUrlServer:
-        'https://msg.dev.livecontract.net/beraterpoolServer/beraterpool/server/v1',
+      stompUrl: data.stompUrl,
+      serverUrlServer: data.url,
     });
   }
 
-  establishConnection() {
+  setConnection(ownerID: number): Observable<void> {
+    this.modalService.open(SyncPilotDialogComponent, {
+      centered: true,
+    });
+    return from(this.syncPilotService.connect(ownerID));
+  }
+
+  establishConnection(user: User, componentData: CMSConnectionComponent): void {
+    const additionalGuestInformation = new Map<string, string>();
+    const groupId = 1;
+    this.setSyncPilotConfig(componentData);
     this.subscription.add(
-      this.user$
+      this.setConnection(this.ownerId)
         .pipe(
-          map((user: User) => {
-            this.connectToSyncPilot(user);
-            this.modalService.open(SyncPilotDialogComponent, {
-              centered: true,
-            });
+          tap(_ => {
+            const guestInfo = this.createGuestInfo(
+              user.firstName,
+              user.name,
+              SyncPilotGender[user.titleCode],
+              additionalGuestInformation
+            );
+            this.syncPilotService.enterQueue(guestInfo, groupId);
           })
         )
         .subscribe()
-    );
-  }
-
-  async connectToSyncPilot(user: User): Promise<void> {
-    const additionalGuestInformation = new Map<string, string>();
-    const groupId = 1;
-    await this.syncPilotService.connect(this.ownerId);
-    this.syncPilotService.enterQueue(
-      this.createGuestInfo(
-        user.firstName,
-        user.name,
-        SyncPilotGender[user.titleCode],
-        additionalGuestInformation
-      ),
-      groupId
     );
   }
 
@@ -108,14 +102,6 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
             }
           })
         )
-        .subscribe()
-    );
-  }
-
-  abortConnectionToSyncPilot() {
-    this.subscription.add(
-      this.agentService.cancelledSyncPilotAgent$
-        .pipe(tap(_ => this.syncPilotService.abort()))
         .subscribe()
     );
   }
