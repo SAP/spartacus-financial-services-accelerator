@@ -13,10 +13,14 @@
         padding: 2rem 0;
       }
     }
+    & form > .row:not(.cx-checkout-btns) > *:first-of-type {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
     legend.label-content {
       font-size: inherit;
     }
-    .cx-checkout-btns .col-md-12 {
+    .cx-checkout-btns > *:first-of-type {
       margin-bottom: 1rem;
     }
     .cx-payment-form-exp-date {
@@ -35,10 +39,6 @@
       font-size: var(--cx-h6-font-size);
       font-weight: var(--cx-font-weight-bold);
       padding: 0.875rem 0 1.25rem;
-    }
-    .col-xl-10 {
-      flex: 0 0 100%;
-      max-width: 100%;
     }
   }
 }

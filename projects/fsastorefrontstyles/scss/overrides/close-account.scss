@@ -1,6 +1,6 @@
 cx-close-account,
 cx-close-account-modal {
-  .col-lg-8.col-md-9 {
+  & > *:first-of-type {
     margin: auto;
   }
   .cx-btn-group {
