@@ -33,6 +33,9 @@ cx-page-layout.CompanyPageTemplate {
       line-height: 1.34;
       font-weight: var(--cx-font-weight-normal);
     }
+    cx-table td a {
+      padding-inline-start: 1.25rem;
+    }
   }
   cx-banner {
     cx-media {
@@ -46,6 +49,11 @@ cx-page-layout.CompanyPageTemplate {
         background: var(--cx-color-4);
         box-shadow: none;
       }
+    }
+  }
+  cx-popover.hint-popover {
+    .popover-body:first-child.cx-close-row {
+      display: none;
     }
   }
 }
