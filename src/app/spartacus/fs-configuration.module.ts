@@ -20,7 +20,11 @@ import {
   dynamicformsTranslations,
   dynamicformsTranslationsDe,
 } from '@spartacus/dynamicforms';
-import { defaultCmsContentProviders, IconConfig } from '@spartacus/storefront';
+import {
+  defaultCmsContentProviders,
+  IconConfig,
+  mediaConfig,
+} from '@spartacus/storefront';
 import { environment } from '../../environments/environment';
 
 @NgModule({
@@ -93,6 +97,7 @@ import { environment } from '../../environments/environment';
       },
     }),
     provideConfig(layoutConfig),
+    provideConfig(mediaConfig),
     provideConfig(routingConfig),
     provideConfig(checkoutConfig),
     provideConfig(occProductConfig),
