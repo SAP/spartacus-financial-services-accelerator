@@ -11,6 +11,7 @@ testFilters([''], () => {
     });
 
     it('Should check anonymous consent', () => {
+      consentManagement.checkFooterConsent();
       consentManagement.checkAnonymousConsent();
       consentManagement.checkConsentDetails();
     });

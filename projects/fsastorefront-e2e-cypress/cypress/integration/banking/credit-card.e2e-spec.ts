@@ -71,6 +71,8 @@ testFilters([''], () => {
     it('Should bind Quote', () => {
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('quoteReviewWithoutOptional');
+      checkout.clickContinueButton();
     });
 
     it('Should check Legal Information page', () => {
@@ -101,7 +103,7 @@ testFilters([''], () => {
 
     it('Should check Order History and Order Status', () => {
       myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('€89.00');
+      myAccount.checkOrderHistoryContent('€89.00', 'Pending');
       cy.get('.cx-order-history-status').should('contain.text', 'Pending');
     });
   });

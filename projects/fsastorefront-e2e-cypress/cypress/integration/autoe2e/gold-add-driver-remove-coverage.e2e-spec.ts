@@ -59,6 +59,7 @@ testFilters([''], () => {
       cy.get('.primary-button').should('contain.text', 'Continue');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
     });
 
