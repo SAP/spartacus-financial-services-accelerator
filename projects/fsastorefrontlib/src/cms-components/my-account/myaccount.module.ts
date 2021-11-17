@@ -24,6 +24,8 @@ import { FSUserConnector } from '../../core/user/connectors/user-connector';
 import { OccFSUserAdapter } from '../../occ/adapters/user/occ-user.adapter';
 import { UserProfileConnector } from '@spartacus/user/profile/core';
 import { OccUserProfileAdapter } from '@spartacus/user/profile/occ';
+import { FSConsentManagementComponent } from './consent-management/consent-management.component';
+import { FSConsentManagementModule } from './consent-management/consent-management.module';
 
 const routes: Routes = [
   {
@@ -118,6 +120,7 @@ const routes: Routes = [
     InboxModule,
     PolicyModule,
     QuoteModule,
+    FSConsentManagementModule,
     ClaimModule,
     PremiumCalendarModule,
     FSAddressBookModule,
@@ -129,6 +132,9 @@ const routes: Routes = [
       cmsComponents: {
         UpdateProfileComponent: {
           component: FSUpdateProfileComponent,
+        },
+        ConsentManagementComponent: {
+          component: FSConsentManagementComponent,
         },
       },
     }),
