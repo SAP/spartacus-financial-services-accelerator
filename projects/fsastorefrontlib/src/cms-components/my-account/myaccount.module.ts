@@ -18,8 +18,8 @@ import { FSOrderModule } from './order';
 import { PolicyModule } from './policy/policy.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
 import { QuoteModule } from './quote/quote.module';
-import { FSUpdateProfileComponent } from './update-profile/update-profile.component';
 import { UpdateProfileModule } from './update-profile/update-profile.module';
+import { FSUpdateProfileComponent } from './update-profile/update-profile.component';
 
 const routes: Routes = [
   {

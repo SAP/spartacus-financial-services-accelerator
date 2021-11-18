@@ -266,7 +266,7 @@ header {
         flex-wrap: wrap;
       }
       cx-link {
-        padding-left: 15px;
+        padding-inline-start: 15px;
         text-decoration: underline;
         white-space: nowrap;
       }
@@ -284,6 +284,8 @@ header {
         font-weight: var(--cx-font-weight-semi);
         padding: 0.5rem 0 0.5rem;
         @include media-breakpoint-down(md) {
+          position: absolute;
+          right: 0;
           padding: 1rem;
         }
       }
@@ -306,13 +308,12 @@ header {
       }
     }
     .HeaderLinks {
+      justify-content: flex-start;
       cx-fs-navigation {
         order: 2;
       }
       cx-link {
-        position: absolute;
-        top: 0;
-        right: 0;
+        padding-inline-start: 0;
       }
       cx-login-greet {
         margin-bottom: 0;
