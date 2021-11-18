@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, UrlTree } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import {
-  B2BUserRole,
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
@@ -22,11 +21,7 @@ export class MyDashboardGuard implements CanActivate {
     protected globalMessageService: GlobalMessageService
   ) {}
 
-  canActivate():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(): Observable<boolean> {
     return this.userAccountFacade.get().pipe(
       filter((user: User) => {
         return user && Object.keys(user).length > 0;
