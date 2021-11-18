@@ -42,7 +42,7 @@ class MockUserIdService {
 }
 class MockAuthService {
   isUserLoggedIn() {
-    return true;
+    return of(true);
   }
 }
 describe('ChangeRequestServiceTest', () => {

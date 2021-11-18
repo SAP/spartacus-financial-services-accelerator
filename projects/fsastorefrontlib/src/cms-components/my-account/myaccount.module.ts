@@ -20,10 +20,6 @@ import { PremiumCalendarModule } from './premium-calendar/premium-calendar.modul
 import { QuoteModule } from './quote/quote.module';
 import { FSUpdateProfileComponent } from './update-profile/update-profile.component';
 import { UpdateProfileModule } from './update-profile/update-profile.module';
-import { FSUserConnector } from '../../core/user/connectors/user-connector';
-import { OccFSUserAdapter } from '../../occ/adapters/user/occ-user.adapter';
-import { UserProfileConnector } from '@spartacus/user/profile/core';
-import { OccUserProfileAdapter } from '@spartacus/user/profile/occ';
 import { FSConsentManagementComponent } from './consent-management/consent-management.component';
 import { FSConsentManagementModule } from './consent-management/consent-management.module';
 
@@ -138,14 +134,6 @@ const routes: Routes = [
         },
       },
     }),
-  ],
-  providers: [
-    OccUserProfileAdapter,
-    OccFSUserAdapter,
-    {
-      provide: UserProfileConnector,
-      useFactory: FSUserConnector,
-    },
   ],
 })
 export class MyAccountModule {}

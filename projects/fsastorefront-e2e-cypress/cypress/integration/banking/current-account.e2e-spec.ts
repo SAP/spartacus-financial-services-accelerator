@@ -5,6 +5,8 @@ import * as register from '../../helpers/register';
 import { registrationUser } from '../../sample-data/users';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
 import testFilters from '../../support/filters';
+import { checkMyQuotesPage } from '../../helpers/my-account/quotes-and-applications';
+import { retrieveQuote } from '../../helpers/my-account/my-account';
 
 testFilters(['smoke'], () => {
   context('Current Account Checkout', () => {
@@ -44,6 +46,13 @@ testFilters(['smoke'], () => {
       register.loginInUser(registrationUser.email, registrationUser.password);
     });
 
+    //BUG: CXFSA-303 will be removed
+    it('Should retrieve quote', () => {
+      checkMyQuotesPage();
+      retrieveQuote('1', 'Current Account');
+      checkout.clickContinueButton();
+    });
+
     it('Should complete personal details step', () => {
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
       checkout.checkPersonalDetailsPage();
@@ -63,6 +72,8 @@ testFilters(['smoke'], () => {
     it('Should bind Quote', () => {
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
     });
 
     it('Should check Legal Information page', () => {

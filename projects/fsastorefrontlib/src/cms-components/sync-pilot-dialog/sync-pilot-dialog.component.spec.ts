@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
+import { Service } from '@syncpilot/bpool-guest-lib';
+import { of } from 'rxjs';
 
 import { SyncPilotDialogComponent } from './sync-pilot-dialog.component';
 
@@ -9,15 +10,26 @@ class MockModalService {
   dismissActiveModal(): void {}
 }
 
-class MockAgentSearchService {
-  setCancelledSyncPilotAgent() {}
+const mockGuestEndpoint = {
+  state: 'accepted',
+  targetChannelAddress: 'https//livecontract.com',
+  groupId: 1,
+  ownerId: 1,
+};
+
+class MockService {
+  onRedirect = of(mockGuestEndpoint);
+  setConfig() {}
+  connect() {}
+  enterQueue() {}
+  abort() {}
 }
 
 describe('SyncPilotDialogComponent', () => {
   let component: SyncPilotDialogComponent;
   let fixture: ComponentFixture<SyncPilotDialogComponent>;
   let modalService: ModalService;
-  let agentSearchService: AgentSearchService;
+  let service: Service;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -29,8 +41,8 @@ describe('SyncPilotDialogComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: AgentSearchService,
-          useClass: MockAgentSearchService,
+          provide: Service,
+          useClass: MockService,
         },
       ],
     }).compileComponents();
@@ -38,10 +50,12 @@ describe('SyncPilotDialogComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SyncPilotDialogComponent);
+    service = TestBed.inject(Service);
     component = fixture.componentInstance;
     fixture.detectChanges();
     modalService = TestBed.inject(ModalService);
-    agentSearchService = TestBed.inject(AgentSearchService);
+
+    spyOn(service, 'abort').and.stub();
   });
 
   it('should create', () => {
@@ -50,9 +64,8 @@ describe('SyncPilotDialogComponent', () => {
 
   it('should dismiss modal', () => {
     spyOn(modalService, 'dismissActiveModal').and.callThrough();
-    spyOn(agentSearchService, 'setCancelledSyncPilotAgent').and.callThrough();
     component.dismissModal('Cross click');
     expect(modalService.dismissActiveModal).toHaveBeenCalled();
-    expect(agentSearchService.setCancelledSyncPilotAgent).toHaveBeenCalled();
+    expect(service.abort).toHaveBeenCalled();
   });
 });

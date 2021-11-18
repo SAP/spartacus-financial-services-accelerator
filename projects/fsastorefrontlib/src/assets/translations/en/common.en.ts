@@ -88,6 +88,7 @@ export const fscommon = {
     quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
+    updateClaim: 'Update Claim',
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',
@@ -134,18 +135,6 @@ export const fscommon = {
       banking_current_account: 'Your Current Account Application',
       banking_loans: 'Your Loan Application',
       banking_fixed_term_deposit: 'Your Fixed Term Deposit Application',
-    },
-    progressBar: {
-      step: {
-        fnolIncidentPage: 'Incident Information',
-        fnolIncidentReportPage: 'Incident Report',
-        fnolGeneralInfoPage: 'General Information',
-        fnolSummaryPage: 'Summary',
-        changeCarDetailsPage: 'Change Car Details',
-        changeSimulationPage: 'Change Preview',
-        changeCoveragePage: 'Change Coverage',
-        changeAdditionalDriverPage: 'Driver Information',
-      },
     },
     category: {
       insurances_property_homeowners: 'Homeowners Insurance',

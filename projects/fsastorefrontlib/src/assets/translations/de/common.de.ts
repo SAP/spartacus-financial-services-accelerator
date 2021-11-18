@@ -88,6 +88,7 @@ export const fscommon = {
     quotesAndApplications: 'Angebote & Anträge',
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
+    updateClaim: '[DE] Update Claim',
     summary: 'Zusammenfassung',
     submit: 'Einreichen',
     totalResults: 'Gesamtergebnisse',
@@ -147,18 +148,6 @@ export const fscommon = {
       banking_current_account: 'Ihr Girokonto Antrag',
       banking_loans: 'Ihr Kredit Antrag',
       banking_fixed_term_deposit: 'Ihr Festgeld Antrag',
-    },
-    progressBar: {
-      step: {
-        fnolIncidentPage: 'Schadensinformationen',
-        fnolIncidentReportPage: 'Schadensmeldung',
-        fnolGeneralInfoPage: 'Allgemeine Informationen',
-        fnolSummaryPage: 'Zusammenfassung',
-        changeCarDetailsPage: 'Fahrzeugdetails ändern',
-        changeSimulationPage: 'Vorschau ändern',
-        changeCoveragePage: 'Versicherungsschutz ändern',
-        changeAdditionalDriverPage: 'Fahrerinformationen',
-      },
     },
     pleaseSelect: 'Wählen Sie:',
     userIdentification: {

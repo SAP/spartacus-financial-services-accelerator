@@ -69,6 +69,8 @@ testFilters([''], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
     });
 
     it('Should check Legal Information page', () => {
@@ -96,7 +98,7 @@ testFilters([''], () => {
 
     it('Should check order history page', () => {
       myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('503,125.00');
+      myAccount.checkOrderHistoryContent('503,125.00', 'Pending Approval');
     });
   });
 });

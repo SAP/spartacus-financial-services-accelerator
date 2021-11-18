@@ -90,6 +90,8 @@ testFilters([''], () => {
       checkout.checkAccordions('threeAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('threeAccordions');
+      checkout.clickContinueButton();
       checkout.populatePaymentCreditCard();
       cy.get('.btn-primary').contains('Continue').click();
       checkout.placeOrderOnFinalReview();

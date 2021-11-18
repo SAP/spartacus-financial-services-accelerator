@@ -268,7 +268,7 @@
             </div>
           </cx-fs-accordion-item>
           <div class="row mt-5">
-            <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+            <div class="col-md-6 mb-3 mb-md-0">
               <ng-container
                 *ngIf="
                   cart.insuranceQuote?.state?.code !== 'BIND' &&
@@ -287,7 +287,7 @@
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
               "
-              class="col-md-6 col-sm-6 col-xs-12"
+              class="col-md-6"
             >
               <ng-container
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"

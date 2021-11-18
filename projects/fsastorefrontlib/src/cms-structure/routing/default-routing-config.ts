@@ -31,6 +31,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   closeAccount: { paths: ['my-account/close-account'] },
   claims: { paths: ['my-account/my-insurance-claims'] },
   claimDetails: { paths: ['my-account/my-insurance-claims/:claimId'] },
+  changeClaim: { paths: ['my-account/change-claim/:claimId'] },
   noClaims: { paths: ['noClaims'] },
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },

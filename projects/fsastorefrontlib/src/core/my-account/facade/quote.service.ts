@@ -214,12 +214,9 @@ export class QuoteService {
       .unsubscribe();
   }
 
-  loadQuotesComparison(quoteCodes: string[], occUserId?: string): void {
+  loadQuotesComparison(cartCodes: string[], userId?: string): void {
     this.store.dispatch(
-      new fromAction.LoadQuoteComparison({
-        cartCodes: quoteCodes,
-        userId: occUserId,
-      })
+      new fromAction.LoadQuoteComparison({ cartCodes, userId })
     );
   }
 
