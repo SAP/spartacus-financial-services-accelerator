@@ -1,9 +1,9 @@
 <ng-container *ngIf="consentTemplates$ | async as templateList">
-  <cx-consent-management-form *ngFor="let consentTemplate of templateList">
+  <div *ngFor="let consentTemplate of templateList">
     <p>
       {{ consentTemplate.description }}
     </p>
-  </cx-consent-management-form>
+  </div>
 </ng-container>
 
 <ng-container *ngIf="consents$ | async as consents">
@@ -14,9 +14,7 @@
           [opened]="true"
           [title]="'consent.oboConsent' | cxTranslate"
         >
-          <cx-consent-management-form
-            *ngFor="let consent of consents.oboConsents; let i = index"
-          >
+          <div *ngFor="let consent of consents.oboConsents; let i = index">
             <ul class="accordion-list container-fluid">
               <li class="accordion-list-item row">
                 <div class="col-6 col-sm-5 item-label">
@@ -64,7 +62,7 @@
                 </div>
               </li>
             </ul>
-          </cx-consent-management-form>
+          </div>
         </cx-fs-accordion-item>
       </div>
     </ng-container>
