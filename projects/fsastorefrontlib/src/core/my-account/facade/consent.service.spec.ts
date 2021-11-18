@@ -78,7 +78,7 @@ describe('ConsentServiceTest', () => {
   });
 
   it('should be able to load consents', () => {
-    service.loadConsents();
+    service.loadConsents(userId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadConsents({ userId: userId })
     );

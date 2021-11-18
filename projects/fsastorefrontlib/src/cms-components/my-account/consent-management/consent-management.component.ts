@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ConsentTemplate, UserConsentService } from '@spartacus/core';
+import {
+  ConsentTemplate,
+  UserConsentService,
+  UserIdService,
+} from '@spartacus/core';
 import { ConsentService } from 'projects/fsastorefrontlib/src/core/my-account/facade/consent.service';
 import { Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { StateWithMyAccount } from '../../../core/my-account/store/my-account-state';
 
 @Component({
@@ -11,20 +16,31 @@ import { StateWithMyAccount } from '../../../core/my-account/store/my-account-st
 export class FSConsentManagementComponent implements OnInit, OnDestroy {
   constructor(
     protected fsConsentService: ConsentService,
+    protected userIdService: UserIdService,
     protected userConsentService: UserConsentService
   ) {}
 
   private subscription = new Subscription();
-  consents$: Observable<StateWithMyAccount>;
-  consentTemplates$: Observable<ConsentTemplate[]>;
-  consentsLoaded$: Observable<boolean>;
+  consents$: Observable<
+    StateWithMyAccount
+  > = this.fsConsentService.getConsents();
+  consentTemplates$: Observable<
+    ConsentTemplate[]
+  > = this.userConsentService.getConsents();
+  consentsLoaded$: Observable<
+    boolean
+  > = this.fsConsentService.getConsentsLoaded();
 
   ngOnInit(): void {
-    this.fsConsentService.loadConsents();
+    this.subscription.add(
+      this.userIdService
+        .getUserId()
+        .pipe(take(1))
+        .subscribe(occUserId => {
+          this.fsConsentService.loadConsents(occUserId);
+        })
+    );
     this.userConsentService.loadConsents();
-    this.consents$ = this.fsConsentService.getConsents();
-    this.consentsLoaded$ = this.fsConsentService.getConsentsLoaded();
-    this.consentTemplates$ = this.userConsentService.getConsents();
   }
 
   ngOnDestroy(): void {

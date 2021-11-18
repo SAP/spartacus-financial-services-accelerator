@@ -14,18 +14,12 @@ export class ConsentService {
     protected userIdService: UserIdService
   ) {}
 
-  loadConsents() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadConsents({
-            userId: occUserId,
-          })
-        );
+  loadConsents(userId) {
+    this.store.dispatch(
+      new fromAction.LoadConsents({
+        userId: userId,
       })
-      .unsubscribe();
+    );
   }
 
   getConsents(): Observable<any> {
