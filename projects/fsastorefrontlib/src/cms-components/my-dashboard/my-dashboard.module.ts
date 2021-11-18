@@ -15,11 +15,12 @@ import {
   provideDefaultConfig,
 } from '@spartacus/core';
 import { MyDashboardComponent } from './my-dashboard.component';
+import { MyDashboardGuard } from './my-dashboard.guard';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, MyDashboardGuard],
     data: {
       cxRoute: 'myDashboard',
       pageLabel: 'my-dashboard',

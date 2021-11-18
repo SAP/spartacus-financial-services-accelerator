@@ -165,6 +165,10 @@ export enum SyncPilotGender {
   rev = 'd',
 }
 
+export enum FSUserRole {
+  SELLER = 'sellergroup',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;
