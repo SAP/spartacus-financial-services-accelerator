@@ -12,7 +12,7 @@ class MockConsentAdapter extends ConsentAdapter {
 
 const user = 'user';
 
-describe('ClaimConnector', () => {
+describe('ConsentConnector', () => {
   let consentConnector: ConsentConnector;
   let consentAdapter: ConsentAdapter;
 
@@ -28,7 +28,7 @@ describe('ClaimConnector', () => {
   it('should be created', () => {
     expect(consentConnector).toBeTruthy();
   });
-  it('should call adapter for getClaims', () => {
+  it('should call adapter for getConsents', () => {
     consentConnector.getConsents(user);
     expect(consentAdapter.getConsents).toHaveBeenCalledWith(user);
   });

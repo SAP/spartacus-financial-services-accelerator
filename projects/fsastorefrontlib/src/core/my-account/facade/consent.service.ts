@@ -6,7 +6,9 @@ import * as fromConsentStore from './../store';
 import { UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ConsentService {
   constructor(
     protected store: Store<StateWithMyAccount>,

@@ -1,70 +1,73 @@
 <ng-container *ngIf="consentTemplates$ | async as templateList">
-  <div *ngFor="let consentTemplate of templateList">
-    <p>
-      {{ consentTemplate.description }}
-    </p>
+  <div class="form-check" *ngFor="let consentTemplate of templateList">
+    <label>
+      <input type="checkbox" class="form-check-input" />
+      <span class="form-check-label cx-be-bold">
+        {{ consentTemplate?.name }}
+      </span>
+      <br />
+      <span class="form-check-label">
+        {{ consentTemplate?.description }}
+      </span>
+    </label>
   </div>
 </ng-container>
 
 <ng-container *ngIf="consents$ | async as consents">
-  <ng-container *ngIf="consentsLoaded$ | async">
-    <ng-container *ngIf="consents?.oboConsents?.length > 0">
-      <div class="accordion">
-        <cx-fs-accordion-item
-          [opened]="true"
-          [title]="'consent.oboConsent' | cxTranslate"
-        >
-          <div *ngFor="let consent of consents.oboConsents; let i = index">
-            <ul class="accordion-list container-fluid">
-              <li class="accordion-list-item row">
-                <div class="col-6 col-sm-5 item-label">
-                  {{ 'consent.consentCode' | cxTranslate }}
+  <ng-container *ngIf="consents?.oboConsents?.length > 0">
+    <div class="accordion">
+      <cx-fs-accordion-item
+        [opened]="true"
+        [title]="'consent.oboConsent' | cxTranslate"
+      >
+        <div *ngFor="let consent of consents.oboConsents; let i = index">
+          <ul class="accordion-list container-fluid">
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'consent.consentCode' | cxTranslate }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{ consent.code }}
+              </div>
+            </li>
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'consent.consentHolderName' | cxTranslate }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{ consent.consentHolders[i].name }}
+              </div>
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'consent.consentHolderEmail' | cxTranslate }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{ consent.consentHolders[i].displayUid }}
+              </div>
+            </li>
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'consent.consentTemplate' | cxTranslate }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{ consent.consentTemplate.id }}
+              </div>
+            </li>
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'consent.permissions' | cxTranslate }}
+              </div>
+              <div
+                class="col-6 col-sm-5 value notice"
+                *ngFor="let item of consent.oboConsentConfiguration.permissions"
+              >
+                <div *ngIf="item | keyvalue">
+                  {{ item.key }}
                 </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ consent.code }}
-                </div>
-              </li>
-              <li class="accordion-list-item row">
-                <div class="col-6 col-sm-5 item-label">
-                  {{ 'consent.consentHolderName' | cxTranslate }}
-                </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ consent.consentHolders[i].name }}
-                </div>
-                <div class="col-6 col-sm-5 item-label">
-                  {{ 'consent.consentHolderEmail' | cxTranslate }}
-                </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ consent.consentHolders[i].displayUid }}
-                </div>
-              </li>
-              <li class="accordion-list-item row">
-                <div class="col-6 col-sm-5 item-label">
-                  {{ 'consent.consentTemplate' | cxTranslate }}
-                </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ consent.consentTemplate.id }}
-                </div>
-              </li>
-              <li class="accordion-list-item row">
-                <div class="col-6 col-sm-5 item-label">
-                  {{ 'consent.permissions' | cxTranslate }}
-                </div>
-                <div
-                  class="col-6 col-sm-5 value notice"
-                  *ngFor="
-                    let item of consent.oboConsentConfiguration.permissions
-                  "
-                >
-                  <div *ngIf="item | keyvalue">
-                    {{ item.key }}
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </cx-fs-accordion-item>
-      </div>
-    </ng-container>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </cx-fs-accordion-item>
+    </div>
   </ng-container>
 </ng-container>
