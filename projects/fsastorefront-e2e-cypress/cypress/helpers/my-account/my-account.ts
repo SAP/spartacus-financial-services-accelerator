@@ -71,7 +71,7 @@ export function checkEmptyOrderHistoryPage() {
   cy.get('div').contains('We have no order records for this account.');
 }
 
-export function checkOrderHistoryContent(price) {
+export function checkOrderHistoryContent(price, status) {
   cy.get('h2').should('contain.text', 'Order history');
   cy.get('.cx-order-history-body')
     .should('be.visible')
@@ -79,7 +79,7 @@ export function checkOrderHistoryContent(price) {
       cy.get('.cx-order-history-thead-mobile').should('be.visible');
       cy.get('.cx-order-history-code').should('be.visible');
       cy.get('.cx-order-history-placed').should('be.visible');
-      cy.get('.cx-order-history-status').should('be.visible');
+      cy.get('.cx-order-history-status').should(status);
       cy.get('.cx-order-history-total').contains(price);
     });
 }

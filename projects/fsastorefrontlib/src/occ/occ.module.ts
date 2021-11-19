@@ -19,6 +19,7 @@ import { FSUserOccModule } from './adapters/user/user-occ.module';
 import { OccValueListService } from './services/value-list/occ-value-list.service';
 import { FSProductOccModule } from './adapters/product-search/product-occ.module';
 import { UserAccountOccModule } from '@spartacus/user/account/occ';
+import { ConsentOccModule } from './adapters/consent-management';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { UserAccountOccModule } from '@spartacus/user/account/occ';
     HttpClientModule,
     ChangeRequestOccModule,
     ClaimOccModule,
+    ConsentOccModule,
     PolicyOccModule,
     QuoteOccModule,
     UserRequestOccModule,

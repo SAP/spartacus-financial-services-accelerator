@@ -1,5 +1,5 @@
 export function checkCompareIsDisabled() {
-  cy.get('.row').contains('Product category');
+  cy.get('.row').should('contain.text', 'Product category');
   cy.get('button.bg-transparent').contains('Clear all').should('be.disabled');
   cy.get('.btn-block').contains('Compare quotes').should('be.disabled');
 }
@@ -33,10 +33,7 @@ export function selectSecondQuoteForComparison(price) {
     .within(() => {
       cy.get('input[type="checkbox"]').click();
     });
-  cy.get('.alert-success').should(
-    'contain',
-    'User successfully selected Loan cards.'
-  );
+  cy.get('.alert-success').should('contain', 'User successfully selected');
 }
 
 export function compareNotDisabled() {

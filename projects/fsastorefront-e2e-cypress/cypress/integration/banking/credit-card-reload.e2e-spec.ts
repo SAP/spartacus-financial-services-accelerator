@@ -71,6 +71,8 @@ testFilters([''], () => {
       checkout.checkBackAndContinueButtons();
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('quoteReviewWithoutOptional');
+      checkout.clickContinueButton();
       //Legal Information
       checkout.checkCheckoutStep('Your Credit Card Application', '7');
       banking.checkLegalInformationPage();
@@ -82,6 +84,7 @@ testFilters([''], () => {
       checkout.checkCheckoutStep('Your Credit Card Application', '7');
       userIdentification.checkUserIdentificationPage();
       cy.reload();
+      //BUG: CXFSA-307
       checkout.checkCheckoutStep('Your Credit Card Application', '7');
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification('At the Nearest Branch');
