@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { PaginationModel } from '@spartacus/core';
+import { PaginationModel, User } from '@spartacus/core';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
+import { AgentSyncPilotComponent } from '../agent-sync-pilot/agent-sync-pilot.component';
 
 @Component({
   selector: 'cx-fs-agent-search-list',
@@ -11,6 +13,7 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
+  user$: Observable<User> = this.userAccountFacade.get();
   searchResults$: Observable<any>;
   searchQuery: string;
   selectedAgent$: Observable<any>;
@@ -22,7 +25,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   ngOnInit() {
@@ -30,16 +34,15 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
     this.searchResults$ = this.agentSearchService.getResults().pipe(
+      filter(searchResult => !!searchResult),
       tap(searchResult => {
-        if (searchResult) {
-          this.initialActiveAgent = searchResult.agents[0];
-          this.pagination = {
-            currentPage: searchResult.pagination.page,
-            pageSize: searchResult.pagination.count,
-            totalPages: searchResult.pagination.totalPages,
-            totalResults: searchResult.pagination.totalCount,
-          };
-        }
+        this.initialActiveAgent = searchResult.agents[0];
+        this.pagination = {
+          currentPage: searchResult.pagination.page,
+          pageSize: searchResult.pagination.count,
+          totalPages: searchResult.pagination.totalPages,
+          totalResults: searchResult.pagination.totalCount,
+        };
       })
     );
   }

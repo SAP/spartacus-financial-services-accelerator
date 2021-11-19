@@ -76,26 +76,51 @@
                 'd-none d-lg-flex': !initialActiveAgent && selectedIndex !== i
               }"
             >
-              <div class="col-12 col-sm-3 position-relative text-center mb-3">
-                <div class="counter text-center semi-bold position-absolute">
-                  {{ i + 1 }}
-                </div>
-                <cx-media
-                  class="cx-product-image-container px-4"
-                  [container]="agent.thumbnail"
-                  format="thumbnail"
-                >
-                </cx-media>
-                <ng-container *ngIf="agent.participationStatus; else offline">
-                  <div class="mt-3 notice">
-                    <span class="mr-1 fas fa-comment"></span>
-                    <span>
-                      {{ 'fscommon.agentLocator.online' | cxTranslate }}
-                    </span>
+              <div class="col-12 col-sm-4">
+                <div class="d-flex justify-content-center">
+                  <div class="counter text-center semi-bold position-absolute">
+                    {{ i + 1 }}
                   </div>
-                </ng-container>
+                  <div class="position-relative">
+                    <cx-media
+                      [ngbTooltip]="
+                        agent.participationStatus
+                          ? ('fscommon.agentLocator.online' | cxTranslate)
+                          : ('fscommon.agentLocator.offline' | cxTranslate)
+                      "
+                      [disableTooltip]="!(user$ | async)"
+                      placement="bottom-right"
+                      class="cx-product-image-container m-auto"
+                      [container]="agent.thumbnail"
+                      format="thumbnail"
+                    >
+                    </cx-media>
+                    <span
+                      [class]="agent.participationStatus ? 'online' : 'offline'"
+                      *ngIf="user$ | async"
+                    ></span>
+                  </div>
+                </div>
+                <div class="d-flex mt-3 mb-3 mb-md-0 justify-content-center">
+                  <a
+                    class="fas fa-envelope"
+                    [class.pr-2]="agent.participationStatus && (user$ | async)"
+                    [routerLink]="
+                      {
+                        cxRoute: 'contactAgent',
+                        params: { agent: agent.email }
+                      } | cxUrl
+                    "
+                  >
+                  </a>
+                  <cx-fs-agent-sync-pilot
+                    class="pl-2"
+                    *ngIf="agent.participationStatus && user$ | async"
+                    [agent]="agent"
+                  ></cx-fs-agent-sync-pilot>
+                </div>
               </div>
-              <div class="col-12 col-sm-9">
+              <div class="col-12 col-sm-8">
                 <h5
                   class="agent-name text-uppercase notice"
                   (click)="showDetails(agent); setActiveAgentIndex(i)"
@@ -127,17 +152,6 @@
                     </ng-container>
                   </ng-container>
                 </div>
-                <button
-                  class="action-button btn-block"
-                  [routerLink]="
-                    {
-                      cxRoute: 'contactAgent',
-                      params: { agent: agent.email }
-                    } | cxUrl
-                  "
-                >
-                  {{ 'fscommon.agentLocator.contact' | cxTranslate }}
-                </button>
               </div>
             </div>
           </ng-container>
@@ -161,11 +175,4 @@
   <h2 class="col-md-6 text-center p-5 normal-weight">
     {{ 'fscommon.agentLocator.noSearchResults' | cxTranslate }}
   </h2>
-</ng-template>
-
-<ng-template #offline>
-  <div class="mt-3 text-secondary">
-    <span class="mr-1 fas fa-comment-slash"></span>
-    <span>{{ 'fscommon.agentLocator.offline' | cxTranslate }} </span>
-  </div>
 </ng-template>

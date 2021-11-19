@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CmsService, WindowRef } from '@spartacus/core';
 import { CmsComponentData, ModalService } from '@spartacus/storefront';
@@ -12,9 +12,7 @@ import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.mo
   selector: 'cx-fs-comparison-table-sync-pilot',
   templateUrl: './comparison-table-sync-pilot.component.html',
 })
-export class ComparisonTableSyncPilotComponent
-  extends SyncPilotConnectionComponent
-  implements OnDestroy {
+export class ComparisonTableSyncPilotComponent extends SyncPilotConnectionComponent {
   constructor(
     protected cmsService: CmsService,
     protected userAccountFacade: UserAccountFacade,

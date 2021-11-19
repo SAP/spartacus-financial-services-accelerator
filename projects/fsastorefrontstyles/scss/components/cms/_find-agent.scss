@@ -13,28 +13,27 @@
       p {
         font-weight: var(--cx-font-weight-semi);
       }
-      .fs-icon {
-        left: 0;
+      .fas {
         &:before {
           padding: 8px;
+          display: inline-block;
+          width: 40px;
+          height: 40px;
           border: 1px solid var(--cx-color-3);
           border-radius: 50%;
           font-size: var(--cx-h3-font-size);
-          left: 0;
           @include fs-transition;
         }
       }
-      .icon-envelope {
-        &:before {
-          color: var(--cx-color-secondary);
-        }
-        &:hover:before {
-          color: var(--cx-color-1);
-          background: var(--cx-color-text);
-          border: 1px solid var(--cx-color-text);
+      cx-fs-agent-sync-pilot {
+        .fas {
+          transform: rotate(90deg);
+          font-size: var(--cx-h3-font-size);
         }
       }
-      .icon-map-marker:hover:before {
+      .fa-envelope:hover::before,
+      .fa-map-marker-alt:hover::before,
+      cx-fs-agent-sync-pilot .fas:hover::before {
         color: var(--cx-color-1);
         background: var(--cx-color-primary);
         border: 1px solid var(--cx-color-primary);

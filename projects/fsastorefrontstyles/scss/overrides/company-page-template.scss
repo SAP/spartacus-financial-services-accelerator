@@ -51,9 +51,7 @@ cx-page-layout.CompanyPageTemplate {
       }
     }
   }
-  cx-popover.hint-popover {
-    .popover-body:first-child.cx-close-row {
-      display: none;
-    }
-  }
+}
+cx-popover .popover-body > .cx-close-row {
+  display: none !important;
 }

@@ -33,7 +33,7 @@
     @include fs-box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
     position: relative;
     .fs-icon,
-    .fas {
+    .fas-accordion {
       @include vertical-center;
       z-index: 2;
       left: 15px;

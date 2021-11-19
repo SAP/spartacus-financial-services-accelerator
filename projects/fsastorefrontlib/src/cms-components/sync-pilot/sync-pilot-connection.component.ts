@@ -35,6 +35,7 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
 
   protected subscription = new Subscription();
   protected readonly ownerId = 1;
+  protected readonly groupId = 1;
   user$: Observable<User> = this.userAccountFacade.get();
 
   ngOnInit() {
@@ -57,7 +58,6 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
 
   establishConnection(user: User, componentData: CMSConnectionComponent): void {
     const additionalGuestInformation = new Map<string, string>();
-    const groupId = 1;
     this.setSyncPilotConfig(componentData);
     this.subscription.add(
       this.setConnection(this.ownerId)
@@ -69,7 +69,7 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
               SyncPilotGender[user.titleCode],
               additionalGuestInformation
             );
-            this.syncPilotService.enterQueue(guestInfo, groupId);
+            this.syncPilotService.enterQueue(guestInfo, this.groupId);
           })
         )
         .subscribe()
