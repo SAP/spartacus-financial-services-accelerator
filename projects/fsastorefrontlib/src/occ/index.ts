@@ -9,3 +9,4 @@ export * from './adapters/user-request/default-occ-user-request-config';
 export * from './adapters/policy/default-occ-policy-config';
 export * from './adapters/claim/default-occ-claim-config';
 export * from './adapters/quote/default-occ-quote-config';
+export * from './adapters/my-dashboard/default-occ-my-dashboard-config';

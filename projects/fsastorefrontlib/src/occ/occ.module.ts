@@ -19,6 +19,7 @@ import { FSUserOccModule } from './adapters/user/user-occ.module';
 import { OccValueListService } from './services/value-list/occ-value-list.service';
 import { FSProductOccModule } from './adapters/product-search/product-occ.module';
 import { UserAccountOccModule } from '@spartacus/user/account/occ';
+import { MyDashboardOccModule } from './adapters/my-dashboard';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { UserAccountOccModule } from '@spartacus/user/account/occ';
     CsTicketOccModule,
     FSUserOccModule,
     FSProductOccModule,
+    MyDashboardOccModule,
   ],
   providers: [OccValueListService, { provide: OccConfig, useExisting: Config }],
 })

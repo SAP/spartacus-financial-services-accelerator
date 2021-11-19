@@ -23,9 +23,7 @@ export class MyDashboardGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.userAccountFacade.get().pipe(
-      filter((user: User) => {
-        return user && Object.keys(user).length > 0;
-      }),
+      filter((user: User) => user && Object.keys(user).length > 0),
       pluck('roles'),
       map((roles: string[]) => {
         const hasRole =
