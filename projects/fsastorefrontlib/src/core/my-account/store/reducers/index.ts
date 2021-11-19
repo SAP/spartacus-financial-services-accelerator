@@ -5,6 +5,7 @@ import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
+import * as fromConsentReducer from './consent.reducer';
 import { AuthActions } from '@spartacus/core';
 import { MyAccountState } from '../my-account-state';
 import * as fromClaimAction from './../actions/claim.action';
@@ -16,6 +17,7 @@ export function getReducers(): ActionReducerMap<MyAccountState> {
     premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer,
     claimPolicies: fromClaimPoliciesReducer.reducer,
+    consents: fromConsentReducer.reducer,
   };
 }
 export const reducerToken: InjectionToken<ActionReducerMap<
