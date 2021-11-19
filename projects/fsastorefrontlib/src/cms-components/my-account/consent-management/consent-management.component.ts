@@ -27,9 +27,6 @@ export class FSConsentManagementComponent implements OnInit, OnDestroy {
   consentTemplates$: Observable<
     ConsentTemplate[]
   > = this.userConsentService.getConsents();
-  consentsLoaded$: Observable<
-    boolean
-  > = this.fsConsentService.getConsentsLoaded();
 
   ngOnInit(): void {
     this.subscription.add(
