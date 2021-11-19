@@ -26,7 +26,7 @@ module.exports = function (config) {
     },
     reporters: ['progress', 'kjhtml', 'dots'],
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/fsastrorefrontlib'),
+      dir: require('path').join(__dirname, '../../coverage/fsastorefrontlib'),
       reporters: [{ type: 'lcov', subdir: '.' }, { type: 'text-summary' }],
       check: {
         global: {

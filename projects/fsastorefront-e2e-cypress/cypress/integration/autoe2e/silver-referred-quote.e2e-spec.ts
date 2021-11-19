@@ -51,6 +51,7 @@ testFilters([''], () => {
       checkout.checkAccordions('quoteReviewWithoutOptional');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('quoteReviewWithoutOptional');
       checkout.clickContinueButton();
       autoIntegration.checkReferredQuotePopup();
       cy.get('.heading-headline').should('contain.text', 'Find an Agent');

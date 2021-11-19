@@ -85,3 +85,8 @@ export interface CmsQuestionnaireCarouselComponent extends CmsComponent {
   categories: string;
   title: string;
 }
+
+export interface CMSConnectionComponent extends CmsComponent {
+  stompUrl?: string;
+  url?: string;
+}

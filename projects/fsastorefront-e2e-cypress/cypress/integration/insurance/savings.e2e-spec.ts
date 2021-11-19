@@ -74,6 +74,8 @@ testFilters([''], () => {
       checkout.checkAccordions('savingsQuoteReview');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('savingsQuoteReview');
+      checkout.clickContinueButton();
     });
 
     it('Select default payment details', () => {

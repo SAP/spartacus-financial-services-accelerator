@@ -56,16 +56,27 @@ export function login(username: string, password: string) {
   });
 }
 
+export function loginAgent(username: string, password: string) {
+  cy.get('cx-csagent-login-form').should('be.visible');
+  cy.get('cx-csagent-login-form').within(() => {
+    cy.get('[formcontrolname="userId"]').clear().type(username);
+    cy.get('[formcontrolname="password"]').clear().type(password);
+    cy.get('button[type=submit]').click();
+  });
+}
+
 export function logout() {
   cy.findByText('Logout').click();
 }
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
-  cy.get('[formcontrolname="userId"]').should('be.visible');
-  cy.get('[formcontrolname="userId"]').eq(0).type(username);
-  cy.get('[formcontrolname="password"]').type(password);
-  cy.get('button[type=submit]').eq(0).click();
+  cy.get('cx-fs-login-form').within(() => {
+    cy.get('[formcontrolname="userId"]').should('be.visible');
+    cy.get('[formcontrolname="userId"]').eq(0).type(username);
+    cy.get('[formcontrolname="password"]').type(password);
+    cy.get('button[type=submit]').eq(0).click();
+  });
 }
 
 export function createB2bCustomer(customer: CreateB2bCustomer) {

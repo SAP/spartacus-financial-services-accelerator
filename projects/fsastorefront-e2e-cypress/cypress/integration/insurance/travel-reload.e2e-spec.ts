@@ -68,6 +68,8 @@ testFilters([''], () => {
       checkout.checkCouponsFields();
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
       //Select Payment Method
       travel.checkPageComponenth3('Payment Details');
       cy.get('cx-fs-payment-method').should('be.visible');

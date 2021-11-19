@@ -124,7 +124,7 @@
               </ng-container>
               <ng-template #details>
                 <a
-                  class="link"
+                  class="link mr-5"
                   [routerLink]="
                     {
                       cxRoute: 'claimDetails',
@@ -133,6 +133,17 @@
                   "
                 >
                   {{ 'fscommon.details' | cxTranslate }}
+                </a>
+                <a
+                  class="link"
+                  [routerLink]="
+                    {
+                      cxRoute: 'changeClaim',
+                      params: { claimId: claim.claimNumber }
+                    } | cxUrl
+                  "
+                >
+                  {{ 'fscommon.updateClaim' | cxTranslate }}
                 </a>
               </ng-template>
             </div>

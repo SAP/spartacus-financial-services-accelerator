@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalService } from '@spartacus/storefront';
-import { AgentSearchService } from '../../core/agent/facade/agent-search.service';
+import { Service } from '@syncpilot/bpool-guest-lib';
 
 @Component({
   selector: 'cx-fs-sync-pilot-dialog',
@@ -9,11 +9,11 @@ import { AgentSearchService } from '../../core/agent/facade/agent-search.service
 export class SyncPilotDialogComponent {
   constructor(
     protected modalService: ModalService,
-    protected agentService: AgentSearchService
+    protected syncPilotService: Service
   ) {}
 
   dismissModal(reason?: any): void {
-    this.agentService.setCancelledSyncPilotAgent(true);
+    this.syncPilotService.abort();
     this.modalService.dismissActiveModal(reason);
   }
 }

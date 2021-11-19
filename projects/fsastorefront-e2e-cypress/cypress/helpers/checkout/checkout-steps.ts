@@ -36,8 +36,6 @@ export function ConfirmBindQuote() {
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
-  cy.get('.primary-button').should('be.visible');
-  cy.contains('Continue').click();
 }
 
 export function clickContinueButton() {
@@ -168,6 +166,8 @@ export function populateContentsCover() {
   cy.get('[name="propertyIsStandard50000ContentCover"]').eq(1).click();
   cy.get('[name=propertyMultipleOf10000ContentCover]').type('15000');
   cy.get('[name="accidentalDamageCoverContents"]').eq(0).click();
+  //BUG
+  cy.get('[name=carRenewalDate]').type('2023-01-01');
 }
 
 export function populatePropertyAddress() {
@@ -265,7 +265,7 @@ export function checkFinalReviewComponents() {
 }
 
 export function checkSyncPilotComparisonTable() {
-  cy.get('cx-fs-sync-pilot-connection-component')
+  cy.get('cx-fs-comparison-table-sync-pilot')
     .should('be.visible')
     .within(() => {
       cy.get('h3').should('contain.text', 'Need Help?');

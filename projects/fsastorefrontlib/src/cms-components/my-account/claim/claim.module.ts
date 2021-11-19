@@ -32,6 +32,7 @@ import { DateFormatConfigurationModule } from '../../../shared/util/helpers/pipe
 import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
+import { ChangeClaimNavigationComponent } from './change-claim/change-claim-navigation.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,15 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'changeClaim',
+      pageLabel: 'changeClaim',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -103,6 +113,9 @@ const routes: Routes = [
         AccountClaimDetailsFlex: {
           component: ClaimDetailsComponent,
         },
+        ChangeClaimFlex: {
+          component: ChangeClaimNavigationComponent,
+        },
       },
     }),
   ],
@@ -112,6 +125,7 @@ const routes: Routes = [
     ClaimPoliciesComponent,
     CreateClaimComponent,
     ClaimDetailsComponent,
+    ChangeClaimNavigationComponent,
   ],
   exports: [
     ClaimsComponent,
@@ -119,6 +133,7 @@ const routes: Routes = [
     ClaimPoliciesComponent,
     CreateClaimComponent,
     ClaimDetailsComponent,
+    ChangeClaimNavigationComponent,
   ],
   providers: [
     ClaimService,
@@ -132,6 +147,7 @@ const routes: Routes = [
     ClaimPoliciesComponent,
     CreateClaimComponent,
     ClaimDetailsComponent,
+    ChangeClaimNavigationComponent,
   ],
 })
 export class ClaimModule {}
