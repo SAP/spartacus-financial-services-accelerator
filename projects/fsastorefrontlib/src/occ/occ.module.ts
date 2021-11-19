@@ -20,6 +20,7 @@ import { OccValueListService } from './services/value-list/occ-value-list.servic
 import { FSProductOccModule } from './adapters/product-search/product-occ.module';
 import { UserAccountOccModule } from '@spartacus/user/account/occ';
 import { MyDashboardOccModule } from './adapters/my-dashboard';
+import { ConsentOccModule } from './adapters/consent-management';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { MyDashboardOccModule } from './adapters/my-dashboard';
     HttpClientModule,
     ChangeRequestOccModule,
     ClaimOccModule,
+    ConsentOccModule,
     PolicyOccModule,
     QuoteOccModule,
     UserRequestOccModule,

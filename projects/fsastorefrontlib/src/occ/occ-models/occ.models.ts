@@ -3,6 +3,8 @@ import {
   B2BUser,
   Cart,
   Category,
+  Consent,
+  ConsentTemplate,
   Occ,
   OrderEntry,
   Price,
@@ -70,6 +72,10 @@ export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
 }
 
+export interface OBOConsentList {
+  consents: OBOConsent[];
+}
+
 export interface QuoteWorkflowStatus {
   code?: string;
 }
@@ -85,6 +91,17 @@ export interface InsuranceQuote {
   quoteWorkflowStatus?: QuoteWorkflowStatus;
   quoteDetails?: Record<string, string>;
   insuredObjectList?: InsuredObjectList;
+}
+
+export interface OBOConsent extends Consent {
+  consentHolders?: User[];
+  consentTemplate?: ConsentTemplate;
+  customer: User;
+  oboConsentConfiguration: OBOConsentConfiguration;
+}
+
+export interface OBOConsentConfiguration {
+  permissions?: Map<string, boolean>;
 }
 
 export enum OrganizationTableType {
