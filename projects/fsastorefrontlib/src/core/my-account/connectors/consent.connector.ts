@@ -11,4 +11,8 @@ export class ConsentConnector {
   getConsents(userId: string): Observable<any> {
     return this.adapter.getConsents(userId);
   }
+
+  getOBOCustomerList(userId: string): Observable<any> {
+    return this.adapter.getOBOCustomerList(userId);
+  }
 }
