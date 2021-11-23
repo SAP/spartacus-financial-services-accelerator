@@ -289,6 +289,6 @@ describe('ComparisonTablePanelComponent', () => {
     fixture.detectChanges();
     expect(
       comparisonTableService.highestElement.nativeElement.clientHeight
-    ).toEqual(38);
+    ).toEqual(39);
   });
 });
