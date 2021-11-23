@@ -20,4 +20,4 @@ export * from './message-notification/index';
 export * from './sync-pilot/index';
 export * from './questionnaire-carousel/index';
 export * from './navigation/index';
-export * from './my-dashboard/index';
+export * from './dashboard/index';

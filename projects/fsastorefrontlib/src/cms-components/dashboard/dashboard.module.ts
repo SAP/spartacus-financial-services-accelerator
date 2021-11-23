@@ -13,16 +13,16 @@ import {
   CmsConfig,
   provideDefaultConfig,
 } from '@spartacus/core';
-import { MyDashboardComponent } from './my-dashboard.component';
-import { MyDashboardGuard } from './my-dashboard.guard';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardGuard } from './dashboard.guard';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, MyDashboardGuard],
+    canActivate: [AuthGuard, CmsPageGuard, DashboardGuard],
     data: {
-      cxRoute: 'myDashboard',
-      pageLabel: 'my-dashboard',
+      cxRoute: 'dashboard',
+      pageLabel: 'dashboard',
     },
     component: PageLayoutComponent,
   },
@@ -39,13 +39,13 @@ const routes: Routes = [
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
-        MyDashboardFlex: {
-          component: MyDashboardComponent,
+        DashboardFlex: {
+          component: DashboardComponent,
         },
       },
     }),
   ],
-  declarations: [MyDashboardComponent],
-  exports: [MyDashboardComponent],
+  declarations: [DashboardComponent],
+  exports: [DashboardComponent],
 })
-export class MyDashboardModule {}
+export class DashboardModule {}

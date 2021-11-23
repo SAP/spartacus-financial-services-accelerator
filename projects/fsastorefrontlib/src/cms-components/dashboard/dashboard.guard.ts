@@ -14,7 +14,7 @@ import { filter, map, pluck } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class MyDashboardGuard implements CanActivate {
+export class DashboardGuard implements CanActivate {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected routingService: RoutingService,

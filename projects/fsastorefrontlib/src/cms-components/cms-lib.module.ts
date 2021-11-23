@@ -27,7 +27,7 @@ import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
-import { MyDashboardModule } from './my-dashboard/my-dashboard.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   imports: [
@@ -38,7 +38,7 @@ import { MyDashboardModule } from './my-dashboard/my-dashboard.module';
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
-    MyDashboardModule,
+    DashboardModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -65,7 +65,7 @@ import { MyDashboardModule } from './my-dashboard/my-dashboard.module';
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
-    MyDashboardModule,
+    DashboardModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MyDashboardGuard } from './my-dashboard.guard';
+import { DashboardGuard } from './dashboard.guard';
 
-describe('MyDashboardGuard', () => {
-  let guard: MyDashboardGuard;
+describe('DashboardGuard', () => {
+  let guard: DashboardGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(MyDashboardGuard);
+    guard = TestBed.inject(DashboardGuard);
   });
 
   it('should be created', () => {
