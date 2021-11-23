@@ -40,6 +40,8 @@ export class FSUpdateProfileComponentService extends UpdateProfileComponentServi
       this.form.patchValue(user);
       if (user.contactInfos) {
         this.form.controls.contactInfos.setValue(user.contactInfos[0]);
+      } else {
+        this.form.controls.contactInfos.reset();
       }
     }
   }

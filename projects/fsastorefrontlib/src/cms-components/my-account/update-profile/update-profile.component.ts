@@ -8,7 +8,7 @@ import { RoutingService } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { UpdateProfileComponent } from '@spartacus/user/profile/components';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { DateConfig } from './../../../core/date-config/date-config';
 
@@ -34,7 +34,12 @@ export class FSUpdateProfileComponent extends UpdateProfileComponent
 
   ngOnInit() {
     this.subscription.add(
-      this.user$.pipe(map(user => this.service.patchForm(user))).subscribe()
+      this.user$
+        .pipe(
+          filter(user => !!user?.uid),
+          map(user => this.service.patchForm(user))
+        )
+        .subscribe()
     );
   }
 
