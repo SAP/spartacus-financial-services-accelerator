@@ -79,7 +79,7 @@ export interface OBOConsentList {
 }
 
 export interface OBOCustomerList {
-  entries: User[];
+  entries: FSUser[];
   pagination: PaginationModel;
   sorts: SortModel[];
 }
@@ -239,6 +239,7 @@ export interface FSContactInfo {
 export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
+  active?: boolean;
 }
 
 export interface FSStepData {

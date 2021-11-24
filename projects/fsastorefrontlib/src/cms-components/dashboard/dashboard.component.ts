@@ -1,12 +1,7 @@
-import { Component } from '@angular/core';
-import {
-  ListModel,
-  TranslationService,
-  User,
-  UserIdService,
-} from '@spartacus/core';
+import { Component, OnInit } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
+import { TranslationService, UserIdService } from '@spartacus/core';
 import { OBOCustomerList } from '../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
 
@@ -14,30 +9,18 @@ import { ConsentConnector } from '../../core/my-account/connectors/consent.conne
   selector: 'cx-fs-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   constructor(
     private consentConnector: ConsentConnector,
     protected userIdService: UserIdService,
     protected translationService: TranslationService
   ) {}
 
-  private DEFAULT_PAGE_SIZE = 10;
-  private sortMapping = {
-    byNameAsc: 'name:asc',
-    byNameDesc: 'name:desc',
-  };
+  sort: string;
 
-  sort = 'byNameAsc';
-  sortOptions = [
-    {
-      code: 'byNameAsc',
-      selected: false,
-    },
-    {
-      code: 'byNameDesc',
-      selected: false,
-    },
-  ];
+  ngOnInit() {
+    this.getSortLabels().subscribe(data => console.log(data));
+  }
 
   customers$: Observable<OBOCustomerList> = this.userIdService.getUserId().pipe(
     take(1),
@@ -45,17 +28,20 @@ export class DashboardComponent {
   );
 
   getSortLabels(): Observable<{
-    byNameAsc: string;
-    byNameDesc: string;
+    name: string;
+    status: string;
+    email: string;
   }> {
     return combineLatest([
-      this.translationService.translate('myInterests.sorting.byNameAsc'),
-      this.translationService.translate('myInterests.sorting.byNameDesc'),
+      this.translationService.translate('dashboard.sorting.name'),
+      this.translationService.translate('fscommon.status'),
+      this.translationService.translate('dashboard.sorting.email'),
     ]).pipe(
-      map(([asc, desc]) => {
+      map(([textByName, textByStatus, textByEmail]) => {
         return {
-          byNameAsc: asc,
-          byNameDesc: desc,
+          name: textByName,
+          status: textByStatus,
+          email: textByEmail,
         };
       })
     );

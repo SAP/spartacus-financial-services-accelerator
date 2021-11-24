@@ -32,10 +32,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     I18nModule,
     SpinnerModule,
     CmsModule,
-    SpinnerModule,
     ListNavigationModule,
     RouterModule.forChild(routes),
   ],

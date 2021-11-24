@@ -6,49 +6,53 @@
         [sortOptions]="customers.sorts"
         [sortLabels]="getSortLabels() | async"
         (sortListEvent)="sortChange($event)"
-        [selectedOption]="sort"
+        [selectedOption]="customers.sorts[0]?.code"
+        placeholder="{{ 'dashboard.sorting.name' | cxTranslate }}"
       ></cx-sorting>
     </div>
     <div class="col-6 col-md-3 ml-auto text-right">
-      <button class="primary-button">Add</button>
+      <button class="primary-button">{{ 'fscommon.add' | cxTranslate }}</button>
     </div>
   </div>
   <!-- TABLE -->
   <table class="table table-hover border-top border-color-3">
     <thead class="d-none d-md-table-row">
       <th scope="col">
-        NAME
+        {{ 'dashboard.name' | cxTranslate }}
       </th>
       <th scope="col">
-        STATUS
+        {{ 'fscommon.status' | cxTranslate }}
       </th>
-      <th scope="col">EMAIL</th>
+      <th scope="col">{{ 'forms.contactType.email' | cxTranslate }}</th>
     </thead>
     <tbody>
       <tr *ngFor="let customer of customers.entries">
         <td class="border-color-3">
           <div class="d-md-none">
-            NAME
+            {{ 'dashboard.name' | cxTranslate }}
           </div>
           <span class="notice">{{ customer?.name }}</span>
         </td>
         <td class="border-color-3">
           <div class="d-md-none">
-            STATUS
+            {{ 'fscommon.status' | cxTranslate }}
           </div>
           <span [ngClass]="customer?.active ? 'text-success' : 'text-danger'">{{
-            customer?.active ? 'Active' : 'Disabled'
+            customer?.active
+              ? ('dashboard.active' | cxTranslate)
+              : ('dashboard.disabled' | cxTranslate)
           }}</span>
         </td>
         <td class="border-color-3">
           <div class="d-md-none">
-            EMAIL
+            {{ 'dashboard.email' | cxTranslate }}
           </div>
           <span>{{ customer?.uid }}</span>
         </td>
       </tr>
     </tbody>
   </table>
+
   <!-- Select Form and Pagination Bottom -->
   <div class="row">
     <ng-container *ngIf="customers.pagination.totalPages > 1">
@@ -59,11 +63,10 @@
     </ng-container>
   </div>
 
-  <!-- NO ORDER CONTAINER -->
+  <!-- NO CUSTOMERS-->
   <ng-template #noCustomers>
-    <h3>No Customers</h3>
+    <h3>{{ 'dashboard.noCustomers' | cxTranslate }}</h3>
   </ng-template>
-  <!-- </ng-container> -->
 </ng-container>
 
 <ng-template #loading>
