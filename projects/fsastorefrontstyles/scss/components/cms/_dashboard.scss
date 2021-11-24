@@ -1,2 +1,19 @@
 %cx-fs-dashboard {
+  .table {
+    thead {
+      background-color: var(--cx-color-4);
+    }
+    th {
+      color: var(--cx-color-2);
+    }
+    td,
+    th {
+      padding: 1.25rem;
+      text-align: left;
+      font-size: var(--cx-title-font-size);
+    }
+    tr {
+      cursor: pointer;
+    }
+  }
 }

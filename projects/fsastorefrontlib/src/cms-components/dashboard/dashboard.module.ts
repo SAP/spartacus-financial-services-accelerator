@@ -5,6 +5,7 @@ import {
   CmsPageGuard,
   SpinnerModule,
   PageLayoutComponent,
+  ListNavigationModule,
 } from '@spartacus/storefront';
 import {
   CmsModule,
@@ -34,6 +35,8 @@ const routes: Routes = [
     I18nModule,
     SpinnerModule,
     CmsModule,
+    SpinnerModule,
+    ListNavigationModule,
     RouterModule.forChild(routes),
   ],
   providers: [

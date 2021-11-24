@@ -7,8 +7,10 @@ import {
   ConsentTemplate,
   Occ,
   OrderEntry,
+  PaginationModel,
   Price,
   Product,
+  SortModel,
   User,
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/checkout/root';
@@ -74,6 +76,12 @@ export interface InsuranceQuoteList {
 
 export interface OBOConsentList {
   consents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: User[];
+  pagination: PaginationModel;
+  sorts: SortModel[];
 }
 
 export interface QuoteWorkflowStatus {

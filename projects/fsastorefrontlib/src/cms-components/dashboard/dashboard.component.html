@@ -1,18 +1,71 @@
-<div class="row">
-  <div class="col-md-5 mb-5">
-    <div class="box-shadow">
-      <h5 class="text-center py-3 mb-0">Customer Profile</h5>
-      <div class="background-color-4">
-        kj hjfkdshfjkdhjkghfdjkgh fjkdgh fjkh gkjfhgjkfd hjkg hgkjfh d
-      </div>
+<ng-container *ngIf="customers$ | async as customers">
+  <!-- BODY -->
+  <div class="row">
+    <div class="form-group col-6 col-md-3">
+      <cx-sorting
+        [sortOptions]="customers.sorts"
+        [sortLabels]="getSortLabels() | async"
+        (sortListEvent)="sortChange($event)"
+        [selectedOption]="sort"
+      ></cx-sorting>
+    </div>
+    <div class="col-6 col-md-3 ml-auto text-right">
+      <button class="primary-button">Add</button>
     </div>
   </div>
-  <div class="col-md-7">
-    <div class="box-shadow">
-      <h5 class="text-center py-3 mb-0">Dashboard Overview</h5>
-      <div class="background-color-4">
-        kj hjfkdshfjkdhjkghfdjkgh fjkdgh fjkh gkjfhgjkfd hjkg hgkjfh d
-      </div>
-    </div>
+  <!-- TABLE -->
+  <table class="table table-hover border-top border-color-3">
+    <thead class="d-none d-md-table-row">
+      <th scope="col">
+        NAME
+      </th>
+      <th scope="col">
+        STATUS
+      </th>
+      <th scope="col">EMAIL</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers.entries">
+        <td class="border-color-3">
+          <div class="d-md-none">
+            NAME
+          </div>
+          <span class="notice">{{ customer?.name }}</span>
+        </td>
+        <td class="border-color-3">
+          <div class="d-md-none">
+            STATUS
+          </div>
+          <span [ngClass]="customer?.active ? 'text-success' : 'text-danger'">{{
+            customer?.active ? 'Active' : 'Disabled'
+          }}</span>
+        </td>
+        <td class="border-color-3">
+          <div class="d-md-none">
+            EMAIL
+          </div>
+          <span>{{ customer?.uid }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Select Form and Pagination Bottom -->
+  <div class="row">
+    <ng-container *ngIf="customers.pagination.totalPages > 1">
+      <cx-pagination
+        [pagination]="customers.pagination"
+        (viewPageEvent)="pageChange($event)"
+      ></cx-pagination>
+    </ng-container>
   </div>
-</div>
+
+  <!-- NO ORDER CONTAINER -->
+  <ng-template #noCustomers>
+    <h3>No Customers</h3>
+  </ng-template>
+  <!-- </ng-container> -->
+</ng-container>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>
