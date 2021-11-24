@@ -63,7 +63,6 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
     componentData: CMSConnectionComponent,
     agent?: any
   ): void {
-    console.log(componentData, 'componentData');
     const additionalGuestInformation = new Map<string, string>();
     this.setSyncPilotConfig(componentData);
     this.subscription.add(

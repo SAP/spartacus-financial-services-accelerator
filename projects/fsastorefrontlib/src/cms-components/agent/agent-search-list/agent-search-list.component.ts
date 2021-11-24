@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PaginationModel, User } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';

@@ -1,7 +1,11 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsService, MockTranslatePipe, WindowRef } from '@spartacus/core';
-import { CmsComponentData, ModalService } from '@spartacus/storefront';
+import {
+  CmsComponentData,
+  IconConfig,
+  ModalService,
+} from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { of } from 'rxjs';
@@ -51,8 +55,18 @@ const CMScomponentData: CMSConnectionComponent = {
   name: 'Test Root Component',
   uid: 'testUid',
 };
+
 const MockCmsService = {
   getComponentData: () => of(CMScomponentData),
+};
+
+const MockIconConfig: IconConfig = {
+  icon: {
+    symbols: {
+      PHONE: 'fas fa-phone',
+      AGENT: 'fas fa-headset',
+    },
+  },
 };
 
 class MockCmsComponentData {
@@ -92,6 +106,10 @@ describe('FSSyncPilotComponent', () => {
         {
           provide: CmsComponentData,
           useClass: MockCmsComponentData,
+        },
+        {
+          provide: IconConfig,
+          useValue: MockIconConfig,
         },
       ],
     }).compileComponents();
