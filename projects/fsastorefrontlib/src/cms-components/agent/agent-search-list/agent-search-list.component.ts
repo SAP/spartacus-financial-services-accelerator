@@ -5,7 +5,6 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
-import { AgentSyncPilotComponent } from '../agent-sync-pilot/agent-sync-pilot.component';
 
 @Component({
   selector: 'cx-fs-agent-search-list',

@@ -1,16 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nTestingModule, WindowRef } from '@spartacus/core';
+import { DebugElement } from '@angular/core';
+import { of } from 'rxjs';
+import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import {
-  CmsComponentData,
-  IconConfig,
-  ModalService,
-} from '@spartacus/storefront';
-import { of } from 'rxjs';
-
-import { AgentSyncPilotComponent } from './agent-sync-pilot.component';
-import { CmsService, I18nTestingModule, WindowRef } from '@spartacus/core';
-import { DebugElement } from '@angular/core';
+import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
 
 const mockUser = {
@@ -43,7 +38,7 @@ class MockService {
   connect(): Promise<void> {
     return Promise.resolve();
   }
-  requestToConsultant(): Promise<void> {
+  enterQueue(): Promise<void> {
     return Promise.resolve();
   }
   abort() {}
@@ -56,25 +51,13 @@ const CMScomponentData: CMSConnectionComponent = {
   uid: 'testUid',
 };
 
-const MockCmsService = {
-  getComponentData: () => of(CMScomponentData),
+const MockCmsComponentData = <CmsComponentData<CMSConnectionComponent>>{
+  data$: of(CMScomponentData),
 };
 
-const MockIconConfig: IconConfig = {
-  icon: {
-    symbols: {
-      PHONE: 'fas fa-phone',
-    },
-  },
-};
-
-class MockCmsComponentData {
-  data$ = of(CMScomponentData);
-}
-
-describe('AgentSyncPilotComponent', () => {
-  let component: AgentSyncPilotComponent;
-  let fixture: ComponentFixture<AgentSyncPilotComponent>;
+describe('SyncPilotConnectionComponent', () => {
+  let component: SyncPilotConnectionComponent;
+  let fixture: ComponentFixture<SyncPilotConnectionComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
@@ -84,7 +67,7 @@ describe('AgentSyncPilotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AgentSyncPilotComponent],
+      declarations: [SyncPilotConnectionComponent],
       imports: [I18nTestingModule],
       providers: [
         {
@@ -103,20 +86,12 @@ describe('AgentSyncPilotComponent', () => {
           provide: CmsComponentData,
           useValue: MockCmsComponentData,
         },
-        {
-          provide: CmsService,
-          useValue: MockCmsService,
-        },
-        {
-          provide: IconConfig,
-          useValue: MockIconConfig,
-        },
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AgentSyncPilotComponent);
+    fixture = TestBed.createComponent(SyncPilotConnectionComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);

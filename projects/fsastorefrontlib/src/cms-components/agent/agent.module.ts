@@ -27,7 +27,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
 import { StoreFinderModule } from '@spartacus/storefinder';
-import { AgentSyncPilotComponent } from './agent-sync-pilot/agent-sync-pilot.component';
+import { FSSyncPilotModule } from '../comparison-table/sync-pilot/sync-pilot.module';
 
 @NgModule({
   imports: [
@@ -43,6 +43,7 @@ import { AgentSyncPilotComponent } from './agent-sync-pilot/agent-sync-pilot.com
     ListNavigationModule,
     SpinnerModule,
     NgbTooltipModule,
+    FSSyncPilotModule,
     RouterModule.forChild([
       {
         path: null,
@@ -80,7 +81,6 @@ import { AgentSyncPilotComponent } from './agent-sync-pilot/agent-sync-pilot.com
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSyncPilotComponent,
   ],
   exports: [
     AgentRootComponent,
@@ -88,7 +88,6 @@ import { AgentSyncPilotComponent } from './agent-sync-pilot/agent-sync-pilot.com
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSyncPilotComponent,
   ],
   entryComponents: [
     AgentRootComponent,
@@ -96,7 +95,6 @@ import { AgentSyncPilotComponent } from './agent-sync-pilot/agent-sync-pilot.com
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSyncPilotComponent,
   ],
   providers: [AgentConnector],
 })

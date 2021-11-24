@@ -265,7 +265,7 @@ export function checkFinalReviewComponents() {
 }
 
 export function checkSyncPilotComparisonTable() {
-  cy.get('cx-fs-comparison-table-sync-pilot')
+  cy.get('cx-fs-sync-pilot')
     .should('be.visible')
     .within(() => {
       cy.get('h3').should('contain.text', 'Need Help?');

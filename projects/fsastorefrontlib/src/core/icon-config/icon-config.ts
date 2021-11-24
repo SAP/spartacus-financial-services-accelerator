@@ -10,6 +10,7 @@ export const iconConfig: IconConfig = {
       TRIP: 'fs-icon icon-plane',
       EVENT: 'fs-icon icon-event',
       PHONE: 'fas fa-phone',
+      AGENT: 'fas fa-headset',
     },
   },
 };
@@ -21,4 +22,5 @@ export enum ICON_TYPE {
   TRIP = 'TRIP',
   EVENT = 'EVENT',
   PHONE = 'PHONE',
+  AGENT = 'AGENT',
 }

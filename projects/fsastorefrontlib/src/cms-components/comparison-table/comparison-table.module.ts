@@ -24,7 +24,7 @@ import { ComparisonTableContainerComponent } from './comparison-table-container/
 import { ComparisonTablePanelComponent } from './comparison-table-panel/comparison-table-panel.component';
 import { ComparisonTableTabComponent } from './comparison-table-tab/comparison-table-tab.component';
 import { ComparisonTableService } from './comparison-table.service';
-import { ComparisonTableSyncPilotComponent } from './comparison-table-sync-pilot/comparison-table-sync-pilot.component';
+import { FSSyncPilotModule } from './sync-pilot/sync-pilot.module';
 
 @NgModule({
   imports: [
@@ -37,6 +37,7 @@ import { ComparisonTableSyncPilotComponent } from './comparison-table-sync-pilot
     NgbNavModule,
     NgbTooltipModule,
     UrlModule,
+    FSSyncPilotModule,
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
@@ -57,14 +58,12 @@ import { ComparisonTableSyncPilotComponent } from './comparison-table-sync-pilot
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent,
-    ComparisonTableSyncPilotComponent,
   ],
   exports: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent,
-    ComparisonTableSyncPilotComponent,
   ],
   providers: [
     FSCartService,

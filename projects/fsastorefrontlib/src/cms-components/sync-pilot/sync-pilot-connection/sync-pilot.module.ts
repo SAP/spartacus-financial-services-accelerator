@@ -8,7 +8,7 @@ import {
 } from '@spartacus/core';
 import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { SyncPilotDialogModule } from '../sync-pilot-dialog/sync-pilot-dialog.module';
+import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog.module';
 
 @NgModule({
   imports: [
