@@ -11,6 +11,19 @@
       padding: 1.25rem;
       text-align: left;
       font-size: var(--cx-title-font-size);
+      cx-icon {
+        @include vertical-center;
+        color: var(--cx-color-6);
+        position: absolute;
+        right: 4%;
+        font-size: var(--cx-h1-font-size);
+      }
+      @include media-breakpoint-down(sm) {
+        padding-inline: 0.65rem;
+        &:last-of-type {
+          padding-inline-end: 1.5rem;
+        }
+      }
     }
     tr {
       cursor: pointer;

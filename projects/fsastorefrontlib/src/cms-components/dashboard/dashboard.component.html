@@ -34,7 +34,7 @@
             <div class="d-md-none">
               {{ 'dashboard.name' | cxTranslate }}
             </div>
-            <span class="notice">{{ customer?.name }}</span>
+            <span class="notice text-break">{{ customer?.name }}</span>
           </td>
           <td class="border-color-3">
             <div class="d-md-none">
@@ -49,11 +49,12 @@
               }}</span
             >
           </td>
-          <td class="border-color-3">
+          <td class="border-color-3 position-relative">
             <div class="d-md-none">
               {{ 'dashboard.email' | cxTranslate }}
             </div>
-            <span>{{ customer?.uid }}</span>
+            <span class="text-break">{{ customer?.uid }}</span>
+            <cx-icon [type]="iconTypes.CARET_RIGHT"></cx-icon>
           </td>
         </tr>
       </tbody>

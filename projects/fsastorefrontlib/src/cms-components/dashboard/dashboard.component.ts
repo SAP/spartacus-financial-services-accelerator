@@ -4,6 +4,7 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { TranslationService, UserIdService } from '@spartacus/core';
 import { OBOCustomerList } from '../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
+import { ICON_TYPE } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-dashboard',
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   sort: string;
+  iconTypes = ICON_TYPE;
 
   ngOnInit() {
     this.getSortLabels().subscribe(data => console.log(data));
