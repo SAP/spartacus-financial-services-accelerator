@@ -2,7 +2,7 @@ export const dashboard = {
   dashboard: {
     name: 'Name',
     email: 'Email',
-    noCustomers: '[DE] No Customers',
+    noCustomers: "[DE] You haven't assigned any customers yet",
     active: '[DE] Active',
     disabled: '[DE] Disabled',
     sorting: {

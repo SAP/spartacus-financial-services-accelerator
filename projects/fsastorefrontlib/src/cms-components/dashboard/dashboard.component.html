@@ -1,73 +1,79 @@
-<ng-container *ngIf="customers$ | async as customers">
-  <!-- BODY -->
-  <div class="row">
-    <div class="form-group col-6 col-md-3">
-      <cx-sorting
-        [sortOptions]="customers.sorts"
-        [sortLabels]="getSortLabels() | async"
-        (sortListEvent)="sortChange($event)"
-        [selectedOption]="customers.sorts[0]?.code"
-        placeholder="{{ 'dashboard.sorting.name' | cxTranslate }}"
-      ></cx-sorting>
+<ng-container *ngIf="customers$ | async as customers; else loading">
+  <ng-container *ngIf="customers.entries.length > 0; else noCustomers">
+    <!-- BODY -->
+    <div class="row">
+      <div class="form-group col-6 col-md-3">
+        <cx-sorting
+          [sortOptions]="customers.sorts"
+          [sortLabels]="getSortLabels() | async"
+          (sortListEvent)="sortChange($event)"
+          [selectedOption]="customers.sorts[0]?.code"
+          placeholder="{{ 'dashboard.sorting.name' | cxTranslate }}"
+        ></cx-sorting>
+      </div>
+      <div class="col-6 col-md-3 ml-auto text-right">
+        <button class="primary-button">
+          {{ 'fscommon.add' | cxTranslate }}
+        </button>
+      </div>
     </div>
-    <div class="col-6 col-md-3 ml-auto text-right">
-      <button class="primary-button">{{ 'fscommon.add' | cxTranslate }}</button>
+    <!-- TABLE -->
+    <table class="table table-hover border-top border-color-3">
+      <thead class="d-none d-md-table-row">
+        <th scope="col">
+          {{ 'dashboard.name' | cxTranslate }}
+        </th>
+        <th scope="col">
+          {{ 'fscommon.status' | cxTranslate }}
+        </th>
+        <th scope="col">{{ 'forms.contactType.email' | cxTranslate }}</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers.entries">
+          <td class="border-color-3">
+            <div class="d-md-none">
+              {{ 'dashboard.name' | cxTranslate }}
+            </div>
+            <span class="notice">{{ customer?.name }}</span>
+          </td>
+          <td class="border-color-3">
+            <div class="d-md-none">
+              {{ 'fscommon.status' | cxTranslate }}
+            </div>
+            <span
+              [ngClass]="customer?.active ? 'text-success' : 'text-danger'"
+              >{{
+                customer?.active
+                  ? ('dashboard.active' | cxTranslate)
+                  : ('dashboard.disabled' | cxTranslate)
+              }}</span
+            >
+          </td>
+          <td class="border-color-3">
+            <div class="d-md-none">
+              {{ 'dashboard.email' | cxTranslate }}
+            </div>
+            <span>{{ customer?.uid }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Select Form and Pagination Bottom -->
+    <div class="row">
+      <ng-container *ngIf="customers.pagination.totalPages > 1">
+        <cx-pagination
+          [pagination]="customers.pagination"
+          (viewPageEvent)="pageChange($event)"
+        ></cx-pagination>
+      </ng-container>
     </div>
-  </div>
-  <!-- TABLE -->
-  <table class="table table-hover border-top border-color-3">
-    <thead class="d-none d-md-table-row">
-      <th scope="col">
-        {{ 'dashboard.name' | cxTranslate }}
-      </th>
-      <th scope="col">
-        {{ 'fscommon.status' | cxTranslate }}
-      </th>
-      <th scope="col">{{ 'forms.contactType.email' | cxTranslate }}</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let customer of customers.entries">
-        <td class="border-color-3">
-          <div class="d-md-none">
-            {{ 'dashboard.name' | cxTranslate }}
-          </div>
-          <span class="notice">{{ customer?.name }}</span>
-        </td>
-        <td class="border-color-3">
-          <div class="d-md-none">
-            {{ 'fscommon.status' | cxTranslate }}
-          </div>
-          <span [ngClass]="customer?.active ? 'text-success' : 'text-danger'">{{
-            customer?.active
-              ? ('dashboard.active' | cxTranslate)
-              : ('dashboard.disabled' | cxTranslate)
-          }}</span>
-        </td>
-        <td class="border-color-3">
-          <div class="d-md-none">
-            {{ 'dashboard.email' | cxTranslate }}
-          </div>
-          <span>{{ customer?.uid }}</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Select Form and Pagination Bottom -->
-  <div class="row">
-    <ng-container *ngIf="customers.pagination.totalPages > 1">
-      <cx-pagination
-        [pagination]="customers.pagination"
-        (viewPageEvent)="pageChange($event)"
-      ></cx-pagination>
-    </ng-container>
-  </div>
-
-  <!-- NO CUSTOMERS-->
-  <ng-template #noCustomers>
-    <h3>{{ 'dashboard.noCustomers' | cxTranslate }}</h3>
-  </ng-template>
+  </ng-container>
 </ng-container>
+
+<!-- NO CUSTOMERS-->
+<ng-template #noCustomers>
+  <h3>{{ 'dashboard.noCustomers' | cxTranslate }}</h3>
+</ng-template>
 
 <ng-template #loading>
   <cx-spinner></cx-spinner>
