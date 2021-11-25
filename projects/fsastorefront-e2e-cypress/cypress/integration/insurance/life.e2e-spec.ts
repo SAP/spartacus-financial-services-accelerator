@@ -23,7 +23,7 @@ testFilters([''], () => {
     it('Should select main and optional products', () => {
       life.populateFirstStep();
       checkout.clickContinueButton();
-      cy.get('cx-fs-sync-pilot-connection-component').should('not.exist');
+      cy.get('cx-fs-sync-pilot-cms-component').should('not.exist');
       life.checkLifeComparisonTable();
       life.selectBasicLifeProduct();
       //check and add optional products

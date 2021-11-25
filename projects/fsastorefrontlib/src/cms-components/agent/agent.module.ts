@@ -27,7 +27,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
 import { StoreFinderModule } from '@spartacus/storefinder';
-import { FSSyncPilotModule } from '../sync-pilot/sync-pilot/sync-pilot.module';
+import { SyncPilotGenericModule } from '../sync-pilot/sync-pilot-generic/sync-pilot-generic.module';
 
 @NgModule({
   imports: [
@@ -43,7 +43,7 @@ import { FSSyncPilotModule } from '../sync-pilot/sync-pilot/sync-pilot.module';
     ListNavigationModule,
     SpinnerModule,
     NgbTooltipModule,
-    FSSyncPilotModule,
+    SyncPilotGenericModule,
     RouterModule.forChild([
       {
         path: null,

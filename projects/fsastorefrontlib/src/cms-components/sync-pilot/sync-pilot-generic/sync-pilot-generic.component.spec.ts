@@ -11,7 +11,7 @@ import { Service } from '@syncpilot/bpool-guest-lib';
 import { of } from 'rxjs';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
 
-import { FSSyncPilotComponent } from './sync-pilot.component';
+import { SyncPilotGenericComponent } from './sync-pilot-generic.component';
 
 const mockUser = {
   uid: 'test@email.com',
@@ -73,9 +73,9 @@ class MockCmsComponentData {
   data$ = of(CMScomponentData);
 }
 
-describe('FSSyncPilotComponent', () => {
-  let component: FSSyncPilotComponent;
-  let fixture: ComponentFixture<FSSyncPilotComponent>;
+describe('SyncPilotGenericComponent', () => {
+  let component: SyncPilotGenericComponent;
+  let fixture: ComponentFixture<SyncPilotGenericComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
@@ -85,7 +85,7 @@ describe('FSSyncPilotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FSSyncPilotComponent, MockTranslatePipe],
+      declarations: [SyncPilotGenericComponent, MockTranslatePipe],
       providers: [
         {
           provide: UserAccountFacade,
@@ -116,7 +116,7 @@ describe('FSSyncPilotComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FSSyncPilotComponent);
+    fixture = TestBed.createComponent(SyncPilotGenericComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);

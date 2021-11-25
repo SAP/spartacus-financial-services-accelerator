@@ -3,7 +3,9 @@
     <div class="fixed-column">
       <div class="table-header sticky-position text-center mb-0">
         <ng-container *ngIf="(user$ | async)?.uid">
-          <cx-fs-sync-pilot [type]="iconType.AGENT"></cx-fs-sync-pilot>
+          <cx-fs-sync-pilot-generic
+            [type]="iconType.AGENT"
+          ></cx-fs-sync-pilot-generic>
         </ng-container>
       </div>
       <div class="table-cell-wrapper">

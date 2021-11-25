@@ -21,12 +21,12 @@ import { GeneralInformationModule } from './form/general-information/general-inf
 import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { B2bModule } from './b2b/b2b.module';
 import { MessageNotificationModule } from './message-notification/message-notification.module';
-import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { UserProfileCoreModule } from '@spartacus/user/profile/core';
 import { UserAccountCoreModule } from '@spartacus/user/account/core';
+import { SyncPilotCmsModule } from './sync-pilot/sync-pilot-cms/sync-pilot-cms.module';
 
 @NgModule({
   imports: [
@@ -52,6 +52,7 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     B2bModule,
     MessageNotificationModule,
     NavigationModule,
+    SyncPilotCmsModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
   ],
@@ -75,7 +76,7 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     GeneralInformationModule,
     B2bModule,
     MessageNotificationModule,
-    SyncPilotModule,
+    SyncPilotCmsModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
   ],

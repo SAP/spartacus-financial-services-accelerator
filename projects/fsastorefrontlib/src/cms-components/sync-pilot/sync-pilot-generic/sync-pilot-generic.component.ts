@@ -9,21 +9,22 @@ import { CmsService, WindowRef } from '@spartacus/core';
 import {
   CmsComponentData,
   IconConfig,
+  ICON_TYPE,
   ModalService,
 } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
-import { ICON_TYPE } from '../../../core/icon-config/icon-config';
-import { SyncPilotConnectionComponent } from '../sync-pilot-connection/sync-pilot-connection.component';
+import { FS_ICON_TYPE } from '../../../core/icon-config/icon-config';
+import { SyncPilotCmsComponent } from '../sync-pilot-cms/sync-pilot-cms.component';
 
 @Component({
-  selector: 'cx-fs-sync-pilot',
-  templateUrl: './sync-pilot.component.html',
+  selector: 'cx-fs-sync-pilot-generic',
+  templateUrl: './sync-pilot-generic.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FSSyncPilotComponent extends SyncPilotConnectionComponent
+export class SyncPilotGenericComponent extends SyncPilotCmsComponent
   implements OnChanges {
   constructor(
     protected cmsService: CmsService,
@@ -38,14 +39,15 @@ export class FSSyncPilotComponent extends SyncPilotConnectionComponent
   }
 
   @Input() agent: any;
-  @Input() cmsComponent = 'FSSyncPilotComponent';
-  @Input() set type(type: ICON_TYPE) {
-    this.agentIcon = this.iconConfig.icon.symbols[type];
-  }
-  agentIcon: string = this.iconConfig.icon.symbols[ICON_TYPE.PHONE];
+  @Input() cmsComponent = 'SyncPilotGenericComponent';
+  @Input() type = FS_ICON_TYPE.PHONE;
+  agentIcon: string;
   component$: Observable<any>;
 
   ngOnChanges() {
+    if (this.type) {
+      this.agentIcon = this.iconConfig.icon.symbols[this.type];
+    }
     this.component$ = this.cmsService.getComponentData(this.cmsComponent);
   }
 }

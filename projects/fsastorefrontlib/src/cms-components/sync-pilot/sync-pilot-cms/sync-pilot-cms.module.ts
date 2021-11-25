@@ -6,9 +6,9 @@ import {
   I18nModule,
   UrlModule,
 } from '@spartacus/core';
-import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog.module';
+import { SyncPilotCmsComponent } from './sync-pilot-cms.component';
 
 @NgModule({
   imports: [
@@ -19,14 +19,14 @@ import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSConnectionComponent: {
-          component: SyncPilotConnectionComponent,
+          component: SyncPilotCmsComponent,
         },
       },
     }),
   ],
-  declarations: [SyncPilotConnectionComponent],
-  exports: [SyncPilotConnectionComponent],
-  entryComponents: [SyncPilotConnectionComponent],
+  declarations: [SyncPilotCmsComponent],
+  exports: [SyncPilotCmsComponent],
+  entryComponents: [SyncPilotCmsComponent],
   providers: [Service],
 })
-export class SyncPilotModule {}
+export class SyncPilotCmsModule {}

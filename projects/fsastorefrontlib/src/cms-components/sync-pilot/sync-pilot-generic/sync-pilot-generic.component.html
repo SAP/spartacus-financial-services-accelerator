@@ -4,7 +4,7 @@
       {{ 'fscommon.syncPilot.needHelp' | cxTranslate }}
     </h3>
     <div class="link" (click)="establishConnection(user, component, agent)">
-      <span *ngIf="agent; else noSpecificAgent" class="{{ agentIcon }}"></span>
+      <cx-icon *ngIf="agent; else noSpecificAgent" [type]="type"></cx-icon>
     </div>
   </ng-container>
 </ng-container>

@@ -25,7 +25,7 @@
           @include fs-transition;
         }
       }
-      cx-fs-sync-pilot {
+      cx-fs-sync-pilot-generic {
         .fas {
           transform: rotate(90deg);
           font-size: var(--cx-h3-font-size);
@@ -33,7 +33,7 @@
       }
       .fa-envelope:hover::before,
       .fa-map-marker-alt:hover::before,
-      cx-fs-sync-pilot .fas:hover::before {
+      cx-fs-sync-pilot-generic .fas:hover::before {
         color: var(--cx-color-1);
         background: var(--cx-color-primary);
         border: 1px solid var(--cx-color-primary);

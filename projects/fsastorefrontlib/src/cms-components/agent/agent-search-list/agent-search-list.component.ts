@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { PaginationModel, User } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, Subscription } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, shareReplay, tap } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
-  user$: Observable<User> = this.userAccountFacade.get();
+  user$: Observable<User> = this.userAccountFacade.get().pipe(shareReplay());
   searchResults$: Observable<any>;
   searchQuery: string;
   selectedAgent$: Observable<any>;

@@ -16,7 +16,7 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
-import { FSSyncPilotModule } from '../../cms-components/sync-pilot/sync-pilot/sync-pilot.module';
+import { SyncPilotGenericModule } from '../sync-pilot/sync-pilot-generic/sync-pilot-generic.module';
 import { FSCartService } from '../../core/cart/facade';
 import { PricingService } from '../../core/product-pricing/facade';
 import { FSProductService } from '../../core/product-pricing/facade/product.service';
@@ -37,7 +37,7 @@ import { ComparisonTableService } from './comparison-table.service';
     NgbNavModule,
     NgbTooltipModule,
     UrlModule,
-    FSSyncPilotModule,
+    SyncPilotGenericModule,
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {

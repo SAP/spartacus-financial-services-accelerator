@@ -15,7 +15,7 @@ export const iconConfig: IconConfig = {
   },
 };
 
-export enum ICON_TYPE {
+export enum FS_ICON_TYPE {
   PROPERTY = 'PROPERTY',
   AUTO = 'AUTO',
   PERSON = 'PERSON',

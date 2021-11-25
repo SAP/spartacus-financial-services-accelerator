@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, WindowRef } from '@spartacus/core';
 import { DebugElement } from '@angular/core';
 import { of } from 'rxjs';
-import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
+import { SyncPilotCmsComponent } from './sync-pilot-cms.component';
 
 const mockUser = {
   uid: 'test@email.com',
@@ -55,9 +55,9 @@ const MockCmsComponentData = <CmsComponentData<CMSConnectionComponent>>{
   data$: of(CMScomponentData),
 };
 
-describe('SyncPilotConnectionComponent', () => {
-  let component: SyncPilotConnectionComponent;
-  let fixture: ComponentFixture<SyncPilotConnectionComponent>;
+describe('SyncPilotCmsComponent', () => {
+  let component: SyncPilotCmsComponent;
+  let fixture: ComponentFixture<SyncPilotCmsComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
@@ -67,7 +67,7 @@ describe('SyncPilotConnectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SyncPilotConnectionComponent],
+      declarations: [SyncPilotCmsComponent],
       imports: [I18nTestingModule],
       providers: [
         {
@@ -91,7 +91,7 @@ describe('SyncPilotConnectionComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SyncPilotConnectionComponent);
+    fixture = TestBed.createComponent(SyncPilotCmsComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);

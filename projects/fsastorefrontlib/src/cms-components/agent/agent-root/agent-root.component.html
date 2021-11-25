@@ -32,14 +32,14 @@
                     [routerLink]="['/agent-locator']"
                     [queryParams]="{ query: agent.email }"
                   ></a>
-                  <cx-fs-sync-pilot
+                  <cx-fs-sync-pilot-generic
                     #syncPilot
                     [ngClass]="{
                       'd-inline-block px-2': syncPilot?.user$ | async
                     }"
                     *ngIf="agent.participationStatus"
                     [agent]="agent"
-                  ></cx-fs-sync-pilot>
+                  ></cx-fs-sync-pilot-generic>
                 </div>
               </div>
             </ng-container>
