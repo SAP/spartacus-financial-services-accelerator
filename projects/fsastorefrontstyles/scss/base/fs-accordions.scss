@@ -42,16 +42,6 @@
     margin-top: 20px;
     @include fs-box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
     position: relative;
-    // .fs-icon,
-    // .fas {
-    //   @include vertical-center;
-    //   z-index: 2;
-    //   left: 15px;
-    //   &:before {
-    //     font-size: var(--cx-h5-font-size);
-    //     color: var(--cx-color-primary);
-    //   }
-    // }
   }
   .accordion-item-wrapper {
     display: flex;
