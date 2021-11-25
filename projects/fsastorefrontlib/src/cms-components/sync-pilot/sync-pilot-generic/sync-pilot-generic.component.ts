@@ -9,7 +9,6 @@ import { CmsService, WindowRef } from '@spartacus/core';
 import {
   CmsComponentData,
   IconConfig,
-  ICON_TYPE,
   ModalService,
 } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
