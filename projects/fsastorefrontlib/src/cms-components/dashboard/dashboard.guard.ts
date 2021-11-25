@@ -6,10 +6,10 @@ import {
   RoutingService,
   User,
 } from '@spartacus/core';
-import { FSUserRole } from '../../occ/occ-models/occ.models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable } from 'rxjs';
 import { filter, map, pluck } from 'rxjs/operators';
+import { FSUserRole } from '../../occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',

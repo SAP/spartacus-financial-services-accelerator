@@ -6,7 +6,6 @@
         <cx-sorting
           [sortOptions]="customers.sorts"
           [sortLabels]="getSortLabels() | async"
-          (sortListEvent)="sortChange($event)"
           [selectedOption]="customers.sorts[0]?.code"
           placeholder="{{ 'dashboard.sorting.name' | cxTranslate }}"
         ></cx-sorting>

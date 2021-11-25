@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { TranslationService, UserIdService } from '@spartacus/core';
@@ -10,7 +10,7 @@ import { ICON_TYPE } from '@spartacus/storefront';
   selector: 'cx-fs-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   constructor(
     private consentConnector: ConsentConnector,
     protected userIdService: UserIdService,
@@ -19,10 +19,6 @@ export class DashboardComponent implements OnInit {
 
   sort: string;
   iconTypes = ICON_TYPE;
-
-  ngOnInit() {
-    this.getSortLabels().subscribe(data => console.log(data));
-  }
 
   customers$: Observable<OBOCustomerList> = this.userIdService.getUserId().pipe(
     take(1),
@@ -47,18 +43,5 @@ export class DashboardComponent implements OnInit {
         };
       })
     );
-  }
-
-  sortChange(sort: string): void {
-    this.sort = sort;
-    // this.productInterestService.loadProductInterests(
-    //   this.DEFAULT_PAGE_SIZE,
-    //   0,
-    //   this.sortMapping[sort]
-    // );
-  }
-
-  pageChange(page: number): void {
-    console.log(page);
   }
 }
