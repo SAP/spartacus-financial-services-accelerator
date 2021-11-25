@@ -8,6 +8,7 @@
     }
     td,
     th {
+      border-color: var(--cx-color-3);
       padding: 1.25rem;
       text-align: left;
       font-size: var(--cx-title-font-size);
@@ -19,14 +20,22 @@
         font-size: var(--cx-h1-font-size);
       }
       @include media-breakpoint-down(sm) {
-        padding-inline: 0.65rem;
+        border-top: 0;
+        padding: 1rem 1.75rem 0;
         &:last-of-type {
-          padding-inline-end: 1.5rem;
+          padding-block-end: 1rem;
         }
       }
     }
     tr {
       cursor: pointer;
+      @include media-breakpoint-down(sm) {
+        border-bottom: 1px solid var(--cx-color-3);
+      }
     }
+  }
+  .mobile-label {
+    font-weight: 700;
+    flex: 0 1 30%;
   }
 }

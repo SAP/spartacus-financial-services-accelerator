@@ -29,16 +29,19 @@
         <th scope="col">{{ 'forms.contactType.email' | cxTranslate }}</th>
       </thead>
       <tbody>
-        <tr *ngFor="let customer of customers.entries">
-          <td class="border-color-3">
-            <div class="d-md-none">
-              {{ 'dashboard.name' | cxTranslate }}
+        <tr
+          class="position-relative"
+          *ngFor="let customer of customers.entries"
+        >
+          <td class="d-flex d-md-table-cell">
+            <div class="mobile-label text-uppercase pr-2 d-md-none">
+              {{ 'dashboard.name' | cxTranslate }}:
             </div>
             <span class="notice text-break">{{ customer?.name }}</span>
           </td>
-          <td class="border-color-3">
-            <div class="d-md-none">
-              {{ 'fscommon.status' | cxTranslate }}
+          <td class="d-flex d-md-table-cell">
+            <div class="mobile-label text-uppercase pr-2 d-md-none">
+              {{ 'fscommon.status' | cxTranslate }}:
             </div>
             <span
               [ngClass]="customer?.active ? 'text-success' : 'text-danger'"
@@ -49,9 +52,9 @@
               }}</span
             >
           </td>
-          <td class="border-color-3 position-relative">
-            <div class="d-md-none">
-              {{ 'dashboard.email' | cxTranslate }}
+          <td class="d-flex d-md-table-cell">
+            <div class="mobile-label text-uppercase pr-2 d-md-none">
+              {{ 'dashboard.email' | cxTranslate }}:
             </div>
             <span class="text-break">{{ customer?.uid }}</span>
             <cx-icon [type]="iconTypes.CARET_RIGHT"></cx-icon>
