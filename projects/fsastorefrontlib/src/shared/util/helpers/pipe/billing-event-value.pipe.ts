@@ -15,11 +15,8 @@ export class BillingEventValuePipe implements PipeTransform {
     const billingEvent = billingEventsList.find(
       event => event.billingTime.name === billingEventLabel
     );
-    if (billingEvent?.price?.value) {
-      return billingEvent?.price?.formattedValue;
-    }
     return !billingEvent?.chargeInformation
-      ? this.translatePipe.transform('fscommon.notIncluded')
+      ? this.translatePipe.transform('fscommon.included')
       : billingEvent?.chargeInformation;
   }
 }
