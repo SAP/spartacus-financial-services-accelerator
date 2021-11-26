@@ -23,11 +23,10 @@ export class SellerDashboardListGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.userAccountFacade.get().pipe(
-      filter((user: User) => user && Object.keys(user).length > 0),
+      filter((user: User) => !!user),
       pluck('roles'),
       map((roles: string[]) => {
-        const hasRole =
-          Array.isArray(roles) && roles.includes(FSUserRole.SELLER);
+        const hasRole = roles.includes(FSUserRole.SELLER);
         if (!hasRole) {
           this.routingService.go({ cxRoute: '/' });
           this.globalMessageService.add(

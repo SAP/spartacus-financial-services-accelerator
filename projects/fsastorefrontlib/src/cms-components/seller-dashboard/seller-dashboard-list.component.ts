@@ -12,7 +12,7 @@ import { ICON_TYPE } from '@spartacus/storefront';
 })
 export class SellerDashboardListComponent {
   constructor(
-    private consentConnector: ConsentConnector,
+    protected consentConnector: ConsentConnector,
     protected userIdService: UserIdService,
     protected translationService: TranslationService
   ) {}
