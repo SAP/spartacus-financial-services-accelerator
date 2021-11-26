@@ -24,11 +24,11 @@ import {
 } from '../../../core/sync-pilot-config/sync-pilot-config';
 
 @Component({
-  selector: 'cx-fs-sync-pilot-cms-component',
-  templateUrl: './sync-pilot-cms.component.html',
+  selector: 'cx-fs-cms-sync-pilot',
+  templateUrl: './cms-sync-pilot.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncPilotCmsComponent implements OnInit, OnDestroy {
+export class CmsSyncPilotComponent implements OnInit, OnDestroy {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected syncPilotService: Service,

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { I18nModule, UrlModule } from '@spartacus/core';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { SyncPilotGenericComponent } from './sync-pilot-generic.component';
+import { GenericSyncPilotComponent } from './generic-sync-pilot.component';
 import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog.module';
 import { IconModule } from '@spartacus/storefront';
 
@@ -14,9 +14,9 @@ import { IconModule } from '@spartacus/storefront';
     SyncPilotDialogModule,
     IconModule,
   ],
-  declarations: [SyncPilotGenericComponent],
-  exports: [SyncPilotGenericComponent],
-  entryComponents: [SyncPilotGenericComponent],
+  declarations: [GenericSyncPilotComponent],
+  exports: [GenericSyncPilotComponent],
+  entryComponents: [GenericSyncPilotComponent],
   providers: [Service],
 })
-export class SyncPilotGenericModule {}
+export class GenericSyncPilotModule {}

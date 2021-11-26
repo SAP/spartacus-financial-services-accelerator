@@ -35,10 +35,6 @@
         border: 2px solid var(--cx-color-1);
         background-color: var(--cx-color-3);
       }
-      cx-fs-sync-pilot-generic .fas {
-        font-size: var(--cx-h3-font-size);
-        transform: rotate(90deg);
-      }
       .online {
         background-color: var(--cx-color-success);
       }
@@ -55,6 +51,14 @@
           display: none;
         }
       }
+    }
+  }
+  cx-fs-generic-sync-pilot {
+    .fas {
+      font-size: var(--cx-h3-font-size);
+    }
+    .fa-phone {
+      transform: rotate(90deg);
     }
   }
   .md-order-change {

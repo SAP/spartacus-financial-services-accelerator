@@ -1,17 +1,12 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsService, MockTranslatePipe, WindowRef } from '@spartacus/core';
-import {
-  CmsComponentData,
-  IconConfig,
-  ModalService,
-} from '@spartacus/storefront';
+import { I18nTestingModule, WindowRef } from '@spartacus/core';
+import { DebugElement } from '@angular/core';
+import { of } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { of } from 'rxjs';
+import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
-
-import { SyncPilotGenericComponent } from './sync-pilot-generic.component';
+import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
 
 const mockUser = {
   uid: 'test@email.com',
@@ -56,26 +51,13 @@ const CMScomponentData: CMSConnectionComponent = {
   uid: 'testUid',
 };
 
-const MockCmsService = {
-  getComponentData: () => of(CMScomponentData),
+const MockCmsComponentData = <CmsComponentData<CMSConnectionComponent>>{
+  data$: of(CMScomponentData),
 };
 
-const MockIconConfig: IconConfig = {
-  icon: {
-    symbols: {
-      PHONE: 'fas fa-phone',
-      AGENT: 'fas fa-headset',
-    },
-  },
-};
-
-class MockCmsComponentData {
-  data$ = of(CMScomponentData);
-}
-
-describe('SyncPilotGenericComponent', () => {
-  let component: SyncPilotGenericComponent;
-  let fixture: ComponentFixture<SyncPilotGenericComponent>;
+describe('CmsSyncPilotComponent', () => {
+  let component: CmsSyncPilotComponent;
+  let fixture: ComponentFixture<CmsSyncPilotComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
@@ -85,7 +67,8 @@ describe('SyncPilotGenericComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SyncPilotGenericComponent, MockTranslatePipe],
+      declarations: [CmsSyncPilotComponent],
+      imports: [I18nTestingModule],
       providers: [
         {
           provide: UserAccountFacade,
@@ -100,23 +83,15 @@ describe('SyncPilotGenericComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: CmsService,
-          useValue: MockCmsService,
-        },
-        {
           provide: CmsComponentData,
-          useClass: MockCmsComponentData,
-        },
-        {
-          provide: IconConfig,
-          useValue: MockIconConfig,
+          useValue: MockCmsComponentData,
         },
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SyncPilotGenericComponent);
+    fixture = TestBed.createComponent(CmsSyncPilotComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);
@@ -134,6 +109,7 @@ describe('SyncPilotGenericComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should establish connection with sync pilot', () => {
     component.establishConnection(mockUser, CMScomponentData);
     expect(window.open).toHaveBeenCalled();

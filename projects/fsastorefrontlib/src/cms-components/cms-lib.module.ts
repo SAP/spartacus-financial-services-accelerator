@@ -26,7 +26,7 @@ import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionna
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { UserProfileCoreModule } from '@spartacus/user/profile/core';
 import { UserAccountCoreModule } from '@spartacus/user/account/core';
-import { SyncPilotCmsModule } from './sync-pilot/sync-pilot-cms/sync-pilot-cms.module';
+import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
 
 @NgModule({
   imports: [
@@ -52,7 +52,7 @@ import { SyncPilotCmsModule } from './sync-pilot/sync-pilot-cms/sync-pilot-cms.m
     B2bModule,
     MessageNotificationModule,
     NavigationModule,
-    SyncPilotCmsModule,
+    CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
   ],
@@ -76,7 +76,7 @@ import { SyncPilotCmsModule } from './sync-pilot/sync-pilot-cms/sync-pilot-cms.m
     GeneralInformationModule,
     B2bModule,
     MessageNotificationModule,
-    SyncPilotCmsModule,
+    CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
   ],

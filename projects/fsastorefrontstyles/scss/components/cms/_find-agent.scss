@@ -30,12 +30,14 @@
           border: 1px solid var(--cx-color-primary);
         }
       }
-      cx-fs-sync-pilot-generic {
-        .fas {
-          transform: rotate(90deg);
-          font-size: var(--cx-h3-font-size);
-        }
-      }
+    }
+  }
+  cx-fs-generic-sync-pilot {
+    .fas {
+      font-size: var(--cx-h3-font-size);
+    }
+    .fa-phone {
+      transform: rotate(90deg);
     }
   }
 }

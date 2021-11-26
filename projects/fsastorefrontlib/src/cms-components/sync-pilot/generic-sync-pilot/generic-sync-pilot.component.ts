@@ -16,14 +16,14 @@ import { Service } from '@syncpilot/bpool-guest-lib';
 
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
 import { FS_ICON_TYPE } from '../../../core/icon-config/icon-config';
-import { SyncPilotCmsComponent } from '../sync-pilot-cms/sync-pilot-cms.component';
+import { CmsSyncPilotComponent } from '../cms-sync-pilot/cms-sync-pilot.component';
 
 @Component({
-  selector: 'cx-fs-sync-pilot-generic',
-  templateUrl: './sync-pilot-generic.component.html',
+  selector: 'cx-fs-generic-sync-pilot',
+  templateUrl: './generic-sync-pilot.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncPilotGenericComponent extends SyncPilotCmsComponent
+export class GenericSyncPilotComponent extends CmsSyncPilotComponent
   implements OnChanges {
   constructor(
     protected cmsService: CmsService,
