@@ -64,10 +64,7 @@
     <!-- Select Form and Pagination Bottom -->
     <div class="row">
       <ng-container *ngIf="customers.pagination.totalPages > 1">
-        <cx-pagination
-          [pagination]="customers.pagination"
-          (viewPageEvent)="pageChange($event)"
-        ></cx-pagination>
+        <cx-pagination [pagination]="customers.pagination"></cx-pagination>
       </ng-container>
     </div>
   </ng-container>
