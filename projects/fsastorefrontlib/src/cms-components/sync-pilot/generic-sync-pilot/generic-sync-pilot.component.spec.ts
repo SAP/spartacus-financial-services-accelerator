@@ -1,12 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, WindowRef } from '@spartacus/core';
 import { DebugElement } from '@angular/core';
-import { of } from 'rxjs';
-import { SyncPilotConnectionComponent } from './sync-pilot-connection.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CmsService, MockTranslatePipe, WindowRef } from '@spartacus/core';
+import {
+  CmsComponentData,
+  IconConfig,
+  ModalService,
+} from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { CmsComponentData, ModalService } from '@spartacus/storefront';
-import { CMSConnectionComponent } from '../../occ/occ-models/cms-component.models';
+import { of } from 'rxjs';
+import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
+
+import { GenericSyncPilotComponent } from './generic-sync-pilot.component';
 
 const mockUser = {
   uid: 'test@email.com',
@@ -51,13 +56,26 @@ const CMScomponentData: CMSConnectionComponent = {
   uid: 'testUid',
 };
 
-const MockCmsComponentData = <CmsComponentData<CMSConnectionComponent>>{
-  data$: of(CMScomponentData),
+const MockCmsService = {
+  getComponentData: () => of(CMScomponentData),
 };
 
-describe('SyncPilotConnectionComponent', () => {
-  let component: SyncPilotConnectionComponent;
-  let fixture: ComponentFixture<SyncPilotConnectionComponent>;
+const MockIconConfig: IconConfig = {
+  icon: {
+    symbols: {
+      PHONE: 'fas fa-phone',
+      AGENT: 'fas fa-headset',
+    },
+  },
+};
+
+class MockCmsComponentData {
+  data$ = of(CMScomponentData);
+}
+
+describe('GenericSyncPilotComponent', () => {
+  let component: GenericSyncPilotComponent;
+  let fixture: ComponentFixture<GenericSyncPilotComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
@@ -67,8 +85,7 @@ describe('SyncPilotConnectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SyncPilotConnectionComponent],
-      imports: [I18nTestingModule],
+      declarations: [GenericSyncPilotComponent, MockTranslatePipe],
       providers: [
         {
           provide: UserAccountFacade,
@@ -83,15 +100,23 @@ describe('SyncPilotConnectionComponent', () => {
           useClass: MockModalService,
         },
         {
+          provide: CmsService,
+          useValue: MockCmsService,
+        },
+        {
           provide: CmsComponentData,
-          useValue: MockCmsComponentData,
+          useClass: MockCmsComponentData,
+        },
+        {
+          provide: IconConfig,
+          useValue: MockIconConfig,
         },
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SyncPilotConnectionComponent);
+    fixture = TestBed.createComponent(GenericSyncPilotComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);
@@ -109,7 +134,6 @@ describe('SyncPilotConnectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
   it('should establish connection with sync pilot', () => {
     component.establishConnection(mockUser, CMScomponentData);
     expect(window.open).toHaveBeenCalled();

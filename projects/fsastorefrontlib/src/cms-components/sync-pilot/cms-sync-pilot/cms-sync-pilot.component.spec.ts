@@ -1,13 +1,12 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsService, MockTranslatePipe, WindowRef } from '@spartacus/core';
-import { CmsComponentData, ModalService } from '@spartacus/storefront';
+import { I18nTestingModule, WindowRef } from '@spartacus/core';
+import { DebugElement } from '@angular/core';
+import { of } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { of } from 'rxjs';
+import { CmsComponentData, ModalService } from '@spartacus/storefront';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
-
-import { ComparisonTableSyncPilotComponent } from './comparison-table-sync-pilot.component';
+import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
 
 const mockUser = {
   uid: 'test@email.com',
@@ -51,17 +50,14 @@ const CMScomponentData: CMSConnectionComponent = {
   name: 'Test Root Component',
   uid: 'testUid',
 };
-const MockCmsService = {
-  getComponentData: () => of(CMScomponentData),
+
+const MockCmsComponentData = <CmsComponentData<CMSConnectionComponent>>{
+  data$: of(CMScomponentData),
 };
 
-class MockCmsComponentData {
-  data$ = of(CMScomponentData);
-}
-
-describe('ComparisonTableSyncPilotComponent', () => {
-  let component: ComparisonTableSyncPilotComponent;
-  let fixture: ComponentFixture<ComparisonTableSyncPilotComponent>;
+describe('CmsSyncPilotComponent', () => {
+  let component: CmsSyncPilotComponent;
+  let fixture: ComponentFixture<CmsSyncPilotComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
   let modalService: ModalService;
@@ -71,7 +67,8 @@ describe('ComparisonTableSyncPilotComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ComparisonTableSyncPilotComponent, MockTranslatePipe],
+      declarations: [CmsSyncPilotComponent],
+      imports: [I18nTestingModule],
       providers: [
         {
           provide: UserAccountFacade,
@@ -86,19 +83,15 @@ describe('ComparisonTableSyncPilotComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: CmsService,
-          useValue: MockCmsService,
-        },
-        {
           provide: CmsComponentData,
-          useClass: MockCmsComponentData,
+          useValue: MockCmsComponentData,
         },
       ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ComparisonTableSyncPilotComponent);
+    fixture = TestBed.createComponent(CmsSyncPilotComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
     modalService = TestBed.inject(ModalService);
@@ -116,6 +109,7 @@ describe('ComparisonTableSyncPilotComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should establish connection with sync pilot', () => {
     component.establishConnection(mockUser, CMScomponentData);
     expect(window.open).toHaveBeenCalled();

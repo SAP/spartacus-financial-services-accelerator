@@ -16,6 +16,7 @@ import {
   CmsPageGuard,
   SpinnerModule,
 } from '@spartacus/storefront';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgentRootComponent } from './agent-root/agent-root.component';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
@@ -26,6 +27,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
 import { StoreFinderModule } from '@spartacus/storefinder';
+import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 
 @NgModule({
   imports: [
@@ -40,6 +42,8 @@ import { StoreFinderModule } from '@spartacus/storefinder';
     ReactiveFormsModule,
     ListNavigationModule,
     SpinnerModule,
+    NgbTooltipModule,
+    GenericSyncPilotModule,
     RouterModule.forChild([
       {
         path: null,
