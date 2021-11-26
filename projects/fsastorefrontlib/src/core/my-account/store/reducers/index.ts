@@ -36,6 +36,7 @@ export function clearUserState(
       action.type === AuthActions.LOGOUT ||
       action.type === fromClaimAction.DELETE_CLAIM_SUCCESS
     ) {
+      localStorage.removeItem('spartacus⚿⚿claims');
       state = undefined;
     }
     return reducer(state, action);
