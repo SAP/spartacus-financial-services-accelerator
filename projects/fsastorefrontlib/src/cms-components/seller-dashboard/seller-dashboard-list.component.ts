@@ -7,10 +7,10 @@ import { ConsentConnector } from '../../core/my-account/connectors/consent.conne
 import { ICON_TYPE } from '@spartacus/storefront';
 
 @Component({
-  selector: 'cx-fs-dashboard',
-  templateUrl: './dashboard.component.html',
+  selector: 'cx-fs-seller-dashboard-list',
+  templateUrl: './seller-dashboard-list.component.html',
 })
-export class DashboardComponent {
+export class SellerDashboardListComponent {
   constructor(
     private consentConnector: ConsentConnector,
     protected userIdService: UserIdService,

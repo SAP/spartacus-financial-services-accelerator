@@ -9,7 +9,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
-import { DashboardComponent } from './dashboard.component';
+import { SellerDashboardListComponent } from './seller-dashboard-list.component';
 
 const code1 = '000001';
 const date1 = 'date1';
@@ -155,19 +155,19 @@ class MockTranslationService {
   }
 }
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
+describe('SellerDashboardListComponent', () => {
+  let component: SellerDashboardListComponent;
   let mockConsentConnector: MockConsentConnector;
   let mockUserIdService: UserIdService;
   let mockTranslationService: TranslationService;
-  let fixture: ComponentFixture<DashboardComponent>;
+  let fixture: ComponentFixture<SellerDashboardListComponent>;
 
   beforeEach(async () => {
     mockConsentConnector = new MockConsentConnector();
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, I18nTestingModule],
       declarations: [
-        DashboardComponent,
+        SellerDashboardListComponent,
         MockPaginationComponent,
         MockSortingComponent,
       ],
@@ -183,7 +183,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(() => {
     spyOn(mockUserIdService, 'getUserId').and.callThrough();
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(SellerDashboardListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
