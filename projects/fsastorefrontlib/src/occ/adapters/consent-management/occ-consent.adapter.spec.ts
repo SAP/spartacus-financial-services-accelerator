@@ -9,6 +9,7 @@ import { OccConsentAdapter } from './occ-consent.adapter';
 
 const userId = 'testId';
 const consentsEndpoint = 'consents';
+const oboConsentCustomersEndpoint = 'oboConsentCustomers';
 
 class MockOccEndpointsService {
   buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -53,6 +54,28 @@ describe('OccConsentAdapter', () => {
         }, `GET method and url`);
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           consentsEndpoint,
+          {
+            urlParams: {
+              userId,
+            },
+          }
+        );
+      })
+    );
+  });
+
+  describe('getOBOCustomerList', () => {
+    it(
+      'should fetch user Claims',
+      waitForAsync(() => {
+        adapter.getOBOCustomerList(userId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === oboConsentCustomersEndpoint && req.method === 'GET'
+          );
+        }, `GET method and url`);
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          oboConsentCustomersEndpoint,
           {
             urlParams: {
               userId,

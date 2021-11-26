@@ -35,4 +35,8 @@ describe('ConsentConnector', () => {
     consentConnector.getConsents(user);
     expect(consentAdapter.getConsents).toHaveBeenCalledWith(user);
   });
+  it('should call adapter to get OBO Customer List', () => {
+    consentConnector.getOBOCustomerList(user);
+    expect(consentAdapter.getOBOCustomerList).toHaveBeenCalledWith(user);
+  });
 });
