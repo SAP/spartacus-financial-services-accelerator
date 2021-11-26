@@ -35,7 +35,7 @@
     }
   }
   .mobile-label {
-    font-weight: 700;
+    font-weight: var(--cx-font-weight-bold);
     flex: 0 1 30%;
   }
 }
