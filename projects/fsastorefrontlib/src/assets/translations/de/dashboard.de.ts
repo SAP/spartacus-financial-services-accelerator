@@ -2,7 +2,7 @@ export const dashboard = {
   dashboard: {
     name: 'Name',
     email: 'Email',
-    noCustomers: "[DE] You haven't assigned any customers yet",
+    noCustomers: '[DE] You haven\'t assigned any customers yet', // prettier-ignore
     active: '[DE] Active',
     disabled: '[DE] Disabled',
     sorting: {

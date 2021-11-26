@@ -104,6 +104,7 @@ const consent2 = {
 };
 
 @Component({
+  // tslint:disable
   template: '',
   selector: 'cx-pagination',
 })
@@ -113,6 +114,7 @@ class MockPaginationComponent {
 }
 
 @Component({
+  // tslint:disable
   template: '',
   selector: 'cx-sorting',
 })
