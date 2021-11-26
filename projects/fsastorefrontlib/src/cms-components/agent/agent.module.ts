@@ -50,6 +50,15 @@ import { StoreFinderModule } from '@spartacus/storefinder';
         },
         component: PageLayoutComponent,
       },
+      {
+        path: null,
+        canActivate: [CmsPageGuard],
+        data: {
+          cxRoute: 'agentLocator',
+          pageLabel: 'agent-locator',
+        },
+        component: PageLayoutComponent,
+      },
     ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
