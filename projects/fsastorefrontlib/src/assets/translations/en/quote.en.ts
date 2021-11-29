@@ -48,6 +48,7 @@ export const quote = {
     quoteGeneralInformation: 'Quote General Information',
     generalInformation: 'General Information',
     noQuotes: 'No quotes for comparison',
+    totalPrice: 'Total Price',
     details: {
       insurances_travel: {
         trip: 'Travel Information',

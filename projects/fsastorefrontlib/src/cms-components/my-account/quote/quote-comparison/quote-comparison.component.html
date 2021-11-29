@@ -37,10 +37,7 @@
                 {{ 'quote.generalInformation' | cxTranslate }}
               </div>
               <div *ngFor="let cart of quotes?.carts" class="col">
-                {{
-                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
-                    ?.cartDisplayName
-                }}
+                {{ (cart?.entries)[0]?.product?.name }}
               </div>
             </li>
             <ng-container
@@ -86,8 +83,7 @@
               </div>
               <div *ngFor="let cart of quotes?.carts" class="col">
                 {{
-                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
-                    ?.cartDisplayName
+                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product?.name
                 }}
               </div>
             </li>
@@ -114,6 +110,14 @@
                 </ng-container>
               </li>
             </ng-container>
+            <li class="accordion-list-item row text-break">
+              <div class="col item-label">
+                {{ 'quote.totalPrice' | cxTranslate }}
+              </div>
+              <div class="col notice" *ngFor="let cart of quotes?.carts">
+                {{ cart.totalPrice?.formattedValue }}
+              </div>
+            </li>
             <li class="accordion-list-item row sub-title text-break">
               <div
                 *ngFor="let cart of quotes?.carts; index as i"
@@ -155,7 +159,7 @@
                   >
                     {{
                       (cart?.entries)[i + 1]?.totalPrice.value
-                        ? (cart?.entries)[i + 1]?.totalPrice.formattedValue
+                        ? ('fscommon.included' | cxTranslate)
                         : ('fscommon.notIncluded' | cxTranslate)
                     }}
                   </div>

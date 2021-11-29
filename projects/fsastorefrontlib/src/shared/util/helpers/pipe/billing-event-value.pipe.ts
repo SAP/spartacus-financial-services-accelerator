@@ -19,7 +19,7 @@ export class BillingEventValuePipe implements PipeTransform {
       return billingEvent?.price?.formattedValue;
     }
     return !billingEvent?.chargeInformation
-      ? this.translatePipe.transform('fscommon.notIncluded')
+      ? this.translatePipe.transform('fscommon.included')
       : billingEvent?.chargeInformation;
   }
 }
