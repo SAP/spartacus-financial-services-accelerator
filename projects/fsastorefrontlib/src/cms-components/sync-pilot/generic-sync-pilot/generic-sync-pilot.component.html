@@ -1,0 +1,17 @@
+<ng-container *ngIf="user$ | async as user">
+  <ng-container *ngIf="component$ | async as component">
+    <h3 *ngIf="!agent" class="table-header-title mb-0">
+      {{ 'fscommon.syncPilot.needHelp' | cxTranslate }}
+    </h3>
+    <div class="link" (click)="establishConnection(user, component, agent)">
+      <cx-icon *ngIf="agent; else noSpecificAgent" [type]="type"></cx-icon>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #noSpecificAgent>
+  <h4 class="{{ agentIcon }} table-header-value"></h4>
+  <p class="mb-0 text-truncate">
+    {{ 'fscommon.syncPilot.speakToAgent' | cxTranslate }}
+  </p>
+</ng-template>
