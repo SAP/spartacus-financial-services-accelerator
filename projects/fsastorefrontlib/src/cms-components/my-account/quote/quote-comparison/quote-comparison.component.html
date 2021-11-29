@@ -37,9 +37,7 @@
                 {{ 'quote.generalInformation' | cxTranslate }}
               </div>
               <div *ngFor="let cart of quotes?.carts" class="col">
-                {{
-                  cart?.entries[0]?.product?.name
-                }}
+                {{ (cart?.entries)[0]?.product?.name }}
               </div>
             </li>
             <ng-container
