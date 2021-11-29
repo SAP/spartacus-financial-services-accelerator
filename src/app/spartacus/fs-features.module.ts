@@ -91,11 +91,13 @@ import {
   UpdateProfileModule,
 } from '@spartacus/user/profile/components';
 import { UserAccountComponentsModule } from '@spartacus/user/account/components';
+import { DigitalPaymentsFeatureModule } from './features/digital-payments-feature.module';
 
 @NgModule({
   imports: [
     AsmModule,
     SmartEditModule,
+    DigitalPaymentsFeatureModule,
     AuthModule.forRoot(),
     LogoutModule,
     LoginRouteModule,

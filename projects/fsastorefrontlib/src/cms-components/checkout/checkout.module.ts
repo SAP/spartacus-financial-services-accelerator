@@ -216,7 +216,7 @@ const routes: Routes = [
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
         },
-        PaymentDetailsFlex: {
+        CheckoutPaymentDetails: {
           component: FSPaymentMethodComponent,
         },
         FinalReviewFlex: {
