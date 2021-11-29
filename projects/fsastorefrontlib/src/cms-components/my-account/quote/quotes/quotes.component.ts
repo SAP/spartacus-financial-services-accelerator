@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
-import { QUOTE_COMPARISON_NUMBER } from 'projects/fsastorefrontlib/src/core/quote-comparison-config/default-quote-comparison-config';
+import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
 
 @Component({
   selector: 'cx-fs-quotes',
