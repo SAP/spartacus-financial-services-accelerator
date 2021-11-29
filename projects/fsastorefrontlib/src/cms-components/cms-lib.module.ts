@@ -23,11 +23,11 @@ import { GeneralInformationModule } from './form/general-information/general-inf
 import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { B2bModule } from './b2b/b2b.module';
 import { MessageNotificationModule } from './message-notification/message-notification.module';
-import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { SellerDashboardList } from './seller-dashboard/seller-dashboard-list.module';
+import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
 
 @NgModule({
   imports: [
@@ -54,6 +54,7 @@ import { SellerDashboardList } from './seller-dashboard/seller-dashboard-list.mo
     B2bModule,
     MessageNotificationModule,
     NavigationModule,
+    CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
   ],
@@ -78,7 +79,7 @@ import { SellerDashboardList } from './seller-dashboard/seller-dashboard-list.mo
     GeneralInformationModule,
     B2bModule,
     MessageNotificationModule,
-    SyncPilotModule,
+    CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
   ],

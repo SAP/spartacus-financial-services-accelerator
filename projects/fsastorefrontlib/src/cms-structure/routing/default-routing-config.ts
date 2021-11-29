@@ -18,6 +18,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   },
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
+  agentLocator: { paths: ['agent-locator'] },
   finalReview: { paths: ['checkout/final-review'] },
   legalInformation: { paths: ['checkout/legal-information'] },
   userIdentification: { paths: ['checkout/user-identification'] },
