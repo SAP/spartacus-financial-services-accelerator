@@ -9,7 +9,7 @@ import {
   CurrentUnitService,
   ListService,
 } from '@spartacus/organization/administration/components';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 import { PotentialAssignmentsListService } from './potential-assignments-list.service';
