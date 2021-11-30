@@ -70,5 +70,13 @@ export const layoutConfig: LayoutConfig = {
     CompanyPageTemplate: {
       slots: ['TopContent', 'BodyContent'],
     },
+    SearchResultsListPageTemplate: {
+      slots: [
+        'Section2',
+        'ProductLeftRefinements',
+        'SearchResultsListSlot',
+        'Section4',
+      ],
+    },
   },
 };
