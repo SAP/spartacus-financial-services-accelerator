@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserAccountCoreModule } from '@spartacus/user/account/core';
 import { effects } from '../core/my-account/store/effects/index';
 import { reducerProvider } from '../core/my-account/store/reducers/index';
 import { AgentModule } from './agent/agent.module';
@@ -24,8 +26,7 @@ import { MessageNotificationModule } from './message-notification/message-notifi
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
-import { UserProfileCoreModule } from '@spartacus/user/profile/core';
-import { UserAccountCoreModule } from '@spartacus/user/account/core';
+import { SellerDashboardListModule } from './seller-dashboard/seller-dashboard-list.module';
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    SellerDashboardListModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -64,6 +66,7 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    SellerDashboardListModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,

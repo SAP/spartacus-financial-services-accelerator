@@ -7,8 +7,10 @@ import {
   ConsentTemplate,
   Occ,
   OrderEntry,
+  PaginationModel,
   Price,
   Product,
+  SortModel,
   User,
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/checkout/root';
@@ -74,6 +76,12 @@ export interface InsuranceQuoteList {
 
 export interface OBOConsentList {
   consents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: FSUser[];
+  pagination: PaginationModel;
+  sorts: SortModel[];
 }
 
 export interface QuoteWorkflowStatus {
@@ -182,6 +190,10 @@ export enum SyncPilotGender {
   rev = 'd',
 }
 
+export enum FSUserRole {
+  SELLER = 'sellergroup',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;
@@ -227,6 +239,7 @@ export interface FSContactInfo {
 export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
+  active?: boolean;
 }
 
 export interface FSStepData {
