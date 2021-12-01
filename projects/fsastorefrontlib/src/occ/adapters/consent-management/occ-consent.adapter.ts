@@ -18,7 +18,7 @@ export class OccConsentAdapter implements ConsentAdapter {
   ) {}
 
   getConsents(userId: string): Observable<any> {
-    const url = this.occEndpointService.buildUrl('consents', {
+    const url = this.occEndpointService.buildUrl('oboConsents', {
       urlParams: {
         userId,
       },
