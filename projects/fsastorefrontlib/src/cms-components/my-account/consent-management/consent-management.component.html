@@ -20,8 +20,8 @@
         </div>
         <div class="cx-consent-toggles">
           <cx-consent-management-form
-            class="d-block pb-2"
-            [consentTemplate]="templateList[0]"
+            *ngFor="let consentTemplate of templateList"
+            [consentTemplate]="consentTemplate"
             [requiredConsents]="requiredConsents"
             (consentChanged)="onConsentChange($event)"
           ></cx-consent-management-form>
@@ -29,7 +29,7 @@
         <ng-container *ngIf="consents$ | async as consents">
           <ng-container *ngIf="consents?.oboConsents?.length > 0">
             <div class="ml-4 pl-2" *ngFor="let consent of consents.oboConsents">
-              <div class="row no-gutters align-items-end">
+              <div class="align-items-end">
                 <span class="semi-bold pr-2"
                   >{{ 'consent.consentHolderName' | cxTranslate }}:</span
                 >
@@ -37,7 +37,7 @@
                   {{ consent.consentHolder?.name }}
                 </span>
               </div>
-              <div class="row no-gutters align-items-end pb-4">
+              <div class="align-items-end pb-4">
                 <span class="semi-bold pr-2"
                   >{{ 'consent.consentHolderEmail' | cxTranslate }}:</span
                 >
