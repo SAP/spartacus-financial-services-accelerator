@@ -7,7 +7,7 @@ import { NavigationNode } from '@spartacus/storefront';
 import { FSNavigationUIComponent } from './navigation-ui.component';
 
 @Component({
-  // eslint-disable-next-line
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-icon',
   template: '',
 })
@@ -16,6 +16,7 @@ class MockIconComponent {
 }
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-generic-link',
   template: '',
 })

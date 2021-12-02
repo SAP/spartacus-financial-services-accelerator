@@ -44,7 +44,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "cx",
+            "prefix": "cx-fs",
             "style": "kebab-case"
           }
         ],
@@ -52,7 +52,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "cx",
+            "prefix": "cx-fs",
             "style": "camelCase"
           }
         ],
