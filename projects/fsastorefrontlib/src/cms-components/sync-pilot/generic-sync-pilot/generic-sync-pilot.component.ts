@@ -38,7 +38,7 @@ export class GenericSyncPilotComponent extends CmsSyncPilotComponent
   }
 
   @Input() agent: any;
-  @Input() cmsComponent = 'SyncPilotGenericComponent';
+  @Input() cmsComponent = 'GenericSyncPilotComponent';
   @Input() type = FS_ICON_TYPE.PHONE;
   agentIcon: string;
   component$: Observable<any>;
