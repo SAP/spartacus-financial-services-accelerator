@@ -18,8 +18,8 @@ import { DebugElement } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { ConsentService } from '../../../core/my-account/facade/consent.service';
 import { FSConsentManagementComponent } from './consent-management.component';
+import { FSConsentTemplate } from '../../../occ/occ-models/occ.models';
 
-const userId = OCC_USER_ID_CURRENT;
 const code = '000001';
 const date1 = 'date1';
 const consentHolderName = 'chName';
@@ -70,15 +70,14 @@ const mockedConsents = {
   ],
 };
 
-const mockedConsentTemplates = {
-  consentTemplates: [
-    {
-      id: consentTemplateId,
-      description: consentTemplateDesc,
-      version: consentTemplateVersion,
-    },
-  ],
-};
+const mockedConsentTemplates = [
+  {
+    id: consentTemplateId,
+    description: consentTemplateDesc,
+    version: 0,
+    exposed: true,
+  },
+];
 
 class MockConsentService {
   loadConsents() {}
@@ -109,8 +108,8 @@ class MockUserConsentService {
   getWithdrawConsentResultSuccess(): Observable<boolean> {
     return of();
   }
-  getConsents(): Observable<ConsentTemplate[]> {
-    return of();
+  getConsents(): Observable<FSConsentTemplate[]> {
+    return of(mockedConsentTemplates);
   }
   giveConsent(
     _consentTemplateId: string,
