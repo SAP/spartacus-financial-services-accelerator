@@ -102,7 +102,7 @@ const mockCmsComponentData = <CmsComponentData<CmsComponent>>{
 };
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-carousel',
   template: `
     <ng-container *ngFor="let item$ of items">

@@ -9,7 +9,7 @@ import { AgentSearchBoxComponent } from './agent-search-box.component';
 const query = 'autoAgent';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-icon',
   template: '',
 })

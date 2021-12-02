@@ -18,7 +18,7 @@ import { PotentialAssignmentsListService } from './potential-assignments-list.se
   selector: 'cx-fs-potential-assignments',
   templateUrl: './potential-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // tslint:disable-next-line:no-host-metadata-property
+  // eslint-disable-next-line  @angular-eslint/no-host-metadata-property
   host: { class: 'content-wrapper' },
   providers: [
     {

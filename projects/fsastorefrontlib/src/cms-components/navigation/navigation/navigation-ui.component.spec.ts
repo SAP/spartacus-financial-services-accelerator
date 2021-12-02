@@ -7,7 +7,7 @@ import { NavigationNode } from '@spartacus/storefront';
 import { FSNavigationUIComponent } from './navigation-ui.component';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-icon',
   template: '',
 })

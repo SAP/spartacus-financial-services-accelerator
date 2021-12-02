@@ -39,7 +39,7 @@ class MockCmsComponentData {
   data$ = of({ ...componentData, configStyles: JSON.stringify({ config }) });
 }
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })

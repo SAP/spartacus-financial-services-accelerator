@@ -16,7 +16,7 @@ import { ChangeCoverageComponent } from './change-coverage.component';
 import createSpy = jasmine.createSpy;
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })
