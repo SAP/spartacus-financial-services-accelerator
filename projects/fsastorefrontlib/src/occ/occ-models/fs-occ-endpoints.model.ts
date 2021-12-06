@@ -185,4 +185,6 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   oboConsentCustomers?: string;
+
+  transferCart? :string;
 }

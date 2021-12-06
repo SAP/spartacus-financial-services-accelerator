@@ -107,6 +107,7 @@ export const fscommon = {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
     },
+    oboCustomers: '[DE] All Customers',
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:

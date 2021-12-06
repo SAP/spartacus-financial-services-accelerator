@@ -12,6 +12,13 @@ import { filter, map, take } from 'rxjs/operators';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import {
+  OBOCustomerList,
+  FSUserRole,
+  FSUser,
+} from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-bind-quote-dialog',
@@ -31,7 +38,9 @@ export class BindQuoteDialogComponent {
     protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected cartService: FSCartService,
-    protected formDataStoragetService: FormDataStorageService
+    protected formDataStoragetService: FormDataStorageService,
+    protected userAccountFacade: UserAccountFacade,
+    protected oboConsentService: ConsentService
   ) {}
 
   dismissModal(reason?: any): void {
@@ -40,11 +49,16 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
-    combineLatest([this.cartService.getActive(), this.cartService.isStable()])
+    combineLatest([
+      this.cartService.isStable(),
+      this.cartService.getActive(), 
+      this.userAccountFacade.get(),
+      this.oboConsentService.getSelectedOBOCustomer(),
+    ])
       .pipe(
-        filter(([_, stable]) => stable),
+        filter(([stable]) => stable),
         take(1),
-        map(([cart, _]) => {
+        map(([_, cart, user, oboConsentCustomer]) => {
           const personalDetailsFormId = (<FSCart>cart)?.entries?.[0]
             .formData?.[0]?.id;
           this.formDataStoragetService.clearFormDataIdFromLocalStorage(
@@ -57,9 +71,39 @@ export class BindQuoteDialogComponent {
           this.formDataStoragetService.clearFormDataIdFromLocalStorage(
             chooseCoverFormId
           );
+
+          if (!!user && user.roles.includes(FSUserRole.SELLER) && !!oboConsentCustomer?.uid) {
+            this.oboConsentService.transferCartToSelectedOBOCustomer(
+              cart.code,
+              user.uid,
+              oboConsentCustomer.uid
+            )
+          }
         })
       )
       .subscribe();
     this.quoteBinding$.emit(false);
   }
+
+  // transferCartToOboConsentCustomer() {
+  //   combineLatest([
+  //     this.cartService.getActiveCartId(),
+      
+  //   ])
+  //     .pipe(
+  //       filter(([cartId, user, oboConsentCustomer]) => !!user && user.roles.includes(FSUserRole.SELLER)),
+  //       take(1),
+  //       map(([cartId, user, oboConsentCustomer]) => {
+  //         console.log(cartId)
+  //         console.log(user)
+  //         console.log(oboConsentCustomer)
+  //         this.oboConsentService.transferCartToSelectedOBOCustomer(
+  //           cartId,
+  //           user.uid,
+  //           oboConsentCustomer.uid
+  //         );
+  //       })
+  //     )
+  //     .subscribe();
+  // }
 }

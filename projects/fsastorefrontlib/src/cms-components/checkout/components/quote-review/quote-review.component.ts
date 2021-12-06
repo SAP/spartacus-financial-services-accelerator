@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCheckoutConfigService,
   CategoryService,
@@ -26,6 +26,14 @@ import {
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
+import {
+  OBOCustomerList,
+  FSUserRole,
+  FSUser,
+} from '../../../../occ/occ-models/occ.models';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -54,8 +62,19 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected translationService: FSTranslationService,
     protected checkoutService: FSCheckoutService,
     protected globalMessageService: GlobalMessageService,
+    protected consentConnector: ConsentConnector,
+    protected userAccountFacade: UserAccountFacade,
+    protected oboConsentService: ConsentService,
     protected winRef?: WindowRef
   ) {}
+
+  oboCustomers$: Observable<
+    OBOCustomerList
+  > = this.userAccountFacade.get().pipe(
+    filter(user => !!user && user.roles.includes(FSUserRole.SELLER)),
+    take(1),
+    switchMap(user => this.consentConnector.getOBOCustomerList(user.uid))
+  );
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
@@ -204,5 +223,13 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  selectOBOCustomer(oboCustomer: FSUser) {
+    this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
+  }
+
+  checkActiveOboCustomers(oboCustomers: FSUser[]) {
+    return oboCustomers.some(oboCustomer => !!oboCustomer);
   }
 }

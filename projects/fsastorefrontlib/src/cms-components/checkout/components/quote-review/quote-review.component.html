@@ -30,6 +30,42 @@
               }}
             </div>
           </h2>
+          <ng-container *ngIf="oboCustomers$ | async as oboCustomers">
+            <ng-container *ngIf="checkActiveOboCustomers(oboCustomers.entries)">
+              <cx-fs-accordion-item
+                [opened]="true"
+                [title]="'fscommon.oboCustomers' | cxTranslate"
+              >
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <ul class="col-12 accordion-list">
+                      <ng-container
+                        *ngFor="let oboCustomer of oboCustomers.entries"
+                      >
+                        <ng-container *ngIf="oboCustomer.active">
+                          <ng-container>
+                            <li class="accordion-list-item row">
+                              <div class="col-6 item-label">
+                                {{ oboCustomer.uid }}
+                              </div>
+                              <div>
+                                <button
+                                  class="btn btn-action"
+                                  (click)="selectOBOCustomer(oboCustomer)"
+                                >
+                                  {{ 'fscommon.select' | cxTranslate }}
+                                </button>
+                              </div>
+                            </li>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </cx-fs-accordion-item>
+            </ng-container>
+          </ng-container>
           <div #ref>
             <ng-container
               *ngIf="

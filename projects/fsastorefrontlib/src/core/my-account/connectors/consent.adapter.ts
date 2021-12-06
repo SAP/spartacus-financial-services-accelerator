@@ -14,4 +14,11 @@ export abstract class ConsentAdapter {
    * @param userId The `userId` used for fetching on behalf of consents
    */
   abstract getOBOCustomerList(userId: string): Observable<any>;
+
+    /**
+   * Abstract method used to get the list of customers created by consent holder.
+   *
+   * @param userId The `userId` used for fetching on behalf of consents
+   */
+     abstract transferCartToOboCustomer(cartId: string, userId: string, oboCustomer: string): Observable<any>;
 }
