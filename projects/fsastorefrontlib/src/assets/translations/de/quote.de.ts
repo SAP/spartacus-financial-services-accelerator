@@ -42,6 +42,7 @@ export const quote = {
     allQuotes: '[DE] All quotes',
     quotesComparison: '[DE] Compare {{ category }} quotes',
     quoteNo: '[DE] Quote No.',
+    existingQuoteNo: '[DE] Existing Policy No.',
     selectQuote: '[DE] Select Quote',
     quoteBillingEvents: '[DE] Quote Billing Events',
     quoteOptionalExtras: '[DE] Quote Optional Extras',
