@@ -6,7 +6,7 @@ export const policy = {
     policyId: 'Policy ID',
     expiredPolicyId: 'Expired Policy ID',
     policyNo: 'Policy No',
-    existingPolicyNo: '[DE] Existing Policy No.',
+    existingPolicyNo: 'Existing Policy No.',
     myPolicy: 'My Policy',
     policyNumberIs: 'Policy number is',
     policyHolder: 'Policy Holder',
