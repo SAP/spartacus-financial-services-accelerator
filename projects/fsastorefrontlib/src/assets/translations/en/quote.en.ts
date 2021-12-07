@@ -48,7 +48,8 @@ export const quote = {
     quoteGeneralInformation: 'Quote General Information',
     generalInformation: 'General Information',
     noQuotes: 'No quotes for comparison',
-    transferCartSuccess: 'Quote is prepared for customer {{ customer }}',
+    transferCartSuccess:
+      'Insurance Quote/Application is successfully prepared for the customer {{ customer }}.',
     totalPrice: 'Total Price',
     details: {
       insurances_travel: {

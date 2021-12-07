@@ -329,7 +329,7 @@
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
               >
                 <ng-container
-                  *ngIf="isCheckoutEnabled$ | async as isCheckoutEnabled"
+                  *ngIf="isCartTransferAllowedForSeller$ | async as isCartTransferAllowedForSeller"
                 >
                   <button
                     class="primary-button btn-block"

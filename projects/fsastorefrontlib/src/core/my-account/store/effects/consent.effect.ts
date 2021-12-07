@@ -42,8 +42,13 @@ export class ConsentEffects {
       ofType(fromActions.TRANSFER_CART),
       map((action: fromActions.TransferCart) => action.payload),
       concatMap(payload => {
+        console.log(payload);
         return this.consentConnector
-          .transferCart(payload.cartId, payload.userId, payload.oboCustomer)
+          .transferCart(
+            payload.cart.code,
+            payload.consentHolder.uid,
+            payload.oboCustomer.uid
+          )
           .pipe(
             switchMap(() => {
               this.routingService.go({
@@ -53,14 +58,14 @@ export class ConsentEffects {
                 {
                   key: 'quote.transferCartSuccess',
                   params: {
-                    customer: payload.oboCustomer,
+                    customer: payload.oboCustomer.name,
                   },
                 },
                 GlobalMessageType.MSG_TYPE_CONFIRMATION
               );
               return [
                 new fromActions.TransferCartSuccess(),
-                new CartActions.RemoveCart({ cartId: payload.cartId }),
+                new CartActions.RemoveCart({ cartId: payload.cart.code }),
               ];
             }),
             catchError(error =>
