@@ -42,9 +42,6 @@ export class OccConsentAdapter implements ConsentAdapter {
       'Content-Type': 'application/json',
     });
 
-    console.log(url);
-    console.log(params);
-
     return this.http
       .patch<any>(url, transferCartAction, { params })
       .pipe(catchError((error: any) => throwError(error.json())));

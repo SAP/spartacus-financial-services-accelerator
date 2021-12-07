@@ -50,9 +50,13 @@ export class ConsentService {
       this.getSelectedOBOCustomer(),
     ]).pipe(
       map(([seller, oboConsentCustomer]) => {
-        if (!seller?.roles.includes(FSUserRole.SELLER) || oboConsentCustomer?.uid) {
+        if (
+          !seller?.roles.includes(FSUserRole.SELLER) ||
+          oboConsentCustomer?.uid
+        ) {
           return true;
         }
+        return false;
       })
     );
   }

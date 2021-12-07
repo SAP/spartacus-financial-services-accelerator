@@ -6,13 +6,31 @@ import { Store, StoreModule } from '@ngrx/store';
 import { inject, TestBed } from '@angular/core/testing';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import * as fromAction from '../store/actions';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
 
 const userId = OCC_USER_ID_CURRENT;
 const consentId = 'CL00001';
-
+const mockUser: FSUser = {
+  firstName: 'Donna',
+  lastName: 'Moore',
+  roles: [FSUserRole.SELLER],
+};
+const mockOBOCustomer: FSUser = {
+  uid: 'customerToTransferCartTo',
+};
+const mockCart: FSCart = {
+  code: 'cartCode',
+};
 class MockUserIdService {
   getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
+  }
+}
+
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
   }
 }
 
@@ -20,6 +38,7 @@ describe('ConsentServiceTest', () => {
   let service: ConsentService;
   let store: Store<StateWithMyAccount>;
   let userIdService: MockUserIdService;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(() => {
     userIdService = new MockUserIdService();
@@ -33,9 +52,10 @@ describe('ConsentServiceTest', () => {
         ConsentService,
         reducerProvider,
         { provide: UserIdService, useValue: userIdService },
+        { provide: UserAccountFacade, useClass: MockUserAccountFacade },
       ],
     });
-
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(ConsentService);
     store = TestBed.inject(Store);
 
@@ -82,5 +102,47 @@ describe('ConsentServiceTest', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadConsents({ userId: userId })
     );
+  });
+
+  it('should transfer cart to selected obo customer', () => {
+    service.setSelectedOBOCustomer(mockUser);
+    service.transferCartToSelectedOBOCustomer(
+      mockCart,
+      mockUser,
+      mockOBOCustomer
+    );
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.TransferCart({
+        cart: mockCart,
+        consentHolder: mockUser,
+        oboCustomer: mockOBOCustomer,
+      })
+    );
+  });
+
+  it('should allow cart transfer for the seller', () => {
+    service.setSelectedOBOCustomer(mockOBOCustomer);
+    service
+      .isCartTransferAllowedForSeller()
+      .subscribe(result => expect(result).toEqual(true))
+      .unsubscribe();
+  });
+
+  it('should not allow cart transfer', () => {
+    service.setSelectedOBOCustomer({});
+    service
+      .isCartTransferAllowedForSeller()
+      .subscribe(result => expect(result).toEqual(false))
+      .unsubscribe();
+  });
+
+  it('should select customer for cart transfer', () => {
+    service.setSelectedOBOCustomer(mockOBOCustomer);
+    service
+      .getSelectedOBOCustomer()
+      .subscribe(selectedCustomer =>
+        expect(selectedCustomer.uid).toEqual(mockOBOCustomer.uid)
+      )
+      .unsubscribe();
   });
 });
