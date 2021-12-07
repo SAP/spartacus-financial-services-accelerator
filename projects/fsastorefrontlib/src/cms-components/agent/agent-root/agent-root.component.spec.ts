@@ -12,7 +12,7 @@ import { CmsAgentRootComponent } from '../../../occ/occ-models';
 import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })
