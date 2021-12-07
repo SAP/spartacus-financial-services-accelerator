@@ -3,7 +3,6 @@ export const LOAD_CONSENTS = '[Consent] Load Consents';
 export const LOAD_CONSENTS_SUCCESS = '[Consent] Load Consents Success';
 export const LOAD_CONSENTS_FAIL = '[Consent] Load Consents Fail';
 
-
 export const TRANSFER_CART = '[Consent] Transfer Cart';
 export const TRANSFER_CART_SUCCESS = '[Consent] Transfer Cart Success';
 export const TRANSFER_CART_FAIL = '[Consent] Transfer Cart Fail';

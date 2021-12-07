@@ -76,6 +76,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     switchMap(user => this.consentConnector.getOBOCustomerList(user.uid))
   );
 
+  isCheckoutEnabled$: Observable<
+    boolean
+  > = this.oboConsentService.isCheckoutEnabledForSeller();
+
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
     this.isCartStable$ = this.cartService.isStable();

@@ -327,15 +327,20 @@
             >
               <ng-container
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
-                ><button
-                  class="primary-button btn-block"
-                  type="button"
-                  data-checkout-url=""
-                  (click)="navigateNext(nextCheckoutStep, cart)"
-                >
-                  {{ 'common.continue' | cxTranslate }}
-                </button></ng-container
               >
+                <ng-container
+                  *ngIf="isCheckoutEnabled$ | async as isCheckoutEnabled"
+                >
+                  <button
+                    class="primary-button btn-block"
+                    type="button"
+                    data-checkout-url=""
+                    (click)="navigateNext(nextCheckoutStep, cart)"
+                  >
+                    {{ 'common.continue' | cxTranslate }}
+                  </button>
+                </ng-container>
+              </ng-container>
             </div>
           </div>
         </div>

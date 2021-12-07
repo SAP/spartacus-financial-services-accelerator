@@ -51,7 +51,7 @@ export class BindQuoteDialogComponent {
     this.quoteService.bindQuote(this.cartCode);
     combineLatest([
       this.cartService.isStable(),
-      this.cartService.getActive(), 
+      this.cartService.getActive(),
       this.userAccountFacade.get(),
       this.oboConsentService.getSelectedOBOCustomer(),
     ])
@@ -72,38 +72,20 @@ export class BindQuoteDialogComponent {
             chooseCoverFormId
           );
 
-          if (!!user && user.roles.includes(FSUserRole.SELLER) && !!oboConsentCustomer?.uid) {
+          if (
+            !!user &&
+            user.roles.includes(FSUserRole.SELLER) &&
+            !!oboConsentCustomer?.uid
+          ) {
             this.oboConsentService.transferCartToSelectedOBOCustomer(
               cart.code,
               user.uid,
               oboConsentCustomer.uid
-            )
+            );
           }
         })
       )
       .subscribe();
     this.quoteBinding$.emit(false);
   }
-
-  // transferCartToOboConsentCustomer() {
-  //   combineLatest([
-  //     this.cartService.getActiveCartId(),
-      
-  //   ])
-  //     .pipe(
-  //       filter(([cartId, user, oboConsentCustomer]) => !!user && user.roles.includes(FSUserRole.SELLER)),
-  //       take(1),
-  //       map(([cartId, user, oboConsentCustomer]) => {
-  //         console.log(cartId)
-  //         console.log(user)
-  //         console.log(oboConsentCustomer)
-  //         this.oboConsentService.transferCartToSelectedOBOCustomer(
-  //           cartId,
-  //           user.uid,
-  //           oboConsentCustomer.uid
-  //         );
-  //       })
-  //     )
-  //     .subscribe();
-  // }
 }

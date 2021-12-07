@@ -17,7 +17,11 @@ export class OccConsentAdapter implements ConsentAdapter {
     protected converterService: ConverterService
   ) {}
 
-  transferCartToOboCustomer(cartId: string, userId: string, oboCustomer: string): Observable<any> {
+  transferCartToOboCustomer(
+    cartId: string,
+    userId: string,
+    oboCustomer: string
+  ): Observable<any> {
     const url = this.occEndpointService.buildUrl('transferCart', {
       urlParams: {
         userId,
@@ -25,8 +29,10 @@ export class OccConsentAdapter implements ConsentAdapter {
       },
     });
 
-    const params: HttpParams = new HttpParams()
-    .set('oboCustomerUid',  oboCustomer)
+    const params: HttpParams = new HttpParams().set(
+      'oboCustomerUid',
+      oboCustomer
+    );
 
     const transferCartAction = {
       actionName: 'TRANSFER_CART',
@@ -40,8 +46,8 @@ export class OccConsentAdapter implements ConsentAdapter {
     console.log(params);
 
     return this.http
-    .patch<any>(url, transferCartAction, { params })
-    .pipe(catchError((error: any) => throwError(error.json())));
+      .patch<any>(url, transferCartAction, { params })
+      .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   getConsents(userId: string): Observable<any> {

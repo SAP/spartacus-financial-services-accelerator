@@ -3,10 +3,12 @@ import * as fromAction from './../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { select, Store } from '@ngrx/store';
 import * as fromConsentStore from './../store';
-import { UserIdService } from '@spartacus/core';
+import { User, UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs';
-import { FSUser } from '@spartacus/fsa-storefront';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { FSUser, FSUserRole } from '@spartacus/fsa-storefront';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,8 @@ export class ConsentService {
 
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   loadConsents(userId) {
@@ -32,7 +35,24 @@ export class ConsentService {
       new fromAction.TransferCart({
         cartId: cartId,
         userId: currentUser,
-        oboCustomer: oboConsentCustomer
+        oboCustomer: oboConsentCustomer,
+      })
+    );
+  }
+
+  public isCheckoutEnabledForSeller(): Observable<boolean> {
+    return combineLatest([
+      this.userAccountFacade.get(),
+      this.getSelectedOBOCustomer(),
+    ]).pipe(
+      map(([seller, oboConsentCustomer]) => {
+        if (!seller?.roles.includes(FSUserRole.SELLER)) {
+          return true;
+        } else {
+          if (oboConsentCustomer?.uid) {
+            return true;
+          }
+        }
       })
     );
   }

@@ -4,7 +4,12 @@ import { of } from 'rxjs';
 import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { ConsentConnector } from '../../connectors/consent.connector';
-import { CartActions, GlobalMessageService, GlobalMessageType, RoutingService } from '@spartacus/core';
+import {
+  CartActions,
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from '@spartacus/core';
 
 @Injectable()
 export class ConsentEffects {
@@ -33,34 +38,36 @@ export class ConsentEffects {
   );
 
   transferCart$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(fromActions.TRANSFER_CART),
-    map((action: fromActions.TransferCart) => action.payload),
-    concatMap(payload => {
-      return this.consentConnector.transferCart(payload.cartId, payload.userId, payload.oboCustomer).pipe(
-        switchMap(() => {
-          this.routingService.go({
-            cxRoute: 'home',
-          });
-          this.globalMessageService.add(
-            {
-              key: 'quote.transferCartSuccess',
-              params: {
-                customer: payload.oboCustomer,
-              },
-            },
-            GlobalMessageType.MSG_TYPE_CONFIRMATION
+    this.actions$.pipe(
+      ofType(fromActions.TRANSFER_CART),
+      map((action: fromActions.TransferCart) => action.payload),
+      concatMap(payload => {
+        return this.consentConnector
+          .transferCart(payload.cartId, payload.userId, payload.oboCustomer)
+          .pipe(
+            switchMap(() => {
+              this.routingService.go({
+                cxRoute: 'home',
+              });
+              this.globalMessageService.add(
+                {
+                  key: 'quote.transferCartSuccess',
+                  params: {
+                    customer: payload.oboCustomer,
+                  },
+                },
+                GlobalMessageType.MSG_TYPE_CONFIRMATION
+              );
+              return [
+                new fromActions.TransferCartSuccess(),
+                new CartActions.RemoveCart({ cartId: payload.cartId }),
+              ];
+            }),
+            catchError(error =>
+              of(new fromActions.TransferCartFail(JSON.stringify(error)))
+            )
           );
-          return [
-            new fromActions.TransferCartSuccess(),
-            new CartActions.RemoveCart({ cartId: payload.cartId }),
-          ];
-        }),
-        catchError(error =>
-          of(new fromActions.TransferCartFail(JSON.stringify(error)))
-        )
-      );
-    })
-  )
-);
+      })
+    )
+  );
 }
