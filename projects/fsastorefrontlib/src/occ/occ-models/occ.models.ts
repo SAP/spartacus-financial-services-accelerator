@@ -108,6 +108,10 @@ export interface OBOConsent extends Consent {
   oboConsentConfiguration: OBOConsentConfiguration;
 }
 
+export interface FSConsentTemplate extends ConsentTemplate {
+  exposed?: boolean;
+}
+
 export interface OBOConsentConfiguration {
   permissions?: Map<string, boolean>;
 }
