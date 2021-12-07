@@ -166,7 +166,9 @@
                   {{ 'claim.participants.role' | cxTranslate }}
                 </div>
                 <div class="col-6 col-sm-5 value notice">
-                  {{ claimParticipant.roles }}
+                  <ng-container *ngFor="let role of claimParticipant.roles">
+                    {{ role }}<br />
+                  </ng-container>
                 </div>
               </li>
               <li class="accordion-list-item row">
