@@ -57,7 +57,7 @@ class MockUpdateProfileFormComponent {
   submitted = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
 }
 @Component({
-  // tslint:disable-next-line:component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-spinner',
   template: ` <div>spinner</div> `,
 })

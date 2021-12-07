@@ -37,7 +37,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })
