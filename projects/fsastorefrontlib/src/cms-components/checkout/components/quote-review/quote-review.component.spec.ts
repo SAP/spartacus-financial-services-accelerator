@@ -487,7 +487,7 @@ describe('Quote Review Component', () => {
     const selectedCustomer = {
       uid: 'selectedOBOCustomer',
     };
-    component.selectOBOCustomer(selectedCustomer);
+    component.selectOBOCustomer(selectedCustomer, 1);
     expect(oboConsentService.setSelectedOBOCustomer).toHaveBeenCalled();
   });
 });

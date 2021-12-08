@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCheckoutConfigService,
   CategoryService,
@@ -40,17 +40,6 @@ import { ConsentService } from '../../../../core/my-account/facade/consent.servi
   templateUrl: './quote-review.component.html',
 })
 export class QuoteReviewComponent implements OnInit, OnDestroy {
-  cart$: Observable<Cart>;
-  showContent$: Observable<boolean> = of(true);
-  isCartStable$: Observable<boolean>;
-  subscription = new Subscription();
-  modalRef: ModalRef;
-  cartCode: string;
-  previousCheckoutStep$: Observable<FSSteps>;
-  nextCheckoutStep$: Observable<FSSteps>;
-  activeCategory$: Observable<string>;
-  baseUrl: string;
-
   constructor(
     protected cartService: FSCartService,
     protected config: OccConfig,
@@ -68,6 +57,18 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected winRef?: WindowRef
   ) {}
 
+  cart$: Observable<Cart>;
+  showContent$: Observable<boolean> = of(true);
+  isCartStable$: Observable<boolean>;
+  subscription = new Subscription();
+  modalRef: ModalRef;
+  cartCode: string;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
+  activeCategory$: Observable<string>;
+  baseUrl: string;
+  selectedIndex = -1;
+
   oboCustomers$: Observable<
     OBOCustomerList
   > = this.userAccountFacade.get().pipe(
@@ -78,7 +79,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   isCartTransferAllowedForSeller$: Observable<
     boolean
-  > = this.oboConsentService.isCartTransferAllowedForSeller();
+  > = this.oboConsentService
+    .isCartTransferAllowedForSeller()
+    .pipe(shareReplay());
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
@@ -195,12 +198,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
   getTranslation(translationGroup: string, translationKey: string): string {
     return this.translationService.getTranslationValue(
       ['quoteReview', translationGroup],
@@ -229,11 +226,19 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  selectOBOCustomer(oboCustomer: FSUser) {
+  selectOBOCustomer(oboCustomer: FSUser, index: number) {
     this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
+    this.selectedIndex = this.selectedIndex === index ? -1 : index;
   }
 
   checkActiveOboCustomers(oboCustomers: FSUser[]) {
     return oboCustomers.some(oboCustomer => !!oboCustomer);
+  }
+
+  ngOnDestroy() {
+    this.oboConsentService.setSelectedOBOCustomer(null);
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

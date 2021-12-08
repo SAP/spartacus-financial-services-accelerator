@@ -14,6 +14,7 @@ export const fscommon = {
     date: 'Datum',
     preview: 'Vorschau',
     select: 'Auswählen',
+    selected: '[DE] Selected',
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',

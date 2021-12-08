@@ -40,24 +40,40 @@
                   <div class="row justify-content-center">
                     <ul class="col-12 accordion-list">
                       <ng-container
-                        *ngFor="let oboCustomer of oboCustomers.entries"
+                        *ngFor="
+                          let oboCustomer of oboCustomers.entries;
+                          let i = index
+                        "
                       >
                         <ng-container *ngIf="oboCustomer.active">
-                          <ng-container>
-                            <li class="accordion-list-item row">
-                              <div class="col-6 item-label">
-                                {{ oboCustomer.uid }}
+                          <li class="accordion-list-item row">
+                            <div class="col-6 col-sm-8">
+                              <div class="row no-gutters">
+                                <span class="col-12 col-sm-6 item-label">
+                                  {{ oboCustomer.name }}
+                                </span>
+                                <span class="col-12 col-sm-6 notice">
+                                  {{ oboCustomer.uid }}
+                                </span>
                               </div>
-                              <div>
-                                <button
-                                  class="btn btn-action"
-                                  (click)="selectOBOCustomer(oboCustomer)"
-                                >
-                                  {{ 'fscommon.select' | cxTranslate }}
-                                </button>
-                              </div>
-                            </li>
-                          </ng-container>
+                            </div>
+                            <span
+                              [ngClass]="{
+                                'is-disabled':
+                                  (isCartTransferAllowedForSeller$ | async) &&
+                                  selectedIndex === i
+                              }"
+                              class="col-6 col-sm-4 link text-right"
+                              (click)="selectOBOCustomer(oboCustomer, i)"
+                            >
+                              {{
+                                (isCartTransferAllowedForSeller$ | async) &&
+                                selectedIndex === i
+                                  ? ('fscommon.selected' | cxTranslate)
+                                  : ('fscommon.select' | cxTranslate)
+                              }}
+                            </span>
+                          </li>
                         </ng-container>
                       </ng-container>
                     </ul>
@@ -328,21 +344,15 @@
               <ng-container
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
               >
-                <ng-container
-                  *ngIf="
-                    isCartTransferAllowedForSeller$
-                      | async as isCartTransferAllowedForSeller
-                  "
+                <button
+                  class="primary-button btn-block"
+                  type="button"
+                  [disabled]="!(isCartTransferAllowedForSeller$ | async)"
+                  data-checkout-url=""
+                  (click)="navigateNext(nextCheckoutStep, cart)"
                 >
-                  <button
-                    class="primary-button btn-block"
-                    type="button"
-                    data-checkout-url=""
-                    (click)="navigateNext(nextCheckoutStep, cart)"
-                  >
-                    {{ 'common.continue' | cxTranslate }}
-                  </button>
-                </ng-container>
+                  {{ 'common.continue' | cxTranslate }}
+                </button>
               </ng-container>
             </div>
           </div>

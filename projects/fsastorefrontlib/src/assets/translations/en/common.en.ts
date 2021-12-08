@@ -17,6 +17,7 @@ export const fscommon = {
     preview: 'Preview',
     change: 'Change',
     select: 'Select',
+    selected: 'Selected',
     subject: 'Subject',
     resume: 'Resume',
     details: 'Details',
