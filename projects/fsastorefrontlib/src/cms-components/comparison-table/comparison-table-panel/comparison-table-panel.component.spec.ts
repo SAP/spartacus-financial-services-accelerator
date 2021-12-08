@@ -27,7 +27,7 @@ import { ComparisonTablePanelComponent } from './comparison-table-panel.componen
 import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-fs-comparison-table-panel-item',
   template: '',
 })

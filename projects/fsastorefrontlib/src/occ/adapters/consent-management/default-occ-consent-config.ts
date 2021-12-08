@@ -4,7 +4,7 @@ export const defaultOccConsentConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
-        consents: 'users/${userId}/oboconsents',
+        oboConsents: 'users/${userId}/oboconsents',
         oboConsentCustomers: 'users/${userId}/oboconsents/customers',
         oboConsentCustomer:
           'users/${userId}/oboconsents/customers/${customerId}',

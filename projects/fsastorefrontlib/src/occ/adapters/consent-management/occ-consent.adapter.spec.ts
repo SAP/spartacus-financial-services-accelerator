@@ -8,7 +8,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { OccConsentAdapter } from './occ-consent.adapter';
 
 const userId = 'testId';
-const consentsEndpoint = 'consents';
+const consentsEndpoint = 'oboConsents';
 const oboConsentCustomersEndpoint = 'oboConsentCustomers';
 
 class MockOccEndpointsService {

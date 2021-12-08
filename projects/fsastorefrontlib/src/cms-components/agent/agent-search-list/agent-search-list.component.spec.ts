@@ -3,10 +3,13 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { of } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { AgentSearchListComponent } from './agent-search-list.component';
 
+const query = 'autoAgent';
+const selectedIndex = 1;
 const searchResults = {
   pagination: { page: 0 },
   agents: [
@@ -18,14 +21,18 @@ const searchResults = {
     },
   ],
 };
-
 const searchResultsPagination = {
   pagination: { page: 1 },
   agents: searchResults.agents,
 };
-
 const agent = {
   email: 'test@test.com',
+};
+const mockUser = {
+  uid: 'test@email.com',
+  firstName: 'testFirstName',
+  name: 'testName',
+  titleCode: 'mr',
 };
 
 class ActivatedRouteMock {
@@ -37,8 +44,6 @@ class ActivatedRouteMock {
     },
   };
 }
-const query = 'autoAgent';
-const selectedIndex = 1;
 
 class MockAgentSearchService {
   search() {}
@@ -51,8 +56,14 @@ class MockAgentSearchService {
   setResetSearchValue() {}
 }
 
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
+  }
+}
+
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })
@@ -68,7 +79,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-pagination',
   template: '',
 })
@@ -77,7 +88,7 @@ class MockPagintionComponent {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-store-finder-map',
   template: '',
 })
@@ -90,6 +101,7 @@ describe('AgentSearchListComponent', () => {
   let fixture: ComponentFixture<AgentSearchListComponent>;
   let mockSearchService: AgentSearchService;
   let activatedRoute: ActivatedRouteMock;
+  let mockUserAccountFacade: UserAccountFacade;
 
   beforeEach(
     waitForAsync(() => {
@@ -98,6 +110,7 @@ describe('AgentSearchListComponent', () => {
         providers: [
           { provide: ActivatedRoute, useClass: ActivatedRouteMock },
           { provide: AgentSearchService, useClass: MockAgentSearchService },
+          { provide: UserAccountFacade, useClass: MockUserAccountFacade },
         ],
         declarations: [
           AgentSearchListComponent,
@@ -114,6 +127,7 @@ describe('AgentSearchListComponent', () => {
     fixture = TestBed.createComponent(AgentSearchListComponent);
     component = fixture.componentInstance;
     activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
+    mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     mockSearchService = TestBed.inject(
       AgentSearchService as Type<AgentSearchService>
     );

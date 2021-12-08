@@ -15,16 +15,20 @@ import {
   EGender,
   GuestInfo,
 } from '@syncpilot/bpool-guest-lib/models/guestinfo';
-import { SyncPilotGender } from '../../occ/occ-models/occ.models';
-import { SyncPilotDialogComponent } from '../sync-pilot-dialog/sync-pilot-dialog.component';
-import { CMSConnectionComponent } from '../../occ/occ-models/cms-component.models';
+import { SyncPilotGender } from '../../../occ/occ-models/occ.models';
+import { SyncPilotDialogComponent } from '../../sync-pilot-dialog/sync-pilot-dialog.component';
+import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
+import {
+  GROUP_ID,
+  OWNER_ID,
+} from '../../../core/sync-pilot-config/sync-pilot-config';
 
 @Component({
-  selector: 'cx-fs-sync-pilot-connection-component',
-  templateUrl: './sync-pilot-connection.component.html',
+  selector: 'cx-fs-cms-sync-pilot',
+  templateUrl: './cms-sync-pilot.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
+export class CmsSyncPilotComponent implements OnInit, OnDestroy {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected syncPilotService: Service,
@@ -34,7 +38,6 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
   ) {}
 
   protected subscription = new Subscription();
-  protected readonly ownerId = 1;
   user$: Observable<User> = this.userAccountFacade.get();
 
   ngOnInit() {
@@ -55,12 +58,15 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
     return from(this.syncPilotService.connect(ownerID));
   }
 
-  establishConnection(user: User, componentData: CMSConnectionComponent): void {
+  establishConnection(
+    user: User,
+    componentData: CMSConnectionComponent,
+    agent?: any
+  ): void {
     const additionalGuestInformation = new Map<string, string>();
-    const groupId = 1;
     this.setSyncPilotConfig(componentData);
     this.subscription.add(
-      this.setConnection(this.ownerId)
+      this.setConnection(OWNER_ID)
         .pipe(
           tap(_ => {
             const guestInfo = this.createGuestInfo(
@@ -69,7 +75,13 @@ export class SyncPilotConnectionComponent implements OnInit, OnDestroy {
               SyncPilotGender[user.titleCode],
               additionalGuestInformation
             );
-            this.syncPilotService.enterQueue(guestInfo, groupId);
+            !agent
+              ? this.syncPilotService.enterQueue(guestInfo, GROUP_ID)
+              : this.syncPilotService.requestToConsultant(
+                  guestInfo,
+                  GROUP_ID,
+                  agent.externalId
+                );
           })
         )
         .subscribe()

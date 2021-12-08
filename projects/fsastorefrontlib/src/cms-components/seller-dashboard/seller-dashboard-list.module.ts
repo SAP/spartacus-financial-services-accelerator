@@ -55,4 +55,4 @@ const routes: Routes = [
   declarations: [SellerDashboardListComponent],
   exports: [SellerDashboardListComponent],
 })
-export class SellerDashboardList {}
+export class SellerDashboardListModule {}

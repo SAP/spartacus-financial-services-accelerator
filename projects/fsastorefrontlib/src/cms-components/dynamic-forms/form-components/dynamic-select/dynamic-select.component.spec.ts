@@ -18,7 +18,7 @@ import { of } from 'rxjs';
 import { DynamicSelectComponent } from './dynamic-select.component';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })

@@ -99,7 +99,7 @@ describe('BillingEventValuePipe', () => {
           quotes.carts[0].entries[0]?.product.price.oneTimeChargeEntries,
           ''
         )
-      ).toEqual('fscommon.notIncluded');
+      ).toEqual('fscommon.included');
       expect(
         pipe.transform(
           quotes.carts[0].entries[0]?.product.price.oneTimeChargeEntries,

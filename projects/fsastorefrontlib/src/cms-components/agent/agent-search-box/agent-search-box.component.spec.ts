@@ -9,7 +9,7 @@ import { AgentSearchBoxComponent } from './agent-search-box.component';
 const query = 'autoAgent';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-icon',
   template: '',
 })
@@ -67,9 +67,9 @@ describe('AgentSearchBoxComponent', () => {
 
   it('should dispatch new query', () => {
     component.findAgents(query);
-    expect(routingService.go).toHaveBeenCalledWith({
-      cxRoute: 'agent-locator',
-      params: { query },
-    });
+    expect(routingService.go).toHaveBeenCalledWith(
+      { cxRoute: 'agentLocator' },
+      { queryParams: { query: query } }
+    );
   });
 });

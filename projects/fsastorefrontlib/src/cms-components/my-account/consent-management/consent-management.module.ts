@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { MediaModule, SpinnerModule } from '@spartacus/storefront';
+import {
+  ConsentManagementModule,
+  MediaModule,
+  SpinnerModule,
+} from '@spartacus/storefront';
 import { I18nModule, UrlModule } from '@spartacus/core';
 import { ConsentService } from 'projects/fsastorefrontlib/src/core/my-account/facade/consent.service';
 import { FSConsentManagementComponent } from './consent-management.component';
-import { AccordionModule } from '../../../shared/accordion/accordion.module';
 
 @NgModule({
   imports: [
@@ -19,7 +22,7 @@ import { AccordionModule } from '../../../shared/accordion/accordion.module';
     SpinnerModule,
     MediaModule,
     UrlModule,
-    AccordionModule,
+    ConsentManagementModule,
   ],
   declarations: [FSConsentManagementComponent],
   exports: [FSConsentManagementComponent],
