@@ -138,8 +138,7 @@ describe('ConsentServiceTest', () => {
 
   it('should select customer for cart transfer', () => {
     service.setSelectedOBOCustomer(mockOBOCustomer);
-    service
-      .getSelectedOBOCustomer()
+    service.selectedOBOCustomer$
       .subscribe(selectedCustomer =>
         expect(selectedCustomer.uid).toEqual(mockOBOCustomer.uid)
       )

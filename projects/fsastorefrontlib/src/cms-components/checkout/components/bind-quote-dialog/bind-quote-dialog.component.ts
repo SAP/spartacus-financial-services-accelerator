@@ -49,7 +49,7 @@ export class BindQuoteDialogComponent {
       this.cartService.isStable(),
       this.cartService.getActive(),
       this.userAccountFacade.get(),
-      this.oboConsentService.getSelectedOBOCustomer(),
+      this.oboConsentService.selectedOBOCustomer$,
     ])
       .pipe(
         filter(([stable]) => stable),

@@ -14,7 +14,8 @@ import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
   providedIn: 'root',
 })
 export class ConsentService {
-  selectedOBOCustomer = new BehaviorSubject<FSUser>(null);
+  private selectedOBOCustomerSource = new BehaviorSubject<FSUser>(null);
+  readonly selectedOBOCustomer$ = this.selectedOBOCustomerSource.asObservable();
 
   constructor(
     protected store: Store<StateWithMyAccount>,
@@ -47,7 +48,7 @@ export class ConsentService {
   isCartTransferAllowedForSeller(): Observable<boolean> {
     return combineLatest([
       this.userAccountFacade.get(),
-      this.getSelectedOBOCustomer(),
+      this.selectedOBOCustomer$,
     ]).pipe(
       map(([seller, oboConsentCustomer]) => {
         if (
@@ -69,11 +70,7 @@ export class ConsentService {
     return this.store.pipe(select(fromConsentStore.getConsentsLoaded));
   }
 
-  getSelectedOBOCustomer(): Observable<FSUser> {
-    return this.selectedOBOCustomer.asObservable();
-  }
-
   setSelectedOBOCustomer(customer: FSUser) {
-    return this.selectedOBOCustomer.next(customer);
+    return this.selectedOBOCustomerSource.next(customer);
   }
 }

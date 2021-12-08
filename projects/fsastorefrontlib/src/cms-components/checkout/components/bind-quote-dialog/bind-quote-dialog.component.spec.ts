@@ -5,12 +5,12 @@ import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { of } from 'rxjs';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
-import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 const cartCode = 'test001';
@@ -87,9 +87,7 @@ class MockUserAccountFacade {
 }
 
 class MockConsentService {
-  getSelectedOBOCustomer() {
-    return of(mockOBOConsentCustomer);
-  }
+  selectedOBOCustomer$ = of(mockOBOConsentCustomer);
   transferCartToSelectedOBOCustomer(mockCart, mockUser, oboConsentCustomer) {}
 }
 
@@ -101,7 +99,7 @@ describe('BindQuoteDialogComponent', () => {
   let quoteService: MockQuoteService;
   let cartService: MockCartService;
   let formDataStorageService: MockFormDataStorageService;
-  let oboConsentService: ConsentService;
+  let oboConsentService: MockConsentService;
   let userAccountFacade: MockUserAccountFacade;
 
   beforeEach(
