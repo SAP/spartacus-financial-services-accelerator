@@ -31,6 +31,12 @@
         <tr
           class="position-relative"
           *ngFor="let customer of customers.entries"
+          [routerLink]="
+            {
+              cxRoute: 'userProfile',
+              params: { customerId: customer.uid }
+            } | cxUrl
+          "
         >
           <td class="d-flex d-md-table-cell">
             <div class="mobile-label text-uppercase pr-2 d-md-none">

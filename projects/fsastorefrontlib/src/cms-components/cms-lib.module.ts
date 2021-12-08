@@ -28,6 +28,7 @@ import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { SellerDashboardList } from './seller-dashboard/seller-dashboard-list.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { SellerDashboardList } from './seller-dashboard/seller-dashboard-list.mo
     CustomContainerModule,
     MyAccountModule,
     SellerDashboardList,
+    UserProfileModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -66,6 +68,7 @@ import { SellerDashboardList } from './seller-dashboard/seller-dashboard-list.mo
     CustomContainerModule,
     MyAccountModule,
     SellerDashboardList,
+    UserProfileModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,

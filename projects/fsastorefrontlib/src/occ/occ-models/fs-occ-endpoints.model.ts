@@ -179,4 +179,28 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   oboConsentCustomers?: string;
+
+  /**
+   * Gets the particular customer of customers created by consent holder
+   *
+   */
+  oboConsentCustomer?: string;
+
+  /**
+   * Gets quotes of the particular customer created by consent holder
+   *
+   */
+  oboConsentCustomerQuotes?: string;
+
+  /**
+   * Gets policies of the particular customer created by consent holder
+   *
+   */
+  oboConsentCustomerPolicies?: string;
+
+  /**
+   * Gets claims of the particular customer created by consent holder
+   *
+   */
+  oboConsentCustomerClaims?: string;
 }

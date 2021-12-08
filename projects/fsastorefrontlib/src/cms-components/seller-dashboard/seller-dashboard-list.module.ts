@@ -14,6 +14,7 @@ import {
   I18nModule,
   CmsConfig,
   provideDefaultConfig,
+  UrlModule,
 } from '@spartacus/core';
 import { SellerDashboardListComponent } from './seller-dashboard-list.component';
 import { SellerDashboardListGuard } from './seller-dashboard-list.guard';
@@ -37,6 +38,7 @@ const routes: Routes = [
     I18nModule,
     SpinnerModule,
     CmsModule,
+    UrlModule,
     ListNavigationModule,
     IconModule,
     RouterModule.forChild(routes),
