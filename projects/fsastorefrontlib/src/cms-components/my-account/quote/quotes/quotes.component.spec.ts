@@ -11,6 +11,7 @@ import {
   OccConfig,
   RoutingService,
   TranslationService,
+  WindowRef,
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
@@ -27,7 +28,7 @@ const insuranceQuote1: any = {
     code: 'testCategory1',
   },
   quoteId: 'test001',
-  quoteStatus: 'unfinished',
+  renewal: true,
 };
 const insuranceQuote2: any = {
   cartCode: 'test002',
@@ -36,7 +37,6 @@ const insuranceQuote2: any = {
     code: 'testCategory1',
   },
   quoteId: 'test002',
-  quoteStatus: 'unfinished',
 };
 const insuranceQuote3: any = {
   cartCode: 'test003',
@@ -45,10 +45,17 @@ const insuranceQuote3: any = {
     code: 'testCategory3',
   },
   quoteId: 'test002',
-  quoteStatus: 'unfinished',
 };
 const quotes = [insuranceQuote1, insuranceQuote2, insuranceQuote3];
 const selectedCategory = { name: 'Test Category 1', code: 'testCategory1' };
+const sessionStorageMock = {
+  setItem(_key: string, _value: string): void {},
+} as Storage;
+const winRef = {
+  get sessionStorage(): Storage {
+    return sessionStorageMock;
+  },
+} as WindowRef;
 class MockRoutingService {
   go = createSpy();
 }
@@ -102,6 +109,8 @@ class MockTranslationService {
     switch (key) {
       case 'quote.allQuotes':
         return of('All quotes');
+      case 'quote.renewalQuotes':
+        return of('Renewal Quotes');
       default:
         return of(key);
     }
@@ -157,6 +166,7 @@ describe('QuotesComponent', () => {
             provide: TranslationService,
             useClass: MockTranslationService,
           },
+          { provide: WindowRef, useValue: winRef },
         ],
       }).compileComponents();
       cartService = TestBed.inject(ActiveCartService);
@@ -223,5 +233,20 @@ describe('QuotesComponent', () => {
     component.clearSelectedQuotes();
     component.selectCategory(selectedCategory);
     expect(component.quoteCodesForCompare.length).toBe(0);
+  });
+
+  it('should redirect to Quote details page', () => {
+    component.goToDetailsPage(insuranceQuote1);
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'quoteDetails',
+      params: {
+        quoteId: insuranceQuote1.quoteId,
+      },
+    });
+  });
+
+  it('should redirect to Quote details page', () => {
+    component.goToComparePage();
+    expect(routingService.go).toHaveBeenCalled();
   });
 });
