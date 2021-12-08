@@ -14,7 +14,7 @@ import {
   TranslationService,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
@@ -181,11 +181,17 @@ export class QuotesComponent implements OnInit, OnDestroy {
   protected setCategoryDropdown() {
     this.options = [];
     this.subscription.add(
-      this.translation
-        .translate('quote.allQuotes')
+      combineLatest([
+        this.translation.translate('quote.allQuotes'),
+        this.translation.translate('quote.renewalQuotes'),
+      ])
         .pipe(
-          map(firstOption => {
+          tap(([firstOption, renewalOption]) => {
             this.options.push({ name: firstOption, code: '' });
+            const renewalQuote = this.quotes.find(quote => quote.renewal);
+            if (renewalQuote) {
+              this.options.push({ name: renewalOption, code: true });
+            }
             Object.keys(this.quotesByCategory).forEach(key =>
               this.options.push({
                 name: key,
@@ -211,7 +217,9 @@ export class QuotesComponent implements OnInit, OnDestroy {
             this.quotes = !selectedItem.code
               ? quotes
               : quotes.filter(
-                  q => q.defaultCategory.code === selectedItem.code
+                  q =>
+                    q.defaultCategory.code === selectedItem.code ||
+                    q.renewal === selectedItem.code
                 );
           })
         )
