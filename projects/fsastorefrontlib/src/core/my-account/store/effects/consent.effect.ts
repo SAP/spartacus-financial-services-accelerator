@@ -42,7 +42,6 @@ export class ConsentEffects {
       ofType(fromActions.TRANSFER_CART),
       map((action: fromActions.TransferCart) => action.payload),
       concatMap(payload => {
-        console.log(payload);
         return this.consentConnector
           .transferCart(
             payload.cart.code,
