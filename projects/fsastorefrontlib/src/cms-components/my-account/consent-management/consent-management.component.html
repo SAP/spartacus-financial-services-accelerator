@@ -28,7 +28,8 @@
         </div>
         <ng-container *ngIf="consents$ | async as consents">
           <ng-container *ngIf="consents?.oboConsents?.length > 0">
-            <div class="ml-4 pl-2" *ngFor="let consent of consents.oboConsents">
+            <hr class="my-4" />
+            <div class="wrapper" *ngFor="let consent of consents.oboConsents">
               <div class="align-items-end">
                 <span class="semi-bold pr-2"
                   >{{ 'consent.consentHolderName' | cxTranslate }}:</span
