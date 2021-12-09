@@ -33,7 +33,7 @@ export class TransferCartSuccess implements Action {
 }
 
 export class TransferCartFail implements Action {
-  readonly type = TRANSFER_CART_SUCCESS;
+  readonly type = TRANSFER_CART_FAIL;
   constructor(public payload: any) {}
 }
 
