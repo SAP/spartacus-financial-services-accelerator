@@ -20,6 +20,7 @@ export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
+
 export function clearInboxState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
