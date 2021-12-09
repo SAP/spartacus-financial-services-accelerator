@@ -97,7 +97,7 @@
                 }}
                 <span
                   *ngIf="
-                    !accordionWrapper.firstChild.tagName &&
+                    categoryConfig?.visibleInsuredObjects?.length === 0 &&
                     cart?.insuranceQuote?.original
                   "
                   class="far fa-star ml-1 notice"
@@ -106,7 +106,7 @@
             </li>
             <li
               *ngIf="
-                !accordionWrapper.firstChild.tagName &&
+                categoryConfig?.visibleInsuredObjects?.length === 0 &&
                 (quotes?.carts)[0]?.insuranceQuote?.renewal
               "
               class="accordion-list-item row text-break"
