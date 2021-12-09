@@ -52,6 +52,8 @@ export const quote = {
     quoteGeneralInformation: '[DE] Quote General Information',
     generalInformation: '[DE] General Information',
     noQuotes: '[DE] No quotes for comparison',
+    transferCartSuccess:
+      '[DE] Insurance Quote/Application is successfully prepared for the customer {{ customer }}.',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',
