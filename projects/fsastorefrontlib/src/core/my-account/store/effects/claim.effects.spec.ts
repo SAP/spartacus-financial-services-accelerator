@@ -372,4 +372,37 @@ describe('Claim Effects', () => {
       expect(effects.updateClaim$).toBeObservable(expected);
     });
   });
+
+  describe('changeClaim$', () => {
+    it('should change claim', () => {
+      const action = new fromActions.ChangeClaim({
+        userId: OCC_USER_ID_CURRENT,
+        claimData: claim3,
+      });
+      const changeClaimCompletion = new fromActions.UpdateClaimSuccess(claim3);
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: changeClaimCompletion });
+
+      expect(effects.changeClaim$).toBeObservable(expected);
+    });
+
+    it('should fail to change claim', () => {
+      spyOn(mockClaimConnector, 'updateClaim').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.ChangeClaim({
+        userId: OCC_USER_ID_CURRENT,
+        claimData: {
+          claimNumber: 'invalidClaimNumber',
+        },
+      });
+      const completion = new fromActions.UpdateClaimFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.changeClaim$).toBeObservable(expected);
+    });
+  });
 });

@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
+import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
 
 @Component({
   selector: 'cx-fs-quotes',
@@ -76,7 +77,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
           tap(quote => {
             if (
               quote &&
-              this.quotesByCategory[quote.defaultCategory.name]?.length >= 2
+              this.quotesByCategory[quote.defaultCategory.name]?.length > 1
             ) {
               this.selectedQuote = quote;
               this.quoteCodesForCompare.push(quote.cartCode);
@@ -99,13 +100,21 @@ export class QuotesComponent implements OnInit, OnDestroy {
   ) {
     this.selectedQuote = selectedQuote;
     const index = this.quoteCodesForCompare.indexOf(selectedQuote.cartCode);
-    if (checked && index === -1 && this.quoteCodesForCompare.length < 2) {
+    if (
+      checked &&
+      index === -1 &&
+      this.quoteCodesForCompare.length < QUOTE_COMPARISON_NUMBER
+    ) {
       this.quoteCodesForCompare.push(selectedQuote.cartCode);
     } else {
       this.quoteCodesForCompare.splice(index, 1);
     }
     this.disableCheckboxes(quotes);
-    if (this.quoteCodesForCompare?.length === 2) {
+    if (
+      checked &&
+      (this.quoteCodesForCompare?.length > 1 ||
+        this.quoteCodesForCompare?.length === QUOTE_COMPARISON_NUMBER)
+    ) {
       this.displayMessage(selectedQuote.defaultCategory.name);
     }
   }
@@ -131,7 +140,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
         quote =>
           this.selectedQuote?.defaultCategory?.code !==
             quote.defaultCategory.code ||
-          (this.quoteCodesForCompare.length === 2 &&
+          (this.quoteCodesForCompare.length === QUOTE_COMPARISON_NUMBER &&
             !this.quoteCodesForCompare.includes(quote.cartCode))
       )
       .map(quote => quote.cartCode);
@@ -217,7 +226,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   goToDetailsPage(quote: InsuranceQuote) {
-    if (this.quotesByCategory[quote.defaultCategory.name]?.length >= 2) {
+    if (this.quotesByCategory[quote.defaultCategory.name]?.length > 1) {
       sessionStorage.setItem('qouteCodeForCompare', quote.cartCode);
     }
     this.routingService.go({
@@ -227,11 +236,10 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   goToComparePage() {
-    sessionStorage.setItem(
-      'quoteCodes',
-      JSON.stringify(this.quoteCodesForCompare)
+    this.routingService.go(
+      { cxRoute: 'quoteComparison' },
+      { queryParams: { cartCodes: this.quoteCodesForCompare.join(',') } }
     );
-    this.routingService.go({ cxRoute: 'quoteComparison' });
   }
 
   ngOnDestroy() {

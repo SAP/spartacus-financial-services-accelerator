@@ -4,7 +4,7 @@ import * as checkout from '../../helpers/checkout/checkout-steps';
 import * as banking from '../../helpers/checkout/banking/checkout-banking';
 import * as loan from '../../helpers/checkout/banking/loan';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
-import * as policies from '../../helpers/my-account/policies';
+import { checkMyQuotesPage } from '../../helpers/my-account/quotes-and-applications';
 import testFilters from '../../support/filters';
 
 testFilters(['smoke'], () => {
@@ -56,7 +56,7 @@ testFilters(['smoke'], () => {
     });
 
     it('Should retrieve bind quote', () => {
-      policies.checkMyQuotesPage();
+      checkMyQuotesPage();
       loan.checkLoanApplication();
       cy.get('.link').contains('Retrieve').click({ force: true });
       checkout.waitForQuoteReviewPage();

@@ -87,6 +87,15 @@ header {
         font-size: var(--cx-title-font-size);
         @include media-breakpoint-down(md) {
           padding: 1rem;
+          display: flex;
+          justify-content: space-between;
+          margin: 0;
+        }
+      }
+      .back h5 {
+        justify-content: flex-start;
+        cx-icon {
+          padding-inline-end: 10px;
         }
       }
       // sub menu nodes
@@ -130,95 +139,96 @@ header {
       }
     }
   }
-  cx-fs-navigation-ui.flyout,
-  cx-navigation-ui.flyout {
-    &.accNavComponent {
-      nav {
-        position: relative;
-        .wrapper {
-          top: 26px;
-        }
-        // Don't hide node title after click on mobile
-        &.is-opened,
-        &.is-open {
-          > h5 {
-            display: flex;
-          }
+  cx-fs-navigation-ui,
+  cx-navigation-ui {
+    white-space: nowrap;
+    &.flyout {
+      > nav > h5 {
+        @include media-breakpoint-down(md) {
+          text-transform: uppercase;
         }
       }
-      // hides sub nav on mobile when it is clicked
-      @include media-breakpoint-down(md) {
-        &.is-open {
-          > nav {
-            display: block;
-            .childs {
-              .back {
-                display: none;
-              }
-              & > nav.is-open {
-                & > h5 {
-                  display: none;
-                }
-              }
-            }
-            // displays back button instead of sub nav
-            &.is-opened {
+      &.accNavComponent {
+        nav {
+          position: relative;
+          .wrapper {
+            top: 26px;
+          }
+        }
+        // hides sub nav on mobile when it is clicked
+        @include media-breakpoint-down(md) {
+          &.is-open {
+            > nav {
+              display: block;
               .childs {
                 .back {
-                  display: initial;
+                  display: none;
+                }
+                & > nav.is-open {
+                  & > h5 {
+                    display: none;
+                  }
+                }
+              }
+              // displays back button instead of sub nav
+              &.is-opened {
+                .childs {
+                  .back {
+                    display: initial;
+                  }
                 }
               }
             }
           }
         }
-      }
-      .childs[columns='1'] {
-        display: flex;
-        flex-direction: column;
-      }
-      .childs[depth='2'] > nav:not(:only-child):not(:last-child) {
-        padding-inline-end: 0;
-      }
-    }
-    .childs nav:not(:last-child) {
-      padding-right: 0;
-    }
-    & > nav {
-      & > h5 {
-        font-size: var(--cx-title-font-size);
-        padding: 18px 25px 18px 0;
-        @include media-breakpoint-down(md) {
-          padding: 1rem;
+        .childs[columns='1'] {
+          display: flex;
+          flex-direction: column;
+        }
+        .childs[depth='2'] > nav:not(:only-child):not(:last-child) {
+          padding-inline-end: 0;
         }
       }
-      &:last-child {
-        overflow: inherit;
+      .childs nav:not(:last-child) {
+        padding-right: 0;
       }
-      & > .wrapper {
-        padding: 0;
-        border: none;
-        @include fs-box-shadow(0px, 1px, 6px, 0px, $color-dark-grey, 0.75);
-        nav:last-child cx-generic-link a {
-          border-bottom: none;
+      & > nav {
+        & > h5 {
+          font-size: var(--cx-title-font-size);
+          padding: 18px 25px 18px 0;
+          @include media-breakpoint-down(md) {
+            padding: 1rem;
+          }
         }
-        @include media-breakpoint-down(md) {
-          box-shadow: none;
+        &:last-child {
+          overflow: inherit;
+        }
+        & > .wrapper {
+          padding: 0;
+          border: none;
+          @include fs-box-shadow(0px, 1px, 6px, 0px, $color-dark-grey, 0.75);
+          nav:last-child cx-generic-link a {
+            border-bottom: none;
+          }
+          @include media-breakpoint-down(md) {
+            box-shadow: none;
+          }
         }
       }
-    }
-    cx-generic-link {
-      border-bottom: none;
-      & > a {
-        padding: 12px 60px 12px 20px;
+      cx-generic-link {
+        border-bottom: none;
+        & > a {
+          padding: 12px 60px 12px 20px;
+        }
       }
-    }
-    cx-generic-link > a,
-    .childs h5 {
-      width: 100%;
-      color: var(--cx-color-text);
-      &:hover {
-        background: var(--cx-color-4);
-        color: var(--cx-color-primary);
+      cx-generic-link > a,
+      .childs h5 {
+        width: 100%;
+        color: var(--cx-color-text);
+        &:hover {
+          background: var(--cx-color-4);
+          color: var(--cx-color-primary);
+        }
       }
     }
   }
@@ -256,7 +266,7 @@ header {
         flex-wrap: wrap;
       }
       cx-link {
-        padding-left: 15px;
+        padding-inline-start: 15px;
         text-decoration: underline;
         white-space: nowrap;
       }
@@ -264,13 +274,19 @@ header {
     cx-login {
       a {
         color: var(--cx-color-text);
-        padding-bottom: 10px;
+        @include media-breakpoint-down(md) {
+          padding: 1rem;
+          display: block;
+        }
       }
       .cx-login-greet {
         color: var(--cx-color-primary);
         font-weight: var(--cx-font-weight-semi);
-        @include media-breakpoint-up(lg) {
-          padding: 0.5rem 0 0.5rem;
+        padding: 0.5rem 0 0.5rem;
+        @include media-breakpoint-down(md) {
+          position: absolute;
+          right: 0;
+          padding: 1rem;
         }
       }
     }
@@ -292,14 +308,12 @@ header {
       }
     }
     .HeaderLinks {
+      justify-content: flex-start;
       cx-fs-navigation {
         order: 2;
       }
       cx-link {
-        position: relative;
-        text-align: right;
-        padding-right: 15px;
-        top: -25px;
+        padding-inline-start: 0;
       }
       cx-login-greet {
         margin-bottom: 0;

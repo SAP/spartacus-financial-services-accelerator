@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CmsConfig, I18nModule, provideDefaultConfig } from '@spartacus/core';
+import { CmsConfig, I18nModule, provideConfig } from '@spartacus/core';
 import { GenericLinkModule, IconModule } from '@spartacus/storefront';
 import { FSNavigationUIComponent } from './navigation-ui.component';
 import { FSNavigationComponent } from './navigation.component';
@@ -15,7 +15,7 @@ import { FSNavigationComponent } from './navigation.component';
     GenericLinkModule,
   ],
   providers: [
-    provideDefaultConfig(<CmsConfig>{
+    provideConfig(<CmsConfig>{
       cmsComponents: {
         NavigationComponent: {
           component: FSNavigationComponent,

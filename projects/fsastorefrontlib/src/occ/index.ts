@@ -2,6 +2,7 @@ export * from './adapters/index';
 export * from './occ-models/index';
 export * from './occ.module';
 export * from './services/default-occ-product-config';
+export * from './services/default-occ-user-config';
 export * from './config/fs-occ-config';
 export * from './adapters/change-request/default-occ-change-request-config';
 export * from './adapters/user-request/default-occ-user-request-config';

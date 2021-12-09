@@ -20,6 +20,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSRegisterComponent } from './register.component';
 import createSpy = jasmine.createSpy;
 import { DateConfig } from './../../../core/date-config/date-config';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserRegisterFacade } from '@spartacus/user/profile/root';
 const isLevelBool: BehaviorSubject<boolean> = new BehaviorSubject(false);
 const registerUserIsSuccess: BehaviorSubject<boolean> = new BehaviorSubject(
   false
@@ -44,6 +46,22 @@ const mockRegisterFormData: any = {
   termsandconditions: true,
   password: 'strongPass$!123',
 };
+const mockAnonymousConsentsConfig: AnonymousConsentsConfig = {
+  anonymousConsents: {
+    registerConsent: 'MARKETING',
+    requiredConsents: ['MARKETING'],
+  },
+};
+const mockTitlesList: Title[] = [
+  {
+    code: 'mr',
+    name: 'Mr.',
+  },
+  {
+    code: 'mrs',
+    name: 'Mrs.',
+  },
+];
 
 class MockUserService {
   loadTitles(): void {}
@@ -102,21 +120,30 @@ class MockAnonymousConsentsService {
 class MockUrlPipe implements PipeTransform {
   transform() {}
 }
-const mockAnonymousConsentsConfig: AnonymousConsentsConfig = {
-  anonymousConsents: {
-    registerConsent: 'MARKETING',
-    requiredConsents: ['MARKETING'],
-  },
-};
+
+class MockUserRegisterFacade implements Partial<UserRegisterFacade> {
+  getTitles() {
+    return of(mockTitlesList);
+  }
+}
 describe('FSRegisterComponent', () => {
   let component: FSRegisterComponent;
   let fixture: ComponentFixture<FSRegisterComponent>;
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [ReactiveFormsModule, RouterTestingModule, I18nTestingModule],
+        imports: [
+          ReactiveFormsModule,
+          RouterTestingModule,
+          I18nTestingModule,
+          UserProfileCoreModule,
+        ],
         declarations: [FSRegisterComponent, MockUrlPipe],
         providers: [
+          {
+            provide: UserRegisterFacade,
+            useClass: MockUserRegisterFacade,
+          },
           {
             provide: AuthRedirectService,
             useClass: MockAuthRedirectService,

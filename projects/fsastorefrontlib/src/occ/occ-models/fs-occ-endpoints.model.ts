@@ -166,5 +166,23 @@ export interface FSOccEndpoints extends OccEndpoints {
    * Disable user
    *
    */
-  disableUser?: string;
+  userCloseAccount?: string;
+
+  /**
+   * Register user
+   *
+   */
+  userRegister?: string;
+
+  /**
+   * Get on behalf of consents
+   *
+   */
+  oboConsents?: string;
+
+  /**
+   * Gets the list of customers created by consent holder
+   *
+   */
+  oboConsentCustomers?: string;
 }

@@ -24,7 +24,10 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
   }
 
   findAgents(searchQuery: string) {
-    this.fsRoutingService.go(['agent-locator'], { query: searchQuery });
+    this.fsRoutingService.go(
+      { cxRoute: 'agentLocator' },
+      { queryParams: { query: searchQuery } }
+    );
   }
 
   onKey(event: any) {
@@ -42,7 +45,7 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
       this.agentSearchService.resetSearchValue.subscribe(isReset => {
         if (isReset) {
           this.searchBox.setValue('');
-          this.findAgents(null);
+          this.findAgents('');
         }
       })
     );

@@ -22,9 +22,14 @@ export const layoutConfig: LayoutConfig = {
       slots: ['PreHeader', 'SiteLogo', 'MessageNotification', 'SearchBox'],
     },
     navigation: {
+      lg: { slots: [] },
       xs: {
         slots: ['SiteLogin', 'NavigationBar', 'SiteContext'],
       },
+      slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
+    },
+    footer: {
+      slots: ['Footer'],
     },
     LandingPageTemplate: {
       slots: [
@@ -49,6 +54,9 @@ export const layoutConfig: LayoutConfig = {
     CheckoutPageTemplate: {
       slots: ['TopContent', 'BodyContent', 'BottomContent'],
     },
+    MultiStepCheckoutSummaryPageTemplate: {
+      slots: ['TopContent', 'BodyContent', 'SideContent', 'BottomContent'],
+    },
     GeneralPageTemplate: {
       slots: [
         'Section1',
@@ -61,6 +69,14 @@ export const layoutConfig: LayoutConfig = {
     },
     CompanyPageTemplate: {
       slots: ['TopContent', 'BodyContent'],
+    },
+    SearchResultsListPageTemplate: {
+      slots: [
+        'Section2',
+        'ProductLeftRefinements',
+        'SearchResultsListSlot',
+        'Section4',
+      ],
     },
   },
 };

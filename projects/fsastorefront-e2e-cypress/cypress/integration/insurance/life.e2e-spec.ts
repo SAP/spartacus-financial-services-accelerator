@@ -2,7 +2,7 @@ import * as life from '../../helpers/checkout/insurance/life-checkout';
 import * as register from '../../helpers/register';
 import { registrationUser } from '../../sample-data/users';
 import * as checkout from '../../helpers/checkout/checkout-steps';
-import * as policies from '../../helpers/my-account/policies';
+import { checkMyQuotesPage } from '../../helpers/my-account/quotes-and-applications';
 import testFilters from '../../support/filters';
 
 testFilters([''], () => {
@@ -23,7 +23,7 @@ testFilters([''], () => {
     it('Should select main and optional products', () => {
       life.populateFirstStep();
       checkout.clickContinueButton();
-      cy.get('cx-fs-sync-pilot-connection-component').should('not.exist');
+      cy.get('cx-fs-cms-sync-pilot').should('not.exist');
       life.checkLifeComparisonTable();
       life.selectBasicLifeProduct();
       //check and add optional products
@@ -35,6 +35,8 @@ testFilters([''], () => {
     it('Should register user in checkout and add second person', () => {
       register.registerUser(registrationUser);
       register.login(registrationUser.email, registrationUser.password);
+      //BUG: CXFSA-303 workaround
+      checkout.startInsuranceCheckout('Life');
       life.addSecondPerson();
       life.populateSecondPerson();
     });
@@ -67,7 +69,7 @@ testFilters([''], () => {
     });
 
     it('Should check quote review step', () => {
-      policies.checkMyQuotesPage();
+      checkMyQuotesPage();
       life.checkLifeQuote();
     });
   });

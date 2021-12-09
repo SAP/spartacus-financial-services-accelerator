@@ -59,6 +59,8 @@ testFilters(['smoke'], () => {
       checkout.checkAccordions('threeAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('threeAccordions');
+      checkout.clickContinueButton();
     });
 
     it('Select default payment details', () => {
@@ -88,7 +90,7 @@ testFilters(['smoke'], () => {
       cy.visit('/login');
       register.login(registrationUser.email, registrationUser.password);
       cy.get('.alert-danger').should(
-        'have.text',
+        'contain.text',
         'User is disabled. Please login again.'
       );
     });

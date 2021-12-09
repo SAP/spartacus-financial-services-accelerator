@@ -31,6 +31,7 @@ export const fscommon = {
     retrieve: 'Abrufen',
     notAvailable: 'N/V',
     contractId: 'VertragId',
+    title: 'Titel',
     orderTotal: 'Gesamtbetrag',
     orderConfirmation: 'Bestellbestätigung',
     orderNumber: 'Bestellnummer',
@@ -87,6 +88,7 @@ export const fscommon = {
     quotesAndApplications: 'Angebote & Anträge',
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
+    updateClaim: '[DE] Update Claim',
     summary: 'Zusammenfassung',
     submit: 'Einreichen',
     totalResults: 'Gesamtergebnisse',
@@ -147,18 +149,6 @@ export const fscommon = {
       banking_loans: 'Ihr Kredit Antrag',
       banking_fixed_term_deposit: 'Ihr Festgeld Antrag',
     },
-    progressBar: {
-      step: {
-        fnolIncidentPage: 'Schadensinformationen',
-        fnolIncidentReportPage: 'Schadensmeldung',
-        fnolGeneralInfoPage: 'Allgemeine Informationen',
-        fnolSummaryPage: 'Zusammenfassung',
-        changeCarDetailsPage: 'Fahrzeugdetails ändern',
-        changeSimulationPage: 'Vorschau ändern',
-        changeCoveragePage: 'Versicherungsschutz ändern',
-        changeAdditionalDriverPage: 'Fahrerinformationen',
-      },
-    },
     pleaseSelect: 'Wählen Sie:',
     userIdentification: {
       title: 'User Identifizierung',
@@ -201,6 +191,8 @@ export const fscommon = {
     syncPilot: {
       speakToAgent: '[DE] Speak to an Agent',
       needHelp: '[DE] Need Help?',
+      contactAgent: '[DE] Connecting to an agent',
+      waitingAgent: '[DE] Waiting for an agent...',
     },
     priceCalculationError:
       'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',

@@ -25,7 +25,7 @@ const cancelChangeRequestsEndpoint = 'cancelChangeRequest';
 const changeRequestData = {};
 
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
   getEndpoint(url: string) {
@@ -50,7 +50,7 @@ describe('OccChangeRequestAdapter', () => {
     adapter = TestBed.inject(OccChangeRequestAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -78,9 +78,14 @@ describe('OccChangeRequestAdapter', () => {
             req.method === 'POST'
           );
         }, `POST method and url`);
-        expect(
-          occEndpointService.getUrl
-        ).toHaveBeenCalledWith(createChangeRequestEndpoint, { userId });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          createChangeRequestEndpoint,
+          {
+            urlParams: {
+              userId,
+            },
+          }
+        );
       })
     );
   });
@@ -97,11 +102,13 @@ describe('OccChangeRequestAdapter', () => {
             req.url === simulateChangeRequestsEndpoint && req.method === 'POST'
           );
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           simulateChangeRequestsEndpoint,
           {
-            userId,
-            requestId,
+            urlParams: {
+              userId,
+              requestId,
+            },
           }
         );
       })
@@ -117,11 +124,13 @@ describe('OccChangeRequestAdapter', () => {
       });
       expect(mockReq.cancelled).toBeFalsy();
       expect(mockReq.request.responseType).toEqual('json');
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+      expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
         changeRequestEndpoint,
         {
-          userId,
-          requestId,
+          urlParams: {
+            userId,
+            requestId,
+          },
         }
       );
     })
@@ -146,11 +155,13 @@ describe('OccChangeRequestAdapter', () => {
       .flush(errorResponse);
     expect(errorResponse.status).toEqual(400);
     expect(errorResponse.name).toEqual('HttpErrorResponse');
-    expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+    expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
       changeRequestEndpoint,
       {
-        userId,
-        requestId,
+        urlParams: {
+          userId,
+          requestId,
+        },
       }
     );
   });
@@ -170,11 +181,13 @@ describe('OccChangeRequestAdapter', () => {
       expect(mockReq.request.body).toEqual(cancelChangeRequestBody);
       expect(mockReq.cancelled).toBeFalsy();
       expect(mockReq.request.responseType).toEqual('json');
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+      expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
         cancelChangeRequestsEndpoint,
         {
-          userId,
-          requestId,
+          urlParams: {
+            userId,
+            requestId,
+          },
         }
       );
     })
@@ -201,11 +214,13 @@ describe('OccChangeRequestAdapter', () => {
       .flush(errorResponse);
     expect(errorResponse.status).toEqual(400);
     expect(errorResponse.name).toEqual('HttpErrorResponse');
-    expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+    expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
       cancelChangeRequestsEndpoint,
       {
-        userId,
-        requestId,
+        urlParams: {
+          userId,
+          requestId,
+        },
       }
     );
   });

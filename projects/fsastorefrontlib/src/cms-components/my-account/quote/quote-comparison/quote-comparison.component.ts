@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
-import { Observable, Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import {
   CategoryComparisonConfig,
   QuoteComparisonConfig,
@@ -32,10 +32,10 @@ import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defal
 export class QuoteComparisonComponent implements OnInit, OnDestroy {
   quotesLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
   quotes$: Observable<any> = this.quoteService.getQuotesComparison();
-  quoteCodes: string[] = JSON.parse(sessionStorage.getItem('quoteCodes'));
+  subscription = new Subscription();
+  quoteCodes: string[];
   categoryConfig: CategoryComparisonConfig;
   billingEventLabels: string[];
-  subscription = new Subscription();
   language: string;
   userId: string;
   subheader: string;
@@ -50,8 +50,29 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subheader = this.quoteCodes?.join(' / ');
+    this.changeLanguage();
     this.subscription
+      .add(
+        combineLatest([
+          this.routingService.getRouterState(),
+          this.userIdService.getUserId(),
+        ])
+          .pipe(
+            filter(([routingData, _]) => !routingData.nextState),
+            map(([routingData, occUserId]) => {
+              this.quoteCodes = routingData.state.queryParams.cartCodes.split(
+                ','
+              );
+              this.userId = occUserId;
+              this.subheader = this.quoteCodes?.join(' / ');
+              this.quoteService.loadQuotesComparison(
+                this.quoteCodes,
+                this.userId
+              );
+            })
+          )
+          .subscribe()
+      )
       .add(
         this.quotes$
           .pipe(
@@ -69,23 +90,7 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
             })
           )
           .subscribe()
-      )
-      .add(
-        this.userIdService
-          .getUserId()
-          .pipe(
-            take(1),
-            tap(occUserId => {
-              this.userId = occUserId;
-              this.quoteService.loadQuotesComparison(
-                this.quoteCodes,
-                this.userId
-              );
-            })
-          )
-          .subscribe()
       );
-    this.changeLanguage();
   }
 
   changeLanguage() {

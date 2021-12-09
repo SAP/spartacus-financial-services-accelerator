@@ -52,6 +52,7 @@ testFilters([''], () => {
       checkout.checkAccordions('quoteReviewWithoutOptional');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('quoteReviewWithoutOptional');
       checkout.clickContinueButton();
     });
 

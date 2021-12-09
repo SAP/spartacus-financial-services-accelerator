@@ -17,7 +17,7 @@ import {
 } from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ComparisonTableService } from '../comparison-table.service';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
@@ -26,6 +26,7 @@ import {
   PricingData,
 } from '../../../occ/occ-models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { FS_ICON_TYPE } from '../../../core/icon-config/icon-config';
 
 @Component({
   selector: 'cx-fs-comparison-table-panel',
@@ -35,6 +36,7 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 export class ComparisonTablePanelComponent
   implements OnInit, AfterViewInit, OnDestroy {
   private subscription = new Subscription();
+  iconType = FS_ICON_TYPE;
   comparisonPanel$: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
   billingData$: Observable<any>;

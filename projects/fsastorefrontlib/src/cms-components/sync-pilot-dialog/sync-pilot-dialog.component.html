@@ -1,0 +1,22 @@
+<div class="popup-content-wrapper">
+  <button
+    type="button"
+    class="close"
+    (click)="dismissModal('Cross click')"
+  ></button>
+  <h3>{{ 'fscommon.syncPilot.contactAgent' | cxTranslate }}</h3>
+  <cx-spinner></cx-spinner>
+  <p>{{ 'fscommon.syncPilot.waitingAgent' | cxTranslate }}</p>
+  <div class="modal-actions">
+    <div class="row">
+      <div class="col-md-6 m-auto">
+        <button
+          class="action-button btn-block"
+          (click)="dismissModal('Cross click')"
+        >
+          {{ 'common.cancel' | cxTranslate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

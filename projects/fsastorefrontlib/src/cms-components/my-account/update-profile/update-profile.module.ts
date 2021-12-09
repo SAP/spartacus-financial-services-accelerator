@@ -1,35 +1,42 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   AuthGuard,
   CmsConfig,
-  ConfigModule,
   I18nModule,
+  provideConfig,
+  UrlModule,
 } from '@spartacus/core';
 import { SpinnerModule, FormErrorsModule } from '@spartacus/storefront';
-import { FSUpdateProfileFormComponent } from './update-profile-form/update-profile-form.component';
+import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { FSUpdateProfileComponent } from './update-profile.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        UpdateProfileSPAComponent: {
-          component: FSUpdateProfileComponent,
-          guards: [AuthGuard],
-        },
-      },
-    }),
     FormsModule,
     ReactiveFormsModule,
     SpinnerModule,
     I18nModule,
     FormErrorsModule,
+    RouterModule,
+    UrlModule,
   ],
-  declarations: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
-  exports: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
+  providers: [
+    provideConfig(<CmsConfig>{
+      cmsComponents: {
+        UpdateProfileComponent: {
+          component: FSUpdateProfileComponent,
+          guards: [AuthGuard],
+        },
+      },
+    }),
+    FSUpdateProfileComponentService,
+  ],
+  declarations: [FSUpdateProfileComponent],
+  exports: [FSUpdateProfileComponent],
   entryComponents: [FSUpdateProfileComponent],
 })
 export class UpdateProfileModule {}

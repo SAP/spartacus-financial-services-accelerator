@@ -16,10 +16,10 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
+import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 import { FSCartService } from '../../core/cart/facade';
 import { PricingService } from '../../core/product-pricing/facade';
 import { FSProductService } from '../../core/product-pricing/facade/product.service';
-import { SyncPilotModule } from '../sync-pilot';
 import { ComparisonTablePanelItemComponent } from './comaprison-table-panel-item/comparison-table-panel-item.component';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 import { ComparisonTablePanelComponent } from './comparison-table-panel/comparison-table-panel.component';
@@ -37,7 +37,7 @@ import { ComparisonTableService } from './comparison-table.service';
     NgbNavModule,
     NgbTooltipModule,
     UrlModule,
-    SyncPilotModule,
+    GenericSyncPilotModule,
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
@@ -60,12 +60,6 @@ import { ComparisonTableService } from './comparison-table.service';
     ComparisonTablePanelItemComponent,
   ],
   exports: [
-    ComparisonTableContainerComponent,
-    ComparisonTableTabComponent,
-    ComparisonTablePanelComponent,
-    ComparisonTablePanelItemComponent,
-  ],
-  entryComponents: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,

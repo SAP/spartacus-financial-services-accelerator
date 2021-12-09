@@ -60,7 +60,7 @@ class InboxTabComponent {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-pagination',
   template: '',
 })
