@@ -18,7 +18,7 @@
             {{ 'consentManagementForm.selectAll' | cxTranslate }}
           </button>
         </div>
-        <div class="cx-consent-toggles">
+        <div class="cx-consent-toggles mb-4">
           <cx-consent-management-form
             *ngFor="let consentTemplate of templateList"
             [consentTemplate]="consentTemplate"
@@ -26,9 +26,10 @@
             (consentChanged)="onConsentChange($event)"
           ></cx-consent-management-form>
         </div>
+        <hr />
         <ng-container *ngIf="consents$ | async as consents">
           <ng-container *ngIf="consents?.oboConsents?.length > 0">
-            <div class="ml-4 pl-2" *ngFor="let consent of consents.oboConsents">
+            <div class="mt-4" *ngFor="let consent of consents.oboConsents">
               <div class="align-items-end">
                 <span class="semi-bold pr-2"
                   >{{ 'consent.consentHolderName' | cxTranslate }}:</span
