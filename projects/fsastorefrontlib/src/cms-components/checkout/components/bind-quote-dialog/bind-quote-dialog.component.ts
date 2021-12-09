@@ -45,21 +45,23 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
-    combineLatest([
-      this.cartService.isStable(),
-      this.cartService.getActive(),
-      this.userAccountFacade.get(),
-      this.oboConsentService.selectedOBOCustomer$,
-    ])
-      .pipe(
-        filter(([stable]) => stable),
-        take(1),
-        map(([_, cart, user, oboConsentCustomer]) => {
-          this.clearFormDataFromLocalStorage(cart);
-          this.transferCartToOBOCustomer(user, oboConsentCustomer, cart);
-        })
-      )
-      .subscribe();
+    this.subscription.add(
+      combineLatest([
+        this.cartService.isStable(),
+        this.cartService.getActive(),
+        this.userAccountFacade.get(),
+        this.oboConsentService.selectedOBOCustomer$,
+      ])
+        .pipe(
+          filter(([stable]) => stable),
+          take(1),
+          map(([_, cart, user, oboConsentCustomer]) => {
+            this.clearFormDataFromLocalStorage(cart);
+            this.transferCartToOBOCustomer(user, oboConsentCustomer, cart);
+          })
+        )
+        .subscribe()
+    );
     this.quoteBinding$.emit(false);
   }
 

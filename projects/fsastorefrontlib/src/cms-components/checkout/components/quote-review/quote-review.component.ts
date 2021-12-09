@@ -231,10 +231,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.selectedIndex = this.selectedIndex === index ? -1 : index;
   }
 
-  checkActiveOboCustomers(oboCustomers: FSUser[]) {
-    return oboCustomers.some(oboCustomer => !!oboCustomer);
-  }
-
   ngOnDestroy() {
     this.oboConsentService.setSelectedOBOCustomer(null);
     if (this.subscription) {
