@@ -17,6 +17,7 @@ export const fscommon = {
     preview: 'Preview',
     change: 'Change',
     select: 'Select',
+    selected: 'Selected',
     subject: 'Subject',
     resume: 'Resume',
     details: 'Details',
@@ -107,6 +108,7 @@ export const fscommon = {
       CARD: 'Credit Card',
       INVOICE: 'Invoice',
     },
+    oboCustomers: 'All Customers',
     application: {
       title: 'Application',
       applicationRequestSubmitted:

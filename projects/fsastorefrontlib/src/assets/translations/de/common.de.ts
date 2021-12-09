@@ -14,6 +14,7 @@ export const fscommon = {
     date: 'Datum',
     preview: 'Vorschau',
     select: 'Auswählen',
+    selected: '[DE] Selected',
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',
@@ -107,6 +108,7 @@ export const fscommon = {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
     },
+    oboCustomers: '[DE] All Customers',
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:

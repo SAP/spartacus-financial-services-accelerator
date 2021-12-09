@@ -30,11 +30,12 @@ export const quote = {
       na: 'N/A',
     },
     quoteSummary: 'Angebotszusammenfassung',
-    productCategory: '[DE] Product category',
+    category: '[DE] Category',
     selectCategory: '[DE] Select category',
     compareQuotes: '[DE] Compare quotes',
+    renewalQuotes: '[DE] Renewal Quotes',
     compare: '[DE] Compare',
-    select: '[DE] Select/Unselect',
+    select: '[DE] Select/Deselect',
     successfulSelection:
       '[DE] User successfully selected travel insurance cards.',
     compareInfo: '[DE] Select two quotes with the same category for comparison',
@@ -49,6 +50,8 @@ export const quote = {
     quoteGeneralInformation: '[DE] Quote General Information',
     generalInformation: '[DE] General Information',
     noQuotes: '[DE] No quotes for comparison',
+    transferCartSuccess:
+      '[DE] Insurance Quote/Application is successfully prepared for the customer {{ customer }}.',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',

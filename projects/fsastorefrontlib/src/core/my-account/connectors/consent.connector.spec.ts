@@ -11,9 +11,16 @@ class MockConsentAdapter extends ConsentAdapter {
   getOBOCustomerList = createSpy(
     'ConsentAdapter.getOBOCustomerList'
   ).and.callFake(userId => of('getOBOCustomerList' + userId));
+  transferCartToOboCustomer = createSpy(
+    'ConsentAdapter.transferCartToOboCustomer'
+  ).and.callFake((cartId, userId, oboCustomer) =>
+    of('transferCartToOboCustomer' + cartId + userId + oboCustomer)
+  );
 }
 
 const user = 'user';
+const cartCode = 'cartCode';
+const oboCustomer = 'customerToTransferCartUid';
 
 describe('ConsentConnector', () => {
   let consentConnector: ConsentConnector;
@@ -38,5 +45,13 @@ describe('ConsentConnector', () => {
   it('should call adapter to get OBO Customer List', () => {
     consentConnector.getOBOCustomerList(user);
     expect(consentAdapter.getOBOCustomerList).toHaveBeenCalledWith(user);
+  });
+  it('should call adapter to transfer cart', () => {
+    consentConnector.transferCart(cartCode, user, oboCustomer);
+    expect(consentAdapter.transferCartToOboCustomer).toHaveBeenCalledWith(
+      cartCode,
+      user,
+      oboCustomer
+    );
   });
 });

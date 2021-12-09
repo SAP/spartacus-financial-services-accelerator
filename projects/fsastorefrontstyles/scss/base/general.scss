@@ -74,4 +74,8 @@ button:focus {
   &:hover {
     text-decoration: underline;
   }
+  &.is-disabled {
+    text-decoration: none;
+    color: var(--cx-color-6);
+  }
 }
