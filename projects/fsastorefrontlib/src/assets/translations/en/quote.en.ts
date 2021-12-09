@@ -38,6 +38,8 @@ export const quote = {
     select: 'Select/Deselect',
     successfulSelection: 'User successfully selected {{ category }} cards.',
     compareInfo: 'Select two quotes with the same category for comparison',
+    renewalInfo: 'This Quote is created from existing policy',
+    renewalQuoteInfo: 'Renewal Quote',
     clearAll: 'Clear all',
     allQuotes: 'All quotes',
     quotesComparison: 'Compare {{ category }} Quotes',

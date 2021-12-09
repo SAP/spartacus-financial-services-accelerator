@@ -40,7 +40,10 @@
                 {{ (cart?.entries)[0]?.product?.name }}
                 <span
                   *ngIf="cart?.insuranceQuote?.original"
-                  class="far fa-star ml-1 notice"
+                  class="far fa-star ml-1 notice pointer"
+                  [ngbTooltip]="'quote.renewalQuoteInfo' | cxTranslate"
+                  triggers="click:blur"
+                  placement="top"
                 ></span>
               </div>
             </li>
@@ -100,7 +103,10 @@
                     categoryConfig?.visibleInsuredObjects?.length === 0 &&
                     cart?.insuranceQuote?.original
                   "
-                  class="far fa-star ml-1 notice"
+                  class="far fa-star ml-1 notice pointer"
+                  [ngbTooltip]="'quote.renewalQuoteInfo' | cxTranslate"
+                  triggers="click:blur"
+                  placement="top"
                 ></span>
               </div>
             </li>

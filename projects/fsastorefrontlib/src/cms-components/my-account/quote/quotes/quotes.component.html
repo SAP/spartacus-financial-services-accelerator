@@ -48,7 +48,13 @@
         <div class="info-card">
           <h6 class="title background-color-4">
             {{ quote.defaultCategory?.name }}
-            <span *ngIf="quote?.renewal" class="far fa-star notice"></span>
+            <span
+              *ngIf="quote?.original"
+              class="far fa-star notice pointer"
+              [ngbTooltip]="'quote.renewalInfo' | cxTranslate"
+              triggers="click:blur"
+              placement="left"
+            ></span>
           </h6>
           <div class="info-card-wrapper">
             <div class="info-card-content">
