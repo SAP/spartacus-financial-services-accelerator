@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -16,6 +16,36 @@ export class OccConsentAdapter implements ConsentAdapter {
     protected occEndpointService: OccEndpointsService,
     protected converterService: ConverterService
   ) {}
+
+  transferCartToOboCustomer(
+    cartId: string,
+    userId: string,
+    oboCustomer: string
+  ): Observable<any> {
+    const url = this.occEndpointService.buildUrl('transferCart', {
+      urlParams: {
+        userId,
+        cartId,
+      },
+    });
+
+    const params: HttpParams = new HttpParams().set(
+      'oboCustomerUid',
+      oboCustomer
+    );
+
+    const transferCartAction = {
+      actionName: 'TRANSFER_CART',
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.http
+      .patch<any>(url, transferCartAction, { params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
 
   getConsents(userId: string): Observable<any> {
     const url = this.occEndpointService.buildUrl('oboConsents', {

@@ -8,8 +8,8 @@ import {
   UserConsentService,
   UserIdService,
 } from '@spartacus/core';
-import { ConsentManagementComponent } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
+import { ConsentManagementComponent } from '@spartacus/storefront';
 import { filter, map, take } from 'rxjs/operators';
 import { ConsentService } from '../../../core/my-account/facade/consent.service';
 import { FSConsentTemplate } from '../../../occ/occ-models/occ.models';

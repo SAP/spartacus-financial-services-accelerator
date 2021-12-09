@@ -15,4 +15,12 @@ export class ConsentConnector {
   getOBOCustomerList(userId: string): Observable<any> {
     return this.adapter.getOBOCustomerList(userId);
   }
+
+  transferCart(
+    cartId: string,
+    userId: string,
+    oboCustomer: string
+  ): Observable<any> {
+    return this.adapter.transferCartToOboCustomer(cartId, userId, oboCustomer);
+  }
 }

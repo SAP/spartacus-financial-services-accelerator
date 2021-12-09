@@ -6,6 +6,7 @@ export const defaultOccConsentConfig: FSOccConfig = {
       endpoints: {
         oboConsents: 'users/${userId}/oboconsents',
         oboConsentCustomers: 'users/${userId}/oboconsents/customers',
+        transferCart: 'users/${userId}/carts/${cartId}/oboconsents/action',
       },
     },
   },
