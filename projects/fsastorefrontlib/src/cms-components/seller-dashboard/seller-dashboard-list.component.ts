@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
-import { TranslationService, UserIdService } from '@spartacus/core';
-import { OBOCustomerList } from '../../occ/occ-models/occ.models';
+import {
+  RoutingService,
+  TranslationService,
+  UserIdService,
+} from '@spartacus/core';
+import { OBOCustomerList, FSUser } from '../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
 import { ICON_TYPE } from '@spartacus/storefront';
 
@@ -14,7 +18,8 @@ export class SellerDashboardListComponent {
   constructor(
     protected consentConnector: ConsentConnector,
     protected userIdService: UserIdService,
-    protected translationService: TranslationService
+    protected translationService: TranslationService,
+    protected routingService: RoutingService
   ) {}
 
   sort: string;
@@ -24,6 +29,13 @@ export class SellerDashboardListComponent {
     take(1),
     switchMap(userId => this.consentConnector.getOBOCustomerList(userId))
   );
+
+  getUserProfile(customer: FSUser) {
+    this.routingService.go({
+      cxRoute: 'userProfile',
+      params: { customerId: customer.uid },
+    });
+  }
 
   getSortLabels(): Observable<{
     name: string;
