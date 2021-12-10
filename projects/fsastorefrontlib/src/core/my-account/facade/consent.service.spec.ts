@@ -8,6 +8,7 @@ import { reducerProvider, reducerToken } from '../store/reducers';
 import * as fromAction from '../store/actions';
 
 const userId = OCC_USER_ID_CURRENT;
+const customerId = 'testCustomerId';
 const consentId = 'CL00001';
 
 class MockUserIdService {
@@ -81,6 +82,43 @@ describe('ConsentServiceTest', () => {
     service.loadConsents(userId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadConsents({ userId: userId })
+    );
+  });
+
+  it('should be able to load customer', () => {
+    service.loadCustomer(userId, customerId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCustomer({ userId: userId, customerId: customerId })
+    );
+  });
+
+  it('should be able to load customer quotes', () => {
+    service.loadCustomerQuotes(userId, customerId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCustomerQuotes({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  });
+
+  it('should be able to load customer policies', () => {
+    service.loadCustomerPolicies(userId, customerId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCustomerPolicies({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  });
+
+  it('should be able to load customer claims', () => {
+    service.loadCustomerClaims(userId, customerId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCustomerClaims({
+        userId: userId,
+        customerId: customerId,
+      })
     );
   });
 });

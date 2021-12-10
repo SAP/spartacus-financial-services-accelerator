@@ -11,9 +11,30 @@ class MockConsentAdapter extends ConsentAdapter {
   getOBOCustomerList = createSpy(
     'ConsentAdapter.getOBOCustomerList'
   ).and.callFake(userId => of('getOBOCustomerList' + userId));
+  getOBOCustomer = createSpy(
+    'ConsentAdapter.getOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getOBOCustomer' + userId + customerId)
+  );
+  getQuotesForOBOCustomer = createSpy(
+    'ConsentAdapter.getQuotesForOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getQuotesForOBOCustomer' + userId + customerId)
+  );
+  getPoliciesForOBOCustomer = createSpy(
+    'ConsentAdapter.getPoliciesForOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getPoliciesForOBOCustomer' + userId + customerId)
+  );
+  getClaimsForOBOCustomer = createSpy(
+    'ConsentAdapter.getClaimsForOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getClaimsForOBOCustomer' + userId + customerId)
+  );
 }
 
 const user = 'user';
+const mockCustomerId = 'customerId';
 
 describe('ConsentConnector', () => {
   let consentConnector: ConsentConnector;
@@ -38,5 +59,33 @@ describe('ConsentConnector', () => {
   it('should call adapter to get OBO Customer List', () => {
     consentConnector.getOBOCustomerList(user);
     expect(consentAdapter.getOBOCustomerList).toHaveBeenCalledWith(user);
+  });
+  it('should call adapter to get OBO Customer', () => {
+    consentConnector.getOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
+  it('should call adapter to get quotes for OBO Customer', () => {
+    consentConnector.getQuotesForOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getQuotesForOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
+  it('should call adapter to get policies for OBO Customer', () => {
+    consentConnector.getPoliciesForOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getPoliciesForOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
+  it('should call adapter to get claims for OBO Customer', () => {
+    consentConnector.getClaimsForOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getClaimsForOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
   });
 });

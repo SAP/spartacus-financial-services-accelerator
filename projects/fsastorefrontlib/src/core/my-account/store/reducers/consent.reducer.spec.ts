@@ -12,6 +12,15 @@ const consentTemplateDesc = 'ctDesc';
 const consentTemplateVersion = 'ctVersion';
 const customerName = 'customerName';
 const customerUid = 'customerUid';
+const firstCartCode = 'test001';
+const firstCategoryCode = 'testCategory1';
+const firstQuoteId = 'test001';
+const secondCartCode = 'test002';
+const secondCategoryCode = 'testCategory2';
+const secondQuoteId = 'test002';
+const policyId = 'policyId';
+const contractId = 'contractId';
+const claimNumber = '0000001';
 
 const mockedConsents = {
   consents: [
@@ -53,6 +62,37 @@ const mockedConsents = {
   ],
 };
 
+const mockedCustomer = {
+  name: customerName,
+  uid: customerUid,
+};
+
+const mockedQuotes: any = [
+  {
+    cartCode: firstCartCode,
+    defaultCategory: {
+      code: firstCategoryCode,
+    },
+    quoteId: firstQuoteId,
+  },
+  {
+    cartCode: secondCartCode,
+    defaultCategory: {
+      code: secondCategoryCode,
+    },
+    quoteId: secondQuoteId,
+  },
+];
+
+const mockedPolicy: any = {
+  policyId: policyId,
+  contractId: contractId,
+};
+
+const mockedClaim = {
+  claimNumber: claimNumber,
+};
+
 describe('Consent Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
@@ -69,6 +109,38 @@ describe('Consent Reducer', () => {
       const state = fromReducer.reducer(initialState, action);
       expect(state.consents).toEqual(mockedConsents);
       expect(state.loaded).toEqual(true);
+    });
+  });
+
+  describe('LOAD_CUSTOMER_SUCCESS', () => {
+    it('should load customer', () => {
+      const action = new fromAction.LoadCustomerSuccess(mockedCustomer);
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.customer).toEqual(mockedCustomer);
+    });
+  });
+
+  describe('LOAD_CUSTOMER_QUOTES_SUCCESS', () => {
+    it('should load customer quotes', () => {
+      const action = new fromAction.LoadCustomerQuotesSuccess(mockedQuotes);
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.customerQuotes).toEqual(mockedQuotes);
+    });
+  });
+
+  describe('LOAD_CUSTOMER_POLICIES_SUCCESS', () => {
+    it('should load customer policies', () => {
+      const action = new fromAction.LoadCustomerPoliciesSuccess(mockedPolicy);
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.customerPolicies).toEqual(mockedPolicy);
+    });
+  });
+
+  describe('LOAD_CUSTOMER_CLAIMS_SUCCESS', () => {
+    it('should load customer claims', () => {
+      const action = new fromAction.LoadCustomerClaimsSuccess(mockedClaim);
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.customerClaims).toEqual(mockedClaim);
     });
   });
 });

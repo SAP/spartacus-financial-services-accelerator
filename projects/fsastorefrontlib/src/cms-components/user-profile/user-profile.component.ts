@@ -1,11 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { ActivatedRoute } from '@angular/router';
 import { ConsentService } from 'projects/fsastorefrontlib/src/core/my-account/facade/consent.service';
 import { RoutingService, User, UserIdService } from '@spartacus/core';
 import { filter, map } from 'rxjs/operators';
 import { InsuranceQuoteList } from 'fsastorefrontlib/occ';
+
+import { QuoteService } from '../../core/my-account/facade';
+import { PolicyService } from '../../core/my-account/facade';
+import { ClaimService } from '../../core/my-account/facade';
+import { FSUserRole } from '@spartacus/fsa-storefront';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -14,96 +18,55 @@ import { InsuranceQuoteList } from 'fsastorefrontlib/occ';
 export class UserProfileComponent implements OnInit, OnDestroy {
   constructor(
     protected userAccountFacade: UserAccountFacade,
-    protected route: ActivatedRoute,
     protected fsConsentService: ConsentService,
     protected routingService: RoutingService,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected quoteService: QuoteService,
+    protected policyService: PolicyService,
+    protected claimService: ClaimService
   ) {}
 
   private subscription = new Subscription();
-  customer$: Observable<User> = this.fsConsentService.getCustomer();
-  customerQuotes$: Observable<
-    InsuranceQuoteList
-  > = this.fsConsentService.getCustomerQuotes();
-  customerPolicies$ = this.fsConsentService.getCustomerPolicies();
-  customerClaims$ = this.fsConsentService.getCustomerClaims();
+  customer: User;
+  customer$: Observable<User>;
+  customerQuotes$: Observable<InsuranceQuoteList>;
+  customerPolicies$;
+  customerClaims$;
 
   ngOnInit(): void {
-    this.loadCustomer();
-    this.loadCustomerQuotes();
-    this.loadCustomerPolicies();
-    this.loadCustomerClaims();
+    this.loadCustomerDetails();
   }
 
-  loadCustomer() {
+  loadCustomerDetails() {
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
         this.userIdService.getUserId(),
+        this.userAccountFacade.get(),
       ])
         .pipe(
           filter(([routingData, _]) => !routingData.nextState),
-          map(([routingData, userId]) => {
+          map(([routingData, userId, user]) => {
             const customerId = routingData.state.params.customerId;
             if (customerId) {
-              this.fsConsentService.loadCustomer(userId, customerId);
-            }
-          })
-        )
-        .subscribe()
-    );
-  }
-
-  loadCustomerQuotes() {
-    this.subscription.add(
-      combineLatest([
-        this.routingService.getRouterState(),
-        this.userIdService.getUserId(),
-      ])
-        .pipe(
-          filter(([routingData, _]) => !routingData.nextState),
-          map(([routingData, userId]) => {
-            const customerId = routingData.state.params.customerId;
-            if (customerId) {
-              this.fsConsentService.loadCustomerQuotes(userId, customerId);
-            }
-          })
-        )
-        .subscribe()
-    );
-  }
-
-  loadCustomerPolicies() {
-    this.subscription.add(
-      combineLatest([
-        this.routingService.getRouterState(),
-        this.userIdService.getUserId(),
-      ])
-        .pipe(
-          filter(([routingData, _]) => !routingData.nextState),
-          map(([routingData, userId]) => {
-            const customerId = routingData.state.params.customerId;
-            if (customerId) {
-              this.fsConsentService.loadCustomerPolicies(userId, customerId);
-            }
-          })
-        )
-        .subscribe()
-    );
-  }
-
-  loadCustomerClaims() {
-    this.subscription.add(
-      combineLatest([
-        this.routingService.getRouterState(),
-        this.userIdService.getUserId(),
-      ])
-        .pipe(
-          filter(([routingData, _]) => !routingData.nextState),
-          map(([routingData, userId]) => {
-            const customerId = routingData.state.params.customerId;
-            if (customerId) {
-              this.fsConsentService.loadCustomerClaims(userId, customerId);
+              if (user.roles.includes(FSUserRole.SELLER)) {
+                this.fsConsentService.loadCustomer(userId, customerId);
+                this.fsConsentService.loadCustomerQuotes(userId, customerId);
+                this.fsConsentService.loadCustomerPolicies(userId, customerId);
+                this.fsConsentService.loadCustomerClaims(userId, customerId);
+                this.customer$ = this.fsConsentService.getCustomer();
+                this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
+                this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
+                this.customerClaims$ = this.fsConsentService.getCustomerClaims();
+              } else {
+                this.quoteService.loadQuotes();
+                this.policyService.loadPolicies();
+                this.claimService.loadClaims();
+                this.customer = user;
+                this.customerQuotes$ = this.quoteService.getQuotes();
+                this.customerPolicies$ = this.policyService.getPolicies();
+                this.customerClaims$ = this.claimService.getClaims();
+              }
             }
           })
         )
