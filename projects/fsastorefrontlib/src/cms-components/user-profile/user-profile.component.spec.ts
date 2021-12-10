@@ -15,7 +15,7 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import createSpy = jasmine.createSpy;
-import { FSUserRole } from '../../occ';
+import { FSUserRole } from '../../occ/occ-models/occ.models';
 
 const customerName = 'customerName';
 const customerUid = 'customerUid';
@@ -124,16 +124,14 @@ const claim3 = {
 
 const claims = [claim1, claim2, claim3];
 
-const roles = [
-  FSUserRole.SELLER
-]
+const roles = [FSUserRole.SELLER];
 
 const mockUser = {
   customerId: 'testuser',
   firstName: firstName,
   lastName: lastName,
   defaultAddress: defaultAddress,
-  roles: roles
+  roles: roles,
 };
 
 const mockedClaims = {
