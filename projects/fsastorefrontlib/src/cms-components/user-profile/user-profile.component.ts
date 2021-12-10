@@ -4,12 +4,11 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { RoutingService, User, UserIdService } from '@spartacus/core';
 import { filter, map } from 'rxjs/operators';
-import { InsuranceQuoteList } from 'fsastorefrontlib/occ';
 
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
-import { FSUserRole } from '@spartacus/fsa-storefront';
+import { FSUserRole, InsuranceQuoteList} from '../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -51,9 +50,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             if (customerId) {
               if (user.roles.includes(FSUserRole.SELLER)) {
                 this.fsConsentService.loadCustomer(userId, customerId);
-                this.fsConsentService.loadCustomerQuotes(userId, customerId);
-                this.fsConsentService.loadCustomerPolicies(userId, customerId);
-                this.fsConsentService.loadCustomerClaims(userId, customerId);
+                this.fsConsentService.loadCustomerAssets(userId, customerId, 'claims');
+                this.fsConsentService.loadCustomerAssets(userId, customerId, 'insuranceQuotes');
+                this.fsConsentService.loadCustomerAssets(userId, customerId, 'insurancePolicies');
+                
                 this.customer$ = this.fsConsentService.getCustomer();
                 this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
                 this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();

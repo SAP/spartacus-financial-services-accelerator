@@ -32,32 +32,43 @@ export class ConsentService {
     );
   }
 
-  loadCustomerQuotes(userId, customerId) {
+  loadCustomerAssets(userId, customerId, asset) {
+    console.log(asset);
     this.store.dispatch(
-      new fromAction.LoadCustomerQuotes({
+      new fromAction.LoadCustomerAssets({
         userId: userId,
         customerId: customerId,
+        asset: asset
       })
     );
   }
 
-  loadCustomerPolicies(userId, customerId) {
-    this.store.dispatch(
-      new fromAction.LoadCustomerPolicies({
-        userId: userId,
-        customerId: customerId,
-      })
-    );
-  }
+  // loadCustomerQuotes(userId, customerId) {
+  //   this.store.dispatch(
+  //     new fromAction.LoadCustomerQuotes({
+  //       userId: userId,
+  //       customerId: customerId,
+  //     })
+  //   );
+  // }
 
-  loadCustomerClaims(userId, customerId) {
-    this.store.dispatch(
-      new fromAction.LoadCustomerClaims({
-        userId: userId,
-        customerId: customerId,
-      })
-    );
-  }
+  // loadCustomerPolicies(userId, customerId) {
+  //   this.store.dispatch(
+  //     new fromAction.LoadCustomerPolicies({
+  //       userId: userId,
+  //       customerId: customerId,
+  //     })
+  //   );
+  // }
+
+  // loadCustomerClaims(userId, customerId) {
+  //   this.store.dispatch(
+  //     new fromAction.LoadCustomerClaims({
+  //       userId: userId,
+  //       customerId: customerId,
+  //     })
+  //   );
+  // }
 
   getConsents(): Observable<any> {
     return this.store.pipe(select(fromConsentStore.getConsents));

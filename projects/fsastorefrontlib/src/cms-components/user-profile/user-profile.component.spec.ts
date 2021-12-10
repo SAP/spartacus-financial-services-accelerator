@@ -15,7 +15,7 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import createSpy = jasmine.createSpy;
-import { FSUserRole } from '../../occ';
+import { FSUserRole } from '../../occ/occ-models/occ.models';
 
 const customerName = 'customerName';
 const customerUid = 'customerUid';
