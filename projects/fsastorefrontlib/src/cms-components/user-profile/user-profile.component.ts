@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { ConsentService } from '../../core/my-account/facade/consent.service';
+import { FSUserRole } from '@spartacus/fsa-storefront';
 import { RoutingService, User, UserIdService } from '@spartacus/core';
 import { filter, map } from 'rxjs/operators';
-import { InsuranceQuoteList } from 'fsastorefrontlib/occ';
 
+import { InsuranceQuoteList } from '../../occ/occ-models/occ.models';
+import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
-import { FSUserRole } from '@spartacus/fsa-storefront';
 
 @Component({
   selector: 'cx-fs-user-profile',
