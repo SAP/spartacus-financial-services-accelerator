@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConverterService, OccEndpointsService } from '@spartacus/core';
-import { InsuranceQuoteList } from '../../../occ';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
+import { InsuranceQuoteList } from '../../../occ/occ-models/occ.models';
 import { ConsentAdapter } from '../../../core/my-account/connectors/consent.adapter';
 import { OBOConsentList } from '../../occ-models/occ.models';
 

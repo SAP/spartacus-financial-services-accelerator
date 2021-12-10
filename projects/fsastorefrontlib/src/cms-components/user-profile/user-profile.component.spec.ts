@@ -124,16 +124,14 @@ const claim3 = {
 
 const claims = [claim1, claim2, claim3];
 
-const roles = [
-  FSUserRole.SELLER
-]
+const roles = [FSUserRole.SELLER];
 
 const mockUser = {
   customerId: 'testuser',
   firstName: firstName,
   lastName: lastName,
   defaultAddress: defaultAddress,
-  roles: roles
+  roles: roles,
 };
 
 const mockedClaims = {
