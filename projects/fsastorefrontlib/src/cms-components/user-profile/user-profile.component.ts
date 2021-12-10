@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { ConsentService } from 'projects/fsastorefrontlib/src/core/my-account/facade/consent.service';
+import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { RoutingService, User, UserIdService } from '@spartacus/core';
 import { filter, map } from 'rxjs/operators';
 import { InsuranceQuoteList } from 'fsastorefrontlib/occ';
