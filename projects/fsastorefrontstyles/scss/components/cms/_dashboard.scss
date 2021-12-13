@@ -39,3 +39,21 @@
     flex: 0 1 30%;
   }
 }
+%cx-fs-user-profile {
+  .user-profile-wrapper,
+  .dashboard-profile-wrapper {
+    padding: 2rem;
+  }
+  .user-profile {
+    padding: 2rem 1rem;
+    & > * {
+      margin-bottom: 1rem;
+    }
+    .user-image {
+      border-radius: 50%;
+      border: 2px solid var(--cx-color-primary);
+      width: 55px;
+      aspect-ratio: 1/1;
+    }
+  }
+}

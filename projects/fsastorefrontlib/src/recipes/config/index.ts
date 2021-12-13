@@ -1,2 +1,2 @@
 export * from './default-layout-config';
-export * from './messages-cms-structure';
+export * from './fs-static-cms-structure';

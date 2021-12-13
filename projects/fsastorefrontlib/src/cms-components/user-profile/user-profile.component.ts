@@ -53,10 +53,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             if (customerId) {
               if (user.roles.includes(FSUserRole.SELLER)) {
                 this.fsConsentService.loadCustomer(userId, customerId);
-                this.fsConsentService.loadCustomerAssets(userId, customerId, 'claims');
-                this.fsConsentService.loadCustomerAssets(userId, customerId, 'insuranceQuotes');
-                this.fsConsentService.loadCustomerAssets(userId, customerId, 'insurancePolicies');
-                
+                this.fsConsentService.loadCustomerAssets(
+                  userId,
+                  customerId,
+                  'claims'
+                );
+                this.fsConsentService.loadCustomerAssets(
+                  userId,
+                  customerId,
+                  'insuranceQuotes'
+                );
+                this.fsConsentService.loadCustomerAssets(
+                  userId,
+                  customerId,
+                  'insurancePolicies'
+                );
                 this.customer$ = this.fsConsentService.getCustomer();
                 this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
                 this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
