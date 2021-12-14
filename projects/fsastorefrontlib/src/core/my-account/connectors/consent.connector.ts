@@ -20,10 +20,6 @@ export class ConsentConnector {
     return this.adapter.getOBOCustomer(userId, customerId);
   }
 
-  // getAssetsForOBOCustomer(userId: string, customerId: string, asset: string): Observable<any> {
-  //   return this.adapter.getAssetsForOBOCustomer(userId, customerId, asset);
-  // }
-
   getQuotesForOBOCustomer(userId: string, customerId: string): Observable<any> {
     return this.adapter.getQuotesForOBOCustomer(userId, customerId);
   }

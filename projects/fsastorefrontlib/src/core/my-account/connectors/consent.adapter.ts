@@ -24,19 +24,6 @@ export abstract class ConsentAdapter {
    */
   abstract getOBOCustomer(userId: string, customerId: string): Observable<any>;
 
-  // /**
-  //  * Abstract method used to get quotes of the particular customer created by consent holder.
-  //  *
-  //  * @param userId The `userId` used for fetching on behalf of consent holder
-  //  *
-  //  * @param customerId The `customerId` used for fetching particular customer
-  //  */
-  // abstract getAssetsForOBOCustomer(
-  //   userId: string,
-  //   customerId: string,
-  //   asset: string
-  // ): Observable<any>;
-
     /**
    * Abstract method used to get quotes of the particular customer created by consent holder.
    *

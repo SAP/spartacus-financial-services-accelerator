@@ -31,43 +31,30 @@ export function reducer(
         loaded: true,
       };
     }
-    case fromAction.LOAD_CUSTOMER_ASSETS_SUCCESS: {
-      console.log(action.payload)
+    case fromAction.LOAD_CUSTOMER_QUOTES_SUCCESS: {
       const customerQuotes = action.payload ? [...action.payload] : [];
-      const customerPolicies = action.payload ? { ...action.payload } : null;
-      const customerClaims = action.payload ? { ...action.payload } : null;
       return {
         ...state,
         customerQuotes,
+        loaded: true,
+      };
+    }
+    case fromAction.LOAD_CUSTOMER_POLICIES_SUCCESS: {
+      const customerPolicies = action.payload ? { ...action.payload } : null;
+      return {
+        ...state,
         customerPolicies,
+        loaded: true,
+      };
+    }
+    case fromAction.LOAD_CUSTOMER_CLAIMS_SUCCESS: {
+      const customerClaims = action.payload ? { ...action.payload } : null;
+      return {
+        ...state,
         customerClaims,
         loaded: true,
       };
     }
-  //   case fromAction.LOAD_CUSTOMER_QUOTES_SUCCESS: {
-  //     const customerQuotes = action.payload ? [...action.payload] : [];
-  //     return {
-  //       ...state,
-  //       customerQuotes,
-  //       loaded: true,
-  //     };
-  //   }
-  //   case fromAction.LOAD_CUSTOMER_POLICIES_SUCCESS: {
-  //     const customerPolicies = action.payload ? { ...action.payload } : null;
-  //     return {
-  //       ...state,
-  //       customerPolicies,
-  //       loaded: true,
-  //     };
-  //   }
-  //   case fromAction.LOAD_CUSTOMER_CLAIMS_SUCCESS: {
-  //     const customerClaims = action.payload ? { ...action.payload } : null;
-  //     return {
-  //       ...state,
-  //       customerClaims,
-  //       loaded: true,
-  //     };
-  //   }
   }
   return state;
 }

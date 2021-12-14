@@ -54,39 +54,6 @@ export class OccConsentAdapter implements ConsentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  // getAssetsForOBOCustomer(userId: string, customerId: string, asset: string): Observable<any> {
-  //   let url;
-  //   switch(asset) {
-  //     case 'insuranceQuotes': {
-  //       url = this.occEndpointService.buildUrl('oboConsentCustomerQuotes', {
-  //       urlParams: {
-  //           userId,
-  //           customerId,
-  //         },
-  //       });
-  //     }
-  //     case 'insurancePolicies': {
-  //       url = this.occEndpointService.buildUrl('oboConsentCustomerPolicies', {
-  //         urlParams: {
-  //             userId,
-  //             customerId,
-  //           },
-  //       });
-  //     }
-  //     case 'claims': {
-  //       url = this.occEndpointService.buildUrl('oboConsentCustomerClaims', {
-  //         urlParams: {
-  //             userId,
-  //             customerId,
-  //           },
-  //       });
-  //     }
-  //   }
-  //   return this.http
-  //     .get(url)
-  //     .pipe(catchError((error: any) => throwError(error.json())));
-  // }
-
   getQuotesForOBOCustomer(userId: string, customerId: string): Observable<any> {
     const url = this.occEndpointService.buildUrl('oboConsentCustomerQuotes', {
       urlParams: {
