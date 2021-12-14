@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FSUserRole } from '@spartacus/fsa-storefront';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { FormValidationService } from '../form-validation/form-validation.service';
 import { FieldConfig } from './../../models/form-config.interface';
 import { FieldDependencyResolverService } from './../form-dependencies/field-dependency-resolver.service';
@@ -9,7 +11,8 @@ export class FormBuilderService {
   constructor(
     protected fb: FormBuilder,
     protected formValidationService: FormValidationService,
-    protected fieldDependencyResolverService: FieldDependencyResolverService
+    protected fieldDependencyResolverService: FieldDependencyResolverService,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   createForm(config) {
@@ -32,6 +35,12 @@ export class FormBuilderService {
             form
           );
         }
+          this.userAccountFacade.get().subscribe(user => {
+            if (user.roles.includes(FSUserRole.SELLER)) {
+              fieldControl.enable();
+              fieldConfig['readonly'] = undefined;
+            }
+          }).unsubscribe()
       });
       if (formGroup.dependsOn) {
         this.fieldDependencyResolverService.resolveFormControlDependencies(
