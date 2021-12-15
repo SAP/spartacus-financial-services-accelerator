@@ -4,7 +4,7 @@ import { I18nTestingModule, User } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSUserPrefillResolver } from './user-prefill-resolver';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { FSUserRole } from '@spartacus/fsa-storefront';
+import { FSUserRole } from '../../../occ/occ-models/occ.models';
 
 const mockUser: User = {
   firstName: 'testFirstName',

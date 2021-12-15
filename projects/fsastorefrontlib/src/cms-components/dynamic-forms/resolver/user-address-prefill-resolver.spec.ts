@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule, User, UserAddressService } from '@spartacus/core';
-import { FSUserRole } from '@spartacus/fsa-storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { of } from 'rxjs';
 import { FSUserAddressPrefillResolver } from './user-address-prefill-resolver';
+import { FSUserRole } from '../../../occ/occ-models/occ.models';
 
 const mockAddress = [
   {

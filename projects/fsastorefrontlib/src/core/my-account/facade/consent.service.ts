@@ -3,7 +3,7 @@ import * as fromAction from './../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { select, Store } from '@ngrx/store';
 import * as fromConsentStore from './../store';
-import { Address, UserActions, UserIdService } from '@spartacus/core';
+import { Address, UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';

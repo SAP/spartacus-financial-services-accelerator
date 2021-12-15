@@ -18,7 +18,7 @@ import { PricingService } from './../../../../core/product-pricing/facade/pricin
 import createSpy = jasmine.createSpy;
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { ConsentService } from '@spartacus/fsa-storefront';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 const firstName = 'Donna';
 const lastName = 'Moore';

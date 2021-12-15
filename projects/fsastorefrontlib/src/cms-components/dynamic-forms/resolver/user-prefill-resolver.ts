@@ -2,7 +2,7 @@ import { filter, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { FormsUtils, PrefillResolver } from '@spartacus/dynamicforms';
-import { FSUserRole } from '@spartacus/fsa-storefront';
+import { FSUserRole } from '../../../occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
