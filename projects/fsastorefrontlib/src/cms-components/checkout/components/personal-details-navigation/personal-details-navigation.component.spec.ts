@@ -12,12 +12,13 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
-import { FSSteps } from '../../../../occ/occ-models';
+import { FSSteps, FSUserRole } from '../../../../occ/occ-models';
 
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import createSpy = jasmine.createSpy;
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { ConsentService } from '@spartacus/fsa-storefront';
 
 const firstName = 'Donna';
 const lastName = 'Moore';
@@ -34,6 +35,7 @@ const mockUser = {
   firstName: firstName,
   lastName: lastName,
   defaultAddress: defaultAddress,
+  roles: [],
 };
 
 const mockCategoryAndStep: FSSteps = {
@@ -114,10 +116,15 @@ class MockUserAccountFacade {
 }
 
 class MockFSAddressService {
-  createAddressData() {}
+  populateAddressFromFormData() {}
+  createAddress() {}
   getAddresses() {
     return of(mockAddress);
   }
+}
+
+class MockConsentService {
+  createAddressForUser() {}
 }
 
 describe('PersonalDetailsNavigationComponent', () => {
@@ -129,6 +136,7 @@ describe('PersonalDetailsNavigationComponent', () => {
   let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
   let formService: FormDataService;
+  let consentService: ConsentService;
 
   beforeEach(
     waitForAsync(() => {
@@ -172,6 +180,10 @@ describe('PersonalDetailsNavigationComponent', () => {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
           },
+          {
+            provide: ConsentService,
+            useClass: MockConsentService,
+          },
         ],
       }).compileComponents();
 
@@ -188,6 +200,7 @@ describe('PersonalDetailsNavigationComponent', () => {
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
     formService = TestBed.inject(FormDataService);
+    consentService = TestBed.inject(ConsentService);
     spyOn(routingService, 'go').and.stub();
   });
 
@@ -240,18 +253,18 @@ describe('PersonalDetailsNavigationComponent', () => {
   });
 
   it('should not set delivery address when form content is empty', () => {
-    spyOn(addressService, 'createAddressData').and.callThrough();
+    spyOn(addressService, 'createAddress').and.callThrough();
     const testFormData: YFormData = {
       id: 'test-formData',
       type: 'DATA',
     };
     spyOn(formService, 'getSubmittedForm').and.returnValue(of(testFormData));
     component.navigateNext(mockCategoryAndStep);
-    expect(addressService.createAddressData).not.toHaveBeenCalled();
+    expect(addressService.createAddress).not.toHaveBeenCalled();
   });
 
   it('should set delivery address when main product in cart is configurable', () => {
-    spyOn(addressService, 'createAddressData').and.callThrough();
+    spyOn(addressService, 'createAddress').and.callThrough();
     const testCart = {
       code: 'testCart',
       entries: [
@@ -271,6 +284,49 @@ describe('PersonalDetailsNavigationComponent', () => {
     };
     spyOn(cartService, 'getActive').and.returnValue(of(testCart));
     component.navigateNext(mockCategoryAndStep);
-    expect(addressService.createAddressData).toHaveBeenCalled();
+    expect(addressService.createAddress).toHaveBeenCalled();
+  });
+
+  it('should create new address for the customer when currently logged in user is part of seller user group', () => {
+    const seller = {
+      customerId: 'testuser',
+      firstName: firstName,
+      lastName: lastName,
+      defaultAddress: defaultAddress,
+      roles: [FSUserRole.SELLER],
+    };
+    const personalDetailsFormData: YFormData = {
+      id: 'test-formData',
+      type: 'DATA',
+      content:
+        '{"personalDetails":{"title":"mrs","firstName":"test","lastName":"test","email":"test@outlook.com","country":"RS"}}',
+    };
+
+    spyOn(consentService, 'createAddressForUser').and.callThrough();
+    spyOn(mockedUserAccountFacade, 'get').and.returnValue(of(seller));
+    spyOn(formService, 'getSubmittedForm').and.returnValue(
+      of(personalDetailsFormData)
+    );
+
+    const testCart = {
+      code: 'testCart',
+      entries: [
+        {
+          entryNumber: 1,
+          formData: [
+            {
+              id: 'formData1',
+            },
+          ],
+          product: {
+            code: 'testProduct',
+            configurable: true,
+          },
+        },
+      ],
+    };
+    spyOn(cartService, 'getActive').and.returnValue(of(testCart));
+    component.navigateNext(mockCategoryAndStep);
+    expect(consentService.createAddressForUser).toHaveBeenCalled();
   });
 });
