@@ -1,15 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, RoutingService } from '@spartacus/core';
+import { Address, RoutingService, User } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
-import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
+import {
+  FSOrderEntry,
+  FSSteps,
+  FSUserRole,
+} from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { ConsentService } from '../../../../core/my-account/facade';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -24,8 +29,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected quoteService: QuoteService,
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
-    protected addressService: FSAddressService
+    protected addressService: FSAddressService,
+    protected consentService: ConsentService
   ) {}
+
+  protected readonly PERSONAL_DETAILS_FORM_GROUP = 'personalDetails';
+  protected readonly EMAIL = 'email';
 
   subscription = new Subscription();
   previousCheckoutStep$: Observable<FSSteps>;
@@ -62,15 +71,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
             return this.formService.getSubmittedForm().pipe(
               map(formData => {
                 if (formData && formData.content) {
-                  // TODO: use user.defaultAddress when Spartacus fix bug regarding properly updating defaultAddress
-                  const defaultAddress = addresses.find(
-                    address => address.defaultAddress
-                  );
-                  this.addressService.createAddressData(
-                    JSON.parse(formData.content),
-                    user,
-                    defaultAddress
-                  );
+                  this.createDeliveryAddressForUser(user, formData, addresses);
                   this.quoteService.underwriteQuote(cart.code);
                   this.quoteService.updateQuote(
                     this.cartId,
@@ -94,6 +95,33 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.routingService.go({
       cxRoute: previousStep.step,
     });
+  }
+
+  private createDeliveryAddressForUser(
+    user: User,
+    formData: YFormData,
+    addresses: Address[]
+  ) {
+    if (user.roles.includes(FSUserRole.SELLER)) {
+      const oboCustomerAddress = this.addressService.populateAddressFromFormData(
+        JSON.parse(formData.content)
+      );
+      const customerId = JSON.parse(formData.content)[
+        this.PERSONAL_DETAILS_FORM_GROUP
+      ][this.EMAIL];
+      this.consentService.createAddressForUser(
+        user.uid,
+        customerId,
+        oboCustomerAddress
+      );
+    } else {
+      // TODO: use user.defaultAddress when Spartacus fix bug regarding properly updating defaultAddress
+      const defaultAddress = addresses.find(address => address.defaultAddress);
+      this.addressService.createAddress(
+        JSON.parse(formData.content),
+        defaultAddress
+      );
+    }
   }
 
   ngOnDestroy() {
