@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { FSUserRole } from '@spartacus/fsa-storefront';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { FormValidationService } from '../form-validation/form-validation.service';
 import { FieldConfig } from './../../models/form-config.interface';
@@ -35,12 +34,7 @@ export class FormBuilderService {
             form
           );
         }
-          this.userAccountFacade.get().subscribe(user => {
-            if (user.roles.includes(FSUserRole.SELLER)) {
-              fieldControl.enable();
-              fieldConfig['readonly'] = undefined;
-            }
-          }).unsubscribe()
+        this.enableFieldsForSellerUserGroup(fieldControl, fieldConfig);
       });
       if (formGroup.dependsOn) {
         this.fieldDependencyResolverService.resolveFormControlDependencies(
@@ -59,5 +53,24 @@ export class FormBuilderService {
       fieldConfig
     );
     return this.fb.control({ disabled, value }, validations);
+  }
+
+  /**
+   * Method is used to enable all form controls when currently logged in customer is part of seller user group.
+   * This is temporary solution. Control property should be defined in the form defintion's JSON metadata.
+   */
+  private enableFieldsForSellerUserGroup(
+    fieldControl: FormControl,
+    fieldConfig
+  ) {
+    this.userAccountFacade
+      .get()
+      .subscribe(user => {
+        if ((<any>user).roles.includes('sellergroup')) {
+          fieldControl.enable();
+          fieldConfig.readonly = false;
+        }
+      })
+      .unsubscribe();
   }
 }
