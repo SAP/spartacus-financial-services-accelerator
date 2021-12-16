@@ -89,7 +89,7 @@ export const fscommon = {
     quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
-    addDocuments: 'Add documents',
+    addDocuments: 'Add Documents',
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',

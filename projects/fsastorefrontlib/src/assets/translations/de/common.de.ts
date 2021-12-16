@@ -89,7 +89,7 @@ export const fscommon = {
     quotesAndApplications: 'Angebote & Anträge',
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
-    addDocuments: '[DE]  Add documents',
+    addDocuments: '[DE]  Add Documents',
     summary: 'Zusammenfassung',
     submit: 'Einreichen',
     totalResults: 'Gesamtergebnisse',
