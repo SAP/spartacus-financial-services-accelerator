@@ -41,7 +41,7 @@
 }
 %cx-fs-user-profile {
   .user-profile-wrapper,
-  .dashboard-profile-wrapper {
+  .dashboard-overview-wrapper {
     padding: 2rem;
   }
   .user-profile {
@@ -55,5 +55,36 @@
       width: 55px;
       aspect-ratio: 1/1;
     }
+  }
+  .dashboard-overview-stats,
+  .dashboard-overview-assets {
+    display: flex;
+    gap: 0.5rem;
+    .item {
+      flex: 0 0 33.333%;
+    }
+    .asset {
+      display: flex;
+      flex: 0 0 calc(50% - 0.5rem);
+      gap: 1rem;
+      @include media-breakpoint-down(sm) {
+        flex: 1 0 100%;
+      }
+      .fas {
+        width: 46px;
+        aspect-ratio: 1/1;
+      }
+    }
+    .number {
+      font-size: clamp(28px, 6vw, 4.5rem);
+      line-height: 1;
+    }
+    .description {
+      font-size: clamp(11px, 2vw, 1.125rem);
+    }
+  }
+  .dashboard-overview-assets {
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 }

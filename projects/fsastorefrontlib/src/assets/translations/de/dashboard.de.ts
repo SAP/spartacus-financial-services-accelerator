@@ -1,5 +1,6 @@
 export const dashboard = {
   dashboard: {
+    overview: '[DE] Dashboard Overview',
     name: 'Name',
     email: 'Email',
     noCustomers: '[DE] You haven\'t assigned any customers yet', // prettier-ignore
@@ -10,5 +11,6 @@ export const dashboard = {
       status: '[DE] by Status',
       email: '[DE] by Email',
     },
+    checkCustomers: '[DE] Check Customer\'s' // prettier-ignore
   },
 };

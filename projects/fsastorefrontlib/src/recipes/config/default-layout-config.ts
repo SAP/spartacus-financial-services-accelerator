@@ -14,6 +14,7 @@ export const layoutConfig: LayoutConfig = {
           'SiteContext',
           'SiteLogo',
           'SearchBox',
+          'DashboardLinkSlot',
           'SiteLogin',
           'MessageNotification',
           'NavigationBar',

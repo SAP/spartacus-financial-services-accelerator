@@ -49,23 +49,23 @@ export class ConsentEffects {
   );
 
   loadCustomerQuotes$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(fromActions.LOAD_CUSTOMER_QUOTES),
-    map((action: fromActions.LoadCustomerQuotes) => action.payload),
-    switchMap(payload => {
-      return this.consentConnector
-        .getQuotesForOBOCustomer(payload.userId, payload.customerId)
-        .pipe(
-          map((customerQuotes: any) => {
-            return new fromActions.LoadCustomerQuotesSuccess(customerQuotes);
-          }),
-          catchError(error =>
-            of(new fromActions.LoadCustomerQuotesFail(JSON.stringify(error)))
-          )
-        );
-    })
-  )
-);
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_CUSTOMER_QUOTES),
+      map((action: fromActions.LoadCustomerQuotes) => action.payload),
+      switchMap(payload => {
+        return this.consentConnector
+          .getQuotesForOBOCustomer(payload.userId, payload.customerId)
+          .pipe(
+            map((customerQuotes: any) => {
+              return new fromActions.LoadCustomerQuotesSuccess(customerQuotes);
+            }),
+            catchError(error =>
+              of(new fromActions.LoadCustomerQuotesFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
+  );
 
   loadCustomerPolicies$ = createEffect(() =>
     this.actions$.pipe(
@@ -107,5 +107,5 @@ export class ConsentEffects {
           );
       })
     )
- );
+  );
 }
