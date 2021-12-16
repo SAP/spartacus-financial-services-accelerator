@@ -49,7 +49,7 @@ export function checkLegalInformationLoan() {
 export function configureLoan(numberOfApplicats) {
   cy.get('[name=numberOfApplicants]').select(numberOfApplicats);
   cy.get('[name=loan-amount]').type('18001');
-  cy.get('[name=loanStartDate]').type('2021-12-12');
+  cy.get('[name=loanStartDate]').type('2023-12-12');
   cy.get('[name=loan-term]').select('6-year');
   cy.get('[name=repayment-frequency]').select('biweekly');
   cy.get('[name=loanPurpose]').select('purchasing-a-car');
@@ -94,7 +94,7 @@ export function checkMiniCart() {
     products: [
       {
         title: ' Start Date: ',
-        value: ' 12 Dec 2021 ',
+        value: ' 12 Dec 2023 ',
       },
       {
         title: 'Loan Amount:',

@@ -34,11 +34,21 @@ export function checkAddressInfoCard() {
   cy.get('.cx-card-label').should('contain.text', 'Omladinskih Brigada');
 }
 
-export function checkDisabledFieldsInsurance() {
+export function checkNewAddressFromCheckout() {
+  cy.get('.cx-card').should('be.visible');
+  cy.get('.card-header').should('contain.text', 'DEFAULT');
+  cy.get('.cx-card-label-bold').should('contain.text', 'Ben Moore');
+  cy.get('.cx-card-label').should('contain.text', 'New Street');
+  cy.get('.cx-card-label').should('contain.text', 'Number 23638');
+  cy.get('.cx-card-label').should('contain.text', 'Berlin, DE');
+  cy.get('.cx-card-label').should('contain.text', '235700');
+}
+
+export function checkDisabledFields(street, number) {
   cy.get('[name=street]').should('be.disabled');
   cy.get('[name=streetNumber]').should('be.disabled');
-  cy.get('[name=street]').should('have.value', 'Omladinskih Brigada');
-  cy.get('[name=streetNumber]').should('have.value', '90g');
+  cy.get('[name=street]').should('have.value', street);
+  cy.get('[name=streetNumber]').should('have.value', number);
 }
 
 export function checkPopulatedFieldsBanking() {
@@ -50,4 +60,12 @@ export function checkPopulatedFieldsBanking() {
 export function addNewDataPersonalDetailsBanking() {
   cy.get('[name=street]').clear().type('New Street');
   cy.get('[name=streetNumber]').clear().type('544');
+}
+
+export function addNewAddressInCheckout() {
+  cy.get('[name="street"]').eq(0).type('New Street');
+  cy.get('[name="streetNumber"]').eq(0).type('Number 23638');
+  cy.get('[name="city"]').eq(0).type('Berlin');
+  cy.get('[name="postcode"]').eq(0).type('235700');
+  cy.get('[name="country"]').eq(0).select('Germany');
 }

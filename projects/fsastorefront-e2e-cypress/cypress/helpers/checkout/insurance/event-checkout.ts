@@ -139,3 +139,16 @@ export function checkEventMiniCart() {
       cy.get('.short-overview-value').should('contain.text', '€18.99');
     });
 }
+
+export function checkMiniCartWithoutOptional() {
+  const miniCartContent: sharedCheckout.MiniCart = {
+    price: ' €18.99 ',
+    products: [
+      {
+        title: ' Two Star Event Plan: ',
+        value: ' €18.99 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}

@@ -9,7 +9,7 @@ const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
 const returnDate = dayjs().add(10, 'day').format('YYYY-MM-DD');
 const startDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
 
-export function populateInsuranceInfoForm() {
+export function populateTripInformation() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=tripDestination]').select('Europe');
     cy.get('[name="tripStartDate"]').type(tomorrowsDate);
@@ -20,7 +20,7 @@ export function populateInsuranceInfoForm() {
   });
 }
 
-export function checkTravelComparisonTable() {
+export function checkSingleTravelComparisonTable() {
   cy.get('cx-fs-comparison-table-container').within(() => {
     cy.get('.nav-link').contains('Single Trip').click();
   });
@@ -56,7 +56,7 @@ export function selectSingleBudgetPlan() {
     });
 }
 
-export function checkOptionalProductsAndPick() {
+export function checkSingleOptionalProductsAndPick() {
   const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Travel Insurance',
     items: [
@@ -159,4 +159,59 @@ export function checkPageComponenth3(checkoutStep) {
     .within(() => {
       cy.get('h2').contains('Travel Insurance');
     });
+}
+
+export function checkBackpackersTravelComparisonTable() {
+  cy.get('cx-fs-comparison-table-container').within(() => {
+    cy.get('.nav-link').contains(' Backpacking Trip').click();
+  });
+  cy.get('.table-header-value').should('contain.text', '€105.00');
+  cy.get('.table-header-value').should('contain.text', '€157.00');
+  cy.get('.table-header-value').should('contain.text', '€187.00');
+}
+
+export function selectBackpackersGold() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(2)
+    .within(() => {
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Backpackers - Gold Plan'
+      );
+      cy.get('.table-header-value').should('contain.text', '€187.00');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function checkBackpackersOptionalProducts() {
+  const addOptionsContent: sharedCheckout.AddOptions = {
+    title: 'Your Travel Insurance',
+    items: [
+      {
+        name: 'Business Cover',
+        notAvailable: true,
+      },
+      {
+        name: 'Excess waiver',
+        available: true,
+      },
+      {
+        name: 'Golf Cover',
+        notAvailable: true,
+      },
+      {
+        name: 'Hazardous Activities',
+        available: true,
+      },
+      {
+        name: 'Valuables Extension',
+        available: true,
+      },
+      {
+        name: 'Winter Sports Cover',
+        available: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
 }

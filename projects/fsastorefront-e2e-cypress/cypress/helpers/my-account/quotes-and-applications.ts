@@ -65,3 +65,11 @@ export function checkWeeklyLoanApplication() {
       });
   });
 }
+
+export function checkTwoQuotes(product1, product2) {
+  cy.get('cx-fs-quotes').within(() => {
+    cy.get('.info-card').should('have.length', 2);
+    cy.get('h6').should('contain.text', product1);
+    cy.get('h6').should('contain.text', product2);
+  });
+}

@@ -37,7 +37,7 @@ export function checkMiniCartFirstStep() {
       },
       {
         title: 'Start Date:',
-        value: ' 2021-12-12 ',
+        value: ' 2023-12-12 ',
       },
     ],
   };
@@ -50,7 +50,7 @@ export function checkMiniCart() {
     products: [
       {
         title: ' Start Date: ',
-        value: ' 12 Dec 2021 ',
+        value: ' 12 Dec 2023 ',
       },
       {
         title: 'Deposit Term:',
@@ -85,7 +85,7 @@ export function configureAProduct() {
   cy.get('[name=term-amount]').type('500000');
   cy.get('[name=deposit-term]').select('3');
   cy.get('[name=maturity-option]').select('termination');
-  cy.get('[name=startDate]').type('2021-12-12');
+  cy.get('[name=startDate]').type('2023-12-12');
 }
 
 export function checkFtdApplication() {
