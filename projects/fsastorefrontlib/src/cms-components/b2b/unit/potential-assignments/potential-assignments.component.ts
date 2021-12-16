@@ -9,7 +9,7 @@ import {
   CurrentUnitService,
   ListService,
 } from '@spartacus/organization/administration/components';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductAssignmentService } from '../../../../core/product-assignment/facade/product-assignment.service';
 import { PotentialAssignmentsListService } from './potential-assignments-list.service';
@@ -18,7 +18,7 @@ import { PotentialAssignmentsListService } from './potential-assignments-list.se
   selector: 'cx-fs-potential-assignments',
   templateUrl: './potential-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // tslint:disable-next-line:no-host-metadata-property
+  // eslint-disable-next-line  @angular-eslint/no-host-metadata-property
   host: { class: 'content-wrapper' },
   providers: [
     {

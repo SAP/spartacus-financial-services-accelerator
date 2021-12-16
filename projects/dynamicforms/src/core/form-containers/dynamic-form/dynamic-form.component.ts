@@ -30,6 +30,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   formData: Observable<YFormData>;
   @Input()
   config: FormDefinition;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 

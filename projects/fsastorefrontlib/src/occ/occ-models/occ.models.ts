@@ -3,10 +3,14 @@ import {
   B2BUser,
   Cart,
   Category,
+  Consent,
+  ConsentTemplate,
   Occ,
   OrderEntry,
+  PaginationModel,
   Price,
   Product,
+  SortModel,
   User,
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/checkout/root';
@@ -70,6 +74,16 @@ export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
 }
 
+export interface OBOConsentList {
+  consents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: FSUser[];
+  pagination: PaginationModel;
+  sorts: SortModel[];
+}
+
 export interface QuoteWorkflowStatus {
   code?: string;
 }
@@ -85,6 +99,23 @@ export interface InsuranceQuote {
   quoteWorkflowStatus?: QuoteWorkflowStatus;
   quoteDetails?: Record<string, string>;
   insuredObjectList?: InsuredObjectList;
+  renewal?: boolean;
+  original?: boolean;
+}
+
+export interface OBOConsent extends Consent {
+  consentHolders?: User[];
+  consentTemplate?: ConsentTemplate;
+  customer: User;
+  oboConsentConfiguration: OBOConsentConfiguration;
+}
+
+export interface FSConsentTemplate extends ConsentTemplate {
+  exposed?: boolean;
+}
+
+export interface OBOConsentConfiguration {
+  permissions?: Map<string, boolean>;
 }
 
 export enum OrganizationTableType {
@@ -165,6 +196,10 @@ export enum SyncPilotGender {
   rev = 'd',
 }
 
+export enum FSUserRole {
+  SELLER = 'sellergroup',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;
@@ -210,6 +245,7 @@ export interface FSContactInfo {
 export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
+  active?: boolean;
 }
 
 export interface FSStepData {

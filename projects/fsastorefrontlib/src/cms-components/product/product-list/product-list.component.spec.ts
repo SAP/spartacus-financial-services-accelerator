@@ -21,7 +21,7 @@ const mockProduct = {
   },
 };
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })

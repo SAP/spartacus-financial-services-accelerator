@@ -22,6 +22,8 @@ import { payment } from './overrides/en/payment';
 import { myAccount } from './overrides/en/my-account';
 import { address } from './overrides/en/address';
 import { cart } from './overrides/en/cart';
+import { consent } from './en/consent.en';
+import { dashboard } from './en/dashboard.en';
 
 export const fstranslations: TranslationResources = {
   b2b,
@@ -40,6 +42,8 @@ export const fstranslations: TranslationResources = {
   organization,
   productAssignments,
   potentialProductAssignments,
+  consent,
+  dashboard,
 };
 
 export const fsOverrides: TranslationResources = {

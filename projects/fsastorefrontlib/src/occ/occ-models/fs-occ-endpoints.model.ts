@@ -173,4 +173,22 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   userRegister?: string;
+
+  /**
+   * Get on behalf of consents
+   *
+   */
+  oboConsents?: string;
+
+  /**
+   * Gets the list of customers created by consent holder
+   *
+   */
+  oboConsentCustomers?: string;
+
+  /**
+   * Transfers cart to customer created by consent holder
+   *
+   */
+  transferCart?: string;
 }

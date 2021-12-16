@@ -12,7 +12,7 @@ import { CmsFormSubmitComponent } from './../../../occ/occ-models/cms-component.
 import { CMSFormSubmitComponent } from './cms-form-submit.component';
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-form-component',
   template: '',
 })
@@ -32,7 +32,7 @@ class MockFormComponent {
 }
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-spinner',
   template: '',
 })

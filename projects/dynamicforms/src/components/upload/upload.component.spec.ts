@@ -24,7 +24,7 @@ import { UploadComponent } from './upload.component';
 import { FormDataService } from '../../core';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })

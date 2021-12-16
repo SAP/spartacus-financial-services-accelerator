@@ -37,11 +37,23 @@
                 {{ 'quote.generalInformation' | cxTranslate }}
               </div>
               <div *ngFor="let cart of quotes?.carts" class="col">
-                {{
-                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
-                    ?.cartDisplayName
-                }}
+                {{ (cart?.entries)[0]?.product?.name }}
+                <span
+                  *ngIf="cart?.insuranceQuote?.original"
+                  class="far fa-star ml-1 notice pointer"
+                  [ngbTooltip]="'quote.renewalQuoteInfo' | cxTranslate"
+                  triggers="click:blur"
+                  placement="top"
+                ></span>
               </div>
+            </li>
+            <li
+              *ngIf="(quotes?.carts)[0]?.insuranceQuote?.renewal"
+              class="accordion-list-item row text-break"
+            >
+              <ng-container
+                [ngTemplateOutlet]="renewalExistingPolicyNumber"
+              ></ng-container>
             </li>
             <ng-container
               *ngTemplateOutlet="
@@ -52,9 +64,7 @@
                     ? (((quotes?.carts)[0]?.entries)[0]?.configurationInfos)[0]
                         ?.configurationValues?.entry
                     : ((quotes?.carts)[0].insuranceQuote?.insuredObjectList
-                        ?.insuredObjects)[0]?.insuredObjectItems,
-                  configurable:
-                    ((quotes?.carts)[0]?.entries)[0]?.product?.configurable
+                        ?.insuredObjects)[0]?.insuredObjectItems
                 }
               "
             >
@@ -86,10 +96,30 @@
               </div>
               <div *ngFor="let cart of quotes?.carts" class="col">
                 {{
-                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product
-                    ?.cartDisplayName
+                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.product?.name
                 }}
+                <span
+                  *ngIf="
+                    categoryConfig?.visibleInsuredObjects?.length === 0 &&
+                    cart?.insuranceQuote?.original
+                  "
+                  class="far fa-star ml-1 notice pointer"
+                  [ngbTooltip]="'quote.renewalQuoteInfo' | cxTranslate"
+                  triggers="click:blur"
+                  placement="top"
+                ></span>
               </div>
+            </li>
+            <li
+              *ngIf="
+                categoryConfig?.visibleInsuredObjects?.length === 0 &&
+                (quotes?.carts)[0]?.insuranceQuote?.renewal
+              "
+              class="accordion-list-item row text-break"
+            >
+              <ng-container
+                [ngTemplateOutlet]="renewalExistingPolicyNumber"
+              ></ng-container>
             </li>
             <li class="accordion-list-item row text-break">
               <div class="col item-label">
@@ -114,6 +144,14 @@
                 </ng-container>
               </li>
             </ng-container>
+            <li class="accordion-list-item row text-break">
+              <div class="col item-label">
+                {{ 'quote.totalPrice' | cxTranslate }}
+              </div>
+              <div class="col notice" *ngFor="let cart of quotes?.carts">
+                {{ cart.totalPrice?.formattedValue }}
+              </div>
+            </li>
             <li class="accordion-list-item row sub-title text-break">
               <div
                 *ngFor="let cart of quotes?.carts; index as i"
@@ -155,7 +193,7 @@
                   >
                     {{
                       (cart?.entries)[i + 1]?.totalPrice.value
-                        ? (cart?.entries)[i + 1]?.totalPrice.formattedValue
+                        ? ('fscommon.included' | cxTranslate)
                         : ('fscommon.notIncluded' | cxTranslate)
                     }}
                   </div>
@@ -200,11 +238,7 @@
         </cx-fs-accordion-item>
       </div>
     </div>
-    <ng-template
-      #generalInformationQuoteComparison
-      let-labelList="labelList"
-      let-configurable="configurable"
-    >
+    <ng-template #generalInformationQuoteComparison let-labelList="labelList">
       <ng-container
         *ngFor="let insuredObjectItem of labelList; index as labelIndex"
       >
@@ -218,7 +252,9 @@
           <li
             *ngIf="
               getTranslation(
-                configurable ? 'quoteReview' : 'quote.details',
+                ((quotes?.carts)[0]?.entries)[0]?.product?.configurable
+                  ? 'quoteReview'
+                  : 'quote.details',
                 categoryConfig?.categoryCode,
                 insuredObjectItem?.label || insuredObjectItem?.key
               ) as insuredObjectItemLabel
@@ -233,7 +269,8 @@
                 *ngTemplateOutlet="
                   generalInformationQuoteValueComparison;
                   context: {
-                    insuredObjectItem: configurable
+                    insuredObjectItem: ((quotes?.carts)[0]?.entries)[0]?.product
+                      ?.configurable
                       ? (((cart?.entries)[0]?.configurationInfos)[0]
                           ?.configurationValues?.entry)[labelIndex]
                       : ((cart.insuranceQuote?.insuredObjectList
@@ -245,6 +282,16 @@
             </ng-container>
           </li>
         </ng-container>
+      </ng-container>
+    </ng-template>
+    <ng-template #renewalExistingPolicyNumber>
+      <div class="col item-label">
+        {{ 'policy.existingPolicyNo' | cxTranslate }}
+      </div>
+      <ng-container *ngFor="let cart of quotes?.carts">
+        <div *ngIf="cart?.insuranceQuote?.original; else na" class="col notice">
+          {{ cart?.insuranceQuote?.policyId }}
+        </div>
       </ng-container>
     </ng-template>
   </div>
@@ -262,4 +309,9 @@
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template #na>
+  <div class="col notice">
+    {{ 'fscommon.notAvailable' | cxTranslate }}
+  </div>
 </ng-template>

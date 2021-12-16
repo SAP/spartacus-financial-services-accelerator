@@ -6,6 +6,7 @@ export const policy = {
     policyChartHeader: '[DE] Premium Overview',
     expiredPolicyId: '[DE] Expired Policy ID',
     policyNo: 'Policennr.',
+    existingPolicyNo: '[DE] Existing Policy No.',
     myPolicy: 'Meine Policen',
     policyNumberIs: 'Versicherungsnummer',
     policyHolder: 'Versicherungshalter',

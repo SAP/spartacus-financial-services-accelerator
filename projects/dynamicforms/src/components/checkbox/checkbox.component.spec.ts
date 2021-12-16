@@ -15,7 +15,7 @@ import { DynamicFormsConfig } from '../../core';
 import { FormService } from './../../core/services/form/form.service';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   selector: 'cx-error-notice',
   template: '',
 })

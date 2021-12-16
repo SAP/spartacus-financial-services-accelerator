@@ -30,6 +30,56 @@
               }}
             </div>
           </h2>
+          <ng-container *ngIf="oboCustomers$ | async as oboCustomers">
+            <cx-fs-accordion-item
+              [opened]="true"
+              [title]="'fscommon.oboCustomers' | cxTranslate"
+            >
+              <div class="container">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion-list">
+                    <ng-container
+                      *ngFor="
+                        let oboCustomer of oboCustomers.entries;
+                        let i = index
+                      "
+                    >
+                      <ng-container *ngIf="oboCustomer.active">
+                        <li class="accordion-list-item row">
+                          <div class="col-6 col-sm-8">
+                            <div class="row no-gutters">
+                              <span class="col-12 col-sm-6 item-label">
+                                {{ oboCustomer.name }}
+                              </span>
+                              <span class="col-12 col-sm-6 notice">
+                                {{ oboCustomer.uid }}
+                              </span>
+                            </div>
+                          </div>
+                          <span
+                            [ngClass]="{
+                              'is-disabled':
+                                (isCartTransferAllowedForSeller$ | async) &&
+                                selectedIndex === i
+                            }"
+                            class="col-6 col-sm-4 link text-right"
+                            (click)="selectOBOCustomer(oboCustomer, i)"
+                          >
+                            {{
+                              (isCartTransferAllowedForSeller$ | async) &&
+                              selectedIndex === i
+                                ? ('fscommon.selected' | cxTranslate)
+                                : ('fscommon.select' | cxTranslate)
+                            }}
+                          </span>
+                        </li>
+                      </ng-container>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </cx-fs-accordion-item>
+          </ng-container>
           <div #ref>
             <ng-container
               *ngIf="
@@ -268,7 +318,7 @@
             </div>
           </cx-fs-accordion-item>
           <div class="row mt-5">
-            <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+            <div class="col-md-6 mb-3 mb-md-0">
               <ng-container
                 *ngIf="
                   cart.insuranceQuote?.state?.code !== 'BIND' &&
@@ -287,19 +337,21 @@
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
               "
-              class="col-md-6 col-sm-6 col-xs-12"
+              class="col-md-6"
             >
               <ng-container
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
-                ><button
+              >
+                <button
                   class="primary-button btn-block"
                   type="button"
+                  [disabled]="!(isCartTransferAllowedForSeller$ | async)"
                   data-checkout-url=""
                   (click)="navigateNext(nextCheckoutStep, cart)"
                 >
                   {{ 'common.continue' | cxTranslate }}
-                </button></ng-container
-              >
+                </button>
+              </ng-container>
             </div>
           </div>
         </div>

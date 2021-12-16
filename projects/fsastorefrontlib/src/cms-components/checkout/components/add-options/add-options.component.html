@@ -145,7 +145,7 @@
 
 <ng-container *ngIf="isCartStable$ | async">
   <div class="row mt-5">
-    <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 mb-md-0">
       <ng-container
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
         ><button
@@ -156,7 +156,7 @@
         </button></ng-container
       >
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6">
       <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
         ><button
           class="primary-button btn-block"

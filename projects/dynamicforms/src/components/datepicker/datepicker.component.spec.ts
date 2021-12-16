@@ -16,7 +16,7 @@ import { FormService } from './../../core/services/form/form.service';
 import { DatePickerComponent } from './datepicker.component';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })

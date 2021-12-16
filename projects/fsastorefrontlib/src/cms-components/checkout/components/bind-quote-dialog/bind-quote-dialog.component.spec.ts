@@ -5,15 +5,20 @@ import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { of } from 'rxjs';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
+import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 const cartCode = 'test001';
 const quoteId = 'testQuote001';
 const chooseCoverFormId = 'chooseCoverForm1';
 const personalDetailsFormId = 'personalDetailsFormId';
+const firstName = 'Donna';
+const lastName = 'Moore';
 
 const mockCart: FSCart = {
   code: cartCode,
@@ -44,6 +49,16 @@ const cartWithForms = {
   },
 };
 
+const mockUser: FSUser = {
+  firstName: firstName,
+  lastName: lastName,
+  roles: [],
+};
+
+const mockOBOConsentCustomer: FSUser = {
+  uid: 'oboconsentuid',
+};
+
 class MockCartService {
   getActive(): any {
     return of(mockCart);
@@ -65,6 +80,17 @@ class MockFormDataStorageService {
   clearFormDataIdFromLocalStorage(formDataId: string) {}
 }
 
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
+  }
+}
+
+class MockConsentService {
+  selectedOBOCustomer$ = of(mockOBOConsentCustomer);
+  transferCartToSelectedOBOCustomer(mockCart, mockUser, oboConsentCustomer) {}
+}
+
 describe('BindQuoteDialogComponent', () => {
   let component: BindQuoteDialogComponent;
   let fixture: ComponentFixture<BindQuoteDialogComponent>;
@@ -73,6 +99,8 @@ describe('BindQuoteDialogComponent', () => {
   let quoteService: MockQuoteService;
   let cartService: MockCartService;
   let formDataStorageService: MockFormDataStorageService;
+  let oboConsentService: MockConsentService;
+  let userAccountFacade: MockUserAccountFacade;
 
   beforeEach(
     waitForAsync(() => {
@@ -96,6 +124,8 @@ describe('BindQuoteDialogComponent', () => {
             provide: FormDataStorageService,
             useClass: MockFormDataStorageService,
           },
+          { provide: UserAccountFacade, useClass: MockUserAccountFacade },
+          { provide: ConsentService, useClass: MockConsentService },
         ],
       }).compileComponents();
     })
@@ -110,6 +140,8 @@ describe('BindQuoteDialogComponent', () => {
     modalService = TestBed.inject(ModalService);
     cartService = TestBed.inject(FSCartService);
     formDataStorageService = TestBed.inject(FormDataStorageService);
+    oboConsentService = TestBed.inject(ConsentService);
+    userAccountFacade = TestBed.inject(UserAccountFacade);
 
     spyOn(quoteService, 'bindQuote').and.callThrough();
     spyOn(modalService, 'dismissActiveModal').and.callThrough();
@@ -142,5 +174,23 @@ describe('BindQuoteDialogComponent', () => {
     expect(
       formDataStorageService.clearFormDataIdFromLocalStorage
     ).toHaveBeenCalledWith(personalDetailsFormId);
+  });
+
+  it('should bind quote and transfer cart to OBO customer', () => {
+    spyOn(
+      oboConsentService,
+      'transferCartToSelectedOBOCustomer'
+    ).and.callThrough();
+    const sellerUser: FSUser = {
+      firstName: firstName,
+      lastName: lastName,
+      roles: [FSUserRole.SELLER],
+    };
+    spyOn(cartService, 'getActive').and.returnValue(of(cartWithForms));
+    spyOn(userAccountFacade, 'get').and.returnValue(of(sellerUser));
+    component.bindQuote();
+    expect(
+      oboConsentService.transferCartToSelectedOBOCustomer
+    ).toHaveBeenCalled();
   });
 });
