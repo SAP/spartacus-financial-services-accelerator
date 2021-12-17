@@ -15,7 +15,7 @@
           [attr.id]="config.name + option.name"
           value="{{ option.name }}"
           [formControlName]="config.name"
-          [attr.readonly]="config.readonly"
+          [attr.readonly]="config.readonly ? config.readonly : null"
         />
         <label class="pl-3 pt-1" [attr.for]="config.name + option.name">
           <ng-container *ngIf="activeLang$ | async as activeLang">

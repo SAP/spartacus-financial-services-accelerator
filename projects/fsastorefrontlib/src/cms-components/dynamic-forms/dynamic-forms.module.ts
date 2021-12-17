@@ -9,6 +9,8 @@ import { AutoPersonalDetailsPrefillResolver } from './resolver/auto-personal-det
 import { CartEntriesPrefillResolver } from './resolver/cart-entries-prefill-resolver';
 import { DynamicSelectComponent } from './form-components/dynamic-select/dynamic-select.component';
 import { ClaimPrefillResolver } from './resolver/claim-prefill-resolver';
+import { FSUserPrefillResolver } from './resolver/user-prefill-resolver';
+import { FSUserAddressPrefillResolver } from './resolver/user-address-prefill-resolver';
 
 @NgModule({
   imports: [
@@ -38,6 +40,12 @@ import { ClaimPrefillResolver } from './resolver/claim-prefill-resolver';
           },
           claim: {
             prefillResolver: ClaimPrefillResolver,
+          },
+          user: {
+            prefillResolver: FSUserPrefillResolver,
+          },
+          address: {
+            prefillResolver: FSUserAddressPrefillResolver,
           },
         },
       },

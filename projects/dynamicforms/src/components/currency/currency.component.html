@@ -17,7 +17,7 @@
           [attr.placeholder]="placeHolder"
           [formControlName]="config.name"
           [attr.name]="config.name"
-          [attr.readonly]="config.readonly"
+          [attr.readonly]="config.readonly ? config.readonly : null"
         />
       </div>
     </div>

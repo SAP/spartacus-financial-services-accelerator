@@ -85,7 +85,7 @@ describe('FSAddressService', () => {
 
   it('should set delivery address for cart when user already has it', () => {
     spyOn(checkoutDeliveryService, 'setDeliveryAddress').and.callThrough();
-    service.createAddressData(formContent, mockUser, mockUser.defaultAddress);
+    service.createAddress(formContent, mockUser.defaultAddress);
     expect(checkoutDeliveryService.setDeliveryAddress).toHaveBeenCalledWith(
       mockUser.defaultAddress
     );
@@ -93,7 +93,7 @@ describe('FSAddressService', () => {
 
   it('should create delivery address', () => {
     spyOn(checkoutDeliveryService, 'createAndSetAddress').and.callThrough();
-    service.createAddressData(formContent, user, null);
+    service.createAddress(formContent, null);
     expect(checkoutDeliveryService.createAndSetAddress).toHaveBeenCalled();
   });
 });

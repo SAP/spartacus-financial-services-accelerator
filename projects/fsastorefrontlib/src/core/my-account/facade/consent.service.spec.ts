@@ -1,4 +1,4 @@
-import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
+import { Address, OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { ConsentService } from './consent.service';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -12,6 +12,7 @@ import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
 const userId = OCC_USER_ID_CURRENT;
 const consentId = 'CL00001';
 const mockUser: FSUser = {
+  uid: 'test@user.com',
   firstName: 'Donna',
   lastName: 'Moore',
   roles: [FSUserRole.SELLER],
@@ -22,12 +23,16 @@ const mockOBOCustomer: FSUser = {
 const mockCart: FSCart = {
   code: 'cartCode',
 };
+const address: Address = {
+  companyName: 'Test Company',
+  defaultAddress: true,
+};
+
 class MockUserIdService {
   getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
-
 class MockUserAccountFacade {
   get() {
     return of(mockUser);
@@ -143,5 +148,16 @@ describe('ConsentServiceTest', () => {
         expect(selectedCustomer.uid).toEqual(mockOBOCustomer.uid)
       )
       .unsubscribe();
+  });
+
+  it('should create address for specified customer by consent holder', () => {
+    service.createAddressForUser(mockUser.uid, mockOBOCustomer.uid, address);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.CreateAddress({
+        userId: 'test@user.com',
+        oboCustomerId: 'customerToTransferCartTo',
+        address: address,
+      })
+    );
   });
 });
