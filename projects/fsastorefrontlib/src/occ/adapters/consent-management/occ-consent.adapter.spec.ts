@@ -8,15 +8,22 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { OccEndpointsService } from '@spartacus/core';
+import { Address, OccEndpointsService } from '@spartacus/core';
 import { OccConsentAdapter } from './occ-consent.adapter';
 
 const userId = 'testId';
 const cartId = 'cartId';
 const oboCustomerId = 'oboCustomerId';
+
 const consentsEndpoint = 'oboConsents';
 const oboConsentCustomersEndpoint = 'oboConsentCustomers';
 const transferCartEndpoint = 'transferCart';
+const addAddressEndpoint = 'oboConsentAddresses';
+
+const address: Address = {
+  companyName: 'Test Company',
+  defaultAddress: true,
+};
 
 class MockOccEndpointsService {
   buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -86,6 +93,29 @@ describe('OccConsentAdapter', () => {
           {
             urlParams: {
               userId,
+            },
+          }
+        );
+      })
+    );
+  });
+
+  describe('createAddressForUser', () => {
+    it(
+      'should create address for user',
+      waitForAsync(() => {
+        adapter
+          .createAddressForUser(userId, oboCustomerId, address)
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === addAddressEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          addAddressEndpoint,
+          {
+            urlParams: {
+              userId,
+              oboCustomerId,
             },
           }
         );

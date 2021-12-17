@@ -13,7 +13,7 @@
         [formControlName]="config.name"
         rows="10"
         [attr.name]="config.name"
-        [attr.readonly]="config.readonly"
+        [attr.readonly]="config.readonly ? config.readonly : null"
       ></textarea>
     </div>
     <cx-error-notice
