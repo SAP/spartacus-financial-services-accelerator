@@ -120,7 +120,7 @@ const oboCustomer = {
   uid: 'customerToTransferCartTo',
 };
 const address: Address = {
-  companyName: 'msg Global Digital',
+  companyName: 'Test Company',
   defaultAddress: true,
 };
 

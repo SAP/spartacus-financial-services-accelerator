@@ -28,7 +28,7 @@ const user = 'user';
 const cartCode = 'cartCode';
 const oboCustomer = 'customerToTransferCartUid';
 const address: Address = {
-  companyName: 'msg Global Digital',
+  companyName: 'Test Company',
   defaultAddress: true,
 };
 

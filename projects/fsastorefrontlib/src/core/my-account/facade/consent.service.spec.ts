@@ -24,7 +24,7 @@ const mockCart: FSCart = {
   code: 'cartCode',
 };
 const address: Address = {
-  companyName: 'msg Global Digital',
+  companyName: 'Test Company',
   defaultAddress: true,
 };
 

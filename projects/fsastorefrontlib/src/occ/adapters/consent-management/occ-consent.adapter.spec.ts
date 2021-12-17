@@ -21,7 +21,7 @@ const transferCartEndpoint = 'transferCart';
 const addAddressEndpoint = 'oboConsentAddresses';
 
 const address: Address = {
-  companyName: 'msg Global Digital',
+  companyName: 'Test Company',
   defaultAddress: true,
 };
 
