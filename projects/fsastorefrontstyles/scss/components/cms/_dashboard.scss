@@ -1,4 +1,5 @@
-%cx-fs-seller-dashboard-list {
+%cx-fs-seller-dashboard-list,
+%cx-fs-user-profile {
   .table {
     thead {
       background-color: var(--cx-color-4);
@@ -64,9 +65,17 @@
       flex: 0 0 33.333%;
     }
     .asset {
+      border: 1px solid var(--cx-color-3);
       display: flex;
       flex: 0 0 calc(50% - 0.5rem);
       gap: 1rem;
+      cursor: pointer;
+      &.active,
+      &:active,
+      &:focus,
+      &:focus-within {
+        border-color: var(--cx-color-primary);
+      }
       @include media-breakpoint-down(sm) {
         flex: 1 0 100%;
       }

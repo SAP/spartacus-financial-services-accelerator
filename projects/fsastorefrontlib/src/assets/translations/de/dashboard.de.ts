@@ -11,6 +11,7 @@ export const dashboard = {
       status: '[DE] by Status',
       email: '[DE] by Email',
     },
-    checkCustomers: '[DE] Check Customer\'s' // prettier-ignore
+    checkCustomers: '[DE] Check Customer\'s', // prettier-ignore
+    noAssets: '[DE] There are no assets of this kind',
   },
 };

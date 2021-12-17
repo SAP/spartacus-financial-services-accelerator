@@ -11,6 +11,7 @@ export const dashboard = {
       status: 'by Status',
       email: 'by Email',
     },
-    checkCustomers: 'Check Customer\'s' // prettier-ignore
+    checkCustomers: 'Check Customer\'s', // prettier-ignore
+    noAssets: 'There are no assets of this kind',
   },
 };

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { RoutingService, User, UserIdService } from '@spartacus/core';
-import { filter, map } from 'rxjs/operators';
+import { RoutingService, UserIdService } from '@spartacus/core';
+import { filter, map, shareReplay } from 'rxjs/operators';
 
 import {
   FSUserRole,
@@ -35,6 +35,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerQuotes$: Observable<InsuranceQuoteList>;
   customerPolicies$: Observable<any>;
   customerClaims$: Observable<any>;
+  assets: { [key: string]: any };
+  assetSelected: string;
 
   ngOnInit(): void {
     this.loadCustomerDetails();
@@ -58,8 +60,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 this.fsConsentService.loadCustomerPolicies(userId, customerId);
                 this.fsConsentService.loadCustomerClaims(userId, customerId);
                 this.customer$ = this.fsConsentService.getCustomer();
-                this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
                 this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
+                this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
                 this.customerClaims$ = this.fsConsentService.getCustomerClaims();
               } else {
                 this.quoteService.loadQuotes();
@@ -75,6 +77,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  showAssetList(assetsChosen: { [key: string]: any }, activeClass) {
+    this.assetSelected = activeClass;
+    this.assets = assetsChosen;
   }
 
   ngOnDestroy(): void {
