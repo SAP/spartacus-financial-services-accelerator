@@ -39,6 +39,8 @@ export const quote = {
     successfulSelection:
       '[DE] User successfully selected travel insurance cards.',
     compareInfo: '[DE] Select two quotes with the same category for comparison',
+    renewalInfo: '[DE] This quote is created from existing policy',
+    renewalQuoteInfo: '[DE]  Renewal Quote',
     clearAll: '[DE] Clear all',
     allQuotes: '[DE] All quotes',
     quotesComparison: '[DE] Compare {{ category }} quotes',
