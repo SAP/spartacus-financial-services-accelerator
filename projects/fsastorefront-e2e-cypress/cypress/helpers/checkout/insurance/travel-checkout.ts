@@ -7,7 +7,7 @@ dayjs.extend(customParseFormat);
 
 const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
 const returnDate = dayjs().add(10, 'day').format('YYYY-MM-DD');
-const startDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
+const startDate = dayjs().add(2, 'day').format('DD MMM YYYY');
 
 export function populateTripInformation() {
   cy.get('cx-dynamic-form').within(() => {
@@ -92,23 +92,23 @@ export function checkSingleOptionalProductsAndPick() {
 
 export function checkTravelMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €99.00 ',
+    price: '€99.00',
     products: [
       {
-        title: ' Start Date: ',
+        title: 'Start Date:',
         value: startDate,
       },
       {
         title: 'Number of Travelers:',
-        value: ' 1 ',
+        value: '1',
       },
       {
-        title: ' Single - Budget Plan: ',
-        value: ' €90.00 ',
+        title: 'Single - Budget Plan:',
+        value: '€90.00',
       },
       {
-        title: ' Winter Sports Cover: ',
-        value: ' €9.00 ',
+        title: 'Winter Sports Cover:',
+        value: '€9.00',
       },
     ],
   };
@@ -163,7 +163,7 @@ export function checkPageComponenth3(checkoutStep) {
 
 export function checkBackpackersTravelComparisonTable() {
   cy.get('cx-fs-comparison-table-container').within(() => {
-    cy.get('.nav-link').contains(' Backpacking Trip').click();
+    cy.get('.nav-link').contains('Backpacking Trip').click();
   });
   cy.get('.table-header-value').should('contain.text', '€105.00');
   cy.get('.table-header-value').should('contain.text', '€157.00');

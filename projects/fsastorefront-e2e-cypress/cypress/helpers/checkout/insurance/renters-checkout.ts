@@ -57,35 +57,35 @@ export function checkOptionalProducts() {
 
 export function checkMiniCartRenters() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €66.62 ',
+    price: '€66.62',
     products: [
       {
-        title: ' Start Date: ',
+        title: 'Start Date:',
         value: tomorrowsDate,
       },
       {
         title: 'Property Address:',
-        value: ' Omladinskin Brigada ',
+        value: 'Omladinskin Brigada',
       },
       {
         title: 'Property Type:',
-        value: ' House ',
+        value: 'House',
       },
       {
-        title: ' Renters Monthly: ',
-        value: ' €31.50 ',
+        title: 'Renters Monthly:',
+        value: '€31.50',
       },
       {
-        title: ' Bicycles Cover: ',
-        value: ' €12.02 ',
+        title: 'Bicycles Cover:',
+        value: '€12.02',
       },
       {
-        title: ' Jewelry and Watches Cover: ',
-        value: ' €15.17 ',
+        title: 'Jewelry and Watches Cover:',
+        value: '€15.17 ',
       },
       {
-        title: ' Temporary Accommodation Cover: ',
-        value: ' €7.93 ',
+        title: 'Temporary Accommodation Cover:',
+        value: '€7.93',
       },
     ],
   };
@@ -94,31 +94,31 @@ export function checkMiniCartRenters() {
 
 export function checkMiniCartRentersRemovedProduct() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €54.60 ',
+    price: '€54.60',
     products: [
       {
-        title: ' Start Date: ',
+        title: 'Start Date:',
         value: tomorrowsDate,
       },
       {
         title: 'Property Address:',
-        value: ' Omladinskin Brigada ',
+        value: 'Omladinskin Brigada',
       },
       {
         title: 'Property Type:',
-        value: ' House ',
+        value: 'House',
       },
       {
-        title: ' Renters Monthly: ',
-        value: ' €31.50 ',
+        title: 'Renters Monthly:',
+        value: '€31.50',
       },
       {
-        title: ' Jewelry and Watches Cover: ',
-        value: ' €15.17 ',
+        title: 'Jewelry and Watches Cover:',
+        value: '€15.17',
       },
       {
-        title: ' Temporary Accommodation Cover: ',
-        value: ' €7.93 ',
+        title: 'Temporary Accommodation Cover:',
+        value: '€7.93',
       },
     ],
   };
