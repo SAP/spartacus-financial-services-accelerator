@@ -114,7 +114,7 @@ export const fscommon = {
       applicationNumber: 'Application number is',
       myApplication: 'My Application',
       applicationID: 'Application ID',
-      number: 'Number:',
+      number: 'Number',
     },
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',

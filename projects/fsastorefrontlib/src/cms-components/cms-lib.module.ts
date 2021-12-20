@@ -29,6 +29,7 @@ import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { SellerDashboardListModule } from './seller-dashboard/seller-dashboard-list.module';
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
+import { AssetsTableModule } from './assets-table/assets-table.module';
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
   ],
   exports: [
     AgentModule,
@@ -85,6 +87,7 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
   ],
   providers: [reducerProvider],
 })

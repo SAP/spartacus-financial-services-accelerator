@@ -13,6 +13,7 @@ import {
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
+import { AssetsTableModule } from '../assets-table/assets-table.module';
 import { UserProfileComponent } from './user-profile.component';
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
     I18nModule,
     SpinnerModule,
     CmsModule,
+    AssetsTableModule,
     RouterModule.forChild(routes),
   ],
   providers: [

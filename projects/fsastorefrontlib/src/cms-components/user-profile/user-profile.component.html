@@ -1,51 +1,49 @@
 <ng-container *ngIf="customer$ | async as user; else loading">
-  <ng-container
-    *ngIf="{
-      quotes: customerQuotes$ | async,
-      policies: customerPolicies$ | async,
-      claims: customerClaims$ | async
-    } as customerAssets"
-  >
-    <div class="row">
-      <div class="col-md-5 mb-5">
-        <div class="box-shadow border border-color-3">
-          <h5 class="text-center py-3 mb-0">
-            {{ 'consent.customerProfile' | cxTranslate }}
-          </h5>
-          <div class="user-profile-wrapper background-color-4">
-            <div
-              class="user-profile bg-white border border-color-3 text-center"
-            >
-              <span class="user-image h1 fas fa-user p-3"></span>
-              <h6 class="text-uppercase">
-                {{ 'consent.customerName' | cxTranslate }}
-              </h6>
-              <h6 class="notice">{{ user.name }}</h6>
-              <hr />
-              <ul class="text-left mb-0">
-                <li class="d-flex justify-content-between align-items-end">
-                  <span class="semi-bold pr-2"
-                    >{{ 'dashboard.email' | cxTranslate }}:</span
-                  >
+  <div class="row mb-5">
+    <div class="col-md-5 mb-5">
+      <div class="box-shadow border border-color-3">
+        <h5 class="text-center py-3 mb-0">
+          {{ 'consent.customerProfile' | cxTranslate }}
+        </h5>
+        <div class="user-profile-wrapper background-color-4">
+          <div class="user-profile bg-white border border-color-3 text-center">
+            <span class="user-image h1 fas fa-user p-3"></span>
+            <h6 class="text-uppercase">
+              {{ 'consent.customerName' | cxTranslate }}
+            </h6>
+            <h6 class="notice">{{ user.name }}</h6>
+            <hr />
+            <ul class="text-left mb-0">
+              <li class="d-flex justify-content-between align-items-end">
+                <span class="semi-bold pr-2"
+                  >{{ 'dashboard.email' | cxTranslate }}:</span
+                >
+                <span class="notice">
+                  {{ user.uid }}
+                </span>
+              </li>
+              <li class="d-flex justify-content-between align-items-end">
+                <span class="semi-bold pr-2"
+                  >{{ 'fscommon.phoneNumber' | cxTranslate }}:</span
+                >
+                <ng-container *ngIf="user.contactInfos?.length">
                   <span class="notice">
-                    {{ user.uid }}
+                    {{ user.contactInfos[0]?.phoneNumber }}
                   </span>
-                </li>
-                <li class="d-flex justify-content-between align-items-end">
-                  <span class="semi-bold pr-2"
-                    >{{ 'fscommon.phoneNumber' | cxTranslate }}:</span
-                  >
-                  <ng-container *ngIf="user.contactInfos?.length">
-                    <span class="notice">
-                      {{ user.contactInfos[0]?.phoneNumber }}
-                    </span>
-                  </ng-container>
-                </li>
-              </ul>
-            </div>
+                </ng-container>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
+    </div>
+    <ng-container
+      *ngIf="{
+        quotes: customerQuotes$ | async,
+        policies: customerPolicies$ | async,
+        claims: customerClaims$ | async
+      } as customerAssets"
+    >
       <div class="col-md-7">
         <div class="box-shadow border border-color-3">
           <h5 class="text-center py-3 mb-0">
@@ -171,53 +169,20 @@
           </div>
         </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
 </ng-container>
 <ng-container *ngIf="assetSelected">
-  <ng-container *ngIf="assets?.length > 0; else noAssets">
-    <div class="mt-5">
-      <table class="box-shadow table table-hover border border-color-3">
-        <thead class="d-none d-md-table-row">
-          <th scope="col">Name</th>
-          <th scope="col">
-            {{ 'fscommon.status' | cxTranslate }}
-          </th>
-          <th scope="col">{{ 'forms.contactType.email' | cxTranslate }}</th>
-        </thead>
-        <tbody>
-          <tr class="position-relative" *ngFor="let asset of assets">
-            <td class="d-flex d-md-table-cell">
-              <div class="mobile-label text-uppercase pr-2 d-md-none">
-                {{ 'dashboard.name' | cxTranslate }}:
-              </div>
-              <span class="notice text-break">
-                {{ asset?.defaultCategory?.name }}
-                {{ asset?.categoryData?.name }}
-                {{ asset?.insurancePolicy?.categoryData?.name }}</span
-              >
-            </td>
-            <td class="d-flex d-md-table-cell">
-              <div class="mobile-label text-uppercase pr-2 d-md-none">
-                {{ 'fscommon.status' | cxTranslate }}:
-              </div>
-              <span>sdfdgdg</span>
-            </td>
-            <td class="d-flex d-md-table-cell">
-              <div class="mobile-label text-uppercase pr-2 d-md-none">
-                {{ 'dashboard.email' | cxTranslate }}:
-              </div>
-              <span class="text-break">gdsgf</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </ng-container>
+  <cx-fs-assets-table
+    [headings]="[
+      'fscommon.application.number' | cxTranslate,
+      'dashboard.name' | cxTranslate,
+      'fscommon.paymentFrequency' | cxTranslate,
+      'fscommon.status' | cxTranslate
+    ]"
+    [assets]="assets"
+  ></cx-fs-assets-table>
 </ng-container>
-<ng-template #noAssets>
-  <h3>{{ 'dashboard.noAssets' | cxTranslate }}</h3>
-</ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>

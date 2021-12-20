@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerQuotes$: Observable<InsuranceQuoteList>;
   customerPolicies$: Observable<any>;
   customerClaims$: Observable<any>;
-  assets: { [key: string]: any };
+  assets: { [key: string]: any }[];
   assetSelected: string;
 
   ngOnInit(): void {
@@ -79,7 +79,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  showAssetList(assetsChosen: { [key: string]: any }, activeClass) {
+  showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
     this.assetSelected = activeClass;
     this.assets = assetsChosen;
   }

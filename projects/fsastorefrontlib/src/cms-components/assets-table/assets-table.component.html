@@ -1,0 +1,53 @@
+<ng-container *ngIf="assets?.length > 0; else noAssets">
+  <table class="box-shadow table table-hover border border-color-3">
+    <thead class="d-none d-md-table-row">
+      <th *ngFor="let heading of headings" scope="col">{{ heading }}</th>
+    </thead>
+    <tbody>
+      <tr class="position-relative" *ngFor="let asset of assets">
+        <td class="d-flex d-md-table-cell">
+          <div class="mobile-label text-uppercase pr-2 d-md-none">
+            {{ headings[0] }}:
+          </div>
+          <span class="notice text-break">
+            {{ asset?.quoteId }}
+            {{ asset?.contractNumber }}
+            {{ asset?.claimNumber }}</span
+          >
+        </td>
+        <td class="d-flex d-md-table-cell">
+          <div class="mobile-label text-uppercase pr-2 d-md-none">
+            {{ headings[1] }}:
+          </div>
+          <span class="text-break">
+            {{ asset?.defaultCategory?.name }}
+            {{ asset?.categoryData?.name }}
+            {{ asset?.insurancePolicy?.categoryData?.name }}</span
+          >
+        </td>
+        <td class="d-flex d-md-table-cell">
+          <div class="mobile-label text-uppercase pr-2 d-md-none">
+            {{ headings[2] }}:
+          </div>
+          <span class="text-break text-capitalize">
+            {{ asset?.paymentFrequency }}
+            {{ asset?.insurancePolicy?.paymentFrequency }}</span
+          >
+        </td>
+        <td class="d-flex d-md-table-cell">
+          <div class="mobile-label text-uppercase pr-2 d-md-none">
+            {{ headings[3] }}:
+          </div>
+          <span class="text-break text-capitalize">
+            {{ asset?.quoteStatus }}
+            {{ asset?.policyStatus }}
+            {{ asset?.claimStatus }}</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+<ng-template #noAssets>
+  <h3 class="text-center">{{ 'dashboard.noAssets' | cxTranslate }}</h3>
+</ng-template>
