@@ -1,0 +1,15 @@
+<ng-container *ngIf="isUserLoggedIn$ | async">
+  <ng-container *ngIf="user$ | async as user">
+    <a
+      [routerLink]="
+        {
+          cxRoute: user.roles.includes(sellerRole)
+            ? 'sellerDashboardList'
+            : 'customerDashboard'
+        } | cxUrl
+      "
+    >
+      {{ 'dashboard.linkTitle' | cxTranslate }}
+    </a>
+  </ng-container>
+</ng-container>

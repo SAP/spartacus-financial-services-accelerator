@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { RoutingService, UserIdService } from '@spartacus/core';
-import { filter, map, shareReplay } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import {
   FSUserRole,

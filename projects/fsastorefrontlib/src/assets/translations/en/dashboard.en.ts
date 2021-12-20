@@ -1,5 +1,6 @@
 export const dashboard = {
   dashboard: {
+    linkTitle: 'Dashboard',
     overview: 'Dashboard Overview',
     name: 'Name',
     email: 'Email',

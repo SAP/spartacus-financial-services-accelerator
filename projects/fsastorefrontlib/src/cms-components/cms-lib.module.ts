@@ -30,6 +30,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
 import { SellerDashboardListModule } from './seller-dashboard/seller-dashboard-list.module';
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
 import { AssetsTableModule } from './assets-table/assets-table.module';
+import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { AssetsTableModule } from './assets-table/assets-table.module';
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
     AssetsTableModule,
+    DashboardLinkModule,
   ],
   exports: [
     AgentModule,
@@ -88,6 +90,7 @@ import { AssetsTableModule } from './assets-table/assets-table.module';
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
     AssetsTableModule,
+    DashboardLinkModule,
   ],
   providers: [reducerProvider],
 })
