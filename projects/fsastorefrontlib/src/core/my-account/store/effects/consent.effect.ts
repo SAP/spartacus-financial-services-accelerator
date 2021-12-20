@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mergeMap,
+  switchMap,
+} from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { ConsentConnector } from '../../connectors/consent.connector';
 import {
@@ -33,6 +39,29 @@ export class ConsentEffects {
             of(new fromActions.LoadConsentsFail(JSON.stringify(error)))
           )
         );
+      })
+    )
+  );
+
+  createAddressForUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.CREATE_ADDRESS),
+      map((action: fromActions.CreateAddress) => action.payload),
+      mergeMap(payload => {
+        return this.consentConnector
+          .createAddressForUser(
+            payload.userId,
+            payload.oboCustomerId,
+            payload.address
+          )
+          .pipe(
+            map((data: any) => {
+              return new fromActions.CreateAddressSuccess(data);
+            }),
+            catchError(error =>
+              of(new fromActions.CreateAddressFail(JSON.stringify(error)))
+            )
+          );
       })
     )
   );

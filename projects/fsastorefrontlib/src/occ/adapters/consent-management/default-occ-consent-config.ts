@@ -7,6 +7,8 @@ export const defaultOccConsentConfig: FSOccConfig = {
         oboConsents: 'users/${userId}/oboconsents',
         oboConsentCustomers: 'users/${userId}/oboconsents/customers',
         transferCart: 'users/${userId}/carts/${cartId}/oboconsents/action',
+        oboConsentAddresses:
+          'users/${userId}/oboconsents/customers/${oboCustomerId}/addresses',
       },
     },
   },

@@ -3,7 +3,7 @@ import * as fromAction from './../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { select, Store } from '@ngrx/store';
 import * as fromConsentStore from './../store';
-import { UserIdService } from '@spartacus/core';
+import { Address, UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -58,6 +58,27 @@ export class ConsentService {
           return true;
         }
         return false;
+      })
+    );
+  }
+
+  /**
+   * Method used to create address for  On-Behalf-Of customer by consent holder
+   *
+   * @param userId The `userId` the identifier of the consent holder
+   * @param oboCustomerId The `userId` the identifier of the On-Behalf-Of Customer
+   * @param address The `address` the address data
+   */
+  createAddressForUser(
+    userId: string,
+    oboCustomerId: string,
+    address: Address
+  ) {
+    this.store.dispatch(
+      new fromAction.CreateAddress({
+        userId,
+        oboCustomerId,
+        address,
       })
     );
   }
