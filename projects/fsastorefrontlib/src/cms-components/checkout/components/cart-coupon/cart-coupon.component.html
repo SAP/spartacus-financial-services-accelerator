@@ -6,23 +6,27 @@
     <div class="form-group">
       <form [formGroup]="couponForm">
         <div class="cx-cart-coupon-container row">
-          <div class="col-6">
-            <input
-              type="text"
-              class="form-control input-coupon-code"
-              formControlName="couponCode"
-            />
-          </div>
-          <div class="col-6">
-            <button
-              (click)="applyVoucher()"
-              class="primary-button btn-block"
-              type="button"
-              [disabled]="cartIsLoading$ | async"
-              [class.disabled]="cartIsLoading$ | async"
-            >
-              {{ 'voucher.apply' | cxTranslate }}
-            </button>
+          <div class="col-12">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control input-coupon-code"
+                formControlName="couponCode"
+                aria-describedby="apply-voucher"
+              />
+              <div class="input-group-append w-25">
+                <button
+                  id="apply-voucher"
+                  (click)="applyVoucher()"
+                  class="primary-button btn-block"
+                  type="button"
+                  [disabled]="cartIsLoading$ | async"
+                  [class.disabled]="cartIsLoading$ | async"
+                >
+                  <span class="fas fa-paper-plane"></span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <cx-form-errors
