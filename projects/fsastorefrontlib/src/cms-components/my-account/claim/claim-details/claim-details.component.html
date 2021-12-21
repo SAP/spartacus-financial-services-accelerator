@@ -209,6 +209,19 @@
           [documentSource]="claim.documents"
           [referredObjectColumnVisible]="false"
         ></cx-fs-documents-table>
+        <div class="col-12 col-md-3 m-auto">
+          <button
+            class="action-button btn-block"
+            [routerLink]="
+              {
+                cxRoute: 'changeClaim',
+                params: { claimId: claim.claimNumber }
+              } | cxUrl
+            "
+          >
+            {{ 'fscommon.addDocuments' | cxTranslate }}
+          </button>
+        </div>
       </div>
     </cx-fs-accordion-item>
   </div>

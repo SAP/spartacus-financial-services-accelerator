@@ -7,6 +7,7 @@ import * as fromEffects from './consent.effect';
 import * as fromReducer from './../../store/reducers/index';
 import { ConsentConnector } from '../../connectors/consent.connector';
 import {
+  Address,
   CartActions,
   GlobalMessageService,
   OCC_USER_ID_CURRENT,
@@ -118,12 +119,20 @@ const mockUser = {
 const oboCustomer = {
   uid: 'customerToTransferCartTo',
 };
+const address: Address = {
+  companyName: 'Test Company',
+  defaultAddress: true,
+};
+
 class MockConsentConnector {
   getConsents() {
     return of(consentList);
   }
   transferCart() {
     return of({});
+  }
+  createAddressForUser() {
+    return of(address);
   }
 }
 
@@ -207,6 +216,25 @@ describe('Consent Effects', () => {
         c: removeCartSuccess,
       });
       expect(effects.transferCart$).toBeObservable(expected);
+    });
+  });
+
+  describe('createAddressForUser$', () => {
+    it('should create address for OBO customer by consent holder', () => {
+      const action = new fromActions.CreateAddress({
+        userId: mockUser,
+        oboCustomerId: oboCustomer,
+        address: address,
+      });
+      const createAddressSuccess = new fromActions.CreateAddressSuccess(
+        address
+      );
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', {
+        b: createAddressSuccess,
+      });
+      expect(effects.createAddressForUser$).toBeObservable(expected);
     });
   });
 });

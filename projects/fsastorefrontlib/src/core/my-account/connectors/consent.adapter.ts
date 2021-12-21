@@ -1,3 +1,4 @@
+import { Address } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 
 export abstract class ConsentAdapter {
@@ -27,4 +28,17 @@ export abstract class ConsentAdapter {
     userId: string,
     oboCustomer: string
   ): Observable<any>;
+
+  /**
+   * Abstract method used to create address for chosen On-Behalf-Of Customer
+   *
+   * @param userId The `userId` the identifier of the consent holder
+   * @param oboCustomerId The `userId` the identifier of the On-Behalf-Of Customer
+   * @param address The `address` the address data
+   */
+  abstract createAddressForUser(
+    userId: string,
+    oboCustomerId: string,
+    address: Address
+  ): Observable<{}>;
 }
