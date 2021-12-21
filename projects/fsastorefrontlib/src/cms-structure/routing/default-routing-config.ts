@@ -38,7 +38,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   contactAgent: { paths: ['contact-agent/:agent'] },
   myDocuments: { paths: ['my-account/my-documents'] },
   sellerDashboardList: { paths: ['seller-dashboard-list'] },
-  customerDashboard: { paths: ['customer-dashboard'] },
+  sellerDashboard: { paths: ['seller-dashboard'] },
   userProfile: { paths: ['user-profile/:customerId'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },

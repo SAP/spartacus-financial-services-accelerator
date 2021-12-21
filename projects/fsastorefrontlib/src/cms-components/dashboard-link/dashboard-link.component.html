@@ -4,8 +4,11 @@
       [routerLink]="
         {
           cxRoute: user.roles.includes(sellerRole)
-            ? 'sellerDashboardList'
-            : 'customerDashboard'
+            ? 'sellerDashboard'
+            : 'userProfile',
+          params: {
+            customerId: ''
+          }
         } | cxUrl
       "
     >

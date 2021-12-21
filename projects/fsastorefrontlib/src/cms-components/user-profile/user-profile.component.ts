@@ -50,11 +50,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.userAccountFacade.get(),
       ])
         .pipe(
-          filter(([routingData, _userId, _user]) => !routingData.nextState),
           map(([routingData, userId, user]) => {
-            const customerId = routingData.state.params.customerId;
+            const customerId = routingData?.state?.params?.customerId;
             if (customerId) {
-              if (user.roles.includes(FSUserRole.SELLER)) {
+              if (user?.roles?.includes(FSUserRole.SELLER)) {
                 this.fsConsentService.loadCustomer(userId, customerId);
                 this.fsConsentService.loadCustomerQuotes(userId, customerId);
                 this.fsConsentService.loadCustomerPolicies(userId, customerId);
@@ -63,15 +62,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
                 this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
                 this.customerClaims$ = this.fsConsentService.getCustomerClaims();
-              } else {
-                this.quoteService.loadQuotes();
-                this.policyService.loadPolicies();
-                this.claimService.loadClaims();
-                this.customer = user;
-                this.customerQuotes$ = this.quoteService.getQuotes();
-                this.customerPolicies$ = this.policyService.getPolicies();
-                this.customerClaims$ = this.claimService.getClaims();
               }
+            } else {
+              this.quoteService.loadQuotes();
+              this.policyService.loadPolicies();
+              this.claimService.loadClaims();
+              this.customer$ = this.userAccountFacade.get();
+              this.customerQuotes$ = this.quoteService.getQuotes();
+              this.customerPolicies$ = this.policyService.getPolicies();
+              this.customerClaims$ = this.claimService.getClaims();
             }
           })
         )
