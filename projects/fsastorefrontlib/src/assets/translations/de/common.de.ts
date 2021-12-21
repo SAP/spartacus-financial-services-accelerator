@@ -14,6 +14,7 @@ export const fscommon = {
     date: 'Datum',
     preview: 'Vorschau',
     select: 'Auswählen',
+    selected: '[DE] Selected',
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',
@@ -88,7 +89,7 @@ export const fscommon = {
     quotesAndApplications: 'Angebote & Anträge',
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
-    updateClaim: '[DE] Update Claim',
+    addDocuments: '[DE]  Add Documents',
     summary: 'Zusammenfassung',
     submit: 'Einreichen',
     totalResults: 'Gesamtergebnisse',
@@ -107,6 +108,7 @@ export const fscommon = {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
     },
+    oboCustomers: '[DE] All Customers',
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:

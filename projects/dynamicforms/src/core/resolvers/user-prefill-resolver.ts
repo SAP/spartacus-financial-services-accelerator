@@ -11,7 +11,6 @@ export class UserPrefillResolver implements PrefillResolver {
   constructor(protected userAccountFacade: UserAccountFacade) {}
 
   getPrefillValue(fieldPath: string) {
-    const attributes = fieldPath.split('.');
     let currentValue;
     return this.userAccountFacade.get().pipe(
       map(user => {

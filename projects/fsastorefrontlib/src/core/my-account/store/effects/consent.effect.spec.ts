@@ -6,9 +6,16 @@ import * as fromActions from '../actions';
 import * as fromEffects from './consent.effect';
 import * as fromReducer from './../../store/reducers/index';
 import { ConsentConnector } from '../../connectors/consent.connector';
-import { GlobalMessageService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  Address,
+  CartActions,
+  GlobalMessageService,
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+} from '@spartacus/core';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
+import createSpy = jasmine.createSpy;
 
 const code1 = '000001';
 const date1 = 'date1';
@@ -127,6 +134,19 @@ const consent2 = {
 };
 
 const consentList = [consent1, consent2];
+const cart = {
+  code: 'cartCode',
+};
+const mockUser = {
+  uid: 'consentHolder',
+};
+const oboCustomer = {
+  uid: 'customerToTransferCartTo',
+};
+const address: Address = {
+  companyName: 'Test Company',
+  defaultAddress: true,
+};
 
 const customer = {
   name: customerName,
@@ -218,11 +238,22 @@ class MockConsentConnector {
   getClaimsForOBOCustomer() {
     return of(claims);
   }
+
+  transferCart() {
+    return of({});
+  }
+  createAddressForUser() {
+    return of(address);
+  }
 }
 
 class MockGlobalMessageService {
   add = jasmine.createSpy();
   remove = jasmine.createSpy();
+}
+
+class MockRoutingService {
+  go = createSpy();
 }
 
 describe('Consent Effects', () => {
@@ -241,6 +272,7 @@ describe('Consent Effects', () => {
       ],
       providers: [
         { provide: ConsentConnector, useValue: mockConsentConnector },
+        { provide: RoutingService, useClass: MockRoutingService },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         fromEffects.ConsentEffects,
         provideMockActions(() => actions$),
@@ -402,6 +434,46 @@ describe('Consent Effects', () => {
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.loadCustomerClaims$).toBeObservable(expected);
+    });
+  });
+
+  describe('transferCart$', () => {
+    it('should transfer cart to obo customer from consent holder', () => {
+      const action = new fromActions.TransferCart({
+        cart: cart,
+        consentHolder: mockUser,
+        oboCustomer: oboCustomer,
+      });
+      const transferCartSuccess = new fromActions.TransferCartSuccess();
+      const removeCartSuccess = new CartActions.RemoveCart({
+        cartId: 'cartCode',
+      });
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-(bc)', {
+        b: transferCartSuccess,
+        c: removeCartSuccess,
+      });
+      expect(effects.transferCart$).toBeObservable(expected);
+    });
+  });
+
+  describe('createAddressForUser$', () => {
+    it('should create address for OBO customer by consent holder', () => {
+      const action = new fromActions.CreateAddress({
+        userId: mockUser,
+        oboCustomerId: oboCustomer,
+        address: address,
+      });
+      const createAddressSuccess = new fromActions.CreateAddressSuccess(
+        address
+      );
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', {
+        b: createAddressSuccess,
+      });
+      expect(effects.createAddressForUser$).toBeObservable(expected);
     });
   });
 });

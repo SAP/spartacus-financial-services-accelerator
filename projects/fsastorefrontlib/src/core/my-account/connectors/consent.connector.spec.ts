@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Address } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ConsentAdapter } from './consent.adapter';
 import { ConsentConnector } from './consent.connector';
@@ -31,10 +32,27 @@ class MockConsentAdapter extends ConsentAdapter {
   ).and.callFake((userId, customerId) =>
     of('getClaimsForOBOCustomer' + userId + customerId)
   );
+
+  transferCartToOboCustomer = createSpy(
+    'ConsentAdapter.transferCartToOboCustomer'
+  ).and.callFake((cartId, userId, oboCustomer) =>
+    of('transferCartToOboCustomer' + cartId + userId + oboCustomer)
+  );
+  createAddressForUser = createSpy(
+    'ConsentAdapter.createAddressForUser'
+  ).and.callFake((userId, oboCustomerId, address) =>
+    of('createAddressForUser' + userId + oboCustomerId + address)
+  );
 }
 
 const user = 'user';
 const mockCustomerId = 'customerId';
+const cartCode = 'cartCode';
+const oboCustomer = 'customerToTransferCartUid';
+const address: Address = {
+  companyName: 'Test Company',
+  defaultAddress: true,
+};
 
 describe('ConsentConnector', () => {
   let consentConnector: ConsentConnector;
@@ -86,6 +104,22 @@ describe('ConsentConnector', () => {
     expect(consentAdapter.getClaimsForOBOCustomer).toHaveBeenCalledWith(
       user,
       mockCustomerId
+    );
+  });
+  it('should call adapter to transfer cart', () => {
+    consentConnector.transferCart(cartCode, user, oboCustomer);
+    expect(consentAdapter.transferCartToOboCustomer).toHaveBeenCalledWith(
+      cartCode,
+      user,
+      oboCustomer
+    );
+  });
+  it('should call adapter to create address for user', () => {
+    consentConnector.createAddressForUser(user, oboCustomer, address);
+    expect(consentAdapter.createAddressForUser).toHaveBeenCalledWith(
+      user,
+      oboCustomer,
+      address
     );
   });
 });

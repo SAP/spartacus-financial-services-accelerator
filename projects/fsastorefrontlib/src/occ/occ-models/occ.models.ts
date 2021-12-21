@@ -99,6 +99,8 @@ export interface InsuranceQuote {
   quoteWorkflowStatus?: QuoteWorkflowStatus;
   quoteDetails?: Record<string, string>;
   insuredObjectList?: InsuredObjectList;
+  renewal?: boolean;
+  original?: boolean;
 }
 
 export interface OBOConsent extends Consent {
