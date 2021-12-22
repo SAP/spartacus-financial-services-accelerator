@@ -3,7 +3,7 @@ export function checkMyQuotesPage() {
     menuOption: 'My Account',
     dropdownItem: 'Quotes & Applications',
   });
-  cy.get('.heading-headline').should('contains.text', 'Quotes & Applications');
+  cy.get('.heading-headline').should('contain.text', 'Quotes & Applications');
 }
 
 export function checkAutoReferredQuote() {
@@ -63,5 +63,13 @@ export function checkWeeklyLoanApplication() {
         cy.get('.value').contains('Pending');
         cy.get('.value').contains('€69.99 / Weekly');
       });
+  });
+}
+
+export function checkTwoQuotes(product1, product2) {
+  cy.get('cx-fs-quotes').within(() => {
+    cy.get('.info-card').should('have.length', 2);
+    cy.get('h6').should('contain.text', product1);
+    cy.get('h6').should('contain.text', product2);
   });
 }

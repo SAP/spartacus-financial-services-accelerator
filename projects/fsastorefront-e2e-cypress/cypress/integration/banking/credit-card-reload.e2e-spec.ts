@@ -72,6 +72,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
       checkout.checkAccordions('quoteReviewWithoutOptional');
+      cy.get('.cx-cart-coupon-container').should('not.exist');
       checkout.clickContinueButton();
       //Legal Information
       checkout.checkCheckoutStep('Your Credit Card Application', '7');

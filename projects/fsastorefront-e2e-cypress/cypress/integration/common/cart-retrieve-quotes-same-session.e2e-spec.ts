@@ -60,29 +60,46 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       loan.checkOptionalProducts();
       checkout.clickContinueButton();
+      checkout.checkCheckoutStep('Your Loan Application', '6');
+      checkout.checkPersonalDetailsPage();
+      banking.populateAddressInfo();
+      banking.populatePersonalDetailsCCandLoan();
+      banking.populateAdditionalApplicantCCandLoan();
+      checkout.clickContinueButton();
+      checkout.checkCheckoutStep('Your Loan Application', '6');
+      banking.checkProgressBarLoanAndFTD();
+      loan.checkMiniCart();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
+      checkout.ConfirmBindQuote();
     });
 
     it('Retrieve Quotes and Applications', () => {
-      myAccount.retrieveQuote('3', 'Loan');
-      cy.get('h2').should('contain.text', 'Your Loan Application');
-      banking.checkProgressBarLoanAndFTD();
+      myAccount.retrieveQuote('3', 'Current Account');
+      cy.get('h2').should('contain.text', 'Add Option');
+      cy.get('h2').should('contain.text', 'Your Current Account Application');
+      banking.checkBankingProgressBar();
+      currentAccount.checkMiniCartCurrentAccount();
       myAccount.retrieveQuote('3', 'Event Insurance');
       cy.get('h2').should('contain.text', 'Event Insurance');
       event.checkProgressBarEvent();
-      myAccount.retrieveQuote('3', 'Current Account');
-      cy.get('h2').should('contain.text', 'Your Current Account Application');
-      banking.checkBankingProgressBar();
+      event.checkMiniCart();
+      myAccount.retrieveQuote('3', 'Loan');
+      cy.get('h2').should('contain.text', 'Your Loan Application');
+      banking.checkProgressBarLoanAndFTD();
+      checkout.checkAccordions('generalQuoteAccordions');
     });
 
     it('Retrieve Event and Complete Checkout', () => {
       myAccount.retrieveQuote('3', 'Event Insurance');
       cy.get('h2').should('contain.text', 'Event Insurance');
       event.checkProgressBarEvent();
+      event.checkMiniCart();
       checkout.clickContinueButton();
       checkout.checkCheckoutStep('Your Event Insurance', '6');
       checkout.checkPersonalDetailsPage();
       event.populatePersonalDetails();
-      checkout.populatePersonalDetailsPage();
+      //checkout.populatePersonalDetailsPage();
       checkout.clickContinueButton();
       checkout.checkCheckoutStep('Your Event Insurance', '6');
       event.checkProgressBarEvent();
@@ -106,6 +123,8 @@ testFilters([''], () => {
       });
       cy.get('h2').should('contain.text', 'Quotes & Applications');
       cy.get('.info-card').should('have.length', 2);
+      cy.get('h6').should('contain.text', 'Loan');
+      cy.get('h6').should('contain.text', 'Current Account');
     });
   });
 });
