@@ -6,9 +6,9 @@ import {
   TranslationService,
   UserIdService,
 } from '@spartacus/core';
-import { OBOCustomerList, FSUser } from '../../occ/occ-models/occ.models';
-import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
 import { ICON_TYPE } from '@spartacus/storefront';
+import { OBOCustomerList, FSUser } from '../../../occ/occ-models/occ.models';
+import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 
 @Component({
   selector: 'cx-fs-seller-dashboard-list',

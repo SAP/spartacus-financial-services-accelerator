@@ -9,7 +9,7 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
+import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 import { SellerDashboardListComponent } from './seller-dashboard-list.component';
 import createSpy = jasmine.createSpy;
 

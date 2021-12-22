@@ -16,16 +16,17 @@ import {
   provideDefaultConfig,
   UrlModule,
 } from '@spartacus/core';
-import { SellerDashboardListComponent } from './seller-dashboard-list.component';
-import { SellerDashboardListGuard } from './seller-dashboard-list.guard';
+import { SellerDashboardListComponent } from './seller-dashboard-list/seller-dashboard-list.component';
+import { SellerDashboardGuard } from './seller-dashboard.guard';
+import { SellerDashboardComponent } from './seller-dashboard.component';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, SellerDashboardListGuard],
+    canActivate: [AuthGuard, CmsPageGuard, SellerDashboardGuard],
     data: {
-      cxRoute: 'sellerDashboardList',
-      pageLabel: 'seller-dashboard-list',
+      cxRoute: 'sellerDashboard',
+      pageLabel: 'seller-dashboard',
     },
     component: PageLayoutComponent,
   },
@@ -46,13 +47,13 @@ const routes: Routes = [
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
-        SellerDashboardListFlex: {
-          component: SellerDashboardListComponent,
+        SellerDashboardFlex: {
+          component: SellerDashboardComponent,
         },
       },
     }),
   ],
-  declarations: [SellerDashboardListComponent],
-  exports: [SellerDashboardListComponent],
+  declarations: [SellerDashboardListComponent, SellerDashboardComponent],
+  exports: [SellerDashboardListComponent, SellerDashboardComponent],
 })
-export class SellerDashboardListModule {}
+export class SellerDashboardModule {}

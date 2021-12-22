@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { RoutingService, UserIdService } from '@spartacus/core';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
   FSUserRole,
@@ -30,8 +30,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   private subscription = new Subscription();
-  customer: FSUser;
   customer$: Observable<FSUser>;
+  seller: boolean;
   customerQuotes$: Observable<InsuranceQuoteList>;
   customerPolicies$: Observable<any>;
   customerClaims$: Observable<any>;
@@ -53,6 +53,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           map(([routingData, userId, user]) => {
             const customerId = routingData?.state?.params?.customerId;
             if (customerId) {
+              this.seller = true;
               if (user?.roles?.includes(FSUserRole.SELLER)) {
                 this.fsConsentService.loadCustomer(userId, customerId);
                 this.fsConsentService.loadCustomerQuotes(userId, customerId);
@@ -64,6 +65,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 this.customerClaims$ = this.fsConsentService.getCustomerClaims();
               }
             } else {
+              this.seller = false;
               this.quoteService.loadQuotes();
               this.policyService.loadPolicies();
               this.claimService.loadClaims();

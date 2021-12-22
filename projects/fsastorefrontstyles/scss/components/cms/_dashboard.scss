@@ -1,5 +1,6 @@
 %cx-fs-seller-dashboard-list,
-%cx-fs-user-profile {
+%cx-fs-user-profile,
+%cx-fs-seller-dashboard {
   .table {
     thead {
       background-color: var(--cx-color-4);
@@ -44,7 +45,8 @@
     flex: 0 1 30%;
   }
 }
-%cx-fs-user-profile {
+%cx-fs-user-profile,
+%cx-fs-seller-dashboard {
   .user-profile-wrapper,
   .dashboard-overview-wrapper {
     padding: 2rem;

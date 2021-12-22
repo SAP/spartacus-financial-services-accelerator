@@ -27,7 +27,7 @@ import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
-import { SellerDashboardListModule } from './seller-dashboard/seller-dashboard-list.module';
+import { SellerDashboardModule } from './seller-dashboard/seller-dashboard.module';
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
 import { AssetsTableModule } from './assets-table/assets-table.module';
 import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
@@ -42,7 +42,7 @@ import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
     CustomContainerModule,
     MyAccountModule,
     UserProfileModule,
-    SellerDashboardListModule,
+    SellerDashboardModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -73,7 +73,7 @@ import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
     CustomContainerModule,
     MyAccountModule,
     UserProfileModule,
-    SellerDashboardListModule,
+    SellerDashboardModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,

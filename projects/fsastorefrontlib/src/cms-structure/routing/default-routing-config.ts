@@ -37,7 +37,6 @@ export const storefrontRoutesConfig: RoutesConfig = {
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
   myDocuments: { paths: ['my-account/my-documents'] },
-  sellerDashboardList: { paths: ['seller-dashboard-list'] },
   sellerDashboard: { paths: ['seller-dashboard'] },
   userProfile: { paths: ['user-profile/:customerId'] },
   inbox: { paths: ['my-account/inbox'] },

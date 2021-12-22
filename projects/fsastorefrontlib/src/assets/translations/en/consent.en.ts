@@ -1,7 +1,5 @@
 export const consent = {
   consent: {
-    customerProfile: 'Customer Profile',
-    customerName: 'Customer Name',
     consentHolderName: 'Consent Holder Name',
     consentHolderEmail: 'Consent Holder Email',
     consentHolderPhone: 'Consent Holder Phone Number',

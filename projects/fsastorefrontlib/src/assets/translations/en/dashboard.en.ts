@@ -1,8 +1,13 @@
 export const dashboard = {
   dashboard: {
+    yourProfile: 'Your Profile',
+    customerProfile: 'Customer Profile',
     linkTitle: 'Dashboard',
+    yourDashboard: 'Your Dashboard',
+    customerDashboard: 'Customer Dashboard',
     overview: 'Dashboard Overview',
     name: 'Name',
+    customerName: 'Customer Name',
     email: 'Email',
     noCustomers: 'You haven\'t assigned any customers yet', // prettier-ignore
     active: 'Active',
