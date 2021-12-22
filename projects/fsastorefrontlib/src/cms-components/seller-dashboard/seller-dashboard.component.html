@@ -1,6 +1,6 @@
 <ng-container *ngIf="seller$ | async as user; else loading">
-  <div class="row mb-5">
-    <div class="col-md-5 mb-5">
+  <div class="row">
+    <div class="col-md-5 mb-5 mb-md-0">
       <div class="box-shadow border border-color-3">
         <h5 class="text-center py-3 mb-0">
           {{ 'dashboard.yourProfile' | cxTranslate }}
@@ -66,24 +66,24 @@
                   }}
                 </div>
                 <span class="description">
-                  {{ 'fscommon.quotesAndApplications' | cxTranslate }}
+                  {{ 'dashboard.customers' | cxTranslate }}
                 </span>
               </li>
             </ul>
             <div class="dashboard-overview-assets mt-3">
               <div
+                [ngClass]="{ active: dashboardListVisible }"
                 class="asset bg-white p-2 align-items-center"
                 role="button"
-                tabindex="3"
+                tabindex="0"
                 (click)="showDashboardList()"
                 (keydown.enter)="showDashboardList()"
               >
                 <span
-                  class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-stamp"
+                  class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-users"
                 ></span>
                 <div class="asset-text">
-                  {{ 'dashboard.checkCustomers' | cxTranslate }}
-                  <span class="notice">{{ 'claim.claims' | cxTranslate }}</span>
+                  {{ 'dashboard.checkCustomerList' | cxTranslate }}
                 </div>
               </div>
             </div>

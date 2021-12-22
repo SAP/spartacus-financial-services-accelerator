@@ -98,6 +98,9 @@
       font-size: clamp(11px, 2vw, 1.125rem);
     }
   }
+  .dashboard-overview-stats {
+    justify-content: center;
+  }
   .dashboard-overview-assets {
     flex-wrap: wrap;
     gap: 1rem;

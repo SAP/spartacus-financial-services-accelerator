@@ -1,13 +1,24 @@
 <ng-container *ngIf="customer$ | async as user; else loading">
-  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
-    {{
-      seller
-        ? ('dashboard.customerDashboard' | cxTranslate)
-        : ('dashboard.yourDashboard' | cxTranslate)
-    }}
-  </h2>
-  <div class="row mb-5">
-    <div class="col-md-5 mb-5">
+  <div class="position-relative text-center">
+    <ng-container *ngIf="seller">
+      <a
+        class="h4 vertical-center-left"
+        routerLink="/seller-dashboard"
+        routerLinkActive="active"
+      >
+        <span class="fas fa-arrow-left"></span
+      ></a>
+    </ng-container>
+    <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+      {{
+        seller
+          ? ('dashboard.customerDashboard' | cxTranslate)
+          : ('dashboard.yourDashboard' | cxTranslate)
+      }}
+    </h2>
+  </div>
+  <div class="row">
+    <div class="col-md-5 mb-5 mb-md-0">
       <div class="box-shadow border border-color-3">
         <h5 class="text-center py-3 mb-0">
           {{
@@ -138,7 +149,11 @@
                   class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-envelope-open-text"
                 ></span>
                 <div class="asset-text">
-                  {{ 'dashboard.checkCustomers' | cxTranslate }}
+                  {{
+                    seller
+                      ? ('dashboard.checkCustomers' | cxTranslate)
+                      : ('dashboard.checkYour' | cxTranslate)
+                  }}
                   <span class="notice">{{
                     'fscommon.quotesAndApplications' | cxTranslate
                   }}</span>
@@ -166,7 +181,11 @@
                   class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-file-invoice"
                 ></span>
                 <div class="asset-text">
-                  {{ 'dashboard.checkCustomers' | cxTranslate }}
+                  {{
+                    seller
+                      ? ('dashboard.checkCustomers' | cxTranslate)
+                      : ('dashboard.checkYour' | cxTranslate)
+                  }}
                   <span class="notice">{{
                     'policy.policies' | cxTranslate
                   }}</span>
@@ -186,7 +205,11 @@
                   class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-stamp"
                 ></span>
                 <div class="asset-text">
-                  {{ 'dashboard.checkCustomers' | cxTranslate }}
+                  {{
+                    seller
+                      ? ('dashboard.checkCustomers' | cxTranslate)
+                      : ('dashboard.checkYour' | cxTranslate)
+                  }}
                   <span class="notice">{{ 'claim.claims' | cxTranslate }}</span>
                 </div>
               </div>
