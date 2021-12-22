@@ -3,7 +3,7 @@ export function checkMyQuotesPage() {
     menuOption: 'My Account',
     dropdownItem: 'Quotes & Applications',
   });
-  cy.get('.heading-headline').should('contains.text', 'Quotes & Applications');
+  cy.get('.heading-headline').should('contain.text', 'Quotes & Applications');
 }
 
 export function checkAutoReferredQuote() {

@@ -93,7 +93,7 @@ testFilters([''], () => {
       cy.get('h2').should('contain.text', 'Savings Insurance');
       checkout.checkCheckoutStep('Your Savings Insurance', '7');
       checkout.checkProgressBarInsurance();
-      cy.get('.section-header-heading').should('contains.text', 'Add Options');
+      cy.get('.section-header-heading').should('contain.text', 'Add Options');
       cy.get('.SiteLogo').should('be.visible').click();
       retrieveQuote('2', 'Auto Insurance');
       checkout.checkCheckoutStep('Your Auto Insurance', '7');
