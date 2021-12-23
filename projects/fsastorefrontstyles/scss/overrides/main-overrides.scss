@@ -72,9 +72,7 @@ cx-fs-cms-custom-container {
   @include media-breakpoint-down(md) {
     padding: 2rem;
   }
-}
-// Temporary solution, untill forms are wrapped in different container component
-cx-fs-cms-custom-container {
+  // Temporary solution, untill forms are wrapped in different container component
   .MultiStepCheckoutSummaryPageTemplate .BodyContent &,
   .MultiStepCheckoutSummaryPageTemplate .SideContent &,
   .CheckoutPageTemplate .BottomContent & {
