@@ -74,11 +74,13 @@ cx-fs-cms-custom-container {
   }
 }
 // Temporary solution, untill forms are wrapped in different container component
-.CheckoutPageTemplate .BottomContent cx-fs-cms-custom-container,
-.MultiStepCheckoutSummaryPageTemplate .BodyContent cx-fs-cms-custom-container,
-.MultiStepCheckoutSummaryPageTemplate .SideContent cx-fs-cms-custom-container {
-  padding: 0;
-  box-shadow: none;
+cx-fs-cms-custom-container {
+  .MultiStepCheckoutSummaryPageTemplate .BodyContent &,
+  .MultiStepCheckoutSummaryPageTemplate .SideContent &,
+  .CheckoutPageTemplate .BottomContent & {
+    padding: 0;
+    box-shadow: none;
+  }
 }
 
 cx-global-message {

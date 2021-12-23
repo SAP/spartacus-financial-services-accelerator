@@ -1,10 +1,13 @@
 <ng-container *ngIf="user$ | async as user">
   <ng-container *ngIf="componentData.data$ | async as componentData">
-    <h5 *ngIf="componentData.title" class="pt-4">
+    <h5 *ngIf="componentData.title">
       {{ componentData.title }}
     </h5>
     <div class="link" (click)="establishConnection(user, componentData)">
-      <span *ngIf="componentData.icon" class="{{ componentData.icon }}"></span>
+      <span
+        *ngIf="componentData.iconClass"
+        class="{{ componentData.iconClass }}"
+      ></span>
     </div>
   </ng-container>
 </ng-container>

@@ -32,31 +32,31 @@
   }
 }
 
-.action-wrapper {
+.coupon-sync-pilot {
   display: flex;
   justify-content: space-between;
-  cx-fs-cart-coupon {
-    width: 60%;
+  cx-fs-cart-coupon .btn-block {
+    min-width: 45px;
   }
   cx-fs-cms-sync-pilot {
-    width: max-content;
     padding-inline-end: 1rem;
     h5 {
-      font-size: 0.875rem;
+      padding-top: 1.5rem;
+      font-size: var(--cx-text-font-size);
     }
     .link {
       text-align: center;
     }
     .fas {
       &:before {
-        padding: 8px;
+        @include fs-transition;
+        @include fs-box-shadow(0px, 1px, 6px, 1px, $color-dark-grey, 0.5);
         display: inline-block;
+        padding: 8px;
         width: 40px;
         height: 40px;
-        box-shadow: 0px 1px 6px 1px #a8a8a8;
         border-radius: 50%;
         font-size: var(--cx-h3-font-size);
-        @include fs-transition;
       }
       &:hover::before {
         color: var(--cx-color-1);
