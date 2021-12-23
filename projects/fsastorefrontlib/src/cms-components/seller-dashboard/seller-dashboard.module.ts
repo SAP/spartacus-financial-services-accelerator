@@ -16,6 +16,7 @@ import {
   provideDefaultConfig,
   UrlModule,
 } from '@spartacus/core';
+import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { SellerDashboardListComponent } from './seller-dashboard-list/seller-dashboard-list.component';
 import { SellerDashboardGuard } from './seller-dashboard.guard';
 import { SellerDashboardComponent } from './seller-dashboard.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
     UrlModule,
     ListNavigationModule,
     IconModule,
+    DateFormatConfigurationModule,
     RouterModule.forChild(routes),
   ],
   providers: [

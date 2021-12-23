@@ -65,7 +65,7 @@
                   }}:</span
                 >
                 <span class="notice">
-                  {{ user.dateOfBirth }}
+                  {{ user?.dateOfBirth | parseDate | date: 'dd MMM yyyy' }}
                 </span>
               </li>
             </ul>
@@ -128,25 +128,47 @@
             </ul>
             <div class="dashboard-overview-assets mt-3">
               <div
-                [ngClass]="assetSelected === 'quotes' ? 'active' : ''"
+                *ngFor="let asset of customerAssets | keyvalue; let i = index"
+                [ngClass]="assetSelected === asset.key ? 'active' : ''"
                 class="asset bg-white p-2 align-items-center"
                 role="button"
-                tabindex="1"
+                [tabindex]="i"
                 (click)="
                   showAssetList(
-                    customerAssets.quotes?.insuranceQuotes,
-                    'quotes'
+                    asset.key === 'quotes'
+                      ? customerAssets.quotes?.insuranceQuotes
+                      : asset.key === 'policies'
+                      ? customerAssets.policies?.insurancePolicies
+                      : asset.key === 'claims'
+                      ? customerAssets.claims?.claims
+                      : '',
+                    asset.key
                   )
                 "
                 (keydown.enter)="
                   showAssetList(
-                    customerAssets.quotes?.insuranceQuotes,
-                    'quotes'
+                    asset.key === 'quotes'
+                      ? customerAssets.quotes?.insuranceQuotes
+                      : asset.key === 'policies'
+                      ? customerAssets.policies?.insurancePolicies
+                      : asset.key === 'claims'
+                      ? customerAssets.claims?.claims
+                      : '',
+                    asset.key
                   )
                 "
               >
                 <span
-                  class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-envelope-open-text"
+                  [ngClass]="
+                    asset.key === 'quotes'
+                      ? 'fa-envelope-open-text'
+                      : asset.key === 'policies'
+                      ? 'fa-file-invoice'
+                      : asset.key === 'claims'
+                      ? 'fa-stamp'
+                      : ''
+                  "
+                  class="asset-image h6 text-center notice p-3 mb-0 fas"
                 ></span>
                 <div class="asset-text">
                   {{
@@ -155,62 +177,15 @@
                       : ('dashboard.checkYour' | cxTranslate)
                   }}
                   <span class="notice">{{
-                    'fscommon.quotesAndApplications' | cxTranslate
+                    (asset.key === 'quotes'
+                      ? 'fscommon.quotesAndApplications'
+                      : asset.key === 'policies'
+                      ? 'policy.policies'
+                      : asset.key === 'claims'
+                      ? 'claim.claims'
+                      : ''
+                    ) | cxTranslate
                   }}</span>
-                </div>
-              </div>
-              <div
-                [ngClass]="assetSelected === 'policies' ? 'active' : ''"
-                class="asset bg-white p-2 align-items-center"
-                role="button"
-                tabindex="2"
-                (click)="
-                  showAssetList(
-                    customerAssets.policies?.insurancePolicies,
-                    'policies'
-                  )
-                "
-                (keydown.enter)="
-                  showAssetList(
-                    customerAssets.policies?.insurancePolicies,
-                    'policies'
-                  )
-                "
-              >
-                <span
-                  class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-file-invoice"
-                ></span>
-                <div class="asset-text">
-                  {{
-                    seller
-                      ? ('dashboard.checkCustomers' | cxTranslate)
-                      : ('dashboard.checkYour' | cxTranslate)
-                  }}
-                  <span class="notice">{{
-                    'policy.policies' | cxTranslate
-                  }}</span>
-                </div>
-              </div>
-              <div
-                [ngClass]="assetSelected === 'claims' ? 'active' : ''"
-                class="asset bg-white p-2 align-items-center"
-                role="button"
-                tabindex="3"
-                (click)="showAssetList(customerAssets.claims?.claims, 'claims')"
-                (keydown.enter)="
-                  showAssetList(customerAssets.claims?.claims, 'claims')
-                "
-              >
-                <span
-                  class="asset-image h6 text-center notice p-3 mb-0 border border-color-3 rounded-circle fas fa-stamp"
-                ></span>
-                <div class="asset-text">
-                  {{
-                    seller
-                      ? ('dashboard.checkCustomers' | cxTranslate)
-                      : ('dashboard.checkYour' | cxTranslate)
-                  }}
-                  <span class="notice">{{ 'claim.claims' | cxTranslate }}</span>
                 </div>
               </div>
             </div>
@@ -231,6 +206,7 @@
     [assets]="assets"
   ></cx-fs-assets-table>
 </ng-container>
+
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>

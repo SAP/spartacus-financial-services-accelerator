@@ -13,6 +13,7 @@ import {
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
+import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { AssetsTableModule } from '../assets-table/assets-table.module';
 import { UserProfileComponent } from './user-profile.component';
 
@@ -36,6 +37,7 @@ const routes: Routes = [
     SpinnerModule,
     CmsModule,
     AssetsTableModule,
+    DateFormatConfigurationModule,
     RouterModule.forChild(routes),
   ],
   providers: [

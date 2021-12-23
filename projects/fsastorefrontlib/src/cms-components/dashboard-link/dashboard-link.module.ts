@@ -9,17 +9,9 @@ import {
 } from '@spartacus/core';
 import { DashboardLinkComponent } from './dashboard-link.component';
 import { PageSlotModule } from '@spartacus/storefront';
-import { LoginModule } from '@spartacus/user/account/components';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    UrlModule,
-    RouterModule,
-    I18nModule,
-    PageSlotModule,
-    LoginModule,
-  ],
+  imports: [CommonModule, UrlModule, RouterModule, I18nModule],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
