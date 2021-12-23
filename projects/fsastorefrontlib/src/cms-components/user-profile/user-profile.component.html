@@ -92,14 +92,14 @@
               <li class="item text-break text-center text-uppercase">
                 <div class="number notice semi-bold">
                   {{
-                    customerAssets.quotes?.insuranceQuotes
-                      ? customerAssets.quotes?.insuranceQuotes?.length
+                    customerAssets.claims?.claims
+                      ? customerAssets.claims?.claims?.length
                       : '0'
                   }}
                 </div>
-                <span class="description">
-                  {{ 'fscommon.quotesAndApplications' | cxTranslate }}
-                </span>
+                <span class="description">{{
+                  'claim.claims' | cxTranslate
+                }}</span>
               </li>
               <li class="item text-break text-center text-uppercase">
                 <div class="number notice semi-bold">
@@ -116,14 +116,14 @@
               <li class="item text-break text-center text-uppercase">
                 <div class="number notice semi-bold">
                   {{
-                    customerAssets.claims?.claims
-                      ? customerAssets.claims?.claims?.length
+                    customerAssets.quotes?.insuranceQuotes
+                      ? customerAssets.quotes?.insuranceQuotes?.length
                       : '0'
                   }}
                 </div>
-                <span class="description">{{
-                  'claim.claims' | cxTranslate
-                }}</span>
+                <span class="description">
+                  {{ 'fscommon.quotesAndApplications' | cxTranslate }}
+                </span>
               </li>
             </ul>
             <div class="dashboard-overview-assets mt-3">
