@@ -63,7 +63,7 @@ const MockCmsService = {
 const MockIconConfig: IconConfig = {
   icon: {
     symbols: {
-      PHONE: 'fas fa-phone',
+      PHONE: 'fas fa-phone-alt',
       AGENT: 'fas fa-headset',
     },
   },
