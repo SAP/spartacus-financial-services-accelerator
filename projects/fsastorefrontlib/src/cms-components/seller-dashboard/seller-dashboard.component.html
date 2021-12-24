@@ -93,9 +93,11 @@
     </div>
   </div>
 </ng-container>
-<ng-container *ngIf="dashboardListVisible">
-  <cx-fs-seller-dashboard-list></cx-fs-seller-dashboard-list>
-</ng-container>
+
+<cx-fs-seller-dashboard-list
+  *ngIf="dashboardListVisible"
+></cx-fs-seller-dashboard-list>
+
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
