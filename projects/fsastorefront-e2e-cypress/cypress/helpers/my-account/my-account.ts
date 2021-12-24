@@ -79,7 +79,7 @@ export function checkOrderHistoryContent(price, status) {
       cy.get('.cx-order-history-thead-mobile').should('be.visible');
       cy.get('.cx-order-history-code').should('be.visible');
       cy.get('.cx-order-history-placed').should('be.visible');
-      cy.get('.cx-order-history-status').should(status);
+      cy.get('.cx-order-history-value').should('contain.text', status);
       cy.get('.cx-order-history-total').contains(price);
     });
 }
@@ -97,5 +97,4 @@ export function retrieveQuote(length, product) {
     .within(() => {
       cy.get('.link').contains('Retrieve').click({ force: true });
     });
-  cy.get('h2').should('contain.text', 'Add Option');
 }

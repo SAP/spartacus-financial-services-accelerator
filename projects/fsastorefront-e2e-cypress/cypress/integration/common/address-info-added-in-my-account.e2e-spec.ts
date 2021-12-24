@@ -9,7 +9,7 @@ import * as addressInfo from '../../helpers/my-account/address-info';
 import { retrieveQuote } from '../../helpers/my-account/my-account';
 
 testFilters([''], () => {
-  context('Address info checks on Personal details', () => {
+  context('Address info added under my account', () => {
     before(() => {
       cy.visit('/');
     });
@@ -38,8 +38,9 @@ testFilters([''], () => {
       checkout.checkPersonalDetailsPage();
     });
 
-    it('Should check empty adderss fields on personal details', () => {
+    it('Should check adderss fields on personal details', () => {
       addressInfo.checkEmptyFields();
+      cy.get('[name=phoneNumber]').should('have.value', '66622299');
     });
 
     it('Should add New address from My Accounts', () => {
@@ -60,7 +61,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       //user was registered with phone number
       cy.get('[name=phoneNumber]').should('have.value', '66622299');
-      addressInfo.checkDisabledFieldsInsurance();
+      addressInfo.checkDisabledFields('Omladinskih Brigada', '90g');
       checkout.clickContinueButton();
       checkout.checkValidationPopUpAndClose();
       //additional fields due to optional product

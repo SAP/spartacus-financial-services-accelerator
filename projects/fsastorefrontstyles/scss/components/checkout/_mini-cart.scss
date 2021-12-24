@@ -31,3 +31,37 @@
     }
   }
 }
+
+.coupon-sync-pilot {
+  display: flex;
+  justify-content: space-between;
+  cx-fs-cart-coupon .btn-block {
+    min-width: 45px;
+  }
+  cx-fs-cms-sync-pilot {
+    padding-inline-end: 1rem;
+    h5 {
+      padding-top: 1.5rem;
+      font-size: var(--cx-text-font-size);
+    }
+    .link {
+      text-align: center;
+    }
+    .fas {
+      &:before {
+        @include fs-transition;
+        @include fs-box-shadow(0px, 1px, 6px, 1px, $color-dark-grey, 0.5);
+        display: inline-block;
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: var(--cx-h3-font-size);
+      }
+      &:hover::before {
+        color: var(--cx-color-1);
+        background: var(--cx-color-primary);
+      }
+    }
+  }
+}
