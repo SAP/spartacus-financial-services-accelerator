@@ -76,26 +76,23 @@
       flex: 0 0 calc(50% - 0.5rem);
       gap: 1rem;
       box-shadow: 0px 5px 8px -4px var(--cx-color-11);
-      transition: all 150ms ease-out;
+      transition: all 150ms ease-in-out;
       cursor: pointer;
       .asset-image {
         border: 1px solid var(--cx-color-3);
         border-radius: 50%;
-        transition: all 150ms ease-out;
       }
       &:hover,
       &:focus-within {
         box-shadow: none;
         transform: scale(0.98);
         border-color: var(--cx-color-primary);
-        transition: all 200ms ease-in;
       }
       &.active {
         transform: scale(0.98);
         box-shadow: 0px 2px 6px -1px var(--cx-color-11) inset;
         .asset-image {
           border-color: var(--cx-color-primary);
-          transition: border-color 150ms ease-in;
         }
       }
       @include media-breakpoint-down(sm) {

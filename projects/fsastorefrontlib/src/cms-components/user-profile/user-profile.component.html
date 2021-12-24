@@ -132,7 +132,7 @@
                 [ngClass]="assetSelected === asset.key ? 'active' : ''"
                 class="asset bg-white p-2 align-items-center"
                 role="button"
-                [tabindex]="i"
+                [tabindex]="i + 1"
                 (click)="
                   showAssetList(
                     asset.key === 'quotes'
