@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserIdService } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -10,6 +10,7 @@ import { switchMap, take } from 'rxjs/operators';
 @Component({
   selector: 'cx-fs-seller-dashboard',
   templateUrl: './seller-dashboard.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SellerDashboardComponent {
   constructor(

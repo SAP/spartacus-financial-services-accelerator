@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { FSUserRole } from '../../occ/occ-models/occ.models';
 @Component({
   selector: 'cx-fs-dashboard-link',
   templateUrl: './dashboard-link.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardLinkComponent {
   constructor(

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import {
@@ -13,6 +13,7 @@ import { ConsentConnector } from '../../../core/my-account/connectors/consent.co
 @Component({
   selector: 'cx-fs-seller-dashboard-list',
   templateUrl: './seller-dashboard-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SellerDashboardListComponent {
   constructor(

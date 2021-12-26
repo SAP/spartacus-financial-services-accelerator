@@ -1,6 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { UserAccountFacade } from '@spartacus/user/account/root';
+import { User, UserAccountFacade } from '@spartacus/user/account/root';
 import { RoutingService, UserIdService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 
@@ -17,6 +22,7 @@ import { ClaimService } from '../../core/my-account/facade';
 @Component({
   selector: 'cx-fs-user-profile',
   templateUrl: 'user-profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileComponent implements OnInit, OnDestroy {
   constructor(
@@ -53,31 +59,39 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           map(([routingData, userId, user]) => {
             const customerId = routingData?.state?.params?.customerId;
             if (customerId) {
-              this.seller = true;
-              if (user?.roles?.includes(FSUserRole.SELLER)) {
-                this.fsConsentService.loadCustomer(userId, customerId);
-                this.fsConsentService.loadCustomerQuotes(userId, customerId);
-                this.fsConsentService.loadCustomerPolicies(userId, customerId);
-                this.fsConsentService.loadCustomerClaims(userId, customerId);
-                this.customer$ = this.fsConsentService.getCustomer();
-                this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
-                this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
-                this.customerClaims$ = this.fsConsentService.getCustomerClaims();
-              }
+              this.getCustomerAssets(user, userId, customerId);
             } else {
-              this.seller = false;
-              this.quoteService.loadQuotes();
-              this.policyService.loadPolicies();
-              this.claimService.loadClaims();
-              this.customer$ = this.userAccountFacade.get();
-              this.customerQuotes$ = this.quoteService.getQuotes();
-              this.customerPolicies$ = this.policyService.getPolicies();
-              this.customerClaims$ = this.claimService.getClaims();
+              this.getSellerAssets();
             }
           })
         )
         .subscribe()
     );
+  }
+
+  private getSellerAssets() {
+    this.seller = false;
+    this.quoteService.loadQuotes();
+    this.policyService.loadPolicies();
+    this.claimService.loadClaims();
+    this.customer$ = this.userAccountFacade.get();
+    this.customerQuotes$ = this.quoteService.getQuotes();
+    this.customerPolicies$ = this.policyService.getPolicies();
+    this.customerClaims$ = this.claimService.getClaims();
+  }
+
+  private getCustomerAssets(user: User, userId: string, customerId: any) {
+    this.seller = true;
+    if (user?.roles?.includes(FSUserRole.SELLER)) {
+      this.fsConsentService.loadCustomer(userId, customerId);
+      this.fsConsentService.loadCustomerQuotes(userId, customerId);
+      this.fsConsentService.loadCustomerPolicies(userId, customerId);
+      this.fsConsentService.loadCustomerClaims(userId, customerId);
+      this.customer$ = this.fsConsentService.getCustomer();
+      this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
+      this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
+      this.customerClaims$ = this.fsConsentService.getCustomerClaims();
+    }
   }
 
   showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
