@@ -6,8 +6,7 @@ import {
   ConverterService,
   OccEndpointsService,
 } from '@spartacus/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { InsuranceQuoteList } from '../../../occ/occ-models/occ.models';
 import { ConsentAdapter } from '../../../core/my-account/connectors/consent.adapter';
