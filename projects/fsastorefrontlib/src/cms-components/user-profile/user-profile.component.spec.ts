@@ -285,7 +285,7 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get Seller assets', () => {
+  it('should get Seller assets if customerId is undefined', () => {
     mockRouterState = null;
     spyOn(routingService, 'getRouterState').and.callThrough();
     spyOn(component, 'loadCustomerDetails').and.callThrough();

@@ -69,7 +69,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  getCustomerAssets(user: User, userId: string, customerId: any) {
+  protected getCustomerAssets(user: User, userId: string, customerId: any) {
     this.seller = true;
     if (user?.roles?.includes(FSUserRole.SELLER)) {
       this.fsConsentService.loadCustomer(userId, customerId);
@@ -83,7 +83,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  getSellerAssets() {
+  protected getSellerAssets() {
     this.seller = false;
     this.quoteService.loadQuotes();
     this.policyService.loadPolicies();
