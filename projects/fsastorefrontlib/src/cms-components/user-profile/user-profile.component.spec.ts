@@ -1,3 +1,4 @@
+import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { QuoteService } from '../../core/my-account/facade/quote.service';
@@ -14,8 +15,8 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import createSpy = jasmine.createSpy;
 import { FSUserRole } from '../../occ/occ-models/occ.models';
+import createSpy = jasmine.createSpy;
 
 const customerName = 'customerName';
 const customerUid = 'customerUid';
@@ -150,6 +151,21 @@ const mockedClaims = {
   ],
 };
 
+let mockRouterState = {
+  state: {
+    params: {
+      customerId: 'testId',
+    },
+  },
+};
+
+@Pipe({
+  name: 'parseDate',
+})
+class MockParseDatePipe implements PipeTransform {
+  transform() {}
+}
+
 class MockConsentService {
   loadCustomer(): void {}
   loadCustomerQuotes(): void {}
@@ -185,14 +201,8 @@ class MockUserAccountFacade {
 
 class MockRoutingService {
   go() {}
-  getRouterState(): Observable<any> {
-    return of({
-      state: {
-        params: {
-          customerId: 'testId',
-        },
-      },
-    });
+  getRouterState() {
+    return of(mockRouterState as any);
   }
 }
 
@@ -252,26 +262,39 @@ describe('UserProfileComponent', () => {
           },
           { provide: ClaimService, useClass: MockClaimService },
         ],
-        declarations: [UserProfileComponent],
+        declarations: [UserProfileComponent, MockParseDatePipe],
       }).compileComponents();
+      fsConsentService = TestBed.inject(ConsentService);
+      userIdService = TestBed.inject(UserIdService);
+      claimService = TestBed.inject(ClaimService);
+      routingService = TestBed.inject(RoutingService);
+      userAccountFacade = TestBed.inject(UserAccountFacade);
+      quoteService = TestBed.inject(QuoteService);
+      policyService = TestBed.inject(PolicyService);
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
-    fsConsentService = TestBed.inject(ConsentService);
-    userIdService = TestBed.inject(UserIdService);
-    claimService = TestBed.inject(ClaimService);
-    routingService = TestBed.inject(RoutingService);
-    userAccountFacade = TestBed.inject(UserAccountFacade);
-    quoteService = TestBed.inject(QuoteService);
-    policyService = TestBed.inject(PolicyService);
     spyOn(routingService, 'go').and.callThrough();
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should get Seller assets', () => {
+    mockRouterState = null;
+    spyOn(routingService, 'getRouterState').and.callThrough();
+    spyOn(component, 'loadCustomerDetails').and.callThrough();
+    component.ngOnInit();
+    expect(component.loadCustomerDetails).toHaveBeenCalled();
+  });
+
+  it('should pick asset', () => {
+    component.showAssetList([mockUser], 'test-class');
+    expect(component.assets).toEqual([mockUser]);
   });
 });

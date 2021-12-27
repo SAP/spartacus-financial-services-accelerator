@@ -69,18 +69,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getSellerAssets() {
-    this.seller = false;
-    this.quoteService.loadQuotes();
-    this.policyService.loadPolicies();
-    this.claimService.loadClaims();
-    this.customer$ = this.userAccountFacade.get();
-    this.customerQuotes$ = this.quoteService.getQuotes();
-    this.customerPolicies$ = this.policyService.getPolicies();
-    this.customerClaims$ = this.claimService.getClaims();
-  }
-
-  private getCustomerAssets(user: User, userId: string, customerId: any) {
+  getCustomerAssets(user: User, userId: string, customerId: any) {
     this.seller = true;
     if (user?.roles?.includes(FSUserRole.SELLER)) {
       this.fsConsentService.loadCustomer(userId, customerId);
@@ -92,6 +81,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
       this.customerClaims$ = this.fsConsentService.getCustomerClaims();
     }
+  }
+
+  getSellerAssets() {
+    this.seller = false;
+    this.quoteService.loadQuotes();
+    this.policyService.loadPolicies();
+    this.claimService.loadClaims();
+    this.customer$ = this.userAccountFacade.get();
+    this.customerQuotes$ = this.quoteService.getQuotes();
+    this.customerPolicies$ = this.policyService.getPolicies();
+    this.customerClaims$ = this.claimService.getClaims();
   }
 
   showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
