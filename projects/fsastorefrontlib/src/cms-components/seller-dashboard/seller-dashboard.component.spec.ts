@@ -17,9 +17,6 @@ import {
 } from '../../occ/occ-models/occ.models';
 import { Component, Pipe, PipeTransform } from '@angular/core';
 
-const consent1 = {};
-const consent2 = {};
-
 const mockSeller: FSUser = {
   firstName: 'Donna',
   lastName: 'Moore',
@@ -54,8 +51,6 @@ const mockOBOCustomer: OBOCustomerList = {
   pagination: {},
   sorts: [],
 };
-
-const consentList = [consent1, consent2];
 
 class MockConsentConnector {
   getOBOCustomerList(OCC_USER_ID_CURRENT) {
