@@ -8,9 +8,8 @@ export class ParseDatePipe implements PipeTransform {
       if (trimmedDate.length === 6) {
         trimmedDate.splice(4, 1);
         return new Date(trimmedDate.join(' '));
-      } else {
-        return new Date(input);
       }
+      return new Date(input);
     }
   }
 }
