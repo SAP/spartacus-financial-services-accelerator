@@ -73,6 +73,7 @@
     "@spartacus/checkout": "4.1.0",
     "@spartacus/cart": "4.1.0",
     "@spartacus/cds": "4.1.0",
+    "@spartacus/digital-payments": "4.1.0",
     "@spartacus/assets": "4.1.0",
     "@spartacus/asm": "4.1.0",
     "@spartacus/user": "4.1.0",
