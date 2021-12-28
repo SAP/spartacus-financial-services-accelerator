@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ClaimAdapter } from '../../../core/my-account/connectors/claim.adapter';

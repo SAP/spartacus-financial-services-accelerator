@@ -25,10 +25,7 @@
             ],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
+              "includePaths": ["./projects/fsastorefrontstyles/scss"]
             },
             "scripts": []
           },
@@ -128,9 +125,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts", "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -161,10 +156,7 @@
             "karmaConfig": "projects/fsastorefrontlib/karma.conf.js",
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
+              "includePaths": ["./projects/fsastorefrontstyles/scss"]
             },
             "codeCoverageExclude": [
               "**/index.ts",

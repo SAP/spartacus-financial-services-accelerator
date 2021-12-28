@@ -1,7 +1,7 @@
 <ng-container *ngIf="customers$ | async as customers; else loading">
   <ng-container *ngIf="customers.entries.length > 0; else noCustomers">
     <!-- BODY -->
-    <div class="row">
+    <div class="row mt-5">
       <div class="form-group col-6 col-md-3">
         <cx-sorting
           [sortOptions]="customers.sorts"
@@ -17,7 +17,7 @@
       </div>
     </div>
     <!-- TABLE -->
-    <table class="table table-hover border-top border-color-3">
+    <table class="box-shadow table table-hover border border-color-3">
       <thead class="d-none d-md-table-row">
         <th scope="col">
           {{ 'dashboard.name' | cxTranslate }}
@@ -31,6 +31,7 @@
         <tr
           class="position-relative"
           *ngFor="let customer of customers.entries"
+          (click)="getUserProfile(customer)"
         >
           <td class="d-flex d-md-table-cell">
             <div class="mobile-label text-uppercase pr-2 d-md-none">

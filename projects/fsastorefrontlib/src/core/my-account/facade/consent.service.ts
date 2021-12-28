@@ -3,7 +3,7 @@ import * as fromAction from './../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { select, Store } from '@ngrx/store';
 import * as fromConsentStore from './../store';
-import { Address, UserIdService } from '@spartacus/core';
+import { UserIdService, Address } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -31,6 +31,14 @@ export class ConsentService {
     );
   }
 
+  loadCustomer(userId, customerId) {
+    this.store.dispatch(
+      new fromAction.LoadCustomer({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  }
   transferCartToSelectedOBOCustomer(
     cart: FSCart,
     currentUser: FSUser,
@@ -45,6 +53,23 @@ export class ConsentService {
     );
   }
 
+  loadCustomerQuotes(userId, customerId) {
+    this.store.dispatch(
+      new fromAction.LoadCustomerQuotes({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  }
+
+  loadCustomerPolicies(userId, customerId) {
+    this.store.dispatch(
+      new fromAction.LoadCustomerPolicies({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  }
   isCartTransferAllowedForSeller(): Observable<boolean> {
     return combineLatest([
       this.userAccountFacade.get(),
@@ -62,6 +87,14 @@ export class ConsentService {
     );
   }
 
+  loadCustomerClaims(userId, customerId) {
+    this.store.dispatch(
+      new fromAction.LoadCustomerClaims({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  }
   /**
    * Method used to create address for  On-Behalf-Of customer by consent holder
    *
@@ -85,6 +118,22 @@ export class ConsentService {
 
   getConsents(): Observable<any> {
     return this.store.pipe(select(fromConsentStore.getConsents));
+  }
+
+  getCustomer(): Observable<any> {
+    return this.store.pipe(select(fromConsentStore.getCustomer));
+  }
+
+  getCustomerQuotes(): Observable<any> {
+    return this.store.pipe(select(fromConsentStore.getCustomerQuotes));
+  }
+
+  getCustomerPolicies(): Observable<any> {
+    return this.store.pipe(select(fromConsentStore.getCustomerPolicies));
+  }
+
+  getCustomerClaims(): Observable<any> {
+    return this.store.pipe(select(fromConsentStore.getCustomerClaims));
   }
 
   getConsentsLoaded(): Observable<boolean> {

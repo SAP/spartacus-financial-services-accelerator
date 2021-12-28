@@ -4,7 +4,7 @@ import { FSUser } from '@spartacus/fsa-storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { of } from 'rxjs';
 
-import { SellerDashboardListGuard } from './seller-dashboard-list.guard';
+import { SellerDashboardGuard } from './seller-dashboard.guard';
 import createSpy = jasmine.createSpy;
 
 const mockUserDetails: FSUser = {
@@ -24,11 +24,11 @@ class MockRoutingService {
   go() {}
 }
 
-describe('SellerDashboardListGuard', () => {
+describe('SellerDashboardGuard', () => {
   let routingService: RoutingService;
   let mockedUserAccountFacade: UserAccountFacade;
   let globalMessageService: GlobalMessageService;
-  let guard: SellerDashboardListGuard;
+  let guard: SellerDashboardGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -41,7 +41,7 @@ describe('SellerDashboardListGuard', () => {
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
       ],
     });
-    guard = TestBed.inject(SellerDashboardListGuard);
+    guard = TestBed.inject(SellerDashboardGuard);
     routingService = TestBed.inject(RoutingService);
     globalMessageService = TestBed.inject(GlobalMessageService);
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);

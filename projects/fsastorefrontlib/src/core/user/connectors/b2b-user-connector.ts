@@ -3,7 +3,7 @@ import {
   B2BUserAdapter,
   B2BUserConnector,
 } from '@spartacus/organization/administration/core';
-import { FSB2BUser } from '../../../../src/occ/occ-models';
+import { FSB2BUser } from '../../../occ/occ-models';
 import { Observable } from 'rxjs';
 
 @Injectable({

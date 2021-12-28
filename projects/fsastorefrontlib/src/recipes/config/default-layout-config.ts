@@ -14,6 +14,7 @@ export const layoutConfig: LayoutConfig = {
           'SiteContext',
           'SiteLogo',
           'SearchBox',
+          'DashboardLinkSlot',
           'SiteLogin',
           'MessageNotification',
           'NavigationBar',
@@ -24,7 +25,12 @@ export const layoutConfig: LayoutConfig = {
     navigation: {
       lg: { slots: [] },
       xs: {
-        slots: ['SiteLogin', 'NavigationBar', 'SiteContext'],
+        slots: [
+          'DashboardLinkSlot',
+          'SiteLogin',
+          'NavigationBar',
+          'SiteContext',
+        ],
       },
       slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
     },
