@@ -59,9 +59,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           map(([routingData, userId, user]) => {
             const customerId = routingData?.state?.params?.customerId;
             if (customerId) {
-              this.getCustomerAssets(user, userId, customerId);
+              this.getSellerAssets(user, userId, customerId);
             } else {
-              this.getSellerAssets();
+              this.getAssetsforCurrentUser();
             }
           })
         )
@@ -69,7 +69,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  protected getCustomerAssets(user: User, userId: string, customerId: any) {
+  protected getSellerAssets(user: User, userId: string, customerId: any) {
     this.seller = true;
     if (user?.roles?.includes(FSUserRole.SELLER)) {
       this.fsConsentService.loadCustomer(userId, customerId);
@@ -83,7 +83,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected getSellerAssets() {
+  protected getAssetsforCurrentUser() {
     this.seller = false;
     this.quoteService.loadQuotes();
     this.policyService.loadPolicies();
