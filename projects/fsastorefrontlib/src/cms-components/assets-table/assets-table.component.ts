@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 
 /**
- * The Asstes Table component currently provides a somewhat generic table DOM structure. It accepts 4 strings used as headings
+ * The Assets Table component currently provides a limited generic table DOM structure. It accepts 4 strings used as headings
  * and one object which can contain either Quotes, Policies or Claims. Based on what asset the user has chosen on user-profile component,
- * that asset is being passed to this component and is displayed accordingly.
+ * that asset is being passed to this component and is displayed accordingly in the table.
  *
  * TO-DO: Create more generic approach with some sort of configuration
  */
