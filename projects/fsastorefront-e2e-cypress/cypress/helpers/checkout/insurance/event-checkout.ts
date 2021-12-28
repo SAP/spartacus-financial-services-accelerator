@@ -94,19 +94,19 @@ export function checkEventPolicy() {
 
 export function checkMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €57.99 ',
+    price: '€57.99',
     products: [
       {
-        title: ' Two Star Event Plan: ',
-        value: ' €18.99 ',
+        title: 'Two Star Event Plan:',
+        value: '€18.99',
       },
       {
-        title: ' Excess Waiver: ',
-        value: ' €10.00 ',
+        title: 'Excess Waiver:',
+        value: '€10.00',
       },
       {
-        title: ' Venue Cover: ',
-        value: ' €29.00 ',
+        title: 'Venue Cover:',
+        value: '€29.00',
       },
     ],
   };
@@ -115,15 +115,15 @@ export function checkMiniCart() {
 
 export function checkMiniCartRemovedProduct() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €47.99 ',
+    price: '€47.99',
     products: [
       {
-        title: ' Two Star Event Plan: ',
-        value: ' €18.99 ',
+        title: 'Two Star Event Plan:',
+        value: '€18.99',
       },
       {
-        title: ' Venue Cover: ',
-        value: ' €29.00 ',
+        title: 'Venue Cover:',
+        value: '€29.00',
       },
     ],
   };
@@ -138,4 +138,17 @@ export function checkEventMiniCart() {
       cy.get('.short-overview-item').should('contain.text', 'Two Star');
       cy.get('.short-overview-value').should('contain.text', '€18.99');
     });
+}
+
+export function checkMiniCartWithoutOptional() {
+  const miniCartContent: sharedCheckout.MiniCart = {
+    price: '€18.99',
+    products: [
+      {
+        title: 'Two Star Event Plan:',
+        value: '€18.99',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }

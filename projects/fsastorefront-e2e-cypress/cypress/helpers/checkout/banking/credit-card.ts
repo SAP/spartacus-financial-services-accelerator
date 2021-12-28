@@ -24,19 +24,19 @@ export function checkOptionalProducts() {
 
 export function checkMiniCartCreditCard() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €89.00 ',
+    price: '€89.00',
     products: [
       {
         title: 'Debit Card Design:',
-        value: ' black ',
+        value: 'black',
       },
       {
         title: 'Minimum Card Limit:',
-        value: ' no ',
+        value: 'no',
       },
       {
-        title: ' Premium Card: ',
-        value: ' €89.00 ',
+        title: 'Premium Card:',
+        value: '€89.00',
       },
     ],
   };

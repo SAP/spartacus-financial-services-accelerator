@@ -75,27 +75,27 @@ export function checkOptionalPremiumAccount() {
 
 export function checkMiniCartCurrentAccount() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €9.99 ',
+    price: '€9.99',
     products: [
       {
         title: 'Number of Applicants:',
-        value: ' 1 ',
+        value: '1',
       },
       {
         title: 'Debit Card:',
-        value: ' yes ',
+        value: 'yes',
       },
       {
         title: 'Debit Card Design:',
-        value: ' black ',
+        value: 'black',
       },
       {
-        title: ' Family Account: ',
-        value: ' €4.99 ',
+        title: 'Family Account:',
+        value: '€4.99',
       },
       {
-        title: ' Transaction Chest: ',
-        value: ' €5.00 ',
+        title: 'Transaction Chest:',
+        value: '€5.00',
       },
     ],
   };
