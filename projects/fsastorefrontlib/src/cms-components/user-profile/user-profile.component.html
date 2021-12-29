@@ -194,18 +194,17 @@
       </div>
     </ng-container>
   </div>
+  <cx-fs-assets-table
+    *ngIf="assetSelected"
+    [headings]="[
+      'fscommon.application.number' | cxTranslate,
+      'dashboard.name' | cxTranslate,
+      'fscommon.paymentFrequency' | cxTranslate,
+      'fscommon.status' | cxTranslate
+    ]"
+    [assets]="assets"
+  ></cx-fs-assets-table>
 </ng-container>
-
-<cx-fs-assets-table
-  *ngIf="assetSelected"
-  [headings]="[
-    'fscommon.application.number' | cxTranslate,
-    'dashboard.name' | cxTranslate,
-    'fscommon.paymentFrequency' | cxTranslate,
-    'fscommon.status' | cxTranslate
-  ]"
-  [assets]="assets"
-></cx-fs-assets-table>
 
 <ng-template #loading>
   <cx-spinner></cx-spinner>
