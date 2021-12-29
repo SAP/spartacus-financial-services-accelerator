@@ -1,16 +1,16 @@
 export const dashboard = {
   dashboard: {
     yourProfile: '[DE] Your Profile',
-    customerProfile: '[DE] Customer Profile',
+    customerProfile: 'Kundenprofil',
     checkCustomerList: '[DE] Check Customer List',
     linkTitle: '[DE] Dashboard',
     yourDashboard: '[DE] Your Dashboard',
-    customerDashboard: '[DE] Customer Dashboard',
-    overview: '[DE] Dashboard Overview',
+    customerDashboard: 'Kundenübersicht',
+    overview: 'Übersicht',
     name: 'Name',
-    customerName: '[DE] Customer Name',
+    customerName: 'Kundenname',
     email: 'Email',
-    noCustomers: '[DE] You haven\'t assigned any customers yet', // prettier-ignore
+    noCustomers: 'Sie haben bisher noch keine Kunden zugewiesen',
     active: '[DE] Active',
     disabled: '[DE] Disabled',
     sorting: {
