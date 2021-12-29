@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
  * The Assets Table component currently provides a limited generic table DOM structure. It accepts 4 strings used as headings
@@ -18,11 +13,9 @@ import {
   templateUrl: './assets-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssetsTableComponent implements OnInit {
+export class AssetsTableComponent {
   constructor() {}
 
   @Input() headings: string[];
   @Input() assets: { [key: string]: any }[];
-
-  ngOnInit(): void {}
 }

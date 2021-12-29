@@ -18,12 +18,9 @@ import { CMSCustomComponentsContainer } from '../../occ/occ-models';
 export class CmsCustomContainerComponent implements OnInit, OnDestroy {
   routeParamId = 'formCode';
   pageContext: PageContext;
-  styleCss: string;
   components$: Observable<CmsComponent[]>;
 
-  @HostBinding('class') get ContainerClass() {
-    return this.styleCss;
-  }
+  @HostBinding('class') styleCss: string;
 
   private subscription = new Subscription();
 
@@ -47,15 +44,15 @@ export class CmsCustomContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.componentData.data$
-      .subscribe(data => {
+    this.subscription.add(
+      this.componentData.data$.subscribe(data => {
         this.styleCss = data.styleClasses ? data.styleClasses : '';
         this.components$ = this.cmsComponentConnector.getList(
           data.simpleCMSComponents.split(' '),
           this.pageContext
         );
       })
-      .unsubscribe();
+    );
   }
 
   ngOnDestroy() {
