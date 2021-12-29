@@ -14,7 +14,7 @@ import { FSUserRole } from '../../occ/occ-models/occ.models';
 @Injectable({
   providedIn: 'root',
 })
-export class SellerDashboardListGuard implements CanActivate {
+export class SellerDashboardGuard implements CanActivate {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected routingService: RoutingService,

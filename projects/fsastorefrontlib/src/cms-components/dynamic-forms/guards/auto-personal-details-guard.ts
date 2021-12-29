@@ -8,7 +8,7 @@ import {
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { FSUser } from '../../../../src/occ/occ-models/occ.models';
+import { FSUser } from '../../../occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FormsUtils } from '@spartacus/dynamicforms';
 import { UserAccountFacade } from '@spartacus/user/account/root';

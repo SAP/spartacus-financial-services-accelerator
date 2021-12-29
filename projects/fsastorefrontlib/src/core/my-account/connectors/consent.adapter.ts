@@ -17,6 +17,51 @@ export abstract class ConsentAdapter {
   abstract getOBOCustomerList(userId: string): Observable<any>;
 
   /**
+   * Abstract method used to get the particular customer of customers created by consent holder.
+   *
+   * @param userId The `userId` used for fetching on behalf of consent holder
+   *
+   * @param customerId The `customerId` used for fetching particular customer
+   */
+  abstract getOBOCustomer(userId: string, customerId: string): Observable<any>;
+
+  /**
+   * Abstract method used to get quotes of the particular customer created by consent holder.
+   *
+   * @param userId The `userId` used for fetching on behalf of consent holder
+   *
+   * @param customerId The `customerId` used for fetching particular customer
+   */
+  abstract getQuotesForOBOCustomer(
+    userId: string,
+    customerId: string
+  ): Observable<any>;
+
+  /**
+   * Abstract method used to get policies of the particular customer created by consent holder.
+   *
+   * @param userId The `userId` used for fetching on behalf of consent holder
+   *
+   * @param customerId The `customerId` used for fetching particular customer
+   */
+  abstract getPoliciesForOBOCustomer(
+    userId: string,
+    customerId: string
+  ): Observable<any>;
+
+  /**
+   * Abstract method used to get claims of the particular customer created by consent holder.
+   *
+   * @param userId The `userId` used for fetching on behalf of consent holder
+   *
+   * @param customerId The `customerId` used for fetching particular customer
+   */
+  abstract getClaimsForOBOCustomer(
+    userId: string,
+    customerId: string
+  ): Observable<any>;
+
+  /**
    * Abstract method used to transfer cart to specified customer created by consent holder
    *
    * @param cartId The `cartId` the identifier of the current cart

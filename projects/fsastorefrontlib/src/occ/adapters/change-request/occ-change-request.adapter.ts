@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/internal/operators/catchError';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
-import { Observable } from 'rxjs';
 import { OccEndpointsService } from '@spartacus/core';
 
 @Injectable()

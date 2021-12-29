@@ -26,8 +26,11 @@ import { MessageNotificationModule } from './message-notification/message-notifi
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
-import { SellerDashboardListModule } from './seller-dashboard/seller-dashboard-list.module';
+import { UserProfileModule } from './user-profile/user-profile.module';
+import { SellerDashboardModule } from './seller-dashboard/seller-dashboard.module';
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
+import { AssetsTableModule } from './assets-table/assets-table.module';
+import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
 
 @NgModule({
   imports: [
@@ -38,7 +41,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
-    SellerDashboardListModule,
+    UserProfileModule,
+    SellerDashboardModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -57,6 +61,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
+    DashboardLinkModule,
   ],
   exports: [
     AgentModule,
@@ -66,7 +72,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
-    SellerDashboardListModule,
+    UserProfileModule,
+    SellerDashboardModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,
@@ -82,6 +89,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
+    DashboardLinkModule,
   ],
   providers: [reducerProvider],
 })
