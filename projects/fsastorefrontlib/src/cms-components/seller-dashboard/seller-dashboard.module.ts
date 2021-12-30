@@ -6,7 +6,6 @@ import {
   SpinnerModule,
   PageLayoutComponent,
   ListNavigationModule,
-  IconModule,
   MediaModule,
 } from '@spartacus/storefront';
 import {
@@ -44,7 +43,6 @@ const routes: Routes = [
     UrlModule,
     ListNavigationModule,
     MediaModule,
-    IconModule,
     DateFormatConfigurationModule,
     RouterModule.forChild(routes),
   ],

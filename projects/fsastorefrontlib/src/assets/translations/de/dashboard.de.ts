@@ -18,6 +18,7 @@ export const dashboard = {
       status: '[DE] by Status',
       email: '[DE] by Email',
     },
+    notSet: '[DE] Not set',
     customers: '[DE] Customers',
     checkCustomers: '[DE] Check Customer\'s', // prettier-ignore
     checkYour: '[DE] Check Your',

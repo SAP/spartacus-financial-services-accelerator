@@ -58,17 +58,13 @@
     }
     .user-image {
       cx-media img,
-      cx-icon {
+      .is-missing {
         border-radius: 50%;
         border: 2px solid var(--cx-color-primary);
         padding: 0.25rem;
       }
-      cx-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .is-missing {
         margin: 0 auto;
-        font-size: calc(var(--cx-h1-font-size) * 1.7);
         width: 96px;
         aspect-ratio: 1/1;
       }

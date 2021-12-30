@@ -31,7 +31,6 @@
           <div class="user-profile bg-white border border-color-3 text-center">
             <div class="user-image">
               <cx-media
-                *ngIf="user.thumbnail; else noImage"
                 [container]="user.thumbnail"
                 format="thumbnail"
                 [alt]="user.name"
@@ -72,7 +71,11 @@
                   }}:</span
                 >
                 <span class="notice">
-                  {{ user.dateOfBirth | parseDate | date: 'dd MMM yyyy' }}
+                  {{
+                    user.dateOfBirth
+                      ? (user.dateOfBirth | parseDate | date: 'dd MMM yyyy')
+                      : ('dashboard.notSet' | cxTranslate)
+                  }}
                 </span>
               </li>
             </ul>
@@ -215,7 +218,4 @@
 
 <ng-template #loading>
   <cx-spinner></cx-spinner>
-</ng-template>
-<ng-template #noImage>
-  <cx-icon [type]="iconTypes.PERSON" aria-label="user-generic-image"></cx-icon>
 </ng-template>
