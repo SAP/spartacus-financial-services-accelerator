@@ -10,6 +10,7 @@ import {
 } from '@spartacus/core';
 import {
   CmsPageGuard,
+  MediaModule,
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
@@ -37,6 +38,7 @@ const routes: Routes = [
     SpinnerModule,
     CmsModule,
     AssetsTableModule,
+    MediaModule,
     DateFormatConfigurationModule,
     RouterModule.forChild(routes),
   ],

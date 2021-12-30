@@ -7,6 +7,7 @@ import {
   PageLayoutComponent,
   ListNavigationModule,
   IconModule,
+  MediaModule,
 } from '@spartacus/storefront';
 import {
   CmsModule,
@@ -42,6 +43,7 @@ const routes: Routes = [
     CmsModule,
     UrlModule,
     ListNavigationModule,
+    MediaModule,
     IconModule,
     DateFormatConfigurationModule,
     RouterModule.forChild(routes),
