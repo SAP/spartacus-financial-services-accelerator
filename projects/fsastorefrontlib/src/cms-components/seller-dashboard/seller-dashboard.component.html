@@ -7,7 +7,14 @@
         </h5>
         <div class="user-profile-wrapper background-color-4">
           <div class="user-profile bg-white border border-color-3 text-center">
-            <span class="user-image h1 fas fa-user p-3"></span>
+            <div class="user-image">
+              <cx-media
+                *ngIf="user.thumbnail; else noImage"
+                [container]="user.thumbnail"
+                format="thumbnail"
+                [alt]="user.name"
+              ></cx-media>
+            </div>
             <h6 class="text-uppercase">
               {{ 'dashboard.name' | cxTranslate }}
             </h6>
@@ -99,4 +106,8 @@
 
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+
+<ng-template #noImage>
+  <cx-icon [type]="iconTypes.PERSON" aria-label="user-generic-image"></cx-icon>
 </ng-template>

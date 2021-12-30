@@ -18,6 +18,7 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
+import { FS_ICON_TYPE } from '../../core/icon-config/icon-config';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -43,6 +44,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerClaims$: Observable<any>;
   assets: { [key: string]: any }[];
   assetSelected: string;
+  iconTypes = FS_ICON_TYPE;
 
   ngOnInit(): void {
     this.loadCustomerDetails();
