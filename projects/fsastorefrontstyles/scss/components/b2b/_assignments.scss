@@ -10,3 +10,8 @@
     margin: 0 0 15px 5px;
   }
 }
+
+cx-org-list cx-table td ul.text li:not(:last-child):after,
+cx-org-list .details ul.value li:not(:last-child):after {
+  content: ' ';
+}
