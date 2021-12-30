@@ -11,6 +11,7 @@
   }
 }
 
+// Override Spartacus styles and putting empty space instead of a comma.
 cx-org-list cx-table td ul.text li:not(:last-child):after,
 cx-org-list .details ul.value li:not(:last-child):after {
   content: ' ';
