@@ -34,9 +34,7 @@ export class CreateOBOCustomerComponentService {
    * Creates the On-Behalf-Of user's details and handles the UI.
    */
   createCustomerByConsentHolder(consentHolder: string): void {
-    console.log(this.form);
     if (!this.form.valid) {
-      console.log('is not valid');
       this.form.markAllAsTouched();
       return;
     }
