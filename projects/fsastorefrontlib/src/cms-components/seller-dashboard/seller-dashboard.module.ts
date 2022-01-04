@@ -7,6 +7,7 @@ import {
   PageLayoutComponent,
   ListNavigationModule,
   IconModule,
+  MediaModule,
   FormErrorsModule,
 } from '@spartacus/storefront';
 import {
@@ -58,6 +59,7 @@ const routes: Routes = [
     CmsModule,
     UrlModule,
     ListNavigationModule,
+    MediaModule,
     IconModule,
     FormsModule,
     ReactiveFormsModule,

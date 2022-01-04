@@ -57,10 +57,17 @@
       margin-bottom: 1rem;
     }
     .user-image {
-      border-radius: 50%;
-      border: 2px solid var(--cx-color-primary);
-      width: 55px;
-      aspect-ratio: 1/1;
+      cx-media img,
+      .is-missing {
+        border-radius: 50%;
+        border: 2px solid var(--cx-color-primary);
+        padding: 0.25rem;
+      }
+      .is-missing {
+        margin: 0 auto;
+        width: 96px;
+        aspect-ratio: 1/1;
+      }
     }
   }
   .dashboard-overview-stats,

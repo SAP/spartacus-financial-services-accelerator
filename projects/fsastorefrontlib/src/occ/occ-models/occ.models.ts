@@ -15,6 +15,7 @@ import {
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/checkout/root';
 import { UserSignUp } from '@spartacus/user/profile/root';
+import { MediaContainer } from '@spartacus/storefront';
 
 export interface ContactAgentData {
   email?: string;
@@ -246,6 +247,7 @@ export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
   active?: boolean;
+  thumbnail?: MediaContainer;
 }
 
 export interface FSStepData {
