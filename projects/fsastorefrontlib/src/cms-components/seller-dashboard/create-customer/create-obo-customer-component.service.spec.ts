@@ -82,7 +82,6 @@ describe('CreateOBOCustomerComponentService', () => {
 
       it('should save customer details', () => {
         spyOn(consentConnector, 'createOBOCustomer').and.callThrough();
-        console.log('save custoemr details');
         service.createCustomerByConsentHolder(consentHolderId);
         expect(consentConnector.createOBOCustomer).toHaveBeenCalled();
       });
