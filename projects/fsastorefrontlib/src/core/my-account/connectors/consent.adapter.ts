@@ -1,4 +1,4 @@
-import { Address } from '@spartacus/core';
+import { Address, User } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 
 export abstract class ConsentAdapter {
@@ -24,6 +24,17 @@ export abstract class ConsentAdapter {
    * @param customerId The `customerId` used for fetching particular customer
    */
   abstract getOBOCustomer(userId: string, customerId: string): Observable<any>;
+
+  /**
+   * Creates the user's details of customer created by seller.
+   *
+   * @param consentHolder The 'consenHolder' that is creating the customer
+   * @param details User details to be created.
+   */
+  abstract createOBOCustomer(
+    consentHolder: string,
+    details: User
+  ): Observable<any>;
 
   /**
    * Abstract method used to get quotes of the particular customer created by consent holder.

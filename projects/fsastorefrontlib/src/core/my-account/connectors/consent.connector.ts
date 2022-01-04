@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ConsentAdapter } from './consent.adapter';
-import { Address } from '@spartacus/core';
+import { Address, User } from '@spartacus/core';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,10 @@ export class ConsentConnector {
 
   getOBOCustomer(userId: string, customerId: string): Observable<any> {
     return this.adapter.getOBOCustomer(userId, customerId);
+  }
+
+  createOBOCustomer(consentHolder: string, details: User): Observable<any> {
+    return this.adapter.createOBOCustomer(consentHolder, details);
   }
 
   getQuotesForOBOCustomer(userId: string, customerId: string): Observable<any> {

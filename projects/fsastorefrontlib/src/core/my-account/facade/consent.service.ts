@@ -70,6 +70,16 @@ export class ConsentService {
       })
     );
   }
+
+  loadCustomerClaims(userId, customerId) {
+    this.store.dispatch(
+      new fromAction.LoadCustomerClaims({
+        userId: userId,
+        customerId: customerId,
+      })
+    );
+  }
+
   isCartTransferAllowedForSeller(): Observable<boolean> {
     return combineLatest([
       this.userAccountFacade.get(),
@@ -87,14 +97,6 @@ export class ConsentService {
     );
   }
 
-  loadCustomerClaims(userId, customerId) {
-    this.store.dispatch(
-      new fromAction.LoadCustomerClaims({
-        userId: userId,
-        customerId: customerId,
-      })
-    );
-  }
   /**
    * Method used to create address for  On-Behalf-Of customer by consent holder
    *

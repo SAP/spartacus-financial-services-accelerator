@@ -1,0 +1,84 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <label>
+    <span class="label-content">{{ 'fscommon.title' | cxTranslate }}</span>
+    <select formControlName="titleCode" class="form-control">
+      <option value="">{{ 'fscommon.none' | cxTranslate }}</option>
+      <option *ngFor="let title of titles$ | async" [value]="title.code">
+        {{ title.name }}
+      </option>
+    </select>
+  </label>
+
+  <label>
+    <span class="label-content">
+      {{ 'fscommon.emailAddress' | cxTranslate }}</span
+    >
+    <input
+      type="text"
+      class="form-control"
+      name="email"
+      placeholder="{{ 'fscommon.emailAddress' | cxTranslate }}"
+      formControlName="email"
+    />
+    <cx-form-errors [control]="form.get('email')"></cx-form-errors>
+  </label>
+
+  <label>
+    <span class="label-content">{{
+      'register.firstName.label' | cxTranslate
+    }}</span>
+    <input
+      type="text"
+      class="form-control"
+      name="firstName"
+      placeholder="{{ 'register.firstName.placeholder' | cxTranslate }}"
+      formControlName="firstName"
+    />
+    <cx-form-errors [control]="form.get('firstName')"></cx-form-errors>
+  </label>
+
+  <label>
+    <span class="label-content">{{
+      'register.lastName.label' | cxTranslate
+    }}</span>
+    <input
+      type="text"
+      class="form-control"
+      name="lastName"
+      placeholder="{{ 'register.lastName.placeholder' | cxTranslate }}"
+      formControlName="lastName"
+    />
+    <cx-form-errors [control]="form.get('lastName')"></cx-form-errors>
+  </label>
+
+  <label>
+    <span class="label-content">{{
+      'forms.dateOfBirth.label' | cxTranslate
+    }}</span>
+    <input
+      type="date"
+      class="form-control"
+      name="dateOfBirth"
+      formControlName="dateOfBirth"
+      placeholder="{{ getDateFormat() }}"
+    />
+    <cx-form-errors
+      [control]="form.get('dateOfBirth')"
+      [translationParams]="{
+        minValue: form.get('dateOfBirth')?.errors?.min?.min,
+        measure: 'year'
+      }"
+    ></cx-form-errors>
+  </label>
+
+  <a
+    class="btn btn-block btn-secondary"
+    [routerLink]="{ cxRoute: 'sellerDashboard' } | cxUrl"
+  >
+    {{ 'common.back' | cxTranslate }}
+  </a>
+
+  <button class="btn btn-block btn-primary" [disabled]="form.disabled">
+    {{ 'common.save' | cxTranslate }}
+  </button>
+</form>

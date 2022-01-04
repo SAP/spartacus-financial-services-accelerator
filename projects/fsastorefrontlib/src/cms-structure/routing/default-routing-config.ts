@@ -38,6 +38,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   contactAgent: { paths: ['contact-agent/:agent'] },
   myDocuments: { paths: ['my-account/my-documents'] },
   sellerDashboard: { paths: ['seller-dashboard'] },
+  createOBOCustomer: { paths: ['seller-dashboard/create-customer'] },
   userProfile: { paths: ['user-profile/:customerId'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },

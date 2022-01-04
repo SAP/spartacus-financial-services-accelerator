@@ -43,6 +43,11 @@ class MockConsentAdapter extends ConsentAdapter {
   ).and.callFake((userId, oboCustomerId, address) =>
     of('createAddressForUser' + userId + oboCustomerId + address)
   );
+  createOBOCustomer = createSpy(
+    'ConsentAdapter.createOBOCustomer'
+  ).and.callFake((consentHolder, details) =>
+    of('createOBOCustomer' + consentHolder + details)
+  );
 }
 
 const user = 'user';
@@ -120,6 +125,19 @@ describe('ConsentConnector', () => {
       user,
       oboCustomer,
       address
+    );
+  });
+
+  it('should call adapter to create customer', () => {
+    const customerDetails = {
+      firstName: 'Test First Name',
+      lastName: 'Test Last Name',
+      email: 'test@email.com',
+    };
+    consentConnector.createOBOCustomer(user, customerDetails);
+    expect(consentAdapter.createOBOCustomer).toHaveBeenCalledWith(
+      user,
+      customerDetails
     );
   });
 });

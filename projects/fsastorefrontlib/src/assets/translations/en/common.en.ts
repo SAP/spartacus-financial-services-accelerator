@@ -1,6 +1,7 @@
 export const fscommon = {
   fscommon: {
     no: 'No',
+    none: '',
     mr: 'Mr.',
     mrs: 'Mrs.',
     add: 'Add',
@@ -109,6 +110,7 @@ export const fscommon = {
       INVOICE: 'Invoice',
     },
     oboCustomers: 'All Customers',
+    userCreatedSuccess: 'User is successfully created',
     application: {
       title: 'Application',
       applicationRequestSubmitted:

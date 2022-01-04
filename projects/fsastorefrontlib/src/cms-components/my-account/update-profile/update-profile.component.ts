@@ -22,7 +22,7 @@ export class FSUpdateProfileComponent extends UpdateProfileComponent
   implements OnInit, OnDestroy {
   constructor(
     protected service: FSUpdateProfileComponentService,
-    private routingService: RoutingService,
+    protected routingService: RoutingService,
     protected userAccountFacade: UserAccountFacade,
     protected config: DateConfig
   ) {
