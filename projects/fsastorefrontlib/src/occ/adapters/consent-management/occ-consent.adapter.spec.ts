@@ -24,6 +24,12 @@ const oboCustomerId = 'oboCustomerId';
 const transferCartEndpoint = 'transferCart';
 const addAddressEndpoint = 'oboConsentAddresses';
 
+const customerDetails = {
+  firstName: 'test name',
+  lastName: 'test last name',
+  email: 'test@email.com',
+  dateOfBirth: '02-02-1992',
+};
 const address: Address = {
   companyName: 'Test Company',
   defaultAddress: true,
@@ -269,6 +275,28 @@ describe('OccConsentAdapter', () => {
             }
           );
         });
+      });
+
+      describe('createOBOCustomer', () => {
+        it(
+          'should create customer',
+          waitForAsync(() => {
+            adapter.createOBOCustomer(userId, customerDetails).subscribe();
+            httpMock.expectOne((req: HttpRequest<any>) => {
+              return (
+                req.url === oboConsentCustomersEndpoint && req.method === 'POST'
+              );
+            }, `POST method and url`);
+            expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+              oboConsentCustomersEndpoint,
+              {
+                urlParams: {
+                  userId,
+                },
+              }
+            );
+          })
+        );
       });
     });
   });
