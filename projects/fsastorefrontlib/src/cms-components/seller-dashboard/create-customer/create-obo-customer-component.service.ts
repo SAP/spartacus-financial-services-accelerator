@@ -33,22 +33,20 @@ export class CreateOBOCustomerComponentService {
   /**
    * Creates the On-Behalf-Of user's details and handles the UI.
    */
-  createCustomerByConsentHolder(consentHolder: string): void {
+  createCustomerByConsentHolder(consentHolder: string): Observable<any> {
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       return;
     }
 
     this.busy$.next(true);
-    this.consentConnector
-      .createOBOCustomer(consentHolder, this.form.value)
-      .subscribe({
-        next: () => this.onSuccess(),
-        error: (error: Error) => this.onError(error),
-      });
+    return this.consentConnector.createOBOCustomer(
+      consentHolder,
+      this.form.value
+    );
   }
 
-  protected onSuccess(): void {
+  onSuccess(): void {
     this.globalMessageService.add(
       {
         key: 'fscommon.userCreatedSuccess',
@@ -60,7 +58,7 @@ export class CreateOBOCustomerComponentService {
     this.form.reset();
   }
 
-  protected onError(_error: Error): void {
+  onError(_error: Error): void {
     this.busy$.next(false);
   }
 }
