@@ -16,8 +16,7 @@ export class CreateOBOCustomerComponent implements OnDestroy {
   constructor(
     protected config: DateConfig,
     protected service: CreateOBOCustomerComponentService,
-    protected userIdService: UserIdService,
-    protected routingService: RoutingService
+    protected userIdService: UserIdService
   ) {}
 
   form: FormGroup = this.service.form;

@@ -40,9 +40,9 @@ class MockUrlPipe implements PipeTransform {
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-spinner',
-  template: ` <div>spinner</div> `,
+  template: '',
 })
-class MockCxSpinnerComponent {}
+class MockSpinnerComponent {}
 
 class MockCreateOBOCustomerComponentService {
   createCustomerByConsentHolder() {}
@@ -66,7 +66,7 @@ describe('CreateOBOCustomerComponent', () => {
       TestBed.configureTestingModule({
         declarations: [
           CreateOBOCustomerComponent,
-          MockCxSpinnerComponent,
+          MockSpinnerComponent,
           MockTranslatePipe,
           MockUrlPipe,
         ],

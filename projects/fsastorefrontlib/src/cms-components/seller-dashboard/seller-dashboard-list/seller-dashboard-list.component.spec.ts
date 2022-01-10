@@ -190,11 +190,11 @@ describe('SellerDashboardListComponent', () => {
         },
       ],
     }).compileComponents();
-    mockUserIdService = TestBed.inject(UserIdService);
-    mockTranslationService = TestBed.inject(TranslationService);
   });
 
   beforeEach(() => {
+    mockUserIdService = TestBed.inject(UserIdService);
+    mockTranslationService = TestBed.inject(TranslationService);
     routingService = TestBed.inject(RoutingService);
     spyOn(mockUserIdService, 'getUserId').and.callThrough();
     fixture = TestBed.createComponent(SellerDashboardListComponent);
@@ -215,8 +215,8 @@ describe('SellerDashboardListComponent', () => {
   });
 
   it('should translate sort labels', () => {
-    component.getSortLabels();
     spyOn(mockTranslationService, 'translate').and.callThrough();
-    expect(mockTranslationService.translate).toHaveBeenCalledTimes(0);
+    component.getSortLabels();
+    expect(mockTranslationService.translate).toHaveBeenCalledTimes(3);
   });
 });
