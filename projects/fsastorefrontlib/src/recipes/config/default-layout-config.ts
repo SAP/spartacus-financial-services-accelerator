@@ -84,5 +84,8 @@ export const layoutConfig: LayoutConfig = {
         'Section4',
       ],
     },
+    LoginPageTemplate: {
+      slots: ['LeftContentSlot', 'RightContentSlot'],
+    },
   },
 };
