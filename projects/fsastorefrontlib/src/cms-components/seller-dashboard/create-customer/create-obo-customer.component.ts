@@ -42,12 +42,6 @@ export class CreateOBOCustomerComponent implements OnDestroy {
     );
   }
 
-  backToDashboard() {
-    this.routingService.go({
-      cxRoute: 'sellerDashboard',
-    });
-  }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

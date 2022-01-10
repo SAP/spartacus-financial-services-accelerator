@@ -81,11 +81,28 @@
               </li>
             </ul>
             <div class="dashboard-overview-assets mt-3">
+              <a
+                class="asset bg-white p-2 align-items-center"
+                role="button"
+                tabindex="1"
+                [routerLink]="
+                  {
+                    cxRoute: 'createOBOCustomer'
+                  } | cxUrl
+                "
+              >
+                <span
+                  class="asset-image h6 text-center notice p-3 mb-0 fas fa-user-plus"
+                ></span>
+                <div class="asset-text">
+                  {{ 'dashboard.addCustomer' | cxTranslate }}
+                </div>
+              </a>
               <div
                 [ngClass]="{ active: dashboardListVisible }"
                 class="asset bg-white p-2 align-items-center"
                 role="button"
-                tabindex="0"
+                tabindex="2"
                 (click)="showDashboardList()"
                 (keydown.enter)="showDashboardList()"
               >

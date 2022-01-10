@@ -109,6 +109,9 @@
         width: 46px;
         aspect-ratio: 1/1;
       }
+      .asset-text {
+        color: var(--cx-color-text);
+      }
     }
     .number {
       font-size: clamp(28px, 6vw, 4.5rem);
