@@ -89,14 +89,13 @@ describe('CreateOBOCustomerComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateOBOCustomerComponent);
-    component = fixture.componentInstance;
-    el = fixture.debugElement;
-
     createOBOCustomerComponentService = TestBed.inject(
       CreateOBOCustomerComponentService
     );
-
     mockUserIdService = TestBed.inject(UserIdService);
+    component = fixture.componentInstance;
+    el = fixture.debugElement;
+
     component.form = mockForm;
     fixture.detectChanges();
   });

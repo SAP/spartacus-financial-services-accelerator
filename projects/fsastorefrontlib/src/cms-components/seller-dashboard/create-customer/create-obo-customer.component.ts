@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { RoutingService, Title, UserIdService } from '@spartacus/core';
+import { Title, UserIdService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { DateConfig } from './../../../core/date-config/date-config';

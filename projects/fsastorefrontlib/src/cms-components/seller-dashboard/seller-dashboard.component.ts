@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { UserIdService } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 
 import { OBOCustomerList, FSUser } from '../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
-import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-seller-dashboard',
