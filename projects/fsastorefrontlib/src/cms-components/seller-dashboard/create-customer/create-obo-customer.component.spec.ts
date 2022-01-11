@@ -11,6 +11,13 @@ import { CreateOBOCustomerComponent } from './create-obo-customer.component';
 import { CreateOBOCustomerComponentService } from './create-obo-customer-component.service';
 import { Observable, of } from 'rxjs';
 
+@Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'cx-spinner',
+  template: '',
+})
+class MockSpinnerComponent {}
+
 const mockUser = {
   email: 'donna@moore.com',
   firstName: 'Donna',
@@ -37,15 +44,10 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
-@Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'cx-spinner',
-  template: '',
-})
-class MockSpinnerComponent {}
-
 class MockCreateOBOCustomerComponentService {
   createCustomerByConsentHolder() {}
+  onSuccess() {}
+  onError() {}
 }
 
 class MockUserIdService {
