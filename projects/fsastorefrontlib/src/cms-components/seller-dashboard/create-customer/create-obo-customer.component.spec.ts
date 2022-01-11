@@ -104,14 +104,23 @@ describe('CreateOBOCustomerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should submit form', () => {
+  it('should not submit form and throw error', () => {
     spyOn(
       createOBOCustomerComponentService,
       'createCustomerByConsentHolder'
     ).and.callThrough();
+    spyOn(createOBOCustomerComponentService, 'onError').and.callThrough();
     component.onSubmit();
-    expect(
-      createOBOCustomerComponentService.createCustomerByConsentHolder
-    ).toHaveBeenCalled();
+    expect(createOBOCustomerComponentService.onError).toHaveBeenCalled();
+  });
+
+  it('should submit form', () => {
+    spyOn(
+      createOBOCustomerComponentService,
+      'createCustomerByConsentHolder'
+    ).and.returnValue(of(mockUser));
+    spyOn(createOBOCustomerComponentService, 'onSuccess').and.callThrough();
+    component.onSubmit();
+    expect(createOBOCustomerComponentService.onSuccess).toHaveBeenCalled();
   });
 });
