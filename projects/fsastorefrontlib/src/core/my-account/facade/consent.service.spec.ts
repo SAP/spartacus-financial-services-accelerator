@@ -10,6 +10,7 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
 
 const userId = OCC_USER_ID_CURRENT;
+const customerId = 'testCustomerId';
 const consentId = 'CL00001';
 const mockUser: FSUser = {
   uid: 'test@user.com',
@@ -109,55 +110,90 @@ describe('ConsentServiceTest', () => {
     );
   });
 
-  it('should transfer cart to selected obo customer', () => {
-    service.setSelectedOBOCustomer(mockUser);
-    service.transferCartToSelectedOBOCustomer(
-      mockCart,
-      mockUser,
-      mockOBOCustomer
-    );
+  it('should be able to load customer', () => {
+    service.loadCustomer(userId, customerId);
     expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.TransferCart({
-        cart: mockCart,
-        consentHolder: mockUser,
-        oboCustomer: mockOBOCustomer,
+      new fromAction.LoadCustomer({ userId: userId, customerId: customerId })
+    );
+  });
+
+  it('should be able to load customer quotes', () => {
+    service.loadCustomerQuotes(userId, customerId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCustomerQuotes({
+        userId: userId,
+        customerId: customerId,
       })
     );
-  });
+    it('should transfer cart to selected obo customer', () => {
+      service.setSelectedOBOCustomer(mockUser);
+      service.transferCartToSelectedOBOCustomer(
+        mockCart,
+        mockUser,
+        mockOBOCustomer
+      );
+      expect(store.dispatch).toHaveBeenCalledWith(
+        new fromAction.TransferCart({
+          cart: mockCart,
+          consentHolder: mockUser,
+          oboCustomer: mockOBOCustomer,
+        })
+      );
+    });
 
-  it('should allow cart transfer for the seller', () => {
-    service.setSelectedOBOCustomer(mockOBOCustomer);
-    service
-      .isCartTransferAllowedForSeller()
-      .subscribe(result => expect(result).toEqual(true))
-      .unsubscribe();
-  });
+    it('should be able to load customer policies', () => {
+      service.loadCustomerPolicies(userId, customerId);
+      expect(store.dispatch).toHaveBeenCalledWith(
+        new fromAction.LoadCustomerPolicies({
+          userId: userId,
+          customerId: customerId,
+        })
+      );
+    });
 
-  it('should not allow cart transfer', () => {
-    service.setSelectedOBOCustomer({});
-    service
-      .isCartTransferAllowedForSeller()
-      .subscribe(result => expect(result).toEqual(false))
-      .unsubscribe();
-  });
+    it('should be able to load customer claims', () => {
+      service.loadCustomerClaims(userId, customerId);
+      expect(store.dispatch).toHaveBeenCalledWith(
+        new fromAction.LoadCustomerClaims({
+          userId: userId,
+          customerId: customerId,
+        })
+      );
+    });
+    it('should allow cart transfer for the seller', () => {
+      service.setSelectedOBOCustomer(mockOBOCustomer);
+      service
+        .isCartTransferAllowedForSeller()
+        .subscribe(result => expect(result).toEqual(true))
+        .unsubscribe();
+    });
 
-  it('should select customer for cart transfer', () => {
-    service.setSelectedOBOCustomer(mockOBOCustomer);
-    service.selectedOBOCustomer$
-      .subscribe(selectedCustomer =>
-        expect(selectedCustomer.uid).toEqual(mockOBOCustomer.uid)
-      )
-      .unsubscribe();
-  });
+    it('should not allow cart transfer', () => {
+      service.setSelectedOBOCustomer({});
+      service
+        .isCartTransferAllowedForSeller()
+        .subscribe(result => expect(result).toEqual(false))
+        .unsubscribe();
+    });
 
-  it('should create address for specified customer by consent holder', () => {
-    service.createAddressForUser(mockUser.uid, mockOBOCustomer.uid, address);
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.CreateAddress({
-        userId: 'test@user.com',
-        oboCustomerId: 'customerToTransferCartTo',
-        address: address,
-      })
-    );
+    it('should select customer for cart transfer', () => {
+      service.setSelectedOBOCustomer(mockOBOCustomer);
+      service.selectedOBOCustomer$
+        .subscribe(selectedCustomer =>
+          expect(selectedCustomer.uid).toEqual(mockOBOCustomer.uid)
+        )
+        .unsubscribe();
+    });
+
+    it('should create address for specified customer by consent holder', () => {
+      service.createAddressForUser(mockUser.uid, mockOBOCustomer.uid, address);
+      expect(store.dispatch).toHaveBeenCalledWith(
+        new fromAction.CreateAddress({
+          userId: 'test@user.com',
+          oboCustomerId: 'customerToTransferCartTo',
+          address: address,
+        })
+      );
+    });
   });
 });

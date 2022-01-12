@@ -4,12 +4,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
   OCC_USER_ID_CURRENT,
+  RoutingService,
   TranslationService,
   UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
+import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 import { SellerDashboardListComponent } from './seller-dashboard-list.component';
+import createSpy = jasmine.createSpy;
 
 const code1 = '000001';
 const date1 = 'date1';
@@ -103,6 +105,10 @@ const consent2 = {
   },
 };
 
+class MockRoutingService {
+  go = createSpy();
+}
+
 @Component({
   // eslint-disable-next-line
   template: '',
@@ -162,6 +168,7 @@ describe('SellerDashboardListComponent', () => {
   let mockConsentConnector: MockConsentConnector;
   let mockUserIdService: UserIdService;
   let mockTranslationService: TranslationService;
+  let routingService: RoutingService;
   let fixture: ComponentFixture<SellerDashboardListComponent>;
 
   beforeEach(async () => {
@@ -177,13 +184,18 @@ describe('SellerDashboardListComponent', () => {
         { provide: ConsentConnector, useValue: mockConsentConnector },
         { provide: TranslationService, useClass: MockTranslationService },
         { provide: UserIdService, useClass: MockUserIdService },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
       ],
     }).compileComponents();
-    mockUserIdService = TestBed.inject(UserIdService);
-    mockTranslationService = TestBed.inject(TranslationService);
   });
 
   beforeEach(() => {
+    mockUserIdService = TestBed.inject(UserIdService);
+    mockTranslationService = TestBed.inject(TranslationService);
+    routingService = TestBed.inject(RoutingService);
     spyOn(mockUserIdService, 'getUserId').and.callThrough();
     fixture = TestBed.createComponent(SellerDashboardListComponent);
     component = fixture.componentInstance;
@@ -194,9 +206,17 @@ describe('SellerDashboardListComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should redirect to user profile page', () => {
+    component.getUserProfile(consent1.customer);
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'userProfile',
+      params: { customerId: consent1.customer.uid },
+    });
+  });
+
   it('should translate sort labels', () => {
-    component.getSortLabels();
     spyOn(mockTranslationService, 'translate').and.callThrough();
-    expect(mockTranslationService.translate).toHaveBeenCalledTimes(0);
+    component.getSortLabels();
+    expect(mockTranslationService.translate).toHaveBeenCalledTimes(3);
   });
 });

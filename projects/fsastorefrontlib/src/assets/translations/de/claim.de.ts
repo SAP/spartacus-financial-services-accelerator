@@ -35,8 +35,8 @@ export const claim = {
     participants: {
       rolesPersonsInvolved: '[DE] Roles/Persons Involved',
       participant: '[DE] Participant ',
-      role: '[DE] Role',
-      name: '[DE] Name',
+      role: 'Rollen',
+      name: 'Name',
     },
   },
 };

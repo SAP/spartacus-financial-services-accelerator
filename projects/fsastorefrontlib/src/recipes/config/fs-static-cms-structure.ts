@@ -6,4 +6,8 @@ export const defaultFSCmsContentProviders: ValueProvider[] = [
     componentId: 'MessageNotificationComponent',
     pageSlotPosition: 'MessageNotification',
   }),
+  provideCmsStructure({
+    componentId: 'DashboardLinkComponent',
+    pageSlotPosition: 'DashboardLinkSlot',
+  }),
 ];

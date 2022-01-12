@@ -1,6 +1,7 @@
 export const fscommon = {
   fscommon: {
     no: 'Nr',
+    none: '',
     mr: 'Herr.',
     mrs: 'Frau',
     add: 'Hinzufügen',
@@ -103,7 +104,7 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: 'Rechnung',
-    recommendedProduct: '[DE] This is your recommended product!',
+    recommendedProduct: 'Dies ist Ihr empfohlenes Produkt!',
     payment: {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
@@ -191,8 +192,8 @@ export const fscommon = {
         '[DE] This coupon code is already applied to the current cart.',
     },
     syncPilot: {
-      speakToAgent: '[DE] Speak to an Agent',
-      needHelp: '[DE] Need Help?',
+      speakToAgent: 'Sprechen Sie Mit Einem Agenten',
+      needHelp: 'Benötigen Sie Hilfe?',
       contactAgent: '[DE] Connecting to an agent',
       waitingAgent: '[DE] Waiting for an agent...',
     },

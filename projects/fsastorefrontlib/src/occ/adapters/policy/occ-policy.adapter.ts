@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { PolicyAdapter } from '../../../core/my-account/connectors/policy.adapter';

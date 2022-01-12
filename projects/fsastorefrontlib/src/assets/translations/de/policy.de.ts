@@ -3,7 +3,7 @@ export const policy = {
     policies: 'Policen',
     policy: 'Police',
     policyId: 'Policen ID',
-    policyChartHeader: '[DE] Premium Overview',
+    policyChartHeader: 'Rechnungsübersicht',
     expiredPolicyId: '[DE] Expired Policy ID',
     policyNo: 'Policennr.',
     existingPolicyNo: '[DE] Existing Policy No.',

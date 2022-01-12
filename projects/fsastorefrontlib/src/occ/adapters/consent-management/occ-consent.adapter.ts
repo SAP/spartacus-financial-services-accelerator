@@ -6,11 +6,12 @@ import {
   ConverterService,
   OccEndpointsService,
 } from '@spartacus/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { InsuranceQuoteList } from '../../../occ/occ-models/occ.models';
 import { ConsentAdapter } from '../../../core/my-account/connectors/consent.adapter';
 import { OBOConsentList } from '../../occ-models/occ.models';
+import { USER_SERIALIZER } from '@spartacus/user/profile/core';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -75,6 +76,73 @@ export class OccConsentAdapter implements ConsentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  getOBOCustomer(userId: string, customerId: string): Observable<any> {
+    const url = this.occEndpointService.buildUrl('oboConsentCustomer', {
+      urlParams: {
+        userId,
+        customerId,
+      },
+    });
+    const params = new HttpParams({ fromString: FULL_PARAMS });
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  createOBOCustomer(userId: string, details: any): Observable<any> {
+    const url = this.occEndpointService.buildUrl('oboConsentCustomers', {
+      urlParams: {
+        userId,
+      },
+    });
+    const params = new HttpParams({ fromString: FULL_PARAMS });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    details = this.converterService.convert(details, USER_SERIALIZER);
+    return this.http
+      .post(url, details, { headers })
+      .pipe(catchError((error: any) => throwError(error)));
+  }
+
+  getQuotesForOBOCustomer(userId: string, customerId: string): Observable<any> {
+    const url = this.occEndpointService.buildUrl('oboConsentCustomerQuotes', {
+      urlParams: {
+        userId,
+        customerId,
+      },
+    });
+    return this.http
+      .get<InsuranceQuoteList>(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  getPoliciesForOBOCustomer(
+    userId: string,
+    customerId: string
+  ): Observable<any> {
+    const url = this.occEndpointService.buildUrl('oboConsentCustomerPolicies', {
+      urlParams: {
+        userId,
+        customerId,
+      },
+    });
+    return this.http
+      .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  getClaimsForOBOCustomer(userId: string, customerId: string): Observable<any> {
+    const url = this.occEndpointService.buildUrl('oboConsentCustomerClaims', {
+      urlParams: {
+        userId,
+        customerId,
+      },
+    });
+    return this.http
+      .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
   createAddressForUser(
     userId: string,
     oboCustomerId: string,

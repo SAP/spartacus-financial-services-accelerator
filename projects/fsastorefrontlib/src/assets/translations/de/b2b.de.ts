@@ -10,15 +10,19 @@ export const organization = {
   organization: {
     productActivation: '[DE] Product Activation',
     productAssignment: '[DE] Product Assignment',
+    notification: {
+      noSufficientPermissions:
+        'Keine ausreichenden Berechtigungen für den Zugriff auf die aufgerufene Seite.',
+    },
   },
   orgUnit: {
-    header: '[DE] All organizations ({{count}})',
-    unit: '[DE] Organization',
+    header: 'Alle Organisationen ({{count}})',
+    unit: 'Organisation',
     parentUnit: '[DE] Parent Organization',
     hint:
       '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
     details: {
-      title: '[DE] Organization Details',
+      title: 'Organisationsdetails',
       subtitle: '[DE] Organization: {{ item.name }}',
       hint:
         '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling an organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
@@ -61,7 +65,7 @@ export const organization = {
       },
     },
     breadcrumbs: {
-      list: '[DE] All organizations',
+      list: 'Alle Organisationen',
       children: '[DE] Child organization',
       productAssignment: '[DE] Product Assignment',
     },
@@ -88,22 +92,25 @@ export const organization = {
       '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Members "inherit" child organizations.',
   },
   orgUser: {
-    unit: '[DE] Organization',
-    orgUnit: '[DE] Organization',
+    unit: 'Organisation',
+    orgUnit: 'Organisation',
     assignApprover: '[DE] Add the user to approvers for the organization',
     hint:
       '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to an organization, and they have access to all child organizations of their primary organization.',
-    header: '[DE] All members ({{count}})',
+    header: 'Alle Mitglieder ({{count}})',
+    links: {
+      password: 'Passwort ändern',
+    },
     details: {
-      title: '[DE] Member Details',
-      subtitle: '[DE] Member: {{ item.name }}',
+      title: 'Mitgliederdetails',
+      subtitle: 'Mitglied: {{ item.name }}',
     },
     breadcrumbs: {
-      list: '[DE] All members',
+      list: 'alle Mitglieder',
     },
     edit: {
       title: '[DE] Edit Member',
-      subtitle: '[DE] Member: {{ item.name }}',
+      subtitle: 'Mitglied: {{ item.name }}',
     },
     create: {
       title: '[DE] Create Member',

@@ -1,7 +1,6 @@
 //point to the theme variables
 //DO NOT load anything else here!
 @import 'theme/fs/variables';
-@import './components/index';
 
 // the $skipComponentStyles is used as a list of component styles that can be ignore
 // during the sass compilation. Whenever the list contains a component selector, the
@@ -15,7 +14,7 @@ $fsSelectors: cx-fs-policy-details, cx-fs-claim-details, cx-fs-premium-calendar,
   cx-fs-enriched-responsive-banner, cx-fs-agent-root, cx-fs-agent-search-box,
   cx-fs-agent-search-list, cx-fs-find-agent-navigation, cx-fs-inbox-messages,
   cx-fs-inbox, cx-fs-product-feature, cx-fs-category-feature, cx-fs-register,
-  cx-fs-update-profile, cx-fs-product-assignments,
+  cx-fs-update-profile, cx-fs-product-assignments, cx-fs-create-obo-customer,
   cx-fs-potential-product-assignments, cx-fs-login-form, cx-update-email,
   cx-update-password, cx-fs-active-products, cx-fs-change-coverage,
   cx-form-component, cx-fs-select-identification, cx-fs-add-options,
@@ -25,7 +24,8 @@ $fsSelectors: cx-fs-policy-details, cx-fs-claim-details, cx-fs-premium-calendar,
   cx-fs-searchbox, cx-fs-questionnaire-carousel, cx-fs-navigation-ui,
   cx-fs-comparison-table-container, cx-fs-comparison-table-tab,
   cx-fs-comparison-table-panel, cx-fs-comparison-table-panel-item,
-  cx-payment-methods, cx-fs-seller-dashboard-list !default;
+  cx-payment-methods, cx-fs-seller-dashboard-list, cx-fs-user-profile,
+  cx-fs-seller-dashboard, cx-fs-dashboard-link !default;
 // future theme's, can be introduced during minors
 $theme: '' !default;
 

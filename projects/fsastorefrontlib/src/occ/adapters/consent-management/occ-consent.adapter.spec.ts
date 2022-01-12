@@ -12,14 +12,24 @@ import { Address, OccEndpointsService } from '@spartacus/core';
 import { OccConsentAdapter } from './occ-consent.adapter';
 
 const userId = 'testId';
-const cartId = 'cartId';
-const oboCustomerId = 'oboCustomerId';
-
+const customerId = 'testCustId';
 const consentsEndpoint = 'oboConsents';
 const oboConsentCustomersEndpoint = 'oboConsentCustomers';
+const oboConsentCustomerEndpoint = 'oboConsentCustomer';
+const oboConsentCustomerQuotesEndpoint = 'oboConsentCustomerQuotes';
+const oboConsentCustomerPoliciesEndpoint = 'oboConsentCustomerPolicies';
+const oboConsentCustomerClaimsEndpoint = 'oboConsentCustomerClaims';
+const cartId = 'cartId';
+const oboCustomerId = 'oboCustomerId';
 const transferCartEndpoint = 'transferCart';
 const addAddressEndpoint = 'oboConsentAddresses';
 
+const customerDetails = {
+  firstName: 'test name',
+  lastName: 'test last name',
+  email: 'test@email.com',
+  dateOfBirth: '02-02-1992',
+};
 const address: Address = {
   companyName: 'Test Company',
   defaultAddress: true,
@@ -100,81 +110,194 @@ describe('OccConsentAdapter', () => {
     );
   });
 
-  describe('createAddressForUser', () => {
+  describe('getOBOCustomer', () => {
     it(
-      'should create address for user',
+      'should fetch user',
       waitForAsync(() => {
-        adapter
-          .createAddressForUser(userId, oboCustomerId, address)
-          .subscribe();
+        adapter.getOBOCustomer(userId, customerId).subscribe();
         httpMock.expectOne((req: HttpRequest<any>) => {
-          return req.url === addAddressEndpoint && req.method === 'POST';
-        }, `POST method and url`);
+          return req.url === oboConsentCustomerEndpoint && req.method === 'GET';
+        }, `GET method and url`);
         expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
-          addAddressEndpoint,
+          oboConsentCustomerEndpoint,
           {
             urlParams: {
               userId,
-              oboCustomerId,
+              customerId,
             },
           }
         );
       })
     );
-  });
-
-  describe('transferCartToOboCustomer', () => {
-    it(
-      'should transfer cart to OBO Customer',
-      waitForAsync(() => {
-        adapter
-          .transferCartToOboCustomer(cartId, userId, oboCustomerId)
-          .subscribe();
-        httpMock.expectOne((req: HttpRequest<any>) => {
-          return req.url === transferCartEndpoint && req.method === 'PATCH';
-        }, `PATCH method and url`);
-        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
-          transferCartEndpoint,
-          {
-            urlParams: {
-              userId,
-              cartId,
-            },
-          }
-        );
-      })
-    );
-
-    it('should throw an error while transfering cart to another customer', () => {
-      let response: any;
-      let errResponse: any;
-      const errorResponse = new HttpErrorResponse({
-        error: '400 error',
-        status: 400,
-        statusText: 'Bad Request',
-      });
-      adapter
-        .transferCartToOboCustomer(cartId, userId, oboCustomerId)
-        .subscribe(
-          res => (response = res),
-          err => (errResponse = err)
-        );
-      httpMock
-        .expectOne((req: HttpRequest<any>) => {
-          return req.url === transferCartEndpoint && req.method === 'PATCH';
+    describe('createAddressForUser', () => {
+      it(
+        'should create address for user',
+        waitForAsync(() => {
+          adapter
+            .createAddressForUser(userId, oboCustomerId, address)
+            .subscribe();
+          httpMock.expectOne((req: HttpRequest<any>) => {
+            return req.url === addAddressEndpoint && req.method === 'POST';
+          }, `POST method and url`);
+          expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+            addAddressEndpoint,
+            {
+              urlParams: {
+                userId,
+                oboCustomerId,
+              },
+            }
+          );
         })
-        .flush(errorResponse);
-      expect(errorResponse.status).toEqual(400);
-      expect(errorResponse.name).toEqual('HttpErrorResponse');
-      expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
-        transferCartEndpoint,
-        {
-          urlParams: {
-            userId,
-            cartId,
-          },
-        }
       );
+    });
+
+    describe('getQuotesForOBOCustomer', () => {
+      it(
+        'should fetch quotes for user',
+        waitForAsync(() => {
+          adapter.getQuotesForOBOCustomer(userId, customerId).subscribe();
+          httpMock.expectOne((req: HttpRequest<any>) => {
+            return (
+              req.url === oboConsentCustomerQuotesEndpoint &&
+              req.method === 'GET'
+            );
+          }, `GET method and url`);
+          expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+            oboConsentCustomerQuotesEndpoint,
+            {
+              urlParams: {
+                userId,
+                customerId,
+              },
+            }
+          );
+        })
+      );
+      describe('transferCartToOboCustomer', () => {
+        it(
+          'should transfer cart to OBO Customer',
+          waitForAsync(() => {
+            adapter
+              .transferCartToOboCustomer(cartId, userId, oboCustomerId)
+              .subscribe();
+            httpMock.expectOne((req: HttpRequest<any>) => {
+              return req.url === transferCartEndpoint && req.method === 'PATCH';
+            }, `PATCH method and url`);
+            expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+              transferCartEndpoint,
+              {
+                urlParams: {
+                  userId,
+                  cartId,
+                },
+              }
+            );
+          })
+        );
+      });
+
+      describe('getPoliciesForOBOCustomer', () => {
+        it(
+          'should fetch policies for user',
+          waitForAsync(() => {
+            adapter.getPoliciesForOBOCustomer(userId, customerId).subscribe();
+            httpMock.expectOne((req: HttpRequest<any>) => {
+              return (
+                req.url === oboConsentCustomerPoliciesEndpoint &&
+                req.method === 'GET'
+              );
+            }, `GET method and url`);
+            expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+              oboConsentCustomerPoliciesEndpoint,
+              {
+                urlParams: {
+                  userId,
+                  customerId,
+                },
+              }
+            );
+          })
+        );
+      });
+
+      describe('getClaimsForOBOCustomer', () => {
+        it(
+          'should fetch claims for user',
+          waitForAsync(() => {
+            adapter.getClaimsForOBOCustomer(userId, customerId).subscribe();
+            httpMock.expectOne((req: HttpRequest<any>) => {
+              return (
+                req.url === oboConsentCustomerClaimsEndpoint &&
+                req.method === 'GET'
+              );
+            }, `GET method and url`);
+            expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+              oboConsentCustomerClaimsEndpoint,
+              {
+                urlParams: {
+                  userId,
+                  customerId,
+                },
+              }
+            );
+          })
+        );
+
+        it('should throw an error while transfering cart to another customer', () => {
+          let response: any;
+          let errResponse: any;
+          const errorResponse = new HttpErrorResponse({
+            error: '400 error',
+            status: 400,
+            statusText: 'Bad Request',
+          });
+          adapter
+            .transferCartToOboCustomer(cartId, userId, oboCustomerId)
+            .subscribe(
+              res => (response = res),
+              err => (errResponse = err)
+            );
+          httpMock
+            .expectOne((req: HttpRequest<any>) => {
+              return req.url === transferCartEndpoint && req.method === 'PATCH';
+            })
+            .flush(errorResponse);
+          expect(errorResponse.status).toEqual(400);
+          expect(errorResponse.name).toEqual('HttpErrorResponse');
+          expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+            transferCartEndpoint,
+            {
+              urlParams: {
+                userId,
+                cartId,
+              },
+            }
+          );
+        });
+      });
+
+      describe('createOBOCustomer', () => {
+        it(
+          'should create customer',
+          waitForAsync(() => {
+            adapter.createOBOCustomer(userId, customerDetails).subscribe();
+            httpMock.expectOne((req: HttpRequest<any>) => {
+              return (
+                req.url === oboConsentCustomersEndpoint && req.method === 'POST'
+              );
+            }, `POST method and url`);
+            expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+              oboConsentCustomersEndpoint,
+              {
+                urlParams: {
+                  userId,
+                },
+              }
+            );
+          })
+        );
+      });
     });
   });
 });

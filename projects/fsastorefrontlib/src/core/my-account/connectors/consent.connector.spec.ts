@@ -12,6 +12,27 @@ class MockConsentAdapter extends ConsentAdapter {
   getOBOCustomerList = createSpy(
     'ConsentAdapter.getOBOCustomerList'
   ).and.callFake(userId => of('getOBOCustomerList' + userId));
+  getOBOCustomer = createSpy(
+    'ConsentAdapter.getOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getOBOCustomer' + userId + customerId)
+  );
+  getQuotesForOBOCustomer = createSpy(
+    'ConsentAdapter.getQuotesForOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getQuotesForOBOCustomer' + userId + customerId)
+  );
+  getPoliciesForOBOCustomer = createSpy(
+    'ConsentAdapter.getPoliciesForOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getPoliciesForOBOCustomer' + userId + customerId)
+  );
+  getClaimsForOBOCustomer = createSpy(
+    'ConsentAdapter.getClaimsForOBOCustomer'
+  ).and.callFake((userId, customerId) =>
+    of('getClaimsForOBOCustomer' + userId + customerId)
+  );
+
   transferCartToOboCustomer = createSpy(
     'ConsentAdapter.transferCartToOboCustomer'
   ).and.callFake((cartId, userId, oboCustomer) =>
@@ -22,9 +43,15 @@ class MockConsentAdapter extends ConsentAdapter {
   ).and.callFake((userId, oboCustomerId, address) =>
     of('createAddressForUser' + userId + oboCustomerId + address)
   );
+  createOBOCustomer = createSpy(
+    'ConsentAdapter.createOBOCustomer'
+  ).and.callFake((consentHolder, details) =>
+    of('createOBOCustomer' + consentHolder + details)
+  );
 }
 
 const user = 'user';
+const mockCustomerId = 'customerId';
 const cartCode = 'cartCode';
 const oboCustomer = 'customerToTransferCartUid';
 const address: Address = {
@@ -56,6 +83,34 @@ describe('ConsentConnector', () => {
     consentConnector.getOBOCustomerList(user);
     expect(consentAdapter.getOBOCustomerList).toHaveBeenCalledWith(user);
   });
+  it('should call adapter to get OBO Customer', () => {
+    consentConnector.getOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
+  it('should call adapter to get quotes for OBO Customer', () => {
+    consentConnector.getQuotesForOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getQuotesForOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
+  it('should call adapter to get policies for OBO Customer', () => {
+    consentConnector.getPoliciesForOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getPoliciesForOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
+  it('should call adapter to get claims for OBO Customer', () => {
+    consentConnector.getClaimsForOBOCustomer(user, mockCustomerId);
+    expect(consentAdapter.getClaimsForOBOCustomer).toHaveBeenCalledWith(
+      user,
+      mockCustomerId
+    );
+  });
   it('should call adapter to transfer cart', () => {
     consentConnector.transferCart(cartCode, user, oboCustomer);
     expect(consentAdapter.transferCartToOboCustomer).toHaveBeenCalledWith(
@@ -70,6 +125,19 @@ describe('ConsentConnector', () => {
       user,
       oboCustomer,
       address
+    );
+  });
+
+  it('should call adapter to create customer', () => {
+    const customerDetails = {
+      firstName: 'Test First Name',
+      lastName: 'Test Last Name',
+      email: 'test@email.com',
+    };
+    consentConnector.createOBOCustomer(user, customerDetails);
+    expect(consentAdapter.createOBOCustomer).toHaveBeenCalledWith(
+      user,
+      customerDetails
     );
   });
 });
