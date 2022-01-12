@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Title, UserIdService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { DateConfig } from './../../../core/date-config/date-config';
 import { CreateOBOCustomerComponentService } from './create-obo-customer-component.service';
 
@@ -22,6 +22,7 @@ export class CreateOBOCustomerComponent implements OnDestroy {
   form: FormGroup = this.service.form;
   titles$: Observable<Title[]> = this.service.titles$;
   subscription = new Subscription();
+  dateFormat: string = this.config.date.format || '';
 
   onSubmit(): void {
     this.subscription.add(
@@ -29,16 +30,15 @@ export class CreateOBOCustomerComponent implements OnDestroy {
         .takeUserId(true)
         .pipe(
           take(1),
-          map(consentHolder =>
+          switchMap(consentHolder =>
             this.service.createCustomerByConsentHolder(consentHolder)
           )
         )
-        .subscribe()
+        .subscribe({
+          next: () => this.service.onSuccess(),
+          error: (error: Error) => this.service.onError(error),
+        })
     );
-  }
-
-  getDateFormat() {
-    return this.config.date.format || '';
   }
 
   ngOnDestroy() {

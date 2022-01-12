@@ -52,6 +52,13 @@ const mockOBOCustomer: OBOCustomerList = {
   sorts: [],
 };
 
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() {}
+}
+
 class MockConsentConnector {
   getOBOCustomerList(OCC_USER_ID_CURRENT) {
     return of(mockOBOCustomer);
@@ -97,6 +104,7 @@ describe('SellerDashboardComponent', () => {
         SellerDashboardComponent,
         SellerDashboardListComponent,
         MockParseDatePipe,
+        MockUrlPipe,
       ],
       providers: [
         { provide: ConsentConnector, useClass: MockConsentConnector },

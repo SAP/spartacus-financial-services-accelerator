@@ -11,6 +11,13 @@ import { CreateOBOCustomerComponent } from './create-obo-customer.component';
 import { CreateOBOCustomerComponentService } from './create-obo-customer-component.service';
 import { Observable, of } from 'rxjs';
 
+@Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'cx-spinner',
+  template: '',
+})
+class MockSpinnerComponent {}
+
 const mockUser = {
   email: 'donna@moore.com',
   firstName: 'Donna',
@@ -37,15 +44,10 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
-@Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: 'cx-spinner',
-  template: ` <div>spinner</div> `,
-})
-class MockCxSpinnerComponent {}
-
 class MockCreateOBOCustomerComponentService {
   createCustomerByConsentHolder() {}
+  onSuccess() {}
+  onError() {}
 }
 
 class MockUserIdService {
@@ -66,7 +68,7 @@ describe('CreateOBOCustomerComponent', () => {
       TestBed.configureTestingModule({
         declarations: [
           CreateOBOCustomerComponent,
-          MockCxSpinnerComponent,
+          MockSpinnerComponent,
           MockTranslatePipe,
           MockUrlPipe,
         ],
@@ -87,14 +89,13 @@ describe('CreateOBOCustomerComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateOBOCustomerComponent);
-    component = fixture.componentInstance;
-    el = fixture.debugElement;
-
     createOBOCustomerComponentService = TestBed.inject(
       CreateOBOCustomerComponentService
     );
-
     mockUserIdService = TestBed.inject(UserIdService);
+    component = fixture.componentInstance;
+    el = fixture.debugElement;
+
     component.form = mockForm;
     fixture.detectChanges();
   });
@@ -103,14 +104,23 @@ describe('CreateOBOCustomerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should submit form', () => {
+  it('should not submit form and throw error', () => {
     spyOn(
       createOBOCustomerComponentService,
       'createCustomerByConsentHolder'
     ).and.callThrough();
+    spyOn(createOBOCustomerComponentService, 'onError').and.callThrough();
     component.onSubmit();
-    expect(
-      createOBOCustomerComponentService.createCustomerByConsentHolder
-    ).toHaveBeenCalled();
+    expect(createOBOCustomerComponentService.onError).toHaveBeenCalled();
+  });
+
+  it('should submit form', () => {
+    spyOn(
+      createOBOCustomerComponentService,
+      'createCustomerByConsentHolder'
+    ).and.returnValue(of(mockUser));
+    spyOn(createOBOCustomerComponentService, 'onSuccess').and.callThrough();
+    component.onSubmit();
+    expect(createOBOCustomerComponentService.onSuccess).toHaveBeenCalled();
   });
 });

@@ -85,9 +85,8 @@ describe('CreateOBOCustomerComponentService', () => {
         service.createCustomerByConsentHolder(consentHolderId);
         expect(consentConnector.createOBOCustomer).toHaveBeenCalled();
       });
-
-      it('should show message', () => {
-        service.createCustomerByConsentHolder(consentHolderId);
+      it('should show message on success', () => {
+        service.onSuccess();
         expect(globalMessageService.add).toHaveBeenCalledWith(
           {
             key: 'fscommon.userCreatedSuccess',
@@ -96,9 +95,9 @@ describe('CreateOBOCustomerComponentService', () => {
         );
       });
 
-      it('reset()', () => {
+      it('should reset form on submit', () => {
         spyOn(service.form, 'reset').and.callThrough();
-        service.createCustomerByConsentHolder(consentHolderId);
+        service.onSuccess();
         expect(service.form.reset).toHaveBeenCalled();
       });
     });
@@ -108,6 +107,10 @@ describe('CreateOBOCustomerComponentService', () => {
       spyOn(consentConnector, 'createOBOCustomer').and.callThrough();
       service.form.patchValue({ customerId: '123' } as User);
       service.createCustomerByConsentHolder(consentHolderId);
+      service.onError({
+        name: 'testName',
+        message: 'Test Message',
+      });
       expect(consentConnector.createOBOCustomer).not.toHaveBeenCalled();
     });
   });

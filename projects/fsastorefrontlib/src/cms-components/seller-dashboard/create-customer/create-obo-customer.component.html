@@ -2,7 +2,9 @@
   <label>
     <span class="label-content">{{ 'fscommon.title' | cxTranslate }}</span>
     <select formControlName="titleCode" class="form-control">
-      <option value="">{{ 'fscommon.none' | cxTranslate }}</option>
+      <option value="" disabled>{{
+        'register.selectTitle' | cxTranslate
+      }}</option>
       <option *ngFor="let title of titles$ | async" [value]="title.code">
         {{ title.name }}
       </option>
@@ -60,7 +62,7 @@
       class="form-control"
       name="dateOfBirth"
       formControlName="dateOfBirth"
-      placeholder="{{ getDateFormat() }}"
+      placeholder="{{ dateFormat }}"
     />
     <cx-form-errors
       [control]="form.get('dateOfBirth')"
@@ -71,12 +73,12 @@
     ></cx-form-errors>
   </label>
 
-  <a
+  <button
     class="btn btn-block btn-secondary"
     [routerLink]="{ cxRoute: 'sellerDashboard' } | cxUrl"
   >
     {{ 'common.back' | cxTranslate }}
-  </a>
+  </button>
 
   <button class="btn btn-block btn-primary" [disabled]="form.disabled">
     {{ 'common.save' | cxTranslate }}
