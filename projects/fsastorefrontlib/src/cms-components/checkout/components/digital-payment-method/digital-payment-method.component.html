@@ -31,38 +31,12 @@
           <div class="my-4">
             <hr />
           </div>
-          <!-- <ng-container
-            *ngIf="
-              cards?.length && !newPaymentFormManuallyOpened;
-              else newPaymentForm
-            "
-          > -->
-          <!-- <div class="row mb-4">
-                <div class="col-md-12 col-lg-6">
-                  <button
-                    class="btn btn-block btn-action"
-                    (click)="showNewPaymentForm()"
-                  >
-                    {{ 'paymentForm.addNewPayment' | cxTranslate }}
-                  </button>
-                </div>
-              </div> -->
 
           <div class="row">
             <div class="cx-payment-card col-md-12">
               <cx-fs-digital-payment-credit-card></cx-fs-digital-payment-credit-card>
-              <!-- <cx-payment-method></cx-payment-method> -->
-              <!-- <div class="cx-payment-card-inner">
-                    <cx-card
-                      [border]="true"
-                      [fitToContainer]="true"
-                      [content]="card.content"
-                      (sendCard)="selectPaymentMethod(card.paymentMethod)"
-                    ></cx-card>
-                  </div> -->
             </div>
           </div>
-          <!-- </ng-container> -->
         </ng-container>
       </div>
     </ng-container>

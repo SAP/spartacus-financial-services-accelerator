@@ -203,8 +203,6 @@ const routes: Routes = [
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     FSCartCouponModule,
-    // DpPaymentCallbackModule,
-    // DigitalPaymentsFeatureModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
@@ -244,7 +242,6 @@ const routes: Routes = [
         PersonalDetailsFormNavigationFlex: {
           component: PersonalDetailsNavigationComponent,
         },
-        // add here new digital payment component and use there Spartacus component DpPaymentMethodComponent
         FSCheckoutPaymentDetails: {
           component: FSDigitalPaymentMethodComponent,
         },

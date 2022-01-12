@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   CheckoutStepService,
   PaymentMethodComponent as CorePaymentMethodComponent,
@@ -22,9 +22,7 @@ export const DP_CARD_REGISTRATION_STATUS = 'x-card-registration-status';
   selector: 'cx-fs-digital-payment-credit-card',
   templateUrl: './digital-payment-credit-card.component.html',
 })
-export class FSDigitalPaymentCreditCardComponent
-  extends CorePaymentMethodComponent
-  implements OnInit {
+export class FSDigitalPaymentCreditCardComponent extends CorePaymentMethodComponent {
   showCallbackScreen = false;
 
   isDpCallback(): boolean {
@@ -71,13 +69,4 @@ export class FSDigitalPaymentCreditCardComponent
     );
     this.showCallbackScreen = this.isDpCallback();
   }
-
-  // ngOnInit(): void {
-  //   super.ngOnInit();
-  //   this.cards$.subscribe(console.log);
-  //   console.log(
-  //     this.newPaymentFormManuallyOpened,
-  //     'newPaymentFormManuallyOpened'
-  //   );
-  // }
 }

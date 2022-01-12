@@ -96,7 +96,7 @@ import { environment } from './../../environments/environment';
 
 const featureModules = [];
 
-if (environment.digitalPayments) {
+if (environment?.digitalPayments) {
   featureModules.push(DigitalPaymentsFeatureModule);
 }
 

@@ -35,6 +35,7 @@ class MockDpCheckoutPaymentService
 }
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-spinner',
   template: '',
 })
