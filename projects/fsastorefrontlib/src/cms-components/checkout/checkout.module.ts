@@ -64,6 +64,9 @@ import {
   PaymentFormModule,
   PaymentMethodModule,
 } from '@spartacus/checkout/components';
+import { FSDigitalPaymentMethodComponent } from './components/digital-payment-method/digital-payment-method.component';
+import { FSDigitalPaymentFormComponent } from './components/digital-payment-method/digital-payment-form/digital-payment-form.component';
+import { FSDigitalPaymentCreditCardComponent } from './components/digital-payment-method/digital-payment-credit-card/digital-payment-credit-card.component';
 
 const routes: Routes = [
   {
@@ -200,6 +203,8 @@ const routes: Routes = [
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     FSCartCouponModule,
+    // DpPaymentCallbackModule,
+    // DigitalPaymentsFeatureModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
@@ -239,6 +244,13 @@ const routes: Routes = [
         PersonalDetailsFormNavigationFlex: {
           component: PersonalDetailsNavigationComponent,
         },
+        // add here new digital payment component and use there Spartacus component DpPaymentMethodComponent
+        FSCheckoutPaymentDetails: {
+          component: FSDigitalPaymentMethodComponent,
+        },
+        CheckoutPaymentDetails: {
+          component: FSDigitalPaymentCreditCardComponent,
+        },
       },
     }),
   ],
@@ -252,6 +264,9 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     FSPaymentMethodComponent,
+    FSDigitalPaymentMethodComponent,
+    FSDigitalPaymentCreditCardComponent,
+    FSDigitalPaymentFormComponent,
   ],
   exports: [
     I18nModule,
@@ -265,6 +280,9 @@ const routes: Routes = [
     FinalReviewComponent,
     OrderConfirmationComponent,
     FSPaymentMethodComponent,
+    FSDigitalPaymentMethodComponent,
+    FSDigitalPaymentCreditCardComponent,
+    FSDigitalPaymentFormComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -278,6 +296,9 @@ const routes: Routes = [
     OrderConfirmationMessageComponent,
     MiniCartComponent,
     FSPaymentMethodComponent,
+    FSDigitalPaymentMethodComponent,
+    FSDigitalPaymentFormComponent,
+    FSDigitalPaymentFormComponent,
   ],
   providers: [
     FSCartService,

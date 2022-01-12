@@ -1,0 +1,124 @@
+<ng-container *ngIf="cards$ | async as cards">
+  <div class="box-shadow mb-5">
+    <h3 class="section-header-heading text-center">
+      {{ 'paymentForm.payment' | cxTranslate }}
+    </h3>
+    <ng-container *ngIf="!(isLoading$ | async); else loading">
+      <div class="py-3 px-4">
+        <h4 class="mb-4">
+          {{ 'fscommon.paymentMethod' | cxTranslate }}
+        </h4>
+        <form>
+          <div class="form-check" *ngFor="let type of paymentTypes$ | async">
+            <label class="pointer">
+              <input
+                id="paymentType-{{ type.code }}"
+                class="form-check-input"
+                type="radio"
+                name="paymentMethod"
+                [attr.aria-checked]="type.code === (paymentType$ | async)"
+                (click)="changeType(type.code)"
+                [value]="type.code"
+                [checked]="type.code === (paymentType$ | async)"
+              />
+              <span class="form-check-label">
+                {{ 'fscommon.payment.' + type.code | cxTranslate }}
+              </span>
+            </label>
+          </div>
+        </form>
+        <ng-container *ngIf="(paymentType$ | async) === creditCard">
+          <div class="my-4">
+            <hr />
+          </div>
+          <!-- <ng-container
+            *ngIf="
+              cards?.length && !newPaymentFormManuallyOpened;
+              else newPaymentForm
+            "
+          > -->
+          <!-- <div class="row mb-4">
+                <div class="col-md-12 col-lg-6">
+                  <button
+                    class="btn btn-block btn-action"
+                    (click)="showNewPaymentForm()"
+                  >
+                    {{ 'paymentForm.addNewPayment' | cxTranslate }}
+                  </button>
+                </div>
+              </div> -->
+
+          <div class="row">
+            <div class="cx-payment-card col-md-12">
+              <cx-fs-digital-payment-credit-card></cx-fs-digital-payment-credit-card>
+              <!-- <cx-payment-method></cx-payment-method> -->
+              <!-- <div class="cx-payment-card-inner">
+                    <cx-card
+                      [border]="true"
+                      [fitToContainer]="true"
+                      [content]="card.content"
+                      (sendCard)="selectPaymentMethod(card.paymentMethod)"
+                    ></cx-card>
+                  </div> -->
+            </div>
+          </div>
+          <!-- </ng-container> -->
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container
+    *ngIf="{
+      paymentDetails: paymentDetails$ | async,
+      paymentType: paymentType$ | async
+    } as payment"
+  >
+    <div
+      *ngIf="showNavigation(cards, newPaymentFormManuallyOpened, payment)"
+      class="row"
+    >
+      <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">
+        <ng-container
+          *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+          ><button
+            class="action-button btn-block"
+            (click)="navigateBack(previousCheckoutStep)"
+          >
+            {{ 'common.back' | cxTranslate }}
+          </button></ng-container
+        >
+      </div>
+      <div class="col-md-12 col-lg-6">
+        <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+          ><button
+            class="primary-button btn-block"
+            type="button"
+            (click)="navigateNext(nextCheckoutStep)"
+            [disabled]="
+              !(paymentType$ | async) ||
+              ((paymentType$ | async) === creditCard &&
+                !(paymentDetails$ | async)?.cardNumber)
+            "
+          >
+            {{ 'common.continue' | cxTranslate }}
+          </button></ng-container
+        >
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #newPaymentForm>
+    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep">
+      <cx-payment-form
+        (setPaymentDetails)="setPaymentDetails($event)"
+        (closeForm)="hideNewPaymentForm()"
+        (goBack)="navigateBack(previousCheckoutStep)"
+        [paymentMethodsCount]="cards?.length || 0"
+        [setAsDefaultField]="!isGuestCheckout"
+      ></cx-payment-form>
+    </ng-container>
+  </ng-template>
+</ng-container>
+
+<ng-template #loading>
+  <div class="cx-spinner"><cx-spinner></cx-spinner></div>
+</ng-template>

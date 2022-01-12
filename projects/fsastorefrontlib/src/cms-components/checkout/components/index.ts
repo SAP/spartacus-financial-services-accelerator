@@ -20,3 +20,6 @@ export * from './user-identification/user-identification.module';
 export * from './payment-method/payment-method.component';
 export * from './cart-coupon/cart-coupon.component';
 export * from './cart-coupon/cart-coupon.module';
+export * from './digital-payment-method/digital-payment-method.component';
+export * from './digital-payment-method/digital-payment-credit-card/digital-payment-credit-card.component';
+export * from './digital-payment-method/digital-payment-form/digital-payment-form.component';

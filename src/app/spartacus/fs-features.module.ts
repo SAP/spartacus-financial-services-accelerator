@@ -102,6 +102,7 @@ if (environment.digitalPayments) {
 
 @NgModule({
   imports: [
+    ...featureModules,
     AsmModule,
     SmartEditModule,
     AuthModule.forRoot(),
@@ -216,7 +217,6 @@ if (environment.digitalPayments) {
     OrderApprovalFeatureModule,
     ReturnRequestListModule,
     ReturnRequestDetailModule,
-    ...featureModules
   ],
 })
 export class FSFeaturesModule {}
