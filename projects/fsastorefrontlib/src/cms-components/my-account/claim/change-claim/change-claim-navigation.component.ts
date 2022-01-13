@@ -58,6 +58,7 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
             if (submittedFormData?.content && uploadedContent) {
               claimCopy.documents = uploadedContent.files;
               this.claimService.changeClaim(claimCopy, occUserId);
+              this.fileService.resetFiles();
             }
           })
         )

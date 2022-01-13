@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FileService } from '@spartacus/dynamicforms';
+import { FileService, DocumentFile } from '@spartacus/dynamicforms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,7 +20,10 @@ export class DocumentsOverviewComponent implements OnInit {
    * Method used to fetch documents by checking their source. Document can be uploaded directly
    * by customer or received from external system.
    */
-  getDocumentsBySource(documents, receivedByExternalSystem: boolean) {
+  getDocumentsBySource(
+    documents: DocumentFile[],
+    receivedByExternalSystem: boolean
+  ) {
     return documents.filter(
       document => document.createdByExternalSystem === receivedByExternalSystem
     );

@@ -14,20 +14,21 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { saveAs } from 'file-saver';
-import { filter, map, switchMap, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
 import { FormDataService } from '../../core/services/data/form-data.service';
 import { FieldConfig } from '../../core';
+import { DocumentFile } from '../../core/models/form-occ.models';
 
 @Component({
   selector: 'cx-upload',
   templateUrl: './upload.component.html',
 })
 export class UploadComponent extends AbstractFormComponent implements OnInit {
-  fileList: File[] = [];
+  fileList: DocumentFile[] = [];
   uploadControl: AbstractControl;
   individualProgress = {};
   files = [];
@@ -79,28 +80,21 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   protected populateUploadedFiles() {
     this.subscription.add(
-      this.formDataService
-        .getFormData()
+      this.fileUploadService
+        .getUploadedDocuments()
         .pipe(
-          filter(formData => !!formData.content),
-          take(1),
-          map(formData => JSON.parse(formData.content).relevantFiles),
-          switchMap(codes => {
-            return this.fileUploadService.getFiles(codes).pipe(
-              map(files => {
-                if (files?.documents) {
-                  this.fileList = files.documents;
-                  files.documents.forEach(file => {
-                    this.files = [...this.files, file.code];
-                  });
-                  this.uploadControl?.setValue(this.files);
-                  this.uploadDisable = true;
-                  this.cd.detectChanges();
-                } else {
-                  this.uploadControl?.setValue(null);
-                }
-              })
-            );
+          map(filesObj => {
+            if (Object.keys(filesObj?.files).length > 0) {
+              this.fileList = Array.from(Object.values(filesObj?.files));
+              this.fileList.forEach((file: DocumentFile) => {
+                this.files = [...this.files, file.code];
+              });
+              this.uploadControl?.setValue(this.files);
+              this.uploadDisable = true;
+              this.cd.detectChanges();
+            } else {
+              this.uploadControl?.setValue(null);
+            }
           })
         )
         .subscribe()
@@ -129,7 +123,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   }
 
-  uploadFiles(files: File[]) {
+  uploadFiles(files: DocumentFile[]) {
     this.uploadDisable = true;
     this.removeAllDisable = true;
     this.setValueAndValidate(this.fileList);
@@ -202,6 +196,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           take(1),
           map(occUserId => {
             this.fileUploadService.removeAllFiles(occUserId, this.fileList);
+            this.fileUploadService.resetFiles();
           })
         )
         .subscribe()
@@ -230,7 +225,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
   }
 
-  protected setValueAndValidate(value: File[]) {
+  protected setValueAndValidate(value: DocumentFile[]) {
     this.uploadControl.setValue(value);
     this.uploadControl.markAsTouched({ onlySelf: true });
   }
