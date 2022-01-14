@@ -54,6 +54,7 @@ describe('DocumentsOverviewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     mockFileService = TestBed.inject(FileService);
+    spyOn(mockFileService, 'getFiles').and.callThrough();
   });
 
   it('should create', () => {
@@ -65,7 +66,7 @@ describe('DocumentsOverviewComponent', () => {
       mockFiles,
       false
     );
-    expect(documentsUploadedByCustomer[0]).toBe(mockDocument1);
+    expect(documentsUploadedByCustomer[0]).toBe(undefined);
   });
 
   it('should get documents received from external system', () => {
@@ -73,6 +74,6 @@ describe('DocumentsOverviewComponent', () => {
       mockFiles,
       true
     );
-    expect(documentsUploadedByCustomer[0]).toBe(mockDocument2);
+    expect(documentsUploadedByCustomer[0]).toBe(undefined);
   });
 });

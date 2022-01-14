@@ -24,7 +24,7 @@ export class DocumentsOverviewComponent implements OnInit {
     documents: DocumentFile[],
     receivedByExternalSystem: boolean
   ) {
-    return documents.filter(
+    return documents?.filter(
       document => document.createdByExternalSystem === receivedByExternalSystem
     );
   }
