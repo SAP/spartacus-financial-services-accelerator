@@ -21,7 +21,7 @@ import { FieldConfig } from '../../core/models/form-config.interface';
 import { FileService } from '../../core/services/file/file.service';
 import { FormService } from './../../core/services/form/form.service';
 import { UploadComponent } from './upload.component';
-import { FormDataService } from '../../core';
+import { DocumentFile, FormDataService } from '../../core';
 
 @Component({
   // eslint-disable-next-line
@@ -67,13 +67,13 @@ const blob1 = new Blob([''], { type: 'application/pdf' });
 blob1['lastModifiedDate'] = '';
 blob1['name'] = 'testFile1';
 blob1['code'] = 'DOC00002012';
-const mockFile = <File>blob1;
+const mockFile = <DocumentFile>blob1;
 
 const blob2 = new Blob([''], { type: 'image/jpeg' });
 blob2['lastModifiedDate'] = '';
 blob2['name'] = 'testFile2';
 blob2['code'] = 'DOC00002011';
-const mockFile2 = <File>blob2;
+const mockFile2 = <DocumentFile>blob2;
 
 const blob3 = new Blob([''], { type: 'application/xml' });
 
@@ -88,7 +88,7 @@ const mockManipulatedTarget = {
 
 const mockNotSupportedFile = {
   target: {
-    files: [<File>blob3],
+    files: [<DocumentFile>blob3],
     multiple: true,
     accept: 'application/pdf,image/jpeg',
     value: 'test',
