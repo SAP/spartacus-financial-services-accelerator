@@ -10,6 +10,7 @@ import {
 import {
   GlobalMessage,
   GlobalMessageService,
+  GlobalMessageType,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
@@ -109,6 +110,10 @@ const mockEvent = {
   },
 };
 
+const uploadedFiles = {
+  files: [mockFile, mockFile2],
+};
+
 const mockFiles = {
   documents: [
     {
@@ -123,12 +128,15 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 
 class MockFileUpladService {
   uploadFile(_file: File) {
-    return of(mockInProgressHttpResponse);
+    return of();
   }
   getFiles(codes) {
     return of(mockFiles);
   }
-  setFileInStore(_body: any) {}
+  getFile(fileCode, fileType) {
+    return of();
+  }
+  setFileInStore() {}
   getUploadedDocuments() {
     return of();
   }
@@ -211,54 +219,82 @@ describe('UploadComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  describe('Upload files', () => {
+    it('should select files', () => {
+      component.ngOnInit();
+      component.handleFiles(mockEvent);
+      expect(component.fileList.length).toEqual(2);
+    });
 
-  it('should select files', () => {
-    component.ngOnInit();
-    component.handleFiles(mockEvent);
-    expect(component.fileList.length).toEqual(2);
-  });
+    it('should not upload file with not supported types', () => {
+      component.ngOnInit();
+      component.handleFiles(mockNotSupportedFile);
+      expect(component.uploadControl.value).toBe(null);
+      expect(component.uploadControl.valid).toBeFalsy();
+      expect(component.fileList.length).toEqual(0);
+    });
 
-  it('should not upload file with not supported types', () => {
-    component.ngOnInit();
-    component.handleFiles(mockNotSupportedFile);
-    expect(component.uploadControl.value).toBe(null);
-    expect(component.uploadControl.valid).toBeFalsy();
-    expect(component.fileList.length).toEqual(0);
-  });
+    it('should reset upload control if there are no files', () => {
+      spyOn(mockfileUpladService, 'getFiles').and.returnValue(of({}));
+      component.ngOnInit();
+      expect(component.uploadControl.value).toBe(null);
+    });
 
-  it('should reset upload control if there is no files', () => {
-    spyOn(mockfileUpladService, 'getFiles').and.returnValue(of({}));
-    component.ngOnInit();
-    expect(component.uploadControl.value).toBe(null);
-  });
+    it('should not select files when accept is manipulated', () => {
+      component.ngOnInit();
+      component.handleFiles(mockManipulatedTarget);
+      expect(component.uploadControl.value).toBe(null);
+    });
 
-  it('should not select files when accept is manipulated', () => {
-    component.ngOnInit();
-    component.handleFiles(mockManipulatedTarget);
-    expect(component.uploadControl.value).toBe(null);
-  });
+    it('should start upload files', () => {
+      spyOn(mockfileUpladService, 'uploadFile').and.returnValue(
+        of(mockInProgressHttpResponse)
+      );
+      component.uploadFiles(mockEvent.target.files);
+      expect(component.individualProgress[0]).toEqual(50);
+    });
 
-  it('should start upload files', () => {
-    component.uploadFiles(mockEvent.target.files);
-    spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
-    expect(component.individualProgress[0]).toEqual(50);
-  });
+    it('should display bytes when value is less than 1024', () => {
+      mockField.maxFileSize = 30;
+      component.handleFiles(mockEvent);
+      expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
+    });
 
-  it('should display bytes when value is less than 1024', () => {
-    mockField.maxFileSize = 30;
-    component.handleFiles(mockEvent);
-    expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
-  });
+    it('should remove single file', () => {
+      component.handleFiles(mockEvent);
+      component.removeFile(0, mockField);
+      expect(component.fileList.length).toEqual(1);
+    });
 
-  it('should remove single file', () => {
-    component.handleFiles(mockEvent);
-    component.removeFile(0, mockField);
-    expect(component.fileList.length).toEqual(1);
-  });
+    it('should remove all files', () => {
+      component.handleFiles(mockEvent);
+      component.removeAll(mockField);
+      expect(component.fileList.length).toEqual(0);
+    });
 
-  it('should remove all files', () => {
-    component.handleFiles(mockEvent);
-    component.removeAll(mockField);
-    expect(component.fileList.length).toEqual(0);
+    it('should populate uploaded files', () => {
+      spyOn(mockfileUpladService, 'getUploadedDocuments').and.returnValue(
+        of(uploadedFiles)
+      );
+      component.ngOnInit();
+      mockfileUpladService.getUploadedDocuments().subscribe(result => {
+        expect(result).toEqual(uploadedFiles);
+      });
+    });
+
+    it('should download file', () => {
+      spyOn(mockfileUpladService, 'getFile').and.returnValue(of(mockFile));
+      component.downloadFile(mockFile);
+      expect(mockfileUpladService.getFile).toHaveBeenCalledWith(
+        mockFile.code,
+        mockFile.type
+      );
+    });
+
+    it('should handle file response', () => {
+      spyOn(mockfileUpladService, 'setFileInStore').and.callThrough();
+      (component as any).handleFileResponse(mockInProgressHttpResponse);
+      expect(mockfileUpladService.setFileInStore).toHaveBeenCalled();
+    });
   });
 });
