@@ -1,27 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FileService } from '@spartacus/dynamicforms';
+import { DocumentFile, FileService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
 import { DocumentsOverviewComponent } from './documents-overview.component';
 import { of } from 'rxjs';
 
-const mockDocument1 = {
-  code: 'TestDocument',
-  name: 'Test Document',
-  creationTime: '2021-02-24T13:13:54+0000',
-  createdByExternalSystem: false,
-};
+const blob1 = new Blob([''], { type: 'application/pdf' });
+blob1['lastModifiedDate'] = '';
+blob1['name'] = 'testFile1';
+blob1['code'] = 'DOC00002012';
+const mockDocument1 = <DocumentFile>blob1;
 
-const mockDocument2 = {
-  code: 'TestDocument',
-  name: 'Test Document',
-  creationTime: '2021-02-24T13:13:54+0000',
-  createdByExternalSystem: true,
-};
+const blob2 = new Blob([''], { type: 'image/jpeg' });
+blob2['lastModifiedDate'] = '';
+blob2['name'] = 'testFile2';
+blob2['code'] = 'DOC00002011';
+const mockDocument2 = <DocumentFile>blob2;
 
-const mockFiles = {
-  documents: [mockDocument1, mockDocument2],
-};
+const mockFiles: DocumentFile[] = [mockDocument1, mockDocument2];
 
 class MockFileService {
   getFiles() {
@@ -66,7 +62,7 @@ describe('DocumentsOverviewComponent', () => {
 
   it('should get documents uploaded by customer', () => {
     const documentsUploadedByCustomer = component.getDocumentsBySource(
-      mockFiles.documents,
+      mockFiles,
       false
     );
     expect(documentsUploadedByCustomer[0]).toBe(mockDocument1);
@@ -74,7 +70,7 @@ describe('DocumentsOverviewComponent', () => {
 
   it('should get documents received from external system', () => {
     const documentsUploadedByCustomer = component.getDocumentsBySource(
-      mockFiles.documents,
+      mockFiles,
       true
     );
     expect(documentsUploadedByCustomer[0]).toBe(mockDocument2);
