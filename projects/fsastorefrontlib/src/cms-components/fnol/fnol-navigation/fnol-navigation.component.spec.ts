@@ -119,6 +119,7 @@ export class MockFileService {
   getUploadedDocuments() {
     return of(uploadedContent);
   }
+  resetFiles() {}
 }
 
 export class MockFormDataService {

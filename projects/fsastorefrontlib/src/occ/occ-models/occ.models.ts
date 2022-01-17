@@ -1,4 +1,4 @@
-import { YFormData } from '@spartacus/dynamicforms';
+import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
 import {
   B2BUser,
   Cart,
@@ -282,7 +282,7 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
-  documents?: any;
+  documents?: DocumentFile[];
   properties?: any;
 }
 
