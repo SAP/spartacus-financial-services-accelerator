@@ -99,7 +99,7 @@ const consent1 = {
     name: customerName1,
     uid: customerUid1,
   },
-  oboConsentConfiguration: {
+  oboPermissionConfiguration: {
     permissions: [
       {
         key: 'fnol',
@@ -135,7 +135,7 @@ const consent2 = {
     name: customerName2,
     uid: customerUid2,
   },
-  oboConsentConfiguration: {
+  oboPermissionConfiguration: {
     permissions: [
       {
         key: 'fnol',
