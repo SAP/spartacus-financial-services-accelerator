@@ -7,7 +7,7 @@ import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 
 @Component({
   selector: 'cx-fs-change-claim-navigation',
-  templateUrl: './change-claim-navigation.html',
+  templateUrl: './change-claim-navigation.component.html',
 })
 export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
   constructor(
@@ -58,6 +58,7 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
             if (submittedFormData?.content && uploadedContent) {
               claimCopy.documents = uploadedContent.files;
               this.claimService.changeClaim(claimCopy, occUserId);
+              this.fileService.resetFiles();
             }
           })
         )

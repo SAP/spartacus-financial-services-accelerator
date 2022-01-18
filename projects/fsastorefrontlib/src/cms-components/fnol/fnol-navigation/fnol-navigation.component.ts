@@ -112,6 +112,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
               userRequest.requestStatus === ClaimStatus.SUBMITTED &&
               userRequest.fsStepGroupDefinition
             ) {
+              this.fileService.resetFiles();
               this.router.go(userRequest.fsStepGroupDefinition.confirmationUrl);
             }
             return of(null);

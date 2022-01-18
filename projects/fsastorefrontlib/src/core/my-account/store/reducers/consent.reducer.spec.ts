@@ -42,7 +42,7 @@ const mockedConsents = {
         name: customerName,
         uid: customerUid,
       },
-      oboConsentConfiguration: {
+      oboPermissionConfiguration: {
         permissions: [
           {
             key: 'fnol',

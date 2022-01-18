@@ -17,3 +17,9 @@ export interface YFormDefinition {
 export interface YFormDefinitionList {
   formDefinitions: YFormDefinition[];
 }
+
+export interface DocumentFile extends File {
+  code: string;
+  createdByExternalSystem: boolean;
+  creationTime: Date;
+}

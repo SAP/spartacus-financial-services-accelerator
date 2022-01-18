@@ -1,4 +1,4 @@
-import { YFormData } from '@spartacus/dynamicforms';
+import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
 import {
   B2BUser,
   Cart,
@@ -108,14 +108,14 @@ export interface OBOConsent extends Consent {
   consentHolders?: User[];
   consentTemplate?: ConsentTemplate;
   customer: User;
-  oboConsentConfiguration: OBOConsentConfiguration;
+  oboPermissionConfiguration: OBOPermissionConfiguration;
 }
 
 export interface FSConsentTemplate extends ConsentTemplate {
   exposed?: boolean;
 }
 
-export interface OBOConsentConfiguration {
+export interface OBOPermissionConfiguration {
   permissions?: Map<string, boolean>;
 }
 
@@ -282,7 +282,7 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
-  documents?: any;
+  documents?: DocumentFile[];
   properties?: any;
 }
 
