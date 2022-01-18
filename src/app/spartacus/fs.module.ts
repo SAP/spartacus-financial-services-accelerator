@@ -7,8 +7,8 @@ import { FSFeaturesModule } from './fs-features.module';
 @NgModule({
   imports: [
     BaseStorefrontModule,
-    FSStorefrontModule,
     FSFeaturesModule,
+    FSStorefrontModule,
     FSConfigurationModule,
   ],
   exports: [BaseStorefrontModule],

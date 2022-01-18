@@ -92,18 +92,9 @@ import {
 } from '@spartacus/user/profile/components';
 import { UserAccountComponentsModule } from '@spartacus/user/account/components';
 import { DigitalPaymentsFeatureModule } from './features/digital-payments-feature.module';
-import { environment } from './../../environments/environment';
-
-// const featureModules = [];
-
-// if (environment?.digitalPayments) {
-//   featureModules.push(DigitalPaymentsFeatureModule);
-// }
 
 @NgModule({
   imports: [
-    // ...featureModules,
-    DigitalPaymentsFeatureModule,
     AsmModule,
     SmartEditModule,
     AuthModule.forRoot(),
@@ -218,6 +209,7 @@ import { environment } from './../../environments/environment';
     OrderApprovalFeatureModule,
     ReturnRequestListModule,
     ReturnRequestDetailModule,
+    DigitalPaymentsFeatureModule,
   ],
 })
 export class FSFeaturesModule {}

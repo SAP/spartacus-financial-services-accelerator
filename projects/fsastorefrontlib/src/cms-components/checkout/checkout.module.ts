@@ -64,9 +64,7 @@ import {
   PaymentFormModule,
   PaymentMethodModule,
 } from '@spartacus/checkout/components';
-import { FSDigitalPaymentMethodComponent } from './components/digital-payment-method/digital-payment-method.component';
-import { FSDigitalPaymentFormComponent } from './components/digital-payment-method/digital-payment-form/digital-payment-form.component';
-import { FSDigitalPaymentCreditCardComponent } from './components/digital-payment-method/digital-payment-credit-card/digital-payment-credit-card.component';
+import { FSDpPaymentMethodModule } from './components/digital-payment-method/digital-payment-method.module';
 
 const routes: Routes = [
   {
@@ -203,6 +201,7 @@ const routes: Routes = [
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     FSCartCouponModule,
+    FSDpPaymentMethodModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
@@ -242,14 +241,9 @@ const routes: Routes = [
         PersonalDetailsFormNavigationFlex: {
           component: PersonalDetailsNavigationComponent,
         },
-        FSCheckoutPaymentDetails: {
-          component: FSDigitalPaymentMethodComponent,
-        },
-        CheckoutPaymentDetails: {
-          component: FSDigitalPaymentCreditCardComponent,
-        },
       },
     }),
+    // DigitalPaymentsModule,
   ],
   declarations: [
     QuoteReviewComponent,
@@ -261,15 +255,12 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     FSPaymentMethodComponent,
-    FSDigitalPaymentMethodComponent,
-    FSDigitalPaymentCreditCardComponent,
-    FSDigitalPaymentFormComponent,
   ],
   exports: [
     I18nModule,
     LegalModule,
     UserIdentificationModule,
-    PaymentMethodModule,
+    // PaymentMethodModule,
     PaymentFormModule,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
@@ -277,25 +268,6 @@ const routes: Routes = [
     FinalReviewComponent,
     OrderConfirmationComponent,
     FSPaymentMethodComponent,
-    FSDigitalPaymentMethodComponent,
-    FSDigitalPaymentCreditCardComponent,
-    FSDigitalPaymentFormComponent,
-  ],
-  entryComponents: [
-    AddOptionsComponent,
-    QuoteReviewComponent,
-    BindQuoteDialogComponent,
-    ReferredQuoteDialogComponent,
-    FinalReviewComponent,
-    ChooseCoverNavigationComponent,
-    PersonalDetailsNavigationComponent,
-    OrderConfirmationComponent,
-    OrderConfirmationMessageComponent,
-    MiniCartComponent,
-    FSPaymentMethodComponent,
-    FSDigitalPaymentMethodComponent,
-    FSDigitalPaymentFormComponent,
-    FSDigitalPaymentFormComponent,
   ],
   providers: [
     FSCartService,
