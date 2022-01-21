@@ -76,7 +76,7 @@ export interface InsuranceQuoteList {
 }
 
 export interface OBOConsentList {
-  consents: OBOConsent[];
+  oboConsents: OBOConsent[];
 }
 
 export interface OBOCustomerList {
@@ -105,18 +105,22 @@ export interface InsuranceQuote {
 }
 
 export interface OBOConsent extends Consent {
-  consentHolders?: User[];
+  consentHolder?: User;
   consentTemplate?: ConsentTemplate;
   customer: User;
-  oboPermissionConfiguration: OBOPermissionConfiguration;
+  oboConsentConfiguration: OBOConsentConfiguration;
 }
 
 export interface FSConsentTemplate extends ConsentTemplate {
   exposed?: boolean;
 }
 
-export interface OBOPermissionConfiguration {
-  permissions?: Map<string, boolean>;
+export interface OBOConsentConfiguration {
+  permissions?: OBOPermissions[];
+}
+
+export interface OBOPermissions {
+  [key: string]: any;
 }
 
 export enum OrganizationTableType {

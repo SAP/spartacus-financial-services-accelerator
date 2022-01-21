@@ -12,7 +12,10 @@ import { Observable, Subscription } from 'rxjs';
 import { ConsentManagementComponent } from '@spartacus/storefront';
 import { filter, map, take } from 'rxjs/operators';
 import { ConsentService } from '../../../core/my-account/facade/consent.service';
-import { FSConsentTemplate } from '../../../occ/occ-models/occ.models';
+import {
+  FSConsentTemplate,
+  OBOConsentList,
+} from '../../../occ/occ-models/occ.models';
 import { StateWithMyAccount } from '../../../core/my-account/store/my-account-state';
 
 @Component({
@@ -41,9 +44,7 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
 
   private subscription = new Subscription();
   templateArray$: Observable<FSConsentTemplate[]>;
-  consents$: Observable<
-    StateWithMyAccount
-  > = this.fsConsentService.getConsents();
+  consents$: Observable<OBOConsentList> = this.fsConsentService.getConsents();
 
   consentTemplates$: Observable<
     ConsentTemplate[]
