@@ -107,19 +107,20 @@ export class OccConsentAdapter implements ConsentAdapter {
       .pipe(catchError((error: any) => throwError(error)));
   }
 
-  getQuotesForOBOCustomer(userId: string, customerId: string): Observable<Models.InsuranceQuote[]> {
+  getQuotesForOBOCustomer(
+    userId: string,
+    customerId: string
+  ): Observable<Models.InsuranceQuote[]> {
     const url = this.occEndpointService.buildUrl('oboConsentCustomerQuotes', {
       urlParams: {
         userId,
         customerId,
       },
     });
-    return this.http
-      .get<InsuranceQuoteList>(url)
-      .pipe(
-        pluck('insuranceQuotes'),
-        this.converterService.pipeableMany(QUOTE_NORMALIZER),
-        catchError((error: any) => throwError(error.json()))
+    return this.http.get<InsuranceQuoteList>(url).pipe(
+      pluck('insuranceQuotes'),
+      this.converterService.pipeableMany(QUOTE_NORMALIZER),
+      catchError((error: any) => throwError(error.json()))
     );
   }
 

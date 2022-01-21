@@ -32,7 +32,7 @@ export function reducer(
       };
     }
     case fromAction.LOAD_CUSTOMER_QUOTES_SUCCESS: {
-      const customerQuotes = action.payload ? [ ...action.payload ] : [];
+      const customerQuotes = action.payload ? [...action.payload] : [];
       return {
         ...state,
         customerQuotes,
