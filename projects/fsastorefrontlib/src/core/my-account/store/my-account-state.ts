@@ -30,7 +30,7 @@ export interface QuoteState {
 export interface ConsentState {
   consents: {};
   customer: {};
-  customerQuotes: Models.InsuranceQuote;
+  customerQuotes: Models.InsuranceQuote[];
   customerPolicies: {};
   customerClaims: {};
   loaded: boolean;

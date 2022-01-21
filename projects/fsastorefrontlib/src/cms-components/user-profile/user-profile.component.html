@@ -126,8 +126,8 @@
               <li class="item text-break text-center text-uppercase">
                 <div class="number notice semi-bold">
                   {{
-                    customerAssets.quotes?.insuranceQuotes
-                      ? customerAssets.quotes?.insuranceQuotes?.length
+                    customerAssets?.quotes
+                      ? customerAssets.quotes?.length
                       : '0'
                   }}
                 </div>
@@ -146,7 +146,7 @@
                 (click)="
                   showAssetList(
                     asset.key === 'quotes'
-                      ? customerAssets.quotes?.insuranceQuotes
+                      ? customerAssets?.quotes
                       : asset.key === 'policies'
                       ? customerAssets.policies?.insurancePolicies
                       : asset.key === 'claims'
@@ -158,7 +158,7 @@
                 (keydown.enter)="
                   showAssetList(
                     asset.key === 'quotes'
-                      ? customerAssets.quotes?.insuranceQuotes
+                      ? customerAssets?.quotes
                       : asset.key === 'policies'
                       ? customerAssets.policies?.insurancePolicies
                       : asset.key === 'claims'

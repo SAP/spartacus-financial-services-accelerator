@@ -4,7 +4,7 @@ import { ConsentState } from '../my-account-state';
 export const initialState: ConsentState = {
   consents: {},
   customer: {},
-  customerQuotes: {},
+  customerQuotes: [],
   customerPolicies: {},
   customerClaims: {},
   loaded: false,
@@ -32,7 +32,7 @@ export function reducer(
       };
     }
     case fromAction.LOAD_CUSTOMER_QUOTES_SUCCESS: {
-      const customerQuotes = action.payload ? { ...action.payload } : null;
+      const customerQuotes = action.payload ? [ ...action.payload ] : [];
       return {
         ...state,
         customerQuotes,

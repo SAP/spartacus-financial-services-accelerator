@@ -124,7 +124,7 @@ describe('Consent Reducer', () => {
     it('should load customer quotes', () => {
       const action = new fromAction.LoadCustomerQuotesSuccess(mockedQuotes);
       const state = fromReducer.reducer(initialState, action);
-      expect(state.customerQuotes).toEqual({ ...mockedQuotes });
+      expect(state.customerQuotes).toEqual(mockedQuotes);
     });
   });
 
