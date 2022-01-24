@@ -73,16 +73,18 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
   changeOBOPermission(
     customerUid: string,
     permissionKey: string,
-    permissionValue: boolean
+    event: Event
   ) {
-    this.fsConsentService
-      .updateOBOPermission(
-        this.userId,
-        customerUid,
-        permissionKey,
-        permissionValue
-      )
-      .subscribe();
+    this.subscription.add(
+      this.fsConsentService
+        .updateOBOPermission(
+          this.userId,
+          customerUid,
+          permissionKey,
+          (event.target as HTMLInputElement).checked
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {
