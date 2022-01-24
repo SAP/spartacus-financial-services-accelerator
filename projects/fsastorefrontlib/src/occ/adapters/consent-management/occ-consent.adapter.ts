@@ -164,12 +164,13 @@ export class OccConsentAdapter implements ConsentAdapter {
   }
 
   updateOBOPermission(
+    userId: string,
     oboConsentHolderUid: string,
     oboPermissionName: string,
     oboPermissionValue: boolean
   ): Observable<any> {
     const url = this.occEndpointService.buildUrl('oboUpdatePermission', {
-      urlParams: { oboConsentHolderUid, oboPermissionName, oboPermissionValue },
+      urlParams: { userId },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

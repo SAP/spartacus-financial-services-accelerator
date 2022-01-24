@@ -57,11 +57,13 @@ export class ConsentConnector {
   }
 
   updateOBOPermission(
+    userId: string,
     oboConsentHolderUid: string,
     oboPermissionName: string,
     oboPermissionValue: boolean
   ): Observable<{}> {
     return this.adapter.updateOBOPermission(
+      userId,
       oboConsentHolderUid,
       oboPermissionName,
       oboPermissionValue

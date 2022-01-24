@@ -16,7 +16,6 @@ import {
   FSConsentTemplate,
   OBOConsentList,
 } from '../../../occ/occ-models/occ.models';
-import { StateWithMyAccount } from '../../../core/my-account/store/my-account-state';
 
 @Component({
   selector: 'cx-fs-consent-management',
@@ -45,6 +44,7 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
   private subscription = new Subscription();
   templateArray$: Observable<FSConsentTemplate[]>;
   consents$: Observable<OBOConsentList> = this.fsConsentService.getConsents();
+  userId: string;
 
   consentTemplates$: Observable<
     ConsentTemplate[]
@@ -63,14 +63,26 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
         .getUserId()
         .pipe(take(1))
         .subscribe(occUserId => {
+          this.userId = occUserId;
           this.fsConsentService.loadConsents(occUserId);
         })
     );
     this.userConsentService.loadConsents();
   }
 
-  updateOBOPermission(customerUid, permissionKey, permissionValue) {
-    console.log(customerUid, permissionKey, permissionValue);
+  changeOBOPermission(
+    customerUid: string,
+    permissionKey: string,
+    permissionValue: boolean
+  ) {
+    this.fsConsentService
+      .updateOBOPermission(
+        this.userId,
+        customerUid,
+        permissionKey,
+        permissionValue
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

@@ -9,6 +9,7 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { map } from 'rxjs/operators';
 import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
+import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,8 @@ export class ConsentService {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected userIdService: UserIdService,
-    protected userAccountFacade: UserAccountFacade
+    protected userAccountFacade: UserAccountFacade,
+    protected consentConnector: ConsentConnector
   ) {}
 
   loadConsents(userId) {
@@ -144,5 +146,19 @@ export class ConsentService {
 
   setSelectedOBOCustomer(customer: FSUser) {
     return this.selectedOBOCustomerSource.next(customer);
+  }
+
+  updateOBOPermission(
+    userId: string,
+    customerUid: string,
+    permissionKey: string,
+    permissionValue: boolean
+  ): Observable<{}> {
+    return this.consentConnector.updateOBOPermission(
+      userId,
+      customerUid,
+      permissionKey,
+      permissionValue
+    );
   }
 }
