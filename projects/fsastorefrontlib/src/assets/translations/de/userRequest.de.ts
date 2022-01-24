@@ -16,10 +16,11 @@ export const userRequest = {
     phFault: 'Wer ist Unfallverantwortlich',
     witnessExist:
       'Gibt es weitere Zeugen mit denen wir Kontakt aufnehmen können',
-    description: '[DE] Description',
-    vehicleParked: '[DE] Is your vehicle parked',
-    otherVehicleInvolved: '[DE] Were there any other vehicle involved',
-    numberOfVehicleInvolved: '[DE] How many vehicles are involved',
-    entitledToDriveVehicle: '[DE] Driver entitled to drive vehicle',
+    description: 'Beschreibung',
+    vehicleParked: 'Ist das Fahrzeug derzeit geparkt?',
+    otherVehicleInvolved: 'War noch ein anderes Fahrzeug beteiligt?',
+    numberOfVehicleInvolved: 'Wie viele Fahrzeuge sind beteiligt?',
+    entitledToDriveVehicle:
+      'Fahrer mit Erlaubnis zum führen eines Kraftfahrzeuges',
   },
 };
