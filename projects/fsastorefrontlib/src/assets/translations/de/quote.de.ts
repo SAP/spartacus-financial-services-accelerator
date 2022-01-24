@@ -33,14 +33,15 @@ export const quote = {
     category: 'Kategorie',
     selectCategory: 'Kategorie wählen',
     compareQuotes: 'Angebote vergleichen',
-    renewalQuotes: '[DE] Renewal Quotes',
-    compare: '[DE] Compare',
+    renewalQuotes: 'Angebote verlängern',
+    compare: 'Vergleichen',
     select: 'Auswählen/Abwählen',
     successfulSelection:
       'Der Benutzer hat die Versicherungskarte für seine {{ category }} erfolgreich ausgewählt.',
-    compareInfo: '[DE] Select two quotes with the same category for comparison',
-    renewalInfo: '[DE] This quote is created from existing policy',
-    renewalQuoteInfo: '[DE]  Renewal Quote',
+    compareInfo:
+      'Wählen Sie für den Vergleich zwei Angebote aus derselben Kategorie aus',
+    renewalInfo: 'Dieses Angebot wurde aus einer bestehenden Police erstellt',
+    renewalQuoteInfo: 'Angebot verlängern',
     clearAll: 'Alles löschen',
     allQuotes: 'Alle Angebote',
     quotesComparison: 'Vergleiche {{ category }} Angebote',
@@ -48,12 +49,12 @@ export const quote = {
     selectQuote: 'Angebot auswählen',
     quoteBillingEvents: 'Abrechnungszeitraum',
     quoteOptionalExtras: 'Optionale Extras',
-    billingEvents: '[DE] Billing Events',
-    quoteGeneralInformation: '[DE] Quote General Information',
-    generalInformation: '[DE] General Information',
-    noQuotes: '[DE] No quotes for comparison',
+    billingEvents: 'Abrechnungsereignisse',
+    quoteGeneralInformation: 'Allgemeine Informationen',
+    generalInformation: 'Allgemeine Informationen',
+    noQuotes: 'Keine Angebote zum vergleichen',
     transferCartSuccess:
-      '[DE] Insurance Quote/Application is successfully prepared for the customer {{ customer }}.',
+      'Versicherungsangebot/-antrag wird erfolgreich für den Kunden erstellt {{ customer }}.',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',

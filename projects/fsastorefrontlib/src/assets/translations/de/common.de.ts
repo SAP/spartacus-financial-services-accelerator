@@ -177,9 +177,9 @@ export const fscommon = {
       contact: 'Kontakt',
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
-      backToList: '[DE] Back to list',
-      online: '[DE] Online',
-      offline: '[DE] Offline',
+      backToList: 'Zurück zur Liste',
+      online: 'Online',
+      offline: 'Offline',
       noSearchResults: 'Keine Ergebnisse',
     },
     questionnaire: {
@@ -189,13 +189,13 @@ export const fscommon = {
     },
     httpHandlers: {
       existingCouponCodeProvided:
-        '[DE] This coupon code is already applied to the current cart.',
+        'Dieser Gutscheincode wird bereits auf den aktuellen Warenkorb angewendet.',
     },
     syncPilot: {
       speakToAgent: 'Sprechen Sie Mit Einem Agenten',
       needHelp: 'Benötigen Sie Hilfe?',
-      contactAgent: '[DE] Connecting to an agent',
-      waitingAgent: '[DE] Waiting for an agent...',
+      contactAgent: 'Verbindung zu einem Agenten wird hergestellt',
+      waitingAgent: 'Warten auf einen Agenten...',
     },
     priceCalculationError:
       'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',
