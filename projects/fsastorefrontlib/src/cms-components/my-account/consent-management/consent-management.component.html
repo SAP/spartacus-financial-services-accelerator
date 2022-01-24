@@ -46,18 +46,26 @@
                   {{ consent.consentHolder?.displayUid }}
                 </span>
               </div>
-
               <div class="pb-4">{{ 'consent.permissions' | cxTranslate }}:</div>
-
               <div
                 class="form-check"
                 *ngFor="
-                  let item of consent.oboConsentConfiguration?.permissions
+                  let item of consent.oboPermissionConfiguration?.permissions
                 "
               >
-                <label>
-                  <input type="checkbox" class="form-check-input" />
-                  <span class="form-check-label" *ngIf="item | keyvalue">
+                <label class="form-check-label" *ngIf="item | keyvalue">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    (change)="
+                      updateOBOPermission(
+                        consent.consentHolder?.displayUid,
+                        item.key,
+                        item.value
+                      )
+                    "
+                  />
+                  <span class="form-check-label">
                     {{ 'consent.' + item.key | cxTranslate }}
                   </span>
                 </label>

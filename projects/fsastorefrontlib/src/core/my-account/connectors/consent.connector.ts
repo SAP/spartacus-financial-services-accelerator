@@ -55,4 +55,16 @@ export class ConsentConnector {
   ): Observable<{}> {
     return this.adapter.createAddressForUser(userId, oboCustomerId, address);
   }
+
+  updateOBOPermission(
+    oboConsentHolderUid: string,
+    oboPermissionName: string,
+    oboPermissionValue: boolean
+  ): Observable<{}> {
+    return this.adapter.updateOBOPermission(
+      oboConsentHolderUid,
+      oboPermissionName,
+      oboPermissionValue
+    );
+  }
 }

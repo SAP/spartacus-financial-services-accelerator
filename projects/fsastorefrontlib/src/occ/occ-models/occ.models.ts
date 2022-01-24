@@ -108,14 +108,14 @@ export interface OBOConsent extends Consent {
   consentHolder?: User;
   consentTemplate?: ConsentTemplate;
   customer: User;
-  oboConsentConfiguration: OBOConsentConfiguration;
+  oboPermissionConfiguration: OBOPermissionConfiguration;
 }
 
 export interface FSConsentTemplate extends ConsentTemplate {
   exposed?: boolean;
 }
 
-export interface OBOConsentConfiguration {
+export interface OBOPermissionConfiguration {
   permissions?: OBOPermissions[];
 }
 

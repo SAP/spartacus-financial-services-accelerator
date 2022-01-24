@@ -69,6 +69,10 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
     this.userConsentService.loadConsents();
   }
 
+  updateOBOPermission(customerUid, permissionKey, permissionValue) {
+    console.log(customerUid, permissionKey, permissionValue);
+  }
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
