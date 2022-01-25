@@ -144,6 +144,9 @@ header {
           text-transform: uppercase;
         }
       }
+      .wrapper {
+        z-index: 20000;
+      }
       &.accNavComponent {
         nav {
           position: relative;
