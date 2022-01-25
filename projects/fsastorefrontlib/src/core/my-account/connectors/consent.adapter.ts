@@ -101,7 +101,7 @@ export abstract class ConsentAdapter {
   /**
    * Abstract method used to update permissions given to Consent Holder
    *
-   * @param userId The `userId` the identifier of the consent holder
+   * @param userId The `userId` identifier of the consent holder
    * @param oboConsentHolderUid `Uid` of customer created by consent holder for which permission should be updated.
    * @param oboPermissionName Name of the permission which should be updated.
    * @param oboPermissionValue Permission `value` which should be updated.

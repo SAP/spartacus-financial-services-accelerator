@@ -1,5 +1,10 @@
 import { Observable, of } from 'rxjs';
-import { waitForAsync, TestBed, ComponentFixture } from '@angular/core/testing';
+import {
+  waitForAsync,
+  TestBed,
+  ComponentFixture,
+  fakeAsync,
+} from '@angular/core/testing';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
@@ -19,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
 import { ConsentService } from '../../../core/my-account/facade/consent.service';
 import { FSConsentManagementComponent } from './consent-management.component';
 import { FSConsentTemplate } from '../../../occ/occ-models/occ.models';
+import { By } from '@angular/platform-browser';
 
 const code = '000001';
 const date1 = 'date1';
@@ -88,6 +94,18 @@ class MockConsentService {
 
   getConsentsLoaded() {
     return of(true);
+  }
+  updateOBOPermission(
+    _customerUid: string,
+    _permissionKey: string,
+    _event: Event
+  ) {
+    return of({
+      userId: 'current',
+      oboConsentHolderUid: 'testUid',
+      oboPermissionName: 'testPermission',
+      oboPermissionValue: true,
+    });
   }
 }
 
@@ -163,6 +181,7 @@ describe('FSConsentManagementComponent', () => {
   let globalMessageService: GlobalMessageService;
   let anonymousConsentsConfig: AnonymousConsentsConfig;
   let anonymousConsentsService: AnonymousConsentsService;
+  let input: HTMLInputElement;
 
   let el: DebugElement;
 
@@ -210,5 +229,19 @@ describe('FSConsentManagementComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should update OBO consent', () => {
+    spyOn(fsConsentService, 'getConsents').and.callThrough();
+    spyOn(userIdService, 'getUserId').and.callThrough();
+    expect(component.userId).toEqual('current');
+    spyOn(fsConsentService, 'updateOBOPermission').and.callThrough();
+    fakeAsync(() => {
+      component.changeOBOPermission(
+        'testUid',
+        'testPermission',
+        new Event('input')
+      );
+      expect(fsConsentService.updateOBOPermission).toHaveBeenCalled();
+    });
   });
 });

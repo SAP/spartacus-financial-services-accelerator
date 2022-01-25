@@ -46,10 +46,6 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
   consents$: Observable<OBOConsentList> = this.fsConsentService.getConsents();
   userId: string;
 
-  consentTemplates$: Observable<
-    ConsentTemplate[]
-  > = this.userConsentService.getConsents();
-
   ngOnInit(): void {
     super.ngOnInit();
     this.templateArray$ = this.templateList$.pipe(

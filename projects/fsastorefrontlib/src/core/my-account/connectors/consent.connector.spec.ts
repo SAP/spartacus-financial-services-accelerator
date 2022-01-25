@@ -48,6 +48,18 @@ class MockConsentAdapter extends ConsentAdapter {
   ).and.callFake((consentHolder, details) =>
     of('createOBOCustomer' + consentHolder + details)
   );
+  updateOBOPermission = createSpy(
+    'ConsentAdapter.updateOBOPermission'
+  ).and.callFake(
+    (userId, oboConsentHolderUid, oboPermissionName, oboPermissionValue) =>
+      of(
+        'updateOBOPermission' +
+          userId +
+          oboConsentHolderUid +
+          oboPermissionName +
+          oboPermissionValue
+      )
+  );
 }
 
 const user = 'user';
@@ -58,6 +70,9 @@ const address: Address = {
   companyName: 'Test Company',
   defaultAddress: true,
 };
+const oboConsentHolderUid = 'test@test.com';
+const oboPermissionName = 'testPermission';
+const oboPermissionValue = true;
 
 describe('ConsentConnector', () => {
   let consentConnector: ConsentConnector;
@@ -138,6 +153,21 @@ describe('ConsentConnector', () => {
     expect(consentAdapter.createOBOCustomer).toHaveBeenCalledWith(
       user,
       customerDetails
+    );
+  });
+
+  it('should call adapter to update OBO permissions', () => {
+    consentConnector.updateOBOPermission(
+      user,
+      oboConsentHolderUid,
+      oboPermissionName,
+      oboPermissionValue
+    );
+    expect(consentAdapter.updateOBOPermission).toHaveBeenCalledWith(
+      user,
+      oboConsentHolderUid,
+      oboPermissionName,
+      oboPermissionValue
     );
   });
 });
