@@ -39,7 +39,7 @@ const address: Address = {
 
 const oboConsentHolderUid = 'test@test.com';
 const oboPermissionName = 'testPermission';
-const oboPermissionValue = true;
+let oboPermissionValue = true;
 
 class GlobalMessageServiceMock {
   add(_text: string | Translatable, _type: GlobalMessageType): void {}
@@ -62,12 +62,7 @@ class MockConsentConnector {
     _permissionKey: string,
     _event: Event
   ) {
-    return of({
-      userId: 'current',
-      oboConsentHolderUid: 'testUid',
-      oboPermissionName: 'testPermission',
-      oboPermissionValue: true,
-    });
+    return of();
   }
 }
 
@@ -157,20 +152,49 @@ describe('ConsentServiceTest', () => {
     );
   });
 
-  it('should be able to update OBO Permissions', () => {
-    spyOn(consentConnector, 'updateOBOPermission').and.callThrough();
-    service.updateOBOPermission(
-      userId,
-      oboConsentHolderUid,
-      oboPermissionName,
-      oboPermissionValue
+  it('should be able to update OBO Permissions to TRUE', () => {
+    spyOn(globalMessageService, 'add').and.callThrough();
+    spyOn(consentConnector, 'updateOBOPermission').and.returnValue(
+      of(userId, oboConsentHolderUid, oboPermissionName, oboPermissionValue)
     );
-    expect(consentConnector.updateOBOPermission).toHaveBeenCalledWith(
-      userId,
-      oboConsentHolderUid,
-      oboPermissionName,
-      oboPermissionValue
+    service
+      .updateOBOPermission(
+        userId,
+        oboConsentHolderUid,
+        oboPermissionName,
+        oboPermissionValue
+      )
+      .subscribe(() =>
+        expect(globalMessageService.add).toHaveBeenCalledWith(
+          { key: 'consentManagementForm.message.success.given' },
+          GlobalMessageType.MSG_TYPE_CONFIRMATION
+        )
+      )
+      .unsubscribe();
+    expect(consentConnector.updateOBOPermission).toHaveBeenCalled();
+  });
+
+  it('should be able to update OBO Permissions to FALSE', () => {
+    oboPermissionValue = false;
+    spyOn(globalMessageService, 'add').and.callThrough();
+    spyOn(consentConnector, 'updateOBOPermission').and.returnValue(
+      of(userId, oboConsentHolderUid, oboPermissionName, oboPermissionValue)
     );
+    service
+      .updateOBOPermission(
+        userId,
+        oboConsentHolderUid,
+        oboPermissionName,
+        oboPermissionValue
+      )
+      .subscribe(() =>
+        expect(globalMessageService.add).toHaveBeenCalledWith(
+          { key: 'consentManagementForm.message.success.withdrawn' },
+          GlobalMessageType.MSG_TYPE_CONFIRMATION
+        )
+      )
+      .unsubscribe();
+    expect(consentConnector.updateOBOPermission).toHaveBeenCalled();
   });
 
   it('should be able to load customer quotes', () => {
