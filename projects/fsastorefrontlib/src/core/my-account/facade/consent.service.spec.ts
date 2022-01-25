@@ -1,4 +1,11 @@
-import { Address, OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
+import {
+  Address,
+  GlobalMessageService,
+  GlobalMessageType,
+  OCC_USER_ID_CURRENT,
+  Translatable,
+  UserIdService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { ConsentService } from './consent.service';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -34,6 +41,10 @@ const oboConsentHolderUid = 'test@test.com';
 const oboPermissionName = 'testPermission';
 const oboPermissionValue = true;
 
+class GlobalMessageServiceMock {
+  add(_text: string | Translatable, _type: GlobalMessageType): void {}
+}
+
 class MockUserIdService {
   getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
@@ -66,6 +77,7 @@ describe('ConsentServiceTest', () => {
   let userIdService: MockUserIdService;
   let mockedUserAccountFacade: UserAccountFacade;
   let consentConnector: ConsentConnector;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     userIdService = new MockUserIdService();
@@ -84,12 +96,14 @@ describe('ConsentServiceTest', () => {
           provide: ConsentConnector,
           useClass: MockConsentConnector,
         },
+        { provide: GlobalMessageService, useClass: GlobalMessageServiceMock },
       ],
     });
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(ConsentService);
     store = TestBed.inject(Store);
     consentConnector = TestBed.inject(ConsentConnector);
+    globalMessageService = TestBed.inject(GlobalMessageService);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

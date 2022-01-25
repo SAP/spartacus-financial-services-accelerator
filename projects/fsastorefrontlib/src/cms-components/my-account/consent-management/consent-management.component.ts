@@ -3,7 +3,6 @@ import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
   AuthService,
-  ConsentTemplate,
   GlobalMessageService,
   UserConsentService,
   UserIdService,

@@ -24,7 +24,6 @@ import { StoreModule } from '@ngrx/store';
 import { ConsentService } from '../../../core/my-account/facade/consent.service';
 import { FSConsentManagementComponent } from './consent-management.component';
 import { FSConsentTemplate } from '../../../occ/occ-models/occ.models';
-import { By } from '@angular/platform-browser';
 
 const code = '000001';
 const date1 = 'date1';
@@ -181,8 +180,6 @@ describe('FSConsentManagementComponent', () => {
   let globalMessageService: GlobalMessageService;
   let anonymousConsentsConfig: AnonymousConsentsConfig;
   let anonymousConsentsService: AnonymousConsentsService;
-  let input: HTMLInputElement;
-
   let el: DebugElement;
 
   beforeEach(
