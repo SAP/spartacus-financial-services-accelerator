@@ -23,6 +23,7 @@ const cartId = 'cartId';
 const oboCustomerId = 'oboCustomerId';
 const transferCartEndpoint = 'transferCart';
 const addAddressEndpoint = 'oboConsentAddresses';
+const oboUpdatePermissionEndpoint = 'oboUpdatePermission';
 
 const customerDetails = {
   firstName: 'test name',
@@ -34,6 +35,10 @@ const address: Address = {
   companyName: 'Test Company',
   defaultAddress: true,
 };
+
+const oboConsentHolderUid = 'test@test.com';
+const oboPermissionName = 'testPermission';
+const oboPermissionValue = true;
 
 class MockOccEndpointsService {
   buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -289,6 +294,35 @@ describe('OccConsentAdapter', () => {
             }, `POST method and url`);
             expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
               oboConsentCustomersEndpoint,
+              {
+                urlParams: {
+                  userId,
+                },
+              }
+            );
+          })
+        );
+      });
+      describe('updateOBOPermission', () => {
+        it(
+          'should update OBO Permissions',
+          waitForAsync(() => {
+            adapter
+              .updateOBOPermission(
+                userId,
+                oboConsentHolderUid,
+                oboPermissionName,
+                oboPermissionValue
+              )
+              .subscribe();
+            httpMock.expectOne((req: HttpRequest<any>) => {
+              return (
+                req.url === oboUpdatePermissionEndpoint &&
+                req.method === 'PATCH'
+              );
+            }, `PATCH method and url`);
+            expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+              oboUpdatePermissionEndpoint,
               {
                 urlParams: {
                   userId,

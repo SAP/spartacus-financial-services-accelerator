@@ -46,10 +46,6 @@ export class OccConsentAdapter implements ConsentAdapter {
       actionName: 'TRANSFER_CART',
     };
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
     return this.http
       .patch<any>(url, transferCartAction, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
@@ -97,7 +93,6 @@ export class OccConsentAdapter implements ConsentAdapter {
         userId,
       },
     });
-    const params = new HttpParams({ fromString: FULL_PARAMS });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -166,5 +161,30 @@ export class OccConsentAdapter implements ConsentAdapter {
     return this.http
       .post(url, address, { headers })
       .pipe(catchError((error: any) => throwError(error)));
+  }
+
+  updateOBOPermission(
+    userId: string,
+    oboConsentHolderUid: string,
+    oboPermissionName: string,
+    oboPermissionValue: boolean
+  ): Observable<any> {
+    const url = this.occEndpointService.buildUrl('oboUpdatePermission', {
+      urlParams: { userId },
+    });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const permissionContent = {
+      actionName: 'UPDATE_PERMISSION',
+    };
+    let params: HttpParams = new HttpParams();
+    params = params.append('oboConsentHolderUid', oboConsentHolderUid);
+    params = params.append('oboPermissionName', oboPermissionName);
+    params = params.append('oboPermissionValue', oboPermissionValue);
+
+    return this.http
+      .patch(url, permissionContent, { headers, params })
+      .pipe(catchError((error: any) => throwError(error.json)));
   }
 }
