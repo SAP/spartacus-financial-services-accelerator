@@ -64,6 +64,7 @@ import {
   PaymentFormModule,
   PaymentMethodModule,
 } from '@spartacus/checkout/components';
+import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 
 const routes: Routes = [
   {
@@ -218,6 +219,7 @@ const routes: Routes = [
         },
         CheckoutPaymentDetails: {
           component: FSPaymentMethodComponent,
+          guards: [FSCheckoutAuthGuard],
         },
         FinalReviewFlex: {
           component: FinalReviewComponent,
