@@ -217,8 +217,10 @@ const routes: Routes = [
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
         },
-        CheckoutPaymentDetails: {
+        PaymentDetailsFlex: {
           component: FSPaymentMethodComponent,
+        },
+        CheckoutPaymentDetails: {
           guards: [FSCheckoutAuthGuard],
         },
         FinalReviewFlex: {
