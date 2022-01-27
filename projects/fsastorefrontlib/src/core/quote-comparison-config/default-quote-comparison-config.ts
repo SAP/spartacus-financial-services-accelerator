@@ -1,5 +1,6 @@
 import { QuoteComparisonConfig } from './quote-comparison-config';
 
+export const QUOTE_COMPARISON_NUMBER = 3;
 export function fsDefaultQuoteComparisonConfigFactory(): QuoteComparisonConfig {
   return {
     categoryConfig: [

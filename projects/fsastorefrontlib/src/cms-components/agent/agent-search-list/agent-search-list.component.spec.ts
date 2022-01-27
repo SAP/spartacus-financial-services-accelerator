@@ -63,7 +63,7 @@ class MockUserAccountFacade {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })
@@ -79,7 +79,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-pagination',
   template: '',
 })
@@ -88,7 +88,7 @@ class MockPagintionComponent {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-store-finder-map',
   template: '',
 })

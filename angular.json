@@ -25,10 +25,7 @@
             ],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
+              "includePaths": ["./projects/fsastorefrontstyles/scss"]
             },
             "scripts": []
           },
@@ -57,6 +54,7 @@
               ]
             },
             "development": {
+              "aot": false,
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -126,10 +124,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -160,10 +157,7 @@
             "karmaConfig": "projects/fsastorefrontlib/karma.conf.js",
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
+              "includePaths": ["./projects/fsastorefrontstyles/scss"]
             },
             "codeCoverageExclude": [
               "**/index.ts",
@@ -175,13 +169,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/fsastorefrontlib/tsconfig.lib.json",
-              "projects/fsastorefrontlib/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/fsastorefrontlib/**/*.ts",
+              "projects/fsastorefrontlib/**/*.html"
+            ]
           }
         }
       }
@@ -213,13 +206,25 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/dynamicforms/tsconfig.lib.json",
-              "projects/dynamicforms/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/dynamicforms/**/*.ts",
+              "projects/dynamicforms/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "schematics": {
+      "root": "projects/schematics",
+      "sourceRoot": "projects/schematics/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/schematics/**/*.ts"]
           }
         }
       }

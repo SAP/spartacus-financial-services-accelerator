@@ -72,12 +72,13 @@ cx-fs-cms-custom-container {
   @include media-breakpoint-down(md) {
     padding: 2rem;
   }
-}
-// Temporary solution, untill forms are wrapped in different container component
-.CheckoutPageTemplate .BottomContent cx-fs-cms-custom-container,
-.MultiStepCheckoutSummaryPageTemplate .BodyContent cx-fs-cms-custom-container {
-  padding: 0;
-  box-shadow: none;
+  // Temporary solution, untill forms are wrapped in different container component
+  .MultiStepCheckoutSummaryPageTemplate .BodyContent &,
+  .MultiStepCheckoutSummaryPageTemplate .SideContent &,
+  .CheckoutPageTemplate .BottomContent & {
+    padding: 0;
+    box-shadow: none;
+  }
 }
 
 cx-global-message {

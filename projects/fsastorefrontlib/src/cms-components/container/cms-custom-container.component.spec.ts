@@ -11,7 +11,7 @@ import { CmsCustomContainerComponent } from './cms-custom-container.component';
 import { CMSCustomComponentsContainer } from '../../occ/occ-models';
 import { ActivatedRoute } from '@angular/router';
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {

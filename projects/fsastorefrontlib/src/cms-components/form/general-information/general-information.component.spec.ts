@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 import { FormDefinitionType } from '../../../occ/occ-models';
 import { GeneralInformationComponent } from './general-information.component';
 import { FSCart } from './../../../occ/occ-models/occ.models';
-import { FSCartService } from '../../../../src/core/cart/facade/cart.service';
+import { FSCartService } from '../../../core/cart/facade/cart.service';
 
 const componentData = {
   uid: 'TestGeneralInformationComponent',
@@ -61,7 +61,7 @@ class MockActivatedRoute {
 }
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-form-component',
   template: '',
 })

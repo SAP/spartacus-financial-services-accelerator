@@ -8,6 +8,6 @@ export const document = {
     issueDate: 'Erstelldatum',
     uploadedDocuments: '[DE] Uploaded Documents',
     receivedDocuments: '[DE] Received Documents',
-    youHaveNoDocuments: '[DE] You have no Documents.',
+    youHaveNoDocuments: 'Sie haben keine Dokumente.',
   },
 };

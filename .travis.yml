@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: CC0-1.0
 language: node_js
 node_js:
-  - 12.19.0
+  - 14.18.1
 env:
   global:
    - NODE_OPTIONS=--max-old-space-size=4096

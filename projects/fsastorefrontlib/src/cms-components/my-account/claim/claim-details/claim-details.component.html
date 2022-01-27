@@ -166,7 +166,9 @@
                   {{ 'claim.participants.role' | cxTranslate }}
                 </div>
                 <div class="col-6 col-sm-5 value notice">
-                  {{ claimParticipant.roles }}
+                  <ng-container *ngFor="let role of claimParticipant.roles">
+                    {{ role }}<br />
+                  </ng-container>
                 </div>
               </li>
               <li class="accordion-list-item row">
@@ -207,6 +209,19 @@
           [documentSource]="claim.documents"
           [referredObjectColumnVisible]="false"
         ></cx-fs-documents-table>
+        <div class="col-12 col-md-3 m-auto">
+          <button
+            class="action-button btn-block"
+            [routerLink]="
+              {
+                cxRoute: 'changeClaim',
+                params: { claimId: claim.claimNumber }
+              } | cxUrl
+            "
+          >
+            {{ 'fscommon.addDocuments' | cxTranslate }}
+          </button>
+        </div>
       </div>
     </cx-fs-accordion-item>
   </div>

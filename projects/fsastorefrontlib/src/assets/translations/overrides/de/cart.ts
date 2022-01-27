@@ -1,5 +1,5 @@
 export const cart = {
   voucher: {
-    vouchersApplied: '[DE] Applied coupons:',
+    vouchersApplied: 'Eingelöste Gutscheine:',
   },
 };

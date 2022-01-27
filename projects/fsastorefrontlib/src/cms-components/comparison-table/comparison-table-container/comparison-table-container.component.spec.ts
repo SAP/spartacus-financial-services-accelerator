@@ -17,7 +17,7 @@ import { ComparisonTableService } from '../comparison-table.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container.component';
 
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {

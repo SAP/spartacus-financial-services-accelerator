@@ -14,10 +14,11 @@ import {
   TranslationService,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
+import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
 
 @Component({
   selector: 'cx-fs-quotes',
@@ -76,7 +77,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
           tap(quote => {
             if (
               quote &&
-              this.quotesByCategory[quote.defaultCategory.name]?.length >= 2
+              this.quotesByCategory[quote.defaultCategory.name]?.length > 1
             ) {
               this.selectedQuote = quote;
               this.quoteCodesForCompare.push(quote.cartCode);
@@ -99,13 +100,21 @@ export class QuotesComponent implements OnInit, OnDestroy {
   ) {
     this.selectedQuote = selectedQuote;
     const index = this.quoteCodesForCompare.indexOf(selectedQuote.cartCode);
-    if (checked && index === -1 && this.quoteCodesForCompare.length < 2) {
+    if (
+      checked &&
+      index === -1 &&
+      this.quoteCodesForCompare.length < QUOTE_COMPARISON_NUMBER
+    ) {
       this.quoteCodesForCompare.push(selectedQuote.cartCode);
     } else {
       this.quoteCodesForCompare.splice(index, 1);
     }
     this.disableCheckboxes(quotes);
-    if (this.quoteCodesForCompare?.length === 2) {
+    if (
+      checked &&
+      (this.quoteCodesForCompare?.length > 1 ||
+        this.quoteCodesForCompare?.length === QUOTE_COMPARISON_NUMBER)
+    ) {
       this.displayMessage(selectedQuote.defaultCategory.name);
     }
   }
@@ -131,7 +140,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
         quote =>
           this.selectedQuote?.defaultCategory?.code !==
             quote.defaultCategory.code ||
-          (this.quoteCodesForCompare.length === 2 &&
+          (this.quoteCodesForCompare.length === QUOTE_COMPARISON_NUMBER &&
             !this.quoteCodesForCompare.includes(quote.cartCode))
       )
       .map(quote => quote.cartCode);
@@ -172,11 +181,17 @@ export class QuotesComponent implements OnInit, OnDestroy {
   protected setCategoryDropdown() {
     this.options = [];
     this.subscription.add(
-      this.translation
-        .translate('quote.allQuotes')
+      combineLatest([
+        this.translation.translate('quote.allQuotes'),
+        this.translation.translate('quote.renewalQuotes'),
+      ])
         .pipe(
-          map(firstOption => {
+          tap(([firstOption, renewalOption]) => {
             this.options.push({ name: firstOption, code: '' });
+            const renewalQuote = this.quotes.find(quote => quote.renewal);
+            if (renewalQuote) {
+              this.options.push({ name: renewalOption, code: true });
+            }
             Object.keys(this.quotesByCategory).forEach(key =>
               this.options.push({
                 name: key,
@@ -202,7 +217,9 @@ export class QuotesComponent implements OnInit, OnDestroy {
             this.quotes = !selectedItem.code
               ? quotes
               : quotes.filter(
-                  q => q.defaultCategory.code === selectedItem.code
+                  q =>
+                    q.defaultCategory.code === selectedItem.code ||
+                    q.renewal === selectedItem.code
                 );
           })
         )
@@ -217,7 +234,7 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   goToDetailsPage(quote: InsuranceQuote) {
-    if (this.quotesByCategory[quote.defaultCategory.name]?.length >= 2) {
+    if (this.quotesByCategory[quote.defaultCategory.name]?.length > 1) {
       sessionStorage.setItem('qouteCodeForCompare', quote.cartCode);
     }
     this.routingService.go({

@@ -59,10 +59,6 @@ header {
       align-self: center;
       color: var(--cx-color-1);
       text-align: right;
-      a:hover {
-        color: var(--cx-color-1);
-        text-decoration: underline;
-      }
     }
   }
   .NavigationBar {
@@ -265,15 +261,9 @@ header {
       @include media-breakpoint-down(md) {
         flex-wrap: wrap;
       }
-      cx-link {
-        padding-left: 15px;
-        text-decoration: underline;
-        white-space: nowrap;
-      }
     }
     cx-login {
       a {
-        color: var(--cx-color-text);
         @include media-breakpoint-down(md) {
           padding: 1rem;
           display: block;
@@ -284,6 +274,8 @@ header {
         font-weight: var(--cx-font-weight-semi);
         padding: 0.5rem 0 0.5rem;
         @include media-breakpoint-down(md) {
+          position: absolute;
+          right: 0;
           padding: 1rem;
         }
       }
@@ -292,11 +284,6 @@ header {
   // Mobile Navigation
   .navigation {
     background: var(--cx-color-4);
-    .SiteLogin {
-      a {
-        color: var(--cx-color-text);
-      }
-    }
     .SiteContext {
       padding: 0.5rem 1rem 0.25rem;
       select,
@@ -306,17 +293,40 @@ header {
       }
     }
     .HeaderLinks {
+      justify-content: flex-start;
       cx-fs-navigation {
         order: 2;
       }
       cx-link {
-        position: absolute;
-        top: 0;
-        right: 0;
+        padding-inline-start: 0;
       }
       cx-login-greet {
         margin-bottom: 0;
       }
+    }
+  }
+
+  .dashboard-link,
+  .SiteLogin cx-link a {
+    color: var(--cx-color-text);
+    padding-inline-start: 15px;
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+}
+%cx-fs-dashboard-link {
+  .dashboard-link {
+    display: flex;
+    position: relative;
+    bottom: -8px;
+    padding: 1rem;
+    &:hover {
+      color: var(--cx-color-text);
+      text-decoration: underline;
+    }
+    @include media-breakpoint-down(md) {
+      bottom: 0;
+      background-color: var(--cx-color-light);
     }
   }
 }

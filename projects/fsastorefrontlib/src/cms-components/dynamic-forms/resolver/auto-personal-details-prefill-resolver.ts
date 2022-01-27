@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@spartacus/dynamicforms';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSCart } from '../../../../src/occ/occ-models/occ.models';
+import { FSCart } from '../../../occ/occ-models/occ.models';
 import { FormsUtils } from '@spartacus/dynamicforms';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';

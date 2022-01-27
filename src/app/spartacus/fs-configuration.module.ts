@@ -20,11 +20,7 @@ import {
   dynamicformsTranslations,
   dynamicformsTranslationsDe,
 } from '@spartacus/dynamicforms';
-import {
-  defaultCmsContentProviders,
-  IconConfig,
-  mediaConfig,
-} from '@spartacus/storefront';
+import { defaultCmsContentProviders, mediaConfig } from '@spartacus/storefront';
 import { environment } from '../../environments/environment';
 
 @NgModule({
@@ -62,17 +58,6 @@ import { environment } from '../../environments/environment';
           de: dynamicformsTranslationsDe,
         },
         fallbackLang: 'en',
-      },
-    }),
-    provideConfig(<IconConfig>{
-      icon: {
-        symbols: {
-          PROPERTY: 'fs-icon icon-house',
-          AUTO: 'fs-icon icon-auto',
-          PERSON: 'fs-icon icon-heart',
-          TRIP: 'fs-icon icon-plane',
-          EVENT: 'fs-icon icon-event',
-        },
       },
     }),
     provideConfig(<OccConfig | SiteContextConfig>{

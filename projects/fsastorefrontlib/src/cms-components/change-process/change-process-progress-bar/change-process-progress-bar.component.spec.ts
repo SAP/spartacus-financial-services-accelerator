@@ -14,7 +14,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-fs-progress-bar',
   template: '',
 })

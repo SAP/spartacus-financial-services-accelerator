@@ -132,31 +132,31 @@ export function checkInvestmentDetails() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €822.19 ',
+    price: '€822.19',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 12 Dec 2022 ',
+        title: 'Start Date:',
+        value: '12 Dec 2022',
       },
       {
         title: 'Annual Contribution Increase:',
-        value: ' 1 ',
+        value: '1',
       },
       {
         title: 'Retirement Age:',
-        value: ' 67 ',
+        value: '67',
       },
       {
-        title: ' Balanced Deal: ',
-        value: ' €779.00 ',
+        title: 'Balanced Deal:',
+        value: '€779.00',
       },
       {
-        title: ' Dependent Children Pension: ',
-        value: ' €2.99 ',
+        title: 'Dependent Children Pension:',
+        value: '€2.99',
       },
       {
-        title: ' Survivor Pension: ',
-        value: ' €40.20 ',
+        title: 'Survivor Pension:',
+        value: '€40.20',
       },
     ],
   };

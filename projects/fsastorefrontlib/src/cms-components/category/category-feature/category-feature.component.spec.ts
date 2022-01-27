@@ -9,7 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule, CmsService, CmsComponent } from '@spartacus/core';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })

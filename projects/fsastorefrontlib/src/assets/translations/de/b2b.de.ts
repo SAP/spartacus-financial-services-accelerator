@@ -8,124 +8,131 @@ export const b2b = {
 
 export const organization = {
   organization: {
-    productActivation: '[DE] Product Activation',
-    productAssignment: '[DE] Product Assignment',
+    productActivation: 'Produkt aktivieren',
+    productAssignment: 'Produkt zuweisen',
+    notification: {
+      noSufficientPermissions:
+        'Keine ausreichenden Berechtigungen für den Zugriff auf die aufgerufene Seite.',
+    },
   },
   orgUnit: {
-    header: '[DE] All organizations ({{count}})',
-    unit: '[DE] Organization',
-    parentUnit: '[DE] Parent Organization',
+    header: 'Alle Organisationen ({{count}})',
+    unit: 'Organisation',
+    parentUnit: 'Übergeordnete Organisation',
     hint:
-      '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
+      'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Mitglieder haben Zugriff auf alle untergeordneten Organisationen ihrer Hauptorganisation.',
     details: {
-      title: '[DE] Organization Details',
-      subtitle: '[DE] Organization: {{ item.name }}',
+      title: 'Organisationsdetails',
+      subtitle: 'Organisation: {{ item.name }}',
       hint:
-        '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling an organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
+        'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Durch das Deaktivieren einer Organisation werden alle untergeordneten Organisationen der Organisation deaktiviert, einschließlich untergeordneter Organisationen und Mitglieder. Deaktivierte Organisationen können nicht bearbeitet werden.',
     },
     edit: {
-      title: '[DE] Edit Organization',
-      subtitle: '[DE] Organization: {{ item.name }}',
+      title: 'Organisation bearbeiten',
+      subtitle: 'Organisation: {{ item.name }}',
     },
     create: {
-      title: '[DE] Create Organization',
+      title: 'Organisation erstellen',
       subtitle: '',
     },
     messages: {
-      deactivate: '[DE] Are you sure you want to disable this organization?',
-      confirmEnabled: '[DE] Organization {{item.name}} enabled successfully',
-      confirmDisabled: '[DE] Organization {{item.name}} disabled successfully',
-      update: '[DE] Organization {{ item.name }} updated successfully',
-      create: '[DE] Organization {{ item.name }} created successfully',
+      deactivate: 'Möchten Sie die Organisation wirklich deaktivieren??',
+      confirmEnabled: 'Organisation {{item.name}} erfolgreich aktiviert',
+      confirmDisabled: 'Organisation {{item.name}} erfolgreich deaktiviert',
+      update: 'Organisation {{ item.name }} erfolgreich aktualisiert',
+      create: 'Organisation {{ item.name }} erfolgreich erstellt',
     },
     links: {
-      units: '[DE] Child Organization',
+      units: 'Untergeordnete Organisation',
       users: 'Mitglieder',
     },
     children: {
       create: {
-        title: '[DE] Create child Organization',
+        title: 'Untergeordnete Organisation erstellen',
         subtitle: '',
       },
       messages: {
-        create: '[DE] Organization {{ item.name }} created successfully',
+        create: 'Organisation {{ item.name }} erfolgreich erstellt',
       },
     },
     form: {
-      parentOrgUnit: '[DE] Parent business organization',
-      create: '[DE] Create Organization',
+      parentOrgUnit: 'Übergeordnete Organisation',
+      create: 'Organisation erstellen',
     },
     assignApprovers: {
       instructions: {
-        check: `[DE] To assign an approver to this organization, select the user's check box.`,
+        check: `Um dieser Organisation einem Administrator zuzuweisen, aktivieren Sie das Kontrollkästchen des Benutzers.`,
       },
     },
     breadcrumbs: {
-      list: '[DE] All organizations',
-      children: '[DE] Child organization',
-      productAssignment: '[DE] Product Assignment',
+      list: 'Alle Organisationen',
+      children: 'Untergeordnete Organisation',
+      productAssignment: 'Produkt zuweisen',
     },
   },
   orgUnitChildren: {
-    title: '[DE] Child organization',
-    subtitle: '[DE] Organization: {{item.name}}',
+    title: 'Untergeordnete Organisation',
+    subtitle: 'Organisation: {{item.name}}',
     hint:
-      '[DE] Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members "inherit" child organizations.',
+      'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Mitglieder übernehmen untergeordnete Organisationen.',
   },
   orgUnitApprovers: {
     subtitle: '[DE] Organization: {{item.name}}',
   },
   orgUnitAssignedApprovers: {
-    subtitle: '[DE] Organization: {{item.name}}',
+    subtitle: 'Organisation: {{item.name}}',
   },
   orgUnitAssignedUsers: {
-    subtitle: '[DE] Organization: {{item.name}}',
+    subtitle: 'Organisation: {{item.name}}',
   },
   orgUnitUsers: {
-    title: '[DE] Organization: {{item.name}}',
-    subtitle: '[DE] Organization: {{item.name}}',
+    title: 'Organisation: {{item.name}}',
+    subtitle: 'Organisation: {{item.name}}',
     hint:
-      '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Members "inherit" child organizations.',
+      'Mitglieder sind die Käufer und Administratoren Ihrer Organisation. Jedem Mitglied wird eine Rolle für den Einkauf oder die Verwaltung der Organisation zugewiesen. Mitglieder übernehmen untergeordnete Organisationen.',
   },
   orgUser: {
-    unit: '[DE] Organization',
-    orgUnit: '[DE] Organization',
-    assignApprover: '[DE] Add the user to approvers for the organization',
+    unit: 'Organisation',
+    orgUnit: 'Organisation',
+    assignApprover: 'Nutzer als Administrator hinzufügen',
     hint:
-      '[DE] Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to an organization, and they have access to all child organizations of their primary organization.',
-    header: '[DE] All members ({{count}})',
+      'Mitglieder sind die Käufer und Administratoren Ihrer Organisation. Jedem Mitglied wird eine Rolle für den Einkauf oder die Verwaltung der Organisation zugewiesen. Jedes Mitglied gehört einer Organisation an und hat Zugriff auf alle untergeordneten Organisationen seiner primären Organisation.',
+    header: 'Alle Mitglieder ({{count}})',
+    links: {
+      password: 'Passwort ändern',
+    },
     details: {
-      title: '[DE] Member Details',
-      subtitle: '[DE] Member: {{ item.name }}',
+      title: 'Mitgliederdetails',
+      subtitle: 'Mitglied: {{ item.name }}',
     },
     breadcrumbs: {
-      list: '[DE] All members',
+      list: 'alle Mitglieder',
     },
     edit: {
-      title: '[DE] Edit Member',
-      subtitle: '[DE] Member: {{ item.name }}',
+      title: 'Mitglied editieren',
+      subtitle: 'Mitglied: {{ item.name }}',
     },
     create: {
-      title: '[DE] Create Member',
+      title: 'Mitglied erstellen',
     },
   },
 };
 
 export const productAssignments = {
   productAssignments: {
-    title: '[DE] Product Assignments',
-    subtitle: '[DE] Products already assigned to the organization.',
-    assign: '[DE] Assign',
-    remove: '[DE] Remove',
-    add: '[DE] Add',
-    deassigned: '[DE] Product {{ item.name }} unassigned successfully',
+    title: 'Zuweisbare Produkte',
+    subtitle: 'Produkte die der Organisation bereits zugeordnet sind.',
+    assign: 'Zuordnen',
+    remove: 'Entfernen',
+    add: 'Hinzufügen',
+    deassigned: 'Produkt {{ item.name }} erfolgreich abgewählt',
   },
 };
 
 export const potentialProductAssignments = {
   potentialProductAssignments: {
-    title: '[DE] Potential Products',
-    subtitle: '[DE] Products which can be assigned to the organization.',
-    assigned: '[DE] Product {{ item.name }} assigned successfully',
+    title: 'Potentielle Produktes',
+    subtitle: 'Produkte die der Organisation zugewiesen werden können.',
+    assigned: 'Produkt {{ item.name }} erfolgreich zugewiesen',
   },
 };

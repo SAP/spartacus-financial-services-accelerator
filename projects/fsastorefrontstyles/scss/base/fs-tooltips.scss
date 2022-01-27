@@ -16,7 +16,7 @@
 .tooltip {
   .tooltip-inner {
     max-width: 250px;
-    width: 250px;
+    width: max-content;
     background-color: var(--cx-color-9);
     opacity: 0.95;
     border-radius: 6px;
@@ -31,7 +31,7 @@
 .tooltip-wrapper {
   @include vertical-center;
   right: 27%;
-  z-index: 2000;
+  z-index: 1000;
   @include media-breakpoint-down(sm) {
     top: 15%;
     right: 30px;

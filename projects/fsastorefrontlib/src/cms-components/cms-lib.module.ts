@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserAccountCoreModule } from '@spartacus/user/account/core';
 import { effects } from '../core/my-account/store/effects/index';
 import { reducerProvider } from '../core/my-account/store/reducers/index';
 import { AgentModule } from './agent/agent.module';
@@ -24,9 +26,11 @@ import { MessageNotificationModule } from './message-notification/message-notifi
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
-import { UserProfileCoreModule } from '@spartacus/user/profile/core';
-import { UserAccountCoreModule } from '@spartacus/user/account/core';
+import { UserProfileModule } from './user-profile/user-profile.module';
+import { SellerDashboardModule } from './seller-dashboard/seller-dashboard.module';
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
+import { AssetsTableModule } from './assets-table/assets-table.module';
+import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
 
 @NgModule({
   imports: [
@@ -37,6 +41,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    UserProfileModule,
+    SellerDashboardModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -55,6 +61,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
+    DashboardLinkModule,
   ],
   exports: [
     AgentModule,
@@ -64,6 +72,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    UserProfileModule,
+    SellerDashboardModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,
@@ -79,6 +89,8 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
     CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
+    DashboardLinkModule,
   ],
   providers: [reducerProvider],
 })

@@ -70,7 +70,7 @@ export function checkMemberIsDisabled() {
   cy.contains(createCustomer.firstName)
     .parentsUntil('table')
     .within(() => {
-      cy.get('cx-org-status-cell').should('contains.text', 'Disabled').click();
+      cy.get('cx-org-status-cell').should('contain.text', 'Disabled').click();
     });
   cy.get('cx-view')
     .should('be.visible')
