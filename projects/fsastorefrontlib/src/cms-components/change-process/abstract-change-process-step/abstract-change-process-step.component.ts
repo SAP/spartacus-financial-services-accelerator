@@ -45,6 +45,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
       this.changeRequest$
         .pipe(
           map(changeRequest => {
+            console.log(changeRequest, 'AbstractChangeProcessStepComponent');
             this.populateSteps(changeRequest);
             if (this.isSimulated(changeRequest)) {
               this.userRequestNavigationService.continue(

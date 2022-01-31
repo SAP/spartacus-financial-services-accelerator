@@ -7,7 +7,7 @@ import {
 } from '@ngrx/store';
 import { StatePersistenceService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import {
   ChangeRequestsState,
@@ -67,8 +67,10 @@ export class ChangeRequestPersistenceService implements OnDestroy {
   protected getChangeRequestData(): Observable<any> {
     return this.store.pipe(
       select(getChangeRequestState),
+      // take(1),
       filter(state => !!state),
       map(state => {
+        console.log(state, 'state');
         return {
           requestId: state.changeRequest.value.content[this.requestId],
           requestStatus: state.changeRequest.value.content[this.requestStatus],
@@ -82,6 +84,8 @@ export class ChangeRequestPersistenceService implements OnDestroy {
    * Used to update state from browser -> state.
    */
   protected onRead(state: any) {
+    console.log(this.requestId);
+    console.log(state, 'state');
     if (state && state[this.requestId]) {
       this.store.dispatch(new fromAction.LoadChangeRequestSuccess(state));
     }
