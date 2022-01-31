@@ -17,6 +17,5 @@ import { FSConsentManagementComponent } from './consent-management.component';
   declarations: [FSConsentManagementComponent],
   exports: [FSConsentManagementComponent],
   providers: [ConsentService],
-  entryComponents: [FSConsentManagementComponent],
 })
 export class FSConsentManagementModule {}
