@@ -66,7 +66,7 @@ export class FormBuilderService {
     this.userAccountFacade
       .get()
       .subscribe(user => {
-        if ((<any>user).roles.includes('sellergroup')) {
+        if ((<any>user)?.roles.includes('sellergroup')) {
           fieldControl.enable();
           fieldConfig.readonly = false;
         }

@@ -22,14 +22,6 @@ const routes: Routes = [
     path: 'login/register',
     redirectTo: 'register',
   },
-  {
-    path: 'register',
-    data: {
-      cxRoute: 'register',
-      pageLabel: 'register',
-    },
-    component: PageLayoutComponent,
-  },
 ];
 
 @NgModule({
