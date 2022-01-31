@@ -76,6 +76,7 @@
     "@spartacus/assets": "4.1.0",
     "@spartacus/asm": "4.1.0",
     "@spartacus/user": "4.1.0",
+    "@spartacus/digital-payments": "4.1.0",
     "@spartacus/tracking": "4.1.0",
     "@syncpilot/bpool-guest-lib": "^0.2.6",
     "@angular/localize": "^12.0.5",
