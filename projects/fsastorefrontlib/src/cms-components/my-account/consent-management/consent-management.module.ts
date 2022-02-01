@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ConsentManagementModule, SpinnerModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
-import { ConsentService } from 'projects/fsastorefrontlib/src/core/my-account/facade/consent.service';
+import { ConsentService } from '../../../core/my-account/facade/consent.service';
 import { FSConsentManagementComponent } from './consent-management.component';
 
 @NgModule({
