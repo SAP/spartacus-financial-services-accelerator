@@ -22,7 +22,7 @@ export const getCheckoutState: MemoizedSelector<
 > = createFeatureSelector<FSCheckoutState>(FS_CHECKOUT_FEATURE);
 
 /**
- * Responsible for storing My account state in the browser storage.
+ * Responsible for storing Checkout state in the browser storage.
  * Uses `StatePersistenceService` mechanism.
  */
 @Injectable({
