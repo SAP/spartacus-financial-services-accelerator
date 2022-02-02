@@ -19,6 +19,7 @@ import createSpy = jasmine.createSpy;
 import { CheckoutDeliveryService } from '@spartacus/checkout/core';
 import { StateWithFSCheckout } from '../store/checkout-state';
 
+const activeCartCode = 'testCartCode';
 const fsCheckout = 'fscheckout';
 const identificationType = 'idType';
 const paymentType = 'paymentCode';
@@ -109,11 +110,15 @@ describe('FSCheckoutService', () => {
   ));
 
   it('should set identification type', () => {
-    service.setIdentificationType(identificationType);
+    service.setIdentificationType(
+      activeCartCode,
+      OCC_USER_ID_CURRENT,
+      identificationType
+    );
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromFSAction.SetIdentificationType({
         identificationType: identificationType,
-        cartId: 'cartId',
+        cartId: activeCartCode,
         userId: OCC_USER_ID_CURRENT,
       })
     );
