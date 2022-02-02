@@ -32,6 +32,7 @@ export function clearCheckoutState(
       action.type === CheckoutActions.PLACE_ORDER ||
       action.type === fromCartAction.START_BUNDLE
     ) {
+      localStorage.removeItem('spartacus⚿⚿fscheckout');
       state = undefined;
     }
     return reducer(state, action);
