@@ -36,8 +36,10 @@ export class FinalReviewComponent implements OnInit {
   }
 
   placeOrder(): void {
-    this.checkoutService.placeOrder(this.tAndCToggler);
-    this.checkoutService.orderPlaced = true;
-    this.routingService.go({ cxRoute: 'orderConfirmation' });
+    if (this.tAndCToggler) {
+      this.checkoutService.placeOrder(this.tAndCToggler);
+      this.checkoutService.orderPlaced = true;
+      this.routingService.go({ cxRoute: 'orderConfirmation' });
+    }
   }
 }
