@@ -345,10 +345,9 @@
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
               >
                 <button
+                  *ngIf="isCartTransferAllowedForSeller$ | async"
                   class="primary-button btn-block"
                   type="button"
-                  [disabled]="!(isCartTransferAllowedForSeller$ | async)"
-                  data-checkout-url=""
                   (click)="navigateNext(nextCheckoutStep, cart)"
                 >
                   {{ 'common.continue' | cxTranslate }}
