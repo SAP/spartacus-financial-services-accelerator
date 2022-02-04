@@ -52,11 +52,7 @@
     <div class="row mt-5 align-items-start">
       <div class="col-12 col-md-8 cx-place-order-form form-check">
         <label>
-          <input
-            class="form-check-input"
-            type="checkbox"
-            (change)="toggleTAndC()"
-          />
+          <input #tAndC class="form-check-input" type="checkbox" />
           <span class="form-check-label">
             {{ 'fscommon.confirmAndAgree' | cxTranslate }}
             <a
@@ -71,8 +67,8 @@
         </label>
       </div>
       <button
-        [disabled]="!tAndCToggler"
-        (click)="placeOrder()"
+        [disabled]="!tAndC.checked"
+        (click)="placeOrder(tAndC)"
         class="col-12 col-md-4 primary-button"
       >
         {{ 'fscommon.apply' | cxTranslate }}

@@ -16,7 +16,7 @@ import { CheckoutPaymentFacade } from '@spartacus/checkout/root';
 export class FinalReviewComponent implements OnInit {
   @Input()
   paymentDetails$: Observable<PaymentDetails>;
-  tAndCToggler = false;
+
   constructor(
     protected checkoutService: FSCheckoutService,
     protected checkoutPaymentService: CheckoutPaymentFacade,
@@ -31,13 +31,9 @@ export class FinalReviewComponent implements OnInit {
     );
   }
 
-  toggleTAndC(): void {
-    this.tAndCToggler = !this.tAndCToggler;
-  }
-
-  placeOrder(): void {
-    if (this.tAndCToggler) {
-      this.checkoutService.placeOrder(this.tAndCToggler);
+  placeOrder(checkbox): void {
+    if (checkbox.checked) {
+      this.checkoutService.placeOrder(checkbox.checked);
       this.checkoutService.orderPlaced = true;
       this.routingService.go({ cxRoute: 'orderConfirmation' });
     }
