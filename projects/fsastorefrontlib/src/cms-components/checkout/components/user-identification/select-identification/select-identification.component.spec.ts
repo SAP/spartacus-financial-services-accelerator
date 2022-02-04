@@ -1,7 +1,13 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { of } from 'rxjs';
+import {
+  ActiveCartService,
+  I18nTestingModule,
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
@@ -10,6 +16,7 @@ import { SelectIdentificationTypeComponent } from './select-identification.compo
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
+const activeCartCode = 'testCartCode';
 const mockCategoryAndStep: FSSteps = {
   stepParameter: 'insurances_travel',
   step: 'category',
@@ -33,17 +40,29 @@ class MockFSCheckoutConfigServiceStub {
 class MockFSCheckoutService {
   placeOrder() {}
   mockDeliveryMode() {}
-  setIdentificationType() {
-    return of(true);
-  }
+  setIdentificationType() {}
 }
 
 class MockCartService {}
+
+class MockActiveCartService {
+  getActiveCartId(): Observable<string> {
+    return of(activeCartCode);
+  }
+}
+
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 
 describe('SelectIdentificationTypeComponent', () => {
   let component: SelectIdentificationTypeComponent;
   let fixture: ComponentFixture<SelectIdentificationTypeComponent>;
   let routingService: RoutingService;
+  let mockActiveCartService: ActiveCartService;
+  let mockUserIdService: UserIdService;
   let el: DebugElement;
 
   beforeEach(
@@ -69,11 +88,18 @@ describe('SelectIdentificationTypeComponent', () => {
             useClass: MockCartService,
           },
           {
+            provide: ActiveCartService,
+            useClass: MockActiveCartService,
+          },
+          { provide: UserIdService, useClass: MockUserIdService },
+          {
             provide: FSCheckoutService,
             useClass: MockFSCheckoutService,
           },
         ],
       }).compileComponents();
+      mockActiveCartService = TestBed.inject(ActiveCartService);
+      mockUserIdService = TestBed.inject(UserIdService);
     })
   );
 

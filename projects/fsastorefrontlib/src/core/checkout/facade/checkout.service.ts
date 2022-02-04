@@ -7,7 +7,7 @@ import {
   UserIdService,
   StateWithProcess,
 } from '@spartacus/core';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
@@ -37,24 +37,18 @@ export class FSCheckoutService extends CheckoutService {
   orderPlaced: boolean;
   mockedDeliveryMode = 'financial-default';
 
-  setIdentificationType(identificationType: string) {
-    combineLatest([
-      this.activeCartService.getActiveCartId(),
-      this.userIdService.getUserId(),
-    ])
-      .subscribe(([activeCartCode, occUserId]) => {
-        if (activeCartCode && occUserId) {
-          this.fsStore.dispatch(
-            new fromFSAction.SetIdentificationType({
-              identificationType: identificationType,
-              cartId: activeCartCode,
-              userId: occUserId,
-            })
-          );
-        }
+  setIdentificationType(
+    activeCartCode: string,
+    occUserId: string,
+    identificationType: string
+  ) {
+    this.fsStore.dispatch(
+      new fromFSAction.SetIdentificationType({
+        identificationType: identificationType,
+        cartId: activeCartCode,
+        userId: occUserId,
       })
-      .unsubscribe();
-    return this.fsStore.pipe(select(CheckoutSelectors.getIdentificationType));
+    );
   }
 
   setLegalInformation() {
