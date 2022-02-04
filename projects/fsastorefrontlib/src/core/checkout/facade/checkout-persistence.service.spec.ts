@@ -18,11 +18,6 @@ const mockCheckoutState: FSCheckoutDataState = {
   identificationType: false,
   paymentType: '',
 };
-const initialState = {
-  legalInformation: false,
-  identificationType: false,
-  paymentType: '',
-};
 
 describe('CheckoutPersistenceService', () => {
   let service: CheckoutPersistenceService;
@@ -38,7 +33,7 @@ describe('CheckoutPersistenceService', () => {
       ],
       providers: [
         provideMockActions(() => actions$),
-        provideMockStore({ initialState }),
+        provideMockStore(),
         CheckoutPersistenceService,
         StatePersistenceService,
       ],
