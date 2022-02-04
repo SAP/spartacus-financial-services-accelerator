@@ -5,7 +5,8 @@ import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.s
 import { FinalReviewComponent } from './final-review.component';
 import { of } from 'rxjs';
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
+import { By } from '@angular/platform-browser';
 @Pipe({
   name: 'cxUrl',
 })
@@ -34,6 +35,7 @@ describe('FinalReviewComponent', () => {
   let checkoutService: FSCheckoutService;
   let checkoutPaymentService: CheckoutPaymentFacade;
   let routingService: RoutingService;
+  let el: DebugElement;
 
   beforeEach(
     waitForAsync(() => {
@@ -62,6 +64,7 @@ describe('FinalReviewComponent', () => {
     fixture = TestBed.createComponent(FinalReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    el = fixture.debugElement;
 
     checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
@@ -80,14 +83,25 @@ describe('FinalReviewComponent', () => {
   });
 
   it('should toggle', () => {
-    component.toggleTAndC();
+    const selectEl = el.query(By.css('.form-check-input')).nativeElement;
+    selectEl.checked = true;
+    component.toggleTAndC(selectEl);
+    selectEl.dispatchEvent(new Event('change'));
     expect(component.tAndCToggler).toEqual(true);
   });
 
   it('should place order', () => {
+    component.tAndCToggler = true;
     component.placeOrder();
     expect(checkoutService.placeOrder).toHaveBeenCalled();
     expect(checkoutService.orderPlaced).toEqual(true);
     expect(routingService.go).toHaveBeenCalled();
+  });
+  it('should NOT place order', () => {
+    component.tAndCToggler = false;
+    component.placeOrder();
+    expect(checkoutService.placeOrder).not.toHaveBeenCalled();
+    expect(checkoutService.orderPlaced).not.toEqual(true);
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 });

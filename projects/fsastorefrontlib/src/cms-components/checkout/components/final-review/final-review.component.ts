@@ -32,7 +32,7 @@ export class FinalReviewComponent implements OnInit {
   }
 
   toggleTAndC(event: Event): void {
-    this.tAndCToggler = (event.target as HTMLInputElement).checked;
+    this.tAndCToggler = (event.target as HTMLInputElement)?.checked;
   }
 
   placeOrder(): void {
