@@ -176,10 +176,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   getFormContent(cart: any): any {
-    if (cart?.deliveryOrderGroups[0]?.entries[0]?.formData?.length > 0) {
-      return JSON.parse(
-        cart.deliveryOrderGroups[0].entries[0].formData[0].content
-      );
+    if (cart?.entries[0]?.formData?.length > 0) {
+      return JSON.parse(cart.entries[0].formData[0].content);
     }
   }
 
