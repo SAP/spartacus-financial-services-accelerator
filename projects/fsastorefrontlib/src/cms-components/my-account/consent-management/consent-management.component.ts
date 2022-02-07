@@ -3,7 +3,6 @@ import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
   AuthService,
-  ConsentTemplate,
   GlobalMessageService,
   UserConsentService,
   UserIdService,
@@ -12,8 +11,10 @@ import { Observable, Subscription } from 'rxjs';
 import { ConsentManagementComponent } from '@spartacus/storefront';
 import { filter, map, take } from 'rxjs/operators';
 import { ConsentService } from '../../../core/my-account/facade/consent.service';
-import { FSConsentTemplate } from '../../../occ/occ-models/occ.models';
-import { StateWithMyAccount } from '../../../core/my-account/store/my-account-state';
+import {
+  FSConsentTemplate,
+  OBOConsentList,
+} from '../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-consent-management',
@@ -41,13 +42,8 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
 
   private subscription = new Subscription();
   templateArray$: Observable<FSConsentTemplate[]>;
-  consents$: Observable<
-    StateWithMyAccount
-  > = this.fsConsentService.getConsents();
-
-  consentTemplates$: Observable<
-    ConsentTemplate[]
-  > = this.userConsentService.getConsents();
+  consents$: Observable<OBOConsentList> = this.fsConsentService.getConsents();
+  userId: string;
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -62,10 +58,28 @@ export class FSConsentManagementComponent extends ConsentManagementComponent
         .getUserId()
         .pipe(take(1))
         .subscribe(occUserId => {
+          this.userId = occUserId;
           this.fsConsentService.loadConsents(occUserId);
         })
     );
     this.userConsentService.loadConsents();
+  }
+
+  changeOBOPermission(
+    customerUid: string,
+    permissionKey: string,
+    event: Event
+  ) {
+    this.subscription.add(
+      this.fsConsentService
+        .updateOBOPermission(
+          this.userId,
+          customerUid,
+          permissionKey,
+          (event.target as HTMLInputElement).checked
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {

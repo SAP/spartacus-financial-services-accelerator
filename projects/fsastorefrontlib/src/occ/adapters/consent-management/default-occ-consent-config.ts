@@ -17,6 +17,7 @@ export const defaultOccConsentConfig: FSOccConfig = {
         transferCart: 'users/${userId}/carts/${cartId}/oboconsents/action',
         oboConsentAddresses:
           'users/${userId}/oboconsents/customers/${oboCustomerId}/addresses',
+        oboUpdatePermission: 'users/${userId}/oboconsents/customers/permission',
       },
     },
   },

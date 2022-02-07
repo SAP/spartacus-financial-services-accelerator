@@ -1,5 +1,10 @@
 import { Observable, of } from 'rxjs';
-import { waitForAsync, TestBed, ComponentFixture } from '@angular/core/testing';
+import {
+  waitForAsync,
+  TestBed,
+  ComponentFixture,
+  fakeAsync,
+} from '@angular/core/testing';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
@@ -89,6 +94,18 @@ class MockConsentService {
   getConsentsLoaded() {
     return of(true);
   }
+  updateOBOPermission(
+    _customerUid: string,
+    _permissionKey: string,
+    _event: Event
+  ) {
+    return of({
+      userId: 'current',
+      oboConsentHolderUid: 'testUid',
+      oboPermissionName: 'testPermission',
+      oboPermissionValue: true,
+    });
+  }
 }
 
 class MockUserConsentService {
@@ -163,7 +180,6 @@ describe('FSConsentManagementComponent', () => {
   let globalMessageService: GlobalMessageService;
   let anonymousConsentsConfig: AnonymousConsentsConfig;
   let anonymousConsentsService: AnonymousConsentsService;
-
   let el: DebugElement;
 
   beforeEach(
@@ -210,5 +226,19 @@ describe('FSConsentManagementComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should update OBO consent', () => {
+    spyOn(fsConsentService, 'getConsents').and.callThrough();
+    spyOn(userIdService, 'getUserId').and.callThrough();
+    expect(component.userId).toEqual('current');
+    spyOn(fsConsentService, 'updateOBOPermission').and.callThrough();
+    fakeAsync(() => {
+      component.changeOBOPermission(
+        'testUid',
+        'testPermission',
+        new Event('input')
+      );
+      expect(fsConsentService.updateOBOPermission).toHaveBeenCalled();
+    });
   });
 });

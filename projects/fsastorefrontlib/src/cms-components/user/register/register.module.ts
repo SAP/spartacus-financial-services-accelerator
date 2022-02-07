@@ -8,11 +8,7 @@ import {
   NotAuthGuard,
   UrlModule,
 } from '@spartacus/core';
-import {
-  FormErrorsModule,
-  PageLayoutComponent,
-  SpinnerModule,
-} from '@spartacus/storefront';
+import { FormErrorsModule, SpinnerModule } from '@spartacus/storefront';
 import { FSRegisterComponent } from './register.component';
 import { RegisterComponentModule } from '@spartacus/user/profile/components';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -21,14 +17,6 @@ const routes: Routes = [
   {
     path: 'login/register',
     redirectTo: 'register',
-  },
-  {
-    path: 'register',
-    data: {
-      cxRoute: 'register',
-      pageLabel: 'register',
-    },
-    component: PageLayoutComponent,
   },
 ];
 

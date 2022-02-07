@@ -221,4 +221,10 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   oboConsentAddresses?: string;
+
+  /**
+   * Updates permission for OBO customer
+   *
+   */
+  oboUpdatePermission?: string;
 }

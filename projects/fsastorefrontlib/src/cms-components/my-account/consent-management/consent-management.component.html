@@ -2,22 +2,6 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="cx-consent-action-links text-right pb-4">
-          <button
-            tabindex="0"
-            class="btn btn-link cx-action-link"
-            (click)="rejectAll(templateList)"
-          >
-            {{ 'consentManagementForm.clearAll' | cxTranslate }}
-          </button>
-          <button
-            tabindex="0"
-            class="btn btn-link cx-action-link"
-            (click)="allowAll(templateList)"
-          >
-            {{ 'consentManagementForm.selectAll' | cxTranslate }}
-          </button>
-        </div>
         <div class="cx-consent-toggles">
           <cx-consent-management-form
             *ngFor="let consentTemplate of templateList"
@@ -46,18 +30,27 @@
                   {{ consent.consentHolder?.displayUid }}
                 </span>
               </div>
-
               <div class="pb-4">{{ 'consent.permissions' | cxTranslate }}:</div>
-
               <div
                 class="form-check"
                 *ngFor="
                   let item of consent.oboPermissionConfiguration?.permissions
                 "
               >
-                <label>
-                  <input type="checkbox" class="form-check-input" />
-                  <span class="form-check-label" *ngIf="item | keyvalue">
+                <label class="form-check-label" *ngIf="item | keyvalue">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [checked]="item.value"
+                    (change)="
+                      changeOBOPermission(
+                        consent.consentHolder?.uid,
+                        item.key,
+                        $event
+                      )
+                    "
+                  />
+                  <span class="form-check-label">
                     {{ 'consent.' + item.key | cxTranslate }}
                   </span>
                 </label>

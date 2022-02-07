@@ -3,12 +3,18 @@ import * as fromAction from './../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { select, Store } from '@ngrx/store';
 import * as fromConsentStore from './../store';
-import { UserIdService, Address } from '@spartacus/core';
+import {
+  UserIdService,
+  Address,
+  GlobalMessageService,
+  GlobalMessageType,
+} from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
+import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +26,9 @@ export class ConsentService {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected userIdService: UserIdService,
-    protected userAccountFacade: UserAccountFacade
+    protected userAccountFacade: UserAccountFacade,
+    protected consentConnector: ConsentConnector,
+    protected globalMessageService: GlobalMessageService
   ) {}
 
   loadConsents(userId) {
@@ -144,5 +152,30 @@ export class ConsentService {
 
   setSelectedOBOCustomer(customer: FSUser) {
     return this.selectedOBOCustomerSource.next(customer);
+  }
+
+  updateOBOPermission(
+    userId: string,
+    customerUid: string,
+    permissionKey: string,
+    permissionValue: boolean
+  ): Observable<{}> {
+    return this.consentConnector
+      .updateOBOPermission(userId, customerUid, permissionKey, permissionValue)
+      .pipe(
+        tap(() => {
+          if (permissionValue) {
+            this.globalMessageService.add(
+              { key: 'consentManagementForm.message.success.given' },
+              GlobalMessageType.MSG_TYPE_CONFIRMATION
+            );
+          } else {
+            this.globalMessageService.add(
+              { key: 'consentManagementForm.message.success.withdrawn' },
+              GlobalMessageType.MSG_TYPE_CONFIRMATION
+            );
+          }
+        })
+      );
   }
 }

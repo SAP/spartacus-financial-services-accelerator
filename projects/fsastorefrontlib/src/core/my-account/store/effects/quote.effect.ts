@@ -1,9 +1,4 @@
-import {
-  CartActions,
-  GlobalMessageService,
-  GlobalMessageType,
-  RoutingService,
-} from '@spartacus/core';
+import { CartActions, RoutingService } from '@spartacus/core';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
@@ -109,7 +104,6 @@ export class QuoteEffects {
               return new fromActions.LoadQuoteComparisonSuccess(carts);
             }),
             catchError(error => {
-              this.showGlobalMessage('httpHandlers.cartNotFound');
               this.routingService.go({ cxRoute: 'quotes' });
               return of(
                 new fromActions.LoadQuoteComparisonFail(JSON.stringify(error))
@@ -120,17 +114,9 @@ export class QuoteEffects {
     )
   );
 
-  private showGlobalMessage(text: string) {
-    this.globalMessageService.add(
-      { key: text },
-      GlobalMessageType.MSG_TYPE_ERROR
-    );
-  }
-
   constructor(
     private actions$: Actions,
     private qouteConnector: QuoteConnector,
-    private globalMessageService: GlobalMessageService,
     private routingService: RoutingService
   ) {}
 }
