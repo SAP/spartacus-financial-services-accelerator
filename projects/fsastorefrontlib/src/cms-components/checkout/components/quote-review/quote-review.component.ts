@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, shareReplay, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCheckoutConfigService,
   CategoryService,
