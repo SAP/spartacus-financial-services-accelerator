@@ -154,6 +154,7 @@ const consent2 = {
 };
 
 const consentList = [consent1, consent2];
+let isCartTransferAllowedForSeller = true;
 
 const mockUser: FSUser = {
   firstName: 'Donna',
@@ -329,7 +330,11 @@ describe('Quote Review Component', () => {
         },
       },
     };
-    component.navigateNext(mockCategoryAndStep, cart);
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
     expect(routingService.go).toHaveBeenCalled();
   });
 
@@ -347,7 +352,11 @@ describe('Quote Review Component', () => {
       },
     };
 
-    component.navigateNext(mockCategoryAndStep, cart);
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
       centered: true,
@@ -372,7 +381,11 @@ describe('Quote Review Component', () => {
       },
     };
 
-    component.navigateNext(mockCategoryAndStep, cart);
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(
       ReferredQuoteDialogComponent,
@@ -489,5 +502,26 @@ describe('Quote Review Component', () => {
     };
     component.selectOBOCustomer(selectedCustomer, 1);
     expect(oboConsentService.setSelectedOBOCustomer).toHaveBeenCalled();
+  });
+
+  it('should NOT continue to next step when cart transfer is not allowed', () => {
+    const cart: FSCart = {
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'BIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'APPROVED',
+        },
+      },
+    };
+    isCartTransferAllowedForSeller = false;
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 });
