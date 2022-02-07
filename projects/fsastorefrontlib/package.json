@@ -29,7 +29,7 @@
     "@ngrx/store": "~10.0.0",
     "@spartacus/core": "3.4.0",
     "@spartacus/user": "3.4.0",
-    "@syncpilot/bpool-guest-lib": "^0.2.6",
+    "@syncpilot/bpool-guest-lib": "^0.3.2",
     "bootstrap": "4.5.0",
     "echarts": "^5.0.2",
     "ngx-echarts": "^6.0.1",
