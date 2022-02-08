@@ -410,36 +410,34 @@ describe('Quote Review Component', () => {
   });
 
   it('should not get form content 2', () => {
-    const content = component.getFormContent({ deliveryOrderGroups: [] });
+    const content = component.getFormContent({ entries: [] });
     expect(content).toEqual(undefined);
   });
 
   it('should not get form content 3', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [] }],
+      entries: [],
     });
     expect(content).toEqual(undefined);
   });
 
   it('should not get form content 4', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [{}] }],
+      entries: [{}],
     });
     expect(content).toEqual(undefined);
   });
 
   it('should not get form content 5', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [{ formData: [] }] }],
+      entries: [{ formData: [] }],
     });
     expect(content).toEqual(undefined);
   });
 
   it('should get form content', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [
-        { entries: [{ formData: [{ content: formDataContent }] }] },
-      ],
+      entries: [{ formData: [{ content: formDataContent }] }],
     });
     const parsedContent = JSON.parse(formDataContent);
     expect(content).toEqual(parsedContent);

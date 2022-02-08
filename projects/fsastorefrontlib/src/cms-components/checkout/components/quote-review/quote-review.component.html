@@ -6,28 +6,20 @@
 >
   <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="showContent$ | async; else loading">
-      <ng-container
-        *ngIf="quoteReview.cart.deliveryOrderGroups?.length > 0; else noQuotes"
-      >
+      <ng-container *ngIf="quoteReview.cart.entries?.length > 0; else noQuotes">
         <div class="accordion">
           <h2 class="row no-gutters section-header-heading">
             <div class="col-12 col-md-2">
               <span
-                *ngIf="
-                  (quoteReview.cart.deliveryOrderGroups[0]?.entries)[0]?.product
-                    ?.images?.length > 0
-                "
+                *ngIf="quoteReview.cart.entries[0]?.product?.images?.length > 0"
                 class="image-wrapper"
               >
                 <cx-media
                   [container]="
-                    (quoteReview.cart.deliveryOrderGroups[0]?.entries)[0]
-                      ?.product?.defaultCategory?.image
+                    (quoteReview.cart?.entries)[0]?.product?.defaultCategory
+                      ?.image
                   "
-                  [alt]="
-                    (quoteReview.cart.deliveryOrderGroups[0]?.entries)[0]
-                      ?.product?.name
-                  "
+                  [alt]="(quoteReview.cart?.entries)[0]?.product?.name"
                 ></cx-media>
               </span>
             </div>
@@ -153,8 +145,8 @@
                 <ul class="col-12 accordion-list">
                   <ng-container
                     *ngFor="
-                      let item of (quoteReview.cart.deliveryOrderGroups[0]
-                        ?.entries)[0]?.product?.price?.oneTimeChargeEntries
+                      let item of quoteReview.cart.entries[0]?.product?.price
+                        ?.oneTimeChargeEntries
                     "
                   >
                     <ng-container *ngIf="item.mandatory">
@@ -212,10 +204,7 @@
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion-list">
                     <ng-container
-                      *ngFor="
-                        let item of quoteReview.cart.deliveryOrderGroups[0]
-                          ?.entries | slice: 1
-                      "
+                      *ngFor="let item of quoteReview.cart.entries | slice: 1"
                     >
                       <ng-container *ngIf="item.removeable">
                         <li class="accordion-list-item row">
@@ -243,9 +232,8 @@
           </ng-container>
           <ng-container
             *ngIf="
-              quoteReview.cart.deliveryOrderGroups[0]?.entries.length > 0 &&
-              (quoteReview.cart.deliveryOrderGroups[0]?.entries)[0]?.product
-                ?.investments
+              quoteReview.cart.entries.length > 0 &&
+              quoteReview.cart.entries[0]?.product?.investments
             "
           >
             <cx-fs-accordion-item
@@ -254,12 +242,7 @@
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion-list">
-                    <ng-container
-                      *ngFor="
-                        let item of quoteReview.cart.deliveryOrderGroups[0]
-                          ?.entries
-                      "
-                    >
+                    <ng-container *ngFor="let item of quoteReview.cart.entries">
                       <ng-container
                         *ngFor="
                           let investmentDetail of item.product?.investments
@@ -301,10 +284,7 @@
             <div class="container">
               <div class="row justify-content-center">
                 <ul
-                  *ngIf="
-                    ((quoteReview.cart?.deliveryOrderGroups)[0]?.entries)[0]
-                      ?.formData
-                  "
+                  *ngIf="(quoteReview.cart?.entries)[0]?.formData"
                   class="col-12 accordion-list"
                 >
                   <ng-container
