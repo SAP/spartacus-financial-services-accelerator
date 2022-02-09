@@ -81,8 +81,15 @@ export interface OBOConsentList {
 
 export interface OBOCustomerList {
   entries: FSUser[];
-  pagination: PaginationModel;
+  pagination: FSPaginationModel;
   sorts: SortModel[];
+}
+
+export interface FSPaginationModel extends PaginationModel {
+  page?: number;
+  count?: number;
+  totalPages?: number;
+  totalCount?: number;
 }
 
 export interface QuoteWorkflowStatus {
