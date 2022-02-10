@@ -1,5 +1,5 @@
 <ng-container *ngIf="customers$ | async as customers; else loading">
-  <ng-container *ngIf="customers?.entries?.length > 0; else noCustomers">
+  <ng-container *ngIf="customers.entries?.length > 0; else noCustomers">
     <!-- BODY -->
     <div class="row mt-5">
       <div class="form-group col-6 col-md-3">
@@ -60,12 +60,10 @@
     <!-- Pagination -->
     <div class="row">
       <div class="col-6">
-        <ng-container *ngIf="customers.pagination">
-          <cx-pagination
-            [pagination]="customers.pagination"
-            (viewPageEvent)="pageChange($event)"
-          ></cx-pagination>
-        </ng-container>
+        <cx-pagination
+          [pagination]="customers.pagination"
+          (viewPageEvent)="pageChange($event)"
+        ></cx-pagination>
       </div>
     </div>
   </ng-container>

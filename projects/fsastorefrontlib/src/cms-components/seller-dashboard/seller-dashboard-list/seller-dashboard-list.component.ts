@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import {
+  PaginationModel,
   RoutingService,
   TranslationService,
   UserIdService,
@@ -43,12 +44,13 @@ export class SellerDashboardListComponent {
     return this.consentConnector
       .getOBOCustomerList(userId, this.searchConfig)
       .pipe(
+        filter(customers => !!customers),
         map(customers => {
-          const pagination = {
-            currentPage: customers?.pagination?.page,
-            pageSize: customers?.pagination?.count,
-            totalPages: customers?.pagination?.totalPages,
-            totalResults: customers?.pagination?.totalCount,
+          const pagination: PaginationModel = {
+            currentPage: customers.pagination?.page,
+            pageSize: customers.pagination?.count,
+            totalPages: customers.pagination?.totalPages,
+            totalResults: customers.pagination?.totalCount,
           };
           return {
             ...customers,

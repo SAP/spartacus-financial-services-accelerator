@@ -76,13 +76,13 @@ export class OccConsentAdapter implements ConsentAdapter {
       },
     });
     let params = new HttpParams({ fromString: FULL_PARAMS });
-    if (searchConfig) {
-      if (searchConfig?.sortCode && searchConfig?.sortOrder) {
-        params = params
-          .set('sortCode', searchConfig?.sortCode)
-          .set('sortOrder', searchConfig?.sortOrder);
-      }
-      params = params.set('currentPage', searchConfig?.currentPage);
+    if (searchConfig?.sortCode && searchConfig?.sortOrder) {
+      params = params
+        .set('sortCode', searchConfig.sortCode)
+        .set('sortOrder', searchConfig.sortOrder);
+    }
+    if (searchConfig?.currentPage) {
+      params = params.set('currentPage', searchConfig.currentPage);
     }
 
     return this.http

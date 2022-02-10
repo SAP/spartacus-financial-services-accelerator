@@ -7,7 +7,6 @@ import {
   ConsentTemplate,
   Occ,
   OrderEntry,
-  PaginationModel,
   Price,
   Product,
   SortModel,
@@ -16,6 +15,7 @@ import {
 import { CheckoutStep } from '@spartacus/checkout/root';
 import { UserSignUp } from '@spartacus/user/profile/root';
 import { MediaContainer } from '@spartacus/storefront';
+import { Pagination } from '@spartacus/core/src/model/unused.model';
 
 export interface ContactAgentData {
   email?: string;
@@ -81,15 +81,8 @@ export interface OBOConsentList {
 
 export interface OBOCustomerList {
   entries: FSUser[];
-  pagination: FSPaginationModel;
+  pagination: Pagination;
   sorts: SortModel[];
-}
-
-export interface FSPaginationModel extends PaginationModel {
-  page?: number;
-  count?: number;
-  totalPages?: number;
-  totalCount?: number;
 }
 
 export interface QuoteWorkflowStatus {

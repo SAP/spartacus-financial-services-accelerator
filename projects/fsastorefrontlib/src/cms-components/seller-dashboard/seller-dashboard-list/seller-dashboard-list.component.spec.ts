@@ -228,8 +228,12 @@ describe('SellerDashboardListComponent', () => {
 
   it('should translate sort labels', () => {
     spyOn(mockTranslationService, 'translate').and.callThrough();
-    component.getSortLabels();
-    expect(mockTranslationService.translate).toHaveBeenCalledTimes(3);
+    component
+      .getSortLabels()
+      .subscribe(() =>
+        expect(mockTranslationService.translate).toHaveBeenCalledTimes(3)
+      )
+      .unsubscribe();
   });
 
   it('should change page', () => {
