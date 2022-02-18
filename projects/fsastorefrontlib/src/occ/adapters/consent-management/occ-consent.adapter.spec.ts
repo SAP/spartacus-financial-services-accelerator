@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { Address, OccEndpointsService } from '@spartacus/core';
+import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
 import { OccConsentAdapter } from './occ-consent.adapter';
 
 const userId = 'testId';
@@ -34,6 +35,11 @@ const customerDetails = {
 const address: Address = {
   companyName: 'Test Company',
   defaultAddress: true,
+};
+const searchConfig: FSSearchConfig = {
+  currentPage: 1,
+  sortCode: 'name',
+  sortOrder: 'asc',
 };
 
 const oboConsentHolderUid = 'test@test.com';
@@ -97,7 +103,7 @@ describe('OccConsentAdapter', () => {
     it(
       'should fetch OBO Customer List',
       waitForAsync(() => {
-        adapter.getOBOCustomerList(userId).subscribe();
+        adapter.getOBOCustomerList(userId, searchConfig).subscribe();
         httpMock.expectOne((req: HttpRequest<any>) => {
           return (
             req.url === oboConsentCustomersEndpoint && req.method === 'GET'

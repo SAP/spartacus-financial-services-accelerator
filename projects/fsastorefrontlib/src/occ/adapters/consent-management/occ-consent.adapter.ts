@@ -8,12 +8,16 @@ import {
 } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, pluck } from 'rxjs/operators';
-import { InsuranceQuoteList } from '../../../occ/occ-models/occ.models';
+import {
+  InsuranceQuoteList,
+  OBOCustomerList,
+} from '../../../occ/occ-models/occ.models';
 import { ConsentAdapter } from '../../../core/my-account/connectors/consent.adapter';
 import { OBOConsentList } from '../../occ-models/occ.models';
 import { USER_SERIALIZER } from '@spartacus/user/profile/core';
 import { Models } from '../../../model/quote.model';
 import { QUOTE_NORMALIZER } from '../../../core/my-account/connectors/converters';
+import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -62,15 +66,27 @@ export class OccConsentAdapter implements ConsentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  getOBOCustomerList(userId: string): Observable<any> {
+  getOBOCustomerList(
+    userId: string,
+    searchConfig?: FSSearchConfig
+  ): Observable<OBOCustomerList> {
     const url = this.occEndpointService.buildUrl('oboConsentCustomers', {
       urlParams: {
         userId,
       },
     });
-    const params = new HttpParams({ fromString: FULL_PARAMS });
+    let params = new HttpParams({ fromString: FULL_PARAMS });
+    if (searchConfig?.sortCode && searchConfig?.sortOrder) {
+      params = params
+        .set('sortCode', searchConfig.sortCode)
+        .set('sortOrder', searchConfig.sortOrder);
+    }
+    if (searchConfig?.currentPage) {
+      params = params.set('currentPage', searchConfig.currentPage);
+    }
+
     return this.http
-      .get(url, { params: params })
+      .get<OBOCustomerList>(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
