@@ -55,9 +55,13 @@ footer {
   }
 }
 
-.close {
-  width: inherit;
-  margin: inherit;
+.alert {
+  .close {
+    width: inherit;
+    margin: inherit;
+    right: 3rem;
+    top: var(--cx-top, 22%);
+  }
 }
 cx-spinner {
   width: 100%;
