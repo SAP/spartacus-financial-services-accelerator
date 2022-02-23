@@ -61,8 +61,7 @@
                 context: {
                   labelList: ((quotes?.carts)[0]?.entries)[0]?.product
                     ?.configurable
-                    ? (((quotes?.carts)[0]?.entries)[0]?.configurationInfos)[0]
-                        ?.configurationValues?.entry
+                    ? categoryConfig?.visibleInsuredObjects
                     : ((quotes?.carts)[0].insuranceQuote?.insuredObjectList
                         ?.insuredObjects)[0]?.insuredObjectItems
                 }
@@ -245,7 +244,7 @@
         <ng-container
           *ngIf="
             categoryConfig?.visibleInsuredObjects.includes(
-              insuredObjectItem?.label || insuredObjectItem?.key
+              insuredObjectItem?.label || insuredObjectItem
             )
           "
         >
@@ -256,7 +255,7 @@
                   ? 'quoteReview'
                   : 'quote.details',
                 categoryConfig?.categoryCode,
-                insuredObjectItem?.label || insuredObjectItem?.key
+                insuredObjectItem?.label || insuredObjectItem
               ) as insuredObjectItemLabel
             "
             class="accordion-list-item row text-break"
@@ -272,7 +271,9 @@
                     insuredObjectItem: ((quotes?.carts)[0]?.entries)[0]?.product
                       ?.configurable
                       ? (((cart?.entries)[0]?.configurationInfos)[0]
-                          ?.configurationValues?.entry)[labelIndex]
+                          ?.configurationValues?.entry
+                        | cxFsBankingEntryValue
+                          : (categoryConfig?.visibleInsuredObjects)[labelIndex])
                       : ((cart.insuranceQuote?.insuredObjectList
                           ?.insuredObjects)[0]?.insuredObjectItems)[labelIndex]
                   }
@@ -301,7 +302,10 @@
   let-insuredObjectItem="insuredObjectItem"
 >
   <div class="col notice">
-    {{ insuredObjectItem?.formattedValue || insuredObjectItem?.value }}
+    {{
+      insuredObjectItem?.formattedValue ||
+        (insuredObjectItem?.value ? insuredObjectItem?.value : '/')
+    }}
   </div>
 </ng-template>
 <ng-template #noQuotes>

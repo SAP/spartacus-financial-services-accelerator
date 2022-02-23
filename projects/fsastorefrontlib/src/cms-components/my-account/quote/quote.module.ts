@@ -30,6 +30,7 @@ import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.co
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { BillingEventValuePipe } from './../../../shared/util/helpers/pipe/billing-event-value.pipe';
+import { BankingEntryValuePipe } from '../../../shared/util/helpers/pipe/banking-entry-value.pipe';
 
 const routes: Routes = [
   {
@@ -93,6 +94,7 @@ const routes: Routes = [
     QuoteDetailsComponent,
     QuoteComparisonComponent,
     BillingEventValuePipe,
+    BankingEntryValuePipe,
   ],
   exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
   providers: [
