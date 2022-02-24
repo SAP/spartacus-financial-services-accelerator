@@ -1,0 +1,15 @@
+cx-close-account,
+cx-close-account-modal {
+  & > *:first-of-type {
+    margin: auto;
+  }
+  .cx-btn-group {
+    .btn-primary {
+      width: 100%;
+    }
+    .btn-secondary,
+    .btn-primary {
+      margin-block-end: 1rem;
+    }
+  }
+}

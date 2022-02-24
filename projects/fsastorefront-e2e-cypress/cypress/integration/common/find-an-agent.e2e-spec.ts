@@ -14,6 +14,7 @@ testFilters(['smoke'], () => {
     });
 
     it('Should search by product category', () => {
+      //BUG: CXFSA-302
       findAnAgent.searchSavingAgents();
     });
 

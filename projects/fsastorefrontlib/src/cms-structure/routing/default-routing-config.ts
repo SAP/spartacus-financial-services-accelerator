@@ -1,6 +1,11 @@
 import { RoutesConfig, RoutingConfig } from '@spartacus/core';
 
 export const storefrontRoutesConfig: RoutesConfig = {
+  register: {
+    paths: ['register'],
+    protected: false,
+    authFlow: true,
+  },
   generalInformation: {
     paths: ['checkout/generalInformation/:formCode'],
     paramsMapping: { formCode: 'code' },
@@ -18,6 +23,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   },
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
+  agentLocator: { paths: ['agent-locator'] },
   finalReview: { paths: ['checkout/final-review'] },
   legalInformation: { paths: ['checkout/legal-information'] },
   userIdentification: { paths: ['checkout/user-identification'] },
@@ -31,15 +37,20 @@ export const storefrontRoutesConfig: RoutesConfig = {
   closeAccount: { paths: ['my-account/close-account'] },
   claims: { paths: ['my-account/my-insurance-claims'] },
   claimDetails: { paths: ['my-account/my-insurance-claims/:claimId'] },
+  changeClaim: { paths: ['my-account/change-claim/:claimId'] },
   noClaims: { paths: ['noClaims'] },
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
   myDocuments: { paths: ['my-account/my-documents'] },
+  sellerDashboard: { paths: ['seller-dashboard'] },
+  createOBOCustomer: { paths: ['seller-dashboard/create-customer'] },
+  userProfile: { paths: ['user-profile/:customerId'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },
   policyDetails: { paths: ['my-account/my-policies/:policyId/:contractId'] },
   quotes: { paths: ['my-account/my-financial-applications'] },
   quoteDetails: { paths: ['my-account/my-financial-applications/:quoteId'] },
+  quoteComparison: { paths: ['my-account/quote-comparison'] },
   premiumCalendar: { paths: ['my-account/premium-calendar'] },
   accountOverview: { paths: ['my-account/account-overview'] },
   fnolIncidentPage: { paths: ['fnolIncidentPage'] },

@@ -34,7 +34,7 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
 
 export function checkMiniCart(miniCart: MiniCart) {
   cy.get('.highlighted .short-overview-value').should(
-    'have.text',
+    'contain.text',
     miniCart.price
   );
   cy.get('.short-overview-content')
@@ -49,11 +49,11 @@ export function checkMiniCart(miniCart: MiniCart) {
           .eq(index)
           .within(() => {
             cy.get('.short-overview-title').should(
-              'have.text',
+              'contain.text',
               productItem.title
             );
             cy.get('.short-overview-value').should(
-              'have.text',
+              'contain.text',
               productItem.value
             );
           });

@@ -25,17 +25,17 @@ testFilters(['smoke'], () => {
     it('Should populate insurance information form', () => {
       checkout.checkCheckoutStep('Your Travel Insurance', '7');
       checkout.checkProgressBarInsurance();
-      travelCheckout.populateInsuranceInfoForm();
+      travelCheckout.populateTripInformation();
       checkout.clickContinueButton();
     });
 
     it('Add main product to the cart', () => {
-      travelCheckout.checkTravelComparisonTable();
+      travelCheckout.checkSingleTravelComparisonTable();
       travelCheckout.selectSingleBudgetPlan();
     });
 
     it('Add optional product to the cart', () => {
-      travelCheckout.checkOptionalProductsAndPick();
+      travelCheckout.checkSingleOptionalProductsAndPick();
       checkout.clickContinueButton();
     });
 
@@ -52,6 +52,8 @@ testFilters(['smoke'], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
     });
 
     it('Select default payment details', () => {

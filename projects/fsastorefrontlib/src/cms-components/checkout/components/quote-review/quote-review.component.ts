@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCheckoutConfigService,
   CategoryService,
@@ -26,23 +26,20 @@ import {
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
+import {
+  OBOCustomerList,
+  FSUserRole,
+  FSUser,
+} from '../../../../occ/occ-models/occ.models';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 @Component({
   selector: 'cx-fs-quote-review',
   templateUrl: './quote-review.component.html',
 })
 export class QuoteReviewComponent implements OnInit, OnDestroy {
-  cart$: Observable<Cart>;
-  showContent$: Observable<boolean> = of(true);
-  isCartStable$: Observable<boolean>;
-  subscription = new Subscription();
-  modalRef: ModalRef;
-  cartCode: string;
-  previousCheckoutStep$: Observable<FSSteps>;
-  nextCheckoutStep$: Observable<FSSteps>;
-  activeCategory$: Observable<string>;
-  baseUrl: string;
-
   constructor(
     protected cartService: FSCartService,
     protected config: OccConfig,
@@ -54,8 +51,35 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected translationService: FSTranslationService,
     protected checkoutService: FSCheckoutService,
     protected globalMessageService: GlobalMessageService,
+    protected consentConnector: ConsentConnector,
+    protected userAccountFacade: UserAccountFacade,
+    protected oboConsentService: ConsentService,
     protected winRef?: WindowRef
   ) {}
+
+  cart$: Observable<Cart>;
+  showContent$: Observable<boolean> = of(true);
+  isCartStable$: Observable<boolean>;
+  subscription = new Subscription();
+  modalRef: ModalRef;
+  cartCode: string;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
+  activeCategory$: Observable<string>;
+  baseUrl: string;
+  selectedIndex = -1;
+
+  oboCustomers$: Observable<
+    OBOCustomerList
+  > = this.userAccountFacade.get().pipe(
+    filter(user => !!user && user.roles.includes(FSUserRole.SELLER)),
+    take(1),
+    switchMap(user => this.consentConnector.getOBOCustomerList(user.uid))
+  );
+
+  isCartTransferAllowedForSeller$: Observable<
+    boolean
+  > = this.oboConsentService.isCartTransferAllowedForSeller();
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
@@ -74,11 +98,18 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigateNext(nextStep: FSSteps, activeCart: Cart) {
+  navigateNext(
+    nextStep: FSSteps,
+    activeCart: Cart,
+    isCartTransferAllowedForSeller: boolean
+  ) {
     this.cartCode = activeCart.code;
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
     const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
       .quoteWorkflowStatus.code;
+    if (!isCartTransferAllowedForSeller) {
+      return;
+    }
     if (bindingState === BindingStateType.UNBIND) {
       this.openQuoteBindingModal(nextStep);
     } else if (
@@ -145,10 +176,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   getFormContent(cart: any): any {
-    if (cart?.deliveryOrderGroups[0]?.entries[0]?.formData?.length > 0) {
-      return JSON.parse(
-        cart.deliveryOrderGroups[0].entries[0].formData[0].content
-      );
+    if (cart?.entries[0]?.formData?.length > 0) {
+      return JSON.parse(cart.entries[0].formData[0].content);
     }
   }
 
@@ -170,12 +199,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   getTranslation(translationGroup: string, translationKey: string): string {
@@ -204,5 +227,17 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  selectOBOCustomer(oboCustomer: FSUser, index: number) {
+    this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
+    this.selectedIndex = this.selectedIndex === index ? -1 : index;
+  }
+
+  ngOnDestroy() {
+    this.oboConsentService.setSelectedOBOCustomer(null);
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

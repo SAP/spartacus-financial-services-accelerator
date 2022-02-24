@@ -70,31 +70,31 @@ export function checkOptionalProductsSecond() {
 
 export function checkLifeBasicMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €11.54 ',
+    price: '€11.54',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 25 Sep 2022 ',
+        title: 'Start Date:',
+        value: '25 Sep 2022',
       },
       {
         title: 'Coverage Period:',
-        value: ' 24 ',
+        value: '24',
       },
       {
         title: 'Coverage Amount:',
-        value: ' 30000 ',
+        value: '30,000.00',
       },
       {
         title: 'Insured:',
-        value: ' yourself ',
+        value: 'yourself',
       },
       {
-        title: ' Basic Life Insurance: ',
-        value: ' €7.69 ',
+        title: 'Basic Life Insurance:',
+        value: '€7.69',
       },
       {
-        title: ' Premium Protection: ',
-        value: ' €3.85 ',
+        title: 'Premium Protection:',
+        value: '€3.85',
       },
     ],
   };
@@ -142,27 +142,27 @@ export function checkLifeComparisonTableSecondPerson() {
 
 export function checkLifeBasicMiniCartSecondPerson() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €22.15 ',
+    price: '€22.15 ',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 25 Sep 2022 ',
+        title: 'Start Date:',
+        value: '25 Sep 2022',
       },
       {
         title: 'Coverage Period:',
-        value: ' 24 ',
+        value: '24',
       },
       {
         title: 'Coverage Amount:',
-        value: ' 30000 ',
+        value: '30,000.00',
       },
       {
         title: 'Insured:',
-        value: ' yourself and second person ',
+        value: 'yourself and second person',
       },
       {
-        title: ' Basic Life Insurance: ',
-        value: ' €22.15 ',
+        title: 'Basic Life Insurance:',
+        value: '€22.15 ',
       },
     ],
   };

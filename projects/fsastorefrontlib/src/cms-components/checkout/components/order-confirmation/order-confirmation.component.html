@@ -75,7 +75,7 @@
                 </ng-container>
               </div>
               <cx-fs-accordion-item
-                [opened]="ref.children.length > 0 ? false : true"
+                [opened]="ref.children.length === 0"
                 [title]="'fscommon.whatsIncluded' | cxTranslate"
               >
                 <div class="container">
@@ -257,8 +257,7 @@
                       {{
                         categoryCode.indexOf('banking') > -1
                           ? ('fscommon.application.applicationID' | cxTranslate)
-                          : ('checkoutOrderConfirmation.orderNumber'
-                            | cxTranslate)
+                          : ('orderDetails.orderNumber' | cxTranslate)
                       }}
                       :
                     </div>

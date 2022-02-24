@@ -1,6 +1,6 @@
 <ng-container *ngIf="product$ | async as product; else loading">
   <ng-container *ngIf="!isLoading; else loading">
-    <div class="table-header">
+    <div class="table-header sticky-position">
       <h3 class="table-header-title">
         {{ product.name }}
         <div
@@ -30,12 +30,12 @@
         <ng-container
           *ngFor="let dynamicAttribute of product.dynamicAttributes | slice: 1"
         >
-          <div class="table-cell">
+          <div #tableCell class="table-cell">
             <ng-container
               *ngIf="dynamicAttribute !== undefined; else itemNotIncluded"
             >
               <div
-                class="table-cell-value text-truncate"
+                class="table-cell-value"
                 *ngIf="
                   dynamicAttribute.value &&
                   dynamicAttribute.value.formattedValue
@@ -55,10 +55,10 @@
         </ng-container>
       </ng-container>
       <ng-container *ngFor="let item of panelItemEntries">
-        <div class="table-cell">
+        <div #tableCell class="table-cell">
           <ng-container *ngIf="item !== undefined; else itemNotIncluded">
             <div
-              class="table-cell-value text-truncate"
+              class="table-cell-value"
               *ngIf="
                 item.price?.value > 0 || item.chargeInformation;
                 else itemIncluded

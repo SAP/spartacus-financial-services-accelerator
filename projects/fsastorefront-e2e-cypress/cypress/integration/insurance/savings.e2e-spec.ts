@@ -5,6 +5,13 @@ import * as register from '../../helpers/register';
 import * as policies from '../../helpers/my-account/policies';
 import * as premiumCalendar from '../../helpers/my-account/my-account';
 import testFilters from '../../support/filters';
+import * as inbox from '../../helpers/my-account/inbox';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const todaysDate = dayjs().format('DD MMM YYYY');
 
 testFilters([''], () => {
   context('Savings Insurance Checkout', () => {
@@ -67,6 +74,8 @@ testFilters([''], () => {
       checkout.checkAccordions('savingsQuoteReview');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('savingsQuoteReview');
+      checkout.clickContinueButton();
     });
 
     it('Select default payment details', () => {
@@ -103,6 +112,14 @@ testFilters([''], () => {
       premiumCalendar.checkPageContent();
       premiumCalendar.checkPremiumCalendarTable();
       premiumCalendar.checkSavingsData();
+    });
+
+    it('Check inbox page', () => {
+      inbox.clickOnInbox();
+      inbox.checkInboxComponets();
+      inbox.checkSavingsTabs();
+      inbox.checkGeneralTab();
+      inbox.checkSavingsMessage();
     });
   });
 });

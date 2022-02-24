@@ -18,7 +18,7 @@
     }
     .payment-container {
       padding: 1.25rem 0.94rem;
-      height: 6.125rem;
+      height: 6.5rem;
       font-size: var(--cx-h6-font-size);
       color: var(--cx-color-6);
     }
@@ -28,7 +28,7 @@
     @include media-breakpoint-down(md) {
       padding: 0;
       grid-template-columns: repeat(2, 50%);
-      grid-template-rows: 50% 6.125rem 6.125rem;
+      grid-template-rows: 50% 6.5rem 6.5rem;
       background-color: var(--cx-color-1);
       border-radius: 0.625rem 0.625rem 0 0;
     }

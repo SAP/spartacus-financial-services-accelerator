@@ -30,6 +30,31 @@ export const quote = {
       na: 'N/A',
     },
     quoteSummary: 'Angebotszusammenfassung',
+    category: 'Kategorie',
+    selectCategory: 'Kategorie wählen',
+    compareQuotes: 'Angebote vergleichen',
+    renewalQuotes: 'Angebote verlängern',
+    compare: 'Vergleichen',
+    select: 'Auswählen/Abwählen',
+    successfulSelection:
+      'Der Benutzer hat die Versicherungskarte für seine {{ category }} erfolgreich ausgewählt.',
+    compareInfo:
+      'Wählen Sie für den Vergleich zwei Angebote aus derselben Kategorie aus',
+    renewalInfo: 'Dieses Angebot wurde aus einer bestehenden Police erstellt',
+    renewalQuoteInfo: 'Angebot verlängern',
+    clearAll: 'Alles löschen',
+    allQuotes: 'Alle Angebote',
+    quotesComparison: 'Vergleiche {{ category }} Angebote',
+    quoteNo: 'Angebots Nr.',
+    selectQuote: 'Angebot auswählen',
+    quoteBillingEvents: 'Abrechnungszeitraum',
+    quoteOptionalExtras: 'Optionale Extras',
+    billingEvents: 'Abrechnungsereignisse',
+    quoteGeneralInformation: 'Allgemeine Informationen',
+    generalInformation: 'Allgemeine Informationen',
+    noQuotes: 'Keine Angebote zum vergleichen',
+    transferCartSuccess:
+      'Versicherungsangebot/-antrag wird erfolgreich für den Kunden erstellt {{ customer }}.',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',

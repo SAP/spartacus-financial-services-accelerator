@@ -55,7 +55,7 @@ export function checkMembersPage() {
   cy.get('cx-org-list')
     .should('be.visible')
     .within(() => {
-      cy.get('h3').should('contain.text', 'All users');
+      cy.get('h3').should('contain.text', 'All members');
       cy.get('.button.primary').should('contain.text', 'Add');
     });
 }
@@ -66,17 +66,17 @@ export function createNewMember() {
   register.createB2bCustomer(createCustomer);
 }
 
-export function changePasswordForNewMember() {
-  cy.contains(createCustomer.firstName).click();
+export function checkMemberIsDisabled() {
+  cy.contains(createCustomer.firstName)
+    .parentsUntil('table')
+    .within(() => {
+      cy.get('cx-org-status-cell').should('contain.text', 'Disabled').click();
+    });
   cy.get('cx-view')
     .should('be.visible')
     .within(() => {
-      cy.get('a.text-capitalize').contains('Change password').click();
+      cy.get('a.text-capitalize').contains('Change password');
     });
-  cy.get('h3').should('contain.text', 'Change password');
-  cy.get('[formcontrolname=password]').type('Password1.');
-  cy.get('[formcontrolname=confirmPassword]').type('Password1.');
-  cy.get('.button.primary').contains('Save').click();
 }
 
 export function checkCurrentAccountComparisonTable() {

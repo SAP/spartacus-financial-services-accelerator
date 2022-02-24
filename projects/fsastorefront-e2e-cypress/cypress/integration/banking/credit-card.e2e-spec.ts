@@ -7,6 +7,12 @@ import * as creditCard from '../../helpers/checkout/banking/credit-card';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
 import * as myAccount from '../../helpers/my-account/my-account';
 import testFilters from '../../support/filters';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const todaysDate = dayjs().format('DD MMM YYYY');
 
 testFilters([''], () => {
   context('Credit Card Checkout', () => {
@@ -65,6 +71,8 @@ testFilters([''], () => {
     it('Should bind Quote', () => {
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('quoteReviewWithoutOptional');
+      checkout.clickContinueButton();
     });
 
     it('Should check Legal Information page', () => {
@@ -82,18 +90,20 @@ testFilters([''], () => {
     it('Should check order confirmation', () => {
       checkout.checkOrderConfirmation();
       checkout.checkAccordions('creditCardConfirmation');
+      cy.wait(22000);
     });
 
     it('Should check Pending message is received', () => {
-      cy.wait(22000);
-      cy.get('cx-fs-message-notification').click();
+      inbox.clickOnInbox();
       inbox.checkInboxComponets();
       inbox.checkBankingTabs();
+      inbox.checkGeneralTab();
+      inbox.checkPendingMessage();
     });
 
     it('Should check Order History and Order Status', () => {
       myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('€89.00');
+      myAccount.checkOrderHistoryContent('€89.00', 'Pending');
       cy.get('.cx-order-history-status').should('contain.text', 'Pending');
     });
   });

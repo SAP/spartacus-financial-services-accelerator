@@ -24,6 +24,8 @@ export const claim = {
     },
     generalInformation: 'Allgemeine Informationen',
     loadingFailed: '[DE] Claim can not be loaded.',
+    successfulChangeClaim:
+      '[DE] Claim {{claimNumber}} is successfully updated.',
     claimDetails: '[DE] Claim Details ({{ subclaimType }})',
     subclaim: {
       claimant: '[DE] Claimant',
@@ -33,8 +35,8 @@ export const claim = {
     participants: {
       rolesPersonsInvolved: '[DE] Roles/Persons Involved',
       participant: '[DE] Participant ',
-      role: '[DE] Role',
-      name: '[DE] Name',
+      role: 'Rollen',
+      name: 'Name',
     },
   },
 };

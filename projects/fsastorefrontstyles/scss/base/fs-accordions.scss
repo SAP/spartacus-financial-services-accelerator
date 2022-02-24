@@ -26,12 +26,6 @@
     &:after {
       right: 15px;
     }
-  }
-  .accordion-item {
-    border: 1px solid var(--cx-color-3);
-    margin-top: 20px;
-    @include fs-box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
-    position: relative;
     .fs-icon,
     .fas {
       @include vertical-center;
@@ -42,6 +36,12 @@
         color: var(--cx-color-primary);
       }
     }
+  }
+  .accordion-item {
+    border: 1px solid var(--cx-color-3);
+    margin-top: 20px;
+    @include fs-box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
+    position: relative;
   }
   .accordion-item-wrapper {
     display: flex;
@@ -57,7 +57,7 @@
   }
   .accordion-list {
     padding: 0 8%;
-    .link {
+    .position-absolute.link {
       top: -14px;
       right: 0;
       padding: inherit;

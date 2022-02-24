@@ -2,7 +2,7 @@
   <!-- ng-container needs check if documents are uploaded by user or they came from external system -->
   <ng-container *ngIf="(documentList | json) != '{}'; else noDocuments">
     <ng-container
-      *ngIf="getDocumentsBySource(documentList?.documents, false).length > 0"
+      *ngIf="getDocumentsBySource(documentList?.documents, false)?.length > 0"
     >
       <h4>{{ 'document.uploadedDocuments' | cxTranslate }}</h4>
       <cx-fs-documents-table
@@ -10,7 +10,7 @@
       ></cx-fs-documents-table>
     </ng-container>
     <ng-container
-      *ngIf="getDocumentsBySource(documentList?.documents, true).length > 0"
+      *ngIf="getDocumentsBySource(documentList?.documents, true)?.length > 0"
     >
       <h4>{{ 'document.receivedDocuments' | cxTranslate }}</h4>
       <cx-fs-documents-table

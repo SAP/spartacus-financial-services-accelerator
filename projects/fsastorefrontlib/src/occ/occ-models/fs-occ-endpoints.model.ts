@@ -128,6 +128,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   quoteAction?: string;
   /**
+   * Compare quotes
+   *
+   */
+  compareQuotes?: string;
+  /**
    * Get claims
    *
    */
@@ -161,5 +166,65 @@ export interface FSOccEndpoints extends OccEndpoints {
    * Disable user
    *
    */
-  disableUser?: string;
+  userCloseAccount?: string;
+
+  /**
+   * Register user
+   *
+   */
+  userRegister?: string;
+
+  /**
+   * Get on behalf of consents
+   *
+   */
+  oboConsents?: string;
+
+  /**
+   * Gets the list of customers created by consent holder
+   *
+   */
+  oboConsentCustomers?: string;
+
+  /**
+   * Gets the particular customer of customers created by consent holder
+   *
+   */
+  oboConsentCustomer?: string;
+
+  /**
+   * Gets quotes of the particular customer created by consent holder
+   *
+   */
+  oboConsentCustomerQuotes?: string;
+
+  /**
+   * Gets policies of the particular customer created by consent holder
+   *
+   */
+  oboConsentCustomerPolicies?: string;
+
+  /**
+   * Gets claims of the particular customer created by consent holder
+   *
+   */
+  oboConsentCustomerClaims?: string;
+
+  /**
+   * Transfers cart to customer created by consent holder
+   *
+   */
+  transferCart?: string;
+
+  /**
+   * Create cart of customer that gave On-Behalf-Of Consent
+   *
+   */
+  oboConsentAddresses?: string;
+
+  /**
+   * Updates permission for OBO customer
+   *
+   */
+  oboUpdatePermission?: string;
 }

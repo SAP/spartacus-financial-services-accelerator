@@ -10,6 +10,7 @@ import {
   WindowRef,
 } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
+import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
 import { of, Observable } from 'rxjs';
 import { FSCart, FSOrderEntry, FSSteps } from '../../../../occ/occ-models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
@@ -21,6 +22,10 @@ import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dial
 import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+
 const formDataContent = '{"content":"formContent"}';
 
 const mockOrderEntries: FSOrderEntry[] = [{ removeable: true }];
@@ -54,6 +59,107 @@ const MockOccModuleConfig: OccConfig = {
       prefix: '',
     },
   },
+};
+
+const code1 = '000001';
+const date1 = 'date1';
+const consentHolderName1 = 'chName1';
+const consentHolderUid1 = 'chUid1';
+const consentTemplateId1 = 'ctId1';
+const consentTemplateDesc1 = 'ctDesc1';
+const consentTemplateVersion1 = 'ctVersion1';
+const customerName1 = 'customerName1';
+const customerUid1 = 'customerUid1';
+
+const code2 = '000002';
+const date2 = 'date2';
+const consentHolderName2 = 'chName2';
+const consentHolderUid2 = 'chUid2';
+const consentTemplateId2 = 'ctId2';
+const consentTemplateDesc2 = 'ctDesc2';
+const consentTemplateVersion2 = 'ctVersion2';
+const customerName2 = 'customerName2';
+const customerUid2 = 'customerUid2';
+
+const consent1 = {
+  code: code1,
+  consentGivenDate: date1,
+  consentHolders: [
+    {
+      name: consentHolderName1,
+      uid: consentHolderUid1,
+    },
+  ],
+  consentTemplate: {
+    id: consentTemplateId1,
+    description: consentTemplateDesc1,
+    version: consentTemplateVersion1,
+  },
+  customer: {
+    name: customerName1,
+    uid: customerUid1,
+  },
+  oboPermissionConfiguration: {
+    permissions: [
+      {
+        key: 'fnol',
+        value: true,
+      },
+      {
+        key: 'checkout',
+        value: true,
+      },
+      {
+        key: 'documents',
+        value: true,
+      },
+    ],
+  },
+};
+
+const consent2 = {
+  code: code2,
+  consentGivenDate: date2,
+  consentHolders: [
+    {
+      name: consentHolderName2,
+      uid: consentHolderUid2,
+    },
+  ],
+  consentTemplate: {
+    id: consentTemplateId2,
+    description: consentTemplateDesc2,
+    version: consentTemplateVersion2,
+  },
+  customer: {
+    name: customerName2,
+    uid: customerUid2,
+  },
+  oboPermissionConfiguration: {
+    permissions: [
+      {
+        key: 'fnol',
+        value: true,
+      },
+      {
+        key: 'checkout',
+        value: true,
+      },
+      {
+        key: 'documents',
+        value: true,
+      },
+    ],
+  },
+};
+
+const consentList = [consent1, consent2];
+let isCartTransferAllowedForSeller = true;
+
+const mockUser: FSUser = {
+  firstName: 'Donna',
+  lastName: 'Moore',
+  roles: [FSUserRole.SELLER],
 };
 class MockFSCheckoutService {
   filterRemoveableEntries() {
@@ -90,6 +196,25 @@ class MockFSTranslationService {
   getTranslationValue() {}
 }
 
+class MockConsentConnector {
+  getOBOCustomerList() {
+    return of(consentList);
+  }
+}
+
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
+  }
+}
+
+class MockConsentService {
+  isCartTransferAllowedForSeller() {
+    return of(true);
+  }
+  setSelectedOBOCustomer(oboConsentCustomer) {}
+}
+
 class MockGlobalMessageService {
   add(_message: GlobalMessage): void {}
 }
@@ -113,13 +238,18 @@ describe('Quote Review Component', () => {
   let mockCartService: FSCartService;
   let mockCheckoutService: FSCheckoutService;
   let winRef: WindowRef;
+  let mockConsentConnector: MockConsentConnector;
+  let userAccountFacade: MockUserAccountFacade;
+  let oboConsentService: ConsentService;
 
   beforeEach(
     waitForAsync(() => {
+      mockConsentConnector = new MockConsentConnector();
       TestBed.configureTestingModule({
         imports: [SpinnerModule, AccordionModule, I18nTestingModule],
         declarations: [QuoteReviewComponent],
         providers: [
+          { provide: ConsentConnector, useValue: mockConsentConnector },
           {
             provide: RoutingService,
             useClass: MockRoutingService,
@@ -160,6 +290,8 @@ describe('Quote Review Component', () => {
             provide: GlobalMessageService,
             useClass: MockGlobalMessageService,
           },
+          { provide: UserAccountFacade, useClass: MockUserAccountFacade },
+          { provide: ConsentService, useClass: MockConsentService },
         ],
       }).compileComponents();
     })
@@ -174,6 +306,9 @@ describe('Quote Review Component', () => {
     globalMessageService = TestBed.inject(GlobalMessageService);
     mockCartService = TestBed.inject(FSCartService);
     mockCheckoutService = TestBed.inject(FSCheckoutService);
+    userAccountFacade = TestBed.inject(UserAccountFacade);
+    oboConsentService = TestBed.inject(ConsentService);
+
     winRef = TestBed.inject(WindowRef);
     spyOn(routingService, 'go').and.stub();
     component.ngOnInit();
@@ -195,7 +330,11 @@ describe('Quote Review Component', () => {
         },
       },
     };
-    component.navigateNext(mockCategoryAndStep, cart);
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
     expect(routingService.go).toHaveBeenCalled();
   });
 
@@ -213,7 +352,11 @@ describe('Quote Review Component', () => {
       },
     };
 
-    component.navigateNext(mockCategoryAndStep, cart);
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
       centered: true,
@@ -238,7 +381,11 @@ describe('Quote Review Component', () => {
       },
     };
 
-    component.navigateNext(mockCategoryAndStep, cart);
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(
       ReferredQuoteDialogComponent,
@@ -263,36 +410,34 @@ describe('Quote Review Component', () => {
   });
 
   it('should not get form content 2', () => {
-    const content = component.getFormContent({ deliveryOrderGroups: [] });
+    const content = component.getFormContent({ entries: [] });
     expect(content).toEqual(undefined);
   });
 
   it('should not get form content 3', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [] }],
+      entries: [],
     });
     expect(content).toEqual(undefined);
   });
 
   it('should not get form content 4', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [{}] }],
+      entries: [{}],
     });
     expect(content).toEqual(undefined);
   });
 
   it('should not get form content 5', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [{ formData: [] }] }],
+      entries: [{ formData: [] }],
     });
     expect(content).toEqual(undefined);
   });
 
   it('should get form content', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [
-        { entries: [{ formData: [{ content: formDataContent }] }] },
-      ],
+      entries: [{ formData: [{ content: formDataContent }] }],
     });
     const parsedContent = JSON.parse(formDataContent);
     expect(content).toEqual(parsedContent);
@@ -346,5 +491,35 @@ describe('Quote Review Component', () => {
     const result = component.checkIfRemoveableEntriesExists(mockCart);
     expect(mockCheckoutService.filterRemoveableEntries).toHaveBeenCalled();
     expect(result).toEqual(true);
+  });
+
+  it('should select customer for cart transfer', () => {
+    spyOn(oboConsentService, 'setSelectedOBOCustomer').and.callThrough();
+    const selectedCustomer = {
+      uid: 'selectedOBOCustomer',
+    };
+    component.selectOBOCustomer(selectedCustomer, 1);
+    expect(oboConsentService.setSelectedOBOCustomer).toHaveBeenCalled();
+  });
+
+  it('should NOT continue to next step when cart transfer is not allowed', () => {
+    const cart: FSCart = {
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'BIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'APPROVED',
+        },
+      },
+    };
+    isCartTransferAllowedForSeller = false;
+    component.navigateNext(
+      mockCategoryAndStep,
+      cart,
+      isCartTransferAllowedForSeller
+    );
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 });

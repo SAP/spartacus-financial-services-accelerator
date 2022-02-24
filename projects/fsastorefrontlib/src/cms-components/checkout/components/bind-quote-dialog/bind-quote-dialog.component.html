@@ -8,7 +8,7 @@
   <p>{{ 'quote.bindingConfirmation' | cxTranslate }}</p>
   <div class="modal-actions">
     <div class="row">
-      <div class="col-xs-12 col-sm-6 mb-3 mb-md-0">
+      <div class="col-md-6 mb-3 mb-md-0">
         <button
           class="action-button btn-block"
           (click)="dismissModal('Cross click')"
@@ -16,7 +16,7 @@
           {{ 'common.cancel' | cxTranslate }}
         </button>
       </div>
-      <div class="col-xs-12 col-sm-6 col-sm-push-6">
+      <div class="col-md-6">
         <button
           class="primary-button btn-block"
           (click)="bindQuote(); dismissModal('Quote bound')"

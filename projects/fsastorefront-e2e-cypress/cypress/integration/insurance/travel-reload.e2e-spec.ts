@@ -23,16 +23,16 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       cy.get('h3').contains('Trip Information');
       cy.get('.cx-cart-coupon-container').should('not.exist');
-      travel.populateInsuranceInfoForm();
+      travel.populateTripInformation();
       checkout.clickContinueButton();
       //What's Included Step
-      travel.checkTravelComparisonTable();
+      travel.checkSingleTravelComparisonTable();
       cy.reload();
       checkout.checkCheckoutStep('Your Travel Insurance', '7');
-      travel.checkTravelComparisonTable();
+      travel.checkSingleTravelComparisonTable();
       travel.selectSingleBudgetPlan();
       //Add Options Step
-      travel.checkOptionalProductsAndPick();
+      travel.checkSingleOptionalProductsAndPick();
       travel.checkPageComponenth2('Add Options');
       checkout.checkCouponsFields();
       cy.reload();
@@ -68,6 +68,8 @@ testFilters([''], () => {
       checkout.checkCouponsFields();
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
       //Select Payment Method
       travel.checkPageComponenth3('Payment Details');
       cy.get('cx-fs-payment-method').should('be.visible');

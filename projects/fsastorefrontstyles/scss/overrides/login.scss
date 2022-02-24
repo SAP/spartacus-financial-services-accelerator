@@ -1,5 +1,9 @@
 %cx-fs-login-form {
   padding: 30px 20px;
+  label,
+  a {
+    margin-bottom: 1rem;
+  }
   @include fs-box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
   .btn-link {
     font-size: $font-size-base;
@@ -11,6 +15,9 @@
 
 %cx-fs-login-form,
 %cx-fs-register {
+  .cx-section-title {
+    margin: 1.5rem 0 0.5rem;
+  }
   @include media-breakpoint-up(md) {
     max-width: 50%;
   }

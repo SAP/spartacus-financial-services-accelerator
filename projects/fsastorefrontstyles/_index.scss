@@ -2,13 +2,16 @@
 @import '~@spartacus/styles/index';
 @import '~@spartacus/storefinder/index';
 @import '~@spartacus/organization/index';
+
 //FSA styling
+@import 'scss/fs-theme';
+@import 'scss/components/index';
 @import 'scss/root.scss';
 @import 'scss/fs-mixins';
 @import 'scss/overrides';
 @import 'scss/base';
 @import 'scss/fonts';
 
-// components
-@import './scss/fs-theme';
+// additional bootstrap component styling
 @import '~bootstrap/scss/progress';
+@import '~bootstrap/scss/input-group';

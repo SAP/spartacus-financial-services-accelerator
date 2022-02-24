@@ -1,0 +1,64 @@
+<ng-container *ngIf="templateArray$ | async as templateList">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="cx-consent-toggles">
+          <cx-consent-management-form
+            *ngFor="let consentTemplate of templateList"
+            [consentTemplate]="consentTemplate"
+            [requiredConsents]="requiredConsents"
+            (consentChanged)="onConsentChange($event)"
+          ></cx-consent-management-form>
+        </div>
+        <ng-container *ngIf="consents$ | async as consents">
+          <ng-container *ngIf="consents?.oboConsents?.length > 0">
+            <hr class="my-4" />
+            <div class="wrapper" *ngFor="let consent of consents.oboConsents">
+              <div class="align-items-end">
+                <span class="semi-bold pr-2"
+                  >{{ 'consent.consentHolderName' | cxTranslate }}:</span
+                >
+                <span class="notice">
+                  {{ consent.consentHolder?.name }}
+                </span>
+              </div>
+              <div class="align-items-end pb-4">
+                <span class="semi-bold pr-2"
+                  >{{ 'consent.consentHolderEmail' | cxTranslate }}:</span
+                >
+                <span class="notice">
+                  {{ consent.consentHolder?.displayUid }}
+                </span>
+              </div>
+              <div class="pb-4">{{ 'consent.permissions' | cxTranslate }}:</div>
+              <div
+                class="form-check"
+                *ngFor="
+                  let item of consent.oboPermissionConfiguration?.permissions
+                "
+              >
+                <label class="form-check-label" *ngIf="item | keyvalue">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [checked]="item.value"
+                    (change)="
+                      changeOBOPermission(
+                        consent.consentHolder?.uid,
+                        item.key,
+                        $event
+                      )
+                    "
+                  />
+                  <span class="form-check-label">
+                    {{ 'consent.' + item.key | cxTranslate }}
+                  </span>
+                </label>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -13,7 +13,6 @@ import {
   I18nTestingModule,
   User,
   UserAddressService,
-  CheckoutDeliveryService,
 } from '@spartacus/core';
 import {
   AddressBookComponentService,
@@ -48,6 +47,7 @@ class MockComponentService {
   loadAddresses = jasmine.createSpy();
   addUserAddress = jasmine.createSpy();
   updateUserAddress = jasmine.createSpy();
+  deleteAddress = jasmine.createSpy();
   getAddressesStateLoading(): Observable<boolean> {
     return isLoading.asObservable();
   }
@@ -98,13 +98,9 @@ class MockAddressFormComponent {
   backToAddress = new EventEmitter<any>();
 }
 
-class MockCheckoutDeliveryService {
-  clearCheckoutDeliveryDetails = jasmine.createSpy();
-}
-
 class MockUserAddressService {
-  deleteUserAddress = jasmine.createSpy();
-  setAddressAsDefault = jasmine.createSpy();
+  deleteUserAddress() {}
+  setAddressAsDefault() {}
 }
 
 describe('FSAddressInfoComponent', () => {
@@ -112,8 +108,8 @@ describe('FSAddressInfoComponent', () => {
   let fixture: ComponentFixture<FSAddressInfoComponent>;
   let el: DebugElement;
   let userAddressService: UserAddressService;
-  let checkoutDeliveryService: CheckoutDeliveryService;
   let mockedUserAccountFacade: UserAccountFacade;
+  let addressBookComponentService: AddressBookComponentService;
 
   beforeEach(
     waitForAsync(() => {
@@ -130,10 +126,6 @@ describe('FSAddressInfoComponent', () => {
             useClass: MockComponentService,
           },
           { provide: UserAddressService, useClass: MockUserAddressService },
-          {
-            provide: CheckoutDeliveryService,
-            useClass: MockCheckoutDeliveryService,
-          },
           {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
@@ -152,11 +144,9 @@ describe('FSAddressInfoComponent', () => {
     userAddressService = TestBed.inject(
       UserAddressService as Type<UserAddressService>
     );
-    checkoutDeliveryService = TestBed.inject(
-      CheckoutDeliveryService as Type<CheckoutDeliveryService>
-    );
 
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
+    addressBookComponentService = TestBed.inject(AddressBookComponentService);
 
     isLoading.next(false);
     component.ngOnInit();
@@ -194,12 +184,5 @@ describe('FSAddressInfoComponent', () => {
         mockAddress.country.isocode &&
         mockAddress.postalCode
     );
-  });
-
-  describe('deleteAddress', () => {
-    it('should set delete user Address', () => {
-      component.deleteAddress('1');
-      expect(userAddressService.deleteUserAddress).toHaveBeenCalledWith('1');
-    });
   });
 });

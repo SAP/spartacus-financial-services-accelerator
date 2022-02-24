@@ -13,7 +13,7 @@ export class OccAgentAdapter implements AgentAdapter {
   ) {}
 
   getAgentsByCategory(category: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('agents');
+    const url = this.occEndpointService.buildUrl('agents');
     const httpParams: HttpParams = new HttpParams()
       .set('categoryCode', category)
       .set('fields', 'DEFAULT');
@@ -27,7 +27,7 @@ export class OccAgentAdapter implements AgentAdapter {
     pageNumber: number,
     longitudeLatitude?: GeoPoint
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('agents');
+    const url = this.occEndpointService.buildUrl('agents');
     let params: HttpParams = new HttpParams()
       .set('page', pageNumber.toString())
       .set('fields', 'DEFAULT');
@@ -47,8 +47,10 @@ export class OccAgentAdapter implements AgentAdapter {
   }
 
   getAgentByID(id: string) {
-    const url = this.occEndpointService.getUrl('agent', {
-      id,
+    const url = this.occEndpointService.buildUrl('agent', {
+      urlParams: {
+        id,
+      },
     });
     const params: HttpParams = new HttpParams().set('fields', 'DEFAULT');
     return this.http

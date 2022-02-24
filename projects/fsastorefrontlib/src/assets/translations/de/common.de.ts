@@ -1,6 +1,7 @@
 export const fscommon = {
   fscommon: {
     no: 'Nr',
+    none: '',
     mr: 'Herr.',
     mrs: 'Frau',
     add: 'Hinzufügen',
@@ -14,6 +15,7 @@ export const fscommon = {
     date: 'Datum',
     preview: 'Vorschau',
     select: 'Auswählen',
+    selected: '[DE] Selected',
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',
@@ -31,6 +33,7 @@ export const fscommon = {
     retrieve: 'Abrufen',
     notAvailable: 'N/V',
     contractId: 'VertragId',
+    title: 'Titel',
     orderTotal: 'Gesamtbetrag',
     orderConfirmation: 'Bestellbestätigung',
     orderNumber: 'Bestellnummer',
@@ -45,6 +48,8 @@ export const fscommon = {
     country: 'Land',
     expiryDate: 'Verfallsdatum',
     expiryNotConfirmed: 'Nicht bestätigt',
+    cancellationDate: '[DE]Cancellation Date',
+    cancellationReason: '[DE]Cancellation Reason',
     expires: 'Läuft ab',
     myAgent: 'Mein Agent',
     contactAgent: 'Kundenbetreuer kontaktieren',
@@ -85,6 +90,7 @@ export const fscommon = {
     quotesAndApplications: 'Angebote & Anträge',
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
+    addDocuments: '[DE]  Add Documents',
     summary: 'Zusammenfassung',
     submit: 'Einreichen',
     totalResults: 'Gesamtergebnisse',
@@ -98,11 +104,12 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: 'Rechnung',
-    recommendedProduct: '[DE] This is your recommended product!',
+    recommendedProduct: 'Dies ist Ihr empfohlenes Produkt!',
     payment: {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
     },
+    oboCustomers: '[DE] All Customers',
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:
@@ -145,18 +152,6 @@ export const fscommon = {
       banking_loans: 'Ihr Kredit Antrag',
       banking_fixed_term_deposit: 'Ihr Festgeld Antrag',
     },
-    progressBar: {
-      step: {
-        fnolIncidentPage: 'Schadensinformationen',
-        fnolIncidentReportPage: 'Schadensmeldung',
-        fnolGeneralInfoPage: 'Allgemeine Informationen',
-        fnolSummaryPage: 'Zusammenfassung',
-        changeCarDetailsPage: 'Fahrzeugdetails ändern',
-        changeSimulationPage: 'Vorschau ändern',
-        changeCoveragePage: 'Versicherungsschutz ändern',
-        changeAdditionalDriverPage: 'Fahrerinformationen',
-      },
-    },
     pleaseSelect: 'Wählen Sie:',
     userIdentification: {
       title: 'User Identifizierung',
@@ -182,9 +177,9 @@ export const fscommon = {
       contact: 'Kontakt',
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
-      backToList: '[DE] Back to list',
-      online: '[DE] Online',
-      offline: '[DE] Offline',
+      backToList: 'Zurück zur Liste',
+      online: 'Online',
+      offline: 'Offline',
       noSearchResults: 'Keine Ergebnisse',
     },
     questionnaire: {
@@ -194,11 +189,13 @@ export const fscommon = {
     },
     httpHandlers: {
       existingCouponCodeProvided:
-        '[DE] This coupon code is already applied to the current cart.',
+        'Dieser Gutscheincode wird bereits auf den aktuellen Warenkorb angewendet.',
     },
     syncPilot: {
-      speakToAgent: '[DE] Speak to an Agent',
-      needHelp: '[DE] Need Help?',
+      speakToAgent: 'Sprechen Sie Mit Einem Agenten',
+      needHelp: 'Benötigen Sie Hilfe?',
+      contactAgent: 'Verbindung zu einem Agenten wird hergestellt',
+      waitingAgent: 'Warten auf einen Agenten...',
     },
     priceCalculationError:
       'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',

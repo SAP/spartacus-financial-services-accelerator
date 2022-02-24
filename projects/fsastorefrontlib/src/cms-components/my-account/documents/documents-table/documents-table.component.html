@@ -43,8 +43,31 @@
             *ngIf="document?.insurancePolicy || document?.claim"
             class="td-value text-right"
           >
-            {{ document?.insurancePolicy?.policyNumber }}
-            {{ document?.claim?.claimNumber }}
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'policyDetails',
+                  params: {
+                    policyId: document?.insurancePolicy?.policyNumber,
+                    contractId: document?.insurancePolicy?.contractNumber
+                  }
+                } | cxUrl
+              "
+            >
+              {{ document?.insurancePolicy?.policyNumber }}
+            </a>
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'claimDetails',
+                  params: { claimId: document?.claim?.claimNumber }
+                } | cxUrl
+              "
+            >
+              {{ document?.claim?.claimNumber }}
+            </a>
           </span>
         </td>
         <td>

@@ -1,40 +1,94 @@
-<ng-container *ngIf="cart$ | async as cart">
+<ng-container
+  *ngIf="{
+    cart: cart$ | async,
+    isCartTransferAllowedForSeller: isCartTransferAllowedForSeller$ | async
+  } as quoteReview"
+>
   <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="showContent$ | async; else loading">
-      <ng-container *ngIf="cart.deliveryOrderGroups?.length > 0; else noQuotes">
+      <ng-container *ngIf="quoteReview.cart.entries?.length > 0; else noQuotes">
         <div class="accordion">
           <h2 class="row no-gutters section-header-heading">
             <div class="col-12 col-md-2">
               <span
-                *ngIf="
-                  (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.images
-                    ?.length > 0
-                "
+                *ngIf="quoteReview.cart.entries[0]?.product?.images?.length > 0"
                 class="image-wrapper"
               >
                 <cx-media
                   [container]="
-                    (cart.deliveryOrderGroups[0]?.entries)[0]?.product
-                      ?.defaultCategory?.image
+                    (quoteReview.cart?.entries)[0]?.product?.defaultCategory
+                      ?.image
                   "
-                  [alt]="
-                    (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.name
-                  "
+                  [alt]="(quoteReview.cart?.entries)[0]?.product?.name"
                 ></cx-media>
               </span>
             </div>
             <div class="col-12 col-md-8">
               {{
                 'fscommon.category.' +
-                  cart.entries[0]?.product?.defaultCategory?.code | cxTranslate
+                  quoteReview.cart.entries[0]?.product?.defaultCategory?.code
+                  | cxTranslate
               }}
             </div>
           </h2>
+          <ng-container *ngIf="oboCustomers$ | async as oboCustomers">
+            <ng-container *ngIf="oboCustomers.entries.length > 0">
+              <cx-fs-accordion-item
+                [opened]="true"
+                [title]="'fscommon.oboCustomers' | cxTranslate"
+              >
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <ul class="col-12 accordion-list">
+                      <ng-container
+                        *ngFor="
+                          let oboCustomer of oboCustomers.entries;
+                          let i = index
+                        "
+                      >
+                        <ng-container *ngIf="oboCustomer.active">
+                          <li class="accordion-list-item row">
+                            <div class="col-6 col-sm-8">
+                              <div class="row no-gutters">
+                                <span class="col-12 col-sm-6 item-label">
+                                  {{ oboCustomer.name }}
+                                </span>
+                                <span class="col-12 col-sm-6 notice">
+                                  {{ oboCustomer.uid }}
+                                </span>
+                              </div>
+                            </div>
+                            <span
+                              [ngClass]="{
+                                'is-disabled':
+                                  quoteReview.isCartTransferAllowedForSeller &&
+                                  selectedIndex === i
+                              }"
+                              class="col-6 col-sm-4 link text-right"
+                              (click)="selectOBOCustomer(oboCustomer, i)"
+                            >
+                              {{
+                                quoteReview.isCartTransferAllowedForSeller &&
+                                selectedIndex === i
+                                  ? ('fscommon.selected' | cxTranslate)
+                                  : ('fscommon.select' | cxTranslate)
+                              }}
+                            </span>
+                          </li>
+                        </ng-container>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </cx-fs-accordion-item>
+            </ng-container>
+          </ng-container>
           <div #ref>
             <ng-container
               *ngIf="
-                cart?.insuranceQuote?.quoteType !== 'EVENT' &&
-                (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
+                quoteReview.cart?.insuranceQuote?.quoteType !== 'EVENT' &&
+                (quoteReview.cart?.entries)[0]?.product
+                  ?.defaultCategory as defaultCategory
               "
             >
               <cx-fs-accordion-item
@@ -48,11 +102,11 @@
                         *ngTemplateOutlet="
                           cartDetails;
                           context: {
-                            valueList: !(cart?.entries)[0]?.product
+                            valueList: !(quoteReview.cart?.entries)[0]?.product
                               ?.configurable
-                              ? cart?.insuranceQuote?.quoteDetails
-                              : ((cart?.entries)[0]?.configurationInfos)[0]
-                                  ?.configurationValues,
+                              ? quoteReview.cart?.insuranceQuote?.quoteDetails
+                              : ((quoteReview.cart?.entries)[0]
+                                  ?.configurationInfos)[0]?.configurationValues,
                             defaultCategory: defaultCategory
                           }
                         "
@@ -63,12 +117,15 @@
                       *ngTemplateOutlet="
                         edit;
                         context: {
-                          route: cart.entries[0]?.product?.configurable
+                          route: quoteReview.cart.entries[0]?.product
+                            ?.configurable
                             ? 'configureProduct'
                             : 'generalInformation',
-                          quoteStateCode: cart.insuranceQuote?.state?.code,
-                          param: cart.entries[0]?.product?.configurable
-                            ? cart.entries[0].product.code
+                          quoteStateCode:
+                            quoteReview.cart.insuranceQuote?.state?.code,
+                          param: quoteReview.cart.entries[0]?.product
+                            ?.configurable
+                            ? quoteReview.cart.entries[0].product.code
                             : ''
                         }
                       "
@@ -80,7 +137,7 @@
             </ng-container>
           </div>
           <cx-fs-accordion-item
-            [opened]="ref.children.length > 0 ? false : true"
+            [opened]="ref.children.length === 0"
             [title]="'fscommon.whatsIncluded' | cxTranslate"
           >
             <div class="container">
@@ -88,8 +145,8 @@
                 <ul class="col-12 accordion-list">
                   <ng-container
                     *ngFor="
-                      let item of (cart.deliveryOrderGroups[0]?.entries)[0]
-                        ?.product?.price?.oneTimeChargeEntries
+                      let item of quoteReview.cart.entries[0]?.product?.price
+                        ?.oneTimeChargeEntries
                     "
                   >
                     <ng-container *ngIf="item.mandatory">
@@ -124,12 +181,13 @@
                   *ngTemplateOutlet="
                     edit;
                     context: {
-                      route: cart.entries[0]?.product?.configurable
+                      route: quoteReview.cart.entries[0]?.product?.configurable
                         ? 'configureProduct'
                         : 'category',
-                      quoteStateCode: cart.insuranceQuote?.state?.code,
-                      param: cart.entries[0]?.product?.configurable
-                        ? cart.entries[0].product.code
+                      quoteStateCode:
+                        quoteReview.cart.insuranceQuote?.state?.code,
+                      param: quoteReview.cart.entries[0]?.product?.configurable
+                        ? quoteReview.cart.entries[0].product.code
                         : ''
                     }
                   "
@@ -138,16 +196,15 @@
               </div>
             </div>
           </cx-fs-accordion-item>
-          <ng-container *ngIf="checkIfRemoveableEntriesExists(cart)">
+          <ng-container
+            *ngIf="checkIfRemoveableEntriesExists(quoteReview.cart)"
+          >
             <cx-fs-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion-list">
                     <ng-container
-                      *ngFor="
-                        let item of cart.deliveryOrderGroups[0]?.entries
-                          | slice: 1
-                      "
+                      *ngFor="let item of quoteReview.cart.entries | slice: 1"
                     >
                       <ng-container *ngIf="item.removeable">
                         <li class="accordion-list-item row">
@@ -163,7 +220,8 @@
                       edit;
                       context: {
                         route: 'addOptions',
-                        quoteStateCode: cart.insuranceQuote?.state?.code
+                        quoteStateCode:
+                          quoteReview.cart.insuranceQuote?.state?.code
                       }
                     "
                   >
@@ -174,8 +232,8 @@
           </ng-container>
           <ng-container
             *ngIf="
-              cart.deliveryOrderGroups[0]?.entries.length > 0 &&
-              (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.investments
+              quoteReview.cart.entries.length > 0 &&
+              quoteReview.cart.entries[0]?.product?.investments
             "
           >
             <cx-fs-accordion-item
@@ -184,9 +242,7 @@
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion-list">
-                    <ng-container
-                      *ngFor="let item of cart.deliveryOrderGroups[0]?.entries"
-                    >
+                    <ng-container *ngFor="let item of quoteReview.cart.entries">
                       <ng-container
                         *ngFor="
                           let investmentDetail of item.product?.investments
@@ -228,13 +284,13 @@
             <div class="container">
               <div class="row justify-content-center">
                 <ul
-                  *ngIf="((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formData"
+                  *ngIf="(quoteReview.cart?.entries)[0]?.formData"
                   class="col-12 accordion-list"
                 >
                   <ng-container
                     *ngFor="
-                      let formEntry of getFormContent(cart)?.personalDetails
-                        | keyvalue
+                      let formEntry of getFormContent(quoteReview.cart)
+                        ?.personalDetails | keyvalue
                     "
                   >
                     <ng-container
@@ -259,7 +315,8 @@
                     edit;
                     context: {
                       route: 'checkoutPersonalDetails',
-                      quoteStateCode: cart.insuranceQuote?.state?.code
+                      quoteStateCode:
+                        quoteReview.cart.insuranceQuote?.state?.code
                     }
                   "
                 >
@@ -268,10 +325,10 @@
             </div>
           </cx-fs-accordion-item>
           <div class="row mt-5">
-            <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+            <div class="col-md-6 mb-3 mb-md-0">
               <ng-container
                 *ngIf="
-                  cart.insuranceQuote?.state?.code !== 'BIND' &&
+                  quoteReview.cart.insuranceQuote?.state?.code !== 'BIND' &&
                   (previousCheckoutStep$ | async) as previousCheckoutStep
                 "
                 ><button
@@ -284,22 +341,31 @@
             </div>
             <div
               *ngIf="
-                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
-                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
+                quoteReview.cart.insuranceQuote?.quoteWorkflowStatus?.code ===
+                  'APPROVED' ||
+                quoteReview.cart.insuranceQuote?.quoteWorkflowStatus?.code ===
+                  'REFERRED'
               "
-              class="col-md-6 col-sm-6 col-xs-12"
+              class="col-md-6"
             >
               <ng-container
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
-                ><button
+              >
+                <button
                   class="primary-button btn-block"
+                  [disabled]="!quoteReview.isCartTransferAllowedForSeller"
                   type="button"
-                  data-checkout-url=""
-                  (click)="navigateNext(nextCheckoutStep, cart)"
+                  (click)="
+                    navigateNext(
+                      nextCheckoutStep,
+                      quoteReview.cart,
+                      quoteReview.isCartTransferAllowedForSeller
+                    )
+                  "
                 >
                   {{ 'common.continue' | cxTranslate }}
-                </button></ng-container
-              >
+                </button>
+              </ng-container>
             </div>
           </div>
         </div>

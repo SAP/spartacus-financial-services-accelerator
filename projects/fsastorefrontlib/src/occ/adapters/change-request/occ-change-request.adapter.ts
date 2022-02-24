@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/internal/operators/catchError';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
-import { Observable } from 'rxjs';
 import { OccEndpointsService } from '@spartacus/core';
 
 @Injectable()
@@ -14,9 +13,11 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
   ) {}
 
   getChangeRequest(userId: string, requestId: string) {
-    const url = this.occEndpointService.getUrl('changeRequest', {
-      userId,
-      requestId,
+    const url = this.occEndpointService.buildUrl('changeRequest', {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     return this.http
       .get(url)
@@ -36,8 +37,10 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
-    const url = this.occEndpointService.getUrl('createChangeRequest', {
-      userId,
+    const url = this.occEndpointService.buildUrl('createChangeRequest', {
+      urlParams: {
+        userId,
+      },
     });
     return this.http
       .post<any>(url, httpParams, { headers })
@@ -45,9 +48,11 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
   }
 
   simulateChangeRequest(userId: string, requestId: string, changeRequest: any) {
-    const url = this.occEndpointService.getUrl('simulateChangeRequest', {
-      userId,
-      requestId,
+    const url = this.occEndpointService.buildUrl('simulateChangeRequest', {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     return this.http
       .post<any>(url, changeRequest)
@@ -55,9 +60,11 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
   }
 
   cancelChangeRequest(userId: string, requestId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('cancelChangeRequest', {
-      userId,
-      requestId,
+    const url = this.occEndpointService.buildUrl('cancelChangeRequest', {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

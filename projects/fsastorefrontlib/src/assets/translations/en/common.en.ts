@@ -1,6 +1,7 @@
 export const fscommon = {
   fscommon: {
     no: 'No',
+    none: '',
     mr: 'Mr.',
     mrs: 'Mrs.',
     add: 'Add',
@@ -17,6 +18,7 @@ export const fscommon = {
     preview: 'Preview',
     change: 'Change',
     select: 'Select',
+    selected: 'Selected',
     subject: 'Subject',
     resume: 'Resume',
     details: 'Details',
@@ -34,6 +36,7 @@ export const fscommon = {
     retrieve: 'Retrieve',
     notAvailable: 'N/A',
     contractId: 'ContractId',
+    title: 'Title',
     orderTotal: 'Order total',
     orderConfirmation: 'Confirmation',
     orderNumber: 'Order Number',
@@ -46,6 +49,8 @@ export const fscommon = {
     postCode: 'Postcode',
     country: 'Country',
     expiryDate: 'Expiry Date',
+    cancellationDate: 'Cancellation Date',
+    cancellationReason: 'Cancellation Reason',
     expiryNotConfirmed: 'Not Confirmed',
     expires: 'Expires',
     myAgent: 'My Agent',
@@ -85,6 +90,7 @@ export const fscommon = {
     quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
+    addDocuments: 'Add Documents',
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',
@@ -103,6 +109,8 @@ export const fscommon = {
       CARD: 'Credit Card',
       INVOICE: 'Invoice',
     },
+    oboCustomers: 'All Customers',
+    userCreatedSuccess: 'User is successfully created',
     application: {
       title: 'Application',
       applicationRequestSubmitted:
@@ -110,7 +118,7 @@ export const fscommon = {
       applicationNumber: 'Application number is',
       myApplication: 'My Application',
       applicationID: 'Application ID',
-      number: 'Number:',
+      number: 'Number',
     },
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
@@ -131,18 +139,6 @@ export const fscommon = {
       banking_current_account: 'Your Current Account Application',
       banking_loans: 'Your Loan Application',
       banking_fixed_term_deposit: 'Your Fixed Term Deposit Application',
-    },
-    progressBar: {
-      step: {
-        fnolIncidentPage: 'Incident Information',
-        fnolIncidentReportPage: 'Incident Report',
-        fnolGeneralInfoPage: 'General Information',
-        fnolSummaryPage: 'Summary',
-        changeCarDetailsPage: 'Change Car Details',
-        changeSimulationPage: 'Change Preview',
-        changeCoveragePage: 'Change Coverage',
-        changeAdditionalDriverPage: 'Driver Information',
-      },
     },
     category: {
       insurances_property_homeowners: 'Homeowners Insurance',
@@ -199,6 +195,8 @@ export const fscommon = {
     syncPilot: {
       speakToAgent: 'Speak to an Agent',
       needHelp: 'Need Help?',
+      contactAgent: 'Connecting to an agent',
+      waitingAgent: 'Waiting for an agent...',
     },
     attachments: 'Attachments',
     pageNotFoundMessage:

@@ -21,23 +21,23 @@ export function checkOptionalProducts() {
 
 export function checkMiniCartFirstStep() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €503,125.00 ',
+    price: '€503,125.00',
     products: [
       {
         title: 'Term Amount:',
-        value: ' 500000 ',
+        value: '500000',
       },
       {
         title: 'Deposit Term:',
-        value: ' 3 ',
+        value: '3',
       },
       {
         title: 'Maturity Option:',
-        value: ' termination ',
+        value: 'termination',
       },
       {
         title: 'Start Date:',
-        value: ' 2021-12-12 ',
+        value: '2023-12-12',
       },
     ],
   };
@@ -46,35 +46,35 @@ export function checkMiniCartFirstStep() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €503,125.00 ',
+    price: '€503,125.00',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 12 Dec 2021 ',
+        title: 'Start Date:',
+        value: '12 Dec 2023',
       },
       {
         title: 'Deposit Term:',
-        value: ' 3 ',
+        value: '3',
       },
       {
         title: 'Maturity Option:',
-        value: ' termination ',
+        value: 'termination',
       },
       {
         title: 'Investment Amount:',
-        value: ' 500000 ',
+        value: '500,000.00',
       },
       {
-        title: ' Fixed Term Deposit: ',
-        value: ' €503,125.00 ',
+        title: 'Fixed Term Deposit: ',
+        value: '€503,125.00',
       },
       {
-        title: ' Flexi Deposit: ',
-        value: ' €0.00 ',
+        title: 'Flexi Deposit:',
+        value: '€0.00',
       },
       {
-        title: ' Offset Account: ',
-        value: ' €0.00 ',
+        title: 'Offset Account:',
+        value: '€0.00',
       },
     ],
   };
@@ -85,7 +85,7 @@ export function configureAProduct() {
   cy.get('[name=term-amount]').type('500000');
   cy.get('[name=deposit-term]').select('3');
   cy.get('[name=maturity-option]').select('termination');
-  cy.get('[name=startDate]').type('2021-12-12');
+  cy.get('[name=startDate]').type('2023-12-12');
 }
 
 export function checkFtdApplication() {

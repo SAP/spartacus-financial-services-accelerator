@@ -1,14 +1,20 @@
 <ng-container *ngIf="comparisonPanel$ | async as panel">
   <ng-container *ngIf="billingData$ | async as billingInfo">
     <div class="fixed-column">
-      <div class="table-header text-center mb-0">
+      <div class="table-header sticky-position text-center mb-0">
         <ng-container *ngIf="(user$ | async)?.uid">
-          <cx-fs-sync-pilot-connection-component></cx-fs-sync-pilot-connection-component>
+          <cx-fs-generic-sync-pilot
+            [type]="iconType.AGENT"
+          ></cx-fs-generic-sync-pilot>
         </ng-container>
       </div>
       <div class="table-cell-wrapper">
-        <div *ngFor="let item of billingInfo.billingTimes" class="table-cell">
-          <span class="table-cell-title text-truncate" title="{{ item.name }}">
+        <div
+          *ngFor="let item of billingInfo.billingTimes"
+          class="table-cell"
+          #tableCell
+        >
+          <span class="table-cell-title text-uppercase" title="{{ item.name }}">
             {{ item.name }}
           </span>
           <div

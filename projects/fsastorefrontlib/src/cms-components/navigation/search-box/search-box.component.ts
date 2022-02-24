@@ -26,7 +26,7 @@ export class FSSearchBoxComponent extends SearchBoxComponent {
     protected checkoutService: FSCheckoutService,
     protected routingService: RoutingService
   ) {
-    super(searchBoxComponentService, componentData, winRef);
+    super(searchBoxComponentService, componentData, winRef, routingService);
   }
 
   startCheckout(product: FSProduct) {

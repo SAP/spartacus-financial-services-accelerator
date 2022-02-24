@@ -49,7 +49,7 @@ export function checkLegalInformationLoan() {
 export function configureLoan(numberOfApplicats) {
   cy.get('[name=numberOfApplicants]').select(numberOfApplicats);
   cy.get('[name=loan-amount]').type('18001');
-  cy.get('[name=loanStartDate]').type('2021-12-12');
+  cy.get('[name=loanStartDate]').type('2023-12-12');
   cy.get('[name=loan-term]').select('6-year');
   cy.get('[name=repayment-frequency]').select('biweekly');
   cy.get('[name=loanPurpose]').select('purchasing-a-car');
@@ -57,31 +57,31 @@ export function configureLoan(numberOfApplicats) {
 
 export function checkMiniCartFirstStep() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €128.83 ',
+    price: '€128.83',
     products: [
       {
         title: 'Number of Applicants:',
-        value: ' 2 ',
+        value: '2 ',
       },
       {
         title: 'Loan Amount:',
-        value: ' 18001 ',
+        value: '18001',
       },
       {
         title: 'Loan Start Date:',
-        value: ' 2021-12-12 ',
+        value: '2023-12-12',
       },
       {
         title: 'Loan Term:',
-        value: ' 6-year ',
+        value: '6-year',
       },
       {
         title: 'Repayment Frequency:',
-        value: ' biweekly ',
+        value: 'biweekly',
       },
       {
         title: 'Loan Purpose:',
-        value: ' purchasing-a-car ',
+        value: 'purchasing-a-car',
       },
     ],
   };
@@ -90,47 +90,47 @@ export function checkMiniCartFirstStep() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €140.00 ',
+    price: '€140.00',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 12 Dec 2021 ',
+        title: 'Start Date:',
+        value: '12 Dec 2023',
       },
       {
         title: 'Loan Amount:',
-        value: ' 18001 ',
+        value: '18,001.00',
       },
       {
         title: 'Loan Term:',
-        value: ' 6-year ',
+        value: ' 6-year',
       },
       {
         title: 'Loan Purpose:',
-        value: ' purchasing-a-car ',
+        value: 'purchasing-a-car',
       },
       {
         title: 'Number Of Applicants:',
-        value: ' 2 ',
+        value: '2',
       },
       {
         title: 'Repayment Frequency:',
-        value: ' biweekly ',
+        value: 'biweekly',
       },
       {
-        title: ' Personal Loan: ',
-        value: ' €124.21 ',
+        title: 'Personal Loan:',
+        value: '€124.21',
       },
       {
-        title: ' Service Fee: ',
-        value: ' €4.62 ',
+        title: 'Service Fee:',
+        value: '€4.62',
       },
       {
-        title: ' Critical Illness Cover: ',
-        value: ' €8.69 ',
+        title: 'Critical Illness Cover:',
+        value: '€8.69',
       },
       {
-        title: ' Job Loss Cover: ',
-        value: ' €2.48 ',
+        title: 'Job Loss Cover:',
+        value: '€2.48',
       },
     ],
   };

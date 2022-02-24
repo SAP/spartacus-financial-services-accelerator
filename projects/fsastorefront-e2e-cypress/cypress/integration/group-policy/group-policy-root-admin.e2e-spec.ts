@@ -25,21 +25,14 @@ testFilters([''], () => {
 
     it('Should create a new member', () => {
       groupPolicy.checkGroupPolicyMainPage();
+      groupPolicy.checkUnitsPage();
+      cy.visit('/');
+      groupPolicy.checkGroupPolicyMainPage();
       groupPolicy.checkMembersPage();
       groupPolicy.createNewMember();
       groupPolicy.checkGroupPolicyMainPage();
       groupPolicy.checkMembersPage();
-      groupPolicy.changePasswordForNewMember();
-      register.logout();
-    });
-
-    it('Should login as new member', () => {
-      cy.visit('/login');
-      register.login(createCustomer.email, createCustomer.password);
-      cy.get('cx-category-navigation')
-        .contains('Insurance')
-        .should('not.exist');
-      cy.get('cx-category-navigation').contains('Banking').should('not.exist');
+      groupPolicy.checkMemberIsDisabled();
     });
   });
 });

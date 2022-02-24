@@ -13,7 +13,7 @@
         formControlName="{{ config.name }}"
         [attr.name]="config.name"
         [step]="1"
-        [attr.readonly]="config.readonly"
+        [attr.readonly]="config.readonly ? config.readonly : null"
       />
     </div>
     <cx-error-notice

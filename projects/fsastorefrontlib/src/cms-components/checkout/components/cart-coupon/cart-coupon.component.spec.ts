@@ -136,7 +136,7 @@ describe('FSCartCouponComponent', () => {
 
   it('should apply voucher', () => {
     const applyBtn = el.query(By.css('button')).nativeElement;
-    input = el.query(By.css('.input-coupon-code')).nativeElement;
+    input = el.query(By.css('.form-control')).nativeElement;
     input.value = 'couponCode1';
     input.dispatchEvent(new Event('input'));
     applyBtn.click();
@@ -147,7 +147,7 @@ describe('FSCartCouponComponent', () => {
 
   it('should not apply voucher if there is no code entered', () => {
     const applyBtn = el.query(By.css('button')).nativeElement;
-    input = el.query(By.css('.input-coupon-code')).nativeElement;
+    input = el.query(By.css('.form-control')).nativeElement;
     input.value = '';
     input.dispatchEvent(new Event('input'));
     applyBtn.click();

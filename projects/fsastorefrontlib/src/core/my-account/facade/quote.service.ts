@@ -10,13 +10,14 @@ import {
   FSCart,
   FSOrderEntry,
   FSProduct,
+  InsuranceQuote,
   QuoteActionType,
 } from '../../../occ/occ-models';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Injectable()
 export class QuoteService {
@@ -29,6 +30,8 @@ export class QuoteService {
     protected routingService: RoutingService
   ) {}
 
+  quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
+  quoteForCompare$ = this.quoteForCompareSource.asObservable();
   private subscription = new Subscription();
 
   loadQuotes() {
@@ -45,19 +48,13 @@ export class QuoteService {
       .unsubscribe();
   }
 
-  loadQuoteDetails(quoteId) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.LoadQuoteDetails({
-            userId: occUserId,
-            quoteId: quoteId,
-          })
-        )
-      )
-      .unsubscribe();
+  loadQuoteDetails(quoteId, occUserId) {
+    this.store.dispatch(
+      new fromAction.LoadQuoteDetails({
+        userId: occUserId,
+        quoteId: quoteId,
+      })
+    );
   }
 
   getQuotes() {
@@ -68,7 +65,7 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
   }
 
-  getQuotesLoaded() {
+  getQuotesLoaded(): Observable<boolean> {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
@@ -215,5 +212,19 @@ export class QuoteService {
         )
       )
       .unsubscribe();
+  }
+
+  loadQuotesComparison(cartCodes: string[], userId?: string): void {
+    this.store.dispatch(
+      new fromAction.LoadQuoteComparison({ cartCodes, userId })
+    );
+  }
+
+  getQuotesComparison(): Observable<any> {
+    return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
+  }
+
+  setQuoteForCompare(quote: InsuranceQuote) {
+    this.quoteForCompareSource.next(quote);
   }
 }

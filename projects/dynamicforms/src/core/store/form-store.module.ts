@@ -1,29 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import {
-  ConfigModule,
-  StateConfig,
-  StateModule,
-  StorageSyncType,
-} from '@spartacus/core';
+import { StateModule } from '@spartacus/core';
+import { FormPersistenceService } from '../services/form-persistance.service';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
 import { FORM_FEATURE } from './state';
 
-export function fileConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`${FORM_FEATURE}.uploadedFiles.content.files`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
+export function formStatePersistenceFactory(
+  formStatePersistenceService: FormPersistenceService
+): () => void {
+  const result = () => formStatePersistenceService.initSync();
+  return result;
 }
 
 @NgModule({
@@ -35,8 +25,15 @@ export function fileConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(fileConfigFactory),
   ],
-  providers: [reducerProvider],
+  providers: [
+    reducerProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: formStatePersistenceFactory,
+      deps: [FormPersistenceService],
+      multi: true,
+    },
+  ],
 })
 export class FormStoreModule {}

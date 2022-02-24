@@ -1,16 +1,21 @@
-import { YFormData } from '@spartacus/dynamicforms';
+import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
 import {
   B2BUser,
   Cart,
   Category,
+  Consent,
+  ConsentTemplate,
   Occ,
   OrderEntry,
   Price,
   Product,
+  SortModel,
   User,
 } from '@spartacus/core';
-import { CheckoutStep } from '@spartacus/storefront';
+import { CheckoutStep } from '@spartacus/checkout/root';
 import { UserSignUp } from '@spartacus/user/profile/root';
+import { MediaContainer } from '@spartacus/storefront';
+import { Pagination } from '@spartacus/core/src/model/unused.model';
 
 export interface ContactAgentData {
   email?: string;
@@ -70,6 +75,16 @@ export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
 }
 
+export interface OBOConsentList {
+  oboConsents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: FSUser[];
+  pagination: Pagination;
+  sorts: SortModel[];
+}
+
 export interface QuoteWorkflowStatus {
   code?: string;
 }
@@ -85,6 +100,27 @@ export interface InsuranceQuote {
   quoteWorkflowStatus?: QuoteWorkflowStatus;
   quoteDetails?: Record<string, string>;
   insuredObjectList?: InsuredObjectList;
+  renewal?: boolean;
+  original?: boolean;
+}
+
+export interface OBOConsent extends Consent {
+  consentHolder?: User;
+  consentTemplate?: ConsentTemplate;
+  customer: User;
+  oboPermissionConfiguration: OBOPermissionConfiguration;
+}
+
+export interface FSConsentTemplate extends ConsentTemplate {
+  exposed?: boolean;
+}
+
+export interface OBOPermissionConfiguration {
+  permissions?: OBOPermissions[];
+}
+
+export interface OBOPermissions {
+  [key: string]: any;
 }
 
 export enum OrganizationTableType {
@@ -156,6 +192,19 @@ export enum QuoteActionType {
   UPDATE = 'UPDATE',
 }
 
+export enum SyncPilotGender {
+  mr = 'm',
+  mrs = 'w',
+  miss = 'w',
+  ms = 'w',
+  dr = 'd',
+  rev = 'd',
+}
+
+export enum FSUserRole {
+  SELLER = 'sellergroup',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;
@@ -201,6 +250,8 @@ export interface FSContactInfo {
 export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
+  active?: boolean;
+  thumbnail?: MediaContainer;
 }
 
 export interface FSStepData {
@@ -235,7 +286,7 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
-  documents?: any;
+  documents?: DocumentFile[];
   properties?: any;
 }
 

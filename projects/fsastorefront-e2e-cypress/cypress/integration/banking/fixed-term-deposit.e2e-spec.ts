@@ -4,8 +4,7 @@ import * as checkout from '../../helpers/checkout/checkout-steps';
 import * as banking from '../../helpers/checkout/banking/checkout-banking';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
 import * as ftd from '../../helpers/checkout/banking/fixed-term-deposit';
-import * as currentAccount from '../../helpers/checkout/banking/current-account';
-import * as policies from '../../helpers/my-account/policies';
+import { checkMyQuotesPage } from '../../helpers/my-account/quotes-and-applications';
 import * as myAccount from '../../helpers/my-account/my-account';
 import testFilters from '../../support/filters';
 
@@ -43,7 +42,7 @@ testFilters([''], () => {
     it('Should populate Personal Details page and go to quotes page', () => {
       checkout.checkCheckoutStep('Your Fixed Term Deposit Application', '6');
       checkout.checkPersonalDetailsPage();
-      policies.checkMyQuotesPage();
+      checkMyQuotesPage();
       ftd.checkFtdApplication();
     });
 
@@ -70,6 +69,8 @@ testFilters([''], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkout.clickContinueButton();
     });
 
     it('Should check Legal Information page', () => {
@@ -97,7 +98,7 @@ testFilters([''], () => {
 
     it('Should check order history page', () => {
       myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('503,125.00');
+      myAccount.checkOrderHistoryContent('503,125.00', 'Pending Approval');
     });
   });
 });

@@ -183,6 +183,15 @@ export class ClaimService {
       .unsubscribe();
   }
 
+  changeClaim(claim: Claim, userId: string) {
+    this.store.dispatch(
+      new fromAction.ChangeClaim({
+        userId: userId,
+        claimData: claim,
+      })
+    );
+  }
+
   private isCreated(claim: any): boolean {
     return claim && claim.claimNumber !== undefined;
   }

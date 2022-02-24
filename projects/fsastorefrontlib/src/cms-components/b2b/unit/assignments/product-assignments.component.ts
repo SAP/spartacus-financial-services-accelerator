@@ -18,7 +18,7 @@ import { ProductAssignmentsListService } from './product-assignments-list.servic
   selector: 'cx-fs-product-assignments',
   templateUrl: './product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // tslint:disable-next-line:no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { class: 'content-wrapper' },
   providers: [
     {

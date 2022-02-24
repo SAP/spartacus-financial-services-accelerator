@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
 import { InboxAdapter } from '../../../core/my-account/connectors/inbox.adapter';
@@ -21,8 +20,10 @@ export class OccInboxAdapter implements InboxAdapter {
     searchConfig: FSSearchConfig,
     read?: boolean
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('siteMessages', {
-      userId,
+    const url = this.occEndpointService.buildUrl('siteMessages', {
+      urlParams: {
+        userId,
+      },
     });
     let params: HttpParams = new HttpParams();
     if (searchConfig.sortCode && searchConfig.sortOrder) {
@@ -54,8 +55,10 @@ export class OccInboxAdapter implements InboxAdapter {
     messagesUidList: Array<string>,
     read: boolean
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('updateMessages', {
-      userId,
+    const url = this.occEndpointService.buildUrl('updateMessages', {
+      urlParams: {
+        userId,
+      },
     });
     const params: HttpParams = new HttpParams()
       .set('messageCodes', messagesUidList.toString())

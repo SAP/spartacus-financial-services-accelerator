@@ -15,7 +15,7 @@ import { InputComponent } from './input.component';
 import { FormService } from './../../core/services/form/form.service';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })

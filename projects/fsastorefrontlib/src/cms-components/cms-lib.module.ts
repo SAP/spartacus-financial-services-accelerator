@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserAccountCoreModule } from '@spartacus/user/account/core';
 import { effects } from '../core/my-account/store/effects/index';
 import { reducerProvider } from '../core/my-account/store/reducers/index';
 import { AgentModule } from './agent/agent.module';
@@ -21,12 +23,14 @@ import { GeneralInformationModule } from './form/general-information/general-inf
 import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { B2bModule } from './b2b/b2b.module';
 import { MessageNotificationModule } from './message-notification/message-notification.module';
-import { SyncPilotModule } from './sync-pilot';
 import { NavigationModule } from './navigation';
 import { QuestionnaireCarouselModule } from './questionnaire-carousel/questionnaire-carousel.module';
 import { FSSearchBoxModule } from './navigation/search-box/search-box.module';
-import { UserProfileCoreModule } from '@spartacus/user/profile/core';
-import { UserAccountCoreModule } from '@spartacus/user/account/core';
+import { UserProfileModule } from './user-profile/user-profile.module';
+import { SellerDashboardModule } from './seller-dashboard/seller-dashboard.module';
+import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
+import { AssetsTableModule } from './assets-table/assets-table.module';
+import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
 
 @NgModule({
   imports: [
@@ -37,6 +41,8 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    UserProfileModule,
+    SellerDashboardModule,
     UserProfileCoreModule,
     UserAccountCoreModule,
     FSRegisterModule,
@@ -52,8 +58,11 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     B2bModule,
     MessageNotificationModule,
     NavigationModule,
+    CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
+    DashboardLinkModule,
   ],
   exports: [
     AgentModule,
@@ -63,6 +72,8 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
+    UserProfileModule,
+    SellerDashboardModule,
     FSRegisterModule,
     FSLoginFormModule,
     FnolModule,
@@ -75,9 +86,11 @@ import { UserAccountCoreModule } from '@spartacus/user/account/core';
     GeneralInformationModule,
     B2bModule,
     MessageNotificationModule,
-    SyncPilotModule,
+    CmsSyncPilotModule,
     QuestionnaireCarouselModule,
     FSSearchBoxModule,
+    AssetsTableModule,
+    DashboardLinkModule,
   ],
   providers: [reducerProvider],
 })

@@ -9,7 +9,7 @@ import { CMSComparisonTabComponent } from '../../../occ/occ-models';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
 
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {

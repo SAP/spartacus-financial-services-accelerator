@@ -13,6 +13,7 @@ export interface MyAccountState {
   premiumCalendar: PremiumCalendarState;
   claims: ClaimState;
   claimPolicies: ClaimPoliciesState;
+  consents: ConsentState;
 }
 
 export interface Quote {
@@ -22,6 +23,16 @@ export interface Quote {
 export interface QuoteState {
   quotes: Models.InsuranceQuote[];
   quoteDetails: {};
+  quotesComparison: {};
+  loaded: boolean;
+}
+
+export interface ConsentState {
+  consents: {};
+  customer: {};
+  customerQuotes: Models.InsuranceQuote[];
+  customerPolicies: {};
+  customerClaims: {};
   loaded: boolean;
 }
 

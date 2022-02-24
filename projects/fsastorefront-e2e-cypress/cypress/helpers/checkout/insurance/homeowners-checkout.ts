@@ -4,7 +4,7 @@ import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
 dayjs.extend(customParseFormat);
 
-const tomorrowsDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
+const tomorrowsDate = dayjs().add(2, 'day').format('DD MMM YYYY');
 
 export function checkHomeownersComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {
@@ -62,31 +62,31 @@ export function checkOptionalProducts() {
 
 export function checkMiniCartHomeowners() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €491.25 ',
+    price: '€491.25',
     products: [
       {
-        title: ' Start Date: ',
+        title: 'Start Date:',
         value: tomorrowsDate,
       },
       {
         title: 'Property Address:',
-        value: ' Omladinskin Brigada ',
+        value: 'Omladinskin Brigada',
       },
       {
         title: 'Property Type:',
-        value: ' House ',
+        value: 'House',
       },
       {
         title: 'Property Value:',
-        value: ' 200000 ',
+        value: '200,000.00',
       },
       {
-        title: ' Homeowners Annually: ',
-        value: ' €338.10 ',
+        title: 'Homeowners Annually:',
+        value: '€338.10',
       },
       {
-        title: ' Jewelry and Watches Cover: ',
-        value: ' €153.15 ',
+        title: 'Jewelry and Watches Cover:',
+        value: '€153.15',
       },
     ],
   };
