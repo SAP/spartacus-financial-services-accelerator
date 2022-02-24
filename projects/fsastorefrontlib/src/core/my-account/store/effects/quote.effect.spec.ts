@@ -4,6 +4,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import {
   CartActions,
+  GlobalMessage,
+  GlobalMessageService,
   OCC_USER_ID_CURRENT,
   RoutingService,
 } from '@spartacus/core';
@@ -81,6 +83,10 @@ class MockRoutingService {
   go = createSpy();
 }
 
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
+
 describe('Quote Effects', () => {
   let actions$: Observable<fromActions.QuoteAction>;
   let effects: fromEffects.QuoteEffects;
@@ -97,6 +103,7 @@ describe('Quote Effects', () => {
       providers: [
         { provide: QuoteConnector, useValue: mockQuoteConnector },
         { provide: RoutingService, useClass: MockRoutingService },
+        { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         fromEffects.QuoteEffects,
         provideMockActions(() => actions$),
       ],
