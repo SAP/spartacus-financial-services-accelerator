@@ -11,7 +11,6 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DynamicFormsConfig } from '../../config/form-config';
 import { GeneralHelpers } from '../../helpers/helpers';
 import { FormDefinition } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
@@ -38,9 +37,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   subscription = new Subscription();
 
-  get changes() {
-    return this.form.valueChanges;
-  }
   get valid() {
     return this.form.valid;
   }
@@ -52,8 +48,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
-    protected formComponentService: FormComponentService,
-    public formConfig: DynamicFormsConfig
+    protected formComponentService: FormComponentService
   ) {}
 
   ngOnInit() {
@@ -137,6 +132,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         this.markInvalidControls(formControl);
       } else {
         const control = <FormControl>formControl;
+        // triggering validation message
         if (!control.valid) {
           control.markAsTouched({ onlySelf: true });
         }

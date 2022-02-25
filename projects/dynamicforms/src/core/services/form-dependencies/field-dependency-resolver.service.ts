@@ -5,6 +5,7 @@ import {
   FormGroup,
   ValidatorFn,
 } from '@angular/forms';
+import { filter, tap } from 'rxjs/operators';
 import { FormService } from '../form/form.service';
 import {
   ControlDependency,
@@ -44,27 +45,40 @@ export class FieldDependencyResolverService {
           }
           this.changeControlEnabled(dependentControl, controlConfig, false);
         }
-        mainFormControl.valueChanges.subscribe(fieldValue => {
-          const dependencyValidations = this.geValidationsForCondition(
-            condition
-          );
-          const dependancyControl = this.fb.control(
-            { disabled: false, value: fieldValue },
-            dependencyValidations
-          );
-
-          if (dependancyControl.valid) {
-            if (controlConfig.dependsOn.hide === true) {
-              controlConfig.hidden = false;
-            }
-            this.changeControlEnabled(dependentControl, controlConfig, true);
-          } else {
-            if (controlConfig.dependsOn.hide === true) {
-              controlConfig.hidden = true;
-            }
-            this.changeControlEnabled(dependentControl, controlConfig, false);
-          }
-        });
+        mainFormControl.valueChanges
+          .pipe(
+            filter(fieldValue => !!fieldValue),
+            tap(fieldValue => {
+              const dependencyValidations = this.geValidationsForCondition(
+                condition
+              );
+              const dependancyControl = this.fb.control(
+                { disabled: false, value: fieldValue },
+                dependencyValidations
+              );
+              if (dependancyControl.valid) {
+                if (controlConfig.dependsOn.hide === true) {
+                  controlConfig.hidden = false;
+                  console.log(controlConfig);
+                }
+                this.changeControlEnabled(
+                  dependentControl,
+                  controlConfig,
+                  true
+                );
+              } else {
+                if (controlConfig.dependsOn.hide === true) {
+                  controlConfig.hidden = true;
+                }
+                this.changeControlEnabled(
+                  dependentControl,
+                  controlConfig,
+                  false
+                );
+              }
+            })
+          )
+          .subscribe();
       }
     });
   }
