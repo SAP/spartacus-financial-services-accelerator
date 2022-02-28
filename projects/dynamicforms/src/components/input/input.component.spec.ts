@@ -33,6 +33,7 @@ const mockField: FieldConfig = {
   fieldType: 'input',
   name: 'testInput',
   label: {
+    default: 'testLabel',
     en: 'Test Input Label',
   },
 };

@@ -36,12 +36,14 @@ const mockField: FieldConfig = {
   options: [
     {
       label: {
+        default: 'testLabel',
         en: 'testOptionLabel',
       },
       name: 'testOptionName',
     },
   ],
   label: {
+    default: 'testLabel',
     en: 'Test',
   },
 };

@@ -22,6 +22,7 @@ const mockField: FieldConfig = {
   fieldType: 'currency',
   name: 'testCurrency',
   label: {
+    default: 'testLabel',
     en: 'Test Input Label',
   },
 };

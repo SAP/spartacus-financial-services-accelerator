@@ -24,6 +24,7 @@ const mockField: FieldConfig = {
   fieldType: 'button',
   name: 'testButton',
   label: {
+    default: 'testLabel',
     en: 'Test button',
   },
 };
