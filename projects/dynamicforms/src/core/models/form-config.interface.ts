@@ -53,7 +53,7 @@ export interface ControlDependency {
 }
 
 export interface LocalizedString {
-  default?: string;
+  default: string;
   [lang: string]: string;
 }
 
