@@ -18,6 +18,7 @@ const mockField: FieldConfig = {
   options: [
     {
       label: {
+        default: 'testLabel',
         en: 'testLabel',
       },
       name: 'testName',
