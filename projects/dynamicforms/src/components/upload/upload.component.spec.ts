@@ -46,6 +46,7 @@ const mockInProgressHttpResponse = {
 
 const mockField: FieldConfig = {
   label: {
+    default: 'testLabel',
     en: 'Test Upload',
     de: 'Test Upload',
   },

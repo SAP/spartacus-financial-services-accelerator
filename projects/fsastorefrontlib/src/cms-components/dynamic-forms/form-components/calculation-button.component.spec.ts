@@ -32,6 +32,7 @@ const mockField: FieldConfig = {
   fieldType: 'calculateButton',
   name: 'testButton',
   label: {
+    default: 'testLabel',
     en: 'Test button',
   },
 };

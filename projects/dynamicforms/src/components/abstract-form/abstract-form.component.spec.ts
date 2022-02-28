@@ -28,7 +28,9 @@ const targetValue = 'titleCode';
 const mockField: FieldConfig = {
   fieldType: 'abstract',
   name: 'testTitle',
-  label: {},
+  label: {
+    default: 'testLabel',
+  },
   prefillValue: {
     targetObject: 'user',
     targetValue: targetValue,
