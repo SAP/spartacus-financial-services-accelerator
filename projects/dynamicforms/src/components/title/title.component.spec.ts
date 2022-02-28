@@ -24,6 +24,7 @@ const mockField: FieldConfig = {
   fieldType: 'title',
   name: 'testTitle',
   label: {
+    default: 'testLabel',
     en: 'Test Title',
   },
 };
