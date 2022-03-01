@@ -1,5 +1,7 @@
 import { Address, User } from '@spartacus/core';
+import { OBOCustomerList } from '../../../occ/occ-models/occ.models';
 import { Observable } from 'rxjs/internal/Observable';
+import { FSSearchConfig } from '../services/inbox-data.service';
 
 export abstract class ConsentAdapter {
   /**
@@ -14,7 +16,10 @@ export abstract class ConsentAdapter {
    *
    * @param userId The `userId` used for fetching on behalf of consents
    */
-  abstract getOBOCustomerList(userId: string): Observable<any>;
+  abstract getOBOCustomerList(
+    userId: string,
+    searchConfig?: FSSearchConfig
+  ): Observable<OBOCustomerList>;
 
   /**
    * Abstract method used to get the particular customer of customers created by consent holder.

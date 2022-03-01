@@ -69,11 +69,7 @@
             >
               <li class="item text-break text-center text-uppercase">
                 <div class="number notice semi-bold">
-                  {{
-                    customers?.entries?.length > 0
-                      ? customers?.entries?.length
-                      : '0'
-                  }}
+                  {{ customers.pagination?.totalCount }}
                 </div>
                 <span class="description">
                   {{ 'dashboard.customers' | cxTranslate }}

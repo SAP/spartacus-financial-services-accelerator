@@ -43,6 +43,7 @@ export const quoteReview = {
       'minimum-card-limit': 'Minimum Card Limit',
       'debit-card-design': 'Debit Card Design',
       'number-of-applicants': 'Number Of Applicants',
+      'minimum-card-amount': 'Minimum Card Amount',
     },
     banking_current_account: {
       'debit-card-design': 'Debit Card Design',

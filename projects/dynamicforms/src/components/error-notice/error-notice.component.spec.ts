@@ -27,6 +27,7 @@ const defaultFieldConfig: FieldConfig = {
 const localizedFieldConfig: FieldConfig = {
   fieldType: fieldType,
   error: {
+    default: 'defaultLabel',
     en: enErrorMessage,
   },
 };

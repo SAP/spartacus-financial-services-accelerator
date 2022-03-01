@@ -2,6 +2,8 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ConsentAdapter } from './consent.adapter';
 import { Address, User } from '@spartacus/core';
+import { FSSearchConfig } from '../services/inbox-data.service';
+import { OBOCustomerList } from '../../../occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +15,11 @@ export class ConsentConnector {
     return this.adapter.getConsents(userId);
   }
 
-  getOBOCustomerList(userId: string): Observable<any> {
-    return this.adapter.getOBOCustomerList(userId);
+  getOBOCustomerList(
+    userId: string,
+    searchConfig?: FSSearchConfig
+  ): Observable<OBOCustomerList> {
+    return this.adapter.getOBOCustomerList(userId, searchConfig);
   }
 
   getOBOCustomer(userId: string, customerId: string): Observable<any> {

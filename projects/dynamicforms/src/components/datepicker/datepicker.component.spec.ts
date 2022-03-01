@@ -35,6 +35,7 @@ const mockField: FieldConfig = {
   fieldType: 'datepicker',
   name: 'testDatePicker',
   label: {
+    default: 'testLabel',
     en: 'TestLabel',
   },
 };

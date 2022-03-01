@@ -1,6 +1,11 @@
 import { RoutesConfig, RoutingConfig } from '@spartacus/core';
 
 export const storefrontRoutesConfig: RoutesConfig = {
+  register: {
+    paths: ['register'],
+    protected: false,
+    authFlow: true,
+  },
   generalInformation: {
     paths: ['checkout/generalInformation/:formCode'],
     paramsMapping: { formCode: 'code' },

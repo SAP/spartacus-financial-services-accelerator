@@ -33,6 +33,7 @@ const mockField: FieldConfig = {
   fieldType: 'select',
   name: 'testSelect',
   label: {
+    default: 'testLabel',
     en: 'TestLabel',
   },
   options: [],
