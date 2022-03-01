@@ -1,7 +1,7 @@
 import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar.component';
@@ -50,9 +50,17 @@ class MockChangeRequestService {
     return of(mockChangeRequest);
   }
 }
+
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
 describe('ChangeProcessProgressBarComponent', () => {
   let component: ChangeProcessProgressBarComponent;
   let fixture: ComponentFixture<ChangeProcessProgressBarComponent>;
+  let mockLanguageService: LanguageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -60,6 +68,7 @@ describe('ChangeProcessProgressBarComponent', () => {
         imports: [I18nTestingModule, RouterTestingModule],
         providers: [
           { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          { provide: LanguageService, useClass: MockLanguageService },
         ],
         declarations: [
           MockUrlPipe,
@@ -67,6 +76,7 @@ describe('ChangeProcessProgressBarComponent', () => {
           MockProgressBarComponent,
         ],
       }).compileComponents();
+      mockLanguageService = TestBed.inject(LanguageService);
     })
   );
 

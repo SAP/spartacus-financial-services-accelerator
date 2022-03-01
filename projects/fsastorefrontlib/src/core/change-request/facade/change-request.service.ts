@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Store, select } from '@ngrx/store';
 import { AuthService, UserIdService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
@@ -13,8 +12,6 @@ import { getChangeRequestErrorFactory } from '../store/selectors';
 
 @Injectable()
 export class ChangeRequestService {
-  requestId: string;
-
   constructor(
     protected store: Store<StateWithChangeRequest>,
     protected authService: AuthService,
@@ -25,11 +22,12 @@ export class ChangeRequestService {
       this.authService.isUserLoggedIn(),
     ])
       .subscribe(([changeRequest, userloggedIn]) => {
+        let requestId: string;
         if (changeRequest) {
-          this.requestId = changeRequest.requestId;
+          requestId = changeRequest.requestId;
         }
         if (!this.isCreated(changeRequest) && userloggedIn) {
-          this.loadChangeRequest();
+          this.loadChangeRequest(requestId);
         }
       })
       .unsubscribe();
@@ -66,19 +64,17 @@ export class ChangeRequestService {
     );
   }
 
-  loadChangeRequest() {
+  loadChangeRequest(requestId: string) {
     this.userIdService
       .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
-        if (this.requestId) {
-          this.store.dispatch(
-            new fromAction.LoadChangeRequest({
-              userId: occUserId,
-              requestId: this.requestId,
-            })
-          );
-        }
+        this.store.dispatch(
+          new fromAction.LoadChangeRequest({
+            userId: occUserId,
+            requestId,
+          })
+        );
       })
       .unsubscribe();
   }
@@ -100,6 +96,7 @@ export class ChangeRequestService {
       })
       .unsubscribe();
   }
+
   cancelChangeRequest(requestId: string) {
     this.userIdService
       .getUserId()

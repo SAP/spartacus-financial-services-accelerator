@@ -28,8 +28,6 @@ export function reducer(
     case fromAction.CANCEL_CHANGE_REQUEST_SUCCESS:
     case fromAction.CREATE_CHANGE_REQUEST_SUCCESS: {
       const content = { ...action.payload };
-      console.log(state, 'state reducer');
-      console.log(content, 'content reducer');
       return {
         ...state,
         content,

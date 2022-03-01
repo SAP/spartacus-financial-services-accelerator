@@ -53,7 +53,6 @@ export class ChangeRequestEffects {
           )
           .pipe(
             map((changeRequest: any) => {
-              console.log(changeRequest, 'effect');
               return new fromActions.LoadChangeRequestSuccess(changeRequest);
             }),
             catchError(error =>
