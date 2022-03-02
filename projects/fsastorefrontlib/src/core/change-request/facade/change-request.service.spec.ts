@@ -81,7 +81,7 @@ describe('ChangeRequestServiceTest', () => {
   ));
 
   it('shuld be able to load change request', () => {
-    service.loadChangeRequest(requestId);
+    service.loadChangeRequest(requestId, userId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadChangeRequest({
         userId: userId,

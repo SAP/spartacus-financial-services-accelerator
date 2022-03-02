@@ -20,14 +20,15 @@ export class ChangeRequestService {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
       this.authService.isUserLoggedIn(),
+      this.userIdService.getUserId(),
     ])
-      .subscribe(([changeRequest, userloggedIn]) => {
+      .subscribe(([changeRequest, userloggedIn, userId]) => {
         let requestId: string;
         if (changeRequest) {
           requestId = changeRequest.requestId;
         }
         if (!this.isCreated(changeRequest) && userloggedIn) {
-          this.loadChangeRequest(requestId);
+          this.loadChangeRequest(requestId, userId);
         }
       })
       .unsubscribe();
@@ -64,19 +65,10 @@ export class ChangeRequestService {
     );
   }
 
-  loadChangeRequest(requestId: string) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadChangeRequest({
-            userId: occUserId,
-            requestId,
-          })
-        );
-      })
-      .unsubscribe();
+  loadChangeRequest(requestId: string, userId: string) {
+    this.store.dispatch(
+      new fromAction.LoadChangeRequest({ userId: userId, requestId: requestId })
+    );
   }
 
   simulateChangeRequest(changeRequest, stepIndex) {

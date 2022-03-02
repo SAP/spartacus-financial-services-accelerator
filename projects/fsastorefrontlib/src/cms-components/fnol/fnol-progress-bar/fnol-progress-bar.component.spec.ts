@@ -43,13 +43,13 @@ export class MockClaimService {
   getCurrentClaim() {
     return of(claimRequest);
   }
-
+  loadClaimById() {}
   loadUserRequestFormData() {}
 }
 
 class MockLanguageService {
   getActive() {
-    return of('en');
+    return of('de');
   }
 }
 
@@ -87,12 +87,14 @@ describe('FNOLProgressBarComponent', () => {
         ],
       }).compileComponents();
       mockLanguageService = TestBed.inject(LanguageService);
+      spyOn(mockClaimService, 'getCurrentClaim').and.callThrough();
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FNOLProgressBarComponent);
     component = fixture.componentInstance;
+    component.language = 'en';
     fixture.detectChanges();
   });
 
