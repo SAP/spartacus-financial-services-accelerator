@@ -110,8 +110,10 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
         .pipe(
           withLatestFrom((guestEndpoint: GuestEndpoint) => {
             if (guestEndpoint.state === 'accepted') {
-              let url = guestEndpoint.targetChannelAddress;
-              url = url.replace(this.GENDER_URL_PARAM, '');
+              const url = guestEndpoint.targetChannelAddress.replace(
+                this.GENDER_URL_PARAM,
+                ''
+              );
               this.modalService.closeActiveModal();
               this.winRef.nativeWindow.open(url, '_blank');
             }
