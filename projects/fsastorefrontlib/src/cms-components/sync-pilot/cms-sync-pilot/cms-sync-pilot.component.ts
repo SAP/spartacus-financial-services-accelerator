@@ -38,6 +38,8 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
   ) {}
 
   protected subscription = new Subscription();
+  // TODO: Workaround for invalid gender url param. Remove when syncPilot resolves issue on their side
+  protected readonly GENDER_URL_PARAM = '{gender}%20';
   user$: Observable<User> = this.userAccountFacade.get();
 
   ngOnInit() {
@@ -108,7 +110,10 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
         .pipe(
           withLatestFrom((guestEndpoint: GuestEndpoint) => {
             if (guestEndpoint.state === 'accepted') {
-              const url = guestEndpoint.targetChannelAddress;
+              const url = guestEndpoint.targetChannelAddress.replace(
+                this.GENDER_URL_PARAM,
+                ''
+              );
               this.modalService.closeActiveModal();
               this.winRef.nativeWindow.open(url, '_blank');
             }
