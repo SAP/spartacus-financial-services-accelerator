@@ -67,6 +67,12 @@ const consent1 = {
       },
     ],
   },
+  pagination: {
+    page: 0,
+    count: 10,
+    totalPages: 2,
+    totalCount: 12,
+  },
 };
 
 const consent2 = {
@@ -102,6 +108,12 @@ const consent2 = {
         value: true,
       },
     ],
+  },
+  pagination: {
+    page: 0,
+    count: 10,
+    totalPages: 2,
+    totalCount: 12,
   },
 };
 
@@ -216,7 +228,17 @@ describe('SellerDashboardListComponent', () => {
 
   it('should translate sort labels', () => {
     spyOn(mockTranslationService, 'translate').and.callThrough();
-    component.getSortLabels();
-    expect(mockTranslationService.translate).toHaveBeenCalledTimes(3);
+    component
+      .getSortLabels()
+      .subscribe(() =>
+        expect(mockTranslationService.translate).toHaveBeenCalledTimes(3)
+      )
+      .unsubscribe();
+  });
+
+  it('should change page', () => {
+    spyOn(mockConsentConnector, 'getOBOCustomerList').and.callThrough();
+    component.pageChange(1);
+    expect(mockConsentConnector.getOBOCustomerList).toHaveBeenCalled();
   });
 });

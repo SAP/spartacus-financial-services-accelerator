@@ -55,6 +55,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockLocalizationObj = {
+  default: 'First Option',
   en: 'Test en',
   de: 'Test de',
 };

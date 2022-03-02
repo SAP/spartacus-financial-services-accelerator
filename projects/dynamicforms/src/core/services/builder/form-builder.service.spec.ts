@@ -75,6 +75,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'accountType',
               label: {
+                default: 'testLabel',
                 en: 'Account Type',
                 de: 'Kontotyp',
               },
@@ -83,6 +84,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'cardDesign',
               label: {
+                default: 'testLabel',
                 en: 'Choose a design for your debit card',
                 de: 'Wählen Sie das Design Ihrer Girokarte',
               },
@@ -109,6 +111,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'accountType',
               label: {
+                default: 'testLabel',
                 en: 'Account Type',
                 de: 'Kontotyp',
               },
@@ -117,6 +120,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'cardDesign',
               label: {
+                default: 'testLabel',
                 en: 'Choose a design for your debit card',
                 de: 'Wählen Sie das Design Ihrer Girokarte',
               },
@@ -141,6 +145,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'accountType',
               label: {
+                default: 'testLabel',
                 en: 'Account Type',
                 de: 'Kontotyp',
               },
@@ -149,6 +154,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'cardDesign',
               label: {
+                default: 'testLabel',
                 en: 'Choose a design for your debit card',
                 de: 'Wählen Sie das Design Ihrer Girokarte',
               },

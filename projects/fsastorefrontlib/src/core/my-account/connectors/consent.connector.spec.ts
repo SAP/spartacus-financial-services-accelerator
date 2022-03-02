@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Address } from '@spartacus/core';
 import { of } from 'rxjs';
+import { FSSearchConfig } from '../services/inbox-data.service';
 import { ConsentAdapter } from './consent.adapter';
 import { ConsentConnector } from './consent.connector';
 import createSpy = jasmine.createSpy;
@@ -73,6 +74,9 @@ const address: Address = {
 const oboConsentHolderUid = 'test@test.com';
 const oboPermissionName = 'testPermission';
 const oboPermissionValue = true;
+const searchConfig: FSSearchConfig = {
+  currentPage: 0,
+};
 
 describe('ConsentConnector', () => {
   let consentConnector: ConsentConnector;
@@ -95,8 +99,11 @@ describe('ConsentConnector', () => {
     expect(consentAdapter.getConsents).toHaveBeenCalledWith(user);
   });
   it('should call adapter to get OBO Customer List', () => {
-    consentConnector.getOBOCustomerList(user);
-    expect(consentAdapter.getOBOCustomerList).toHaveBeenCalledWith(user);
+    consentConnector.getOBOCustomerList(user, searchConfig);
+    expect(consentAdapter.getOBOCustomerList).toHaveBeenCalledWith(
+      user,
+      searchConfig
+    );
   });
   it('should call adapter to get OBO Customer', () => {
     consentConnector.getOBOCustomer(user, mockCustomerId);

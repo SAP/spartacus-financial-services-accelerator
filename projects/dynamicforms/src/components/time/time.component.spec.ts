@@ -34,6 +34,7 @@ const mockField: FieldConfig = {
   fieldType: 'time',
   name: 'testTime',
   label: {
+    default: 'testLabel',
     en: 'What time did it happen?',
   },
 };
