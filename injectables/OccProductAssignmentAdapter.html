@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -187,8 +188,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/product-assignment/occ-product-assignment.adapter.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/product-assignment/occ-product-assignment.adapter.ts:88</a></div>
                 </td>
             </tr>
 
@@ -292,8 +293,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/product-assignment/occ-product-assignment.adapter.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/product-assignment/occ-product-assignment.adapter.ts:48</a></div>
                 </td>
             </tr>
 
@@ -514,8 +515,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/product-assignment/occ-product-assignment.adapter.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/product-assignment/occ-product-assignment.adapter.ts:68</a></div>
                 </td>
             </tr>
 
@@ -616,9 +617,11 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     currentPage?: number,
     sort?: string
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;productAssignments&#x27;, {
-      userId,
-      orgUnitId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;productAssignments&#x27;, {
+      urlParams: {
+        userId,
+        orgUnitId,
+      },
     });
     let params: HttpParams &#x3D; new HttpParams();
     if (active !&#x3D;&#x3D; undefined) {
@@ -643,9 +646,11 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     orgUnitId: string,
     productCode: string
   ) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;createProductAssignments&#x27;, {
-      userId,
-      orgUnitId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;createProductAssignments&#x27;, {
+      urlParams: {
+        userId,
+        orgUnitId,
+      },
     });
     const headers &#x3D; new HttpHeaders({
       &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
@@ -661,10 +666,12 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     orgUnitId: string,
     fsProductAssignmentCode: string
   ) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;removeProductAssignments&#x27;, {
-      userId,
-      orgUnitId,
-      fsProductAssignmentCode,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;removeProductAssignments&#x27;, {
+      urlParams: {
+        userId,
+        orgUnitId,
+        fsProductAssignmentCode,
+      },
     });
     const headers &#x3D; new HttpHeaders({
       &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
@@ -680,10 +687,12 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     fsProductAssignmentCode: string,
     active: boolean
   ) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;updateProductAssignments&#x27;, {
-      userId,
-      orgUnitId,
-      fsProductAssignmentCode,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;updateProductAssignments&#x27;, {
+      urlParams: {
+        userId,
+        orgUnitId,
+        fsProductAssignmentCode,
+      },
     });
     const headers &#x3D; new HttpHeaders({
       &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
@@ -712,6 +721,7 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -725,6 +735,15 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

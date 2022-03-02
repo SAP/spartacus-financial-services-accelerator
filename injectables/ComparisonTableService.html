@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -84,6 +85,9 @@
                                     <span class="modifier">Private</span>
                                 <a href="#availableTabSource" >availableTabSource</a>
                             </li>
+                            <li>
+                                <a href="#highestElement" >highestElement</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -97,10 +101,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#calculateHeights" >calculateHeights</a>
+                            </li>
+                            <li>
                                 <a href="#getComparisonTabs" class="deprecated-name">getComparisonTabs</a>
                             </li>
                             <li>
                                 <a href="#setAvailableTabs" >setAvailableTabs</a>
+                            </li>
+                            <li>
+                                <a href="#setEqualElementsHeights" >setEqualElementsHeights</a>
+                            </li>
+                            <li>
+                                <a href="#setHeightsAtResize" >setHeightsAtResize</a>
                             </li>
                         </ul>
                     </td>
@@ -125,7 +138,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -172,6 +185,114 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="calculateHeights"></a>
+                    <span class="name">
+                        <span ><b>calculateHeights</b></span>
+                        <a href="#calculateHeights"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculateHeights(elemRef: QueryList<ElementRef<HTMLElement>>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, getHighestElement?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank">Function</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:48</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Passes the elements for height calculation</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>elemRef</td>
+                                    <td>
+                                            <code>QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>array of elements that will be passed for resizing</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>renderer</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>reference to component&#39;s renderer</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>getHighestElement</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>optional method that sets the highest element as a reference</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getComparisonTabs"></a>
                     <span class="name">
                         <span class="deprecated-name"><b>getComparisonTabs</b></span>
@@ -194,8 +315,8 @@ Service is no longer used anywhere, instead, cmsService.getComponentData() metho
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:88</a></div>
                 </td>
             </tr>
 
@@ -265,8 +386,8 @@ Service is no longer used anywhere, instead, cmsService.getComponentData() metho
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="18"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:18</a></div>
                 </td>
             </tr>
 
@@ -314,6 +435,223 @@ Service is no longer used anywhere, instead, cmsService.getComponentData() metho
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setEqualElementsHeights"></a>
+                    <span class="name">
+                        <span ><b>setEqualElementsHeights</b></span>
+                        <a href="#setEqualElementsHeights"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setEqualElementsHeights(elementArray: ElementRef<HTMLElement>[], renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:28</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sets the min-height property of all elements in array to the highest one</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>elementArray</td>
+                                    <td>
+                                            <code>ElementRef&lt;HTMLElement&gt;[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>array of elements that will be resized</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>renderer</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>reference to component&#39;s renderer</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setHeightsAtResize"></a>
+                    <span class="name">
+                        <span ><b>setHeightsAtResize</b></span>
+                        <a href="#setHeightsAtResize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setHeightsAtResize(winRef: WindowRef, tableCell: QueryList<ElementRef<HTMLElement>>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, getHighestElement?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank">Function</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:69</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Executes height calculation on window resize</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>winRef</td>
+                                    <td>
+                                            <code>WindowRef</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>component&#39;s window reference</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>tableCell</td>
+                                    <td>
+                                            <code>QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>array of elements that will be passed for resizing</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>renderer</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>reference to component&#39;s renderer</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>getHighestElement</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>optional method that sets the highest element as a reference</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;WindowRef&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>WindowRef observable</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
@@ -339,7 +677,7 @@ Service is no longer used anywhere, instead, cmsService.getComponentData() metho
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -367,7 +705,33 @@ Service is no longer used anywhere, instead, cmsService.getComponentData() metho
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:11</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="highestElement"></a>
+                    <span class="name">
+                        <span ><b>highestElement</b></span>
+                        <a href="#highestElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLElement&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -380,9 +744,10 @@ Service is no longer used anywhere, instead, cmsService.getComponentData() metho
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { CmsService } from &#x27;@spartacus/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ElementRef, Injectable, QueryList, Renderer2 } from &#x27;@angular/core&#x27;;
+import { CmsService, WindowRef } from &#x27;@spartacus/core&#x27;;
 import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { tap } from &#x27;rxjs/operators&#x27;;
 import { CMSComparisonTabComponent } from &#x27;../../occ/occ-models&#x27;;
 
 @Injectable()
@@ -394,8 +759,72 @@ export class ComparisonTableService {
   );
   readonly availableTab$ &#x3D; this.availableTabSource.asObservable();
 
+  highestElement: ElementRef&lt;HTMLElement&gt;;
+
   setAvailableTabs(tabs: CMSComparisonTabComponent[]) {
     this.availableTabSource.next(tabs);
+  }
+
+  /**
+   * Sets the min-height property of all elements in array to the highest one
+   *
+   * @param elementArray array of elements that will be resized
+   * @param renderer reference to component&#x27;s renderer
+   */
+  setEqualElementsHeights(
+    elementArray: ElementRef&lt;HTMLElement&gt;[],
+    renderer: Renderer2
+  ) {
+    elementArray.forEach(elem &#x3D;&gt; {
+      renderer.setStyle(
+        elem.nativeElement,
+        &#x27;min-height&#x27;,
+        &#x60;${this.highestElement?.nativeElement.clientHeight}px&#x60;
+      );
+    });
+  }
+
+  /**
+   * Passes the elements for height calculation
+   *
+   * @param elemRef array of elements that will be passed for resizing
+   * @param renderer reference to component&#x27;s renderer
+   * @param getHighestElement optional method that sets the highest element as a reference
+   */
+  calculateHeights(
+    elemRef: QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;,
+    renderer: Renderer2,
+    getHighestElement?: Function
+  ) {
+    const elementArray &#x3D; elemRef.toArray();
+    if (getHighestElement) {
+      getHighestElement(elementArray);
+    }
+    this.setEqualElementsHeights(elementArray, renderer);
+  }
+
+  /**
+   * Executes height calculation on window resize
+   *
+   * @param winRef component&#x27;s window reference
+   * @param tableCell array of elements that will be passed for resizing
+   * @param renderer reference to component&#x27;s renderer
+   * @param getHighestElement optional method that sets the highest element as a reference
+   * @returns WindowRef observable
+   */
+  setHeightsAtResize(
+    winRef: WindowRef,
+    tableCell: QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;,
+    renderer: Renderer2,
+    getHighestElement?: Function
+  ): Observable&lt;WindowRef&gt; {
+    return winRef.resize$.pipe(
+      tap(_ &#x3D;&gt; {
+        if (tableCell) {
+          this.calculateHeights(tableCell, renderer, getHighestElement);
+        }
+      })
+    );
   }
 
   /**
@@ -422,6 +851,7 @@ export class ComparisonTableService {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -435,6 +865,15 @@ export class ComparisonTableService {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

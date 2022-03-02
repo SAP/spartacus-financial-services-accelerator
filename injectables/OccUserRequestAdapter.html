@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -109,7 +110,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -184,8 +185,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:16</a></div>
                 </td>
             </tr>
 
@@ -265,8 +266,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:45</a></div>
                 </td>
             </tr>
 
@@ -346,8 +347,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/user-request/occ-user-request.adapter.ts:28</a></div>
                 </td>
             </tr>
 
@@ -428,8 +429,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { OccEndpointsService } from &#x27;@spartacus/core&#x27;;
-import { Observable } from &#x27;rxjs/internal/Observable&#x27;;
-import { throwError } from &#x27;rxjs/internal/observable/throwError&#x27;;
+import { Observable, throwError } from &#x27;rxjs&#x27;;
 import { catchError } from &#x27;rxjs/operators&#x27;;
 import { FSStepData } from &#x27;../../occ-models&#x27;;
 import { UserRequestAdapter } from &#x27;../../../core/user-request/connectors/user-request.adapter&#x27;;
@@ -442,9 +442,11 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
   ) {}
 
   getUserRequest(userId: string, requestId: string): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;userRequest&#x27;, {
-      userId,
-      requestId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;userRequest&#x27;, {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     return this.http
       .get(url)
@@ -456,19 +458,24 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     requestId: string,
     stepData: FSStepData
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;userRequest&#x27;, {
-      userId,
-      requestId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;userRequest&#x27;, {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
+
     return this.http
       .patch(url, stepData, {})
       .pipe(catchError((error: any) &#x3D;&gt; throwError(error.json())));
   }
 
   submitUserRequest(userId: string, requestId: string): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;submitUserRequest&#x27;, {
-      userId,
-      requestId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;submitUserRequest&#x27;, {
+      urlParams: {
+        userId,
+        requestId,
+      },
     });
     const headers &#x3D; new HttpHeaders({
       &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
@@ -498,6 +505,7 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -511,6 +519,15 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

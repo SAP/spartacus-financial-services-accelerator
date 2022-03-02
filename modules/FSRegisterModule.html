@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -178,34 +178,29 @@ import {
   NotAuthGuard,
   UrlModule,
 } from &#x27;@spartacus/core&#x27;;
-import {
-  PageLayoutComponent,
-  RegisterComponentModule,
-} from &#x27;@spartacus/storefront&#x27;;
+import { FormErrorsModule, SpinnerModule } from &#x27;@spartacus/storefront&#x27;;
 import { FSRegisterComponent } from &#x27;./register.component&#x27;;
+import { RegisterComponentModule } from &#x27;@spartacus/user/profile/components&#x27;;
+import { NgSelectModule } from &#x27;@ng-select/ng-select&#x27;;
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;login/register&#x27;,
     redirectTo: &#x27;register&#x27;,
   },
-  {
-    path: &#x27;register&#x27;,
-    data: {
-      cxRoute: &#x27;register&#x27;,
-      pageLabel: &#x27;register&#x27;,
-    },
-    component: PageLayoutComponent,
-  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
     CommonModule,
-    RegisterComponentModule,
+    ReactiveFormsModule,
+    NgSelectModule,
     I18nModule,
+    FormErrorsModule,
+    SpinnerModule,
+    UrlModule,
+    RouterModule.forChild(routes),
+    RegisterComponentModule,
     ConfigModule.withConfig({
       cmsComponents: {
         RegisterCustomerComponent: {
@@ -214,8 +209,6 @@ const routes: Routes &#x3D; [
         },
       },
     }),
-    RouterModule,
-    UrlModule,
   ],
   declarations: [FSRegisterComponent],
   exports: [FSRegisterComponent],
@@ -225,6 +218,8 @@ export class FSRegisterModule {}
 </code></pre>
     </div>
 </div>
+
+
 
 
 
@@ -253,6 +248,15 @@ export class FSRegisterModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

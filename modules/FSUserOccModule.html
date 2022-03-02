@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -77,23 +77,17 @@ import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
 import { provideConfig } from &#x27;@spartacus/core&#x27;;
 import { defaultCsTicketConfig } from &#x27;../cs-ticket/deafult-occ-cs-ticket-config&#x27;;
-import { OccFSUserAdapter } from &#x27;./occ-user.adapter&#x27;;
-import { UserProfileAdapter } from &#x27;@spartacus/user/profile/core&#x27;;
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
-  providers: [
-    {
-      provide: UserProfileAdapter,
-      useClass: OccFSUserAdapter,
-    },
-    provideConfig(defaultCsTicketConfig),
-  ],
+  providers: [provideConfig(defaultCsTicketConfig)],
 })
 export class FSUserOccModule {}
 </code></pre>
     </div>
 </div>
+
+
 
 
 
@@ -122,6 +116,15 @@ export class FSUserOccModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

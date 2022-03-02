@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -120,7 +121,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -195,8 +196,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:17</a></div>
                 </td>
             </tr>
 
@@ -300,8 +301,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:53</a></div>
                 </td>
             </tr>
 
@@ -403,7 +404,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/occ/adapters/inbox/occ-inbox.adapter.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -418,9 +419,8 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpParams, HttpHeaders } from &#x27;@angular/common/http&#x27;;
-import { Observable } from &#x27;rxjs/internal/Observable&#x27;;
+import { Observable, throwError } from &#x27;rxjs&#x27;;
 import { catchError } from &#x27;rxjs/operators&#x27;;
-import { throwError } from &#x27;rxjs/internal/observable/throwError&#x27;;
 import { OccEndpointsService } from &#x27;@spartacus/core&#x27;;
 import { FSSearchConfig } from &#x27;../../../core/my-account/services/inbox-data.service&#x27;;
 import { InboxAdapter } from &#x27;../../../core/my-account/connectors/inbox.adapter&#x27;;
@@ -439,8 +439,10 @@ export class OccInboxAdapter implements InboxAdapter {
     searchConfig: FSSearchConfig,
     read?: boolean
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;siteMessages&#x27;, {
-      userId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;siteMessages&#x27;, {
+      urlParams: {
+        userId,
+      },
     });
     let params: HttpParams &#x3D; new HttpParams();
     if (searchConfig.sortCode &amp;&amp; searchConfig.sortOrder) {
@@ -472,8 +474,10 @@ export class OccInboxAdapter implements InboxAdapter {
     messagesUidList: Array&lt;string&gt;,
     read: boolean
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;updateMessages&#x27;, {
-      userId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;updateMessages&#x27;, {
+      urlParams: {
+        userId,
+      },
     });
     const params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;messageCodes&#x27;, messagesUidList.toString())
@@ -503,6 +507,7 @@ export class OccInboxAdapter implements InboxAdapter {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -516,6 +521,15 @@ export class OccInboxAdapter implements InboxAdapter {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

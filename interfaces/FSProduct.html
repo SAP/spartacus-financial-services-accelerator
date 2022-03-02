@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
 
 
 
@@ -374,19 +375,24 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { YFormData } from &#x27;@spartacus/dynamicforms&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DocumentFile, YFormData } from &#x27;@spartacus/dynamicforms&#x27;;
 import {
   B2BUser,
   Cart,
   Category,
+  Consent,
+  ConsentTemplate,
   Occ,
   OrderEntry,
   Price,
   Product,
+  SortModel,
   User,
 } from &#x27;@spartacus/core&#x27;;
-import { CheckoutStep } from &#x27;@spartacus/storefront&#x27;;
+import { CheckoutStep } from &#x27;@spartacus/checkout/root&#x27;;
 import { UserSignUp } from &#x27;@spartacus/user/profile/root&#x27;;
+import { MediaContainer } from &#x27;@spartacus/storefront&#x27;;
+import { Pagination } from &#x27;@spartacus/core/src/model/unused.model&#x27;;
 
 export interface ContactAgentData {
   email?: string;
@@ -446,6 +452,16 @@ export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
 }
 
+export interface OBOConsentList {
+  oboConsents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: FSUser[];
+  pagination: Pagination;
+  sorts: SortModel[];
+}
+
 export interface QuoteWorkflowStatus {
   code?: string;
 }
@@ -461,6 +477,27 @@ export interface InsuranceQuote {
   quoteWorkflowStatus?: QuoteWorkflowStatus;
   quoteDetails?: Record&lt;string, string&gt;;
   insuredObjectList?: InsuredObjectList;
+  renewal?: boolean;
+  original?: boolean;
+}
+
+export interface OBOConsent extends Consent {
+  consentHolder?: User;
+  consentTemplate?: ConsentTemplate;
+  customer: User;
+  oboPermissionConfiguration: OBOPermissionConfiguration;
+}
+
+export interface FSConsentTemplate extends ConsentTemplate {
+  exposed?: boolean;
+}
+
+export interface OBOPermissionConfiguration {
+  permissions?: OBOPermissions[];
+}
+
+export interface OBOPermissions {
+  [key: string]: any;
 }
 
 export enum OrganizationTableType {
@@ -532,6 +569,19 @@ export enum QuoteActionType {
   UPDATE &#x3D; &#x27;UPDATE&#x27;,
 }
 
+export enum SyncPilotGender {
+  mr &#x3D; &#x27;m&#x27;,
+  mrs &#x3D; &#x27;w&#x27;,
+  miss &#x3D; &#x27;w&#x27;,
+  ms &#x3D; &#x27;w&#x27;,
+  dr &#x3D; &#x27;d&#x27;,
+  rev &#x3D; &#x27;d&#x27;,
+}
+
+export enum FSUserRole {
+  SELLER &#x3D; &#x27;sellergroup&#x27;,
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;
@@ -577,6 +627,8 @@ export interface FSContactInfo {
 export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
+  active?: boolean;
+  thumbnail?: MediaContainer;
 }
 
 export interface FSStepData {
@@ -611,7 +663,7 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
-  documents?: any;
+  documents?: DocumentFile[];
   properties?: any;
 }
 
@@ -658,6 +710,7 @@ export interface FSProductAssignment {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -671,6 +724,15 @@ export interface FSProductAssignment {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -201,7 +201,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
-import { CmsConfig, I18nModule, provideDefaultConfig } from &#x27;@spartacus/core&#x27;;
+import { CmsConfig, I18nModule, provideConfig } from &#x27;@spartacus/core&#x27;;
 import { GenericLinkModule, IconModule } from &#x27;@spartacus/storefront&#x27;;
 import { FSNavigationUIComponent } from &#x27;./navigation-ui.component&#x27;;
 import { FSNavigationComponent } from &#x27;./navigation.component&#x27;;
@@ -215,7 +215,7 @@ import { FSNavigationComponent } from &#x27;./navigation.component&#x27;;
     GenericLinkModule,
   ],
   providers: [
-    provideDefaultConfig(&lt;CmsConfig&gt;{
+    provideConfig(&lt;CmsConfig&gt;{
       cmsComponents: {
         NavigationComponent: {
           component: FSNavigationComponent,
@@ -246,6 +246,8 @@ export class NavigationModule {}
 
 
 
+
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -259,6 +261,15 @@ export class NavigationModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

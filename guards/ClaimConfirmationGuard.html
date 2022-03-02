@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content guard">
                    <div class="content-data">
+
 
 
 
@@ -71,6 +72,22 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#claimConfirmationStatuses" >claimConfirmationStatuses</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -101,7 +118,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userRequestService: <a href="../injectables/UserRequestService.html" target="_self">UserRequestService</a>, routingService: RoutingService, globalMessageService: GlobalMessageService)</code>
+<code>constructor(routingService: RoutingService, globalMessageService: GlobalMessageService, claimService: <a href="../injectables/ClaimService.html" target="_self">ClaimService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -124,18 +141,6 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userRequestService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserRequestService.html" target="_self" >UserRequestService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
                                                         <td>routingService</td>
                                                   
                                                         <td>
@@ -152,6 +157,18 @@
                                                   
                                                         <td>
                                                                     <code>GlobalMessageService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>claimService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ClaimService.html" target="_self" >ClaimService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -193,8 +210,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/claim/guards/claim-confirmation-guard.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/claim/guards/claim-confirmation-guard.ts:29</a></div>
                 </td>
             </tr>
 
@@ -222,25 +239,38 @@ import {
   GlobalMessageType,
   RoutingService,
 } from &#x27;@spartacus/core&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
+import { combineLatest, Observable } from &#x27;rxjs&#x27;;
 import { ClaimStatus } from &#x27;../../../occ/occ-models/occ.models&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
-import { UserRequestService } from &#x27;../../user-request/facade&#x27;;
+import { filter, map } from &#x27;rxjs/operators&#x27;;
+import { ClaimService } from &#x27;../../my-account&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class ClaimConfirmationGuard implements CanActivate {
   constructor(
-    protected userRequestService: UserRequestService,
     protected routingService: RoutingService,
-    protected globalMessageService: GlobalMessageService
+    protected globalMessageService: GlobalMessageService,
+    protected claimService: ClaimService
   ) {}
 
+  private readonly claimConfirmationStatuses &#x3D; [
+    ClaimStatus.APPROVED,
+    ClaimStatus.SUBMITTED,
+    ClaimStatus.PROCESSING,
+  ];
+
   canActivate(): Observable&lt;boolean | UrlTree&gt; {
-    return this.userRequestService.getUserRequest().pipe(
-      map(claim &#x3D;&gt; {
-        if (claim.requestStatus &#x3D;&#x3D;&#x3D; ClaimStatus.SUBMITTED) {
+    return combineLatest([
+      this.claimService.getLoaded(),
+      this.claimService.getCurrentClaim(),
+    ]).pipe(
+      filter(([loaded, _]) &#x3D;&gt; loaded),
+      map(([_, claim]) &#x3D;&gt; {
+        const isClaimFinished &#x3D; this.claimConfirmationStatuses.includes(
+          claim.claimStatus
+        );
+        if (isClaimFinished) {
           this.globalMessageService.add(
             { key: &#x27;claim.alreadySubmitted&#x27; },
             GlobalMessageType.MSG_TYPE_INFO
@@ -266,6 +296,7 @@ export class ClaimConfirmationGuard implements CanActivate {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -279,6 +310,15 @@ export class ClaimConfirmationGuard implements CanActivate {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

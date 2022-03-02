@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -115,7 +116,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:160</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:165</a></div>
                             </td>
                         </tr>
 
@@ -190,47 +191,40 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
-    map((action: fromActions.UpdateProductAssignment) &#x3D;&gt; action.payload),
-    concatMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .changeActiveStatus(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productAssignmentCode,
-          payload.active
-        )
-        .pipe(
-          map((productAssignment: any) &#x3D;&gt; {
-            return new fromActions.UpdateProductAssignmentSuccess(
-              productAssignment
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.UpdateProductAssignmentFail({
-                error: JSON.stringify(error),
-              })
-            )
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
+      map((action: fromActions.UpdateProductAssignment) &#x3D;&gt; action.payload),
+      concatMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .changeActiveStatus(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productAssignmentCode,
+            payload.active
           )
-        );
-    })
+          .pipe(
+            map((productAssignment: any) &#x3D;&gt; {
+              return new fromActions.UpdateProductAssignmentSuccess(
+                productAssignment
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.UpdateProductAssignmentFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:134</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:137</a></div>
                         </td>
                     </tr>
 
@@ -256,41 +250,34 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
-    map((action: fromActions.CreateProductAssignment) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .createProductAssignment(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productCode
-        )
-        .pipe(
-          map((productAssignments: any) &#x3D;&gt; {
-            return new fromActions.CreateProductAssignmentSuccess(
-              productAssignments
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.CreateProductAssignmentFail({
-                error: JSON.stringify(error),
-              })
-            )
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
+      map((action: fromActions.CreateProductAssignment) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .createProductAssignment(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productCode
           )
-        );
-    })
+          .pipe(
+            map((productAssignments: any) &#x3D;&gt; {
+              return new fromActions.CreateProductAssignmentSuccess(
+                productAssignments
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.CreateProductAssignmentFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
@@ -321,44 +308,37 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
-    map(
-      (action: fromActions.LoadPotentialProductAssignments) &#x3D;&gt; action.payload
-    ),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .loadProductAssignmentsForUnit(payload.occUserId, payload.orgUnitId)
-        .pipe(
-          map((productAssignments: any) &#x3D;&gt; {
-            return new fromActions.LoadPotentialProductAssignmentsSuccess(
-              productAssignments
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.LoadPotentialProductAssignmentsFail({
-                error: JSON.stringify(error),
-              })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
+      map(
+        (action: fromActions.LoadPotentialProductAssignments) &#x3D;&gt; action.payload
+      ),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .loadProductAssignmentsForUnit(payload.occUserId, payload.orgUnitId)
+          .pipe(
+            map((productAssignments: any) &#x3D;&gt; {
+              return new fromActions.LoadPotentialProductAssignmentsSuccess(
+                productAssignments
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.LoadPotentialProductAssignmentsFail({
+                  error: JSON.stringify(error),
+                })
+              )
             )
-          )
-        );
-    })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:108</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -384,49 +364,42 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_PRODUCT_ASSIGNMENTS),
-    map((action: fromActions.LoadProductAssignments) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .loadProductAssignmentsForUnit(
-          payload.occUserId,
-          payload.orgUnitId,
-          payload.active,
-          payload.pageSize,
-          payload.currentPage,
-          payload.sort
-        )
-        .pipe(
-          map((productAssignments: any) &#x3D;&gt; {
-            return new fromActions.LoadProductAssignmentsSuccess(
-              productAssignments
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.LoadProductAssignmentsFail({
-                error: JSON.stringify(error),
-              })
-            )
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_PRODUCT_ASSIGNMENTS),
+      map((action: fromActions.LoadProductAssignments) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .loadProductAssignmentsForUnit(
+            payload.occUserId,
+            payload.orgUnitId,
+            payload.active,
+            payload.pageSize,
+            payload.currentPage,
+            payload.sort
           )
-        );
-    })
+          .pipe(
+            map((productAssignments: any) &#x3D;&gt; {
+              return new fromActions.LoadProductAssignmentsSuccess(
+                productAssignments
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.LoadProductAssignmentsFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -452,50 +425,43 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
-    map((action: fromActions.RemoveProductAssignment) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .removeProductAssignment(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productAssignmentCode
-        )
-        .pipe(
-          switchMap(() &#x3D;&gt; {
-            return [
-              new fromActions.RemoveProductAssignmentSuccess(),
-              new fromActions.LoadPotentialProductAssignments({
-                occUserId: payload.userId,
-                orgUnitId: payload.parentOrgUnit,
-              }),
-            ];
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.RemoveProductAssignmentFail({
-                error: JSON.stringify(error),
-              })
-            )
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
+      map((action: fromActions.RemoveProductAssignment) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .removeProductAssignment(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productAssignmentCode
           )
-        );
-    })
+          .pipe(
+            switchMap(() &#x3D;&gt; {
+              return [
+                new fromActions.RemoveProductAssignmentSuccess(),
+                new fromActions.LoadPotentialProductAssignments({
+                  occUserId: payload.userId,
+                  orgUnitId: payload.parentOrgUnit,
+                }),
+              ];
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.RemoveProductAssignmentFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:76</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/fsastorefrontlib/src/core/product-assignment/store/effects/product-assignment.effect.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -509,7 +475,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import {
   catchError,
@@ -523,150 +489,155 @@ import * as fromActions from &#x27;../actions&#x27;;
 
 @Injectable()
 export class ProductAssignmentEffects {
-  @Effect()
-  loadProductAssignments$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_PRODUCT_ASSIGNMENTS),
-    map((action: fromActions.LoadProductAssignments) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .loadProductAssignmentsForUnit(
-          payload.occUserId,
-          payload.orgUnitId,
-          payload.active,
-          payload.pageSize,
-          payload.currentPage,
-          payload.sort
-        )
-        .pipe(
-          map((productAssignments: any) &#x3D;&gt; {
-            return new fromActions.LoadProductAssignmentsSuccess(
-              productAssignments
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.LoadProductAssignmentsFail({
-                error: JSON.stringify(error),
-              })
-            )
+  loadProductAssignments$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_PRODUCT_ASSIGNMENTS),
+      map((action: fromActions.LoadProductAssignments) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .loadProductAssignmentsForUnit(
+            payload.occUserId,
+            payload.orgUnitId,
+            payload.active,
+            payload.pageSize,
+            payload.currentPage,
+            payload.sort
           )
-        );
-    })
+          .pipe(
+            map((productAssignments: any) &#x3D;&gt; {
+              return new fromActions.LoadProductAssignmentsSuccess(
+                productAssignments
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.LoadProductAssignmentsFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  createProductAssignment$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
-    map((action: fromActions.CreateProductAssignment) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .createProductAssignment(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productCode
-        )
-        .pipe(
-          map((productAssignments: any) &#x3D;&gt; {
-            return new fromActions.CreateProductAssignmentSuccess(
-              productAssignments
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.CreateProductAssignmentFail({
-                error: JSON.stringify(error),
-              })
-            )
+  createProductAssignment$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
+      map((action: fromActions.CreateProductAssignment) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .createProductAssignment(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productCode
           )
-        );
-    })
+          .pipe(
+            map((productAssignments: any) &#x3D;&gt; {
+              return new fromActions.CreateProductAssignmentSuccess(
+                productAssignments
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.CreateProductAssignmentFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  removeProductAssignment$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
-    map((action: fromActions.RemoveProductAssignment) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .removeProductAssignment(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productAssignmentCode
-        )
-        .pipe(
-          switchMap(() &#x3D;&gt; {
-            return [
-              new fromActions.RemoveProductAssignmentSuccess(),
-              new fromActions.LoadPotentialProductAssignments({
-                occUserId: payload.userId,
-                orgUnitId: payload.parentOrgUnit,
-              }),
-            ];
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.RemoveProductAssignmentFail({
-                error: JSON.stringify(error),
-              })
-            )
+  removeProductAssignment$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
+      map((action: fromActions.RemoveProductAssignment) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .removeProductAssignment(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productAssignmentCode
           )
-        );
-    })
+          .pipe(
+            switchMap(() &#x3D;&gt; {
+              return [
+                new fromActions.RemoveProductAssignmentSuccess(),
+                new fromActions.LoadPotentialProductAssignments({
+                  occUserId: payload.userId,
+                  orgUnitId: payload.parentOrgUnit,
+                }),
+              ];
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.RemoveProductAssignmentFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  loadPotentialProductAssignments$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
-    map(
-      (action: fromActions.LoadPotentialProductAssignments) &#x3D;&gt; action.payload
-    ),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .loadProductAssignmentsForUnit(payload.occUserId, payload.orgUnitId)
-        .pipe(
-          map((productAssignments: any) &#x3D;&gt; {
-            return new fromActions.LoadPotentialProductAssignmentsSuccess(
-              productAssignments
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.LoadPotentialProductAssignmentsFail({
-                error: JSON.stringify(error),
-              })
+  loadPotentialProductAssignments$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
+      map(
+        (action: fromActions.LoadPotentialProductAssignments) &#x3D;&gt; action.payload
+      ),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .loadProductAssignmentsForUnit(payload.occUserId, payload.orgUnitId)
+          .pipe(
+            map((productAssignments: any) &#x3D;&gt; {
+              return new fromActions.LoadPotentialProductAssignmentsSuccess(
+                productAssignments
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.LoadPotentialProductAssignmentsFail({
+                  error: JSON.stringify(error),
+                })
+              )
             )
-          )
-        );
-    })
+          );
+      })
+    )
   );
 
-  @Effect()
-  changeActiveStatus$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
-    map((action: fromActions.UpdateProductAssignment) &#x3D;&gt; action.payload),
-    concatMap(payload &#x3D;&gt; {
-      return this.productAssignmentConnector
-        .changeActiveStatus(
-          payload.userId,
-          payload.orgUnitId,
-          payload.productAssignmentCode,
-          payload.active
-        )
-        .pipe(
-          map((productAssignment: any) &#x3D;&gt; {
-            return new fromActions.UpdateProductAssignmentSuccess(
-              productAssignment
-            );
-          }),
-          catchError(error &#x3D;&gt;
-            of(
-              new fromActions.UpdateProductAssignmentFail({
-                error: JSON.stringify(error),
-              })
-            )
+  changeActiveStatus$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
+      map((action: fromActions.UpdateProductAssignment) &#x3D;&gt; action.payload),
+      concatMap(payload &#x3D;&gt; {
+        return this.productAssignmentConnector
+          .changeActiveStatus(
+            payload.userId,
+            payload.orgUnitId,
+            payload.productAssignmentCode,
+            payload.active
           )
-        );
-    })
+          .pipe(
+            map((productAssignment: any) &#x3D;&gt; {
+              return new fromActions.UpdateProductAssignmentSuccess(
+                productAssignment
+              );
+            }),
+            catchError(error &#x3D;&gt;
+              of(
+                new fromActions.UpdateProductAssignmentFail({
+                  error: JSON.stringify(error),
+                })
+              )
+            )
+          );
+      })
+    )
   );
 
   constructor(
@@ -678,6 +649,7 @@ export class ProductAssignmentEffects {
     </div>
 
 </div>
+
 
 
 
@@ -703,6 +675,15 @@ export class ProductAssignmentEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

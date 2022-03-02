@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -165,7 +165,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { provideDefaultConfig } from &#x27;@spartacus/core&#x27;;
+import { provideConfig } from &#x27;@spartacus/core&#x27;;
 import { UserComponentsModule } from &#x27;@spartacus/organization/administration/components&#x27;;
 import { FSUnitUserCreateModule } from &#x27;./create/unit-user-create.module&#x27;;
 import { FSUserDetailsModule } from &#x27;./details/user-details.module&#x27;;
@@ -178,12 +178,14 @@ import { userCmsConfig } from &#x27;./user.config&#x27;;
     FSUserFormModule,
     FSUnitUserCreateModule,
   ],
-  providers: [provideDefaultConfig(userCmsConfig)],
+  providers: [provideConfig(userCmsConfig)],
 })
 export class FSUserComponentsModule {}
 </code></pre>
     </div>
 </div>
+
+
 
 
 
@@ -212,6 +214,15 @@ export class FSUserComponentsModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

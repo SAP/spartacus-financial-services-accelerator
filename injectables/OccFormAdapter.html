@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -187,8 +188,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/form/occ-form.adapter.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/form/occ-form.adapter.ts:54</a></div>
                 </td>
             </tr>
 
@@ -268,8 +269,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="74"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/form/occ-form.adapter.ts:74</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/form/occ-form.adapter.ts:80</a></div>
                 </td>
             </tr>
 
@@ -349,8 +350,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="60"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/form/occ-form.adapter.ts:60</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/form/occ-form.adapter.ts:66</a></div>
                 </td>
             </tr>
 
@@ -519,8 +520,10 @@ export class OccFormAdapter implements FormAdapter {
   ) {}
 
   saveFormData(formData: YFormData, userId: string): Observable&lt;YFormData&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;createFormData&#x27;, {
-      userId: userId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;createFormData&#x27;, {
+      urlParams: {
+        userId: userId,
+      },
     });
     let params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;definitionId&#x27;, formData.formDefinition.formId)
@@ -532,9 +535,11 @@ export class OccFormAdapter implements FormAdapter {
 
     if (formData.id) {
       const formDataId &#x3D; formData.id;
-      const updateUrl &#x3D; this.occEndpointService.getUrl(&#x27;formData&#x27;, {
-        userId: userId,
-        formDataId,
+      const updateUrl &#x3D; this.occEndpointService.buildUrl(&#x27;formData&#x27;, {
+        urlParams: {
+          userId: userId,
+          formDataId,
+        },
       });
       return this.http
         .put&lt;YFormData&gt;(updateUrl, formData.content, { params: params })
@@ -547,9 +552,11 @@ export class OccFormAdapter implements FormAdapter {
   }
 
   getFormData(formDataId: string, userId: string): Observable&lt;YFormData&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;formData&#x27;, {
-      userId: userId,
-      formDataId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;formData&#x27;, {
+      urlParams: {
+        userId: userId,
+        formDataId,
+      },
     });
     return this.http
       .get&lt;YFormData&gt;(url)
@@ -560,7 +567,7 @@ export class OccFormAdapter implements FormAdapter {
     categoryCode: string,
     formDefinitionType: string
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;formDefinitions&#x27;);
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;formDefinitions&#x27;);
     const params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;categoryCode&#x27;, categoryCode)
       .set(&#x27;yFormDefinitionType&#x27;, formDefinitionType)
@@ -574,8 +581,10 @@ export class OccFormAdapter implements FormAdapter {
     applicationId: string,
     formDefinitionId: string
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;formDefinition&#x27;, {
-      formDefinitionId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;formDefinition&#x27;, {
+      urlParams: {
+        formDefinitionId,
+      },
     });
     const params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;applicationId&#x27;, applicationId)
@@ -587,6 +596,7 @@ export class OccFormAdapter implements FormAdapter {
     </div>
 
 </div>
+
 
 
 
@@ -612,6 +622,15 @@ export class OccFormAdapter implements FormAdapter {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

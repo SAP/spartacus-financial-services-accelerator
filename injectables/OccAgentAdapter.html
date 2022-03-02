@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -416,7 +417,7 @@ export class OccAgentAdapter implements AgentAdapter {
   ) {}
 
   getAgentsByCategory(category: string): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;agents&#x27;);
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;agents&#x27;);
     const httpParams: HttpParams &#x3D; new HttpParams()
       .set(&#x27;categoryCode&#x27;, category)
       .set(&#x27;fields&#x27;, &#x27;DEFAULT&#x27;);
@@ -430,7 +431,7 @@ export class OccAgentAdapter implements AgentAdapter {
     pageNumber: number,
     longitudeLatitude?: GeoPoint
   ): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;agents&#x27;);
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;agents&#x27;);
     let params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;page&#x27;, pageNumber.toString())
       .set(&#x27;fields&#x27;, &#x27;DEFAULT&#x27;);
@@ -450,8 +451,10 @@ export class OccAgentAdapter implements AgentAdapter {
   }
 
   getAgentByID(id: string) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;agent&#x27;, {
-      id,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;agent&#x27;, {
+      urlParams: {
+        id,
+      },
     });
     const params: HttpParams &#x3D; new HttpParams().set(&#x27;fields&#x27;, &#x27;DEFAULT&#x27;);
     return this.http
@@ -463,6 +466,7 @@ export class OccAgentAdapter implements AgentAdapter {
     </div>
 
 </div>
+
 
 
 
@@ -488,6 +492,15 @@ export class OccAgentAdapter implements AgentAdapter {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

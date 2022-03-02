@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -133,7 +134,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:177</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:187</a></div>
                             </td>
                         </tr>
 
@@ -234,8 +235,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="171"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:171</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="181"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:181</a></div>
                 </td>
             </tr>
 
@@ -308,36 +309,29 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.CANCEL_CHANGE_REQUEST),
-    map((action: fromActions.CancelChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .cancelChangeRequest(payload.userId, payload.requestId)
-        .pipe(
-          map((changeRequest: any) &#x3D;&gt; {
-            return new fromActions.CancelChangeRequestSuccess(changeRequest);
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.CancelChangeRequestFail(JSON.stringify(error)))
-          )
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.CANCEL_CHANGE_REQUEST),
+      map((action: fromActions.CancelChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .cancelChangeRequest(payload.userId, payload.requestId)
+          .pipe(
+            map((changeRequest: any) &#x3D;&gt; {
+              return new fromActions.CancelChangeRequestSuccess(changeRequest);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.CancelChangeRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:97</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -363,44 +357,37 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.CREATE_CHANGE_REQUEST),
-    map((action: fromActions.CreateChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .createChangeRequestForPolicy(
-          payload.policyId,
-          payload.contractId,
-          payload.changeRequestType,
-          payload.userId
-        )
-        .pipe(
-          map((changeRequest: any) &#x3D;&gt; {
-            return new fromActions.CreateChangeRequestSuccess(changeRequest);
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(&#x27;policy.changeError&#x27;);
-            return of(
-              new fromActions.CreateChangeRequestFail(JSON.stringify(error))
-            );
-          })
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.CREATE_CHANGE_REQUEST),
+      map((action: fromActions.CreateChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .createChangeRequestForPolicy(
+            payload.policyId,
+            payload.contractId,
+            payload.changeRequestType,
+            payload.userId
+          )
+          .pipe(
+            map((changeRequest: any) &#x3D;&gt; {
+              return new fromActions.CreateChangeRequestSuccess(changeRequest);
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;policy.changeError&#x27;);
+              return of(
+                new fromActions.CreateChangeRequestFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -426,34 +413,27 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_CHANGE_REQUEST),
-    map((action: fromActions.LoadChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .getChangeRequest(
-          payload.userId ? payload.userId : OCC_USER_ID_CURRENT,
-          payload.requestId
-        )
-        .pipe(
-          map((changeRequest: any) &#x3D;&gt; {
-            return new fromActions.LoadChangeRequestSuccess(changeRequest);
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.LoadChangeRequestFail(JSON.stringify(error)))
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_CHANGE_REQUEST),
+      map((action: fromActions.LoadChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .getChangeRequest(
+            payload.userId ? payload.userId : OCC_USER_ID_CURRENT,
+            payload.requestId
           )
-        );
-    })
+          .pipe(
+            map((changeRequest: any) &#x3D;&gt; {
+              return new fromActions.LoadChangeRequestSuccess(changeRequest);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.LoadChangeRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
@@ -484,50 +464,43 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.SIMULATE_CHANGE_REQUEST),
-    map((action: fromActions.SimulateChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .simulateChangeRequest(
-          payload.userId,
-          payload.requestId,
-          payload.changeRequest
-        )
-        .pipe(
-          switchMap((changeRequest: any) &#x3D;&gt; {
-            return [
-              new fromActions.SimulateChangeRequestSuccess(changeRequest),
-              new fromActions.UpdateChangeRequest({
-                userId: payload.userId,
-                requestId: payload.requestId,
-                stepData: payload.stepData,
-              }),
-            ];
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(&#x27;policy.changeError&#x27;);
-            return of(
-              new fromActions.SimulateChangeRequestFail(JSON.stringify(error))
-            );
-          })
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SIMULATE_CHANGE_REQUEST),
+      map((action: fromActions.SimulateChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .simulateChangeRequest(
+            payload.userId,
+            payload.requestId,
+            payload.changeRequest
+          )
+          .pipe(
+            switchMap((changeRequest: any) &#x3D;&gt; {
+              return [
+                new fromActions.SimulateChangeRequestSuccess(changeRequest),
+                new fromActions.UpdateChangeRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                  stepData: payload.stepData,
+                }),
+              ];
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;policy.changeError&#x27;);
+              return of(
+                new fromActions.SimulateChangeRequestFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -553,42 +526,35 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.SUBMIT_CHANGE_REQUEST),
-    map((action: fromActions.SubmitChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .submitUserRequest(payload.userId, payload.requestId)
-        .pipe(
-          mergeMap(userRequest &#x3D;&gt; {
-            return [
-              new fromActions.LoadChangeRequest(userRequest),
-              new fromActions.SubmitChangeRequestSuccess(userRequest),
-            ];
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(&#x27;policy.changeError&#x27;);
-            return of(
-              new fromActions.SubmitChangeRequestFail(JSON.stringify(error))
-            );
-          })
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SUBMIT_CHANGE_REQUEST),
+      map((action: fromActions.SubmitChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .submitUserRequest(payload.userId, payload.requestId)
+          .pipe(
+            mergeMap(userRequest &#x3D;&gt; {
+              return [
+                new fromActions.LoadChangeRequest(userRequest),
+                new fromActions.SubmitChangeRequestSuccess(userRequest),
+              ];
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;policy.changeError&#x27;);
+              return of(
+                new fromActions.SubmitChangeRequestFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:115</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -614,51 +580,48 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.UPDATE_CHANGE_REQUEST),
-    map((action: fromActions.UpdateChangeRequest) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
-        .pipe(
-          map((userRequest: any) &#x3D;&gt; {
-            const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
-            const configSteps &#x3D; userRequest.configurationSteps;
-            if (
-              configSteps &amp;&amp;
-              configSteps.length &gt; 0 &amp;&amp;
-              sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
-              configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
-                StepStatus.COMPLETED
-            ) {
-              return new fromActions.SubmitChangeRequest({
-                userId: payload.userId,
-                requestId: payload.requestId,
-              });
-            } else {
-              return new fromActions.UpdateChangeRequestSuccess(userRequest);
-            }
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateChangeRequestFail(JSON.stringify(error)))
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_CHANGE_REQUEST),
+      map((action: fromActions.UpdateChangeRequest) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .updateUserRequest(
+            payload.userId,
+            payload.requestId,
+            payload.stepData
           )
-        );
-    })
+          .pipe(
+            map((userRequest: any) &#x3D;&gt; {
+              const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
+              const configSteps &#x3D; userRequest.configurationSteps;
+              if (
+                configSteps &amp;&amp;
+                configSteps.length &gt; 0 &amp;&amp;
+                sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
+                configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
+                  StepStatus.COMPLETED
+              ) {
+                return new fromActions.SubmitChangeRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                });
+              } else {
+                return new fromActions.UpdateChangeRequestSuccess(userRequest);
+              }
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateChangeRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:139</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">projects/fsastorefrontlib/src/core/change-request/store/effects/change-request.effect.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -672,7 +635,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { catchError, map, mergeMap, switchMap } from &#x27;rxjs/operators&#x27;;
 import { ChangeRequestConnector } from &#x27;../../connectors/change-request.connector&#x27;;
@@ -687,158 +650,168 @@ import { UserRequestConnector } from &#x27;../../../user-request/connectors/user
 
 @Injectable()
 export class ChangeRequestEffects {
-  @Effect()
-  createChangeRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.CREATE_CHANGE_REQUEST),
-    map((action: fromActions.CreateChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .createChangeRequestForPolicy(
-          payload.policyId,
-          payload.contractId,
-          payload.changeRequestType,
-          payload.userId
-        )
-        .pipe(
-          map((changeRequest: any) &#x3D;&gt; {
-            return new fromActions.CreateChangeRequestSuccess(changeRequest);
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(&#x27;policy.changeError&#x27;);
-            return of(
-              new fromActions.CreateChangeRequestFail(JSON.stringify(error))
-            );
-          })
-        );
-    })
-  );
-
-  @Effect()
-  loadChangeRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_CHANGE_REQUEST),
-    map((action: fromActions.LoadChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .getChangeRequest(
-          payload.userId ? payload.userId : OCC_USER_ID_CURRENT,
-          payload.requestId
-        )
-        .pipe(
-          map((changeRequest: any) &#x3D;&gt; {
-            return new fromActions.LoadChangeRequestSuccess(changeRequest);
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.LoadChangeRequestFail(JSON.stringify(error)))
+  createChangeRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.CREATE_CHANGE_REQUEST),
+      map((action: fromActions.CreateChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .createChangeRequestForPolicy(
+            payload.policyId,
+            payload.contractId,
+            payload.changeRequestType,
+            payload.userId
           )
-        );
-    })
+          .pipe(
+            map((changeRequest: any) &#x3D;&gt; {
+              return new fromActions.CreateChangeRequestSuccess(changeRequest);
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;policy.changeError&#x27;);
+              return of(
+                new fromActions.CreateChangeRequestFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   );
 
-  @Effect()
-  simulateChangeRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.SIMULATE_CHANGE_REQUEST),
-    map((action: fromActions.SimulateChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .simulateChangeRequest(
-          payload.userId,
-          payload.requestId,
-          payload.changeRequest
-        )
-        .pipe(
-          switchMap((changeRequest: any) &#x3D;&gt; {
-            return [
-              new fromActions.SimulateChangeRequestSuccess(changeRequest),
-              new fromActions.UpdateChangeRequest({
-                userId: payload.userId,
-                requestId: payload.requestId,
-                stepData: payload.stepData,
-              }),
-            ];
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(&#x27;policy.changeError&#x27;);
-            return of(
-              new fromActions.SimulateChangeRequestFail(JSON.stringify(error))
-            );
-          })
-        );
-    })
-  );
-
-  @Effect()
-  cancelChangeRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.CANCEL_CHANGE_REQUEST),
-    map((action: fromActions.CancelChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.changeRequestConnector
-        .cancelChangeRequest(payload.userId, payload.requestId)
-        .pipe(
-          map((changeRequest: any) &#x3D;&gt; {
-            return new fromActions.CancelChangeRequestSuccess(changeRequest);
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.CancelChangeRequestFail(JSON.stringify(error)))
+  loadChangeRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_CHANGE_REQUEST),
+      map((action: fromActions.LoadChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .getChangeRequest(
+            payload.userId ? payload.userId : OCC_USER_ID_CURRENT,
+            payload.requestId
           )
-        );
-    })
+          .pipe(
+            map((changeRequest: any) &#x3D;&gt; {
+              return new fromActions.LoadChangeRequestSuccess(changeRequest);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.LoadChangeRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  submitChangeRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.SUBMIT_CHANGE_REQUEST),
-    map((action: fromActions.SubmitChangeRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .submitUserRequest(payload.userId, payload.requestId)
-        .pipe(
-          mergeMap(userRequest &#x3D;&gt; {
-            return [
-              new fromActions.LoadChangeRequest(userRequest),
-              new fromActions.SubmitChangeRequestSuccess(userRequest),
-            ];
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(&#x27;policy.changeError&#x27;);
-            return of(
-              new fromActions.SubmitChangeRequestFail(JSON.stringify(error))
-            );
-          })
-        );
-    })
-  );
-
-  @Effect()
-  updateChangeRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.UPDATE_CHANGE_REQUEST),
-    map((action: fromActions.UpdateChangeRequest) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
-        .pipe(
-          map((userRequest: any) &#x3D;&gt; {
-            const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
-            const configSteps &#x3D; userRequest.configurationSteps;
-            if (
-              configSteps &amp;&amp;
-              configSteps.length &gt; 0 &amp;&amp;
-              sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
-              configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
-                StepStatus.COMPLETED
-            ) {
-              return new fromActions.SubmitChangeRequest({
-                userId: payload.userId,
-                requestId: payload.requestId,
-              });
-            } else {
-              return new fromActions.UpdateChangeRequestSuccess(userRequest);
-            }
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateChangeRequestFail(JSON.stringify(error)))
+  simulateChangeRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SIMULATE_CHANGE_REQUEST),
+      map((action: fromActions.SimulateChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .simulateChangeRequest(
+            payload.userId,
+            payload.requestId,
+            payload.changeRequest
           )
-        );
-    })
+          .pipe(
+            switchMap((changeRequest: any) &#x3D;&gt; {
+              return [
+                new fromActions.SimulateChangeRequestSuccess(changeRequest),
+                new fromActions.UpdateChangeRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                  stepData: payload.stepData,
+                }),
+              ];
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;policy.changeError&#x27;);
+              return of(
+                new fromActions.SimulateChangeRequestFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
+  );
+
+  cancelChangeRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.CANCEL_CHANGE_REQUEST),
+      map((action: fromActions.CancelChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.changeRequestConnector
+          .cancelChangeRequest(payload.userId, payload.requestId)
+          .pipe(
+            map((changeRequest: any) &#x3D;&gt; {
+              return new fromActions.CancelChangeRequestSuccess(changeRequest);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.CancelChangeRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
+  );
+
+  submitChangeRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SUBMIT_CHANGE_REQUEST),
+      map((action: fromActions.SubmitChangeRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .submitUserRequest(payload.userId, payload.requestId)
+          .pipe(
+            mergeMap(userRequest &#x3D;&gt; {
+              return [
+                new fromActions.LoadChangeRequest(userRequest),
+                new fromActions.SubmitChangeRequestSuccess(userRequest),
+              ];
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;policy.changeError&#x27;);
+              return of(
+                new fromActions.SubmitChangeRequestFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
+  );
+
+  updateChangeRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_CHANGE_REQUEST),
+      map((action: fromActions.UpdateChangeRequest) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .updateUserRequest(
+            payload.userId,
+            payload.requestId,
+            payload.stepData
+          )
+          .pipe(
+            map((userRequest: any) &#x3D;&gt; {
+              const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
+              const configSteps &#x3D; userRequest.configurationSteps;
+              if (
+                configSteps &amp;&amp;
+                configSteps.length &gt; 0 &amp;&amp;
+                sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
+                configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
+                  StepStatus.COMPLETED
+              ) {
+                return new fromActions.SubmitChangeRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                });
+              } else {
+                return new fromActions.UpdateChangeRequestSuccess(userRequest);
+              }
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateChangeRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
 
   private showGlobalMessage(text: string) {
@@ -872,6 +845,7 @@ export class ChangeRequestEffects {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -885,6 +859,15 @@ export class ChangeRequestEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

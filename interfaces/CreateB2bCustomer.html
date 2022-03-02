@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
 
 
 
@@ -351,16 +352,27 @@ export function login(username: string, password: string) {
   });
 }
 
+export function loginAgent(username: string, password: string) {
+  cy.get(&#x27;cx-csagent-login-form&#x27;).should(&#x27;be.visible&#x27;);
+  cy.get(&#x27;cx-csagent-login-form&#x27;).within(() &#x3D;&gt; {
+    cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).clear().type(username);
+    cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).clear().type(password);
+    cy.get(&#x27;button[type&#x3D;submit]&#x27;).click();
+  });
+}
+
 export function logout() {
   cy.findByText(&#x27;Logout&#x27;).click();
 }
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
-  cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).should(&#x27;be.visible&#x27;);
-  cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).eq(0).type(username);
-  cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).type(password);
-  cy.get(&#x27;button[type&#x3D;submit]&#x27;).eq(0).click();
+  cy.get(&#x27;cx-fs-login-form&#x27;).within(() &#x3D;&gt; {
+    cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).should(&#x27;be.visible&#x27;);
+    cy.get(&#x27;[formcontrolname&#x3D;&quot;userId&quot;]&#x27;).eq(0).type(username);
+    cy.get(&#x27;[formcontrolname&#x3D;&quot;password&quot;]&#x27;).type(password);
+    cy.get(&#x27;button[type&#x3D;submit]&#x27;).eq(0).click();
+  });
 }
 
 export function createB2bCustomer(customer: CreateB2bCustomer) {
@@ -383,6 +395,7 @@ export function createB2bCustomer(customer: CreateB2bCustomer) {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -396,6 +409,15 @@ export function createB2bCustomer(customer: CreateB2bCustomer) {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

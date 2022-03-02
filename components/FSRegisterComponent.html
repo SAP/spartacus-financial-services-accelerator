@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -78,13 +78,12 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
 <section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover">
+    <table class="table table-sm table-hover metadata">
         <tbody>
 
 
@@ -161,9 +160,6 @@
                                 <a href="#getDateFormat" >getDateFormat</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                         </ul>
@@ -184,7 +180,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: UserService, globalMessageService: GlobalMessageService, fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, router: RoutingService, anonymousConsentsService: AnonymousConsentsService, anonymousConsentsConfig: AnonymousConsentsConfig, config: <a href="../injectables/DateConfig.html" target="_self">DateConfig</a>, authConfigService: AuthConfigService)</code>
+<code>constructor(userRegister: UserRegisterFacade, globalMessageService: GlobalMessageService, fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, router: RoutingService, anonymousConsentsService: AnonymousConsentsService, anonymousConsentsConfig: AnonymousConsentsConfig, config: <a href="../injectables/DateConfig.html" target="_self">DateConfig</a>, authConfigService: AuthConfigService)</code>
                     </td>
                 </tr>
                         <tr>
@@ -207,10 +203,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userService</td>
+                                                        <td>userRegister</td>
                                                   
                                                         <td>
-                                                                    <code>UserService</code>
+                                                                    <code>UserRegisterFacade</code>
                                                         </td>
                                                   
                                                     <td>
@@ -340,8 +336,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:73</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="81"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:81</a></div>
                 </td>
             </tr>
 
@@ -409,8 +405,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="95"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:95</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:103</a></div>
                 </td>
             </tr>
 
@@ -420,43 +416,6 @@
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
-                    <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="99"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:99</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                     </div>
                 </td>
@@ -483,8 +442,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="62"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:62</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/user/register/register.component.ts:70</a></div>
                 </td>
             </tr>
 
@@ -545,19 +504,27 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.fb.group({
-    ...this.registerForm.controls,
-    phoneNumber: [
-      &#x27;&#x27;,
-      DefaultFormValidators.regexValidator(
-        DefaultFormValidators.phoneNumberRegex
+                        <i>Default value : </i><code>this.fb.group(
+    {
+      ...this.registerForm.controls,
+      phoneNumber: [
+        &#x27;&#x27;,
+        DefaultFormValidators.regexValidator(
+          DefaultFormValidators.phoneNumberRegex
+        ),
+      ],
+      dateOfBirth: [
+        &#x27;&#x27;,
+        [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
+      ],
+    },
+    {
+      validators: CustomFormValidators.passwordsMustMatch(
+        &#x27;password&#x27;,
+        &#x27;passwordconf&#x27;
       ),
-    ],
-    dateOfBirth: [
-      &#x27;&#x27;,
-      [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
-    ],
-  })</code>
+    }
+  )</code>
                     </td>
                 </tr>
                     <tr>
@@ -609,22 +576,22 @@ import {
   ANONYMOUS_CONSENT_STATUS,
   GlobalMessageService,
   RoutingService,
-  UserService,
   AuthConfigService,
 } from &#x27;@spartacus/core&#x27;;
-import { RegisterComponent } from &#x27;@spartacus/storefront&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
 import { FSUserSignUp } from &#x27;../../../occ/occ-models&#x27;;
 import { DateConfig } from &#x27;./../../../core/date-config/date-config&#x27;;
+import { RegisterComponent } from &#x27;@spartacus/user/profile/components&#x27;;
+import { UserRegisterFacade } from &#x27;@spartacus/user/profile/root&#x27;;
+import { CustomFormValidators } from &#x27;@spartacus/storefront&#x27;;
 
 @Component({
   selector: &#x27;cx-fs-register&#x27;,
   templateUrl: &#x27;./register.component.html&#x27;,
 })
-export class FSRegisterComponent extends RegisterComponent
-  implements OnInit, OnDestroy {
+export class FSRegisterComponent extends RegisterComponent implements OnInit {
   constructor(
-    protected userService: UserService,
+    protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
     protected router: RoutingService,
@@ -634,7 +601,7 @@ export class FSRegisterComponent extends RegisterComponent
     protected authConfigService: AuthConfigService
   ) {
     super(
-      userService,
+      userRegister,
       globalMessageService,
       fb,
       router,
@@ -647,19 +614,27 @@ export class FSRegisterComponent extends RegisterComponent
   sub &#x3D; new Subscription();
   consentGiven: boolean;
 
-  registerForm &#x3D; this.fb.group({
-    ...this.registerForm.controls,
-    phoneNumber: [
-      &#x27;&#x27;,
-      DefaultFormValidators.regexValidator(
-        DefaultFormValidators.phoneNumberRegex
+  registerForm &#x3D; this.fb.group(
+    {
+      ...this.registerForm.controls,
+      phoneNumber: [
+        &#x27;&#x27;,
+        DefaultFormValidators.regexValidator(
+          DefaultFormValidators.phoneNumberRegex
+        ),
+      ],
+      dateOfBirth: [
+        &#x27;&#x27;,
+        [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
+      ],
+    },
+    {
+      validators: CustomFormValidators.passwordsMustMatch(
+        &#x27;password&#x27;,
+        &#x27;passwordconf&#x27;
       ),
-    ],
-    dateOfBirth: [
-      &#x27;&#x27;,
-      [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
-    ],
-  });
+    }
+  );
 
   ngOnInit() {
     super.ngOnInit();
@@ -697,268 +672,238 @@ export class FSRegisterComponent extends RegisterComponent
   getDateFormat() {
     return this.config.date.format || &#x27;&#x27;;
   }
-
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
-  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;section&gt;
-  &lt;div class&#x3D;&quot;cx-section&quot;&gt;
-    &lt;form (ngSubmit)&#x3D;&quot;submitForm()&quot; [formGroup]&#x3D;&quot;registerForm&quot;&gt;
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;register.title&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;select formControlName&#x3D;&quot;titleCode&quot; class&#x3D;&quot;form-control&quot;&gt;
-            &lt;option selected value&#x3D;&quot;&quot; disabled&gt;{{
-              &#x27;register.selectTitle&#x27; | cxTranslate
-            }}&lt;/option&gt;
-            &lt;option
-              *ngFor&#x3D;&quot;let title of titles$ | async&quot;
-              [value]&#x3D;&quot;title.code&quot;
-              &gt;{{ title.name }}&lt;/option
-            &gt;
-          &lt;/select&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;register.firstName.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            type&#x3D;&quot;text&quot;
-            name&#x3D;&quot;firstname&quot;
-            placeholder&#x3D;&quot;{{ &#x27;register.firstName.placeholder&#x27; | cxTranslate }}&quot;
-            formControlName&#x3D;&quot;firstName&quot;
-          /&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;register.lastName.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            type&#x3D;&quot;text&quot;
-            name&#x3D;&quot;lastname&quot;
-            placeholder&#x3D;&quot;{{ &#x27;register.lastName.placeholder&#x27; | cxTranslate }}&quot;
-            formControlName&#x3D;&quot;lastName&quot;
-          /&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;forms.dateOfBirth.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            [class.is-invalid]&#x3D;&quot;
-              registerForm.get(&#x27;dateOfBirth&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;dateOfBirth&#x27;).dirty
-            &quot;
-            type&#x3D;&quot;date&quot;
-            name&#x3D;&quot;dateOfBirth&quot;
-            formControlName&#x3D;&quot;dateOfBirth&quot;
-            placeholder&#x3D;&quot;{{ getDateFormat() }}&quot;
-          /&gt;
-          &lt;div
-            class&#x3D;&quot;invalid-feedback&quot;
-            *ngIf&#x3D;&quot;
-              registerForm.get(&#x27;dateOfBirth&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;dateOfBirth&#x27;).dirty
-            &quot;
-          &gt;
-            &lt;span&gt;{{ &#x27;forms.dateOfBirthMinimumAge&#x27; | cxTranslate }}&lt;/span&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;section
+  class&#x3D;&quot;cx-page-section container&quot;
+  *ngIf&#x3D;&quot;!(isLoading$ | async); else loading&quot;
+&gt;
+  &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
+    &lt;div class&#x3D;&quot;col-12&quot;&gt;
+      &lt;div class&#x3D;&quot;cx-section&quot;&gt;
+        &lt;form (ngSubmit)&#x3D;&quot;submitForm()&quot; [formGroup]&#x3D;&quot;registerForm&quot;&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;register.title&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;select formControlName&#x3D;&quot;titleCode&quot; class&#x3D;&quot;form-control&quot;&gt;
+                &lt;option selected value&#x3D;&quot;&quot; disabled&gt;
+                  {{ &#x27;register.selectTitle&#x27; | cxTranslate }}
+                &lt;/option&gt;
+                &lt;option
+                  *ngFor&#x3D;&quot;let title of titles$ | async&quot;
+                  [value]&#x3D;&quot;title.code&quot;
+                &gt;
+                  {{ title.name }}
+                &lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/label&gt;
           &lt;/div&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;forms.phoneNumber.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            [class.is-invalid]&#x3D;&quot;
-              registerForm.get(&#x27;phoneNumber&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;phoneNumber&#x27;).dirty
-            &quot;
-            type&#x3D;&quot;text&quot;
-            name&#x3D;&quot;phoneNumber&quot;
-            formControlName&#x3D;&quot;phoneNumber&quot;
-          /&gt;
-          &lt;div
-            class&#x3D;&quot;invalid-feedback&quot;
-            *ngIf&#x3D;&quot;
-              registerForm.get(&#x27;phoneNumber&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;phoneNumber&#x27;).dirty
-            &quot;
-          &gt;
-            &lt;span&gt;{{
-              &#x27;forms.phoneNumber.lengthValidation&#x27; | cxTranslate
-            }}&lt;/span&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;register.firstName.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                type&#x3D;&quot;text&quot;
+                name&#x3D;&quot;firstname&quot;
+                placeholder&#x3D;&quot;{{
+                  &#x27;register.firstName.placeholder&#x27; | cxTranslate
+                }}&quot;
+                formControlName&#x3D;&quot;firstName&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;firstName&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
           &lt;/div&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;register.emailAddress.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            [class.is-invalid]&#x3D;&quot;
-              registerForm.get(&#x27;email&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;email&#x27;).dirty
-            &quot;
-            type&#x3D;&quot;email&quot;
-            name&#x3D;&quot;email&quot;
-            placeholder&#x3D;&quot;{{
-              &#x27;register.emailAddress.placeholder&#x27; | cxTranslate
-            }}&quot;
-            formControlName&#x3D;&quot;email&quot;
-          /&gt;
-          &lt;div
-            class&#x3D;&quot;invalid-feedback&quot;
-            *ngIf&#x3D;&quot;
-              registerForm.get(&#x27;email&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;email&#x27;).dirty
-            &quot;
-          &gt;
-            &lt;span&gt;{{ &#x27;forms.enterValidEmail&#x27; | cxTranslate }}&lt;/span&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;register.lastName.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                type&#x3D;&quot;text&quot;
+                name&#x3D;&quot;lastname&quot;
+                placeholder&#x3D;&quot;{{
+                  &#x27;register.lastName.placeholder&#x27; | cxTranslate
+                }}&quot;
+                formControlName&#x3D;&quot;lastName&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;lastName&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
           &lt;/div&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;register.password.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            [class.is-invalid]&#x3D;&quot;
-              registerForm.get(&#x27;password&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;password&#x27;).dirty
-            &quot;
-            type&#x3D;&quot;password&quot;
-            name&#x3D;&quot;password&quot;
-            placeholder&#x3D;&quot;{{ &#x27;register.password.placeholder&#x27; | cxTranslate }}&quot;
-            formControlName&#x3D;&quot;password&quot;
-          /&gt;
-          &lt;div
-            class&#x3D;&quot;invalid-feedback&quot;
-            *ngIf&#x3D;&quot;
-              registerForm.get(&#x27;password&#x27;).invalid &amp;&amp;
-              registerForm.get(&#x27;password&#x27;).dirty
-            &quot;
-          &gt;
-            &lt;span&gt;{{ &#x27;register.passwordMinRequirements&#x27; | cxTranslate }}&lt;/span&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;forms.dateOfBirth.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                [class.is-invalid]&#x3D;&quot;
+                  registerForm.get(&#x27;dateOfBirth&#x27;).invalid &amp;&amp;
+                  registerForm.get(&#x27;dateOfBirth&#x27;).dirty
+                &quot;
+                type&#x3D;&quot;date&quot;
+                name&#x3D;&quot;dateOfBirth&quot;
+                formControlName&#x3D;&quot;dateOfBirth&quot;
+                placeholder&#x3D;&quot;{{ getDateFormat() }}&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;dateOfBirth&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
           &lt;/div&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;label&gt;
-          &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
-            &#x27;register.confirmPassword.label&#x27; | cxTranslate
-          }}&lt;/span&gt;
-          &lt;input
-            class&#x3D;&quot;form-control&quot;
-            [class.is-invalid]&#x3D;&quot;
-              registerForm.get(&#x27;password&#x27;).value !&#x3D;&#x3D;
-              registerForm.get(&#x27;passwordconf&#x27;).value
-            &quot;
-            type&#x3D;&quot;password&quot;
-            name&#x3D;&quot;confirmpassword&quot;
-            placeholder&#x3D;&quot;{{
-              &#x27;register.confirmPassword.placeholder&#x27; | cxTranslate
-            }}&quot;
-            formControlName&#x3D;&quot;passwordconf&quot;
-          /&gt;
-          &lt;div
-            class&#x3D;&quot;invalid-feedback&quot;
-            *ngIf&#x3D;&quot;
-              registerForm.get(&#x27;password&#x27;).value !&#x3D;&#x3D;
-                registerForm.get(&#x27;passwordconf&#x27;).value &amp;&amp;
-              registerForm.get(&#x27;passwordconf&#x27;).value
-            &quot;
-          &gt;
-            &lt;span&gt;{{ &#x27;register.bothPasswordMustMatch&#x27; | cxTranslate }}&lt;/span&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;forms.phoneNumber.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                [class.is-invalid]&#x3D;&quot;
+                  registerForm.get(&#x27;phoneNumber&#x27;).invalid &amp;&amp;
+                  registerForm.get(&#x27;phoneNumber&#x27;).dirty
+                &quot;
+                type&#x3D;&quot;text&quot;
+                name&#x3D;&quot;phoneNumber&quot;
+                formControlName&#x3D;&quot;phoneNumber&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;phoneNumber&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
           &lt;/div&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;div class&#x3D;&quot;form-check&quot;&gt;
-          &lt;label *ngIf&#x3D;&quot;anonymousConsent$ | async as anonymousConsent&quot;&gt;
-            &lt;input
-              type&#x3D;&quot;checkbox&quot;
-              name&#x3D;&quot;newsletter&quot;
-              class&#x3D;&quot;form-check-input&quot;
-              formControlName&#x3D;&quot;newsletter&quot;
-              [checked]&#x3D;&quot;isConsentGiven(anonymousConsent.consent)&quot;
-            /&gt;
-            &lt;span class&#x3D;&quot;form-check-label&quot;&gt;
-              {{ anonymousConsent.template }}
-            &lt;/span&gt;
-          &lt;/label&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;register.emailAddress.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                type&#x3D;&quot;email&quot;
+                name&#x3D;&quot;email&quot;
+                placeholder&#x3D;&quot;{{
+                  &#x27;register.emailAddress.placeholder&#x27; | cxTranslate
+                }}&quot;
+                formControlName&#x3D;&quot;email&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;email&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;form-group&quot;&gt;
-        &lt;div class&#x3D;&quot;form-check&quot;&gt;
-          &lt;label&gt;
-            &lt;input
-              type&#x3D;&quot;checkbox&quot;
-              name&#x3D;&quot;termsandconditions&quot;
-              formControlName&#x3D;&quot;termsandconditions&quot;
-            /&gt;
-            &lt;span class&#x3D;&quot;form-check-label&quot;&gt;
-              {{ &#x27;register.confirmThatRead&#x27; | cxTranslate }}
-              &lt;a
-                class&#x3D;&quot;link text-capitalize&quot;
-                [routerLink]&#x3D;&quot;{ cxRoute: &#x27;termsAndConditions&#x27; } | cxUrl&quot;
-                target&#x3D;&quot;_blank&quot;
-                rel&#x3D;&quot;noopener noreferrer&quot;
-              &gt;
-                {{ &#x27;register.termsAndConditions&#x27; | cxTranslate }}
-              &lt;/a&gt;
-            &lt;/span&gt;
-          &lt;/label&gt;
-        &lt;/div&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;register.password.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                type&#x3D;&quot;password&quot;
+                name&#x3D;&quot;password&quot;
+                placeholder&#x3D;&quot;{{
+                  &#x27;register.password.placeholder&#x27; | cxTranslate
+                }}&quot;
+                formControlName&#x3D;&quot;password&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;password&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label&gt;
+              &lt;span class&#x3D;&quot;label-content&quot;&gt;{{
+                &#x27;register.confirmPassword.label&#x27; | cxTranslate
+              }}&lt;/span&gt;
+              &lt;input
+                class&#x3D;&quot;form-control&quot;
+                type&#x3D;&quot;password&quot;
+                name&#x3D;&quot;confirmpassword&quot;
+                placeholder&#x3D;&quot;{{
+                  &#x27;register.confirmPassword.placeholder&#x27; | cxTranslate
+                }}&quot;
+                formControlName&#x3D;&quot;passwordconf&quot;
+              /&gt;
+              &lt;cx-form-errors
+                [control]&#x3D;&quot;registerForm.get(&#x27;passwordconf&#x27;)&quot;
+              &gt;&lt;/cx-form-errors&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;div class&#x3D;&quot;form-check&quot;&gt;
+              &lt;label *ngIf&#x3D;&quot;anonymousConsent$ | async as anonymousConsent&quot;&gt;
+                &lt;input
+                  type&#x3D;&quot;checkbox&quot;
+                  name&#x3D;&quot;newsletter&quot;
+                  class&#x3D;&quot;form-check-input&quot;
+                  formControlName&#x3D;&quot;newsletter&quot;
+                  [checked]&#x3D;&quot;isConsentGiven(anonymousConsent.consent)&quot;
+                /&gt;
+                &lt;span class&#x3D;&quot;form-check-label&quot;&gt;
+                  {{ anonymousConsent.template }}
+                &lt;/span&gt;
+              &lt;/label&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;div class&#x3D;&quot;form-check&quot;&gt;
+              &lt;label&gt;
+                &lt;input
+                  type&#x3D;&quot;checkbox&quot;
+                  name&#x3D;&quot;termsandconditions&quot;
+                  formControlName&#x3D;&quot;termsandconditions&quot;
+                /&gt;
+                &lt;span class&#x3D;&quot;form-check-label&quot;&gt;
+                  {{ &#x27;register.confirmThatRead&#x27; | cxTranslate }}
+                  &lt;a
+                    [routerLink]&#x3D;&quot;{ cxRoute: &#x27;termsAndConditions&#x27; } | cxUrl&quot;
+                    target&#x3D;&quot;_blank&quot;
+                  &gt;
+                    {{ &#x27;register.termsAndConditions&#x27; | cxTranslate }}
+                  &lt;/a&gt;
+                &lt;/span&gt;
+                &lt;cx-form-errors
+                  [control]&#x3D;&quot;registerForm.get(&#x27;termsandconditions&#x27;)&quot;
+                &gt;&lt;/cx-form-errors&gt;
+              &lt;/label&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-block btn-primary&quot;&gt;
+            {{ &#x27;register.register&#x27; | cxTranslate }}
+          &lt;/button&gt;
+          &lt;a
+            class&#x3D;&quot;cx-login-link btn-link&quot;
+            [routerLink]&#x3D;&quot;{ cxRoute: &#x27;login&#x27; } | cxUrl&quot;
+            &gt;{{ &#x27;register.signIn&#x27; | cxTranslate }}&lt;/a
+          &gt;
+        &lt;/form&gt;
       &lt;/div&gt;
-      &lt;button
-        type&#x3D;&quot;submit&quot;
-        [disabled]&#x3D;&quot;registerForm.invalid&quot;
-        class&#x3D;&quot;btn btn-block btn-primary&quot;
-      &gt;
-        {{ &#x27;register.register&#x27; | cxTranslate }}
-      &lt;/button&gt;
-      &lt;a
-        class&#x3D;&quot;cx-login-link btn-link&quot;
-        [routerLink]&#x3D;&quot;{ cxRoute: &#x27;login&#x27; } | cxUrl&quot;
-        &gt;{{ &#x27;register.signIn&#x27; | cxTranslate }}&lt;/a
-      &gt;
-    &lt;/form&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;
+
+&lt;ng-template #loading&gt;
+  &lt;div class&#x3D;&quot;cx-spinner&quot;&gt;&lt;cx-spinner&gt;&lt;/cx-spinner&gt;&lt;/div&gt;
+&lt;/ng-template&gt;
 </code></pre>
     </div>
 
@@ -988,12 +933,14 @@ export class FSRegisterComponent extends RegisterComponent
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><section>  <div class="cx-section">    <form (ngSubmit)="submitForm()" [formGroup]="registerForm">      <div class="form-group">        <label>          <span class="label-content">{{            \'register.title\' | cxTranslate          }}</span>          <select formControlName="titleCode" class="form-control">            <option selected value="" disabled>{{              \'register.selectTitle\' | cxTranslate            }}</option>            <option              *ngFor="let title of titles$ | async"              [value]="title.code"              >{{ title.name }}</option            >          </select>        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'register.firstName.label\' | cxTranslate          }}</span>          <input            class="form-control"            type="text"            name="firstname"            placeholder="{{ \'register.firstName.placeholder\' | cxTranslate }}"            formControlName="firstName"          />        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'register.lastName.label\' | cxTranslate          }}</span>          <input            class="form-control"            type="text"            name="lastname"            placeholder="{{ \'register.lastName.placeholder\' | cxTranslate }}"            formControlName="lastName"          />        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'forms.dateOfBirth.label\' | cxTranslate          }}</span>          <input            class="form-control"            [class.is-invalid]="              registerForm.get(\'dateOfBirth\').invalid &&              registerForm.get(\'dateOfBirth\').dirty            "            type="date"            name="dateOfBirth"            formControlName="dateOfBirth"            placeholder="{{ getDateFormat() }}"          />          <div            class="invalid-feedback"            *ngIf="              registerForm.get(\'dateOfBirth\').invalid &&              registerForm.get(\'dateOfBirth\').dirty            "          >            <span>{{ \'forms.dateOfBirthMinimumAge\' | cxTranslate }}</span>          </div>        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'forms.phoneNumber.label\' | cxTranslate          }}</span>          <input            class="form-control"            [class.is-invalid]="              registerForm.get(\'phoneNumber\').invalid &&              registerForm.get(\'phoneNumber\').dirty            "            type="text"            name="phoneNumber"            formControlName="phoneNumber"          />          <div            class="invalid-feedback"            *ngIf="              registerForm.get(\'phoneNumber\').invalid &&              registerForm.get(\'phoneNumber\').dirty            "          >            <span>{{              \'forms.phoneNumber.lengthValidation\' | cxTranslate            }}</span>          </div>        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'register.emailAddress.label\' | cxTranslate          }}</span>          <input            class="form-control"            [class.is-invalid]="              registerForm.get(\'email\').invalid &&              registerForm.get(\'email\').dirty            "            type="email"            name="email"            placeholder="{{              \'register.emailAddress.placeholder\' | cxTranslate            }}"            formControlName="email"          />          <div            class="invalid-feedback"            *ngIf="              registerForm.get(\'email\').invalid &&              registerForm.get(\'email\').dirty            "          >            <span>{{ \'forms.enterValidEmail\' | cxTranslate }}</span>          </div>        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'register.password.label\' | cxTranslate          }}</span>          <input            class="form-control"            [class.is-invalid]="              registerForm.get(\'password\').invalid &&              registerForm.get(\'password\').dirty            "            type="password"            name="password"            placeholder="{{ \'register.password.placeholder\' | cxTranslate }}"            formControlName="password"          />          <div            class="invalid-feedback"            *ngIf="              registerForm.get(\'password\').invalid &&              registerForm.get(\'password\').dirty            "          >            <span>{{ \'register.passwordMinRequirements\' | cxTranslate }}</span>          </div>        </label>      </div>      <div class="form-group">        <label>          <span class="label-content">{{            \'register.confirmPassword.label\' | cxTranslate          }}</span>          <input            class="form-control"            [class.is-invalid]="              registerForm.get(\'password\').value !==              registerForm.get(\'passwordconf\').value            "            type="password"            name="confirmpassword"            placeholder="{{              \'register.confirmPassword.placeholder\' | cxTranslate            }}"            formControlName="passwordconf"          />          <div            class="invalid-feedback"            *ngIf="              registerForm.get(\'password\').value !==                registerForm.get(\'passwordconf\').value &&              registerForm.get(\'passwordconf\').value            "          >            <span>{{ \'register.bothPasswordMustMatch\' | cxTranslate }}</span>          </div>        </label>      </div>      <div class="form-group">        <div class="form-check">          <label *ngIf="anonymousConsent$ | async as anonymousConsent">            <input              type="checkbox"              name="newsletter"              class="form-check-input"              formControlName="newsletter"              [checked]="isConsentGiven(anonymousConsent.consent)"            />            <span class="form-check-label">              {{ anonymousConsent.template }}            </span>          </label>        </div>      </div>      <div class="form-group">        <div class="form-check">          <label>            <input              type="checkbox"              name="termsandconditions"              formControlName="termsandconditions"            />            <span class="form-check-label">              {{ \'register.confirmThatRead\' | cxTranslate }}              <a                class="link text-capitalize"                [routerLink]="{ cxRoute: \'termsAndConditions\' } | cxUrl"                target="_blank"                rel="noopener noreferrer"              >                {{ \'register.termsAndConditions\' | cxTranslate }}              </a>            </span>          </label>        </div>      </div>      <button        type="submit"        [disabled]="registerForm.invalid"        class="btn btn-block btn-primary"      >        {{ \'register.register\' | cxTranslate }}      </button>      <a        class="cx-login-link btn-link"        [routerLink]="{ cxRoute: \'login\' } | cxUrl"        >{{ \'register.signIn\' | cxTranslate }}</a      >    </form>  </div></section></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotConnectionComponent', 'selector': 'cx-fs-sync-pilot-connection-component'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+        var COMPONENT_TEMPLATE = '<div><section  class="cx-page-section container"  *ngIf="!(isLoading$ | async); else loading">  <div class="row justify-content-center">    <div class="col-12">      <div class="cx-section">        <form (ngSubmit)="submitForm()" [formGroup]="registerForm">          <div class="form-group">            <label>              <span class="label-content">{{                \'register.title\' | cxTranslate              }}</span>              <select formControlName="titleCode" class="form-control">                <option selected value="" disabled>                  {{ \'register.selectTitle\' | cxTranslate }}                </option>                <option                  *ngFor="let title of titles$ | async"                  [value]="title.code"                >                  {{ title.name }}                </option>              </select>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'register.firstName.label\' | cxTranslate              }}</span>              <input                class="form-control"                type="text"                name="firstname"                placeholder="{{                  \'register.firstName.placeholder\' | cxTranslate                }}"                formControlName="firstName"              />              <cx-form-errors                [control]="registerForm.get(\'firstName\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'register.lastName.label\' | cxTranslate              }}</span>              <input                class="form-control"                type="text"                name="lastname"                placeholder="{{                  \'register.lastName.placeholder\' | cxTranslate                }}"                formControlName="lastName"              />              <cx-form-errors                [control]="registerForm.get(\'lastName\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'forms.dateOfBirth.label\' | cxTranslate              }}</span>              <input                class="form-control"                [class.is-invalid]="                  registerForm.get(\'dateOfBirth\').invalid &&                  registerForm.get(\'dateOfBirth\').dirty                "                type="date"                name="dateOfBirth"                formControlName="dateOfBirth"                placeholder="{{ getDateFormat() }}"              />              <cx-form-errors                [control]="registerForm.get(\'dateOfBirth\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'forms.phoneNumber.label\' | cxTranslate              }}</span>              <input                class="form-control"                [class.is-invalid]="                  registerForm.get(\'phoneNumber\').invalid &&                  registerForm.get(\'phoneNumber\').dirty                "                type="text"                name="phoneNumber"                formControlName="phoneNumber"              />              <cx-form-errors                [control]="registerForm.get(\'phoneNumber\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'register.emailAddress.label\' | cxTranslate              }}</span>              <input                class="form-control"                type="email"                name="email"                placeholder="{{                  \'register.emailAddress.placeholder\' | cxTranslate                }}"                formControlName="email"              />              <cx-form-errors                [control]="registerForm.get(\'email\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'register.password.label\' | cxTranslate              }}</span>              <input                class="form-control"                type="password"                name="password"                placeholder="{{                  \'register.password.placeholder\' | cxTranslate                }}"                formControlName="password"              />              <cx-form-errors                [control]="registerForm.get(\'password\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <label>              <span class="label-content">{{                \'register.confirmPassword.label\' | cxTranslate              }}</span>              <input                class="form-control"                type="password"                name="confirmpassword"                placeholder="{{                  \'register.confirmPassword.placeholder\' | cxTranslate                }}"                formControlName="passwordconf"              />              <cx-form-errors                [control]="registerForm.get(\'passwordconf\')"              ></cx-form-errors>            </label>          </div>          <div class="form-group">            <div class="form-check">              <label *ngIf="anonymousConsent$ | async as anonymousConsent">                <input                  type="checkbox"                  name="newsletter"                  class="form-check-input"                  formControlName="newsletter"                  [checked]="isConsentGiven(anonymousConsent.consent)"                />                <span class="form-check-label">                  {{ anonymousConsent.template }}                </span>              </label>            </div>          </div>          <div class="form-group">            <div class="form-check">              <label>                <input                  type="checkbox"                  name="termsandconditions"                  formControlName="termsandconditions"                />                <span class="form-check-label">                  {{ \'register.confirmThatRead\' | cxTranslate }}                  <a                    [routerLink]="{ cxRoute: \'termsAndConditions\' } | cxUrl"                    target="_blank"                  >                    {{ \'register.termsAndConditions\' | cxTranslate }}                  </a>                </span>                <cx-form-errors                  [control]="registerForm.get(\'termsandconditions\')"                ></cx-form-errors>              </label>            </div>          </div>          <button type="submit" class="btn btn-block btn-primary">            {{ \'register.register\' | cxTranslate }}          </button>          <a            class="cx-login-link btn-link"            [routerLink]="{ cxRoute: \'login\' } | cxUrl"            >{{ \'register.signIn\' | cxTranslate }}</a          >        </form>      </div>    </div>  </div></section><ng-template #loading>  <div class="cx-spinner"><cx-spinner></cx-spinner></div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssetsTableComponent', 'selector': 'cx-fs-assets-table'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeClaimNavigationComponent', 'selector': 'cx-fs-change-claim-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'CmsSyncPilotComponent', 'selector': 'cx-fs-cms-sync-pilot'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'CreateOBOCustomerComponent', 'selector': 'cx-fs-create-obo-customer'},{'name': 'CurrencyComponent', 'selector': 'cx-currency'},{'name': 'DashboardLinkComponent', 'selector': 'cx-fs-dashboard-link'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSConsentManagementComponent', 'selector': 'cx-fs-consent-management'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSLoginRegisterComponent', 'selector': 'cx-fs-login-register'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': 'cx-fs-update-profile'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'GenericSyncPilotComponent', 'selector': 'cx-fs-generic-sync-pilot'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteComparisonComponent', 'selector': 'cx-fs-quote-comparison'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SellerDashboardComponent', 'selector': 'cx-fs-seller-dashboard'},{'name': 'SellerDashboardListComponent', 'selector': 'cx-fs-seller-dashboard-list'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotDialogComponent', 'selector': 'cx-fs-sync-pilot-dialog'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'},{'name': 'UserProfileComponent', 'selector': 'cx-fs-user-profile'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'FSRegisterComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
+
 
 
 
@@ -1022,6 +969,15 @@ export class FSRegisterComponent extends RegisterComponent
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

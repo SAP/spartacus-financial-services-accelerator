@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -166,10 +166,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
-import {
-  provideDefaultConfig,
-  provideDefaultConfigFactory,
-} from &#x27;@spartacus/core&#x27;;
+import { provideConfig, provideConfigFactory } from &#x27;@spartacus/core&#x27;;
 import { UnitsComponentsModule } from &#x27;@spartacus/organization/administration/components&#x27;;
 import {
   unitsCmsConfig,
@@ -189,15 +186,17 @@ import { PotentialAssignmentsModule } from &#x27;./potential-assignments/potenti
     UnitsComponentsModule,
   ],
   providers: [
-    provideDefaultConfigFactory(unitsTableConfigFactoryFactory),
-    provideDefaultConfig(unitsRoutingConfig),
-    provideDefaultConfig(unitsCmsConfig),
+    provideConfigFactory(unitsTableConfigFactoryFactory),
+    provideConfig(unitsRoutingConfig),
+    provideConfig(unitsCmsConfig),
   ],
 })
 export class FSUnitsComponentsModule {}
 </code></pre>
     </div>
 </div>
+
+
 
 
 
@@ -226,6 +225,15 @@ export class FSUnitsComponentsModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

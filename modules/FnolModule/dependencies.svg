@@ -18,10 +18,6 @@
 <title>cluster_FnolModule_declarations</title>
 <polygon fill="none" stroke="black" points="963,-40.8 963,-92.8 1765,-92.8 1765,-40.8 963,-40.8"/>
 </g>
-<g id="clust8" class="cluster">
-<title>cluster_FnolModule_exports</title>
-<polygon fill="none" stroke="black" points="489,-170.8 489,-222.8 1305,-222.8 1305,-170.8 489,-170.8"/>
-</g>
 <g id="clust7" class="cluster">
 <title>cluster_FnolModule_imports</title>
 <polygon fill="none" stroke="black" points="501,-40.8 501,-92.8 955,-92.8 955,-40.8 501,-40.8"/>
@@ -29,6 +25,10 @@
 <g id="clust10" class="cluster">
 <title>cluster_FnolModule_providers</title>
 <polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 493,-92.8 493,-40.8 16,-40.8"/>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_FnolModule_exports</title>
+<polygon fill="none" stroke="black" points="489,-170.8 489,-222.8 1305,-222.8 1305,-170.8 489,-170.8"/>
 </g>
 <!-- FNOLConfirmationComponent -->
 <g id="node1" class="node">

@@ -14,13 +14,13 @@
 <title>cluster_B2bModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 244,-230.8 244,-32.8 8,-32.8"/>
 </g>
-<g id="clust3" class="cluster">
-<title>cluster_B2bModule_imports</title>
-<polygon fill="none" stroke="black" points="18,-40.8 18,-92.8 234,-92.8 234,-40.8 18,-40.8"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_B2bModule_exports</title>
 <polygon fill="none" stroke="black" points="16,-170.8 16,-222.8 236,-222.8 236,-170.8 16,-170.8"/>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_B2bModule_imports</title>
+<polygon fill="none" stroke="black" points="18,-40.8 18,-92.8 234,-92.8 234,-40.8 18,-40.8"/>
 </g>
 <!-- ProductAssignmentStoreModule -->
 <g id="node1" class="node">

@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -72,13 +72,14 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
                     <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
 <section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover">
+    <table class="table table-sm table-hover metadata">
         <tbody>
 
             <tr>
@@ -141,6 +142,9 @@
                                 <a href="#comparisonPanel$" >comparisonPanel$</a>
                             </li>
                             <li>
+                                <a href="#iconType" >iconType</a>
+                            </li>
+                            <li>
                                 <a href="#pricingData$" >pricingData$</a>
                             </li>
                             <li>
@@ -149,6 +153,9 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#tableCell" >tableCell</a>
                             </li>
                             <li>
                                 <a href="#user$" >user$</a>
@@ -165,6 +172,13 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getHighestElement" >getHighestElement</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
@@ -189,12 +203,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(componentData: <a href="../interfaces/ComparisonPanelCMSComponent.html" target="_self">CmsComponentData&lt;ComparisonPanelCMSComponent&gt;</a>, billingTimeConnector: <a href="../injectables/BillingTimeConnector.html" target="_self">BillingTimeConnector</a>, formDataService: <a href="../injectables/FormDataService.html" target="_self">FormDataService</a>, pricingService: <a href="../injectables/PricingService.html" target="_self">PricingService</a>, formDataStorageService: <a href="../injectables/FormDataStorageService.html" target="_self">FormDataStorageService</a>, userAccountFacade: UserAccountFacade, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+<code>constructor(componentData: <a href="../interfaces/ComparisonPanelCMSComponent.html" target="_self">CmsComponentData&lt;ComparisonPanelCMSComponent&gt;</a>, billingTimeConnector: <a href="../injectables/BillingTimeConnector.html" target="_self">BillingTimeConnector</a>, formDataService: <a href="../injectables/FormDataService.html" target="_self">FormDataService</a>, pricingService: <a href="../injectables/PricingService.html" target="_self">PricingService</a>, formDataStorageService: <a href="../injectables/FormDataStorageService.html" target="_self">FormDataStorageService</a>, userAccountFacade: UserAccountFacade, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, comparisonTableService: <a href="../injectables/ComparisonTableService.html" target="_self">ComparisonTableService</a>, renderer: <a href="https://angular.io/api/core/Renderer2" target="_blank">Renderer2</a>, winRef: WindowRef)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -295,6 +309,42 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>comparisonTableService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ComparisonTableService.html" target="_self" >ComparisonTableService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>renderer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/Renderer2" target="_blank" >Renderer2</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>winRef</td>
+                                                  
+                                                        <td>
+                                                                    <code>WindowRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -317,6 +367,117 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getHighestElement"></a>
+                    <span class="name">
+                        <span class="modifier">Protected</span>
+                        <span ><b>getHighestElement</b></span>
+                        <a href="#getHighestElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getHighestElement(elementArray: ElementRef<HTMLElement>[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:111</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sets the highest element in an array as a comparisonTableService
+property for easier reference</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>elementArray</td>
+                                    <td>
+                                            <code>ElementRef&lt;HTMLElement&gt;[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="117"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:117</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
                         <span ><b>ngOnDestroy</b></span>
@@ -333,8 +494,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="93"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:93</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:145</a></div>
                 </td>
             </tr>
 
@@ -370,8 +531,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:62</a></div>
                 </td>
             </tr>
 
@@ -412,7 +573,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -438,7 +599,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -464,7 +625,32 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="iconType"></a>
+                    <span class="name">
+                        <span ><b>iconType</b></span>
+                        <a href="#iconType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>FS_ICON_TYPE</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -490,7 +676,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -516,7 +702,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -542,7 +728,42 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tableCell"></a>
+                    <span class="name">
+                        <span ><b>tableCell</b></span>
+                        <a href="#tableCell"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(&#x27;tableCell&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -573,7 +794,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/comparison-table/comparison-table-panel/comparison-table-panel.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -587,20 +808,26 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
+  Renderer2,
+  ViewChildren,
 } from &#x27;@angular/core&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
-import { User } from &#x27;@spartacus/core&#x27;;
+import { User, WindowRef } from &#x27;@spartacus/core&#x27;;
 import {
   FormDataService,
   FormDataStorageService,
 } from &#x27;@spartacus/dynamicforms&#x27;;
 import { CmsComponentData } from &#x27;@spartacus/storefront&#x27;;
 import { Observable, of, Subscription } from &#x27;rxjs&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
+import { filter, map } from &#x27;rxjs/operators&#x27;;
+import { ComparisonTableService } from &#x27;../comparison-table.service&#x27;;
 import { BillingTimeConnector } from &#x27;../../../core/product-pricing/connectors/billing-time.connector&#x27;;
 import { PricingService } from &#x27;../../../core/product-pricing/facade/pricing.service&#x27;;
 import {
@@ -608,19 +835,23 @@ import {
   PricingData,
 } from &#x27;../../../occ/occ-models&#x27;;
 import { UserAccountFacade } from &#x27;@spartacus/user/account/root&#x27;;
+import { FS_ICON_TYPE } from &#x27;../../../core/icon-config/icon-config&#x27;;
 
 @Component({
   selector: &#x27;cx-fs-comparison-table-panel&#x27;,
   templateUrl: &#x27;./comparison-table-panel.component.html&#x27;,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
+export class ComparisonTablePanelComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   private subscription &#x3D; new Subscription();
+  iconType &#x3D; FS_ICON_TYPE;
   comparisonPanel$: Observable&lt;ComparisonPanelCMSComponent&gt;;
   productList: string[];
   billingData$: Observable&lt;any&gt;;
   pricingData$: Observable&lt;PricingData&gt;;
   categoryCode: string;
+  @ViewChildren(&#x27;tableCell&#x27;) tableCell: QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;;
 
   constructor(
     protected componentData: CmsComponentData&lt;ComparisonPanelCMSComponent&gt;,
@@ -629,7 +860,10 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected formDataStorageService: FormDataStorageService,
     protected userAccountFacade: UserAccountFacade,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected comparisonTableService: ComparisonTableService,
+    protected renderer: Renderer2,
+    protected winRef: WindowRef
   ) {}
 
   user$: Observable&lt;User&gt; &#x3D; this.userAccountFacade.get();
@@ -678,6 +912,45 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Sets the highest element in an array as a comparisonTableService
+   * property for easier reference
+   * @param elemRef array of elements that will sorted based on their height
+   */
+  protected getHighestElement(elementArray: ElementRef&lt;HTMLElement&gt;[]) {
+    this.comparisonTableService.highestElement &#x3D; elementArray.sort(
+      (a, b) &#x3D;&gt; a.nativeElement.clientHeight - b.nativeElement.clientHeight
+    )[elementArray.length - 1];
+  }
+
+  ngAfterViewInit() {
+    this.subscription
+      .add(
+        this.tableCell.changes
+          .pipe(
+            filter(el &#x3D;&gt; el.length &gt; 0),
+            map((elemRef: QueryList&lt;ElementRef&lt;HTMLElement&gt;&gt;) &#x3D;&gt; {
+              this.comparisonTableService.calculateHeights(
+                elemRef,
+                this.renderer,
+                this.getHighestElement.bind(this)
+              );
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.comparisonTableService
+          .setHeightsAtResize(
+            this.winRef,
+            this.tableCell,
+            this.renderer,
+            this.getHighestElement.bind(this)
+          )
+          .subscribe()
+      );
+  }
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -691,14 +964,20 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
         <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;comparisonPanel$ | async as panel&quot;&gt;
   &lt;ng-container *ngIf&#x3D;&quot;billingData$ | async as billingInfo&quot;&gt;
     &lt;div class&#x3D;&quot;fixed-column&quot;&gt;
-      &lt;div class&#x3D;&quot;table-header text-center mb-0&quot;&gt;
+      &lt;div class&#x3D;&quot;table-header sticky-position text-center mb-0&quot;&gt;
         &lt;ng-container *ngIf&#x3D;&quot;(user$ | async)?.uid&quot;&gt;
-          &lt;cx-fs-sync-pilot-connection-component&gt;&lt;/cx-fs-sync-pilot-connection-component&gt;
+          &lt;cx-fs-generic-sync-pilot
+            [type]&#x3D;&quot;iconType.AGENT&quot;
+          &gt;&lt;/cx-fs-generic-sync-pilot&gt;
         &lt;/ng-container&gt;
       &lt;/div&gt;
       &lt;div class&#x3D;&quot;table-cell-wrapper&quot;&gt;
-        &lt;div *ngFor&#x3D;&quot;let item of billingInfo.billingTimes&quot; class&#x3D;&quot;table-cell&quot;&gt;
-          &lt;span class&#x3D;&quot;table-cell-title text-truncate&quot; title&#x3D;&quot;{{ item.name }}&quot;&gt;
+        &lt;div
+          *ngFor&#x3D;&quot;let item of billingInfo.billingTimes&quot;
+          class&#x3D;&quot;table-cell&quot;
+          #tableCell
+        &gt;
+          &lt;span class&#x3D;&quot;table-cell-title text-uppercase&quot; title&#x3D;&quot;{{ item.name }}&quot;&gt;
             {{ item.name }}
           &lt;/span&gt;
           &lt;div
@@ -763,12 +1042,14 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="comparisonPanel$ | async as panel">  <ng-container *ngIf="billingData$ | async as billingInfo">    <div class="fixed-column">      <div class="table-header text-center mb-0">        <ng-container *ngIf="(user$ | async)?.uid">          <cx-fs-sync-pilot-connection-component></cx-fs-sync-pilot-connection-component>        </ng-container>      </div>      <div class="table-cell-wrapper">        <div *ngFor="let item of billingInfo.billingTimes" class="table-cell">          <span class="table-cell-title text-truncate" title="{{ item.name }}">            {{ item.name }}          </span>          <div            class="fs-tooltip"            tooltipClass="ct-tooltip"            ngbTooltip="{{ item.helpContent }}"            triggers="click:blur"            placement="top"          >            i          </div>        </div>      </div>    </div>    <div class="slide-column-wrapper">      <div class="slide-column">        <ng-container *ngIf="comparisonPanel$ | async as panel">          <ng-container *ngFor="let productCode of panel.products.split(\' \')">            <ng-container *ngIf="productCode">              <cx-fs-comparison-table-panel-item                *ngIf="pricingData$ | async as pricing; else loading"                [productCode]="productCode"                [billingTimes]="billingInfo.billingTimes"                [pricingData]="pricing"              ></cx-fs-comparison-table-panel-item>            </ng-container>          </ng-container>        </ng-container>      </div>    </div>  </ng-container></ng-container><ng-template #loading>  <cx-spinner></cx-spinner></ng-template></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotConnectionComponent', 'selector': 'cx-fs-sync-pilot-connection-component'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="comparisonPanel$ | async as panel">  <ng-container *ngIf="billingData$ | async as billingInfo">    <div class="fixed-column">      <div class="table-header sticky-position text-center mb-0">        <ng-container *ngIf="(user$ | async)?.uid">          <cx-fs-generic-sync-pilot            [type]="iconType.AGENT"          ></cx-fs-generic-sync-pilot>        </ng-container>      </div>      <div class="table-cell-wrapper">        <div          *ngFor="let item of billingInfo.billingTimes"          class="table-cell"          #tableCell        >          <span class="table-cell-title text-uppercase" title="{{ item.name }}">            {{ item.name }}          </span>          <div            class="fs-tooltip"            tooltipClass="ct-tooltip"            ngbTooltip="{{ item.helpContent }}"            triggers="click:blur"            placement="top"          >            i          </div>        </div>      </div>    </div>    <div class="slide-column-wrapper">      <div class="slide-column">        <ng-container *ngIf="comparisonPanel$ | async as panel">          <ng-container *ngFor="let productCode of panel.products.split(\' \')">            <ng-container *ngIf="productCode">              <cx-fs-comparison-table-panel-item                *ngIf="pricingData$ | async as pricing; else loading"                [productCode]="productCode"                [billingTimes]="billingInfo.billingTimes"                [pricingData]="pricing"              ></cx-fs-comparison-table-panel-item>            </ng-container>          </ng-container>        </ng-container>      </div>    </div>  </ng-container></ng-container><ng-template #loading>  <cx-spinner></cx-spinner></ng-template></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssetsTableComponent', 'selector': 'cx-fs-assets-table'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeClaimNavigationComponent', 'selector': 'cx-fs-change-claim-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'CmsSyncPilotComponent', 'selector': 'cx-fs-cms-sync-pilot'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'CreateOBOCustomerComponent', 'selector': 'cx-fs-create-obo-customer'},{'name': 'CurrencyComponent', 'selector': 'cx-currency'},{'name': 'DashboardLinkComponent', 'selector': 'cx-fs-dashboard-link'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSConsentManagementComponent', 'selector': 'cx-fs-consent-management'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSLoginRegisterComponent', 'selector': 'cx-fs-login-register'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': 'cx-fs-update-profile'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'GenericSyncPilotComponent', 'selector': 'cx-fs-generic-sync-pilot'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteComparisonComponent', 'selector': 'cx-fs-quote-comparison'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SellerDashboardComponent', 'selector': 'cx-fs-seller-dashboard'},{'name': 'SellerDashboardListComponent', 'selector': 'cx-fs-seller-dashboard-list'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotDialogComponent', 'selector': 'cx-fs-sync-pilot-dialog'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'},{'name': 'UserProfileComponent', 'selector': 'cx-fs-user-profile'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'ComparisonTablePanelComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
+
 
 
 
@@ -797,6 +1078,15 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -95,6 +96,16 @@
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
+                                <a href="#FIRST_NAME" >FIRST_NAME</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#LAST_NAME" >LAST_NAME</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
                                 <a href="#PERSONAL_DETAILS_FORM_GROUP" >PERSONAL_DETAILS_FORM_GROUP</a>
                             </li>
                             <li>
@@ -130,7 +141,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#createAddressData" >createAddressData</a>
+                                <a href="#createAddress" >createAddress</a>
+                            </li>
+                            <li>
+                                <a href="#createAddressData" class="deprecated-name">createAddressData</a>
+                            </li>
+                            <li>
+                                <a href="#populateAddressFromFormData" >populateAddressFromFormData</a>
                             </li>
                         </ul>
                     </td>
@@ -150,12 +167,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: Store<StateWithUser | StateWithProcess>, userIdService: UserIdService, checkoutDeliveryService: CheckoutDeliveryService)</code>
+<code>constructor(store: Store<StateWithUser | StateWithProcess>, userIdService: UserIdService, checkoutDeliveryService: CheckoutDeliveryService, userAddressConnector: UserAddressConnector, commandService: CommandService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -208,6 +225,30 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>userAddressConnector</td>
+                                                  
+                                                        <td>
+                                                                    <code>UserAddressConnector</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>commandService</td>
+                                                  
+                                                        <td>
+                                                                    <code>CommandService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -226,11 +267,97 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="createAddress"></a>
+                    <span class="name">
+                        <span ><b>createAddress</b></span>
+                        <a href="#createAddress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createAddress(formData: literal type, defaultAddress: Address)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:57</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formData</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>defaultAddress</td>
+                                    <td>
+                                            <code>Address</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="createAddressData"></a>
                     <span class="name">
-                        <span ><b>createAddressData</b></span>
+                        <span class="deprecated-name"><b>createAddressData</b></span>
                         <a href="#createAddressData"><span class="icon ion-ios-link"></span></a>
                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4 deprecated">
+                    [object Object],[object Object],[object Object]
                 </td>
             </tr>
             <tr>
@@ -242,14 +369,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:43</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Not longer used. Declared attribute #user is never read.
+Use <a href="#createAddress({">[name: string]: Object </a>, Address)} instead.</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -315,6 +445,75 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateAddressFromFormData"></a>
+                    <span class="name">
+                        <span ><b>populateAddressFromFormData</b></span>
+                        <a href="#populateAddressFromFormData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>populateAddressFromFormData(formData: literal type)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="67"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:67</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>formData</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Address</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
@@ -347,7 +546,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -380,7 +579,73 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FIRST_NAME"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>FIRST_NAME</b></span>
+                        <a href="#FIRST_NAME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;firstName&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LAST_NAME"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>LAST_NAME</b></span>
+                        <a href="#LAST_NAME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;lastName&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -413,7 +678,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -446,7 +711,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -479,7 +744,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -512,7 +777,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -545,7 +810,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/fsastorefrontlib/src/core/user/facade/address.service.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -560,12 +825,14 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
+import { CheckoutDeliveryService } from &#x27;@spartacus/checkout/core&#x27;;
 import {
   Address,
-  CheckoutDeliveryService,
+  CommandService,
   StateWithProcess,
   StateWithUser,
   User,
+  UserAddressConnector,
   UserAddressService,
   UserIdService,
 } from &#x27;@spartacus/core&#x27;;
@@ -575,13 +842,17 @@ export class FSAddressService extends UserAddressService {
   constructor(
     protected store: Store&lt;StateWithUser | StateWithProcess&lt;void&gt;&gt;,
     protected userIdService: UserIdService,
-    protected checkoutDeliveryService: CheckoutDeliveryService
+    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected userAddressConnector: UserAddressConnector,
+    protected commandService: CommandService
   ) {
-    super(store, userIdService);
+    super(store, userIdService, userAddressConnector, commandService);
     this.loadAddresses();
   }
 
   protected readonly PERSONAL_DETAILS_FORM_GROUP &#x3D; &#x27;personalDetails&#x27;;
+  protected readonly FIRST_NAME &#x3D; &#x27;firstName&#x27;;
+  protected readonly LAST_NAME &#x3D; &#x27;lastName&#x27;;
   protected readonly STREET_NAME &#x3D; &#x27;street&#x27;;
   protected readonly STREET_NUMBER &#x3D; &#x27;streetNumber&#x27;;
   protected readonly CITY &#x3D; &#x27;city&#x27;;
@@ -589,6 +860,11 @@ export class FSAddressService extends UserAddressService {
   protected readonly POSTAL_CODE &#x3D; &#x27;postcode&#x27;;
   protected readonly PHONE_NUMBER &#x3D; &#x27;phoneNumber&#x27;;
 
+  /**
+   * @deprecated since 4.0
+   * Not longer used. Declared attribute #user is never read.
+   * Use {@link #createAddress({ [name: string]: Object }, Address)} instead.
+   */
   createAddressData(
     formData: { [name: string]: Object },
     user: User,
@@ -597,29 +873,45 @@ export class FSAddressService extends UserAddressService {
     if (!!defaultAddress) {
       this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
     } else {
-      const address: Address &#x3D; {
-        country: {
-          isocode: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.COUNTRY],
-        },
-        firstName: user.firstName,
-        lastName: user.lastName,
-        line1: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NAME],
-        line2: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NUMBER],
-        town: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.CITY],
-        postalCode:
-          formData[this.PERSONAL_DETAILS_FORM_GROUP][this.POSTAL_CODE],
-        phone: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.PHONE_NUMBER],
-        defaultAddress: true,
-        shippingAddress: true,
-      };
-      this.checkoutDeliveryService.createAndSetAddress(address);
+      this.checkoutDeliveryService.createAndSetAddress(
+        this.populateAddressFromFormData(formData)
+      );
     }
+  }
+
+  createAddress(formData: { [name: string]: Object }, defaultAddress: Address) {
+    if (!!defaultAddress) {
+      this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
+    } else {
+      this.checkoutDeliveryService.createAndSetAddress(
+        this.populateAddressFromFormData(formData)
+      );
+    }
+  }
+
+  populateAddressFromFormData(formData: { [p: string]: Object }) {
+    const address: Address &#x3D; {
+      country: {
+        isocode: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.COUNTRY],
+      },
+      firstName: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.FIRST_NAME],
+      lastName: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.LAST_NAME],
+      line1: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NAME],
+      line2: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.STREET_NUMBER],
+      town: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.CITY],
+      postalCode: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.POSTAL_CODE],
+      phone: formData[this.PERSONAL_DETAILS_FORM_GROUP][this.PHONE_NUMBER],
+      defaultAddress: true,
+      shippingAddress: true,
+    };
+    return address;
   }
 }
 </code></pre>
     </div>
 
 </div>
+
 
 
 
@@ -645,6 +937,15 @@ export class FSAddressService extends UserAddressService {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

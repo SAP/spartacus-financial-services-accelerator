@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -190,8 +191,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="51"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:51</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:55</a></div>
                 </td>
             </tr>
 
@@ -288,8 +289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="65"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:65</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:71</a></div>
                 </td>
             </tr>
 
@@ -369,8 +370,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:85</a></div>
                 </td>
             </tr>
 
@@ -450,8 +451,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">projects/dynamicforms/src/occ/adapters/file/occ-file.adapter.ts:40</a></div>
                 </td>
             </tr>
 
@@ -615,8 +616,10 @@ export class OccFileAdapter implements FileAdapter {
   ) {}
 
   uploadFile(userId, file: File): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;uploadFile&#x27;, {
-      userId: userId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;uploadFile&#x27;, {
+      urlParams: {
+        userId: userId,
+      },
     });
     const params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;fileSize&#x27;, file.size.toString())
@@ -635,9 +638,11 @@ export class OccFileAdapter implements FileAdapter {
   }
 
   removeFileForUserAndCode(userId: string, fileCode: string): Observable&lt;any&gt; {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;removeFile&#x27;, {
-      userId,
-      fileCode,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;removeFile&#x27;, {
+      urlParams: {
+        userId,
+        fileCode,
+      },
     });
     const headers &#x3D; new HttpHeaders({
       &#x27;Content-Type&#x27;: &#x27;application/x-www-form-urlencoded&#x27;,
@@ -648,9 +653,11 @@ export class OccFileAdapter implements FileAdapter {
   }
 
   getFileForCodeAndType(userId: string, fileCode: string, fileType: string) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;getFile&#x27;, {
-      userId,
-      fileCode,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;getFile&#x27;, {
+      urlParams: {
+        userId,
+        fileCode,
+      },
     });
     return this.http.get&lt;string&gt;(url).pipe(
       map(document &#x3D;&gt; base64StringToBlob(document, fileType)),
@@ -662,8 +669,10 @@ export class OccFileAdapter implements FileAdapter {
    * @deprecated The method should not be used. Use getFilesForUser instead
    */
   getFilesForCodes(userId: string, fileCodes: Array&lt;string&gt;) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;getFiles&#x27;, {
-      userId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;getFiles&#x27;, {
+      urlParams: {
+        userId,
+      },
     });
     const params: HttpParams &#x3D; new HttpParams()
       .set(&#x27;documentCodes&#x27;, fileCodes.toString())
@@ -674,8 +683,10 @@ export class OccFileAdapter implements FileAdapter {
   }
 
   getFilesForUser(userId: string, fileCodes?: Array&lt;string&gt;) {
-    const url &#x3D; this.occEndpointService.getUrl(&#x27;getFiles&#x27;, {
-      userId,
+    const url &#x3D; this.occEndpointService.buildUrl(&#x27;getFiles&#x27;, {
+      urlParams: {
+        userId,
+      },
     });
     let params: HttpParams &#x3D; new HttpParams().set(&#x27;fields&#x27;, FULL_PARAMS);
 
@@ -703,6 +714,7 @@ export class OccFileAdapter implements FileAdapter {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -716,6 +728,15 @@ export class OccFileAdapter implements FileAdapter {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

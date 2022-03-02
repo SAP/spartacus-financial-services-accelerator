@@ -1,0 +1,535 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>fsastorefrontapp documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">fsastorefrontapp documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  OBOConsentList</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>projects/fsastorefrontlib/src/occ/occ-models/occ.models.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#oboConsents" 
+>
+                                            oboConsents
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="oboConsents"></a>
+                                        <span class="name "><b>oboConsents</b>
+                                            <a href="#oboConsents">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>oboConsents:         <code><a href="../interfaces/OBOConsent.html" target="_self" >OBOConsent[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/OBOConsent.html" target="_self" >OBOConsent[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DocumentFile, YFormData } from &#x27;@spartacus/dynamicforms&#x27;;
+import {
+  B2BUser,
+  Cart,
+  Category,
+  Consent,
+  ConsentTemplate,
+  Occ,
+  OrderEntry,
+  Price,
+  Product,
+  SortModel,
+  User,
+} from &#x27;@spartacus/core&#x27;;
+import { CheckoutStep } from &#x27;@spartacus/checkout/root&#x27;;
+import { UserSignUp } from &#x27;@spartacus/user/profile/root&#x27;;
+import { MediaContainer } from &#x27;@spartacus/storefront&#x27;;
+import { Pagination } from &#x27;@spartacus/core/src/model/unused.model&#x27;;
+
+export interface ContactAgentData {
+  email?: string;
+  interest?: string;
+  contactType?: string;
+  subject?: string;
+  message?: string;
+}
+
+export interface BundleTemplate {
+  id: string;
+  name?: string;
+  childBundleTemplates?: BundleTemplate[];
+}
+
+export interface FSProduct extends Product {
+  price?: FSPrice;
+  cartDispalyName?: string;
+  defaultCategory?: Category;
+  bundleTemplates?: BundleTemplate[];
+  configurable?: boolean;
+  dynamicAttributes?: Map&lt;string, any&gt;;
+}
+
+export interface YFormConfiguratorSettings {
+  configurationFormId?: string;
+  configuratorType?: string;
+  configurationApplicationId?: string;
+  configurationCategory?: Category;
+}
+
+export interface FSCategory extends Category {
+  yformConfiguratorSettings?: YFormConfiguratorSettings[];
+}
+
+export interface OrgUnit {
+  uid: string;
+  name?: string;
+  active?: boolean;
+}
+
+export interface B2BAdministrator {
+  orgUnit: OrgUnit;
+}
+
+export interface FSOrderEntry extends OrderEntry {
+  configurationInfos?: any[];
+  removeable?: boolean;
+}
+
+export interface FSCart extends Cart {
+  insuranceQuote?: InsuranceQuote;
+  entries?: FSOrderEntry[];
+}
+
+export interface InsuranceQuoteList {
+  insuranceQuotes: InsuranceQuote[];
+}
+
+export interface OBOConsentList {
+  oboConsents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: FSUser[];
+  pagination: Pagination;
+  sorts: SortModel[];
+}
+
+export interface QuoteWorkflowStatus {
+  code?: string;
+}
+
+export interface InsuranceQuote {
+  quoteId?: string;
+  cartCode?: string;
+  state?: QuoteBindingState;
+  defaultCategory?: Occ.Category;
+  quoteStatus?: QuoteStatus;
+  quotePrice?: Occ.Price;
+  paymentFrequency?: string;
+  quoteWorkflowStatus?: QuoteWorkflowStatus;
+  quoteDetails?: Record&lt;string, string&gt;;
+  insuredObjectList?: InsuredObjectList;
+  renewal?: boolean;
+  original?: boolean;
+}
+
+export interface OBOConsent extends Consent {
+  consentHolder?: User;
+  consentTemplate?: ConsentTemplate;
+  customer: User;
+  oboPermissionConfiguration: OBOPermissionConfiguration;
+}
+
+export interface FSConsentTemplate extends ConsentTemplate {
+  exposed?: boolean;
+}
+
+export interface OBOPermissionConfiguration {
+  permissions?: OBOPermissions[];
+}
+
+export interface OBOPermissions {
+  [key: string]: any;
+}
+
+export enum OrganizationTableType {
+  PRODUCT_ASSIGNMENTS &#x3D; &#x27;productAssignments&#x27;,
+  POTENTIAL_PRODUCT_ASSIGNMENTS &#x3D; &#x27;potentialProductAssignments&#x27;,
+}
+
+export interface InsuredObjectList {
+  insuredObjects?: any[];
+}
+export interface QuoteBindingState {
+  code?: string;
+}
+
+export interface QuoteStatus {
+  code?: string;
+}
+
+export enum FSPaymentTypeEnum {
+  INVOICE &#x3D; &#x27;INVOICE&#x27;,
+  CARD &#x3D; &#x27;CARD&#x27;,
+}
+
+export enum BindingStateType {
+  BIND &#x3D; &#x27;BIND&#x27;,
+  UNBIND &#x3D; &#x27;UNBIND&#x27;,
+}
+
+export enum QuoteWorkflowStatusType {
+  APPROVED &#x3D; &#x27;APPROVED&#x27;,
+  REFERRED &#x3D; &#x27;REFERRED&#x27;,
+  PENDING &#x3D; &#x27;PENDING&#x27;,
+}
+
+export enum ConfiguratorType {
+  PRODUCT_CONFIGURE_FORM &#x3D; &#x27;PRODUCT_CONFIGURE_FORM&#x27;,
+}
+export enum FormDefinitionType {
+  PRODUCT_CONFIGURE &#x3D; &#x27;PRODUCT_CONFIGURE&#x27;,
+  PERSONAL_DETAILS &#x3D; &#x27;PERSONAL_DETAILS&#x27;,
+}
+export enum RequestType {
+  INSURED_OBJECT_CHANGE &#x3D; &#x27;FSINSUREDOBJECT_CHANGE&#x27;,
+  INSURED_OBJECT_ADD &#x3D; &#x27;FSINSUREDOBJECT_ADD&#x27;,
+  COVERAGE_CHANGE &#x3D; &#x27;FSCOVERAGE_CHANGE&#x27;,
+  FSCLAIM &#x3D; &#x27;FSCLAIM&#x27;,
+}
+
+export enum ClaimStatus {
+  OPEN &#x3D; &#x27;OPEN&#x27;,
+  SUBMITTED &#x3D; &#x27;SUBMITTED&#x27;,
+  PROCESSING &#x3D; &#x27;PROCESSING&#x27;,
+  ERROR &#x3D; &#x27;ERROR&#x27;,
+  APPROVED &#x3D; &#x27;APPROVED&#x27;,
+  REJECTED &#x3D; &#x27;REJECTED&#x27;,
+}
+export enum ChangeRequestStatus {
+  SUBMITTED &#x3D; &#x27;SUBMITTED&#x27;,
+  REFERRED &#x3D; &#x27;REFERRED&#x27;,
+}
+export enum StepStatus {
+  COMPLETED &#x3D; &#x27;COMPLETED&#x27;,
+  CANCELED &#x3D; &#x27;CANCELED&#x27;,
+}
+
+export enum QuoteActionType {
+  BIND &#x3D; &#x27;BIND&#x27;,
+  UNDERWRITING &#x3D; &#x27;UNDERWRITING&#x27;,
+  UPDATE &#x3D; &#x27;UPDATE&#x27;,
+}
+
+export enum SyncPilotGender {
+  mr &#x3D; &#x27;m&#x27;,
+  mrs &#x3D; &#x27;w&#x27;,
+  miss &#x3D; &#x27;w&#x27;,
+  ms &#x3D; &#x27;w&#x27;,
+  dr &#x3D; &#x27;d&#x27;,
+  rev &#x3D; &#x27;d&#x27;,
+}
+
+export enum FSUserRole {
+  SELLER &#x3D; &#x27;sellergroup&#x27;,
+}
+
+export interface FSOrderEntry extends OrderEntry {
+  formData?: any[];
+  product?: FSProduct;
+}
+
+export interface FSPrice extends Price {
+  oneTimeChargeEntries?: OneTimeChargeEntry[];
+  recurringChargeEntries?: RecurringChargeEntry[];
+}
+
+export interface OneTimeChargeEntry {
+  code?: string;
+  name?: string;
+  price?: Price;
+  billingTime?: BillingTime;
+  chargeInformation?: string;
+}
+
+export interface RecurringChargeEntry {
+  price?: Price;
+}
+
+export interface BillingTime {
+  code?: string;
+  name?: string;
+  description?: string;
+}
+
+export interface FSB2BUser extends B2BUser {
+  dateOfBirth?: string;
+}
+
+export interface FSUserSignUp extends UserSignUp {
+  dateOfBirth?: string;
+  phoneNumber?: string;
+}
+
+export interface FSContactInfo {
+  code?: string;
+  phoneNumber?: string;
+}
+
+export interface FSUser extends User {
+  dateOfBirth?: string;
+  contactInfos?: FSContactInfo[];
+  active?: boolean;
+  thumbnail?: MediaContainer;
+}
+
+export interface FSStepData {
+  name?: string;
+  sequenceNumber?: string;
+  pageLabelOrId?: string;
+  status?: string;
+  yformConfigurator?: YFormData;
+  summaryStep?: boolean;
+}
+
+export interface FSUserRequest {
+  requestId?: string;
+  configurationSteps?: FSStepData[];
+  requestStatus?: string;
+}
+
+export interface FSLocationOfLoss {
+  code?: string;
+  countryCode?: string;
+  city?: string;
+  postcode?: string;
+  address?: string;
+  additionalDetails?: string;
+}
+
+export interface Claim extends FSUserRequest {
+  claimNumber?: string;
+  locationOfLoss?: FSLocationOfLoss;
+  causeOfLoss?: string;
+  incidentType?: FSIncidentType;
+  dateOfLoss?: string;
+  timeOfLoss?: string;
+  claimStatus?: ClaimStatus;
+  documents?: DocumentFile[];
+  properties?: any;
+}
+
+export interface AllowedFSRequestType {
+  requestType?: FSRequestType;
+}
+
+export interface FSRequestType {
+  code?: string;
+}
+
+export interface FSIncidentType {
+  incidentCode?: string;
+}
+
+export interface ChangedPolicyData {
+  changeType?: string;
+  label?: string;
+  oldValue?: string;
+  newValue?: string;
+}
+
+export interface FSCheckoutStep extends CheckoutStep {
+  restrictedCategories?: string[];
+}
+export interface FSSteps {
+  stepParameter: string;
+  step: string;
+}
+
+export interface FSProductAssignment {
+  assignmentCode?: string;
+  name?: string;
+  added?: boolean;
+  active?: boolean;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'OBOConsentList.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

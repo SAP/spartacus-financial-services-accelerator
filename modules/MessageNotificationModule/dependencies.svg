@@ -14,13 +14,13 @@
 <title>cluster_MessageNotificationModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 242,-230.8 242,-32.8 8,-32.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_MessageNotificationModule_exports</title>
-<polygon fill="none" stroke="black" points="16,-170.8 16,-222.8 234,-222.8 234,-170.8 16,-170.8"/>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_MessageNotificationModule_declarations</title>
 <polygon fill="none" stroke="black" points="18,-40.8 18,-92.8 232,-92.8 232,-40.8 18,-40.8"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_MessageNotificationModule_exports</title>
+<polygon fill="none" stroke="black" points="16,-170.8 16,-222.8 234,-222.8 234,-170.8 16,-170.8"/>
 </g>
 <!-- MessageNotificationComponent -->
 <g id="node1" class="node">

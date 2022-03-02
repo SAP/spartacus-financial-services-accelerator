@@ -18,13 +18,13 @@
 <title>cluster_AddOptionsModule_declarations</title>
 <polygon fill="none" stroke="black" points="434,-40.8 434,-92.8 600,-92.8 600,-40.8 434,-40.8"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_AddOptionsModule_imports</title>
-<polygon fill="none" stroke="black" points="328,-40.8 328,-92.8 426,-92.8 426,-40.8 328,-40.8"/>
-</g>
 <g id="clust5" class="cluster">
 <title>cluster_AddOptionsModule_exports</title>
 <polygon fill="none" stroke="black" points="225,-170.8 225,-222.8 395,-222.8 395,-170.8 225,-170.8"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_AddOptionsModule_imports</title>
+<polygon fill="none" stroke="black" points="328,-40.8 328,-92.8 426,-92.8 426,-40.8 328,-40.8"/>
 </g>
 <g id="clust7" class="cluster">
 <title>cluster_AddOptionsModule_providers</title>

@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -109,7 +110,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:64</a></div>
                             </td>
                         </tr>
 
@@ -190,26 +191,22 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(AuthActions.LOGOUT),
-    tap(_ &#x3D;&gt; {
-      this.formDataStorageService.clearFormDataLocalStorage();
-    })
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(AuthActions.LOGOUT),
+        tap(_ &#x3D;&gt; {
+          sessionStorage.removeItem(&#x27;quoteCodes&#x27;);
+          this.formDataStorageService.clearFormDataLocalStorage();
+        })
+      ),
+    { dispatch: false }
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect({dispatch: false})<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -235,36 +232,31 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_FORM_DATA),
-    map((action: fromActions.LoadFormData) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.formConnector
-        .getFormData(payload.formDataId, payload.userId)
-        .pipe(
-          map((formData: any) &#x3D;&gt; {
-            return new fromActions.LoadFormDataSuccess(formData);
-          }),
-          catchError(error &#x3D;&gt; {
-            return of(new fromActions.LoadFormDataFail(JSON.stringify(error)));
-          })
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_FORM_DATA),
+      map((action: fromActions.LoadFormData) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.formConnector
+          .getFormData(payload.formDataId, payload.userId)
+          .pipe(
+            map((formData: any) &#x3D;&gt; {
+              return new fromActions.LoadFormDataSuccess(formData);
+            }),
+            catchError(error &#x3D;&gt; {
+              return of(
+                new fromActions.LoadFormDataFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:12</a></div>
                         </td>
                     </tr>
 
@@ -290,36 +282,31 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.SAVE_FORM_DATA),
-    map((action: fromActions.SaveFormData) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.formConnector
-        .saveFormData(payload.formData, payload.userId)
-        .pipe(
-          map((formData: any) &#x3D;&gt; {
-            return new fromActions.SaveFormDataSuccess(formData);
-          }),
-          catchError(error &#x3D;&gt; {
-            return of(new fromActions.SaveFormDataFail(JSON.stringify(error)));
-          })
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SAVE_FORM_DATA),
+      map((action: fromActions.SaveFormData) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.formConnector
+          .saveFormData(payload.formData, payload.userId)
+          .pipe(
+            map((formData: any) &#x3D;&gt; {
+              return new fromActions.SaveFormDataSuccess(formData);
+            }),
+            catchError(error &#x3D;&gt; {
+              return of(
+                new fromActions.SaveFormDataFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/dynamicforms/src/core/store/effects/form-data.effect.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -333,7 +320,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { AuthActions } from &#x27;@spartacus/core&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { catchError, map, mergeMap, tap } from &#x27;rxjs/operators&#x27;;
@@ -343,48 +330,58 @@ import * as fromActions from &#x27;../actions&#x27;;
 
 @Injectable()
 export class FormDataEffects {
-  @Effect()
-  loadFormData$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_FORM_DATA),
-    map((action: fromActions.LoadFormData) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.formConnector
-        .getFormData(payload.formDataId, payload.userId)
-        .pipe(
-          map((formData: any) &#x3D;&gt; {
-            return new fromActions.LoadFormDataSuccess(formData);
-          }),
-          catchError(error &#x3D;&gt; {
-            return of(new fromActions.LoadFormDataFail(JSON.stringify(error)));
-          })
-        );
-    })
+  loadFormData$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_FORM_DATA),
+      map((action: fromActions.LoadFormData) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.formConnector
+          .getFormData(payload.formDataId, payload.userId)
+          .pipe(
+            map((formData: any) &#x3D;&gt; {
+              return new fromActions.LoadFormDataSuccess(formData);
+            }),
+            catchError(error &#x3D;&gt; {
+              return of(
+                new fromActions.LoadFormDataFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   );
 
-  @Effect()
-  saveFormData$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.SAVE_FORM_DATA),
-    map((action: fromActions.SaveFormData) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.formConnector
-        .saveFormData(payload.formData, payload.userId)
-        .pipe(
-          map((formData: any) &#x3D;&gt; {
-            return new fromActions.SaveFormDataSuccess(formData);
-          }),
-          catchError(error &#x3D;&gt; {
-            return of(new fromActions.SaveFormDataFail(JSON.stringify(error)));
-          })
-        );
-    })
+  saveFormData$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SAVE_FORM_DATA),
+      map((action: fromActions.SaveFormData) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.formConnector
+          .saveFormData(payload.formData, payload.userId)
+          .pipe(
+            map((formData: any) &#x3D;&gt; {
+              return new fromActions.SaveFormDataSuccess(formData);
+            }),
+            catchError(error &#x3D;&gt; {
+              return of(
+                new fromActions.SaveFormDataFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
   );
 
-  @Effect({ dispatch: false })
-  clearFormData$ &#x3D; this.actions$.pipe(
-    ofType(AuthActions.LOGOUT),
-    tap(_ &#x3D;&gt; {
-      this.formDataStorageService.clearFormDataLocalStorage();
-    })
+  clearFormData$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(AuthActions.LOGOUT),
+        tap(_ &#x3D;&gt; {
+          sessionStorage.removeItem(&#x27;quoteCodes&#x27;);
+          this.formDataStorageService.clearFormDataLocalStorage();
+        })
+      ),
+    { dispatch: false }
   );
 
   constructor(
@@ -397,6 +394,7 @@ export class FormDataEffects {
     </div>
 
 </div>
+
 
 
 
@@ -422,6 +420,15 @@ export class FormDataEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -744,14 +744,10 @@ import {
 } from &#x27;@spartacus/core&#x27;;
 import {
   CardModule,
-  CartNotEmptyGuard,
   CmsPageGuard,
   MediaModule,
   PageComponentModule,
   PageLayoutComponent,
-  PaymentDetailsSetGuard,
-  PaymentFormModule,
-  PaymentMethodModule,
   SpinnerModule,
 } from &#x27;@spartacus/storefront&#x27;;
 import { CartConnector } from &#x27;../../core/cart/connectors/cart.connector&#x27;;
@@ -793,6 +789,12 @@ import { CheckoutStepGuard } from &#x27;./guards/checkout-step-guard&#x27;;
 import { FSPaymentMethodComponent } from &#x27;./components/payment-method/payment-method.component&#x27;;
 import { FSCartCouponModule } from &#x27;./components/cart-coupon/cart-coupon.module&#x27;;
 import { FSAddressService } from &#x27;../../core/user/facade/address.service&#x27;;
+import {
+  CartNotEmptyGuard,
+  PaymentFormModule,
+  PaymentMethodModule,
+} from &#x27;@spartacus/checkout/components&#x27;;
+import { FSCheckoutAuthGuard } from &#x27;./guards/checkout-auth-guard&#x27;;
 
 const routes: Routes &#x3D; [
   {
@@ -858,7 +860,6 @@ const routes: Routes &#x3D; [
       AuthGuard,
       CmsPageGuard,
       CartNotEmptyGuard,
-      PaymentDetailsSetGuard,
       ReferredQuoteGuard,
     ],
     data: {
@@ -948,6 +949,9 @@ const routes: Routes &#x3D; [
         },
         PaymentDetailsFlex: {
           component: FSPaymentMethodComponent,
+        },
+        CheckoutPaymentDetails: {
+          guards: [FSCheckoutAuthGuard],
         },
         FinalReviewFlex: {
           component: FinalReviewComponent,
@@ -1042,6 +1046,8 @@ export class CheckoutModule {}
 
 
 
+
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -1055,6 +1061,15 @@ export class CheckoutModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -109,7 +110,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:61</a></div>
                             </td>
                         </tr>
 
@@ -184,34 +185,27 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_POLICIES),
-    map((action: fromActions.LoadPolicies) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.policyConnector.getPolicies(payload.userId).pipe(
-        map((policies: any) &#x3D;&gt; {
-          return new fromActions.LoadPoliciesSuccess(policies);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadPoliciesFail(JSON.stringify(error)))
-        )
-      );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_POLICIES),
+      map((action: fromActions.LoadPolicies) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.policyConnector.getPolicies(payload.userId).pipe(
+          map((policies: any) &#x3D;&gt; {
+            return new fromActions.LoadPoliciesSuccess(policies);
+          }),
+          catchError(error &#x3D;&gt;
+            of(new fromActions.LoadPoliciesFail(JSON.stringify(error)))
+          )
+        );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:10</a></div>
                         </td>
                     </tr>
 
@@ -237,36 +231,29 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_POLICY_DETAILS),
-    map((action: fromActions.LoadPolicyDetails) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.policyConnector
-        .getPolicy(payload.userId, payload.policyId, payload.contractId)
-        .pipe(
-          map((policy: any) &#x3D;&gt; {
-            return new fromActions.LoadPolicyDetailsSuccess(policy);
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.LoadPolicyDetailsFail(JSON.stringify(error)))
-          )
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_POLICY_DETAILS),
+      map((action: fromActions.LoadPolicyDetails) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.policyConnector
+          .getPolicy(payload.userId, payload.policyId, payload.contractId)
+          .pipe(
+            map((policy: any) &#x3D;&gt; {
+              return new fromActions.LoadPolicyDetailsSuccess(policy);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.LoadPolicyDetailsFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -292,34 +279,27 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_PREMIUM_CALENDAR),
-    map((action: fromActions.LoadPremiumCalendar) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
-        map((premiumCalendar: any) &#x3D;&gt; {
-          return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
-        )
-      );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_PREMIUM_CALENDAR),
+      map((action: fromActions.LoadPremiumCalendar) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
+          map((premiumCalendar: any) &#x3D;&gt; {
+            return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
+          }),
+          catchError(error &#x3D;&gt;
+            of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
+          )
+        );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/policy.effect.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -333,7 +313,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { catchError, map, switchMap } from &#x27;rxjs/operators&#x27;;
 import * as fromActions from &#x27;../actions&#x27;;
@@ -341,52 +321,57 @@ import { PolicyConnector } from &#x27;../../connectors/policy.connector&#x27;;
 
 @Injectable()
 export class PolicyEffects {
-  @Effect()
-  loadPolicies$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_POLICIES),
-    map((action: fromActions.LoadPolicies) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.policyConnector.getPolicies(payload.userId).pipe(
-        map((policies: any) &#x3D;&gt; {
-          return new fromActions.LoadPoliciesSuccess(policies);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadPoliciesFail(JSON.stringify(error)))
-        )
-      );
-    })
-  );
-  @Effect()
-  loadPolicyDetails$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_POLICY_DETAILS),
-    map((action: fromActions.LoadPolicyDetails) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.policyConnector
-        .getPolicy(payload.userId, payload.policyId, payload.contractId)
-        .pipe(
-          map((policy: any) &#x3D;&gt; {
-            return new fromActions.LoadPolicyDetailsSuccess(policy);
+  loadPolicies$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_POLICIES),
+      map((action: fromActions.LoadPolicies) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.policyConnector.getPolicies(payload.userId).pipe(
+          map((policies: any) &#x3D;&gt; {
+            return new fromActions.LoadPoliciesSuccess(policies);
           }),
           catchError(error &#x3D;&gt;
-            of(new fromActions.LoadPolicyDetailsFail(JSON.stringify(error)))
+            of(new fromActions.LoadPoliciesFail(JSON.stringify(error)))
           )
         );
-    })
+      })
+    )
   );
-  @Effect()
-  loadPremiumCalendar$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_PREMIUM_CALENDAR),
-    map((action: fromActions.LoadPremiumCalendar) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
-        map((premiumCalendar: any) &#x3D;&gt; {
-          return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
-        )
-      );
-    })
+
+  loadPolicyDetails$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_POLICY_DETAILS),
+      map((action: fromActions.LoadPolicyDetails) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.policyConnector
+          .getPolicy(payload.userId, payload.policyId, payload.contractId)
+          .pipe(
+            map((policy: any) &#x3D;&gt; {
+              return new fromActions.LoadPolicyDetailsSuccess(policy);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.LoadPolicyDetailsFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
+  );
+
+  loadPremiumCalendar$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_PREMIUM_CALENDAR),
+      map((action: fromActions.LoadPremiumCalendar) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
+          map((premiumCalendar: any) &#x3D;&gt; {
+            return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
+          }),
+          catchError(error &#x3D;&gt;
+            of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
+          )
+        );
+      })
+    )
   );
 
   constructor(
@@ -398,6 +383,7 @@ export class PolicyEffects {
     </div>
 
 </div>
+
 
 
 
@@ -423,6 +409,15 @@ export class PolicyEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

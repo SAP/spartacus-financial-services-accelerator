@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -106,7 +107,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/cart.effect.ts:117</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/cart.effect.ts:119</a></div>
                             </td>
                         </tr>
 
@@ -193,52 +194,45 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.ADD_OPTIONAL_PRODUCT),
-    map((action: fromActions.AddOptionalProduct) &#x3D;&gt; action.payload),
-    concatMap(payload &#x3D;&gt; {
-      return this.cartConnector
-        .addToCart(
-          payload.userId,
-          payload.cartId,
-          payload.productCode,
-          payload.quantity,
-          payload.entryNumber
-        )
-        .pipe(
-          concatMap((cart: any) &#x3D;&gt; [
-            new CartActions.CartAddEntrySuccess({
-              ...cart.entry,
-              userId: payload.userId,
-              cartId: payload.cartId,
-            }),
-          ]),
-          catchError(error &#x3D;&gt;
-            from([
-              new CartActions.CartAddEntryFail(error),
-              new CartActions.LoadCart({
-                cartId: payload.cartId,
-                userId: payload.userId,
-              }),
-            ])
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.ADD_OPTIONAL_PRODUCT),
+      map((action: fromActions.AddOptionalProduct) &#x3D;&gt; action.payload),
+      concatMap(payload &#x3D;&gt; {
+        return this.cartConnector
+          .addToCart(
+            payload.userId,
+            payload.cartId,
+            payload.productCode,
+            payload.quantity,
+            payload.entryNumber
           )
-        );
-    })
+          .pipe(
+            concatMap((cart: any) &#x3D;&gt; [
+              new CartActions.CartAddEntrySuccess({
+                ...cart.entry,
+                userId: payload.userId,
+                cartId: payload.cartId,
+              }),
+            ]),
+            catchError(error &#x3D;&gt;
+              from([
+                new CartActions.CartAddEntryFail(error),
+                new CartActions.LoadCart({
+                  cartId: payload.cartId,
+                  userId: payload.userId,
+                }),
+              ])
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/cart.effect.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/cart.effect.ts:13</a></div>
                         </td>
                     </tr>
 
@@ -264,85 +258,78 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.START_BUNDLE),
-    map((action: fromActions.StartBundle) &#x3D;&gt; action.payload),
-    concatMap(payload &#x3D;&gt; {
-      return this.cartConnector
-        .startBundle(
-          payload.userId,
-          payload.cartId,
-          payload.productCode,
-          payload.bundleTemplateId,
-          payload.quantity,
-          payload.pricingData
-        )
-        .pipe(
-          concatMap((cart: any) &#x3D;&gt; {
-            const actions: Action[] &#x3D; [];
-            const cartCode &#x3D;
-              payload.userId &#x3D;&#x3D;&#x3D; OCC_USER_ID_ANONYMOUS
-                ? cart.guid
-                : cart.cartCode;
-            if (cart?.entry?.product?.defaultCategory) {
-              const formDataId &#x3D; this.formDataStorageService.getFormDataIdByCategory(
-                cart.entry.product.defaultCategory.code
-              );
-              if (formDataId) {
-                const insuranceQuote &#x3D; {
-                  quoteDetails: {
-                    entry: [
-                      {
-                        key: &#x27;formId&#x27;,
-                        value: formDataId,
-                      },
-                    ],
-                  },
-                };
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.START_BUNDLE),
+      map((action: fromActions.StartBundle) &#x3D;&gt; action.payload),
+      concatMap(payload &#x3D;&gt; {
+        return this.cartConnector
+          .startBundle(
+            payload.userId,
+            payload.cartId,
+            payload.productCode,
+            payload.bundleTemplateId,
+            payload.quantity,
+            payload.pricingData
+          )
+          .pipe(
+            concatMap((cart: any) &#x3D;&gt; {
+              const actions: Action[] &#x3D; [];
+              const cartCode &#x3D;
+                payload.userId &#x3D;&#x3D;&#x3D; OCC_USER_ID_ANONYMOUS
+                  ? cart.guid
+                  : cart.cartCode;
+              if (cart?.entry?.product?.defaultCategory) {
+                const formDataId &#x3D; this.formDataStorageService.getFormDataIdByCategory(
+                  cart.entry.product.defaultCategory.code
+                );
+                if (formDataId) {
+                  const insuranceQuote &#x3D; {
+                    quoteDetails: {
+                      entry: [
+                        {
+                          key: &#x27;formId&#x27;,
+                          value: formDataId,
+                        },
+                      ],
+                    },
+                  };
+                  actions.push(
+                    new fromQuoteActions.UpdateQuote({
+                      userId: payload.userId,
+                      cartId: cartCode,
+                      quoteContent: insuranceQuote,
+                    })
+                  );
+                }
+              }
+              if (cartCode &#x3D;&#x3D;&#x3D; payload.cartId) {
                 actions.push(
-                  new fromQuoteActions.UpdateQuote({
+                  new CartActions.CartAddEntrySuccess({
+                    ...cart.entry,
                     userId: payload.userId,
                     cartId: cartCode,
-                    quoteContent: insuranceQuote,
                   })
                 );
+              } else {
+                actions.push(new fromActions.StartBundleFail(payload.cartId));
               }
-            }
-            if (cartCode &#x3D;&#x3D;&#x3D; payload.cartId) {
-              actions.push(
-                new CartActions.CartAddEntrySuccess({
-                  ...cart.entry,
+              return [
+                new CartActions.LoadCart({
                   userId: payload.userId,
                   cartId: cartCode,
-                })
-              );
-            } else {
-              actions.push(new fromActions.StartBundleFail(payload.cartId));
-            }
-            return [
-              new CartActions.LoadCart({
-                userId: payload.userId,
-                cartId: cartCode,
-                extraData: {
-                  active: true,
-                },
-              }),
-              ...actions,
-            ];
-          }),
-          catchError(error &#x3D;&gt; from([new CartActions.CartAddEntryFail(error)]))
-        );
-    })
+                  extraData: {
+                    active: true,
+                  },
+                }),
+                ...actions,
+              ];
+            }),
+            catchError(error &#x3D;&gt; from([new CartActions.CartAddEntryFail(error)]))
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
@@ -362,7 +349,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { FormDataStorageService } from &#x27;@spartacus/dynamicforms&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Action } from &#x27;@ngrx/store&#x27;;
 import { CartActions, OCC_USER_ID_ANONYMOUS } from &#x27;@spartacus/core&#x27;;
 import { from, Observable } from &#x27;rxjs&#x27;;
@@ -372,110 +359,112 @@ import * as fromQuoteActions from &#x27;../../../my-account/store/actions/quote.
 import * as fromActions from &#x27;../actions/cart.action&#x27;;
 @Injectable()
 export class CartEffects {
-  @Effect()
-  addOptionalProduct$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.ADD_OPTIONAL_PRODUCT),
-    map((action: fromActions.AddOptionalProduct) &#x3D;&gt; action.payload),
-    concatMap(payload &#x3D;&gt; {
-      return this.cartConnector
-        .addToCart(
-          payload.userId,
-          payload.cartId,
-          payload.productCode,
-          payload.quantity,
-          payload.entryNumber
-        )
-        .pipe(
-          concatMap((cart: any) &#x3D;&gt; [
-            new CartActions.CartAddEntrySuccess({
-              ...cart.entry,
-              userId: payload.userId,
-              cartId: payload.cartId,
-            }),
-          ]),
-          catchError(error &#x3D;&gt;
-            from([
-              new CartActions.CartAddEntryFail(error),
-              new CartActions.LoadCart({
-                cartId: payload.cartId,
-                userId: payload.userId,
-              }),
-            ])
+  addOptionalProduct$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.ADD_OPTIONAL_PRODUCT),
+      map((action: fromActions.AddOptionalProduct) &#x3D;&gt; action.payload),
+      concatMap(payload &#x3D;&gt; {
+        return this.cartConnector
+          .addToCart(
+            payload.userId,
+            payload.cartId,
+            payload.productCode,
+            payload.quantity,
+            payload.entryNumber
           )
-        );
-    })
+          .pipe(
+            concatMap((cart: any) &#x3D;&gt; [
+              new CartActions.CartAddEntrySuccess({
+                ...cart.entry,
+                userId: payload.userId,
+                cartId: payload.cartId,
+              }),
+            ]),
+            catchError(error &#x3D;&gt;
+              from([
+                new CartActions.CartAddEntryFail(error),
+                new CartActions.LoadCart({
+                  cartId: payload.cartId,
+                  userId: payload.userId,
+                }),
+              ])
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  startBundle$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.START_BUNDLE),
-    map((action: fromActions.StartBundle) &#x3D;&gt; action.payload),
-    concatMap(payload &#x3D;&gt; {
-      return this.cartConnector
-        .startBundle(
-          payload.userId,
-          payload.cartId,
-          payload.productCode,
-          payload.bundleTemplateId,
-          payload.quantity,
-          payload.pricingData
-        )
-        .pipe(
-          concatMap((cart: any) &#x3D;&gt; {
-            const actions: Action[] &#x3D; [];
-            const cartCode &#x3D;
-              payload.userId &#x3D;&#x3D;&#x3D; OCC_USER_ID_ANONYMOUS
-                ? cart.guid
-                : cart.cartCode;
-            if (cart?.entry?.product?.defaultCategory) {
-              const formDataId &#x3D; this.formDataStorageService.getFormDataIdByCategory(
-                cart.entry.product.defaultCategory.code
-              );
-              if (formDataId) {
-                const insuranceQuote &#x3D; {
-                  quoteDetails: {
-                    entry: [
-                      {
-                        key: &#x27;formId&#x27;,
-                        value: formDataId,
-                      },
-                    ],
-                  },
-                };
+  startBundle$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.START_BUNDLE),
+      map((action: fromActions.StartBundle) &#x3D;&gt; action.payload),
+      concatMap(payload &#x3D;&gt; {
+        return this.cartConnector
+          .startBundle(
+            payload.userId,
+            payload.cartId,
+            payload.productCode,
+            payload.bundleTemplateId,
+            payload.quantity,
+            payload.pricingData
+          )
+          .pipe(
+            concatMap((cart: any) &#x3D;&gt; {
+              const actions: Action[] &#x3D; [];
+              const cartCode &#x3D;
+                payload.userId &#x3D;&#x3D;&#x3D; OCC_USER_ID_ANONYMOUS
+                  ? cart.guid
+                  : cart.cartCode;
+              if (cart?.entry?.product?.defaultCategory) {
+                const formDataId &#x3D; this.formDataStorageService.getFormDataIdByCategory(
+                  cart.entry.product.defaultCategory.code
+                );
+                if (formDataId) {
+                  const insuranceQuote &#x3D; {
+                    quoteDetails: {
+                      entry: [
+                        {
+                          key: &#x27;formId&#x27;,
+                          value: formDataId,
+                        },
+                      ],
+                    },
+                  };
+                  actions.push(
+                    new fromQuoteActions.UpdateQuote({
+                      userId: payload.userId,
+                      cartId: cartCode,
+                      quoteContent: insuranceQuote,
+                    })
+                  );
+                }
+              }
+              if (cartCode &#x3D;&#x3D;&#x3D; payload.cartId) {
                 actions.push(
-                  new fromQuoteActions.UpdateQuote({
+                  new CartActions.CartAddEntrySuccess({
+                    ...cart.entry,
                     userId: payload.userId,
                     cartId: cartCode,
-                    quoteContent: insuranceQuote,
                   })
                 );
+              } else {
+                actions.push(new fromActions.StartBundleFail(payload.cartId));
               }
-            }
-            if (cartCode &#x3D;&#x3D;&#x3D; payload.cartId) {
-              actions.push(
-                new CartActions.CartAddEntrySuccess({
-                  ...cart.entry,
+              return [
+                new CartActions.LoadCart({
                   userId: payload.userId,
                   cartId: cartCode,
-                })
-              );
-            } else {
-              actions.push(new fromActions.StartBundleFail(payload.cartId));
-            }
-            return [
-              new CartActions.LoadCart({
-                userId: payload.userId,
-                cartId: cartCode,
-                extraData: {
-                  active: true,
-                },
-              }),
-              ...actions,
-            ];
-          }),
-          catchError(error &#x3D;&gt; from([new CartActions.CartAddEntryFail(error)]))
-        );
-    })
+                  extraData: {
+                    active: true,
+                  },
+                }),
+                ...actions,
+              ];
+            }),
+            catchError(error &#x3D;&gt; from([new CartActions.CartAddEntryFail(error)]))
+          );
+      })
+    )
   );
 
   constructor(
@@ -488,6 +477,7 @@ export class CartEffects {
     </div>
 
 </div>
+
 
 
 
@@ -513,6 +503,15 @@ export class CartEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

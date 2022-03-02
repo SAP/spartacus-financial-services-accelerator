@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -106,7 +107,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -181,39 +182,32 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.SUBMIT_USER_REQUEST),
-    map((action: fromActions.SubmitUserRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .submitUserRequest(payload.userId, payload.requestId)
-        .pipe(
-          mergeMap(userRequest &#x3D;&gt; {
-            return [
-              new fromActions.LoadUserRequest(userRequest),
-              new fromActions.SubmitUserRequestSuccess(userRequest),
-            ];
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.SubmitUserRequestFail(JSON.stringify(error)))
-          )
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SUBMIT_USER_REQUEST),
+      map((action: fromActions.SubmitUserRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .submitUserRequest(payload.userId, payload.requestId)
+          .pipe(
+            mergeMap(userRequest &#x3D;&gt; {
+              return [
+                new fromActions.LoadUserRequest(userRequest),
+                new fromActions.SubmitUserRequestSuccess(userRequest),
+              ];
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.SubmitUserRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -239,51 +233,48 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.UPDATE_USER_REQUEST),
-    map((action: fromActions.UpdateUserRequest) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
-        .pipe(
-          map((userRequest: any) &#x3D;&gt; {
-            const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
-            const configSteps &#x3D; userRequest.configurationSteps;
-            if (
-              configSteps &amp;&amp;
-              configSteps.length &gt; 0 &amp;&amp;
-              sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
-              configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
-                StepStatus.COMPLETED
-            ) {
-              return new fromActions.SubmitUserRequest({
-                userId: payload.userId,
-                requestId: payload.requestId,
-              });
-            } else {
-              return new fromActions.UpdateUserRequestSuccess(userRequest);
-            }
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateUserRequestFail(JSON.stringify(error)))
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_USER_REQUEST),
+      map((action: fromActions.UpdateUserRequest) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .updateUserRequest(
+            payload.userId,
+            payload.requestId,
+            payload.stepData
           )
-        );
-    })
+          .pipe(
+            map((userRequest: any) &#x3D;&gt; {
+              const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
+              const configSteps &#x3D; userRequest.configurationSteps;
+              if (
+                configSteps &amp;&amp;
+                configSteps.length &gt; 0 &amp;&amp;
+                sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
+                configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
+                  StepStatus.COMPLETED
+              ) {
+                return new fromActions.SubmitUserRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                });
+              } else {
+                return new fromActions.UpdateUserRequestSuccess(userRequest);
+              }
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateUserRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/fsastorefrontlib/src/core/user-request/store/effects/user-request.effect.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -297,7 +288,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { catchError, map, mergeMap, switchMap } from &#x27;rxjs/operators&#x27;;
 import * as fromActions from &#x27;../actions&#x27;;
@@ -306,58 +297,64 @@ import { StepStatus } from &#x27;../../../../occ/occ-models&#x27;;
 
 @Injectable()
 export class UserRequestEffects {
-  @Effect()
-  updateUserRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.UPDATE_USER_REQUEST),
-    map((action: fromActions.UpdateUserRequest) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
-        .pipe(
-          map((userRequest: any) &#x3D;&gt; {
-            const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
-            const configSteps &#x3D; userRequest.configurationSteps;
-            if (
-              configSteps &amp;&amp;
-              configSteps.length &gt; 0 &amp;&amp;
-              sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
-              configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
-                StepStatus.COMPLETED
-            ) {
-              return new fromActions.SubmitUserRequest({
-                userId: payload.userId,
-                requestId: payload.requestId,
-              });
-            } else {
-              return new fromActions.UpdateUserRequestSuccess(userRequest);
-            }
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateUserRequestFail(JSON.stringify(error)))
+  updateUserRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_USER_REQUEST),
+      map((action: fromActions.UpdateUserRequest) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .updateUserRequest(
+            payload.userId,
+            payload.requestId,
+            payload.stepData
           )
-        );
-    })
+          .pipe(
+            map((userRequest: any) &#x3D;&gt; {
+              const sequenceNumber &#x3D; payload.stepData.sequenceNumber;
+              const configSteps &#x3D; userRequest.configurationSteps;
+              if (
+                configSteps &amp;&amp;
+                configSteps.length &gt; 0 &amp;&amp;
+                sequenceNumber &#x3D;&#x3D;&#x3D; configSteps.length &amp;&amp;
+                configSteps[configSteps.length - 1].status &#x3D;&#x3D;&#x3D;
+                  StepStatus.COMPLETED
+              ) {
+                return new fromActions.SubmitUserRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                });
+              } else {
+                return new fromActions.UpdateUserRequestSuccess(userRequest);
+              }
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateUserRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  submitUserRequest$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.SUBMIT_USER_REQUEST),
-    map((action: fromActions.SubmitUserRequest) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.userRequestConnector
-        .submitUserRequest(payload.userId, payload.requestId)
-        .pipe(
-          mergeMap(userRequest &#x3D;&gt; {
-            return [
-              new fromActions.LoadUserRequest(userRequest),
-              new fromActions.SubmitUserRequestSuccess(userRequest),
-            ];
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.SubmitUserRequestFail(JSON.stringify(error)))
-          )
-        );
-    })
+  submitUserRequest$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.SUBMIT_USER_REQUEST),
+      map((action: fromActions.SubmitUserRequest) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.userRequestConnector
+          .submitUserRequest(payload.userId, payload.requestId)
+          .pipe(
+            mergeMap(userRequest &#x3D;&gt; {
+              return [
+                new fromActions.LoadUserRequest(userRequest),
+                new fromActions.SubmitUserRequestSuccess(userRequest),
+              ];
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.SubmitUserRequestFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
 
   constructor(
@@ -369,6 +366,7 @@ export class UserRequestEffects {
     </div>
 
 </div>
+
 
 
 
@@ -394,6 +392,15 @@ export class UserRequestEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

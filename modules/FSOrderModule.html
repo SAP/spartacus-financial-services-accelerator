@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -56,13 +56,13 @@
 <title>cluster_FSOrderModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 857,-230.8 857,-32.8 8,-32.8"/>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_FSOrderModule_declarations</title>
-<polygon fill="none" stroke="black" points="24,-40.8 24,-92.8 843,-92.8 843,-40.8 24,-40.8"/>
-</g>
 <g id="clust8" class="cluster">
 <title>cluster_FSOrderModule_exports</title>
 <polygon fill="none" stroke="black" points="16,-170.8 16,-222.8 849,-222.8 849,-170.8 16,-170.8"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_FSOrderModule_declarations</title>
+<polygon fill="none" stroke="black" points="24,-40.8 24,-92.8 843,-92.8 843,-40.8 24,-40.8"/>
 </g>
 <!-- FSOrderDetailItemsComponent -->
 <g id="node1" class="node">
@@ -266,7 +266,7 @@ import {
   FeaturesConfig,
   FeaturesConfigModule,
   I18nModule,
-  provideDefaultConfig,
+  provideConfig,
   UrlModule,
 } from &#x27;@spartacus/core&#x27;;
 import {
@@ -304,7 +304,7 @@ const moduleComponents &#x3D; [
     CartCouponModule,
   ],
   providers: [
-    provideDefaultConfig(&lt;CmsConfig | FeaturesConfig&gt;{
+    provideConfig(&lt;CmsConfig | FeaturesConfig&gt;{
       cmsComponents: {
         AccountOrderDetailsItemsComponent: {
           component: FSOrderDetailItemsComponent,
@@ -344,6 +344,8 @@ export class FSOrderModule {}
 
 
 
+
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -357,6 +359,15 @@ export class FSOrderModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

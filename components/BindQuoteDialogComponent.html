@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -71,7 +71,7 @@
 
 <section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover">
+    <table class="table table-sm table-hover metadata">
         <tbody>
 
 
@@ -145,7 +145,15 @@
                                 <a href="#bindQuote" >bindQuote</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#clearFormDataFromLocalStorage" >clearFormDataFromLocalStorage</a>
+                            </li>
+                            <li>
                                 <a href="#dismissModal" >dismissModal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#transferCartToOBOCustomer" >transferCartToOBOCustomer</a>
                             </li>
                         </ul>
                     </td>
@@ -179,12 +187,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(modalService: ModalService, quoteService: <a href="../injectables/QuoteService.html" target="_self">QuoteService</a>, cartService: <a href="../injectables/FSCartService.html" target="_self">FSCartService</a>, formDataStoragetService: <a href="../injectables/FormDataStorageService.html" target="_self">FormDataStorageService</a>)</code>
+<code>constructor(modalService: ModalService, quoteService: <a href="../injectables/QuoteService.html" target="_self">QuoteService</a>, cartService: <a href="../injectables/FSCartService.html" target="_self">FSCartService</a>, formDataStoragetService: <a href="../injectables/FormDataStorageService.html" target="_self">FormDataStorageService</a>, userAccountFacade: UserAccountFacade, oboConsentService: <a href="../injectables/ConsentService.html" target="_self">ConsentService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -249,6 +257,30 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>userAccountFacade</td>
+                                                  
+                                                        <td>
+                                                                    <code>UserAccountFacade</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>oboConsentService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ConsentService.html" target="_self" >ConsentService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -277,7 +309,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:28</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -310,8 +342,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:46</a></div>
                 </td>
             </tr>
 
@@ -322,6 +354,77 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearFormDataFromLocalStorage"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>clearFormDataFromLocalStorage</b></span>
+                        <a href="#clearFormDataFromLocalStorage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clearFormDataFromLocalStorage(cart: <a href="../interfaces/FSCart.html" target="_self">FSCart</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:68</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>cart</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSCart.html" target="_self" >FSCart</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -347,8 +450,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:42</a></div>
                 </td>
             </tr>
 
@@ -396,6 +499,101 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transferCartToOBOCustomer"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>transferCartToOBOCustomer</b></span>
+                        <a href="#transferCartToOBOCustomer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>transferCartToOBOCustomer(user: <a href="../interfaces/FSUser.html" target="_self">FSUser</a>, oboConsentCustomer: <a href="../interfaces/FSUser.html" target="_self">FSUser</a>, cart: <a href="../interfaces/FSCart.html" target="_self">FSCart</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSUser.html" target="_self" >FSUser</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>oboConsentCustomer</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSUser.html" target="_self" >FSUser</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>cart</td>
+                                    <td>
+                                                <code><a href="../interfaces/FSCart.html" target="_self" >FSCart</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section>
     
@@ -421,7 +619,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -456,7 +654,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -481,7 +679,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/fsastorefrontlib/src/cms-components/checkout/components/bind-quote-dialog/bind-quote-dialog.component.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -508,6 +706,9 @@ import { filter, map, take } from &#x27;rxjs/operators&#x27;;
 import { QuoteService } from &#x27;../../../../core/my-account/facade/quote.service&#x27;;
 import { FSCartService } from &#x27;./../../../../core/cart/facade/cart.service&#x27;;
 import { FSCart } from &#x27;./../../../../occ/occ-models/occ.models&#x27;;
+import { ConsentService } from &#x27;../../../../core/my-account/facade/consent.service&#x27;;
+import { UserAccountFacade } from &#x27;@spartacus/user/account/root&#x27;;
+import { FSUserRole, FSUser } from &#x27;../../../../occ/occ-models/occ.models&#x27;;
 
 @Component({
   selector: &#x27;cx-fs-bind-quote-dialog&#x27;,
@@ -527,7 +728,9 @@ export class BindQuoteDialogComponent {
     protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected cartService: FSCartService,
-    protected formDataStoragetService: FormDataStorageService
+    protected formDataStoragetService: FormDataStorageService,
+    protected userAccountFacade: UserAccountFacade,
+    protected oboConsentService: ConsentService
   ) {}
 
   dismissModal(reason?: any): void {
@@ -536,27 +739,57 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
-    combineLatest([this.cartService.getActive(), this.cartService.isStable()])
-      .pipe(
-        filter(([_, stable]) &#x3D;&gt; stable),
-        take(1),
-        map(([cart, _]) &#x3D;&gt; {
-          const personalDetailsFormId &#x3D; (&lt;FSCart&gt;cart)?.entries?.[0]
-            .formData?.[0]?.id;
-          this.formDataStoragetService.clearFormDataIdFromLocalStorage(
-            personalDetailsFormId
-          );
-
-          const chooseCoverFormId &#x3D; &lt;any&gt;(
-            (&lt;FSCart&gt;cart).insuranceQuote?.quoteDetails?.formId
-          );
-          this.formDataStoragetService.clearFormDataIdFromLocalStorage(
-            chooseCoverFormId
-          );
-        })
-      )
-      .subscribe();
+    this.subscription.add(
+      combineLatest([
+        this.cartService.isStable(),
+        this.cartService.getActive(),
+        this.userAccountFacade.get(),
+        this.oboConsentService.selectedOBOCustomer$,
+      ])
+        .pipe(
+          filter(([stable]) &#x3D;&gt; stable),
+          take(1),
+          map(([_, cart, user, oboConsentCustomer]) &#x3D;&gt; {
+            this.clearFormDataFromLocalStorage(cart);
+            this.transferCartToOBOCustomer(user, oboConsentCustomer, cart);
+          })
+        )
+        .subscribe()
+    );
     this.quoteBinding$.emit(false);
+  }
+
+  private clearFormDataFromLocalStorage(cart: FSCart) {
+    const personalDetailsFormId &#x3D; (&lt;FSCart&gt;cart)?.entries?.[0].formData?.[0]
+      ?.id;
+    this.formDataStoragetService.clearFormDataIdFromLocalStorage(
+      personalDetailsFormId
+    );
+
+    const chooseCoverFormId &#x3D; &lt;any&gt;(
+      (&lt;FSCart&gt;cart).insuranceQuote?.quoteDetails?.formId
+    );
+    this.formDataStoragetService.clearFormDataIdFromLocalStorage(
+      chooseCoverFormId
+    );
+  }
+
+  private transferCartToOBOCustomer(
+    user: FSUser,
+    oboConsentCustomer: FSUser,
+    cart: FSCart
+  ) {
+    if (
+      !!user &amp;&amp;
+      user.roles.includes(FSUserRole.SELLER) &amp;&amp;
+      !!oboConsentCustomer?.uid
+    ) {
+      this.oboConsentService.transferCartToSelectedOBOCustomer(
+        cart,
+        user,
+        oboConsentCustomer
+      );
+    }
   }
 }
 </code></pre>
@@ -573,7 +806,7 @@ export class BindQuoteDialogComponent {
   &lt;p&gt;{{ &#x27;quote.bindingConfirmation&#x27; | cxTranslate }}&lt;/p&gt;
   &lt;div class&#x3D;&quot;modal-actions&quot;&gt;
     &lt;div class&#x3D;&quot;row&quot;&gt;
-      &lt;div class&#x3D;&quot;col-xs-12 col-sm-6 mb-3 mb-md-0&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-6 mb-3 mb-md-0&quot;&gt;
         &lt;button
           class&#x3D;&quot;action-button btn-block&quot;
           (click)&#x3D;&quot;dismissModal(&#x27;Cross click&#x27;)&quot;
@@ -581,7 +814,7 @@ export class BindQuoteDialogComponent {
           {{ &#x27;common.cancel&#x27; | cxTranslate }}
         &lt;/button&gt;
       &lt;/div&gt;
-      &lt;div class&#x3D;&quot;col-xs-12 col-sm-6 col-sm-push-6&quot;&gt;
+      &lt;div class&#x3D;&quot;col-md-6&quot;&gt;
         &lt;button
           class&#x3D;&quot;primary-button btn-block&quot;
           (click)&#x3D;&quot;bindQuote(); dismissModal(&#x27;Quote bound&#x27;)&quot;
@@ -621,12 +854,14 @@ export class BindQuoteDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="popup-content-wrapper">  <button    type="button"    class="close"    (click)="dismissModal(\'Cross click\')"  ></button>  <h3>{{ \'quote.confirmInformation\' | cxTranslate }}</h3>  <p>{{ \'quote.bindingConfirmation\' | cxTranslate }}</p>  <div class="modal-actions">    <div class="row">      <div class="col-xs-12 col-sm-6 mb-3 mb-md-0">        <button          class="action-button btn-block"          (click)="dismissModal(\'Cross click\')"        >          {{ \'common.cancel\' | cxTranslate }}        </button>      </div>      <div class="col-xs-12 col-sm-6 col-sm-push-6">        <button          class="primary-button btn-block"          (click)="bindQuote(); dismissModal(\'Quote bound\')"        >          {{ \'common.continue\' | cxTranslate }}        </button>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': ''},{'name': 'FSUpdateProfileFormComponent', 'selector': 'cx-fs-update-profile-form'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotConnectionComponent', 'selector': 'cx-fs-sync-pilot-connection-component'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'}];
+        var COMPONENT_TEMPLATE = '<div><div class="popup-content-wrapper">  <button    type="button"    class="close"    (click)="dismissModal(\'Cross click\')"  ></button>  <h3>{{ \'quote.confirmInformation\' | cxTranslate }}</h3>  <p>{{ \'quote.bindingConfirmation\' | cxTranslate }}</p>  <div class="modal-actions">    <div class="row">      <div class="col-md-6 mb-3 mb-md-0">        <button          class="action-button btn-block"          (click)="dismissModal(\'Cross click\')"        >          {{ \'common.cancel\' | cxTranslate }}        </button>      </div>      <div class="col-md-6">        <button          class="primary-button btn-block"          (click)="bindQuote(); dismissModal(\'Quote bound\')"        >          {{ \'common.continue\' | cxTranslate }}        </button>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AbstractChangeProcessStepComponent', 'selector': ''},{'name': 'AbstractFormComponent', 'selector': ''},{'name': 'AbstractOptionsComponent', 'selector': ''},{'name': 'AccordionItemComponent', 'selector': 'cx-fs-accordion-item'},{'name': 'ActivateProductCellComponent', 'selector': 'cx-fs-activate-product-cell'},{'name': 'AddOptionsComponent', 'selector': 'cx-fs-add-options'},{'name': 'AgentRootComponent', 'selector': 'cx-fs-agent-root'},{'name': 'AgentSearchBoxComponent', 'selector': 'cx-fs-agent-search-box'},{'name': 'AgentSearchListComponent', 'selector': 'cx-fs-agent-search-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AssetsTableComponent', 'selector': 'cx-fs-assets-table'},{'name': 'AssignProductCellComponent', 'selector': 'cx-fs-assign-product-cell'},{'name': 'BindQuoteDialogComponent', 'selector': 'cx-fs-bind-quote-dialog'},{'name': 'ButtonComponent', 'selector': 'cx-button'},{'name': 'CalculationButtonComponent', 'selector': 'cx-fs-button'},{'name': 'CategoryFeatureCarouselComponent', 'selector': 'cx-fs-category-carousel'},{'name': 'CategoryFeatureComponent', 'selector': 'cx-fs-category-feature'},{'name': 'ChangeCarDetailsNavigationComponent', 'selector': 'cx-fs-change-car-details-navigation'},{'name': 'ChangeClaimNavigationComponent', 'selector': 'cx-fs-change-claim-navigation'},{'name': 'ChangeCoverageComponent', 'selector': 'cx-fs-change-coverage'},{'name': 'ChangeProcessConfirmationComponent', 'selector': 'cx-fs-change-process-confirmation'},{'name': 'ChangeProcessProgressBarComponent', 'selector': 'cx-fs-change-process-progress-bar'},{'name': 'ChangeSimulationComponent', 'selector': 'cx-fs-change-simulation'},{'name': 'CheckboxComponent', 'selector': 'cx-checkbox'},{'name': 'ChooseCoverNavigationComponent', 'selector': 'cx-fs-choose-cover-navigation'},{'name': 'ClaimDetailsComponent', 'selector': 'cx-fs-claim-details'},{'name': 'ClaimPoliciesComponent', 'selector': 'cx-fs-claim-policies'},{'name': 'ClaimsComponent', 'selector': 'cx-fs-claims'},{'name': 'CmsCustomContainerComponent', 'selector': 'cx-fs-cms-custom-container'},{'name': 'CMSFormSubmitComponent', 'selector': 'cx-fs-cms-form-submit'},{'name': 'CmsSyncPilotComponent', 'selector': 'cx-fs-cms-sync-pilot'},{'name': 'ComparisonTableContainerComponent', 'selector': 'cx-fs-comparison-table-container'},{'name': 'ComparisonTablePanelComponent', 'selector': 'cx-fs-comparison-table-panel'},{'name': 'ComparisonTablePanelItemComponent', 'selector': 'cx-fs-comparison-table-panel-item'},{'name': 'ComparisonTableTabComponent', 'selector': 'cx-fs-comparison-table-tab'},{'name': 'ContactAgentFormComponent', 'selector': 'cx-fs-contact-agent-form'},{'name': 'CreateClaimComponent', 'selector': 'cx-fs-create-claim'},{'name': 'CreateOBOCustomerComponent', 'selector': 'cx-fs-create-obo-customer'},{'name': 'CurrencyComponent', 'selector': 'cx-currency'},{'name': 'DashboardLinkComponent', 'selector': 'cx-fs-dashboard-link'},{'name': 'DataHolderComponent', 'selector': ''},{'name': 'DatePickerComponent', 'selector': 'cx-datepicker'},{'name': 'DeleteClaimDialogComponent', 'selector': 'cx-fs-deleted-claim-dialog'},{'name': 'DocumentsOverviewComponent', 'selector': 'cx-fs-documents-overview'},{'name': 'DocumentsTableComponent', 'selector': 'cx-fs-documents-table'},{'name': 'DynamicFormComponent', 'selector': 'cx-dynamic-form'},{'name': 'DynamicSelectComponent', 'selector': 'cx-fs-dynamic-select'},{'name': 'EnrichedResponsiveBannerComponent', 'selector': 'cx-fs-enriched-responsive-banner'},{'name': 'ErrorNoticeComponent', 'selector': 'cx-error-notice'},{'name': 'FinalReviewComponent', 'selector': 'cx-fs-final-review'},{'name': 'FindAgentNavigationComponent', 'selector': 'cx-fs-find-agent-navigation'},{'name': 'FNOLConfirmationComponent', 'selector': 'cx-fs-fnol-confirmation'},{'name': 'FNOLNavigationComponent', 'selector': 'cx-fs-fnol-navigation'},{'name': 'FNOLProgressBarComponent', 'selector': 'cx-fs-fnol-progress-bar'},{'name': 'FNOLSummaryComponent', 'selector': 'cx-fs-fnol-summary'},{'name': 'FormCMSComponent', 'selector': 'cx-form-cms'},{'name': 'FormComponent', 'selector': 'cx-form-component'},{'name': 'FormPopupErrorComponent', 'selector': 'cx-form-popup-error'},{'name': 'FSAddressFormComponent', 'selector': 'cx-fs-address-form'},{'name': 'FSAddressInfoComponent', 'selector': ''},{'name': 'FSCartCouponComponent', 'selector': 'cx-fs-cart-coupon'},{'name': 'FSCheckoutProgressComponent', 'selector': 'cx-fs-checkout-progress'},{'name': 'FSConsentManagementComponent', 'selector': 'cx-fs-consent-management'},{'name': 'FSLoginFormComponent', 'selector': 'cx-fs-login-form'},{'name': 'FSLoginRegisterComponent', 'selector': 'cx-fs-login-register'},{'name': 'FSNavigationComponent', 'selector': 'cx-fs-navigation'},{'name': 'FSNavigationUIComponent', 'selector': 'cx-fs-navigation-ui'},{'name': 'FSOrderDetailItemsComponent', 'selector': 'cx-fs-order-details-items'},{'name': 'FSOrderDetailTotalsComponent', 'selector': 'cx-fs-order-details-totals'},{'name': 'FSOrderHistoryComponent', 'selector': 'cx-fs-order-history'},{'name': 'FSOrderSummaryComponent', 'selector': 'cx-fs-order-summary'},{'name': 'FSPaymentMethodComponent', 'selector': 'cx-fs-payment-method'},{'name': 'FSProductListComponent', 'selector': 'cx-fs-product-list'},{'name': 'FSRegisterComponent', 'selector': 'cx-fs-register'},{'name': 'FSSearchBoxComponent', 'selector': 'cx-fs-searchbox'},{'name': 'FSUnitDetailsComponent', 'selector': 'cx-fs-org-unit-details'},{'name': 'FSUnitUserCreateComponent', 'selector': 'cx-fs-org-unit-user-create'},{'name': 'FSUpdateProfileComponent', 'selector': 'cx-fs-update-profile'},{'name': 'FSUserDetailsComponent', 'selector': 'cx-fs-org-user-details'},{'name': 'FSUserFormComponent', 'selector': 'cx-fs-org-user-form'},{'name': 'GeneralInformationComponent', 'selector': 'cx-fs-general-information'},{'name': 'GenericSyncPilotComponent', 'selector': 'cx-fs-generic-sync-pilot'},{'name': 'InboxComponent', 'selector': 'cx-fs-inbox'},{'name': 'InboxMessagesComponent', 'selector': 'cx-fs-inbox-messages'},{'name': 'InboxTabComponent', 'selector': 'cx-fs-inbox-tab'},{'name': 'InputComponent', 'selector': 'cx-input'},{'name': 'LegalCheckboxesComponent', 'selector': 'cx-fs-legal-checkboxes'},{'name': 'LegalDocumentsComponent', 'selector': 'cx-fs-legal-documents'},{'name': 'MessageNotificationComponent', 'selector': 'cx-fs-message-notification'},{'name': 'MiniCartComponent', 'selector': 'cx-fs-mini-cart'},{'name': 'NotFoundComponent', 'selector': 'cx-fs-not-found'},{'name': 'OrderConfirmationComponent', 'selector': 'cx-fs-order-confirmation'},{'name': 'OrderConfirmationMessageComponent', 'selector': 'cx-fs-order-confirmation-message'},{'name': 'PersonalDetailsComponent', 'selector': 'cx-fs-personal-details'},{'name': 'PersonalDetailsNavigationComponent', 'selector': 'cx-fs-personal-details-navigation'},{'name': 'PoliciesChartComponent', 'selector': 'cx-fs-policies-chart'},{'name': 'PoliciesComponent', 'selector': 'cx-fs-policies'},{'name': 'PolicyDetailsComponent', 'selector': 'cx-fs-policy-details'},{'name': 'PotentialAssignmentsComponent', 'selector': 'cx-fs-potential-assignments'},{'name': 'PremiumCalendarComponent', 'selector': 'cx-fs-premium-calendar'},{'name': 'ProductAssignmentsComponent', 'selector': 'cx-fs-product-assignments'},{'name': 'ProductConfigurationFormComponent', 'selector': 'cx-fs-product-configuration-form'},{'name': 'ProductConfigurationMiniCartComponent', 'selector': 'cx-fs-product-configuration-mini-cart'},{'name': 'ProductConfigurationNavigationComponent', 'selector': 'cx-fs-product-configuration-navigation'},{'name': 'ProductFeatureComponent', 'selector': 'cx-fs-product-feature'},{'name': 'ProgressBarComponent', 'selector': 'cx-fs-progress-bar'},{'name': 'QuestionnaireCarouselComponent', 'selector': 'cx-fs-questionnaire-carousel'},{'name': 'QuoteComparisonComponent', 'selector': 'cx-fs-quote-comparison'},{'name': 'QuoteDetailsComponent', 'selector': 'cx-fs-quote-details'},{'name': 'QuoteReviewComponent', 'selector': 'cx-fs-quote-review'},{'name': 'QuotesComponent', 'selector': 'cx-fs-quotes'},{'name': 'RadioComponent', 'selector': 'cx-radio'},{'name': 'ReferredQuoteDialogComponent', 'selector': 'cx-fs-referred-quote-dialog'},{'name': 'RemoveProductCellComponent', 'selector': 'cx-fs-remove-product-cell'},{'name': 'SelectComponent', 'selector': 'cx-select'},{'name': 'SelectIdentificationTypeComponent', 'selector': 'cx-fs-select-identification'},{'name': 'SellerDashboardComponent', 'selector': 'cx-fs-seller-dashboard'},{'name': 'SellerDashboardListComponent', 'selector': 'cx-fs-seller-dashboard-list'},{'name': 'SeparatorComponent', 'selector': 'cx-separator'},{'name': 'SyncPilotDialogComponent', 'selector': 'cx-fs-sync-pilot-dialog'},{'name': 'TextAreaComponent', 'selector': 'cx-text-area'},{'name': 'TimeComponent', 'selector': 'cx-time'},{'name': 'TitleComponent', 'selector': 'cx-title'},{'name': 'UploadComponent', 'selector': 'cx-upload'},{'name': 'UserProfileComponent', 'selector': 'cx-fs-user-profile'}];
     var DIRECTIVES = [{'name': 'FormComponentDirective', 'selector': '[cxFormComponent]'}];
     var ACTUAL_COMPONENT = {'name': 'BindQuoteDialogComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
+
 
 
 
@@ -655,6 +890,15 @@ export class BindQuoteDialogComponent {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

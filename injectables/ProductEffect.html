@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -118,7 +119,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -207,8 +208,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:41</a></div>
                 </td>
             </tr>
 
@@ -293,43 +294,36 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
-    map((action: fromActions.LoadCalculatedProductData) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productPricingConnector
-        .getCalculatedProductData(payload.productCode, payload.pricingData)
-        .pipe(
-          timeout(30000),
-          map((product: any) &#x3D;&gt; {
-            return new ProductActions.LoadProductSuccess(product);
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(
-              &#x27;fscommon.priceCalculationError&#x27;,
-              GlobalMessageType.MSG_TYPE_ERROR
-            );
-            return of(
-              new ProductActions.LoadProductFail(payload.productCode, error)
-            );
-          })
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
+      map((action: fromActions.LoadCalculatedProductData) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productPricingConnector
+          .getCalculatedProductData(payload.productCode, payload.pricingData)
+          .pipe(
+            timeout(30000),
+            map((product: any) &#x3D;&gt; {
+              return new ProductActions.LoadProductSuccess(product);
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(
+                &#x27;fscommon.priceCalculationError&#x27;,
+                GlobalMessageType.MSG_TYPE_ERROR
+              );
+              return of(
+                new ProductActions.LoadProductFail(payload.productCode, error)
+              );
+            })
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/fsastorefrontlib/src/core/checkout/store/effects/product.effect.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -343,7 +337,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import {
   GlobalMessageService,
   GlobalMessageType,
@@ -356,29 +350,30 @@ import * as fromActions from &#x27;../actions/index&#x27;;
 
 @Injectable()
 export class ProductEffect {
-  @Effect()
-  getCalculatedProductData$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
-    map((action: fromActions.LoadCalculatedProductData) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.productPricingConnector
-        .getCalculatedProductData(payload.productCode, payload.pricingData)
-        .pipe(
-          timeout(30000),
-          map((product: any) &#x3D;&gt; {
-            return new ProductActions.LoadProductSuccess(product);
-          }),
-          catchError(error &#x3D;&gt; {
-            this.showGlobalMessage(
-              &#x27;fscommon.priceCalculationError&#x27;,
-              GlobalMessageType.MSG_TYPE_ERROR
-            );
-            return of(
-              new ProductActions.LoadProductFail(payload.productCode, error)
-            );
-          })
-        );
-    })
+  getCalculatedProductData$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
+      map((action: fromActions.LoadCalculatedProductData) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.productPricingConnector
+          .getCalculatedProductData(payload.productCode, payload.pricingData)
+          .pipe(
+            timeout(30000),
+            map((product: any) &#x3D;&gt; {
+              return new ProductActions.LoadProductSuccess(product);
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(
+                &#x27;fscommon.priceCalculationError&#x27;,
+                GlobalMessageType.MSG_TYPE_ERROR
+              );
+              return of(
+                new ProductActions.LoadProductFail(payload.productCode, error)
+              );
+            })
+          );
+      })
+    )
   );
 
   private showGlobalMessage(text: string, messageType: GlobalMessageType) {
@@ -408,6 +403,7 @@ export class ProductEffect {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
         <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
@@ -421,6 +417,15 @@ export class ProductEffect {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

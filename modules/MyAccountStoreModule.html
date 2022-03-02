@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -74,31 +74,20 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
-import { NgModule } from &#x27;@angular/core&#x27;;
+import { APP_INITIALIZER, NgModule } from &#x27;@angular/core&#x27;;
 import { EffectsModule } from &#x27;@ngrx/effects&#x27;;
 import { StoreModule } from &#x27;@ngrx/store&#x27;;
 import { effects } from &#x27;./effects/index&#x27;;
 import { reducerProvider, reducerToken, metaReducers } from &#x27;./reducers/index&#x27;;
-import {
-  StateConfig,
-  StorageSyncType,
-  StateModule,
-  ConfigModule,
-} from &#x27;@spartacus/core&#x27;;
+import { StateModule } from &#x27;@spartacus/core&#x27;;
 import { MY_ACCOUNT_FEATURE } from &#x27;./my-account-state&#x27;;
+import { MyAccountPersistenceService } from &#x27;../services/my-account-persistance.service&#x27;;
 
-export function claimConfigFactory(): StateConfig {
-  const config: StateConfig &#x3D; {
-    state: {
-      storageSync: {
-        keys: {
-          [&#x60;assets.claims.content.claimNumber&#x60;]: StorageSyncType.LOCAL_STORAGE,
-          [&#x60;assets.claims.content.claimStatus&#x60;]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
+export function claimStatePersistenceFactory(
+  claimPersistenceService: MyAccountPersistenceService
+): () &#x3D;&gt; void {
+  const result &#x3D; () &#x3D;&gt; claimPersistenceService.initSync();
+  return result;
 }
 
 @NgModule({
@@ -110,14 +99,23 @@ export function claimConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(claimConfigFactory),
   ],
-  providers: [reducerProvider],
+  providers: [
+    reducerProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: claimStatePersistenceFactory,
+      deps: [MyAccountPersistenceService],
+      multi: true,
+    },
+  ],
 })
 export class MyAccountStoreModule {}
 </code></pre>
     </div>
 </div>
+
+
 
 
 
@@ -146,6 +144,15 @@ export class MyAccountStoreModule {}
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

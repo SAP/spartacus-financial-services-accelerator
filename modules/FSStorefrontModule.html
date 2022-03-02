@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -219,15 +219,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>withConfig(config?: StorefrontConfig)</code>
+                    <code>withConfig(config?: Config)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="97"
-                            class="link-to-prism">projects/fsastorefrontlib/src/recipes/storefront.module.ts:97</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">projects/fsastorefrontlib/src/recipes/storefront.module.ts:41</a></div>
                 </td>
             </tr>
 
@@ -250,7 +250,7 @@
                                 <tr>
                                     <td>config</td>
                                     <td>
-                                            <code>StorefrontConfig</code>
+                                            <code>Config</code>
                                     </td>
 
                                     <td>
@@ -281,117 +281,57 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ModuleWithProviders, NgModule } from &#x27;@angular/core&#x27;;
-import { translationChunksConfig, translations } from &#x27;@spartacus/assets&#x27;;
 import {
-  ConfigModule,
+  Config,
   provideConfig,
   provideDefaultConfigFactory,
 } from &#x27;@spartacus/core&#x27;;
 import {
-  B2cStorefrontModule,
+  BaseStorefrontModule,
   PageComponentModule,
-  StorefrontConfig,
 } from &#x27;@spartacus/storefront&#x27;;
-import { fsOverrides, fstranslations } from &#x27;../assets/translations/index&#x27;;
-import {
-  fsOverridesDe,
-  fstranslationsDe,
-} from &#x27;../assets/translations/index_de&#x27;;
 import { CheckoutModule } from &#x27;../cms-components/checkout/checkout.module&#x27;;
-import { checkoutConfig } from &#x27;../cms-components/checkout/config/default-checkout-config&#x27;;
 import { CmsLibModule } from &#x27;../cms-components/cms-lib.module&#x27;;
-import { routingConfig } from &#x27;../cms-structure/routing/default-routing-config&#x27;;
 import { OccModule } from &#x27;../occ/occ.module&#x27;;
-import { occProductConfig } from &#x27;../occ/services/default-occ-product-config&#x27;;
-import { occUserConfig } from &#x27;../occ/services/default-occ-user-config&#x27;;
-import { layoutConfig } from &#x27;./config/default-layout-config&#x27;;
-import {
-  dynamicformsTranslations,
-  dynamicformsTranslationsDe,
-} from &#x27;@spartacus/dynamicforms&#x27;;
-import { fsDefaultDateFormatConfigFactory } from &#x27;../core/date-config/default-date-config&#x27;;
-import { defaultCmsContentProviders } from &#x27;./config/messages-cms-structure&#x27;;
+import { defaultFSCmsContentProviders } from &#x27;./config/fs-static-cms-structure&#x27;;
 import { FSGlobalMessageModule } from &#x27;../core/global-message/global-message.module&#x27;;
+import { occUserConfig } from &#x27;../occ/services/default-occ-user-config&#x27;;
+import { fsDefaultDateFormatConfigFactory } from &#x27;../core/date-config/default-date-config&#x27;;
+import { fsDefaultQuoteComparisonConfigFactory } from &#x27;../core/quote-comparison-config/default-quote-comparison-config&#x27;;
+import { iconConfig } from &#x27;../core/icon-config/icon-config&#x27;;
 
 @NgModule({
   imports: [
+    BaseStorefrontModule,
     PageComponentModule,
-    B2cStorefrontModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
     FSGlobalMessageModule.forRoot(),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: translations.en,
-        },
-        chunks: translationChunksConfig,
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: fsOverrides,
-          de: fsOverridesDe,
-        },
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: fstranslations,
-          de: fstranslationsDe,
-        },
-        fallbackLang: &#x27;en&#x27;,
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: dynamicformsTranslations,
-          de: dynamicformsTranslationsDe,
-        },
-        fallbackLang: &#x27;en&#x27;,
-      },
-    }),
-    ConfigModule.withConfig(layoutConfig),
-    ConfigModule.withConfig(routingConfig),
-    ConfigModule.withConfig(checkoutConfig),
-    ConfigModule.withConfig(occProductConfig),
-    ConfigModule.withConfig(occUserConfig),
-    ConfigModule.withConfig({
-      icon: {
-        symbols: {
-          PROPERTY: &#x27;fs-icon icon-house&#x27;,
-          AUTO: &#x27;fs-icon icon-auto&#x27;,
-          PERSON: &#x27;fs-icon icon-heart&#x27;,
-          TRIP: &#x27;fs-icon icon-plane&#x27;,
-          EVENT: &#x27;fs-icon icon-event&#x27;,
-        },
-      },
-    }),
   ],
-  exports: [B2cStorefrontModule, CmsLibModule],
+  exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
+  providers: [
+    ...defaultFSCmsContentProviders,
+    provideConfig(occUserConfig),
+    provideConfig(iconConfig),
+    provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+    provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
+  ],
 })
 export class FSStorefrontModule {
-  static withConfig(
-    config?: StorefrontConfig
-  ): ModuleWithProviders&lt;FSStorefrontModule&gt; {
+  static withConfig(config?: Config): ModuleWithProviders&lt;FSStorefrontModule&gt; {
     return {
       ngModule: FSStorefrontModule,
-      providers: [
-        provideConfig(config),
-        provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
-        ...defaultCmsContentProviders,
-      ],
+      providers: [provideConfig(config)],
     };
   }
 }
 </code></pre>
     </div>
 </div>
+
+
 
 
 
@@ -420,6 +360,15 @@ export class FSStorefrontModule {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

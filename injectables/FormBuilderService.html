@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -83,6 +84,10 @@
                             <li>
                                 <a href="#createForm" >createForm</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#enableFieldsForSellerUserGroup" >enableFieldsForSellerUserGroup</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -101,12 +106,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, formValidationService: <a href="../injectables/FormValidationService.html" target="_self">FormValidationService</a>, fieldDependencyResolverService: <a href="../injectables/FieldDependencyResolverService.html" target="_self">FieldDependencyResolverService</a>)</code>
+<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, formValidationService: <a href="../injectables/FormValidationService.html" target="_self">FormValidationService</a>, fieldDependencyResolverService: <a href="../injectables/FieldDependencyResolverService.html" target="_self">FieldDependencyResolverService</a>, userAccountFacade: UserAccountFacade)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -159,6 +164,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>userAccountFacade</td>
+                                                  
+                                                        <td>
+                                                                    <code>UserAccountFacade</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -193,8 +210,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:50</a></div>
                 </td>
             </tr>
 
@@ -262,8 +279,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:17</a></div>
                 </td>
             </tr>
 
@@ -307,6 +324,91 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enableFieldsForSellerUserGroup"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>enableFieldsForSellerUserGroup</b></span>
+                        <a href="#enableFieldsForSellerUserGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>enableFieldsForSellerUserGroup(fieldControl: <a href="https://angular.io/api/forms/FormControl" target="_blank">FormControl</a>, fieldConfig)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="62"
+                            class="link-to-prism">projects/dynamicforms/src/core/services/builder/form-builder.service.ts:62</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Method is used to enable all form controls when currently logged in customer is part of seller user group.
+This is temporary solution. Control property should be defined in the form defintion&#39;s JSON metadata.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fieldControl</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/FormControl" target="_blank" >FormControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>fieldConfig</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -314,7 +416,8 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { FormBuilder } from &#x27;@angular/forms&#x27;;
+import { FormBuilder, FormControl } from &#x27;@angular/forms&#x27;;
+import { UserAccountFacade } from &#x27;@spartacus/user/account/root&#x27;;
 import { FormValidationService } from &#x27;../form-validation/form-validation.service&#x27;;
 import { FieldConfig } from &#x27;./../../models/form-config.interface&#x27;;
 import { FieldDependencyResolverService } from &#x27;./../form-dependencies/field-dependency-resolver.service&#x27;;
@@ -324,7 +427,8 @@ export class FormBuilderService {
   constructor(
     protected fb: FormBuilder,
     protected formValidationService: FormValidationService,
-    protected fieldDependencyResolverService: FieldDependencyResolverService
+    protected fieldDependencyResolverService: FieldDependencyResolverService,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   createForm(config) {
@@ -347,6 +451,7 @@ export class FormBuilderService {
             form
           );
         }
+        this.enableFieldsForSellerUserGroup(fieldControl, fieldConfig);
       });
       if (formGroup.dependsOn) {
         this.fieldDependencyResolverService.resolveFormControlDependencies(
@@ -366,11 +471,31 @@ export class FormBuilderService {
     );
     return this.fb.control({ disabled, value }, validations);
   }
+
+  /**
+   * Method is used to enable all form controls when currently logged in customer is part of seller user group.
+   * This is temporary solution. Control property should be defined in the form defintion&#x27;s JSON metadata.
+   */
+  private enableFieldsForSellerUserGroup(
+    fieldControl: FormControl,
+    fieldConfig
+  ) {
+    this.userAccountFacade
+      .get()
+      .subscribe(user &#x3D;&gt; {
+        if ((&lt;any&gt;user)?.roles.includes(&#x27;sellergroup&#x27;)) {
+          fieldControl.enable();
+          fieldConfig.readonly &#x3D; false;
+        }
+      })
+      .unsubscribe();
+  }
 }
 </code></pre>
     </div>
 
 </div>
+
 
 
 
@@ -396,6 +521,15 @@ export class FormBuilderService {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;

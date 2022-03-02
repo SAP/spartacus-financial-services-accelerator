@@ -9,7 +9,7 @@
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -30,6 +30,7 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
 
 
 
@@ -80,6 +81,9 @@
                                 <a href="#bindQuote$" >bindQuote$</a>
                             </li>
                             <li>
+                                <a href="#loadQuoteComparison$" >loadQuoteComparison$</a>
+                            </li>
+                            <li>
                                 <a href="#loadQuoteDetails$" >loadQuoteDetails$</a>
                             </li>
                             <li>
@@ -92,6 +96,21 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showGlobalMessage" >showGlobalMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -107,12 +126,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, qouteConnector: <a href="../injectables/QuoteConnector.html" target="_self">QuoteConnector</a>)</code>
+<code>constructor(actions$: Actions, qouteConnector: <a href="../injectables/QuoteConnector.html" target="_self">QuoteConnector</a>, globalMessageService: GlobalMessageService, routingService: RoutingService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:87</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:128</a></div>
                             </td>
                         </tr>
 
@@ -153,6 +172,30 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>globalMessageService</td>
+                                                  
+                                                        <td>
+                                                                    <code>GlobalMessageService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>routingService</td>
+                                                  
+                                                        <td>
+                                                                    <code>RoutingService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -162,7 +205,83 @@
         </table>
 </section>
 
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGlobalMessage"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>showGlobalMessage</b></span>
+                        <a href="#showGlobalMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showGlobalMessage(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
 
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:123</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>text</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
             <section>
     
     <h3 id="inputs">
@@ -187,46 +306,91 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.QUOTE_PROCESS_ACTION),
-    map((action: fromActions.QuoteProcessAction) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.qouteConnector
-        .invokeQuoteAction(
-          payload.userId,
-          payload.cartId,
-          payload.action,
-          payload.body
-        )
-        .pipe(
-          mergeMap(() &#x3D;&gt; {
-            return [
-              new CartActions.LoadCart({
-                userId: payload.userId,
-                cartId: payload.cartId,
-              }),
-            ];
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.QUOTE_PROCESS_ACTION),
+      map((action: fromActions.QuoteProcessAction) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .invokeQuoteAction(
+            payload.userId,
+            payload.cartId,
+            payload.action,
+            payload.body
           )
-        );
-    })
+          .pipe(
+            mergeMap(() &#x3D;&gt; {
+              return [
+                new CartActions.LoadCart({
+                  userId: payload.userId,
+                  cartId: payload.cartId,
+                }),
+              ];
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadQuoteComparison$"></a>
+                    <span class="name">
+                        <span ><b>loadQuoteComparison$</b></span>
+                        <a href="#loadQuoteComparison$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_QUOTE_COMPARISON),
+      map((action: fromActions.LoadQuoteComparison) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .compareQuotes(payload.cartCodes, payload.userId)
+          .pipe(
+            map((carts: any) &#x3D;&gt; {
+              return new fromActions.LoadQuoteComparisonSuccess(carts);
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;httpHandlers.cartNotFound&#x27;);
+              this.routingService.go({ cxRoute: &#x27;quotes&#x27; });
+              return of(
+                new fromActions.LoadQuoteComparisonFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -252,34 +416,29 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_QUOTE_DETAILS),
-    map((action: fromActions.LoadQuoteDetails) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.qouteConnector.getQuote(payload.userId, payload.quoteId).pipe(
-        map((quote: any) &#x3D;&gt; {
-          return new fromActions.LoadQuoteDetailsSuccess(quote);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
-        )
-      );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_QUOTE_DETAILS),
+      map((action: fromActions.LoadQuoteDetails) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .getQuote(payload.userId, payload.quoteId)
+          .pipe(
+            map((quote: any) &#x3D;&gt; {
+              return new fromActions.LoadQuoteDetailsSuccess(quote);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -305,34 +464,27 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.LOAD_QUOTES),
-    map((action: fromActions.LoadQuotes) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.qouteConnector.getQuotes(payload.userId).pipe(
-        map((quotes: any) &#x3D;&gt; {
-          return new fromActions.LoadQuotesSuccess(quotes);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadQuotesFail(JSON.stringify(error)))
-        )
-      );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_QUOTES),
+      map((action: fromActions.LoadQuotes) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector.getQuotes(payload.userId).pipe(
+          map((quotes: any) &#x3D;&gt; {
+            return new fromActions.LoadQuotesSuccess(quotes);
+          }),
+          catchError(error &#x3D;&gt;
+            of(new fromActions.LoadQuotesFail(JSON.stringify(error)))
+          )
+        );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -358,36 +510,29 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.actions$.pipe(
-    ofType(fromActions.UPDATE_QUOTE),
-    map((action: fromActions.UpdateQuote) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.qouteConnector
-        .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
-        .pipe(
-          map((quote: any) &#x3D;&gt; {
-            return new fromActions.UpdateQuoteSuccess(quote);
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
-          )
-        );
-    })
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_QUOTE),
+      map((action: fromActions.UpdateQuote) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
+          .pipe(
+            map((quote: any) &#x3D;&gt; {
+              return new fromActions.UpdateQuoteSuccess(quote);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   )</code>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Effect()<br />
-                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/fsastorefrontlib/src/core/my-account/store/effects/quote.effect.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -400,9 +545,14 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CartActions } from &#x27;@spartacus/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  CartActions,
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from &#x27;@spartacus/core&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
-import { Actions, Effect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
 import { Observable, of } from &#x27;rxjs&#x27;;
 import { catchError, map, mergeMap, switchMap } from &#x27;rxjs/operators&#x27;;
 import * as fromActions from &#x27;../actions&#x27;;
@@ -410,93 +560,132 @@ import { QuoteConnector } from &#x27;../../connectors/quote.connector&#x27;;
 
 @Injectable()
 export class QuoteEffects {
-  @Effect()
-  loadQuotes$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_QUOTES),
-    map((action: fromActions.LoadQuotes) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.qouteConnector.getQuotes(payload.userId).pipe(
-        map((quotes: any) &#x3D;&gt; {
-          return new fromActions.LoadQuotesSuccess(quotes);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadQuotesFail(JSON.stringify(error)))
-        )
-      );
-    })
-  );
-
-  @Effect()
-  updateQuote$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.UPDATE_QUOTE),
-    map((action: fromActions.UpdateQuote) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.qouteConnector
-        .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
-        .pipe(
-          map((quote: any) &#x3D;&gt; {
-            return new fromActions.UpdateQuoteSuccess(quote);
+  loadQuotes$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_QUOTES),
+      map((action: fromActions.LoadQuotes) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector.getQuotes(payload.userId).pipe(
+          map((quotes: any) &#x3D;&gt; {
+            return new fromActions.LoadQuotesSuccess(quotes);
           }),
           catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+            of(new fromActions.LoadQuotesFail(JSON.stringify(error)))
           )
         );
-    })
+      })
+    )
   );
 
-  @Effect()
-  bindQuote$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.QUOTE_PROCESS_ACTION),
-    map((action: fromActions.QuoteProcessAction) &#x3D;&gt; action.payload),
-    mergeMap(payload &#x3D;&gt; {
-      return this.qouteConnector
-        .invokeQuoteAction(
-          payload.userId,
-          payload.cartId,
-          payload.action,
-          payload.body
-        )
-        .pipe(
-          mergeMap(() &#x3D;&gt; {
-            return [
-              new CartActions.LoadCart({
-                userId: payload.userId,
-                cartId: payload.cartId,
-              }),
-            ];
-          }),
-          catchError(error &#x3D;&gt;
-            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+  updateQuote$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.UPDATE_QUOTE),
+      map((action: fromActions.UpdateQuote) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
+          .pipe(
+            map((quote: any) &#x3D;&gt; {
+              return new fromActions.UpdateQuoteSuccess(quote);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
+  );
+
+  bindQuote$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.QUOTE_PROCESS_ACTION),
+      map((action: fromActions.QuoteProcessAction) &#x3D;&gt; action.payload),
+      mergeMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .invokeQuoteAction(
+            payload.userId,
+            payload.cartId,
+            payload.action,
+            payload.body
           )
-        );
-    })
+          .pipe(
+            mergeMap(() &#x3D;&gt; {
+              return [
+                new CartActions.LoadCart({
+                  userId: payload.userId,
+                  cartId: payload.cartId,
+                }),
+              ];
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
 
-  @Effect()
-  loadQuoteDetails$: Observable&lt;any&gt; &#x3D; this.actions$.pipe(
-    ofType(fromActions.LOAD_QUOTE_DETAILS),
-    map((action: fromActions.LoadQuoteDetails) &#x3D;&gt; action.payload),
-    switchMap(payload &#x3D;&gt; {
-      return this.qouteConnector.getQuote(payload.userId, payload.quoteId).pipe(
-        map((quote: any) &#x3D;&gt; {
-          return new fromActions.LoadQuoteDetailsSuccess(quote);
-        }),
-        catchError(error &#x3D;&gt;
-          of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
-        )
-      );
-    })
+  loadQuoteDetails$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_QUOTE_DETAILS),
+      map((action: fromActions.LoadQuoteDetails) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .getQuote(payload.userId, payload.quoteId)
+          .pipe(
+            map((quote: any) &#x3D;&gt; {
+              return new fromActions.LoadQuoteDetailsSuccess(quote);
+            }),
+            catchError(error &#x3D;&gt;
+              of(new fromActions.LoadQuoteDetailsFail(JSON.stringify(error)))
+            )
+          );
+      })
+    )
   );
+
+  loadQuoteComparison$: Observable&lt;any&gt; &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(fromActions.LOAD_QUOTE_COMPARISON),
+      map((action: fromActions.LoadQuoteComparison) &#x3D;&gt; action.payload),
+      switchMap(payload &#x3D;&gt; {
+        return this.qouteConnector
+          .compareQuotes(payload.cartCodes, payload.userId)
+          .pipe(
+            map((carts: any) &#x3D;&gt; {
+              return new fromActions.LoadQuoteComparisonSuccess(carts);
+            }),
+            catchError(error &#x3D;&gt; {
+              this.showGlobalMessage(&#x27;httpHandlers.cartNotFound&#x27;);
+              this.routingService.go({ cxRoute: &#x27;quotes&#x27; });
+              return of(
+                new fromActions.LoadQuoteComparisonFail(JSON.stringify(error))
+              );
+            })
+          );
+      })
+    )
+  );
+
+  private showGlobalMessage(text: string) {
+    this.globalMessageService.add(
+      { key: text },
+      GlobalMessageType.MSG_TYPE_ERROR
+    );
+  }
 
   constructor(
     private actions$: Actions,
-    private qouteConnector: QuoteConnector
+    private qouteConnector: QuoteConnector,
+    private globalMessageService: GlobalMessageService,
+    private routingService: RoutingService
   ) {}
 }
 </code></pre>
     </div>
 
 </div>
+
 
 
 
@@ -522,6 +711,15 @@ export class QuoteEffects {
                <!-- END CONTENT -->
            </div>
        </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
