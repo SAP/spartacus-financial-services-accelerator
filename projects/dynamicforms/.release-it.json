@@ -10,7 +10,7 @@
     "publishPath": "./../../dist/dynamicforms"
   },
   "hooks": {
-    "after:version:bump": "cd ../.. && ng build dynamicforms --prod"
+    "after:version:bump": "cd ../.. && ng build dynamicforms --configuration production"
   },
   "github": {
     "release": true,

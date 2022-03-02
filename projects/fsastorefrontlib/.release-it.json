@@ -10,7 +10,7 @@
     "publishPath": "./../../dist/fsastorefrontlib"
   },
   "hooks": {
-    "after:version:bump": "cd ../.. && ng build fsastorefrontlib --prod"
+    "after:version:bump": "cd ../.. && ng build fsastorefrontlib --configuration production"
   },
   "github": {
     "release": true,
