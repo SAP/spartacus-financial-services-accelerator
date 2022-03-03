@@ -83,6 +83,7 @@ describe('CreateClaimComponent', () => {
   });
 
   it('should start claim', () => {
+    component.confirm = true;
     selectedPolicy.next(mockSelectedPolicy);
     fixture.detectChanges();
     component.startClaim();

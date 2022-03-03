@@ -58,6 +58,9 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   }
 
   setIdentificationType() {
+    if (!this.selected) {
+      return;
+    }
     combineLatest([
       this.activeCartService.getActiveCartId(),
       this.userIdService.getUserId(),

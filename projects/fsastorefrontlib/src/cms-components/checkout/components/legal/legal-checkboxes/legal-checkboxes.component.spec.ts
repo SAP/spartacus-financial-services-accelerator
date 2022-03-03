@@ -1,5 +1,10 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -7,6 +12,13 @@ import { FSSteps } from '../../../../../occ/occ-models';
 import { FSCheckoutService } from './../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { LegalCheckboxesComponent } from './legal-checkboxes.component';
+
+const mockForm: FormGroup = new FormGroup({
+  actOnMyBehalf: new FormControl(true, Validators.required),
+  authorizedToAccept: new FormControl(true, Validators.required),
+  readAndAgree: new FormControl(true, Validators.required),
+  usePersonalData: new FormControl(true, Validators.required),
+});
 
 class MockActivatedRoute {
   params = of();
@@ -77,7 +89,7 @@ describe('LegalCheckboxesComponent', () => {
   });
 
   it('should continue to next step', () => {
-    component.navigateNext(mockCategoryAndStep);
+    component.navigateNext(mockCategoryAndStep, mockForm);
     expect(routingService.go).toHaveBeenCalled();
   });
 
