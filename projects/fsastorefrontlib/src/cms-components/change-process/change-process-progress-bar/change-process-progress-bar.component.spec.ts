@@ -1,8 +1,13 @@
 import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule } from '@spartacus/core';
-import { of } from 'rxjs';
+import {
+  I18nTestingModule,
+  LanguageService,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar.component';
 
@@ -49,10 +54,27 @@ class MockChangeRequestService {
   getChangeRequest() {
     return of(mockChangeRequest);
   }
+  loadChangeRequest() {}
 }
+
+class MockLanguageService {
+  getActive() {
+    return of('de');
+  }
+}
+
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('ChangeProcessProgressBarComponent', () => {
   let component: ChangeProcessProgressBarComponent;
   let fixture: ComponentFixture<ChangeProcessProgressBarComponent>;
+  let mockChangeRequestService: ChangeRequestService;
+  let mockLanguageService: LanguageService;
+  let mockUserService: UserIdService;
 
   beforeEach(
     waitForAsync(() => {
@@ -60,6 +82,8 @@ describe('ChangeProcessProgressBarComponent', () => {
         imports: [I18nTestingModule, RouterTestingModule],
         providers: [
           { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          { provide: LanguageService, useClass: MockLanguageService },
+          { provide: UserIdService, useClass: MockUserIdService },
         ],
         declarations: [
           MockUrlPipe,
@@ -67,12 +91,16 @@ describe('ChangeProcessProgressBarComponent', () => {
           MockProgressBarComponent,
         ],
       }).compileComponents();
+      mockChangeRequestService = TestBed.inject(ChangeRequestService);
+      mockLanguageService = TestBed.inject(LanguageService);
+      mockUserService = TestBed.inject(UserIdService);
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChangeProcessProgressBarComponent);
     component = fixture.componentInstance;
+    component.language = 'en';
     fixture.detectChanges();
   });
 

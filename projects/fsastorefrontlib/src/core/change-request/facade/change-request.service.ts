@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Store, select } from '@ngrx/store';
 import { AuthService, UserIdService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
@@ -13,8 +12,6 @@ import { getChangeRequestErrorFactory } from '../store/selectors';
 
 @Injectable()
 export class ChangeRequestService {
-  requestId: string;
-
   constructor(
     protected store: Store<StateWithChangeRequest>,
     protected authService: AuthService,
@@ -23,13 +20,15 @@ export class ChangeRequestService {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
       this.authService.isUserLoggedIn(),
+      this.userIdService.getUserId(),
     ])
-      .subscribe(([changeRequest, userloggedIn]) => {
+      .subscribe(([changeRequest, userloggedIn, userId]) => {
+        let requestId: string;
         if (changeRequest) {
-          this.requestId = changeRequest.requestId;
+          requestId = changeRequest.requestId;
         }
         if (!this.isCreated(changeRequest) && userloggedIn) {
-          this.loadChangeRequest();
+          this.loadChangeRequest(requestId, userId);
         }
       })
       .unsubscribe();
@@ -66,21 +65,10 @@ export class ChangeRequestService {
     );
   }
 
-  loadChangeRequest() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        if (this.requestId) {
-          this.store.dispatch(
-            new fromAction.LoadChangeRequest({
-              userId: occUserId,
-              requestId: this.requestId,
-            })
-          );
-        }
-      })
-      .unsubscribe();
+  loadChangeRequest(requestId: string, userId: string) {
+    this.store.dispatch(
+      new fromAction.LoadChangeRequest({ userId: userId, requestId: requestId })
+    );
   }
 
   simulateChangeRequest(changeRequest, stepIndex) {
@@ -100,6 +88,7 @@ export class ChangeRequestService {
       })
       .unsubscribe();
   }
+
   cancelChangeRequest(requestId: string) {
     this.userIdService
       .getUserId()
