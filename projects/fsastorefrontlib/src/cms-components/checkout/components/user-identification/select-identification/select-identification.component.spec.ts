@@ -138,4 +138,10 @@ describe('SelectIdentificationTypeComponent', () => {
       cxRoute: 'orderConfirmation',
     });
   });
+
+  it('should not set identification type if it is not selected', () => {
+    component.selected = null;
+    component.setIdentificationType();
+    expect(routingService.go).not.toHaveBeenCalled();
+  });
 });

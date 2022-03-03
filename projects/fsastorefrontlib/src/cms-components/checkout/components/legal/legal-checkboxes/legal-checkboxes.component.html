@@ -37,7 +37,7 @@
           [disabled]="!form.valid"
           class="primary-button btn-block"
           type="button"
-          (click)="navigateNext(nextCheckoutStep, form)"
+          (click)="navigateNext(nextCheckoutStep, form?.form)"
         >
           {{ 'common.continue' | cxTranslate }}
         </button>

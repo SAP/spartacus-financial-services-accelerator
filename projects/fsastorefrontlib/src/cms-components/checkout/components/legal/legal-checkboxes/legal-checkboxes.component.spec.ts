@@ -97,4 +97,10 @@ describe('LegalCheckboxesComponent', () => {
     component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
+
+  it('should not continue to next step if form is invalid', () => {
+    mockForm.get('actOnMyBehalf').setValue(null);
+    component.navigateNext(mockCategoryAndStep, mockForm);
+    expect(routingService.go).not.toHaveBeenCalled();
+  });
 });
