@@ -7,7 +7,7 @@ import {
 import { FileService } from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ClaimService } from '../../../../core/my-account/facade';
 import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.service';
 
@@ -33,17 +33,19 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
   }
 
   startClaim() {
+    if (!this.confirm) {
+      return;
+    }
     this.subscription.add(
       this.isPolicySelected$
         .pipe(
+          filter(policy => !!policy?.userId),
           map(policy => {
-            if (policy && policy.userId) {
-              this.claimService.createClaim(policy.policyId, policy.contractId);
-              this.fileUploadService.resetFiles();
-              this.routingService.go({
-                cxRoute: 'fnolIncidentPage',
-              });
-            }
+            this.claimService.createClaim(policy.policyId, policy.contractId);
+            this.fileUploadService.resetFiles();
+            this.routingService.go({
+              cxRoute: 'fnolIncidentPage',
+            });
           })
         )
         .subscribe()
@@ -51,6 +53,7 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.claimService.resetSelectedPolicy();
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="form-check col-xs-12 col-md-7">
+    <div class="form-check col-md-7">
       <label>
         <input
           class="form-check-input"
@@ -14,7 +14,7 @@
       </label>
     </div>
     <button
-      class="primary-button btn-block col-xs-12 col-md-5"
+      class="primary-button btn-block col-md-5"
       [disabled]="!confirm || !(isPolicySelected$ | async)"
       (click)="startClaim()"
     >
