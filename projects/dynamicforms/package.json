@@ -1,7 +1,7 @@
 {
   "name": "@spartacus/dynamicforms",
   "description": "Library for creating dynamic forms, designed to work with Spartacus application",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": "FSA",
   "repository": "https://github.com/SAP/spartacus-financial-services-accelerator/tree/develop/projects/dynamicforms",
   "homepage": "https://github.com/SAP/spartacus-financial-services-accelerator",
