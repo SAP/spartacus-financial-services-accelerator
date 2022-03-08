@@ -65,6 +65,7 @@ import {
   PaymentMethodModule,
 } from '@spartacus/checkout/components';
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
+import { MessageModule } from '@spartacus/organization/administration/components';
 
 const routes: Routes = [
   {
@@ -201,6 +202,7 @@ const routes: Routes = [
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     FSCartCouponModule,
+    MessageModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
@@ -268,19 +270,6 @@ const routes: Routes = [
     ReferredQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
-    FSPaymentMethodComponent,
-  ],
-  entryComponents: [
-    AddOptionsComponent,
-    QuoteReviewComponent,
-    BindQuoteDialogComponent,
-    ReferredQuoteDialogComponent,
-    FinalReviewComponent,
-    ChooseCoverNavigationComponent,
-    PersonalDetailsNavigationComponent,
-    OrderConfirmationComponent,
-    OrderConfirmationMessageComponent,
-    MiniCartComponent,
     FSPaymentMethodComponent,
   ],
   providers: [

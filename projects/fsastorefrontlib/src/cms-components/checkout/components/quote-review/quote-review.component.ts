@@ -8,7 +8,11 @@ import {
   RoutingService,
   WindowRef,
 } from '@spartacus/core';
-import { ModalRef, ModalService } from '@spartacus/storefront';
+import {
+  MessageComponent,
+  ModalRef,
+  ModalService,
+} from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
@@ -34,6 +38,7 @@ import {
 } from '../../../../occ/occ-models/occ.models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
+import { MessageService } from '@spartacus/organization/administration/components';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -54,9 +59,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
     protected oboConsentService: ConsentService,
+    protected messageService: MessageService,
     protected winRef?: WindowRef
   ) {}
 
+  oboCustomerMessage: MessageComponent;
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
@@ -230,11 +237,22 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   selectOBOCustomer(oboCustomer: FSUser, index: number) {
+    this.messageService.clear();
+    this.messageService.add({
+      message: {
+        key: 'quoteReview.message.selectedOboCustomer',
+        params: {
+          oboCustomer: oboCustomer.name,
+        },
+      },
+      timeout: 3000,
+    });
     this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
     this.selectedIndex = this.selectedIndex === index ? -1 : index;
   }
 
   ngOnDestroy() {
+    this.messageService.clear();
     this.oboConsentService.setSelectedOBOCustomer(null);
     if (this.subscription) {
       this.subscription.unsubscribe();

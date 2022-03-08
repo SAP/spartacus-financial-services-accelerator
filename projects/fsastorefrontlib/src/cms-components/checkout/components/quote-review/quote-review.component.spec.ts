@@ -11,7 +11,7 @@ import {
 } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
-import { of, Observable } from 'rxjs';
+import { of, Observable, Subject } from 'rxjs';
 import { FSCart, FSOrderEntry, FSSteps } from '../../../../occ/occ-models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -25,6 +25,7 @@ import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.ser
 import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { MessageService } from '@spartacus/organization/administration/components';
 
 const formDataContent = '{"content":"formContent"}';
 
@@ -219,6 +220,13 @@ class MockGlobalMessageService {
   add(_message: GlobalMessage): void {}
 }
 
+class MockMessageService {
+  add() {
+    return new Subject();
+  }
+  clear() {}
+}
+
 const modalInstance: any = {
   componentInstance: {
     cartCode: '',
@@ -241,6 +249,7 @@ describe('Quote Review Component', () => {
   let mockConsentConnector: MockConsentConnector;
   let userAccountFacade: MockUserAccountFacade;
   let oboConsentService: ConsentService;
+  let mockMessageService: MessageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -292,6 +301,10 @@ describe('Quote Review Component', () => {
           },
           { provide: UserAccountFacade, useClass: MockUserAccountFacade },
           { provide: ConsentService, useClass: MockConsentService },
+          {
+            provide: MessageService,
+            useClass: MockMessageService,
+          },
         ],
       }).compileComponents();
     })
@@ -308,6 +321,7 @@ describe('Quote Review Component', () => {
     mockCheckoutService = TestBed.inject(FSCheckoutService);
     userAccountFacade = TestBed.inject(UserAccountFacade);
     oboConsentService = TestBed.inject(ConsentService);
+    mockMessageService = TestBed.inject(MessageService);
 
     winRef = TestBed.inject(WindowRef);
     spyOn(routingService, 'go').and.stub();
