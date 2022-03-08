@@ -8,11 +8,7 @@ import {
   RoutingService,
   WindowRef,
 } from '@spartacus/core';
-import {
-  MessageComponent,
-  ModalRef,
-  ModalService,
-} from '@spartacus/storefront';
+import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
@@ -63,7 +59,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected winRef?: WindowRef
   ) {}
 
-  oboCustomerMessage: MessageComponent;
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
