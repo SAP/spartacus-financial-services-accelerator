@@ -21,7 +21,7 @@ const MESSAGE_TYPE = {
   templateUrl: './message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('fade', [
+    trigger('fadeOut', [
       transition('* => void', [animate(300, style({ opacity: 0 }))]),
     ]),
   ],

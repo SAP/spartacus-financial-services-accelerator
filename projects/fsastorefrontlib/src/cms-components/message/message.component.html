@@ -1,8 +1,9 @@
 <div
   *ngIf="showMessage$ | async"
+  @fadeOut
   class="alert-{{
     messageCssClass
-  }} d-flex justify-content-between align-items-center px-3 py-1 fade-out"
+  }} d-flex justify-content-between align-items-center px-3 py-1"
 >
   <span class="text-dark">
     {{ messageText$ | async }}
