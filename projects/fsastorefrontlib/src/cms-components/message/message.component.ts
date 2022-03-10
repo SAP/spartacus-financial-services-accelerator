@@ -4,6 +4,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
 } from '@angular/core';
 import { GlobalMessageType } from '@spartacus/core';
 import { Observable, Subject } from 'rxjs';
@@ -26,7 +27,7 @@ const MESSAGE_TYPE = {
     ]),
   ],
 })
-export class FSMessageComponent implements OnChanges {
+export class FSMessageComponent implements OnChanges, OnDestroy {
   @Input() messageText$: Observable<string>;
   @Input() timeout: number;
   @Input() set type(type: GlobalMessageType) {
@@ -34,7 +35,6 @@ export class FSMessageComponent implements OnChanges {
   }
   showMessage$ = new Subject();
   messageCssClass: string;
-  constructor() {}
 
   ngOnChanges(): void {
     if (this.messageText$) {

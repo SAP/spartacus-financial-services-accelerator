@@ -34,7 +34,6 @@ import {
 } from '../../../../occ/occ-models/occ.models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
-import { MessageService } from '@spartacus/organization/administration/components';
 
 @Component({
   selector: 'cx-fs-quote-review',
