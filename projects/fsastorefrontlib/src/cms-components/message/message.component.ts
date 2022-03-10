@@ -42,9 +42,7 @@ export class FSMessageComponent implements OnChanges {
       this.messageText$
         .pipe(
           debounceTime(this.timeout),
-          tap(() => {
-            this.showMessage$.next(false);
-          }),
+          tap(() => this.showMessage$.next(false)),
           takeUntil(this.showMessage$)
         )
         .subscribe();
