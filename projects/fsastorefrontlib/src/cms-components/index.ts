@@ -24,3 +24,4 @@ export * from './sync-pilot/index';
 export * from './questionnaire-carousel/index';
 export * from './navigation/index';
 export * from './seller-dashboard/index';
+export * from './message/index';

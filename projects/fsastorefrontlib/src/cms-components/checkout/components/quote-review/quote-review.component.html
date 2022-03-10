@@ -37,9 +37,15 @@
                 [opened]="true"
                 [title]="'fscommon.oboCustomers' | cxTranslate"
               >
+                <div class="position-absolute w-100 message-position">
+                  <cx-fs-message
+                    [messageText$]="oboCustomerMessage$"
+                    [type]="messageType.MSG_TYPE_CONFIRMATION"
+                    [timeout]="3000"
+                  ></cx-fs-message>
+                </div>
                 <div class="container">
                   <div class="row justify-content-center">
-                    <cx-org-message></cx-org-message>
                     <ul class="col-12 accordion-list">
                       <ng-container
                         *ngFor="

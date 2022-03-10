@@ -55,7 +55,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
     protected oboConsentService: ConsentService,
-    protected messageService: MessageService,
     protected winRef?: WindowRef
   ) {}
 
@@ -70,6 +69,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   activeCategory$: Observable<string>;
   baseUrl: string;
   selectedIndex = -1;
+  oboCustomerMessage$: Observable<string>;
+  messageType = GlobalMessageType;
 
   oboCustomers$: Observable<
     OBOCustomerList
@@ -232,22 +233,17 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   selectOBOCustomer(oboCustomer: FSUser, index: number) {
-    this.messageService.clear();
-    this.messageService.add({
-      message: {
-        key: 'quoteReview.message.selectedOboCustomer',
-        params: {
-          oboCustomer: oboCustomer.name,
-        },
-      },
-      timeout: 3000,
-    });
     this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
     this.selectedIndex = this.selectedIndex === index ? -1 : index;
+    this.oboCustomerMessage$ = this.translationService.translate(
+      'quoteReview.message.selectedOboCustomer',
+      {
+        oboCustomer: oboCustomer.name,
+      }
+    );
   }
 
   ngOnDestroy() {
-    this.messageService.clear();
     this.oboConsentService.setSelectedOBOCustomer(null);
     if (this.subscription) {
       this.subscription.unsubscribe();

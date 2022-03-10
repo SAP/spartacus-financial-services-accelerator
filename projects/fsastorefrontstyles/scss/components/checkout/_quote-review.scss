@@ -1,6 +1,6 @@
 %cx-fs-quote-review {
-  @extend %organizationMessage;
-  cx-org-message {
+  .message-position {
+    left: 0;
     top: 0;
   }
 }

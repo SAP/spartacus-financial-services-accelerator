@@ -65,7 +65,7 @@ import {
   PaymentMethodModule,
 } from '@spartacus/checkout/components';
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
-import { MessageModule } from '@spartacus/organization/administration/components';
+import { FSMessageModule } from './../message/message.module';
 
 const routes: Routes = [
   {
@@ -202,7 +202,7 @@ const routes: Routes = [
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     FSCartCouponModule,
-    MessageModule,
+    FSMessageModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),

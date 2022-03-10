@@ -1,0 +1,13 @@
+<div
+  *ngIf="showMessage$ | async"
+  class="alert-{{
+    messageCssClass
+  }} d-flex justify-content-between align-items-center px-3 py-1 fade-out"
+>
+  <span class="text-dark">
+    {{ messageText$ | async }}
+  </span>
+  <button type="button" class="bg-transparent" (click)="close()">
+    <cx-icon class="cx-icon fas fa-times"></cx-icon>
+  </button>
+</div>
