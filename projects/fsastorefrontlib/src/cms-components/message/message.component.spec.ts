@@ -17,7 +17,7 @@ describe('FSMessageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FSMessageComponent);
     component = fixture.componentInstance;
-    component.messageText$ = of('Test message');
+    component.messageText = 'Test message';
     component.ngOnChanges();
     fixture.detectChanges();
   });
@@ -34,9 +34,7 @@ describe('FSMessageComponent', () => {
   it('should close message', () => {
     component.close();
     component.showMessage$
-      .subscribe(showMessage => {
-        expect(showMessage).toBe(false);
-      })
+      .subscribe(showMessage => expect(showMessage).toBe(false))
       .unsubscribe();
   });
 });

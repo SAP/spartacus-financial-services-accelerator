@@ -68,7 +68,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   activeCategory$: Observable<string>;
   baseUrl: string;
   selectedIndex = -1;
-  oboCustomerMessage$: Observable<string>;
   messageType = GlobalMessageType;
 
   oboCustomers$: Observable<
@@ -234,12 +233,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   selectOBOCustomer(oboCustomer: FSUser, index: number) {
     this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
     this.selectedIndex = this.selectedIndex === index ? -1 : index;
-    this.oboCustomerMessage$ = this.translationService.translate(
-      'quoteReview.message.selectedOboCustomer',
-      {
-        oboCustomer: oboCustomer.name,
-      }
-    );
   }
 
   ngOnDestroy() {

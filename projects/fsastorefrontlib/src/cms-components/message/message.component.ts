@@ -7,10 +7,10 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { GlobalMessageType } from '@spartacus/core';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { debounceTime, tap } from 'rxjs/operators';
 
-const MESSAGE_TYPE = {
+const MESSAGE_TYPES = {
   [GlobalMessageType.MSG_TYPE_INFO]: 'info',
   [GlobalMessageType.MSG_TYPE_ERROR]: 'danger',
   [GlobalMessageType.MSG_TYPE_WARNING]: 'warning',
@@ -22,31 +22,44 @@ const MESSAGE_TYPE = {
   templateUrl: './message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('fadeOut', [
-      transition('* => void', [animate(300, style({ opacity: 0 }))]),
+    trigger('fade', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(100, style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate(300, style({ opacity: 0 }))]),
     ]),
   ],
 })
 export class FSMessageComponent implements OnChanges, OnDestroy {
-  @Input() messageText$: Observable<string>;
+  @Input() messageText: string;
   @Input() timeout: number;
   @Input() set type(type: GlobalMessageType) {
-    this.messageCssClass = MESSAGE_TYPE[type];
+    this.messageCssClass = MESSAGE_TYPES[type];
   }
   showMessage$ = new Subject();
+  messageText$ = new BehaviorSubject('');
   messageCssClass: string;
+  subscription = new Subscription();
 
   ngOnChanges(): void {
-    if (this.messageText$) {
+    if (this.messageText) {
+      this.messageText$.next(this.messageText);
       this.showMessage$.next(true);
+      this.closeWithDelay();
+    }
+  }
+
+  closeWithDelay() {
+    this.subscription.add(
       this.messageText$
+        .asObservable()
         .pipe(
           debounceTime(this.timeout),
-          tap(() => this.showMessage$.next(false)),
-          takeUntil(this.showMessage$)
+          tap(() => this.showMessage$.next(false))
         )
-        .subscribe();
-    }
+        .subscribe()
+    );
   }
 
   close() {
@@ -54,6 +67,8 @@ export class FSMessageComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.showMessage$.complete();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
