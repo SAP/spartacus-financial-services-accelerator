@@ -47,22 +47,7 @@
   .absolute-center {
     @include absolute-center;
   }
-  .vertical-center {
-    @include vertical-center;
-  }
-  .top {
-    top: 0;
-  }
-  .bottom {
-    bottom: 0;
-  }
-  .right {
-    right: 0;
-  }
   .horizontal-center {
     @include horizontal-center;
-  }
-  .left {
-    left: 0;
   }
 }

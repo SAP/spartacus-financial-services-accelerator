@@ -199,14 +199,20 @@
     text-align: center;
   }
 }
-.vertical-center-left {
+.vertical-center {
   @include vertical-center;
-  left: 0;
-  z-index: 1;
 }
-.vertical-center-right {
-  @include vertical-center;
+.top {
+  top: 0;
+}
+.bottom {
+  bottom: 0;
+}
+.right {
   right: 0;
+}
+.left {
+  left: 0;
 }
 .ribbon {
   position: relative;
@@ -243,11 +249,6 @@
 }
 .opaque {
   opacity: 0.5;
-}
-.sticky-position {
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
 .z-index-1 {
   z-index: 1;
