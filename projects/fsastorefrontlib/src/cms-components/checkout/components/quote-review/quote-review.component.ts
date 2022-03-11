@@ -68,6 +68,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   activeCategory$: Observable<string>;
   baseUrl: string;
   selectedIndex = -1;
+  messageType = GlobalMessageType;
 
   oboCustomers$: Observable<
     OBOCustomerList

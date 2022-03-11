@@ -1,6 +1,6 @@
 <ng-container *ngIf="product$ | async as product; else loading">
   <ng-container *ngIf="!isLoading; else loading">
-    <div class="table-header sticky-position">
+    <div class="table-header position-sticky top z-index-1">
       <h3 class="table-header-title">
         {{ product.name }}
         <div

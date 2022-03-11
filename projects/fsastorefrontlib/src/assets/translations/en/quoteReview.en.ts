@@ -77,5 +77,8 @@ export const quoteReview = {
     status: {
       pending: 'Your quote is in status pending. Please contact an agent.',
     },
+    message: {
+      selectedOboCustomer: '{{ oboCustomer }} succesfully selected!',
+    },
   },
 };

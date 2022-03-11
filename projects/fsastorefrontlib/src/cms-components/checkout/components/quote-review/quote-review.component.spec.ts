@@ -194,6 +194,7 @@ class FSCheckoutConfigServiceStub {
 
 class MockFSTranslationService {
   getTranslationValue() {}
+  translate() {}
 }
 
 class MockConsentConnector {

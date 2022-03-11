@@ -78,5 +78,8 @@ export const quoteReview = {
       pending:
         'Ihr Antrag wird zur Zeit bearbeitet. Bitte wenden Sie sich an einen Makler.',
     },
+    message: {
+      selectedOboCustomer: '[DE] {{ oboCustomer }} succesfully selected!',
+    },
   },
 };

@@ -1,0 +1,16 @@
+<div
+  *ngIf="showMessage$ | async"
+  @fade
+  class="position-relative alert-{{ messageCssClass }} p-3 text-center"
+>
+  <span class="text-dark">
+    {{ messageText }}
+  </span>
+  <button
+    type="button"
+    class="bg-transparent pointer vertical-center right mr-2"
+    (click)="close()"
+  >
+    <cx-icon class="cx-icon fas fa-times"></cx-icon>
+  </button>
+</div>
