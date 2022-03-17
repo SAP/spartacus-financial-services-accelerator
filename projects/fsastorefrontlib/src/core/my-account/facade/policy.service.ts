@@ -3,15 +3,23 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
-import { UserIdService } from '@spartacus/core';
-import { take } from 'rxjs/operators';
+import {
+  LanguageSetEvent,
+  Query,
+  QueryService,
+  UserIdService,
+} from '@spartacus/core';
+import { switchMap, take } from 'rxjs/operators';
 import { StateWithMyAccount } from '../store/my-account-state';
+import { PolicyConnector } from '../connectors/policy.connector';
 
 @Injectable()
 export class PolicyService {
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected query: QueryService,
+    protected policyConnector: PolicyConnector
   ) {}
 
   getPolicies(): Observable<any> {
@@ -55,26 +63,20 @@ export class PolicyService {
       .unsubscribe();
   }
 
-  loadPremiumCalendar() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.LoadPremiumCalendar({
-            userId: occUserId,
-          })
-        )
-      )
-      .unsubscribe();
-  }
+  protected premiumCalendarQuery: Query<any> = this.query.create(
+    () =>
+      this.userIdService
+        .getUserId()
+        .pipe(
+          switchMap(userId => this.policyConnector.getPremiumCalendar(userId))
+        ),
+    {
+      reloadOn: [LanguageSetEvent],
+    }
+  );
 
-  getPremiumCalendar() {
-    return this.store.pipe(select(fromStore.getPremiumCalendarData));
-  }
-
-  getPremiumCalendarLoaded() {
-    return this.store.pipe(select(fromStore.getPremiumCalendarLoaded));
+  getPremiumCalendar(): Observable<any> {
+    return this.premiumCalendarQuery.get();
   }
 
   loadPolicyDetails(policyId, contractId) {

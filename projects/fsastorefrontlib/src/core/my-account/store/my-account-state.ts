@@ -10,7 +10,6 @@ export interface StateWithMyAccount {
 export interface MyAccountState {
   quotes: QuoteState;
   policies: PolicyState;
-  premiumCalendar: PremiumCalendarState;
   claims: ClaimState;
   claimPolicies: ClaimPoliciesState;
   consents: ConsentState;

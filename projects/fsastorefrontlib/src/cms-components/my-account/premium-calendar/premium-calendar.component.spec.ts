@@ -10,20 +10,15 @@ import { of } from 'rxjs';
 const policy1 = {
   policyId: 'policyId',
   opened: false,
+  billingData: [
+    {
+      paymentStatus: 'Overdue',
+      dueDate: new Date().toString(),
+    },
+  ],
 };
 const policies = {
   insurancePolicies: [policy1],
-};
-const MockOccConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
 };
 
 class MockPolicyService {
@@ -49,10 +44,6 @@ describe('PremiumCalendarComponent', () => {
             provide: PolicyService,
             useClass: MockPolicyService,
           },
-          {
-            provide: OccConfig,
-            useValue: MockOccConfig,
-          },
         ],
       }).compileComponents();
     })
@@ -67,10 +58,6 @@ describe('PremiumCalendarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should get base url', () => {
-    expect(component.baseUrl).toEqual('');
   });
 
   it('should open and close policy accordion', () => {

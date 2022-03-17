@@ -43,23 +43,6 @@ export class PolicyEffects {
     )
   );
 
-  loadPremiumCalendar$: Observable<any> = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fromActions.LOAD_PREMIUM_CALENDAR),
-      map((action: fromActions.LoadPremiumCalendar) => action.payload),
-      switchMap(payload => {
-        return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
-          map((premiumCalendar: any) => {
-            return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
-          }),
-          catchError(error =>
-            of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
-          )
-        );
-      })
-    )
-  );
-
   constructor(
     private actions$: Actions,
     private policyConnector: PolicyConnector

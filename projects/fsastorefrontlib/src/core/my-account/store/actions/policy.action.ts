@@ -4,11 +4,6 @@ export const LOAD_POLICIES = '[Policy] Load Policies';
 export const LOAD_POLICIES_SUCCESS = '[Policy] Load Policies Success';
 export const LOAD_POLICIES_FAIL = '[Policy] Load Policies Fail';
 
-export const LOAD_PREMIUM_CALENDAR = '[Policy] Load PremiumCalendar';
-export const LOAD_PREMIUM_CALENDAR_SUCCESS =
-  '[Policy] Load PremiumCalendar Success';
-export const LOAD_PREMIUM_CALENDAR_FAIL = '[Policy] Load PremiumCalendar Fail';
-
 export const LOAD_POLICY_DETAILS = '[Policy] Load Policy Details';
 export const LOAD_POLICY_DETAILS_FAIL = '[Policy] Load Policy Fail';
 export const LOAD_POLICY_DETAILS_SUCCESS = '[Policy] Load Policy Success';
@@ -26,21 +21,6 @@ export class LoadPoliciesSuccess implements Action {
 
 export class LoadPoliciesFail implements Action {
   readonly type = LOAD_POLICIES_FAIL;
-  constructor(public payload: any) {}
-}
-
-export class LoadPremiumCalendar implements Action {
-  readonly type = LOAD_PREMIUM_CALENDAR;
-  constructor(public payload: any) {}
-}
-
-export class LoadPremiumCalendarSuccess implements Action {
-  readonly type = LOAD_PREMIUM_CALENDAR_SUCCESS;
-  constructor(public payload: any) {}
-}
-
-export class LoadPremiumCalendarFail implements Action {
-  readonly type = LOAD_PREMIUM_CALENDAR_FAIL;
   constructor(public payload: any) {}
 }
 
@@ -73,9 +53,6 @@ export type PolicyAction =
   | LoadPolicies
   | LoadPoliciesSuccess
   | LoadPoliciesFail
-  | LoadPremiumCalendar
-  | LoadPremiumCalendarSuccess
-  | LoadPremiumCalendarFail
   | LoadPolicyDetails
   | LoadPolicyDetailsFail
   | LoadPolicyDetailsSuccess

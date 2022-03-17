@@ -3,7 +3,6 @@ import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import * as fromClaimPoliciesReducer from './claim-policies.reducer';
 import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
-import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
 import * as fromConsentReducer from './consent.reducer';
 import { AuthActions } from '@spartacus/core';
@@ -14,7 +13,6 @@ export function getReducers(): ActionReducerMap<MyAccountState> {
   return {
     quotes: fromQuoteReducer.reducer,
     policies: fromPolicyReducer.reducer,
-    premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer,
     claimPolicies: fromClaimPoliciesReducer.reducer,
     consents: fromConsentReducer.reducer,

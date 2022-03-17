@@ -134,34 +134,4 @@ describe('Policy Effects', () => {
       expect(effects.loadPolicyDetails$).toBeObservable(expected);
     });
   });
-
-  describe('premiumCalendar$', () => {
-    it('should return premium calendar policies', () => {
-      const action = new fromActions.LoadPremiumCalendar({
-        userId: OCC_USER_ID_CURRENT,
-      });
-      const completion = new fromActions.LoadPremiumCalendarSuccess(
-        premiumCalendarPolicies
-      );
-
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.loadPremiumCalendar$).toBeObservable(expected);
-    });
-
-    it('should fail to return premium calendar policies', () => {
-      spyOn(mockPolicyConnector, 'getPremiumCalendar').and.returnValue(
-        throwError('Error')
-      );
-      const action = new fromActions.LoadPremiumCalendar({
-        userId: OCC_USER_ID_CURRENT,
-      });
-      const completion = new fromActions.LoadPremiumCalendarFail(
-        JSON.stringify('Error')
-      );
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.loadPremiumCalendar$).toBeObservable(expected);
-    });
-  });
 });
