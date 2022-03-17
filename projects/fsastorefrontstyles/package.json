@@ -21,6 +21,6 @@
     "bootstrap": "4.5.0"
   },
   "dependencies": {
-    "hamburgers": "^1.1.3"
+    "hamburgers": "1.1.3"
   }
 }
