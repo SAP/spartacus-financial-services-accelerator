@@ -10,24 +10,18 @@ import * as fromReducers from '../store/reducers/index';
 import * as fromActions from '../store/actions/index';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import {
-  StateWithUserRequest,
-  UserRequestState,
-  USER_REQUEST_FEATURE,
-} from '../store/user-request-state';
+import { USER_REQUEST_FEATURE } from '../store/user-request-state';
 import { UserRequestPersistenceService } from './user-request-persistance.service';
 
-export const getUserRequestState: MemoizedSelector<
-  StateWithUserRequest,
-  UserRequestState
-> = createFeatureSelector<UserRequestState>(USER_REQUEST_FEATURE);
 const mockUserRequest = {
-  content: {
-    requestId: '0000001',
-    requestStatus: 'OPEN',
-    configurationSteps: [],
+  userRequest: {
+    content: {
+      requestId: '0000001',
+      requestStatus: 'OPEN',
+      configurationSteps: [],
+    },
+    loaded: true,
   },
-  loaded: true,
 };
 const mockUserRequestState = { [USER_REQUEST_FEATURE]: mockUserRequest };
 
@@ -35,7 +29,7 @@ describe('UserRequestPersistenceService', () => {
   let service: UserRequestPersistenceService;
   let persistenceService: StatePersistenceService;
   let actions$ = of({ type: fromActions.UpdateUserRequestSuccess });
-  let store: MockStore<StateWithUserRequest>;
+  let store: MockStore<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -70,14 +64,8 @@ describe('UserRequestPersistenceService', () => {
     expect(persistenceService.syncWithStorage).toHaveBeenCalled();
   });
 
-  it('should get user request', () => {
-    service['getUserRequest']()
-      .subscribe(state => expect(state.requestId).toBe('0000001'))
-      .unsubscribe();
-  });
-
   it('should read state', () => {
-    service['onRead'](mockUserRequest.content);
+    service['onRead'](mockUserRequest.userRequest.content);
     expect(store.dispatch).toHaveBeenCalled();
   });
 

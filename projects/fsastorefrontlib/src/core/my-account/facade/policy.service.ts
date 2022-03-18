@@ -5,6 +5,8 @@ import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
 import {
   LanguageSetEvent,
+  LoginEvent,
+  LogoutEvent,
   Query,
   QueryService,
   UserIdService,
@@ -12,6 +14,7 @@ import {
 import { switchMap, take } from 'rxjs/operators';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { PolicyConnector } from '../connectors/policy.connector';
+import { OrderPlacedEvent } from '@spartacus/checkout/root';
 
 @Injectable()
 export class PolicyService {
@@ -71,7 +74,8 @@ export class PolicyService {
           switchMap(userId => this.policyConnector.getPremiumCalendar(userId))
         ),
     {
-      reloadOn: [LanguageSetEvent],
+      reloadOn: [LanguageSetEvent, OrderPlacedEvent],
+      resetOn: [LogoutEvent, LoginEvent],
     }
   );
 
