@@ -60,10 +60,11 @@ describe('PremiumCalendarComponent', () => {
   let fixture: ComponentFixture<PremiumCalendarComponent>;
   let policyService: PolicyService;
   let userIdService: MockUserIdService;
-  let policyConnector: PolicyConnector;
+  let mockPolicyConnector: MockPolicyConnector;
 
   beforeEach(
     waitForAsync(() => {
+      mockPolicyConnector = new MockPolicyConnector();
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
         declarations: [PremiumCalendarComponent],
@@ -73,6 +74,7 @@ describe('PremiumCalendarComponent', () => {
             useClass: MockPolicyService,
           },
           { provide: UserIdService, useClass: MockUserIdService },
+          { provide: PolicyConnector, useValue: mockPolicyConnector },
         ],
       }).compileComponents();
     })
@@ -80,12 +82,11 @@ describe('PremiumCalendarComponent', () => {
 
   beforeEach(() => {
     policyService = TestBed.inject(PolicyService);
-    policyConnector = TestBed.inject(PolicyConnector);
     userIdService = TestBed.inject(UserIdService);
     fixture = TestBed.createComponent(PremiumCalendarComponent);
     component = fixture.componentInstance;
 
-    spyOn(policyConnector, 'getPremiumCalendar').and.callThrough();
+    spyOn(mockPolicyConnector, 'getPremiumCalendar').and.callThrough();
     spyOn(userIdService, 'getUserId').and.callThrough();
 
     fixture.detectChanges();
