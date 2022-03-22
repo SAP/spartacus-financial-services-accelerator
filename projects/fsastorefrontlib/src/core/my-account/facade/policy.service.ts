@@ -3,26 +3,15 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
-import {
-  LanguageSetEvent,
-  LoginEvent,
-  LogoutEvent,
-  Query,
-  QueryService,
-  UserIdService,
-} from '@spartacus/core';
-import { switchMap, take } from 'rxjs/operators';
+import { UserIdService } from '@spartacus/core';
+import { take } from 'rxjs/operators';
 import { StateWithMyAccount } from '../store/my-account-state';
-import { PolicyConnector } from '../connectors/policy.connector';
-import { OrderPlacedEvent } from '@spartacus/checkout/root';
 
 @Injectable()
 export class PolicyService {
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected userIdService: UserIdService,
-    protected query: QueryService,
-    protected policyConnector: PolicyConnector
+    protected userIdService: UserIdService
   ) {}
 
   getPolicies(): Observable<any> {
@@ -64,23 +53,6 @@ export class PolicyService {
         )
       )
       .unsubscribe();
-  }
-
-  protected premiumCalendarQuery: Query<any> = this.query.create(
-    () =>
-      this.userIdService
-        .getUserId()
-        .pipe(
-          switchMap(userId => this.policyConnector.getPremiumCalendar(userId))
-        ),
-    {
-      reloadOn: [LanguageSetEvent, OrderPlacedEvent],
-      resetOn: [LogoutEvent, LoginEvent],
-    }
-  );
-
-  getPremiumCalendar(): Observable<any> {
-    return this.premiumCalendarQuery.get();
   }
 
   loadPolicyDetails(policyId, contractId) {

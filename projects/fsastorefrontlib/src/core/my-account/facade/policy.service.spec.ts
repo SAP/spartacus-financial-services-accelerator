@@ -2,7 +2,6 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { PolicyConnector } from '../connectors/policy.connector';
 import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
@@ -24,17 +23,10 @@ class MockUserIdService {
   }
 }
 
-class MockPolicyConnector {
-  getPremiumCalendar() {
-    return of(mockedPolicy);
-  }
-}
-
 describe('PolicyServiceTest', () => {
   let service: PolicyService;
   let store: Store<StateWithMyAccount>;
   let userIdService: MockUserIdService;
-  let policyConnector: PolicyConnector;
 
   beforeEach(() => {
     userIdService = new MockUserIdService();
@@ -47,18 +39,14 @@ describe('PolicyServiceTest', () => {
         PolicyService,
         reducerProvider,
         { provide: UserIdService, useClass: MockUserIdService },
-        { provide: PolicyConnector, useClass: MockPolicyConnector },
       ],
     });
 
     service = TestBed.inject(PolicyService);
-    policyConnector = TestBed.inject(PolicyConnector);
     userIdService = TestBed.inject(UserIdService);
     store = TestBed.inject(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
-    spyOn(policyConnector, 'getPremiumCalendar').and.callThrough();
-    spyOn(userIdService, 'getUserId').and.callThrough();
   });
 
   it('should PolicyService is injected', inject(
@@ -118,16 +106,5 @@ describe('PolicyServiceTest', () => {
         contractId: contractId,
       })
     );
-  });
-
-  it('should be able to get premium calendar', () => {
-    let loaded;
-    service
-      .getPremiumCalendar()
-      .subscribe(response => {
-        loaded = response;
-      })
-      .unsubscribe();
-    expect(loaded).toEqual(mockedPolicy);
   });
 });

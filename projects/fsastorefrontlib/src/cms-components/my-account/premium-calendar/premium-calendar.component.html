@@ -7,11 +7,13 @@
   >
     <div class="container-fluid">
       <div class="section-header-heading row d-none d-lg-flex text-left">
-        <h5 class="col text-center">{{ 'policy.policy' | cxTranslate }}</h5>
+        <h5 class="col text-center pl-0">
+          {{ 'policy.policy' | cxTranslate }}
+        </h5>
         <h5 class="col">{{ 'fscommon.paymentFrequency' | cxTranslate }}</h5>
         <h5 class="col">{{ 'premiumCalendar.dueDate' | cxTranslate }}</h5>
         <h5 class="col">{{ 'fscommon.premium' | cxTranslate }}</h5>
-        <h5 class="col">{{ 'fscommon.paymentMethod' | cxTranslate }}</h5>
+        <h5 class="col pr-0">{{ 'fscommon.paymentMethod' | cxTranslate }}</h5>
       </div>
       <div *ngFor="let policy of policies.insurancePolicies; let i = index">
         <div
