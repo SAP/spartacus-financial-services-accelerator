@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   FormDataService,
   FormDataStorageService,
@@ -24,7 +24,7 @@ import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 @Injectable()
-export class QuoteService {
+export class QuoteService implements OnDestroy {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected cartService: FSCartService,
@@ -32,7 +32,7 @@ export class QuoteService {
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService,
     protected routingService: RoutingService
-  ) { }
+  ) {}
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
   private subscription = new Subscription();
@@ -86,7 +86,7 @@ export class QuoteService {
       this.cartService
         .getActive()
         .pipe(
-          filter(cart => (cart.code === quote.cartCode)),
+          filter(cart => cart.code === quote.cartCode),
           take(1),
           map((cart: FSCart) => {
             if (cart && cart.entries && cart.entries.length > 0) {
@@ -143,22 +143,25 @@ export class QuoteService {
     if (insuranceQuote && insuranceQuote.quoteDetails) {
       const dataId = insuranceQuote.quoteDetails.formId;
       this.formDataService.loadFormData(dataId);
-      this.formDataService
-        .getFormData()
-        .pipe(
-          map(formData => {
-            if (formData.formDefinition) {
-              this.formDataStorageService.setFormDataToLocalStorage({
-                id: dataId,
-                formDefinition: {
-                  formId: formData.formDefinition.formId,
-                },
-                categoryCode: categoryCode,
-              });
-            }
-          })
-        )
-        .subscribe();
+      this.subscription.add(
+        this.formDataService
+          .getFormData()
+          .pipe(
+            take(1),
+            map(formData => {
+              if (formData.formDefinition) {
+                this.formDataStorageService.setFormDataToLocalStorage({
+                  id: dataId,
+                  formDefinition: {
+                    formId: formData.formDefinition.formId,
+                  },
+                  categoryCode: categoryCode,
+                });
+              }
+            })
+          )
+          .subscribe()
+      );
     }
   }
 
@@ -223,5 +226,9 @@ export class QuoteService {
 
   setQuoteForCompare(quote: InsuranceQuote) {
     this.quoteForCompareSource.next(quote);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
