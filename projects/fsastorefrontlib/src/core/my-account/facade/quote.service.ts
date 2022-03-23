@@ -36,7 +36,6 @@ export class QuoteService {
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
   private subscription = new Subscription();
-  cart$: Observable<Cart>;
 
   loadQuotes() {
     this.userIdService
@@ -79,28 +78,30 @@ export class QuoteService {
       .subscribe(occUserId => {
         if (occUserId) {
           this.cartService.loadCart(quote.cartCode, occUserId);
-          this.cart$ = this.cartService.getCart(quote.cartCode);
         }
       })
       .unsubscribe();
 
     this.subscription.add(
-      this.cart$
-      .pipe(
-        filter(cart => (cart !== undefined && cart.code === quote.cartCode)),
-        map((cart: FSCart) => {
-          if (cart && cart.entries && cart.entries.length > 0) {
-            const orderEntry: OrderEntry = cart.entries[0];
-            const product: FSProduct = orderEntry.product;
-            this.loadPersonalDetailsForm(orderEntry);
-            this.loadChooseCoverForm(
-              cart.insuranceQuote,
-              product.defaultCategory.code
-            );
-          }
-        })
-      )
-      .subscribe()
+      this.cartService
+        .getActive()
+        .pipe(
+          filter(cart => (cart.code === quote.cartCode)),
+          take(1),
+          map((cart: FSCart) => {
+            if (cart && cart.entries && cart.entries.length > 0) {
+              const orderEntry: OrderEntry = cart.entries[0];
+              const product: FSProduct = orderEntry.product;
+
+              this.loadPersonalDetailsForm(orderEntry);
+              this.loadChooseCoverForm(
+                cart.insuranceQuote,
+                product.defaultCategory.code
+              );
+            }
+          })
+        )
+        .subscribe()
     );
   }
 
