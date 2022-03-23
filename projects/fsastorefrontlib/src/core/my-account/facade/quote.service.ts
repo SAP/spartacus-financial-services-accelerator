@@ -84,7 +84,8 @@ export class QuoteService {
       })
       .unsubscribe();
 
-    this.cart$
+    this.subscription.add(
+      this.cart$
       .pipe(
         filter(cart => (cart !== undefined && cart.code === quote.cartCode)),
         map((cart: FSCart) => {
@@ -99,7 +100,8 @@ export class QuoteService {
           }
         })
       )
-      .subscribe();
+      .subscribe()
+    );
   }
 
   retrieveQuoteCheckout(quote: any) {
