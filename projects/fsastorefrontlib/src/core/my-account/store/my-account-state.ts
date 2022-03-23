@@ -42,6 +42,10 @@ export interface PolicyState {
   loaded: boolean;
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export interface PremiumCalendarState {
   data: {};
   loaded: boolean;

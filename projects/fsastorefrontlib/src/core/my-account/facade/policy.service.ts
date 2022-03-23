@@ -55,28 +55,6 @@ export class PolicyService {
       .unsubscribe();
   }
 
-  loadPremiumCalendar() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.LoadPremiumCalendar({
-            userId: occUserId,
-          })
-        )
-      )
-      .unsubscribe();
-  }
-
-  getPremiumCalendar() {
-    return this.store.pipe(select(fromStore.getPremiumCalendarData));
-  }
-
-  getPremiumCalendarLoaded() {
-    return this.store.pipe(select(fromStore.getPremiumCalendarLoaded));
-  }
-
   loadPolicyDetails(policyId, contractId) {
     this.userIdService
       .getUserId()
@@ -91,5 +69,39 @@ export class PolicyService {
         )
       )
       .unsubscribe();
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use connector directly, as we remove store for this feature.
+   */
+  loadPremiumCalendar() {
+    this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPremiumCalendar({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use connector directly, as we remove store for this feature.
+   */
+  getPremiumCalendar() {
+    return this.store.pipe(select(fromStore.getPremiumCalendarData));
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use connector directly, as we remove store for this feature.
+   */
+  getPremiumCalendarLoaded() {
+    return this.store.pipe(select(fromStore.getPremiumCalendarLoaded));
   }
 }
