@@ -1,11 +1,16 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   FormDataService,
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
-import { filter, map, take, tap } from 'rxjs/operators';
+import {
+  Cart,
+  OrderEntry,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCart,
   FSOrderEntry,
@@ -17,9 +22,9 @@ import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
-export class QuoteService implements OnDestroy {
+export class QuoteService {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected cartService: FSCartService,
@@ -30,7 +35,6 @@ export class QuoteService implements OnDestroy {
   ) {}
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
-  private subscription = new Subscription();
 
   loadQuotes() {
     this.userIdService
@@ -67,45 +71,38 @@ export class QuoteService implements OnDestroy {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
-  retrieveQuote(quote: any) {
-    this.userIdService
-      .getUserId()
-      .subscribe(occUserId => {
+  retrieveQuote(quote: any): Observable<any> {
+    return this.userIdService.getUserId().pipe(
+      switchMap(occUserId => {
         if (occUserId) {
           this.cartService.loadCart(quote.cartCode, occUserId);
         }
-      })
-      .unsubscribe();
 
-    this.subscription.add(
-      this.cartService
-        .getActive()
-        .pipe(
-          filter(cart => cart.code === quote.cartCode),
+        return this.cartService.getActive().pipe(
+          filter(
+            cart => cart.code === quote.cartCode && cart.entries?.length > 0
+          ),
           take(1),
-          map((cart: FSCart) => {
-            if (cart && cart.entries && cart.entries.length > 0) {
-              const orderEntry: OrderEntry = cart.entries[0];
-              const product: FSProduct = orderEntry.product;
+          switchMap((cart: FSCart) => {
+            const orderEntry: OrderEntry = cart.entries[0];
+            const product: FSProduct = orderEntry.product;
 
-              this.loadPersonalDetailsForm(orderEntry);
-              this.loadChooseCoverForm(
-                cart.insuranceQuote,
-                product.defaultCategory.code
-              );
-            }
+            this.loadPersonalDetailsForm(orderEntry);
+            return this.loadChooseCoverForm(
+              cart.insuranceQuote,
+              product.defaultCategory.code
+            );
           })
-        )
-        .subscribe()
+        );
+      })
     );
   }
 
-  retrieveQuoteCheckout(quote: any) {
-    this.retrieveQuote(quote);
-    this.subscription.add(
-      this.cartService
-        .getActive()
-        .pipe(
+  retrieveQuoteCheckout(quote: any): Observable<Cart> {
+    return this.retrieveQuote(quote).pipe(
+      take(1),
+      switchMap(_ => {
+        return this.cartService.getActive().pipe(
           take(1),
           tap(_ => {
             if (quote?.state?.code === 'BIND') {
@@ -118,8 +115,8 @@ export class QuoteService implements OnDestroy {
               });
             }
           })
-        )
-        .subscribe()
+        );
+      })
     );
   }
 
@@ -134,28 +131,26 @@ export class QuoteService implements OnDestroy {
     }
   }
 
-  protected loadChooseCoverForm(insuranceQuote: any, categoryCode: string) {
+  protected loadChooseCoverForm(
+    insuranceQuote: any,
+    categoryCode: string
+  ): Observable<void> {
     if (insuranceQuote && insuranceQuote.quoteDetails) {
       const dataId = insuranceQuote.quoteDetails.formId;
       this.formDataService.loadFormData(dataId);
-      this.subscription.add(
-        this.formDataService
-          .getFormData()
-          .pipe(
-            take(1),
-            map(formData => {
-              if (formData.formDefinition) {
-                this.formDataStorageService.setFormDataToLocalStorage({
-                  id: dataId,
-                  formDefinition: {
-                    formId: formData.formDefinition.formId,
-                  },
-                  categoryCode: categoryCode,
-                });
-              }
-            })
-          )
-          .subscribe()
+      return this.formDataService.getFormData().pipe(
+        take(1),
+        map(formData => {
+          if (formData.formDefinition) {
+            this.formDataStorageService.setFormDataToLocalStorage({
+              id: dataId,
+              formDefinition: {
+                formId: formData.formDefinition.formId,
+              },
+              categoryCode: categoryCode,
+            });
+          }
+        })
       );
     }
   }
@@ -221,9 +216,5 @@ export class QuoteService implements OnDestroy {
 
   setQuoteForCompare(quote: InsuranceQuote) {
     this.quoteForCompareSource.next(quote);
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

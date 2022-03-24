@@ -31,7 +31,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
     .data$;
   availableTabs$: Observable<
     CMSComparisonTabComponent[]
-  > = this.comparisonTableService.getAvailableTabsSortedByProperty('title');
+  > = this.getAvailableTabsSortedByTitle();
 
   initialTabs: string[];
   tabs: ComparisonPanelCMSComponent[] = [];
@@ -80,6 +80,19 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
         );
       });
     }
+  }
+
+  /**
+   * Sorts and returns available tabs by title
+   *
+   * @returns CMSComparisonTabComponent[] observable
+   */
+  private getAvailableTabsSortedByTitle(): Observable<
+    CMSComparisonTabComponent[]
+  > {
+    return this.comparisonTableService.availableTab$.pipe(
+      map(tab => tab.sort((a, b) => (a.title < b.title ? -1 : 1)))
+    );
   }
 
   ngOnDestroy() {

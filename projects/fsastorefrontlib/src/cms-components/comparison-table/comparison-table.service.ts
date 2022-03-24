@@ -88,23 +88,4 @@ export class ComparisonTableService {
   getComparisonTabs(tabIds: string[]): Observable<CMSComparisonTabComponent>[] {
     return tabIds.map(tabId => this.cmsService.getComponentData(tabId));
   }
-
-  /**
-   * Sorts and returns available tabs by a given property
-   *
-   * @param property property of the tab by which the tabs need to get sorted
-   * @returns CMSComparisonTabComponent[] observable
-   */
-  getAvailableTabsSortedByProperty(
-    property: string
-  ): Observable<CMSComparisonTabComponent[]> {
-    return this.availableTab$.pipe(
-      tap(tab => {
-        tab.sort((a, b) => {
-          return a[property] < b[property] ? -1 : 1;
-        });
-        return tab;
-      })
-    );
-  }
 }
