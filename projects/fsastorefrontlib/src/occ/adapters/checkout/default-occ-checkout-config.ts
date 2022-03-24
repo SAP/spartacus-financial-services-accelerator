@@ -5,7 +5,7 @@ export const defaultOccCheckoutConfig: FSOccConfig = {
     occ: {
       endpoints: {
         userIdentification:
-          'users/${userId}/carts/${cartId}/userIdentification',
+          'users/${userId}/fscarts/${cartId}/userIdentification',
       },
     },
   },

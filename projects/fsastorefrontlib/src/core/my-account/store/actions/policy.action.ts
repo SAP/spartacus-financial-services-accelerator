@@ -4,9 +4,21 @@ export const LOAD_POLICIES = '[Policy] Load Policies';
 export const LOAD_POLICIES_SUCCESS = '[Policy] Load Policies Success';
 export const LOAD_POLICIES_FAIL = '[Policy] Load Policies Fail';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const LOAD_PREMIUM_CALENDAR = '[Policy] Load PremiumCalendar';
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const LOAD_PREMIUM_CALENDAR_SUCCESS =
   '[Policy] Load PremiumCalendar Success';
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const LOAD_PREMIUM_CALENDAR_FAIL = '[Policy] Load PremiumCalendar Fail';
 
 export const LOAD_POLICY_DETAILS = '[Policy] Load Policy Details';
@@ -29,16 +41,26 @@ export class LoadPoliciesFail implements Action {
   constructor(public payload: any) {}
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export class LoadPremiumCalendar implements Action {
   readonly type = LOAD_PREMIUM_CALENDAR;
   constructor(public payload: any) {}
 }
-
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export class LoadPremiumCalendarSuccess implements Action {
   readonly type = LOAD_PREMIUM_CALENDAR_SUCCESS;
   constructor(public payload: any) {}
 }
-
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export class LoadPremiumCalendarFail implements Action {
   readonly type = LOAD_PREMIUM_CALENDAR_FAIL;
   constructor(public payload: any) {}
