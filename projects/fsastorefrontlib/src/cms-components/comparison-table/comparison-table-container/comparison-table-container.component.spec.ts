@@ -33,6 +33,14 @@ const componentData: CMSComparisonTabComponent = {
   },
 };
 
+class ComparisonTableContainerComponentExtended extends ComparisonTableContainerComponent {
+  getAvailableTabsSortedByTitleExtended(): Observable<
+    CMSComparisonTabComponent[]
+  > {
+    return super.getAvailableTabsSortedByTitle();
+  }
+}
+
 class MockCmsService {
   getComponentData(): Observable<CMSComparisonTabComponent> {
     return of(componentData);
@@ -46,8 +54,11 @@ class MockComparisonTableService {
 
 describe('ComparisonTableContainerComponent', () => {
   let comparisonTableContainer: ComparisonTableContainerComponent;
+  let comparisonTableContainerComponentExtended: ComparisonTableContainerComponentExtended;
   let fixture: ComponentFixture<ComparisonTableContainerComponent>;
+  let fixtureExtended: ComponentFixture<ComparisonTableContainerComponentExtended>;
   let el: DebugElement;
+  let elex: DebugElement;
 
   const componentData: CmsMultiComparisonTabContainer = {
     uid: 'TestMultiComparisonTabContainer',
@@ -89,8 +100,30 @@ describe('ComparisonTableContainerComponent', () => {
     el = fixture.debugElement;
   });
 
+  beforeEach(() => {
+    fixtureExtended = TestBed.createComponent(
+      ComparisonTableContainerComponentExtended
+    );
+    comparisonTableContainerComponentExtended =
+      fixtureExtended.componentInstance;
+    elex = fixture.debugElement;
+  });
+
   it('should create comparison table container', () => {
     fixture.detectChanges();
     expect(comparisonTableContainer).toBeTruthy();
+  });
+
+  describe('getAvailableTabsSortedByTitle', () => {
+    it('should get the available tabs sorted by title', () => {
+      (done: DoneFn) => {
+        comparisonTableContainerComponentExtended
+          .getAvailableTabsSortedByTitleExtended()
+          .subscribe(value => {
+            expect(value).toBeObservable();
+            done();
+          });
+      };
+    });
   });
 });
