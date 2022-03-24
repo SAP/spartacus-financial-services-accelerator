@@ -4,12 +4,7 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import {
-  Cart,
-  OrderEntry,
-  RoutingService,
-  UserIdService,
-} from '@spartacus/core';
+import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCart,
@@ -71,7 +66,7 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
-  retrieveQuote(quote: any): Observable<any> {
+  retrieveQuote(quote: any): Observable<void> {
     return this.userIdService.getUserId().pipe(
       switchMap(occUserId => {
         if (occUserId) {
@@ -83,39 +78,43 @@ export class QuoteService {
             cart => cart.code === quote.cartCode && cart.entries?.length > 0
           ),
           take(1),
-          switchMap((cart: FSCart) => {
-            const orderEntry: OrderEntry = cart.entries[0];
-            const product: FSProduct = orderEntry.product;
-
-            this.loadPersonalDetailsForm(orderEntry);
-            return this.loadChooseCoverForm(
-              cart.insuranceQuote,
-              product.defaultCategory.code
-            );
-          })
+          switchMap((cart: FSCart) => this.loadForms(cart))
         );
       })
     );
   }
 
-  retrieveQuoteCheckout(quote: any): Observable<Cart> {
+  protected loadForms(cart: FSCart): Observable<void> {
+    const orderEntry: OrderEntry = cart.entries[0];
+    const product: FSProduct = orderEntry.product;
+
+    this.loadPersonalDetailsForm(orderEntry);
+    return this.loadChooseCoverForm(
+      cart.insuranceQuote,
+      product.defaultCategory.code
+    );
+  }
+
+  retrieveQuoteCheckout(quote: any): Observable<FSCart> {
     return this.retrieveQuote(quote).pipe(
       take(1),
-      switchMap(_ => {
-        return this.cartService.getActive().pipe(
-          take(1),
-          tap(_ => {
-            if (quote?.state?.code === 'BIND') {
-              this.routingService.go({
-                cxRoute: 'quoteReview',
-              });
-            } else {
-              this.routingService.go({
-                cxRoute: 'addOptions',
-              });
-            }
-          })
-        );
+      switchMap(_ => this.routeToCheckout(quote))
+    );
+  }
+
+  protected routeToCheckout(quote: any): Observable<FSCart> {
+    return this.cartService.getActive().pipe(
+      take(1),
+      tap(_ => {
+        if (quote?.state?.code === 'BIND') {
+          this.routingService.go({
+            cxRoute: 'quoteReview',
+          });
+        } else {
+          this.routingService.go({
+            cxRoute: 'addOptions',
+          });
+        }
       })
     );
   }
