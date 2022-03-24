@@ -78,6 +78,58 @@
                   }}
                 </span>
               </li>
+              <hr />
+              <li class="d-flex justify-content-between">
+                <span class="semi-bold pr-2"
+                  >{{
+                    'fscommon.register.address.label' | cxTranslate
+                  }}:</span
+                >
+                <div class="notice">
+                  <div>
+                    {{
+                      user.defaultAddress
+                        ? (user.defaultAddress.country.name)
+                        : ('dashboard.notSet' | cxTranslate)
+                    }}
+                  </div>
+                  <div>
+                      <span>
+                      {{
+                        user.defaultAddress
+                          ? (user.defaultAddress.line1)
+                          : ('dashboard.notSet' | cxTranslate)
+                      }}
+                      </span>
+                      <span>
+                      {{
+                        user.defaultAddress
+                          ? (user.defaultAddress.line2)
+                          : ('dashboard.notSet' | cxTranslate)
+                      }}
+                     </span>
+                  </div>
+                  <div>
+                      <span>
+                      {{
+                        user.defaultAddress
+                          ? (user.defaultAddress.town)
+                          : ('dashboard.notSet' | cxTranslate)
+                      }}
+                      </span>
+                      <span>
+                      {{
+                        user.defaultAddress
+                          ? (user.defaultAddress.postalCode)
+                          : ('dashboard.notSet' | cxTranslate)
+                      }}
+                    </span>
+                  </div>
+                  <button (click)="openUserChangeAddressModal()">
+                    <span class="notice fs-icon icon-edit"></span>
+                  </button>
+                </div>
+              </li>
             </ul>
           </div>
         </div>

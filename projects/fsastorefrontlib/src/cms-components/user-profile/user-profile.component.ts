@@ -18,6 +18,8 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
+import { ModalRef, ModalService } from '@spartacus/storefront';
+import { UserChangeAddressDialogComponent } from '../user-change-address-dialog/user-change-address-dialog.component';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -32,7 +34,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected userIdService: UserIdService,
     protected quoteService: QuoteService,
     protected policyService: PolicyService,
-    protected claimService: ClaimService
+    protected claimService: ClaimService,
+    protected modalService: ModalService,
   ) {}
 
   private subscription = new Subscription();
@@ -43,6 +46,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerClaims$: Observable<any>;
   assets: { [key: string]: any }[];
   assetSelected: string;
+  modalRef: ModalRef;
 
   ngOnInit(): void {
     this.loadCustomerDetails();
@@ -97,6 +101,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
     this.assetSelected = activeClass;
     this.assets = assetsChosen;
+  }
+
+  openUserChangeAddressModal() {
+    let modalInstance: any;
+    this.modalRef = this.modalService.open(UserChangeAddressDialogComponent, {
+      centered: true,
+      size: 'lg',
+    });
+    modalInstance = this.modalRef.componentInstance;
   }
 
   ngOnDestroy(): void {
