@@ -56,7 +56,11 @@ export class FSRegisterComponent extends RegisterComponent implements OnInit {
       ],
       dateOfBirth: [
         '',
-        [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
+        [
+          Validators.required,
+          DefaultFormValidators.dateOfBirthValidator(18),
+          Validators.min(1900),
+        ],
       ],
     },
     {

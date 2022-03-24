@@ -37,6 +37,22 @@
                 [opened]="true"
                 [title]="'fscommon.oboCustomers' | cxTranslate"
               >
+                <div class="position-absolute w-100 left top">
+                  <cx-fs-message
+                    [messageText]="
+                      selectedIndex !== -1
+                        ? ('quoteReview.message.selectedOboCustomer'
+                          | cxTranslate
+                            : {
+                                oboCustomer:
+                                  (oboCustomers?.entries)[selectedIndex]?.name
+                              })
+                        : ''
+                    "
+                    [type]="messageType.MSG_TYPE_CONFIRMATION"
+                    [timeout]="3000"
+                  ></cx-fs-message>
+                </div>
                 <div class="container">
                   <div class="row justify-content-center">
                     <ul class="col-12 accordion-list">

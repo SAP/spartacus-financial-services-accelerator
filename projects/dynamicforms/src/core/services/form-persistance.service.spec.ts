@@ -6,54 +6,64 @@ import {
 } from '@ngrx/store';
 import { StatePersistenceService } from '@spartacus/core';
 import { of } from 'rxjs';
-import {
-  FSCheckoutState,
-  FS_CHECKOUT_FEATURE,
-  StateWithFSCheckout,
-} from '../store/checkout-state';
-import * as fromReducers from './../store/reducers/index';
+import * as fromReducers from '../store/reducers/index';
 import * as fromActions from '../store/actions/index';
-import { CheckoutPersistenceService } from './checkout-persistance.service';
+import { FormPersistenceService } from './form-persistance.service';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { FormsState, FORM_FEATURE, StateWithForm } from '../store/state';
 
-export const getCheckoutState: MemoizedSelector<
-  StateWithFSCheckout,
-  FSCheckoutState
-> = createFeatureSelector<FSCheckoutState>(FS_CHECKOUT_FEATURE);
-const mockCheckout = {
-  fscheckout: {
-    legalInformation: true,
-    identificationType: false,
-    paymentType: '',
+export const getFormsState: MemoizedSelector<
+  StateWithForm,
+  FormsState
+> = createFeatureSelector<FormsState>(FORM_FEATURE);
+const blob1 = new Blob([''], { type: 'application/pdf' });
+blob1['lastModifiedDate'] = '';
+blob1['name'] = 'testFile1';
+const mockFile = <File>blob1;
+const mockFiles = {
+  files: [mockFile],
+};
+const mockFileState = {
+  formDefinition: {
+    loaded: false,
+    content: {},
+  },
+  formData: {
+    loaded: false,
+    content: {},
+  },
+  uploadedFiles: {
+    loaded: true,
+    content: mockFiles,
   },
 };
-const mockCheckoutState = { [FS_CHECKOUT_FEATURE]: mockCheckout };
+const mockFormState = { [FORM_FEATURE]: mockFileState };
 
-describe('CheckoutPersistenceService', () => {
-  let service: CheckoutPersistenceService;
+describe('FormPersistenceService', () => {
+  let service: FormPersistenceService;
   let persistenceService: StatePersistenceService;
-  let actions$ = of({ type: fromActions.SetLegalInformationSuccess });
-  let store: MockStore<StateWithFSCheckout>;
+  let actions$ = of({ type: fromActions.SetUploadedFiles });
+  let store: MockStore<StateWithForm>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(FS_CHECKOUT_FEATURE, fromReducers.getReducers()),
+        StoreModule.forFeature(FORM_FEATURE, fromReducers.getReducers()),
       ],
       providers: [
         provideMockActions(() => actions$),
         provideMockStore(),
-        CheckoutPersistenceService,
+        FormPersistenceService,
         StatePersistenceService,
       ],
     });
 
-    service = TestBed.inject(CheckoutPersistenceService);
+    service = TestBed.inject(FormPersistenceService);
     persistenceService = TestBed.inject(StatePersistenceService);
     store = TestBed.inject(MockStore);
-    store.setState(mockCheckoutState);
+    store.setState(mockFormState);
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(persistenceService, 'syncWithStorage').and.stub();
   });
@@ -67,14 +77,14 @@ describe('CheckoutPersistenceService', () => {
     expect(persistenceService.syncWithStorage).toHaveBeenCalled();
   });
 
-  it('should get checkout content', () => {
-    service['getCheckoutContent']()
-      .subscribe(state => expect(state.legalInformation).toBe(true))
+  it('should get uploaded files', () => {
+    service['getUploadedFiles']()
+      .subscribe(state => expect(state.files.length).toBe(1))
       .unsubscribe();
   });
 
   it('should read state', () => {
-    service['onRead'](mockCheckout.fscheckout);
+    service['onRead'](mockFiles);
     expect(store.dispatch).toHaveBeenCalled();
   });
 

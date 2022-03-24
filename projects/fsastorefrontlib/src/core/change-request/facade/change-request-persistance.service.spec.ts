@@ -6,54 +6,60 @@ import {
 } from '@ngrx/store';
 import { StatePersistenceService } from '@spartacus/core';
 import { of } from 'rxjs';
-import {
-  FSCheckoutState,
-  FS_CHECKOUT_FEATURE,
-  StateWithFSCheckout,
-} from '../store/checkout-state';
-import * as fromReducers from './../store/reducers/index';
+import * as fromReducers from '../store/reducers/index';
 import * as fromActions from '../store/actions/index';
-import { CheckoutPersistenceService } from './checkout-persistance.service';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import {
+  ChangeRequestsState,
+  CHANGE_REQUEST_FEATURE,
+  StateWithChangeRequest,
+} from '../store/change-request-state';
+import { ChangeRequestPersistenceService } from './change-request-persistence.service';
 
-export const getCheckoutState: MemoizedSelector<
-  StateWithFSCheckout,
-  FSCheckoutState
-> = createFeatureSelector<FSCheckoutState>(FS_CHECKOUT_FEATURE);
-const mockCheckout = {
-  fscheckout: {
-    legalInformation: true,
-    identificationType: false,
-    paymentType: '',
+export const getChangeRequestState: MemoizedSelector<
+  StateWithChangeRequest,
+  ChangeRequestsState
+> = createFeatureSelector<ChangeRequestsState>(CHANGE_REQUEST_FEATURE);
+const mockChangeRequest = {
+  changeRequest: {
+    value: {
+      content: {
+        requestId: '0000001',
+        requestStatus: 'OPEN',
+      },
+      loaded: true,
+    },
   },
 };
-const mockCheckoutState = { [FS_CHECKOUT_FEATURE]: mockCheckout };
+const mockChangeRequestState = { [CHANGE_REQUEST_FEATURE]: mockChangeRequest };
 
-describe('CheckoutPersistenceService', () => {
-  let service: CheckoutPersistenceService;
+describe('ChangeRequestPersistenceService', () => {
+  let service: ChangeRequestPersistenceService;
   let persistenceService: StatePersistenceService;
-  let actions$ = of({ type: fromActions.SetLegalInformationSuccess });
-  let store: MockStore<StateWithFSCheckout>;
+  let actions$ = of({ type: fromActions.LoadChangeRequestSuccess });
+  let store: MockStore<StateWithChangeRequest>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(FS_CHECKOUT_FEATURE, fromReducers.getReducers()),
+        StoreModule.forFeature(
+          CHANGE_REQUEST_FEATURE,
+          fromReducers.getReducers()
+        ),
       ],
       providers: [
         provideMockActions(() => actions$),
         provideMockStore(),
-        CheckoutPersistenceService,
+        ChangeRequestPersistenceService,
         StatePersistenceService,
       ],
     });
-
-    service = TestBed.inject(CheckoutPersistenceService);
+    service = TestBed.inject(ChangeRequestPersistenceService);
     persistenceService = TestBed.inject(StatePersistenceService);
     store = TestBed.inject(MockStore);
-    store.setState(mockCheckoutState);
+    store.setState(mockChangeRequestState);
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(persistenceService, 'syncWithStorage').and.stub();
   });
@@ -67,14 +73,14 @@ describe('CheckoutPersistenceService', () => {
     expect(persistenceService.syncWithStorage).toHaveBeenCalled();
   });
 
-  it('should get checkout content', () => {
-    service['getCheckoutContent']()
-      .subscribe(state => expect(state.legalInformation).toBe(true))
+  it('should get change request', () => {
+    service['getChangeRequestData']()
+      .subscribe(state => expect(state.requestId).toBe('0000001'))
       .unsubscribe();
   });
 
   it('should read state', () => {
-    service['onRead'](mockCheckout.fscheckout);
+    service['onRead'](mockChangeRequest.changeRequest.value.content);
     expect(store.dispatch).toHaveBeenCalled();
   });
 
