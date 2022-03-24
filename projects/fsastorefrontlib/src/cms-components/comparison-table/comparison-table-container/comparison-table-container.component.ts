@@ -87,7 +87,7 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
    *
    * @returns CMSComparisonTabComponent[] observable
    */
-  protected getAvailableTabsSortedByTitle(): Observable<
+  private getAvailableTabsSortedByTitle(): Observable<
     CMSComparisonTabComponent[]
   > {
     return this.comparisonTableService.availableTab$.pipe(
