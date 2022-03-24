@@ -5,7 +5,6 @@ import {
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import {
-  Cart,
   OrderEntry,
   RoutingService,
   UserIdService,
