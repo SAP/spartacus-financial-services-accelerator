@@ -54,7 +54,9 @@ export class ChangeClaimNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           map(([submittedFormData, uploadedContent, occUserId]) => {
             // needed to deep clone claimData object
+            console.log(claim);
             const claimCopy = JSON.parse(JSON.stringify(claim));
+            console.log(claimCopy);
             if (submittedFormData?.content && uploadedContent) {
               claimCopy.documents = uploadedContent.files;
               this.claimService.changeClaim(claimCopy, occUserId);

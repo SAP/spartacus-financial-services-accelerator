@@ -29,7 +29,7 @@ export class DocumentsTableComponent implements OnDestroy {
     return !!document.code && !!document.mime;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
