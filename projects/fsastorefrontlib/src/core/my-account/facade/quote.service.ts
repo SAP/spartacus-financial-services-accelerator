@@ -5,7 +5,7 @@ import {
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
-import { filter, map, take, tap } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCart,
   FSOrderEntry,
@@ -17,8 +17,7 @@ import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class QuoteService {
   constructor(
@@ -29,10 +28,8 @@ export class QuoteService {
     protected formDataStorageService: FormDataStorageService,
     protected routingService: RoutingService
   ) {}
-
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
-  private subscription = new Subscription();
 
   loadQuotes() {
     this.userIdService
@@ -69,59 +66,56 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
-  retrieveQuote(quote: any) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
+  retrieveQuote(quote: any): Observable<void> {
+    return this.userIdService.getUserId().pipe(
+      switchMap(occUserId => {
         if (occUserId) {
           this.cartService.loadCart(quote.cartCode, occUserId);
         }
-      })
-      .unsubscribe();
 
-    this.cartService
-      .getActive()
-      .pipe(
-        filter(cart => cart.code === quote.cartCode),
-        take(1)
-      )
-      .subscribe((cart: FSCart) => {
-        if (cart && cart.entries && cart.entries.length > 0) {
-          const orderEntry: OrderEntry = cart.entries[0];
-          const product: FSProduct = orderEntry.product;
-
-          this.loadPersonalDetailsForm(orderEntry);
-          this.loadChooseCoverForm(
-            cart.insuranceQuote,
-            product.defaultCategory.code
-          );
-        }
+        return this.cartService.getActive().pipe(
+          filter(
+            cart => cart.code === quote.cartCode && cart.entries?.length > 0
+          ),
+          take(1),
+          switchMap((cart: FSCart) => this.loadForms(cart))
+        );
       })
-      .unsubscribe();
+    );
   }
 
-  retrieveQuoteCheckout(quote: any) {
-    this.retrieveQuote(quote);
-    this.subscription.add(
-      this.cartService
-        .getActive()
-        .pipe(
-          filter(cart => cart.code === quote.cartCode),
-          take(1),
-          tap(_ => {
-            if (quote?.state?.code === 'BIND') {
-              this.routingService.go({
-                cxRoute: 'quoteReview',
-              });
-            } else {
-              this.routingService.go({
-                cxRoute: 'addOptions',
-              });
-            }
-          })
-        )
-        .subscribe()
+  protected loadForms(cart: FSCart): Observable<void> {
+    const orderEntry: OrderEntry = cart.entries[0];
+    const product: FSProduct = orderEntry.product;
+
+    this.loadPersonalDetailsForm(orderEntry);
+    return this.loadChooseCoverForm(
+      cart.insuranceQuote,
+      product.defaultCategory.code
+    );
+  }
+
+  retrieveQuoteCheckout(quote: any): Observable<FSCart> {
+    return this.retrieveQuote(quote).pipe(
+      take(1),
+      switchMap(_ => this.routeToCheckout(quote))
+    );
+  }
+
+  protected routeToCheckout(quote: any): Observable<FSCart> {
+    return this.cartService.getActive().pipe(
+      take(1),
+      tap(_ => {
+        if (quote?.state?.code === 'BIND') {
+          this.routingService.go({
+            cxRoute: 'quoteReview',
+          });
+        } else {
+          this.routingService.go({
+            cxRoute: 'addOptions',
+          });
+        }
+      })
     );
   }
 
@@ -136,32 +130,27 @@ export class QuoteService {
     }
   }
 
-  protected loadChooseCoverForm(insuranceQuote: any, categoryCode: string) {
-    if (
-      insuranceQuote &&
-      insuranceQuote.quoteDetails &&
-      insuranceQuote.quoteDetails.entry
-    ) {
-      const dataId = insuranceQuote.quoteDetails.entry
-        .filter(details => details.key === 'formId')
-        .map(mapEntry => mapEntry.value)[0];
+  protected loadChooseCoverForm(
+    insuranceQuote: any,
+    categoryCode: string
+  ): Observable<void> {
+    if (insuranceQuote && insuranceQuote.quoteDetails) {
+      const dataId = insuranceQuote.quoteDetails.formId;
       this.formDataService.loadFormData(dataId);
-      this.formDataService
-        .getFormData()
-        .pipe(
-          map(formData => {
-            if (formData.formDefinition) {
-              this.formDataStorageService.setFormDataToLocalStorage({
-                id: dataId,
-                formDefinition: {
-                  formId: formData.formDefinition.formId,
-                },
-                categoryCode: categoryCode,
-              });
-            }
-          })
-        )
-        .subscribe();
+      return this.formDataService.getFormData().pipe(
+        take(1),
+        map(formData => {
+          if (formData.formDefinition) {
+            this.formDataStorageService.setFormDataToLocalStorage({
+              id: dataId,
+              formDefinition: {
+                formId: formData.formDefinition.formId,
+              },
+              categoryCode: categoryCode,
+            });
+          }
+        })
+      );
     }
   }
 

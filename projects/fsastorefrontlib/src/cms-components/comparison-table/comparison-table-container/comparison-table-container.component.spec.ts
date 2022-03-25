@@ -40,7 +40,7 @@ class MockCmsService {
 }
 
 class MockComparisonTableService {
-  availableTab = new Subject<CMSComparisonTabComponent[]>();
+  availableTab$ = new Subject<CMSComparisonTabComponent[]>();
   setAvailableTabs() {}
 }
 
