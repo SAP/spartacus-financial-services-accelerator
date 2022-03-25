@@ -14,8 +14,9 @@ import createSpy = jasmine.createSpy;
 import { QuoteComparisonComponent } from './quote-comparison.component';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteComparisonConfig } from '../../../../core/quote-comparison-config/quote-comparison-config';
+import { FSCart } from '@spartacus/fsa-storefront';
 
-const cart1: any = {
+const cart1: FSCart = {
   code: 'test001',
   insuranceQuote: {
     state: {
@@ -63,16 +64,14 @@ const cart1: any = {
       entries: [
         {
           product: {
-            defaultCategory: {
-              code: 'insurances_travel',
-            },
+            code: 'insurances_travel',
           },
         },
       ],
     },
   ],
 };
-const cart2: any = {
+const cart2: FSCart = {
   code: 'test002',
   insuranceQuote: {
     cartCode: 'test002',
@@ -118,9 +117,7 @@ const cart2: any = {
       entries: [
         {
           product: {
-            defaultCategory: {
-              code: 'insurances_travel',
-            },
+            code: 'insurances_travel',
           },
         },
       ],
@@ -159,18 +156,18 @@ class MockRoutingService {
 }
 
 class MockQuoteService {
-  retrieveQuoteCheckout = createSpy();
+  retrieveQuoteCheckout = createSpy().and.returnValue(of(cart1));
   getQuotesComparison() {
     return of(quoteComparisonCarts);
   }
   loadQuotesComparison(quoteCodes) {
     return of();
   }
-  getQuotesLoaded() {}
+  getQuotesLoaded() { }
 }
 
 class MockFSTranslationService {
-  getTranslationValue() {}
+  getTranslationValue() { }
 }
 
 class MockLanguageService {

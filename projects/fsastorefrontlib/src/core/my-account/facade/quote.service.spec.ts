@@ -321,7 +321,7 @@ describe('QuoteServiceTest', () => {
   });
 
   it('should retrieve quote checkout', () => {
-    service.retrieveQuoteCheckout(mockQuote);
+    service.retrieveQuoteCheckout(mockQuote).subscribe().unsubscribe();
     expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'quoteReview' });
     const unbindQuote = {
       ...mockQuote,
@@ -329,7 +329,7 @@ describe('QuoteServiceTest', () => {
         code: 'UNBIND',
       },
     };
-    service.retrieveQuoteCheckout(unbindQuote);
+    service.retrieveQuoteCheckout(unbindQuote).subscribe().unsubscribe();
     expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'addOptions' });
   });
 });
