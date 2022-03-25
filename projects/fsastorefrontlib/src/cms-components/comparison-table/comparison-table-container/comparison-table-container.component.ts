@@ -91,17 +91,8 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
     CMSComparisonTabComponent[]
   > {
     return this.comparisonTableService.availableTab$.pipe(
-      map(tab => this.sortByTitle(tab))
+      map(tab => tab.sort((a, b) => (a.title < b.title ? -1 : 1)))
     );
-  }
-
-  /**
-   * Sorts tabs by title
-   *
-   * @returns CMSComparisonTabComponent[]
-   */
-  private sortByTitle(tab: CMSComparisonTabComponent[]) {
-    return tab.sort((a, b) => (a.title < b.title ? -1 : 1));
   }
 
   ngOnDestroy() {
