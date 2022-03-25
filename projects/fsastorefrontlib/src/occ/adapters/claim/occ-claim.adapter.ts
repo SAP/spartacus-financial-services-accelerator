@@ -103,6 +103,7 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  //TODO: CXFSA-552: Implement Normalizer for conversion of form data to claim object
   protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
     const claim = claimData.content ? JSON.parse(claimData.content) : {};
     const documents = claimData.documents;
