@@ -163,11 +163,11 @@ class MockQuoteService {
   loadQuotesComparison(quoteCodes) {
     return of();
   }
-  getQuotesLoaded() { }
+  getQuotesLoaded() {}
 }
 
 class MockFSTranslationService {
-  getTranslationValue() { }
+  getTranslationValue() {}
 }
 
 class MockLanguageService {
