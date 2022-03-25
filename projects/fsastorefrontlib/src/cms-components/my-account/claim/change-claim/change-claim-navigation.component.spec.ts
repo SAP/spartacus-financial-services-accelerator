@@ -150,6 +150,6 @@ describe('ChangeClaimNavigationComponent', () => {
     spyOn(mockUserIdService, 'getUserId').and.callThrough();
     spyOn(mockClaimService, 'changeClaim').and.callThrough();
     component.submit(claimMock);
-    expect(mockFileService.resetFiles).toHaveBeenCalled();
+    expect(mockFileService.resetFiles).not.toHaveBeenCalled();
   });
 });
