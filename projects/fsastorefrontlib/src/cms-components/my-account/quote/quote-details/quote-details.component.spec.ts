@@ -9,12 +9,67 @@ import {
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
+import { FSCart, InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteDetailsComponent } from '../../../my-account/quote/quote-details/quote-details.component';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import createSpy = jasmine.createSpy;
 
+const cart1: FSCart = {
+  code: 'test001',
+  insuranceQuote: {
+    state: {
+      code: 'BIND',
+    },
+    insuredObjectList: {
+      insuredObjects: [
+        {
+          insuredObjectItems: [
+            {
+              label: 'tripDestination',
+              value: 'Test value1',
+            },
+            {
+              label: 'costOfTrip',
+              value: 'Test value2',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  entries: [
+    {
+      product: {
+        price: {
+          oneTimeChargeEntries: [
+            {
+              billingTime: {
+                code: 'personalliabilitycoverage',
+                name: 'Personal Liability',
+              },
+              price: {
+                formattedValue: '€1,000,000.00',
+                value: 1000000,
+              },
+            },
+          ],
+        },
+      },
+    },
+  ],
+  deliveryOrderGroups: [
+    {
+      entries: [
+        {
+          product: {
+            code: 'insurances_travel',
+          },
+        },
+      ],
+    },
+  ],
+};
 const insuranceQuote1: any = {
   cartCode: 'test001',
   defaultCategory: {
@@ -41,7 +96,7 @@ class MockRoutingService {
 
 class MockQuoteService {
   quoteForCompare$ = new BehaviorSubject<InsuranceQuote>(insuranceQuote1);
-  retrieveQuoteCheckout = createSpy();
+  retrieveQuoteCheckout = createSpy().and.returnValue(of(cart1));
   getQuoteDetails() {
     return of(insuranceQuote1);
   }

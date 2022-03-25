@@ -70,7 +70,9 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
   }
 
   retrieveQuote(quote: any) {
-    this.quoteService.retrieveQuoteCheckout(quote);
+    this.subscription.add(
+      this.quoteService.retrieveQuoteCheckout(quote).subscribe()
+    );
   }
 
   compareQuote(quote: InsuranceQuote) {

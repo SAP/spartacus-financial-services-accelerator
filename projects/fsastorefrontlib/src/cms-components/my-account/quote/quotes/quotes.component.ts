@@ -90,7 +90,9 @@ export class QuotesComponent implements OnInit, OnDestroy {
   }
 
   retrieveQuote(quote: InsuranceQuote) {
-    this.quoteService.retrieveQuoteCheckout(quote);
+    this.subscription.add(
+      this.quoteService.retrieveQuoteCheckout(quote).subscribe()
+    );
   }
 
   selectQuote(

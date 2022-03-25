@@ -143,7 +143,10 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
       ...cart.insuranceQuote,
       cartCode: cart.code,
     };
-    this.quoteService.retrieveQuoteCheckout(quote);
+
+    this.subscription.add(
+      this.quoteService.retrieveQuoteCheckout(quote).subscribe()
+    );
   }
 
   ngOnDestroy() {
