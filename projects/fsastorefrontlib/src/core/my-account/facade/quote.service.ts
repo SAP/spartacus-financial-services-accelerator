@@ -112,7 +112,6 @@ export class QuoteService {
   }
 
   protected routeToCheckout(quote: any): Observable<FSCart> {
-    console.log('Hello from routeToCheckout');
     return this.cartService.getActive().pipe(
       take(1),
       tap(_ => {
