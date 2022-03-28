@@ -73,13 +73,22 @@ export class QuoteService {
           this.cartService.loadCart(quote.cartCode, occUserId);
         }
 
-        return this.cartService.getActive().pipe(
-          filter(
-            cart => cart.code === quote.cartCode && cart.entries?.length > 0
-          ),
-          take(1),
-          switchMap((cart: FSCart) => this.loadForms(cart))
-        );
+        if (quote?.state?.code === 'BIND') {
+          return this.cartService.getActive().pipe(
+            filter(
+              cart => cart.code === quote.cartCode && cart.entries?.length > 0
+            ),
+            take(1)
+          );
+        } else {
+          return this.cartService.getActive().pipe(
+            filter(
+              cart => cart.code === quote.cartCode && cart.entries?.length > 0
+            ),
+            take(1),
+            switchMap((cart: FSCart) => this.loadForms(cart))
+          );
+        }
       })
     );
   }
