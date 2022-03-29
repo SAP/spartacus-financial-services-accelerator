@@ -140,8 +140,8 @@ export class QuoteService {
     insuranceQuote: any,
     categoryCode: string
   ): Observable<any> {
-    const dataId = insuranceQuote.quoteDetails?.formId;
-    if (insuranceQuote && insuranceQuote.quoteDetails && dataId) {
+    const dataId = insuranceQuote?.quoteDetails?.formId;
+    if (dataId) {
       this.formDataService.loadFormData(dataId);
       return this.formDataService.getFormData().pipe(
         filter(formData => formData.id === dataId),
