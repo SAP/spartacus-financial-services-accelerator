@@ -96,7 +96,7 @@ export class DefaultFormValidators extends Validators {
           comparisonField,
           <FormGroup>control.root
         );
-        const targetAge = compareToField.value;
+        const targetAge = compareToField?.value;
         const age = new Date(
           today.getFullYear() - targetAge,
           today.getMonth(),
@@ -114,7 +114,7 @@ export class DefaultFormValidators extends Validators {
           comparisonField,
           <FormGroup>control.root
         );
-        const compareToFieldParsed = compareToField.value;
+        const compareToFieldParsed = compareToField?.value;
         const DOBtoYear = Number(
           new Date(compareToFieldParsed as string).getFullYear()
         );
@@ -138,7 +138,7 @@ export class DefaultFormValidators extends Validators {
           comparisonField,
           <FormGroup>control.root
         );
-        const compareToFieldParsed = Number(compareToField.value);
+        const compareToFieldParsed = Number(compareToField?.value);
         return DefaultFormValidators.valueComparison(
           currentField,
           compareToFieldParsed,
@@ -156,7 +156,7 @@ export class DefaultFormValidators extends Validators {
           comparisonField,
           <FormGroup>control.root
         );
-        const compareToFieldParsed = Date.parse(compareToField.value);
+        const compareToFieldParsed = Date.parse(compareToField?.value);
         return DefaultFormValidators.valueComparison(
           compareToFieldParsed,
           currentField,

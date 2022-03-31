@@ -12,3 +12,7 @@
   font-weight: var(--cx-font-weight-semi);
   text-transform: uppercase;
 }
+html,
+body {
+  scroll-behavior: smooth;
+}

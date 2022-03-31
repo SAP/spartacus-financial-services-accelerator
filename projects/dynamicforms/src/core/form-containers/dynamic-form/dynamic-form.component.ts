@@ -1,12 +1,16 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -18,6 +22,7 @@ import { FormBuilderService } from '../../services/builder/form-builder.service'
 import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from './../../models/form-occ.models';
 import { FormComponentService } from '../../../components/form-component.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -25,7 +30,7 @@ import { FormComponentService } from '../../../components/form-component.service
   templateUrl: './dynamic-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicFormComponent implements OnInit, OnDestroy {
+export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input()
   formData: Observable<YFormData>;
   @Input()
@@ -53,8 +58,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
     protected formComponentService: FormComponentService,
+    protected renderer: Renderer2,
+    protected viewportScroller: ViewportScroller,
     public formConfig: DynamicFormsConfig
   ) {}
+  @ViewChild('wizardForm') wizardForm: ElementRef<HTMLElement>;
+  visibleElements: Element[] = [];
 
   ngOnInit() {
     this.populatedInvalid$ = this.formComponentService.isPopulatedFormInvalid;
@@ -75,6 +84,15 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           .subscribe()
       );
     }
+  }
+
+  ngAfterViewInit(): void {
+    const children = Array.from(this.wizardForm.nativeElement.children);
+    this.visibleElements = children.filter(item => !item['hidden']);
+    this.renderer.removeClass(
+      this.wizardForm.nativeElement.children[0],
+      'd-none'
+    );
   }
 
   mapDataToFormControls(formData) {
@@ -141,6 +159,36 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           control.markAsTouched({ onlySelf: true });
         }
       }
+    }
+  }
+
+  previousSection(index: number) {
+    console.log(index);
+    this.viewportScroller.scrollToPosition([0, 0]);
+    if (index - 1 > -1) {
+      this.renderer.removeClass(
+        this.wizardForm.nativeElement.children[index - 1],
+        'd-none'
+      );
+      this.renderer.addClass(
+        this.wizardForm.nativeElement.children[index],
+        'd-none'
+      );
+    }
+  }
+
+  nextSection(index: number) {
+    console.log(index);
+    this.viewportScroller.scrollToPosition([0, 0]);
+    if (this.wizardForm.nativeElement.children.length > index + 1) {
+      this.renderer.removeClass(
+        this.wizardForm.nativeElement.children[index + 1],
+        'd-none'
+      );
+      this.renderer.addClass(
+        this.wizardForm.nativeElement.children[index],
+        'd-none'
+      );
     }
   }
 

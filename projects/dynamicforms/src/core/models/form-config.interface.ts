@@ -2,6 +2,7 @@ export interface FormDefinition {
   formGroups: DynamicFormGroup[];
   formId: string;
   cssClass?: string;
+  wizard?: boolean;
 }
 export interface DynamicFormGroup {
   groupCode?: string;

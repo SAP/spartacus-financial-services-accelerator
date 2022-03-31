@@ -1,9 +1,12 @@
 <ng-container *ngIf="form && config">
-  <form [ngClass]="config.cssClass" [formGroup]="form">
-    <ng-container *ngFor="let formGroup of config.formGroups">
+  <form #wizardForm [ngClass]="config.cssClass" [formGroup]="form">
+    <ng-container *ngFor="let formGroup of config.formGroups; let i = index">
       <div
         class="row"
         [ngClass]="formGroup.cssClass"
+        [ngClass]="{
+          'd-none': config.wizard
+        }"
         [hidden]="formGroup.hidden"
       >
         <ng-container
@@ -14,6 +17,29 @@
             formGroup.groupCode ? form.controls[formGroup.groupCode] : form
           "
         >
+        </ng-container>
+        <ng-container *ngIf="config.wizard">
+          <div *ngIf="i - 1 > -1" class="col-md-4 d-flex mt-3">
+            <button
+              class="btn btn-action w-100"
+              type="button"
+              (click)="previousSection(i)"
+            >
+              PREVIOUS
+            </button>
+          </div>
+          <div
+            *ngIf="config.formGroups.length > i + 1"
+            class="col-md-4 d-flex ml-auto mt-3"
+          >
+            <button
+              class="btn btn-action w-100"
+              type="button"
+              (click)="nextSection(i)"
+            >
+              NEXT
+            </button>
+          </div>
         </ng-container>
       </div>
     </ng-container>
