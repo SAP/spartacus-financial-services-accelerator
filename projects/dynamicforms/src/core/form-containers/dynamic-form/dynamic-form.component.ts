@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -9,12 +10,14 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  QueryList,
   Renderer2,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { GeneralHelpers } from '../../helpers/helpers';
 import { FormDefinition } from '../../models/form-config.interface';
@@ -30,7 +33,8 @@ import { ViewportScroller } from '@angular/common';
   templateUrl: './dynamic-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DynamicFormComponent
+  implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   @Input()
   formData: Observable<YFormData>;
   @Input()
@@ -64,6 +68,7 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
   @ViewChild('wizardForm') wizardForm: ElementRef<HTMLElement>;
   visibleElements: Element[] = [];
+  children: Element[] = [];
 
   ngOnInit() {
     this.populatedInvalid$ = this.formComponentService.isPopulatedFormInvalid;
@@ -87,12 +92,47 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    const children = Array.from(this.wizardForm.nativeElement.children);
-    this.visibleElements = children.filter(item => !item['hidden']);
+    this.children = Array.from(this.wizardForm.nativeElement.children);
+    this.visibleElements = this.children.filter(item => !item['hidden']);
     this.renderer.removeClass(
       this.wizardForm.nativeElement.children[0],
       'd-none'
     );
+  }
+
+  ngAfterViewChecked() {
+    this.visibleElements = this.children.filter(item => !item['hidden']);
+    console.log(this.visibleElements);
+  }
+
+  previousSection(wizardFormGroup: HTMLElement) {
+    const availableGroup = this.visibleElements.findIndex(
+      elem =>
+        elem.firstChild.textContent === wizardFormGroup.firstChild.textContent
+    );
+    this.viewportScroller.scrollToPosition([0, 0]);
+    if (availableGroup - 1 > -1) {
+      this.renderer.removeClass(
+        this.visibleElements[availableGroup - 1],
+        'd-none'
+      );
+      this.renderer.addClass(this.visibleElements[availableGroup], 'd-none');
+    }
+  }
+
+  nextSection(wizardFormGroup: HTMLElement) {
+    const availableGroup = this.visibleElements.findIndex(
+      elem =>
+        elem.firstChild.textContent === wizardFormGroup.firstChild.textContent
+    );
+    this.viewportScroller.scrollToPosition([0, 0]);
+    if (this.visibleElements.length > availableGroup + 1) {
+      this.renderer.removeClass(
+        this.visibleElements[availableGroup + 1],
+        'd-none'
+      );
+      this.renderer.addClass(this.visibleElements[availableGroup], 'd-none');
+    }
   }
 
   mapDataToFormControls(formData) {
@@ -159,36 +199,6 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, OnDestroy {
           control.markAsTouched({ onlySelf: true });
         }
       }
-    }
-  }
-
-  previousSection(index: number) {
-    console.log(index);
-    this.viewportScroller.scrollToPosition([0, 0]);
-    if (index - 1 > -1) {
-      this.renderer.removeClass(
-        this.wizardForm.nativeElement.children[index - 1],
-        'd-none'
-      );
-      this.renderer.addClass(
-        this.wizardForm.nativeElement.children[index],
-        'd-none'
-      );
-    }
-  }
-
-  nextSection(index: number) {
-    console.log(index);
-    this.viewportScroller.scrollToPosition([0, 0]);
-    if (this.wizardForm.nativeElement.children.length > index + 1) {
-      this.renderer.removeClass(
-        this.wizardForm.nativeElement.children[index + 1],
-        'd-none'
-      );
-      this.renderer.addClass(
-        this.wizardForm.nativeElement.children[index],
-        'd-none'
-      );
     }
   }
 
