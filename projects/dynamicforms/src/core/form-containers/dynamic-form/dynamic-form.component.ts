@@ -103,7 +103,6 @@ export class DynamicFormComponent
 
   ngAfterViewChecked() {
     this.visibleElements = this.children.filter(item => !item['hidden']);
-    console.log(this.visibleIndex);
   }
 
   previousSection(wizardFormGroup: HTMLElement) {
