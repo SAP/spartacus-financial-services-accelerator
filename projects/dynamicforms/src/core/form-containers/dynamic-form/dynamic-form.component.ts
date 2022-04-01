@@ -69,6 +69,7 @@ export class DynamicFormComponent
   @ViewChild('wizardForm') wizardForm: ElementRef<HTMLElement>;
   visibleElements: Element[] = [];
   children: Element[] = [];
+  visibleIndex = 0;
 
   ngOnInit() {
     this.populatedInvalid$ = this.formComponentService.isPopulatedFormInvalid;
@@ -102,7 +103,7 @@ export class DynamicFormComponent
 
   ngAfterViewChecked() {
     this.visibleElements = this.children.filter(item => !item['hidden']);
-    console.log(this.visibleElements);
+    console.log(this.visibleIndex);
   }
 
   previousSection(wizardFormGroup: HTMLElement) {
@@ -110,6 +111,7 @@ export class DynamicFormComponent
       elem =>
         elem.firstChild.textContent === wizardFormGroup.firstChild.textContent
     );
+    this.visibleIndex = availableGroup - 1;
     this.viewportScroller.scrollToPosition([0, 0]);
     if (availableGroup - 1 > -1) {
       this.renderer.removeClass(
@@ -125,6 +127,7 @@ export class DynamicFormComponent
       elem =>
         elem.firstChild.textContent === wizardFormGroup.firstChild.textContent
     );
+    this.visibleIndex = availableGroup + 1;
     this.viewportScroller.scrollToPosition([0, 0]);
     if (this.visibleElements.length > availableGroup + 1) {
       this.renderer.removeClass(

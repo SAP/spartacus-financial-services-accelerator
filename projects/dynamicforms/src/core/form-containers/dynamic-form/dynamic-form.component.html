@@ -20,7 +20,7 @@
         >
         </ng-container>
         <ng-container *ngIf="config.wizard">
-          <div class="col-md-4 d-flex mt-3">
+          <div *ngIf="visibleIndex > 0" class="col-md-4 d-flex mt-3">
             <button
               class="btn btn-action w-100"
               type="button"
@@ -29,7 +29,10 @@
               PREVIOUS
             </button>
           </div>
-          <div class="col-md-4 d-flex ml-auto mt-3">
+          <div
+            *ngIf="visibleElements.length > visibleIndex + 1"
+            class="col-md-4 d-flex ml-auto mt-3"
+          >
             <button
               class="btn btn-action w-100"
               type="button"
