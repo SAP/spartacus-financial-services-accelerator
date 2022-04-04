@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -10,14 +11,12 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  QueryList,
   Renderer2,
   ViewChild,
-  ViewChildren,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { GeneralHelpers } from '../../helpers/helpers';
 import { FormDefinition } from '../../models/form-config.interface';
@@ -25,7 +24,7 @@ import { FormBuilderService } from '../../services/builder/form-builder.service'
 import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from './../../models/form-occ.models';
 import { FormComponentService } from '../../../components/form-component.service';
-import { ViewportScroller } from '@angular/common';
+import { DynamicFormGroup } from '../../../core/models/form-config.interface';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -93,6 +92,7 @@ export class DynamicFormComponent
   }
 
   ngAfterViewInit(): void {
+    console.log(this.form);
     this.children = Array.from(this.wizardForm.nativeElement.children);
     this.visibleElements = this.children.filter(item => !item['hidden']);
     this.renderer.removeClass(
@@ -110,9 +110,9 @@ export class DynamicFormComponent
       elem =>
         elem.firstChild.textContent === wizardFormGroup.firstChild.textContent
     );
-    this.visibleIndex = availableGroup - 1;
-    this.viewportScroller.scrollToPosition([0, 0]);
     if (availableGroup - 1 > -1) {
+      this.visibleIndex = availableGroup - 1;
+      this.viewportScroller.scrollToPosition([0, 0]);
       this.renderer.removeClass(
         this.visibleElements[availableGroup - 1],
         'd-none'
@@ -121,14 +121,22 @@ export class DynamicFormComponent
     }
   }
 
-  nextSection(wizardFormGroup: HTMLElement) {
+  nextSection(wizardFormGroup: HTMLElement, formGroup: DynamicFormGroup) {
+    const currentFormGroup = this.form.get(formGroup.groupCode) as FormGroup;
     const availableGroup = this.visibleElements.findIndex(
       elem =>
         elem.firstChild.textContent === wizardFormGroup.firstChild.textContent
     );
-    this.visibleIndex = availableGroup + 1;
-    this.viewportScroller.scrollToPosition([0, 0]);
-    if (this.visibleElements.length > availableGroup + 1) {
+    if (currentFormGroup.invalid) {
+      this.markInvalidControls(currentFormGroup);
+      return;
+    }
+    if (
+      this.visibleElements.length > availableGroup + 1 &&
+      currentFormGroup.valid
+    ) {
+      this.visibleIndex = availableGroup + 1;
+      this.viewportScroller.scrollToPosition([0, 0]);
       this.renderer.removeClass(
         this.visibleElements[availableGroup + 1],
         'd-none'
