@@ -17,7 +17,7 @@ import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 @Injectable()
 export class QuoteService {
   constructor(
@@ -66,7 +66,7 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
-  retrieveQuote(quote: any): Observable<void> {
+  retrieveQuote(quote: any): Observable<any> {
     return this.userIdService.getUserId().pipe(
       switchMap(occUserId => {
         if (occUserId) {
@@ -78,13 +78,19 @@ export class QuoteService {
             cart => cart.code === quote.cartCode && cart.entries?.length > 0
           ),
           take(1),
-          switchMap((cart: FSCart) => this.loadForms(cart))
+          switchMap((cart: FSCart) => {
+            if (quote?.state?.code !== 'BIND') {
+              return this.loadForms(cart);
+            } else {
+              return of([]);
+            }
+          })
         );
       })
     );
   }
 
-  protected loadForms(cart: FSCart): Observable<void> {
+  protected loadForms(cart: FSCart): Observable<any> {
     const orderEntry: OrderEntry = cart.entries[0];
     const product: FSProduct = orderEntry.product;
 
@@ -133,11 +139,12 @@ export class QuoteService {
   protected loadChooseCoverForm(
     insuranceQuote: any,
     categoryCode: string
-  ): Observable<void> {
-    if (insuranceQuote && insuranceQuote.quoteDetails) {
-      const dataId = insuranceQuote.quoteDetails.formId;
+  ): Observable<any> {
+    const dataId = insuranceQuote?.quoteDetails?.formId;
+    if (dataId) {
       this.formDataService.loadFormData(dataId);
       return this.formDataService.getFormData().pipe(
+        filter(formData => formData.id === dataId),
         take(1),
         map(formData => {
           if (formData.formDefinition) {
@@ -151,6 +158,8 @@ export class QuoteService {
           }
         })
       );
+    } else {
+      return of([]);
     }
   }
 
