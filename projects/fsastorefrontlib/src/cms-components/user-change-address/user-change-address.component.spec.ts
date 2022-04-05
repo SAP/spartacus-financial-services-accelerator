@@ -107,7 +107,6 @@ describe('UserChangeAddressComponent', () => {
     fixture = TestBed.createComponent(UserChangeAddressComponent);
     component = fixture.componentInstance;
     component.customer = mockCustomer;
-    // component.selectedCountry$ = new BehaviorSubject(country.isocode);
     fixture.detectChanges();
     spyOn(component.actionChange, 'emit');
   });
