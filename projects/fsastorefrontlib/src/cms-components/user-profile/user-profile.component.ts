@@ -6,7 +6,12 @@ import {
 } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { User, UserAccountFacade } from '@spartacus/user/account/root';
-import { RoutingService, UserIdService } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
 import { map } from 'rxjs/operators';
 
 import {
@@ -18,8 +23,6 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
-import { ModalRef, ModalService } from '@spartacus/storefront';
-import { UserChangeAddressDialogComponent } from '../user-change-address-dialog/user-change-address-dialog.component';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -35,7 +38,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected quoteService: QuoteService,
     protected policyService: PolicyService,
     protected claimService: ClaimService,
-    protected modalService: ModalService,
+    protected globalMessageService: GlobalMessageService
   ) {}
 
   private subscription = new Subscription();
@@ -46,7 +49,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerClaims$: Observable<any>;
   assets: { [key: string]: any }[];
   assetSelected: string;
-  modalRef: ModalRef;
+  showAddressForm = false;
+  userId: string;
+  customerId: string;
 
   ngOnInit(): void {
     this.loadCustomerDetails();
@@ -61,9 +66,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       ])
         .pipe(
           map(([routingData, userId, user]) => {
-            const customerId = routingData?.state?.params?.customerId;
-            if (customerId) {
-              this.getSellerAssets(user, userId, customerId);
+            this.userId = userId;
+            this.customerId = routingData?.state?.params?.customerId;
+            if (this.customerId) {
+              this.getSellerAssets(user, userId, this.customerId);
             } else {
               this.getAssetsforCurrentUser();
             }
@@ -103,13 +109,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.assets = assetsChosen;
   }
 
-  openUserChangeAddressModal() {
-    let modalInstance: any;
-    this.modalRef = this.modalService.open(UserChangeAddressDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
-    modalInstance = this.modalRef.componentInstance;
+  showUserAddressForm() {
+    this.showAddressForm = true;
+  }
+
+  changedAddress(action: string) {
+    this.showAddressForm = false;
+    if (action) {
+      this.fsConsentService.loadCustomer(this.userId, this.customerId);
+      this.globalMessageService.add(
+        {
+          key: `addressForm.successfully${action}Address`,
+        },
+        GlobalMessageType.MSG_TYPE_CONFIRMATION
+      );
+    }
   }
 
   ngOnDestroy(): void {

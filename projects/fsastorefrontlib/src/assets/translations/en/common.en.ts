@@ -128,7 +128,7 @@ export const fscommon = {
       },
       address: {
         label: 'Address Info',
-      }
+      },
     },
     checkout: {
       insurances_property_homeowners: 'Your Homeowners Insurance',

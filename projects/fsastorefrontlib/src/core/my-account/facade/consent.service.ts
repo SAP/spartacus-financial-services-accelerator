@@ -22,6 +22,8 @@ import { ConsentConnector } from '../../../core/my-account/connectors/consent.co
 export class ConsentService {
   private selectedOBOCustomerSource = new BehaviorSubject<FSUser>(null);
   readonly selectedOBOCustomer$ = this.selectedOBOCustomerSource.asObservable();
+  private userAddressAddedSource = new BehaviorSubject<boolean>(false);
+  readonly userAddressAdded$ = this.userAddressAddedSource.asObservable();
 
   constructor(
     protected store: Store<StateWithMyAccount>,
@@ -109,7 +111,7 @@ export class ConsentService {
    * Method used to create address for  On-Behalf-Of customer by consent holder
    *
    * @param userId The `userId` the identifier of the consent holder
-   * @param oboCustomerId The `userId` the identifier of the On-Behalf-Of Customer
+   * @param oboCustomerId The `oboCustomerId` the identifier of the On-Behalf-Of Customer
    * @param address The `address` the address data
    */
   createAddressForUser(
@@ -123,6 +125,28 @@ export class ConsentService {
         oboCustomerId,
         address,
       })
+    );
+  }
+
+  /**
+   * Method used to update address for On-Behalf-Of customer by consent holder
+   *
+   * @param userId The `userId` the identifier of the consent holder
+   * @param oboCustomerId The `oboCustomerId` the identifier of the On-Behalf-Of Customer
+   * @param addressId The `addressId` the identifier of the On-Behalf-Of Customer
+   * @param address The `address` the address data
+   */
+  updateAddressForUser(
+    userId: string,
+    oboCustomerId: string,
+    addressId: string,
+    address: Address
+  ): Observable<any> {
+    return this.consentConnector.updateAddressForUser(
+      userId,
+      oboCustomerId,
+      addressId,
+      address
     );
   }
 
@@ -177,5 +201,9 @@ export class ConsentService {
           }
         })
       );
+  }
+
+  setUserAddressAdded(changed: boolean) {
+    return this.userAddressAddedSource.next(changed);
   }
 }

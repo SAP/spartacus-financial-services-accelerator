@@ -253,3 +253,43 @@
 .z-index-1 {
   z-index: 1;
 }
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.slide-left {
+  animation: slide-in 0.3s ease-in;
+  -webkit-animation: slide-in 0.3s ease-in;
+}
+
+.slide-right {
+  animation: slide-out 0.3s ease-out;
+  -webkit-animation: slide-out 0.3s ease-out;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

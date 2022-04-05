@@ -29,5 +29,7 @@ export const address = {
       label: 'Telefonnummer (optional)',
       placeholder: '(555) 555 - 0123',
     },
+    successfullyEditAddress: '[DE] Successfully updated address',
+    successfullyAddAddress: '[DE]  Successfully added address',
   },
 };

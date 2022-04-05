@@ -27,8 +27,11 @@
               : ('dashboard.yourProfile' | cxTranslate)
           }}
         </h5>
-        <div class="user-profile-wrapper background-color-4">
-          <div class="user-profile bg-white border border-color-3 text-center">
+        <div class="user-profile-wrapper background-color-4 overflow-hidden">
+          <div
+            class="user-profile bg-white border border-color-3 text-center slide-right"
+            *ngIf="!showAddressForm"
+          >
             <div class="user-image">
               <cx-media
                 [container]="user.thumbnail"
@@ -81,57 +84,53 @@
               <hr />
               <li class="d-flex justify-content-between">
                 <span class="semi-bold pr-2"
-                  >{{
-                    'fscommon.register.address.label' | cxTranslate
-                  }}:</span
+                  >{{ 'fscommon.register.address.label' | cxTranslate }}:</span
                 >
-                <div class="notice">
+                <div
+                  class="notice"
+                  *ngIf="user.defaultAddress; else addAddress"
+                >
                   <div>
-                    {{
-                      user.defaultAddress
-                        ? (user.defaultAddress.country.name)
-                        : ('dashboard.notSet' | cxTranslate)
-                    }}
+                    {{ user.defaultAddress.country.name }}
                   </div>
                   <div>
-                      <span>
-                      {{
-                        user.defaultAddress
-                          ? (user.defaultAddress.line1)
-                          : ('dashboard.notSet' | cxTranslate)
-                      }}
-                      </span>
-                      <span>
-                      {{
-                        user.defaultAddress
-                          ? (user.defaultAddress.line2)
-                          : ('dashboard.notSet' | cxTranslate)
-                      }}
-                     </span>
-                  </div>
-                  <div>
-                      <span>
-                      {{
-                        user.defaultAddress
-                          ? (user.defaultAddress.town)
-                          : ('dashboard.notSet' | cxTranslate)
-                      }}
-                      </span>
-                      <span>
-                      {{
-                        user.defaultAddress
-                          ? (user.defaultAddress.postalCode)
-                          : ('dashboard.notSet' | cxTranslate)
-                      }}
+                    <span>
+                      {{ user.defaultAddress.line1 }}
+                    </span>
+                    <span>
+                      {{ user.defaultAddress.line2 }}
                     </span>
                   </div>
-                  <button (click)="openUserChangeAddressModal()">
-                    <span class="notice fs-icon icon-edit"></span>
-                  </button>
+                  <div>
+                    <span>
+                      {{ user.defaultAddress.town }}
+                    </span>
+                    <span>
+                      {{ user.defaultAddress.postalCode }}
+                    </span>
+                  </div>
+                  <div class="text-right mt-3">
+                    <a class="link" (click)="showUserAddressForm()">
+                      {{ 'addressForm.editAddress' | cxTranslate }}
+                    </a>
+                  </div>
                 </div>
+                <ng-template #addAddress>
+                  <div class="text-right">
+                    <a class="link" (click)="showUserAddressForm()">
+                      {{ 'addressBook.addAddress' | cxTranslate }}
+                    </a>
+                  </div>
+                </ng-template>
               </li>
             </ul>
           </div>
+          <cx-fs-user-change-address-dialog
+            *ngIf="showAddressForm"
+            [customer]="user"
+            [userId]="userId"
+            (actionChange)="changedAddress($event)"
+          ></cx-fs-user-change-address-dialog>
         </div>
       </div>
     </div>
