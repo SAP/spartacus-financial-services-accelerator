@@ -20,6 +20,20 @@
         >
         </ng-container>
         <ng-container *ngIf="config.wizard">
+          <div class="col-12 my-3">
+            <div class="progress">
+              <div
+                class="progress-bar"
+                [style.width]="progressBar + '%'"
+                role="progressbar"
+                [attr.aria-valuenow]="progressBar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{ progressBar }}
+              </div>
+            </div>
+          </div>
           <div *ngIf="visibleIndex > 0" class="col-md-4 d-flex mt-3">
             <button
               class="btn btn-action w-100"
@@ -31,7 +45,7 @@
           </div>
           <div
             *ngIf="visibleElements.length > visibleIndex + 1"
-            class="col-md-4 d-flex ml-auto mt-3"
+            class="col-md-4 d-flex mt-3 ml-auto"
           >
             <button
               class="btn btn-action w-100"

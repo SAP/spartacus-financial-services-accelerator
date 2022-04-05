@@ -66,9 +66,11 @@ export class DynamicFormComponent
     public formConfig: DynamicFormsConfig
   ) {}
   @ViewChild('wizardForm') wizardForm: ElementRef<HTMLElement>;
+  @ViewChild('wizardFormGroup') wizardFormGroup: ElementRef<HTMLElement>;
   visibleElements: Element[] = [];
   children: Element[] = [];
   visibleIndex = 0;
+  progressBar: number;
 
   ngOnInit() {
     this.populatedInvalid$ = this.formComponentService.isPopulatedFormInvalid;
@@ -92,9 +94,9 @@ export class DynamicFormComponent
   }
 
   ngAfterViewInit(): void {
-    console.log(this.form);
     this.children = Array.from(this.wizardForm.nativeElement.children);
     this.visibleElements = this.children.filter(item => !item['hidden']);
+    this.progressBar = Math.round((1 / this.visibleElements.length) * 100);
     this.renderer.removeClass(
       this.wizardForm.nativeElement.children[0],
       'd-none'
@@ -103,6 +105,8 @@ export class DynamicFormComponent
 
   ngAfterViewChecked() {
     this.visibleElements = this.children.filter(item => !item['hidden']);
+    this.progressBar = Math.round((1 / this.visibleElements.length) * 100);
+    console.log(this.visibleElements.length);
   }
 
   previousSection(wizardFormGroup: HTMLElement) {
@@ -135,6 +139,9 @@ export class DynamicFormComponent
       this.visibleElements.length > availableGroup + 1 &&
       currentFormGroup.valid
     ) {
+      this.progressBar = Math.round(
+        ((availableGroup + 1) / this.visibleElements.length) * 100
+      );
       this.visibleIndex = availableGroup + 1;
       this.viewportScroller.scrollToPosition([0, 0]);
       this.renderer.removeClass(
