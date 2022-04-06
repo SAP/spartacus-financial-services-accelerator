@@ -80,12 +80,4 @@ export class ComparisonTableService {
       })
     );
   }
-
-  /**
-   * @deprecated since 2.0
-   * Service is no longer used anywhere, instead, cmsService.getComponentData() method is used directly in the component
-   */
-  getComparisonTabs(tabIds: string[]): Observable<CMSComparisonTabComponent>[] {
-    return tabIds.map(tabId => this.cmsService.getComponentData(tabId));
-  }
 }
