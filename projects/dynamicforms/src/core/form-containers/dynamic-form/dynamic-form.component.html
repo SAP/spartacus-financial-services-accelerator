@@ -1,4 +1,18 @@
 <ng-container *ngIf="form && config">
+  <div class="col-12 my-3">
+    <div class="progress">
+      <div
+        class="progress-bar"
+        [style.width]="progressBar + '%'"
+        role="progressbar"
+        [attr.aria-valuenow]="progressBar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        {{ progressBar }}
+      </div>
+    </div>
+  </div>
   <form #wizardForm [ngClass]="config.cssClass" [formGroup]="form">
     <ng-container *ngFor="let formGroup of config.formGroups">
       <div
@@ -20,20 +34,6 @@
         >
         </ng-container>
         <ng-container *ngIf="config.wizard">
-          <div class="col-12 my-3">
-            <div class="progress">
-              <div
-                class="progress-bar"
-                [style.width]="progressBar + '%'"
-                role="progressbar"
-                [attr.aria-valuenow]="progressBar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                {{ progressBar }}
-              </div>
-            </div>
-          </div>
           <div *ngIf="visibleIndex > 0" class="col-md-4 d-flex mt-3">
             <button
               class="btn btn-action w-100"
