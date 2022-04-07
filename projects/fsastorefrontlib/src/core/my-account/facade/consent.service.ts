@@ -8,7 +8,6 @@ import {
   Address,
   GlobalMessageService,
   GlobalMessageType,
-  Country,
 } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, combineLatest } from 'rxjs';
