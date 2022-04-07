@@ -15,6 +15,7 @@ import {
 import { COUNTRY_URL } from '../../../shared/util/constants/constants';
 import { filter, map } from 'rxjs/operators';
 import { OccValueListService } from '../../../occ/services/value-list/occ-value-list.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class FSAddressService extends UserAddressService {
@@ -87,7 +88,7 @@ export class FSAddressService extends UserAddressService {
     return address;
   }
 
-  getCountries() {
+  getCountries(): Observable<any> {
     return this.occValueListService.getValuesFromAPI(COUNTRY_URL).pipe(
       filter(result => result.values),
       map(result => {

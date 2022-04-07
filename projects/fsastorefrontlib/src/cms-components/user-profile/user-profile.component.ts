@@ -45,7 +45,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected renderer: Renderer2
   ) {}
 
-  @ViewChild('customerProfile', { static: false }) customerProfile: ElementRef;
+  @ViewChild('customerProfile') customerProfile: ElementRef;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
   seller: boolean;
