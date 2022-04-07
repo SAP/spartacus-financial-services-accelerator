@@ -126,6 +126,9 @@ export const fscommon = {
       dateOfBirth: {
         label: 'Date of Birth',
       },
+      address: {
+        label: 'Address Info',
+      },
     },
     checkout: {
       insurances_property_homeowners: 'Your Homeowners Insurance',

@@ -16,29 +16,12 @@ import {
 import { FormErrorsModule, ModalService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSAddressFormComponent } from './address-form.component';
-import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import createSpy = jasmine.createSpy;
+import { FSAddressService } from '../../../../core/user/facade/address.service';
 
-class MockUserService {
-  getTitles(): Observable<Title[]> {
-    return of();
-  }
-  loadTitles(): void {}
-}
-
-class MockUserAddressService {
-  getDeliveryCountries(): Observable<Country[]> {
-    return of();
-  }
-  loadDeliveryCountries(): void {}
-  getRegions(): Observable<Region[]> {
-    return of();
-  }
-  getAddresses(): Observable<Address[]> {
-    return of([]);
-  }
-}
-
+const mockRegions: Region[] = [
+  { isocode: 'CA-AB', isocodeShort: 'AB', name: 'Alberta' },
+];
 const mockUser: User = {
   firstName: 'John',
   lastName: 'Doe',
@@ -66,13 +49,33 @@ const mockCountries: Country[] = [
   },
 ];
 
+class MockUserService {
+  getTitles(): Observable<Title[]> {
+    return of();
+  }
+  loadTitles(): void {}
+}
+
+class MockUserAddressService {
+  getDeliveryCountries(): Observable<Country[]> {
+    return of();
+  }
+  loadDeliveryCountries(): void {}
+  getRegions(): Observable<Region[]> {
+    return of(mockRegions);
+  }
+  getAddresses(): Observable<Address[]> {
+    return of([]);
+  }
+}
+
 class MockModalService {
   open(): any {}
 }
 
-class MockOccValueListService {
-  getValuesFromAPI(): any {
-    return of({ results: [country] });
+class MockFSAddressService {
+  getCountries() {
+    return of();
   }
 }
 
@@ -85,6 +88,7 @@ describe('FSAddressFormComponent', () => {
   let userService: UserService;
   let mockGlobalMessageService: any;
   let mockModalService: MockModalService;
+  let fSAddressService: FSAddressService;
 
   beforeEach(
     waitForAsync(() => {
@@ -104,7 +108,7 @@ describe('FSAddressFormComponent', () => {
         providers: [
           { provide: ModalService, useValue: { open: () => {} } },
           { provide: UserService, useClass: MockUserService },
-          { provide: OccValueListService, useClass: MockOccValueListService },
+          { provide: FSAddressService, useClass: MockFSAddressService },
           { provide: UserAddressService, useClass: MockUserAddressService },
           { provide: GlobalMessageService, useValue: mockGlobalMessageService },
           { provide: ModalService, useClass: MockModalService },
@@ -117,6 +121,7 @@ describe('FSAddressFormComponent', () => {
 
       userService = TestBed.inject(UserService);
       userAddressService = TestBed.inject(UserAddressService);
+      fSAddressService = TestBed.inject(FSAddressService);
     })
   );
 
@@ -129,6 +134,7 @@ describe('FSAddressFormComponent', () => {
 
     spyOn(component.submitAddress, 'emit').and.callThrough();
     spyOn(component.backToAddress, 'emit').and.callThrough();
+    spyOn(fSAddressService, 'getCountries').and.callThrough();
   });
 
   it('should be created', () => {
@@ -140,7 +146,7 @@ describe('FSAddressFormComponent', () => {
       of(mockCountries)
     );
     spyOn(userAddressService, 'loadDeliveryCountries').and.stub();
-    spyOn(userAddressService, 'getRegions').and.returnValue(of([]));
+    spyOn(userAddressService, 'getRegions').and.callThrough();
     spyOn(userAddressService, 'getAddresses').and.returnValue(of([]));
     component.ngOnInit();
 
@@ -162,7 +168,7 @@ describe('FSAddressFormComponent', () => {
   it('should call ngOnInit without setting initial values for first & last name', () => {
     spyOn(userAddressService, 'getDeliveryCountries').and.returnValue(of([]));
     spyOn(userAddressService, 'loadDeliveryCountries').and.stub();
-    spyOn(userAddressService, 'getRegions').and.returnValue(of([]));
+    spyOn(userAddressService, 'getRegions').and.callThrough();
     spyOn(userAddressService, 'getAddresses').and.returnValue(of([]));
     component.user = null;
     component.ngOnInit();

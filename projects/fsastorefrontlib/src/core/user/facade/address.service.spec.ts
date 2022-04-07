@@ -2,6 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
   AddressValidation,
+  Country,
   StateWithUser,
   User,
   UserAddressConnector,
@@ -10,6 +11,7 @@ import { CheckoutDeliveryService } from '@spartacus/checkout/core';
 import { FSAddressService } from './address.service';
 import { of } from 'rxjs';
 import createSpy = jasmine.createSpy;
+import { OccValueListService } from '../../../occ/services/value-list/occ-value-list.service';
 
 const formContent = {
   personalDetails: {
@@ -21,12 +23,6 @@ const formContent = {
     country: 'RS',
   },
 };
-
-const user: User = {
-  firstName: 'Mock',
-  lastName: 'User',
-};
-
 const mockUser: User = {
   firstName: 'Mock',
   lastName: 'User',
@@ -38,6 +34,16 @@ const mockUser: User = {
 const mockAddressVerificationResult: AddressValidation = {
   decision: 'ACCEPT',
 };
+const mockCountries: Country[] = [
+  {
+    isocode: 'AD',
+    name: 'Andorra',
+  },
+  {
+    isocode: 'RS',
+    name: 'Serbia',
+  },
+];
 
 class MockCheckoutDeliveryService {
   setDeliveryAddress() {}
@@ -50,10 +56,17 @@ class MockUserAddressConnector implements Partial<UserAddressConnector> {
   );
 }
 
+class MockOccValueListService {
+  getValuesFromAPI() {
+    return of({ values: mockCountries });
+  }
+}
+
 describe('FSAddressService', () => {
   let service: FSAddressService;
   let store: Store<StateWithUser>;
   let checkoutDeliveryService: CheckoutDeliveryService;
+  let occValueListService: OccValueListService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
@@ -67,6 +80,10 @@ describe('FSAddressService', () => {
           provide: UserAddressConnector,
           useClass: MockUserAddressConnector,
         },
+        {
+          provide: OccValueListService,
+          useClass: MockOccValueListService,
+        },
       ],
     });
 
@@ -74,6 +91,7 @@ describe('FSAddressService', () => {
     spyOn(store, 'dispatch').and.callThrough();
     service = TestBed.inject(FSAddressService);
     checkoutDeliveryService = TestBed.inject(CheckoutDeliveryService);
+    occValueListService = TestBed.inject(OccValueListService);
   });
 
   it('should FSAddressService is injected', inject(
@@ -95,5 +113,13 @@ describe('FSAddressService', () => {
     spyOn(checkoutDeliveryService, 'createAndSetAddress').and.callThrough();
     service.createAddress(formContent, null);
     expect(checkoutDeliveryService.createAndSetAddress).toHaveBeenCalled();
+  });
+
+  it('should get countries', () => {
+    spyOn(occValueListService, 'getValuesFromAPI').and.callThrough();
+    service
+      .getCountries()
+      .subscribe(countries => expect(countries.length).toEqual(2))
+      .unsubscribe();
   });
 });

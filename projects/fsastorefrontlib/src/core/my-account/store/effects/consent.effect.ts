@@ -16,6 +16,7 @@ import {
 } from '@spartacus/core';
 import * as fromActions from '../actions';
 import { ConsentConnector } from '../../connectors/consent.connector';
+import { ConsentService } from '../../facade/consent.service';
 
 @Injectable()
 export class ConsentEffects {
@@ -23,7 +24,8 @@ export class ConsentEffects {
     private actions$: Actions,
     private routingService: RoutingService,
     private globalMessageService: GlobalMessageService,
-    private consentConnector: ConsentConnector
+    private consentConnector: ConsentConnector,
+    private fsConsentService: ConsentService
   ) {}
 
   loadConsents$ = createEffect(() =>
@@ -74,6 +76,7 @@ export class ConsentEffects {
           )
           .pipe(
             map((data: any) => {
+              this.fsConsentService.setUserAddressAdded(true);
               return new fromActions.CreateAddressSuccess(data);
             }),
             catchError(error =>
