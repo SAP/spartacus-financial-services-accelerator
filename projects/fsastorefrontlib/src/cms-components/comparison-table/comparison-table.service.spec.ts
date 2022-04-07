@@ -87,18 +87,6 @@ describe('ComparisonTableService', () => {
       .unsubscribe();
   });
 
-  it('should get comparison table tab data', () => {
-    const result: Observable<
-      CMSComparisonTabComponent
-    >[] = service.getComparisonTabs(['testComparisonTab']);
-    expect(result.length).toEqual(1);
-    result[0]
-      .subscribe(comparisonTabData =>
-        expect(comparisonTabData).toEqual(componentData)
-      )
-      .unsubscribe();
-  });
-
   it('should equalize min-height of all table-cells', inject(
     [RendererFactory2],
     (factory: RendererFactory2) => {

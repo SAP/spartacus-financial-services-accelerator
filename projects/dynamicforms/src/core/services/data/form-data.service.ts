@@ -31,14 +31,6 @@ export class FormDataService {
     return this.submittedForm.asObservable();
   }
 
-  /**
-   * @deprecated since 2.0
-   * Duplicated submit method
-   */
-  setSubmittedForm(formData?: YFormData) {
-    this.submittedForm.next(formData);
-  }
-
   saveFormData(formData: YFormData) {
     this.userIdService
       .getUserId()
