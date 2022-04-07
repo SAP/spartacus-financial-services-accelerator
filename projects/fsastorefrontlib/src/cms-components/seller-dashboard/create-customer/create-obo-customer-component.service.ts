@@ -5,6 +5,7 @@ import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 import { Title, UserProfileFacade } from '@spartacus/user/profile/root';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CustomFormValidators } from '@spartacus/storefront';
 
 @Injectable()
 export class CreateOBOCustomerComponentService {
@@ -19,7 +20,10 @@ export class CreateOBOCustomerComponentService {
   titles$: Observable<Title[]> = this.userProfile.getTitles();
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required,
+      CustomFormValidators.emailValidator,
+    ]),
     titleCode: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
