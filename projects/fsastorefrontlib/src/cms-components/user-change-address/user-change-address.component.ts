@@ -9,11 +9,11 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Address, Country, Region, UserAddressService } from '@spartacus/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
-import { OccValueListService } from '../../occ/services/value-list/occ-value-list.service';
+import { Observable, Subscription } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs/operators';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { FSUser } from '../../occ/occ-models/occ.models';
+import { FSAddressService } from '../../core/user/facade/address.service';
 
 @Component({
   selector: 'cx-fs-user-change-address-dialog',
@@ -24,6 +24,9 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
   @Input() customer: FSUser;
   @Input() userId: string;
   @Output() actionChange = new EventEmitter<string>();
+  private subscription = new Subscription();
+  countries$: Observable<Country[]>;
+  regions$: Observable<Region[]>;
   addressForm: FormGroup = this.fb.group({
     country: this.fb.group({
       isocode: [null, Validators.required],
@@ -32,16 +35,14 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
     line2: [''],
     town: ['', [Validators.required]],
     postalCode: ['', [Validators.required]],
+    region: this.fb.group({
+      isocode: [null, Validators.required],
+    }),
   });
-  countriesURL = '/catalogs/financialProductCatalog/valueLists/country';
-  countries$: Observable<Country[]>;
-  selectedCountry$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  regions$: Observable<Region[]>;
-  private subscription = new Subscription();
 
   constructor(
     protected fb: FormBuilder,
-    protected occValueListService: OccValueListService,
+    protected fSAddressService: FSAddressService,
     protected userAddressService: UserAddressService,
     protected fsConsentService: ConsentService
   ) {}
@@ -49,41 +50,26 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.customer?.defaultAddress) {
       this.addressForm.patchValue(this.customer?.defaultAddress);
-      this.selectedCountry$.next(this.addressForm.get('country.isocode').value);
-    }
-    this.countries$ = this.occValueListService
-      .getValuesFromAPI(this.countriesURL)
-      .pipe(
-        filter(result => result.values),
-        map(result => {
-          const options: Country[] = [];
-          result.values.forEach(item => {
-            options.push({
-              name: item.value,
-              isocode: item.key,
-            });
-          });
-          return options;
-        })
+      this.fsConsentService.setSelectedCountry(
+        this.addressForm.get('country.isocode').value
       );
-    this.regions$ = this.selectedCountry$.pipe(
+    }
+    this.countries$ = this.fSAddressService.getCountries();
+    this.regions$ = this.fsConsentService.selectedCountry$.pipe(
       switchMap(country => this.userAddressService.getRegions(country)),
       tap(regions => {
-        if (regions.length > 0) {
-          this.addressForm.addControl(
-            'region',
-            this.fb.group({
-              isocode: [
-                this.customer?.defaultAddress?.region?.isocode,
-                Validators.required,
-              ],
-            })
-          );
+        const regionControl = this.addressForm.get('region.isocode');
+        if (regions && regions.length > 0) {
+          regionControl.enable();
         } else {
-          this.addressForm.removeControl('region');
+          regionControl.disable();
         }
       })
     );
+    this.notifyAddedAddress();
+  }
+
+  notifyAddedAddress() {
     this.subscription.add(
       this.fsConsentService.userAddressAdded$
         .pipe(
@@ -100,7 +86,7 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
 
   countrySelected(country: Country): void {
     this.addressForm.get('country.isocode').setValue(country.isocode);
-    this.selectedCountry$.next(country.isocode);
+    this.fsConsentService.setSelectedCountry(country.isocode);
   }
 
   changeAddress() {

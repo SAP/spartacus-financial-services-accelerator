@@ -10,8 +10,8 @@ import {
 } from '@spartacus/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
+import { FSAddressService } from '../../core/user/facade/address.service';
 import { FSUserRole } from '../../occ/occ-models/occ.models';
-import { OccValueListService } from '../../occ/services/value-list/occ-value-list.service';
 import { UserChangeAddressComponent } from './user-change-address.component';
 
 const country = { isocode: 'AT', name: 'Austria' };
@@ -52,8 +52,8 @@ const mockCustomer = {
   name: firstName + ' ' + lastName,
 };
 
-class MockOccValueListService {
-  getValuesFromAPI() {
+class MockFSAddressService {
+  getCountries() {
     return of({ values: mockCountries });
   }
 }
@@ -66,6 +66,8 @@ class MockUserAddressService {
 
 class MockConsentService {
   userAddressAdded$ = new BehaviorSubject(true);
+  selectedCountry$ = new BehaviorSubject(true);
+  setSelectedCountry() {}
   setUserAddressAdded() {}
   createAddressForUser(): void {}
   updateAddressForUser() {
@@ -76,7 +78,7 @@ class MockConsentService {
 describe('UserChangeAddressComponent', () => {
   let component: UserChangeAddressComponent;
   let fixture: ComponentFixture<UserChangeAddressComponent>;
-  let occValueListService: OccValueListService;
+  let fSAddressService: FSAddressService;
   let userAddressService: UserAddressService;
   let fsConsentService: ConsentService;
 
@@ -87,8 +89,8 @@ describe('UserChangeAddressComponent', () => {
       providers: [
         FormBuilder,
         {
-          provide: OccValueListService,
-          useClass: MockOccValueListService,
+          provide: FSAddressService,
+          useClass: MockFSAddressService,
         },
         {
           provide: UserAddressService,
@@ -101,7 +103,7 @@ describe('UserChangeAddressComponent', () => {
       ],
     }).compileComponents();
 
-    occValueListService = TestBed.inject(OccValueListService);
+    fSAddressService = TestBed.inject(FSAddressService);
     userAddressService = TestBed.inject(UserAddressService);
     fsConsentService = TestBed.inject(ConsentService);
     fixture = TestBed.createComponent(UserChangeAddressComponent);

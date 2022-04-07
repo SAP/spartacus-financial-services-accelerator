@@ -8,6 +8,7 @@ import {
   Address,
   GlobalMessageService,
   GlobalMessageType,
+  Country,
 } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, combineLatest } from 'rxjs';
@@ -24,6 +25,8 @@ export class ConsentService {
   readonly selectedOBOCustomer$ = this.selectedOBOCustomerSource.asObservable();
   private userAddressAddedSource = new BehaviorSubject<boolean>(false);
   readonly userAddressAdded$ = this.userAddressAddedSource.asObservable();
+  protected selectedCountrySource = new BehaviorSubject<string>('');
+  readonly selectedCountry$ = this.selectedCountrySource.asObservable();
 
   constructor(
     protected store: Store<StateWithMyAccount>,
@@ -204,6 +207,10 @@ export class ConsentService {
   }
 
   setUserAddressAdded(changed: boolean) {
-    return this.userAddressAddedSource.next(changed);
+    this.userAddressAddedSource.next(changed);
+  }
+
+  setSelectedCountry(countryIsocode: string) {
+    this.selectedCountrySource.next(countryIsocode);
   }
 }

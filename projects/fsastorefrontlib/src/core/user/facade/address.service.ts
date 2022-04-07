@@ -4,6 +4,7 @@ import { CheckoutDeliveryService } from '@spartacus/checkout/core';
 import {
   Address,
   CommandService,
+  Country,
   StateWithProcess,
   StateWithUser,
   User,
@@ -11,6 +12,9 @@ import {
   UserAddressService,
   UserIdService,
 } from '@spartacus/core';
+import { COUNTRY_URL } from '../../../shared/util/constants/constants';
+import { filter, map } from 'rxjs/operators';
+import { OccValueListService } from '../../../occ/services/value-list/occ-value-list.service';
 
 @Injectable()
 export class FSAddressService extends UserAddressService {
@@ -19,7 +23,8 @@ export class FSAddressService extends UserAddressService {
     protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService,
     protected userAddressConnector: UserAddressConnector,
-    protected commandService: CommandService
+    protected commandService: CommandService,
+    protected occValueListService: OccValueListService
   ) {
     super(store, userIdService, userAddressConnector, commandService);
     this.loadAddresses();
@@ -80,5 +85,21 @@ export class FSAddressService extends UserAddressService {
       shippingAddress: true,
     };
     return address;
+  }
+
+  getCountries() {
+    return this.occValueListService.getValuesFromAPI(COUNTRY_URL).pipe(
+      filter(result => result.values),
+      map(result => {
+        const options: Country[] = [];
+        result.values.forEach(item => {
+          options.push({
+            name: item.value,
+            isocode: item.key,
+          });
+        });
+        return options;
+      })
+    );
   }
 }

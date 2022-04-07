@@ -1,8 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { User, UserAccountFacade } from '@spartacus/user/account/root';
@@ -38,9 +41,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected quoteService: QuoteService,
     protected policyService: PolicyService,
     protected claimService: ClaimService,
-    protected globalMessageService: GlobalMessageService
+    protected globalMessageService: GlobalMessageService,
+    protected renderer: Renderer2
   ) {}
 
+  @ViewChild('customerProfile', { static: false }) customerProfile: ElementRef;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
   seller: boolean;
@@ -111,10 +116,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   showUserAddressForm() {
     this.showAddressForm = true;
+    this.renderer.removeClass(this.customerProfile.nativeElement, 'slide-out');
   }
 
   changedAddress(action: string) {
     this.showAddressForm = false;
+    this.renderer.addClass(this.customerProfile.nativeElement, 'slide-out');
     if (action) {
       this.fsConsentService.loadCustomer(this.userId, this.customerId);
       this.globalMessageService.add(

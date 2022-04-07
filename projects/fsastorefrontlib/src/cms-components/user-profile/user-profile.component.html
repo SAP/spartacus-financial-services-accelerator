@@ -19,7 +19,7 @@
   </div>
   <div class="row">
     <div class="col-md-5 mb-5 mb-md-0">
-      <div class="box-shadow border border-color-3">
+      <div class="box-shadow border border-color-3 overflow-hidden">
         <h5 class="text-center py-3 mb-0">
           {{
             seller
@@ -27,9 +27,9 @@
               : ('dashboard.yourProfile' | cxTranslate)
           }}
         </h5>
-        <div class="user-profile-wrapper background-color-4 overflow-hidden">
+        <div #customerProfile class="user-profile-wrapper background-color-4">
           <div
-            class="user-profile bg-white border border-color-3 text-center slide-out"
+            class="user-profile bg-white border border-color-3 text-center"
             *ngIf="!showAddressForm"
           >
             <div class="user-image">
@@ -86,40 +86,29 @@
                 <span class="semi-bold pr-2"
                   >{{ 'fscommon.register.address.label' | cxTranslate }}:</span
                 >
-                <div
-                  class="notice"
-                  *ngIf="user.defaultAddress; else addAddress"
-                >
-                  <div>
+                <dl class="notice" *ngIf="user.defaultAddress; else addAddress">
+                  <dt>
                     {{ user.defaultAddress.country.name }}
-                  </div>
-                  <div>
-                    <span>
-                      {{ user.defaultAddress.line1 }}
-                    </span>
-                    <span>
-                      {{ user.defaultAddress.line2 }}
-                    </span>
-                  </div>
-                  <div>
-                    <span>
-                      {{ user.defaultAddress.town }}
-                    </span>
-                    <span>
-                      {{ user.defaultAddress.postalCode }}
-                    </span>
-                  </div>
+                  </dt>
+                  <dt>
+                    {{ user.defaultAddress.line1 }}
+                    {{ user.defaultAddress.line2 }}
+                  </dt>
+                  <dt>
+                    {{ user.defaultAddress.town }}
+                    {{ user.defaultAddress.postalCode }}
+                  </dt>
                   <div class="text-right mt-3">
-                    <a class="link" (click)="showUserAddressForm()">
+                    <span class="link" (click)="showUserAddressForm()">
                       {{ 'addressForm.editAddress' | cxTranslate }}
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </dl>
                 <ng-template #addAddress>
                   <div class="text-right">
-                    <a class="link" (click)="showUserAddressForm()">
+                    <span class="link" (click)="showUserAddressForm()">
                       {{ 'addressBook.addAddress' | cxTranslate }}
-                    </a>
+                    </span>
                   </div>
                 </ng-template>
               </li>
