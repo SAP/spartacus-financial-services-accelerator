@@ -10,10 +10,43 @@
             {{ headings[0] }}:
           </div>
           <span class="notice text-break">
-            {{ asset?.quoteId }}
-            {{ asset?.contractNumber }}
-            {{ asset?.claimNumber }}</span
-          >
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'quoteDetails',
+                  params: { quoteId: asset?.quoteId }
+                } | cxUrl
+              "
+            >
+              {{ asset?.quoteId }}
+            </a>
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'policyDetails',
+                  params: {
+                    policyId: asset?.policyNumber,
+                    contractId: asset?.contractNumber
+                  }
+                } | cxUrl
+              "
+            >
+              {{ asset?.contractNumber }}
+            </a>
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'claimDetails',
+                  params: { claimId: asset?.claimNumber }
+                } | cxUrl
+              "
+            >
+              {{ asset?.claimNumber }}
+            </a>
+          </span>
         </td>
         <td class="d-flex d-md-table-cell">
           <div class="mobile-label text-uppercase pr-2 d-md-none">

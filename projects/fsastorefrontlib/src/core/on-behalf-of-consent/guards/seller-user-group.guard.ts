@@ -9,12 +9,16 @@ import {
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable } from 'rxjs';
 import { filter, map, pluck } from 'rxjs/operators';
-import { FSUserRole } from '../../occ/occ-models/occ.models';
+import { FSUserRole } from '../../../occ/occ-models/occ.models';
 
+/**
+    Allows access if currently logged in customer is part of seller user group.
+    Prevents access to certain pages that should be approachable only by sellers/agents.
+*/
 @Injectable({
   providedIn: 'root',
 })
-export class SellerDashboardGuard implements CanActivate {
+export class SellerUserGroupGuard implements CanActivate {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected routingService: RoutingService,

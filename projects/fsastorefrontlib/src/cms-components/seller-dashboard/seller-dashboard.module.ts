@@ -21,7 +21,7 @@ import {
 } from '@spartacus/core';
 import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { SellerDashboardListComponent } from './seller-dashboard-list/seller-dashboard-list.component';
-import { SellerDashboardGuard } from './seller-dashboard.guard';
+import { SellerUserGroupGuard } from '../../core/on-behalf-of-consent/guards/seller-user-group.guard';
 import { SellerDashboardComponent } from './seller-dashboard.component';
 import { CreateOBOCustomerComponent } from './create-customer/create-obo-customer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,7 +32,7 @@ import { ConsentConnector } from '../../core';
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, SellerDashboardGuard],
+    canActivate: [AuthGuard, CmsPageGuard, SellerUserGroupGuard],
     data: {
       cxRoute: 'sellerDashboard',
       pageLabel: 'seller-dashboard',
@@ -41,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, SellerDashboardGuard],
+    canActivate: [AuthGuard, CmsPageGuard, SellerUserGroupGuard],
     data: {
       cxRoute: 'createOBOCustomer',
       pageLabel: 'create-OBOCustomer',
@@ -75,7 +75,7 @@ const routes: Routes = [
         },
         CreateOBOCustomerComponent: {
           component: CreateOBOCustomerComponent,
-          guards: [AuthGuard, SellerDashboardGuard],
+          guards: [AuthGuard, SellerUserGroupGuard],
           providers: [
             {
               provide: CreateOBOCustomerComponentService,

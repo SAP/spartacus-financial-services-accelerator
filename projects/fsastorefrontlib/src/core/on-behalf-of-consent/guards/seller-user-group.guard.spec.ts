@@ -3,8 +3,7 @@ import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { FSUser } from '@spartacus/fsa-storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { of } from 'rxjs';
-
-import { SellerDashboardGuard } from './seller-dashboard.guard';
+import { SellerUserGroupGuard } from './seller-user-group.guard';
 import createSpy = jasmine.createSpy;
 
 const mockUserDetails: FSUser = {
@@ -17,18 +16,18 @@ class MockUserAccountFacade implements Partial<UserAccountFacade> {
 }
 
 class MockGlobalMessageService {
-  add(arg) {}
+  add() {}
 }
 
 class MockRoutingService {
   go() {}
 }
 
-describe('SellerDashboardGuard', () => {
+describe('SellerUserGroupGuard', () => {
   let routingService: RoutingService;
   let mockedUserAccountFacade: UserAccountFacade;
   let globalMessageService: GlobalMessageService;
-  let guard: SellerDashboardGuard;
+  let guard: SellerUserGroupGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -41,14 +40,14 @@ describe('SellerDashboardGuard', () => {
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
       ],
     });
-    guard = TestBed.inject(SellerDashboardGuard);
+    guard = TestBed.inject(SellerUserGroupGuard);
     routingService = TestBed.inject(RoutingService);
     globalMessageService = TestBed.inject(GlobalMessageService);
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     spyOn(routingService, 'go').and.stub();
   });
 
-  it('should return true when admin role found', () => {
+  it('should return true when seller role found', () => {
     let result: boolean;
     mockUserDetails.roles = ['sellergroup'];
 
@@ -60,7 +59,7 @@ describe('SellerDashboardGuard', () => {
     expect(result).toEqual(true);
   });
 
-  it('should return false when customergroup role not found', () => {
+  it('should return false when customergroup role is found', () => {
     let result: boolean;
     mockUserDetails.roles = ['customergroup'];
 
