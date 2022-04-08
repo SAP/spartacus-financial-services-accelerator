@@ -16,6 +16,7 @@ import {
 } from '@spartacus/storefront';
 import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { AssetsTableModule } from '../assets-table/assets-table.module';
+import { UserChangeAddressModule } from '../user-change-address/user-change-address.module';
 import { UserProfileComponent } from './user-profile.component';
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
     AssetsTableModule,
     MediaModule,
     DateFormatConfigurationModule,
+    UserChangeAddressModule,
     RouterModule.forChild(routes),
   ],
   providers: [

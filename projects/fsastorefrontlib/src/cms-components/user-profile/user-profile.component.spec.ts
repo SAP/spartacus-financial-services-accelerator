@@ -6,6 +6,9 @@ import { PolicyService } from '../../core/my-account/facade/policy.service';
 import { ClaimService } from '../../core/my-account/facade/claim.service';
 import {
   Address,
+  GlobalMessage,
+  GlobalMessageService,
+  GlobalMessageType,
   I18nTestingModule,
   OCC_USER_ID_CURRENT,
   RoutingService,
@@ -52,6 +55,11 @@ const defaultAddress: Address = {
   postalCode: '11000',
   town: 'Belgrade',
   defaultAddress: true,
+  id: 'addressMockId',
+  line1: 'line1',
+  line2: 'line2',
+  region: { isocode: 'JP-27' },
+  country: { isocode: 'JP' },
 };
 
 const customer = {
@@ -133,6 +141,7 @@ const mockUser = {
   lastName: lastName,
   defaultAddress: defaultAddress,
   roles: roles,
+  name: firstName + ' ' + lastName,
 };
 
 const mockedClaims = {
@@ -226,6 +235,10 @@ class MockClaimService {
   }
 }
 
+class MockGlobalMessageService {
+  add(_message: GlobalMessage): void {}
+}
+
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
@@ -236,6 +249,7 @@ describe('UserProfileComponent', () => {
   let quoteService: QuoteService;
   let policyService: PolicyService;
   let claimService: ClaimService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -261,6 +275,10 @@ describe('UserProfileComponent', () => {
             useClass: MockPolicyService,
           },
           { provide: ClaimService, useClass: MockClaimService },
+          {
+            provide: GlobalMessageService,
+            useClass: MockGlobalMessageService,
+          },
         ],
         declarations: [UserProfileComponent, MockParseDatePipe],
       }).compileComponents();
@@ -271,6 +289,7 @@ describe('UserProfileComponent', () => {
       userAccountFacade = TestBed.inject(UserAccountFacade);
       quoteService = TestBed.inject(QuoteService);
       policyService = TestBed.inject(PolicyService);
+      globalMessageService = TestBed.inject(GlobalMessageService);
     })
   );
 
@@ -296,5 +315,19 @@ describe('UserProfileComponent', () => {
   it('should pick asset', () => {
     component.showAssetList([mockUser], 'test-class');
     expect(component.assets).toEqual([mockUser]);
+  });
+
+  it('should show user address form', () => {
+    component.showUserAddressForm();
+    expect(component.showUserAddressForm).toBeTruthy();
+  });
+
+  it('should display message when adress is changed', () => {
+    spyOn(globalMessageService, 'add').and.callThrough();
+    component.changedAddress('Add');
+    expect(globalMessageService.add).toHaveBeenCalledWith(
+      { key: 'addressForm.successfullyAddAddress' },
+      GlobalMessageType.MSG_TYPE_CONFIRMATION
+    );
   });
 });

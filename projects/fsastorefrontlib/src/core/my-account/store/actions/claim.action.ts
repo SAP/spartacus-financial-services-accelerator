@@ -7,21 +7,8 @@ export const DELETE_CLAIM_FAIL = '[Claim] Delete Claim Fail';
 export const LOAD_CLAIMS = '[Claim] Load Claims';
 export const LOAD_CLAIMS_SUCCESS = '[Claim] Load Claims Success';
 export const LOAD_CLAIMS_FAIL = '[Claim] Load Claims Fail';
-
-/**
- * @deprecated The const should not be used. Use LOAD_CLAIM_BY_ID instead
- */
-export const LOAD_CURRENT_CLAIM = '[Claim] Load Current Claim';
 export const LOAD_CLAIM_BY_ID = '[Claim] Load Claim By Id';
-/**
- * @deprecated The const should not be used. Use LOAD_CLAIM_BY_ID_FAIL instead
- */
-export const LOAD_CURRENT_CLAIM_FAIL = '[Claim] Load Current Claim Fail';
 export const LOAD_CLAIM_BY_ID_FAIL = '[Claim] Load Claim By Id Fail';
-/**
- * @deprecated The const should not be used. Use LOAD_CLAIM_BY_ID_SUCCESS instead
- */
-export const LOAD_CURRENT_CLAIM_SUCCESS = '[Claim] Load Current Claim Success';
 export const LOAD_CLAIM_BY_ID_SUCCESS = '[Claim] Load Claim By Id Success';
 
 export const CREATE_CLAIM = '[Claim] Create Claim';
@@ -63,37 +50,13 @@ export class LoadClaimsFail implements Action {
   readonly type = LOAD_CLAIMS_FAIL;
   constructor(public payload: any) {}
 }
-
-/**
- * @deprecated The action should not be used. Use LoadClaimById instead
- */
-export class LoadCurrentClaim implements Action {
-  readonly type = LOAD_CURRENT_CLAIM;
-  constructor(public payload: any) {}
-}
 export class LoadClaimById implements Action {
   readonly type = LOAD_CLAIM_BY_ID;
   constructor(public payload: any) {}
 }
 
-/**
- * @deprecated The action should not be used. Use LoadClaimByIdSuccess instead
- */
-export class LoadCurrentClaimSuccess implements Action {
-  readonly type = LOAD_CURRENT_CLAIM_SUCCESS;
-  constructor(public payload: any) {}
-}
-
 export class LoadClaimByIdSuccess implements Action {
   readonly type = LOAD_CLAIM_BY_ID_SUCCESS;
-  constructor(public payload: any) {}
-}
-
-/**
- * @deprecated The action should not be used. Use LoadClaimByIdFail instead
- */
-export class LoadCurrentClaimFail implements Action {
-  readonly type = LOAD_CURRENT_CLAIM_FAIL;
   constructor(public payload: any) {}
 }
 

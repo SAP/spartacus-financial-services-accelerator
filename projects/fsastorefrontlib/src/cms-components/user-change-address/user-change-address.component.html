@@ -1,0 +1,155 @@
+<div
+  *ngIf="countries$ | async as countries; else loading"
+  class="user-profile bg-white border border-color-3 slide-in"
+>
+  <form [formGroup]="addressForm">
+    <div class="form-group" formGroupName="country">
+      <ng-container>
+        <div *ngIf="countries.length !== 0">
+          <label class="label-content">
+            {{ 'addressForm.country' | cxTranslate }}
+          </label>
+          <ng-select
+            class="country-select"
+            formControlName="isocode"
+            [searchable]="true"
+            [clearable]="false"
+            [items]="countries"
+            bindLabel="name"
+            bindValue="isocode"
+            placeholder="{{ 'addressForm.selectOne' | cxTranslate }}"
+            (change)="countrySelected($event)"
+          >
+          </ng-select>
+          <cx-form-errors
+            [control]="addressForm.get('country.isocode')"
+          ></cx-form-errors>
+        </div>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="regions$ | async as regions">
+      <ng-container *ngIf="regions.length !== 0 && addressForm.get('region')">
+        <div class="form-group" formGroupName="region">
+          <label class="label-content">
+            {{ 'addressForm.state' | cxTranslate }}
+          </label>
+          <ng-select
+            class="region-select"
+            formControlName="isocode"
+            [searchable]="true"
+            [clearable]="false"
+            [items]="regions"
+            [bindLabel]="regions[0].name ? 'name' : 'isocode'"
+            [bindValue]="regions[0].name ? 'isocode' : 'region'"
+            [placeholder]="'addressForm.selectOne' | cxTranslate"
+          >
+          </ng-select>
+          <cx-form-errors
+            [control]="addressForm.get('region.isocode')"
+          ></cx-form-errors>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="form-group row">
+      <div class="col">
+        <label class="label-content">
+          {{ 'addressForm.streetName' | cxTranslate }}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.streetAddress' | cxTranslate"
+          formControlName="line1"
+        />
+        <cx-form-errors
+          [control]="addressForm.get('line1')"
+          [translationParams]="{
+            maxLength: addressForm.get('line1')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col">
+        <label class="label-content">
+          {{ 'addressForm.streetNumber' | cxTranslate }}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.aptSuite' | cxTranslate"
+          formControlName="line2"
+        />
+        <cx-form-errors
+          [control]="addressForm.get('line2')"
+          [translationParams]="{
+            maxLength: addressForm.get('line2')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-lg-6">
+        <label class="label-content">
+          {{ 'addressForm.city.label' | cxTranslate }}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.city.placeholder' | cxTranslate"
+          formControlName="town"
+        />
+        <cx-form-errors
+          [control]="addressForm.get('town')"
+          [translationParams]="{
+            maxLength: addressForm.get('town')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
+      </div>
+      <div class="col-lg-6">
+        <label class="label-content">
+          {{ 'addressForm.zipCode.label' | cxTranslate }}
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'addressForm.zipCode.placeholder' | cxTranslate"
+          formControlName="postalCode"
+        />
+        <cx-form-errors
+          [control]="addressForm.get('postalCode')"
+          [translationParams]="{
+            maxLength: addressForm.get('postalCode')?.errors?.maxlength
+              ?.requiredLength
+          }"
+        ></cx-form-errors>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="col-lg-6">
+      <button
+        class="btn btn-block btn-secondary"
+        type="button"
+        (click)="cancel()"
+      >
+        {{ 'common.cancel' | cxTranslate }}
+      </button>
+    </div>
+    <div class="col-lg-6 mt-3 mt-lg-0">
+      <button
+        class="btn btn-block btn-primary"
+        type="submit"
+        (click)="changeAddress()"
+      >
+        {{ 'common.save' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

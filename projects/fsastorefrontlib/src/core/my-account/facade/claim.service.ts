@@ -34,24 +34,6 @@ export class ClaimService {
       .unsubscribe();
   }
 
-  /**
-   * @deprecated The method should not be used. Use loadClaimById instead
-   */
-  loadCurrentClaim() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadClaimById({
-            userId: occUserId,
-            claimId: this.currentClaimId,
-          })
-        );
-      })
-      .unsubscribe();
-  }
-
   loadClaimById(claimId) {
     this.userIdService
       .getUserId()

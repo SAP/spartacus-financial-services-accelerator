@@ -18,6 +18,8 @@ export const defaultOccConsentConfig: FSOccConfig = {
         oboConsentAddresses:
           'users/${userId}/oboconsents/customers/${oboCustomerId}/addresses',
         oboUpdatePermission: 'users/${userId}/oboconsents/customers/permission',
+        oboConsentUpdateAddress:
+          'users/${userId}/oboconsents/customers/${oboCustomerId}/addresses/${addressId}',
       },
     },
   },

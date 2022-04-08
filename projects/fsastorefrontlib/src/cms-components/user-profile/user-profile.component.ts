@@ -1,12 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
+  Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { User, UserAccountFacade } from '@spartacus/user/account/root';
-import { RoutingService, UserIdService } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
 import { map } from 'rxjs/operators';
 
 import {
@@ -32,9 +40,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected userIdService: UserIdService,
     protected quoteService: QuoteService,
     protected policyService: PolicyService,
-    protected claimService: ClaimService
+    protected claimService: ClaimService,
+    protected globalMessageService: GlobalMessageService,
+    protected renderer: Renderer2
   ) {}
 
+  @ViewChild('customerProfile') customerProfile: ElementRef;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
   seller: boolean;
@@ -43,6 +54,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerClaims$: Observable<any>;
   assets: { [key: string]: any }[];
   assetSelected: string;
+  showAddressForm = false;
+  userId: string;
+  customerId: string;
 
   ngOnInit(): void {
     this.loadCustomerDetails();
@@ -57,9 +71,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       ])
         .pipe(
           map(([routingData, userId, user]) => {
-            const customerId = routingData?.state?.params?.customerId;
-            if (customerId) {
-              this.getSellerAssets(user, userId, customerId);
+            this.userId = userId;
+            this.customerId = routingData?.state?.params?.customerId;
+            if (this.customerId) {
+              this.getSellerAssets(user, userId, this.customerId);
             } else {
               this.getAssetsforCurrentUser();
             }
@@ -97,6 +112,25 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
     this.assetSelected = activeClass;
     this.assets = assetsChosen;
+  }
+
+  showUserAddressForm() {
+    this.showAddressForm = true;
+    this.renderer.removeClass(this.customerProfile.nativeElement, 'slide-out');
+  }
+
+  changedAddress(action: string) {
+    this.showAddressForm = false;
+    this.renderer.addClass(this.customerProfile.nativeElement, 'slide-out');
+    if (action) {
+      this.fsConsentService.loadCustomer(this.userId, this.customerId);
+      this.globalMessageService.add(
+        {
+          key: `addressForm.successfully${action}Address`,
+        },
+        GlobalMessageType.MSG_TYPE_CONFIRMATION
+      );
+    }
   }
 
   ngOnDestroy(): void {

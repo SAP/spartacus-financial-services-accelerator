@@ -61,6 +61,20 @@ export class ConsentConnector {
     return this.adapter.createAddressForUser(userId, oboCustomerId, address);
   }
 
+  updateAddressForUser(
+    userId: string,
+    oboCustomerId,
+    addressId: string,
+    address: Address
+  ): Observable<{}> {
+    return this.adapter.updateAddressForUser(
+      userId,
+      oboCustomerId,
+      addressId,
+      address
+    );
+  }
+
   updateOBOPermission(
     userId: string,
     oboConsentHolderUid: string,

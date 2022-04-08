@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  Country,
   GlobalMessageService,
   TranslationService,
   User,
@@ -15,8 +14,7 @@ import {
 } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { AddressFormComponent, ModalService } from '@spartacus/storefront';
-import { filter, map } from 'rxjs/operators';
-import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
+import { FSAddressService } from 'projects/fsastorefrontlib/src/core/user/facade/address.service';
 
 @Component({
   selector: 'cx-fs-address-form',
@@ -52,8 +50,6 @@ export class FSAddressFormComponent extends AddressFormComponent
     defaultAddress: [true],
   });
 
-  countriesURL = '/catalogs/financialProductCatalog/valueLists/country';
-
   constructor(
     protected fb: FormBuilder,
     protected userService: UserService,
@@ -61,7 +57,7 @@ export class FSAddressFormComponent extends AddressFormComponent
     protected globalMessageService: GlobalMessageService,
     protected modalService: ModalService,
     protected translationService: TranslationService,
-    protected occValueListService: OccValueListService
+    protected fSAddressService: FSAddressService
   ) {
     super(
       fb,
@@ -81,21 +77,7 @@ export class FSAddressFormComponent extends AddressFormComponent
     if (this.user?.lastName) {
       this.addressForm.controls.lastName.setValue(this.user.lastName);
     }
-    this.countries$ = this.occValueListService
-      .getValuesFromAPI(this.countriesURL)
-      .pipe(
-        filter(result => result.values),
-        map(result => {
-          const options: Country[] = [];
-          result.values.forEach(item => {
-            options.push({
-              name: item.value,
-              isocode: item.key,
-            });
-          });
-          return options;
-        })
-      );
+    this.countries$ = this.fSAddressService.getCountries();
   }
 
   verifyAddress(): void {

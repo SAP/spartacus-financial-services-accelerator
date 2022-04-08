@@ -19,7 +19,7 @@
   </div>
   <div class="row">
     <div class="col-md-5 mb-5 mb-md-0">
-      <div class="box-shadow border border-color-3">
+      <div class="box-shadow border border-color-3 overflow-hidden">
         <h5 class="text-center py-3 mb-0">
           {{
             seller
@@ -27,8 +27,11 @@
               : ('dashboard.yourProfile' | cxTranslate)
           }}
         </h5>
-        <div class="user-profile-wrapper background-color-4">
-          <div class="user-profile bg-white border border-color-3 text-center">
+        <div #customerProfile class="user-profile-wrapper background-color-4">
+          <div
+            class="user-profile bg-white border border-color-3 text-center"
+            *ngIf="!showAddressForm"
+          >
             <div class="user-image">
               <cx-media
                 [container]="user.thumbnail"
@@ -78,8 +81,45 @@
                   }}
                 </span>
               </li>
+              <hr />
+              <li class="d-flex justify-content-between">
+                <span class="semi-bold pr-2"
+                  >{{ 'fscommon.register.address.label' | cxTranslate }}:</span
+                >
+                <dl class="notice" *ngIf="user.defaultAddress; else addAddress">
+                  <dt>
+                    {{ user.defaultAddress.country.name }}
+                  </dt>
+                  <dt>
+                    {{ user.defaultAddress.line1 }}
+                    {{ user.defaultAddress.line2 }}
+                  </dt>
+                  <dt>
+                    {{ user.defaultAddress.town }}
+                    {{ user.defaultAddress.postalCode }}
+                  </dt>
+                  <div class="text-right mt-3">
+                    <span class="link" (click)="showUserAddressForm()">
+                      {{ 'addressForm.editAddress' | cxTranslate }}
+                    </span>
+                  </div>
+                </dl>
+                <ng-template #addAddress>
+                  <div class="text-right">
+                    <span class="link" (click)="showUserAddressForm()">
+                      {{ 'addressBook.addAddress' | cxTranslate }}
+                    </span>
+                  </div>
+                </ng-template>
+              </li>
             </ul>
           </div>
+          <cx-fs-user-change-address-dialog
+            *ngIf="showAddressForm"
+            [customer]="user"
+            [userId]="userId"
+            (actionChange)="changedAddress($event)"
+          ></cx-fs-user-change-address-dialog>
         </div>
       </div>
     </div>

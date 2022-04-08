@@ -104,6 +104,21 @@ export abstract class ConsentAdapter {
   ): Observable<{}>;
 
   /**
+   * Abstract method used to update address for chosen On-Behalf-Of Customer
+   *
+   * @param userId The `userId` the identifier of the consent holder
+   * @param oboCustomerId The `userId` the identifier of the On-Behalf-Of Customer
+   * @param addressId The `addressId` the identifier of the On-Behalf-Of Customer
+   * @param address The `address` the address data
+   */
+  abstract updateAddressForUser(
+    userId: string,
+    oboCustomerId: string,
+    addressId: string,
+    address: Address
+  ): Observable<{}>;
+
+  /**
    * Abstract method used to update permissions given to Consent Holder
    *
    * @param userId The `userId` identifier of the consent holder

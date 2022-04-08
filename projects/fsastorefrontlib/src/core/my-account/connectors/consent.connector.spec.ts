@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Address } from '@spartacus/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FSSearchConfig } from '../services/inbox-data.service';
 import { ConsentAdapter } from './consent.adapter';
 import { ConsentConnector } from './consent.connector';
@@ -61,12 +61,18 @@ class MockConsentAdapter extends ConsentAdapter {
           oboPermissionValue
       )
   );
+  updateAddressForUser = createSpy(
+    'ConsentAdapter.updateAddressForUser'
+  ).and.callFake((userId, oboCustomerId, addressId, address) =>
+    of('updateAddressForUser' + userId + oboCustomerId + addressId + address)
+  );
 }
 
 const user = 'user';
 const mockCustomerId = 'customerId';
 const cartCode = 'cartCode';
 const oboCustomer = 'customerToTransferCartUid';
+const addressId = 'addressId';
 const address: Address = {
   companyName: 'Test Company',
   defaultAddress: true,
@@ -146,6 +152,21 @@ describe('ConsentConnector', () => {
     expect(consentAdapter.createAddressForUser).toHaveBeenCalledWith(
       user,
       oboCustomer,
+      address
+    );
+  });
+
+  it('should call adapter to update address for user', () => {
+    consentConnector.updateAddressForUser(
+      user,
+      oboCustomer,
+      addressId,
+      address
+    );
+    expect(consentAdapter.updateAddressForUser).toHaveBeenCalledWith(
+      user,
+      oboCustomer,
+      addressId,
       address
     );
   });

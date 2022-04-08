@@ -161,6 +161,7 @@ export class OccConsentAdapter implements ConsentAdapter {
       .get(url)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   createAddressForUser(
     userId: string,
     oboCustomerId: string,
@@ -176,6 +177,25 @@ export class OccConsentAdapter implements ConsentAdapter {
 
     return this.http
       .post(url, address, { headers })
+      .pipe(catchError((error: any) => throwError(error)));
+  }
+
+  updateAddressForUser(
+    userId: string,
+    oboCustomerId: string,
+    addressId: string,
+    address: Address
+  ): Observable<{}> {
+    const url = this.occEndpointService.buildUrl('oboConsentUpdateAddress', {
+      urlParams: { userId, oboCustomerId, addressId },
+    });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    address = this.converterService.convert(address, ADDRESS_SERIALIZER);
+
+    return this.http
+      .patch(url, address, { headers })
       .pipe(catchError((error: any) => throwError(error)));
   }
 
