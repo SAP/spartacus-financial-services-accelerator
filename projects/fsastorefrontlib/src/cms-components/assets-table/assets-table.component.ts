@@ -18,4 +18,5 @@ export class AssetsTableComponent {
 
   @Input() headings: string[];
   @Input() assets: { [key: string]: any }[];
+  @Input() isSeller: boolean;
 }
