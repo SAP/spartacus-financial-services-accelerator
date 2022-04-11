@@ -34,7 +34,6 @@
       }
     }
     tr {
-      cursor: pointer;
       @include media-breakpoint-down(sm) {
         border-bottom: 1px solid var(--cx-color-3);
       }

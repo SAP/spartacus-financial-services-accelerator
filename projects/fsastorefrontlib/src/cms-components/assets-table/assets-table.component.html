@@ -4,20 +4,20 @@
       <th *ngFor="let heading of headings" scope="col">{{ heading }}</th>
     </thead>
     <tbody>
-      <tr class="position-relative" *ngFor="let asset of assets">
+      <tr
+        class="position-relative"
+        [ngClass]="{ pointer: !isSeller }"
+        *ngFor="let asset of assets"
+        (click)="resolveAssetUrl(asset)"
+      >
         <td class="d-flex d-md-table-cell">
           <div class="mobile-label text-uppercase pr-2 d-md-none">
             {{ headings[0] }}:
           </div>
           <span class="notice text-break">
-            <span
-              [ngClass]="{ link: !isSeller }"
-              (click)="resolveAssetUrl(asset)"
-            >
-              {{ asset?.quoteId }}
-              {{ asset?.contractNumber }}
-              {{ asset?.claimNumber }}
-            </span>
+            {{ asset?.quoteId }}
+            {{ asset?.contractNumber }}
+            {{ asset?.claimNumber }}
           </span>
         </td>
         <td class="d-flex d-md-table-cell">
