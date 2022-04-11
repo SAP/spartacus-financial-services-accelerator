@@ -9,10 +9,7 @@
           <div class="mobile-label text-uppercase pr-2 d-md-none">
             {{ headings[0] }}:
           </div>
-          <span
-            class="notice text-break"
-            [ngClass]="{ 'is-disabled': isSeller }"
-          >
+          <span class="notice text-break">
             <span
               [ngClass]="{ link: !isSeller }"
               (click)="resolveAssetUrl(asset)"

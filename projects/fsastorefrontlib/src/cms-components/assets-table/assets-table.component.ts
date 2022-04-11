@@ -22,7 +22,7 @@ export class AssetsTableComponent {
   @Input() isSeller: boolean;
 
   resolveAssetUrl(asset: { [key: string]: any }) {
-    if (asset) {
+    if (asset && !this.isSeller) {
       const assetRoute = asset.quoteId
         ? 'quoteDetails'
         : asset.policyNumber
