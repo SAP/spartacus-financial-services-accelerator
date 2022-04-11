@@ -13,42 +13,14 @@
             class="notice text-break"
             [ngClass]="{ 'is-disabled': isSeller }"
           >
-            <a
+            <span
               [ngClass]="{ link: !isSeller }"
-              [routerLink]="
-                {
-                  cxRoute: 'quoteDetails',
-                  params: { quoteId: asset?.quoteId }
-                } | cxUrl
-              "
+              (click)="resolveAssetUrl(asset)"
             >
               {{ asset?.quoteId }}
-            </a>
-            <a
-              [ngClass]="{ link: !isSeller }"
-              [routerLink]="
-                {
-                  cxRoute: 'policyDetails',
-                  params: {
-                    policyId: asset?.policyNumber,
-                    contractId: asset?.contractNumber
-                  }
-                } | cxUrl
-              "
-            >
               {{ asset?.contractNumber }}
-            </a>
-            <a
-              [ngClass]="{ link: !isSeller }"
-              [routerLink]="
-                {
-                  cxRoute: 'claimDetails',
-                  params: { claimId: asset?.claimNumber }
-                } | cxUrl
-              "
-            >
               {{ asset?.claimNumber }}
-            </a>
+            </span>
           </span>
         </td>
         <td class="d-flex d-md-table-cell">
