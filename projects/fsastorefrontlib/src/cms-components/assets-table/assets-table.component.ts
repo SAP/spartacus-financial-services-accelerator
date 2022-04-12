@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { RoutingService } from '@spartacus/core';
 
 /**
  * The Assets Table component currently provides a limited generic table DOM structure. It accepts 4 strings used as headings
@@ -14,8 +15,31 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssetsTableComponent {
-  constructor() {}
+  constructor(protected routingService: RoutingService) {}
 
   @Input() headings: string[];
   @Input() assets: { [key: string]: any }[];
+  @Input() isSeller: boolean;
+
+  resolveAssetUrl(asset: { [key: string]: any }) {
+    if (asset && !this.isSeller) {
+      const assetRoute = asset.quoteId
+        ? 'quoteDetails'
+        : asset.policyNumber
+        ? 'policyDetails'
+        : 'claimDetails';
+      const assetParams = asset.quoteId
+        ? { quoteId: asset.quoteId }
+        : asset.policyNumber
+        ? {
+            policyId: asset.policyNumber,
+            contractId: asset.contractNumber,
+          }
+        : { claimId: asset.claimNumber };
+      this.routingService.go({
+        cxRoute: assetRoute,
+        params: assetParams,
+      });
+    }
+  }
 }
