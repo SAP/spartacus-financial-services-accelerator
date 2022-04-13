@@ -1,6 +1,10 @@
 import * as fromAction from '../actions';
 import { QuoteState } from '../my-account-state';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const initialState: QuoteState = {
   quotes: [],
   quoteDetails: null,
@@ -8,6 +12,10 @@ export const initialState: QuoteState = {
   loaded: false,
 };
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export function reducer(
   state = initialState,
   action: fromAction.QuoteAction

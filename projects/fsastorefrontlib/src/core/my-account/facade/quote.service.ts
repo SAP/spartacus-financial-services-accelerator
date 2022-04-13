@@ -4,8 +4,18 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import {
+  EventService,
+  LanguageSetEvent,
+  LoginEvent,
+  LogoutEvent,
+  OrderEntry,
+  Query,
+  QueryService,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
+import { filter, map, mapTo, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCart,
   FSOrderEntry,
@@ -18,6 +28,12 @@ import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { QuoteConnector } from '../connectors/quote.connector';
+import { ProfileTagPushEvent } from '@spartacus/cds';
+import {
+  QuoteConfirmationPushEvent,
+  QuotePlacedEvent,
+} from '../../../cms-components/my-account/quote/quotes/quote.event';
 @Injectable()
 export class QuoteService {
   constructor(
@@ -26,11 +42,18 @@ export class QuoteService {
     protected userIdService: UserIdService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected query: QueryService,
+    protected quoteConnector: QuoteConnector,
+    protected eventService: EventService
   ) {}
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use connector directly, as we remove store for this feature.
+   */
   loadQuotes() {
     this.userIdService
       .getUserId()
@@ -43,6 +66,55 @@ export class QuoteService {
         )
       )
       .unsubscribe();
+  }
+
+  /**
+   * Listens to QuotePlacedEvent events
+   *
+   * @returns an observable emitting events that describe order confirmation page visits in a profiltag compliant way
+   * @see QuotePlacedEvent
+   * @see QuoteConfirmationPushEvent
+   */
+  quoteConfirmationPageVisited(): Observable<ProfileTagPushEvent> {
+    return this.eventService
+      .get(QuotePlacedEvent)
+      .pipe(mapTo(new QuoteConfirmationPushEvent()));
+  }
+
+  // /**
+  //  * Returns the quote reset triggers for the checkout query.
+  //  */
+  // protected getCheckoutQueryResetQuoteTriggers(): QueryNotifier[] {
+  //   return [
+  //     // we need to reset the query's state after the checkout is finished
+  //     QuotePlacedEvent,
+  //   ];
+  // }
+
+  // /**
+  //  * Returns the reset triggers for the checkout query.
+  //  */
+  // protected getQueryResetTriggers(): QueryNotifier[] {
+  //   return [
+  //     LogoutEvent,
+  //     LoginEvent,
+  //     ...this.getCheckoutQueryResetQuoteTriggers(),
+  //   ];
+  // }
+
+  protected quotesQuery: Query<any> = this.query.create(
+    () =>
+      this.userIdService
+        .getUserId()
+        .pipe(switchMap(userId => this.quoteConnector.getQuotes(userId))),
+    {
+      reloadOn: [LanguageSetEvent, QuotePlacedEvent],
+      resetOn: [LogoutEvent, LoginEvent],
+    }
+  );
+
+  getQuotesAndApplication(): Observable<any> {
+    return this.quotesQuery.get();
   }
 
   loadQuoteDetails(quoteId, occUserId) {
@@ -62,6 +134,10 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use connector directly, as we remove store for this feature.
+   */
   getQuotesLoaded(): Observable<boolean> {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }

@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { CartActions, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import {
+  CartActions,
+  EventService,
+  OCC_USER_ID_ANONYMOUS,
+} from '@spartacus/core';
 import { from, Observable } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { CartConnector } from '../../../cart/connectors/cart.connector';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/cart.action';
+import { QuotePlacedEvent } from '../../../../cms-components/my-account/quote/quotes/quote.event';
 @Injectable()
 export class CartEffects {
   addOptionalProduct$: Observable<any> = createEffect(() =>
@@ -61,6 +66,15 @@ export class CartEffects {
           )
           .pipe(
             concatMap((cart: any) => {
+              console.log(cart, 'cart startBundle effect');
+              this.eventService.dispatch(
+                {
+                  userId: payload.userId,
+                  activeCartId: payload.cartId,
+                  quote: cart,
+                },
+                QuotePlacedEvent
+              );
               const actions: Action[] = [];
               const cartCode =
                 payload.userId === OCC_USER_ID_ANONYMOUS
@@ -121,6 +135,7 @@ export class CartEffects {
   constructor(
     private actions$: Actions,
     private cartConnector: CartConnector,
-    private formDataStorageService: FormDataStorageService
+    private formDataStorageService: FormDataStorageService,
+    private eventService: EventService
   ) {}
 }

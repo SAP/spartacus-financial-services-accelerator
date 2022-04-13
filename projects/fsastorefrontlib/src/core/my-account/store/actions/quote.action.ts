@@ -1,8 +1,20 @@
 import { Action } from '@ngrx/store';
 import { StateUtils, MULTI_CART_DATA } from '@spartacus/core';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const LOAD_QUOTES = '[Quote] Load Quotes';
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const LOAD_QUOTES_SUCCESS = '[Quote] Load Quotes Success';
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const LOAD_QUOTES_FAIL = '[Quote] Load Quotes Fail';
 
 export const UPDATE_QUOTE = '[Quote] Update Quote';
@@ -19,16 +31,28 @@ export const LOAD_QUOTE_COMPARISON = '[Quote] Load Quote Comparison';
 export const LOAD_QUOTE_COMPARISON_SUCCESS = '[Quote] Load Comparison Success';
 export const LOAD_QUOTE_COMPARISON_FAIL = '[Quote] Load Comparison Fail';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export class LoadQuotes implements Action {
   readonly type = LOAD_QUOTES;
   constructor(public payload: any) {}
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export class LoadQuotesSuccess implements Action {
   readonly type = LOAD_QUOTES_SUCCESS;
   constructor(public payload: any) {}
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export class LoadQuotesFail implements Action {
   readonly type = LOAD_QUOTES_FAIL;
   constructor(public payload: any) {}

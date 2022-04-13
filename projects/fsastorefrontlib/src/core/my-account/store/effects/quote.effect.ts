@@ -8,6 +8,10 @@ import { QuoteConnector } from '../../connectors/quote.connector';
 
 @Injectable()
 export class QuoteEffects {
+  /**
+   * @deprecated since version 4.0.2
+   * Use connector directly, as we remove store for this feature.
+   */
   loadQuotes$: Observable<any> = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.LOAD_QUOTES),

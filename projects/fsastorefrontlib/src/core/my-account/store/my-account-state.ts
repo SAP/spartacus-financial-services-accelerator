@@ -20,6 +20,10 @@ export interface Quote {
   quoteId?: string;
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export interface QuoteState {
   quotes: Models.InsuranceQuote[];
   quoteDetails: {};

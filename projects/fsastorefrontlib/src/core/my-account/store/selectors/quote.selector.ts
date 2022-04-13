@@ -7,6 +7,10 @@ import {
   StateWithMyAccount,
 } from '../my-account-state';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const getQuotesState: MemoizedSelector<
   StateWithMyAccount,
   QuoteState
@@ -15,6 +19,10 @@ export const getQuotesState: MemoizedSelector<
   (quoteState: MyAccountState) => quoteState.quotes
 );
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const getQuotes: MemoizedSelector<
   StateWithMyAccount,
   any
@@ -30,6 +38,10 @@ export const getQuotesComparison: MemoizedSelector<
   any
 > = createSelector(getQuotesState, fromQuote.getQuotesComparison);
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const getQuotesLoaded: MemoizedSelector<
   StateWithMyAccount,
   boolean
