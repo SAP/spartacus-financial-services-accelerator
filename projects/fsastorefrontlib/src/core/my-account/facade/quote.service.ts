@@ -81,27 +81,6 @@ export class QuoteService {
       .pipe(mapTo(new QuoteConfirmationPushEvent()));
   }
 
-  // /**
-  //  * Returns the quote reset triggers for the checkout query.
-  //  */
-  // protected getCheckoutQueryResetQuoteTriggers(): QueryNotifier[] {
-  //   return [
-  //     // we need to reset the query's state after the checkout is finished
-  //     QuotePlacedEvent,
-  //   ];
-  // }
-
-  // /**
-  //  * Returns the reset triggers for the checkout query.
-  //  */
-  // protected getQueryResetTriggers(): QueryNotifier[] {
-  //   return [
-  //     LogoutEvent,
-  //     LoginEvent,
-  //     ...this.getCheckoutQueryResetQuoteTriggers(),
-  //   ];
-  // }
-
   protected quotesQuery: Query<any> = this.query.create(
     () =>
       this.userIdService

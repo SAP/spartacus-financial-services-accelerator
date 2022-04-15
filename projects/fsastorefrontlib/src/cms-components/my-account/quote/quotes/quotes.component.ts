@@ -6,10 +6,8 @@ import {
 } from '@angular/core';
 import {
   ActiveCartService,
-  EventService,
   GlobalMessageService,
   GlobalMessageType,
-  LanguageService,
   OccConfig,
   RoutingService,
   TranslationService,
@@ -33,13 +31,11 @@ export class QuotesComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected cartService: ActiveCartService,
     protected policyChartDataService: PolicyChartDataService,
-    protected languageService: LanguageService,
     protected globalMessageService: GlobalMessageService,
     protected translation: TranslationService
   ) {}
 
   private subscription = new Subscription();
-  // quotesLoaded$ = this.quoteService.getQuotesLoaded();
   quotesLoaded$ = this.quoteService.getQuotesAndApplication();
   quotes: InsuranceQuote[];
   baseUrl: string = this.config.backend.occ.baseUrl;
@@ -51,32 +47,9 @@ export class QuotesComponent implements OnInit, OnDestroy {
   language: string;
 
   ngOnInit() {
-    // this.events.get(QuotePlacedEvent).subscribe(data => {
-    //   console.log(data, 'data QuotePlacedEvent');
-    //   this.quotesLoaded$ = this.quoteService.getQuotesAndApplication();
-    // });
-    this.quoteService.quoteConfirmationPageVisited();
-    this.quotesLoaded$.subscribe(data => console.log(data, 'quotesLoaded'));
-    // this.quoteService.loadQuotes();
+    // this.quoteService.quoteConfirmationPageVisited();
     this.groupQuotesByCategory();
-    // this.changeLanguage();
   }
-
-  // changeLanguage() {
-  //   this.subscription.add(
-  //     this.languageService
-  //       .getActive()
-  //       .pipe(
-  //         tap(lang => {
-  //           if (this.language && this.language !== lang) {
-  //             this.quoteService.loadQuotes();
-  //           }
-  //           this.language = lang;
-  //         })
-  //       )
-  //       .subscribe()
-  //   );
-  // }
 
   selectedQuoteFromQuoteDetails() {
     this.subscription.add(
@@ -159,7 +132,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
   protected groupQuotesByCategory() {
     this.subscription.add(
       this.quoteService
-        // .getQuotes()
         .getQuotesAndApplication()
         .pipe(
           filter(quotes => quotes && quotes.length !== 0),
@@ -222,7 +194,6 @@ export class QuotesComponent implements OnInit, OnDestroy {
     }
     this.subscription.add(
       this.quoteService
-        // .getQuotes()
         .getQuotesAndApplication()
         .pipe(
           map(quotes => {
