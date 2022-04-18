@@ -39,7 +39,7 @@ export class EnrichedResponsiveBannerComponent implements OnInit, OnDestroy {
               padding: this.configStyles?.textBoxPadding,
               'text-align': this.configStyles?.textBoxTextPosition,
               'max-width': boxView ? this.configStyles?.textBoxMaxWidth : '',
-              'position': this.configStyles?.position,
+              position: this.configStyles?.position,
             };
             this.bannerClasses = `${this.getVerticalClass(this.configStyles)} ${
               boxView
