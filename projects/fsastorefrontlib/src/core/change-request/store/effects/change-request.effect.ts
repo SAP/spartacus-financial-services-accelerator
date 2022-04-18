@@ -68,6 +68,7 @@ export class ChangeRequestEffects {
       ofType(fromActions.SIMULATE_CHANGE_REQUEST),
       map((action: fromActions.SimulateChangeRequest) => action.payload),
       mergeMap(payload => {
+        console.log(payload, 'payload effect ');
         return this.changeRequestConnector
           .simulateChangeRequest(
             payload.userId,
@@ -76,6 +77,7 @@ export class ChangeRequestEffects {
           )
           .pipe(
             switchMap((changeRequest: any) => {
+              console.log(changeRequest, 'changeRequest effect ');
               return [
                 new fromActions.SimulateChangeRequestSuccess(changeRequest),
                 new fromActions.UpdateChangeRequest({

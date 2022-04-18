@@ -22,6 +22,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
       this.changeRequest$
         .pipe(
           map(changeRequestData => {
+            this.optionalCoverages = [];
             const optionalProducts = changeRequestData?.insurancePolicy?.optionalProducts.filter(
               optionalProduct => !optionalProduct.isMandatory
             );
@@ -46,6 +47,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
         potentialCoverage.coverageIsIncluded = true;
       }
     });
+    // console.log(this.optionalCoverages, 'optionalCoverages addCoverage');
   }
 
   removeCoverage(coverage: any) {
@@ -56,10 +58,13 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
         potentialCoverage.coverageIsIncluded = false;
       }
     });
+    // console.log(this.optionalCoverages, 'optionalCoverages removeCoverage');
   }
 
   simulateChanges(changeRequestData) {
+    console.log(changeRequestData, 'changeRequestData simulateChanges');
     if (this.isPolicyChanged()) {
+      console.log('policy changed');
       const optionalProducts = [];
       this.optionalCoverages.forEach(coverage => {
         if (coverage.coverageIsIncluded) {
@@ -71,6 +76,8 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
           });
         }
       });
+      console.log(optionalProducts, 'optionalProducts simulateChanges');
+      console.log(this.optionalCoverages, 'optionalCoverages simulateChanges');
       this.simulateChangeRequest({
         requestId: changeRequestData.requestId,
         insurancePolicy: {
