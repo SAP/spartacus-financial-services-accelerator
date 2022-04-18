@@ -68,6 +68,7 @@ export class QuoteService {
       .unsubscribe();
   }
 
+  // Check if this needed at all
   /**
    * Listens to QuotePlacedEvent events
    *
