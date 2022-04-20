@@ -41,23 +41,13 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
     }
   }
 
-  addCoverage(idx: number) {
+  toggleCoverage(idx: number, newCoverageStatus) {
     this.resolveCoverageChange(idx);
-    const isIncluded = { ...this.optionalCoverages[idx] };
-    isIncluded.coverageIsIncluded = true;
+    const included = { ...this.optionalCoverages[idx] };
+    included.coverageIsIncluded = !newCoverageStatus;
     this.optionalCoverages = this.optionalCoverages.map(
       (potentialCoverage, index) =>
-        idx !== index ? potentialCoverage : isIncluded
-    );
-  }
-
-  removeCoverage(idx: number) {
-    this.resolveCoverageChange(idx);
-    const notIncluded = { ...this.optionalCoverages[idx] };
-    notIncluded.coverageIsIncluded = false;
-    this.optionalCoverages = this.optionalCoverages.map(
-      (potentialCoverage, index) =>
-        idx !== index ? potentialCoverage : notIncluded
+        idx !== index ? potentialCoverage : included
     );
   }
 
@@ -81,14 +71,6 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
         },
         configurationSteps: changeRequestData.configurationSteps,
       });
-    }
-  }
-
-  toggleCoverage(idx: number) {
-    if (!this.checkCoverageChanged.includes(idx)) {
-      this.checkCoverageChanged.push(idx);
-    } else {
-      this.checkCoverageChanged.splice(idx, 1);
     }
   }
 }

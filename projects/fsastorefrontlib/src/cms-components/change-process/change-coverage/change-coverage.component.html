@@ -84,22 +84,16 @@
       <h6>{{ coverage.coverageProduct?.name }}</h6>
     </div>
     <div class="col-12 col-md-3 align-self-center text-center">
-      <ng-container *ngIf="coverage.coverageIsIncluded">
-        <button
-          class="secondary-button btn-block text-capitalize"
-          (click)="removeCoverage(idx)"
-        >
-          {{ 'common.remove' | cxTranslate }}
-        </button>
-      </ng-container>
-      <ng-container *ngIf="!coverage.coverageIsIncluded">
-        <button
-          class="secondary-button btn-block text-capitalize"
-          (click)="addCoverage(idx)"
-        >
-          {{ 'fscommon.add' | cxTranslate }}
-        </button>
-      </ng-container>
+      <button
+        class="secondary-button btn-block text-capitalize"
+        (click)="toggleCoverage(idx, coverage.coverageIsIncluded)"
+      >
+        {{
+          coverage.coverageIsIncluded
+            ? ('common.remove' | cxTranslate)
+            : ('fscommon.add' | cxTranslate)
+        }}
+      </button>
     </div>
   </div>
 </ng-template>
