@@ -200,12 +200,13 @@ describe('ChangeCoverageComponent', () => {
       coverageProduct: {
         code: product1,
       },
+      coverageIsIncluded: false,
     };
 
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
-    component.addCoverage(coverage);
+    component.toggleCoverage(0, coverage.coverageIsIncluded);
     component.simulateChanges(mockChangeRequest);
     expect(component.optionalCoverages[0].coverageIsIncluded).toEqual(true);
   });
@@ -217,13 +218,14 @@ describe('ChangeCoverageComponent', () => {
       coverageProduct: {
         code: product1,
       },
+      coverageIsIncluded: true,
     };
 
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
 
-    component.removeCoverage(coverage);
+    component.toggleCoverage(0, coverage.coverageIsIncluded);
     expect(component.optionalCoverages[0].coverageIsIncluded).toEqual(false);
   });
 

@@ -30,9 +30,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   configurationSteps: FSStepData[];
   activeStepIndex: number;
 
-  changeRequest$: Observable<
-    any
-  > = this.changeRequestService.getChangeRequest();
+  changeRequest$: Observable<any>;
 
   subscription = new Subscription();
 
@@ -42,6 +40,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         .getChangeRequestError()
         .subscribe(error => this.onError(error))
     );
+    this.changeRequest$ = this.changeRequestService.getChangeRequest();
     this.subscription.add(
       this.changeRequest$
         .pipe(

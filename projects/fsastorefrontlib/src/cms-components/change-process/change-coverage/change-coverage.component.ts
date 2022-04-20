@@ -41,7 +41,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
     }
   }
 
-  toggleCoverage(idx: number, newCoverageStatus) {
+  toggleCoverage(idx: number, newCoverageStatus: boolean) {
     this.resolveCoverageChange(idx);
     const included = { ...this.optionalCoverages[idx] };
     included.coverageIsIncluded = !newCoverageStatus;
