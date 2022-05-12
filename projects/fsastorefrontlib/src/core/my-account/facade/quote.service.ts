@@ -18,6 +18,7 @@ import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+
 @Injectable()
 export class QuoteService {
   constructor(
@@ -31,6 +32,10 @@ export class QuoteService {
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   loadQuotes() {
     this.userIdService
       .getUserId()
@@ -45,6 +50,10 @@ export class QuoteService {
       .unsubscribe();
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   loadQuoteDetails(quoteId, occUserId) {
     this.store.dispatch(
       new fromAction.LoadQuoteDetails({
@@ -54,14 +63,26 @@ export class QuoteService {
     );
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   getQuotes() {
     return this.store.pipe(select(fromQuoteStore.getQuotes));
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   getQuoteDetails(): Observable<any> {
     return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   getQuotesLoaded(): Observable<boolean> {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
@@ -162,7 +183,10 @@ export class QuoteService {
       return of([]);
     }
   }
-
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   bindQuote(cartId: string) {
     this.userIdService
       .getUserId()
@@ -178,7 +202,10 @@ export class QuoteService {
       )
       .unsubscribe();
   }
-
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   underwriteQuote(cartId: string) {
     this.userIdService
       .getUserId()
@@ -194,7 +221,10 @@ export class QuoteService {
       )
       .unsubscribe();
   }
-
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   updateQuote(cartId: string, priceAttributes: any) {
     this.userIdService
       .getUserId()
@@ -211,13 +241,19 @@ export class QuoteService {
       )
       .unsubscribe();
   }
-
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   loadQuotesComparison(cartCodes: string[], userId?: string): void {
     this.store.dispatch(
       new fromAction.LoadQuoteComparison({ cartCodes, userId })
     );
   }
-
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
   getQuotesComparison(): Observable<any> {
     return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
   }

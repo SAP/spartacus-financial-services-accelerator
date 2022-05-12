@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   CmsPageGuard,
@@ -22,14 +21,15 @@ import {
   TranslatePipe,
 } from '@spartacus/core';
 
-import { QuotesComponent } from './quotes/quotes.component';
-import { QuoteDetailsComponent } from './quote-details/quote-details.component';
-import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
-import { QuoteService } from '../../../core/my-account/facade/quote.service';
+// import { QuotesComponent } from './quotes/quotes.component';
+// import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
+// import { QuoteDetailsComponent } from './quote-details/quote-details.component';
+// import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
-import { BillingEventValuePipe } from './../../../shared/util/helpers/pipe/billing-event-value.pipe';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { BillingEventValuePipe } from '../../../shared/util/helpers/pipe/billing-event-value.pipe';
 import { BankingEntryValuePipe } from '../../../shared/util/helpers/pipe/banking-entry-value.pipe';
 
 const routes: Routes = [
@@ -89,20 +89,8 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [
-    QuotesComponent,
-    QuoteDetailsComponent,
-    QuoteComparisonComponent,
-    BillingEventValuePipe,
-    BankingEntryValuePipe,
-  ],
-  exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
-  providers: [
-    QuoteService,
-    QuoteConnector,
-    PolicyChartDataService,
-    TranslatePipe,
-  ],
-  entryComponents: [QuotesComponent],
+  // declarations: [BillingEventValuePipe, BankingEntryValuePipe],
+  exports: [],
+  providers: [QuoteConnector, PolicyChartDataService, TranslatePipe],
 })
-export class QuoteModule {}
+export class QuotesApplicationsModule {}

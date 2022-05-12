@@ -1,6 +1,10 @@
 import * as fromAction from '../actions';
 import { QuoteState } from '../my-account-state';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export const initialState: QuoteState = {
   quotes: [],
   quoteDetails: null,
@@ -8,6 +12,10 @@ export const initialState: QuoteState = {
   loaded: false,
 };
 
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export function reducer(
   state = initialState,
   action: fromAction.QuoteAction
@@ -47,9 +55,24 @@ export function reducer(
   }
   return state;
 }
-
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export const getQuotes = (state: QuoteState) => state.quotes;
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export const getQuote = (state: QuoteState) => state.quoteDetails;
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export const getQuotesComparison = (state: QuoteState) =>
   state.quotesComparison;
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export const getLoaded = (state: QuoteState) => state.loaded;

@@ -4,7 +4,6 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { combineLatest, Subscription } from 'rxjs';
 import {
   ActiveCartService,
   GlobalMessageService,
@@ -13,12 +12,15 @@ import {
   OccConfig,
   RoutingService,
   TranslationService,
+  UserIdService,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, take, tap, switchMap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
+import { QuoteConnector } from '../../../../core/my-account/connectors/quote.connector';
 
 @Component({
   selector: 'cx-fs-quotes',
@@ -34,7 +36,9 @@ export class QuotesComponent implements OnInit, OnDestroy {
     protected policyChartDataService: PolicyChartDataService,
     protected languageService: LanguageService,
     protected globalMessageService: GlobalMessageService,
-    protected translation: TranslationService
+    protected translation: TranslationService,
+    protected userIdService: UserIdService,
+    protected quoteConnector: QuoteConnector
   ) {}
 
   private subscription = new Subscription();
@@ -47,12 +51,29 @@ export class QuotesComponent implements OnInit, OnDestroy {
   quotesByCategory: { [key: string]: any[] };
   selectedQuote: InsuranceQuote;
   language: string;
+  fsQuotes$: Observable<InsuranceQuote[]> = this.userIdService.getUserId().pipe(
+    take(1),
+    switchMap(occUserId => this.quoteConnector.getQuotes(occUserId))
+  );
 
   ngOnInit() {
-    this.quoteService.loadQuotes();
+    // this.quoteService.loadQuotes();
+    // this.loadQuotes();
     this.groupQuotesByCategory();
     this.changeLanguage();
   }
+
+  // loadQuotes() {
+  //   this.subscription.add(
+  //     this.userIdService
+  //       .getUserId()
+  //       .pipe(
+  //         take(1),
+  //         switchMap(occUserId => this.quoteConnector.getQuotes(occUserId))
+  //       )
+  //       .subscribe()
+  //   );
+  // }
 
   changeLanguage() {
     this.subscription.add(
