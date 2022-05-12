@@ -29,8 +29,7 @@ import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
-import { BillingEventValuePipe } from './../../../shared/util/helpers/pipe/billing-event-value.pipe';
-import { BankingEntryValuePipe } from '../../../shared/util/helpers/pipe/banking-entry-value.pipe';
+import { ContextValueModule } from '../../../shared/util/helpers/pipe/context-value/context-value.module';
 
 const routes: Routes = [
   {
@@ -74,6 +73,7 @@ const routes: Routes = [
     UrlModule,
     AccordionModule,
     NgbTooltipModule,
+    ContextValueModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -93,8 +93,6 @@ const routes: Routes = [
     QuotesComponent,
     QuoteDetailsComponent,
     QuoteComparisonComponent,
-    BillingEventValuePipe,
-    BankingEntryValuePipe,
   ],
   exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
   providers: [

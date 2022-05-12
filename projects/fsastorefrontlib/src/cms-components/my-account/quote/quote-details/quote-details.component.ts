@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Cart, RoutingService, UserIdService } from '@spartacus/core';
+import { RoutingService, UserIdService } from '@spartacus/core';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
+import { FSCart, InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-quote-details',
@@ -14,7 +14,7 @@ import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 export class QuoteDetailsComponent implements OnInit, OnDestroy {
   quoteLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
   quote$: Observable<InsuranceQuote> = this.quoteService.getQuoteDetails();
-  cart$: Observable<Cart>;
+  cart$: Observable<FSCart>;
   subscription = new Subscription();
   userId: string;
   quoteCodeForCompare: string;

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TranslatePipe } from '@spartacus/core';
-import { OneTimeChargeEntry } from '../../../../occ/occ-models/occ.models';
+import { OneTimeChargeEntry } from '../../../../../occ/occ-models/occ.models';
 
 @Pipe({
   name: 'cxFsBillingEventValue',

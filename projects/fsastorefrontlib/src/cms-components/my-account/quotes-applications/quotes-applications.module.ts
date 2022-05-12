@@ -18,7 +18,6 @@ import {
   RoutesConfig,
   RoutingConfig,
   UrlModule,
-  TranslatePipe,
 } from '@spartacus/core';
 
 // import { QuotesComponent } from './quotes/quotes.component';
@@ -91,6 +90,6 @@ const routes: Routes = [
   ],
   // declarations: [BillingEventValuePipe, BankingEntryValuePipe],
   exports: [],
-  providers: [QuoteConnector, PolicyChartDataService, TranslatePipe],
+  providers: [QuoteConnector, PolicyChartDataService],
 })
 export class QuotesApplicationsModule {}

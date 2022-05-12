@@ -5,6 +5,7 @@ import {
   Category,
   Consent,
   ConsentTemplate,
+  Images,
   Occ,
   OrderEntry,
   Price,
@@ -102,6 +103,12 @@ export interface InsuranceQuote {
   insuredObjectList?: InsuredObjectList;
   renewal?: boolean;
   original?: boolean;
+  startDate?: Date;
+  expiryDate?: Date;
+  policyId?: string;
+  planName?: string;
+  isExpired?: boolean;
+  quoteImages?: Images;
 }
 
 export interface OBOConsent extends Consent {
