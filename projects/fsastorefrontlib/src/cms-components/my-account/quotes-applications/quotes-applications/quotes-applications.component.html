@@ -3,8 +3,8 @@
 </h2>
 
 <ng-container *ngIf="fsQuotes$ | async; else loading">
-  <div *ngIf="quotes?.length > 0; else noQuotes">
-    <div class="row mb-5">
+  <ng-container *ngIf="quotes?.length > 0; else noQuotes">
+    <!-- <div class="row mb-5">
       <div class="col-md-5 z-index-1">
         <div class="row">
           <span class="col-12 label-content">{{
@@ -42,7 +42,7 @@
           {{ 'quote.compareQuotes' | cxTranslate }}
         </button>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div *ngFor="let quote of quotes" class="col-md-6 d-flex">
         <div class="info-card">
@@ -112,7 +112,7 @@
                 <span class="image-wrapper text-center">
                   <cx-media
                     class="image-item"
-                    [container]="quote.defaultCategory.image"
+                    [container]="quote.quoteImages"
                   ></cx-media>
                 </span>
               </div>
@@ -138,13 +138,13 @@
                   >
                     <input
                       #checkbox
-                      (click)="selectQuote(checkbox.checked, quote, quotes)"
                       class="form-check-input mt-0"
                       type="checkbox"
                       value="{{ quote.cartCode }}"
                       id="{{ quote.cartCode }}"
                       [disabled]="disabledQuoteCodes?.includes(quote.cartCode)"
                       [checked]="quoteCodesForCompare.includes(quote.cartCode)"
+                      (click)="selectQuote(checkbox.checked, quote, quotes)"
                     />
                     <label class="mb-0" for="{{ quote.cartCode }}">{{
                       'quote.select' | cxTranslate
@@ -179,7 +179,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>

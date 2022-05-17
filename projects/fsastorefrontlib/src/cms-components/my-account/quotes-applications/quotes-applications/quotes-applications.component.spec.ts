@@ -15,7 +15,7 @@ import {
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { QuotesComponent } from './quotes.component';
+import { QuotesApplicationsComponent } from './quotes-applications.component';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
@@ -172,9 +172,9 @@ class MockTranslationService {
   }
 }
 
-describe('QuotesComponent', () => {
-  let component: QuotesComponent;
-  let fixture: ComponentFixture<QuotesComponent>;
+describe('QuotesApplicationsComponent', () => {
+  let component: QuotesApplicationsComponent;
+  let fixture: ComponentFixture<QuotesApplicationsComponent>;
   let quoteService: QuoteService;
   let routingService: RoutingService;
   let cartService: ActiveCartService;
@@ -187,7 +187,7 @@ describe('QuotesComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-        declarations: [QuotesComponent],
+        declarations: [QuotesApplicationsComponent],
         providers: [
           {
             provide: QuoteService,
@@ -229,7 +229,7 @@ describe('QuotesComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuotesComponent);
+    fixture = TestBed.createComponent(QuotesApplicationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     quoteService = TestBed.inject(QuoteService);

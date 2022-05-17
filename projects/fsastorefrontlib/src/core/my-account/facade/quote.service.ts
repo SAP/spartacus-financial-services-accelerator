@@ -18,6 +18,7 @@ import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { QuoteConnector } from '../connectors/quote.connector';
 
 @Injectable()
 export class QuoteService {
@@ -27,10 +28,22 @@ export class QuoteService {
     protected userIdService: UserIdService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected quoteConnector: QuoteConnector
   ) {}
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
+
+  getQuotesAndApplications(): Observable<InsuranceQuote[]> {
+    return this.userIdService.getUserId().pipe(
+      take(1),
+      switchMap(occUserId => this.quoteConnector.getQuotes(occUserId))
+    );
+  }
+
+  // groupQuotesAndApplicationsByCategory() {
+
+  // }
 
   /**
    * @deprecated since version 4.0.2
