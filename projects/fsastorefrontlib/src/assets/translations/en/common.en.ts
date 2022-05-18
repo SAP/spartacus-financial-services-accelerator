@@ -144,6 +144,7 @@ export const fscommon = {
       banking_fixed_term_deposit: 'Your Fixed Term Deposit Application',
     },
     category: {
+      allQuotes: 'All quotes',
       insurances_property_homeowners: 'Homeowners Insurance',
       insurances_property_renters: 'Renters Insurance',
       insurances_auto: 'Auto Insurance',
