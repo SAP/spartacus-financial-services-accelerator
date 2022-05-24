@@ -17,7 +17,7 @@ import {
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
-import { filter, map, take, tap, switchMap, shareReplay } from 'rxjs/operators';
+import { tap, switchMap, shareReplay } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
 import { QuoteConnector } from '../../../../core/my-account/connectors/quote.connector';
@@ -46,10 +46,9 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   baseUrl: string = this.config.backend.occ.baseUrl;
   quoteCodesForCompare: string[] = [];
   disabledQuoteCodes: string[] = [];
-  options: any[] = [{ name: 'All quotes', code: 'allQuotes' }];
+  options: any[];
   quotesByCategory: { name: string; code: string };
   selectedQuote: InsuranceQuote;
-  language: string;
   fsQuotes$: Observable<
     InsuranceQuote[]
   > = this.quoteService.getQuotesAndApplications().pipe(shareReplay());
@@ -59,7 +58,6 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   }
 
   protected groupQuotesByCategory() {
-    // this.options = [];
     this.subscription.add(
       this.fsQuotes$
         .pipe(
@@ -81,29 +79,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
             );
           }),
           switchMap(_ => this.selectedQuoteFromQuoteDetails()),
-          tap(() => {
-            Object.keys(this.quotesByCategory).forEach(key =>
-              this.options.push({
-                name: key,
-                code: this.quotesByCategory[key][0]?.code,
-              })
-            );
-            console.log(this.options);
-          })
-          // switchMap(_ => this.setCategoryDropdown())
-        )
-        .subscribe()
-    );
-  }
-
-  changeLanguage() {
-    this.subscription.add(
-      this.languageService
-        .getAll()
-        .pipe(
-          tap(lang => {
-            console.log(lang);
-          })
+          switchMap(_ => this.setCategoryDropdown())
         )
         .subscribe()
     );
@@ -143,6 +119,12 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
           this.disableCheckboxes(this.quotes);
         }
       })
+    );
+  }
+
+  retrieveQuote(quote: InsuranceQuote) {
+    this.subscription.add(
+      this.quoteService.retrieveQuoteCheckout(quote).subscribe()
     );
   }
 
@@ -186,6 +168,16 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
     ) {
       this.displayMessage(selectedQuote.defaultCategory.name);
     }
+  }
+
+  goToDetailsPage(quote: InsuranceQuote) {
+    if (this.quotesByCategory[quote.defaultCategory.name]?.length > 1) {
+      sessionStorage.setItem('qouteCodeForCompare', quote.cartCode);
+    }
+    this.routingService.go({
+      cxRoute: 'quoteDetails',
+      params: { quoteId: quote.quoteId },
+    });
   }
 
   goToComparePage() {

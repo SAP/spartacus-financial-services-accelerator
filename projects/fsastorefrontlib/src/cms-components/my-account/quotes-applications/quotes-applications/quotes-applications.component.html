@@ -14,15 +14,16 @@
             <ng-select
               placeholder="{{ 'quote.selectCategory' | cxTranslate }}"
               [searchable]="false"
+              [items]="options"
               [clearable]="false"
               bindLabel="name"
               bindValue="code"
               (change)="selectCategory($event)"
             >
-              <ng-option *ngFor="let option of options">
+              <!-- <ng-option *ngFor="let option of options">
                 {{
                   'fscommon.category.' + option.code | cxTranslate
-                }}</ng-option
+                }}</ng-option -->
               >
             </ng-select>
           </label>
