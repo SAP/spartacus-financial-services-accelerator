@@ -20,6 +20,7 @@ import { FSUserOccModule } from './adapters/user/user-occ.module';
 import { OccValueListService } from './services/value-list/occ-value-list.service';
 import { FSProductOccModule } from './adapters/product-search/product-occ.module';
 import { ConsentOccModule } from './adapters/consent-management';
+import { AppointmentSchedulingOccModule } from './adapters/appointment-scheduling';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { ConsentOccModule } from './adapters/consent-management';
     QuoteOccModule,
     UserRequestOccModule,
     CsTicketOccModule,
+    AppointmentSchedulingOccModule,
     FSUserOccModule,
     FSProductOccModule,
   ],

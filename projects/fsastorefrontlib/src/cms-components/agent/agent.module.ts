@@ -28,6 +28,7 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
 import { StoreFinderModule } from '@spartacus/storefinder';
 import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
+import { AppointmentSchedulingFormComponent } from './appointment-scheduling/appointment-scheduling-form.component';
 
 @NgModule({
   imports: [
@@ -63,6 +64,15 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
         },
         component: PageLayoutComponent,
       },
+      {
+        path: null,
+        canActivate: [CmsPageGuard],
+        data: {
+          cxRoute: 'appointmentSchedulingPage',
+          pageLabel: 'appointment-scheduling',
+        },
+        component: PageLayoutComponent,
+      },
     ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
@@ -78,8 +88,8 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
         AgentSearchBoxFlex: {
           component: AgentSearchBoxComponent,
         },
-        AgentSearchListFlex: {
-          component: AgentSearchListComponent,
+        AppointmentSchedulingFlex: {
+          component: AppointmentSchedulingFormComponent,
         },
       },
     }),
@@ -90,6 +100,7 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
+    AppointmentSchedulingFormComponent
   ],
   exports: [
     AgentRootComponent,
@@ -97,6 +108,7 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
+    AppointmentSchedulingFormComponent
   ],
   entryComponents: [
     AgentRootComponent,
@@ -104,6 +116,7 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
+    AppointmentSchedulingFormComponent
   ],
   providers: [AgentConnector],
 })

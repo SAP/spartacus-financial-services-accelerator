@@ -63,6 +63,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   changeSimulationPage: { paths: ['changeSimulationPage'] },
   changeAdditionalDriverPage: { paths: ['changeAdditionalDriverPage'] },
   questionnaire: { paths: ['questionnaire'] },
+  appointmentSchedulingPage: { paths: ['appointment-scheduling/:agent'] },
 };
 
 export const routingConfig: RoutingConfig = {

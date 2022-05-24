@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class OccValueListService {
+export class OccValueListService{
   constructor(
     protected httpClient: HttpClient,
     protected occEndpointService: OccEndpointsService
