@@ -39,6 +39,7 @@ export interface FSProduct extends Product {
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
   dynamicAttributes?: Map<string, any>;
+  investments?: any[];
 }
 
 export interface YFormConfiguratorSettings {
