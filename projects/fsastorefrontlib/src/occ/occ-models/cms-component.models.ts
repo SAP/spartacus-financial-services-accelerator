@@ -41,6 +41,7 @@ export interface CmsEnrichedBannerConfig {
   textBoxMargin?: string;
   textBoxPadding?: string;
   textBoxTextPosition?: string;
+  position?: string;
 }
 
 export interface CmsInboxComponent extends CmsComponent {
