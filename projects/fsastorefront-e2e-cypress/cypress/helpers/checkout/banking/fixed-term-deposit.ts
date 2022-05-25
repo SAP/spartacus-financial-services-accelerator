@@ -89,7 +89,7 @@ export function configureAProduct() {
 }
 
 export function checkFtdApplication() {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 1);
     cy.get('h6').should('have.text', ' Fixed Term Deposit ');
     cy.get('.label').contains('Fixed Term Deposit');

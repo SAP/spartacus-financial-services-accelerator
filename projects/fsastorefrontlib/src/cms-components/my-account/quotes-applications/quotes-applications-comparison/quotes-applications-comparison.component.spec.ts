@@ -11,7 +11,7 @@ import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
-import { QuoteComparisonComponent } from './quote-comparison.component';
+import { QuotesApplicationsComparisonComponent } from './quotes-applications-comparison.component';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteComparisonConfig } from '../../../../core/quote-comparison-config/quote-comparison-config';
 import { FSCart } from '@spartacus/fsa-storefront';
@@ -182,9 +182,9 @@ class MockUserIdService {
   }
 }
 
-describe('QuoteComparisonComponent', () => {
-  let component: QuoteComparisonComponent;
-  let fixture: ComponentFixture<QuoteComparisonComponent>;
+describe('QuotesApplicationsComparisonComponent', () => {
+  let component: QuotesApplicationsComparisonComponent;
+  let fixture: ComponentFixture<QuotesApplicationsComparisonComponent>;
   let quoteService: QuoteService;
   let routingService: RoutingService;
   let languageService: LanguageService;
@@ -195,7 +195,7 @@ describe('QuoteComparisonComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-        declarations: [QuoteComparisonComponent],
+        declarations: [QuotesApplicationsComparisonComponent],
         providers: [
           {
             provide: QuoteService,
@@ -227,7 +227,7 @@ describe('QuoteComparisonComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuoteComparisonComponent);
+    fixture = TestBed.createComponent(QuotesApplicationsComparisonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     quoteService = TestBed.inject(QuoteService);

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   CmsPageGuard,
@@ -18,17 +19,16 @@ import {
   RoutesConfig,
   RoutingConfig,
   UrlModule,
+  TranslatePipe,
 } from '@spartacus/core';
 
-// import { QuotesComponent } from './quotes/quotes.component';
-// import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
-// import { QuoteDetailsComponent } from './quote-details/quote-details.component';
+import { QuotesApplicationsComparisonComponent } from './quotes-applications-comparison/quotes-applications-comparison.component';
 import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContextValueModule } from '../../../shared/util/helpers/pipe/context-value/context-value.module';
+import { QuotesApplicationsDetailsComponent } from './quotes-applications-details/quotes-applications-details.component';
 import { QuotesApplicationsComponent } from './quotes-applications/quotes-applications.component';
 
 const routes: Routes = [
@@ -80,17 +80,26 @@ const routes: Routes = [
         AccountMyQuotesFlex: {
           component: QuotesApplicationsComponent,
         },
-        // AccountQuoteDetailsFlex: {
-        //   component: QuoteDetailsComponent,
-        // },
-        // AccountQuoteComparisonFlex: {
-        //   component: QuoteComparisonComponent,
-        // },
+        AccountQuoteDetailsFlex: {
+          component: QuotesApplicationsDetailsComponent,
+        },
+        AccountQuoteComparisonFlex: {
+          component: QuotesApplicationsComparisonComponent,
+        },
       },
     }),
   ],
-  declarations: [QuotesApplicationsComponent],
-  exports: [QuotesApplicationsComponent],
-  providers: [QuoteService, QuoteConnector, PolicyChartDataService],
+  declarations: [
+    QuotesApplicationsComponent,
+    QuotesApplicationsDetailsComponent,
+    QuotesApplicationsComparisonComponent,
+  ],
+  exports: [QuotesApplicationsComponent, QuotesApplicationsDetailsComponent],
+  providers: [
+    QuoteService,
+    QuoteConnector,
+    PolicyChartDataService,
+    TranslatePipe,
+  ],
 })
 export class QuotesApplicationsModule {}

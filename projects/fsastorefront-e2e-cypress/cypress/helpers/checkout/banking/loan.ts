@@ -138,7 +138,7 @@ export function checkMiniCart() {
 }
 
 export function checkLoanApplication() {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 1);
     cy.get('h6').should('have.text', ' Loan ');
     cy.get('.label').contains('Personal Loan');

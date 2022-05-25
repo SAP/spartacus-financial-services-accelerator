@@ -7,7 +7,7 @@ import {
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, shareReplay, tap } from 'rxjs/operators';
 import {
   CategoryComparisonConfig,
   QuoteComparisonConfig,
@@ -25,13 +25,12 @@ import {
 import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defalut-general-config';
 
 @Component({
-  selector: 'cx-fs-quote-comparison',
-  templateUrl: './quote-comparison.component.html',
+  selector: 'cx-fs-quotes-applications-comparison',
+  templateUrl: './quotes-applications-comparison.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuoteComparisonComponent implements OnInit, OnDestroy {
-  quotesLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
-  quotes$: Observable<any> = this.quoteService.getQuotesComparison();
+export class QuotesApplicationsComparisonComponent
+  implements OnInit, OnDestroy {
   subscription = new Subscription();
   quoteCodes: string[];
   categoryConfig: CategoryComparisonConfig;
@@ -39,6 +38,7 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   language: string;
   userId: string;
   subheader: string;
+  fsQuote$: Observable<any>;
 
   constructor(
     protected quoteService: QuoteService,
@@ -50,7 +50,7 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.changeLanguage();
+    // this.changeLanguage();
     this.subscription
       .add(
         combineLatest([
@@ -65,16 +65,15 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
               );
               this.userId = occUserId;
               this.subheader = this.quoteCodes?.join(' / ');
-              this.quoteService.loadQuotesComparison(
-                this.quoteCodes,
-                this.userId
-              );
+              this.fsQuote$ = this.quoteService
+                .getQuotesApplictionsForCompare(this.quoteCodes, this.userId)
+                .pipe(shareReplay());
             })
           )
           .subscribe()
       )
       .add(
-        this.quotes$
+        this.fsQuote$
           .pipe(
             tap(quotes => {
               this.billingEventLabels = [];
@@ -93,24 +92,21 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
       );
   }
 
-  changeLanguage() {
-    this.subscription.add(
-      this.languageService
-        .getActive()
-        .pipe(
-          tap(lang => {
-            if (this.language && this.language !== lang) {
-              this.quoteService.loadQuotesComparison(
-                this.quoteCodes,
-                this.userId
-              );
-            }
-            this.language = lang;
-          })
-        )
-        .subscribe()
-    );
-  }
+  // changeLanguage() {
+  //   this.subscription.add(
+  //     this.languageService
+  //       .getActive()
+  //       .pipe(
+  //         tap(lang => {
+  //           if (this.language && this.language !== lang) {
+  //             return this.fsQuote$;
+  //           }
+  //           this.language = lang;
+  //         })
+  //       )
+  //       .subscribe(data => console.log(data))
+  //   );
+  // }
 
   getBillingEventLabels(oneTimeChargeEntry: OneTimeChargeEntry) {
     if (

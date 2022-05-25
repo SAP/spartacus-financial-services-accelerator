@@ -23,7 +23,7 @@ export function checkAutoReferredQuote() {
 }
 
 export function checkBiweeklyLoanApplication() {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 1);
     cy.get('h6').should('contain.text', 'Loan');
     cy.get('.label').contains('Personal Loan');
@@ -35,7 +35,7 @@ export function checkBiweeklyLoanApplication() {
 }
 
 export function checkEventQuote() {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 2);
     cy.get('h6')
       .should('contain.text', 'Event Insurance')
@@ -51,7 +51,7 @@ export function checkEventQuote() {
 }
 
 export function checkWeeklyLoanApplication() {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 3);
     cy.get('.value')
       .contains('Pending')
@@ -67,7 +67,7 @@ export function checkWeeklyLoanApplication() {
 }
 
 export function checkTwoQuotes(product1, product2) {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 2);
     cy.get('h6').should('contain.text', product1);
     cy.get('h6').should('contain.text', product2);

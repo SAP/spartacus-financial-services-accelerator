@@ -11,7 +11,7 @@ import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSCart, InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
-import { QuoteDetailsComponent } from '../../../my-account/quote/quote-details/quote-details.component';
+import { QuotesApplicationsDetailsComponent } from './quotes-applications-details.component';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import createSpy = jasmine.createSpy;
 
@@ -123,8 +123,8 @@ class MockCartService {
 }
 
 describe('QuoteDetailsComponent', () => {
-  let component: QuoteDetailsComponent;
-  let fixture: ComponentFixture<QuoteDetailsComponent>;
+  let component: QuotesApplicationsDetailsComponent;
+  let fixture: ComponentFixture<QuotesApplicationsDetailsComponent>;
   let quoteService: QuoteService;
   let routingService: RoutingService;
   let userIdService: UserIdService;
@@ -135,7 +135,7 @@ describe('QuoteDetailsComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-        declarations: [QuoteDetailsComponent],
+        declarations: [QuotesApplicationsDetailsComponent],
         providers: [
           {
             provide: QuoteService,
@@ -163,7 +163,7 @@ describe('QuoteDetailsComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuoteDetailsComponent);
+    fixture = TestBed.createComponent(QuotesApplicationsDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     quoteService = TestBed.inject(QuoteService);

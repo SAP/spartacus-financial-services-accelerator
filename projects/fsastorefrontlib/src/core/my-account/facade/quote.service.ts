@@ -41,9 +41,16 @@ export class QuoteService {
     );
   }
 
-  // groupQuotesAndApplicationsByCategory() {
+  getQuoteApplictionDetails(userId: string, quoteId: string) {
+    return this.quoteConnector.getQuote(userId, quoteId);
+  }
 
-  // }
+  getQuotesApplictionsForCompare(
+    cartCodes: string[],
+    userId: string
+  ): Observable<any> {
+    return this.quoteConnector.compareQuotes(cartCodes, userId);
+  }
 
   /**
    * @deprecated since version 4.0.2

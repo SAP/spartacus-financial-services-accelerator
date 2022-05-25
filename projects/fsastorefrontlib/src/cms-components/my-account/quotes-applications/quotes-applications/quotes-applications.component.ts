@@ -23,7 +23,7 @@ import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-confi
 import { QuoteConnector } from '../../../../core/my-account/connectors/quote.connector';
 
 @Component({
-  selector: 'cx-fs-quotes',
+  selector: 'cx-fs-quotes-applications',
   templateUrl: './quotes-applications.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
