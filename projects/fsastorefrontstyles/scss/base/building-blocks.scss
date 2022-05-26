@@ -158,47 +158,6 @@
     background-color: var(--cx-color-primary);
   }
 }
-.underline-effect {
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: var(--cx-color-7);
-    width: 0;
-    height: 5px;
-    transition: all 300ms ease;
-  }
-  &:hover:before {
-    width: 100%;
-  }
-}
-.empty-block {
-  .content {
-    color: var(--cx-color-text);
-    background-color: var(--cx-color-4);
-    font-size: $h6-font-size;
-  }
-}
-.overflow-box {
-  height: 220px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-.info-icon {
-  &:before {
-    content: 'i';
-    font-family: 'monospace';
-    background-color: var(--cx-color-text);
-    border-radius: 50%;
-    font-size: 35px;
-    color: var(--cx-color-1);
-    width: 56px;
-    height: 56px;
-    display: block;
-    text-align: center;
-  }
-}
 .vertical-center {
   @include vertical-center;
 }
