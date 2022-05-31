@@ -1,6 +1,88 @@
-<button
-class="action-button btn-block"
-(click)="submit()"
->
-{{ 'common.save' | cxTranslate }}
-</button>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label class="label-content" for="subject"
+      >{{ 'appointmentScheduling.subject' | cxTranslate }}:</label
+    >
+    <input
+      id="subject"
+      class="form-control"
+      type="text"
+      formControlName="subject"
+      placeholder="{{
+        'appointmentScheduling.placeholder.subject' | cxTranslate
+      }}"
+    />
+    <cx-form-errors [control]="form.get('subject')"></cx-form-errors>
+  </div>
+  <div class="form-group">
+    <label for="appointmentDate" class="label-content"
+      >{{ 'appointmentScheduling.chooseDate' | cxTranslate }}:</label
+    >
+    <input
+      id="appointmentDate"
+      class="form-control"
+      type="date"
+      formControlName="appointmentDate"
+      min="{{ date | date: 'yyyy-MM-dd' }}"
+    />
+    <cx-form-errors [control]="form.get('appointmentDate')"></cx-form-errors>
+  </div>
+  <div class="form-group">
+    <label for="appointmentTime" class="label-content"
+      >{{ 'appointmentScheduling.chooseTime' | cxTranslate }}:</label
+    >
+    <select
+      id="appointmentTime"
+      class="form-control"
+      formControlName="appointmentTime"
+    >
+      <option value="" disabled hidden selected
+        >{{ 'appointmentScheduling.timeSlot' | cxTranslate }}:</option
+      >
+      <option *ngFor="let time of availableTimes" value="{{ time.value }}">{{
+        time.label
+      }}</option>
+    </select>
+    <cx-form-errors [control]="form.get('appointmentTime')"></cx-form-errors>
+  </div>
+  <div class="form-group">
+    <label for="description" class="label-content"
+      >{{ 'appointmentScheduling.description' | cxTranslate }}:</label
+    >
+    <textarea
+      id="description"
+      rows="10"
+      class="form-control"
+      type="text"
+      formControlName="description"
+      placeholder="{{
+        'appointmentScheduling.placeholder.description' | cxTranslate
+      }}"
+    ></textarea>
+    <cx-form-errors [control]="form.get('description')"></cx-form-errors>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      formControlName="consentGiven"
+    />
+    <span class="form-check-label cx-be-bold">{{
+      'appointmentScheduling.consent' | cxTranslate
+    }}</span>
+  </div>
+  <cx-form-errors [control]="form.get('consentGiven')"></cx-form-errors>
+
+  <div class="actions">
+    <button
+      (click)="goBack()"
+      class="btn btn-block btn-secondary"
+      type="button"
+    >
+      {{ 'common.cancel' | cxTranslate }}
+    </button>
+    <button class="btn btn-block btn-primary" type="submit">
+      {{ 'common.save' | cxTranslate }}
+    </button>
+  </div>
+</form>

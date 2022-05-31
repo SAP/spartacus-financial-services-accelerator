@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppointmentData } from '../../../occ/occ-models/occ.models';
 import { Observable } from 'rxjs';
 import { AppointmentSchedulingAdapter } from './appointment-scheduling.adapter';
 
@@ -6,17 +7,19 @@ import { AppointmentSchedulingAdapter } from './appointment-scheduling.adapter';
   providedIn: 'root',
 })
 export class AppointmentSchedulingConnector {
-  constructor(protected appointmentSchedulingAdapter: AppointmentSchedulingAdapter) {}
+  constructor(
+    protected appointmentSchedulingAdapter: AppointmentSchedulingAdapter
+  ) {}
 
   createAppointmentForAgent(
     agentId: string,
     userId: string,
-    appontmentData: any
+    appointmentData: AppointmentData
   ): Observable<any> {
     return this.appointmentSchedulingAdapter.createAppointmentForAgent(
       agentId,
       userId,
-      appontmentData
+      appointmentData
     );
   }
 }

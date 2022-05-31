@@ -1,3 +1,4 @@
+import { AppointmentData } from '../../../occ/occ-models/occ.models';
 
 export abstract class AppointmentSchedulingAdapter {
   /**
@@ -5,11 +6,11 @@ export abstract class AppointmentSchedulingAdapter {
    *
    * @param agentId The agent id
    * @param userId The user id
-   * @param appointmentSchedulingData The submitted appointment data
+   * @param appointmentData The submitted appointment data
    */
   abstract createAppointmentForAgent(
     agentId: string,
     userId: string,
-    appointmentSchedulingData: any
+    appointmentData: AppointmentData
   );
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  AuthGuard,
   CmsConfig,
   ConfigModule,
   I18nModule,
@@ -15,6 +16,7 @@ import {
   PageLayoutComponent,
   CmsPageGuard,
   SpinnerModule,
+  FormErrorsModule,
 } from '@spartacus/storefront';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgentRootComponent } from './agent-root/agent-root.component';
@@ -43,6 +45,7 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
     ReactiveFormsModule,
     ListNavigationModule,
     SpinnerModule,
+    FormErrorsModule,
     NgbTooltipModule,
     GenericSyncPilotModule,
     RouterModule.forChild([
@@ -66,7 +69,7 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
       },
       {
         path: null,
-        canActivate: [CmsPageGuard],
+        canActivate: [CmsPageGuard, AuthGuard],
         data: {
           cxRoute: 'appointmentSchedulingPage',
           pageLabel: 'appointment-scheduling',
@@ -88,6 +91,9 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
         AgentSearchBoxFlex: {
           component: AgentSearchBoxComponent,
         },
+        AgentSearchListFlex: {
+          component: AgentSearchListComponent,
+        },
         AppointmentSchedulingFlex: {
           component: AppointmentSchedulingFormComponent,
         },
@@ -100,7 +106,7 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AppointmentSchedulingFormComponent
+    AppointmentSchedulingFormComponent,
   ],
   exports: [
     AgentRootComponent,
@@ -108,15 +114,7 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AppointmentSchedulingFormComponent
-  ],
-  entryComponents: [
-    AgentRootComponent,
-    ContactAgentFormComponent,
-    FindAgentNavigationComponent,
-    AgentSearchBoxComponent,
-    AgentSearchListComponent,
-    AppointmentSchedulingFormComponent
+    AppointmentSchedulingFormComponent,
   ],
   providers: [AgentConnector],
 })
