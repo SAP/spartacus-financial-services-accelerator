@@ -21,7 +21,6 @@ export const storefrontRoutesConfig: RoutesConfig = {
   checkoutPersonalDetails: {
     paths: ['checkout/personal-details'],
   },
-  quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
   agentLocator: { paths: ['agent-locator'] },
   finalReview: { paths: ['checkout/final-review'] },
@@ -51,6 +50,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   quotes: { paths: ['my-account/my-financial-applications'] },
   quoteDetails: { paths: ['my-account/my-financial-applications/:quoteId'] },
   quoteComparison: { paths: ['my-account/quote-comparison'] },
+  quoteReview: { paths: ['checkout/quote-review'] },
   premiumCalendar: { paths: ['my-account/premium-calendar'] },
   accountOverview: { paths: ['my-account/account-overview'] },
   fnolIncidentPage: { paths: ['fnolIncidentPage'] },

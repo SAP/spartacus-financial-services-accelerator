@@ -4,7 +4,16 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
+import {
+  LanguageSetEvent,
+  LoginEvent,
+  LogoutEvent,
+  OrderEntry,
+  Query,
+  QueryService,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCart,
@@ -22,6 +31,19 @@ import { QuoteConnector } from '../connectors/quote.connector';
 
 @Injectable()
 export class QuoteService {
+  protected quoteQuery: Query<InsuranceQuote[]> = this.query.create(
+    () =>
+      this.userIdService.getUserId().pipe(
+        take(1),
+        switchMap(occUserId => {
+          return this.quoteConnector.getQuotes(occUserId);
+        })
+      ),
+    {
+      reloadOn: [LanguageSetEvent],
+      resetOn: [LoginEvent, LogoutEvent],
+    }
+  );
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected cartService: FSCartService,
@@ -29,10 +51,15 @@ export class QuoteService {
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService,
     protected routingService: RoutingService,
-    protected quoteConnector: QuoteConnector
+    protected quoteConnector: QuoteConnector,
+    protected query: QueryService
   ) {}
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
+
+  getQuotesAndApplicationsQuery(): Observable<InsuranceQuote[]> {
+    return this.quoteQuery.get();
+  }
 
   getQuotesAndApplications(): Observable<InsuranceQuote[]> {
     return this.userIdService.getUserId().pipe(
