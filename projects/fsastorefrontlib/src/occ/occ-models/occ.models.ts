@@ -323,3 +323,11 @@ export interface FSProductAssignment {
   added?: boolean;
   active?: boolean;
 }
+
+export interface AppointmentData {
+  subject: string;
+  appointmentDate: string;
+  appointmentTime: string;
+  description: string;
+  consentGiven: boolean;
+}

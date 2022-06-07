@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  AuthGuard,
   CmsConfig,
   ConfigModule,
   I18nModule,
@@ -15,6 +16,7 @@ import {
   PageLayoutComponent,
   CmsPageGuard,
   SpinnerModule,
+  FormErrorsModule,
 } from '@spartacus/storefront';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgentRootComponent } from './agent-root/agent-root.component';
@@ -28,6 +30,7 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
 import { StoreFinderModule } from '@spartacus/storefinder';
 import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
+import { AppointmentSchedulingFormComponent } from './appointment-scheduling/appointment-scheduling-form.component';
 
 @NgModule({
   imports: [
@@ -42,6 +45,7 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
     ReactiveFormsModule,
     ListNavigationModule,
     SpinnerModule,
+    FormErrorsModule,
     NgbTooltipModule,
     GenericSyncPilotModule,
     RouterModule.forChild([
@@ -63,6 +67,15 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
         },
         component: PageLayoutComponent,
       },
+      {
+        path: null,
+        canActivate: [CmsPageGuard, AuthGuard],
+        data: {
+          cxRoute: 'appointmentSchedulingPage',
+          pageLabel: 'appointment-scheduling',
+        },
+        component: PageLayoutComponent,
+      },
     ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
@@ -81,6 +94,9 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
         AgentSearchListFlex: {
           component: AgentSearchListComponent,
         },
+        AppointmentSchedulingFlex: {
+          component: AppointmentSchedulingFormComponent,
+        },
       },
     }),
   ],
@@ -90,6 +106,7 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
+    AppointmentSchedulingFormComponent,
   ],
   exports: [
     AgentRootComponent,
@@ -97,13 +114,7 @@ import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-  ],
-  entryComponents: [
-    AgentRootComponent,
-    ContactAgentFormComponent,
-    FindAgentNavigationComponent,
-    AgentSearchBoxComponent,
-    AgentSearchListComponent,
+    AppointmentSchedulingFormComponent,
   ],
   providers: [AgentConnector],
 })

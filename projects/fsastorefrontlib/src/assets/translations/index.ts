@@ -24,6 +24,7 @@ import { address } from './overrides/en/address';
 import { cart } from './overrides/en/cart';
 import { consent } from './en/consent.en';
 import { dashboard } from './en/dashboard.en';
+import { appointmentScheduling } from './en/appointment.en';
 
 export const fstranslations: TranslationResources = {
   b2b,
@@ -44,6 +45,7 @@ export const fstranslations: TranslationResources = {
   potentialProductAssignments,
   consent,
   dashboard,
+  appointmentScheduling,
 };
 
 export const fsOverrides: TranslationResources = {
