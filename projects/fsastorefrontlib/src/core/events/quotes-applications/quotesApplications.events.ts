@@ -1,5 +1,6 @@
 import { ProfileTagPushEvent } from '@spartacus/cds';
 import { CxEvent } from '@spartacus/core';
+import { InsuranceQuote } from '@spartacus/fsa-storefront';
 
 /**
  * An abstract event for all the quote events.
@@ -20,7 +21,7 @@ export class QuotePlacedEvent extends QuoteEvent {
   /**
    * Quote
    */
-  quote: any;
+  quote: InsuranceQuote;
 }
 
 export class QuoteConfirmationPushEvent implements ProfileTagPushEvent {

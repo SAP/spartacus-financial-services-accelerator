@@ -4,6 +4,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { tap, switchMap, shareReplay } from 'rxjs/operators';
 import {
   ActiveCartService,
   GlobalMessageService,
@@ -15,9 +17,7 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { combineLatest, Observable, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
-import { tap, switchMap, shareReplay, filter } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
 import { QuoteConnector } from '../../../../core/my-account/connectors/quote.connector';
@@ -51,10 +51,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   selectedQuote: InsuranceQuote;
   fsQuotes$: Observable<
     InsuranceQuote[]
-  > = this.quoteService.getQuotesAndApplicationsQuery().pipe(
-    filter(data => !!data),
-    shareReplay()
-  );
+  > = this.quoteService.getQuotesAndApplications().pipe(shareReplay());
 
   ngOnInit() {
     this.groupQuotesByCategory();

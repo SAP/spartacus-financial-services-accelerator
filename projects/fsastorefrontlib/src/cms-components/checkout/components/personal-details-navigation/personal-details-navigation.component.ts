@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, RoutingService, User } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
+import { FormDataService, YFormData } from '@spartacus/dynamicforms';
+import { Address, EventService, RoutingService, User } from '@spartacus/core';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import {
+  FSCart,
   FSOrderEntry,
   FSSteps,
   FSUserRole,
@@ -13,8 +15,8 @@ import { FSCheckoutConfigService } from './../../../../core/checkout/services/ch
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
-import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade';
+import { QuotePlacedEvent } from '../../../../core/events/quotes-applications/quotesApplications.events';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -30,7 +32,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
     protected addressService: FSAddressService,
-    protected consentService: ConsentService
+    protected consentService: ConsentService,
+    protected eventService: EventService
   ) {}
 
   protected readonly PERSONAL_DETAILS_FORM_GROUP = 'personalDetails';
@@ -60,6 +63,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           switchMap(([cart, user, addresses]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
+              const quote = (<FSCart>cart).insuranceQuote;
               const entry: FSOrderEntry = cart.entries[0];
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
@@ -67,6 +71,14 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               yFormData.id =
                 entry?.formData?.length > 0 ? entry?.formData[0].id : null;
               this.formService.submit(yFormData);
+              this.eventService.dispatch(
+                {
+                  userId: user.uid,
+                  activeCartId: this.cartId,
+                  quote: quote,
+                },
+                QuotePlacedEvent
+              );
             }
             return this.formService.getSubmittedForm().pipe(
               map(formData => {

@@ -5,6 +5,9 @@ import {
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import {
+  Command,
+  CommandService,
+  CommandStrategy,
   LanguageSetEvent,
   LoginEvent,
   LogoutEvent,
@@ -28,9 +31,24 @@ import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { QuoteConnector } from '../connectors/quote.connector';
+import { QuotePlacedEvent } from '../../events';
 
 @Injectable()
 export class QuoteService {
+  constructor(
+    protected store: Store<StateWithMyAccount>,
+    protected cartService: FSCartService,
+    protected userIdService: UserIdService,
+    protected formDataService: FormDataService,
+    protected formDataStorageService: FormDataStorageService,
+    protected routingService: RoutingService,
+    protected quoteConnector: QuoteConnector,
+    protected query: QueryService,
+    protected command: CommandService
+  ) {}
+  quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
+  quoteForCompare$ = this.quoteForCompareSource.asObservable();
+
   protected quoteQuery: Query<InsuranceQuote[]> = this.query.create(
     () =>
       this.userIdService.getUserId().pipe(
@@ -40,32 +58,64 @@ export class QuoteService {
         })
       ),
     {
-      reloadOn: [LanguageSetEvent],
+      reloadOn: [LanguageSetEvent, QuotePlacedEvent],
       resetOn: [LoginEvent, LogoutEvent],
     }
   );
-  constructor(
-    protected store: Store<StateWithMyAccount>,
-    protected cartService: FSCartService,
-    protected userIdService: UserIdService,
-    protected formDataService: FormDataService,
-    protected formDataStorageService: FormDataStorageService,
-    protected routingService: RoutingService,
-    protected quoteConnector: QuoteConnector,
-    protected query: QueryService
-  ) {}
-  quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
-  quoteForCompare$ = this.quoteForCompareSource.asObservable();
 
-  getQuotesAndApplicationsQuery(): Observable<InsuranceQuote[]> {
-    return this.quoteQuery.get();
+  // bindQuote(cartId: string) {
+  //   this.userIdService
+  //     .getUserId()
+  //     .pipe(take(1))
+  //     .subscribe(occUserId =>
+  //       this.store.dispatch(
+  //         new fromAction.QuoteProcessAction({
+  //           userId: occUserId,
+  //           cartId: cartId,
+  //           action: QuoteActionType.BIND,
+  //         })
+  //       )
+  //     )
+  //     .unsubscribe();
+  // }
+
+  bindQuoteCommand(cartId: string) {
+    this.userIdService.getUserId().pipe(
+      take(1),
+      switchMap(occUserId => {
+        return this.quoteConnector.invokeQuoteAction(
+          occUserId,
+          cartId,
+          QuoteActionType.BIND,
+          {}
+        );
+      })
+    );
   }
 
+  // protected updateCommand: Command<{
+  //   password: string;
+  //   newUid: string;
+  // }> = this.command.create(
+  //   payload =>
+  //     this.userIdService
+  //       .takeUserId(true)
+  //       .pipe(
+  //         switchMap(uid =>
+  //           this.userProfileConnector.updateEmail(
+  //             uid,
+  //             payload.password,
+  //             payload.newUid
+  //           )
+  //         )
+  //       ),
+  //   {
+  //     strategy: CommandStrategy.Queue,
+  //   }
+  // );
+
   getQuotesAndApplications(): Observable<InsuranceQuote[]> {
-    return this.userIdService.getUserId().pipe(
-      take(1),
-      switchMap(occUserId => this.quoteConnector.getQuotes(occUserId))
-    );
+    return this.quoteQuery.get().pipe(filter(data => !!data));
   }
 
   getQuoteApplictionDetails(userId: string, quoteId: string) {
