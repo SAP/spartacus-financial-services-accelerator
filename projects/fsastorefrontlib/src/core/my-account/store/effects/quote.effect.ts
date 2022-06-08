@@ -52,7 +52,6 @@ export class QuoteEffects {
       ofType(fromActions.QUOTE_PROCESS_ACTION),
       map((action: fromActions.QuoteProcessAction) => action.payload),
       mergeMap(payload => {
-        console.log(payload);
         return this.qouteConnector
           .invokeQuoteAction(
             payload.userId,

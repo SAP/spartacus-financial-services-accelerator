@@ -32,7 +32,7 @@ export abstract class QuoteAdapter {
     userId: string,
     cartId: string,
     quoteAction: string,
-    body: any
+    body?: any
   ): Observable<any>;
 
   /**

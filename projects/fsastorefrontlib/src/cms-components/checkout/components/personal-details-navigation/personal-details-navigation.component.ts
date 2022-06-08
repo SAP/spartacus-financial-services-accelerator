@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { Address, EventService, RoutingService, User } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -63,7 +63,6 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           switchMap(([cart, user, addresses]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
-              const quote = (<FSCart>cart).insuranceQuote;
               const entry: FSOrderEntry = cart.entries[0];
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
@@ -71,30 +70,32 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               yFormData.id =
                 entry?.formData?.length > 0 ? entry?.formData[0].id : null;
               this.formService.submit(yFormData);
-              this.eventService.dispatch(
-                {
-                  userId: user.uid,
-                  activeCartId: this.cartId,
-                  quote: quote,
-                },
-                QuotePlacedEvent
-              );
             }
             return this.formService.getSubmittedForm().pipe(
-              map(formData => {
-                if (formData && formData.content) {
-                  this.createDeliveryAddressForUser(user, formData, addresses);
-                  this.quoteService.underwriteQuote(cart.code);
-                  this.quoteService.updateQuote(
-                    this.cartId,
-                    this.pricingService.buildPricingData(
-                      JSON.parse(formData.content)
-                    )
+              filter(formData => !!(formData && formData.content)),
+              switchMap(formData => {
+                this.createDeliveryAddressForUser(user, formData, addresses);
+                return this.quoteService
+                  .underwriteQuoteApplication(cart.code)
+                  .pipe(
+                    switchMap(_ => {
+                      return this.quoteService
+                        .updateQuoteApplication(
+                          this.cartId,
+                          this.pricingService.buildPricingData(
+                            JSON.parse(formData.content)
+                          )
+                        )
+                        .pipe(
+                          tap(_ => {
+                            this.eventService.dispatch({}, QuotePlacedEvent);
+                            this.routingService.go({
+                              cxRoute: nextStep.step,
+                            });
+                          })
+                        );
+                    })
                   );
-                  this.routingService.go({
-                    cxRoute: nextStep.step,
-                  });
-                }
               })
             );
           })

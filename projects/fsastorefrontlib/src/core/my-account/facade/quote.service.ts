@@ -63,56 +63,19 @@ export class QuoteService {
     }
   );
 
-  // bindQuote(cartId: string) {
-  //   this.userIdService
-  //     .getUserId()
-  //     .pipe(take(1))
-  //     .subscribe(occUserId =>
-  //       this.store.dispatch(
-  //         new fromAction.QuoteProcessAction({
-  //           userId: occUserId,
-  //           cartId: cartId,
-  //           action: QuoteActionType.BIND,
-  //         })
-  //       )
-  //     )
-  //     .unsubscribe();
+  // bindQuoteCommand(cartId: string) {
+  //   this.userIdService.getUserId().pipe(
+  //     take(1),
+  //     switchMap(occUserId => {
+  //       return this.quoteConnector.invokeQuoteAction(
+  //         occUserId,
+  //         cartId,
+  //         QuoteActionType.BIND,
+  //         {}
+  //       );
+  //     })
+  //   );
   // }
-
-  bindQuoteCommand(cartId: string) {
-    this.userIdService.getUserId().pipe(
-      take(1),
-      switchMap(occUserId => {
-        return this.quoteConnector.invokeQuoteAction(
-          occUserId,
-          cartId,
-          QuoteActionType.BIND,
-          {}
-        );
-      })
-    );
-  }
-
-  // protected updateCommand: Command<{
-  //   password: string;
-  //   newUid: string;
-  // }> = this.command.create(
-  //   payload =>
-  //     this.userIdService
-  //       .takeUserId(true)
-  //       .pipe(
-  //         switchMap(uid =>
-  //           this.userProfileConnector.updateEmail(
-  //             uid,
-  //             payload.password,
-  //             payload.newUid
-  //           )
-  //         )
-  //       ),
-  //   {
-  //     strategy: CommandStrategy.Queue,
-  //   }
-  // );
 
   getQuotesAndApplications(): Observable<InsuranceQuote[]> {
     return this.quoteQuery.get().pipe(filter(data => !!data));
@@ -120,6 +83,38 @@ export class QuoteService {
 
   getQuoteApplictionDetails(userId: string, quoteId: string) {
     return this.quoteConnector.getQuote(userId, quoteId);
+  }
+
+  underwriteQuoteApplication(cartId: string): Observable<any> {
+    return this.userIdService.getUserId().pipe(
+      take(1),
+      switchMap(occUserId => {
+        return this.quoteConnector.invokeQuoteAction(
+          occUserId,
+          cartId,
+          QuoteActionType.UNDERWRITING
+        );
+      })
+    );
+  }
+
+  updateQuoteApplication(
+    cartId: string,
+    priceAttributes: any
+  ): Observable<any> {
+    return this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .pipe(
+        switchMap(occUserId =>
+          this.quoteConnector.invokeQuoteAction(
+            occUserId,
+            cartId,
+            QuoteActionType.UPDATE,
+            priceAttributes
+          )
+        )
+      );
   }
 
   getQuotesApplictionsForCompare(

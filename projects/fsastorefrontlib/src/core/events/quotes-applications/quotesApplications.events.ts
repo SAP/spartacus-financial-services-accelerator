@@ -8,6 +8,7 @@ import { InsuranceQuote } from '@spartacus/fsa-storefront';
 export abstract class QuoteEvent extends CxEvent {
   userId?: string;
   activeCartId?: string;
+  quote?: InsuranceQuote;
 }
 
 /**
@@ -18,10 +19,6 @@ export class QuotePlacedEvent extends QuoteEvent {
    * Event's type
    */
   static readonly type = 'QuotePlacedEvent';
-  /**
-   * Quote
-   */
-  quote: InsuranceQuote;
 }
 
 export class QuoteConfirmationPushEvent implements ProfileTagPushEvent {
