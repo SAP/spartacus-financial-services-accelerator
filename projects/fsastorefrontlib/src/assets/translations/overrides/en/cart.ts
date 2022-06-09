@@ -1,9 +1,9 @@
 export const cart = {
   voucher: {
     vouchersApplied: 'Applied coupons:',
-    applyVoucherSuccess: '{{voucherCode}} wurde eingelöst.',
+    applyVoucherSuccess: '{{voucherCode}} was redeemed.',
   },
   orderCost: {
-    discount: 'Sie sparen',
+    discount: 'You save',
   },
 };
