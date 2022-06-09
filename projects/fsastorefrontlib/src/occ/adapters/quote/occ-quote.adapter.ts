@@ -52,7 +52,6 @@ export class OccQuoteAdapter implements QuoteAdapter {
     quoteAction: string,
     body?: any
   ): Observable<any> {
-    console.log(userId, cartId, quoteAction, body);
     const url = this.occEndpointService.buildUrl('quoteAction', {
       urlParams: {
         userId,

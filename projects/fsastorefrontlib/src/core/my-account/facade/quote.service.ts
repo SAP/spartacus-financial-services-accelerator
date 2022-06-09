@@ -107,12 +107,14 @@ export class QuoteService {
       .pipe(take(1))
       .pipe(
         switchMap(occUserId =>
-          this.quoteConnector.invokeQuoteAction(
-            occUserId,
-            cartId,
-            QuoteActionType.UPDATE,
-            priceAttributes
-          )
+          this.quoteConnector
+            .invokeQuoteAction(
+              occUserId,
+              cartId,
+              QuoteActionType.UPDATE,
+              priceAttributes
+            )
+            .pipe(tap(_ => this.cartService.loadCart(cartId, occUserId)))
         )
       );
   }

@@ -75,6 +75,9 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               filter(formData => !!(formData && formData.content)),
               switchMap(formData => {
                 this.createDeliveryAddressForUser(user, formData, addresses);
+                const pricingAttributesData = this.pricingService.buildPricingData(
+                  JSON.parse(formData.content)
+                );
                 return this.quoteService
                   .underwriteQuoteApplication(cart.code)
                   .pipe(
@@ -82,9 +85,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                       return this.quoteService
                         .updateQuoteApplication(
                           this.cartId,
-                          this.pricingService.buildPricingData(
-                            JSON.parse(formData.content)
-                          )
+                          pricingAttributesData
                         )
                         .pipe(
                           tap(_ => {
