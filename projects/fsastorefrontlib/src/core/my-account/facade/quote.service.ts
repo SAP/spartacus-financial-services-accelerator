@@ -63,20 +63,6 @@ export class QuoteService {
     }
   );
 
-  // bindQuoteCommand(cartId: string) {
-  //   this.userIdService.getUserId().pipe(
-  //     take(1),
-  //     switchMap(occUserId => {
-  //       return this.quoteConnector.invokeQuoteAction(
-  //         occUserId,
-  //         cartId,
-  //         QuoteActionType.BIND,
-  //         {}
-  //       );
-  //     })
-  //   );
-  // }
-
   getQuotesAndApplications(): Observable<InsuranceQuote[]> {
     return this.quoteQuery.get().pipe(filter(data => !!data));
   }
@@ -117,6 +103,17 @@ export class QuoteService {
             .pipe(tap(_ => this.cartService.loadCart(cartId, occUserId)))
         )
       );
+  }
+
+  bindQuoteApplication(cartId: string): Observable<any> {
+    return this.userIdService.getUserId().pipe(
+      take(1),
+      switchMap(occUserId => {
+        return this.quoteConnector
+          .invokeQuoteAction(occUserId, cartId, QuoteActionType.BIND)
+          .pipe(tap(_ => this.cartService.loadCart(cartId, occUserId)));
+      })
+    );
   }
 
   getQuotesApplictionsForCompare(
