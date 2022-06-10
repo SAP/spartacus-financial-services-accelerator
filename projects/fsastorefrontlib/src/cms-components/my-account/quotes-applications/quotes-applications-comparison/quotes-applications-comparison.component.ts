@@ -17,11 +17,7 @@ import {
   InsuranceQuote,
   OneTimeChargeEntry,
 } from '../../../../occ/occ-models/occ.models';
-import {
-  LanguageService,
-  RoutingService,
-  UserIdService,
-} from '@spartacus/core';
+import { RoutingService, UserIdService } from '@spartacus/core';
 import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defalut-general-config';
 
 @Component({
@@ -35,7 +31,6 @@ export class QuotesApplicationsComparisonComponent
   quoteCodes: string[];
   categoryConfig: CategoryComparisonConfig;
   billingEventLabels: string[];
-  language: string;
   userId: string;
   subheader: string;
   fsQuote$: Observable<any>;
@@ -44,13 +39,11 @@ export class QuotesApplicationsComparisonComponent
     protected quoteService: QuoteService,
     protected translationService: FSTranslationService,
     protected quoteComparisonConfig: QuoteComparisonConfig,
-    protected languageService: LanguageService,
     protected routingService: RoutingService,
     protected userIdService: UserIdService
   ) {}
 
   ngOnInit(): void {
-    // this.changeLanguage();
     this.subscription
       .add(
         combineLatest([
@@ -91,22 +84,6 @@ export class QuotesApplicationsComparisonComponent
           .subscribe()
       );
   }
-
-  // changeLanguage() {
-  //   this.subscription.add(
-  //     this.languageService
-  //       .getActive()
-  //       .pipe(
-  //         tap(lang => {
-  //           if (this.language && this.language !== lang) {
-  //             return this.fsQuote$;
-  //           }
-  //           this.language = lang;
-  //         })
-  //       )
-  //       .subscribe(data => console.log(data))
-  //   );
-  // }
 
   getBillingEventLabels(oneTimeChargeEntry: OneTimeChargeEntry) {
     if (
