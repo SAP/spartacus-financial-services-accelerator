@@ -26,7 +26,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
       pluck('insuranceQuotes'),
       this.converterService.pipeableMany(QUOTE_NORMALIZER),
       map(data => (data ? data : [])),
-      catchError((error: any) => throwError(error.json()))
+      catchError((error: any) => throwError(error))
     );
   }
 
@@ -43,7 +43,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
     return this.http
       .patch(url, quoteContent)
-      .pipe(catchError((error: any) => throwError(error.json)));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   invokeQuoteAction(
@@ -67,7 +67,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     };
     return this.http
       .post(url, bindQuoteAction, { headers })
-      .pipe(catchError((error: any) => throwError(error.json)));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   getQuote(userId: string, quoteId: string): Observable<any> {
@@ -77,9 +77,10 @@ export class OccQuoteAdapter implements QuoteAdapter {
         quoteId,
       },
     });
+    console.log(url);
     return this.http
       .get(url)
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   compareQuotes(cartCodes: string[], userId: string) {
@@ -94,6 +95,6 @@ export class OccQuoteAdapter implements QuoteAdapter {
     );
     return this.http
       .get(url, { params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 }

@@ -5,7 +5,6 @@ import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { Address, EventService, RoutingService, User } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import {
-  FSCart,
   FSOrderEntry,
   FSSteps,
   FSUserRole,
@@ -16,7 +15,6 @@ import { QuoteService } from './../../../../core/my-account/facade/quote.service
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { ConsentService } from '../../../../core/my-account/facade';
-import { QuotePlacedEvent } from '../../../../core/events/quotes-applications/quotesApplications.events';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -32,8 +30,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
     protected addressService: FSAddressService,
-    protected consentService: ConsentService,
-    protected eventService: EventService
+    protected consentService: ConsentService
   ) {}
 
   protected readonly PERSONAL_DETAILS_FORM_GROUP = 'personalDetails';
@@ -89,7 +86,6 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                         )
                         .pipe(
                           tap(_ => {
-                            this.eventService.dispatch({}, QuotePlacedEvent);
                             this.routingService.go({
                               cxRoute: nextStep.step,
                             });

@@ -215,7 +215,9 @@ describe('PersonalDetailsNavigationComponent', () => {
 
   it('should navigate next', () => {
     component.navigateNext(mockCategoryAndStep);
-    expect(quoteService.underwriteQuote).toHaveBeenCalledWith(mockCart.code);
+    expect(quoteService.underwriteQuoteApplication).toHaveBeenCalledWith(
+      mockCart.code
+    );
   });
 
   it('should not navigate next when cart is empty', () => {

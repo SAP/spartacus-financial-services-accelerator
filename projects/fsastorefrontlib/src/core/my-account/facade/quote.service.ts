@@ -8,6 +8,7 @@ import {
   Command,
   CommandService,
   CommandStrategy,
+  EventService,
   LanguageSetEvent,
   LoginEvent,
   LogoutEvent,
@@ -44,7 +45,8 @@ export class QuoteService {
     protected routingService: RoutingService,
     protected quoteConnector: QuoteConnector,
     protected query: QueryService,
-    protected command: CommandService
+    protected command: CommandService,
+    protected eventService: EventService
   ) {}
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
@@ -100,7 +102,12 @@ export class QuoteService {
               QuoteActionType.UPDATE,
               priceAttributes
             )
-            .pipe(tap(_ => this.cartService.loadCart(cartId, occUserId)))
+            .pipe(
+              tap(_ => {
+                this.eventService.dispatch({}, QuotePlacedEvent);
+                return this.cartService.loadCart(cartId, occUserId);
+              })
+            )
         )
       );
   }
@@ -111,7 +118,12 @@ export class QuoteService {
       switchMap(occUserId => {
         return this.quoteConnector
           .invokeQuoteAction(occUserId, cartId, QuoteActionType.BIND)
-          .pipe(tap(_ => this.cartService.loadCart(cartId, occUserId)));
+          .pipe(
+            tap(_ => {
+              this.eventService.dispatch({}, QuotePlacedEvent);
+              return this.cartService.loadCart(cartId, occUserId);
+            })
+          );
       })
     );
   }
