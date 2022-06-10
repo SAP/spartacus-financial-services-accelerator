@@ -22,7 +22,7 @@ import { userRequest } from './de/userRequest.de';
 import { common } from './overrides/de/common';
 import { user } from './overrides/de/user';
 import { address } from './overrides/de/address';
-import { cart } from './overrides/en/cart';
+import { cart } from './overrides/de/cart';
 import { product } from './overrides/de/product';
 import { dashboard } from './de/dashboard.de';
 import { appointmentScheduling } from './de/appointment.de';
