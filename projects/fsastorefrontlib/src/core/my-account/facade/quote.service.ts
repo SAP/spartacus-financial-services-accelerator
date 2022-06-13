@@ -31,7 +31,7 @@ import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { QuoteConnector } from '../connectors/quote.connector';
-import { QuoteUpdatedEvent } from '../../events';
+import { QuoteApplicationUpdatedEvent } from '../../events';
 import { OrderPlacedEvent } from '@spartacus/checkout/root';
 
 @Injectable()
@@ -60,7 +60,11 @@ export class QuoteService {
         })
       ),
     {
-      reloadOn: [LanguageSetEvent, QuoteUpdatedEvent, OrderPlacedEvent],
+      reloadOn: [
+        LanguageSetEvent,
+        QuoteApplicationUpdatedEvent,
+        OrderPlacedEvent,
+      ],
       resetOn: [LoginEvent, LogoutEvent],
     }
   );
@@ -82,7 +86,7 @@ export class QuoteService {
           )
           .pipe(
             tap(_ => {
-              this.eventService.dispatch({}, QuoteUpdatedEvent);
+              this.eventService.dispatch({}, QuoteApplicationUpdatedEvent);
               return this.cartService.loadCart(payload.cartId, occUserId);
             })
           )

@@ -4,7 +4,7 @@ import { InsuranceQuote } from '@spartacus/fsa-storefront';
 /**
  * An abstract event for all the quote events.
  */
-export abstract class QuoteEvent extends CxEvent {
+export abstract class QuoteApplicationEvent extends CxEvent {
   userId?: string;
   activeCartId?: string;
   quote?: InsuranceQuote;
@@ -13,9 +13,9 @@ export abstract class QuoteEvent extends CxEvent {
 /**
  * Indicates that a user has successfully placed an quote.
  */
-export class QuoteUpdatedEvent extends QuoteEvent {
+export class QuoteApplicationUpdatedEvent extends QuoteApplicationEvent {
   /**
    * Event's type
    */
-  static readonly type = 'QuoteUpdatedEvent';
+  static readonly type = 'QuoteApplicationUpdatedEvent';
 }
