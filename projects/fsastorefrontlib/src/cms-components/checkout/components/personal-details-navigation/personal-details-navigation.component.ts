@@ -2,12 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, EventService, RoutingService, User } from '@spartacus/core';
+import { Address, RoutingService, User } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import {
+  FSCart,
   FSOrderEntry,
   FSSteps,
+  FSUser,
   FSUserRole,
+  QuoteActionType,
 } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -39,27 +42,23 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
-  cartId: string;
-  addressData: Address;
+  cart$: Observable<FSCart> = this.cartService.getActive();
+  user$: Observable<FSUser> = this.userAccountFacade.get();
+  address$: Observable<Address[]> = this.addressService.getAddresses();
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-    this.userAccountFacade.get();
   }
 
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
-      combineLatest([
-        this.cartService.getActive(),
-        this.userAccountFacade.get(),
-        this.addressService.getAddresses(),
-      ])
+      combineLatest([this.cart$, this.user$, this.address$])
         .pipe(
           take(1),
           switchMap(([cart, user, addresses]) => {
+            const cartId: string = cart?.code;
             if (cart?.code && cart?.entries?.length > 0) {
-              this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
@@ -76,12 +75,13 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                   JSON.parse(formData.content)
                 );
                 return this.quoteService
-                  .underwriteQuoteApplication(cart.code)
+                  .underwriteQuoteApplication(cartId)
                   .pipe(
                     switchMap(_ => {
                       return this.quoteService
                         .updateQuoteApplication(
-                          this.cartId,
+                          cartId,
+                          QuoteActionType.UPDATE,
                           pricingAttributesData
                         )
                         .pipe(

@@ -7,7 +7,6 @@ import { select, Store } from '@ngrx/store';
 import {
   Command,
   CommandService,
-  CommandStrategy,
   EventService,
   LanguageSetEvent,
   LoginEvent,
@@ -32,7 +31,8 @@ import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { QuoteConnector } from '../connectors/quote.connector';
-import { QuotePlacedEvent } from '../../events';
+import { QuoteUpdatedEvent } from '../../events';
+import { OrderPlacedEvent } from '@spartacus/checkout/root';
 
 @Injectable()
 export class QuoteService {
@@ -51,7 +51,7 @@ export class QuoteService {
   quoteForCompareSource = new BehaviorSubject<InsuranceQuote>(null);
   quoteForCompare$ = this.quoteForCompareSource.asObservable();
 
-  protected quoteQuery: Query<InsuranceQuote[]> = this.query.create(
+  protected quoteApplicationQuery: Query<InsuranceQuote[]> = this.query.create(
     () =>
       this.userIdService.getUserId().pipe(
         take(1),
@@ -60,13 +60,50 @@ export class QuoteService {
         })
       ),
     {
-      reloadOn: [LanguageSetEvent, QuotePlacedEvent],
+      reloadOn: [LanguageSetEvent, QuoteUpdatedEvent, OrderPlacedEvent],
       resetOn: [LoginEvent, LogoutEvent],
     }
   );
 
+  protected updateQuoteApplicationCommand: Command<{
+    cartId: string;
+    quoteActionType: string;
+    priceAttributes?: {};
+  }> = this.command.create(payload =>
+    this.userIdService.getUserId().pipe(
+      take(1),
+      switchMap(occUserId =>
+        this.quoteConnector
+          .invokeQuoteAction(
+            occUserId,
+            payload.cartId,
+            payload.quoteActionType,
+            payload.priceAttributes
+          )
+          .pipe(
+            tap(_ => {
+              this.eventService.dispatch({}, QuoteUpdatedEvent);
+              return this.cartService.loadCart(payload.cartId, occUserId);
+            })
+          )
+      )
+    )
+  );
+
   getQuotesAndApplications(): Observable<InsuranceQuote[]> {
-    return this.quoteQuery.get().pipe(filter(data => !!data));
+    return this.quoteApplicationQuery.get().pipe(filter(data => !!data));
+  }
+
+  updateQuoteApplication(
+    cartId: string,
+    quoteActionType: string,
+    priceAttributes?: {}
+  ): Observable<unknown> {
+    return this.updateQuoteApplicationCommand.execute({
+      cartId,
+      quoteActionType,
+      priceAttributes,
+    });
   }
 
   getQuoteApplictionDetails(userId: string, quoteId: string) {
@@ -82,48 +119,6 @@ export class QuoteService {
           cartId,
           QuoteActionType.UNDERWRITING
         );
-      })
-    );
-  }
-
-  updateQuoteApplication(
-    cartId: string,
-    priceAttributes: any
-  ): Observable<any> {
-    return this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .pipe(
-        switchMap(occUserId =>
-          this.quoteConnector
-            .invokeQuoteAction(
-              occUserId,
-              cartId,
-              QuoteActionType.UPDATE,
-              priceAttributes
-            )
-            .pipe(
-              tap(_ => {
-                this.eventService.dispatch({}, QuotePlacedEvent);
-                return this.cartService.loadCart(cartId, occUserId);
-              })
-            )
-        )
-      );
-  }
-
-  bindQuoteApplication(cartId: string): Observable<any> {
-    return this.userIdService.getUserId().pipe(
-      take(1),
-      switchMap(occUserId => {
-        return this.quoteConnector
-          .invokeQuoteAction(occUserId, cartId, QuoteActionType.BIND)
-          .pipe(
-            tap(_ => {
-              this.eventService.dispatch({}, QuotePlacedEvent);
-              return this.cartService.loadCart(cartId, occUserId);
-            })
-          );
       })
     );
   }

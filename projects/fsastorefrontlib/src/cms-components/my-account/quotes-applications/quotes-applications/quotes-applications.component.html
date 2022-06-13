@@ -2,7 +2,7 @@
   {{ 'fscommon.quotesAndApplications' | cxTranslate }}
 </h2>
 
-<ng-container *ngIf="fsQuotes$ | async; else loading">
+<ng-container *ngIf="quotesApplications$ | async; else loading">
   <ng-container *ngIf="quotes?.length > 0; else noQuotes">
     <div class="row mb-5">
       <div class="col-md-5 z-index-1">

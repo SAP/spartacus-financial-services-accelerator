@@ -16,7 +16,7 @@ export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   userId: string;
   quoteCodeForCompare: string;
-  fsQuote$: Observable<InsuranceQuote>;
+  quotesApplications$: Observable<InsuranceQuote>;
 
   constructor(
     protected routingService: RoutingService,
@@ -31,7 +31,7 @@ export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
     this.getCart();
   }
 
-  loadQuoteDetails() {
+  loadQuoteDetails(): void {
     this.quoteCodeForCompare = sessionStorage.getItem('qouteCodeForCompare');
     this.subscription.add(
       combineLatest([
@@ -43,7 +43,7 @@ export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
           map(([routingData, userId]) => {
             const quoteId = routingData.state.params.quoteId;
             if (quoteId) {
-              this.fsQuote$ = this.quoteService
+              this.quotesApplications$ = this.quoteService
                 .getQuoteApplictionDetails(userId, quoteId)
                 .pipe(shareReplay());
             }
@@ -54,10 +54,10 @@ export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getCart() {
-    if (this.fsQuote$) {
+  getCart(): void {
+    if (this.quotesApplications$) {
       this.subscription.add(
-        this.fsQuote$
+        this.quotesApplications$
           .pipe(
             filter(quote => !!quote?.quoteId),
             map(quoteData => {
@@ -70,13 +70,13 @@ export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  retrieveQuote(quote: any) {
+  retrieveQuote(quote: InsuranceQuote): void {
     this.subscription.add(
       this.quoteService.retrieveQuoteCheckout(quote).subscribe()
     );
   }
 
-  compareQuote(quote: InsuranceQuote) {
+  compareQuote(quote: InsuranceQuote): void {
     this.quoteService.setQuoteForCompare(quote);
     this.routingService.go({ cxRoute: 'quotes' });
   }

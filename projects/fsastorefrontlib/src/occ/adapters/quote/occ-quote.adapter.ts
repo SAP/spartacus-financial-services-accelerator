@@ -77,7 +77,6 @@ export class OccQuoteAdapter implements QuoteAdapter {
         quoteId,
       },
     });
-    console.log(url);
     return this.http
       .get(url)
       .pipe(catchError((error: any) => throwError(error)));

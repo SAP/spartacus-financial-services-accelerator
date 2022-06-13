@@ -33,7 +33,7 @@ export class QuotesApplicationsComparisonComponent
   billingEventLabels: string[];
   userId: string;
   subheader: string;
-  fsQuote$: Observable<any>;
+  quotesApplications$: Observable<any>;
 
   constructor(
     protected quoteService: QuoteService,
@@ -58,7 +58,7 @@ export class QuotesApplicationsComparisonComponent
               );
               this.userId = occUserId;
               this.subheader = this.quoteCodes?.join(' / ');
-              this.fsQuote$ = this.quoteService
+              this.quotesApplications$ = this.quoteService
                 .getQuotesApplictionsForCompare(this.quoteCodes, this.userId)
                 .pipe(shareReplay());
             })
@@ -66,7 +66,7 @@ export class QuotesApplicationsComparisonComponent
           .subscribe()
       )
       .add(
-        this.fsQuote$
+        this.quotesApplications$
           .pipe(
             tap(quotes => {
               this.billingEventLabels = [];
@@ -85,7 +85,7 @@ export class QuotesApplicationsComparisonComponent
       );
   }
 
-  getBillingEventLabels(oneTimeChargeEntry: OneTimeChargeEntry) {
+  getBillingEventLabels(oneTimeChargeEntry: OneTimeChargeEntry): void {
     if (
       PAY_NOW_BILLING_TIME_CODE !== oneTimeChargeEntry?.billingTime?.code &&
       !this.billingEventLabels.includes(oneTimeChargeEntry?.billingTime?.name)
@@ -94,7 +94,7 @@ export class QuotesApplicationsComparisonComponent
     }
   }
 
-  getCategoryConfig(cartCategoryCode: string) {
+  getCategoryConfig(cartCategoryCode: string): void {
     this.categoryConfig = this.quoteComparisonConfig.categoryConfig.find(
       category => category.categoryCode === cartCategoryCode
     );
@@ -111,7 +111,7 @@ export class QuotesApplicationsComparisonComponent
     );
   }
 
-  retrieveQuote(cart: FSCart) {
+  retrieveQuote(cart: FSCart): void {
     const quote: InsuranceQuote = {
       ...cart.insuranceQuote,
       cartCode: cart.code,
@@ -122,7 +122,7 @@ export class QuotesApplicationsComparisonComponent
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

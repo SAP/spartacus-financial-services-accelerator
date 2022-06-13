@@ -1,4 +1,3 @@
-import { ProfileTagPushEvent } from '@spartacus/cds';
 import { CxEvent } from '@spartacus/core';
 import { InsuranceQuote } from '@spartacus/fsa-storefront';
 
@@ -14,18 +13,9 @@ export abstract class QuoteEvent extends CxEvent {
 /**
  * Indicates that a user has successfully placed an quote.
  */
-export class QuotePlacedEvent extends QuoteEvent {
+export class QuoteUpdatedEvent extends QuoteEvent {
   /**
    * Event's type
    */
-  static readonly type = 'QuotePlacedEvent';
-}
-
-export class QuoteConfirmationPushEvent implements ProfileTagPushEvent {
-  name = 'QuoteConfirmationPushEvent';
-  data: any;
-  constructor(data?: any) {
-    console.log(data, 'data QuoteConfirmationPushEvent');
-    this.data = data;
-  }
+  static readonly type = 'QuoteUpdatedEvent';
 }

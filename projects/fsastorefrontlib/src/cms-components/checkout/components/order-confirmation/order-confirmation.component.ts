@@ -15,7 +15,7 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderConfirmationComponent implements OnInit, OnDestroy {
-  order$: Observable<Order>;
+  order$: Observable<Order> = this.checkoutService.getOrderDetails();
   orderPlaced = this.checkoutService.orderPlaced;
   baseUrl: string;
 
@@ -26,7 +26,6 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.order$ = this.checkoutService.getOrderDetails();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
@@ -36,14 +35,7 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
   }
 
   getFormContent(order: any): any {
-    if (
-      order &&
-      order.entries &&
-      order.entries.length > 0 &&
-      order.entries[0].formData
-    ) {
-      return JSON.parse(order.entries[0].formData[0].content);
-    }
+    return JSON.parse(order?.entries[0]?.formData[0]?.content);
   }
 
   getTranslation(translationGroup: string, translationKey: string): string {

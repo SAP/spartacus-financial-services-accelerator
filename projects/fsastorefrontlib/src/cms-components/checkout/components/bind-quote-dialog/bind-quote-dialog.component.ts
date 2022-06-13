@@ -14,7 +14,11 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
+import {
+  FSUserRole,
+  FSUser,
+  QuoteActionType,
+} from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-bind-quote-dialog',
@@ -46,7 +50,7 @@ export class BindQuoteDialogComponent {
   bindQuote() {
     this.subscription.add(
       this.quoteService
-        .bindQuoteApplication(this.cartCode)
+        .updateQuoteApplication(this.cartCode, QuoteActionType.BIND)
         .pipe(
           switchMap(_ =>
             combineLatest([

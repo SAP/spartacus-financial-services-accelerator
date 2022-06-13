@@ -47,7 +47,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   options: any[];
   quotesByCategory: { name: string; code: string };
   selectedQuote: InsuranceQuote;
-  fsQuotes$: Observable<
+  quotesApplications$: Observable<
     InsuranceQuote[]
   > = this.quoteService.getQuotesAndApplications().pipe(shareReplay());
 
@@ -57,7 +57,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
 
   protected groupQuotesByCategory() {
     this.subscription.add(
-      this.fsQuotes$
+      this.quotesApplications$
         .pipe(
           tap(quotes => {
             this.quotes = quotes;
@@ -196,7 +196,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
       this.disabledQuoteCodes = [];
     }
     this.subscription.add(
-      this.fsQuotes$
+      this.quotesApplications$
         .pipe(
           tap(quotes => {
             this.disableCheckboxes(quotes);
