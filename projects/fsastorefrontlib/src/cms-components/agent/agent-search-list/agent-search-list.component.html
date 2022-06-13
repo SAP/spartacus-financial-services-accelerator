@@ -122,7 +122,7 @@
                   </div>
                   <div class="d-flex my-3 mb-md-0 justify-content-center">
                     <a
-                      class="fas fa-envelope"
+                      class="fas fa-envelope px-2"
                       [class.pr-2]="
                         agent.participationStatus && agentLocator.user
                       "
@@ -134,6 +134,15 @@
                       "
                     >
                     </a>
+                    <a
+                      class="fas fa-calendar-alt px-2"
+                      [routerLink]="
+                        {
+                          cxRoute: 'appointmentSchedulingPage',
+                          params: { agent: agent.email }
+                        } | cxUrl
+                      "
+                    ></a>
                     <cx-fs-generic-sync-pilot
                       class="pl-2"
                       *ngIf="agent.participationStatus && agentLocator.user"
