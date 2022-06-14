@@ -1,53 +1,23 @@
 <ng-container *ngIf="assets?.length > 0; else noAssets">
   <table class="box-shadow table table-hover border border-color-3 mt-5">
     <thead class="d-none d-md-table-row">
-      <th *ngFor="let heading of headings" scope="col">{{ heading }}</th>
+      <th *ngFor="let heading of dataByAssetType[selectedAsset].headings" scope="col">
+        {{ heading | cxTranslate }}
+      </th>
     </thead>
     <tbody>
-      <tr
-        class="position-relative"
-        [ngClass]="{ pointer: !isSeller }"
-        *ngFor="let asset of assets"
-        (click)="resolveAssetUrl(asset)"
-      >
-        <td class="d-flex d-md-table-cell">
+      <tr class="position-relative" [ngClass]="{ pointer: !isSeller }" *ngFor="let asset of assets"
+        (click)="resolveAssetUrl(asset)">
+        <td class="d-flex d-md-table-cell" *ngFor="
+            let propName of dataByAssetType[selectedAsset].values;
+            let i = index
+          ">
           <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[0] }}:
+            {{ dataByAssetType[selectedAsset].headings[i] | cxTranslate }}:
           </div>
           <span class="notice text-break">
-            {{ asset?.quoteId }}
-            {{ asset?.contractNumber }}
-            {{ asset?.claimNumber }}
+            {{ asset[propName.value] }}
           </span>
-        </td>
-        <td class="d-flex d-md-table-cell">
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[1] }}:
-          </div>
-          <span class="text-break">
-            {{ asset?.defaultCategory?.name }}
-            {{ asset?.categoryData?.name }}
-            {{ asset?.insurancePolicy?.categoryData?.name }}</span
-          >
-        </td>
-        <td class="d-flex d-md-table-cell">
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[2] }}:
-          </div>
-          <span class="text-break text-capitalize">
-            {{ asset?.paymentFrequency }}
-            {{ asset?.insurancePolicy?.paymentFrequency }}</span
-          >
-        </td>
-        <td class="d-flex d-md-table-cell">
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[3] }}:
-          </div>
-          <span class="text-break text-capitalize">
-            {{ asset?.quoteStatus }}
-            {{ asset?.policyStatus }}
-            {{ asset?.claimStatus }}</span
-          >
         </td>
       </tr>
     </tbody>

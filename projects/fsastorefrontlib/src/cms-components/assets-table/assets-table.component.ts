@@ -9,6 +9,12 @@ import { RoutingService } from '@spartacus/core';
  * TO-DO: Create more generic approach with some sort of configuration
  */
 
+export enum AssetTableType {
+  CLAIM = 'claims',
+  POLICY = 'policies',
+  QUOTE = 'quotes',
+}
+
 @Component({
   selector: 'cx-fs-assets-table',
   templateUrl: './assets-table.component.html',
@@ -17,29 +23,70 @@ import { RoutingService } from '@spartacus/core';
 export class AssetsTableComponent {
   constructor(protected routingService: RoutingService) {}
 
-  @Input() headings: string[];
   @Input() assets: { [key: string]: any }[];
   @Input() isSeller: boolean;
+  @Input() selectedAsset: AssetTableType;
+
+  defaultHeadings: string[] = [
+    'fscommon.application.number',
+    'dashboard.name',
+    'fscommon.paymentFrequency',
+    'fscommon.status',
+  ];
+
+  dataByAssetType: { [key in AssetTableType]: any } = {
+    claims: {
+      headings: this.defaultHeadings,
+      values: [
+        { propName: true, value: 'claimNumber' },
+        { propName: true, value: 'insurancePolicy.categoryData.name' },
+        { propName: true, value: 'insurancePolicy.paymentFrequency' },
+        { propName: true, value: 'claimStatus' },
+      ],
+    },
+    policies: {
+      headings: [...this.defaultHeadings, 'Claim'],
+      values: [
+        { propName: true, value: 'contractNumber' },
+        { propName: true, value: 'categoryData.name' },
+        { propName: true, value: 'paymentFrequency' },
+        { propName: true, value: 'policyStatus' },
+        { propName: false, value: 'CREATE' },
+      ],
+    },
+    quotes: {
+      headings: this.defaultHeadings,
+      values: [
+        { propName: true, value: 'quoteId' },
+        { propName: true, value: 'defaultCategory.name' },
+        { propName: true, value: 'paymentFrequency' },
+        { propName: true, value: 'quoteStatus' },
+      ],
+    },
+  };
 
   resolveAssetUrl(asset: { [key: string]: any }) {
+    const routeByAssetType: { [key in AssetTableType]: any } = {
+      claims: {
+        cxRoute: 'claimDetails',
+        params: { claimId: asset.claimNumber },
+      },
+      policies: {
+        cxRoute: 'policyDetails',
+        params: {
+          policyId: asset.policyNumber,
+          contractId: asset.contractNumber,
+        },
+      },
+      quotes: {
+        cxRoute: 'quoteDetails',
+        params: { quoteId: asset.quoteId },
+      },
+    };
+
     if (asset && !this.isSeller) {
-      const assetRoute = asset.quoteId
-        ? 'quoteDetails'
-        : asset.policyNumber
-        ? 'policyDetails'
-        : 'claimDetails';
-      const assetParams = asset.quoteId
-        ? { quoteId: asset.quoteId }
-        : asset.policyNumber
-        ? {
-            policyId: asset.policyNumber,
-            contractId: asset.contractNumber,
-          }
-        : { claimId: asset.claimNumber };
-      this.routingService.go({
-        cxRoute: assetRoute,
-        params: assetParams,
-      });
+      const { cxRoute, params } = routeByAssetType[this.selectedAsset];
+      this.routingService.go({ cxRoute, params });
     }
   }
 }

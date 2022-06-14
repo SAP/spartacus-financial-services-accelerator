@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ComponentFactoryResolver,
   ElementRef,
   OnDestroy,
   OnInit,
@@ -26,6 +27,11 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
+import {
+  AssetsTableComponent,
+  AssetTableType,
+} from '../assets-table/assets-table.component';
+import { DynamicComponentDirective } from './dynamic-component.directive';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -42,8 +48,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected claimService: ClaimService,
     protected globalMessageService: GlobalMessageService,
-    protected renderer: Renderer2
+    protected renderer: Renderer2,
+    protected cfr: ComponentFactoryResolver
   ) {}
+
+  @ViewChild(DynamicComponentDirective, { static: false })
+  dynamicComponent!: DynamicComponentDirective;
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
   private subscription = new Subscription();
@@ -53,7 +63,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerPolicies$: Observable<any>;
   customerClaims$: Observable<any>;
   assets: { [key: string]: any }[];
-  assetSelected: string;
+  assetSelected: AssetTableType;
   showAddressForm = false;
   userId: string;
   customerId: string;
@@ -112,6 +122,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
     this.assetSelected = activeClass;
     this.assets = assetsChosen;
+    this.loadDynamicComponent();
   }
 
   showUserAddressForm() {
@@ -131,6 +142,22 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         GlobalMessageType.MSG_TYPE_CONFIRMATION
       );
     }
+  }
+
+  private loadDynamicComponent() {
+    const componentFactory = this.cfr.resolveComponentFactory(
+      AssetsTableComponent
+    );
+
+    const viewContainerRef = this.dynamicComponent.viewContainerRef;
+    viewContainerRef.clear();
+
+    const componentRef = viewContainerRef.createComponent<AssetsTableComponent>(
+      componentFactory
+    );
+    componentRef.instance.assets = this.assets;
+    componentRef.instance.isSeller = this.seller;
+    componentRef.instance.selectedAsset = this.assetSelected;
   }
 
   ngOnDestroy(): void {
