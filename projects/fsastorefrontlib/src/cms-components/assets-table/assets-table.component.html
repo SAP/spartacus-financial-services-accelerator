@@ -1,22 +1,32 @@
 <ng-container *ngIf="assets?.length > 0; else noAssets">
   <table class="box-shadow table table-hover border border-color-3 mt-5">
     <thead class="d-none d-md-table-row">
-      <th *ngFor="let heading of dataByAssetType[selectedAsset].headings" scope="col">
+      <th
+        *ngFor="let heading of dataByAssetType[selectedAsset].headings"
+        scope="col"
+      >
         {{ heading | cxTranslate }}
       </th>
     </thead>
     <tbody>
-      <tr class="position-relative" [ngClass]="{ pointer: !isSeller }" *ngFor="let asset of assets"
-        (click)="resolveAssetUrl(asset)">
-        <td class="d-flex d-md-table-cell" *ngFor="
-            let propName of dataByAssetType[selectedAsset].values;
+      <tr
+        class="position-relative"
+        [ngClass]="{ pointer: !isSeller }"
+        *ngFor="let asset of assets"
+        (click)="resolveAssetUrl(asset)"
+      >
+        <td
+          class="d-flex d-md-table-cell"
+          *ngFor="
+            let value of dataByAssetType[selectedAsset].values;
             let i = index
-          ">
+          "
+        >
           <div class="mobile-label text-uppercase pr-2 d-md-none">
             {{ dataByAssetType[selectedAsset].headings[i] | cxTranslate }}:
           </div>
           <span class="notice text-break">
-            {{ asset[propName.value] }}
+            {{ value | resolveAssetValue: asset }}
           </span>
         </td>
       </tr>

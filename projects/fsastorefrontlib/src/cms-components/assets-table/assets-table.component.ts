@@ -45,7 +45,7 @@ export class AssetsTableComponent {
       ],
     },
     policies: {
-      headings: [...this.defaultHeadings, 'Claim'],
+      headings: [...this.defaultHeadings, 'claim.claim'],
       values: [
         { propName: true, value: 'contractNumber' },
         { propName: true, value: 'categoryData.name' },
