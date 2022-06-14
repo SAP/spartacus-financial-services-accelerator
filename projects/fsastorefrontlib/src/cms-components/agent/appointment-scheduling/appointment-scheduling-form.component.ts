@@ -10,12 +10,11 @@ import {
   GlobalMessageService,
   GlobalMessageType,
   OCC_USER_ID_ANONYMOUS,
+  UserIdService,
   RoutingService,
-  User,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
-import { UserAccountFacade } from '@spartacus/user/account/root';
 import { DateConfig } from './../../../core/date-config/date-config';
 import { AppointmentSchedulingService } from './../../../core/appointment-scheduling/facade/appointment-scheduling.service';
 import { tap } from 'rxjs/operators';
@@ -28,7 +27,7 @@ import { tap } from 'rxjs/operators';
 export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected userAccountFacade: UserAccountFacade,
+    protected userIdService: UserIdService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
     protected globalMessageService: GlobalMessageService,
@@ -100,10 +99,10 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getUserId(): Observable<User> {
-    return this.userAccountFacade.get().pipe(
-      tap(user => {
-        this.userId = user && user.uid ? user.uid : OCC_USER_ID_ANONYMOUS;
+  private getUserId(): Observable<string> {
+    return this.userIdService.getUserId().pipe(
+      tap(userId => {
+        this.userId = userId ? userId : OCC_USER_ID_ANONYMOUS;
       })
     );
   }
