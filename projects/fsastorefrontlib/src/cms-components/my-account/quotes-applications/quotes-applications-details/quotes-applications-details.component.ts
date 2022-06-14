@@ -44,7 +44,7 @@ export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
             const quoteId = routingData.state.params.quoteId;
             if (quoteId) {
               this.quotesApplications$ = this.quoteService
-                .getQuoteApplictionDetails(userId, quoteId)
+                .getQuoteApplicationDetails(userId, quoteId)
                 .pipe(shareReplay());
             }
             this.userId = userId;

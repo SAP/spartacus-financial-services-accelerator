@@ -59,7 +59,7 @@ export class QuotesApplicationsComparisonComponent
               this.userId = occUserId;
               this.subheader = this.quoteCodes?.join(' / ');
               this.quotesApplications$ = this.quoteService
-                .getQuotesApplictionsForCompare(this.quoteCodes, this.userId)
+                .getQuotesApplicationsForCompare(this.quoteCodes, this.userId)
                 .pipe(shareReplay());
             })
           )

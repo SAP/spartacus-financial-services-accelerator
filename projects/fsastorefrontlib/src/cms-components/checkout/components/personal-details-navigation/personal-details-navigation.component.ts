@@ -74,6 +74,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                 const pricingAttributesData = this.pricingService.buildPricingData(
                   JSON.parse(formData.content)
                 );
+                // consider refactoring this (maybe on BE?), since underwriteQuoteApplication
+                // and updateQuoteApplication are using the same API call
                 return this.quoteService
                   .underwriteQuoteApplication(cartId)
                   .pipe(

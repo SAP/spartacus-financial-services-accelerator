@@ -94,7 +94,7 @@ export class QuoteService {
     )
   );
 
-  getQuotesAndApplications(): Observable<InsuranceQuote[]> {
+  getQuotesApplications(): Observable<InsuranceQuote[]> {
     return this.quoteApplicationQuery.get().pipe(filter(data => !!data));
   }
 
@@ -110,7 +110,7 @@ export class QuoteService {
     });
   }
 
-  getQuoteApplictionDetails(userId: string, quoteId: string) {
+  getQuoteApplicationDetails(userId: string, quoteId: string) {
     return this.quoteConnector.getQuote(userId, quoteId);
   }
 
@@ -127,7 +127,7 @@ export class QuoteService {
     );
   }
 
-  getQuotesApplictionsForCompare(
+  getQuotesApplicationsForCompare(
     cartCodes: string[],
     userId: string
   ): Observable<any> {
@@ -189,7 +189,18 @@ export class QuoteService {
     return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
-  retrieveQuote(quote: any): Observable<any> {
+  protected loadForms(cart: FSCart): Observable<any> {
+    const orderEntry: OrderEntry = cart.entries[0];
+    const product: FSProduct = orderEntry.product;
+
+    this.loadPersonalDetailsForm(orderEntry);
+    return this.loadChooseCoverForm(
+      cart.insuranceQuote,
+      product.defaultCategory.code
+    );
+  }
+
+  protected retrieveQuote(quote: any): Observable<any> {
     return this.userIdService.getUserId().pipe(
       switchMap(occUserId => {
         if (occUserId) {
@@ -210,24 +221,6 @@ export class QuoteService {
           })
         );
       })
-    );
-  }
-
-  protected loadForms(cart: FSCart): Observable<any> {
-    const orderEntry: OrderEntry = cart.entries[0];
-    const product: FSProduct = orderEntry.product;
-
-    this.loadPersonalDetailsForm(orderEntry);
-    return this.loadChooseCoverForm(
-      cart.insuranceQuote,
-      product.defaultCategory.code
-    );
-  }
-
-  retrieveQuoteCheckout(quote: any): Observable<FSCart> {
-    return this.retrieveQuote(quote).pipe(
-      take(1),
-      switchMap(_ => this.routeToCheckout(quote))
     );
   }
 
@@ -285,6 +278,14 @@ export class QuoteService {
       return of([]);
     }
   }
+
+  retrieveQuoteCheckout(quote: any): Observable<FSCart> {
+    return this.retrieveQuote(quote).pipe(
+      take(1),
+      switchMap(_ => this.routeToCheckout(quote))
+    );
+  }
+
   /**
    * @deprecated since version 4.0.2
    * Use Commands and Queries instead.

@@ -49,7 +49,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   selectedQuote: InsuranceQuote;
   quotesApplications$: Observable<
     InsuranceQuote[]
-  > = this.quoteService.getQuotesAndApplications().pipe(shareReplay());
+  > = this.quoteService.getQuotesApplications().pipe(shareReplay());
 
   ngOnInit() {
     this.groupQuotesByCategory();
