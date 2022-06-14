@@ -134,61 +134,6 @@ export class QuoteService {
     return this.quoteConnector.compareQuotes(cartCodes, userId);
   }
 
-  /**
-   * @deprecated since version 4.0.2
-   * Use Commands and Queries instead.
-   */
-  loadQuotes() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.LoadQuotes({
-            userId: occUserId,
-          })
-        )
-      )
-      .unsubscribe();
-  }
-
-  /**
-   * @deprecated since version 4.0.2
-   * Use Commands and Queries instead.
-   */
-  loadQuoteDetails(quoteId, occUserId) {
-    this.store.dispatch(
-      new fromAction.LoadQuoteDetails({
-        userId: occUserId,
-        quoteId: quoteId,
-      })
-    );
-  }
-
-  /**
-   * @deprecated since version 4.0.2
-   * Use Commands and Queries instead.
-   */
-  getQuotes() {
-    return this.store.pipe(select(fromQuoteStore.getQuotes));
-  }
-
-  /**
-   * @deprecated since version 4.0.2
-   * Use Commands and Queries instead.
-   */
-  getQuoteDetails(): Observable<any> {
-    return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
-  }
-
-  /**
-   * @deprecated since version 4.0.2
-   * Use Commands and Queries instead.
-   */
-  getQuotesLoaded(): Observable<boolean> {
-    return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
-  }
-
   protected loadForms(cart: FSCart): Observable<any> {
     const orderEntry: OrderEntry = cart.entries[0];
     const product: FSProduct = orderEntry.product;
@@ -206,7 +151,6 @@ export class QuoteService {
         if (occUserId) {
           this.cartService.loadCart(quote.cartCode, occUserId);
         }
-
         return this.cartService.getActive().pipe(
           filter(
             cart => cart.code === quote.cartCode && cart.entries?.length > 0
@@ -286,6 +230,64 @@ export class QuoteService {
     );
   }
 
+  setQuoteForCompare(quote: InsuranceQuote) {
+    this.quoteForCompareSource.next(quote);
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
+  loadQuotes() {
+    this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadQuotes({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
+  loadQuoteDetails(quoteId, occUserId) {
+    this.store.dispatch(
+      new fromAction.LoadQuoteDetails({
+        userId: occUserId,
+        quoteId: quoteId,
+      })
+    );
+  }
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
+  getQuotes() {
+    return this.store.pipe(select(fromQuoteStore.getQuotes));
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
+  getQuoteDetails(): Observable<any> {
+    return this.store.pipe(select(fromQuoteStore.getQuoteDetails));
+  }
+
+  /**
+   * @deprecated since version 4.0.2
+   * Use Commands and Queries instead.
+   */
+  getQuotesLoaded(): Observable<boolean> {
+    return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
+  }
+
   /**
    * @deprecated since version 4.0.2
    * Use Commands and Queries instead.
@@ -359,9 +361,5 @@ export class QuoteService {
    */
   getQuotesComparison(): Observable<any> {
     return this.store.pipe(select(fromQuoteStore.getQuotesComparison));
-  }
-
-  setQuoteForCompare(quote: InsuranceQuote) {
-    this.quoteForCompareSource.next(quote);
   }
 }
