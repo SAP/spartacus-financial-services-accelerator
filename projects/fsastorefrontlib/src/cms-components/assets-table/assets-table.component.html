@@ -54,18 +54,16 @@
   </table>
 </ng-container>
 <ng-template #noAssets>
-  <div [ngSwitch]="assetSelected">
-    <h3 *ngSwitchCase="'policies'" class="text-center mt-5">
-      {{ 'dashboard.noPolicies' | cxTranslate }}
-    </h3>
-    <h3 *ngSwitchCase="'claims'" class="text-center mt-5">
-      {{ 'dashboard.noClaims' | cxTranslate }}
-    </h3>
-    <h3 *ngSwitchCase="'quotes'" class="text-center mt-5">
-      {{ 'dashboard.noQuotesOrApplication' | cxTranslate }}
-    </h3>
-    <h3 *ngSwitchDefault class="text-center mt-5">
-      {{ 'dashboard.noAssets' | cxTranslate }}
-    </h3>
-  </div>
+  <h3 class="text-center mt-5">
+    {{
+      (assetSelected === 'quotes'
+        ? 'dashboard.noQuotesOrApplication'
+        : assetSelected === 'policies'
+        ? 'dashboard.noPolicies'
+        : assetSelected === 'claims'
+        ? 'dashboard.noClaims'
+        : ''
+      ) | cxTranslate
+    }}
+  </h3>
 </ng-template>
