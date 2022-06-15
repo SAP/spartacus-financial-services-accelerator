@@ -54,5 +54,16 @@
   </table>
 </ng-container>
 <ng-template #noAssets>
-  <h3 class="text-center mt-5">{{ 'dashboard.noAssets' | cxTranslate }}</h3>
+  <h3 class="text-center mt-5">
+    {{
+      (assetSelected === 'quotes'
+        ? 'dashboard.noQuotesOrApplication'
+        : assetSelected === 'policies'
+        ? 'dashboard.noPolicies'
+        : assetSelected === 'claims'
+        ? 'dashboard.noClaims'
+        : ''
+      ) | cxTranslate
+    }}
+  </h3>
 </ng-template>

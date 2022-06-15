@@ -24,5 +24,8 @@ export const dashboard = {
     checkCustomers: 'Check Customer\'s', // prettier-ignore
     checkYour: 'Check Your',
     noAssets: 'There are no assets of this kind',
+    noClaims: 'There are no claims',
+    noPolicies: 'There are no policies',
+    noQuotesOrApplication: 'There are no quotes or applications',
   },
 };
