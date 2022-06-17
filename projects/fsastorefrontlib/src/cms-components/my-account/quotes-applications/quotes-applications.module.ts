@@ -94,7 +94,11 @@ const routes: Routes = [
     QuotesApplicationsDetailsComponent,
     QuotesApplicationsComparisonComponent,
   ],
-  exports: [QuotesApplicationsComponent, QuotesApplicationsDetailsComponent],
+  exports: [
+    QuotesApplicationsComponent,
+    QuotesApplicationsDetailsComponent,
+    QuotesApplicationsComparisonComponent,
+  ],
   providers: [
     QuoteService,
     QuoteConnector,

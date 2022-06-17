@@ -97,4 +97,9 @@ describe('AppointmentSchedulingFormComponent', () => {
     expect(component.submit).toHaveBeenCalled();
     expect(component.form.valid).toBeTrue();
   });
+
+  it('should NOT call display toast message', () => {
+    component.form.get('consentGiven').setValue(null);
+    expect(globalMessageServiceSpy.add).not.toHaveBeenCalled();
+  });
 });
