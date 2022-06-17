@@ -1,5 +1,5 @@
 import { CxEvent } from '@spartacus/core';
-import { InsuranceQuote } from '@spartacus/fsa-storefront';
+import { InsuranceQuote } from '../../../occ/occ-models/occ.models';
 
 /**
  * An abstract event for all the quote events.

@@ -5,4 +5,6 @@ export * from './util/helpers/pipe/parseDate.pipe';
 export * from './util/helpers/pipe/formatDate.pipe';
 export * from './util/helpers/pipe/sortByName.pipe';
 export * from './util/helpers/pipe/highlight.pipe';
+export * from './util/helpers/pipe/context-value/banking-entry-value.pipe';
+export * from './util/helpers/pipe/context-value/billing-event-value.pipe';
 export * from './util/constants/constants';

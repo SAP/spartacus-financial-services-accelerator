@@ -14,7 +14,7 @@ import createSpy = jasmine.createSpy;
 import { QuoteComparisonComponent } from './quote-comparison.component';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteComparisonConfig } from '../../../../core/quote-comparison-config/quote-comparison-config';
-import { FSCart } from '@spartacus/fsa-storefront';
+import { FSCart } from '../../../../occ/occ-models/occ.models';
 
 const cart1: FSCart = {
   code: 'test001',
