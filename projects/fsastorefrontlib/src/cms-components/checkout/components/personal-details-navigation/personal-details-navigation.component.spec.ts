@@ -78,8 +78,16 @@ class MockRoutingService {
 }
 
 class MockQuoteService {
-  underwriteQuote = createSpy();
-  updateQuote = createSpy();
+  underwriteQuoteApplication(cartId): Observable<any> {
+    return of(null);
+  }
+  updateQuoteApplication(
+    cartId,
+    quoteActionType,
+    pricingAttributesData
+  ): Observable<any> {
+    return of(null);
+  }
 }
 
 class MockCheckoutConfigService {
@@ -214,6 +222,7 @@ describe('PersonalDetailsNavigationComponent', () => {
   });
 
   it('should navigate next', () => {
+    spyOn(quoteService, 'underwriteQuoteApplication').and.callThrough();
     component.navigateNext(mockCategoryAndStep);
     expect(quoteService.underwriteQuoteApplication).toHaveBeenCalledWith(
       mockCart.code
@@ -303,13 +312,6 @@ describe('PersonalDetailsNavigationComponent', () => {
       content:
         '{"personalDetails":{"title":"mrs","firstName":"test","lastName":"test","email":"test@outlook.com","country":"RS"}}',
     };
-
-    spyOn(consentService, 'createAddressForUser').and.callThrough();
-    spyOn(mockedUserAccountFacade, 'get').and.returnValue(of(seller));
-    spyOn(formService, 'getSubmittedForm').and.returnValue(
-      of(personalDetailsFormData)
-    );
-
     const testCart = {
       code: 'testCart',
       entries: [
@@ -328,7 +330,18 @@ describe('PersonalDetailsNavigationComponent', () => {
       ],
     };
     spyOn(cartService, 'getActive').and.returnValue(of(testCart));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValue(of(seller));
+    spyOn(addressService, 'getAddresses').and.returnValue(of(mockAddress));
+    spyOn(consentService, 'createAddressForUser').and.callThrough();
+    spyOn(formService, 'getSubmittedForm').and.returnValue(
+      of(personalDetailsFormData)
+    );
     component.navigateNext(mockCategoryAndStep);
+    component['createDeliveryAddressForUser'](
+      seller,
+      personalDetailsFormData,
+      mockAddress
+    );
     expect(consentService.createAddressForUser).toHaveBeenCalled();
   });
 });

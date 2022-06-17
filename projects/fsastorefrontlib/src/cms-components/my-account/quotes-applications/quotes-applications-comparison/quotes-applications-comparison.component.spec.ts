@@ -2,7 +2,6 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
-  LanguageService,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
@@ -170,12 +169,6 @@ class MockFSTranslationService {
   getTranslationValue() {}
 }
 
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
-}
-
 class MockUserIdService {
   getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
@@ -187,7 +180,6 @@ describe('QuotesApplicationsComparisonComponent', () => {
   let fixture: ComponentFixture<QuotesApplicationsComparisonComponent>;
   let quoteService: QuoteService;
   let routingService: RoutingService;
-  let languageService: LanguageService;
   let fSTranslationService: FSTranslationService;
   let userIdService: UserIdService;
 
@@ -214,10 +206,6 @@ describe('QuotesApplicationsComparisonComponent', () => {
             useClass: MockRoutingService,
           },
           {
-            provide: LanguageService,
-            useClass: MockLanguageService,
-          },
-          {
             provide: UserIdService,
             useClass: MockUserIdService,
           },
@@ -233,7 +221,6 @@ describe('QuotesApplicationsComparisonComponent', () => {
     quoteService = TestBed.inject(QuoteService);
     fSTranslationService = TestBed.inject(FSTranslationService);
     routingService = TestBed.inject(RoutingService);
-    languageService = TestBed.inject(LanguageService);
     userIdService = TestBed.inject(UserIdService);
     spyOn(routingService, 'getRouterState').and.callThrough();
   });
@@ -245,6 +232,7 @@ describe('QuotesApplicationsComparisonComponent', () => {
   it('should not retrieve quote', () => {
     component.retrieveQuote({});
     expect(routingService.go).not.toHaveBeenCalled();
+    console.log('fds');
   });
 
   it('should retrieve quote', () => {
@@ -262,11 +250,5 @@ describe('QuotesApplicationsComparisonComponent', () => {
       'tripDestination'
     );
     expect(translationValue).toEqual('test value');
-  });
-
-  it('should change language', () => {
-    spyOn(languageService, 'getActive').and.returnValue(of('de'));
-    component.changeLanguage();
-    expect(component.language).toEqual('de');
   });
 });

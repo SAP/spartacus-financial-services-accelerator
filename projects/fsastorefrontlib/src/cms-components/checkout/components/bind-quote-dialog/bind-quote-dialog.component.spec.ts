@@ -4,13 +4,17 @@ import { By } from '@angular/platform-browser';
 import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
-import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
+import {
+  FSUserRole,
+  FSUser,
+  QuoteActionType,
+} from '../../../../occ/occ-models/occ.models';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 const cartCode = 'test001';
@@ -69,7 +73,12 @@ class MockCartService {
 }
 
 class MockQuoteService {
-  bindQuote(code: string): void {}
+  updateQuoteApplication(
+    code: string,
+    mockQuoteActionType: QuoteActionType
+  ): Observable<unknown> {
+    return of(null);
+  }
 }
 
 class MockModalService {
@@ -143,7 +152,7 @@ describe('BindQuoteDialogComponent', () => {
     oboConsentService = TestBed.inject(ConsentService);
     userAccountFacade = TestBed.inject(UserAccountFacade);
 
-    spyOn(quoteService, 'bindQuote').and.callThrough();
+    spyOn(quoteService, 'updateQuoteApplication').and.callThrough();
     spyOn(modalService, 'dismissActiveModal').and.callThrough();
     spyOn(
       formDataStorageService,
@@ -165,7 +174,10 @@ describe('BindQuoteDialogComponent', () => {
 
   it('should bind quote', () => {
     component.bindQuote();
-    expect(quoteService.bindQuote).toHaveBeenCalledWith(mockCart.code);
+    expect(quoteService.updateQuoteApplication).toHaveBeenCalledWith(
+      mockCart.code,
+      QuoteActionType.BIND
+    );
   });
 
   it('should bind quote and remove form data', () => {

@@ -7,7 +7,6 @@ import {
   GlobalMessageService,
   GlobalMessageType,
   I18nTestingModule,
-  LanguageService,
   OccConfig,
   RoutingService,
   TranslationService,
@@ -149,12 +148,6 @@ class MockPolicyChartDataService {
   getObjectValueByProperty() {}
 }
 
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
-}
-
 class MockGlobalMessageService {
   add(_message: GlobalMessage): void {}
 }
@@ -179,7 +172,6 @@ describe('QuotesApplicationsComponent', () => {
   let routingService: RoutingService;
   let cartService: ActiveCartService;
   let policyChartDataService: PolicyChartDataService;
-  let languageService: LanguageService;
   let globalMessageService: GlobalMessageService;
   let translationService: TranslationService;
 
@@ -210,10 +202,6 @@ describe('QuotesApplicationsComponent', () => {
             useClass: MockPolicyChartDataService,
           },
           {
-            provide: LanguageService,
-            useClass: MockLanguageService,
-          },
-          {
             provide: GlobalMessageService,
             useClass: MockGlobalMessageService,
           },
@@ -235,10 +223,8 @@ describe('QuotesApplicationsComponent', () => {
     quoteService = TestBed.inject(QuoteService);
     routingService = TestBed.inject(RoutingService);
     policyChartDataService = TestBed.inject(PolicyChartDataService);
-    languageService = TestBed.inject(LanguageService);
     globalMessageService = TestBed.inject(GlobalMessageService);
     translationService = TestBed.inject(TranslationService);
-    component.language = 'de';
   });
 
   it('should create', () => {

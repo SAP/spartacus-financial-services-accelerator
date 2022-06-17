@@ -105,6 +105,9 @@ class MockQuoteService {
   }
   loadQuoteDetails() {}
   setQuoteForCompare() {}
+  getQuoteApplicationDetails() {
+    return of(insuranceQuote1);
+  }
 }
 
 class MockUserIdService {
@@ -122,7 +125,7 @@ class MockCartService {
   getCart() {}
 }
 
-describe('QuoteDetailsComponent', () => {
+describe('QuotesApplicationsDetailsComponent', () => {
   let component: QuotesApplicationsDetailsComponent;
   let fixture: ComponentFixture<QuotesApplicationsDetailsComponent>;
   let quoteService: QuoteService;

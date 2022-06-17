@@ -5,7 +5,10 @@ import {
 } from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import {
+  CommandService,
+  EventService,
   OCC_USER_ID_CURRENT,
+  QueryService,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
@@ -18,6 +21,7 @@ import {
 } from './../../../occ/occ-models/occ.models';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
+import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { QuoteService } from './quote.service';
 import createSpy = jasmine.createSpy;
 
@@ -95,10 +99,48 @@ const insuranceQuote2: any = {
   },
   quoteId: 'test002',
 };
+
 const quoteCodes = ['test001', 'test002'];
 const quoteForComparison = {
   carts: [insuranceQuote1, insuranceQuote2],
 };
+
+const insuranceQuotes = {
+  insuranceQuotes: [insuranceQuote1, insuranceQuote2],
+};
+
+const quoteDetails: any = {
+  quoteDetails: {
+    entry: [
+      {
+        key: 'updateQuoteKey1',
+        value: 'testValue1',
+      },
+      {
+        key: 'updateQuoteKey2',
+        value: 'testValue2',
+      },
+    ],
+  },
+};
+
+class MockQuoteConnector {
+  getQuotes() {
+    return of(insuranceQuotes);
+  }
+  updateQuote() {
+    return of(quoteDetails);
+  }
+  invokeQuoteAction() {
+    return of(insuranceQuote1);
+  }
+  getQuote() {
+    return of(insuranceQuote1);
+  }
+  compareQuotes() {
+    return of(quoteForComparison);
+  }
+}
 
 class MockUserIdService {
   getUserId(): Observable<string> {
@@ -128,6 +170,13 @@ class MockCartService {
   loadCart() {}
 }
 
+class MockEventService implements Partial<EventService> {
+  get(): Observable<any> {
+    return of();
+  }
+  dispatch() {}
+}
+
 describe('QuoteServiceTest', () => {
   let service: QuoteService;
   let store: Store<StateWithMyAccount>;
@@ -136,10 +185,13 @@ describe('QuoteServiceTest', () => {
   let userIdService: UserIdService;
   let mockFormDataStorageService: FormDataStorageService;
   let routingService: RoutingService;
+  let mockQuoteConnector: MockQuoteConnector;
+  // let queryService: QueryService;
+  let eventService: EventService;
 
   beforeEach(() => {
     formDataService = new MockFormDataService();
-
+    let mockQuoteConnector: MockQuoteConnector;
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -148,10 +200,17 @@ describe('QuoteServiceTest', () => {
       providers: [
         QuoteService,
         reducerProvider,
+        QueryService,
+        CommandService,
         { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: UserIdService, useClass: MockUserIdService },
         { provide: RoutingService, useClass: MockRoutingService },
+        { provide: QuoteConnector, useValue: mockQuoteConnector },
+        {
+          provide: EventService,
+          useClass: MockEventService,
+        },
         {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
@@ -165,6 +224,7 @@ describe('QuoteServiceTest', () => {
     userIdService = TestBed.inject(UserIdService);
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
     routingService = TestBed.inject(RoutingService);
+    eventService = TestBed.inject(EventService);
 
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();
@@ -260,7 +320,7 @@ describe('QuoteServiceTest', () => {
   });
 
   it('should be able to retrieve quotes', () => {
-    service.retrieveQuote(mockQuote);
+    service['retrieveQuote'](mockQuote);
     userIdService
       .getUserId()
       .subscribe(data => {

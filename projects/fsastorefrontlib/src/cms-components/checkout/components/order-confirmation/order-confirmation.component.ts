@@ -35,7 +35,9 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
   }
 
   getFormContent(order: any): any {
-    return JSON.parse(order?.entries[0]?.formData[0]?.content);
+    if (order?.entries?.length > 0) {
+      return JSON.parse(order.entries[0]?.formData[0]?.content);
+    }
   }
 
   getTranslation(translationGroup: string, translationKey: string): string {
