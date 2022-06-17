@@ -126,6 +126,9 @@ class MockQuoteService {
   getLoaded() {}
   getQuotesLoaded() {}
   setQuoteForCompare() {}
+  getQuotesApplications() {
+    return of(quotes);
+  }
 }
 
 class MockUserIdService {
@@ -231,6 +234,7 @@ describe('QuotesApplicationsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     quoteService = TestBed.inject(QuoteService);
+    spyOn(quoteService, 'getQuotesApplications').and.callThrough();
     routingService = TestBed.inject(RoutingService);
     policyChartDataService = TestBed.inject(PolicyChartDataService);
     globalMessageService = TestBed.inject(GlobalMessageService);
@@ -275,10 +279,9 @@ describe('QuotesApplicationsComponent', () => {
   });
 
   it('should filter quotes', () => {
-    spyOn(quoteService, 'getQuotes').and.callThrough();
     component.selectCategory({ name: 'All quotes', code: '' });
     component.selectCategory(selectedCategory);
-    expect(quoteService.getQuotes).toHaveBeenCalled();
+    expect(component.quotes).toEqual([insuranceQuote1, insuranceQuote2]);
   });
 
   it('should clear selected quotes', () => {

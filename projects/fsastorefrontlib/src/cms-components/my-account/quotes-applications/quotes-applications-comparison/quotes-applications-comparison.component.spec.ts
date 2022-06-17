@@ -163,6 +163,9 @@ class MockQuoteService {
     return of();
   }
   getQuotesLoaded() {}
+  getQuotesApplicationsForCompare() {
+    return of(quoteComparisonCarts);
+  }
 }
 
 class MockFSTranslationService {
@@ -229,26 +232,25 @@ describe('QuotesApplicationsComparisonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should not retrieve quote', () => {
-  //   component.retrieveQuote({});
-  //   expect(routingService.go).not.toHaveBeenCalled();
-  //   console.log('fds');
-  // });
+  it('should not retrieve quote', () => {
+    component.retrieveQuote({});
+    expect(routingService.go).not.toHaveBeenCalled();
+  });
 
-  // it('should retrieve quote', () => {
-  //   component.retrieveQuote(cart1);
-  //   expect(quoteService.retrieveQuoteCheckout).toHaveBeenCalled();
-  // });
+  it('should retrieve quote', () => {
+    component.retrieveQuote(cart1);
+    expect(quoteService.retrieveQuoteCheckout).toHaveBeenCalled();
+  });
 
-  // it('should find translation for key', () => {
-  //   spyOn(fSTranslationService, 'getTranslationValue').and.returnValue(
-  //     'test value'
-  //   );
-  //   const translationValue = component.getTranslation(
-  //     'quote.details',
-  //     'insurances_auto',
-  //     'tripDestination'
-  //   );
-  //   expect(translationValue).toEqual('test value');
-  // });
+  it('should find translation for key', () => {
+    spyOn(fSTranslationService, 'getTranslationValue').and.returnValue(
+      'test value'
+    );
+    const translationValue = component.getTranslation(
+      'quote.details',
+      'insurances_auto',
+      'tripDestination'
+    );
+    expect(translationValue).toEqual('test value');
+  });
 });

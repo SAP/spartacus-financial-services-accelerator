@@ -127,7 +127,7 @@
             <ng-container
               *ngIf="
                 !quote.isExpired &&
-                quote.quoteWorkflowStatus.code !== 'REFERRED'
+                quote.quoteWorkflowStatus?.code !== 'REFERRED'
               "
             >
               <div class="info-card-links justify-content-between">

@@ -205,6 +205,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
                     q.defaultCategory.code === selectedItem.code ||
                     q.renewal === selectedItem.code
                 );
+            console.log(this.quotes);
           })
         )
         .subscribe()
