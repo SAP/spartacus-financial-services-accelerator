@@ -111,12 +111,13 @@ describe('OrderConfirmationComponent', () => {
     );
   });
 
-  it('should not get form content', () => {
-    const mockOrder = {
-      code: 'testOrder',
-      entries: [],
-    };
+  it('should not get form content when order is empty', () => {
+    const mockOrder = {};
     expect(component.getFormContent(mockOrder)).toEqual(undefined);
+  });
+
+  it('should not get form content when there is no order', () => {
+    expect(component.getFormContent(undefined)).toEqual(undefined);
   });
 
   it('should find translation for key', () => {
