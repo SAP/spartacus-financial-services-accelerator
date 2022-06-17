@@ -19,7 +19,6 @@ import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 import { QUOTE_COMPARISON_NUMBER } from '../../../../core/quote-comparison-config/default-quote-comparison-config';
-import { QuoteConnector } from '../../../../core/my-account/connectors/quote.connector';
 
 @Component({
   selector: 'cx-fs-quotes-applications',
@@ -35,8 +34,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
     protected policyChartDataService: PolicyChartDataService,
     protected globalMessageService: GlobalMessageService,
     protected translation: TranslationService,
-    protected userIdService: UserIdService,
-    protected quoteConnector: QuoteConnector
+    protected userIdService: UserIdService
   ) {}
 
   private subscription = new Subscription();

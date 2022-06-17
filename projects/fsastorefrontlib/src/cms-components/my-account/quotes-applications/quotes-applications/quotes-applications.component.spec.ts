@@ -8,8 +8,10 @@ import {
   GlobalMessageType,
   I18nTestingModule,
   OccConfig,
+  OCC_USER_ID_CURRENT,
   RoutingService,
   TranslationService,
+  UserIdService,
   WindowRef,
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
@@ -126,6 +128,12 @@ class MockQuoteService {
   setQuoteForCompare() {}
 }
 
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 const MockOccConfig: OccConfig = {
   context: {
     baseSite: [''],
@@ -174,6 +182,7 @@ describe('QuotesApplicationsComponent', () => {
   let policyChartDataService: PolicyChartDataService;
   let globalMessageService: GlobalMessageService;
   let translationService: TranslationService;
+  let mockUserService: UserIdService;
 
   beforeEach(
     waitForAsync(() => {
@@ -210,6 +219,7 @@ describe('QuotesApplicationsComponent', () => {
             useClass: MockTranslationService,
           },
           { provide: WindowRef, useValue: winRef },
+          { provide: UserIdService, useClass: MockUserIdService },
         ],
       }).compileComponents();
       cartService = TestBed.inject(ActiveCartService);
@@ -225,6 +235,7 @@ describe('QuotesApplicationsComponent', () => {
     policyChartDataService = TestBed.inject(PolicyChartDataService);
     globalMessageService = TestBed.inject(GlobalMessageService);
     translationService = TestBed.inject(TranslationService);
+    mockUserService = TestBed.inject(UserIdService);
   });
 
   it('should create', () => {
