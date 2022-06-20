@@ -140,6 +140,13 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
     }
   }
 
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   showNavigation(
     cards: any,
     newPaymentFormManuallyOpened: boolean,
@@ -153,12 +160,5 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
         payment.paymentType === this.creditCard &&
         payment.paymentDetails?.cardNumber)
     );
-  }
-
-  ngOnDestroy() {
-    super.ngOnDestroy();
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }

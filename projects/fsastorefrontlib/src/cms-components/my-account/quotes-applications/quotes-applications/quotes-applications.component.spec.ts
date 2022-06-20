@@ -125,7 +125,9 @@ class MockQuoteService {
   loadQuotes() {}
   getLoaded() {}
   getQuotesLoaded() {}
-  setQuoteForCompare() {}
+  setQuoteForCompare() {
+    return this.quoteForCompare$.asObservable();
+  }
   getQuotesApplications() {
     return of(quotes);
   }
