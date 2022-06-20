@@ -7,6 +7,9 @@ import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { QuoteActionType } from '../../occ-models';
 import { OccQuoteAdapter } from './occ-quote.adapter';
+import { Models } from '../../../model/quote.model';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 const userId = '123';
 const cartId = '123';
@@ -70,6 +73,24 @@ describe('OccQuoteAdapter', () => {
         );
       })
     );
+    it(
+      'should throw error when fetching user Quotes',
+      waitForAsync(() => {
+        let body: Models.InsuranceQuote[] | undefined;
+        adapter
+          .getQuotes(userId)
+          .pipe(catchError((error: any) => throwError(error)))
+          .subscribe(
+            _result => {},
+            _error => {}
+          );
+        const mockReq = httpMock.expectOne(req => {
+          return req.method === 'GET';
+        });
+        mockReq.flush('', { status: 400, statusText: 'Error' });
+        expect(body).toBeUndefined();
+      })
+    );
   });
 
   describe('updateQuote', () => {
@@ -89,6 +110,24 @@ describe('OccQuoteAdapter', () => {
             },
           }
         );
+      })
+    );
+    it(
+      'should throw error when updating user Quote',
+      waitForAsync(() => {
+        let body: Models.InsuranceQuote[] | undefined;
+        adapter
+          .updateQuote(userId, cartId, quoteContent)
+          .pipe(catchError((error: any) => throwError(error)))
+          .subscribe(
+            _result => {},
+            _error => {}
+          );
+        const mockReq = httpMock.expectOne(req => {
+          return req.method === 'PATCH';
+        });
+        mockReq.flush('', { status: 400, statusText: 'Error' });
+        expect(body).toBeUndefined();
       })
     );
   });
@@ -114,6 +153,24 @@ describe('OccQuoteAdapter', () => {
         );
       })
     );
+    it(
+      'should throw error when binding user Quote',
+      waitForAsync(() => {
+        let body: Models.InsuranceQuote[] | undefined;
+        adapter
+          .invokeQuoteAction(userId, cartId, QuoteActionType.BIND, null)
+          .pipe(catchError((error: any) => throwError(error)))
+          .subscribe(
+            _result => {},
+            _error => {}
+          );
+        const mockReq = httpMock.expectOne(req => {
+          return req.method === 'POST';
+        });
+        mockReq.flush('', { status: 400, statusText: 'Error' });
+        expect(body).toBeUndefined();
+      })
+    );
   });
 
   describe('getQuote', () => {
@@ -135,6 +192,24 @@ describe('OccQuoteAdapter', () => {
         );
       })
     );
+    it(
+      'should throw error when fetching single Quote',
+      waitForAsync(() => {
+        let body: Models.InsuranceQuote[] | undefined;
+        adapter
+          .getQuote(userId, quoteId)
+          .pipe(catchError((error: any) => throwError(error)))
+          .subscribe(
+            _result => {},
+            _error => {}
+          );
+        const mockReq = httpMock.expectOne(req => {
+          return req.method === 'GET';
+        });
+        mockReq.flush('', { status: 400, statusText: 'Error' });
+        expect(body).toBeUndefined();
+      })
+    );
   });
 
   describe('compareQuotes', () => {
@@ -153,6 +228,24 @@ describe('OccQuoteAdapter', () => {
             },
           }
         );
+      })
+    );
+    it(
+      'should throw error when comparing Quotes',
+      waitForAsync(() => {
+        let body: Models.InsuranceQuote[] | undefined;
+        adapter
+          .compareQuotes(cartCodes, userId)
+          .pipe(catchError((error: any) => throwError(error)))
+          .subscribe(
+            _result => {},
+            _error => {}
+          );
+        const mockReq = httpMock.expectOne(req => {
+          return req.method === 'GET';
+        });
+        mockReq.flush('', { status: 400, statusText: 'Error' });
+        expect(body).toBeUndefined();
       })
     );
   });
