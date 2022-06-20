@@ -9,8 +9,8 @@ import {
   CmsPageGuard,
   MediaModule,
   PageLayoutComponent,
+  SpinnerModule,
 } from '@spartacus/storefront';
-import { SpinnerModule } from '@spartacus/storefront';
 import {
   AuthGuard,
   I18nModule,
