@@ -25,7 +25,11 @@
           <div class="mobile-label text-uppercase pr-2 d-md-none">
             {{ dataByAssetType[selectedAsset].headings[i] | cxTranslate }}:
           </div>
-          <span class="notice text-break">
+          <span
+            class="notice text-break"
+            (click)="value.route ? startClaim($event, asset) : false"
+            [ngClass]="{ pointer: value.route }"
+          >
             {{ value | resolveAssetValue: asset }}
           </span>
         </td>

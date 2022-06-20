@@ -242,7 +242,14 @@
       </div>
     </ng-container>
   </div>
-  <ng-template cxFsDynamicComponent></ng-template>
+  <cx-fs-assets-table
+    *ngIf="assets"
+    [assets]="assets"
+    [isSeller]="seller"
+    [selectedAsset]="assetSelected"
+    [customerId]="customerId"
+  >
+  </cx-fs-assets-table>
 </ng-container>
 
 <ng-template #loading>

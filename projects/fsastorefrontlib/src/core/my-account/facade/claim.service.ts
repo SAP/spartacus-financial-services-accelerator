@@ -6,9 +6,10 @@ import * as fromAction from '../store/actions';
 import * as fromClaimStore from '../store';
 import { SelectedPolicy } from '../services/claim-data.service';
 import { AuthService, UserIdService } from '@spartacus/core';
-import { take, filter, switchMap } from 'rxjs/operators';
+import { take, filter, switchMap, map } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
 import { StateWithMyAccount } from '../store/my-account-state';
+import { OboCustomerService } from 'projects/fsastorefrontlib/src/cms-components/seller-dashboard/seller-dashboard-list/obo-customer.service';
 
 @Injectable()
 export class ClaimService {
@@ -19,7 +20,8 @@ export class ClaimService {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected authService: AuthService,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected oboCustomerService: OboCustomerService
   ) {
     combineLatest([
       this.store.select(fromSelector.getClaimContent),
@@ -115,19 +117,36 @@ export class ClaimService {
   }
 
   createClaim(policyId: string, contractId: string) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.CreateClaim({
-            userId: occUserId,
-            policyId: policyId,
-            contractId: contractId,
-          })
-        )
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.CreateClaim({ userId, policyId, contractId })
+          );
+        })
       )
+      .subscribe()
       .unsubscribe();
+    // combineLatest([
+    //   this.oboCustomerService.selectedCustomer$,
+    //   this.userIdService.getUserId(),
+    // ])
+    //   .pipe(
+    //     map(([selectedCustomer, occUserId]) => {
+    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
+
+    //       this.store.dispatch(
+    //         new fromAction.CreateClaim({
+    //           userId,
+    //           policyId: policyId,
+    //           contractId: contractId,
+    //         })
+    //       );
+    //     })
+    //   )
+    //   .subscribe()
+    //   .unsubscribe();
   }
 
   resumeClaim(claimNumber: string) {
@@ -146,23 +165,42 @@ export class ClaimService {
       .unsubscribe();
   }
 
-  updateClaim(claim: Claim, stepIndex: number, stepStatus: string) {
-    const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
-      status: stepStatus,
-    });
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.UpdateClaim({
-            userId: occUserId,
-            claimData: claim,
-            stepData: stepData,
-          })
-        );
-      })
+  updateClaim(claimData: Claim, stepIndex: number, stepStatus: string) {
+    const stepData = Object.assign(
+      {},
+      claimData.configurationSteps[stepIndex],
+      {
+        status: stepStatus,
+      }
+    );
+
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.UpdateClaim({ userId, claimData, stepData })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
+
+    // combineLatest([
+    //   this.oboCustomerService.selectedCustomer$,
+    //   this.userIdService.getUserId(),
+    // ])
+    //   .pipe(
+    //     map(([selectedCustomer, occUserId]) => {
+    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
+
+    //       this.store.dispatch(
+    //         new fromAction.UpdateClaim({ userId, claimData, stepData })
+    //       );
+    //     })
+    //   )
+    //   .subscribe()
+    //   .unsubscribe();
   }
 
   changeClaim(claim: Claim, userId: string) {

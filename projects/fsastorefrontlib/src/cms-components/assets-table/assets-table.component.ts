@@ -1,5 +1,20 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { RoutingService } from '@spartacus/core';
+import { FileService } from '@spartacus/dynamicforms';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {
+  getDataByAssetType,
+  getRouteByAssetType,
+} from '../../core/assets-table-config/assets-table.config';
+import { ClaimService } from '../../core/my-account/facade/claim.service';
+import { AssetTableType } from '../../occ/occ-models/occ.models';
 
 /**
  * The Assets Table component currently provides a limited generic table DOM structure. It accepts 4 strings used as headings
@@ -9,23 +24,24 @@ import { RoutingService } from '@spartacus/core';
  * TO-DO: Create more generic approach with some sort of configuration
  */
 
-export enum AssetTableType {
-  CLAIM = 'claims',
-  POLICY = 'policies',
-  QUOTE = 'quotes',
-}
-
 @Component({
   selector: 'cx-fs-assets-table',
   templateUrl: './assets-table.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AssetsTableComponent {
-  constructor(protected routingService: RoutingService) {}
+export class AssetsTableComponent implements OnInit, OnDestroy {
+  private subscription = new Subscription();
+
+  constructor(
+    protected routingService: RoutingService,
+    protected fileUploadService: FileService,
+    protected claimService: ClaimService
+  ) {}
 
   @Input() assets: { [key: string]: any }[];
   @Input() isSeller: boolean;
   @Input() selectedAsset: AssetTableType;
+  @Input() customerId: string;
 
   defaultHeadings: string[] = [
     'fscommon.application.number',
@@ -34,59 +50,56 @@ export class AssetsTableComponent {
     'fscommon.status',
   ];
 
-  dataByAssetType: { [key in AssetTableType]: any } = {
-    claims: {
-      headings: this.defaultHeadings,
-      values: [
-        { propName: true, value: 'claimNumber' },
-        { propName: true, value: 'insurancePolicy.categoryData.name' },
-        { propName: true, value: 'insurancePolicy.paymentFrequency' },
-        { propName: true, value: 'claimStatus' },
-      ],
-    },
-    policies: {
-      headings: [...this.defaultHeadings, 'claim.claim'],
-      values: [
-        { propName: true, value: 'contractNumber' },
-        { propName: true, value: 'categoryData.name' },
-        { propName: true, value: 'paymentFrequency' },
-        { propName: true, value: 'policyStatus' },
-        { propName: false, value: 'CREATE' },
-      ],
-    },
-    quotes: {
-      headings: this.defaultHeadings,
-      values: [
-        { propName: true, value: 'quoteId' },
-        { propName: true, value: 'defaultCategory.name' },
-        { propName: true, value: 'paymentFrequency' },
-        { propName: true, value: 'quoteStatus' },
-      ],
-    },
-  };
+  dataByAssetType: { [key in AssetTableType]: any };
+  routeByAssetType: { [key in AssetTableType]: any };
+
+  ngOnInit(): void {
+    this.dataByAssetType = getDataByAssetType(
+      this.defaultHeadings,
+      this.customerId
+    );
+  }
+
+  startClaim(e, asset) {
+    e.stopPropagation();
+
+    if (
+      asset.categoryData.code === 'insurances_auto' &&
+      asset.policyNumber &&
+      asset.contractNumber
+    ) {
+      this.fileUploadService.resetFiles();
+      this.claimService.createClaim(asset.policyNumber, asset.contractNumber);
+
+      this.subscription.add(
+        this.claimService
+          .getCurrentClaim()
+          .pipe(
+            map(claim => {
+              if (claim && claim.configurationSteps) {
+                this.routingService.go({
+                  cxRoute: claim.configurationSteps[0].pageLabelOrId,
+                });
+              }
+            })
+          )
+          .subscribe()
+      );
+    }
+  }
 
   resolveAssetUrl(asset: { [key: string]: any }) {
-    const routeByAssetType: { [key in AssetTableType]: any } = {
-      claims: {
-        cxRoute: 'claimDetails',
-        params: { claimId: asset.claimNumber },
-      },
-      policies: {
-        cxRoute: 'policyDetails',
-        params: {
-          policyId: asset.policyNumber,
-          contractId: asset.contractNumber,
-        },
-      },
-      quotes: {
-        cxRoute: 'quoteDetails',
-        params: { quoteId: asset.quoteId },
-      },
-    };
+    this.routeByAssetType = getRouteByAssetType(asset);
 
     if (asset && !this.isSeller) {
-      const { cxRoute, params } = routeByAssetType[this.selectedAsset];
+      const { cxRoute, params } = this.routeByAssetType[this.selectedAsset];
       this.routingService.go({ cxRoute, params });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

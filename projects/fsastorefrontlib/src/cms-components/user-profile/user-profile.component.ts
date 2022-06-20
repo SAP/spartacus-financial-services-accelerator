@@ -22,16 +22,12 @@ import {
   FSUserRole,
   FSUser,
   InsuranceQuoteList,
+  AssetTableType,
 } from '../../occ/occ-models/occ.models';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
-import {
-  AssetsTableComponent,
-  AssetTableType,
-} from '../assets-table/assets-table.component';
-import { DynamicComponentDirective } from './dynamic-component.directive';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -51,9 +47,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected renderer: Renderer2,
     protected cfr: ComponentFactoryResolver
   ) {}
-
-  @ViewChild(DynamicComponentDirective, { static: false })
-  dynamicComponent!: DynamicComponentDirective;
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
   private subscription = new Subscription();
@@ -122,7 +115,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
     this.assetSelected = activeClass;
     this.assets = assetsChosen;
-    this.loadDynamicComponent();
   }
 
   showUserAddressForm() {
@@ -142,22 +134,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         GlobalMessageType.MSG_TYPE_CONFIRMATION
       );
     }
-  }
-
-  private loadDynamicComponent() {
-    const componentFactory = this.cfr.resolveComponentFactory(
-      AssetsTableComponent
-    );
-
-    const viewContainerRef = this.dynamicComponent.viewContainerRef;
-    viewContainerRef.clear();
-
-    const componentRef = viewContainerRef.createComponent<AssetsTableComponent>(
-      componentFactory
-    );
-    componentRef.instance.assets = this.assets;
-    componentRef.instance.isSeller = this.seller;
-    componentRef.instance.selectedAsset = this.assetSelected;
   }
 
   ngOnDestroy(): void {

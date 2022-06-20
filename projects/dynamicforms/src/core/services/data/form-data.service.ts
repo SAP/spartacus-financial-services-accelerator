@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { OboCustomerService } from 'projects/fsastorefrontlib/src/cms-components/seller-dashboard/seller-dashboard-list/obo-customer.service';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
 import * as fromSelector from '../../store/selectors';
@@ -16,7 +17,8 @@ export class FormDataService {
 
   constructor(
     protected store: Store<StateWithForm>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected oboCustomerService: OboCustomerService
   ) {}
 
   setContinueToNextStep(isContinueClicked: boolean) {
@@ -32,18 +34,35 @@ export class FormDataService {
   }
 
   saveFormData(formData: YFormData) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.SaveFormData({
-            formData: formData,
-            userId: occUserId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.SaveFormData({ formData, userId })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
+    // combineLatest([
+    //   this.oboCustomerService.selectedCustomer$,
+    //   this.userIdService.getUserId(),
+    // ])
+    //   .pipe(
+    //     map(([selectedCustomer, occUserId]) => {
+    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
+
+    //       this.store.dispatch(
+    //         new fromAction.SaveFormData({
+    //           formData: formData,
+    //           userId,
+    //         })
+    //       );
+    //     })
+    //   )
+    //   .subscribe()
+    //   .unsubscribe();
   }
 
   loadFormDefinition(applicationId: string, formDefinitionId: string) {
@@ -65,18 +84,35 @@ export class FormDataService {
   }
 
   loadFormData(formDataId: string) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadFormData({
-            formDataId: formDataId,
-            userId: occUserId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.LoadFormData({ formDataId, userId })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
+    // combineLatest([
+    //   this.oboCustomerService.selectedCustomer$,
+    //   this.userIdService.getUserId(),
+    // ])
+    //   .pipe(
+    //     map(([selectedCustomer, occUserId]) => {
+    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
+
+    //       this.store.dispatch(
+    //         new fromAction.LoadFormData({
+    //           formDataId: formDataId,
+    //           userId,
+    //         })
+    //       );
+    //     })
+    //   )
+    //   .subscribe()
+    //   .unsubscribe();
   }
 
   getFormData(): Observable<YFormData> {
