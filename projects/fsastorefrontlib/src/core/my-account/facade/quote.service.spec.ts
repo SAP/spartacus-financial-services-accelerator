@@ -186,12 +186,10 @@ describe('QuoteServiceTest', () => {
   let mockFormDataStorageService: FormDataStorageService;
   let routingService: RoutingService;
   let mockQuoteConnector: MockQuoteConnector;
-  // let queryService: QueryService;
   let eventService: EventService;
 
   beforeEach(() => {
     formDataService = new MockFormDataService();
-    let mockQuoteConnector: MockQuoteConnector;
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
