@@ -125,16 +125,23 @@ const quoteDetails: any = {
 };
 
 class MockQuoteConnector {
-  getQuotes() {
-    return of(insuranceQuotes);
-  }
+  getQuotes = createSpy().and.callFake((uid: string) =>
+    of({
+      uid,
+    })
+  );
   updateQuote() {
     return of(quoteDetails);
   }
-  invokeQuoteAction() {
+  invokeQuoteAction(
+    _userId: string,
+    _cartId: string,
+    _action: string,
+    _body?: any
+  ) {
     return of(insuranceQuote1);
   }
-  getQuote() {
+  getQuote(_userId: string, _cartId: string) {
     return of(insuranceQuote1);
   }
   compareQuotes() {
@@ -190,6 +197,7 @@ describe('QuoteServiceTest', () => {
 
   beforeEach(() => {
     formDataService = new MockFormDataService();
+    mockQuoteConnector = new MockQuoteConnector();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -389,5 +397,49 @@ describe('QuoteServiceTest', () => {
     };
     service.retrieveQuoteCheckout(unbindQuote).subscribe().unsubscribe();
     expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'addOptions' });
+  });
+
+  it('should load quotes', () => {
+    spyOn(userIdService, 'getUserId').and.returnValue(of(userId));
+    service.getQuotesApplications().subscribe();
+    expect(mockQuoteConnector.getQuotes).toHaveBeenCalledWith('current');
+  });
+
+  it('should update Quote-Application', () => {
+    spyOn(userIdService, 'getUserId').and.returnValue(of(userId));
+    spyOn(mockQuoteConnector, 'invokeQuoteAction').and.callThrough();
+    const priceAttributes = 'testPrice';
+    service.updateQuoteApplication(
+      cartId,
+      QuoteActionType.UPDATE,
+      priceAttributes
+    );
+    expect(mockQuoteConnector.invokeQuoteAction).toHaveBeenCalledWith(
+      userId,
+      cartId,
+      QuoteActionType.UPDATE,
+      priceAttributes
+    );
+  });
+
+  it('should get quote and application details', () => {
+    spyOn(mockQuoteConnector, 'getQuote').and.callThrough();
+    service.getQuoteApplicationDetails(userId, mockQuote.quoteId);
+    expect(mockQuoteConnector.getQuote).toHaveBeenCalledWith(
+      userId,
+      mockQuote.quoteId
+    );
+  });
+
+  it('should underwrite Quote-Application', () => {
+    spyOn(userIdService, 'getUserId').and.returnValue(of(userId));
+    spyOn(mockQuoteConnector, 'invokeQuoteAction').and.callThrough();
+    service.underwriteQuoteApplication(cartId).subscribe();
+    expect(userIdService.getUserId).toHaveBeenCalled();
+    expect(mockQuoteConnector.invokeQuoteAction).toHaveBeenCalledWith(
+      userId,
+      cartId,
+      QuoteActionType.UNDERWRITING
+    );
   });
 });
