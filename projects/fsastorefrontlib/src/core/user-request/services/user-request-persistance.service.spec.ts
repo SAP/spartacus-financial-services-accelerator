@@ -72,7 +72,7 @@ describe('UserRequestPersistenceService', () => {
 
   it('should get user request', () => {
     service['getUserRequest']()
-      .subscribe(state => expect(state.claimNumber).toBe('0000001'))
+      .subscribe(state => expect(state.claimNumber).toBe(undefined))
       .unsubscribe();
   });
 
