@@ -144,7 +144,7 @@ class MockQuoteConnector {
   getQuote(_userId: string, _cartId: string) {
     return of(insuranceQuote1);
   }
-  compareQuotes() {
+  compareQuotes(_cartCodes: string[], _userId: string) {
     return of(quoteForComparison);
   }
 }
@@ -440,6 +440,15 @@ describe('QuoteServiceTest', () => {
       userId,
       cartId,
       QuoteActionType.UNDERWRITING
+    );
+  });
+
+  it('should get Quotes-Applications For Compare', () => {
+    spyOn(mockQuoteConnector, 'compareQuotes').and.callThrough();
+    service.getQuotesApplicationsForCompare(quoteCodes, userId).subscribe();
+    expect(mockQuoteConnector.compareQuotes).toHaveBeenCalledWith(
+      quoteCodes,
+      userId
     );
   });
 });
