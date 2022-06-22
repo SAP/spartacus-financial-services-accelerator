@@ -54,10 +54,7 @@ export class AssetsTableComponent implements OnInit, OnDestroy {
   routeByAssetType: { [key in AssetTableType]: any };
 
   ngOnInit(): void {
-    this.dataByAssetType = getDataByAssetType(
-      this.defaultHeadings,
-      this.customerId
-    );
+    this.dataByAssetType = getDataByAssetType(this.defaultHeadings);
   }
 
   startClaim(e, asset) {

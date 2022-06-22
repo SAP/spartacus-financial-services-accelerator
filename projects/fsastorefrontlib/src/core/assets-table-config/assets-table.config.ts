@@ -1,11 +1,10 @@
 import { AssetTableType } from '../../occ/occ-models/occ.models';
 
 export const getDataByAssetType = (
-  headings,
-  customerId
+  headings
 ): { [key in AssetTableType]: any } => ({
   claims: {
-    headings: headings,
+    headings,
     values: [
       { propName: true, value: 'claimNumber' },
       { propName: true, value: 'insurancePolicy.categoryData.name' },
@@ -23,12 +22,12 @@ export const getDataByAssetType = (
       {
         propName: false,
         value: 'CREATE',
-        route: 'fnolIncidentPage',
+        startClaim: true,
       },
     ],
   },
   quotes: {
-    headings: headings,
+    headings,
     values: [
       { propName: true, value: 'quoteId' },
       { propName: true, value: 'defaultCategory.name' },
