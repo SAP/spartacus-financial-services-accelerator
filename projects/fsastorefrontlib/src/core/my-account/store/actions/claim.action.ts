@@ -21,6 +21,8 @@ export const UPDATE_CLAIM_SUCCESS = '[Claim] Update Claim Success';
 
 export const CHANGE_CLAIM = '[Claim] Change Claim';
 
+export const RESET_CLAIM_STATE = '[Claim] Reset Claim State';
+
 export class DeleteClaim implements Action {
   readonly type = DELETE_CLAIM;
   constructor(public payload: any) {}
@@ -100,6 +102,10 @@ export class UpdateClaimSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class ResetClaimState implements Action {
+  readonly type = RESET_CLAIM_STATE;
+}
+
 export type ClaimAction =
   | DeleteClaim
   | DeleteClaimSuccess
@@ -116,4 +122,5 @@ export type ClaimAction =
   | UpdateClaim
   | UpdateClaimSuccess
   | UpdateClaimFail
-  | ChangeClaim;
+  | ChangeClaim
+  | ResetClaimState;

@@ -56,6 +56,9 @@ export function reducer(
         loaded: true,
       };
     }
+    case fromAction.RESET_CLAIM_STATE: {
+      state = initialState;
+    }
   }
 
   return state;

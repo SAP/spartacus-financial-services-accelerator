@@ -128,25 +128,6 @@ export class ClaimService {
       )
       .subscribe()
       .unsubscribe();
-    // combineLatest([
-    //   this.oboCustomerService.selectedCustomer$,
-    //   this.userIdService.getUserId(),
-    // ])
-    //   .pipe(
-    //     map(([selectedCustomer, occUserId]) => {
-    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
-
-    //       this.store.dispatch(
-    //         new fromAction.CreateClaim({
-    //           userId,
-    //           policyId: policyId,
-    //           contractId: contractId,
-    //         })
-    //       );
-    //     })
-    //   )
-    //   .subscribe()
-    //   .unsubscribe();
   }
 
   resumeClaim(claimNumber: string) {
@@ -185,22 +166,6 @@ export class ClaimService {
       )
       .subscribe()
       .unsubscribe();
-
-    // combineLatest([
-    //   this.oboCustomerService.selectedCustomer$,
-    //   this.userIdService.getUserId(),
-    // ])
-    //   .pipe(
-    //     map(([selectedCustomer, occUserId]) => {
-    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
-
-    //       this.store.dispatch(
-    //         new fromAction.UpdateClaim({ userId, claimData, stepData })
-    //       );
-    //     })
-    //   )
-    //   .subscribe()
-    //   .unsubscribe();
   }
 
   changeClaim(claim: Claim, userId: string) {
@@ -210,6 +175,10 @@ export class ClaimService {
         claimData: claim,
       })
     );
+  }
+
+  resetClaimState() {
+    this.store.dispatch(new fromAction.ResetClaimState());
   }
 
   private isCreated(claim: any): boolean {
