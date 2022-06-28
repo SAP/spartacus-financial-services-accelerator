@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { FileConnector } from '../../connectors/file.connector';
 import * as fromAction from '../../store/actions';
 import * as uploadSelector from '../../store/selectors/upload.selector';
 import { StateWithForm } from '../../store/state';
 import { saveAs } from 'file-saver';
-import { OboCustomerService } from 'projects/fsastorefrontlib/src/cms-components/seller-dashboard/seller-dashboard-list/obo-customer.service';
+import { OboCustomerService } from '../../../core/services/obo-customer/obo-customer.service';
 
 @Injectable()
 export class FileService {
@@ -41,16 +41,6 @@ export class FileService {
     return this.oboCustomerService
       .getOboCustomerUserId()
       .pipe(switchMap(userId => this.fileConnector.uploadFile(userId, file)));
-    // return combineLatest([
-    //   this.oboCustomerService.selectedCustomer$,
-    //   this.userIdService.getUserId(),
-    // ]).pipe(
-    //   switchMap(([selectedCustomer, occUserId]) => {
-    //     const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
-
-    //     return this.fileConnector.uploadFile(userId, file);
-    //   })
-    // );
   }
 
   resetFiles(): void {

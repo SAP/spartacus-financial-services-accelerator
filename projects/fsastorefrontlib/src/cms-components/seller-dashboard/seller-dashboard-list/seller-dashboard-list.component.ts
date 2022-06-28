@@ -11,7 +11,7 @@ import { ICON_TYPE } from '@spartacus/storefront';
 import { OBOCustomerList, FSUser } from '../../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
-import { OboCustomerService } from './obo-customer.service';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-seller-dashboard-list',

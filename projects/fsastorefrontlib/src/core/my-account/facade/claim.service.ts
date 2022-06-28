@@ -9,7 +9,7 @@ import { AuthService, UserIdService } from '@spartacus/core';
 import { take, filter, switchMap, map } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
 import { StateWithMyAccount } from '../store/my-account-state';
-import { OboCustomerService } from 'projects/fsastorefrontlib/src/cms-components/seller-dashboard/seller-dashboard-list/obo-customer.service';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 @Injectable()
 export class ClaimService {

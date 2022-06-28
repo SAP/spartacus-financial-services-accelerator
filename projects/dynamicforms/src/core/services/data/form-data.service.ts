@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
-import { OboCustomerService } from 'projects/fsastorefrontlib/src/cms-components/seller-dashboard/seller-dashboard-list/obo-customer.service';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { OboCustomerService } from '../../../core/services/obo-customer/obo-customer.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
@@ -45,24 +45,6 @@ export class FormDataService {
       )
       .subscribe()
       .unsubscribe();
-    // combineLatest([
-    //   this.oboCustomerService.selectedCustomer$,
-    //   this.userIdService.getUserId(),
-    // ])
-    //   .pipe(
-    //     map(([selectedCustomer, occUserId]) => {
-    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
-
-    //       this.store.dispatch(
-    //         new fromAction.SaveFormData({
-    //           formData: formData,
-    //           userId,
-    //         })
-    //       );
-    //     })
-    //   )
-    //   .subscribe()
-    //   .unsubscribe();
   }
 
   loadFormDefinition(applicationId: string, formDefinitionId: string) {
@@ -95,24 +77,6 @@ export class FormDataService {
       )
       .subscribe()
       .unsubscribe();
-    // combineLatest([
-    //   this.oboCustomerService.selectedCustomer$,
-    //   this.userIdService.getUserId(),
-    // ])
-    //   .pipe(
-    //     map(([selectedCustomer, occUserId]) => {
-    //       const userId = selectedCustomer ? selectedCustomer.uid : occUserId;
-
-    //       this.store.dispatch(
-    //         new fromAction.LoadFormData({
-    //           formDataId: formDataId,
-    //           userId,
-    //         })
-    //       );
-    //     })
-    //   )
-    //   .subscribe()
-    //   .unsubscribe();
   }
 
   getFormData(): Observable<YFormData> {
