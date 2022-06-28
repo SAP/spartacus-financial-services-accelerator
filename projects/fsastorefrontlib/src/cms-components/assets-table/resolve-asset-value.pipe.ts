@@ -1,7 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { TranslatePipe } from '@spartacus/core';
+import { RequestType } from '../../occ';
 
 @Pipe({ name: 'resolveAssetValue' })
 export class ResolveAssetValuePipe implements PipeTransform {
+  constructor(private tpipe: TranslatePipe) {}
+
   transform(value: any, ...args: any[]) {
     const asset = args[0];
 
@@ -11,6 +15,12 @@ export class ResolveAssetValuePipe implements PipeTransform {
         .reduce((accum, curr) => accum?.[curr], asset);
     }
 
-    return asset.categoryData.code === 'insurances_auto' ? value.value : 'N/A';
+    const allowedFSRequestTypes = asset.categoryData.allowedFSRequestTypes;
+
+    return allowedFSRequestTypes
+      .map(allowedRequestType => allowedRequestType.requestType.code)
+      .indexOf(RequestType.FSCLAIM) > -1
+      ? this.tpipe.transform(value.value)
+      : this.tpipe.transform('fscommon.notAvailable');
   }
 }

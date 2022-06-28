@@ -1,8 +1,11 @@
-import { AssetTableType } from '../../occ/occ-models/occ.models';
+import {
+  AssetTableType,
+  DataByAssetType,
+} from '../../occ/occ-models/occ.models';
 
 export const getDataByAssetType = (
   headings
-): { [key in AssetTableType]: any } => ({
+): { [key in AssetTableType]: DataByAssetType } => ({
   claims: {
     headings,
     values: [
@@ -21,8 +24,9 @@ export const getDataByAssetType = (
       { propName: true, value: 'policyStatus' },
       {
         propName: false,
-        value: 'CREATE',
+        value: 'fscommon.create',
         startClaim: true,
+        classes: 'text-uppercase',
       },
     ],
   },

@@ -1,3 +1,5 @@
+import { TestBed } from '@angular/core/testing';
+import { MockTranslatePipe, TranslatePipe } from '@spartacus/core';
 import { getDataByAssetType } from '../../core/assets-table-config/assets-table.config';
 import { ResolveAssetValuePipe } from './resolve-asset-value.pipe';
 
@@ -21,7 +23,13 @@ const mockedClaim = {
 const mockedClaimResult = ['CL00002019', 'Auto Insurance', 'Monthly', 'OPEN'];
 
 const mockedPolicy = {
-  categoryData: { name: 'Auto Insurance', code: 'insurances_auto' },
+  categoryData: {
+    name: 'Auto Insurance',
+    code: 'insurances_auto',
+    allowedFSRequestTypes: [
+      { code: 'fsclaim_request_type', requestType: { code: 'FSCLAIM' } },
+    ],
+  },
   contractNumber: '00001000',
   orderNumber: '00001000',
   paymentFrequency: 'Monthly',
@@ -32,11 +40,26 @@ const mockedPolicyResult = [
   'Auto Insurance',
   'Monthly',
   'Active',
-  'CREATE',
+  'fscommon.create',
 ];
 
-describe('TitleCasePipe', () => {
-  const pipe = new ResolveAssetValuePipe();
+describe('ResolveAssetValuePipe', () => {
+  let pipe: ResolveAssetValuePipe;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [MockTranslatePipe],
+      providers: [
+        ResolveAssetValuePipe,
+        {
+          provide: TranslatePipe,
+          useClass: MockTranslatePipe,
+        },
+      ],
+    });
+
+    pipe = TestBed.inject(ResolveAssetValuePipe);
+  });
 
   it('transforms claim to correct values', () => {
     mockedDataByAssetType.claims.values.forEach((claimConfig, i) => {

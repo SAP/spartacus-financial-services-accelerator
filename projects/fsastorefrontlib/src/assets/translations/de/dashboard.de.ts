@@ -24,5 +24,8 @@ export const dashboard = {
     checkCustomers: 'Kundendaten prüfen',
     checkYour: 'Prüfe dein',
     noAssets: 'Es gibt keine Vermögenswerte dieser Art',
+    noClaims: 'Es bestehen keine Schadensfälle',
+    noPolicies: 'Es bestehen keine Policen',
+    noQuotesOrApplication: 'Es bestehen keine Angebote oder Anträge',
   },
 };

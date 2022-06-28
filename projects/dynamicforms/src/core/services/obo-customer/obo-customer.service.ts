@@ -1,39 +1,31 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { EventService, LogoutEvent, UserIdService } from '@spartacus/core';
-import { FSUser } from 'fsastorefrontlib/occ';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class OboCustomerService implements OnDestroy {
+  private sessionStorageKey = 'selectedOboCustomerId';
   private subscription: Subscription = new Subscription();
-  private selectedCustomer: BehaviorSubject<FSUser> = new BehaviorSubject(null);
-
-  selectedCustomer$: Observable<FSUser> = this.selectedCustomer.asObservable();
 
   constructor(
     protected eventService: EventService,
     protected userIdService: UserIdService
   ) {
-    this.subscription.add(
-      this.eventService
-        .get(LogoutEvent)
-        .pipe(map(() => this.setSelectedCustomer(null)))
-        .subscribe()
-    );
+    this.onLogout();
   }
 
-  setSelectedCustomer(user: FSUser) {
-    this.selectedCustomer.next(user);
+  setSelectedCustomer(user: any) {
+    sessionStorage.setItem(this.sessionStorageKey, user.uid);
   }
 
   getOboCustomerUserId(): Observable<string> {
     return combineLatest([
-      this.selectedCustomer$,
+      of(sessionStorage.getItem(this.sessionStorageKey)),
       this.userIdService.getUserId(),
     ]).pipe(
       map(([selectedCustomer, userOccId]) =>
-        selectedCustomer ? selectedCustomer.uid : userOccId
+        selectedCustomer ? selectedCustomer : userOccId
       )
     );
   }
@@ -42,5 +34,14 @@ export class OboCustomerService implements OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  private onLogout() {
+    this.subscription.add(
+      this.eventService
+        .get(LogoutEvent)
+        .pipe(tap(() => sessionStorage.removeItem(this.sessionStorageKey)))
+        .subscribe()
+    );
   }
 }

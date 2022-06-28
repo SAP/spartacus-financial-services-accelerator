@@ -17,7 +17,6 @@ import {
 import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { AssetsTableModule } from '../assets-table/assets-table.module';
 import { UserChangeAddressModule } from '../user-change-address/user-change-address.module';
-import { DynamicComponentDirective } from './dynamic-component.directive';
 import { UserProfileComponent } from './user-profile.component';
 
 const routes: Routes = [
@@ -54,7 +53,7 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [UserProfileComponent, DynamicComponentDirective],
-  exports: [UserProfileComponent, DynamicComponentDirective],
+  declarations: [UserProfileComponent],
+  exports: [UserProfileComponent],
 })
 export class UserProfileModule {}

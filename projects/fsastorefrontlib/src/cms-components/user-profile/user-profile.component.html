@@ -186,9 +186,9 @@
                     asset.key === 'quotes'
                       ? customerAssets?.quotes
                       : asset.key === 'policies'
-                      ? customerAssets.policies?.insurancePolicies
+                      ? customerAssets.policies?.insurancePolicies || []
                       : asset.key === 'claims'
-                      ? customerAssets.claims?.claims
+                      ? customerAssets.claims?.claims || []
                       : '',
                     asset.key
                   )
@@ -198,9 +198,9 @@
                     asset.key === 'quotes'
                       ? customerAssets?.quotes
                       : asset.key === 'policies'
-                      ? customerAssets.policies?.insurancePolicies
+                      ? customerAssets.policies?.insurancePolicies || []
                       : asset.key === 'claims'
-                      ? customerAssets.claims?.claims
+                      ? customerAssets.claims?.claims || []
                       : '',
                     asset.key
                   )

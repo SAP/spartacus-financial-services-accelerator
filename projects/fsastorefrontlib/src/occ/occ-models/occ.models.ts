@@ -89,9 +89,9 @@ export enum FSUserRole {
 }
 
 export enum AssetTableType {
-  CLAIM = 'claims',
-  POLICY = 'policies',
-  QUOTE = 'quotes',
+  CLAIMS = 'claims',
+  POLICIES = 'policies',
+  QUOTES = 'quotes',
 }
 
 export interface ContactAgentData {
@@ -336,4 +336,14 @@ export interface AppointmentData {
   appointmentTime: string;
   description: string;
   consentGiven: boolean;
+}
+
+export interface DataByAssetType {
+  headings: string[];
+  values: {
+    propName: boolean;
+    value: string;
+    startClaim?: boolean;
+    classes?: string;
+  }[];
 }

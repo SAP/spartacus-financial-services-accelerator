@@ -73,7 +73,7 @@ export class UserRequestPersistenceService implements OnDestroy {
           userRequest: {
             content: {
               requestStatus:
-                state[USER_REQUEST_FEATURE].content[this.requestStatus],
+                state[USER_REQUEST_FEATURE]?.content[this.requestStatus],
             },
           },
         };

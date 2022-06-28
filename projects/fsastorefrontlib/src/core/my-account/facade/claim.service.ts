@@ -6,7 +6,7 @@ import * as fromAction from '../store/actions';
 import * as fromClaimStore from '../store';
 import { SelectedPolicy } from '../services/claim-data.service';
 import { AuthService, UserIdService } from '@spartacus/core';
-import { take, filter, switchMap, map } from 'rxjs/operators';
+import { take, filter, switchMap, map, tap } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { OboCustomerService } from '@spartacus/dynamicforms';
@@ -37,17 +37,20 @@ export class ClaimService {
   }
 
   loadClaimById(claimId) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadClaimById({
-            userId: occUserId,
-            claimId: claimId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        take(1),
+        tap(userId => {
+          this.store.dispatch(
+            new fromAction.LoadClaimById({
+              userId,
+              claimId,
+            })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
   }
 

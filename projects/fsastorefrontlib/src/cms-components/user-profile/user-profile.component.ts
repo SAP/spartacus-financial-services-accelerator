@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ComponentFactoryResolver,
   ElementRef,
   OnDestroy,
   OnInit,
@@ -44,8 +43,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected claimService: ClaimService,
     protected globalMessageService: GlobalMessageService,
-    protected renderer: Renderer2,
-    protected cfr: ComponentFactoryResolver
+    protected renderer: Renderer2
   ) {}
 
   @ViewChild('customerProfile') customerProfile: ElementRef;

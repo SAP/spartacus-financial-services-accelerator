@@ -78,7 +78,7 @@ describe('AssetsTableComponent', () => {
   });
 
   it('should resolve url and param for QUOTE asset', () => {
-    component.selectedAsset = AssetTableType.QUOTE;
+    component.selectedAsset = AssetTableType.QUOTES;
 
     component.resolveAssetUrl(insuranceQuote1);
     expect(mockRoutingService.go).toHaveBeenCalledWith({
@@ -87,7 +87,7 @@ describe('AssetsTableComponent', () => {
     });
   });
   it('should resolve url and param for POLICY asset', () => {
-    component.selectedAsset = AssetTableType.POLICY;
+    component.selectedAsset = AssetTableType.POLICIES;
 
     component.resolveAssetUrl(insurancePolicy1);
     expect(mockRoutingService.go).toHaveBeenCalledWith({
@@ -96,7 +96,7 @@ describe('AssetsTableComponent', () => {
     });
   });
   it('should resolve url and param for CLAIM asset', () => {
-    component.selectedAsset = AssetTableType.CLAIM;
+    component.selectedAsset = AssetTableType.CLAIMS;
 
     component.resolveAssetUrl(claim1);
     expect(mockRoutingService.go).toHaveBeenCalledWith({

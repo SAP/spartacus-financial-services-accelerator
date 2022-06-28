@@ -43,6 +43,8 @@ export class AssetsTableComponent implements OnInit, OnDestroy {
   @Input() selectedAsset: AssetTableType;
   @Input() customerId: string;
 
+  assetTableTypeRef = AssetTableType;
+
   defaultHeadings: string[] = [
     'fscommon.application.number',
     'dashboard.name',

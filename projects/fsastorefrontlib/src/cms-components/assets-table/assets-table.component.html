@@ -26,7 +26,7 @@
             {{ dataByAssetType[selectedAsset].headings[i] | cxTranslate }}:
           </div>
           <span
-            class="notice text-break"
+            class="notice text-break {{ value.classes ? value.classes : '' }}"
             (click)="value.startClaim ? startClaim($event, asset) : false"
             [ngClass]="{ pointer: value.startClaim }"
           >
@@ -38,5 +38,16 @@
   </table>
 </ng-container>
 <ng-template #noAssets>
-  <h3 class="text-center mt-5">{{ 'dashboard.noAssets' | cxTranslate }}</h3>
+  <h3 class="text-center mt-5">
+    {{
+      (selectedAsset === assetTableTypeRef.QUOTES
+        ? 'dashboard.noQuotesOrApplication'
+        : selectedAsset === assetTableTypeRef.POLICIES
+        ? 'dashboard.noPolicies'
+        : selectedAsset === assetTableTypeRef.CLAIMS
+        ? 'dashboard.noClaims'
+        : ''
+      ) | cxTranslate
+    }}
+  </h3>
 </ng-template>
