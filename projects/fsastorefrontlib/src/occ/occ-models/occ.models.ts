@@ -333,5 +333,5 @@ export interface AppointmentData {
 }
 
 export enum FSB2BUserRole {
-  SELLER = "sellergroup",
+  SELLER = 'sellergroup',
 }
