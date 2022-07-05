@@ -7,7 +7,7 @@ export const forms = {
     },
     effectiveDate: 'Datum des Inkrafttretens',
     phoneNumber: {
-      label: 'Telefonnummer',
+      label: 'Telefonnummer (Optional)',
       lengthValidation:
         'Die Telefonnummer sollte aus mindestens 6 und höchstens 20 Zeichen bestehen.',
     },

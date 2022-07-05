@@ -7,7 +7,7 @@ export const forms = {
     },
     effectiveDate: 'Effective date',
     phoneNumber: {
-      label: 'Phone number',
+      label: 'Phone number (Optional)',
       lengthValidation:
         'Phone number should be between minimum 6 characters and maximum 20',
     },
