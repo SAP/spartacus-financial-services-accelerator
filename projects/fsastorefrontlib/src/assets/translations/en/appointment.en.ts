@@ -5,7 +5,8 @@ export const appointmentScheduling = {
     chooseTime: 'Choose Time',
     timeSlot: 'Please select time slot',
     description: 'Description',
-    consent: 'I approve this consent',
+    consent:
+      'This is a sample consent description that will need to be updated or replaced, based on the valid registration consent required.',
     successfulConsent: 'Consent is successfully given.',
     createdAppointment: 'Appointment has been created',
     placeholder: {

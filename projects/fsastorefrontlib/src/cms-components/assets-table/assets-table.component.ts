@@ -39,6 +39,7 @@ export class AssetsTableComponent implements OnInit, OnDestroy {
   ) {}
 
   @Input() assets: { [key: string]: any }[];
+  @Input() assetSelected: string;
   @Input() isSeller: boolean;
   @Input() selectedAsset: AssetTableType;
   @Input() customerId: string;
