@@ -10,6 +10,9 @@ export const organization = {
   organization: {
     productActivation: 'Product Activation',
     productAssignment: 'Product Assignment',
+    userRoles: {
+      sellergroup: 'Seller',
+    },
   },
   orgUnit: {
     header: 'All organizations ({{count}})',

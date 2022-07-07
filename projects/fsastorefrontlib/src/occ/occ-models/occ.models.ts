@@ -331,3 +331,7 @@ export interface AppointmentData {
   description: string;
   consentGiven: boolean;
 }
+
+export enum FSB2BUserRole {
+  SELLER = 'sellergroup',
+}

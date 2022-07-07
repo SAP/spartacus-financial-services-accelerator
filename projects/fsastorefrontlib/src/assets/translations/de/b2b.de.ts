@@ -14,6 +14,9 @@ export const organization = {
       noSufficientPermissions:
         'Keine ausreichenden Berechtigungen für den Zugriff auf die aufgerufene Seite.',
     },
+    userRoles: {
+      sellergroup: '[DE] Seller',
+    },
   },
   orgUnit: {
     header: 'Alle Organisationen ({{count}})',
