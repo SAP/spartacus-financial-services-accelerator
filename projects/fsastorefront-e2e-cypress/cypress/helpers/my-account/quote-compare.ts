@@ -5,7 +5,7 @@ export function checkCompareIsDisabled() {
 }
 
 export function selectFirstQuoteForCompare(price, productCategory) {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 4);
     cy.get('.value')
       .contains(price)

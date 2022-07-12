@@ -28,7 +28,14 @@ export function reducer(
   }
   return state;
 }
-
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const getPremiumCalendarData = (state: PremiumCalendarState) =>
   state.data;
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export const getLoaded = (state: PremiumCalendarState) => state.loaded;

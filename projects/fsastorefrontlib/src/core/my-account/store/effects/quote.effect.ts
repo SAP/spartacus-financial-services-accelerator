@@ -6,6 +6,10 @@ import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { QuoteConnector } from '../../connectors/quote.connector';
 
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 @Injectable()
 export class QuoteEffects {
   loadQuotes$: Observable<any> = createEffect(() =>
@@ -43,7 +47,6 @@ export class QuoteEffects {
       })
     )
   );
-
   bindQuote$: Observable<any> = createEffect(() =>
     this.actions$.pipe(
       ofType(fromActions.QUOTE_PROCESS_ACTION),

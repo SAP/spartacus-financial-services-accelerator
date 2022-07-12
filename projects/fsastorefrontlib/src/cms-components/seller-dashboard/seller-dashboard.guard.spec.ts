@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
-import { FSUser } from '@spartacus/fsa-storefront';
+import { FSUser } from '../../occ/occ-models/occ.models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { of } from 'rxjs';
 

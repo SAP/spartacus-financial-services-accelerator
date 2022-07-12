@@ -170,7 +170,7 @@ export function checkLifeBasicMiniCartSecondPerson() {
 }
 
 export function checkLifeQuote() {
-  cy.get('cx-fs-quotes').within(() => {
+  cy.get('cx-fs-quotes-applications').within(() => {
     cy.get('.info-card').should('have.length', 1);
     cy.get('h6').should('have.text', ' Life Insurance ');
     cy.get('.label').contains('Basic Life Insurance');

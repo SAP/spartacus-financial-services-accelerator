@@ -1,19 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { Address, RoutingService, User } from '@spartacus/core';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import {
+  FSCart,
   FSOrderEntry,
   FSSteps,
+  FSUser,
   FSUserRole,
+  QuoteActionType,
 } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FSAddressService } from './../../../../core/user/facade/address.service';
-import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade';
 
 @Component({
@@ -39,27 +42,23 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
-  cartId: string;
-  addressData: Address;
+  cart$: Observable<FSCart> = this.cartService.getActive();
+  user$: Observable<FSUser> = this.userAccountFacade.get();
+  address$: Observable<Address[]> = this.addressService.getAddresses();
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-    this.userAccountFacade.get();
   }
 
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
-      combineLatest([
-        this.cartService.getActive(),
-        this.userAccountFacade.get(),
-        this.addressService.getAddresses(),
-      ])
+      combineLatest([this.cart$, this.user$, this.address$])
         .pipe(
           take(1),
           switchMap(([cart, user, addresses]) => {
+            const cartId: string = cart?.code;
             if (cart?.code && cart?.entries?.length > 0) {
-              this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
@@ -69,20 +68,33 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               this.formService.submit(yFormData);
             }
             return this.formService.getSubmittedForm().pipe(
-              map(formData => {
-                if (formData && formData.content) {
-                  this.createDeliveryAddressForUser(user, formData, addresses);
-                  this.quoteService.underwriteQuote(cart.code);
-                  this.quoteService.updateQuote(
-                    this.cartId,
-                    this.pricingService.buildPricingData(
-                      JSON.parse(formData.content)
-                    )
+              filter(formData => !!(formData && formData.content)),
+              switchMap(formData => {
+                this.createDeliveryAddressForUser(user, formData, addresses);
+                const pricingAttributesData = this.pricingService.buildPricingData(
+                  JSON.parse(formData.content)
+                );
+                // consider refactoring this (maybe on BE?), since underwriteQuoteApplication
+                // and updateQuoteApplication are using the same API call
+                return this.quoteService
+                  .underwriteQuoteApplication(cartId)
+                  .pipe(
+                    switchMap(_ => {
+                      return this.quoteService
+                        .updateQuoteApplication(
+                          cartId,
+                          QuoteActionType.UPDATE,
+                          pricingAttributesData
+                        )
+                        .pipe(
+                          tap(_ => {
+                            this.routingService.go({
+                              cxRoute: nextStep.step,
+                            });
+                          })
+                        );
+                    })
                   );
-                  this.routingService.go({
-                    cxRoute: nextStep.step,
-                  });
-                }
               })
             );
           })

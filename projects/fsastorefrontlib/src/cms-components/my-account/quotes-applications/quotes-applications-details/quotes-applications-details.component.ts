@@ -1,23 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutingService, UserIdService } from '@spartacus/core';
-import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
+import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, shareReplay } from 'rxjs/operators';
 import { FSCart, InsuranceQuote } from '../../../../occ/occ-models/occ.models';
 
 @Component({
-  selector: 'cx-fs-quote-details',
-  templateUrl: './quote-details.component.html',
+  selector: 'cx-fs-quote-applications-details',
+  templateUrl: './quotes-applications-details.component.html',
 })
-export class QuoteDetailsComponent implements OnInit, OnDestroy {
-  quoteLoaded$: Observable<boolean> = this.quoteService.getQuotesLoaded();
-  quote$: Observable<InsuranceQuote> = this.quoteService.getQuoteDetails();
+export class QuotesApplicationsDetailsComponent implements OnInit, OnDestroy {
   cart$: Observable<FSCart>;
   subscription = new Subscription();
   userId: string;
   quoteCodeForCompare: string;
+  quotesApplications$: Observable<InsuranceQuote>;
 
   constructor(
     protected routingService: RoutingService,
@@ -32,7 +31,7 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
     this.getCart();
   }
 
-  loadQuoteDetails() {
+  loadQuoteDetails(): void {
     this.quoteCodeForCompare = sessionStorage.getItem('qouteCodeForCompare');
     this.subscription.add(
       combineLatest([
@@ -44,7 +43,9 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
           map(([routingData, userId]) => {
             const quoteId = routingData.state.params.quoteId;
             if (quoteId) {
-              this.quoteService.loadQuoteDetails(quoteId, userId);
+              this.quotesApplications$ = this.quoteService
+                .getQuoteApplicationDetails(userId, quoteId)
+                .pipe(shareReplay());
             }
             this.userId = userId;
           })
@@ -53,10 +54,10 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getCart() {
-    if (this.quote$) {
+  getCart(): void {
+    if (this.quotesApplications$) {
       this.subscription.add(
-        this.quote$
+        this.quotesApplications$
           .pipe(
             filter(quote => !!quote?.quoteId),
             map(quoteData => {
@@ -69,13 +70,13 @@ export class QuoteDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  retrieveQuote(quote: any) {
+  retrieveQuote(quote: InsuranceQuote): void {
     this.subscription.add(
       this.quoteService.retrieveQuoteCheckout(quote).subscribe()
     );
   }
 
-  compareQuote(quote: InsuranceQuote) {
+  compareQuote(quote: InsuranceQuote): void {
     this.quoteService.setQuoteForCompare(quote);
     this.routingService.go({ cxRoute: 'quotes' });
   }

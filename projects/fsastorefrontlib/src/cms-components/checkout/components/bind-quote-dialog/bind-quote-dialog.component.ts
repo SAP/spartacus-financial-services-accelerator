@@ -8,13 +8,17 @@ import {
 import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { ModalService } from '@spartacus/storefront';
 import { combineLatest, Subscription } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
+import {
+  FSUserRole,
+  FSUser,
+  QuoteActionType,
+} from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-bind-quote-dialog',
@@ -44,21 +48,25 @@ export class BindQuoteDialogComponent {
   }
 
   bindQuote() {
-    this.quoteService.bindQuote(this.cartCode);
     this.subscription.add(
-      combineLatest([
-        this.cartService.isStable(),
-        this.cartService.getActive(),
-        this.userAccountFacade.get(),
-        this.oboConsentService.selectedOBOCustomer$,
-      ])
+      this.quoteService
+        .updateQuoteApplication(this.cartCode, QuoteActionType.BIND)
         .pipe(
-          filter(([stable]) => stable),
-          take(1),
-          map(([_, cart, user, oboConsentCustomer]) => {
-            this.clearFormDataFromLocalStorage(cart);
-            this.transferCartToOBOCustomer(user, oboConsentCustomer, cart);
-          })
+          switchMap(_ =>
+            combineLatest([
+              this.cartService.isStable(),
+              this.cartService.getActive(),
+              this.userAccountFacade.get(),
+              this.oboConsentService.selectedOBOCustomer$,
+            ]).pipe(
+              filter(([stable]) => stable),
+              take(1),
+              map(([_, cart, user, oboConsentCustomer]) => {
+                this.clearFormDataFromLocalStorage(cart);
+                this.transferCartToOBOCustomer(user, oboConsentCustomer, cart);
+              })
+            )
+          )
         )
         .subscribe()
     );

@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { combineLatest, Subscription } from 'rxjs';
 import {
   ActiveCartService,
   GlobalMessageService,
@@ -14,7 +15,6 @@ import {
   TranslationService,
 } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { combineLatest, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
 import { filter, map, tap } from 'rxjs/operators';
 import { InsuranceQuote } from '../../../../occ/occ-models/occ.models';

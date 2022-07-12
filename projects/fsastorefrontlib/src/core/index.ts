@@ -10,4 +10,5 @@ export * from './product-pricing/index';
 export * from './user-request/index';
 export * from './date-config/date-config';
 export * from './user/index';
+export * from './events';
 export * from './appointment-scheduling/index';

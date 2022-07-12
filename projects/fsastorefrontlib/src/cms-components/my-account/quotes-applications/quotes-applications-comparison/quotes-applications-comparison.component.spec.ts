@@ -2,7 +2,6 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
-  LanguageService,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
@@ -11,7 +10,7 @@ import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
-import { QuoteComparisonComponent } from './quote-comparison.component';
+import { QuotesApplicationsComparisonComponent } from './quotes-applications-comparison.component';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { QuoteComparisonConfig } from '../../../../core/quote-comparison-config/quote-comparison-config';
 import { FSCart } from '../../../../occ/occ-models/occ.models';
@@ -164,16 +163,13 @@ class MockQuoteService {
     return of();
   }
   getQuotesLoaded() {}
+  getQuotesApplicationsForCompare() {
+    return of(quoteComparisonCarts);
+  }
 }
 
 class MockFSTranslationService {
   getTranslationValue() {}
-}
-
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
 }
 
 class MockUserIdService {
@@ -182,12 +178,11 @@ class MockUserIdService {
   }
 }
 
-describe('QuoteComparisonComponent', () => {
-  let component: QuoteComparisonComponent;
-  let fixture: ComponentFixture<QuoteComparisonComponent>;
+describe('QuotesApplicationsComparisonComponent', () => {
+  let component: QuotesApplicationsComparisonComponent;
+  let fixture: ComponentFixture<QuotesApplicationsComparisonComponent>;
   let quoteService: QuoteService;
   let routingService: RoutingService;
-  let languageService: LanguageService;
   let fSTranslationService: FSTranslationService;
   let userIdService: UserIdService;
 
@@ -195,7 +190,7 @@ describe('QuoteComparisonComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-        declarations: [QuoteComparisonComponent],
+        declarations: [QuotesApplicationsComparisonComponent],
         providers: [
           {
             provide: QuoteService,
@@ -214,10 +209,6 @@ describe('QuoteComparisonComponent', () => {
             useClass: MockRoutingService,
           },
           {
-            provide: LanguageService,
-            useClass: MockLanguageService,
-          },
-          {
             provide: UserIdService,
             useClass: MockUserIdService,
           },
@@ -227,13 +218,12 @@ describe('QuoteComparisonComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuoteComparisonComponent);
+    fixture = TestBed.createComponent(QuotesApplicationsComparisonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     quoteService = TestBed.inject(QuoteService);
     fSTranslationService = TestBed.inject(FSTranslationService);
     routingService = TestBed.inject(RoutingService);
-    languageService = TestBed.inject(LanguageService);
     userIdService = TestBed.inject(UserIdService);
     spyOn(routingService, 'getRouterState').and.callThrough();
   });
@@ -262,11 +252,5 @@ describe('QuoteComparisonComponent', () => {
       'tripDestination'
     );
     expect(translationValue).toEqual('test value');
-  });
-
-  it('should change language', () => {
-    spyOn(languageService, 'getActive').and.returnValue(of('de'));
-    component.changeLanguage();
-    expect(component.language).toEqual('de');
   });
 });

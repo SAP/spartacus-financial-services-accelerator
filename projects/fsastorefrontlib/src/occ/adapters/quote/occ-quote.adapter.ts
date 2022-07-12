@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, pluck } from 'rxjs/operators';
+import { catchError, map, pluck } from 'rxjs/operators';
 import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
 import { Models } from '../../../model/quote.model';
 
@@ -16,7 +16,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     protected converterService: ConverterService
   ) {}
 
-  getQuotes(userId: string): Observable<Models.InsuranceQuote[]> {
+  getQuotes(userId: string): Observable<Models.InsuranceQuote[] | []> {
     const url = this.occEndpointService.buildUrl('quotes', {
       urlParams: {
         userId,
@@ -25,7 +25,8 @@ export class OccQuoteAdapter implements QuoteAdapter {
     return this.http.get<InsuranceQuoteList>(url).pipe(
       pluck('insuranceQuotes'),
       this.converterService.pipeableMany(QUOTE_NORMALIZER),
-      catchError((error: any) => throwError(error.json()))
+      map(data => (data ? data : [])),
+      catchError((error: any) => throwError(error))
     );
   }
 
@@ -42,14 +43,14 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
     return this.http
       .patch(url, quoteContent)
-      .pipe(catchError((error: any) => throwError(error.json)));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   invokeQuoteAction(
     userId: string,
     cartId: string,
     quoteAction: string,
-    body: any
+    body?: any
   ): Observable<any> {
     const url = this.occEndpointService.buildUrl('quoteAction', {
       urlParams: {
@@ -66,7 +67,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     };
     return this.http
       .post(url, bindQuoteAction, { headers })
-      .pipe(catchError((error: any) => throwError(error.json)));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   getQuote(userId: string, quoteId: string): Observable<any> {
@@ -78,7 +79,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
     return this.http
       .get(url)
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   compareQuotes(cartCodes: string[], userId: string) {
@@ -93,6 +94,6 @@ export class OccQuoteAdapter implements QuoteAdapter {
     );
     return this.http
       .get(url, { params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 }

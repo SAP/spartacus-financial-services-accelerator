@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
+  EventService,
   // CheckoutPaymentService,
   PaymentDetails,
   RoutingService,
@@ -20,7 +21,8 @@ export class FinalReviewComponent implements OnInit {
   constructor(
     protected checkoutService: FSCheckoutService,
     protected checkoutPaymentService: CheckoutPaymentFacade,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected eventService: EventService
   ) {}
 
   ngOnInit() {

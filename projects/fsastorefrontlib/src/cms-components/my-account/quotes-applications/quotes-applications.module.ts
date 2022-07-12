@@ -9,8 +9,8 @@ import {
   CmsPageGuard,
   MediaModule,
   PageLayoutComponent,
+  SpinnerModule,
 } from '@spartacus/storefront';
-import { SpinnerModule } from '@spartacus/storefront';
 import {
   AuthGuard,
   I18nModule,
@@ -22,14 +22,14 @@ import {
   TranslatePipe,
 } from '@spartacus/core';
 
-import { QuotesComponent } from './quotes/quotes.component';
-import { QuoteDetailsComponent } from './quote-details/quote-details.component';
-import { QuoteComparisonComponent } from './quote-comparison/quote-comparison.component';
+import { QuotesApplicationsComparisonComponent } from './quotes-applications-comparison/quotes-applications-comparison.component';
 import { QuoteService } from '../../../core/my-account/facade/quote.service';
 import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { PolicyChartDataService } from '../../../core/my-account/services/policy-chart-data.service';
 import { ContextValueModule } from '../../../shared/util/helpers/pipe/context-value/context-value.module';
+import { QuotesApplicationsDetailsComponent } from './quotes-applications-details/quotes-applications-details.component';
+import { QuotesApplicationsComponent } from './quotes-applications/quotes-applications.component';
 
 const routes: Routes = [
   {
@@ -78,29 +78,32 @@ const routes: Routes = [
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountMyQuotesFlex: {
-          component: QuotesComponent,
+          component: QuotesApplicationsComponent,
         },
         AccountQuoteDetailsFlex: {
-          component: QuoteDetailsComponent,
+          component: QuotesApplicationsDetailsComponent,
         },
         AccountQuoteComparisonFlex: {
-          component: QuoteComparisonComponent,
+          component: QuotesApplicationsComparisonComponent,
         },
       },
     }),
   ],
   declarations: [
-    QuotesComponent,
-    QuoteDetailsComponent,
-    QuoteComparisonComponent,
+    QuotesApplicationsComponent,
+    QuotesApplicationsDetailsComponent,
+    QuotesApplicationsComparisonComponent,
   ],
-  exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
+  exports: [
+    QuotesApplicationsComponent,
+    QuotesApplicationsDetailsComponent,
+    QuotesApplicationsComparisonComponent,
+  ],
   providers: [
     QuoteService,
     QuoteConnector,
     PolicyChartDataService,
     TranslatePipe,
   ],
-  entryComponents: [QuotesComponent],
 })
-export class QuoteModule {}
+export class QuotesApplicationsModule {}

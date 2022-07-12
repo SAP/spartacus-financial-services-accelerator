@@ -20,6 +20,10 @@ export interface Quote {
   quoteId?: string;
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use Commands and Queries instead.
+ */
 export interface QuoteState {
   quotes: Models.InsuranceQuote[];
   quoteDetails: {};

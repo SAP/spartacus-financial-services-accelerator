@@ -127,6 +127,7 @@ export const fscommon = {
       },
     },
     category: {
+      allQuotes: 'Alle Angebote',
       insurances_property_homeowners: 'Wohngebäude Versicherung',
       insurances_property_renters: 'Hausrat Versicherung',
       insurances_auto: 'Auto Versicherung',
