@@ -30,7 +30,7 @@
             (click)="value.startClaim ? startClaim($event, asset) : false"
             [ngClass]="{ pointer: value.startClaim }"
           >
-            {{ value | resolveAssetValue: asset }}
+            {{ value | resolveAssetValue: asset | async }}
           </span>
         </td>
       </tr>

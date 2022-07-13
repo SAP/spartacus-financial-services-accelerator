@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { MockTranslatePipe, TranslatePipe } from '@spartacus/core';
+import { I18nModule, TranslationService } from '@spartacus/core';
+import { of } from 'rxjs';
 import { getDataByAssetType } from '../../core/assets-table-config/assets-table.config';
 import { ResolveAssetValuePipe } from './resolve-asset-value.pipe';
 
@@ -35,45 +36,43 @@ const mockedPolicy = {
   paymentFrequency: 'Monthly',
   policyStatus: 'Active',
 };
-const mockedPolicyResult = [
-  '00001000',
-  'Auto Insurance',
-  'Monthly',
-  'Active',
-  'fscommon.create',
-];
 
 describe('ResolveAssetValuePipe', () => {
   let pipe: ResolveAssetValuePipe;
+  let translationServiceSpy: jasmine.SpyObj<TranslationService>;
 
   beforeEach(() => {
+    const spy = jasmine.createSpyObj('TranslationService', ['translate']);
+
     TestBed.configureTestingModule({
-      declarations: [MockTranslatePipe],
+      imports: [I18nModule],
       providers: [
         ResolveAssetValuePipe,
         {
-          provide: TranslatePipe,
-          useClass: MockTranslatePipe,
+          provide: TranslationService,
+          useValue: spy,
         },
       ],
     });
 
     pipe = TestBed.inject(ResolveAssetValuePipe);
+    translationServiceSpy = TestBed.inject(
+      TranslationService
+    ) as jasmine.SpyObj<TranslationService>;
   });
 
   it('transforms claim to correct values', () => {
     mockedDataByAssetType.claims.values.forEach((claimConfig, i) => {
-      expect(pipe.transform(claimConfig, mockedClaim)).toBe(
-        mockedClaimResult[i]
-      );
+      const stubValue = of(mockedClaimResult[i]);
+      translationServiceSpy.translate.and.returnValue(stubValue);
+
+      pipe.transform(claimConfig, mockedClaim).subscribe(res => {
+        expect(res).toBe(mockedClaimResult[i]);
+      });
     });
   });
 
-  it('transforms policy to correct values', () => {
-    mockedDataByAssetType.policies.values.forEach((policyConfig, i) => {
-      expect(pipe.transform(policyConfig, mockedPolicy)).toBe(
-        mockedPolicyResult[i]
-      );
-    });
+  it('allowedFSRequestTypesIsClaim returns correct values', () => {
+    expect(pipe.allowedFSRequestTypesIsClaim(mockedPolicy)).toBe(true);
   });
 });
