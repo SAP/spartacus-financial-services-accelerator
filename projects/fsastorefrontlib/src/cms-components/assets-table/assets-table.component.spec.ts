@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
+import { FileService } from '@spartacus/dynamicforms';
+import { ClaimService } from '../../core/my-account/facade/claim.service';
+import { AssetTableType } from '../../occ';
 
 import { AssetsTableComponent } from './assets-table.component';
 import createSpy = jasmine.createSpy;
@@ -33,9 +36,17 @@ class MockRoutingService {
 describe('AssetsTableComponent', () => {
   let component: AssetsTableComponent;
   let mockRoutingService: RoutingService;
+  let fileServiceSpy: jasmine.SpyObj<FileService>;
+  let claimServiceSpy: jasmine.SpyObj<ClaimService>;
   let fixture: ComponentFixture<AssetsTableComponent>;
 
   beforeEach(async () => {
+    const _fileServiceSpy = jasmine.createSpyObj('FileService', ['resetFiles']);
+    const _claimServiceSpy = jasmine.createSpyObj('ClaimService', [
+      'createClaim',
+      'getCurrentClaim',
+    ]);
+
     await TestBed.configureTestingModule({
       imports: [I18nTestingModule],
       providers: [
@@ -43,11 +54,17 @@ describe('AssetsTableComponent', () => {
           provide: RoutingService,
           useClass: MockRoutingService,
         },
+        { provide: FileService, useValue: _fileServiceSpy },
+        { provide: ClaimService, useValue: _claimServiceSpy },
       ],
       declarations: [AssetsTableComponent],
     }).compileComponents();
 
     mockRoutingService = TestBed.inject(RoutingService);
+    fileServiceSpy = TestBed.inject(FileService) as jasmine.SpyObj<FileService>;
+    claimServiceSpy = TestBed.inject(ClaimService) as jasmine.SpyObj<
+      ClaimService
+    >;
   });
 
   beforeEach(() => {
@@ -61,6 +78,8 @@ describe('AssetsTableComponent', () => {
   });
 
   it('should resolve url and param for QUOTE asset', () => {
+    component.selectedAsset = AssetTableType.QUOTES;
+
     component.resolveAssetUrl(insuranceQuote1);
     expect(mockRoutingService.go).toHaveBeenCalledWith({
       cxRoute: 'quoteDetails',
@@ -68,6 +87,8 @@ describe('AssetsTableComponent', () => {
     });
   });
   it('should resolve url and param for POLICY asset', () => {
+    component.selectedAsset = AssetTableType.POLICIES;
+
     component.resolveAssetUrl(insurancePolicy1);
     expect(mockRoutingService.go).toHaveBeenCalledWith({
       cxRoute: 'policyDetails',
@@ -75,14 +96,12 @@ describe('AssetsTableComponent', () => {
     });
   });
   it('should resolve url and param for CLAIM asset', () => {
+    component.selectedAsset = AssetTableType.CLAIMS;
+
     component.resolveAssetUrl(claim1);
     expect(mockRoutingService.go).toHaveBeenCalledWith({
       cxRoute: 'claimDetails',
       params: { claimId: claimId1 },
     });
-  });
-  it('should NOT resolve url and param for ANY asset', () => {
-    component.resolveAssetUrl(undefined);
-    expect(mockRoutingService.go).not.toHaveBeenCalled();
   });
 });

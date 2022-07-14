@@ -52,7 +52,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "cx-fs",
+            "prefix": "cxFs",
             "style": "camelCase"
           }
         ],

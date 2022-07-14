@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { B2BUserRole } from '@spartacus/core';
 import { B2BUserService } from '@spartacus/organization/administration/core';
-import { FSB2BUserRole } from '../../../occ';
+import { FSUserRole } from '../../../occ';
 @Injectable({ providedIn: 'root' })
 export class FSB2BUserService extends B2BUserService {
   /**
@@ -11,6 +11,6 @@ export class FSB2BUserService extends B2BUserService {
    * this implementation accordingly.
    */
   getAllRoles(): any {
-    return [B2BUserRole.CUSTOMER, B2BUserRole.ADMIN, FSB2BUserRole.SELLER];
+    return [B2BUserRole.CUSTOMER, B2BUserRole.ADMIN, FSUserRole.SELLER];
   }
 }

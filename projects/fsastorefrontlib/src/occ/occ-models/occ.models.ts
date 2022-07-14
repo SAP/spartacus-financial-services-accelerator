@@ -17,6 +17,83 @@ import { UserSignUp } from '@spartacus/user/profile/root';
 import { MediaContainer } from '@spartacus/storefront';
 import { Pagination } from '@spartacus/core/src/model/unused.model';
 
+export enum OrganizationTableType {
+  PRODUCT_ASSIGNMENTS = 'productAssignments',
+  POTENTIAL_PRODUCT_ASSIGNMENTS = 'potentialProductAssignments',
+}
+
+export enum FSPaymentTypeEnum {
+  INVOICE = 'INVOICE',
+  CARD = 'CARD',
+}
+
+export enum BindingStateType {
+  BIND = 'BIND',
+  UNBIND = 'UNBIND',
+}
+
+export enum QuoteWorkflowStatusType {
+  APPROVED = 'APPROVED',
+  REFERRED = 'REFERRED',
+  PENDING = 'PENDING',
+}
+
+export enum ConfiguratorType {
+  PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
+}
+export enum FormDefinitionType {
+  PRODUCT_CONFIGURE = 'PRODUCT_CONFIGURE',
+  PERSONAL_DETAILS = 'PERSONAL_DETAILS',
+}
+export enum RequestType {
+  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
+  INSURED_OBJECT_ADD = 'FSINSUREDOBJECT_ADD',
+  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
+  FSCLAIM = 'FSCLAIM',
+}
+
+export enum ClaimStatus {
+  OPEN = 'OPEN',
+  SUBMITTED = 'SUBMITTED',
+  PROCESSING = 'PROCESSING',
+  ERROR = 'ERROR',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+export enum ChangeRequestStatus {
+  SUBMITTED = 'SUBMITTED',
+  REFERRED = 'REFERRED',
+}
+export enum StepStatus {
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED',
+}
+
+export enum QuoteActionType {
+  BIND = 'BIND',
+  UNDERWRITING = 'UNDERWRITING',
+  UPDATE = 'UPDATE',
+}
+
+export enum SyncPilotGender {
+  mr = 'm',
+  mrs = 'w',
+  miss = 'w',
+  ms = 'w',
+  dr = 'd',
+  rev = 'd',
+}
+
+export enum FSUserRole {
+  SELLER = 'sellergroup',
+}
+
+export enum AssetTableType {
+  CLAIMS = 'claims',
+  POLICIES = 'policies',
+  QUOTES = 'quotes',
+}
+
 export interface ContactAgentData {
   email?: string;
   interest?: string;
@@ -123,11 +200,6 @@ export interface OBOPermissions {
   [key: string]: any;
 }
 
-export enum OrganizationTableType {
-  PRODUCT_ASSIGNMENTS = 'productAssignments',
-  POTENTIAL_PRODUCT_ASSIGNMENTS = 'potentialProductAssignments',
-}
-
 export interface InsuredObjectList {
   insuredObjects?: any[];
 }
@@ -137,72 +209,6 @@ export interface QuoteBindingState {
 
 export interface QuoteStatus {
   code?: string;
-}
-
-export enum FSPaymentTypeEnum {
-  INVOICE = 'INVOICE',
-  CARD = 'CARD',
-}
-
-export enum BindingStateType {
-  BIND = 'BIND',
-  UNBIND = 'UNBIND',
-}
-
-export enum QuoteWorkflowStatusType {
-  APPROVED = 'APPROVED',
-  REFERRED = 'REFERRED',
-  PENDING = 'PENDING',
-}
-
-export enum ConfiguratorType {
-  PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
-}
-export enum FormDefinitionType {
-  PRODUCT_CONFIGURE = 'PRODUCT_CONFIGURE',
-  PERSONAL_DETAILS = 'PERSONAL_DETAILS',
-}
-export enum RequestType {
-  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
-  INSURED_OBJECT_ADD = 'FSINSUREDOBJECT_ADD',
-  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
-  FSCLAIM = 'FSCLAIM',
-}
-
-export enum ClaimStatus {
-  OPEN = 'OPEN',
-  SUBMITTED = 'SUBMITTED',
-  PROCESSING = 'PROCESSING',
-  ERROR = 'ERROR',
-  APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED',
-}
-export enum ChangeRequestStatus {
-  SUBMITTED = 'SUBMITTED',
-  REFERRED = 'REFERRED',
-}
-export enum StepStatus {
-  COMPLETED = 'COMPLETED',
-  CANCELED = 'CANCELED',
-}
-
-export enum QuoteActionType {
-  BIND = 'BIND',
-  UNDERWRITING = 'UNDERWRITING',
-  UPDATE = 'UPDATE',
-}
-
-export enum SyncPilotGender {
-  mr = 'm',
-  mrs = 'w',
-  miss = 'w',
-  ms = 'w',
-  dr = 'd',
-  rev = 'd',
-}
-
-export enum FSUserRole {
-  SELLER = 'sellergroup',
 }
 
 export interface FSOrderEntry extends OrderEntry {
@@ -332,6 +338,12 @@ export interface AppointmentData {
   consentGiven: boolean;
 }
 
-export enum FSB2BUserRole {
-  SELLER = 'sellergroup',
+export interface DataByAssetType {
+  headings: string[];
+  values: {
+    propName: boolean;
+    value: string;
+    startClaim?: boolean;
+    classes?: string;
+  }[];
 }

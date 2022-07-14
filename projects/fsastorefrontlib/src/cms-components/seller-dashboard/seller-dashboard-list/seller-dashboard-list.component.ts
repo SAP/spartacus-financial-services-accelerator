@@ -11,6 +11,7 @@ import { ICON_TYPE } from '@spartacus/storefront';
 import { OBOCustomerList, FSUser } from '../../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-seller-dashboard-list',
@@ -22,7 +23,8 @@ export class SellerDashboardListComponent {
     protected consentConnector: ConsentConnector,
     protected userIdService: UserIdService,
     protected translationService: TranslationService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected oboCustomerService: OboCustomerService
   ) {}
 
   sort: string;
@@ -61,6 +63,8 @@ export class SellerDashboardListComponent {
   }
 
   getUserProfile(customer: FSUser) {
+    this.oboCustomerService.setSelectedCustomer(customer);
+
     this.routingService.go({
       cxRoute: 'userProfile',
       params: { customerId: customer.uid },

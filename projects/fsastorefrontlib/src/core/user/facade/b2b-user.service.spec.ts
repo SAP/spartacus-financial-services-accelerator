@@ -4,7 +4,7 @@ import { B2BUserRole, UserIdService } from '@spartacus/core';
 import { StateWithOrganization } from '@spartacus/organization/administration/core';
 import { BehaviorSubject } from 'rxjs';
 import { FSB2BUserService } from './b2b-user.service';
-import { FSB2BUserRole } from '@spartacus/fsa-storefront';
+import { FSUserRole } from '../../../occ';
 
 const userId = 'current';
 let takeUserId$: BehaviorSubject<string | never>;
@@ -50,7 +50,7 @@ describe('B2BUserService', () => {
     expect(possibleB2BRoles).toEqual([
       B2BUserRole.CUSTOMER,
       B2BUserRole.ADMIN,
-      FSB2BUserRole.SELLER,
+      FSUserRole.SELLER,
     ]);
   });
 });
