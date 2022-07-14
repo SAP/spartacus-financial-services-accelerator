@@ -4,6 +4,7 @@ import { B2BUserRole, UserIdService } from '@spartacus/core';
 import { StateWithOrganization } from '@spartacus/organization/administration/core';
 import { BehaviorSubject } from 'rxjs';
 import { FSB2BUserService } from './b2b-user.service';
+import { FSUserRole } from '../../../occ';
 
 const userId = 'current';
 let takeUserId$: BehaviorSubject<string | never>;
@@ -44,8 +45,12 @@ describe('B2BUserService', () => {
   ));
 
   it('should get possible roles for b2b customer', () => {
-    const possibleB2BRoles: B2BUserRole[] = service.getAllRoles();
-    expect(possibleB2BRoles.length).toEqual(2);
-    expect(possibleB2BRoles).toEqual([B2BUserRole.CUSTOMER, B2BUserRole.ADMIN]);
+    const possibleB2BRoles: any = service.getAllRoles();
+    expect(possibleB2BRoles.length).toEqual(3);
+    expect(possibleB2BRoles).toEqual([
+      B2BUserRole.CUSTOMER,
+      B2BUserRole.ADMIN,
+      FSUserRole.SELLER,
+    ]);
   });
 });

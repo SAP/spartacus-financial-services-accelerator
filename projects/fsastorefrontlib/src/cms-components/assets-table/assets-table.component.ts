@@ -60,8 +60,9 @@ export class AssetsTableComponent implements OnInit, OnDestroy {
     this.dataByAssetType = getDataByAssetType(this.defaultHeadings);
   }
 
-  startClaim(e, asset) {
+  startClaim(e, asset, assetConfig) {
     e.stopPropagation();
+    if (!assetConfig.startClaim) return;
 
     if (
       asset.categoryData.code === 'insurances_auto' &&

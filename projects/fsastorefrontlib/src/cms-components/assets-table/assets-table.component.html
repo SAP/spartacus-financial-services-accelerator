@@ -27,7 +27,7 @@
           </div>
           <span
             class="notice text-break {{ value.classes ? value.classes : '' }}"
-            (click)="value.startClaim ? startClaim($event, asset) : false"
+            (click)="startClaim($event, asset, value)"
             [ngClass]="{ pointer: value.startClaim }"
           >
             {{ value | resolveAssetValue: asset | async }}
