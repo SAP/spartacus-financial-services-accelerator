@@ -12,12 +12,14 @@ import {
   GlobalMessageType,
   OCC_USER_ID_ANONYMOUS,
   RoutingService,
+  UserIdService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentData } from './../../../occ/occ-models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-contact-agent-form',
@@ -28,6 +30,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   constructor(
     protected agentSearchService: AgentSearchService,
     protected userAccountFacade: UserAccountFacade,
+    protected userIdService: UserIdService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
     protected globalMessageService: GlobalMessageService,
@@ -86,21 +89,26 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
 
   submit(): void {
     this.subscription.add(
-      this.csTicketService
-        .createCsTicketForAgent(
-          this.agentId,
-          this.userId,
-          this.collectDataFromContactAgentForm(this.contactAgentForm.value)
-        )
-        .subscribe(data => {
-          if (data) {
-            this.router.go('/');
-            this.globalMessageService.add(
-              'Ticket has been created',
-              GlobalMessageType.MSG_TYPE_CONFIRMATION
-            );
-          }
-        })
+      this.userIdService.getUserId().subscribe(userId => {
+        this.csTicketService
+          .createCsTicketForAgent(
+            this.agentId,
+            userId,
+            this.collectDataFromContactAgentForm(this.contactAgentForm.value)
+          )
+          .pipe(
+            map(data => {
+              if (data) {
+                this.router.go('/');
+                this.globalMessageService.add(
+                  'Ticket has been created',
+                  GlobalMessageType.MSG_TYPE_CONFIRMATION
+                );
+              }
+            })
+          )
+          .subscribe();
+      })
     );
   }
 
