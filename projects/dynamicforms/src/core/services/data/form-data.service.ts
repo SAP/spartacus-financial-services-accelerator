@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
+import { OboCustomerService } from '../../../core/services/obo-customer/obo-customer.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
 import * as fromSelector from '../../store/selectors';
@@ -16,7 +17,8 @@ export class FormDataService {
 
   constructor(
     protected store: Store<StateWithForm>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected oboCustomerService: OboCustomerService
   ) {}
 
   setContinueToNextStep(isContinueClicked: boolean) {
@@ -32,17 +34,16 @@ export class FormDataService {
   }
 
   saveFormData(formData: YFormData) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.SaveFormData({
-            formData: formData,
-            userId: occUserId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.SaveFormData({ formData, userId })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
   }
 
@@ -65,17 +66,16 @@ export class FormDataService {
   }
 
   loadFormData(formDataId: string) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadFormData({
-            formDataId: formDataId,
-            userId: occUserId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.LoadFormData({ formDataId, userId })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
   }
 

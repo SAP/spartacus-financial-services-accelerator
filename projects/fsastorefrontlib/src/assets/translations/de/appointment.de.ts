@@ -5,7 +5,8 @@ export const appointmentScheduling = {
     chooseTime: 'Zeit auswählen',
     timeSlot: 'Bitte Zeitfenster auswählen',
     description: 'Beschreibung',
-    consent: 'Ich stimme dieser Einwilligung zu',
+    consent:
+      'Dies ist eine Einwilligungserklärung, die basierend auf der erforderlichen gültigen Bestimmungen aktualisiert oder ersetzt werden muss.',
     successfulConsent: 'Die Einwilligung wurde erfolgreich erteilt.',
     createdAppointment: 'Termin wurde erstellt',
     placeholder: {

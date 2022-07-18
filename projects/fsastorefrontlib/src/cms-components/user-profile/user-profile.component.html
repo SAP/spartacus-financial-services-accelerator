@@ -186,9 +186,9 @@
                     asset.key === 'quotes'
                       ? customerAssets?.quotes
                       : asset.key === 'policies'
-                      ? customerAssets.policies?.insurancePolicies
+                      ? customerAssets.policies?.insurancePolicies || []
                       : asset.key === 'claims'
-                      ? customerAssets.claims?.claims
+                      ? customerAssets.claims?.claims || []
                       : '',
                     asset.key
                   )
@@ -198,9 +198,9 @@
                     asset.key === 'quotes'
                       ? customerAssets?.quotes
                       : asset.key === 'policies'
-                      ? customerAssets.policies?.insurancePolicies
+                      ? customerAssets.policies?.insurancePolicies || []
                       : asset.key === 'claims'
-                      ? customerAssets.claims?.claims
+                      ? customerAssets.claims?.claims || []
                       : '',
                     asset.key
                   )
@@ -243,17 +243,14 @@
     </ng-container>
   </div>
   <cx-fs-assets-table
-    *ngIf="assetSelected"
-    [headings]="[
-      'fscommon.application.number' | cxTranslate,
-      'dashboard.name' | cxTranslate,
-      'fscommon.paymentFrequency' | cxTranslate,
-      'fscommon.status' | cxTranslate
-    ]"
+    *ngIf="assets"
     [assets]="assets"
     [assetSelected]="assetSelected"
     [isSeller]="seller"
-  ></cx-fs-assets-table>
+    [selectedAsset]="assetSelected"
+    [customerId]="customerId"
+  >
+  </cx-fs-assets-table>
 </ng-container>
 
 <ng-template #loading>

@@ -1,7 +1,12 @@
 <ng-container *ngIf="assets?.length > 0; else noAssets">
   <table class="box-shadow table table-hover border border-color-3 mt-5">
     <thead class="d-none d-md-table-row">
-      <th *ngFor="let heading of headings" scope="col">{{ heading }}</th>
+      <th
+        *ngFor="let heading of dataByAssetType[selectedAsset].headings"
+        scope="col"
+      >
+        {{ heading | cxTranslate }}
+      </th>
     </thead>
     <tbody>
       <tr
@@ -10,44 +15,23 @@
         *ngFor="let asset of assets"
         (click)="resolveAssetUrl(asset)"
       >
-        <td class="d-flex d-md-table-cell">
+        <td
+          class="d-flex d-md-table-cell"
+          *ngFor="
+            let value of dataByAssetType[selectedAsset].values;
+            let i = index
+          "
+        >
           <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[0] }}:
+            {{ dataByAssetType[selectedAsset].headings[i] | cxTranslate }}:
           </div>
-          <span class="notice text-break">
-            {{ asset?.quoteId }}
-            {{ asset?.contractNumber }}
-            {{ asset?.claimNumber }}
+          <span
+            class="notice text-break {{ value.classes ? value.classes : '' }}"
+            (click)="startClaim($event, asset, value)"
+            [ngClass]="{ pointer: value.startClaim }"
+          >
+            {{ value | resolveAssetValue: asset | async }}
           </span>
-        </td>
-        <td class="d-flex d-md-table-cell">
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[1] }}:
-          </div>
-          <span class="text-break">
-            {{ asset?.defaultCategory?.name }}
-            {{ asset?.categoryData?.name }}
-            {{ asset?.insurancePolicy?.categoryData?.name }}</span
-          >
-        </td>
-        <td class="d-flex d-md-table-cell">
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[2] }}:
-          </div>
-          <span class="text-break text-capitalize">
-            {{ asset?.paymentFrequency }}
-            {{ asset?.insurancePolicy?.paymentFrequency }}</span
-          >
-        </td>
-        <td class="d-flex d-md-table-cell">
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ headings[3] }}:
-          </div>
-          <span class="text-break text-capitalize">
-            {{ asset?.quoteStatus }}
-            {{ asset?.policyStatus }}
-            {{ asset?.claimStatus }}</span
-          >
         </td>
       </tr>
     </tbody>
@@ -56,11 +40,11 @@
 <ng-template #noAssets>
   <h3 class="text-center mt-5">
     {{
-      (assetSelected === 'quotes'
+      (selectedAsset === assetTableTypeRef.QUOTES
         ? 'dashboard.noQuotesOrApplication'
-        : assetSelected === 'policies'
+        : selectedAsset === assetTableTypeRef.POLICIES
         ? 'dashboard.noPolicies'
-        : assetSelected === 'claims'
+        : selectedAsset === assetTableTypeRef.CLAIMS
         ? 'dashboard.noClaims'
         : ''
       ) | cxTranslate

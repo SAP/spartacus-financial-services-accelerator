@@ -21,6 +21,7 @@ import {
   FSUserRole,
   FSUser,
   InsuranceQuoteList,
+  AssetTableType,
 } from '../../occ/occ-models/occ.models';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
@@ -53,7 +54,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   customerPolicies$: Observable<any>;
   customerClaims$: Observable<any>;
   assets: { [key: string]: any }[];
-  assetSelected: string;
+  assetSelected: AssetTableType;
   showAddressForm = false;
   userId: string;
   customerId: string;
