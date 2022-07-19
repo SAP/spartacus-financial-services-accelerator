@@ -19,7 +19,7 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
 import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentData } from './../../../occ/occ-models';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { map } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-contact-agent-form',
@@ -88,28 +88,28 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this.subscription.add(
-      this.userIdService.getUserId().subscribe(userId => {
-        this.csTicketService
-          .createCsTicketForAgent(
+    this.userIdService
+      .getUserId()
+      .pipe(
+        take(1),
+        switchMap(userId =>
+          this.csTicketService.createCsTicketForAgent(
             this.agentId,
             userId,
             this.collectDataFromContactAgentForm(this.contactAgentForm.value)
           )
-          .pipe(
-            map(data => {
-              if (data) {
-                this.router.go('/');
-                this.globalMessageService.add(
-                  'Ticket has been created',
-                  GlobalMessageType.MSG_TYPE_CONFIRMATION
-                );
-              }
-            })
-          )
-          .subscribe();
-      })
-    );
+        ),
+        map(data => {
+          if (data) {
+            this.router.go('/');
+            this.globalMessageService.add(
+              { key: 'fscommon.ticketCreated' },
+              GlobalMessageType.MSG_TYPE_CONFIRMATION
+            );
+          }
+        })
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
