@@ -1,0 +1,27 @@
+<ng-container *ngIf="appointmentDate">
+  <div class="box-shadow p-4">
+    <div class="content860 d-flex flex-column align-content-center flex-wrap">
+      <div class="d-flex justify-content-center my-5">
+        <div class="image-wrapper">
+          <img class="image-item" [src]="getImagelink()" alt="" />
+        </div>
+      </div>
+      <h5 class="notice-text text-center py-2 px-4 mb-5">
+        {{
+          'appointmentScheduling.confirmation.scheduled'
+            | cxTranslate
+              : {
+                  date: appointmentDate | date: 'dd.M.Y.',
+                  time: appointmentDate | date: 'HH:mm'
+                }
+        }}
+      </h5>
+      <div class="flex-100 border border-color-6 mb-5"></div>
+      <p>
+        {{
+          'appointmentScheduling.confirmation.submissionNotice' | cxTranslate
+        }}
+      </p>
+    </div>
+  </div>
+</ng-container>

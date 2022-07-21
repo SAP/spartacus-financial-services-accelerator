@@ -13,5 +13,11 @@ export const appointmentScheduling = {
       subject: 'Add appointment subject',
       description: 'Add details for your appointment request',
     },
+    confirmation: {
+      submissionNotice:
+        'Your appointment request has been successfully saved in our system. You can find the confirmation email in the Inbox of your self-service portal and in your mailbox.',
+      scheduled:
+        'Your appointment has been scheduled for {{ date }} at {{ time }}',
+    },
   },
 };
