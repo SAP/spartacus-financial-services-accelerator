@@ -6,9 +6,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   GlobalMessageService,
   I18nTestingModule,
+  OCC_USER_ID_CURRENT,
   RoutingService,
+  UserIdService,
 } from '@spartacus/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentFormComponent } from './contact-agent-form.component';
@@ -69,6 +71,11 @@ class MockRoutingService {
 class MockGlobalMessageService {
   add(): void {}
 }
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 
 describe('ContactAgentFormComponent', () => {
   let component: ContactAgentFormComponent;
@@ -78,6 +85,7 @@ describe('ContactAgentFormComponent', () => {
   let mockSearchService: AgentSearchService;
   let globalMessageService: GlobalMessageService;
   let mockRoutingService: RoutingService;
+  let mockUserIdService: UserIdService;
 
   beforeEach(
     waitForAsync(() => {
@@ -109,6 +117,10 @@ describe('ContactAgentFormComponent', () => {
             provide: CsTicketService,
             useClass: MockCsTicketService,
           },
+          {
+            provide: UserIdService,
+            useClass: MockUserIdService,
+          },
         ],
       }).compileComponents();
     })
@@ -122,6 +134,7 @@ describe('ContactAgentFormComponent', () => {
     mockSearchService = TestBed.inject(AgentSearchService);
     mockedCsTicketService = TestBed.inject(CsTicketService);
     mockRoutingService = TestBed.inject(RoutingService);
+    mockUserIdService = TestBed.inject(UserIdService);
   });
 
   it('should create', () => {
