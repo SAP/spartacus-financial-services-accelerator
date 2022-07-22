@@ -46,6 +46,8 @@ class MockCartService {
   getEntries(): Observable<OrderEntry[]> {
     return of(mockEntries);
   }
+
+  loadCart() {}
 }
 
 class MockCurrencyService {
@@ -126,6 +128,7 @@ describe('AddOptionsComponent', () => {
     spyOn(cartService, 'removeEntry').and.callThrough();
     spyOn(cartService, 'addOptionalProduct').and.callThrough();
     spyOn(cartService, 'getEntries').and.callThrough();
+    spyOn(cartService, 'loadCart').and.callThrough();
 
     routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
@@ -174,6 +177,16 @@ describe('AddOptionsComponent', () => {
     component.ngOnInit();
     component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
+  });
+
+  it('should not set active cart for chatbot', () => {
+    component.chatbotSetActiveCart(undefined, 'userId');
+    expect(cartService.loadCart).not.toHaveBeenCalled();
+  });
+
+  it('should set active cart for chatbot', () => {
+    component.chatbotSetActiveCart('guid', 'userId');
+    expect(cartService.loadCart).toHaveBeenCalled();
   });
 
   it('should not render navigation buttons if next and previous steps are not defined', () => {

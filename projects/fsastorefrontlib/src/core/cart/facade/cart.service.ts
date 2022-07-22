@@ -120,15 +120,13 @@ export class FSCartService extends ActiveCartService {
   }
 
   loadCart(cartId: string, userId: string): void {
-    if (userId !== OCC_USER_ID_ANONYMOUS) {
-      this.multiCartService.loadCart({
-        userId: userId,
-        cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
-        extraData: {
-          active: true,
-        },
-      });
-    }
+    this.multiCartService.loadCart({
+      userId: userId,
+      cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
+      extraData: {
+        active: true,
+      },
+    });
   }
 
   getCart(cartId: string): Observable<Cart> {

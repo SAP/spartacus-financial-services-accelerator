@@ -5,8 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import {
+  CurrencyService,
+  OrderEntry,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
@@ -23,12 +28,14 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected currencyService: CurrencyService
+    protected currencyService: CurrencyService,
+    protected userIdService: UserIdService
   ) {}
 
   entries$: Observable<OrderEntry[]>;
   isCartStable$: Observable<boolean>;
   subscription = new Subscription();
+  chatbotSubscription = new Subscription();
   currentCurrency: string;
 
   previousCheckoutStep$: Observable<FSSteps>;
@@ -44,6 +51,20 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .pipe(
           map(currentCurrency => {
             this.currentCurrency = currentCurrency;
+          })
+        )
+        .subscribe()
+    );
+
+    this.chatbotSubscription.add(
+      combineLatest([
+        this.activatedRoute.queryParamMap,
+        this.userIdService.getUserId(),
+      ])
+        .pipe(
+          map(([param, userId]) => {
+            let guid = param.get('guid');
+            this.chatbotSetActiveCart(guid, userId);
           })
         )
         .subscribe()
@@ -83,9 +104,19 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     });
   }
 
+  chatbotSetActiveCart(guid: string, userId: string) {
+    if (!guid) {
+      return;
+    }
+    this.cartService.loadCart(guid, userId);
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (this.chatbotSubscription) {
+      this.chatbotSubscription.unsubscribe();
     }
   }
 }
