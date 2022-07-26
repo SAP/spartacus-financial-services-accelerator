@@ -3,7 +3,7 @@
     <div class="content860 d-flex flex-column align-content-center flex-wrap">
       <div class="d-flex justify-content-center my-5">
         <div class="image-wrapper">
-          <img class="image-item" [src]="getImagelink()" alt="" />
+          <img class="image-item" [src]="imageLink" alt="" />
         </div>
       </div>
       <h5 class="notice-text text-center py-2 px-4 mb-5">
@@ -16,7 +16,7 @@
                 }
         }}
       </h5>
-      <div class="flex-100 border border-color-6 mb-5"></div>
+      <hr class="w-100 border border-color-6 mb-5" />
       <p>
         {{
           'appointmentScheduling.confirmation.submissionNotice' | cxTranslate

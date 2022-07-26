@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RoutingService } from '@spartacus/core';
+import { RoutingService, WindowRef } from '@spartacus/core';
 import { genericIcons } from '../../../assets/icons/generic-icons';
 
 @Component({
@@ -10,20 +10,20 @@ import { genericIcons } from '../../../assets/icons/generic-icons';
 export class AppointmentSchedulingConfirmationComponent implements OnInit {
   constructor(
     protected domSanitizer: DomSanitizer,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected winRef: WindowRef
   ) {}
 
   appointmentDate: string;
+  imageLink = this.domSanitizer.bypassSecurityTrustUrl(
+    genericIcons.appointmentConfirmationImage
+  );
 
   ngOnInit() {
-    if (history.state.date) {
-      this.appointmentDate = history.state.date;
-    } else {
+    this.appointmentDate = this.winRef.nativeWindow.history.state.date;
+
+    if (!this.appointmentDate) {
       this.routingService.go('/');
     }
-  }
-
-  getImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
   }
 }

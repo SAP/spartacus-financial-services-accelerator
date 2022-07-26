@@ -43,10 +43,6 @@ describe('AppointmentSchedulingConfirmationComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should check image src', () => {
-    expect(component.getImagelink()).toEqual(mockImageSrc);
-  });
-
   it('should check appointmentDate', () => {
     const mockedDate = '2022-05-04 11:00';
     history.pushState({ date: mockedDate }, '', '');
