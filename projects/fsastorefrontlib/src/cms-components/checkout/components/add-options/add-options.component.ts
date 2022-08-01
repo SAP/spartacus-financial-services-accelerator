@@ -44,29 +44,31 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
 
-    this.subscription.add(
-      this.currencyService
-        .getActive()
-        .pipe(
-          map(currentCurrency => {
-            this.currentCurrency = currentCurrency;
-          })
-        )
-        .subscribe()
-    ).add(
-      combineLatest([
-        this.activatedRoute.queryParamMap,
-        this.userIdService.getUserId(),
-      ])
-        .pipe(
-          map(([param, userId]) => {
-            let guid = param.get('guid');
-            console.log("Get in add-options, guid: " + guid);
-            //this.chatbotSetActiveCart('00000017', userId);
-          })
-        )
-        .subscribe()
-    );
+    this.subscription
+      .add(
+        this.currencyService
+          .getActive()
+          .pipe(
+            map(currentCurrency => {
+              this.currentCurrency = currentCurrency;
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        combineLatest([
+          this.activatedRoute.queryParamMap,
+          this.userIdService.getUserId(),
+        ])
+          .pipe(
+            map(([param, userId]) => {
+              let guid = param.get('guid');
+              console.log('Get in add-options, guid: ' + guid);
+              //this.chatbotSetActiveCart('00000017', userId);
+            })
+          )
+          .subscribe()
+      );
 
     this.isCartStable$ = this.cartService.isStable();
 

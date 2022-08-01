@@ -66,7 +66,7 @@ import {
 } from '@spartacus/checkout/components';
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 import { FSMessageModule } from './../message/message.module';
-import {AddOptionsGuard} from './guards/add-options-guard';
+import { AddOptionsGuard } from './guards/add-options-guard';
 
 const routes: Routes = [
   {
