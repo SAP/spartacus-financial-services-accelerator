@@ -66,6 +66,7 @@ import {
 } from '@spartacus/checkout/components';
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 import { FSMessageModule } from './../message/message.module';
+import {AddOptionsGuard} from './guards/add-options-guard';
 
 const routes: Routes = [
   {
@@ -212,6 +213,7 @@ const routes: Routes = [
         AddOptionsFlex: {
           // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent, // to SPA component
+          guards: [AddOptionsGuard],
         },
         MiniCartFlex: {
           component: MiniCartComponent,

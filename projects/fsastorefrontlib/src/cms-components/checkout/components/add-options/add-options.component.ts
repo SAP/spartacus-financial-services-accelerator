@@ -35,7 +35,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   entries$: Observable<OrderEntry[]>;
   isCartStable$: Observable<boolean>;
   subscription = new Subscription();
-  chatbotSubscription = new Subscription();
   currentCurrency: string;
 
   previousCheckoutStep$: Observable<FSSteps>;
@@ -54,9 +53,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
-    );
-
-    this.chatbotSubscription.add(
+    ).add(
       combineLatest([
         this.activatedRoute.queryParamMap,
         this.userIdService.getUserId(),
@@ -64,7 +61,8 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .pipe(
           map(([param, userId]) => {
             let guid = param.get('guid');
-            this.chatbotSetActiveCart(guid, userId);
+            console.log("Get in add-options, guid: " + guid);
+            //this.chatbotSetActiveCart('00000017', userId);
           })
         )
         .subscribe()
@@ -114,9 +112,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
-    }
-    if (this.chatbotSubscription) {
-      this.chatbotSubscription.unsubscribe();
     }
   }
 }

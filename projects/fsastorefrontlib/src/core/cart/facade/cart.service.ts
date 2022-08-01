@@ -25,6 +25,10 @@ export class FSCartService extends ActiveCartService {
     super(store, multiCartService, userIdService);
   }
 
+  setChatbotCart(cart: Observable<Cart>) {
+    this.activeCart$ = cart;
+  }
+
   createCartForProduct(
     productCode: string,
     bundleTemplateId: string,
