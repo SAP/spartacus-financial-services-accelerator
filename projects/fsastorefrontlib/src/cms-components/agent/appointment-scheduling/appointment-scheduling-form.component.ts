@@ -31,7 +31,7 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
     protected globalMessageService: GlobalMessageService,
-    protected router: RoutingService,
+    protected routingService: RoutingService,
     protected appointmentSchedulingService: AppointmentSchedulingService,
     protected config: DateConfig
   ) {}
@@ -64,7 +64,7 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.router.back();
+    this.routingService.back();
   }
 
   submit(): void {
@@ -77,8 +77,16 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
       this.appointmentSchedulingService
         .createAppointment(this.agentId, this.userId, this.form.value)
         .pipe(
-          tap(() => {
-            this.router.go('/');
+          tap(createdAppointment => {
+            this.routingService.go(
+              {
+                cxRoute: 'appointmentSchedulingConfirmationPage',
+              },
+              {
+                state: createdAppointment,
+              }
+            );
+
             this.globalMessageService.add(
               { key: 'appointmentScheduling.createdAppointment' },
               GlobalMessageType.MSG_TYPE_CONFIRMATION
