@@ -17,7 +17,9 @@ import {
 } from '../../../../../core/product-pricing/facade';
 import { FSProduct, PricingData } from '../../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../../core/i18n/facade/translation.service';
+import { CurrencyService } from '@spartacus/core';
 import { PAY_NOW_BILLING_TIME_CODE } from './../../../../../core/general-config/defalut-general-config';
+import { CURRENCY_CODE } from './../../../../../core/general-config/defalut-general-config';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
@@ -32,11 +34,13 @@ export class ProductConfigurationMiniCartComponent
     protected currentProductService: CurrentProductService,
     protected formDataService: FormDataService,
     protected changeDetectorRef: ChangeDetectorRef,
-    protected translationService: FSTranslationService
+    protected translationService: FSTranslationService,
+    protected currencyService: CurrencyService
   ) {}
 
   subscription = new Subscription();
   product$: Observable<Product> = this.currentProductService.getProduct();
+  currentCurrency$: Observable<string> = this.currencyService.getActive();
   productId: string;
   categoryName: string;
   pricingData: PricingData;
@@ -61,8 +65,9 @@ export class ProductConfigurationMiniCartComponent
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                this.pricingData = this.pricingService.buildPricingData(
-                  JSON.parse(formData.content)
+                this.pricingData = this.pricingService.buildPricingDataWithformDefinition(
+                  JSON.parse(formData.content),
+                  JSON.parse(formData.formDefinition.content)
                 );
                 this.product$ = this.productService.getCalculatedProductData(
                   this.productId,
@@ -91,6 +96,16 @@ export class ProductConfigurationMiniCartComponent
       }
     });
     return paynowFormattedPrice;
+  }
+
+  detectCurrencyAndFormatValue(entry: any, currencyData: string): string {
+    if (entry.type == CURRENCY_CODE) {
+      return Number(entry.value).toLocaleString(navigator.language, {
+        style: 'currency',
+        currency: currencyData,
+      });
+    }
+    return entry.value;
   }
 
   ngOnDestroy() {
