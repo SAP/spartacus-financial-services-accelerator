@@ -31,6 +31,7 @@ import { StoreFinderComponentsModule } from '@spartacus/storefinder/components';
 import { StoreFinderModule } from '@spartacus/storefinder';
 import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 import { AppointmentSchedulingFormComponent } from './appointment-scheduling/appointment-scheduling-form.component';
+import { AppointmentSchedulingConfirmationComponent } from './appointment-scheduling-confirmation/appointment-scheduling-confirmation.component';
 
 @NgModule({
   imports: [
@@ -76,6 +77,15 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
         },
         component: PageLayoutComponent,
       },
+      {
+        path: null,
+        canActivate: [CmsPageGuard, AuthGuard],
+        data: {
+          cxRoute: 'appointmentSchedulingConfirmationPage',
+          pageLabel: 'appointmentSchedulingConfirmationPage',
+        },
+        component: PageLayoutComponent,
+      },
     ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
@@ -97,6 +107,9 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
         AppointmentSchedulingFlex: {
           component: AppointmentSchedulingFormComponent,
         },
+        AppointmentSchedulingConfirmationFlex: {
+          component: AppointmentSchedulingConfirmationComponent,
+        },
       },
     }),
   ],
@@ -107,6 +120,7 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
     AgentSearchBoxComponent,
     AgentSearchListComponent,
     AppointmentSchedulingFormComponent,
+    AppointmentSchedulingConfirmationComponent,
   ],
   exports: [
     AgentRootComponent,
@@ -115,6 +129,7 @@ import { AppointmentSchedulingFormComponent } from './appointment-scheduling/app
     AgentSearchBoxComponent,
     AgentSearchListComponent,
     AppointmentSchedulingFormComponent,
+    AppointmentSchedulingConfirmationComponent,
   ],
   providers: [AgentConnector],
 })

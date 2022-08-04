@@ -5,13 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  CurrencyService,
-  OrderEntry,
-  RoutingService,
-  UserIdService,
-} from '@spartacus/core';
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
@@ -28,8 +23,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected currencyService: CurrencyService,
-    protected userIdService: UserIdService
+    protected currencyService: CurrencyService
   ) {}
 
   entries$: Observable<OrderEntry[]>;
@@ -44,31 +38,16 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
 
-    this.subscription
-      .add(
-        this.currencyService
-          .getActive()
-          .pipe(
-            map(currentCurrency => {
-              this.currentCurrency = currentCurrency;
-            })
-          )
-          .subscribe()
-      )
-      .add(
-        combineLatest([
-          this.activatedRoute.queryParamMap,
-          this.userIdService.getUserId(),
-        ])
-          .pipe(
-            map(([param, userId]) => {
-              let guid = param.get('guid');
-              console.log('Get in add-options, guid: ' + guid);
-              //this.chatbotSetActiveCart('00000017', userId);
-            })
-          )
-          .subscribe()
-      );
+    this.subscription.add(
+      this.currencyService
+        .getActive()
+        .pipe(
+          map(currentCurrency => {
+            this.currentCurrency = currentCurrency;
+          })
+        )
+        .subscribe()
+    );
 
     this.isCartStable$ = this.cartService.isStable();
 
@@ -102,13 +81,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.routingService.go({
       cxRoute: nextStep.step,
     });
-  }
-
-  chatbotSetActiveCart(guid: string, userId: string) {
-    if (!guid) {
-      return;
-    }
-    this.cartService.loadCart(guid, userId);
   }
 
   ngOnDestroy() {
