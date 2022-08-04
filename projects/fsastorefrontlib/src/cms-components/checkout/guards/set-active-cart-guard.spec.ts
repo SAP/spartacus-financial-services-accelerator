@@ -1,6 +1,11 @@
-import { FSCart, FSCartService } from '@spartacus/fsa-storefront';
-import {MultiCartService, OCC_USER_ID_ANONYMOUS, UserIdService} from '@spartacus/core';
+import {
+  MultiCartService,
+  OCC_USER_ID_ANONYMOUS,
+  UserIdService,
+} from '@spartacus/core';
 import { SetActiveCartGuard } from './set-active-cart-guard';
+import { FSCartService } from '../../../core/cart/facade/cart.service';
+import { FSCart } from '../../../occ/occ-models/occ.models';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
@@ -55,10 +60,9 @@ fdescribe('SetActiveCartGuard', () => {
     const route: any = {
       url: [{ path: '/financial/en/EUR/checkout/add-options/' }],
     };
-    console.log(route);
     mockGuard
       .canActivate(route)
-      .subscribe(_ =>     {
+      .subscribe(_ => {
         expect(mockFsCartService.loadCart).not.toHaveBeenCalled();
         expect(mockMultiCartService.mergeToCurrentCart).not.toHaveBeenCalled();
       })
@@ -74,7 +78,7 @@ fdescribe('SetActiveCartGuard', () => {
     };
     mockGuard
       .canActivate(route)
-      .subscribe(_ =>     {
+      .subscribe(_ => {
         expect(mockFsCartService.loadCart).toHaveBeenCalled();
         expect(mockFsCartService.getCart).toHaveBeenCalled();
         expect(mockFsCartService.setActiveCart).toHaveBeenCalled();
@@ -92,7 +96,7 @@ fdescribe('SetActiveCartGuard', () => {
     };
     mockGuard
       .canActivate(route)
-      .subscribe(_ =>     {
+      .subscribe(_ => {
         expect(mockMultiCartService.mergeToCurrentCart).toHaveBeenCalled();
       })
       .unsubscribe();

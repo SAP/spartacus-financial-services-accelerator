@@ -20,12 +20,12 @@ export class SetActiveCartGuard implements CanActivate {
     protected multiCartService: MultiCartService
   ) {}
 
-  newCart$: Observable<Cart>;
+  newActiveCart$: Observable<Cart>;
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     return this.userIdService.getUserId().pipe(
       map(userId => {
-        let guid = route.queryParams['guid'];
+        const guid = route.queryParams['guid'];
         this.setActiveCartForUser(guid, userId);
         return true;
       })
@@ -36,8 +36,8 @@ export class SetActiveCartGuard implements CanActivate {
     if (guid) {
       if (userId === OCC_USER_ID_ANONYMOUS) {
         this.fsCartService.loadCart(guid, OCC_USER_ID_ANONYMOUS);
-        this.newCart$ = this.fsCartService.getCart(guid);
-        this.fsCartService.setActiveCart(this.newCart$);
+        this.newActiveCart$ = this.fsCartService.getCart(guid);
+        this.fsCartService.setActiveCart(this.newActiveCart$);
       } else {
         this.multiCartService.mergeToCurrentCart({
           userId: userId,
