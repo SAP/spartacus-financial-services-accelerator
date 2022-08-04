@@ -118,12 +118,6 @@ describe('FSCartServiceTest', () => {
     });
   });
 
-  it('should not load cart for invalid code', () => {
-    spyOn(multiCartService, 'loadCart').and.callThrough();
-    service.loadCart('indalidCartId', OCC_USER_ID_ANONYMOUS);
-    expect(multiCartService.loadCart).not.toHaveBeenCalled();
-  });
-
   it('should load cart with current cart code', () => {
     spyOn(multiCartService, 'loadCart').and.callThrough();
     service.loadCart(undefined, OCC_CART_ID_CURRENT);
