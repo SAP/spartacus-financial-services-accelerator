@@ -1,28 +1,21 @@
 import { Injectable } from '@angular/core';
-import {
-  PriceAttributeGroup,
-  PricingData,
-} from '../../../occ/occ-models/form-pricing.interface';
+import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
 export class PricingService {
   buildPricingData(formData: { [name: string]: Object }): PricingData {
+    const formDataKeys = Object.keys(formData);
+
     const pricingAttributesData: PricingData = {
-      priceAttributeGroups: [],
-    };
-    Object.keys(formData).forEach(groupCode => {
-      const priceAttributeGroup: PriceAttributeGroup = {
-        priceAttributes: [],
-      };
-      priceAttributeGroup.name = groupCode;
-      Object.keys(formData[groupCode]).forEach(inputName => {
-        priceAttributeGroup.priceAttributes.push({
+      priceAttributeGroups: formDataKeys.map(formDataKey => ({
+        name: formDataKey,
+        priceAttributes: Object.keys(formData[formDataKey]).map(inputName => ({
           key: inputName,
-          value: formData[groupCode][inputName],
-        });
-      });
-      pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
-    });
+          value: formData[formDataKey][inputName],
+        })),
+      })),
+    };
+
     return pricingAttributesData;
   }
 
@@ -30,38 +23,39 @@ export class PricingService {
     formData: { [name: string]: Object },
     formDefinition: { [name: string]: Object }
   ): PricingData {
+    const formDataKeys = Object.keys(formData);
+
     const pricingAttributesData: PricingData = {
-      priceAttributeGroups: [],
+      priceAttributeGroups: formDataKeys.map(groupCode => {
+        let groupIndex = Object.keys(formDefinition?.formGroups).findIndex(
+          (group: any) =>
+            formDefinition?.formGroups[group].groupCode === groupCode
+        );
+
+        return {
+          name: groupCode,
+          priceAttributes: Object.keys(formData[groupCode]).map(inputName => {
+            let fieldIndex = Object.keys(
+              formDefinition?.formGroups[groupIndex].fieldConfigs
+            ).findIndex(
+              (field: any) =>
+                formDefinition?.formGroups[groupIndex].fieldConfigs[field]
+                  .name === inputName
+            );
+
+            let field =
+              formDefinition?.formGroups[groupIndex].fieldConfigs[fieldIndex];
+
+            return {
+              type: field?.fieldType,
+              key: inputName,
+              value: formData[groupCode][inputName],
+            };
+          }),
+        };
+      }),
     };
-    Object.keys(formData).forEach(groupCode => {
-      let groupIndex = Object.keys(formDefinition?.formGroups).findIndex(
-        (group: any) => {
-          return formDefinition?.formGroups[group].groupCode == groupCode;
-        }
-      );
-      const priceAttributeGroup: PriceAttributeGroup = {
-        priceAttributes: [],
-      };
-      priceAttributeGroup.name = groupCode;
-      Object.keys(formData[groupCode]).forEach(inputName => {
-        let fieldIndex = Object.keys(
-          formDefinition?.formGroups[groupIndex].fieldConfigs
-        ).findIndex((field: any) => {
-          return (
-            formDefinition?.formGroups[groupIndex].fieldConfigs[field].name ==
-            inputName
-          );
-        });
-        let field =
-          formDefinition?.formGroups[groupIndex].fieldConfigs[fieldIndex];
-        priceAttributeGroup.priceAttributes.push({
-          type: field?.fieldType,
-          key: inputName,
-          value: formData[groupCode][inputName],
-        });
-      });
-      pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
-    });
+
     return pricingAttributesData;
   }
 }
