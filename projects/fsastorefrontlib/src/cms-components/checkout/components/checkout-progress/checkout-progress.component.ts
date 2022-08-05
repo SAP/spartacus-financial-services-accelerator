@@ -94,10 +94,8 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
               this.subscription.add(
                 this.cartService.getActive().subscribe(cart => {
                   if (
-                    cart.deliveryOrderGroups &&
-                    cart.deliveryOrderGroups.length > 0 &&
-                    cart.deliveryOrderGroups[0].entries &&
-                    cart.deliveryOrderGroups[0].entries.length > 0
+                    cart?.deliveryOrderGroups?.length > 0 &&
+                    cart?.deliveryOrderGroups[0]?.entries?.length > 0
                   ) {
                     const fsProduct: FSProduct =
                       cart.deliveryOrderGroups[0].entries[0].product;

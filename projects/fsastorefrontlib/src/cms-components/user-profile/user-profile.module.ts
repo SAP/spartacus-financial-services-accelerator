@@ -14,6 +14,7 @@ import {
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
+import { UserProfileGuard } from './guards/user-profile-guard';
 import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { AssetsTableModule } from '../assets-table/assets-table.module';
 import { UserChangeAddressModule } from '../user-change-address/user-change-address.module';
@@ -22,7 +23,7 @@ import { UserProfileComponent } from './user-profile.component';
 const routes: Routes = [
   {
     path: null,
-    canActivate: [CmsPageGuard, AuthGuard],
+    canActivate: [CmsPageGuard, AuthGuard, UserProfileGuard],
     data: {
       cxRoute: 'userProfile',
       pageLabel: 'user-profile',
