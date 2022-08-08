@@ -76,7 +76,7 @@ describe('SetActiveCartGuard', () => {
     const route: any = {
       url: [{ path: '/financial/en/EUR/checkout/add-options/' }],
       queryParams: {
-        guid: 'guid',
+        guid: 'testguid',
       },
     };
     mockGuard
@@ -94,7 +94,7 @@ describe('SetActiveCartGuard', () => {
     const route: any = {
       url: [{ path: '/financial/en/EUR/checkout/add-options/' }],
       queryParams: {
-        guid: 'guid',
+        guid: 'testguid',
       },
     };
     mockGuard
