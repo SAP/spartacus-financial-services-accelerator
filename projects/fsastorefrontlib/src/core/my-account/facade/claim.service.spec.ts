@@ -11,6 +11,7 @@ import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ClaimService } from './claim.service';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -39,12 +40,18 @@ class MockAuthService {
     return of(true);
   }
 }
+class MockOboCustomerService {
+  getOboCustomerUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 describe('ClaimServiceTest', () => {
   let service: ClaimService;
   let store: Store<StateWithMyAccount>;
   let claimData: ClaimDataServiceStub;
   let authService: MockAuthService;
   let userIdService: MockUserIdService;
+  let oboCustomerService: MockOboCustomerService;
 
   class ClaimDataServiceStub {
     userId = userId;
@@ -54,6 +61,7 @@ describe('ClaimServiceTest', () => {
   beforeEach(() => {
     authService = new MockAuthService();
     userIdService = new MockUserIdService();
+    oboCustomerService = new MockOboCustomerService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -66,6 +74,7 @@ describe('ClaimServiceTest', () => {
         { provide: ClaimDataService, useClass: ClaimDataServiceStub },
         { provide: AuthService, useValue: authService },
         { provide: UserIdService, useValue: userIdService },
+        { provide: OboCustomerService, useValue: oboCustomerService },
       ],
     });
 
