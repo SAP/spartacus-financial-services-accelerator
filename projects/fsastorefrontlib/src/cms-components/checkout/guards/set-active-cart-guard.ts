@@ -26,27 +26,27 @@ export class SetActiveCartGuard implements CanActivate {
     return this.userIdService.getUserId().pipe(
       map(userId => {
         const guid = route.queryParams['guid'];
-        this.setActiveCartForUser(guid, userId);
+        if (guid) {
+          this.setActiveCartForUser(guid, userId);
+        }
         return true;
       })
     );
   }
 
   setActiveCartForUser(guid: string, userId: string) {
-    if (guid) {
-      if (userId === OCC_USER_ID_ANONYMOUS) {
-        this.fsCartService.loadCart(guid, OCC_USER_ID_ANONYMOUS);
-        this.newActiveCart$ = this.fsCartService.getCart(guid);
-        this.fsCartService.setActiveCart(this.newActiveCart$);
-      } else {
-        this.multiCartService.mergeToCurrentCart({
-          userId: userId,
-          cartId: guid,
-          extraData: {
-            active: true,
-          },
-        });
-      }
+    if (userId === OCC_USER_ID_ANONYMOUS) {
+      this.fsCartService.loadCart(guid, OCC_USER_ID_ANONYMOUS);
+      this.newActiveCart$ = this.fsCartService.getCart(guid);
+      this.fsCartService.setActiveCart(this.newActiveCart$);
+    } else {
+      this.multiCartService.mergeToCurrentCart({
+        userId: userId,
+        cartId: guid,
+        extraData: {
+          active: true,
+        },
+      });
     }
   }
 }

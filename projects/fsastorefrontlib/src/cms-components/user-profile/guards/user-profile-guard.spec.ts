@@ -58,6 +58,9 @@ describe(`UserProfileGuard`, () => {
   it(`should redirect customer to user profile page`, () => {
     const route: any = {
       url: '/financial/en/EUR/user-profile/',
+      params: {
+        customerId: undefined,
+      },
     };
     guard
       .canActivate(route)
