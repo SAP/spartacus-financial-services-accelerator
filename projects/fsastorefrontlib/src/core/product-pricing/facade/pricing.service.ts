@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormDefinition } from '@spartacus/dynamicforms';
 import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
@@ -19,9 +20,9 @@ export class PricingService {
     return pricingAttributesData;
   }
 
-  buildPricingDataWithformDefinition(
+  buildPricingDataWithFormDefinition(
     formData: { [name: string]: Object },
-    formDefinition: { [name: string]: Object }
+    formDefinition: FormDefinition
   ): PricingData {
     const formDataKeys = Object.keys(formData);
 
@@ -43,11 +44,11 @@ export class PricingService {
                   .name === inputName
             );
 
-            let field =
+            let fieldObj =
               formDefinition?.formGroups[groupIndex].fieldConfigs[fieldIndex];
 
             return {
-              type: field?.fieldType,
+              type: fieldObj?.fieldType,
               key: inputName,
               value: formData[groupCode][inputName],
             };

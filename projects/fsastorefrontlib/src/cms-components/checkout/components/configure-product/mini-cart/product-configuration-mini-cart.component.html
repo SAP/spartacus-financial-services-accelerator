@@ -20,7 +20,7 @@
           >
             <div class="short-overview-title col-7">{{ label }}:</div>
             <div class="short-overview-value col-5">
-              {{ priceAttribute | currencyDetector | async }}
+              {{ priceAttribute | miniCartCurrency | async }}
             </div>
           </ng-container>
         </div>

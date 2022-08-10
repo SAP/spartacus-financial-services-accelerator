@@ -20,7 +20,7 @@ import { ProductConfigurationFormComponent } from './form/product-configuration-
 import { ProductConfigurationMiniCartComponent } from './mini-cart/product-configuration-mini-cart.component';
 import { ProductConfigurationNavigationComponent } from './navigation/product-configuration-navigation.component';
 import { FSDynamicformsModule } from '../../../dynamic-forms/dynamic-forms.module';
-import { CurrencyDetectorPipe } from '../../../../shared/util/helpers/pipe/currency-detector.pipe';
+import { MiniCartCurrencyPipe } from '../../../../shared/util/helpers/pipe/currency-detector.pipe';
 
 const routes: Routes = [
   {
@@ -61,13 +61,13 @@ const routes: Routes = [
     ProductConfigurationFormComponent,
     ProductConfigurationMiniCartComponent,
     ProductConfigurationNavigationComponent,
-    CurrencyDetectorPipe,
+    MiniCartCurrencyPipe,
   ],
   exports: [
     ProductConfigurationFormComponent,
     ProductConfigurationMiniCartComponent,
     ProductConfigurationNavigationComponent,
-    CurrencyDetectorPipe,
+    MiniCartCurrencyPipe,
   ],
 })
 export class ProductConfigurationModule {}

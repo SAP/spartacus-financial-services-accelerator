@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { CurrencyService } from '@spartacus/core';
 import { of } from 'rxjs';
-import { CurrencyDetectorPipe } from './currency-detector.pipe';
+import { MiniCartCurrencyPipe } from './currency-detector.pipe';
 
 class MockCurrencyService {
   getActive() {
@@ -15,18 +15,18 @@ const mockedCurrencyEntry = {
 };
 
 describe('CurrencyDetectorPipe', () => {
-  let pipe: CurrencyDetectorPipe;
+  let pipe: MiniCartCurrencyPipe;
   let currencyService: CurrencyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        CurrencyDetectorPipe,
+        MiniCartCurrencyPipe,
         { provide: CurrencyService, useClass: MockCurrencyService },
       ],
     });
 
-    pipe = TestBed.inject(CurrencyDetectorPipe);
+    pipe = TestBed.inject(MiniCartCurrencyPipe);
     currencyService = TestBed.inject(CurrencyService);
   });
 

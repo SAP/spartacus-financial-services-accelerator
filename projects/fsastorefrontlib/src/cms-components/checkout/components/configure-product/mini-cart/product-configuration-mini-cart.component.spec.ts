@@ -69,7 +69,7 @@ class MockPricingService {
     return pricingData;
   }
 
-  buildPricingDataWithformDefinition(): PricingData {
+  buildPricingDataWithFormDefinition(): PricingData {
     return pricingData;
   }
 }

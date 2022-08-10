@@ -61,7 +61,7 @@ export class ProductConfigurationMiniCartComponent
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                this.pricingData = this.pricingService.buildPricingDataWithformDefinition(
+                this.pricingData = this.pricingService.buildPricingDataWithFormDefinition(
                   JSON.parse(formData.content),
                   JSON.parse(formData.formDefinition.content)
                 );

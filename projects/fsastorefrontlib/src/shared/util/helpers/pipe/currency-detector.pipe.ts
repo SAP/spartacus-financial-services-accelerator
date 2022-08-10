@@ -4,8 +4,8 @@ import { combineLatest, iif, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { CURRENCY_CODE } from '../../../../core/general-config/default-general-config';
 
-@Pipe({ name: 'currencyDetector' })
-export class CurrencyDetectorPipe implements PipeTransform {
+@Pipe({ name: 'miniCartCurrency' })
+export class MiniCartCurrencyPipe implements PipeTransform {
   currentCurrency$: Observable<string> = this.currencyService.getActive();
 
   constructor(
@@ -17,11 +17,11 @@ export class CurrencyDetectorPipe implements PipeTransform {
     const entryCurrencyStream = [of(entry), this.currentCurrency$];
 
     return combineLatest(entryCurrencyStream).pipe(
-      mergeMap(([entry, currency]) =>
+      mergeMap(([_entry, currency]) =>
         iif(
-          () => entry.type === CURRENCY_CODE,
-          this.currencyEntry(entry, currency),
-          this.defaultEntry(entry)
+          () => _entry.type === CURRENCY_CODE,
+          this.currencyEntry(_entry, currency),
+          this.defaultEntry(_entry)
         )
       )
     );
