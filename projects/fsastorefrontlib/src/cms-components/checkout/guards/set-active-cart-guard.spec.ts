@@ -31,7 +31,7 @@ class MockMultiCartService {
   mergeToCurrentCart() {}
 }
 
-fdescribe('SetActiveCartGuard', () => {
+describe('SetActiveCartGuard', () => {
   let mockGuard: SetActiveCartGuard;
   let mockFsCartService: FSCartService;
   let mockUserIdService: UserIdService;
@@ -50,6 +50,7 @@ fdescribe('SetActiveCartGuard', () => {
     mockFsCartService = TestBed.inject(FSCartService);
     mockUserIdService = TestBed.inject(UserIdService);
     mockMultiCartService = TestBed.inject(MultiCartService);
+    spyOn(mockGuard, 'setActiveCartForUser').and.callThrough();
     spyOn(mockFsCartService, 'loadCart').and.callThrough();
     spyOn(mockFsCartService, 'getCart').and.callThrough();
     spyOn(mockFsCartService, 'setActiveCart').and.callThrough();
@@ -59,12 +60,14 @@ fdescribe('SetActiveCartGuard', () => {
   it(`should not set active cart for user`, () => {
     const route: any = {
       url: [{ path: '/financial/en/EUR/checkout/add-options/' }],
+      queryParams: {
+        guid: undefined,
+      },
     };
     mockGuard
       .canActivate(route)
       .subscribe(_ => {
-        expect(mockFsCartService.loadCart).not.toHaveBeenCalled();
-        expect(mockMultiCartService.mergeToCurrentCart).not.toHaveBeenCalled();
+        expect(mockGuard.setActiveCartForUser).not.toHaveBeenCalled();
       })
       .unsubscribe();
   });
@@ -73,7 +76,7 @@ fdescribe('SetActiveCartGuard', () => {
     const route: any = {
       url: [{ path: '/financial/en/EUR/checkout/add-options/' }],
       queryParams: {
-        guid: 'guid',
+        guid: 'testguid',
       },
     };
     mockGuard
@@ -91,7 +94,7 @@ fdescribe('SetActiveCartGuard', () => {
     const route: any = {
       url: [{ path: '/financial/en/EUR/checkout/add-options/' }],
       queryParams: {
-        guid: 'guid',
+        guid: 'testguid',
       },
     };
     mockGuard

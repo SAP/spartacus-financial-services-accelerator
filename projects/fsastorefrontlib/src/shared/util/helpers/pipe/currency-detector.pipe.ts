@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { CurrencyService, WindowRef } from '@spartacus/core';
 import { combineLatest, iif, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { CURRENCY_CODE } from '../../../../core/general-config/defalut-general-config';
+import { CURRENCY_CODE } from '../../../../core/general-config/default-general-config';
 
 @Pipe({ name: 'currencyDetector' })
 export class CurrencyDetectorPipe implements PipeTransform {
@@ -15,12 +15,11 @@ export class CurrencyDetectorPipe implements PipeTransform {
 
   transform(entry: any): Observable<string> {
     const entryCurrencyStream = [of(entry), this.currentCurrency$];
-    const entryIsCurrency = entry.type === CURRENCY_CODE;
 
     return combineLatest(entryCurrencyStream).pipe(
       mergeMap(([entry, currency]) =>
         iif(
-          () => entryIsCurrency,
+          () => entry.type === CURRENCY_CODE,
           this.currencyEntry(entry, currency),
           this.defaultEntry(entry)
         )
