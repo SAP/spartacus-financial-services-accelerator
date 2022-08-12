@@ -10,4 +10,5 @@ export interface PriceAttributeGroup {
 export interface PricingAttribute {
   key: string;
   value: Object;
+  type?: string;
 }

@@ -17,7 +17,7 @@ import {
 } from '../../../../../core/product-pricing/facade';
 import { FSProduct, PricingData } from '../../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../../core/i18n/facade/translation.service';
-import { PAY_NOW_BILLING_TIME_CODE } from './../../../../../core/general-config/defalut-general-config';
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../../../core/general-config/default-general-config';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
@@ -61,8 +61,9 @@ export class ProductConfigurationMiniCartComponent
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                this.pricingData = this.pricingService.buildPricingData(
-                  JSON.parse(formData.content)
+                this.pricingData = this.pricingService.buildPricingDataWithFormDefinition(
+                  JSON.parse(formData.content),
+                  JSON.parse(formData.formDefinition.content)
                 );
                 this.product$ = this.productService.getCalculatedProductData(
                   this.productId,
