@@ -94,7 +94,7 @@
               <button
                 *ngIf="fileList.length > 1 && !removeAllDisable"
                 class="action-button btn-block"
-                (click)="removeAll(uploadField)"
+                (click)="removeAllAndResetUploadField(uploadField)"
               >
                 {{ 'dynamicforms.removeAll' | cxTranslate }}
               </button>

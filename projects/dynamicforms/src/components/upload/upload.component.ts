@@ -32,6 +32,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   uploadControl: AbstractControl;
   individualProgress = {};
   files = [];
+  fileCodes = [];
   uploadDisable = false;
   removeAllDisable = false;
 
@@ -52,6 +53,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
+    this.removeAll()
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
@@ -188,7 +190,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     }
   }
 
-  removeAll(uploadField) {
+  removeAll() {
     this.subscription.add(
       this.userIdService
         .getUserId()
@@ -202,8 +204,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         .subscribe()
     );
     this.fileList = [];
-    uploadField.value = null;
     this.setValueAndValidate(this.fileList);
+  }
+
+  removeAllAndResetUploadField(uploadField) {
+    this.removeAll();
+    uploadField.value = null;
   }
 
   downloadFile(file) {
@@ -233,13 +239,14 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.files.push(fileCode);
-    this.uploadControl.setValue(this.files);
+    this.fileCodes.push(fileCode);
+    this.uploadControl.setValue(this.fileCodes);
   }
 
   protected resetFileList() {
     this.fileList = [];
     this.files = [];
+    this.fileCodes = [];
     this.fileUploadService.resetFiles();
   }
 
