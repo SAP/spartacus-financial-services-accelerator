@@ -53,7 +53,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
-    this.removeAll()
+    this.removeAll();
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
