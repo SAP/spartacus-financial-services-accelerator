@@ -269,7 +269,7 @@ describe('UploadComponent', () => {
 
     it('should remove all files', () => {
       component.handleFiles(mockEvent);
-      component.removeAllAndResetUploadField(mockField);
+      component.removeAll(mockField);
       expect(component.fileList.length).toEqual(0);
     });
 
