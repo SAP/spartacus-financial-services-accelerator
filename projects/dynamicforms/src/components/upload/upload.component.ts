@@ -32,7 +32,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   uploadControl: AbstractControl;
   individualProgress = {};
   files = [];
-  fileCodes = [];
   uploadDisable = false;
   removeAllDisable = false;
 
@@ -53,7 +52,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
-    this.removeAll();
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
@@ -89,7 +87,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             if (Object.keys(filesObj?.files).length > 0) {
               this.fileList = Array.from(Object.values(filesObj?.files));
               this.fileList.forEach((file: DocumentFile) => {
-                this.files = [...this.files, file.code];
+                if (!this.files.includes(file.code)) {
+                  this.files.push(file.code);
+                }
               });
               this.uploadControl?.setValue(this.files);
               this.uploadDisable = true;
@@ -190,7 +190,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     }
   }
 
-  removeAll() {
+  removeAll(uploadField) {
     this.subscription.add(
       this.userIdService
         .getUserId()
@@ -204,12 +204,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         .subscribe()
     );
     this.fileList = [];
-    this.setValueAndValidate(this.fileList);
-  }
-
-  removeAllAndResetUploadField(uploadField) {
-    this.removeAll();
     uploadField.value = null;
+    this.setValueAndValidate(this.fileList);
   }
 
   downloadFile(file) {
@@ -239,14 +235,16 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.fileCodes.push(fileCode);
-    this.uploadControl.setValue(this.fileCodes);
+    if (!this.files.includes(fileCode)) {
+      this.files.push(fileCode);
+    }
+    this.uploadControl.setValue(this.files);
+    console.log(this.files);
   }
 
   protected resetFileList() {
     this.fileList = [];
     this.files = [];
-    this.fileCodes = [];
     this.fileUploadService.resetFiles();
   }
 
