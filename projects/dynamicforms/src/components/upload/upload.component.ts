@@ -163,7 +163,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   removeFile(index: number, uploadField: HTMLInputElement) {
-    // Execute Http.Delete request to backend
     this.removeFromStorage(index);
     this.fileList.splice(index, 1);
     if (this.files.length !== 0) {
@@ -198,6 +197,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   protected removeFromStorage(index?: number) {
+    // Execute Http.Delete request to backend
     this.subscription.add(
       this.userIdService
         .getUserId()
