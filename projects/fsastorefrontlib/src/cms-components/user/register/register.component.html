@@ -22,6 +22,9 @@
                   {{ title.name }}
                 </option>
               </select>
+              <cx-form-errors
+                [control]="registerForm.get('titleCode')"
+              ></cx-form-errors>
             </label>
           </div>
 
