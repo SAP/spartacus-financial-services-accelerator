@@ -162,7 +162,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  removeFile(index: number, uploadField: HTMLInputElement) {
+  removeFile(index: number, uploadField: FieldConfig) {
     this.removeFromStorage(index);
     this.fileList.splice(index, 1);
     if (this.files.length !== 0) {
@@ -176,7 +176,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     }
   }
 
-  removeAll(uploadField: HTMLInputElement) {
+  removeAll(uploadField: FieldConfig) {
     this.removeFromStorage();
     this.fileList = [];
     uploadField.value = null;
