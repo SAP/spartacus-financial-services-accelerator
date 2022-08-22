@@ -52,7 +52,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
-    this.removeAllFromStorage();
+    this.removeFromStorage(); // Removes files from BE, ensures same state in BackOffice
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
@@ -162,23 +162,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  removeFile(index, uploadField) {
+  removeFile(index: number, uploadField: HTMLInputElement) {
     // Execute Http.Delete request to backend
-    this.subscription.add(
-      this.userIdService
-        .getUserId()
-        .pipe(
-          take(1),
-          map(occUserId => {
-            const fileCode = (<any>this.fileList[index])?.code;
-            if (fileCode) {
-              this.fileUploadService.removeFileForCode(occUserId, fileCode);
-              this.setValueAndValidate(null);
-            }
-          })
-        )
-        .subscribe()
-    );
+    this.removeFromStorage(index);
     this.fileList.splice(index, 1);
     if (this.files.length !== 0) {
       this.files.splice(index, 1);
@@ -191,8 +177,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     }
   }
 
-  removeAll(uploadField) {
-    this.removeAllFromStorage();
+  removeAll(uploadField: HTMLInputElement) {
+    this.removeFromStorage();
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
@@ -211,15 +197,21 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
   }
 
-  protected removeAllFromStorage() {
+  protected removeFromStorage(index?: number) {
     this.subscription.add(
       this.userIdService
         .getUserId()
         .pipe(
           take(1),
           map(occUserId => {
-            this.fileUploadService.removeAllFiles(occUserId, this.fileList);
-            this.fileUploadService.resetFiles();
+            const fileCode = (<any>this.fileList[index])?.code;
+            if (fileCode) {
+              this.fileUploadService.removeFileForCode(occUserId, fileCode);
+              this.setValueAndValidate(null);
+            } else {
+              this.fileUploadService.removeAllFiles(occUserId, this.fileList);
+              this.fileUploadService.resetFiles();
+            }
           })
         )
         .subscribe()
