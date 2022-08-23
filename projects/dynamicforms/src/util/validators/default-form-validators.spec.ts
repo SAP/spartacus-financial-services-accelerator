@@ -39,7 +39,7 @@ describe('FormValidationService', () => {
     form.get(field1).setValue('fieldValue');
     form.get(field2).setValue('otherValue');
     expect(DefaultFormValidators.matchFields(field1, field2)(form)).toEqual({
-      NotEqual: true,
+      notEqual: true,
     });
   });
 
@@ -47,7 +47,7 @@ describe('FormValidationService', () => {
     form.get(dateOfBirth).setValue('10-10-2015');
     expect(
       DefaultFormValidators.dateOfBirthValidator(18)(form.get(dateOfBirth))
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ invalidAge: true });
   });
 
   it('should not return error, when person is older then minimun age', () => {
@@ -61,7 +61,7 @@ describe('FormValidationService', () => {
     form.get(field1).setValue('testValue');
     expect(
       DefaultFormValidators.shouldContainValue('notExist')(form.get(field1))
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ noValue: true });
   });
 
   it('should not return error, when field contains given value', () => {
@@ -113,7 +113,7 @@ describe('FormValidationService', () => {
     form.get(field1).setValue('testValue');
     expect(
       DefaultFormValidators.regexValidator(numberLetterRegex)(form.get(field1))
-    ).toEqual({ InvalidFormat: true });
+    ).toEqual({ invalidFormat: true });
   });
 
   it('should not return error, when field contains numbers only', () => {
@@ -150,7 +150,7 @@ describe('FormValidationService', () => {
         dateToCompare,
         'shouldBeGreater'
       )
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ valueShouldBeGreater: true });
 
     expect(
       DefaultFormValidators.valueComparison(
@@ -158,7 +158,7 @@ describe('FormValidationService', () => {
         dateToCompare2,
         'shouldBeLess'
       )
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ valueShouldBeLess: true });
 
     expect(
       DefaultFormValidators.valueComparison(
@@ -189,19 +189,19 @@ describe('FormValidationService', () => {
       DefaultFormValidators.compareToCurrentDate('shouldBeEqual')(
         form.get(date1)
       )
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ dateShouldBeEqual: true });
 
     expect(
       DefaultFormValidators.compareToCurrentDate('shouldBeGreater')(
         form.get(date1)
       )
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ dateShouldBeGreater: true });
 
     expect(
       DefaultFormValidators.compareToCurrentDate('shouldBeGreaterOrEqual')(
         form.get(date1)
       )
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ dateShouldBeGreaterOrEqual: true });
   });
 
   it('should compare date in future with current date', () => {
@@ -212,19 +212,19 @@ describe('FormValidationService', () => {
       DefaultFormValidators.compareToCurrentDate('shouldBeLess')(
         form.get(date1)
       )
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ dateShouldBeLess: true });
 
     expect(
       DefaultFormValidators.compareToCurrentDate('shouldBeLessOrEqual')(
         form.get(date1)
       )
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ dateShouldBeLessOrEqual: true });
 
     expect(
       DefaultFormValidators.compareToCurrentDate('shouldBeEqual')(
         form.get(date1)
       )
-    ).toEqual({ InvalidDate: true });
+    ).toEqual({ dateShouldBeEqual: true });
 
     expect(
       DefaultFormValidators.compareToCurrentDate('shouldBeGreater')(
@@ -245,7 +245,7 @@ describe('FormValidationService', () => {
 
     expect(
       DefaultFormValidators.compareDates(date2, 'shouldBeLess')(form.get(date1))
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ valueShouldBeLess: true });
 
     expect(
       DefaultFormValidators.compareDates(
@@ -271,7 +271,7 @@ describe('FormValidationService', () => {
         field2,
         'shouldBeGreater'
       )(form.get(field1))
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ valueShouldBeGreater: true });
   });
 
   it('should age and date of birth fields', () => {
@@ -290,14 +290,14 @@ describe('FormValidationService', () => {
         dateOfBirth,
         'shouldBeGreater'
       )(form.get(field1))
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ valueShouldBeGreater: true });
 
     expect(
       DefaultFormValidators.compareDOBtoAge(
         field1,
         'shouldBeLess'
       )(form.get(dateOfBirth))
-    ).toEqual({ valueConflict: true });
+    ).toEqual({ valueShouldBeLess: true });
 
     expect(
       DefaultFormValidators.compareDOBtoAge(

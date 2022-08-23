@@ -8,6 +8,7 @@
       class="form-control"
       type="text"
       formControlName="subject"
+      [maxLength]="subjectMaxLength"
       placeholder="{{
         'appointmentScheduling.placeholder.subject' | cxTranslate
       }}"
@@ -23,7 +24,7 @@
       class="form-control"
       type="date"
       formControlName="appointmentDate"
-      min="{{ date | date: 'yyyy-MM-dd' }}"
+      [min]="tomorrow | date: 'yyyy-MM-dd'"
     />
     <cx-form-errors [control]="form.get('appointmentDate')"></cx-form-errors>
   </div>
@@ -51,7 +52,8 @@
     >
     <textarea
       id="description"
-      rows="10"
+      [maxLength]="descriptionMaxLength"
+      rows="5"
       class="form-control"
       type="text"
       formControlName="description"
