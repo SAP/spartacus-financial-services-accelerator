@@ -48,6 +48,7 @@ export class FSRegisterComponent extends RegisterComponent implements OnInit {
   registerForm = this.fb.group(
     {
       ...this.registerForm.controls,
+      titleCode: ['', Validators.required],
       phoneNumber: [
         '',
         DefaultFormValidators.regexValidator(
