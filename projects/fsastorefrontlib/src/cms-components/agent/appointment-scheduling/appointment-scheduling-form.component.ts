@@ -19,6 +19,7 @@ import { DateConfig } from './../../../core/date-config/date-config';
 import { AppointmentSchedulingService } from './../../../core/appointment-scheduling/facade/appointment-scheduling.service';
 import { switchMap, tap } from 'rxjs/operators';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
+import { SpinnerService } from '../../../shared/services/spinner.service';
 
 @Component({
   selector: 'cx-fs-appointment-scheduling-form',
@@ -34,6 +35,7 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
     protected globalMessageService: GlobalMessageService,
     protected routingService: RoutingService,
     protected appointmentSchedulingService: AppointmentSchedulingService,
+    protected spinnerService: SpinnerService,
     protected config: DateConfig
   ) {}
 

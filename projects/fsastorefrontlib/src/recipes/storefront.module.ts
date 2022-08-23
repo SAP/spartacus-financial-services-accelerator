@@ -17,6 +17,8 @@ import { occUserConfig } from '../occ/services/default-occ-user-config';
 import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
 import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-config/default-quote-comparison-config';
 import { iconConfig } from '../core/icon-config/icon-config';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SpinnerInterceptor } from '../shared';
 
 @NgModule({
   imports: [
@@ -35,6 +37,7 @@ import { iconConfig } from '../core/icon-config/icon-config';
     provideConfig(iconConfig),
     provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
     provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
   ],
 })
 export class FSStorefrontModule {
