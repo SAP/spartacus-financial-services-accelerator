@@ -23,9 +23,13 @@ export class DefaultFormValidators extends Validators {
     if (baseValue && comparisonValue) {
       switch (operator) {
         case 'shouldBeGreater':
-          return baseValue > comparisonValue ? null : { valueShouldBeGreater: true };
+          return baseValue > comparisonValue
+            ? null
+            : { valueShouldBeGreater: true };
         case 'shouldBeLess':
-          return baseValue < comparisonValue ? null : { valueShouldBeLess: true };
+          return baseValue < comparisonValue
+            ? null
+            : { valueShouldBeLess: true };
       }
     }
   }
