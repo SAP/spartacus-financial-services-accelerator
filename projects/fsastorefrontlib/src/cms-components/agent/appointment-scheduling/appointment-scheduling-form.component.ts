@@ -17,7 +17,8 @@ import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { DateConfig } from './../../../core/date-config/date-config';
 import { AppointmentSchedulingService } from './../../../core/appointment-scheduling/facade/appointment-scheduling.service';
-import { tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-appointment-scheduling-form',
@@ -46,21 +47,40 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
       label: `${index + 10}:00 (1h)`,
       value: `${index + 10}:00`,
     }));
-  date = new Date();
+  today = new Date();
+  tomorrow = this.today.setDate(this.today.getDate() + 1);
+  subjectMaxLength: number = 50;
+  descriptionMaxLength: number = 250;
 
   form: FormGroup = this.fb.group({
-    subject: ['', [Validators.required]],
-    appointmentDate: [null, [Validators.required]],
+    subject: [
+      '',
+      [Validators.required, Validators.maxLength(this.subjectMaxLength)],
+    ],
+    appointmentDate: [
+      null,
+      [
+        Validators.required,
+        DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
+      ],
+    ],
     appointmentTime: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    description: [
+      '',
+      [Validators.required, Validators.maxLength(this.descriptionMaxLength)],
+    ],
     consentGiven: [false, [Validators.required, Validators.requiredTrue]],
   });
 
   ngOnInit() {
-    this.subscription
-      .add(this.getAgentId().subscribe())
-      .add(this.getUserId().subscribe())
-      .add(this.onConsentChange().subscribe());
+    this.subscription.add(
+      this.getAgentId()
+        .pipe(
+          switchMap(_ => this.getUserId()),
+          switchMap(_ => this.onConsentChange())
+        )
+        .subscribe()
+    );
   }
 
   goBack() {

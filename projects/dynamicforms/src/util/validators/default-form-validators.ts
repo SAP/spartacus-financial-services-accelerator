@@ -23,9 +23,13 @@ export class DefaultFormValidators extends Validators {
     if (baseValue && comparisonValue) {
       switch (operator) {
         case 'shouldBeGreater':
-          return baseValue > comparisonValue ? null : { valueConflict: true };
+          return baseValue > comparisonValue
+            ? null
+            : { valueShouldBeGreater: true };
         case 'shouldBeLess':
-          return baseValue < comparisonValue ? null : { valueConflict: true };
+          return baseValue < comparisonValue
+            ? null
+            : { valueShouldBeLess: true };
       }
     }
   }
@@ -60,16 +64,16 @@ export class DefaultFormValidators extends Validators {
         if (regex === this.phoneNumberRegex) {
           return field.match(regex) ? null : { cxInvalidPhoneRegex: true };
         }
-        return field.match(regex) ? null : { InvalidFormat: true };
+        return field.match(regex) ? null : { invalidFormat: true };
       }
       return null;
     };
   }
 
   static matchFields(controlName: string, controlName2: string) {
-    return (control: AbstractControl): { NotEqual: boolean } => {
+    return (control: AbstractControl): { notEqual: boolean } => {
       if (control.get(controlName).value !== control.get(controlName2).value) {
-        return { NotEqual: true };
+        return { notEqual: true };
       }
     };
   }
@@ -83,7 +87,7 @@ export class DefaultFormValidators extends Validators {
         today.getMonth(),
         today.getDate()
       );
-      return userAge < age ? null : { InvalidDate: true };
+      return userAge < age ? null : { invalidAge: true };
     };
   }
 
@@ -176,23 +180,23 @@ export class DefaultFormValidators extends Validators {
         case 'shouldBeEqual':
           return inputVal.getTime() === today.getTime()
             ? null
-            : { InvalidDate: true };
+            : { dateShouldBeEqual: true };
         case 'shouldBeGreater':
           return inputVal.getTime() > today.getTime()
             ? null
-            : { InvalidDate: true };
+            : { dateShouldBeGreater: true };
         case 'shouldBeLess':
           return inputVal.getTime() < today.getTime()
             ? null
-            : { InvalidDate: true };
+            : { dateShouldBeLess: true };
         case 'shouldBeGreaterOrEqual':
           return inputVal.getTime() >= today.getTime()
             ? null
-            : { InvalidDate: true };
+            : { dateShouldBeGreaterOrEqual: true };
         case 'shouldBeLessOrEqual':
           return inputVal.getTime() <= today.getTime()
             ? null
-            : { InvalidDate: true };
+            : { dateShouldBeLessOrEqual: true };
       }
     };
   }
@@ -241,7 +245,7 @@ export class DefaultFormValidators extends Validators {
   static shouldContainValue(value) {
     return (control: AbstractControl): ValidationErrors | null => {
       const valid = control.value.indexOf(value) !== -1;
-      return valid ? null : { valueConflict: true };
+      return valid ? null : { noValue: true };
     };
   }
 }

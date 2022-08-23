@@ -86,15 +86,33 @@ describe('AppointmentSchedulingFormComponent', () => {
     );
 
     component.form.setValue({
-      subject: 'test',
-      appointmentDate: 'test',
-      appointmentTime: 'test',
-      description: 'test',
+      subject: 'Test subject',
+      appointmentDate: new Date('2030-02-11T13:02:58+0000'),
+      appointmentTime: '10:00 (1h)',
+      description: 'Test description',
       consentGiven: true,
     });
 
     component.submit();
     expect(component.submit).toHaveBeenCalled();
     expect(component.form.valid).toBeTrue();
+  });
+
+  it('should NOT call submit with INVALID appointment date', () => {
+    spyOn(component, 'submit').and.callThrough();
+    appointmentSchedulingServiceSpy.createAppointment.and.returnValue(
+      of('Test')
+    );
+
+    component.form.setValue({
+      subject: 'Test subject',
+      appointmentDate: new Date('2010-02-11T13:02:58+0000'),
+      appointmentTime: '10:00 (1h)',
+      description: 'Test description',
+      consentGiven: true,
+    });
+
+    component.submit();
+    expect(component.form.valid).toBeFalse();
   });
 });
