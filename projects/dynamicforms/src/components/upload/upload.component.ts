@@ -52,6 +52,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
+    this.removeFromStorage(); // Removes files from BE, ensures same state in BackOffice
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
@@ -87,7 +88,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             if (Object.keys(filesObj?.files).length > 0) {
               this.fileList = Array.from(Object.values(filesObj?.files));
               this.fileList.forEach((file: DocumentFile) => {
-                this.files = [...this.files, file.code];
+                if (!this.files.includes(file.code)) {
+                  this.files.push(file.code);
+                }
               });
               this.uploadControl?.setValue(this.files);
               this.uploadDisable = true;
@@ -159,23 +162,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  removeFile(index, uploadField) {
-    // Execute Http.Delete request to backend
-    this.subscription.add(
-      this.userIdService
-        .getUserId()
-        .pipe(
-          take(1),
-          map(occUserId => {
-            const fileCode = (<any>this.fileList[index])?.code;
-            if (fileCode) {
-              this.fileUploadService.removeFileForCode(occUserId, fileCode);
-              this.setValueAndValidate(null);
-            }
-          })
-        )
-        .subscribe()
-    );
+  removeFile(index: number, uploadField: FieldConfig) {
+    this.removeFromStorage(index);
     this.fileList.splice(index, 1);
     if (this.files.length !== 0) {
       this.files.splice(index, 1);
@@ -188,19 +176,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     }
   }
 
-  removeAll(uploadField) {
-    this.subscription.add(
-      this.userIdService
-        .getUserId()
-        .pipe(
-          take(1),
-          map(occUserId => {
-            this.fileUploadService.removeAllFiles(occUserId, this.fileList);
-            this.fileUploadService.resetFiles();
-          })
-        )
-        .subscribe()
-    );
+  removeAll(uploadField: FieldConfig) {
+    this.removeFromStorage();
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
@@ -213,6 +190,28 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         .pipe(
           map(downloadedFile => {
             saveAs(downloadedFile, file.name);
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  protected removeFromStorage(index?: number) {
+    // Execute Http.Delete request to backend
+    this.subscription.add(
+      this.userIdService
+        .getUserId()
+        .pipe(
+          take(1),
+          map(occUserId => {
+            const fileCode = (<any>this.fileList[index])?.code;
+            if (fileCode) {
+              this.fileUploadService.removeFileForCode(occUserId, fileCode);
+              this.setValueAndValidate(null);
+            } else {
+              this.fileUploadService.removeAllFiles(occUserId, this.fileList);
+              this.fileUploadService.resetFiles();
+            }
           })
         )
         .subscribe()
@@ -233,7 +232,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.files.push(fileCode);
+    if (!this.files.includes(fileCode)) {
+      this.files.push(fileCode);
+    }
     this.uploadControl.setValue(this.files);
   }
 
