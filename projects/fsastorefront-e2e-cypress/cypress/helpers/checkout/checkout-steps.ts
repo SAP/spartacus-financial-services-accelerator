@@ -132,8 +132,7 @@ export function removeOptionalProduct(productName) {
 }
 
 export function checkMyAccountEmptyPages(myAccountPage, emptyPageMessage) {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: myAccountPage,
   });
   cy.get('h2').should('contain.text', myAccountPage);
@@ -249,8 +248,8 @@ export function checkCouponsFields() {
   cy.get('.cx-cart-coupon-container')
     .should('be.visible')
     .within(() => {
-      cy.get('.form-control').should('be.visible');
-      cy.get('.primary-button').should('contain.text', 'Apply');
+      cy.get('[formcontrolname=couponCode]').should('be.visible');
+      cy.get('#apply-voucher').should('be.visible');
     });
 }
 
@@ -288,6 +287,7 @@ export const categoryPage = {
   userIdentification: 'user-identification',
   addressInfo: 'my-account/address-info',
   addOptions: 'checkout/add-options',
+  personalDetails: 'checkout/personal-details',
 };
 
 export function checkPageURL(page: string) {

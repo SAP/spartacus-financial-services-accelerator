@@ -42,24 +42,30 @@ Cypress.Commands.add(
   ({
     menuOption,
     dropdownItem,
-    nextPageUrlPart,
   }: {
     menuOption: string;
     dropdownItem: string;
-    nextPageUrlPart: string;
   }) => {
-    cy.get('header [aria-label="' + menuOption + '"]')
+    cy.get('cx-navigation-ui')
+      .contains(menuOption)
       .should('be.visible')
       .invoke('mouseover')
       .next('.wrapper')
       .within(() => {
         cy.findAllByText(dropdownItem).click({ force: true });
       });
-    if (nextPageUrlPart) {
-      cy.location('pathname', { timeout: 10000 }).should(
-        'include',
-        nextPageUrlPart
-      );
-    }
+  }
+);
+
+Cypress.Commands.add(
+  'selectOptionFromMyAccount',
+  ({ dropdownItem }: { dropdownItem: string }) => {
+    cy.get('header [aria-label="' + 'My Account' + '"]')
+      .should('be.visible')
+      .invoke('mouseover')
+      .next('.wrapper')
+      .within(() => {
+        cy.findAllByText(dropdownItem).click({ force: true });
+      });
   }
 );

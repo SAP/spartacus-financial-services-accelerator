@@ -58,6 +58,7 @@ testFilters(['smoke'], () => {
       checkout.checkCheckoutStep('Your Auto Insurance', '7');
       checkout.checkProgressBarInsurance();
       checkout.checkAccordions('generalQuoteAccordions');
+      checkout.checkBackAndContinueButtons();
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
       checkout.checkAccordions('generalQuoteAccordions');
@@ -66,7 +67,7 @@ testFilters(['smoke'], () => {
 
     it('Select default payment details and place an order', () => {
       checkout.populatePaymentCreditCard();
-      cy.get('.btn-primary').contains('Continue').click();
+      checkout.clickContinueButton();
       checkout.placeOrderOnFinalReview();
       checkout.checkOrderConfirmation();
     });

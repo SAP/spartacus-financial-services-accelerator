@@ -51,9 +51,10 @@ testFilters([''], () => {
     });
 
     it('Should bind auto quote', () => {
+      checkout.checkPageURL(checkout.categoryPage.personalDetails);
       checkout.checkPersonalDetailsPage();
-      auto.populateVehicleDetails();
       auto.populateMainDriverData();
+      checkout.checkProgressBarInsurance();
       checkout.clickContinueButton();
       checkout.checkCheckoutStep('Your Auto Insurance', '7');
       checkout.checkProgressBarInsurance();
@@ -86,7 +87,7 @@ testFilters([''], () => {
       cy.get('.SiteLogo').should('be.visible').click();
       register.logout();
       checkPageElements();
-      cy.get('cx-login').click();
+      cy.get('cx-login').should('be.visible').click();
       register.login(registrationUser.email, registrationUser.password);
       checkMyQuotesPage();
       retrieveQuote('2', 'Savings Insurance');
