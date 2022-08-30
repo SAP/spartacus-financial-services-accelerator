@@ -109,9 +109,7 @@ export function checkGeneralInformationAccordion() {
 
 export function checkConfirmationPage() {
   cy.get('.heading-headline').contains('Claim Confirmation');
-  cy.get('.notice-text ').contains(
-    ' Your processing number is: ' + claimNumber
-  );
+  cy.get('.notice-text ').contains(' Your processing number is: ');
   cy.get('.content860 p')
     .first()
     .contains(

@@ -115,7 +115,7 @@ export function populateVehicleDetails() {
 export function populateMainDriverData() {
   cy.get('[name=mainDriverFirstName]').type('John');
   cy.get('[name=mainDriverLastName]').type('Moore');
-  cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
+  cy.get('[name=mainDriverLicenceNumber]').clear().type('BG-234-xx');
 }
 
 export function populateAdditionalData() {

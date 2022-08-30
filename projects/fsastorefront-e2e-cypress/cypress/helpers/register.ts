@@ -40,8 +40,7 @@ export function registerUser(user: RegisterUser) {
 }
 
 export function validatePhoneNumber(expectedValue: string) {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: 'Personal Details',
   });
   cy.get('[formcontrolname="phoneNumber"]').should('have.value', expectedValue);
