@@ -13,7 +13,6 @@ export interface CreateB2bCustomer {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
 }
 
 export function populateRegistrationForm(user: RegisterUser) {
@@ -79,13 +78,17 @@ export function loginInUser(username: string, password: string) {
   });
 }
 
-export function createB2bCustomer(customer: CreateB2bCustomer) {
+export function createB2bCustomer(
+  customer: CreateB2bCustomer,
+  role,
+  organization
+) {
   cy.get('[formcontrolname=titleCode]').ngSelect(customer.titleCode);
   cy.get('[formcontrolname=firstName]').type(customer.firstName);
   cy.get('[formcontrolname=lastName]').type(customer.lastName);
   cy.get('[formcontrolname=dateOfBirth]').type('1991-01-01');
   cy.get('[formcontrolname=email]').type(customer.email);
-  cy.get('.form-check-input').eq(0).click();
-  cy.get('[formcontrolname=uid]').ngSelect('Panda');
+  cy.get('.form-check-input').eq(role).click();
+  cy.get('[formcontrolname=uid]').ngSelect(organization);
   cy.get('.button.primary').contains('Save').click();
 }

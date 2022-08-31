@@ -1,6 +1,5 @@
 export function checkMyQuotesPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: 'Quotes & Applications',
   });
   cy.get('.heading-headline').should('contain.text', 'Quotes & Applications');
@@ -72,4 +71,29 @@ export function checkTwoQuotes(product1, product2) {
     cy.get('h6').should('contain.text', product1);
     cy.get('h6').should('contain.text', product2);
   });
+}
+
+export function checkEventQuoteAndRetrieve() {
+  cy.get('.info-card')
+    .contains('Event Insurance')
+    .siblings('.info-card-wrapper')
+    .within(() => {
+      cy.get('.value').contains('QREF');
+      cy.get('.value').contains('Approved');
+      cy.get('.value').contains('€57.99 / One-time Charge');
+      cy.get('.link').contains('Retrieve').click({ force: true });
+    });
+}
+
+export function checkCurrentAccountAndRetrieve() {
+  cy.get('.info-card')
+    .contains('Current Account')
+    .siblings('.info-card-wrapper')
+    .within(() => {
+      cy.get('.label').contains('Family Account');
+      cy.get('.value').contains('QREF');
+      cy.get('.value').contains('Approved');
+      cy.get('.value').contains('€9.99 / Monthly');
+      cy.get('.link').contains('Retrieve').click({ force: true });
+    });
 }

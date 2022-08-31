@@ -3,6 +3,7 @@ import * as register from '../../helpers/register';
 import * as renters from '../../helpers/checkout/insurance/renters-checkout';
 import * as checkout from '../../helpers/checkout/checkout-steps';
 import testFilters from '../../support/filters';
+import { selectPaymentMethodInvoice } from '../../helpers/checkout/insurance/payment';
 
 testFilters(['smoke'], () => {
   context('Renters Checkout', () => {
@@ -67,8 +68,10 @@ testFilters(['smoke'], () => {
     });
 
     it('Select default payment details', () => {
-      checkout.populatePaymentCreditCard();
-      cy.get('.btn-primary').contains('Continue').click();
+      selectPaymentMethodInvoice();
+      //checkout.populatePaymentCreditCard();
+      checkout.clickContinueButton();
+      // cy.get('.btn-primary').contains('Continue').click();
     });
 
     it('Place order on final review page', () => {
@@ -83,6 +86,7 @@ testFilters(['smoke'], () => {
     it('Should validate phone number and check empty my account pages', () => {
       register.validatePhoneNumber('');
       checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
+      checkout.checkMyAccountEmptyPages('My Documents', 'You have no Claims!');
     });
   });
 });
