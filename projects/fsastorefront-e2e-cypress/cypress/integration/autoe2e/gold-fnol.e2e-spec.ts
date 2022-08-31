@@ -74,7 +74,6 @@ testFilters([''], () => {
       fnol.checkFNOLSteps();
       fnol.populateIncidentInformationStep();
       checkout.clickContinueButton();
-      autoIntegration.waitForIncidentReportForm();
     });
 
     it('Should check and populate Incident Report page', () => {
@@ -113,8 +112,7 @@ testFilters([''], () => {
     });
 
     it('Should check claim replication', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Claims',
       });
       fnol.checkClaimReplication();

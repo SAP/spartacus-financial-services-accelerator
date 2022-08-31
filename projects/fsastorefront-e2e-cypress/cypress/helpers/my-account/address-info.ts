@@ -63,7 +63,7 @@ export function addNewDataPersonalDetailsBanking() {
 }
 
 export function addNewAddressInCheckout() {
-  cy.get('[name="street"]').eq(0).type('New Street');
+  cy.get('[name="street"]').should('be.visible').eq(0).type('New Street');
   cy.get('[name="streetNumber"]').eq(0).type('Number 23638');
   cy.get('[name="city"]').eq(0).type('Berlin');
   cy.get('[name="postcode"]').eq(0).type('235700');

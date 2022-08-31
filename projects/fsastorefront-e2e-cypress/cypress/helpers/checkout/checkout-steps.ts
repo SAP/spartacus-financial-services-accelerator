@@ -248,8 +248,8 @@ export function checkCouponsFields() {
   cy.get('.cx-cart-coupon-container')
     .should('be.visible')
     .within(() => {
-      cy.get('.form-control').should('be.visible');
-      cy.get('.primary-button').should('contain.text', 'Apply');
+      cy.get('[formcontrolname=couponCode]').should('be.visible');
+      cy.get('#apply-voucher').should('be.visible');
     });
 }
 
@@ -287,7 +287,11 @@ export const pages = {
   userIdentification: 'user-identification',
   addressInfo: 'my-account/address-info',
   addOptions: 'checkout/add-options',
+<<<<<<< HEAD
   sellerDashboard: 'seller-dashboard',
+=======
+  personalDetails: 'checkout/personal-details',
+>>>>>>> f9d26e71ce65add2004f6186d39130ab065363ce
 };
 
 export function checkPageURL(page: string) {

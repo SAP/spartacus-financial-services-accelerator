@@ -35,8 +35,6 @@ testFilters([''], () => {
     it('Should register user in checkout and add second person', () => {
       register.registerUser(registrationUser);
       register.login(registrationUser.email, registrationUser.password);
-      //BUG: CXFSA-303 workaround
-      checkout.startInsuranceCheckout('Life');
       life.addSecondPerson();
       life.populateSecondPerson();
     });

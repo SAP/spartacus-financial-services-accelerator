@@ -25,9 +25,9 @@ export function checkAgentList() {
     .eq(1)
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
-      cy.get('.agent-name').should('contain.text', 'Kai Ratliff');
+      cy.get('.agent-name').should('contain.text', 'Aladdin Gentry');
       cy.get('.mb-3').should('contain.text', 'Event Insurance');
-      cy.get('.action-button').should('contain.text', 'Contact');
+      cy.get('.fa-envelope').should('be.visible');
     });
   cy.get('.cx-store-map').should('be.visible');
 }
@@ -43,7 +43,7 @@ export function searchSavingAgents() {
       cy.get('.cx-product-image-container').should('be.visible');
       cy.get('.agent-name').should('contain.text', 'Burton Franco');
       cy.get('.mb-3').should('contain.text', 'Savings');
-      cy.get('.action-button').should('contain.text', 'Contact');
+      cy.get('.fa-envelope').should('be.visible');
     });
 }
 
@@ -88,7 +88,7 @@ export function checkLocatedAgent() {
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
       cy.get('.agent-name').contains(' Deacon Fuller ');
-      cy.get('.action-button').contains(' Contact ');
+      cy.get('.fa-envelope').should('be.visible');
     });
 }
 
@@ -103,16 +103,16 @@ export function searchFrancoAgent() {
       cy.get('.cx-product-image-container').should('be.visible');
       cy.get('.agent-name').contains(' Burton Franco ');
       cy.get('.mb-3').contains(' Event Insurance ');
-      cy.get('.action-button').contains(' Contact ');
+      cy.get('.fa-envelope').should('be.visible');
     });
 }
 
 export function contactAgentByName(agentName) {
   cy.get('.agent-name')
     .contains(agentName)
-    .parent()
+    .parents('.agent-list-item')
     .within(() => {
-      cy.get('.action-button').should('be.visible').click();
+      cy.get('.fa-envelope').should('be.visible').click();
     });
 }
 
@@ -125,9 +125,9 @@ export function locateSavingsAgent() {
       cy.get('.agent-container').should('have.length', 4);
       cy.get('.py-3')
         .contains('Deacon Fuller')
-        .parent()
+        .parents('.agent-container')
         .within(() => {
-          cy.get('.icon-map-marker').click();
+          cy.get('.fa-map-marker-alt').click();
         });
     });
 }
@@ -140,5 +140,5 @@ export function checkIndira() {
   cy.get('.cx-product-image-container').should('be.visible');
   cy.get('.agent-name').contains(' Idira Duffy ');
   cy.get('.mb-3').contains(' Event Insurance ');
-  cy.get('.action-button').should('contain.text', 'Contact');
+  cy.get('.fa-envelope').should('be.visible');
 }
