@@ -43,7 +43,8 @@ testFilters([''], () => {
     });
 
     it('Should address is added to Address Info', () => {
-      cy.selectOptionFromMyAccount({
+      cy.selectOptionFromDropdown({
+        menuOption: 'My Account',
         dropdownItem: 'Address Info',
       });
       checkout.checkPageURL(checkout.pages.addressInfo);
@@ -71,7 +72,8 @@ testFilters([''], () => {
     });
 
     it('Should delete new address', () => {
-      cy.selectOptionFromMyAccount({
+      cy.selectOptionFromDropdown({
+        menuOption: 'My Account',
         dropdownItem: 'Address Info',
       });
       checkout.checkPageURL(checkout.pages.addressInfo);

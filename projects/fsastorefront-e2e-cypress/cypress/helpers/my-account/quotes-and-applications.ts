@@ -1,9 +1,5 @@
 export function checkMyQuotesPage() {
   cy.selectOptionFromMyAccount({
-<<<<<<< HEAD
-=======
-    menuOption: 'My Account',
->>>>>>> f9d26e71ce65add2004f6186d39130ab065363ce
     dropdownItem: 'Quotes & Applications',
   });
   cy.get('.heading-headline').should('contain.text', 'Quotes & Applications');
@@ -62,6 +58,7 @@ export function checkWeeklyLoanApplication() {
       .within(() => {
         cy.get('h6').should('contain.text', 'Loan');
         cy.get('.label').contains('Personal Loan');
+        cy.get('.value').contains('00001');
         cy.get('.value').contains('Pending');
         cy.get('.value').contains('€69.99 / Weekly');
       });

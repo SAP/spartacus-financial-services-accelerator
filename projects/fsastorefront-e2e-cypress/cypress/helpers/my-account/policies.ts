@@ -1,5 +1,6 @@
 export function checkMyPoliciesPage() {
-  cy.selectOptionFromMyAccount({
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
     dropdownItem: 'Policies',
   });
   cy.get('cx-fs-policies').within(() => {
