@@ -105,8 +105,7 @@ testFilters([''], () => {
     });
 
     it('Check premium calendar', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Premium Calendar',
       });
       premiumCalendar.checkPageContent();

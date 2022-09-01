@@ -87,7 +87,7 @@ export function checkLocatedAgent() {
     .should('have.length', 1)
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
-      cy.get('.agent-name').contains(' Deacon Fuller ');
+      cy.get('.agent-name').contains('Deacon Fuller');
       cy.get('.fa-envelope').should('be.visible');
     });
 }
@@ -101,8 +101,8 @@ export function searchFrancoAgent() {
     .should('have.length', 1)
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
-      cy.get('.agent-name').contains(' Burton Franco ');
-      cy.get('.mb-3').contains(' Event Insurance ');
+      cy.get('.agent-name').contains('Burton Franco');
+      cy.get('.mb-3').contains('Event Insurance');
       cy.get('.fa-envelope').should('be.visible');
     });
 }

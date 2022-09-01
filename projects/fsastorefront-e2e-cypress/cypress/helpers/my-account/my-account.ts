@@ -59,8 +59,7 @@ export function checkPersonalDetails() {
 }
 
 export function orderHistoryPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: 'Order History',
   });
 }
@@ -85,8 +84,7 @@ export function checkOrderHistoryContent(price, status) {
 }
 
 export function retrieveQuote(length, product) {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: 'Quotes & Applications',
   });
   cy.get('h2').should('contain.text', 'Quotes & Applications');
