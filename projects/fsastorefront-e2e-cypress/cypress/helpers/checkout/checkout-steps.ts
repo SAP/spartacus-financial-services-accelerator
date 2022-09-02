@@ -272,7 +272,7 @@ export function checkSyncPilotComparisonTable() {
     });
 }
 
-export const categoryPage = {
+export const pages = {
   homeowners: 'insurance_main_homeowners',
   renters: 'insurance_main_renters',
   auto: 'insurance_main_auto',
@@ -287,6 +287,7 @@ export const categoryPage = {
   userIdentification: 'user-identification',
   addressInfo: 'my-account/address-info',
   addOptions: 'checkout/add-options',
+  sellerDashboard: 'seller-dashboard',
   personalDetails: 'checkout/personal-details',
 };
 
@@ -303,4 +304,10 @@ export function checkValidationPopUpAndClose() {
       cy.get('h3').should('contain.text', 'There are validation errors');
       cy.get('.close').click();
     });
+}
+
+export function populateCustomerDetails() {
+  cy.get('[name="title"]').select('mr');
+  cy.get('[name="firstName"]').type('Stephen');
+  cy.get('[name="lastName"]').type('Bailey');
 }

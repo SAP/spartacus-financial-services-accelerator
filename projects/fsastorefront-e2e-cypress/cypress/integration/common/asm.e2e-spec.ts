@@ -5,6 +5,7 @@ import {
   registrationUserWithoutPhone,
 } from '../../sample-data/users';
 import testFilters from '../../support/filters';
+import * as homepage from '../../helpers/homepage';
 
 testFilters([''], () => {
   context('ASM', () => {
@@ -21,8 +22,8 @@ testFilters([''], () => {
       );
     });
 
-    it('should open login as agent', () => {
-      register.loginInUser(amosAgent.email, amosAgent.password);
+    it('should login as agent', () => {
+      register.loginASMAgent();
       cy.get('cx-asm-session-timer').should('be.visible');
       cy.get('.logout').should('be.visible').click();
       asm.checkAsmHeader();

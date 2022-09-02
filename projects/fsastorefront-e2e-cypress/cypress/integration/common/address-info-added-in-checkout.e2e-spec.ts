@@ -46,7 +46,7 @@ testFilters([''], () => {
       cy.selectOptionFromMyAccount({
         dropdownItem: 'Address Info',
       });
-      checkout.checkPageURL(checkout.categoryPage.addressInfo);
+      checkout.checkPageURL(checkout.pages.addressInfo);
       addressInfo.checkNewAddressFromCheckout();
     });
 
@@ -74,7 +74,7 @@ testFilters([''], () => {
       cy.selectOptionFromMyAccount({
         dropdownItem: 'Address Info',
       });
-      checkout.checkPageURL(checkout.categoryPage.addressInfo);
+      checkout.checkPageURL(checkout.pages.addressInfo);
       addressInfo.checkNewAddressFromCheckout();
       cy.contains('Delete').click();
       cy.get('.cx-card-delete-msg').should(

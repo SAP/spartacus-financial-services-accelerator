@@ -74,6 +74,7 @@ testFilters([''], () => {
       fnol.checkFNOLSteps();
       fnol.populateIncidentInformationStep();
       checkout.clickContinueButton();
+      autoIntegration.waitForIncidentReportForm();
     });
 
     it('Should check and populate Incident Report page', () => {
