@@ -30,10 +30,20 @@ export class ConsentConnector {
     return this.adapter.createOBOCustomer(consentHolder, details);
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link QuoteConnector.getQuotes(userId: string) method} instead.
+   */
   getQuotesForOBOCustomer(userId: string, customerId: string): Observable<any> {
     return this.adapter.getQuotesForOBOCustomer(userId, customerId);
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link PolicyConnector.getPolicies(userId: string) method} instead.
+   */
   getPoliciesForOBOCustomer(
     userId: string,
     customerId: string
@@ -41,6 +51,11 @@ export class ConsentConnector {
     return this.adapter.getPoliciesForOBOCustomer(userId, customerId);
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link ClaimConnector.getClaims(userId: string) method} instead.
+   */
   getClaimsForOBOCustomer(userId: string, customerId: string): Observable<any> {
     return this.adapter.getClaimsForOBOCustomer(userId, customerId);
   }

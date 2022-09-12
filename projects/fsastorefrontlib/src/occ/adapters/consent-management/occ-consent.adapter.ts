@@ -118,6 +118,11 @@ export class OccConsentAdapter implements ConsentAdapter {
       .pipe(catchError((error: any) => throwError(error)));
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link OccQuoteAdapter.getQuotes(userId: string) method} instead.
+   */
   getQuotesForOBOCustomer(
     userId: string,
     customerId: string
@@ -135,6 +140,11 @@ export class OccConsentAdapter implements ConsentAdapter {
     );
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link OccPolicyAdapter.getPolicies(userId: string) method} instead.
+   */
   getPoliciesForOBOCustomer(
     userId: string,
     customerId: string
@@ -150,6 +160,11 @@ export class OccConsentAdapter implements ConsentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link OccClaimAdapter.getClaims(userId: string) method} instead.
+   */
   getClaimsForOBOCustomer(userId: string, customerId: string): Observable<any> {
     const url = this.occEndpointService.buildUrl('oboConsentCustomerClaims', {
       urlParams: {

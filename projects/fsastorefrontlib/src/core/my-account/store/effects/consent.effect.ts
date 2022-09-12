@@ -16,7 +16,9 @@ import {
 } from '@spartacus/core';
 import * as fromActions from '../actions';
 import { ConsentConnector } from '../../connectors/consent.connector';
+import { QuoteConnector } from '../../connectors/quote.connector';
 import { ConsentService } from '../../facade/consent.service';
+import { ClaimConnector, PolicyConnector } from '../../connectors';
 
 @Injectable()
 export class ConsentEffects {
@@ -25,6 +27,9 @@ export class ConsentEffects {
     private routingService: RoutingService,
     private globalMessageService: GlobalMessageService,
     private consentConnector: ConsentConnector,
+    private quoteConnector: QuoteConnector,
+    private policyConnector: PolicyConnector,
+    private claimConnector: ClaimConnector,
     private fsConsentService: ConsentService
   ) {}
 
@@ -92,16 +97,14 @@ export class ConsentEffects {
       ofType(fromActions.LOAD_CUSTOMER_QUOTES),
       map((action: fromActions.LoadCustomerQuotes) => action.payload),
       switchMap(payload => {
-        return this.consentConnector
-          .getQuotesForOBOCustomer(payload.userId, payload.customerId)
-          .pipe(
-            map((customerQuotes: any) => {
-              return new fromActions.LoadCustomerQuotesSuccess(customerQuotes);
-            }),
-            catchError(error =>
-              of(new fromActions.LoadCustomerQuotesFail(JSON.stringify(error)))
-            )
-          );
+        return this.quoteConnector.getQuotes(payload.customerId).pipe(
+          map((customerQuotes: any) => {
+            return new fromActions.LoadCustomerQuotesSuccess(customerQuotes);
+          }),
+          catchError(error =>
+            of(new fromActions.LoadCustomerQuotesFail(JSON.stringify(error)))
+          )
+        );
       })
     )
   );
@@ -111,20 +114,16 @@ export class ConsentEffects {
       ofType(fromActions.LOAD_CUSTOMER_POLICIES),
       map((action: fromActions.LoadCustomerPolicies) => action.payload),
       switchMap(payload => {
-        return this.consentConnector
-          .getPoliciesForOBOCustomer(payload.userId, payload.customerId)
-          .pipe(
-            map((customerPolicies: any) => {
-              return new fromActions.LoadCustomerPoliciesSuccess(
-                customerPolicies
-              );
-            }),
-            catchError(error =>
-              of(
-                new fromActions.LoadCustomerPoliciesFail(JSON.stringify(error))
-              )
-            )
-          );
+        return this.policyConnector.getPolicies(payload.customerId).pipe(
+          map((customerPolicies: any) => {
+            return new fromActions.LoadCustomerPoliciesSuccess(
+              customerPolicies
+            );
+          }),
+          catchError(error =>
+            of(new fromActions.LoadCustomerPoliciesFail(JSON.stringify(error)))
+          )
+        );
       })
     )
   );
@@ -134,16 +133,14 @@ export class ConsentEffects {
       ofType(fromActions.LOAD_CUSTOMER_CLAIMS),
       map((action: fromActions.LoadCustomerClaims) => action.payload),
       switchMap(payload => {
-        return this.consentConnector
-          .getClaimsForOBOCustomer(payload.userId, payload.customerId)
-          .pipe(
-            map((customerClaims: any) => {
-              return new fromActions.LoadCustomerClaimsSuccess(customerClaims);
-            }),
-            catchError(error =>
-              of(new fromActions.LoadCustomerClaimsFail(JSON.stringify(error)))
-            )
-          );
+        return this.claimConnector.getClaims(payload.customerId).pipe(
+          map((customerClaims: any) => {
+            return new fromActions.LoadCustomerClaimsSuccess(customerClaims);
+          }),
+          catchError(error =>
+            of(new fromActions.LoadCustomerClaimsFail(JSON.stringify(error)))
+          )
+        );
       })
     )
   );
