@@ -1,13 +1,13 @@
 {
   "defaultCommandTimeout": 20000,
-  "baseUrl": "http://10.27.246.242",
+  "baseUrl": "https://localhost:9002",
   "requestTimeout": 10000,
   "modifyObstructiveCode": false,
   "env": {
     "CLIENT_ID": "financial_trusted",
     "CLIENT_SECRET": "secret",
-    "API_URL": "https://10.27.246.242:9012",
-    "API_URL_INT": "https://10.27.241.19:9012"
+    "API_URL": "https://localhost:9002",
+    "API_URL_INT": "https://localhost:9002"
   },
   "video": false,
   "reporter": "mochawesome",

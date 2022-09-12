@@ -13,6 +13,7 @@ testFilters([''], () => {
       register.loginInUser(rootAdmin.email, rootAdmin.password);
       cy.get('cx-category-navigation').should('contain.text', 'Insurance');
       cy.get('cx-category-navigation').should('contain.text', 'Banking');
+      cy.get('cx-fs-dashboard-link').contains('Dashboard');
     });
 
     it('Should create a new group', () => {
@@ -30,6 +31,7 @@ testFilters([''], () => {
       groupPolicy.checkGroupPolicyMainPage();
       groupPolicy.checkMembersPage();
       groupPolicy.createNewMember();
+      register.createB2bCustomer(createCustomer, '0', 'Panda');
       groupPolicy.checkGroupPolicyMainPage();
       groupPolicy.checkMembersPage();
       groupPolicy.checkMemberIsDisabled();

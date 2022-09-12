@@ -22,7 +22,6 @@ export const createCustomer = {
   firstName: generateCustomerName('AKungFu'),
   lastName: 'Panda',
   email: generateMail('AKungFu'),
-  password: 'Password1.',
 };
 
 export function generateMail(name: string) {
@@ -58,4 +57,26 @@ export const carGroupAdmin = {
 export const carGroupCustomer = {
   email: 'elena.petrova@sapfsa.com',
   password: '123123',
+};
+
+export const createSeller = {
+  titleCode: 'Ms.',
+  firstName: generateCustomerName('Ana'),
+  lastName: 'Jones',
+  email: generateMail('AnaJones'),
+};
+
+export const newSeller = {
+  email: createSeller.email,
+  password: 'Password1.',
+};
+
+export const sellerIndira = {
+  email: 'indira.duffy@sap.com',
+  password: '123456',
+};
+
+export const stephenCustomer = {
+  email: 'stephen.bailey@sapfsa.com',
+  password: '123456',
 };

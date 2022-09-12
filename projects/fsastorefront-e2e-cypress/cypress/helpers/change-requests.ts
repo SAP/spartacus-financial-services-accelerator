@@ -81,7 +81,6 @@ export function addTrailerLiability() {
     .within(() => {
       cy.get('h6').contains('Trailer Liability');
       cy.get('.secondary-button').click();
-      cy.get('.secondary-button').contains('Remove');
     });
 }
 

@@ -31,16 +31,14 @@ testFilters([''], () => {
     });
 
     it('Should check Personal Details page', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Personal Details',
       });
       myAccount.checkPersonalDetails();
     });
 
     it('Should check consent management page', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Consent Management',
       });
       cy.get('input[type="checkbox"]').first().should('be.checked');

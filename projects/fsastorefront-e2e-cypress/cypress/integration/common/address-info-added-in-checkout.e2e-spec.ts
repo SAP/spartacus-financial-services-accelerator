@@ -43,11 +43,10 @@ testFilters([''], () => {
     });
 
     it('Should address is added to Address Info', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Address Info',
       });
-      checkout.checkPageURL(checkout.categoryPage.addressInfo);
+      checkout.checkPageURL(checkout.pages.addressInfo);
       addressInfo.checkNewAddressFromCheckout();
     });
 
@@ -72,11 +71,10 @@ testFilters([''], () => {
     });
 
     it('Should delete new address', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Address Info',
       });
-      checkout.checkPageURL(checkout.categoryPage.addressInfo);
+      checkout.checkPageURL(checkout.pages.addressInfo);
       addressInfo.checkNewAddressFromCheckout();
       cy.contains('Delete').click();
       cy.get('.cx-card-delete-msg').should(

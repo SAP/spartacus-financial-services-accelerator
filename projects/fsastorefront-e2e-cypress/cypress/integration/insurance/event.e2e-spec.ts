@@ -78,8 +78,7 @@ testFilters(['smoke'], () => {
     });
 
     it('Close account for user', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Close Account',
       });
       myAccount.checkCloseAccountPage();

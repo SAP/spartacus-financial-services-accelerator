@@ -113,8 +113,7 @@ testFilters([''], () => {
     });
 
     it('Should check claim replication', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Claims',
       });
       fnol.checkClaimReplication();

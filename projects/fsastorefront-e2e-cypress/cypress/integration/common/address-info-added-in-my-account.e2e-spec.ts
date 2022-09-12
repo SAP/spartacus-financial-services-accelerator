@@ -44,11 +44,10 @@ testFilters([''], () => {
     });
 
     it('Should add New address from My Accounts', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Address Info',
       });
-      checkout.checkPageURL(checkout.categoryPage.addressInfo);
+      checkout.checkPageURL(checkout.pages.addressInfo);
       addressInfo.checkRegisteredUserData();
       addressInfo.populateNewAddressInfo();
       addressInfo.addNewAddressInfo();
@@ -57,7 +56,7 @@ testFilters([''], () => {
 
     it('Should Retrieve insurance quote', () => {
       retrieveQuote('1', 'Savings Insurance');
-      checkout.checkPageURL(checkout.categoryPage.addOptions);
+      checkout.checkPageURL(checkout.pages.addOptions);
       checkout.clickContinueButton();
       //user was registered with phone number
       cy.get('[name=phoneNumber]').should('have.value', '66622299');
@@ -96,11 +95,10 @@ testFilters([''], () => {
     });
 
     it('Should check address is not updated', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Address Info',
       });
-      checkout.checkPageURL(checkout.categoryPage.addressInfo);
+      checkout.checkPageURL(checkout.pages.addressInfo);
       addressInfo.checkAddressInfoCard();
     });
   });
