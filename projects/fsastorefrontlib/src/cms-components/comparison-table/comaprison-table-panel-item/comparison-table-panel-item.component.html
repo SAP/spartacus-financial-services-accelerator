@@ -14,11 +14,24 @@
         <h4 class="table-header-value">{{ productPrice }}</h4>
       </ng-container>
       <a
+        *ngIf="!product.investments?.length"
         class="link mt-1"
         [routerLink]="
           {
             cxRoute: 'category',
             params: { code: product.defaultCategory?.parentCategory?.code }
+          } | cxUrl
+        "
+      >
+        {{ 'fscommon.moreInfo' | cxTranslate }}
+      </a>
+      <a
+        *ngIf="product.investments?.length"
+        class="link mt-1"
+        [routerLink]="
+          {
+            cxRoute: 'salesIllustration',
+            params: { savingsProductCode: product.code }
           } | cxUrl
         "
       >

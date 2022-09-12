@@ -1,0 +1,132 @@
+<ng-container *ngIf="product$ | async as product; else loading">
+  <div class="d-flex justify-content-between align-items-center">
+    <a class="h4 pointer" (click)="location.back()">
+      <span class="fas fa-arrow-left"></span
+    ></a>
+    <h2 class="heading-headline py-3 px-4 text-center">
+      {{
+        'salesIllustration.mainTitle'
+          | cxTranslate: { cartDisplayName: product.cartDisplayName }
+      }}
+    </h2>
+    <a
+      (click)="
+        createCartAndStartBundleForProduct(
+          product.code,
+          product.bundleTemplates[0]?.id
+        )
+      "
+      class="pointer text-right text-uppercase"
+    >
+      <u>
+        <span class="d-none d-sm-block">{{
+          'salesIllustration.addToCart' | cxTranslate
+        }}</span>
+        <span class="d-block d-sm-none">{{ 'common.add' | cxTranslate }}</span>
+      </u>
+    </a>
+  </div>
+  <div class="accordion">
+    <cx-fs-accordion-item title="Savings Details" opened="true">
+      <table class="table mx-auto">
+        <tbody>
+          <tr
+            *ngFor="
+              let dynamicAttribute of product.dynamicAttributes;
+              let i = index
+            "
+          >
+            <td
+              class="item-label border-top-0"
+              [ngClass]="{ 'border-top-0': i === 0 }"
+            >
+              {{ 'salesIllustration.' + dynamicAttribute.key | cxTranslate }}
+            </td>
+            <td
+              class="value notice border-top-0"
+              [ngClass]="{ 'border-top-0': i === 0 }"
+            >
+              {{ dynamicAttribute.value.formattedValue }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </cx-fs-accordion-item>
+  </div>
+
+  <ul ngbNav #nav="ngbNav" class="mt-5">
+    <li [ngbNavItem]="1" class="d-none d-sm-block">
+      <a ngbNavLink><i class="fas fa-chart-line fa-2x"></i></a>
+      <ng-template ngbNavContent>
+        <div class="mt-5 projections">
+          <h5 class="text-center p-3 projections-title text-uppercase">
+            {{ 'salesIllustration.salesProjections' | cxTranslate }}
+          </h5>
+          <div
+            style="height: 400px;"
+            class="pb-5"
+            echarts
+            [options]="chartOptions$ | async"
+            (chartInit)="onChartInit($event)"
+          ></div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" class="d-none d-sm-block">
+      <a ngbNavLink><i class="fas fa-list-ul fa-2x"></i></a>
+      <ng-template ngbNavContent>
+        <div
+          class="table-responsive mt-4"
+          *ngIf="pagination$ | async as pagination"
+        >
+          <table
+            class="table table-hover sales-data"
+            *ngIf="tableData$ | async as tableData"
+          >
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="text-left">
+                  {{ 'salesIllustration.year' | cxTranslate }}
+                </th>
+                <th scope="col" class="text-right">
+                  {{ 'salesIllustration.contribution' | cxTranslate }}
+                </th>
+                <th scope="col" class="text-right">
+                  {{ 'salesIllustration.expectedSavings' | cxTranslate }}
+                </th>
+                <th scope="col" class="text-right">
+                  {{ 'salesIllustration.interest' | cxTranslate }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let year of tableData.years.values; let i = index">
+                <td>{{ year }}</td>
+                <td class="text-right">
+                  {{ tableData.contributionSeries.values[i] }}
+                </td>
+                <td class="text-right">
+                  {{ tableData.expectedSavingsSeries.values[i] }}
+                </td>
+                <td class="text-right">
+                  {{ tableData.interestSeries.values[i] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <cx-pagination
+            class="justify-content-center justify-content-sm-end"
+            [pagination]="pagination"
+            (viewPageEvent)="onPageChange($event)"
+          >
+          </cx-pagination>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
+</ng-container>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

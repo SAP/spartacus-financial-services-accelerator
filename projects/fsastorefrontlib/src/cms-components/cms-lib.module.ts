@@ -31,6 +31,7 @@ import { SellerDashboardModule } from './seller-dashboard/seller-dashboard.modul
 import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.module';
 import { AssetsTableModule } from './assets-table/assets-table.module';
 import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
+import { SalesIllustrationModule } from './sales-illustration/sales-illustration.module';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
     FSSearchBoxModule,
     AssetsTableModule,
     DashboardLinkModule,
+    SalesIllustrationModule,
   ],
   exports: [
     AgentModule,
@@ -91,6 +93,7 @@ import { DashboardLinkModule } from './dashboard-link/dashboard-link.module';
     FSSearchBoxModule,
     AssetsTableModule,
     DashboardLinkModule,
+    SalesIllustrationModule,
   ],
   providers: [reducerProvider],
 })

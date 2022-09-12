@@ -1,0 +1,23 @@
+export const salesIllustration = {
+  salesIllustration: {
+    expectedSavings: 'Expected Amount',
+    guaranteedSavings: 'Guaranteed Amount',
+    monthlyAnnuity: 'Monthly Annuity',
+    savingsDetails: 'Your Savings Details',
+    description: 'Description',
+    amount: 'Amount',
+    back: 'Back',
+    select: 'Select',
+    chartView: 'Chart View',
+    tableView: 'Table View',
+    year: 'Year',
+    contribution: 'Contribution',
+    interest: 'Interest',
+    itemsPerPage: 'Items Per Page',
+    productWith: 'Product with code',
+    notAvailable: 'is not available for sales illustration',
+    addToCart: 'Add to cart',
+    mainTitle: 'Savings - {{ cartDisplayName }} Sales Illustration',
+    salesProjections: 'Progression savings projections',
+  },
+};
