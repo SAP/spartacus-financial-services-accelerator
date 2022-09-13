@@ -42,11 +42,9 @@ export abstract class ConsentAdapter {
   ): Observable<any>;
 
   /**
-   * Abstract method used to get quotes of the particular customer created by consent holder.
-   *
-   * @param userId The `userId` used for fetching on behalf of consent holder
-   *
-   * @param customerId The `customerId` used for fetching particular customer
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link QuoteAdapter | the getQuotes(userId: string) method} instead.
    */
   abstract getQuotesForOBOCustomer(
     userId: string,
@@ -54,11 +52,9 @@ export abstract class ConsentAdapter {
   ): Observable<any>;
 
   /**
-   * Abstract method used to get policies of the particular customer created by consent holder.
-   *
-   * @param userId The `userId` used for fetching on behalf of consent holder
-   *
-   * @param customerId The `customerId` used for fetching particular customer
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link PolicyAdapter | the getPolicies(userId: string) method} instead.
    */
   abstract getPoliciesForOBOCustomer(
     userId: string,
@@ -66,11 +62,9 @@ export abstract class ConsentAdapter {
   ): Observable<any>;
 
   /**
-   * Abstract method used to get claims of the particular customer created by consent holder.
-   *
-   * @param userId The `userId` used for fetching on behalf of consent holder
-   *
-   * @param customerId The `customerId` used for fetching particular customer
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link ClaimAdapter | the getClaims(userId: string) method} instead.
    */
   abstract getClaimsForOBOCustomer(
     userId: string,
