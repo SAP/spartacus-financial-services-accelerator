@@ -15,10 +15,13 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import * as fromActions from '../actions';
-import { ConsentConnector } from '../../connectors/consent.connector';
-import { QuoteConnector } from '../../connectors/quote.connector';
 import { ConsentService } from '../../facade/consent.service';
-import { ClaimConnector, PolicyConnector } from '../../connectors';
+import {
+  ConsentConnector,
+  ClaimConnector,
+  PolicyConnector,
+  QuoteConnector,
+} from '../../connectors';
 
 @Injectable()
 export class ConsentEffects {
