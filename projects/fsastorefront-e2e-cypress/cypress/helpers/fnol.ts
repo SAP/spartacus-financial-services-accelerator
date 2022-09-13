@@ -228,8 +228,8 @@ export function checkClaimReplication(incidetType) {
       cy.get('.info-card-data').within(() => {
         cy.get('.value').should('contain.text', incidetType);
       });
-      cy.get('div.info-card-links').contains('Details');
-      cy.get('div.info-card-links').contains('Add Documents');
+      cy.get('.info-card-links').contains('Details');
+      cy.get('.info-card-links').contains('Add Documents');
     });
 }
 
