@@ -56,7 +56,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details and place an order', () => {
+    it('Should select default payment details and place an order', () => {
       selectPaymentMethodInvoice();
       checkout.clickContinueButton();
       checkout.placeOrderOnFinalReview();

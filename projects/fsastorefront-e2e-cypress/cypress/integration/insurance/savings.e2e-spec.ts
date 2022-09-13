@@ -78,33 +78,33 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details', () => {
+    it('Should select default payment details', () => {
       checkout.populatePaymentCreditCard();
       cy.get('.btn-primary').contains('Continue').click();
     });
 
-    it('Place order on final review page', () => {
+    it('Should place an order on final review page', () => {
       checkout.placeOrderOnFinalReview();
     });
 
-    it('Check order confirmation', () => {
+    it('Should check order confirmation', () => {
       checkout.checkAccordions('savingsFinalReview');
       checkout.checkOrderConfirmation();
       cy.wait(200000);
     });
 
-    it('Check my policies page', () => {
+    it('Should check my policies page', () => {
       policies.checkMyPoliciesPage();
       savings.checkSavingsPolicy();
     });
 
-    it('Check policy details page', () => {
+    it('Should check policy details page', () => {
       policies.clickOnPolicyDetails();
       checkout.checkAccordions('savingsPolicyDetails');
       savings.checkInvestmentDetails();
     });
 
-    it('Check premium calendar', () => {
+    it('Should check premium calendar', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'My Account',
         dropdownItem: 'Premium Calendar',
@@ -114,7 +114,7 @@ testFilters([''], () => {
       premiumCalendar.checkSavingsData();
     });
 
-    it('Check inbox page', () => {
+    it('Should check inbox page', () => {
       inbox.clickOnInbox();
       inbox.checkInboxComponets();
       inbox.checkSavingsTabs();

@@ -10,7 +10,7 @@ testFilters(['smoke'], () => {
       cy.visit('/');
     });
 
-    it('should check homeowners product category page', () => {
+    it('Should check homeowners product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Homeowners',
@@ -24,7 +24,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check renters product category page', () => {
+    it('Should check renters product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Renters',
@@ -38,7 +38,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Auto product category page', () => {
+    it('Should check Auto product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Auto',
@@ -53,7 +53,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Life product category page', () => {
+    it('Should check Life product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Life',
@@ -70,7 +70,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Travel product category page', () => {
+    it('Should check Travel product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Travel',
@@ -85,7 +85,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Event product category page', () => {
+    it('Should check Event product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Event',
@@ -100,7 +100,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Savings product category page', () => {
+    it('Should check Savings product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Savings',
@@ -118,7 +118,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Current Account product category page', () => {
+    it('Should check Current Account product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Current Account',
@@ -133,7 +133,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Credit Card product category page', () => {
+    it('Should check Credit Card product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Credit Card',
@@ -148,7 +148,7 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Loan product category page', () => {
+    it('Should check Loan product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Loan',
@@ -159,7 +159,7 @@ testFilters(['smoke'], () => {
       productCategory.checkCategoryProductHeadings('Personal Loan');
     });
 
-    it('should check Fixed Term Deposit product category page', () => {
+    it('Should check Fixed Term Deposit product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Fixed Term Deposit',

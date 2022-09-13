@@ -12,7 +12,7 @@ testFilters([''], () => {
       cy.visit('/?asm=true');
     });
 
-    it('should open asm mode and register a new user', () => {
+    it('Should open asm mode and register a new user', () => {
       asm.checkAsmHeader();
       register.registerUser(registrationUserWithoutPhone);
       register.login(
@@ -21,7 +21,7 @@ testFilters([''], () => {
       );
     });
 
-    it('should open login as agent', () => {
+    it('Should open login as agent', () => {
       register.loginInUser(amosAgent.email, amosAgent.password);
       cy.get('cx-asm-session-timer').should('be.visible');
       cy.get('.logout').should('be.visible').click();

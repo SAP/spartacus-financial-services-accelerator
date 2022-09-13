@@ -54,7 +54,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details and place an order', () => {
+    it('Should select default payment details and place an order', () => {
       selectPaymentMethodInvoice();
       checkout.clickContinueButton();
       checkout.placeOrderOnFinalReview();
@@ -72,7 +72,7 @@ testFilters([''], () => {
       autoIntegration.waitForIncidentInfoForm();
       fnol.checkFNOLCheckoutPage();
       fnol.checkFNOLSteps();
-      fnol.populateIncidentInformationStep();
+      fnol.populateIncidentInformationStep('Collision');
       checkout.clickContinueButton();
     });
 
@@ -98,8 +98,8 @@ testFilters([''], () => {
     });
 
     it('Should check information in accordions on summary page', () => {
-      autoIntegration.checkIncidentInformationAccordion();
-      fnol.checkIncidentReportAccordion();
+      autoIntegration.checkIncidentInformationAccordion('AutoCollision');
+      fnol.checkIncidentReportAccordion('3');
       fnol.checkGeneralInformationAccordion();
       cy.get('.primary-button').should('be.visible');
       cy.get('.primary-button').contains('Submit').click({ force: true });
@@ -115,7 +115,7 @@ testFilters([''], () => {
       cy.selectOptionFromMyAccount({
         dropdownItem: 'Claims',
       });
-      fnol.checkClaimReplication();
+      fnol.checkClaimReplication('Collision');
     });
   });
 });

@@ -36,7 +36,7 @@ testFilters([''], () => {
       register.logout();
     });
 
-    it('Login as seller and check seller dashboard', () => {
+    it('Should login as seller and check seller dashboard', () => {
       cy.get('cx-login').should('be.visible').click();
       register.loginInUser(sellerIndira.email, sellerIndira.password);
       homepage.checkPageElements();
@@ -46,7 +46,7 @@ testFilters([''], () => {
       checkDashboardOverview();
     });
 
-    it('Check customer dashboard', () => {
+    it('Should check customer dashboard', () => {
       checkCustomerList();
       goToCustomerDashboard('Stephen Bailey');
       cy.get('span.semi-bold').contains('Address Info:');

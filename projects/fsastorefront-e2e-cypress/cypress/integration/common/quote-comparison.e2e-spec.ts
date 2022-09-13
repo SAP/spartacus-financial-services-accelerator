@@ -14,13 +14,13 @@ testFilters([''], () => {
       cy.visit('/');
     });
 
-    it('Register a new user', () => {
+    it('Should register a new user', () => {
       register.registerUser(registrationUser);
       register.login(registrationUser.email, registrationUser.password);
       checkout.waitConsent();
     });
 
-    it('Create a loan quote', () => {
+    it('Should create a loan quote', () => {
       banking.startBankingCheckout('Loan');
       banking.checkProgressBarLoanAndFTD();
       banking.checkConfigureStep();
@@ -40,13 +40,13 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Check loan application is Created', () => {
+    it('Should Check loan application is Created', () => {
       quotes.checkMyQuotesPage();
       compare.checkCompareIsDisabled();
       quotes.checkBiweeklyLoanApplication();
     });
 
-    it('Create a event quote', () => {
+    it('Should create a event quote', () => {
       checkout.startInsuranceCheckout('Event');
       checkout.checkCheckoutStep('Your Event Insurance', '6');
       event.checkProgressBarEvent();
@@ -62,13 +62,13 @@ testFilters([''], () => {
       checkout.ConfirmBindQuote();
     });
 
-    it('Check event application is created', () => {
+    it('Should check event application is created', () => {
       quotes.checkMyQuotesPage();
       compare.checkCompareIsDisabled();
       quotes.checkEventQuote();
     });
 
-    it('Create second loan aplication', () => {
+    it('Should create second loan aplication', () => {
       banking.startBankingCheckout('Loan');
       banking.checkProgressBarLoanAndFTD();
       banking.checkConfigureStep();
@@ -80,13 +80,13 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Check second loan application is created', () => {
+    it('Should check second loan application is created', () => {
       quotes.checkMyQuotesPage();
       compare.checkCompareIsDisabled();
       quotes.checkWeeklyLoanApplication();
     });
 
-    it('Create second event quote', () => {
+    it('Should create second event quote', () => {
       checkout.startInsuranceCheckout('Event');
       checkout.checkCheckoutStep('Your Event Insurance', '6');
       event.checkProgressBarEvent();
@@ -97,7 +97,7 @@ testFilters([''], () => {
       checkout.removeOptionalProduct('Excess Waiver');
     });
 
-    it('Compare banking applications', () => {
+    it('Should compare banking applications', () => {
       quotes.checkMyQuotesPage();
       compare.checkCompareIsDisabled();
       compare.selectFirstQuoteForCompare('€69.99 / Weekly', 'Personal Loan');
@@ -108,7 +108,7 @@ testFilters([''], () => {
       checkout.checkAccordions('compareQuote');
     });
 
-    it('Compare insurance quotes', () => {
+    it('Should compare insurance quotes', () => {
       cy.get('.fa-arrow-left').click();
       cy.get('.heading-headline').should(
         'contains.text',

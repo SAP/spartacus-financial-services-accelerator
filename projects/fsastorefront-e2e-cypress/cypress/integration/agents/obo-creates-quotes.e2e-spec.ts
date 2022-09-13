@@ -17,7 +17,7 @@ testFilters([''], () => {
       cy.visit('/login');
     });
 
-    it('Seller creates event quote for customer', () => {
+    it('Should create event quote as seller', () => {
       register.loginInUser(sellerIndira.email, sellerIndira.password);
       cy.get('.SiteLogo').should('be.visible').click();
       checkout.startInsuranceCheckout('Event');
@@ -46,7 +46,7 @@ testFilters([''], () => {
       homepage.checkPageElements();
     });
 
-    it('Seller creates current account application for customer', () => {
+    it('Should create current account application as seller', () => {
       banking.startBankingCheckout('Current Account');
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
       banking.checkBankingProgressBar();
@@ -78,7 +78,7 @@ testFilters([''], () => {
       homepage.checkPageElements();
     });
 
-    it('Customer completes event checkout', () => {
+    it('Should complete event checkout as customer', () => {
       cy.get('cx-login').click();
       register.loginInUser(stephenCustomer.email, stephenCustomer.password);
       cy.get('.cx-login-greet').should('be.visible');
@@ -98,7 +98,7 @@ testFilters([''], () => {
       checkout.checkOrderConfirmation();
     });
 
-    it('Customer completes current account checkout', () => {
+    it('Should complete current account checkout as customer', () => {
       quotes.checkMyQuotesPage();
       quotes.checkCurrentAccountAndRetrieve();
       checkout.checkCheckoutStep('Your Current Account Application', '7');

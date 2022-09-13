@@ -95,7 +95,7 @@ export function waitForGeneralInfoForm() {
   });
 }
 
-export function checkIncidentInformationAccordion() {
+export function checkIncidentInformationAccordion(incidentType) {
   cy.get('.accordion-heading')
     .eq(0)
     .should('contain.text', 'Incident Information');
@@ -104,7 +104,7 @@ export function checkIncidentInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
     });
-  cy.get('.accordion-list-item').contains('AutoCollision');
+  cy.get('.accordion-list-item').contains(incidentType);
 }
 
 export function checkReferredQuotePopup() {

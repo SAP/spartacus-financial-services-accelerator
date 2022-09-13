@@ -63,21 +63,21 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details', () => {
+    it('Should select default payment details', () => {
       checkout.populatePaymentCreditCard();
       cy.get('.btn-primary').contains('Continue').click();
     });
 
-    it('Place order on final review page', () => {
+    it('Should place order on final review page', () => {
       checkout.placeOrderOnFinalReview();
     });
 
-    it('Check order confirmation', () => {
+    it('Should check order confirmation', () => {
       checkout.checkAccordions('threeAccordions');
       checkout.checkOrderConfirmation();
     });
 
-    it('Close account for user', () => {
+    it('Should close account for user', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'My Account',
         dropdownItem: 'Close Account',
@@ -86,7 +86,7 @@ testFilters(['smoke'], () => {
       myAccount.closeAccount();
     });
 
-    it('Closed account user cannot login', () => {
+    it('Should check that user with closed account cannot login', () => {
       cy.visit('/login');
       register.login(registrationUser.email, registrationUser.password);
       cy.get('.alert-danger').should(
