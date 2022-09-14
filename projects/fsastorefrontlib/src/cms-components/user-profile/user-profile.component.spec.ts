@@ -20,6 +20,7 @@ import { Observable, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FSUserRole } from '../../occ/occ-models/occ.models';
 import createSpy = jasmine.createSpy;
+import { UserProfileService } from '@spartacus/user/profile/core';
 
 const customerName = 'customerName';
 const customerUid = 'customerUid';
@@ -215,6 +216,12 @@ class MockRoutingService {
   }
 }
 
+class MockUserProfileService {
+  get() {
+    return of(mockUser as any);
+  }
+}
+
 class MockQuoteService {
   getQuotes() {
     return of(insuranceQuotes);
@@ -245,6 +252,7 @@ describe('UserProfileComponent', () => {
   let userAccountFacade: UserAccountFacade;
   let fsConsentService: ConsentService;
   let routingService: RoutingService;
+  let userProfileService: UserProfileService;
   let userIdService: UserIdService;
   let quoteService: QuoteService;
   let policyService: PolicyService;
@@ -267,6 +275,10 @@ describe('UserProfileComponent', () => {
             useClass: MockRoutingService,
           },
           {
+            provide: UserProfileService,
+            useClass: MockUserProfileService,
+          },
+          {
             provide: QuoteService,
             useClass: MockQuoteService,
           },
@@ -286,6 +298,7 @@ describe('UserProfileComponent', () => {
       userIdService = TestBed.inject(UserIdService);
       claimService = TestBed.inject(ClaimService);
       routingService = TestBed.inject(RoutingService);
+      userProfileService = TestBed.inject(UserProfileService);
       userAccountFacade = TestBed.inject(UserAccountFacade);
       quoteService = TestBed.inject(QuoteService);
       policyService = TestBed.inject(PolicyService);

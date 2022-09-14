@@ -59,7 +59,7 @@ describe(`UserProfileGuard`, () => {
     const route: any = {
       url: '/financial/en/EUR/user-profile/',
       params: {
-        customerId: undefined,
+        customerId: currentUser.uid,
       },
     };
     guard
