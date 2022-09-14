@@ -27,6 +27,7 @@ import { ConsentService } from '../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../core/my-account/facade';
 import { PolicyService } from '../../core/my-account/facade';
 import { ClaimService } from '../../core/my-account/facade';
+import { UserProfileService } from '@spartacus/user/profile/core';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -38,6 +39,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected userAccountFacade: UserAccountFacade,
     protected fsConsentService: ConsentService,
     protected routingService: RoutingService,
+    protected userProfileService: UserProfileService,
     protected userIdService: UserIdService,
     protected quoteService: QuoteService,
     protected policyService: PolicyService,
@@ -67,14 +69,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
+        this.userProfileService.get(),
         this.userIdService.getUserId(),
         this.userAccountFacade.get(),
       ])
         .pipe(
-          map(([routingData, userId, user]) => {
+          map(([routingData, customer, userId, user]) => {
             this.userId = userId;
             this.customerId = routingData?.state?.params?.customerId;
-            if (this.customerId) {
+            if (customer.roles.includes(FSUserRole.SELLER) && this.customerId !== customer.uid) {
               this.getSellerAssets(user, userId, this.customerId);
             } else {
               this.getAssetsforCurrentUser();
