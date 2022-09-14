@@ -87,7 +87,7 @@ testFilters([''], () => {
 
     it('Should check documents page', () => {
       checkMyDocuments('1');
-      cy.get('span.td-value').contains('Claim.pdf');
+      cy.get('.td-value').contains('Claim.pdf');
       checkout.checkPageURL(checkout.pages.documentsPage);
     });
 
