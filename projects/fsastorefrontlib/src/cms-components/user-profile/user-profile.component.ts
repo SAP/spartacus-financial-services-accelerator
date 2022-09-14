@@ -77,7 +77,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           map(([routingData, customer, userId, user]) => {
             this.userId = userId;
             this.customerId = routingData?.state?.params?.customerId;
-            if (customer.roles.includes(FSUserRole.SELLER) && this.customerId !== customer.uid) {
+            if (
+              customer.roles.includes(FSUserRole.SELLER) &&
+              this.customerId !== customer.uid
+            ) {
               this.getSellerAssets(user, userId, this.customerId);
             } else {
               this.getAssetsforCurrentUser();

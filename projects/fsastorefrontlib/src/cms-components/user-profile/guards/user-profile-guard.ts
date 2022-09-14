@@ -27,28 +27,24 @@ export class UserProfileGuard implements CanActivate {
       map(customer => {
         const oboCustomerId = route.params['customerId'];
 
-        console.log(customer.uid)
-        console.log(oboCustomerId)
-        if(oboCustomerId === ""){
+        if (oboCustomerId === '') {
           this.routingService.go({
             cxRoute: 'userProfile',
             params: { customerId: customer.uid },
           });
-        }else{
-          if (customer.uid === oboCustomerId) {
-            console.log("OVDE SAM")
-            return true;
-          }else{
-            if (!customer.roles.includes(FSUserRole.SELLER)) {
-              this.globalMessageService.add(
-                { key: 'organization.notification.noSufficientPermissions' },
-                GlobalMessageType.MSG_TYPE_WARNING
-              );
-              this.routingService.go({
-                cxRoute: 'userProfile',
-                params: { customerId: customer.uid },
-              });
-            }
+        } else {
+          if (
+            customer.uid !== oboCustomerId &&
+            !customer.roles.includes(FSUserRole.SELLER)
+          ) {
+            this.globalMessageService.add(
+              { key: 'organization.notification.noSufficientPermissions' },
+              GlobalMessageType.MSG_TYPE_WARNING
+            );
+            this.routingService.go({
+              cxRoute: 'userProfile',
+              params: { customerId: customer.uid },
+            });
           }
         }
 
