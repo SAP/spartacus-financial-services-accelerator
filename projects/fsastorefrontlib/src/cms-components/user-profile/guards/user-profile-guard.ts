@@ -35,8 +35,24 @@ export class UserProfileGuard implements CanActivate {
             { key: 'organization.notification.noSufficientPermissions' },
             GlobalMessageType.MSG_TYPE_WARNING
           );
-          this.routingService.go({ cxRoute: 'home' });
+          this.routingService.go({
+            cxRoute: 'userProfile',
+            params: { customerId: "" },
+          });
         }
+
+
+        if (
+          !!oboCustomerId &&
+          customer.uid === oboCustomerId
+        ) {
+          this.routingService.go({
+            cxRoute: 'userProfile',
+            params: { customerId: "" },
+          });
+        }
+
+
         return true;
       })
     );
