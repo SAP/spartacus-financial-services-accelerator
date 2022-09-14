@@ -319,7 +319,7 @@ export function uploadNewDocument(newDocument) {
       cy.get('.btn-primary')
         .should('contain.text', 'Upload')
         .click({ force: true });
-      cy.get('.fas.fa-check').should('be.visible');
+      cy.get('.fa-check').should('be.visible');
     });
   cy.get('.primary-button').contains('Submit').click({ force: true });
 }
