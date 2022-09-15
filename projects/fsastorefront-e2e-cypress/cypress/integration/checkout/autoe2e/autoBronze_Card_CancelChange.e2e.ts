@@ -7,9 +7,7 @@ import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
-import {
-  checkChangedMileagePremiumCancelled,
-} from '../../../helpers/checkout/insurance/policyChange_integration';
+import { checkChangedMileagePremiumCancelled } from '../../../helpers/checkout/insurance/policyChange_integration';
 
 Cypress.config('defaultCommandTimeout', 500000);
 

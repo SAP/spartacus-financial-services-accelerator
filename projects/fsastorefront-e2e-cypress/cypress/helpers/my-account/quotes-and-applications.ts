@@ -1,9 +1,5 @@
 export function checkMyQuotesPage() {
   cy.selectOptionFromMyAccount({
-<<<<<<< HEAD
-=======
-    menuOption: 'My Account',
->>>>>>> f9d26e71ce65add2004f6186d39130ab065363ce
     dropdownItem: 'Quotes & Applications',
   });
   cy.get('.heading-headline').should('contain.text', 'Quotes & Applications');
