@@ -68,7 +68,6 @@ export function logout() {
 }
 
 export function loginInUser(username: string, password: string) {
-  //will be deleted once register user is working correctly
   cy.get('cx-fs-login-form').within(() => {
     cy.get('[formcontrolname="userId"]').should('be.visible');
     cy.get('[formcontrolname="userId"]').eq(0).type(username);
@@ -90,4 +89,13 @@ export function createB2bCustomer(
   cy.get('.form-check-input').eq(role).click();
   cy.get('[formcontrolname=uid]').ngSelect(organization);
   cy.get('.button.primary').contains('Save').click();
+}
+
+export function loginASMAgent() {
+  cy.get('cx-csagent-login-form').within(() => {
+    cy.get('[formcontrolname="userId"]').should('be.visible');
+    cy.get('[formcontrolname="userId"]').eq(0).type('amos.adkins@sapfsa.com');
+    cy.get('[formcontrolname="password"]').type('1234');
+    cy.get('button[type=submit]').eq(0).click();
+  });
 }

@@ -51,10 +51,8 @@ testFilters([''], () => {
     });
 
     it('Should bind auto quote', () => {
-      checkout.checkPageURL(checkout.categoryPage.personalDetails);
       checkout.checkPersonalDetailsPage();
       auto.populateMainDriverData();
-      checkout.checkProgressBarInsurance();
       checkout.clickContinueButton();
       checkout.checkCheckoutStep('Your Auto Insurance', '7');
       checkout.checkProgressBarInsurance();

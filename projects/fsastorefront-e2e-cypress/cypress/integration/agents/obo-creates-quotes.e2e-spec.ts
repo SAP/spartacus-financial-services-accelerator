@@ -46,7 +46,7 @@ testFilters([''], () => {
       homepage.checkPageElements();
     });
 
-    it('Should create current account application as seller', () => {
+    it('Should enable seller to create current account application for customer', () => {
       banking.startBankingCheckout('Current Account');
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
       banking.checkBankingProgressBar();
@@ -78,7 +78,7 @@ testFilters([''], () => {
       homepage.checkPageElements();
     });
 
-    it('Should complete event checkout as customer', () => {
+    it('Should check that customer can complete event checkout', () => {
       cy.get('cx-login').click();
       register.loginInUser(stephenCustomer.email, stephenCustomer.password);
       cy.get('.cx-login-greet').should('be.visible');
@@ -98,7 +98,7 @@ testFilters([''], () => {
       checkout.checkOrderConfirmation();
     });
 
-    it('Should complete current account checkout as customer', () => {
+    it('Should check that customer can complete current account checkout', () => {
       quotes.checkMyQuotesPage();
       quotes.checkCurrentAccountAndRetrieve();
       checkout.checkCheckoutStep('Your Current Account Application', '7');

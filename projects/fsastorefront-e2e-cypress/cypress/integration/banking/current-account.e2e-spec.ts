@@ -5,6 +5,8 @@ import * as register from '../../helpers/register';
 import { registrationUser } from '../../sample-data/users';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
 import testFilters from '../../support/filters';
+import { checkMyQuotesPage } from '../../helpers/my-account/quotes-and-applications';
+import { retrieveQuote } from '../../helpers/my-account/my-account';
 
 testFilters(['smoke'], () => {
   context('Current Account Checkout', () => {
@@ -52,6 +54,7 @@ testFilters(['smoke'], () => {
       currentAccount.checkMiniCartCurrentAccount();
       // Needed for user registration/login to complete in the background
       cy.wait(5000);
+      checkout.checkBackAndContinueButtons();
       checkout.clickContinueButton();
     });
 

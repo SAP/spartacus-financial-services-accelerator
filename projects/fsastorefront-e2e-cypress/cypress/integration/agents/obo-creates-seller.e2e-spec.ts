@@ -59,6 +59,5 @@ testFilters([''], () => {
       cy.get('cx-login').click();
       register.loginInUser(newSeller.email, newSeller.password);
     });
-    //TODO: add create a quote and check seller doesnt have quote
   });
 });
