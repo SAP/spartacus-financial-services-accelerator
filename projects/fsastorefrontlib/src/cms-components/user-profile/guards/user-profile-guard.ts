@@ -28,10 +28,7 @@ export class UserProfileGuard implements CanActivate {
         const oboCustomerId = route.params['customerId'];
 
         if (oboCustomerId === '') {
-          this.routingService.go({
-            cxRoute: 'userProfile',
-            params: { customerId: customer.uid },
-          });
+          this.routeToUserProfile(customer.uid);
         } else {
           if (
             customer.uid !== oboCustomerId &&
@@ -41,15 +38,19 @@ export class UserProfileGuard implements CanActivate {
               { key: 'organization.notification.noSufficientPermissions' },
               GlobalMessageType.MSG_TYPE_WARNING
             );
-            this.routingService.go({
-              cxRoute: 'userProfile',
-              params: { customerId: customer.uid },
-            });
+            this.routeToUserProfile(customer.uid);
           }
         }
 
         return true;
       })
     );
+  }
+
+  routeToUserProfile(uid: string) {
+    this.routingService.go({
+      cxRoute: 'userProfile',
+      params: { customerId: uid },
+    });
   }
 }
