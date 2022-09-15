@@ -1,0 +1,10 @@
+%cx-fs-sales-illustration {
+  ul[role='tablist'] .nav-link.active {
+    color: var(--cx-color-inverse);
+    background-color: var(--cx-color-primary);
+  }
+
+  .chart {
+    min-height: 28.5rem;
+  }
+}

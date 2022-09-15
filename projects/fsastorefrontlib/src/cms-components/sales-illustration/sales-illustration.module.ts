@@ -7,7 +7,6 @@ import {
   CmsConfig,
   ConfigModule,
   I18nModule,
-  ProductService,
   UrlModule,
 } from '@spartacus/core';
 import {
@@ -19,8 +18,7 @@ import {
 } from '@spartacus/storefront';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AccordionModule } from '../../shared';
-import { SalesIllustrationMainComponent } from './components/sales-illustration-main/sales-illustration-main.component';
-import { ChartService } from './services/chart.service';
+import { SalesIllustrationComponent } from './components/sales-illustration/sales-illustration.component';
 
 const routes: Routes = [
   {
@@ -35,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SalesIllustrationMainComponent],
+  declarations: [SalesIllustrationComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -53,15 +51,11 @@ const routes: Routes = [
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         SalesIllustrationFlex: {
-          component: () =>
-            import(
-              './components/sales-illustration-main/sales-illustration-main.component'
-            ).then(m => m.SalesIllustrationMainComponent),
+          component: SalesIllustrationComponent,
         },
       },
     }),
   ],
-  exports: [SalesIllustrationMainComponent],
-  providers: [ProductService, ChartService],
+  exports: [SalesIllustrationComponent],
 })
 export class SalesIllustrationModule {}

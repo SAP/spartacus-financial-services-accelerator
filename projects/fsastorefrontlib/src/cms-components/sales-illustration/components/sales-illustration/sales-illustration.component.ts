@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -9,7 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbNav } from '@ng-bootstrap/ng-bootstrap';
-import { PaginationModel, RoutingService } from '@spartacus/core';
+import { PaginationModel, RoutingService, WindowRef } from '@spartacus/core';
 import {
   FormDataService,
   FormDataStorageService,
@@ -19,112 +18,130 @@ import { ECharts, EChartsOption } from 'echarts';
 import {
   BehaviorSubject,
   combineLatest,
-  fromEvent,
   Observable,
   of,
-  ReplaySubject,
+  Subscription,
 } from 'rxjs';
 import {
-  debounceTime,
   filter,
-  first,
   map,
   shareReplay,
   switchMap,
-  takeUntil,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { FSCartService, FSProductService } from '../../../../core';
 import { PricingService } from '../../../../core/product-pricing/facade/pricing.service';
+import { SalesIllustrationChartService } from '../../../../core/sales-illustration/facade/sales-illustration-chart.service';
+import { FSProduct } from '../../../../occ';
 import { PricingData } from '../../../../occ/occ-models/form-pricing.interface';
 import { PaginationHelper } from '../../../../shared/util/helpers/pagination/PaginationHelper';
-import { logger } from '../../../../shared/util/helpers/rxjs/logger';
-import { ChartService } from '../../services/chart.service';
 
 @Component({
-  selector: 'cx-fs-sales-illustration-main',
-  templateUrl: './sales-illustration-main.component.html',
+  selector: 'cx-fs-sales-illustration',
+  templateUrl: './sales-illustration.component.html',
+  providers: [SalesIllustrationChartService],
 })
-export class SalesIllustrationMainComponent
+export class SalesIllustrationComponent
   implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChildren('nav') nav: QueryList<NgbNav>;
+  @ViewChildren('nav') tabNavigation: QueryList<NgbNav>;
 
-  private destroyed$: ReplaySubject<boolean> = new ReplaySubject();
+  private subscription: Subscription = new Subscription();
 
   pricingData$: Observable<PricingData>;
 
-  productCode$: Observable<string>;
-  product$: Observable<any>;
+  productCode$: Observable<string> = this.activatedRoute.params.pipe(
+    map(param => param.savingsProductCode),
+    shareReplay()
+  );
+
+  product$: Observable<FSProduct>;
   tableData$: Observable<any>;
 
   eChartsInstance: ECharts;
   chartOptions$: Observable<EChartsOption>;
 
-  pagination$: BehaviorSubject<PaginationModel> = new BehaviorSubject({
+  paginationRaw: PaginationModel = {
     currentPage: 0,
     pageSize: 5,
     totalPages: 0,
     totalResults: 0,
-  });
+  };
+
+  private paginationBehaviourSubject: BehaviorSubject<
+    PaginationModel
+  > = new BehaviorSubject(this.paginationRaw);
+
+  pagination$: Observable<
+    PaginationModel
+  > = this.paginationBehaviourSubject.asObservable();
 
   constructor(
+    protected winRef: WindowRef,
     private activatedRoute: ActivatedRoute,
     private productService: FSProductService,
     private formDataStorageService: FormDataStorageService,
     private formDataService: FormDataService,
     private pricingService: PricingService,
-    private chartService: ChartService,
+    private chartService: SalesIllustrationChartService,
     private cartService: FSCartService,
-    private routingService: RoutingService,
     private breakpointService: BreakpointService,
-    public location: Location
+    public routingService: RoutingService
   ) {}
 
   ngAfterViewInit(): void {
-    combineLatest([this.breakpointService.breakpoint$, this.nav.changes])
-      .pipe(
-        tap(([breakpoint, change]) => {
-          breakpoint === BREAKPOINT.xs ? change.first.select(2) : null;
-        }),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe();
+    this.subscription.add(
+      combineLatest([
+        this.breakpointService.breakpoint$,
+        this.tabNavigation.changes,
+      ])
+        .pipe(
+          tap(([breakpoint, change]) => {
+            if (breakpoint === BREAKPOINT.xs) {
+              change.first.select(2);
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnInit(): void {
-    fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(300),
-        tap(e => this.resizeChart()),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe();
+    this.subscription.add(
+      this.winRef.resize$.pipe(tap(e => this.resizeChart())).subscribe()
+    );
 
-    this.productCode$ = this.activatedRoute.params.pipe(
-      map(param => param.savingsProductCode),
-      logger('Product Code'),
+    this.pricingData$ = this.productCode$.pipe(
+      switchMap(productCode =>
+        this.productService.get(productCode).pipe(
+          map((product: any) =>
+            this.formDataStorageService.getFormDataIdByCategory(
+              product?.defaultCategory?.code
+            )
+          ),
+          switchMap(formDataId =>
+            formDataId ? this.getFormData(formDataId) : of({})
+          )
+        )
+      ),
       shareReplay()
     );
 
-    this.pricingData$ = this.getPricingData();
-
     this.product$ = combineLatest([this.productCode$, this.pricingData$]).pipe(
-      filter(
-        ([_, pricingData]) => pricingData.priceAttributeGroups !== undefined
-      ),
+      filter(([_, pricingData]) => !!pricingData?.priceAttributeGroups),
       switchMap(([productCode, pricingData]) =>
         this.productService.getCalculatedProductData(productCode, pricingData)
       ),
       filter(product => !!product),
       map((product: any) => this.formatProduct(product)),
-      logger('Changed Product'),
       shareReplay()
     );
 
     this.chartOptions$ = this.product$.pipe(
       switchMap((product: any) =>
-        this.chartService.getChartOptions(product.salesIllustrationDiagramData)
+        this.chartService.getSalesIllustrationChartOptions(
+          product.salesIllustrationDiagramData
+        )
       )
     );
 
@@ -168,74 +185,57 @@ export class SalesIllustrationMainComponent
   }
 
   onPageChange(currentPage: number) {
-    this.pagination$.next({
-      ...this.pagination$.value,
+    this.paginationRaw = {
+      ...this.paginationRaw,
       currentPage,
-    });
+    };
+
+    this.paginationBehaviourSubject.next(this.paginationRaw);
   }
 
   createCartAndStartBundleForProduct(
     productCode: string,
     bundleTemplateId: string
   ) {
-    this.pricingData$
-      .pipe(
-        map(pricingData =>
-          this.cartService.createCartForProduct(
-            productCode,
-            bundleTemplateId,
-            1,
-            pricingData
-          )
-        ),
-        first()
-      )
-      .subscribe();
-
-    this.routingService.go({ cxRoute: 'addOptions' });
-  }
-
-  private getPricingData(): Observable<PricingData> {
-    return this.productCode$.pipe(
-      switchMap(productCode =>
-        this.productService.get(productCode).pipe(
-          map((product: any) =>
-            this.formDataStorageService.getFormDataIdByCategory(
-              product?.defaultCategory?.code
+    this.subscription.add(
+      this.pricingData$
+        .pipe(
+          map(pricingData =>
+            this.cartService.createCartForProduct(
+              productCode,
+              bundleTemplateId,
+              1,
+              pricingData
             )
-          ),
-          switchMap(formDataId =>
-            formDataId ? this.getFormData(formDataId) : of({})
           )
         )
-      ),
-      shareReplay(),
-      logger('PricingData')
+        .subscribe()
     );
+
+    this.routingService.go({ cxRoute: 'addOptions' });
   }
 
   private getFormData(formDataId: string): Observable<PricingData> {
     this.formDataService.loadFormData(formDataId);
 
     return this.formDataService.getFormData().pipe(
-      map(formData => {
-        if (formData.content) {
-          return this.pricingService.buildPricingData(
-            JSON.parse(formData.content)
-          );
-        }
-      })
+      filter(formData => !!formData.content),
+      map(formData =>
+        this.pricingService.buildPricingData(JSON.parse(formData.content))
+      )
     );
   }
 
   private formatProduct(product) {
     const totalResults = product.salesIllustrationDiagramData?.length;
 
-    this.pagination$.next({
-      ...this.pagination$.value,
+    this.paginationRaw = {
+      ...this.paginationRaw,
       totalResults,
-      totalPages: Math.ceil(totalResults / this.pagination$.value.pageSize),
-    });
+      totalPages: Math.ceil(totalResults / this.paginationRaw.pageSize),
+    };
+
+    this.paginationBehaviourSubject.next(this.paginationRaw);
 
     return {
       ...product,
@@ -266,7 +266,8 @@ export class SalesIllustrationMainComponent
   }
 
   ngOnDestroy(): void {
-    this.destroyed$.next(true);
-    this.destroyed$.complete();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

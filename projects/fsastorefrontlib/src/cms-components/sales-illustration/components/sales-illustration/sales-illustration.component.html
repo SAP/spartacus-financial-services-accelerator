@@ -1,8 +1,9 @@
 <ng-container *ngIf="product$ | async as product; else loading">
   <div class="d-flex justify-content-between align-items-center">
-    <a class="h4 pointer" (click)="location.back()">
-      <span class="fas fa-arrow-left"></span
-    ></a>
+    <span
+      class="fas fa-arrow-left pointer h1"
+      (click)="routingService.back()"
+    ></span>
     <h2 class="heading-headline py-3 px-4 text-center">
       {{
         'salesIllustration.mainTitle'
@@ -18,53 +19,42 @@
       "
       class="pointer text-right text-uppercase"
     >
-      <u>
-        <span class="d-none d-sm-block">{{
-          'salesIllustration.addToCart' | cxTranslate
-        }}</span>
-        <span class="d-block d-sm-none">{{ 'common.add' | cxTranslate }}</span>
-      </u>
+      <span class="fa-solid fas fa-cart-plus pointer h1"></span>
     </a>
   </div>
-  <div class="accordion">
-    <cx-fs-accordion-item title="Savings Details" opened="true">
-      <table class="table mx-auto">
-        <tbody>
-          <tr
-            *ngFor="
-              let dynamicAttribute of product.dynamicAttributes;
-              let i = index
-            "
-          >
-            <td
-              class="item-label border-top-0"
-              [ngClass]="{ 'border-top-0': i === 0 }"
-            >
-              {{ 'salesIllustration.' + dynamicAttribute.key | cxTranslate }}
-            </td>
-            <td
-              class="value notice border-top-0"
-              [ngClass]="{ 'border-top-0': i === 0 }"
-            >
-              {{ dynamicAttribute.value.formattedValue }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="accordion mt-5">
+    <cx-fs-accordion-item
+      [title]="'salesIllustration.savingsDetails' | cxTranslate"
+      opened="true"
+    >
+      <div
+        class="row mx-0 border-top border-color-3"
+        *ngFor="
+          let dynamicAttribute of product.dynamicAttributes;
+          let i = index
+        "
+        [ngClass]="{ 'border-top-0': i === 0 }"
+      >
+        <div class="col-6 item-label p-3">
+          {{ 'salesIllustration.' + dynamicAttribute.key | cxTranslate }}
+        </div>
+        <div class="col-6 value notice p-3">
+          {{ dynamicAttribute.value.formattedValue }}
+        </div>
+      </div>
     </cx-fs-accordion-item>
   </div>
 
   <ul ngbNav #nav="ngbNav" class="mt-5">
     <li [ngbNavItem]="1" class="d-none d-sm-block">
-      <a ngbNavLink><i class="fas fa-chart-line fa-2x"></i></a>
+      <a ngbNavLink><span class="fas fa-chart-line fa-2x"></span></a>
       <ng-template ngbNavContent>
-        <div class="mt-5 projections">
-          <h5 class="text-center p-3 projections-title text-uppercase">
-            {{ 'salesIllustration.salesProjections' | cxTranslate }}
+        <div class="mt-5 border border-color-3 box-shadow">
+          <h5 class="text-center p-3 text-uppercase bg-4">
+            {{ 'salesIllustration.savingsProgress' | cxTranslate }}
           </h5>
           <div
-            style="height: 400px;"
-            class="pb-5"
+            class="pb-5 chart"
             echarts
             [options]="chartOptions$ | async"
             (chartInit)="onChartInit($event)"
@@ -73,14 +63,18 @@
       </ng-template>
     </li>
     <li [ngbNavItem]="2" class="d-none d-sm-block">
-      <a ngbNavLink><i class="fas fa-list-ul fa-2x"></i></a>
+      <a ngbNavLink><span class="fas fa-list-ul fa-2x"></span></a>
       <ng-template ngbNavContent>
         <div
           class="table-responsive mt-4"
           *ngIf="pagination$ | async as pagination"
         >
           <table
-            class="table table-hover sales-data"
+            attr.aria-label="{{
+              'salesIllustration.mainTitle'
+                | cxTranslate: { cartDisplayName: product.cartDisplayName }
+            }}"
+            class="table table-hover border border-color-3 box-shadow"
             *ngIf="tableData$ | async as tableData"
           >
             <thead class="thead-light">
@@ -89,7 +83,7 @@
                   {{ 'salesIllustration.year' | cxTranslate }}
                 </th>
                 <th scope="col" class="text-right">
-                  {{ 'salesIllustration.contribution' | cxTranslate }}
+                  {{ 'fscommon.contribution' | cxTranslate }}
                 </th>
                 <th scope="col" class="text-right">
                   {{ 'salesIllustration.expectedSavings' | cxTranslate }}
@@ -115,7 +109,7 @@
             </tbody>
           </table>
           <cx-pagination
-            class="justify-content-center justify-content-sm-end"
+            class="justify-content-center justify-content-sm-end mt-5"
             [pagination]="pagination"
             (viewPageEvent)="onPageChange($event)"
           >
