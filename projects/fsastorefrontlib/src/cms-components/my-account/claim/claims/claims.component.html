@@ -104,7 +104,7 @@
                   <img
                     *ngIf="claim.incidentType != undefined; else noIncidentType"
                     class="image-item"
-                    [src]="getBaseUrl() + claim.incidentType?.icon.url"
+                    [src]="baseUrl + claim.incidentType?.icon.url"
                     alt="{{ claim.incidentType?.icon.alt }}"
                   />
                 </span>
@@ -123,8 +123,27 @@
                 }}</a>
               </ng-container>
               <ng-template #details>
-                <a class="link">
+                <a
+                  class="link mr-5"
+                  [routerLink]="
+                    {
+                      cxRoute: 'claimDetails',
+                      params: { claimId: claim.claimNumber }
+                    } | cxUrl
+                  "
+                >
                   {{ 'fscommon.details' | cxTranslate }}
+                </a>
+                <a
+                  class="link"
+                  [routerLink]="
+                    {
+                      cxRoute: 'changeClaim',
+                      params: { claimId: claim.claimNumber }
+                    } | cxUrl
+                  "
+                >
+                  {{ 'fscommon.addDocuments' | cxTranslate }}
                 </a>
               </ng-template>
             </div>

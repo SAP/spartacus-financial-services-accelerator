@@ -1,6 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -112,7 +112,7 @@ describe('PoliciesComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should get base url', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
   it('should call create claim', () => {
     spyOn(claimService, 'createClaim').and.stub();

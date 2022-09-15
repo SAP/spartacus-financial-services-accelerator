@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, UrlTree } from '@angular/router';
+import { CanActivate } from '@angular/router';
 import {
   ActiveCartService,
   GlobalMessageService,
@@ -7,7 +7,7 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import {
   FSCart,
   QuoteWorkflowStatusType,
@@ -23,23 +23,22 @@ export class ReferredQuoteGuard implements CanActivate {
     protected globalMessageService: GlobalMessageService
   ) {}
 
-  canActivate(): Observable<boolean | UrlTree> {
+  canActivate(): Observable<boolean> {
     return this.cartService.getActive().pipe(
+      filter(cart => !!cart.code),
+      take(1),
       map(cart => {
-        if ((<FSCart>cart).insuranceQuote) {
-          const quoteWorkflowStatus = (<FSCart>cart).insuranceQuote
-            .quoteWorkflowStatus;
-          if (quoteWorkflowStatus.code === QuoteWorkflowStatusType.REFERRED) {
-            this.globalMessageService.add(
-              { key: 'quote.referredQuoteDescription' },
-              GlobalMessageType.MSG_TYPE_INFO
-            );
-            this.routingService.go({ cxRoute: 'home' });
-            return false;
-          } else {
-            return true;
-          }
+        const quoteWorkflowStatus = (<FSCart>cart)?.insuranceQuote
+          ?.quoteWorkflowStatus;
+        if (quoteWorkflowStatus.code === QuoteWorkflowStatusType.REFERRED) {
+          this.globalMessageService.add(
+            { key: 'quote.referredQuoteDescription' },
+            GlobalMessageType.MSG_TYPE_INFO
+          );
+          this.routingService.go({ cxRoute: 'home' });
+          return false;
         }
+        return true;
       })
     );
   }

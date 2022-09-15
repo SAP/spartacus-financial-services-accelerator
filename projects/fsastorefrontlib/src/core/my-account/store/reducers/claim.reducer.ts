@@ -5,7 +5,7 @@ export const initialState: ClaimState = {
   claims: {},
   refresh: false,
   loaded: false,
-  content: {},
+  content: null,
 };
 
 export function reducer(
@@ -23,8 +23,8 @@ export function reducer(
       };
     }
 
-    case fromAction.LOAD_CURRENT_CLAIM_SUCCESS: {
-      const content = { ...action.payload };
+    case fromAction.LOAD_CLAIM_BY_ID_SUCCESS: {
+      const content = action.payload ? { ...action.payload } : null;
       return {
         ...state,
         content,
@@ -55,6 +55,9 @@ export function reducer(
         refresh: false,
         loaded: true,
       };
+    }
+    case fromAction.RESET_CLAIM_STATE: {
+      state = initialState;
     }
   }
 

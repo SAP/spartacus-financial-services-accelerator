@@ -1,0 +1,27 @@
+%cx-fs-policy-details,
+%cx-fs-claim-details {
+  width: 100%;
+  .content-box {
+    text-align: center;
+    background-color: var(--cx-color-1);
+    border-radius: 5px;
+    padding: 20px 0;
+    margin: 0 4% 70px;
+    @include fs-box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+    @include media-breakpoint-down(sm) {
+      padding: 25px 0 20px;
+    }
+    .content-box-info {
+      margin: 20px 0 10px;
+      font-weight: var(--cx-font-weight-semi);
+      font-size: var(--cx-h6-font-size);
+    }
+  }
+  .documents {
+    .value {
+      @include media-breakpoint-down(xs) {
+        padding: 0 15px;
+      }
+    }
+  }
+}

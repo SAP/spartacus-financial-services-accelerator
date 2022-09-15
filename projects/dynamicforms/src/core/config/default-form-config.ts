@@ -14,6 +14,8 @@ import { UserPrefillResolver } from '../resolvers/user-prefill-resolver';
 import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
 import { UploadComponent } from '../../components/upload/upload.component';
 import { CurrentDatePrefillResolver } from '../resolvers/current-date-prefill-resolver';
+import { UserAddressPrefillResolver } from '../resolvers/user-address-prefill-resolver';
+import { CurrencyComponent } from '../../components/currency/currency.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -54,6 +56,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       upload: {
         component: UploadComponent,
       },
+      currency: {
+        component: CurrencyComponent,
+      },
     },
     validators: {
       compareToCurrentDate: {
@@ -89,6 +94,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       checkValue: {
         validator: DefaultFormValidators.checkValue,
       },
+      checkEmptyValue: {
+        validator: DefaultFormValidators.checkEmptyValue,
+      },
       containsValue: {
         validator: DefaultFormValidators.shouldContainValue,
       },
@@ -103,6 +111,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
     },
     prefill: {
+      address: {
+        prefillResolver: UserAddressPrefillResolver,
+      },
       user: {
         prefillResolver: UserPrefillResolver,
       },

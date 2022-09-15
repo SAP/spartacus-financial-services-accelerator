@@ -14,19 +14,21 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { saveAs } from 'file-saver';
-import { filter, map, switchMap, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
-import { FormDataService } from '../../core/services';
+import { FormDataService } from '../../core/services/data/form-data.service';
+import { FieldConfig } from '../../core';
+import { DocumentFile } from '../../core/models/form-occ.models';
 
 @Component({
   selector: 'cx-upload',
   templateUrl: './upload.component.html',
 })
 export class UploadComponent extends AbstractFormComponent implements OnInit {
-  fileList: File[] = [];
+  fileList: DocumentFile[] = [];
   uploadControl: AbstractControl;
   individualProgress = {};
   files = [];
@@ -50,17 +52,20 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
+    this.removeFromStorage(); // Removes files from BE, ensures same state in BackOffice
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
+    const filteredFiles = this.filterFiles(this.config, event.target.files);
     if (
       this.config.accept.toString() === event.target.accept &&
-      this.config.multiple === event.target.multiple &&
-      this.checkFileSize(event)
+      this.config.multiple === event.target.multiple
     ) {
-      this.fileList = Array.from(event.target.files);
+      this.fileList = Array.from(filteredFiles);
       this.fileList.splice(this.config.maxUploads);
-      this.setValueAndValidate(this.fileList);
+      if (this.fileList.length === 0) {
+        this.setValueAndValidate(null);
+      }
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
       // or files are violating config rules
@@ -76,31 +81,40 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   protected populateUploadedFiles() {
     this.subscription.add(
-      this.formDataService
-        .getFormData()
+      this.fileUploadService
+        .getUploadedDocuments()
         .pipe(
-          filter(formData => !!formData.content),
-          take(1),
-          map(formData => JSON.parse(formData.content).relevantFiles),
-          switchMap(codes => {
-            return this.fileUploadService.getFiles(codes).pipe(
-              filter(files => !!files.documents),
-              map(files => {
-                this.fileList = files.documents;
-                if (this.files.length === 0) {
-                  files.documents.forEach(file => {
-                    this.files.push(file.code);
-                  });
-                  this.uploadControl?.setValue(this.files);
+          map(filesObj => {
+            if (Object.keys(filesObj?.files).length > 0) {
+              this.fileList = Array.from(Object.values(filesObj?.files));
+              this.fileList.forEach((file: DocumentFile) => {
+                if (!this.files.includes(file.code)) {
+                  this.files.push(file.code);
                 }
-                this.uploadDisable = true;
-                this.cd.detectChanges();
-              })
-            );
+              });
+              this.uploadControl?.setValue(this.files);
+              this.uploadDisable = true;
+              this.cd.detectChanges();
+            } else {
+              this.uploadControl?.setValue(null);
+            }
           })
         )
         .subscribe()
     );
+  }
+
+  protected filterFiles(config: FieldConfig, files: FileList) {
+    const filtedFiles = [];
+    Array.from(files).forEach(file => {
+      if (
+        config.accept.includes(file.type) &&
+        file.size <= this.config.maxFileSize
+      ) {
+        filtedFiles.push(file);
+      }
+    });
+    return filtedFiles;
   }
 
   convertFileSize(bytes: number) {
@@ -112,7 +126,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   }
 
-  uploadFiles(files: File[]) {
+  uploadFiles(files: DocumentFile[]) {
     this.uploadDisable = true;
     this.removeAllDisable = true;
     this.setValueAndValidate(this.fileList);
@@ -148,43 +162,22 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  removeFile(index, uploadField) {
-    // Execute Http.Delete request to backend
-    this.subscription.add(
-      this.userIdService
-        .getUserId()
-        .pipe(
-          take(1),
-          map(occUserId => {
-            const fileCode = (<any>this.fileList[index])?.code;
-            if (fileCode) {
-              this.fileUploadService.removeFileForCode(occUserId, fileCode);
-            }
-          })
-        )
-        .subscribe()
-    );
+  removeFile(index: number, uploadField: FieldConfig) {
+    this.removeFromStorage(index);
     this.fileList.splice(index, 1);
-    this.files.splice(index, 1);
-    this.setValueAndValidate(this.files);
+    if (this.files.length !== 0) {
+      this.files.splice(index, 1);
+      this.setValueAndValidate(this.files);
+    }
+
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
       uploadField.value = null;
     }
   }
 
-  removeAll(uploadField) {
-    this.subscription.add(
-      this.userIdService
-        .getUserId()
-        .pipe(
-          take(1),
-          map(occUserId => {
-            this.fileUploadService.removeAllFiles(occUserId, this.fileList);
-          })
-        )
-        .subscribe()
-    );
+  removeAll(uploadField: FieldConfig) {
+    this.removeFromStorage();
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
@@ -203,21 +196,35 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
   }
 
+  protected removeFromStorage(index?: number) {
+    // Execute Http.Delete request to backend
+    this.subscription.add(
+      this.userIdService
+        .getUserId()
+        .pipe(
+          take(1),
+          map(occUserId => {
+            const fileCode = (<any>this.fileList[index])?.code;
+            if (fileCode) {
+              this.fileUploadService.removeFileForCode(occUserId, fileCode);
+              this.setValueAndValidate(null);
+            } else {
+              this.fileUploadService.removeAllFiles(occUserId, this.fileList);
+              this.fileUploadService.resetFiles();
+            }
+          })
+        )
+        .subscribe()
+    );
+  }
+
   protected overallProgressFinished(progress) {
     return (
       Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
     );
   }
 
-  protected checkFileSize(event): boolean {
-    const files: File[] = Array.from(event.target.files);
-    const maxExceeded = files.filter(
-      file => file.size > this.config.maxFileSize
-    );
-    return maxExceeded.length <= 0;
-  }
-
-  protected setValueAndValidate(value: File[]) {
+  protected setValueAndValidate(value: DocumentFile[]) {
     this.uploadControl.setValue(value);
     this.uploadControl.markAsTouched({ onlySelf: true });
   }
@@ -225,7 +232,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.files.push(fileCode);
+    if (!this.files.includes(fileCode)) {
+      this.files.push(fileCode);
+    }
     this.uploadControl.setValue(this.files);
   }
 

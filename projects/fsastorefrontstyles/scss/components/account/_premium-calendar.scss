@@ -1,5 +1,3 @@
-@import '../../theme/fs/variables';
-
 %cx-fs-premium-calendar {
   .container-fluid {
     @include media-breakpoint-down(md) {
@@ -18,9 +16,9 @@
         margin: 0;
       }
     }
-    .accordion + .col {
+    .payment-container {
       padding: 1.25rem 0.94rem;
-      height: 6.125rem;
+      height: 6.5rem;
       font-size: var(--cx-h6-font-size);
       color: var(--cx-color-6);
     }
@@ -30,7 +28,7 @@
     @include media-breakpoint-down(md) {
       padding: 0;
       grid-template-columns: repeat(2, 50%);
-      grid-template-rows: 50% 6.125rem 6.125rem;
+      grid-template-rows: 50% 6.5rem 6.5rem;
       background-color: var(--cx-color-1);
       border-radius: 0.625rem 0.625rem 0 0;
     }
@@ -65,6 +63,13 @@
         }
       }
     }
+    .icon-triangle-bottom {
+      right: 5%;
+      @include vertical-center-rotate;
+      @include media-breakpoint-down(md) {
+        color: var(--cx-color-6);
+      }
+    }
   }
   .notice {
     @include media-breakpoint-down(md) {
@@ -75,18 +80,6 @@
     h5 {
       @include media-breakpoint-down(md) {
         color: var(--cx-color-6);
-      }
-    }
-    .icon-triangle-bottom {
-      @include media-breakpoint-down(md) {
-        right: 5%;
-        color: var(--cx-color-6);
-        @include transition;
-        @include vertical-center;
-      }
-      &.rotate {
-        transform: translateY(-50%) rotateZ(180deg);
-        -webkit-transform: translateY(-50%) rotateZ(180deg);
       }
     }
   }

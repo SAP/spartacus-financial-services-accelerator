@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig } from '@spartacus/core';
-import { DynamicFormModule } from '@fsa/dynamicforms';
+import { DynamicFormModule } from '@spartacus/dynamicforms';
 import { SpinnerModule } from '@spartacus/storefront';
 import { GeneralInformationComponent } from './general-information.component';
 

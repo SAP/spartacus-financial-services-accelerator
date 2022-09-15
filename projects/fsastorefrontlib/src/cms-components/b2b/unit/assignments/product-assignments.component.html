@@ -1,0 +1,13 @@
+<ng-container *ngIf="unit$ | async as unit">
+  <cx-org-sub-list>
+    <a
+      *ngIf="isUnitDefaultOrganizationOfUser(unit.uid) | async"
+      actions
+      class="link"
+      routerLink="assign"
+      [class.disabled]="!unit?.active"
+    >
+      {{ 'productAssignments.assign' | cxTranslate }}
+    </a>
+  </cx-org-sub-list>
+</ng-container>

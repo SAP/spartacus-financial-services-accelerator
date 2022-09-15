@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, of, Subscription, combineLatest } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import {
   UserRequestNavigationService,
@@ -11,7 +11,7 @@ import {
 } from '../../../core/user-request/facade';
 import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-fnol-navigation',
@@ -59,33 +59,6 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
   }
 
   next(currentStep: number, claimData: any): void {
-    this.subscription.add(
-      this.userRequestService
-        .getUserRequest()
-        .pipe(
-          filter(payload => payload !== undefined),
-          map(request => {
-            if (
-              request.configurationSteps &&
-              request.configurationSteps[currentStep].status ===
-                StepStatus.COMPLETED
-            ) {
-              this.userRequestNavigationService.continue(
-                this.configurationSteps,
-                currentStep
-              );
-            }
-            if (
-              request.requestStatus === ClaimStatus.SUBMITTED &&
-              request.fsStepGroupDefinition
-            ) {
-              this.router.go(request.fsStepGroupDefinition.confirmationUrl);
-            }
-          })
-        )
-        .subscribe()
-    );
-
     if (!this.configurationSteps[this.activeStepIndex].summaryStep) {
       const formData: YFormData = {};
       if (this.activeStepData.yformConfigurator) {
@@ -106,21 +79,41 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
       combineLatest([
         this.formDataService.getSubmittedForm(),
         this.fileService.getUploadedDocuments(),
+        this.userRequestService.getUserRequest(),
       ])
         .pipe(
-          map(([submittedFormData, uploadedContent]) => {
+          map(([submittedFormData, uploadedContent, userRequest]) => {
+            // needed to deep clone claimData object
+            const claimCopy = JSON.parse(JSON.stringify(claimData));
             if (submittedFormData && submittedFormData.content) {
-              claimData.configurationSteps[
+              claimCopy.configurationSteps[
                 this.activeStepIndex
               ].stepContent.contentData = submittedFormData;
               if (uploadedContent) {
-                claimData.documents = uploadedContent.files;
+                claimCopy.documents = uploadedContent.files;
               }
               this.claimService.updateClaim(
-                claimData,
+                claimCopy,
                 this.activeStepIndex,
                 StepStatus.COMPLETED
               );
+              if (
+                userRequest.configurationSteps &&
+                userRequest.configurationSteps[currentStep].status ===
+                  StepStatus.COMPLETED
+              ) {
+                this.userRequestNavigationService.continue(
+                  this.configurationSteps,
+                  currentStep
+                );
+              }
+            }
+            if (
+              userRequest.requestStatus === ClaimStatus.SUBMITTED &&
+              userRequest.fsStepGroupDefinition
+            ) {
+              this.fileService.resetFiles();
+              this.router.go(userRequest.fsStepGroupDefinition.confirmationUrl);
             }
             return of(null);
           })

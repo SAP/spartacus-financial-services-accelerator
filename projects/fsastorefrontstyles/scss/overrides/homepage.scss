@@ -2,46 +2,13 @@
 @import '../theme';
 
 .LandingPageTemplate {
-  .enriched-banner {
-    &-text {
-      padding: 2vw;
-      background-color: rgba(255, 255, 255, 0.7);
-      position: absolute;
-      text-align: left;
-      max-width: 410px;
-      top: 50%;
-      left: 30%;
-      transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%);
-      @include media-breakpoint-down(sm) {
-        left: 40%;
-      }
-    }
-    &-title {
-      font-size: var(--cx-h1-font-size);
-      color: var(--cx-color-secondary);
-      font-weight: var(--cx-font-weight-semi);
-      @include media-breakpoint-down(md) {
-        font-size: 4vw;
-      }
-    }
-    &-details {
-      display: block;
-      margin-top: 1vw;
-      pointer-events: none;
-      font-size: var(--cx-h5-font-size);
-      @include media-breakpoint-down(sm) {
-        font-size: 3.5vw;
-      }
-    }
-  }
   main cx-page-slot:not(.Section1) {
     @include contentWidth();
     padding: 3rem 1.5rem 0 1.5rem;
   }
 
   // Carousel & Homepage headings
-  cx-fs-category-carousel h3 {
+  cx-fs-category-carousel h2 {
     @include headline-style;
     padding: 1rem 0;
     margin: 1rem auto 3rem;
@@ -62,6 +29,41 @@
       width: 100%;
       padding: 0 15px;
       margin-bottom: 60px;
+    }
+  }
+
+  // Need analysis entry point section
+  .Section3 {
+    .homepage-questionnaire {
+      border-radius: 2.5rem;
+      background-color: var(--cx-color-light);
+      font-size: var(--cx-h5-font-size);
+      cx-generic-link {
+        display: inline-block;
+        padding: 0 4rem;
+      }
+      cx-generic-link a {
+        font-weight: var(--cx-font-weight-semi);
+      }
+      &::before,
+      &::after {
+        @include vertical-center;
+        font-family: 'Font Awesome 5 Free', sans-serif;
+        font-weight: 900;
+        content: '\f061';
+        background-color: var(--cx-color-1);
+        color: var(--cx-color-primary);
+        border-radius: 50%;
+        padding: 10px;
+        width: 3rem;
+      }
+      &::before {
+        left: 0.5rem;
+      }
+      &::after {
+        right: 0.5rem;
+        transform: translateY(-50%) rotateZ(180deg);
+      }
     }
   }
 

@@ -52,5 +52,18 @@ export const common = {
       'term-amount': 'Investment Amount',
       'deposit-term': 'Deposit Term',
     },
+    voucherCode: 'Coupon code',
+  },
+  formErrors: {
+    pattern: 'Should contain at least one number, no special characters',
+    maxlength: 'Maximum {{ maxLength }} characters',
+    min: 'Minimum value is {{ minValue }} {{ measure }}',
+    invalidAge: 'Must be over 18 years old',
+    dateShouldBeGreaterOrEqual: 'Date cannot be in the past',
+    dateShouldBeGreater: 'Date must be in the future',
+    cxInvalidPassword:
+      'Password must be six characters minimum, with one uppercase letter, one number, one symbol',
+    cxInvalidPhoneRegex:
+      'Phone number should be between minimum 6 characters and maximum 20',
   },
 };

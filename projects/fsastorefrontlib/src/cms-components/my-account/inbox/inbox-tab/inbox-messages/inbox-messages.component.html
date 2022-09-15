@@ -4,7 +4,9 @@
   (click)="changeSelectedMessages(!envelopState)"
   [ngClass]="envelopState ? 'icon-envelope-open' : 'icon-envelope'"
 ></div>
-<div class="section-header-heading p-4 position-relative container-fluid">
+<div
+  class="section-header-heading p-4 text-left border-top-0 position-relative container-fluid"
+>
   <div class="row d-none d-md-flex">
     <div class="col-1">
       <label class="checkbox-label">
@@ -26,7 +28,7 @@
       <div class="col-3 text-uppercase">
         {{ 'fscommon.subject' | cxTranslate }}
         <span
-          class="filter position-absolute fs-icon icon-triangle-bottom"
+          class="fs-icon icon-triangle-bottom"
           (click)="
             sorts.subject = sorts.subject === 'desc' ? 'asc' : 'desc';
             sortMessages('subject', sorts.subject)
@@ -38,7 +40,7 @@
       <div class="col-6 text-uppercase">
         {{ 'fscommon.preview' | cxTranslate }}
         <span
-          class="filter position-absolute fs-icon icon-triangle-bottom"
+          class="fs-icon icon-triangle-bottom"
           (click)="
             sorts.content = sorts.content === 'desc' ? 'asc' : 'desc';
             sortMessages('body', sorts.content)
@@ -49,7 +51,7 @@
       <div class="col-2 text-uppercase">
         {{ 'fscommon.date' | cxTranslate }}
         <span
-          class="filter position-absolute fs-icon icon-triangle-bottom"
+          class="fs-icon icon-triangle-bottom"
           (click)="
             sorts.sentDate = sorts.sentDate === 'desc' ? 'asc' : 'desc';
             sortMessages('sentdate', sorts.sentDate)
@@ -59,10 +61,9 @@
       </div>
     </ng-container>
   </div>
-
-  <div class="mobile-heading row d-md-none">
-    <div class="col-2">
-      <label class="checkbox-label">
+  <div class="row d-md-none align-items-center">
+    <div class="col-1">
+      <label class="checkbox-label d-inline align-middle">
         <input
           type="checkbox"
           [checked]="mainCheckboxChecked"
@@ -72,22 +73,21 @@
       </label>
     </div>
     <div
-      class="col-8 text-center"
+      class="col-9 text-left ml-4 heading-dropdown d-flex justify-content-between align-items-center"
       (click)="displayMobileGroups = !displayMobileGroups"
     >
-      {{ mobileGroupTitle }}
-    </div>
-    <div class="col-2">
+      <span>{{ mobileGroupTitle }}</span>
       <span
-        class="filter position-absolute fs-icon icon-triangle-bottom"
+        class="fas fa-chevron-down"
+        [ngClass]="displayMobileGroups ? 'rotate' : ''"
       ></span>
     </div>
   </div>
   <div
-    class="select d-md-none"
+    class="select position-absolute w-100"
     [ngClass]="{ opened: displayMobileGroups, '': displayMobileGroups }"
   >
-    <ul>
+    <ul role="tablist" class="nav-tabs">
       <li
         class="tab"
         *ngFor="let tab of mobileTabs; let i = index"
@@ -102,7 +102,9 @@
 
 <!--  TABLE HEADER  END -->
 
-<ng-container *ngIf="messagesObject$ | async as messagesObj">
+<ng-container
+  *ngIf="messagesObject$ | async as messagesObj; else ghostMessages"
+>
   <div class="messages">
     <div
       class="message accordion border-bottom border-color-3"
@@ -187,7 +189,19 @@
     </cx-pagination>
   </div>
 </ng-container>
-
+<ng-template #ghostMessages>
+  <div *ngIf="ghostData?.values; else noMessages" class="ghost container-fluid">
+    <div
+      class="row ghost-row border border-top-0 border-color-3"
+      *ngFor="let data of ghostData.values"
+    >
+      <div class="col-1"></div>
+      <div class="col-6 col-md-3"></div>
+      <div class="col-md-6 d-none d-md-flex"></div>
+      <div class="col-3 col-md-2 col-sm-4"></div>
+    </div>
+  </div>
+</ng-template>
 <ng-template #noMessages>
   <p class="p-4 border-bottom border-color-3">
     {{ 'fscommon.noMessagesForGroup' | cxTranslate }}

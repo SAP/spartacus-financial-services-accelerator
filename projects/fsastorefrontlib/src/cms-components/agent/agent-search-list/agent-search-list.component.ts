@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { PaginationModel } from '@spartacus/core';
+import { PaginationModel, User } from '@spartacus/core';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
@@ -11,44 +12,49 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
+  user$: Observable<User> = this.userAccountFacade.get();
   searchResults$: Observable<any>;
   searchQuery: string;
   selectedAgent$: Observable<any>;
   selectedIndex = 0;
   pagination: PaginationModel;
+  initialActiveAgent: any;
+  singleAgentSelected = false;
+  navigator: Navigator = globalThis.navigator;
 
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   ngOnInit() {
     this.subscription.add(
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
-
     this.searchResults$ = this.agentSearchService.getResults().pipe(
-      tap(agents => {
-        if (agents) {
-          this.pagination = {
-            currentPage: agents.pagination.page,
-            pageSize: agents.pagination.count,
-            totalPages: agents.pagination.totalPages,
-            totalResults: agents.pagination.totalCount,
-          };
-        }
+      filter(searchResult => !!searchResult),
+      tap(searchResult => {
+        this.initialActiveAgent = searchResult.agents[0];
+        this.pagination = {
+          currentPage: searchResult.pagination.page,
+          pageSize: searchResult.pagination.count,
+          totalPages: searchResult.pagination.totalPages,
+          totalResults: searchResult.pagination.totalCount,
+        };
       })
     );
   }
 
   private initialize(queryParams: Params) {
-    if (queryParams.query) {
-      this.searchQuery = queryParams.query;
-    }
+    queryParams.query
+      ? (this.searchQuery = queryParams.query)
+      : (this.searchQuery = '');
     this.agentSearchService.search(this.searchQuery, 0);
   }
 
   showDetails(agent) {
+    this.initialActiveAgent = null;
     this.selectedAgent$ = this.agentSearchService.getAgentByID(agent.email);
   }
 
@@ -57,10 +63,19 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   setActiveAgentIndex(selectedIndex: number) {
-    this.selectedIndex = selectedIndex;
+    if (selectedIndex === -1) {
+      this.singleAgentSelected = false;
+      this.agentSearchService.search(this.searchQuery, 0);
+      this.agentSearchService.setResetSearchValue(true);
+    } else {
+      this.singleAgentSelected = true;
+    }
+    // after clicking on the Back to list first in the list should be selected
+    this.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
   }
 
   ngOnDestroy() {
+    this.agentSearchService.agents.next(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

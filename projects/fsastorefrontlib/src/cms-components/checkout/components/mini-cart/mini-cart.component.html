@@ -68,7 +68,22 @@
               </div>
             </div>
           </ng-container>
-          <div class="highlighted border-top border-color-3 row">
+          <div
+            class="short-overview-item border-top border-color-3 row"
+            *ngIf="cart.totalDiscounts?.value > 0"
+          >
+            <div class="short-overview-title col-7">
+              {{ 'orderCost.discount' | cxTranslate }}
+            </div>
+            <div class="short-overview-value col-5">
+              {{ cart.totalDiscounts?.formattedValue }}
+            </div>
+          </div>
+          <div
+            class="highlighted row {{
+              cart.totalDiscounts?.value > 0 ? '' : ' border-top border-color-3'
+            }} "
+          >
             <div class="short-overview-title col-6">
               {{ 'fscommon.totalPrice' | cxTranslate }}:
             </div>

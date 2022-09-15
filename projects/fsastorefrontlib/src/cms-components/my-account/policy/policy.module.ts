@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
+import {
+  SpinnerModule,
+  PageLayoutComponent,
+  MediaModule,
+} from '@spartacus/storefront';
 import {
   AuthGuard,
   I18nModule,
@@ -14,13 +17,14 @@ import {
   RoutingConfig,
 } from '@spartacus/core';
 import { CmsPageGuard } from '@spartacus/storefront';
-
 import { PoliciesComponent } from './policies/policies.component';
 import { PolicyService } from '../../../core/my-account/facade/policy.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
+import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
+import { PoliciesChartModule } from './policies-chart/policies-chart.module';
 
 const routes: Routes = [
   {
@@ -48,11 +52,13 @@ const routes: Routes = [
     CommonModule,
     RouterModule,
     I18nModule,
-    FormsModule,
     NgSelectModule,
     SpinnerModule,
     AccordionModule,
     ChangeRequestStoreModule,
+    MediaModule,
+    DocumentsTableModule,
+    PoliciesChartModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -68,6 +74,5 @@ const routes: Routes = [
   declarations: [PoliciesComponent, PolicyDetailsComponent],
   exports: [PoliciesComponent, PolicyDetailsComponent],
   providers: [PolicyService, ChangeRequestService],
-  entryComponents: [PoliciesComponent, PolicyDetailsComponent],
 })
 export class PolicyModule {}

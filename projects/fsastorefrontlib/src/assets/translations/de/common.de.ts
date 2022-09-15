@@ -1,6 +1,8 @@
 export const fscommon = {
   fscommon: {
+    create: 'Schaffen',
     no: 'Nr',
+    none: '',
     mr: 'Herr.',
     mrs: 'Frau',
     add: 'Hinzufügen',
@@ -14,6 +16,7 @@ export const fscommon = {
     date: 'Datum',
     preview: 'Vorschau',
     select: 'Auswählen',
+    selected: '[DE] Selected',
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',
@@ -31,8 +34,10 @@ export const fscommon = {
     retrieve: 'Abrufen',
     notAvailable: 'N/V',
     contractId: 'VertragId',
+    title: 'Titel',
     orderTotal: 'Gesamtbetrag',
     orderConfirmation: 'Bestellbestätigung',
+    orderNumber: 'Bestellnummer',
     startDate: 'Startdatum',
     phoneNumber: 'Telefonnummer',
     address: 'Adresse',
@@ -44,6 +49,8 @@ export const fscommon = {
     country: 'Land',
     expiryDate: 'Verfallsdatum',
     expiryNotConfirmed: 'Nicht bestätigt',
+    cancellationDate: '[DE]Cancellation Date',
+    cancellationReason: '[DE]Cancellation Reason',
     expires: 'Läuft ab',
     myAgent: 'Mein Agent',
     contactAgent: 'Kundenbetreuer kontaktieren',
@@ -52,6 +59,7 @@ export const fscommon = {
     finalReview: 'Abschließende Prüfung',
     paymentDetails: 'Zahlungsdetails',
     paymentFrequency: 'Zahlungsrythmus',
+    oneTimeCharge: 'Einmaliger Gebühreneintrag',
     paymentMethod: 'Zahlungsmethode',
     confirmAndAgree:
       'Hiermit bestätige ich, dass ich die Datenschutzbestimmungen gelesen habe und damit einverstanden bin.',
@@ -70,6 +78,8 @@ export const fscommon = {
     whatsIncluded: 'Was\ist beinhaltet', // prettier-ignore
     addedByYou: 'Hinzugefügt',
     investementDetails: 'Investment Informationen',
+    fundName: 'Name',
+    isin: 'ISIN',
     personalDetails: 'Persönliche Angaben',
     generalDetails: 'Allgemeine Informationen',
     optionalExtras: 'Optionale Extras',
@@ -81,9 +91,11 @@ export const fscommon = {
     quotesAndApplications: 'Angebote & Anträge',
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
+    addDocuments: '[DE]  Add Documents',
     summary: 'Zusammenfassung',
     submit: 'Einreichen',
     totalResults: 'Gesamtergebnisse',
+    finalResult: '[DE] Final result:',
     vehicleMake: 'Fahrzeugmarke',
     vehicleModel: 'Fahrzeugmodell',
     propertyType: 'Objekttyp',
@@ -93,10 +105,13 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: 'Rechnung',
+    ticketCreated: '[DE] Ticket has been created',
+    recommendedProduct: 'Dies ist Ihr empfohlenes Produkt!',
     payment: {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
     },
+    oboCustomers: '[DE] All Customers',
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:
@@ -164,6 +179,27 @@ export const fscommon = {
       contact: 'Kontakt',
       categories: 'Kategorien',
       searchBox: 'Suchen Sie einen Agent oder eine Versicherungsart',
+      backToList: 'Zurück zur Liste',
+      online: 'Online',
+      offline: 'Offline',
+      noSearchResults: 'Keine Ergebnisse',
     },
+    questionnaire: {
+      noResults:
+        'Leider gibt es kein Produkt, dass alle ausgewählten Kriterien erfüllt. Bitte versuchen Sie es erneut mit anderen Angaben oder wenden Sie sich an einen',
+      agentLink: 'Agenten.',
+    },
+    httpHandlers: {
+      existingCouponCodeProvided:
+        'Dieser Gutscheincode wird bereits auf den aktuellen Warenkorb angewendet.',
+    },
+    syncPilot: {
+      speakToAgent: 'Sprechen Sie Mit Einem Agenten',
+      needHelp: 'Benötigen Sie Hilfe?',
+      contactAgent: 'Verbindung zu einem Agenten wird hergestellt',
+      waitingAgent: 'Warten auf einen Agenten...',
+    },
+    priceCalculationError:
+      'Bei der Preisberechnung ist ein Fehler aufgetreten, versuchen Sie es erneut.',
   },
 };

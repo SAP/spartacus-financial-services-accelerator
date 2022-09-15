@@ -5,7 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 import {
   ClaimService,
   PolicyService,
@@ -33,6 +33,7 @@ export class PoliciesComponent implements OnInit, OnDestroy {
 
   policies$;
   policiesLoaded$;
+  baseUrl: string;
 
   private subscription = new Subscription();
 
@@ -40,10 +41,7 @@ export class PoliciesComponent implements OnInit, OnDestroy {
     this.policyService.loadPolicies();
     this.policies$ = this.policyService.getPolicies();
     this.policiesLoaded$ = this.policyService.getLoaded();
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   startClaim(policyId: string, contractNumber: string) {

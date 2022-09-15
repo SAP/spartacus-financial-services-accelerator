@@ -3,11 +3,11 @@ import {
   AbstractFormComponent,
   DynamicFormsConfig,
   FormService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-dynamic-select',
@@ -28,6 +28,8 @@ export class DynamicSelectComponent extends AbstractFormComponent
     super(formConfig, languageService, injector, formService);
   }
 
+  isSelectComponentDependant = false;
+
   ngOnInit() {
     super.ngOnInit();
     if (this.config.apiValue) {
@@ -40,18 +42,27 @@ export class DynamicSelectComponent extends AbstractFormComponent
       this.subscription.add(
         this.occValueListService
           .getValuesFromAPI(this.config.apiValue.url)
-          .pipe(map(result => this.assignResultToOptions(result)))
+          .pipe(
+            filter(result => result.values),
+            map(result => {
+              this.assignResultToOptions(result);
+            })
+          )
           .subscribe()
       );
     } else {
-      const masterFormControl = this.formService.getFormControlForCode(
+      /**
+       * Assign options to dynamic select component which have dependancy on another form control (mainFormControl)
+       */
+      const mainFormControl = this.formService.getFormControlForCode(
         this.config.apiValue.param,
         this.group
       );
       this.subscription.add(
-        masterFormControl.valueChanges
+        mainFormControl.valueChanges
           .pipe(
             switchMap(value => {
+              this.isSelectComponentDependant = true;
               if (value) {
                 return this.occValueListService
                   .getValuesFromAPI(this.config.apiValue.url, value)
@@ -81,8 +92,11 @@ export class DynamicSelectComponent extends AbstractFormComponent
   }
 
   assignOptions(options: any[]) {
+    const dynamicSelectField = this.group.get(this.config.name);
     this.options$ = of(options);
     this.changeDetectorRef.detectChanges();
-    this.group.get(this.config.name).setValue(null);
+    if (!dynamicSelectField?.value || this.isSelectComponentDependant) {
+      dynamicSelectField.setValue(null);
+    }
   }
 }

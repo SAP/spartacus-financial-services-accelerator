@@ -19,15 +19,12 @@ import { DynamicFormComponent } from './dynamic-form.component';
 import { FormComponentService } from '../../../components/form-component.service';
 
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxFormComponent]',
-  inputs: ['config', 'group'],
 })
 export class MockDynamicFieldDirective {
-  @Input()
-  config: FieldConfig;
-  @Input()
-  group: FormGroup;
+  @Input() config: FieldConfig;
+  @Input() group: FormGroup;
 }
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
@@ -58,6 +55,7 @@ const mockField: FieldConfig = {
   fieldType: 'datepicker',
   name: 'testDatePicker',
   label: {
+    default: 'testLabel',
     en: 'What time did it happen?',
   },
 };

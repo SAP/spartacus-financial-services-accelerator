@@ -17,7 +17,7 @@ const cachedValue = 'mockedCachedValue';
 const externalAPI = 'https://example.com/countries';
 
 class MockOccEndpointsService {
-  getBaseEndpoint() {
+  getBaseUrl() {
     return baseEndpoint;
   }
 }

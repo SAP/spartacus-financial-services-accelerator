@@ -1,5 +1,11 @@
 import * as shared from '../shared-checkout';
 import * as sharedCheckout from '../shared-checkout.interface';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
 
 export function checkProgressBarEvent() {
   cy.get('p.label').should('have.length', 6).eq(0).contains("What's Included");
@@ -11,7 +17,7 @@ export function checkProgressBarEvent() {
 }
 
 export function checkEventComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Two Star Event Plan',
@@ -38,13 +44,16 @@ export function selectTwoStarEvent() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Two Star Event Plan');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Two Star Event Plan'
+      );
       cy.get('.primary-button').click();
     });
 }
 
 export function checkOptionalProducts() {
-  const addOptionsContent: addOptionsPage.AddOptions = {
+  const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Event Insurance',
     items: [
       {
@@ -54,7 +63,7 @@ export function checkOptionalProducts() {
       },
       {
         name: 'Increase supplier failure and public liability',
-        available: false,
+        notAvailable: true,
       },
       {
         name: 'Venue Cover',
@@ -68,14 +77,11 @@ export function checkOptionalProducts() {
 
 export function populatePersonalDetails() {
   cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name="eventCountry"]').select('UK');
-    cy.get('[name="eventDate"]').type('2020-12-12');
+    cy.get('[name="eventCountry"]').select('FR');
+    cy.get('[name="eventDate"]').type(tomorrowsDate);
     cy.get('[name="eventVenue"]').type('my Birthday party');
-    cy.get('[name="eventVenueAddress"]').type('Oxford Street 23b');
-    cy.get('[name="eventVenueCity"]').type('London');
-    cy.get('[name="address1"]').type('Omladinskih Brigada');
-    cy.get('[name="postcode"]').type('111111');
-    cy.get('[name=city]').type('Belgrade');
+    cy.get('[name="eventVenueAddress"]').type('Champ de Mars');
+    cy.get('[name="eventVenueCity"]').type('Paris');
   });
 }
 
@@ -88,19 +94,19 @@ export function checkEventPolicy() {
 
 export function checkMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €57.99 ',
+    price: '€57.99',
     products: [
       {
-        title: ' Two Star Event Plan: ',
-        value: ' €18.99 ',
+        title: 'Two Star Event Plan:',
+        value: '€18.99',
       },
       {
-        title: ' Excess Waiver: ',
-        value: ' €10.00 ',
+        title: 'Excess Waiver:',
+        value: '€10.00',
       },
       {
-        title: ' Venue Cover: ',
-        value: ' €29.00 ',
+        title: 'Venue Cover:',
+        value: '€29.00',
       },
     ],
   };
@@ -109,15 +115,38 @@ export function checkMiniCart() {
 
 export function checkMiniCartRemovedProduct() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €47.99 ',
+    price: '€47.99',
     products: [
       {
-        title: ' Two Star Event Plan: ',
-        value: ' €18.99 ',
+        title: 'Two Star Event Plan:',
+        value: '€18.99',
       },
       {
-        title: ' Venue Cover: ',
-        value: ' €29.00 ',
+        title: 'Venue Cover:',
+        value: '€29.00',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
+export function checkEventMiniCart() {
+  cy.get('cx-fs-mini-cart')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h2').should('contain.text', 'Event Insurance');
+      cy.get('.short-overview-item').should('contain.text', 'Two Star');
+      cy.get('.short-overview-value').should('contain.text', '€18.99');
+    });
+}
+
+export function checkMiniCartWithoutOptional() {
+  const miniCartContent: sharedCheckout.MiniCart = {
+    price: '€18.99',
+    products: [
+      {
+        title: 'Two Star Event Plan:',
+        value: '€18.99',
       },
     ],
   };

@@ -1,0 +1,326 @@
+<ng-container *ngIf="quoteLoaded$ | async; else loading">
+  <ng-container *ngIf="quote$ | async as quote">
+    <div class="position-relative text-center">
+      <a
+        class="h4 vertical-center left z-index-1"
+        routerLink="/my-account/my-financial-applications/"
+        routerLinkActive="active"
+      >
+        <span class="fas fa-arrow-left"></span
+      ></a>
+      <h2 class="heading-headline p-3 mt-3 mb-5 text-center">
+        <span *ngIf="quote">
+          {{ quote.defaultCategory?.name }} {{ quote.planName }}
+        </span>
+        <br />
+        <span>
+          {{ quote.quoteId }}
+        </span>
+      </h2>
+    </div>
+    <div class="accordion">
+      <cx-fs-accordion-item
+        [opened]="true"
+        [title]="'fscommon.summary' | cxTranslate"
+      >
+        <ul class="accordion-list container-fluid">
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.product' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ quote.defaultCategory?.name }}
+            </div>
+          </li>
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.status' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ quote.quoteWorkflowStatus?.code }}
+            </div>
+          </li>
+          <li *ngIf="quote.expiryDate" class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.expiryDate' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ quote.expiryDate | cxDate: 'dd MMM yyyy' }}
+            </div>
+          </li>
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.price' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ quote.quotePrice }}
+            </div>
+          </li>
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.paymentFrequency' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ quote.paymentFrequency }}
+            </div>
+          </li>
+        </ul>
+      </cx-fs-accordion-item>
+      <ng-container *ngIf="quote.insuredObjectList?.insuredObjects?.length > 0">
+        <cx-fs-accordion-item
+          [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate"
+        >
+          <ng-container
+            *ngFor="
+              let insuredObject of quote.insuredObjectList?.insuredObjects
+            "
+          >
+            <ng-container
+              *ngIf="
+                insuredObject?.insuredObjectItems &&
+                insuredObject?.insuredObjectItems.length > 0
+              "
+            >
+              <ul class="accordion-list container-fluid">
+                <li
+                  *ngIf="
+                    getTranslation(
+                      quote.defaultCategory?.code,
+                      insuredObject.insuredObjectType | lowercase
+                    ) as insuredObjectType
+                  "
+                  class="accordion-list-item row sub-title"
+                >
+                  <div class="col-12">
+                    {{ insuredObjectType }}
+                  </div>
+                </li>
+                <ng-container
+                  *ngFor="
+                    let insuredObjectItem of insuredObject?.insuredObjectItems
+                  "
+                >
+                  <li
+                    *ngIf="
+                      getTranslation(
+                        quote.defaultCategory?.code,
+                        insuredObjectItem.label
+                      ) as insuredObjectItemLabel
+                    "
+                    class="accordion-list-item row"
+                  >
+                    <div class="col-6 col-sm-5 item-label">
+                      {{ insuredObjectItemLabel }}
+                    </div>
+                    <div class="col-6 col-sm-5 value notice">
+                      {{ insuredObjectItem.value }}
+                    </div>
+                  </li>
+                </ng-container>
+              </ul>
+              <ng-container
+                *ngIf="
+                  insuredObject.childInsuredObjectList?.insuredObjects?.length >
+                  0
+                "
+              >
+                <ng-container
+                  *ngFor="
+                    let childInsuredObject of insuredObject
+                      .childInsuredObjectList.insuredObjects;
+                    let i = index
+                  "
+                >
+                  <ul class="accordion-list container-fluid">
+                    <li class="accordion-list-item row sub-title">
+                      <div class="col-12">
+                        {{ childInsuredObject.insuredObjectType }} {{ i + 1 }}
+                      </div>
+                    </li>
+                    <ng-container
+                      *ngIf="childInsuredObject.insuredObjectItems?.length > 0"
+                    >
+                      <ng-container
+                        *ngFor="
+                          let childInsuredObjectItem of childInsuredObject.insuredObjectItems
+                        "
+                      >
+                        <li
+                          *ngIf="
+                            (childInsuredObjectItem.label !== 'customerId' ||
+                              childInsuredObjectItem.value !== 'false') &&
+                            getTranslation(
+                              quote.defaultCategory?.code,
+                              childInsuredObjectItem.label
+                            ) as childInsuredObjectItemLabel
+                          "
+                          class="accordion-list-item row"
+                        >
+                          <div class="col-6 col-sm-5 item-label">
+                            {{ childInsuredObjectItemLabel }}
+                          </div>
+                          <div class="col-6 col-sm-5 value notice">
+                            {{ childInsuredObjectItem.value }}
+                          </div>
+                        </li>
+                      </ng-container>
+                    </ng-container>
+                  </ul>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </cx-fs-accordion-item>
+      </ng-container>
+      <ng-container *ngIf="cart$ | async as cart">
+        <cx-fs-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
+          <ul
+            class="accordion-list container-fluid"
+            *ngIf="cart.entries.length > 0"
+          >
+            <ng-container
+              *ngFor="
+                let entry of cart.entries[0]?.product.price.oneTimeChargeEntries
+              "
+            >
+              <li
+                *ngIf="entry.billingTime.code !== 'paynow'"
+                class="accordion-list-item row"
+              >
+                <div class="col-6 col-sm-5 item-label">
+                  {{ entry.billingTime.name }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{
+                    entry.price.value > 0
+                      ? entry.price.formattedValue
+                      : ('fscommon.included' | cxTranslate)
+                  }}
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+        </cx-fs-accordion-item>
+        <ng-container
+          *ngIf="
+            cart.entries[0]?.product?.defaultCategory?.code ==
+            'insurances_savings'
+          "
+        >
+          <cx-fs-accordion-item
+            [title]="'fscommon.investementDetails' | cxTranslate"
+          >
+            <ul class="accordion-list container-fluid">
+              <ng-container
+                *ngFor="let entry of cart.entries[0]?.product?.investments"
+              >
+                <li class="accordion-list-item row">
+                  <div class="col-6 col-sm-5 item-label">
+                    {{ 'fscommon.fundName' | cxTranslate }}
+                  </div>
+                  <div class="col-6 col-sm-5 value notice">
+                    {{ entry.investmentType?.factSheetDocument?.altText }}
+                  </div>
+                </li>
+                <li class="accordion-list-item row">
+                  <div class="col-6 col-sm-5 item-label">
+                    {{ 'fscommon.isin' | cxTranslate }}
+                  </div>
+                  <div class="col-6 col-sm-5 value notice">
+                    {{ entry.investmentType?.isin }}
+                  </div>
+                </li>
+                <li class="accordion-list-item row">
+                  <div class="col-6 col-sm-5 item-label">
+                    {{ 'fscommon.yearsPerformanse' | cxTranslate }}
+                  </div>
+                  <div class="col-6 col-sm-5 value notice">
+                    {{ entry.investmentType?.fiveYearPerformance }}
+                  </div>
+                </li>
+                <li class="accordion-list-item row">
+                  <div class="col-6 col-sm-5 item-label">
+                    {{ 'fscommon.riskAndReturningRate' | cxTranslate }}
+                  </div>
+                  <div class="col-6 col-sm-5 value notice">
+                    {{ entry.investmentType?.riskReturningRating }}
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </cx-fs-accordion-item>
+        </ng-container>
+        <cx-fs-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
+          <ul class="accordion-list container-fluid">
+            <ng-container *ngFor="let entry of cart?.entries; let i = index">
+              <li *ngIf="i > 0" class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ entry.product.name }}
+                </div>
+                <div
+                  class="col-6 col-sm-5 value notice"
+                  [innerText]="
+                    entry.quantity
+                      ? ('fscommon.included' | cxTranslate)
+                      : ('fscommon.notIncluded' | cxTranslate)
+                  "
+                ></div>
+              </li>
+            </ng-container>
+          </ul>
+        </cx-fs-accordion-item>
+        <cx-fs-accordion-item
+          [title]="'fscommon.whatDoesItCostMe' | cxTranslate"
+        >
+          <ul class="accordion-list container-fluid">
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'fscommon.price' | cxTranslate }}
+              </div>
+              <div class="col-xs-12 col-sm-6 value notice">
+                {{ cart.totalPrice?.formattedValue }}
+              </div>
+            </li>
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ 'fscommon.paymentFrequency' | cxTranslate }}
+              </div>
+              <div class="col-6 col-sm-5 value notice">
+                {{ cart.insuranceQuote?.paymentFrequency }}
+              </div>
+            </li>
+            <ng-container *ngIf="cart.paymentInfo">
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.paymentMethod' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{
+                    cart.paymentInfo.cardNumber
+                      ? cart.paymentType?.displayName
+                      : ('fscommon.invoice' | cxTranslate)
+                  }}
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+        </cx-fs-accordion-item>
+      </ng-container>
+    </div>
+    <div class="row mt-4 justify-content-center">
+      <div class="col-12 col-sm-5 mt-3">
+        <button class="action-button btn-block" (click)="retrieveQuote(quote)">
+          {{ 'fscommon.retrieve' | cxTranslate }}
+        </button>
+      </div>
+      <div *ngIf="quoteCodeForCompare" class="col-12 col-sm-5 mt-3">
+        <button class="primary-button btn-block" (click)="compareQuote(quote)">
+          {{ 'quote.compare' | cxTranslate }}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

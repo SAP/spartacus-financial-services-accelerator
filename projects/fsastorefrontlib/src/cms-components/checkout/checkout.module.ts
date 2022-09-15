@@ -14,14 +14,10 @@ import {
 } from '@spartacus/core';
 import {
   CardModule,
-  CartNotEmptyGuard,
   CmsPageGuard,
   MediaModule,
   PageComponentModule,
   PageLayoutComponent,
-  PaymentDetailsSetGuard,
-  PaymentFormModule,
-  PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
@@ -61,6 +57,16 @@ import { UserIdentificationModule } from './components/user-identification/user-
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
+import { FSCartCouponModule } from './components/cart-coupon/cart-coupon.module';
+import { FSAddressService } from '../../core/user/facade/address.service';
+import {
+  CartNotEmptyGuard,
+  PaymentFormModule,
+  PaymentMethodModule,
+} from '@spartacus/checkout/components';
+import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
+import { FSMessageModule } from './../message/message.module';
+import { SetActiveCartGuard } from './guards/set-active-cart-guard';
 
 const routes: Routes = [
   {
@@ -77,7 +83,7 @@ const routes: Routes = [
     canActivate: [CmsPageGuard, BindQuoteGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'add-options', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+      pageLabel: 'add-options', // LABEL for ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent, // SPA LAYOUT Component you're targeting
   },
@@ -126,7 +132,6 @@ const routes: Routes = [
       AuthGuard,
       CmsPageGuard,
       CartNotEmptyGuard,
-      PaymentDetailsSetGuard,
       ReferredQuoteGuard,
     ],
     data: {
@@ -197,13 +202,18 @@ const routes: Routes = [
     UrlModule,
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
-    RouterModule.forChild(routes),
+    FSCartCouponModule,
+    FSMessageModule,
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AddOptionsFlex: {
           // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent, // to SPA component
+          guards: [SetActiveCartGuard],
         },
         MiniCartFlex: {
           component: MiniCartComponent,
@@ -213,6 +223,9 @@ const routes: Routes = [
         },
         PaymentDetailsFlex: {
           component: FSPaymentMethodComponent,
+        },
+        CheckoutPaymentDetails: {
+          guards: [FSCheckoutAuthGuard],
         },
         FinalReviewFlex: {
           component: FinalReviewComponent,
@@ -261,19 +274,6 @@ const routes: Routes = [
     OrderConfirmationComponent,
     FSPaymentMethodComponent,
   ],
-  entryComponents: [
-    AddOptionsComponent,
-    QuoteReviewComponent,
-    BindQuoteDialogComponent,
-    ReferredQuoteDialogComponent,
-    FinalReviewComponent,
-    ChooseCoverNavigationComponent,
-    PersonalDetailsNavigationComponent,
-    OrderConfirmationComponent,
-    OrderConfirmationMessageComponent,
-    MiniCartComponent,
-    FSPaymentMethodComponent,
-  ],
   providers: [
     FSCartService,
     FSTranslationService,
@@ -281,6 +281,7 @@ const routes: Routes = [
     CartConnector,
     QuoteConnector,
     CategoryService,
+    FSAddressService,
     reducerProvider,
   ],
 })

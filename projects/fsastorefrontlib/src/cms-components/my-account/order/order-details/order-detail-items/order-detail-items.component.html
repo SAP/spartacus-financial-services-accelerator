@@ -1,11 +1,22 @@
 <ng-container *ngIf="order$ | async as order">
-  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
-    {{ 'orderDetails.orderId' | cxTranslate }} {{ order?.code }}
-  </h2>
+  <div class="position-relative text-center">
+    <a
+      class="vertical-center left z-index-1 h4"
+      routerLink="/my-account/orders/"
+    >
+      <span class="fas fa-arrow-left m-0"></span
+    ></a>
+    <h2 class="heading-headline py-3 px-4 mt-3 mb-5">
+      {{ 'orderDetails.orderId' | cxTranslate }} {{ order?.code }}
+    </h2>
+  </div>
   <ng-container *ngIf="order?.entries?.length > 0">
     <ng-container *ngIf="order?.entries as entries">
       <div class="container-fluid">
-        <div class="row d-none d-md-flex text-uppercase">
+        <!-- DESKTOP TABLE HEAD START-->
+        <div
+          class="row d-none d-md-flex text-uppercase py-4 background-color-4 border-color-3 border-bottom border-top"
+        >
           <div class="title col-6">
             {{ 'cartItems.description' | cxTranslate }}
           </div>
@@ -16,57 +27,90 @@
             {{ 'fscommon.price' | cxTranslate }}
           </div>
         </div>
+        <!-- DESKTOP TABLE HEAD END-->
         <ng-container *ngFor="let entry of entries">
-          <div class="row border-bottom py-3 align-items-center">
+          <div class="row border-bottom border-color-3 py-3 align-items-center">
+            <div class="col-12 col-md-2 text-center text-md-left">
+              <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
+            </div>
+            <!-- DESKTOP VIEW START-->
+            <div class="col-6 col-md-8 text-break d-none d-md-block">
+              <div class="row align-items-center">
+                <div class="col-6 d-none d-md-block">
+                  <div class="title semi-bold">{{ entry.product?.name }}</div>
+                </div>
+                <div class="col-6 d-none d-md-block">
+                  <ng-container
+                    *ngIf="
+                      entry.product?.fulfilmentType?.code ===
+                        'FINANCIAL_3RD_PARTY';
+                      else paymentFrequency
+                    "
+                  >
+                    {{ 'fscommon.oneTimeCharge' | cxTranslate }}
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-md-2 text-right text-break d-none d-md-block">
+              <div>{{ entry?.totalPrice?.formattedValue }}</div>
+            </div>
+            <!-- DESKTOP VIEW END-->
+            <!-- MOBILE VIEW START-->
+            <div class="col-12 d-block d-md-none mt-3">
+              <div class="row">
+                <div class="col-6">
+                  {{ 'cartItems.description' | cxTranslate }}:
+                </div>
+                <div class="col-6 text-right">
+                  {{ entry.product?.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  {{ 'fscommon.paymentFrequency' | cxTranslate }}:
+                </div>
+                <div class="col-6 text-right">
+                  <ng-container
+                    *ngIf="
+                      entry.product?.fulfilmentType?.code ===
+                        'FINANCIAL_3RD_PARTY';
+                      else paymentFrequency
+                    "
+                  >
+                    {{ 'fscommon.oneTimeCharge' | cxTranslate }}
+                  </ng-container>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 semi-bold">
+                  {{ 'fscommon.price' | cxTranslate }}:
+                </div>
+                <div class="col-6 text-right semi-bold">
+                  {{ entry?.totalPrice?.formattedValue }}
+                </div>
+              </div>
+            </div>
+            <!-- MOBILE VIEW END-->
             <div
               *ngIf="
                 entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
               "
-              class="col-12 text-right text-uppercase semi-bold"
+              class="col-12 col-md-3 text-right text-uppercase semi-bold ml-auto my-2"
             >
-              <a href="/">
-                <span
-                  class="h2 d-inline d-md-none fs-icon icon-selected-item"
-                ></span>
-                <span class="d-none d-md-inline">
-                  {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
-                </span>
-              </a>
-            </div>
-            <div class="col-2">
-              <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
-            </div>
-            <div class="col-6 col-md-8 text-break">
-              <div class="row align-items-center">
-                <div class="col-12 col-md-6">
-                  <div class="title semi-bold">{{ entry.product?.name }}</div>
-                  <div>
-                    {{ entry.product?.code }}
-                  </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="d-block d-md-none semi-bold">
-                    {{ 'fscommon.paymentFrequency' | cxTranslate }}:
-                  </div>
-                  <div>
-                    <ng-container
-                      *ngIf="order.insuranceQuote.paymentFrequency; else na"
-                      >{{ order.insuranceQuote.paymentFrequency }}</ng-container
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-4 col-md-2 text-right text-break">
-              <div class="d-inline d-md-none semi-bold">
-                {{ 'fscommon.price' | cxTranslate }}:
-              </div>
-              <div>{{ entry?.totalPrice?.formattedValue }}</div>
+              <button class="action-button btn-block">
+                {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
+              </button>
             </div>
           </div>
         </ng-container>
       </div>
     </ng-container>
+    <ng-template #paymentFrequency>
+      <span *ngIf="order.insuranceQuote.paymentFrequency; else na">
+        {{ order.insuranceQuote.paymentFrequency }}
+      </span>
+    </ng-template>
     <ng-template #na>
       {{ 'fscommon.notAvailable' | cxTranslate }}
     </ng-template>

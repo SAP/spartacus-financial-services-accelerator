@@ -20,7 +20,7 @@
           >
             <div class="short-overview-title col-7">{{ label }}:</div>
             <div class="short-overview-value col-5">
-              {{ priceAttribute.value }}
+              {{ priceAttribute | miniCartCurrency | async }}
             </div>
           </ng-container>
         </div>
@@ -29,9 +29,7 @@
             {{ 'fscommon.totalPrice' | cxTranslate }}:
           </div>
           <div class="short-overview-value col-6">
-            {{
-              (product.price?.oneTimeChargeEntries)[0]?.price?.formattedValue
-            }}
+            {{ getPaynowFormattedPrice(product.price?.oneTimeChargeEntries) }}
           </div>
         </div>
       </ng-container>

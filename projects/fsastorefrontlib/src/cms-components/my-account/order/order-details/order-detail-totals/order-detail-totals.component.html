@@ -1,42 +1,65 @@
 <ng-container *ngIf="order$ | async as order">
   <div class="row flex-md-row-reverse flex-lg-row-reverse flex-xl-row-reverse">
     <div class="cx-summary col-12 col-md-4">
-      <cx-order-summary [cart]="order"></cx-order-summary>
+      <cx-fs-order-summary [order]="order"></cx-fs-order-summary>
     </div>
     <div class="card-wrapper col-12 col-md-4 my-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">
+          <h6 class="card-title">
             {{ 'fscommon.paymentDetails' | cxTranslate }}
-          </h5>
-          <p class="card-text">{{ order.paymentInfo?.accountHolderName }}</p>
-          <p class="card-text">{{ order.paymentInfo?.cardNumber }}</p>
-          <p class="card-text">
-            {{ 'fscommon.expires' | cxTranslate }}:
-            {{ order.paymentInfo?.expiryMonth }}/{{
-              order.paymentInfo?.expiryYear
-            }}
-          </p>
+          </h6>
+          <ng-container *ngIf="order.paymentInfo?.expiryMonth; else invoice">
+            <p class="card-text">{{ order.paymentInfo?.accountHolderName }}</p>
+            <p class="card-text">{{ order.paymentInfo?.cardNumber }}</p>
+            <p class="card-text">
+              {{ 'fscommon.expires' | cxTranslate }}:
+              {{ order.paymentInfo?.expiryMonth }}/{{
+                order.paymentInfo?.expiryYear
+              }}
+            </p>
+          </ng-container>
         </div>
       </div>
     </div>
     <div class="card-wrapper col-12 col-md-4 my-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">
-            {{ 'checkoutOrderConfirmation.orderNumber' | cxTranslate }}
-          </h5>
-          <p class="card-text">{{ order.code }}</p>
-          <h5 class="card-title">
-            {{ 'checkoutOrderConfirmation.placedOn' | cxTranslate }}
-          </h5>
-          <p class="card-text">{{ order.created | cxDate: 'longDate' }}</p>
-          <h5 class="card-title">
-            {{ 'checkoutOrderConfirmation.status' | cxTranslate }}
-          </h5>
-          <p class="card-text">{{ order.status }}</p>
+          <div class="row mb-2">
+            <div class="col-6 col-md-12 semi-bold">
+              {{ 'orderDetails.orderNumber' | cxTranslate }}:
+            </div>
+            <div class="col-6 col-md-12 text-right text-md-left">
+              {{ order.code }}
+            </div>
+          </div>
+          <div class="row mb-2" *ngIf="order.insuranceQuote?.policyId">
+            <div class="col-6 col-md-12 semi-bold">
+              {{ 'policy.policyId' | cxTranslate }}:
+            </div>
+            <div class="col-6 col-md-12 text-right text-md-left">
+              {{ order.insuranceQuote?.policyId }}
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-6 col-md-12 semi-bold">
+              {{ 'orderDetails.placedOn' | cxTranslate }}:
+            </div>
+            <div class="col-6 col-md-12 text-right text-md-left">
+              {{ order.created | cxDate: 'longDate' }}
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-6 col-md-12 semi-bold">
+              {{ 'orderDetails.status' | cxTranslate }}:
+            </div>
+            <div class="col-6 col-md-12 text-right text-md-left">
+              {{ order.status }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </ng-container>
+<ng-template #invoice> {{ 'fscommon.invoice' | cxTranslate }}</ng-template>

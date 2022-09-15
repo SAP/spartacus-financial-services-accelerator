@@ -2,18 +2,21 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { FileConnector } from '../../connectors/file.connector';
 import * as fromAction from '../../store/actions';
 import * as uploadSelector from '../../store/selectors/upload.selector';
 import { StateWithForm } from '../../store/state';
+import { saveAs } from 'file-saver';
+import { OboCustomerService } from '../../../core/services/obo-customer/obo-customer.service';
 
 @Injectable()
 export class FileService {
   constructor(
     protected userIdService: UserIdService,
     protected fileConnector: FileConnector,
-    protected store: Store<StateWithForm>
+    protected store: Store<StateWithForm>,
+    protected oboCustomerService: OboCustomerService
   ) {}
 
   getFile(fileCode: string, fileType: string): Observable<any> {
@@ -25,7 +28,7 @@ export class FileService {
     );
   }
 
-  getFiles(fileCodes: Array<string>): Observable<any> {
+  getFiles(fileCodes?: Array<string>): Observable<any> {
     return this.userIdService.getUserId().pipe(
       take(1),
       switchMap(occUserId => {
@@ -35,12 +38,9 @@ export class FileService {
   }
 
   uploadFile(file: File): Observable<any> {
-    return this.userIdService.getUserId().pipe(
-      take(1),
-      switchMap(occUserId => {
-        return this.fileConnector.uploadFile(occUserId, file);
-      })
-    );
+    return this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(switchMap(userId => this.fileConnector.uploadFile(userId, file)));
   }
 
   resetFiles(): void {
@@ -77,5 +77,13 @@ export class FileService {
         }
       });
     }
+  }
+
+  getDocument(document) {
+    return this.getFile(document.code, document.mime).pipe(
+      map(downloadedFile => {
+        saveAs(downloadedFile, document.altText);
+      })
+    );
   }
 }

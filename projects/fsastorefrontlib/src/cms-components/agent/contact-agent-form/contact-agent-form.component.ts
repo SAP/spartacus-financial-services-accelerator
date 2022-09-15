@@ -6,18 +6,20 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { DefaultFormValidators } from '@fsa/dynamicforms';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import {
   GlobalMessageService,
   GlobalMessageType,
   OCC_USER_ID_ANONYMOUS,
   RoutingService,
-  UserService,
+  UserIdService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentData } from './../../../occ/occ-models';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { map, switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-contact-agent-form',
@@ -27,7 +29,8 @@ import { ContactAgentData } from './../../../occ/occ-models';
 export class ContactAgentFormComponent implements OnInit, OnDestroy {
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected userService: UserService,
+    protected userAccountFacade: UserAccountFacade,
+    protected userIdService: UserIdService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
     protected globalMessageService: GlobalMessageService,
@@ -53,7 +56,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.userService.get().subscribe(user => {
+        this.userAccountFacade.get().subscribe(user => {
           if (user && user.uid) {
             this.userId = user.uid;
             this.contactAgentForm.patchValue({
@@ -85,23 +88,28 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this.subscription.add(
-      this.csTicketService
-        .createCsTicketForAgent(
-          this.agentId,
-          this.userId,
-          this.collectDataFromContactAgentForm(this.contactAgentForm.value)
-        )
-        .subscribe(data => {
+    this.userIdService
+      .getUserId()
+      .pipe(
+        take(1),
+        switchMap(userId =>
+          this.csTicketService.createCsTicketForAgent(
+            this.agentId,
+            userId,
+            this.collectDataFromContactAgentForm(this.contactAgentForm.value)
+          )
+        ),
+        map(data => {
           if (data) {
             this.router.go('/');
             this.globalMessageService.add(
-              'Ticket has been created',
+              { key: 'fscommon.ticketCreated' },
               GlobalMessageType.MSG_TYPE_CONFIRMATION
             );
           }
         })
-    );
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {

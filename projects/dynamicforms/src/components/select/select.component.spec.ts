@@ -15,7 +15,7 @@ import { SelectComponent } from './select.component';
 import { FormService } from './../../core/services/form/form.service';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })
@@ -33,6 +33,7 @@ const mockField: FieldConfig = {
   fieldType: 'select',
   name: 'testSelect',
   label: {
+    default: 'testLabel',
     en: 'TestLabel',
   },
   options: [],

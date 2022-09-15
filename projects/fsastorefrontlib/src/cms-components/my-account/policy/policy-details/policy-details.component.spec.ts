@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 
 import {
   I18nTestingModule,
@@ -96,7 +96,7 @@ const document = {
 };
 
 class MockFileService {
-  getFile(code, mime) {
+  getDocument(file) {
     return of(document);
   }
 }
@@ -111,7 +111,7 @@ describe('PolicyDetailsComponent', () => {
   let changeRequestService: MockChangeRequestService;
   let routingService: RoutingService;
   let policyService: PolicyService;
-  let fileService: MockFileService;
+  let fileService: FileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -161,7 +161,7 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should return baseUrl', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
 
   it('should create change request for policy', () => {
@@ -217,9 +217,9 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should test get document', () => {
-    spyOn(fileService, 'getFile').and.callThrough();
-    component.getDocument(document, mockEvent);
-    expect(fileService.getFile).toHaveBeenCalledWith(documentId, documentMime);
+    spyOn(fileService, 'getDocument').and.callThrough();
+    component.getDocument(document);
+    expect(fileService.getDocument).toHaveBeenCalledWith(document);
   });
 
   it('should check if adding of new insured object is allowed', () => {

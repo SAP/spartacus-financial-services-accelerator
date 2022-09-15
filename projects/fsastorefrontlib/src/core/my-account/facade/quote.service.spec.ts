@@ -1,49 +1,103 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  OCC_USER_ID_ANONYMOUS,
   OCC_USER_ID_CURRENT,
+  RoutingService,
   UserIdService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
-import { QuoteActionType } from './../../../occ/occ-models/occ.models';
+import {
+  FSProduct,
+  QuoteActionType,
+} from './../../../occ/occ-models/occ.models';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
+import createSpy = jasmine.createSpy;
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
-const formId = 'formId';
-const formDefinitionId = 'formDefinitionId';
-
-const mockFormData = {
-  id: formId,
-  formDefinition: {
-    formId: formDefinitionId,
+const mockProduct: FSProduct = {
+  code: 'testProduct',
+  defaultCategory: {
+    code: 'testDefaultCategory',
+    name: 'test category',
   },
 };
-
-const cartWithOneEntry = {
+const mockCart: any = {
+  code: 'testCode',
+  guid: 'testUid',
   deliveryOrderGroups: [
     {
-      entries: [
+      quantity: 1,
+    },
+  ],
+  insuranceQuote: {
+    state: {
+      code: 'UNBIND',
+    },
+    quoteDetails: {
+      entry: [
         {
-          product: {
-            defaultCategory: {
-              code: 'testCategory',
-            },
+          key: 'formId',
+          value: 'testValue1',
+        },
+        {
+          key: 'updateQuoteKey2',
+          value: 'testValue2',
+        },
+      ],
+    },
+  },
+  entries: [
+    {
+      product: mockProduct,
+      formData: [
+        {
+          id: 'testId',
+          formDefinition: {
+            formId: 'testFormId',
+            content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
           },
         },
       ],
     },
   ],
+  totalItems: 0,
+  totalPrice: {
+    currencyIso: 'USD',
+    value: 10.0,
+  },
 };
-
-const cartWithoutEntries = {
-  deliveryOrderGroups: [],
+const mockQuote = {
+  state: { code: 'BIND' },
+  cartCode: 'testCode',
+  userId: userId,
+  quoteId: 'testQuote',
+};
+const insuranceQuote1: any = {
+  cartCode: 'test001',
+  defaultCategory: {
+    code: 'testCategory1',
+  },
+  quoteId: 'test001',
+};
+const insuranceQuote2: any = {
+  cartCode: 'test002',
+  defaultCategory: {
+    code: 'testCategory1',
+  },
+  quoteId: 'test002',
+};
+const quoteCodes = ['test001', 'test002'];
+const quoteForComparison = {
+  carts: [insuranceQuote1, insuranceQuote2],
 };
 
 class MockUserIdService {
@@ -53,9 +107,8 @@ class MockUserIdService {
 }
 
 class MockFormDataService {
-  formData;
   getFormData() {
-    return of(this.formData);
+    return of(mockCart.entries[0].formData[0]);
   }
   loadFormData(): void {}
 }
@@ -64,39 +117,13 @@ class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
 
-const mockCart = {
-  deliveryOrderGroups: [
-    {
-      entries: [
-        {
-          formData: [
-            {
-              id: 'formDataId',
-              formDefinition: {
-                formId: 'formDefinitionId',
-              },
-            },
-          ],
-          product: {
-            defaultCategory: {
-              code: 'category',
-            },
-          },
-        },
-      ],
-    },
-  ],
-  insuranceQuote: {
-    quoteDetails: {
-      entry: [{ key: 'formId', value: 'testFormId' }],
-    },
-  },
-};
+class MockRoutingService {
+  go = createSpy();
+}
 
 class MockCartService {
-  cart;
   getActive() {
-    return of(this.cart);
+    return of(mockCart);
   }
   loadCart() {}
 }
@@ -108,9 +135,9 @@ describe('QuoteServiceTest', () => {
   let formDataService: MockFormDataService;
   let userIdService: UserIdService;
   let mockFormDataStorageService: FormDataStorageService;
+  let routingService: RoutingService;
 
   beforeEach(() => {
-    //  userIdService = new UserIdService();
     formDataService = new MockFormDataService();
 
     TestBed.configureTestingModule({
@@ -124,6 +151,7 @@ describe('QuoteServiceTest', () => {
         { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: UserIdService, useClass: MockUserIdService },
+        { provide: RoutingService, useClass: MockRoutingService },
         {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
@@ -136,8 +164,10 @@ describe('QuoteServiceTest', () => {
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
     mockFormDataStorageService = TestBed.inject(FormDataStorageService);
+    routingService = TestBed.inject(RoutingService);
 
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();
   });
 
   it('should QuoteService is injected', inject(
@@ -214,5 +244,92 @@ describe('QuoteServiceTest', () => {
         action: QuoteActionType.UNDERWRITING,
       })
     );
+  });
+
+  it('should be able to update quote', () => {
+    const priceAttributes = 'testPrice';
+    service.updateQuote(cartId, priceAttributes);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.QuoteProcessAction({
+        userId: userId,
+        cartId: cartId,
+        action: QuoteActionType.UPDATE,
+        body: priceAttributes,
+      })
+    );
+  });
+
+  it('should be able to retrieve quotes', () => {
+    service.retrieveQuote(mockQuote);
+    userIdService
+      .getUserId()
+      .subscribe(data => {
+        expect(data).toEqual(mockQuote.userId);
+      })
+      .unsubscribe();
+  });
+
+  it('should be able to load quote details', () => {
+    service.loadQuoteDetails(mockQuote.quoteId, userId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadQuoteDetails({
+        userId: userId,
+        quoteId: mockQuote.quoteId,
+      })
+    );
+  });
+
+  it('should be able to load quote details', () => {
+    store.dispatch(new fromAction.LoadQuoteDetailsSuccess(mockQuote));
+    let loadedQuoteDetails;
+    service
+      .getQuoteDetails()
+      .subscribe(response => (loadedQuoteDetails = response))
+      .unsubscribe();
+    expect(loadedQuoteDetails).toEqual(mockQuote);
+  });
+
+  it('should be able to load quote comparison', () => {
+    service.loadQuotesComparison(quoteCodes, userId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadQuoteComparison({
+        cartCodes: quoteCodes,
+        userId: userId,
+      })
+    );
+  });
+
+  it('should be able to load quote comparison', () => {
+    store.dispatch(
+      new fromAction.LoadQuoteComparisonSuccess(quoteForComparison)
+    );
+    let loadedQuoteComparison;
+    service
+      .getQuotesComparison()
+      .subscribe(response => (loadedQuoteComparison = response))
+      .unsubscribe();
+    expect(loadedQuoteComparison).toEqual(quoteForComparison);
+  });
+
+  it('should set qute for compare', () => {
+    service.setQuoteForCompare(insuranceQuote1);
+    let quoteForCompare;
+    service.quoteForCompare$
+      .subscribe(response => (quoteForCompare = response))
+      .unsubscribe();
+    expect(quoteForCompare).toEqual(insuranceQuote1);
+  });
+
+  it('should retrieve quote checkout', () => {
+    service.retrieveQuoteCheckout(mockQuote).subscribe().unsubscribe();
+    expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'quoteReview' });
+    const unbindQuote = {
+      ...mockQuote,
+      state: {
+        code: 'UNBIND',
+      },
+    };
+    service.retrieveQuoteCheckout(unbindQuote).subscribe().unsubscribe();
+    expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'addOptions' });
   });
 });

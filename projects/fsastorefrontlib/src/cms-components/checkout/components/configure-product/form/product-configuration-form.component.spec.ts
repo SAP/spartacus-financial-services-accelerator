@@ -4,7 +4,7 @@ import {
   FormDataService,
   FormDataStorageService,
   YFormData,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { I18nTestingModule, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -17,7 +17,7 @@ import {
 import { ProductConfigurationFormComponent } from './product-configuration-form.component';
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-form-component',
   template: '',
 })
@@ -37,7 +37,7 @@ class MockFormComponent {
 }
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-spinner',
   template: '',
 })

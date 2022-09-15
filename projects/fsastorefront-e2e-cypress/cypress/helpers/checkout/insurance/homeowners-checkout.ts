@@ -1,4 +1,10 @@
 import * as shared from '../shared-checkout';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format('DD MMM YYYY');
 
 export function checkHomeownersComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {
@@ -20,7 +26,10 @@ export function selectHomeownersAnnually() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Homeowners Annually');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Homeowners Annually'
+      );
       cy.get('.primary-button').click();
     });
 }
@@ -30,11 +39,11 @@ export function checkOptionalProducts() {
     title: 'Your Homeowners Insurance',
     items: [
       {
-        name: 'Flood Cover',
+        name: 'Bicycles Cover',
         available: true,
       },
       {
-        name: 'Temporary Accomodation Cover',
+        name: 'Flood Cover',
         available: true,
       },
       {
@@ -43,7 +52,7 @@ export function checkOptionalProducts() {
         shouldAdd: true,
       },
       {
-        name: 'Bicycles Cover',
+        name: 'Temporary Accommodation Cover',
         available: true,
       },
     ],
@@ -53,31 +62,31 @@ export function checkOptionalProducts() {
 
 export function checkMiniCartHomeowners() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €491.25 ',
+    price: '€491.25',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 12 Dec 2020 ',
+        title: 'Start Date:',
+        value: tomorrowsDate,
       },
       {
         title: 'Property Address:',
-        value: ' Omladinskin Brigada ',
+        value: 'Omladinskin Brigada',
       },
       {
         title: 'Property Type:',
-        value: ' House ',
+        value: 'House',
       },
       {
         title: 'Property Value:',
-        value: ' 200000 ',
+        value: '200,000.00',
       },
       {
-        title: ' Homeowners Annually: ',
-        value: ' €338.10 ',
+        title: 'Homeowners Annually:',
+        value: '€338.10',
       },
       {
-        title: ' Jewelry and Watches Cover: ',
-        value: ' €153.15 ',
+        title: 'Jewelry and Watches Cover:',
+        value: '€153.15',
       },
     ],
   };

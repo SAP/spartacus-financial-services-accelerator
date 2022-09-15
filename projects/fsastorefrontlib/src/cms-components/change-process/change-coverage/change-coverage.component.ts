@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
@@ -9,15 +8,12 @@ import { AbstractChangeProcessStepComponent } from '../abstract-change-process-s
 })
 export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
   implements OnInit, OnDestroy {
-  changeRequest$: Observable<any>;
-  currentDate;
-
+  currentDate = new Date();
   optionalCoverages = [];
-  initialOptionalCoverages = [];
+  checkCoverageChanged = [];
 
   ngOnInit() {
     super.ngOnInit();
-    this.currentDate = new Date().toISOString().substr(0, 10);
     this.subscription.add(
       this.changeRequest$
         .pipe(
@@ -26,11 +22,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
               optionalProduct => !optionalProduct.isMandatory
             );
             if (optionalProducts && !this.isSimulated(changeRequestData)) {
-              optionalProducts.map((coverage, index) => {
-                coverage.index = index;
-                this.optionalCoverages.push(coverage);
-                this.initialOptionalCoverages.push({ ...coverage });
-              });
+              this.optionalCoverages = [...optionalProducts];
             }
           })
         )
@@ -38,28 +30,29 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
     );
   }
 
-  addCoverage(coverage: any) {
-    this.optionalCoverages.forEach(potentialCoverage => {
-      if (
-        potentialCoverage.coverageProduct.code === coverage.coverageProduct.code
-      ) {
-        potentialCoverage.coverageIsIncluded = true;
-      }
-    });
+  resolveCoverageChange(index: number) {
+    if (!this.checkCoverageChanged.includes(index)) {
+      this.checkCoverageChanged.push(index);
+    } else {
+      this.checkCoverageChanged.splice(
+        this.checkCoverageChanged.findIndex(idx => idx === index),
+        1
+      );
+    }
   }
 
-  removeCoverage(coverage: any) {
-    this.optionalCoverages.forEach(potentialCoverage => {
-      if (
-        potentialCoverage.coverageProduct.code === coverage.coverageProduct.code
-      ) {
-        potentialCoverage.coverageIsIncluded = false;
-      }
-    });
+  toggleCoverage(idx: number, newCoverageStatus: boolean) {
+    this.resolveCoverageChange(idx);
+    const included = { ...this.optionalCoverages[idx] };
+    included.coverageIsIncluded = !newCoverageStatus;
+    this.optionalCoverages = this.optionalCoverages.map(
+      (potentialCoverage, index) =>
+        idx !== index ? potentialCoverage : included
+    );
   }
 
   simulateChanges(changeRequestData) {
-    if (this.isPolicyChanged()) {
+    if (this.checkCoverageChanged.length > 0) {
       const optionalProducts = [];
       this.optionalCoverages.forEach(coverage => {
         if (coverage.coverageIsIncluded) {
@@ -79,20 +72,5 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
         configurationSteps: changeRequestData.configurationSteps,
       });
     }
-  }
-
-  isPolicyChanged(): boolean {
-    let isPolicyChanged = false;
-    this.optionalCoverages.forEach((optionalCoverage, index) => {
-      if (
-        optionalCoverage &&
-        this.initialOptionalCoverages[index] &&
-        optionalCoverage.coverageIsIncluded !==
-          this.initialOptionalCoverages[index].coverageIsIncluded
-      ) {
-        isPolicyChanged = true;
-      }
-    });
-    return isPolicyChanged;
   }
 }

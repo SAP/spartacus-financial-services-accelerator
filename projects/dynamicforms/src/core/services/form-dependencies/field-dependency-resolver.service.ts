@@ -21,11 +21,11 @@ export class FieldDependencyResolverService {
   ) {}
 
   /**
-   * Method used to enable/disable dependent control based on conditions defined at master control
+   * Method used to enable/disable dependent control based on conditions defined at main control
    *
    * @param controlConfig The dependent field config for which dependencies are resolved
    * @param dependentControl The dependent field control for which dependencies are resolved
-   * @param formGroup The form group which tracks value and validity of master form controls
+   * @param formGroup The form group which tracks value and validity of main form controls
    */
   resolveFormControlDependencies(
     controlConfig: any,
@@ -33,18 +33,18 @@ export class FieldDependencyResolverService {
     formGroup: FormGroup
   ) {
     controlConfig.dependsOn.controls.forEach(condition => {
-      const masterFormControl = this.formService.getFormControlForCode(
+      const mainFormControl = this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
       );
-      if (masterFormControl) {
-        if (!masterFormControl.value) {
+      if (mainFormControl) {
+        if (!mainFormControl.value) {
           if (controlConfig.dependsOn.hide === true) {
             controlConfig.hidden = true;
           }
           this.changeControlEnabled(dependentControl, controlConfig, false);
         }
-        masterFormControl.valueChanges.subscribe(fieldValue => {
+        mainFormControl.valueChanges.subscribe(fieldValue => {
           const dependencyValidations = this.geValidationsForCondition(
             condition
           );
@@ -96,6 +96,7 @@ export class FieldDependencyResolverService {
     } else {
       dependentControl.disable();
     }
+    dependentControl.updateValueAndValidity({ emitEvent: false });
   }
 
   geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {

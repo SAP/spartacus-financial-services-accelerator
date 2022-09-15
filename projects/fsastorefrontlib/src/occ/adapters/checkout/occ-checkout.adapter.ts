@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/internal/operators/catchError';
 import { CheckoutAdapter } from '../../../core/checkout/connectors/checkout.adapter';
 
 @Injectable()
@@ -17,9 +17,11 @@ export class OccCheckoutAdapter implements CheckoutAdapter {
     cartId: string,
     userId: string
   ) {
-    const url = this.occEndpointService.getUrl('userIdentification', {
-      userId,
-      cartId,
+    const url = this.occEndpointService.buildUrl('userIdentification', {
+      urlParams: {
+        userId,
+        cartId,
+      },
     });
     const params: HttpParams = new HttpParams().set(
       'identificationType',

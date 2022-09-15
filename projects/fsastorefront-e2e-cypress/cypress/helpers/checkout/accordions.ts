@@ -1,49 +1,57 @@
+const whatsIncluded = "What's Included";
+const addedByYou = 'Added by you';
+const personalDetails = 'Personal Details';
+const generalDetails = 'General Details';
+const policySummary = 'Policy Summary';
+const whoOrWhatInsured = 'Who or What Is Insured';
+const optionalExtras = 'Optional Extras';
+
 export const quoteReviewAccordionGroup1 = [
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const quoteReviewAccordionGroup2 = [
-  'General Details',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  generalDetails,
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const quoteReviewWithoutOptionalProducts = [
-  'General Details',
-  "What's Included",
-  'Personal Details',
+  generalDetails,
+  whatsIncluded,
+  personalDetails,
 ];
 
 export const finalReviewAccordionLife = [
   'Life Insurance Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const finalReviewAccordionTravel = [
   'Travel Insurance Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const policyDetailsAccordions = [
-  ' Policy Summary ',
-  ' Who or What Is Insured ',
-  " What's Included ",
-  ' Optional Extras ',
+  policySummary,
+  whoOrWhatInsured,
+  whatsIncluded,
+  optionalExtras,
   ' What Does It Cost Me? ',
 ];
 
 export const policyDetailsIntegration = [
-  ' Policy Summary ',
-  ' Who or What Is Insured ',
-  " What's Included ",
-  ' Optional Extras ',
+  policySummary,
+  whoOrWhatInsured,
+  whatsIncluded,
+  optionalExtras,
   ' What Does It Cost Me? ',
   ' Documents',
 ];
@@ -56,71 +64,101 @@ export const agentListViewAccordions = [
   ' Travel Insurance',
   ' Event Insurance',
   ' Savings Insurance',
+  ' Loan Application',
+  ' Fixed Term Deposit Application',
+  ' Credit Card Application',
+  ' Current Account Application',
 ];
 
 export const finalReviewAccordionHomeowners = [
   'Homeowners Insurance Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const finalReviewAccordionRenters = [
   'Renters Insurance Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const confirmationAccordionCreditCard = [
   'Credit Card Information',
-  "What's Included",
-  'Personal Details',
+  whatsIncluded,
+  personalDetails,
 ];
 
 export const confirmationAccordionCurrentAccount = [
   'Current Account Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 export const confirmationAccordionLoan = [
   'Loan Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const quoteReviewAccordionSavings = [
-  'General Details',
-  "What's Included",
-  'Added by you',
+  generalDetails,
+  whatsIncluded,
+  addedByYou,
   'Investments Details',
-  'Personal Details',
+  personalDetails,
 ];
 
 export const finalReviewAccordionSavings = [
   'Savings Insurance Information',
-  "What's Included",
-  'Added by you',
+  whatsIncluded,
+  addedByYou,
   'Investments Details',
-  'Personal Details',
+  personalDetails,
 ];
 
 export const policyDetailsSavings = [
-  'Policy Summary',
-  'Who or What Is Insured',
-  "What's Included",
-  'Optional Extras',
+  policySummary,
+  whoOrWhatInsured,
+  whatsIncluded,
+  optionalExtras,
   'Investment Details',
   'What Does It Cost Me',
 ];
 
 export const confirmationAccordionFTD = [
   'Fixed Term Deposit Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
+];
+
+export const compareQuoteAccordion = [
+  'Quote General Information',
+  'Quote Billing Events',
+  'Quote Optional Extras',
+];
+
+export const compareEventQuoteAccordion = [
+  'Quote Billing Events',
+  'Quote Optional Extras',
+];
+
+export const sellerEventAccordion = [
+  'All Customers',
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
+];
+
+export const sellerCurrentAccountAccordion = [
+  'All Customers',
+  generalDetails,
+  whatsIncluded,
+  addedByYou,
+  personalDetails,
 ];
 
 export const Accordions = {
@@ -196,6 +234,22 @@ export const Accordions = {
     {
       category: 'confirmationCurrentAccount',
       accordionItems: this.confirmationAccordionCurrentAccount,
+    },
+    {
+      category: 'compareQuote',
+      accordionItems: this.compareQuoteAccordion,
+    },
+    {
+      category: 'compareEventQuote',
+      accordionItems: this.compareEventQuoteAccordion,
+    },
+    {
+      category: 'eventQuoteReviewSeller',
+      accordionItems: this.sellerEventAccordion,
+    },
+    {
+      category: 'currentAccountSeller',
+      accordionItems: this.sellerCurrentAccountAccordion,
     },
   ],
 };

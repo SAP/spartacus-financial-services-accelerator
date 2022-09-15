@@ -4,7 +4,7 @@ import {
   CmsBannerComponentMedia,
   CmsComponent,
 } from '@spartacus/core';
-import { YFormCmsComponent } from '@fsa/dynamicforms';
+import { YFormCmsComponent } from '@spartacus/dynamicforms';
 
 export interface CmsProductFeatureComponent extends CmsComponent {
   title?: string;
@@ -29,6 +29,19 @@ export interface CmsEnrichedResponsiveBannerComponent
   headingText?: string;
   styledText?: string;
   url?: string;
+  configStyles?: string;
+}
+
+export interface CmsEnrichedBannerConfig {
+  textBox?: boolean;
+  textBoxType?: string;
+  textBoxVerticalPosition?: string;
+  textBoxHorizontalPosition?: string;
+  textBoxMaxWidth?: string;
+  textBoxMargin?: string;
+  textBoxPadding?: string;
+  textBoxTextPosition?: string;
+  position?: string;
 }
 
 export interface CmsInboxComponent extends CmsComponent {
@@ -67,4 +80,14 @@ export interface CmsFormSubmitComponent extends YFormCmsComponent {
 
 export interface CmsAgentRootComponent extends CmsComponent {
   agentRootCategory?: string;
+}
+
+export interface CmsQuestionnaireCarouselComponent extends CmsComponent {
+  categories: string;
+  title: string;
+}
+
+export interface CMSConnectionComponent extends CmsComponent {
+  stompUrl?: string;
+  url?: string;
 }

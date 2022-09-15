@@ -9,11 +9,11 @@
           <img class="image-item" [src]="getImagelink()" alt="" />
         </div>
       </div>
-      <div class="flex-100 border border-color-6 mb-5"></div>
+      <hr class="w-100 border border-color-6 mb-5" />
       <p class="text-center">
         {{ 'changeRequest.confirmation.message' | cxTranslate }}
 
-        <a class="overview-section-link" routerLink="/my-account/inbox/">{{
+        <a routerLink="/my-account/inbox/">{{
           'changeRequest.confirmation.inbox' | cxTranslate
         }}</a>
       </p>

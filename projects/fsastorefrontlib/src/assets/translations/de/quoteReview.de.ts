@@ -43,6 +43,7 @@ export const quoteReview = {
       'minimum-card-limit': 'Mindestlimit für Karte',
       'debit-card-design': 'Design der Debitkarte',
       'number-of-applicants': 'Anzahl Antragsteller',
+      'minimum-card-amount': ' Minimaler Kartenbetrag',
     },
     banking_current_account: {
       'debit-card-design': 'Design der Debitkarte',
@@ -72,6 +73,13 @@ export const quoteReview = {
       email: 'E-Mail-Adresse',
       postcode: 'Postleitzahl',
       country: 'Land',
+    },
+    status: {
+      pending:
+        'Ihr Antrag wird zur Zeit bearbeitet. Bitte wenden Sie sich an einen Makler.',
+    },
+    message: {
+      selectedOboCustomer: '[DE] {{ oboCustomer }} succesfully selected!',
     },
   },
 };

@@ -5,7 +5,7 @@ import {
   FormDefinition,
   YFormData,
   YFormDefinition,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';

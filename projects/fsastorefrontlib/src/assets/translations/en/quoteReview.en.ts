@@ -43,6 +43,7 @@ export const quoteReview = {
       'minimum-card-limit': 'Minimum Card Limit',
       'debit-card-design': 'Debit Card Design',
       'number-of-applicants': 'Number Of Applicants',
+      'minimum-card-amount': 'Minimum Card Amount',
     },
     banking_current_account: {
       'debit-card-design': 'Debit Card Design',
@@ -72,6 +73,12 @@ export const quoteReview = {
       email: 'Email Address',
       postcode: 'Postcode',
       country: 'Country',
+    },
+    status: {
+      pending: 'Your quote is in status pending. Please contact an agent.',
+    },
+    message: {
+      selectedOboCustomer: '{{ oboCustomer }} succesfully selected!',
     },
   },
 };

@@ -6,9 +6,10 @@ import * as fromAction from '../store/actions';
 import * as fromClaimStore from '../store';
 import { SelectedPolicy } from '../services/claim-data.service';
 import { AuthService, UserIdService } from '@spartacus/core';
-import { take, filter, switchMap } from 'rxjs/operators';
+import { take, filter, switchMap, map, tap } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
 import { StateWithMyAccount } from '../store/my-account-state';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 @Injectable()
 export class ClaimService {
@@ -19,33 +20,37 @@ export class ClaimService {
   constructor(
     protected store: Store<StateWithMyAccount>,
     protected authService: AuthService,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected oboCustomerService: OboCustomerService
   ) {
     combineLatest([
       this.store.select(fromSelector.getClaimContent),
       this.authService.isUserLoggedIn(),
     ])
       .subscribe(([claim, userLoggedIn]) => {
-        this.currentClaimId = claim.claimNumber;
+        this.currentClaimId = claim?.claimNumber;
         if (this.isCreated(claim) && userLoggedIn) {
-          this.loadCurrentClaim();
+          this.loadClaimById(this.currentClaimId);
         }
       })
       .unsubscribe();
   }
 
-  loadCurrentClaim() {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadCurrentClaim({
-            userId: occUserId,
-            claimId: this.currentClaimId,
-          })
-        );
-      })
+  loadClaimById(claimId) {
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        take(1),
+        tap(userId => {
+          this.store.dispatch(
+            new fromAction.LoadClaimById({
+              userId,
+              claimId,
+            })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
   }
 
@@ -115,18 +120,16 @@ export class ClaimService {
   }
 
   createClaim(policyId: string, contractId: string) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new fromAction.CreateClaim({
-            userId: occUserId,
-            policyId: policyId,
-            contractId: contractId,
-          })
-        )
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.CreateClaim({ userId, policyId, contractId })
+          );
+        })
       )
+      .subscribe()
       .unsubscribe();
   }
 
@@ -137,7 +140,7 @@ export class ClaimService {
       .subscribe(occUserId => {
         this.currentClaimId = claimNumber;
         this.store.dispatch(
-          new fromAction.LoadCurrentClaim({
+          new fromAction.LoadClaimById({
             userId: occUserId,
             claimId: claimNumber,
           })
@@ -146,30 +149,42 @@ export class ClaimService {
       .unsubscribe();
   }
 
-  updateClaim(claim: Claim, stepIndex: number, stepStatus: string) {
-    const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
-      status: stepStatus,
-    });
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.UpdateClaim({
-            userId: occUserId,
-            claimData: claim,
-            stepData: stepData,
-          })
-        );
-      })
+  updateClaim(claimData: Claim, stepIndex: number, stepStatus: string) {
+    const stepData = Object.assign(
+      {},
+      claimData.configurationSteps[stepIndex],
+      {
+        status: stepStatus,
+      }
+    );
+
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.UpdateClaim({ userId, claimData, stepData })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
+  }
+
+  changeClaim(claim: Claim, userId: string) {
+    this.store.dispatch(
+      new fromAction.ChangeClaim({
+        userId: userId,
+        claimData: claim,
+      })
+    );
+  }
+
+  resetClaimState() {
+    this.store.dispatch(new fromAction.ResetClaimState());
   }
 
   private isCreated(claim: any): boolean {
     return claim && claim.claimNumber !== undefined;
-  }
-
-  private isLoggedIn(userId: string): boolean {
-    return typeof userId !== undefined;
   }
 }

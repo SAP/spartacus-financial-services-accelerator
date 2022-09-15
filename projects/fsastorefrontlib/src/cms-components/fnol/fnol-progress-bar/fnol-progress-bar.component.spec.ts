@@ -1,7 +1,7 @@
 import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { UserRequestService } from '../../../core/user-request/facade';
 import { Claim } from '../../../occ/occ-models';
@@ -16,7 +16,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-fs-progress-bar',
   template: '',
 })
@@ -43,8 +43,14 @@ export class MockClaimService {
   getCurrentClaim() {
     return of(claimRequest);
   }
-
+  loadClaimById() {}
   loadUserRequestFormData() {}
+}
+
+class MockLanguageService {
+  getActive() {
+    return of('de');
+  }
 }
 
 describe('FNOLProgressBarComponent', () => {
@@ -52,6 +58,7 @@ describe('FNOLProgressBarComponent', () => {
   let fixture: ComponentFixture<FNOLProgressBarComponent>;
   let mockUserRequestService: MockUserRequestService;
   let mockClaimService: MockClaimService;
+  let mockLanguageService: LanguageService;
 
   beforeEach(
     waitForAsync(() => {
@@ -73,14 +80,21 @@ describe('FNOLProgressBarComponent', () => {
             provide: ClaimService,
             useValue: mockClaimService,
           },
+          {
+            provide: LanguageService,
+            useClass: MockLanguageService,
+          },
         ],
       }).compileComponents();
+      mockLanguageService = TestBed.inject(LanguageService);
+      spyOn(mockClaimService, 'getCurrentClaim').and.callThrough();
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FNOLProgressBarComponent);
     component = fixture.componentInstance;
+    component.language = 'en';
     fixture.detectChanges();
   });
 

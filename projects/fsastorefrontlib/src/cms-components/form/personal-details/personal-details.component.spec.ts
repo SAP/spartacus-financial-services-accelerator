@@ -1,12 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
+
 import {
   ActiveCartService,
   AuthService,
   Cart,
   CmsComponent,
   I18nTestingModule,
+  UserAddressService,
 } from '@spartacus/core';
 import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -37,7 +42,7 @@ class MockAuthService {
   }
 }
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-form-component',
   template: '',
 })
@@ -81,6 +86,9 @@ class MockActiveCartService {
     return of();
   }
 }
+class MockUserAddressService {
+  loadAddresses() {}
+}
 const componentData = {
   uid: 'TestPersonalDetailsComponent',
   typeCode: 'PersonalDetailsComponent',
@@ -112,6 +120,10 @@ describe('PersonalDetailsComponent', () => {
           {
             provide: ActiveCartService,
             useClass: MockActiveCartService,
+          },
+          {
+            provide: UserAddressService,
+            useClass: MockUserAddressService,
           },
           {
             provide: CmsComponentData,

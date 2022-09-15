@@ -17,8 +17,14 @@ const claimEndpoint = 'claim';
 const claimsEndpoint = 'claims';
 const createClaimEndpoint = 'createClaim';
 
+const mockClaimData = {
+  content:
+    '{"whatHappened":"AutoTheft","whenHappened":"2021-05-01","whatTime":"15:06:46","country":"RS","city":"Novi Sad","postcode":"21000","address":"AAA, 22","description":"ddfdgf"}',
+  documents: [],
+};
+
 class MockOccEndpointsService {
-  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+  buildUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
   }
 
@@ -43,7 +49,7 @@ describe('OccClaimAdapter', () => {
     adapter = TestBed.inject(OccClaimAdapter);
     httpMock = TestBed.inject(HttpTestingController);
     occEndpointService = TestBed.inject(OccEndpointsService);
-    spyOn(occEndpointService, 'getUrl').and.callThrough();
+    spyOn(occEndpointService, 'buildUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -58,9 +64,14 @@ describe('OccClaimAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === claimsEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimsEndpoint, {
-          userId,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          claimsEndpoint,
+          {
+            urlParams: {
+              userId,
+            },
+          }
+        );
       })
     );
   });
@@ -73,10 +84,15 @@ describe('OccClaimAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === claimEndpoint && req.method === 'GET';
         }, `GET method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
-          userId,
-          claimId,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          claimEndpoint,
+          {
+            urlParams: {
+              userId,
+              claimId,
+            },
+          }
+        );
       })
     );
   });
@@ -89,10 +105,15 @@ describe('OccClaimAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === claimEndpoint && req.method === 'DELETE';
         }, `DELETE method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
-          userId,
-          claimId,
-        });
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          claimEndpoint,
+          {
+            urlParams: {
+              userId,
+              claimId,
+            },
+          }
+        );
       })
     );
   });
@@ -105,10 +126,52 @@ describe('OccClaimAdapter', () => {
         httpMock.expectOne((req: HttpRequest<any>) => {
           return req.url === createClaimEndpoint && req.method === 'POST';
         }, `POST method and url`);
-        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
           createClaimEndpoint,
           {
-            userId,
+            urlParams: {
+              userId,
+            },
+          }
+        );
+      })
+    );
+  });
+
+  describe('updateClaim', () => {
+    it(
+      'update claim for specified claimId',
+      waitForAsync(() => {
+        adapter.updateClaim(userId, claimId, mockClaimData).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimEndpoint && req.method === 'PATCH';
+        }, `PATCH method and url`);
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          claimEndpoint,
+          {
+            urlParams: {
+              userId,
+              claimId,
+            },
+          }
+        );
+      })
+    );
+
+    it(
+      'update claim for specified claimId without passing claim object',
+      waitForAsync(() => {
+        adapter.updateClaim(userId, claimId, {}).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimEndpoint && req.method === 'PATCH';
+        }, `PATCH method and url`);
+        expect(occEndpointService.buildUrl).toHaveBeenCalledWith(
+          claimEndpoint,
+          {
+            urlParams: {
+              userId,
+              claimId,
+            },
           }
         );
       })

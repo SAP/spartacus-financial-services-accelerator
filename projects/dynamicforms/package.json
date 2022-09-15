@@ -1,24 +1,36 @@
 {
-  "name": "@fsa/dynamicforms",
-  "version": "0.0.1",
+  "name": "@spartacus/dynamicforms",
+  "description": "Library for creating dynamic forms, designed to work with Spartacus application",
+  "version": "2.0.0",
   "author": "FSA",
+  "repository": "https://github.com/SAP/spartacus-financial-services-accelerator/tree/develop/projects/dynamicforms",
+  "homepage": "https://github.com/SAP/spartacus-financial-services-accelerator",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "fsa",
+    "dynamicforms",
+    "spartacus"
+  ],
   "peerDependencies": {
-    "@angular/common": "~10.1.0",
-    "@angular/compiler": "~10.1.0",
-    "@angular/core": "~10.1.0",
-    "@angular/forms": "~10.1.0",
-    "@angular/localize": "^10.1.0",
-    "@angular/platform-browser": "~10.1.0",
-    "@angular/router": "~10.1.0",
-    "@angular/service-worker": "~10.1.0",
-    "@ngrx/effects": "~10.0.0",
-    "@ngrx/store": "~10.0.0",
-    "@spartacus/core": "^3.0.0",
-    "@spartacus/storefront": "^3.0.0",
-    "bootstrap": "^4.5.0",
-    "rxjs": "^6.5.4",
-    "zone.js": "^0.10.2",
+    "@angular/common": "~12.0.5",
+    "@angular/compiler": "~12.0.5",
+    "@angular/core": "~12.0.5",
+    "@angular/forms": "~12.0.5",
+    "@angular/localize": "~12.0.5",
+    "@angular/platform-browser": "~12.0.5",
+    "@angular/router": "~12.0.5",
+    "@angular/service-worker": "~12.0.5",
+    "blob-util": "^2.0.2",
     "file-saver": "^2.0.2",
-    "blob-util": "^2.0.2"
+    "@ngrx/effects": "~12.1.0",
+    "@ngrx/store": "~12.1.0",
+    "@spartacus/core": "^4.3.0",
+    "@spartacus/storefront": "^4.2.0",
+    "bootstrap": "4.5.0",
+    "rxjs": "^6.6.0",
+    "zone.js": "~0.11.4"
   }
 }

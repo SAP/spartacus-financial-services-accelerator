@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FSProductListComponent } from './product-list.component';
-import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
+import { Component, Input, PipeTransform, Pipe } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -12,9 +12,16 @@ import {
   ListNavigationModule,
 } from '@spartacus/storefront';
 import createSpy = jasmine.createSpy;
+import { FSCheckoutService } from './../../../core/checkout/facade/checkout.service';
 
+const mockProduct = {
+  code: 'testProduct',
+  defaultCategory: {
+    code: 'testCategory',
+  },
+};
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })
@@ -38,6 +45,10 @@ class MockPageLayoutService {
   }
 }
 
+class MockCheckoutService {
+  startCheckoutForProduct() {}
+}
+
 export class MockProductListComponentService {
   setQuery = createSpy('setQuery');
   viewPage = createSpy('viewPage');
@@ -59,6 +70,7 @@ export class MockViewConfig {
 describe('ProductListComponent', () => {
   let component: FSProductListComponent;
   let fixture: ComponentFixture<FSProductListComponent>;
+  let checkoutService: FSCheckoutService;
 
   beforeEach(
     waitForAsync(() => {
@@ -78,6 +90,10 @@ describe('ProductListComponent', () => {
             provide: ViewConfig,
             useClass: MockViewConfig,
           },
+          {
+            provide: FSCheckoutService,
+            useClass: MockCheckoutService,
+          },
         ],
       }).compileComponents();
     })
@@ -86,9 +102,16 @@ describe('ProductListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FSProductListComponent);
     component = fixture.componentInstance;
+    checkoutService = TestBed.inject(FSCheckoutService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should start checkout for product', () => {
+    spyOn(checkoutService, 'startCheckoutForProduct').and.callThrough();
+    component.startCheckout(mockProduct);
+    expect(checkoutService.startCheckoutForProduct).toHaveBeenCalled();
   });
 });

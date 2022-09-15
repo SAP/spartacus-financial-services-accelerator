@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <section *ngIf="changeRequest$ | async as changeRequest">
-        <h2 class="heading-headline py-4 text-center text-uppercase">
+        <h2 class="heading-headline py-4 text-center">
           {{ 'fscommon.change' | cxTranslate }}
           {{ changeRequest.insurancePolicy?.categoryData?.name }}
           {{ 'policy.policy' | cxTranslate }}

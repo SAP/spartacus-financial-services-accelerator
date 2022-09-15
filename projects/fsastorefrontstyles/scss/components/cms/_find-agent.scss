@@ -13,32 +13,28 @@
       p {
         font-weight: var(--cx-font-weight-semi);
       }
-      .fs-icon {
-        left: 0;
+      .fas {
         &:before {
           padding: 8px;
+          display: inline-block;
+          width: 40px;
+          height: 40px;
           border: 1px solid var(--cx-color-3);
           border-radius: 50%;
           font-size: var(--cx-h3-font-size);
-          left: 0;
           @include fs-transition;
         }
-      }
-      .icon-envelope {
-        &:before {
-          color: var(--cx-color-secondary);
-        }
-        &:hover:before {
+        &:hover::before {
           color: var(--cx-color-1);
-          background: var(--cx-color-text);
-          border: 1px solid var(--cx-color-text);
+          background: var(--cx-color-primary);
+          border: 1px solid var(--cx-color-primary);
         }
       }
-      .icon-map-marker:hover:before {
-        color: var(--cx-color-1);
-        background: var(--cx-color-primary);
-        border: 1px solid var(--cx-color-primary);
-      }
+    }
+  }
+  cx-fs-generic-sync-pilot {
+    .fas {
+      font-size: var(--cx-h3-font-size);
     }
   }
 }

@@ -1,7 +1,10 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
 import { CmsComponent, CmsComponentConnector } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -9,7 +12,7 @@ import { CmsFormSubmitComponent } from './../../../occ/occ-models/cms-component.
 import { CMSFormSubmitComponent } from './cms-form-submit.component';
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-form-component',
   template: '',
 })
@@ -29,7 +32,7 @@ class MockFormComponent {
 }
 
 @Component({
-  // tslint:disable-next-line: component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'cx-spinner',
   template: '',
 })

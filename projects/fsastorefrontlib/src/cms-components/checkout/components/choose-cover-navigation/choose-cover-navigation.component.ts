@@ -4,7 +4,7 @@ import {
   FormDataService,
   FormDataStorageService,
   YFormData,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';

@@ -9,6 +9,10 @@ export const address = {
       label: 'Vorname',
       placeholder: 'Nachname',
     },
+    streetName: 'Straße',
+    streetNumber: 'Hausnummer',
+    editAddress: 'Adresse bearbeiten',
+    addAddress: 'Adresse hinzufügen',
     address1: 'Adresse 1',
     address2: 'Adresse 2 (optional)',
     country: 'Land',
@@ -25,5 +29,7 @@ export const address = {
       label: 'Telefonnummer (optional)',
       placeholder: '(555) 555 - 0123',
     },
+    successfullyEditAddress: '[DE] Successfully updated address',
+    successfullyAddAddress: '[DE]  Successfully added address',
   },
 };

@@ -1,43 +1,4 @@
-@import '../fs-mixins';
-@import '../theme';
-
 cx-page-layout.FSCategoryPageTemplate {
-  .enriched-banner {
-    &-text {
-      background: rgba(255, 255, 255, 0.7);
-      display: flex;
-      flex-flow: column;
-      text-align: center;
-      position: absolute;
-      bottom: 0;
-      padding: 2rem;
-      width: 100%;
-      @include media-breakpoint-down(md) {
-        padding: 1rem;
-      }
-    }
-    &-title {
-      font-size: var(--cx-h3-font-size);
-      color: var(--cx-color-text);
-      font-weight: var(--cx-font-weight-semi);
-      padding-bottom: 1.2rem;
-      @include media-breakpoint-down(md) {
-        font-size: var(--cx-title-font-size);
-      }
-    }
-    &-details {
-      display: flex;
-      justify-content: center;
-    }
-    &-styled-text {
-      @extend .primary-button;
-      font-weight: var(--cx-font-weight-semi);
-      padding: 0.5rem 1rem;
-      @include media-breakpoint-down(md) {
-        font-size: var(--cx-xs-font-size);
-      }
-    }
-  }
   cx-page-slot > * {
     display: flex;
   }
@@ -74,18 +35,24 @@ cx-page-layout.FSCategoryPageTemplate {
     }
   }
   .Section3 {
+    cx-banner,
+    cx-paragraph {
+      flex: 0 1 50%;
+    }
+    cx-banner {
+      @include media-breakpoint-down(sm) {
+        flex: 1 1 100%;
+        flex-direction: column;
+      }
+    }
     cx-fs-cms-custom-container {
       @include media-breakpoint-down(sm) {
         flex-direction: column;
       }
-      cx-banner,
-      cx-paragraph {
-        flex: 1 1 50%;
-      }
       cx-paragraph {
         display: flex;
         align-items: center;
-        padding: 0.5rem 2rem;
+        padding: 0 2rem;
         text-align: left;
         @include media-breakpoint-down(sm) {
           padding: 2rem;
@@ -93,6 +60,28 @@ cx-page-layout.FSCategoryPageTemplate {
         }
         & > p {
           margin-bottom: 0;
+        }
+      }
+    }
+    cx-fs-cms-custom-container.category-inner-container {
+      flex: 1 1 50%;
+      justify-content: center;
+      cx-paragraph {
+        @include media-breakpoint-down(sm) {
+          padding: 1rem;
+        }
+      }
+      cx-link {
+        padding: 0 2rem;
+        font-size: var(--cx-title-font-size);
+        font-weight: var(--cx-font-weight-semi);
+        color: var(--cx-color-primary);
+        text-transform: uppercase;
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
+        a:hover {
+          text-decoration: underline;
         }
       }
     }

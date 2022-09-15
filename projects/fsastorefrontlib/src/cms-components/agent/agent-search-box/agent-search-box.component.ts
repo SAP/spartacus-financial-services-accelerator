@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { StoreFinderSearchComponent } from '@spartacus/misc/storefinder/components';
+import { StoreFinderSearchComponent } from '@spartacus/storefinder/components';
+import { Subscription } from 'rxjs';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
   selector: 'cx-fs-agent-search-box',
   templateUrl: './agent-search-box.component.html',
 })
 export class AgentSearchBoxComponent extends StoreFinderSearchComponent
-  implements OnInit {
-  constructor(protected fsRoutingService: RoutingService) {
+  implements OnInit, OnDestroy {
+  subscription = new Subscription();
+
+  constructor(
+    protected fsRoutingService: RoutingService,
+    protected agentSearchService: AgentSearchService
+  ) {
     super(fsRoutingService);
   }
 
   ngOnInit() {
-    this.findAgents(null);
+    this.resetSearchValueAndRouteParams();
   }
 
   findAgents(searchQuery: string) {
-    this.fsRoutingService.go(['agent-locator'], { query: searchQuery });
+    this.fsRoutingService.go(
+      { cxRoute: 'agentLocator' },
+      { queryParams: { query: searchQuery } }
+    );
   }
 
   onKey(event: any) {
@@ -27,6 +37,23 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
       event.key === 'Enter'
     ) {
       this.findAgents(this.searchBox.value);
+    }
+  }
+
+  protected resetSearchValueAndRouteParams() {
+    this.subscription.add(
+      this.agentSearchService.resetSearchValue.subscribe(isReset => {
+        if (isReset) {
+          this.searchBox.setValue('');
+          this.findAgents('');
+        }
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

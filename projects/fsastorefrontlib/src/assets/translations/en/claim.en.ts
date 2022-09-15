@@ -21,6 +21,21 @@ export const claim = {
         'If you have any questions, do not hesitate to contact your claim handler.',
     },
     createFailed: 'Claim for given policy cannot be created.',
+    loadingFailed: 'Claim can not be loaded.',
+    successfulChangeClaim: 'Claim {{claimNumber}} is successfully updated.',
     alreadySubmitted: 'Your Claim is already submitted.',
+    generalInformation: 'General Information',
+    claimDetails: 'Claim Details ({{ subclaimType }})',
+    subclaim: {
+      claimant: 'Claimant',
+      paymentInformation: 'Payment Information',
+      paymentDetails: ' paid to {{ payee }} via {{ paymentMethod }} on ',
+    },
+    participants: {
+      rolesPersonsInvolved: 'Roles/Persons Involved',
+      participant: 'Participant ',
+      role: 'Role',
+      name: 'Name',
+    },
   },
 };

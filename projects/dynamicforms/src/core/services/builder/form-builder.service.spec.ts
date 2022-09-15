@@ -7,10 +7,24 @@ import { FormBuilder } from '@angular/forms';
 import { FormValidationService } from '../form-validation/form-validation.service';
 import { FieldConfig } from '../../models/form-config.interface';
 import { FieldDependencyResolverService } from '../form-dependencies/field-dependency-resolver.service';
+import { of } from 'rxjs';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 class MockFormValidationService {
   getValidatorsForField(fieldConfig: FieldConfig) {
     return [];
+  }
+}
+
+const mockUser = {
+  firstName: 'testFirstName',
+  lastName: 'testLastName',
+  roles: [],
+};
+
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
   }
 }
 
@@ -20,6 +34,7 @@ class MockFieldDependencyResolverService {
 
 describe('FormDataService', () => {
   let service: FormBuilderService;
+  let mockedUserAccountFacade: UserAccountFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,9 +52,11 @@ describe('FormDataService', () => {
           provide: FieldDependencyResolverService,
           useClass: MockFieldDependencyResolverService,
         },
+        { provide: UserAccountFacade, useClass: MockUserAccountFacade },
       ],
     });
 
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(FormBuilderService);
   });
 
@@ -58,6 +75,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'accountType',
               label: {
+                default: 'testLabel',
                 en: 'Account Type',
                 de: 'Kontotyp',
               },
@@ -66,6 +84,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'cardDesign',
               label: {
+                default: 'testLabel',
                 en: 'Choose a design for your debit card',
                 de: 'Wählen Sie das Design Ihrer Girokarte',
               },
@@ -92,6 +111,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'accountType',
               label: {
+                default: 'testLabel',
                 en: 'Account Type',
                 de: 'Kontotyp',
               },
@@ -100,6 +120,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'cardDesign',
               label: {
+                default: 'testLabel',
                 en: 'Choose a design for your debit card',
                 de: 'Wählen Sie das Design Ihrer Girokarte',
               },
@@ -124,6 +145,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'accountType',
               label: {
+                default: 'testLabel',
                 en: 'Account Type',
                 de: 'Kontotyp',
               },
@@ -132,6 +154,7 @@ describe('FormDataService', () => {
               fieldType: 'input',
               name: 'cardDesign',
               label: {
+                default: 'testLabel',
                 en: 'Choose a design for your debit card',
                 de: 'Wählen Sie das Design Ihrer Girokarte',
               },

@@ -29,7 +29,7 @@
 </div>
 <div class="border-top border-color-3 my-3"></div>
 <div class="row mt-5">
-  <div class="col-6">
+  <div class="col-md-6 mb-3">
     <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
       ><button
         class="action-button btn-block"
@@ -39,7 +39,7 @@
       </button></ng-container
     >
   </div>
-  <div class="col-6">
+  <div class="col-md-6">
     <button
       class="primary-button btn-block"
       (click)="setIdentificationType()"

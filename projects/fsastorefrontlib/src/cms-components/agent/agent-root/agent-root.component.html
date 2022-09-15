@@ -17,22 +17,38 @@
                   >
                   </cx-media>
                   <p class="py-3">{{ agent.displayName }}</p>
-                  <div class="row no-gutters">
-                    <a
-                      class="col-6 fs-icon icon-envelope text-right position-relative pr-2"
-                      [routerLink]="
-                        {
-                          cxRoute: 'contactAgent',
-                          params: { agent: agent.email }
-                        } | cxUrl
-                      "
-                    ></a>
-                    <a
-                      class="col-6 fs-icon icon-map-marker text-left position-relative pl-2"
-                      [routerLink]="['/agent-locator']"
-                      [queryParams]="{ query: agent.email }"
-                    ></a>
-                  </div>
+                  <a
+                    class="fas fa-envelope px-2"
+                    [routerLink]="
+                      {
+                        cxRoute: 'contactAgent',
+                        params: { agent: agent.email }
+                      } | cxUrl
+                    "
+                  >
+                  </a>
+                  <a
+                    class="fas fa-map-marker-alt px-2"
+                    [routerLink]="['/agent-locator']"
+                    [queryParams]="{ query: agent.email }"
+                  ></a>
+                  <a
+                    class="fas fa-calendar-alt px-2"
+                    [routerLink]="
+                      {
+                        cxRoute: 'appointmentSchedulingPage',
+                        params: { agent: agent.email }
+                      } | cxUrl
+                    "
+                  ></a>
+                  <cx-fs-generic-sync-pilot
+                    #syncPilot
+                    [ngClass]="{
+                      'd-inline-block px-2': syncPilot?.user$ | async
+                    }"
+                    *ngIf="agent.participationStatus"
+                    [agent]="agent"
+                  ></cx-fs-generic-sync-pilot>
                 </div>
               </div>
             </ng-container>

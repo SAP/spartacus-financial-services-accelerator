@@ -8,6 +8,7 @@ import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { CartConnector } from '../../../../core/cart/connectors';
 import { FSCartService } from '../../../../core/cart/facade';
 import { AddOptionsComponent } from './add-options.component';
+import { SortModule } from '../../../../shared/util/helpers/pipe/sort.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { AddOptionsComponent } from './add-options.component';
     NgSelectModule,
     SpinnerModule,
     MediaModule,
+    SortModule,
     NgbTooltipModule,
   ],
   declarations: [AddOptionsComponent],

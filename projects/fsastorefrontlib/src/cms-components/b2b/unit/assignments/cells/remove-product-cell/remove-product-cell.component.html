@@ -1,0 +1,13 @@
+<ng-container *ngIf="currentUnit$ | async as currentUnit">
+  <span
+    *ngIf="
+      currentUnit &&
+      currentUnit.parentOrgUnit &&
+      (isUnitDefaultOrganizationOfUser(currentUnit.uid) | async)
+    "
+    class="pointer notice"
+    (click)="removeProduct(currentUnit.uid, currentUnit.parentOrgUnit?.uid)"
+  >
+    {{ 'productAssignments.remove' | cxTranslate }}</span
+  >
+</ng-container>

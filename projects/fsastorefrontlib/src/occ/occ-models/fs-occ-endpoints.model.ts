@@ -113,6 +113,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   quotes?: string;
   /**
+   * Get quote by id
+   *
+   */
+  quote?: string;
+  /**
    * Updates quote
    *
    */
@@ -122,6 +127,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   quoteAction?: string;
+  /**
+   * Compare quotes
+   *
+   */
+  compareQuotes?: string;
   /**
    * Get claims
    *
@@ -156,5 +166,75 @@ export interface FSOccEndpoints extends OccEndpoints {
    * Disable user
    *
    */
-  disableUser?: string;
+  userCloseAccount?: string;
+
+  /**
+   * Register user
+   *
+   */
+  userRegister?: string;
+
+  /**
+   * Get on behalf of consents
+   *
+   */
+  oboConsents?: string;
+
+  /**
+   * Gets the list of customers created by consent holder
+   *
+   */
+  oboConsentCustomers?: string;
+
+  /**
+   * Gets the particular customer of customers created by consent holder
+   *
+   */
+  oboConsentCustomer?: string;
+
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link #quotes} instead.
+   */
+  oboConsentCustomerQuotes?: string;
+
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link #policies} instead.
+   */
+  oboConsentCustomerPolicies?: string;
+
+  /**
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link #claims} instead.
+   */
+  oboConsentCustomerClaims?: string;
+
+  /**
+   * Transfers cart to customer created by consent holder
+   *
+   */
+  transferCart?: string;
+
+  /**
+   * Create cart of customer that gave On-Behalf-Of Consent
+   *
+   */
+  oboConsentAddresses?: string;
+
+  /**
+   * Updates permission for OBO customer
+   *
+   */
+  oboUpdatePermission?: string;
+  /**
+   * Update address OBO customer
+   *
+   */
+  oboConsentUpdateAddress?: string;
+
+  createAppointment?: string;
 }

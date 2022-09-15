@@ -1,10 +1,14 @@
 import { DebugElement, Directive, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  CmsComponent,
+  ContentSlotComponentData,
+  CmsService,
+} from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import {
   CMSComparisonTabComponent,
   CmsMultiComparisonTabContainer,
@@ -13,27 +17,35 @@ import { ComparisonTableService } from '../comparison-table.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container.component';
 
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {
   @Input() cxComponentWrapper: ContentSlotComponentData;
 }
 
-const mockedCMSComparisonTabComponent: CMSComparisonTabComponent = {
-  name: 'Test1',
-  title: 'Tab 1',
+const componentData: CMSComparisonTabComponent = {
+  uid: 'testComparisonTab',
+  typeCode: '"CMSComparisonTabComponent"',
+  comparisonPanel: {
+    uid: 'testComparisonPanel',
+    products: 'TEST_PRODUCT_1 TEST_PRODUCT_2',
+  },
 };
 
-class MockComparisonTableService {
-  getComparisonTabs(): Observable<CMSComparisonTabComponent>[] {
-    return [of(mockedCMSComparisonTabComponent)];
+class MockCmsService {
+  getComponentData(): Observable<CMSComparisonTabComponent> {
+    return of(componentData);
   }
 }
 
+class MockComparisonTableService {
+  availableTab$ = new Subject<CMSComparisonTabComponent[]>();
+  setAvailableTabs() {}
+}
+
 describe('ComparisonTableContainerComponent', () => {
-  let comaparisonTableContainer: ComparisonTableContainerComponent;
-  let mockComparisonTableService: MockComparisonTableService;
+  let comparisonTableContainer: ComparisonTableContainerComponent;
   let fixture: ComponentFixture<ComparisonTableContainerComponent>;
   let el: DebugElement;
 
@@ -50,9 +62,8 @@ describe('ComparisonTableContainerComponent', () => {
 
   beforeEach(
     waitForAsync(() => {
-      mockComparisonTableService = new MockComparisonTableService();
       TestBed.configureTestingModule({
-        imports: [NgbTabsetModule],
+        imports: [NgbNavModule],
         declarations: [
           ComparisonTableContainerComponent,
           MockComponentWrapperDirective,
@@ -62,9 +73,10 @@ describe('ComparisonTableContainerComponent', () => {
             provide: CmsComponentData,
             useValue: mockCmsComponentData,
           },
+          { provide: CmsService, useClass: MockCmsService },
           {
             provide: ComparisonTableService,
-            useValue: mockComparisonTableService,
+            useClass: MockComparisonTableService,
           },
         ],
       }).compileComponents();
@@ -73,16 +85,12 @@ describe('ComparisonTableContainerComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTableContainerComponent);
-    comaparisonTableContainer = fixture.componentInstance;
+    comparisonTableContainer = fixture.componentInstance;
     el = fixture.debugElement;
   });
 
   it('should create comparison table container', () => {
-    expect(comaparisonTableContainer).toBeTruthy();
-  });
-
-  it('should contain tabs', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('ngb-tabset'))).toBeTruthy();
+    expect(comparisonTableContainer).toBeTruthy();
   });
 });

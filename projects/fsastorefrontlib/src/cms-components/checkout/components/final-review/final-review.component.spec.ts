@@ -1,14 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {
-  CheckoutPaymentService,
-  I18nTestingModule,
-  RoutingService,
-} from '@spartacus/core';
+import { I18nTestingModule, RoutingService } from '@spartacus/core';
+import { CheckoutPaymentFacade } from '@spartacus/checkout/root';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FinalReviewComponent } from './final-review.component';
 import { of } from 'rxjs';
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
+import { By } from '@angular/platform-browser';
 @Pipe({
   name: 'cxUrl',
 })
@@ -20,7 +18,7 @@ class MockCheckoutService {
   placeOrder() {}
 }
 
-class MockCheckoutPaymentService {
+class MockCheckoutPaymentFacade {
   getPaymentDetails() {
     return of({});
   }
@@ -35,8 +33,9 @@ describe('FinalReviewComponent', () => {
   let component: FinalReviewComponent;
   let fixture: ComponentFixture<FinalReviewComponent>;
   let checkoutService: FSCheckoutService;
-  let checkoutPaymentService: CheckoutPaymentService;
+  let checkoutPaymentService: CheckoutPaymentFacade;
   let routingService: RoutingService;
+  let el: DebugElement;
 
   beforeEach(
     waitForAsync(() => {
@@ -49,8 +48,8 @@ describe('FinalReviewComponent', () => {
             useClass: MockCheckoutService,
           },
           {
-            provide: CheckoutPaymentService,
-            useClass: MockCheckoutPaymentService,
+            provide: CheckoutPaymentFacade,
+            useClass: MockCheckoutPaymentFacade,
           },
           {
             provide: RoutingService,
@@ -65,12 +64,13 @@ describe('FinalReviewComponent', () => {
     fixture = TestBed.createComponent(FinalReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    el = fixture.debugElement;
 
     checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutPaymentService = TestBed.inject(CheckoutPaymentService);
+    checkoutPaymentService = TestBed.inject(CheckoutPaymentFacade);
     spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
 
     routingService = TestBed.inject(RoutingService);
@@ -83,14 +83,25 @@ describe('FinalReviewComponent', () => {
   });
 
   it('should toggle', () => {
-    component.toggleTAndC();
+    const selectEl = el.query(By.css('.form-check-input')).nativeElement;
+    selectEl.checked = true;
+    component.toggleTAndC(selectEl);
+    selectEl.dispatchEvent(new Event('change'));
     expect(component.tAndCToggler).toEqual(true);
   });
 
   it('should place order', () => {
+    component.tAndCToggler = true;
     component.placeOrder();
     expect(checkoutService.placeOrder).toHaveBeenCalled();
     expect(checkoutService.orderPlaced).toEqual(true);
     expect(routingService.go).toHaveBeenCalled();
+  });
+  it('should NOT place order', () => {
+    component.tAndCToggler = false;
+    component.placeOrder();
+    expect(checkoutService.placeOrder).not.toHaveBeenCalled();
+    expect(checkoutService.orderPlaced).not.toEqual(true);
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 });

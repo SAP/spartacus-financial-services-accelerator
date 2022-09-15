@@ -1,0 +1,20 @@
+{
+  "git": {
+    "requireCleanWorkingDir": true,
+    "requireUpstream": false,
+    "tagName": "dynamicforms-${version}",
+    "commitMessage": "Bumping dynamicforms version to ${version}",
+    "tagAnnotation": "Bumping dynamicforms version to ${version}"
+  },
+  "npm": {
+    "publishPath": "./../../dist/dynamicforms"
+  },
+  "hooks": {
+    "after:version:bump": "cd ../.. && ng build dynamicforms --prod"
+  },
+  "github": {
+    "release": true,
+    "assets": ["../../docs.tar.gz", "../../docs.zip"],
+    "releaseName": "@spartacus/dynamicforms@${version}"
+  }
+}

@@ -6,7 +6,7 @@ import {
   FormDataStorageService,
   FormService,
   YFormData,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { LanguageService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
@@ -55,7 +55,7 @@ export class CalculationButtonComponent extends AbstractFormComponent
     );
   }
 
-  onSubmit() {
+  onSubmit(event: UIEvent) {
     const formDataId = this.formDataStorageService.getFormDataIdByCategory(
       this.categoryCode
     );
@@ -63,6 +63,8 @@ export class CalculationButtonComponent extends AbstractFormComponent
     if (formDataId) {
       formData.id = formDataId;
     }
+    this.formDataService.setContinueToNextStep(false);
     this.formDataService.submit(formData);
+    event.stopPropagation();
   }
 }

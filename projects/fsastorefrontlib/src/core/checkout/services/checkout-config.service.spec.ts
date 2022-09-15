@@ -1,16 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import {
-  OrderEntry,
-  Product,
-  RoutesConfig,
-  RoutingConfigService,
-} from '@spartacus/core';
-import {
-  CheckoutConfig,
-  CheckoutStepService,
-  CurrentProductService,
-} from '@spartacus/storefront';
+import { Product, RoutesConfig, RoutingConfigService } from '@spartacus/core';
+import { CurrentProductService } from '@spartacus/storefront';
+import { CheckoutStepService } from '@spartacus/checkout/components';
+import { CheckoutConfig } from '@spartacus/checkout/root';
 import { Observable, of } from 'rxjs';
 import { checkoutConfig } from '../../../cms-components/checkout/config/default-checkout-config';
 import { storefrontRoutesConfig } from '../../../cms-structure/routing/default-routing-config';
@@ -23,31 +16,14 @@ const mockCheckoutSteps: Array<FSCheckoutStep> = checkoutConfig.checkout.steps;
 
 const mockCheckoutConfig: CheckoutConfig = checkoutConfig;
 
-const product: FSProduct = {
-  defaultCategory: {
-    code: 'insurances_auto',
-  },
-  configurable: false,
-};
-
-const mockEntries: OrderEntry[] = [
-  {
-    product: product,
-  },
-];
-
 const mockCart = {
-  deliveryOrderGroups: [
+  entries: [
     {
-      entries: [
-        {
-          product: {
-            defaultCategory: {
-              code: 'insurances_auto',
-            },
-          },
+      product: {
+        defaultCategory: {
+          code: 'insurances_auto',
         },
-      ],
+      },
     },
   ],
 };
@@ -58,14 +34,16 @@ class MockCartService {
 }
 
 class MockCheckoutStepService {
-  getPreviousCheckoutStepUrl() {}
+  getPreviousCheckoutStepUrl() {
+    return 'checkout/add-options';
+  }
 }
 
 const mockRoutingConfig: RoutesConfig = storefrontRoutesConfig;
 
 class MockRoutingConfigService {
   getRouteConfig(routeName: string) {
-    return mockCheckoutConfig[routeName].paths[0];
+    return mockCheckoutConfig[routeName];
   }
 }
 
@@ -177,5 +155,28 @@ describe('FSCheckoutConfigService', () => {
   it('should return false for non product step', () => {
     spyOn<any>(service, 'getUrlFromStepRoute').and.returnValue('/route/:code');
     expect(service.isProductStep('nonProductPage')).toBe(false);
+  });
+
+  it('should trigger previous and next step', () => {
+    spyOn(routingConfigService, 'getRouteConfig').and.returnValue({
+      paths: ['checkout/configureProduct/:productCode'],
+    });
+    spyOn<any>(service, 'getUrlFromStepRoute').and.callFake(route => {
+      return mockRoutingConfig[route].paths[0];
+    });
+    service.triggerPreviousNextStepSet(activatedRoute);
+    expect(service.getCurrentStepIndex(activatedRoute)).toBe(3);
+  });
+
+  it('should get initial step for event category', () => {
+    expect(service.getInitialStepForCategory('insurances_event')).toBe(
+      checkoutConfig.checkout.steps[1]
+    );
+  });
+
+  it('should get initial step for loan category', () => {
+    expect(service.getInitialStepForCategory('banking_loans')).toBe(
+      checkoutConfig.checkout.steps[2]
+    );
   });
 });

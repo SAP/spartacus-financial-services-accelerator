@@ -18,6 +18,7 @@ export const payment = {
     useThisPayment: '[DE] Use this payment',
     addNewPayment: '[DE] Add New Payment',
     changePayment: '[DE] Change Payment',
+    sameAsShippingAddress: '[DE] Use previously added address',
   },
   paymentMethods: {
     paymentMethods: 'Zahlungsdetails',

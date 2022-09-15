@@ -10,7 +10,7 @@ import {
   YFormData,
   FormDataService,
   FormDataStorageService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { map, take, filter } from 'rxjs/operators';
 import { RequestType } from './../../../occ/occ-models';
 

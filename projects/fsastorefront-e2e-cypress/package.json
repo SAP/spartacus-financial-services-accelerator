@@ -5,7 +5,11 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:open:local": "cypress open --config-file cypress.local.json",
-    "cy:run": "cypress run --spec cypress/integration/checkout/**/*  --browser=chrome",
+    "cy:run": "cypress run --spec cypress/integration/**/*  --browser=chrome",
+    "cy:run:insurance": "cypress run --spec cypress/integration/insurance/**/*",
+    "cy:run:banking": "cypress run --spec cypress/integration/banking/**/*",
+    "cy:run:auto": "cypress run --spec cypress/integration/autoe2e/**/*",
+    "cy:run:common": "cypress run --spec cypress/integration/common/**/*",
     "cy:run:local": "cypress run --config-file cypress.local.json",
     "cy:cli": "cypress run",
     "cy:run:mobile": "cypress run --config numTestsKeptInMemory=1 --spec cypress/integration/mobile/**/*",
@@ -18,13 +22,14 @@
     "cypress-report-creation": "npm run merge-reports; npm run generate-full-report"
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^4.0.3",
-    "@testing-library/cypress": "^5.0.0",
-    "cypress": "3.8.2",
-    "cypress-file-upload": "^4.1.1",
+    "@cypress/webpack-preprocessor": "^5.9.1",
+    "@testing-library/cypress": "^8.0.0",
+    "cypress": "^8.0.0",
+    "cypress-file-upload": "^5.0.8",
     "mocha": "5.2.0",
     "mochawesome": "^4.1.0",
     "mochawesome-merge": "^2.0.1",
-    "mochawesome-report-generator": "^4.0.1"
+    "mochawesome-report-generator": "^4.0.1",
+    "dayjs": "^1.10.4"
   }
 }

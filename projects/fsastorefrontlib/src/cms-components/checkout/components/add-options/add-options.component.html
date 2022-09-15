@@ -6,7 +6,13 @@
   </div>
   <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="entries$ | async as entries">
-      <ng-container *ngFor="let orderEntryData of entries | slice: 1">
+      <ng-container
+        *ngFor="
+          let orderEntryData of entries
+            | slice: 1
+            | cxSortByName: 'product':'name'
+        "
+      >
         <div
           class="row mx-3 py-3 no-gutters position-relative"
           *ngIf="orderEntryData.product"
@@ -24,7 +30,10 @@
           <ng-template #tooltipContent>
             <span>{{ orderEntryData.product?.description }}</span>
             <ng-container
-              *ngIf="orderEntryData.product.classifications as classifications"
+              *ngIf="
+                orderEntryData.product.displayClassifications &&
+                orderEntryData.product.classifications as classifications
+              "
             >
               <hr />
               <div
@@ -44,7 +53,6 @@
             <cx-media
               class="cx-product-image-container"
               [container]="orderEntryData.product?.images?.PRIMARY"
-              format="96Wx96H"
             ></cx-media>
           </div>
           <div class="col-12 col-md-7 align-self-center">
@@ -91,10 +99,18 @@
           </div>
         </div>
       </ng-container>
-      <ng-container *ngIf="entries[0].product?.classifications">
+      <ng-container
+        *ngIf="
+          entries[0].product.displayClassifications &&
+          entries[0].product?.classifications
+        "
+      >
         <div class="row mx-3 py-3 no-gutters">
           <div class="col-12 col-md-2 align-self-center">
-            <div class="info-icon p-3 d-inline-flex"></div>
+            <cx-media
+              class="cx-product-image-container"
+              [container]="entries[0].product?.images?.PRIMARY"
+            ></cx-media>
           </div>
           <div class="col-12 col-md-5 align-self-center">
             <h6>
@@ -129,7 +145,7 @@
 
 <ng-container *ngIf="isCartStable$ | async">
   <div class="row mt-5">
-    <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+    <div class="col-md-6 mb-3 mb-md-0">
       <ng-container
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
         ><button
@@ -140,7 +156,7 @@
         </button></ng-container
       >
     </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6">
       <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
         ><button
           class="primary-button btn-block"

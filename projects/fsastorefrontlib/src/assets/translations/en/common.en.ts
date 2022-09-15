@@ -1,6 +1,8 @@
 export const fscommon = {
   fscommon: {
+    create: 'Create',
     no: 'No',
+    none: '',
     mr: 'Mr.',
     mrs: 'Mrs.',
     add: 'Add',
@@ -17,6 +19,7 @@ export const fscommon = {
     preview: 'Preview',
     change: 'Change',
     select: 'Select',
+    selected: 'Selected',
     subject: 'Subject',
     resume: 'Resume',
     details: 'Details',
@@ -34,8 +37,10 @@ export const fscommon = {
     retrieve: 'Retrieve',
     notAvailable: 'N/A',
     contractId: 'ContractId',
+    title: 'Title',
     orderTotal: 'Order total',
     orderConfirmation: 'Confirmation',
+    orderNumber: 'Order Number',
     startDate: 'Start Date',
     phoneNumber: 'Phone Number',
     address: 'Address',
@@ -45,6 +50,8 @@ export const fscommon = {
     postCode: 'Postcode',
     country: 'Country',
     expiryDate: 'Expiry Date',
+    cancellationDate: 'Cancellation Date',
+    cancellationReason: 'Cancellation Reason',
     expiryNotConfirmed: 'Not Confirmed',
     expires: 'Expires',
     myAgent: 'My Agent',
@@ -54,6 +61,7 @@ export const fscommon = {
     finalReview: 'Final Review',
     paymentDetails: 'Payment Details',
     paymentFrequency: 'Payment frequency',
+    oneTimeCharge: 'One Time Charge',
     paymentMethod: 'Payment method',
     confirmAndAgree: 'I confirm that I have read and agree with the',
     termsConditions: 'Terms & Conditions',
@@ -70,6 +78,8 @@ export const fscommon = {
     whatsIncluded: 'What\'s Included', // prettier-ignore
     addedByYou: 'Added by you',
     investementDetails: 'Investments Details',
+    fundName: 'Name',
+    isin: 'ISIN',
     personalDetails: 'Personal Details',
     generalDetails: 'General Details',
     optionalExtras: 'Optional Extras',
@@ -81,9 +91,11 @@ export const fscommon = {
     quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
+    addDocuments: 'Add Documents',
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',
+    finalResult: 'Final result:',
     vehicleMake: 'Vehicle Make',
     vehicleModel: 'Vehicle Model',
     propertyType: 'Property type',
@@ -93,10 +105,14 @@ export const fscommon = {
     contribution: 'Contribution',
     creditCard: 'Credit Card',
     invoice: 'Invoice',
+    ticketCreated: 'Ticket has been created',
+    recommendedProduct: 'Recommended product',
     payment: {
       CARD: 'Credit Card',
       INVOICE: 'Invoice',
     },
+    oboCustomers: 'All Customers',
+    userCreatedSuccess: 'User is successfully created',
     application: {
       title: 'Application',
       applicationRequestSubmitted:
@@ -104,13 +120,16 @@ export const fscommon = {
       applicationNumber: 'Application number is',
       myApplication: 'My Application',
       applicationID: 'Application ID',
-      number: 'Number:',
+      number: 'Number',
     },
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
       enterValidEmail: 'Please enter a valid email',
       dateOfBirth: {
         label: 'Date of Birth',
+      },
+      address: {
+        label: 'Address Info',
       },
     },
     checkout: {
@@ -164,9 +183,30 @@ export const fscommon = {
       contact: 'Contact',
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
+      backToList: 'Back to list',
+      online: 'Online',
+      offline: 'Offline',
+      noSearchResults: 'No search results',
+    },
+    questionnaire: {
+      noResults:
+        'Unfortunately, there is no product that fits all chosen criteria. Please try again with different combination or contact an',
+      agentLink: 'agent.',
+    },
+    httpHandlers: {
+      existingCouponCodeProvided:
+        'This coupon code is already applied to the current cart.',
+    },
+    syncPilot: {
+      speakToAgent: 'Speak to an Agent',
+      needHelp: 'Need Help?',
+      contactAgent: 'Connecting to an agent',
+      waitingAgent: 'Waiting for an agent...',
     },
     attachments: 'Attachments',
     pageNotFoundMessage:
-      'Whoops! Sorry, we couldn\'t find that way! Try getting back.' // prettier-ignore
+      'Whoops! Sorry, we couldn\'t find that way! Try getting back.', // prettier-ignore
+    priceCalculationError:
+      'There has been an error with price calculation, please try again.',
   },
 };

@@ -5,16 +5,19 @@ import { FileConnector } from './file.connector';
 import createSpy = jasmine.createSpy;
 
 class MockFileAdapter implements FileAdapter {
-  getFileForCodeAndType = createSpy(
-    'FileAdapter.getFileForCodeAndType'
-  ).and.callFake((userId, fileCode, fileType) =>
-    of('getFileForCodeAndType' + userId + fileCode + fileType)
-  );
   getFilesForCodes = createSpy(
     'FileAdapter.getFilesForCodes'
   ).and.callFake((userId, fileCodes) =>
     of('getFilesForCodes' + userId + fileCodes)
   );
+  getFileForCodeAndType = createSpy(
+    'FileAdapter.getFileForCodeAndType'
+  ).and.callFake((userId, fileCode, fileType) =>
+    of('getFileForCodeAndType' + userId + fileCode + fileType)
+  );
+  getFilesForUser = createSpy(
+    'FileAdapter.getFilesForUser'
+  ).and.callFake(userId => of('getFilesForUser' + userId));
   uploadFile = createSpy(
     'FileAdapter.uploadFile'
   ).and.callFake((userId, file) => of('uploadFile' + userId + file));
@@ -56,9 +59,14 @@ describe('FileConnector', () => {
     );
   });
 
+  it('should call adapter for getFilesForUser', () => {
+    fileConnector.getFiles(user);
+    expect(fileAdapter.getFilesForUser).toHaveBeenCalledWith(user, undefined);
+  });
+
   it('should call adapter for getFilesForCodes', () => {
     fileConnector.getFiles(user, documentCodes);
-    expect(fileAdapter.getFilesForCodes).toHaveBeenCalledWith(
+    expect(fileAdapter.getFilesForUser).toHaveBeenCalledWith(
       user,
       documentCodes
     );

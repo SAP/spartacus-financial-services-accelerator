@@ -15,7 +15,7 @@ import { FormService } from './../../core/services/form/form.service';
 import { TimeComponent } from './time.component';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })
@@ -34,6 +34,7 @@ const mockField: FieldConfig = {
   fieldType: 'time',
   name: 'testTime',
   label: {
+    default: 'testLabel',
     en: 'What time did it happen?',
   },
 };

@@ -7,10 +7,9 @@ export const DELETE_CLAIM_FAIL = '[Claim] Delete Claim Fail';
 export const LOAD_CLAIMS = '[Claim] Load Claims';
 export const LOAD_CLAIMS_SUCCESS = '[Claim] Load Claims Success';
 export const LOAD_CLAIMS_FAIL = '[Claim] Load Claims Fail';
-
-export const LOAD_CURRENT_CLAIM = '[Claim] Load Current Claim';
-export const LOAD_CURRENT_CLAIM_FAIL = '[Claim] Load Current Claim Fail';
-export const LOAD_CURRENT_CLAIM_SUCCESS = '[Claim] Load Current Claim Success';
+export const LOAD_CLAIM_BY_ID = '[Claim] Load Claim By Id';
+export const LOAD_CLAIM_BY_ID_FAIL = '[Claim] Load Claim By Id Fail';
+export const LOAD_CLAIM_BY_ID_SUCCESS = '[Claim] Load Claim By Id Success';
 
 export const CREATE_CLAIM = '[Claim] Create Claim';
 export const CREATE_CLAIM_FAIL = '[Claim] Create Claim Fail';
@@ -19,6 +18,10 @@ export const CREATE_CLAIM_SUCCESS = '[Claim] Create Claim Success';
 export const UPDATE_CLAIM = '[Claim] Update Claim';
 export const UPDATE_CLAIM_FAIL = '[Claim] Update Claim Fail';
 export const UPDATE_CLAIM_SUCCESS = '[Claim] Update Claim Success';
+
+export const CHANGE_CLAIM = '[Claim] Change Claim';
+
+export const RESET_CLAIM_STATE = '[Claim] Reset Claim State';
 
 export class DeleteClaim implements Action {
   readonly type = DELETE_CLAIM;
@@ -49,19 +52,18 @@ export class LoadClaimsFail implements Action {
   readonly type = LOAD_CLAIMS_FAIL;
   constructor(public payload: any) {}
 }
-
-export class LoadCurrentClaim implements Action {
-  readonly type = LOAD_CURRENT_CLAIM;
+export class LoadClaimById implements Action {
+  readonly type = LOAD_CLAIM_BY_ID;
   constructor(public payload: any) {}
 }
 
-export class LoadCurrentClaimSuccess implements Action {
-  readonly type = LOAD_CURRENT_CLAIM_SUCCESS;
+export class LoadClaimByIdSuccess implements Action {
+  readonly type = LOAD_CLAIM_BY_ID_SUCCESS;
   constructor(public payload: any) {}
 }
 
-export class LoadCurrentClaimFail implements Action {
-  readonly type = LOAD_CURRENT_CLAIM_FAIL;
+export class LoadClaimByIdFail implements Action {
+  readonly type = LOAD_CLAIM_BY_ID_FAIL;
   constructor(public payload: any) {}
 }
 
@@ -85,6 +87,11 @@ export class UpdateClaim implements Action {
   constructor(public payload: any) {}
 }
 
+export class ChangeClaim implements Action {
+  readonly type = CHANGE_CLAIM;
+  constructor(public payload: any) {}
+}
+
 export class UpdateClaimFail implements Action {
   readonly type = UPDATE_CLAIM_FAIL;
   constructor(public payload: any) {}
@@ -95,6 +102,10 @@ export class UpdateClaimSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class ResetClaimState implements Action {
+  readonly type = RESET_CLAIM_STATE;
+}
+
 export type ClaimAction =
   | DeleteClaim
   | DeleteClaimSuccess
@@ -102,12 +113,14 @@ export type ClaimAction =
   | LoadClaims
   | LoadClaimsSuccess
   | LoadClaimsFail
-  | LoadCurrentClaim
-  | LoadCurrentClaimSuccess
-  | LoadCurrentClaimFail
+  | LoadClaimById
+  | LoadClaimByIdSuccess
+  | LoadClaimByIdFail
   | CreateClaim
   | CreateClaimSuccess
   | CreateClaimFail
   | UpdateClaim
   | UpdateClaimSuccess
-  | UpdateClaimFail;
+  | UpdateClaimFail
+  | ChangeClaim
+  | ResetClaimState;

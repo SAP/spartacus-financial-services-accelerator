@@ -1,16 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  CheckoutStepService,
-  PaymentMethodComponent,
-} from '@spartacus/storefront';
-import {
   ActiveCartService,
-  CheckoutDeliveryService,
-  CheckoutPaymentService,
   GlobalMessageService,
   PaymentDetails,
   PaymentType,
-  PaymentTypeService,
   RoutingService,
   TranslationService,
   UserPaymentService,
@@ -21,6 +14,15 @@ import { FSPaymentTypeEnum, FSSteps } from '../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { filter, map, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../core/checkout/facade';
+import {
+  CheckoutDeliveryService,
+  CheckoutPaymentService,
+  PaymentTypeService,
+} from '@spartacus/checkout/core';
+import {
+  CheckoutStepService,
+  PaymentMethodComponent,
+} from '@spartacus/checkout/components';
 
 @Component({
   selector: 'cx-fs-payment-method',
@@ -65,6 +67,29 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+    // TODO: Remove once the checkout state is updated with delivery address saved on backend
+    this.subscription
+      .add(
+        this.activeCartService
+          .getActive()
+          .pipe(
+            filter(cart => !!cart),
+            map(cart => {
+              this.checkoutService.loadCheckoutDetails(cart.code);
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.checkoutDeliveryService
+          .getDeliveryAddress()
+          .pipe(
+            map(address => {
+              this.deliveryAddress = address;
+            })
+          )
+          .subscribe()
+      );
     this.paymentTypeService.loadPaymentTypes();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;

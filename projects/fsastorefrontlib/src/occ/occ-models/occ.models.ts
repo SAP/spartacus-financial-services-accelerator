@@ -1,15 +1,98 @@
-import { YFormData } from '@fsa/dynamicforms';
+import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
 import {
+  B2BUser,
   Cart,
   Category,
+  Consent,
+  ConsentTemplate,
   Occ,
   OrderEntry,
   Price,
   Product,
+  SortModel,
   User,
-  UserSignUp,
 } from '@spartacus/core';
-import { CheckoutStep } from '@spartacus/storefront';
+import { CheckoutStep } from '@spartacus/checkout/root';
+import { UserSignUp } from '@spartacus/user/profile/root';
+import { MediaContainer } from '@spartacus/storefront';
+import { Pagination } from '@spartacus/core/src/model/unused.model';
+
+export enum OrganizationTableType {
+  PRODUCT_ASSIGNMENTS = 'productAssignments',
+  POTENTIAL_PRODUCT_ASSIGNMENTS = 'potentialProductAssignments',
+}
+
+export enum FSPaymentTypeEnum {
+  INVOICE = 'INVOICE',
+  CARD = 'CARD',
+}
+
+export enum BindingStateType {
+  BIND = 'BIND',
+  UNBIND = 'UNBIND',
+}
+
+export enum QuoteWorkflowStatusType {
+  APPROVED = 'APPROVED',
+  REFERRED = 'REFERRED',
+  PENDING = 'PENDING',
+}
+
+export enum ConfiguratorType {
+  PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
+}
+export enum FormDefinitionType {
+  PRODUCT_CONFIGURE = 'PRODUCT_CONFIGURE',
+  PERSONAL_DETAILS = 'PERSONAL_DETAILS',
+}
+export enum RequestType {
+  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
+  INSURED_OBJECT_ADD = 'FSINSUREDOBJECT_ADD',
+  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
+  FSCLAIM = 'FSCLAIM',
+}
+
+export enum ClaimStatus {
+  OPEN = 'OPEN',
+  SUBMITTED = 'SUBMITTED',
+  PROCESSING = 'PROCESSING',
+  ERROR = 'ERROR',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+export enum ChangeRequestStatus {
+  SUBMITTED = 'SUBMITTED',
+  REFERRED = 'REFERRED',
+}
+export enum StepStatus {
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED',
+}
+
+export enum QuoteActionType {
+  BIND = 'BIND',
+  UNDERWRITING = 'UNDERWRITING',
+  UPDATE = 'UPDATE',
+}
+
+export enum SyncPilotGender {
+  mr = 'm',
+  mrs = 'w',
+  miss = 'w',
+  ms = 'w',
+  dr = 'd',
+  rev = 'd',
+}
+
+export enum FSUserRole {
+  SELLER = 'sellergroup',
+}
+
+export enum AssetTableType {
+  CLAIMS = 'claims',
+  POLICIES = 'policies',
+  QUOTES = 'quotes',
+}
 
 export interface ContactAgentData {
   email?: string;
@@ -69,12 +152,23 @@ export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
 }
 
+export interface OBOConsentList {
+  oboConsents: OBOConsent[];
+}
+
+export interface OBOCustomerList {
+  entries: FSUser[];
+  pagination: Pagination;
+  sorts: SortModel[];
+}
+
 export interface QuoteWorkflowStatus {
   code?: string;
 }
 
 export interface InsuranceQuote {
   quoteId?: string;
+  cartCode?: string;
   state?: QuoteBindingState;
   defaultCategory?: Occ.Category;
   quoteStatus?: QuoteStatus;
@@ -83,6 +177,27 @@ export interface InsuranceQuote {
   quoteWorkflowStatus?: QuoteWorkflowStatus;
   quoteDetails?: Record<string, string>;
   insuredObjectList?: InsuredObjectList;
+  renewal?: boolean;
+  original?: boolean;
+}
+
+export interface OBOConsent extends Consent {
+  consentHolder?: User;
+  consentTemplate?: ConsentTemplate;
+  customer: User;
+  oboPermissionConfiguration: OBOPermissionConfiguration;
+}
+
+export interface FSConsentTemplate extends ConsentTemplate {
+  exposed?: boolean;
+}
+
+export interface OBOPermissionConfiguration {
+  permissions?: OBOPermissions[];
+}
+
+export interface OBOPermissions {
+  [key: string]: any;
 }
 
 export interface InsuredObjectList {
@@ -94,59 +209,6 @@ export interface QuoteBindingState {
 
 export interface QuoteStatus {
   code?: string;
-}
-
-export enum FSPaymentTypeEnum {
-  INVOICE = 'INVOICE',
-  CARD = 'CARD',
-}
-
-export enum BindingStateType {
-  BIND = 'BIND',
-  UNBIND = 'UNBIND',
-}
-
-export enum QuoteWorkflowStatusType {
-  APPROVED = 'APPROVED',
-  REFERRED = 'REFERRED',
-  PENDING = 'PENDING',
-}
-
-export enum ConfiguratorType {
-  PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
-}
-export enum FormDefinitionType {
-  PRODUCT_CONFIGURE = 'PRODUCT_CONFIGURE',
-  PERSONAL_DETAILS = 'PERSONAL_DETAILS',
-}
-export enum RequestType {
-  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
-  INSURED_OBJECT_ADD = 'FSINSUREDOBJECT_ADD',
-  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
-  FSCLAIM = 'FSCLAIM',
-}
-
-export enum ClaimStatus {
-  OPEN = 'OPEN',
-  SUBMITTED = 'SUBMITTED',
-  PROCESSING = 'PROCESSING',
-  ERROR = 'ERROR',
-  APPROVED = 'APPROVED',
-  REJECTED = 'REJECTED',
-}
-export enum ChangeRequestStatus {
-  SUBMITTED = 'SUBMITTED',
-  REFERRED = 'REFERRED',
-}
-export enum StepStatus {
-  COMPLETED = 'COMPLETED',
-  CANCELED = 'CANCELED',
-}
-
-export enum QuoteActionType {
-  BIND = 'BIND',
-  UNDERWRITING = 'UNDERWRITING',
-  UPDATE = 'UPDATE',
 }
 
 export interface FSOrderEntry extends OrderEntry {
@@ -177,6 +239,10 @@ export interface BillingTime {
   description?: string;
 }
 
+export interface FSB2BUser extends B2BUser {
+  dateOfBirth?: string;
+}
+
 export interface FSUserSignUp extends UserSignUp {
   dateOfBirth?: string;
   phoneNumber?: string;
@@ -190,6 +256,8 @@ export interface FSContactInfo {
 export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
+  active?: boolean;
+  thumbnail?: MediaContainer;
 }
 
 export interface FSStepData {
@@ -224,7 +292,7 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
-  documents?: any;
+  documents?: DocumentFile[];
   properties?: any;
 }
 
@@ -253,4 +321,29 @@ export interface FSCheckoutStep extends CheckoutStep {
 export interface FSSteps {
   stepParameter: string;
   step: string;
+}
+
+export interface FSProductAssignment {
+  assignmentCode?: string;
+  name?: string;
+  added?: boolean;
+  active?: boolean;
+}
+
+export interface AppointmentData {
+  subject: string;
+  appointmentDate: string;
+  appointmentTime: string;
+  description: string;
+  consentGiven: boolean;
+}
+
+export interface DataByAssetType {
+  headings: string[];
+  values: {
+    propName: boolean;
+    value: string;
+    startClaim?: boolean;
+    classes?: string;
+  }[];
 }

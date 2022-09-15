@@ -42,7 +42,7 @@ class MockUserIdService {
 }
 class MockAuthService {
   isUserLoggedIn() {
-    return true;
+    return of(true);
   }
 }
 describe('ChangeRequestServiceTest', () => {
@@ -81,8 +81,7 @@ describe('ChangeRequestServiceTest', () => {
   ));
 
   it('shuld be able to load change request', () => {
-    service.requestId = requestId;
-    service.loadChangeRequest();
+    service.loadChangeRequest(requestId, userId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadChangeRequest({
         userId: userId,

@@ -10,7 +10,7 @@ import {
   StateWithMultiCart,
   UserIdService,
 } from '@spartacus/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import * as fromAction from './../../checkout/store/actions/index';
@@ -23,6 +23,10 @@ export class FSCartService extends ActiveCartService {
     protected multiCartService: MultiCartService
   ) {
     super(store, multiCartService, userIdService);
+  }
+
+  setActiveCart(cart: Observable<Cart>) {
+    this.activeCart$ = cart;
   }
 
   createCartForProduct(
@@ -85,6 +89,7 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     pricingData: PricingData
   ) {
+    localStorage.removeItem('bindingState');
     this.store.dispatch(
       new fromAction.StartBundle({
         userId: userId,
@@ -119,15 +124,17 @@ export class FSCartService extends ActiveCartService {
   }
 
   loadCart(cartId: string, userId: string): void {
-    if (userId !== OCC_USER_ID_ANONYMOUS) {
-      this.multiCartService.loadCart({
-        userId: userId,
-        cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
-        extraData: {
-          active: true,
-        },
-      });
-    }
+    this.multiCartService.loadCart({
+      userId: userId,
+      cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
+      extraData: {
+        active: true,
+      },
+    });
+  }
+
+  getCart(cartId: string): Observable<Cart> {
+    return this.multiCartService.getCart(cartId);
   }
 
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {

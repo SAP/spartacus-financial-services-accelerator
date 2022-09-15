@@ -1,0 +1,15 @@
+%cx-fs-policies-chart {
+  .accordion {
+    .accordion-item {
+      margin-top: 0;
+    }
+    .fa-chart-pie {
+      color: var(--cx-color-primary);
+    }
+  }
+  .chart-container {
+    @include media-breakpoint-down(sm) {
+      width: 310px;
+    }
+  }
+}

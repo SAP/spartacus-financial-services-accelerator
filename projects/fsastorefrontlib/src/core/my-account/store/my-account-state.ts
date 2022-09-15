@@ -13,6 +13,7 @@ export interface MyAccountState {
   premiumCalendar: PremiumCalendarState;
   claims: ClaimState;
   claimPolicies: ClaimPoliciesState;
+  consents: ConsentState;
 }
 
 export interface Quote {
@@ -21,6 +22,17 @@ export interface Quote {
 
 export interface QuoteState {
   quotes: Models.InsuranceQuote[];
+  quoteDetails: {};
+  quotesComparison: {};
+  loaded: boolean;
+}
+
+export interface ConsentState {
+  consents: {};
+  customer: {};
+  customerQuotes: Models.InsuranceQuote[];
+  customerPolicies: {};
+  customerClaims: {};
   loaded: boolean;
 }
 
@@ -30,6 +42,10 @@ export interface PolicyState {
   loaded: boolean;
 }
 
+/**
+ * @deprecated since version 4.0.2
+ * Use connector directly, as we remove store for this feature.
+ */
 export interface PremiumCalendarState {
   data: {};
   loaded: boolean;

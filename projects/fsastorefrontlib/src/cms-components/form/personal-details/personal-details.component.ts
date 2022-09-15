@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { ActiveCartService, AuthService } from '@spartacus/core';
+import {
+  ActiveCartService,
+  AuthService,
+  UserAddressService,
+} from '@spartacus/core';
 import { filter, map, take } from 'rxjs/operators';
 import {
   FormCMSComponent,
   FormDataService,
   FormDataStorageService,
   YFormCmsComponent,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import {
   FSProduct,
@@ -24,9 +28,11 @@ export class PersonalDetailsComponent extends FormCMSComponent {
     protected cartService: ActiveCartService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected userAddressService: UserAddressService
   ) {
     super(componentData, formDataService, formDataStorageService);
+    this.userAddressService.loadAddresses();
   }
 
   loadFormDefinition() {

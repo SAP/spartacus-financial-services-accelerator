@@ -3,7 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  CmsConfig,
+  OccConfig,
   I18nTestingModule,
   Product,
   RoutingService,
@@ -14,8 +14,11 @@ import { Observable } from 'rxjs/internal/Observable';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
 import { FSProductService } from './../../../core/product-pricing/facade/product.service';
+import { ComparisonTableService } from '../comparison-table.service';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
+import createSpy = jasmine.createSpy;
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../core/general-config/default-general-config';
 
 @Pipe({
   name: 'cxUrl',
@@ -24,7 +27,7 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
-const paynow = 'paynow';
+const paynow = PAY_NOW_BILLING_TIME_CODE;
 
 const billingTimes = [
   {
@@ -81,14 +84,23 @@ const recurringProduct: FSProduct = {
   },
 };
 
+class MockComparisonTableService {
+  setAvailableTabs() {}
+  calculateHeights() {}
+  setHeightsAtResize() {
+    return of();
+  }
+}
+
 class MockCartService {
   createCartForProduct(): void {}
 }
 
-const mockCmsConfig: CmsConfig = {
+const testBaseUrl = '';
+const mockCmsConfig: OccConfig = {
   backend: {
     occ: {
-      baseUrl: 'base-url',
+      baseUrl: testBaseUrl,
       prefix: '/rest/v2/',
     },
   },
@@ -99,7 +111,7 @@ const mockCmsConfig: CmsConfig = {
 };
 
 class MockRoutingService {
-  go() {}
+  go = createSpy();
 }
 
 const nextStep = 'nextStep';
@@ -130,10 +142,9 @@ describe('ComparisonTablePanelItemComponent', () => {
   let comparisonTablePanelItemComponent: ComparisonTablePanelItemComponent;
   let fixture: ComponentFixture<ComparisonTablePanelItemComponent>;
   let mockCartService: FSCartService;
-  let mockRoutingService: RoutingService;
-  let mockCheckoutConfigService: FSCheckoutConfigService;
   let mockProductService: FSProductService;
-
+  let comparisonTableService: ComparisonTableService;
+  let routingService: RoutingService;
   let el: DebugElement;
 
   beforeEach(
@@ -151,7 +162,7 @@ describe('ComparisonTablePanelItemComponent', () => {
             useClass: MockCartService,
           },
           {
-            provide: CmsConfig,
+            provide: OccConfig,
             useValue: mockCmsConfig,
           },
           {
@@ -170,13 +181,17 @@ describe('ComparisonTablePanelItemComponent', () => {
             provide: FSProductService,
             useClass: MockFSProductService,
           },
+          {
+            provide: ComparisonTableService,
+            useClass: MockComparisonTableService,
+          },
         ],
         declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
       }).compileComponents();
       mockCartService = TestBed.inject(FSCartService);
-      mockRoutingService = TestBed.inject(RoutingService);
-      mockCheckoutConfigService = TestBed.inject(FSCheckoutConfigService);
       mockProductService = TestBed.inject(FSProductService);
+      comparisonTableService = TestBed.inject(ComparisonTableService);
+      routingService = TestBed.inject(RoutingService);
     })
   );
 
@@ -257,7 +272,7 @@ describe('ComparisonTablePanelItemComponent', () => {
     expect(result).not.toBeTruthy();
   });
 
-  it('should create and start bundle for product', () => {
+  it('should create and start bundle', () => {
     spyOn(mockCartService, 'createCartForProduct').and.stub();
     comparisonTablePanelItemComponent.createCartAndStartBundleForProduct(
       'TEST_PRODUCT',
@@ -267,8 +282,87 @@ describe('ComparisonTablePanelItemComponent', () => {
     expect(mockCartService.createCartForProduct).toHaveBeenCalled();
   });
 
+  it('should navigate to addOptions step when product is not configurable', () => {
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(product)
+    );
+    spyOn(mockCartService, 'createCartForProduct').and.stub();
+    comparisonTablePanelItemComponent.getProductData();
+    comparisonTablePanelItemComponent.createCartAndStartBundleForProduct(
+      'TEST_PRODUCT',
+      'bundleTemplateId'
+    );
+
+    expect(mockCartService.createCartForProduct).toHaveBeenCalled();
+
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'addOptions',
+      params: Object({ code: undefined }),
+    });
+  });
+
+  it('should navigate to configureProduct step when product is configurable', () => {
+    const mockProduct: FSProduct = {
+      code: productCode,
+      name: productName,
+      configurable: true,
+    };
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(mockProduct)
+    );
+    spyOn(mockCartService, 'createCartForProduct').and.stub();
+    comparisonTablePanelItemComponent.getProductData();
+    comparisonTablePanelItemComponent.createCartAndStartBundleForProduct(
+      'TEST_PRODUCT',
+      'bundleTemplateId'
+    );
+
+    expect(routingService.go).toHaveBeenCalledWith({
+      cxRoute: 'configureProduct',
+      params: Object({ code: 'TEST_PRODUCT' }),
+    });
+  });
+
+  it('should set product price when product has dynamic attributes', () => {
+    const mockProductPrice = '25.00';
+    const mockProduct = {
+      code: productCode,
+      name: productName,
+      price: {
+        currencyIso: currencyIso,
+        oneTimeChargeEntries: [
+          {
+            billingTime: {
+              code: paynow,
+            },
+            price: {
+              value: 25.0,
+              formattedValue: mockProductPrice,
+            },
+          },
+        ],
+      },
+      dynamicAttributes: [
+        {
+          key: 'monthlyAnnuity',
+          value: {
+            formattedValue: mockProductPrice,
+          },
+        },
+      ],
+    };
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(mockProduct)
+    );
+    spyOn(mockCartService, 'createCartForProduct').and.stub();
+    comparisonTablePanelItemComponent.getProductData();
+    expect(comparisonTablePanelItemComponent.productPrice).toEqual(
+      mockProductPrice
+    );
+  });
+
   it('should get base url', () => {
-    const baseUrl = comparisonTablePanelItemComponent.getBaseUrl();
-    expect(baseUrl).toEqual('base-url');
+    const baseUrl = comparisonTablePanelItemComponent.baseUrl;
+    expect(baseUrl).toEqual(testBaseUrl);
   });
 });

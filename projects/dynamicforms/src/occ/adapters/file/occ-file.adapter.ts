@@ -16,10 +16,15 @@ export class OccFileAdapter implements FileAdapter {
   ) {}
 
   uploadFile(userId, file: File): Observable<any> {
-    const url = this.occEndpointService.getUrl('uploadFile', {
-      userId: userId,
+    const url = this.occEndpointService.buildUrl('uploadFile', {
+      urlParams: {
+        userId: userId,
+      },
     });
-    const params: HttpParams = new HttpParams().set('fields', FULL_PARAMS);
+    const params: HttpParams = new HttpParams()
+      .set('fileSize', file.size.toString())
+      .set('fields', FULL_PARAMS);
+
     const data: FormData = new FormData();
     data.append('file', file);
 
@@ -33,9 +38,11 @@ export class OccFileAdapter implements FileAdapter {
   }
 
   removeFileForUserAndCode(userId: string, fileCode: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('removeFile', {
-      userId,
-      fileCode,
+    const url = this.occEndpointService.buildUrl('removeFile', {
+      urlParams: {
+        userId,
+        fileCode,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -46,9 +53,11 @@ export class OccFileAdapter implements FileAdapter {
   }
 
   getFileForCodeAndType(userId: string, fileCode: string, fileType: string) {
-    const url = this.occEndpointService.getUrl('getFile', {
-      userId,
-      fileCode,
+    const url = this.occEndpointService.buildUrl('getFile', {
+      urlParams: {
+        userId,
+        fileCode,
+      },
     });
     return this.http.get<string>(url).pipe(
       map(document => base64StringToBlob(document, fileType)),
@@ -56,13 +65,17 @@ export class OccFileAdapter implements FileAdapter {
     );
   }
 
-  getFilesForCodes(userId: string, fileCodes: Array<string>) {
-    const url = this.occEndpointService.getUrl('getFiles', {
-      userId,
+  getFilesForUser(userId: string, fileCodes?: Array<string>) {
+    const url = this.occEndpointService.buildUrl('getFiles', {
+      urlParams: {
+        userId,
+      },
     });
-    const params: HttpParams = new HttpParams()
-      .set('documentCodes', fileCodes.toString())
-      .set('fields', FULL_PARAMS);
+    let params: HttpParams = new HttpParams().set('fields', FULL_PARAMS);
+
+    if (fileCodes) {
+      params = params.set('documentCodes', fileCodes.toString());
+    }
     return this.http
       .get<any>(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));

@@ -1,18 +1,32 @@
-@import '../fs-mixins';
-@import '../theme';
-@import '~bootstrap/scss/mixins/breakpoints';
-
 ul[role='tablist'].nav-tabs {
   border-bottom: 1px solid var(--cx-color-3);
   @include media-breakpoint-down(xs) {
     display: block;
   }
-  .nav-item .nav-link {
-    @extend .fs-tab;
-  }
-}
-.hide-tab-heading {
-  .nav-item {
-    display: none;
+  .nav-item .nav-link,
+  .fs-tab {
+    color: var(--cx-color-text);
+    margin-right: 3px;
+    padding: 1rem 2rem;
+    display: flex;
+    border-bottom: 3px solid transparent;
+    @include fs-transition;
+    &.active {
+      font-weight: var(--cx-font-weight-bold);
+      background-color: var(--cx-color-4);
+      color: var(--cx-color-text);
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom: 3px solid var(--cx-color-primary);
+    }
+    &:hover {
+      color: var(--cx-color-primary);
+      border-bottom: 3px solid var(--cx-color-primary);
+      opacity: 0.8;
+    }
+    @include media-breakpoint-down(xs) {
+      border-radius: 0;
+      margin-right: 0;
+    }
   }
 }

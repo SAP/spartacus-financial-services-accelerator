@@ -15,7 +15,7 @@ import { RadioComponent } from './radio.component';
 import { FormService } from './../../core/services/form/form.service';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })
@@ -36,12 +36,14 @@ const mockField: FieldConfig = {
   options: [
     {
       label: {
+        default: 'testLabel',
         en: 'testOptionLabel',
       },
       name: 'testOptionName',
     },
   ],
   label: {
+    default: 'testLabel',
     en: 'What time did it happen?',
   },
 };

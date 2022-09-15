@@ -1,28 +1,28 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { DefaultFormValidators } from '@fsa/dynamicforms';
+import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
   ANONYMOUS_CONSENT_STATUS,
   GlobalMessageService,
   RoutingService,
-  UserService,
   AuthConfigService,
 } from '@spartacus/core';
-import { RegisterComponent } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { FSUserSignUp } from '../../../occ/occ-models';
 import { DateConfig } from './../../../core/date-config/date-config';
+import { RegisterComponent } from '@spartacus/user/profile/components';
+import { UserRegisterFacade } from '@spartacus/user/profile/root';
+import { CustomFormValidators } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-register',
   templateUrl: './register.component.html',
 })
-export class FSRegisterComponent extends RegisterComponent
-  implements OnInit, OnDestroy {
+export class FSRegisterComponent extends RegisterComponent implements OnInit {
   constructor(
-    protected userService: UserService,
+    protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
     protected router: RoutingService,
@@ -32,7 +32,7 @@ export class FSRegisterComponent extends RegisterComponent
     protected authConfigService: AuthConfigService
   ) {
     super(
-      userService,
+      userRegister,
       globalMessageService,
       fb,
       router,
@@ -45,19 +45,32 @@ export class FSRegisterComponent extends RegisterComponent
   sub = new Subscription();
   consentGiven: boolean;
 
-  registerForm = this.fb.group({
-    ...this.registerForm.controls,
-    phoneNumber: [
-      '',
-      DefaultFormValidators.regexValidator(
-        DefaultFormValidators.phoneNumberRegex
+  registerForm = this.fb.group(
+    {
+      ...this.registerForm.controls,
+      titleCode: ['', Validators.required],
+      phoneNumber: [
+        '',
+        DefaultFormValidators.regexValidator(
+          DefaultFormValidators.phoneNumberRegex
+        ),
+      ],
+      dateOfBirth: [
+        '',
+        [
+          Validators.required,
+          DefaultFormValidators.dateOfBirthValidator(18),
+          Validators.min(1900),
+        ],
+      ],
+    },
+    {
+      validators: CustomFormValidators.passwordsMustMatch(
+        'password',
+        'passwordconf'
       ),
-    ],
-    dateOfBirth: [
-      '',
-      [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
-    ],
-  });
+    }
+  );
 
   ngOnInit() {
     super.ngOnInit();
@@ -94,11 +107,5 @@ export class FSRegisterComponent extends RegisterComponent
 
   getDateFormat() {
     return this.config.date.format || '';
-  }
-
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 }

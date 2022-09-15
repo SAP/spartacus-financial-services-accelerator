@@ -1,6 +1,6 @@
 import { experimental, JsonParseMode, parseJson } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { Schema as FsOptions } from '../../add-fsa/schema';
+import { FSSchema as FsOptions } from '../../add-fsa/schema';
 
 const DEFAULT_POSSIBLE_PROJECT_FILES = ['/angular.json', '/.angular.json'];
 

@@ -13,7 +13,7 @@ import {
   FormDataService,
   FormDataStorageService,
   FormService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { LanguageService, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -32,11 +32,10 @@ const mockField: FieldConfig = {
   fieldType: 'calculateButton',
   name: 'testButton',
   label: {
+    default: 'testLabel',
     en: 'Test button',
   },
 };
-
-class MockOccValueListService {}
 
 class MockLanguageService {
   getActive() {
@@ -72,6 +71,7 @@ class MockFormService {
 
 class MockFormDataService {
   submit() {}
+  setContinueToNextStep(continueToNextStep) {}
 }
 
 describe('CalculationButtonComponent', () => {
@@ -156,7 +156,7 @@ describe('CalculationButtonComponent', () => {
   });
 
   it('should submit form data', () => {
-    component.onSubmit();
+    component.onSubmit(new UIEvent('click'));
     expect(formDataService.submit).toHaveBeenCalled();
   });
 });

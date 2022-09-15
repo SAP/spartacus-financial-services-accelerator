@@ -10,12 +10,14 @@ import {
   I18nModule,
   RoutesConfig,
   RoutingConfig,
+  UrlModule,
 } from '@spartacus/core';
 import {
   CmsPageGuard,
   PageLayoutComponent,
   SpinnerModule,
   CardModule,
+  MediaModule,
 } from '@spartacus/storefront';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimPoliciesComponent } from './claim-policies/claim-policies.component';
@@ -23,10 +25,14 @@ import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
-import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
+import { DateFormatConfigurationModule } from '../../../shared/util/helpers/pipe/dateFormatConfiguration.module';
+import { ClaimDetailsComponent } from './claim-details/claim-details.component';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
+import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
+import { ChangeClaimNavigationComponent } from './change-claim/change-claim-navigation.component';
 
 const routes: Routes = [
   {
@@ -56,6 +62,24 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'claimDetails',
+      pageLabel: 'claim-details',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'changeClaim',
+      pageLabel: 'changeClaim',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -67,6 +91,11 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     CardModule,
+    UrlModule,
+    MediaModule,
+    AccordionModule,
+    DateFormatConfigurationModule,
+    DocumentsTableModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -81,21 +110,30 @@ const routes: Routes = [
           component: CreateClaimComponent,
           guards: [AuthGuard],
         },
+        AccountClaimDetailsFlex: {
+          component: ClaimDetailsComponent,
+        },
+        ChangeClaimFlex: {
+          component: ChangeClaimNavigationComponent,
+        },
       },
     }),
   ],
   declarations: [
-    ParseDatePipe,
     ClaimsComponent,
     DeleteClaimDialogComponent,
     ClaimPoliciesComponent,
     CreateClaimComponent,
+    ClaimDetailsComponent,
+    ChangeClaimNavigationComponent,
   ],
   exports: [
     ClaimsComponent,
-    ClaimPoliciesComponent,
     DeleteClaimDialogComponent,
-    ParseDatePipe,
+    ClaimPoliciesComponent,
+    CreateClaimComponent,
+    ClaimDetailsComponent,
+    ChangeClaimNavigationComponent,
   ],
   providers: [
     ClaimService,
@@ -108,6 +146,8 @@ const routes: Routes = [
     DeleteClaimDialogComponent,
     ClaimPoliciesComponent,
     CreateClaimComponent,
+    ClaimDetailsComponent,
+    ChangeClaimNavigationComponent,
   ],
 })
 export class ClaimModule {}

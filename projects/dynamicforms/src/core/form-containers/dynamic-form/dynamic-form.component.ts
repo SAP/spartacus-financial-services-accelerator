@@ -30,6 +30,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   formData: Observable<YFormData>;
   @Input()
   config: FormDefinition;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 
@@ -86,7 +87,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {
           const formGroup = this.form.get(groupCode);
-          if (formGroup) {
+          if (formGroup && formData[groupCode][controlName] !== ' ') {
             if (formGroup.get(controlName)) {
               formGroup
                 .get(controlName)
@@ -146,6 +147,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   private checkInvalidControls(formData: YFormData): boolean {
     return !!(formData && !this.valid);
   }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

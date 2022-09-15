@@ -1,5 +1,10 @@
 @import '../theme/fs/variables';
 
+%cx-fs-order-details-items {
+  img {
+    width: 50px;
+  }
+}
 %cx-fs-order-details-totals {
   @include media-breakpoint-up(md) {
     background-color: var(--cx-color-background);
@@ -20,6 +25,29 @@
       padding: 0 1rem;
       @include media-breakpoint-down(sm) {
         padding: 1.5rem 1rem;
+      }
+    }
+  }
+}
+%cx-fs-order-summary {
+  padding-bottom: 16px;
+  @extend %cx-order-summary;
+  %cx-applied-coupons {
+    & > * {
+      display: flex;
+      & > * {
+        flex: 1 1 50%;
+        max-width: 50%;
+      }
+      .coupon-summary.textonly {
+        display: block;
+        background: none;
+        font-weight: var(--cx-font-weight-semi);
+        margin: 0;
+        padding: 0;
+        border: none;
+        text-align: right;
+        line-height: 1.6;
       }
     }
   }

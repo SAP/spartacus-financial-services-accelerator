@@ -36,6 +36,8 @@ const mockMessages = {
 class MockInboxService {
   activeMessageGroupAndTitle = of(mockInboxTab);
   messagesSource = new BehaviorSubject<any>(null);
+  unreadMessagesState = new BehaviorSubject<any>(null);
+  setUnreadMessageState() {}
 
   getMessages() {
     return of(mockMessages);
@@ -58,7 +60,7 @@ class InboxTabComponent {
 }
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-pagination',
   template: '',
 })

@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { FormDefinitionType } from '@fsa/storefront';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { GlobalMessage, GlobalMessageService } from '@spartacus/core';
@@ -81,7 +80,7 @@ describe('Form Definition Effects', () => {
   it('should load form definition by category', () => {
     const action = new fromActions.LoadFormDefinition({
       categoryCode: category,
-      formDefinitionType: FormDefinitionType.PERSONAL_DETAILS,
+      formDefinitionType: 'PERSONAL_DETAILS',
     });
     const completion = new fromActions.LoadFormDefinitionSuccess(
       formDefinition

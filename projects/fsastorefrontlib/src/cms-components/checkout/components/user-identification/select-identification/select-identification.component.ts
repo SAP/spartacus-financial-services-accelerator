@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RoutingService } from '@spartacus/core';
-import { Subscription, Observable } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import {
+  ActiveCartService,
+  RoutingService,
+  UserIdService,
+} from '@spartacus/core';
+import { Subscription, Observable, combineLatest } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 import { FSSteps } from '../../../../../occ/occ-models';
@@ -20,7 +24,9 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected checkoutService: FSCheckoutService,
-    protected cartService: FSCartService
+    protected cartService: FSCartService,
+    protected activeCartService: ActiveCartService,
+    protected userIdService: UserIdService
   ) {}
 
   private subscription = new Subscription();
@@ -51,27 +57,35 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
     this.selected = identificationType.name;
   }
 
+  setIdentificationType() {
+    if (!this.selected) {
+      return;
+    }
+    combineLatest([
+      this.activeCartService.getActiveCartId(),
+      this.userIdService.getUserId(),
+    ])
+      .pipe(
+        filter(([activeCartCode]) => !!activeCartCode),
+        take(1),
+        map(([activeCartCode, occUserId]) => {
+          this.checkoutService.setIdentificationType(
+            activeCartCode,
+            occUserId,
+            this.selected
+          );
+          this.checkoutService.placeOrder(true);
+          this.checkoutService.orderPlaced = true;
+          this.routingService.go({ cxRoute: 'orderConfirmation' });
+        })
+      )
+      .subscribe();
+  }
+
   navigateBack(previousStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
     });
-  }
-
-  setIdentificationType() {
-    this.subscription.add(
-      this.checkoutService
-        .setIdentificationType(this.selected)
-        .pipe(
-          filter(identificationType => identificationType),
-          take(1),
-          tap(() => {
-            this.checkoutService.placeOrder(true);
-            this.checkoutService.orderPlaced = true;
-            this.routingService.go({ cxRoute: 'orderConfirmation' });
-          })
-        )
-        .subscribe()
-    );
   }
 
   ngOnDestroy() {

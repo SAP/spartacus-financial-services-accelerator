@@ -19,7 +19,7 @@ export function reducer(
       if (content?.body?.code) {
         fileContent.files = [...fileContent.files, content.body];
       }
-      content = fileContent;
+      content = { ...fileContent };
       return {
         ...state,
         content,
@@ -27,14 +27,26 @@ export function reducer(
       };
     }
     case fromAction.REMOVE_FILE_SUCCESS: {
-      const fileContent = { ...state.content };
+      // needed to deep clone state.content object
+      const fileContent = JSON.parse(JSON.stringify(state.content));
       const removedFileCode = action.payload;
       fileContent.files.forEach((file, index) => {
         if ((<any>file).code === removedFileCode) {
           fileContent.files.splice(index, 1);
         }
       });
-      const content = fileContent;
+      const content = { ...fileContent };
+      return {
+        ...state,
+        content,
+        loaded: true,
+      };
+    }
+    case fromAction.SET_UPLOADED_FILES: {
+      let content = { ...action.payload };
+      const fileContent = { ...state.content };
+      fileContent.files = content;
+      content = { ...fileContent };
       return {
         ...state,
         content,

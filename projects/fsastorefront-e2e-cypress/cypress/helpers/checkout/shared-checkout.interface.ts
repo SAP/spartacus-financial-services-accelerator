@@ -22,6 +22,7 @@ export interface AddOptionItem {
   available?: boolean;
   shouldAdd?: boolean;
   mandatory?: boolean;
+  notAvailable?: boolean;
 }
 
 export interface AddOptions {

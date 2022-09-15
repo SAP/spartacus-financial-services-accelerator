@@ -11,12 +11,15 @@ import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ClaimService } from './claim.service';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
 const contractId = 'CT00001';
 const claimId = 'CL00001';
-
+const claimMock = {
+  claimNumber: claimId,
+};
 const claimPolicies = {
   insurancePolicies: [
     {
@@ -34,7 +37,12 @@ class MockUserIdService {
 }
 class MockAuthService {
   isUserLoggedIn() {
-    return true;
+    return of(true);
+  }
+}
+class MockOboCustomerService {
+  getOboCustomerUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
   }
 }
 describe('ClaimServiceTest', () => {
@@ -43,6 +51,7 @@ describe('ClaimServiceTest', () => {
   let claimData: ClaimDataServiceStub;
   let authService: MockAuthService;
   let userIdService: MockUserIdService;
+  let oboCustomerService: MockOboCustomerService;
 
   class ClaimDataServiceStub {
     userId = userId;
@@ -52,6 +61,7 @@ describe('ClaimServiceTest', () => {
   beforeEach(() => {
     authService = new MockAuthService();
     userIdService = new MockUserIdService();
+    oboCustomerService = new MockOboCustomerService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -64,6 +74,7 @@ describe('ClaimServiceTest', () => {
         { provide: ClaimDataService, useClass: ClaimDataServiceStub },
         { provide: AuthService, useValue: authService },
         { provide: UserIdService, useValue: userIdService },
+        { provide: OboCustomerService, useValue: oboCustomerService },
       ],
     });
 
@@ -94,9 +105,7 @@ describe('ClaimServiceTest', () => {
   });
 
   it('should be able to get current claim', () => {
-    store.dispatch(
-      new fromAction.LoadCurrentClaimSuccess({ claimId: claimId })
-    );
+    store.dispatch(new fromAction.LoadClaimByIdSuccess({ claimId: claimId }));
     let claimResponse;
     service
       .getCurrentClaim()
@@ -109,9 +118,9 @@ describe('ClaimServiceTest', () => {
 
   it('should be able to load claim by id', () => {
     service.currentClaimId = claimId;
-    service.loadCurrentClaim();
+    service.loadClaimById(service.currentClaimId);
     expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadCurrentClaim({ userId: userId, claimId: claimId })
+      new fromAction.LoadClaimById({ userId: userId, claimId: claimId })
     );
   });
 
@@ -191,7 +200,7 @@ describe('ClaimServiceTest', () => {
   it('should be able to resume claim', () => {
     service.resumeClaim(claimId);
     expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadCurrentClaim({ userId: userId, claimId: claimId })
+      new fromAction.LoadClaimById({ userId: userId, claimId: claimId })
     );
   });
 
@@ -221,5 +230,15 @@ describe('ClaimServiceTest', () => {
       })
       .unsubscribe();
     expect(selectedPolicy).toEqual(null);
+  });
+
+  it('should change claim test', () => {
+    service.changeClaim(claimMock, OCC_USER_ID_CURRENT);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.ChangeClaim({
+        userId: OCC_USER_ID_CURRENT,
+        claimData: claimMock,
+      })
+    );
   });
 });

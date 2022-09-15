@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { ChangeCoverageComponent } from './change-coverage.component';
 import createSpy = jasmine.createSpy;
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-media',
   template: '',
 })
@@ -105,6 +105,13 @@ class MockRoutingService {
   go = createSpy();
 }
 
+@Pipe({
+  name: 'cxFormatDate',
+})
+class MockDatePipe implements PipeTransform {
+  transform() {}
+}
+
 class GlobalMessageServiceMock {}
 
 class MockChangePolicyService {}
@@ -148,7 +155,11 @@ describe('ChangeCoverageComponent', () => {
             },
           },
         ],
-        declarations: [ChangeCoverageComponent, MockMediaComponent],
+        declarations: [
+          ChangeCoverageComponent,
+          MockMediaComponent,
+          MockDatePipe,
+        ],
       }).compileComponents();
 
       mockUserRequestNavigationService = TestBed.inject(
@@ -189,12 +200,13 @@ describe('ChangeCoverageComponent', () => {
       coverageProduct: {
         code: product1,
       },
+      coverageIsIncluded: false,
     };
 
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
-    component.addCoverage(coverage);
+    component.toggleCoverage(0, coverage.coverageIsIncluded);
     component.simulateChanges(mockChangeRequest);
     expect(component.optionalCoverages[0].coverageIsIncluded).toEqual(true);
   });
@@ -206,13 +218,14 @@ describe('ChangeCoverageComponent', () => {
       coverageProduct: {
         code: product1,
       },
+      coverageIsIncluded: true,
     };
 
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
 
-    component.removeCoverage(coverage);
+    component.toggleCoverage(0, coverage.coverageIsIncluded);
     expect(component.optionalCoverages[0].coverageIsIncluded).toEqual(false);
   });
 

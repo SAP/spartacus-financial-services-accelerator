@@ -5,3 +5,6 @@ export * from './premium-calendar/index';
 export * from './quote/index';
 export * from './update-profile/index';
 export * from './myaccount.module';
+export * from './order/index';
+export * from './address-info/index';
+export * from './documents/index';

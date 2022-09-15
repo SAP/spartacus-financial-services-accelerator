@@ -1,110 +1,47 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { translationChunksConfig, translations } from '@spartacus/assets';
 import {
-  ConfigModule,
+  Config,
   provideConfig,
   provideDefaultConfigFactory,
 } from '@spartacus/core';
 import {
-  B2cStorefrontModule,
+  BaseStorefrontModule,
   PageComponentModule,
-  StorefrontConfig,
 } from '@spartacus/storefront';
-import { fsOverrides, fstranslations } from '../assets/translations/index';
-import {
-  fsOverridesDe,
-  fstranslationsDe,
-} from '../assets/translations/index_de';
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
-import { checkoutConfig } from '../cms-components/checkout/config/default-checkout-config';
 import { CmsLibModule } from '../cms-components/cms-lib.module';
-import { routingConfig } from '../cms-structure/routing/default-routing-config';
 import { OccModule } from '../occ/occ.module';
-import { occProductConfig } from '../occ/services/default-occ-product-config';
+import { defaultFSCmsContentProviders } from './config/fs-static-cms-structure';
+import { FSGlobalMessageModule } from '../core/global-message/global-message.module';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
-import { layoutConfig } from './config/default-layout-config';
-import {
-  dynamicformsTranslations,
-  dynamicformsTranslationsDe,
-} from '@fsa/dynamicforms';
-import { defaultFSGlobalMessageConfigFactory } from '../core/global-message-config/default-global-message-config';
+import { fsDefaultDateFormatConfigFactory } from '../core/date-config/default-date-config';
+import { fsDefaultQuoteComparisonConfigFactory } from '../core/quote-comparison-config/default-quote-comparison-config';
+import { iconConfig } from '../core/icon-config/icon-config';
 
 @NgModule({
   imports: [
+    BaseStorefrontModule,
     PageComponentModule,
-    B2cStorefrontModule,
     CmsLibModule,
     CheckoutModule,
     OccModule,
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: translations.en,
-        },
-        chunks: translationChunksConfig,
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: fsOverrides,
-          de: fsOverridesDe,
-        },
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: fstranslations,
-          de: fstranslationsDe,
-        },
-        fallbackLang: 'en',
-      },
-    }),
-    ConfigModule.withConfig({
-      i18n: {
-        resources: {
-          en: dynamicformsTranslations,
-          de: dynamicformsTranslationsDe,
-        },
-        fallbackLang: 'en',
-      },
-    }),
-    ConfigModule.withConfig(layoutConfig),
-    ConfigModule.withConfig(routingConfig),
-    ConfigModule.withConfig(checkoutConfig),
-    ConfigModule.withConfig(occProductConfig),
-    ConfigModule.withConfig(occUserConfig),
-    ConfigModule.withConfig({
-      icon: {
-        symbols: {
-          PROPERTY: 'fs-icon icon-house',
-          AUTO: 'fs-icon icon-auto',
-          PERSON: 'fs-icon icon-heart',
-          TRIP: 'fs-icon icon-plane',
-          EVENT: 'fs-icon icon-event',
-        },
-      },
-    }),
-    ConfigModule.withConfig({
-      date: {
-        format: 'yyyy-mm-dd',
-      },
-    }),
+    FSGlobalMessageModule.forRoot(),
   ],
-  exports: [B2cStorefrontModule, CmsLibModule],
+  exports: [BaseStorefrontModule, CmsLibModule],
   declarations: [],
+  providers: [
+    ...defaultFSCmsContentProviders,
+    provideConfig(occUserConfig),
+    provideConfig(iconConfig),
+    provideDefaultConfigFactory(fsDefaultDateFormatConfigFactory),
+    provideDefaultConfigFactory(fsDefaultQuoteComparisonConfigFactory),
+  ],
 })
 export class FSStorefrontModule {
-  static withConfig(
-    config?: StorefrontConfig
-  ): ModuleWithProviders<FSStorefrontModule> {
+  static withConfig(config?: Config): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
-      providers: [
-        provideConfig(config),
-        provideDefaultConfigFactory(defaultFSGlobalMessageConfigFactory),
-      ],
+      providers: [provideConfig(config)],
     };
   }
 }

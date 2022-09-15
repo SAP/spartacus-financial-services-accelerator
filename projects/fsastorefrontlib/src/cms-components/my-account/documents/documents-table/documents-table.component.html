@@ -1,0 +1,81 @@
+<table
+  class="table"
+  [attr.aria-label]="'document.uploadedDocuments' | cxTranslate"
+>
+  <thead class="d-none d-md-table-row">
+    <th scope="col">
+      {{ 'document.name' | cxTranslate }}
+    </th>
+    <th scope="col">
+      {{ 'document.creationDate' | cxTranslate }}
+    </th>
+    <th *ngIf="referredObjectColumnVisible" scope="col">
+      {{ 'document.referredInsuranceObject' | cxTranslate }}
+    </th>
+    <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let document of documentSource">
+      <ng-container *ngIf="isDocumentValid(document)">
+        <td class="pointer">
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.name' | cxTranslate }}:
+          </div>
+          <span
+            class="td-value text-right notice"
+            (click)="downloadDocument(document)"
+            >{{ document.name }}</span
+          >
+        </td>
+        <td>
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.creationDate' | cxTranslate }}:
+          </div>
+          <span class="td-value text-right">{{
+            document.creationTime | cxDate: 'dd MMM yyyy'
+          }}</span>
+        </td>
+        <td *ngIf="referredObjectColumnVisible">
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.referredInsuranceObject' | cxTranslate }}:
+          </div>
+          <span
+            *ngIf="document?.insurancePolicy || document?.claim"
+            class="td-value text-right"
+          >
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'policyDetails',
+                  params: {
+                    policyId: document?.insurancePolicy?.policyNumber,
+                    contractId: document?.insurancePolicy?.contractNumber
+                  }
+                } | cxUrl
+              "
+            >
+              {{ document?.insurancePolicy?.policyNumber }}
+            </a>
+            <a
+              class="link"
+              [routerLink]="
+                {
+                  cxRoute: 'claimDetails',
+                  params: { claimId: document?.claim?.claimNumber }
+                } | cxUrl
+              "
+            >
+              {{ document?.claim?.claimNumber }}
+            </a>
+          </span>
+        </td>
+        <td>
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.documentType' | cxTranslate }}:
+          </div>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>

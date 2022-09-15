@@ -1,0 +1,231 @@
+<ng-container *ngIf="claim$ | async as claim">
+  <div class="position-relative text-center">
+    <a
+      class="h4 vertical-center left z-index-1"
+      routerLink="/my-account/my-insurance-claims/"
+    >
+      <span class="fas fa-arrow-left"></span
+    ></a>
+    <h2 class="heading-headline p-3 mt-3 mb-5 text-center">
+      {{ claim.insurancePolicy?.categoryData?.name }}
+      {{ 'claim.claim' | cxTranslate }}
+      <br />
+      {{ claim.claimNumber }}
+    </h2>
+  </div>
+  <div class="accordion">
+    <cx-fs-accordion-item
+      [opened]="true"
+      [title]="'claim.generalInformation' | cxTranslate"
+    >
+      <ul class="accordion-list container-fluid">
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.incidentType' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ claim.incidentType?.incidentName }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.claimNo' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ claim.claimNumber }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'policy.policyNo' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ claim.insurancePolicy?.policyNumber }}
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.dateOfLoss' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container *ngIf="claim.dateOfLoss != undefined; else na">
+              {{ claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy' }}
+            </ng-container>
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'claim.claimHandler' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container
+              *ngIf="claim.claimHandler?.displayName != undefined; else na"
+            >
+              {{ claim.claimHandler.displayName }}</ng-container
+            >
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.emailAddress' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container
+              *ngIf="claim.claimHandler?.email != undefined; else na"
+              >{{ claim.claimHandler.email }}</ng-container
+            >
+          </div>
+        </li>
+        <li class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.status' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            <ng-container *ngIf="claim.claimStatus != undefined; else na">
+              {{ claim.claimStatus }}
+            </ng-container>
+          </div>
+        </li>
+      </ul>
+    </cx-fs-accordion-item>
+    <ng-container *ngIf="claim.subclaims?.length > 0">
+      <cx-fs-accordion-item
+        *ngFor="let subclaim of claim.subclaims"
+        [title]="
+          'claim.claimDetails' | cxTranslate: { subclaimType: subclaim.type }
+        "
+      >
+        <ul class="accordion-list container-fluid">
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'fscommon.status' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ subclaim.status }}
+            </div>
+          </li>
+          <li class="accordion-list-item row">
+            <div class="col-6 col-sm-5 item-label">
+              {{ 'claim.subclaim.claimant' | cxTranslate }}
+            </div>
+            <div class="col-6 col-sm-5 value notice">
+              {{ subclaim.claimant }}
+            </div>
+          </li>
+        </ul>
+        <ul
+          *ngIf="subclaim.paymentTransactions?.length > 0"
+          class="accordion-list container-fluid"
+        >
+          <li class="accordion-list-item row sub-title">
+            <div class="col-12">
+              {{ 'claim.subclaim.paymentInformation' | cxTranslate }}
+            </div>
+          </li>
+          <li
+            *ngFor="let payment of subclaim.paymentTransactions"
+            class="accordion-list-item row"
+          >
+            <div class="col-12 value">
+              {{
+                (payment.amount | currency: payment.currencyIsocode) +
+                  ('claim.subclaim.paymentDetails'
+                    | cxTranslate
+                      : {
+                          payee: payment.payee,
+                          paymentMethod: payment.paymentMethod
+                        }) +
+                  (payment?.time | parseDate | cxDate: 'dd.MM.yyyy')
+              }}
+            </div>
+          </li>
+        </ul>
+      </cx-fs-accordion-item>
+    </ng-container>
+    <ng-container *ngIf="claim.claimParticipants?.length > 0">
+      <cx-fs-accordion-item
+        [title]="'claim.participants.rolesPersonsInvolved' | cxTranslate"
+      >
+        <ng-container
+          *ngFor="
+            let claimParticipant of claim.claimParticipants;
+            let i = index
+          "
+        >
+          <ng-container>
+            <ul class="accordion-list container-fluid">
+              <li class="accordion-list-item row sub-title">
+                <div class="col-12">
+                  {{
+                    ('claim.participants.participant' | cxTranslate) + (i + 1)
+                  }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'claim.participants.role' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  <ng-container *ngFor="let role of claimParticipant.roles">
+                    {{ role }}<br />
+                  </ng-container>
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'claim.participants.name' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.name }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.address' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.address }}
+                </div>
+              </li>
+              <li class="accordion-list-item row">
+                <div class="col-6 col-sm-5 item-label">
+                  {{ 'fscommon.phoneNumber' | cxTranslate }}
+                </div>
+                <div class="col-6 col-sm-5 value notice">
+                  {{ claimParticipant.phoneNumber }}
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+        </ng-container>
+      </cx-fs-accordion-item>
+    </ng-container>
+    <cx-fs-accordion-item
+      *ngIf="claim.documents && claim.documents.length > 0"
+      [title]="'fscommon.documents' | cxTranslate"
+    >
+      <div class="accordion-list">
+        <cx-fs-documents-table
+          [documentSource]="claim.documents"
+          [referredObjectColumnVisible]="false"
+        ></cx-fs-documents-table>
+        <div class="col-12 col-md-3 m-auto">
+          <button
+            class="action-button btn-block"
+            [routerLink]="
+              {
+                cxRoute: 'changeClaim',
+                params: { claimId: claim.claimNumber }
+              } | cxUrl
+            "
+          >
+            {{ 'fscommon.addDocuments' | cxTranslate }}
+          </button>
+        </div>
+      </div>
+    </cx-fs-accordion-item>
+  </div>
+</ng-container>
+<ng-template #na>
+  {{ 'fscommon.notAvailable' | cxTranslate }}
+</ng-template>

@@ -1,0 +1,29 @@
+<ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'dynamicforms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">{{ currentCurrency$ | async }}</span>
+        </div>
+        <input
+          type="text"
+          class="form-control"
+          [attr.placeholder]="placeHolder"
+          [formControlName]="config.name"
+          [attr.name]="config.name"
+          [attr.readonly]="config.readonly ? config.readonly : null"
+        />
+      </div>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>

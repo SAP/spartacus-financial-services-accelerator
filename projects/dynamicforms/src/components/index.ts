@@ -16,3 +16,4 @@ export * from './separator/separator.component';
 export * from './checkbox/checkbox.component';
 export * from './upload/upload.component';
 export * from './form-component.directive';
+export * from './currency/currency.component';

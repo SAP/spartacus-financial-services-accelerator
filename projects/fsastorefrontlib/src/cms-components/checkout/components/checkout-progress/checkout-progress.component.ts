@@ -6,11 +6,11 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  CheckoutConfig,
   CheckoutProgressComponent,
   CheckoutStepService,
-  CurrentProductService,
-} from '@spartacus/storefront';
+} from '@spartacus/checkout/components';
+import { CheckoutConfig } from '@spartacus/checkout/root';
+import { CurrentProductService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
@@ -94,10 +94,8 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
               this.subscription.add(
                 this.cartService.getActive().subscribe(cart => {
                   if (
-                    cart.deliveryOrderGroups &&
-                    cart.deliveryOrderGroups.length > 0 &&
-                    cart.deliveryOrderGroups[0].entries &&
-                    cart.deliveryOrderGroups[0].entries.length > 0
+                    cart?.deliveryOrderGroups?.length > 0 &&
+                    cart?.deliveryOrderGroups[0]?.entries?.length > 0
                   ) {
                     const fsProduct: FSProduct =
                       cart.deliveryOrderGroups[0].entries[0].product;

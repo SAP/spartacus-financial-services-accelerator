@@ -1,7 +1,15 @@
 <ng-container *ngIf="product$ | async as product; else loading">
   <ng-container *ngIf="!isLoading; else loading">
-    <div class="table-header">
-      <h3 class="table-header-title">{{ product.name }}</h3>
+    <div class="table-header position-sticky top z-index-1">
+      <h3 class="table-header-title">
+        {{ product.name }}
+        <div
+          *ngIf="recommendedProduct === product.code"
+          class="text-uppercase ribbon"
+        >
+          {{ 'fscommon.recommendedProduct' | cxTranslate }}
+        </div>
+      </h3>
       <ng-container *ngIf="productPrice; else na">
         <h4 class="table-header-value">{{ productPrice }}</h4>
       </ng-container>
@@ -22,12 +30,12 @@
         <ng-container
           *ngFor="let dynamicAttribute of product.dynamicAttributes | slice: 1"
         >
-          <div class="table-cell">
+          <div #tableCell class="table-cell">
             <ng-container
               *ngIf="dynamicAttribute !== undefined; else itemNotIncluded"
             >
               <div
-                class="table-cell-value text-truncate"
+                class="table-cell-value"
                 *ngIf="
                   dynamicAttribute.value &&
                   dynamicAttribute.value.formattedValue
@@ -47,10 +55,10 @@
         </ng-container>
       </ng-container>
       <ng-container *ngFor="let item of panelItemEntries">
-        <div class="table-cell">
+        <div #tableCell class="table-cell">
           <ng-container *ngIf="item !== undefined; else itemNotIncluded">
             <div
-              class="table-cell-value text-truncate"
+              class="table-cell-value"
               *ngIf="
                 item.price?.value > 0 || item.chargeInformation;
                 else itemIncluded
@@ -80,7 +88,7 @@
           <a
             class="link"
             [href]="
-              getBaseUrl() +
+              baseUrl +
               investment.investmentType?.factSheetDocument?.downloadUrl
             "
             ><strong>{{ investment.investmentType?.fundName }}</strong></a

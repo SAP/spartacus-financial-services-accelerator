@@ -1,7 +1,7 @@
 import { DebugElement, Directive, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -9,7 +9,7 @@ import { CMSComparisonTabComponent } from '../../../occ/occ-models';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
 
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {
@@ -38,7 +38,7 @@ describe('ComparisonTableTabComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NgbTabsetModule],
+        imports: [NgbNavModule],
         declarations: [
           ComparisonTableTabComponent,
           MockComponentWrapperDirective,

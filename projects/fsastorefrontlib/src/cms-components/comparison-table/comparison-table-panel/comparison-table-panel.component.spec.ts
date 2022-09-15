@@ -1,4 +1,10 @@
-import { Component, DebugElement, Input } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  ElementRef,
+  Input,
+  QueryList,
+} from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -6,8 +12,8 @@ import {
   FormDataService,
   FormDataStorageService,
   YFormData,
-} from '@fsa/dynamicforms';
-import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+} from '@spartacus/dynamicforms';
+import { NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData, MediaModule } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -16,10 +22,12 @@ import { BillingTimeConnector } from './../../../core/product-pricing/connectors
 import { PricingService } from './../../../core/product-pricing/facade/pricing.service';
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
+import { ComparisonTableService } from '../comparison-table.service';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-fs-comparison-table-panel-item',
   template: '',
 })
@@ -64,10 +72,50 @@ const formData: YFormData = {
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
 };
 
+const mockUser = {
+  uid: 'test@email.com',
+  name: 'testName',
+};
+
 let pricingData: PricingData;
 
 class MockActivatedRoute {
   params = of();
+}
+
+const tableCellTitleArray = [
+  'Lorem ipsum',
+  'Dolor sit amet',
+  'Consectetur adipiscing elit',
+  'Fusce mollis',
+  'Nibh eu justo',
+];
+
+function createTableCells(): QueryList<ElementRef<HTMLElement>> {
+  const queryList = new QueryList<ElementRef<HTMLElement>>();
+  const elementRefs = [];
+  const tableCellWrapper = document.createElement('div');
+  tableCellWrapper.className = 'table-cell-wrapper';
+  tableCellWrapper.style.width = '130px';
+  document.body.append(tableCellWrapper);
+  for (let i = 0; i < tableCellTitleArray.length; i++) {
+    const tableCell = document.createElement('div');
+    tableCell.className = `table-cell`;
+    tableCell.innerHTML = `<span class="table-cell-title">${tableCellTitleArray[i]}</span>`;
+    const elementElementRef = new ElementRef(tableCell);
+    elementRefs.push(elementElementRef);
+    tableCellWrapper.append(tableCell);
+  }
+  queryList.reset(elementRefs);
+  return queryList;
+}
+
+class MockComparisonTableService {
+  setAvailableTabs() {}
+  calculateHeights() {}
+  setHeightsAtResize() {
+    return of();
+  }
 }
 
 class MockFormDataStorageService {
@@ -94,6 +142,13 @@ class MockPricingService {
     return pricingData;
   }
 }
+
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
+  }
+}
+
 describe('ComparisonTablePanelComponent', () => {
   let comparisonTablePanelComponent: ComparisonTablePanelComponent;
   let fixture: ComponentFixture<ComparisonTablePanelComponent>;
@@ -101,12 +156,14 @@ describe('ComparisonTablePanelComponent', () => {
   let mockFormDataService: FormDataService;
   let mockPricingService: PricingService;
   let mockFOrMDataStorageService: FormDataStorageService;
+  let comparisonTableService: ComparisonTableService;
+  let tableCells: QueryList<ElementRef<HTMLElement>>;
   let el: DebugElement;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [NgbTabsetModule, NgbTooltipModule, MediaModule],
+        imports: [NgbNavModule, NgbTooltipModule, MediaModule],
         providers: [
           {
             provide: CmsComponentData,
@@ -132,6 +189,14 @@ describe('ComparisonTablePanelComponent', () => {
             provide: ActivatedRoute,
             useClass: MockActivatedRoute,
           },
+          {
+            provide: UserAccountFacade,
+            useClass: MockUserAccountFacade,
+          },
+          {
+            provide: ComparisonTableService,
+            useClass: MockComparisonTableService,
+          },
         ],
         declarations: [
           ComparisonTablePanelComponent,
@@ -142,6 +207,8 @@ describe('ComparisonTablePanelComponent', () => {
       mockFormDataService = TestBed.inject(FormDataService);
       mockPricingService = TestBed.inject(PricingService);
       mockFOrMDataStorageService = TestBed.inject(FormDataStorageService);
+      comparisonTableService = TestBed.inject(ComparisonTableService);
+      tableCells = createTableCells();
     })
   );
 
@@ -214,5 +281,14 @@ describe('ComparisonTablePanelComponent', () => {
     const comparisonTablePanelItem = el.query(By.css('cx-spinner'))
       .nativeElement;
     expect(comparisonTablePanelItem).toBeTruthy();
+  });
+
+  it('should get the highest element in the array and set it in service property', () => {
+    const tableCellsArray = tableCells.toArray();
+    comparisonTablePanelComponent['getHighestElement'](tableCellsArray);
+    fixture.detectChanges();
+    expect(
+      comparisonTableService.highestElement.nativeElement.clientHeight
+    ).toEqual(39);
   });
 });

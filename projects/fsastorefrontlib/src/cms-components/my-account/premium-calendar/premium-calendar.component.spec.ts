@@ -1,11 +1,21 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule, OccConfig } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import {
+  I18nTestingModule,
+  UserIdService,
+  OCC_USER_ID_CURRENT,
+  OccConfig,
+} from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { PolicyService } from '../../../core/my-account/facade';
+import { PolicyConnector } from '../../../core/my-account/connectors/policy.connector';
 import { PremiumCalendarComponent } from './premium-calendar.component';
 import createSpy = jasmine.createSpy;
-import { of } from 'rxjs';
+
+const policyId = 'PL00001';
+const contractId = 'CT00001';
+const testCategory = 'testCategory';
 
 const policy1 = {
   policyId: 'policyId',
@@ -13,7 +23,31 @@ const policy1 = {
 };
 const policies = {
   insurancePolicies: [policy1],
+  billingData: [
+    {
+      paymentStatus: 'Overdue',
+      dueDate: new Date().toString(),
+    },
+  ],
 };
+
+const mockedPolicy = {
+  policyId: policyId,
+  contractId: contractId,
+};
+
+class MockPolicyConnector {
+  getPremiumCalendar() {
+    return of(mockedPolicy);
+  }
+}
+
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 const MockOccConfig: OccConfig = {
   context: {
     baseSite: [''],
@@ -38,9 +72,12 @@ describe('PremiumCalendarComponent', () => {
   let component: PremiumCalendarComponent;
   let fixture: ComponentFixture<PremiumCalendarComponent>;
   let policyService: PolicyService;
+  let userIdService: MockUserIdService;
+  let mockPolicyConnector: MockPolicyConnector;
 
   beforeEach(
     waitForAsync(() => {
+      mockPolicyConnector = new MockPolicyConnector();
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
         declarations: [PremiumCalendarComponent],
@@ -53,16 +90,23 @@ describe('PremiumCalendarComponent', () => {
             provide: OccConfig,
             useValue: MockOccConfig,
           },
+          { provide: UserIdService, useClass: MockUserIdService },
+          { provide: PolicyConnector, useValue: mockPolicyConnector },
         ],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
+    policyService = TestBed.inject(PolicyService);
+    userIdService = TestBed.inject(UserIdService);
     fixture = TestBed.createComponent(PremiumCalendarComponent);
     component = fixture.componentInstance;
+
+    spyOn(mockPolicyConnector, 'getPremiumCalendar').and.callThrough();
+    spyOn(userIdService, 'getUserId').and.callThrough();
+
     fixture.detectChanges();
-    policyService = TestBed.inject(PolicyService);
   });
 
   it('should create', () => {
@@ -70,7 +114,7 @@ describe('PremiumCalendarComponent', () => {
   });
 
   it('should get base url', () => {
-    expect(component.getBaseUrl()).toEqual('');
+    expect(component.baseUrl).toEqual('');
   });
 
   it('should open and close policy accordion', () => {

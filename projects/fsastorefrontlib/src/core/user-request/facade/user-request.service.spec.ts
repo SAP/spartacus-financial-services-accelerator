@@ -1,8 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { FormDataStorageService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers/index';

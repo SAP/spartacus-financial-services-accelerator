@@ -47,7 +47,7 @@
             {{ 'changeRequest.newPremium' | cxTranslate }}:
           </div>
           <div class="offset-1 col-4 semi-bold">
-            {{ currentDate | date: 'dd-MM-yyyy' }}
+            {{ currentDate | cxFormatDate }}
           </div>
           <div class="col-4 semi-bold">
             {{ changeRequest.insurancePolicy?.policyPremium?.formattedValue }} /
@@ -130,7 +130,7 @@
         class="primary-button btn-block"
         (click)="updateChangeRequest(changeRequest)"
       >
-        {{ 'common.submit' | cxTranslate }}
+        {{ 'fscommon.submit' | cxTranslate }}
       </button>
     </div>
   </div>

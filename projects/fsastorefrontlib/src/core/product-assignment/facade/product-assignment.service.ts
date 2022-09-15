@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OCC_USER_ID_ANONYMOUS, UserIdService } from '@spartacus/core';
+import { B2BUser, OCC_USER_ID_ANONYMOUS, UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import { StateWithProductAssignment } from '../store/product-assignments-state';
 import * as fromSelector from '../store/selectors';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductAssignmentService {
   constructor(
     protected store: Store<StateWithProductAssignment>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   user: string;
@@ -61,6 +63,15 @@ export class ProductAssignmentService {
         }
       })
       .unsubscribe();
+  }
+
+  isUserAdminOfUnit(unitId: string): Observable<boolean> {
+    return this.userAccountFacade.get().pipe(
+      filter(user => !!user && user?.uid !== OCC_USER_ID_ANONYMOUS),
+      map(user => {
+        return (<B2BUser>user).orgUnit?.uid === unitId;
+      })
+    );
   }
 
   createProductAssignment(orgUnitId: string, productCode: string) {

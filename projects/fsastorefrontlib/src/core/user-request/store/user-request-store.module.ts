@@ -1,29 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { userRequestEffects } from './effects/index';
 import { reducerProvider, reducerToken, metaReducers } from './reducers/index';
-import {
-  ConfigModule,
-  StateConfig,
-  StateModule,
-  StorageSyncType,
-} from '@spartacus/core';
+import { StateModule } from '@spartacus/core';
 import { USER_REQUEST_FEATURE } from './user-request-state';
+import { UserRequestPersistenceService } from '../services/user-request-persistance.service';
 
-export function userRequestConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`${USER_REQUEST_FEATURE}.userRequest.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
+export function userRequestStatePersistenceFactory(
+  userRequestPersistenceService: UserRequestPersistenceService
+): () => void {
+  const result = () => userRequestPersistenceService.initSync();
+  return result;
 }
 
 @NgModule({
@@ -35,8 +25,15 @@ export function userRequestConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(userRequestEffects),
-    ConfigModule.withConfigFactory(userRequestConfigFactory),
   ],
-  providers: [reducerProvider],
+  providers: [
+    reducerProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: userRequestStatePersistenceFactory,
+      deps: [UserRequestPersistenceService],
+      multi: true,
+    },
+  ],
 })
 export class UserRequestStoreModule {}

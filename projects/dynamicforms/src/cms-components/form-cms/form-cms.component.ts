@@ -23,7 +23,7 @@ export class FormCMSComponent implements OnInit, OnDestroy {
   formDefinition$: Observable<YFormDefinition>;
   formData$: Observable<YFormData>;
   formConfig: FormDefinition;
-
+  formDataId: string;
   subscription = new Subscription();
 
   ngOnInit() {
@@ -37,11 +37,11 @@ export class FormCMSComponent implements OnInit, OnDestroy {
         if (definition.content) {
           this.formConfig = <FormDefinition>JSON.parse(definition.content);
         }
-        const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
+        this.formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
           definition.formId
         );
-        if (formDataId) {
-          this.formDataService.loadFormData(formDataId);
+        if (this.formDataId) {
+          this.formDataService.loadFormData(this.formDataId);
           this.formData$ = this.formDataService.getFormData();
         }
         return definition;

@@ -1,25 +1,11 @@
 import * as shared from '../shared-checkout';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
-const todaysDate = Cypress.moment().format('YYYY-MM-DD');
-const currentDate = Cypress.moment().format(' DD MMM YYYY ');
+dayjs.extend(customParseFormat);
 
-export function openCategoryPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'Insurance',
-    dropdownItem: 'Auto',
-  });
-  cy.get('.enriched-banner-styled-text')
-    .invoke('text')
-    .then(text => {
-      if (text !== ' Get a Quote') {
-        openCategoryPage();
-      }
-    });
-
-  cy.get('.enriched-banner-styled-text')
-    .should('be.visible')
-    .click({ force: true });
-}
+const todaysDate = dayjs().format('YYYY-MM-DD');
+const currentDate = dayjs().format(' DD MMM YYYY ');
 
 export function populateAutoMonthlyAudi() {
   cy.get('cx-dynamic-form').within(() => {
@@ -70,19 +56,21 @@ export function populateAutoAnnuallyBMW() {
 }
 
 export function populateAutoMonthlyOpel() {
-  cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=coverageStartDate]').type(todaysDate);
-    cy.get('[name="paymentFrequency"]').select('MONTHLY');
-    cy.get('[name="vehicleMake"]').select('Opel');
-    cy.get('[name="vehicleModel"]').select('GT');
-    cy.get('[name="vehicleType"]').select('OPELGT2008');
-    cy.get('[name="vehicleYear"]').select('2007');
-    cy.get('[name="vehicleAnnualMileage"]').type('90000');
-    cy.get('[name="vehicleValue"]').type('5000');
-    cy.get('[name="vehicleUsage"]').select('Personal');
-    cy.get('[name="vehiclePurchaseDate"]').type('2018-01-01');
-    cy.get('[name="vehicleOwnerPostalCode"]').type('11090');
-  });
+  cy.get('cx-dynamic-form')
+    .should('be.visible')
+    .within(() => {
+      cy.get('[name=coverageStartDate]').type(todaysDate);
+      cy.get('[name="paymentFrequency"]').select('MONTHLY');
+      cy.get('[name="vehicleMake"]').select('Opel');
+      cy.get('[name="vehicleModel"]').select('GT');
+      cy.get('[name="vehicleType"]').select('OPELGT2008');
+      cy.get('[name="vehicleYear"]').select('2007');
+      cy.get('[name="vehicleAnnualMileage"]').type('90000');
+      cy.get('[name="vehicleValue"]').type('5000');
+      cy.get('[name="vehicleUsage"]').select('Personal');
+      cy.get('[name="vehiclePurchaseDate"]').type('2018-01-01');
+      cy.get('[name="vehicleOwnerPostalCode"]').type('11090');
+    });
 }
 
 export function populateMainDriverInfo() {
@@ -206,14 +194,14 @@ export function populateVehicleDetails() {
 }
 
 export function populateMainDriverData() {
-  cy.get('[name=mainDriverFirstName]').type('Johan');
-  cy.get('[name=mainDriverLastName]').type('Grozni');
-  cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
+  cy.get('[name=mainDriverFirstName]').type('John');
+  cy.get('[name=mainDriverLastName]').type('Moore');
+  cy.get('[name=mainDriverLicenceNumber]').clear().type('BG-234-xx');
 }
 
 export function populateAdditionalData() {
   cy.get('[name=additionalDriver1FirstName]').type('Phin');
-  cy.get('[name=additionalDriver1LastName]').type('Jones');
+  cy.get('[name=additionalDriver1LastName]').type('Moore');
   cy.get('[name=additionalDriver1LicenceNumber]').type('BG-234-yy');
 }
 
@@ -232,10 +220,6 @@ export function checkOptionalProductsSilver() {
         mandatory: true,
       },
       {
-        name: 'Uninsured Coverage',
-        available: true,
-      },
-      {
         name: 'Roadside Assistance',
         available: true,
       },
@@ -243,9 +227,49 @@ export function checkOptionalProductsSilver() {
         name: 'Trailer Liability',
         available: true,
       },
+
+      {
+        name: 'Uninsured Coverage',
+        available: true,
+      },
       {
         name: 'Winter Tires',
         available: true,
+      },
+      {
+        name: ' Covered with Third Party Liability ',
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function addOptionalProductsSilver() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Auto Insurance',
+    items: [
+      {
+        name: 'Collision Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Roadside Assistance',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: 'Trailer Liability',
+        available: true,
+      },
+
+      {
+        name: 'Uninsured Coverage',
+        available: true,
+      },
+      {
+        name: 'Winter Tires',
+        available: true,
+        shouldAdd: true,
       },
       {
         name: ' Covered with Third Party Liability ',
@@ -265,13 +289,13 @@ export function checkOptionalProductsBronze() {
         shouldAdd: true,
       },
       {
+        name: 'Trailer Liability',
+        available: true,
+      },
+      {
         name: 'Uninsured Coverage',
         available: true,
         shouldAdd: true,
-      },
-      {
-        name: 'Trailer Liability',
-        available: true,
       },
       {
         name: 'Winter Tires',
@@ -298,16 +322,16 @@ export function checkOptionalProductsGold() {
         mandatory: true,
       },
       {
-        name: 'Uninsured Coverage',
-        mandatory: true,
-      },
-      {
         name: 'Roadside Assistance',
         mandatory: true,
       },
       {
         name: 'Trailer Liability',
         available: true,
+      },
+      {
+        name: 'Uninsured Coverage',
+        mandatory: true,
       },
       {
         name: 'Winter Tires',
@@ -319,4 +343,51 @@ export function checkOptionalProductsGold() {
     ],
   };
   shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function checkOptionalProductsGoldAddOptional() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Auto Insurance',
+    items: [
+      {
+        name: 'Collision Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Comprehensive Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Roadside Assistance',
+        mandatory: true,
+      },
+      {
+        name: 'Trailer Liability',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: 'Uninsured Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Winter Tires',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: ' Covered with Third Party Liability ',
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function updateDateOfBirth() {
+  cy.get('cx-dynamic-form').within(() => {
+    cy.get('[name="vehicleModel"]').select('Golf');
+    cy.get('[name="vehicleType"]').select('GolfCDiesel');
+    cy.get('[name="vehicleYear"]').select('2014');
+    cy.get('[name=dateOfBirth]').eq(0).type('1990-01-12');
+  });
 }

@@ -6,15 +6,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   GlobalMessageService,
   I18nTestingModule,
+  OCC_USER_ID_CURRENT,
   RoutingService,
-  UserService,
+  UserIdService,
 } from '@spartacus/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentFormComponent } from './contact-agent-form.component';
 
 import createSpy = jasmine.createSpy;
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const mockedUserDetails = {
   firstName: 'Test',
@@ -51,7 +53,7 @@ class ActivatedRouteMock {
 class MockUrlPipe implements PipeTransform {
   transform() {}
 }
-class MockedUserService {
+class MockedUserAccountFacade {
   get() {
     return of(mockedUserDetails);
   }
@@ -69,15 +71,21 @@ class MockRoutingService {
 class MockGlobalMessageService {
   add(): void {}
 }
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 
 describe('ContactAgentFormComponent', () => {
   let component: ContactAgentFormComponent;
   let fixture: ComponentFixture<ContactAgentFormComponent>;
-  let mockedUserService: UserService;
+  let mockedUserAccountFacade: UserAccountFacade;
   let mockedCsTicketService: CsTicketService;
   let mockSearchService: AgentSearchService;
   let globalMessageService: GlobalMessageService;
   let mockRoutingService: RoutingService;
+  let mockUserIdService: UserIdService;
 
   beforeEach(
     waitForAsync(() => {
@@ -86,8 +94,8 @@ describe('ContactAgentFormComponent', () => {
         imports: [I18nTestingModule, RouterTestingModule, ReactiveFormsModule],
         providers: [
           {
-            provide: UserService,
-            useClass: MockedUserService,
+            provide: UserAccountFacade,
+            useClass: MockedUserAccountFacade,
           },
           {
             provide: AgentSearchService,
@@ -109,6 +117,10 @@ describe('ContactAgentFormComponent', () => {
             provide: CsTicketService,
             useClass: MockCsTicketService,
           },
+          {
+            provide: UserIdService,
+            useClass: MockUserIdService,
+          },
         ],
       }).compileComponents();
     })
@@ -118,10 +130,11 @@ describe('ContactAgentFormComponent', () => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
     component = fixture.componentInstance;
     globalMessageService = TestBed.inject(GlobalMessageService);
-    mockedUserService = TestBed.inject(UserService);
+    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     mockSearchService = TestBed.inject(AgentSearchService);
     mockedCsTicketService = TestBed.inject(CsTicketService);
     mockRoutingService = TestBed.inject(RoutingService);
+    mockUserIdService = TestBed.inject(UserIdService);
   });
 
   it('should create', () => {
@@ -129,15 +142,17 @@ describe('ContactAgentFormComponent', () => {
   });
 
   it('should get the user details', () => {
-    spyOn(mockedUserService, 'get').and.returnValue(of(mockedUserDetails));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValue(
+      of(mockedUserDetails)
+    );
     fixture.detectChanges();
-    expect(mockedUserService.get).toHaveBeenCalled();
+    expect(mockedUserAccountFacade.get).toHaveBeenCalled();
   });
 
   it('should NOT get the user details', () => {
-    spyOn(mockedUserService, 'get').and.returnValue(of(undefined));
+    spyOn(mockedUserAccountFacade, 'get').and.returnValue(of(undefined));
     fixture.detectChanges();
-    expect(mockedUserService.get).toHaveBeenCalled();
+    expect(mockedUserAccountFacade.get).toHaveBeenCalled();
   });
 
   it('should NOT find agent', () => {

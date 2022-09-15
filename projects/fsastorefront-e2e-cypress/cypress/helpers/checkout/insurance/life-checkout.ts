@@ -17,7 +17,10 @@ export function selectBasicLifeProduct() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Basic Life Insurance');
+      cy.get('.table-header-title').should(
+        'contain.text',
+        'Basic Life Insurance'
+      );
       cy.get('.primary-button').click();
     });
 }
@@ -27,17 +30,17 @@ export function checkOptionalProductsAddRenewalOption() {
     title: 'Your Life Insurance',
     items: [
       {
-        name: 'Premium Protection',
-        available: true,
+        name: 'Payment Protection Benefit',
+        notAvailable: true,
       },
       {
-        name: 'Renewal Option',
+        name: 'Premium Protection',
         available: true,
         shouldAdd: true,
       },
       {
-        name: 'Payment Protection Benefit',
-        available: false,
+        name: 'Renewal Option',
+        notAvailable: true,
       },
     ],
   };
@@ -49,16 +52,16 @@ export function checkOptionalProductsSecond() {
     title: 'Your Life Insurance',
     items: [
       {
+        name: 'Payment Protection Benefit',
+        notAvailable: true,
+      },
+      {
         name: 'Premium Protection',
         available: true,
       },
       {
         name: 'Renewal Option',
-        available: true,
-      },
-      {
-        name: 'Payment Protection Benefit',
-        available: false,
+        notAvailable: true,
       },
     ],
   };
@@ -67,31 +70,31 @@ export function checkOptionalProductsSecond() {
 
 export function checkLifeBasicMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €9.75 ',
+    price: '€11.54',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 25 Sep 2022 ',
+        title: 'Start Date:',
+        value: '25 Sep 2022',
       },
       {
         title: 'Coverage Period:',
-        value: ' 24 ',
+        value: '24',
       },
       {
         title: 'Coverage Amount:',
-        value: ' 30000 ',
+        value: '30,000.00',
       },
       {
         title: 'Insured:',
-        value: ' yourself ',
+        value: 'yourself',
       },
       {
-        title: ' Basic Life Insurance: ',
-        value: ' €7.69 ',
+        title: 'Basic Life Insurance:',
+        value: '€7.69',
       },
       {
-        title: ' Renewal Option: ',
-        value: ' €2.06 ',
+        title: 'Premium Protection:',
+        value: '€3.85',
       },
     ],
   };
@@ -115,6 +118,7 @@ export function checkLifeComparisonTable() {
 }
 
 export function populateSecondPerson() {
+  cy.get('[name="lifeSecondDob"]').should('be.visible');
   cy.get('[name="lifeSecondDob"]').type('1981-09-25');
   cy.get('[name=lifeSecondSmoke]').eq(0).click();
   cy.get('[name="lifeRelationship"]').select('Civil Partner');
@@ -138,27 +142,27 @@ export function checkLifeComparisonTableSecondPerson() {
 
 export function checkLifeBasicMiniCartSecondPerson() {
   const miniCartContent: sharedCheckout.MiniCart = {
-    price: ' €22.15 ',
+    price: '€22.15 ',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 25 Sep 2022 ',
+        title: 'Start Date:',
+        value: '25 Sep 2022',
       },
       {
         title: 'Coverage Period:',
-        value: ' 24 ',
+        value: '24',
       },
       {
         title: 'Coverage Amount:',
-        value: ' 30000 ',
+        value: '30,000.00',
       },
       {
         title: 'Insured:',
-        value: ' yourself and second person ',
+        value: 'yourself and second person',
       },
       {
-        title: ' Basic Life Insurance: ',
-        value: ' €22.15 ',
+        title: 'Basic Life Insurance:',
+        value: '€22.15 ',
       },
     ],
   };
@@ -181,7 +185,5 @@ export function addSecondPerson() {
     cy.get('h2').should('have.text', ' Your Life Insurance ');
   });
   cy.get('p.label').contains('Choose a Cover').click();
-  cy.wait(500);
-  cy.get('[name=lifeWhoCovered]').eq('1').should('be.visible').click();
-  cy.wait(500);
+  cy.get('[name=lifeWhoCovered]').eq(1).should('be.visible').click();
 }

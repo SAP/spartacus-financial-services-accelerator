@@ -1,0 +1,18 @@
+%cx-fs-product-assignments {
+  td.activate {
+    width: 20%;
+  }
+  .custom-control-input:checked ~ .custom-control-label::before {
+    border-color: var(--cx-color-primary);
+    background-color: var(--cx-color-primary);
+  }
+  .custom-control-label {
+    margin: 0 0 15px 5px;
+  }
+}
+
+// Override Spartacus styles and putting empty space instead of a comma.
+cx-org-list cx-table td ul.text li:not(:last-child):after,
+cx-org-list .details ul.value li:not(:last-child):after {
+  content: ' ';
+}

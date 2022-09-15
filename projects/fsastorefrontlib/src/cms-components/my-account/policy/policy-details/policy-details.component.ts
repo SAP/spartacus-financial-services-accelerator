@@ -5,14 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { saveAs } from 'file-saver';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
 import { FSTranslationService } from '../../../../core/i18n/facade';
-import { FileService } from '@fsa/dynamicforms';
+import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -31,6 +30,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   policy$;
   subscription = new Subscription();
+  baseUrl: string;
 
   ngOnInit(): void {
     this.subscription.add(
@@ -48,10 +48,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
     this.policy$ = this.policyService.getPolicyDetails();
-  }
-
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+    this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   isChangeAllowed(
@@ -95,18 +92,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getDocument(document, event) {
-    event.preventDefault();
-    this.subscription.add(
-      this.fileService
-        .getFile(document.code, document.mime)
-        .pipe(
-          map(downloadedFile => {
-            saveAs(downloadedFile, document.altText);
-          })
-        )
-        .subscribe()
-    );
+  getDocument(document) {
+    this.subscription.add(this.fileService.getDocument(document).subscribe());
   }
 
   getTranslation(translationGroup: string, translationKey: string): string {

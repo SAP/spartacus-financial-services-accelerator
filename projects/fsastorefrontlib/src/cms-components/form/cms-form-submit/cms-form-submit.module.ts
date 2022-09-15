@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
 import { CMSFormSubmitComponent } from './cms-form-submit.component';
-import { DynamicFormModule } from '@fsa/dynamicforms';
+import { DynamicFormModule } from '@spartacus/dynamicforms';
 import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
 
 @NgModule({

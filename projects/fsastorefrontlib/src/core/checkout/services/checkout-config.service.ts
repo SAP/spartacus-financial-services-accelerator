@@ -5,10 +5,10 @@ import {
   RoutingConfigService,
 } from '@spartacus/core';
 import {
-  CheckoutConfig,
   CheckoutConfigService,
   CheckoutStepService,
-} from '@spartacus/storefront';
+} from '@spartacus/checkout/components';
+import { CheckoutConfig } from '@spartacus/checkout/root';
 import { BehaviorSubject } from 'rxjs';
 import { FSSteps, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
 import { FSCartService } from '../../cart';
@@ -112,6 +112,12 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     return stepIndex >= 0 && this.steps[stepIndex - 1]
       ? this.getUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
       : null;
+  }
+
+  getInitialStepForCategory(category: string): FSCheckoutStep {
+    return this.fsCheckoutConfig.checkout?.steps?.find(
+      step => !(<FSCheckoutStep>step).restrictedCategories.includes(category)
+    );
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.

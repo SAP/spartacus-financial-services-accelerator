@@ -1,31 +1,22 @@
 <ng-container *ngIf="policy$ | async as policy">
-  <div class="overview-section mb-5">
-    <span
-      *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct"
-      class="image-wrapper"
-    >
-      <img
-        class="image-item"
-        [src]="getBaseUrl() + policy.mainProduct.coverageProduct.images[0].url"
-        alt=""
-      />
-    </span>
-    <h4>
-      <span *ngIf="policy.categoryData" class="overview-section-title">
-        {{ policy.categoryData.name }} {{ 'policy.policy' | cxTranslate }}
-        <br />
-        {{ policy.mainProduct.coverageProduct.name }}
-      </span>
-      <span class="overview-section-value border-bottom border-color-3">
-        {{ policy.policyNumber }}
-      </span>
-    </h4>
+  <div class="position-relative text-center">
     <a
-      class="overview-section-link"
+      class="h4 vertical-center left z-index-1"
       routerLink="/my-account/my-policies/"
       routerLinkActive="active"
-      >{{ 'common.back' | cxTranslate }}</a
     >
+      <span class="fas fa-arrow-left"></span
+    ></a>
+    <h2 class="heading-headline p-3 mt-3 mb-5 text-center">
+      <span *ngIf="policy.categoryData">
+        {{ policy.mainProduct.coverageProduct.name }}
+        {{ 'policy.policy' | cxTranslate }}
+      </span>
+      <br />
+      <span>
+        {{ policy.policyNumber }}
+      </span>
+    </h2>
   </div>
   <div class="accordion">
     <cx-fs-accordion-item
@@ -39,6 +30,14 @@
           </div>
           <div class="col-6 col-sm-5 value notice">
             {{ policy.contractNumber }}
+          </div>
+        </li>
+        <li class="accordion-list-item row" *ngIf="policy.orderNumber">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.orderNumber' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.orderNumber }}
           </div>
         </li>
         <li *ngIf="policy.expiredPolicyNumber" class="accordion-list-item row">
@@ -84,6 +83,30 @@
           <div class="col-6 col-sm-5 value notice">
             {{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
             {{ policy.endDate | cxDate: 'dd MMM yyyy' }}
+          </div>
+        </li>
+        <li *ngIf="policy.policyStatus" class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.status' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.policyStatus }}
+          </div>
+        </li>
+        <li *ngIf="policy.cancellationDate" class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.cancellationDate' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.cancellationDate | cxDate: 'dd MMM yyyy' }}
+          </div>
+        </li>
+        <li *ngIf="policy.cancellationReason" class="accordion-list-item row">
+          <div class="col-6 col-sm-5 item-label">
+            {{ 'fscommon.cancellationReason' | cxTranslate }}
+          </div>
+          <div class="col-6 col-sm-5 value notice">
+            {{ policy.cancellationReason }}
           </div>
         </li>
       </ul>
@@ -418,31 +441,12 @@
       *ngIf="policy.documents && policy.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
-      <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
-          <div class="col-6">
-            {{ 'policy.documentName' | cxTranslate }}
-          </div>
-          <div class="col-6 value">
-            {{ 'policy.documentIssueDate' | cxTranslate }}
-          </div>
-        </li>
-        <ng-container *ngFor="let document of policy.documents">
-          <li class="accordion-list-item row">
-            <div class="col-6">
-              <a
-                href="#"
-                class="document-link d-block text-truncate"
-                (click)="getDocument(document, $event)"
-                >{{ document.altText }}</a
-              >
-            </div>
-            <div class="col-6 document-title text-right text-sm-left">
-              {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}
-            </div>
-          </li>
-        </ng-container>
-      </ul>
+      <div class="accordion-list">
+        <cx-fs-documents-table
+          [documentSource]="policy.documents"
+          [referredObjectColumnVisible]="false"
+        ></cx-fs-documents-table>
+      </div>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
       *ngIf="policy.responsibleAgent"
@@ -453,7 +457,7 @@
           <div class="content-box col-xs-10 col-sm-4 col-md-3">
             <img
               class="circle-image"
-              [src]="getBaseUrl() + policy.responsibleAgent?.thumbnail?.url"
+              [src]="baseUrl + policy.responsibleAgent?.thumbnail?.url"
               [alt]="policy.responsibleAgent?.displayName"
             />
             <p class="content-box-info">

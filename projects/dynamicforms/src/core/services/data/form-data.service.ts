@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
+import { OboCustomerService } from '../../../core/services/obo-customer/obo-customer.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
 import * as fromSelector from '../../store/selectors';
@@ -11,11 +12,18 @@ import { StateWithForm } from '../../store/state';
 @Injectable()
 export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
+  continueToNextStepSource = new BehaviorSubject<boolean>(false);
+  continueToNextStep$ = this.continueToNextStepSource.asObservable();
 
   constructor(
     protected store: Store<StateWithForm>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected oboCustomerService: OboCustomerService
   ) {}
+
+  setContinueToNextStep(isContinueClicked: boolean) {
+    this.continueToNextStepSource.next(isContinueClicked);
+  }
 
   submit(form: YFormData) {
     this.submittedForm.next(form);
@@ -25,22 +33,17 @@ export class FormDataService {
     return this.submittedForm.asObservable();
   }
 
-  setSubmittedForm(formData?: YFormData) {
-    this.submittedForm.next(formData);
-  }
-
   saveFormData(formData: YFormData) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.SaveFormData({
-            formData: formData,
-            userId: occUserId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.SaveFormData({ formData, userId })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
   }
 
@@ -63,17 +66,16 @@ export class FormDataService {
   }
 
   loadFormData(formDataId: string) {
-    this.userIdService
-      .getUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadFormData({
-            formDataId: formDataId,
-            userId: occUserId,
-          })
-        );
-      })
+    this.oboCustomerService
+      .getOboCustomerUserId()
+      .pipe(
+        map(userId => {
+          this.store.dispatch(
+            new fromAction.LoadFormData({ formDataId, userId })
+          );
+        })
+      )
+      .subscribe()
       .unsubscribe();
   }
 

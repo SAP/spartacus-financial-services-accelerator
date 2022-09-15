@@ -1,23 +1,90 @@
-<ng-container>
-  <div *ngIf="loading$ | async; else updateForm">
-    <div class="cx-spinner">
-      <cx-spinner></cx-spinner>
+<cx-spinner class="overlay" *ngIf="isUpdating$ | async"> </cx-spinner>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <label>
+    <span class="label-content">{{ 'fscommon.title' | cxTranslate }}</span>
+    <select formControlName="titleCode" class="form-control">
+      <option value="">{{ 'updateProfileForm.none' | cxTranslate }}</option>
+      <option *ngFor="let title of titles$ | async" [value]="title.code">
+        {{ title.name }}
+      </option>
+    </select>
+  </label>
+  <label>
+    <span class="label-content">{{
+      'updateProfileForm.firstName.label' | cxTranslate
+    }}</span>
+    <input
+      type="text"
+      class="form-control"
+      name="firstName"
+      placeholder="{{
+        'updateProfileForm.firstName.placeholder' | cxTranslate
+      }}"
+      formControlName="firstName"
+    />
+    <cx-form-errors [control]="form.get('firstName')"></cx-form-errors>
+  </label>
+
+  <label>
+    <span class="label-content">{{
+      'updateProfileForm.lastName.label' | cxTranslate
+    }}</span>
+    <input
+      type="text"
+      class="form-control"
+      name="lastName"
+      placeholder="{{ 'updateProfileForm.lastName.placeholder' | cxTranslate }}"
+      formControlName="lastName"
+    />
+    <cx-form-errors [control]="form.get('lastName')"></cx-form-errors>
+  </label>
+
+  <label>
+    <span class="label-content">{{
+      'forms.dateOfBirth.label' | cxTranslate
+    }}</span>
+    <input
+      type="date"
+      class="form-control"
+      name="dateOfBirth"
+      formControlName="dateOfBirth"
+      placeholder="{{ getDateFormat() }}"
+    />
+    <cx-form-errors
+      [control]="form.get('dateOfBirth')"
+      [translationParams]="{
+        minValue: form.get('dateOfBirth')?.errors?.min?.min,
+        measure: 'year'
+      }"
+    ></cx-form-errors>
+  </label>
+
+  <div class="form-group row" formGroupName="contactInfos">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content">{{
+          'forms.phoneNumber.label' | cxTranslate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          name="contactInfos"
+          formControlName="phoneNumber"
+        />
+        <cx-form-errors [control]="form.get('contactInfos')"></cx-form-errors>
+      </label>
     </div>
   </div>
 
-  <ng-template #updateForm>
-    <div class="container">
-      <div class="row justify-content-center">
-        <cx-fs-update-profile-form
-          *ngIf="(user$ | async)?.uid"
-          class="col-md-12 col-lg-6"
-          [user]="user$ | async"
-          [titles]="titles$ | async"
-          (cancelled)="onCancel()"
-          (submitted)="onSubmit($event)"
-        >
-        </cx-fs-update-profile-form>
-      </div>
-    </div>
-  </ng-template>
-</ng-container>
+  <a
+    class="btn btn-block btn-secondary"
+    [routerLink]="{ cxRoute: 'home' } | cxUrl"
+  >
+    {{ 'common.cancel' | cxTranslate }}
+  </a>
+
+  <button class="btn btn-block btn-primary" [disabled]="form.disabled">
+    {{ 'common.save' | cxTranslate }}
+  </button>
+</form>

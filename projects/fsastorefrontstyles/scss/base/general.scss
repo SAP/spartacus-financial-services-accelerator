@@ -1,6 +1,5 @@
-@import '../fs-mixins';
-
-body {
+body,
+html {
   font-size: $font-size-base;
   color: var(--cx-color-text);
 }
@@ -74,5 +73,9 @@ button:focus {
   color: var(--cx-color-primary);
   &:hover {
     text-decoration: underline;
+  }
+  &.is-disabled {
+    text-decoration: none;
+    color: var(--cx-color-6);
   }
 }

@@ -6,6 +6,9 @@ import { QuoteConnector } from './quote.connector';
 import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
+  getQuote = createSpy(
+    'QuoteAdapter.getQuote'
+  ).and.callFake((userId, quoteId) => of('getQuote' + userId + quoteId));
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
@@ -19,9 +22,16 @@ class MockQuoteAdapter implements QuoteAdapter {
   ).and.callFake((userId, policyId, contractId) =>
     of('invokeQuoteAction' + userId + policyId + contractId)
   );
+  compareQuotes = createSpy(
+    'QuoteAdapter.invokeQuoteAction'
+  ).and.callFake((cartCodes, userId) =>
+    of('compareQuotes' + cartCodes + userId)
+  );
 }
 const user = 'user';
 const cartId = 'cartId';
+const mockQuoteId = 'quoteId';
+const mockQuoteCodes = ['quote1', 'quote2'];
 
 describe('QuoteConnector', () => {
   let quoteConnector: QuoteConnector;
@@ -38,6 +48,10 @@ describe('QuoteConnector', () => {
 
   it('should be created', () => {
     expect(quoteConnector).toBeTruthy();
+  });
+  it('should call adapter for getQuote', () => {
+    quoteConnector.getQuote(user, mockQuoteId);
+    expect(quoteAdapter.getQuote).toHaveBeenCalledWith(user, mockQuoteId);
   });
   it('should call adapter for getQuotes', () => {
     quoteConnector.getQuotes(user);
@@ -65,6 +79,13 @@ describe('QuoteConnector', () => {
       cartId,
       QuoteActionType.UPDATE,
       { attribute: '1' }
+    );
+  });
+  it('should call adapter for getQuote', () => {
+    quoteConnector.compareQuotes(mockQuoteCodes, user);
+    expect(quoteAdapter.compareQuotes).toHaveBeenCalledWith(
+      mockQuoteCodes,
+      user
     );
   });
 });

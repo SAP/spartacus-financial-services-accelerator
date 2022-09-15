@@ -11,7 +11,7 @@ import {
 } from '@spartacus/core';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-carousel',
   template: '',
 })
@@ -23,7 +23,7 @@ class MockCarouselComponent {
 }
 
 @Directive({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {

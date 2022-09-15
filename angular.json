@@ -25,10 +25,7 @@
             ],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
+              "includePaths": ["./projects/fsastorefrontstyles/scss"]
             },
             "scripts": []
           },
@@ -43,7 +40,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -53,9 +49,18 @@
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumError": "10mb"
                 }
               ]
+            },
+            "development": {
+              "aot": false,
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             },
             "ci": {
               "fileReplacements": [
@@ -67,7 +72,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -84,7 +88,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -111,7 +114,8 @@
             "qa": {
               "browserTarget": "fsastorefrontapp:build:qa"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -120,10 +124,9 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -135,10 +138,15 @@
       "prefix": "cx-fs",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/fsastorefrontlib/tsconfig.lib.json",
             "project": "projects/fsastorefrontlib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/fsastorefrontlib/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -149,22 +157,24 @@
             "karmaConfig": "projects/fsastorefrontlib/karma.conf.js",
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
+              "includePaths": ["./projects/fsastorefrontstyles/scss"]
             },
-            "codeCoverageExclude": ["**/index.ts", "**/*.de.ts", "**/*.en.ts"]
+            "codeCoverageExclude": [
+              "**/index.ts",
+              "**/*.de.ts",
+              "**/*.en.ts",
+              "**/*store.module.ts",
+              "**/*config.ts"
+            ]
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/fsastorefrontlib/tsconfig.lib.json",
-              "projects/fsastorefrontlib/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/fsastorefrontlib/**/*.ts",
+              "projects/fsastorefrontlib/**/*.html"
+            ]
           }
         }
       }
@@ -176,7 +186,7 @@
       "prefix": "cx",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/dynamicforms/tsconfig.lib.json",
             "project": "projects/dynamicforms/ng-package.json"
@@ -196,13 +206,25 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/dynamicforms/tsconfig.lib.json",
-              "projects/dynamicforms/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "projects/dynamicforms/**/*.ts",
+              "projects/dynamicforms/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "schematics": {
+      "root": "projects/schematics",
+      "sourceRoot": "projects/schematics/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/schematics/**/*.ts"]
           }
         }
       }

@@ -1,4 +1,10 @@
 import * as shared from '../shared-checkout';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const startDate = dayjs().add(2, 'day').format(' DD MMM YYYY ');
 
 export function checkComparisonPage() {
   cy.get('cx-fs-comparison-table-panel').should('be.visible');
@@ -13,15 +19,15 @@ export function checkSavingsComparisonTable() {
     mainProducts: [
       {
         name: 'Safe and Steady',
-        price: '€199.39',
+        price: '€181.10',
       },
       {
         name: 'Balanced Deal',
-        price: '€270.39',
+        price: '€240.22',
       },
       {
         name: 'Flexi-Max',
-        price: '€488.71',
+        price: '€414.40',
       },
     ],
   };
@@ -32,20 +38,24 @@ export function selecBalancedDeal() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Balanced Deal');
+      cy.get('.table-header-title').should('contain.text', 'Balanced Deal');
       cy.get('.primary-button').click();
     });
 }
 
-export function checkOptionalProducts() {
+export function selecSafeAndSteady() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(0)
+    .within(() => {
+      cy.get('.table-header-title').should('contain.text', 'Safe and Steady');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function checkOptionalProductsBalancedDeal() {
   const addOptionsContent: addOptionsPage.AddOptions = {
     title: 'Your Savings Insurance',
     items: [
-      {
-        name: 'Survivor Pension',
-        available: true,
-        shouldAdd: true,
-      },
       {
         name: 'Dependent Children Pension',
         available: true,
@@ -53,7 +63,34 @@ export function checkOptionalProducts() {
       },
       {
         name: 'Disability Premium Waiver',
+        notAvailable: true,
+      },
+      {
+        name: 'Survivor Pension',
         available: true,
+        shouldAdd: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function checkOptionalProductsSafeAndSteady() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Savings Insurance',
+    items: [
+      {
+        name: 'Dependent Children Pension',
+        notAvailable: true,
+      },
+      {
+        name: 'Disability Premium Waiver',
+        notAvailable: true,
+      },
+      {
+        name: 'Survivor Pension',
+        available: true,
+        shouldAdd: true,
       },
     ],
   };
@@ -71,14 +108,13 @@ export function checkSavingsPolicy() {
   cy.get('.label').contains('Contribution');
   cy.get('.value').contains('779');
   cy.get('.label').contains('Premium');
-  cy.get('.value').contains('€817.23');
 }
 
 export function populateCoverageInformation() {
   cy.get('[name=contributionFrequency]').select('Half_Yearly');
   cy.get('[name=contribution]').type('779');
   cy.get('[name=annualContributionIncrease]').select('1');
-  cy.get('[name=startDate]').type('2020-12-12');
+  cy.get('[name=startDate]').type('2022-12-12');
   cy.get('[name=retirementAge]').type('67');
   cy.get('[name=dateOfBirth]').type('1981-11-12');
 }
@@ -96,31 +132,31 @@ export function checkInvestmentDetails() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €817.23 ',
+    price: '€822.19',
     products: [
       {
-        title: ' Start Date: ',
-        value: ' 12 Dec 2020 ',
+        title: 'Start Date:',
+        value: '12 Dec 2022',
       },
       {
         title: 'Annual Contribution Increase:',
-        value: ' 1 ',
+        value: '1',
       },
       {
         title: 'Retirement Age:',
-        value: ' 67 ',
+        value: '67',
       },
       {
-        title: ' Balanced Deal: ',
-        value: ' €779.00 ',
+        title: 'Balanced Deal:',
+        value: '€779.00',
       },
       {
-        title: ' Survivor Pension: ',
-        value: ' €35.24 ',
+        title: 'Dependent Children Pension:',
+        value: '€2.99',
       },
       {
-        title: ' Dependent Children Pension: ',
-        value: ' €2.99 ',
+        title: 'Survivor Pension:',
+        value: '€40.20',
       },
     ],
   };

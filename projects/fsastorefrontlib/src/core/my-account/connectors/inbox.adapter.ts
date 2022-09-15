@@ -8,11 +8,13 @@ export abstract class InboxAdapter {
    * @param userId The user id
    * @param messageGroup The message group
    * @param searchConfig The search configuration defined by sort code and order
+   * @param read The read/unread messages
    */
   abstract getSiteMessagesForUserAndGroup(
     userId: string,
     messageGroup: string,
-    searchConfig: FSSearchConfig
+    searchConfig: FSSearchConfig,
+    read?: boolean
   ): Observable<any>;
 
   /**

@@ -77,5 +77,18 @@ export const common = {
       'term-amount': 'Investment Betrag',
       'deposit-term': 'Einzahlungsdauer',
     },
+    voucherCode: 'Gutscheincode',
+  },
+  formErrors: {
+    pattern: '[DE] Should contain at least one number, no special characters',
+    maxlength: '[DE] Maximum {{ maxLength }} characters',
+    min: '[DE] Minimum value is {{ minValue }} {{ measure }}',
+    invalidAge: '[DE] Must be over 18 years old',
+    dateShouldBeGreaterOrEqual: '[DE] Date cannot be in the past',
+    dateShouldBeGreater: '[DE] Date must be in the future',
+    cxInvalidPassword:
+      '[DE] Password must be six characters minimum, with one uppercase letter, one number, one symbol',
+    cxInvalidPhoneRegex:
+      '[DE] Phone number should be between minimum 6 characters and maximum 20',
   },
 };

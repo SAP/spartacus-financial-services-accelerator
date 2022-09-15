@@ -152,7 +152,7 @@ export class ChangePolicyService {
   }
 
   getChangedCoverageValue(label: string, changedPolicy: any): string {
-    const changedCoverage = changedPolicy.optionalProducts.find(
+    const changedCoverage = changedPolicy?.optionalProducts.find(
       coverage => coverage.coverageProduct.cartDisplayName === label
     );
     return changedCoverage.coverageIsIncluded;

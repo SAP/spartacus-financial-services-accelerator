@@ -5,13 +5,13 @@ import {
   GlobalMessageType,
   OCC_USER_ID_ANONYMOUS,
   RoutingService,
-  UserService,
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { FSUser } from '../../../../src/occ/occ-models/occ.models';
+import { FSUser } from '../../../occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
-import { FormsUtils } from '../utils/forms-utils';
+import { FormsUtils } from '@spartacus/dynamicforms';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class AutoPersonalDetailsGuard implements CanActivate {
   constructor(
     protected routingService: RoutingService,
     protected cartService: FSCartService,
-    protected userService: UserService,
+    protected userAccountFacade: UserAccountFacade,
     protected globalMessageService: GlobalMessageService
   ) {}
   private readonly policyHolderSameAsMainDriverPath =
@@ -31,7 +31,7 @@ export class AutoPersonalDetailsGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return combineLatest([
       this.cartService.getActive(),
-      this.userService.get(),
+      this.userAccountFacade.get(),
       this.cartService.isStable(),
     ]).pipe(
       filter(([_, user, loaded]) => this.isUserValid(user) && loaded),

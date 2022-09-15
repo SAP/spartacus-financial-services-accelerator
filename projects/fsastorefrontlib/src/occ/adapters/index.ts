@@ -11,4 +11,4 @@ export * from './pricing/index';
 export * from './product-assignment/index';
 export * from './quote/index';
 export * from './user-request/index';
-export * from './user/index';
+export * from './product-search/index';

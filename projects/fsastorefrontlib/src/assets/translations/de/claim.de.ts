@@ -22,5 +22,21 @@ export const claim = {
       questionsOrConcerns:
         'Wenn Sie weitere Fragen haben, wenden Sie sich bitte an Ihren Sachbearbeiter. Um Ihren Status online zu überprüfen, besuchen Sie den Bereich Schadensfälle.',
     },
+    generalInformation: 'Allgemeine Informationen',
+    loadingFailed: '[DE] Claim can not be loaded.',
+    successfulChangeClaim:
+      '[DE] Claim {{claimNumber}} is successfully updated.',
+    claimDetails: '[DE] Claim Details ({{ subclaimType }})',
+    subclaim: {
+      claimant: '[DE] Claimant',
+      paymentInformation: '[DE] Payment Information',
+      paymentDetails: '[DE] paid to {{ payee }} via {{ paymentMethod }} on ',
+    },
+    participants: {
+      rolesPersonsInvolved: '[DE] Roles/Persons Involved',
+      participant: '[DE] Participant ',
+      role: 'Rollen',
+      name: 'Name',
+    },
   },
 };

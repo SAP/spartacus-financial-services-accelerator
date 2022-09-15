@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Config, OccConfig } from '@spartacus/core';
+import { UserAccountOccModule } from '@spartacus/user/account/occ';
 import { AgentOccModule } from './adapters/agent/agent-occ.module';
 import { BillingTimeOccModule } from './adapters/billing-time/billing-time-occ.module';
 import { FsCartOccModule } from './adapters/cart/cart-occ.module';
@@ -17,10 +18,14 @@ import { QuoteOccModule } from './adapters/quote/quote-occ.module';
 import { UserRequestOccModule } from './adapters/user-request/user-request-occ.module';
 import { FSUserOccModule } from './adapters/user/user-occ.module';
 import { OccValueListService } from './services/value-list/occ-value-list.service';
+import { FSProductOccModule } from './adapters/product-search/product-occ.module';
+import { ConsentOccModule } from './adapters/consent-management';
+import { AppointmentSchedulingOccModule } from './adapters/appointment-scheduling';
 
 @NgModule({
   imports: [
     AgentOccModule,
+    UserAccountOccModule,
     BillingTimeOccModule,
     CheckoutOccModule,
     ProductPricingOccModule,
@@ -31,11 +36,14 @@ import { OccValueListService } from './services/value-list/occ-value-list.servic
     HttpClientModule,
     ChangeRequestOccModule,
     ClaimOccModule,
+    ConsentOccModule,
     PolicyOccModule,
     QuoteOccModule,
     UserRequestOccModule,
     CsTicketOccModule,
+    AppointmentSchedulingOccModule,
     FSUserOccModule,
+    FSProductOccModule,
   ],
   providers: [OccValueListService, { provide: OccConfig, useExisting: Config }],
 })

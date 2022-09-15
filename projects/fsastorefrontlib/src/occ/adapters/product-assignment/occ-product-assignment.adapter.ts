@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ProductAssignmentAdapter } from '../../../core/product-assignment/connectors';
 
@@ -21,9 +20,11 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     currentPage?: number,
     sort?: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('productAssignments', {
-      userId,
-      orgUnitId,
+    const url = this.occEndpointService.buildUrl('productAssignments', {
+      urlParams: {
+        userId,
+        orgUnitId,
+      },
     });
     let params: HttpParams = new HttpParams();
     if (active !== undefined) {
@@ -48,9 +49,11 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     orgUnitId: string,
     productCode: string
   ) {
-    const url = this.occEndpointService.getUrl('createProductAssignments', {
-      userId,
-      orgUnitId,
+    const url = this.occEndpointService.buildUrl('createProductAssignments', {
+      urlParams: {
+        userId,
+        orgUnitId,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -66,10 +69,12 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     orgUnitId: string,
     fsProductAssignmentCode: string
   ) {
-    const url = this.occEndpointService.getUrl('removeProductAssignments', {
-      userId,
-      orgUnitId,
-      fsProductAssignmentCode,
+    const url = this.occEndpointService.buildUrl('removeProductAssignments', {
+      urlParams: {
+        userId,
+        orgUnitId,
+        fsProductAssignmentCode,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -85,10 +90,12 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     fsProductAssignmentCode: string,
     active: boolean
   ) {
-    const url = this.occEndpointService.getUrl('updateProductAssignments', {
-      userId,
-      orgUnitId,
-      fsProductAssignmentCode,
+    const url = this.occEndpointService.buildUrl('updateProductAssignments', {
+      urlParams: {
+        userId,
+        orgUnitId,
+        fsProductAssignmentCode,
+      },
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

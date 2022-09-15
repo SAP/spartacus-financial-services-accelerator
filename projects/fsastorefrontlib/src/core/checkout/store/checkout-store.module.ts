@@ -1,29 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import {
-  CHECKOUT_FEATURE,
-  ConfigModule,
-  StateConfig,
-  StateModule,
-  StorageSyncType,
-} from '@spartacus/core';
+import { StateModule } from '@spartacus/core';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
+import { FS_CHECKOUT_FEATURE } from './checkout-state';
+import { CheckoutPersistenceService } from '../facade/checkout-persistance.service';
 
-export function checkoutConfigFactory(): StateConfig {
-  const config: StateConfig = {
-    state: {
-      storageSync: {
-        keys: {
-          [`${CHECKOUT_FEATURE}.steps.value`]: StorageSyncType.LOCAL_STORAGE,
-        },
-      },
-    },
-  };
-  return config;
+export function checkoutStatePersistenceFactory(
+  checkoutPersistenceService: CheckoutPersistenceService
+): () => void {
+  const result = () => checkoutPersistenceService.initSync();
+  return result;
 }
 
 @NgModule({
@@ -31,12 +21,19 @@ export function checkoutConfigFactory(): StateConfig {
     CommonModule,
     HttpClientModule,
     StateModule,
-    StoreModule.forFeature(CHECKOUT_FEATURE, reducerToken, {
+    StoreModule.forFeature(FS_CHECKOUT_FEATURE, reducerToken, {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(checkoutConfigFactory),
   ],
-  providers: [reducerProvider],
+  providers: [
+    reducerProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: checkoutStatePersistenceFactory,
+      deps: [CheckoutPersistenceService],
+      multi: true,
+    },
+  ],
 })
 export class FSCheckoutStoreModule {}

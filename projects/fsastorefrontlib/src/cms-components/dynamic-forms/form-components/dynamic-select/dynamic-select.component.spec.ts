@@ -11,14 +11,14 @@ import {
   DynamicFormsConfig,
   FieldConfig,
   FormService,
-} from '@fsa/dynamicforms';
+} from '@spartacus/dynamicforms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { of } from 'rxjs';
 import { DynamicSelectComponent } from './dynamic-select.component';
 
 @Component({
-  // tslint:disable
+  // eslint-disable-next-line
   selector: 'cx-error-notice',
   template: '',
 })
@@ -108,6 +108,7 @@ describe('DynamicSelectComponent', () => {
       fieldType: 'select',
       name: 'testSelect',
       label: {
+        default: 'testLabel',
         en: 'TestLabel',
       },
       options: [],

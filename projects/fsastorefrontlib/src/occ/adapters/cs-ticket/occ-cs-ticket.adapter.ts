@@ -18,8 +18,10 @@ export class OccCsTicketAdapter implements CsTicketAdapter {
     userId: string,
     ticketData: ContactAgentData
   ) {
-    const url = this.occEndpointService.getUrl('createCsTicket', {
-      userId,
+    const url = this.occEndpointService.buildUrl('createCsTicket', {
+      urlParams: {
+        userId,
+      },
     });
     let params = new HttpParams({});
     if (agentId) {

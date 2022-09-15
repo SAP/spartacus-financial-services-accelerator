@@ -1,0 +1,16 @@
+{
+  "git": {
+    "requireCleanWorkingDir": true,
+    "requireUpstream": false,
+    "tagName": "fsa-schematics-${version}",
+    "commitMessage": "Bumping fsa schematics version to ${version}",
+    "tagAnnotation": "Bumping fsa schematics version to ${version}"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "@spartacus/fsa-schematics@${version}"
+  },
+  "hooks": {
+    "after:version:bump": "yarn build"
+  }
+}

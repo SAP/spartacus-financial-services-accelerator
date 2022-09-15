@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Observable, of, Subscription } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade';
 import { ClaimService } from './../../../../core/my-account/';
@@ -25,12 +25,12 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
     this.subscription = this.claimService
       .getClaimPolicies()
       .pipe(
+        take(1),
         map(claimData => {
           if (
-            claimData &&
-            claimData.loaded &&
             claimData.claimPoliciesData &&
-            !claimData.claimPoliciesData.insurancePolicies
+            (claimData.claimPoliciesData.insurancePolicies?.length === 0 ||
+              Object.keys(claimData.claimPoliciesData)?.length === 0)
           ) {
             this.routingService.go({ cxRoute: 'noClaims' });
             return of(false);

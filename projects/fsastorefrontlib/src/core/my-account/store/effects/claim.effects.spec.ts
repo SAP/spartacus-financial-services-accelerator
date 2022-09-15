@@ -2,7 +2,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { GlobalMessageService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  OCC_USER_ID_CURRENT,
+  RoutingService,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
@@ -79,6 +83,7 @@ describe('Claim Effects', () => {
   let mockClaimConnector: MockClaimConnector;
   let mockClaimDataService: MockClaimDataService;
   let globalMessageService: GlobalMessageService;
+  let routingService: RoutingService;
 
   beforeEach(() => {
     mockClaimConnector = new MockClaimConnector();
@@ -96,12 +101,17 @@ describe('Claim Effects', () => {
           provide: ClaimDataService,
           useValue: mockClaimDataService,
         },
+        {
+          provide: RoutingService,
+          useValue: { go: jasmine.createSpy() },
+        },
         fromEffects.ClaimEffects,
         provideMockActions(() => actions$),
       ],
     });
     effects = TestBed.inject(fromEffects.ClaimEffects);
     globalMessageService = TestBed.inject(GlobalMessageService);
+    routingService = TestBed.inject(RoutingService);
   });
 
   describe('loadClaims$', () => {
@@ -132,28 +142,28 @@ describe('Claim Effects', () => {
   });
 
   it('should return claim', () => {
-    const action = new fromActions.LoadCurrentClaim({
+    const action = new fromActions.LoadClaimById({
       userId: OCC_USER_ID_CURRENT,
       claimId: claimId1,
     });
-    const completion = new fromActions.LoadCurrentClaimSuccess(claim1);
+    const completion = new fromActions.LoadClaimByIdSuccess(claim1);
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
-    expect(effects.loadCurrentClaim$).toBeObservable(expected);
+    expect(effects.loadClaimById$).toBeObservable(expected);
   });
 
   it('should fail to return claim', () => {
     spyOn(mockClaimConnector, 'getClaim').and.returnValue(throwError('Error'));
-    const action = new fromActions.LoadCurrentClaim({
+    const action = new fromActions.LoadClaimById({
       userId: OCC_USER_ID_CURRENT,
       claimId: claimId1,
     });
-    const completion = new fromActions.LoadCurrentClaimFail(
+    const completion = new fromActions.LoadClaimByIdFail(
       JSON.stringify('Error')
     );
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
-    expect(effects.loadCurrentClaim$).toBeObservable(expected);
+    expect(effects.loadClaimById$).toBeObservable(expected);
   });
 
   describe('removeClaim$', () => {
@@ -360,6 +370,39 @@ describe('Claim Effects', () => {
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.updateClaim$).toBeObservable(expected);
+    });
+  });
+
+  describe('changeClaim$', () => {
+    it('should change claim', () => {
+      const action = new fromActions.ChangeClaim({
+        userId: OCC_USER_ID_CURRENT,
+        claimData: claim3,
+      });
+      const changeClaimCompletion = new fromActions.UpdateClaimSuccess(claim3);
+
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: changeClaimCompletion });
+
+      expect(effects.changeClaim$).toBeObservable(expected);
+    });
+
+    it('should fail to change claim', () => {
+      spyOn(mockClaimConnector, 'updateClaim').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.ChangeClaim({
+        userId: OCC_USER_ID_CURRENT,
+        claimData: {
+          claimNumber: 'invalidClaimNumber',
+        },
+      });
+      const completion = new fromActions.UpdateClaimFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.changeClaim$).toBeObservable(expected);
     });
   });
 });
