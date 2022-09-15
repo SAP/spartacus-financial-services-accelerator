@@ -14,7 +14,7 @@ testFilters(['smoke'], () => {
       cy.visit('/');
     });
 
-    it('Start checkout for Current Account ', () => {
+    it('Should start checkout for Current Account ', () => {
       banking.startBankingCheckout('Current Account');
     });
 

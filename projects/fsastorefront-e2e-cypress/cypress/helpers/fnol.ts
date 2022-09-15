@@ -30,10 +30,10 @@ export function checkFNOLSteps() {
   cy.get('p.label').eq(3).should('have.text', ' Summary ');
 }
 
-export function populateIncidentInformationStep() {
+export function populateIncidentInformationStep(incidentType) {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=whatHappened]')
-      .select('Collision')
+      .select(incidentType)
       .then(() => {
         if (!claimNumber) {
           claimNumber = this.getClaimIdFromLocalStorage();
@@ -73,24 +73,12 @@ export function checkSummaryPage() {
   cy.get('.accordion-item').should('have.length', '3');
 }
 
-export function checkIncidentInformationAccordion() {
-  cy.get('.accordion-heading')
-    .eq(0)
-    .should('have.text', ' Incident Information ');
-  cy.get('.accordion-item-wrapper')
-    .eq(0)
-    .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '8');
-    });
-  cy.get('.accordion-list-item').contains('AutoGlassDamage');
-}
-
-export function checkIncidentReportAccordion() {
+export function checkIncidentReportAccordion(accordionItem) {
   cy.get('.accordion-heading').eq(1).should('have.text', ' Incident Report ');
   cy.get('.accordion-item-wrapper')
     .eq(1)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '3');
+      cy.get('.accordion-list-item').should('have.length', accordionItem);
     });
   cy.get('.accordion-list-item').contains('while buying tesla coils');
 }
@@ -233,12 +221,119 @@ export function checkDownloadButton() {
   });
 }
 
-export function checkClaimReplication() {
+export function checkClaimReplication(incidetType) {
   cy.get('.info-card')
     .should('have.length', 1)
     .within(() => {
       cy.get('.info-card-data').within(() => {
-        cy.get('.value').should('contain.text', 'Collision');
+        cy.get('.value').should('contain.text', incidetType);
       });
+      cy.get('.info-card-links').contains('Details');
+      cy.get('.info-card-links').contains('Add Documents');
+    });
+}
+
+export function uploadDocuments() {
+  const filePath = 'Claim.pdf';
+  cy.get('.custom-file-input').attachFile(filePath);
+  cy.get('.btn-primary')
+    .should('contain.text', 'Upload')
+    .eq(0)
+    .click({ force: true });
+}
+
+export function startClaimFromHomepage() {
+  cy.get('cx-banner').eq(2).click();
+  cy.get('.section-header-heading').contains('Which car has been damaged?');
+  cy.contains('The affected car is not listed? Contact an agent for help!');
+  cy.get('.form-check-label').should('be.visible');
+  cy.get('.primary-button').contains('Continue').should('be.disabled');
+  cy.get('.heading-headline')
+    .should('be.visible')
+    .contains('Make a Claim Online');
+}
+
+export function selectAutoPolicyAndStartClaim() {
+  cy.get('cx-card')
+    .should('be.visible')
+    .within(() => {
+      cy.contains('Auto Insurance Policy');
+      cy.contains('Vehicle Make: Tesla');
+      cy.get('.btn-link').contains('Select').click({ force: true });
+    });
+  cy.get('.form-check-input').click();
+  cy.get('.primary-button').contains('Continue').click();
+}
+
+export function deleteClaim() {
+  cy.get('.info-card').within(() => {
+    cy.contains('Fire')
+      .parents('.col-12')
+      .within(() => {
+        cy.get('a.fs-icon.icon-bin')
+          .should('be.visible')
+          .eq(0)
+          .click({ force: true });
+      });
+  });
+  cy.get('cx-fs-deleted-claim-dialog', { withinSubject: null })
+    .should('be.visible')
+    .within(() => {
+      cy.get('h3').contains('Delete started claim process');
+      cy.get('.action-button').contains('Cancel');
+      cy.get('button.close').should('be.visible');
+      cy.get('.primary-button').contains('Delete').click();
+    });
+}
+
+export function claimAction(action) {
+  cy.get('.info-card').within(() => {
+    cy.contains('Glass Damage')
+      .parents('.col-12')
+      .within(() => {
+        cy.get('a.link').contains(action).click({ force: true });
+      });
+  });
+}
+
+export function checkUpdateClaimPage() {
+  cy.get('cx-form-component', { withinSubject: null }).should('be.visible');
+  cy.get('cx-fs-change-claim-navigation', { withinSubject: null })
+    .should('be.visible')
+    .within(() => {
+      cy.get('.action-button').contains('Back');
+      cy.get('.primary-button').contains('Submit');
+    });
+  cy.get('.heading-headline').contains('Update Claim');
+}
+
+export function uploadNewDocument(newDocument) {
+  cy.get('cx-form-component', { withinSubject: null })
+    .should('be.visible')
+    .within(() => {
+      const filePath = newDocument;
+      cy.get('.col-form-label').contains(
+        'Please upload files relevant to the incident:'
+      );
+      cy.get('.custom-file-input').attachFile(filePath);
+      cy.get('.btn-primary')
+        .should('contain.text', 'Upload')
+        .click({ force: true });
+      cy.get('.fa-check').should('be.visible');
+    });
+  cy.get('.primary-button').contains('Submit').click({ force: true });
+}
+
+export function checkClaimDetails() {
+  cy.get('.heading-headline', { withinSubject: null }).should(
+    'contain.text',
+    'Auto Insurance Claim'
+  );
+  cy.get('cx-fs-accordion-item', { withinSubject: null })
+    .should('be.visible')
+    .within(() => {
+      cy.get('.accordion-heading').contains('General Information');
+      cy.get('.accordion-heading').contains('Documents').click();
+      cy.get('.action-button').contains('Add Documents').click();
     });
 }

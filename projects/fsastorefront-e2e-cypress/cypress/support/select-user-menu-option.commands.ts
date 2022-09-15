@@ -65,7 +65,7 @@ Cypress.Commands.add(
       .invoke('mouseover')
       .next('.wrapper')
       .within(() => {
-        cy.findAllByText(dropdownItem).click({ force: true });
+        cy.contains(dropdownItem).click({ force: true });
       });
   }
 );

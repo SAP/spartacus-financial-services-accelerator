@@ -289,6 +289,7 @@ export const pages = {
   addOptions: 'checkout/add-options',
   sellerDashboard: 'seller-dashboard',
   personalDetails: 'checkout/personal-details',
+  documentsPage: 'my-account/my-documents',
 };
 
 export function checkPageURL(page: string) {

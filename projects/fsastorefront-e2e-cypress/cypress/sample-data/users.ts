@@ -61,7 +61,7 @@ export const carGroupCustomer = {
 
 export const createSeller = {
   titleCode: 'Ms.',
-  firstName: generateCustomerName('Ana'),
+  firstName: 'Ana',
   lastName: 'Jones',
   email: generateMail('AnaJones'),
 };

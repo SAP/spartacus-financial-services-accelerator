@@ -17,7 +17,7 @@ testFilters([''], () => {
       cy.visit('/login');
     });
 
-    it('Should enable seller to create quote for customer', () => {
+    it('Should create event quote as seller', () => {
       register.loginInUser(sellerIndira.email, sellerIndira.password);
       cy.get('.SiteLogo').should('be.visible').click();
       checkout.startInsuranceCheckout('Event');

@@ -16,7 +16,7 @@ testFilters(['smoke'], () => {
       register.login(registrationUser.email, registrationUser.password);
     });
 
-    it('Should complete first auto step with additional driver', () => {
+    it('Should complete first auto step', () => {
       checkout.waitConsent();
       checkout.startInsuranceCheckout('Auto');
       auto.populateAutoAnnuallyBMW();
@@ -44,7 +44,7 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
     });
 
-    it('Change main product from silver to bronze', () => {
+    it('Should change main product from silver to bronze', () => {
       autoIntegration.selectAutoBronze();
       auto.checkOptionalProductsBronze();
       checkout.clickContinueButton();
@@ -64,7 +64,7 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details and place an order', () => {
+    it('Should select default payment details and place an order', () => {
       checkout.populatePaymentCreditCard();
       cy.get('.btn-primary').contains('Continue').click();
       checkout.placeOrderOnFinalReview();

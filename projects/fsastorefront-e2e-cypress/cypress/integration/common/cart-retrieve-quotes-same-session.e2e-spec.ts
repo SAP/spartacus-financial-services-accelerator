@@ -19,7 +19,7 @@ testFilters([''], () => {
       register.login(registrationUser.email, registrationUser.password);
     });
 
-    it('Create Current Account Application', () => {
+    it('Should create Current Account Application', () => {
       checkout.waitConsent();
       banking.startBankingCheckout('Current Account');
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
@@ -34,7 +34,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Create Event Quote', () => {
+    it('Should create Event Quote', () => {
       cy.get('.SiteLogo').should('be.visible').click();
       checkout.startInsuranceCheckout('Event');
       checkout.checkCheckoutStep('Your Event Insurance', '6');
@@ -48,7 +48,7 @@ testFilters([''], () => {
       checkout.checkPersonalDetailsPage();
     });
 
-    it('Create a Loan Application', () => {
+    it('Should create a Loan Application', () => {
       cy.get('.SiteLogo').should('be.visible').click();
       banking.startBankingCheckout('Loan');
       checkout.checkCheckoutStep('Your Loan Application', '6');
@@ -74,7 +74,7 @@ testFilters([''], () => {
       checkout.ConfirmBindQuote();
     });
 
-    it('Retrieve Quotes and Applications', () => {
+    it('Should retrieve Quotes and Applications', () => {
       myAccount.retrieveQuote('3', 'Current Account');
       cy.get('h2').should('contain.text', 'Add Option');
       cy.get('h2').should('contain.text', 'Your Current Account Application');
@@ -90,7 +90,7 @@ testFilters([''], () => {
       checkout.checkAccordions('generalQuoteAccordions');
     });
 
-    it('Retrieve Event and Complete Checkout', () => {
+    it('Should retrieve Event and Complete Checkout', () => {
       myAccount.retrieveQuote('3', 'Event Insurance');
       cy.get('h2').should('contain.text', 'Event Insurance');
       event.checkProgressBarEvent();
@@ -116,7 +116,7 @@ testFilters([''], () => {
       checkout.checkOrderConfirmation();
     });
 
-    it('Check Quotes and Applications page', () => {
+    it('Should check Quotes and Applications page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'My Account',
         dropdownItem: 'Quotes & Applications',

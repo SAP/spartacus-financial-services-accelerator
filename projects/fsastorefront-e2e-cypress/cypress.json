@@ -1,6 +1,6 @@
 {
   "defaultCommandTimeout": 20000,
-  "baseUrl": "https://localhost:9002",
+  "baseUrl": "http://localhost:4200/",
   "requestTimeout": 10000,
   "modifyObstructiveCode": false,
   "env": {
