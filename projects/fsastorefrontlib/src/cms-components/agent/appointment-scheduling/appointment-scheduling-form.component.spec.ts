@@ -142,8 +142,8 @@ describe('AppointmentSchedulingFormComponent', () => {
 
     component.form.setValue({
       subject: 'Subject',
-      appointmentDate: 'Appointment Date',
-      appointmentTime: 'Appointment Time',
+      appointmentDate: new Date('2030-02-11T13:02:58+0000'),
+      appointmentTime: '10:00 (1h)',
       description: 'Description',
       consentGiven: true,
     });
