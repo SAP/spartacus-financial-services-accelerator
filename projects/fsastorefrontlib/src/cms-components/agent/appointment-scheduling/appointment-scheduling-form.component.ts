@@ -14,7 +14,6 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { DateConfig } from './../../../core/date-config/date-config';
 import { AppointmentSchedulingService } from './../../../core/appointment-scheduling/facade/appointment-scheduling.service';
 import { switchMap, tap } from 'rxjs/operators';
@@ -27,7 +26,6 @@ import { DefaultFormValidators } from '@spartacus/dynamicforms';
 })
 export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
   constructor(
-    protected agentSearchService: AgentSearchService,
     protected userIdService: UserIdService,
     protected route: ActivatedRoute,
     protected fb: FormBuilder,
