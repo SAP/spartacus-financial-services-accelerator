@@ -4,18 +4,18 @@ import { EChartsOption } from 'echarts';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  getSalesIllustrationChartConfig,
-  salesIllustrationChartTranslateKeys,
-} from '../../chart-config/sales-illustration-chart-config';
+  getSavingsIllustrationChartConfig,
+  savingsIllustrationChartTranslateKeys,
+} from '../../chart-config/savings-illustration-chart-config';
 
 @Injectable()
-export class SalesIllustrationChartService {
+export class SavingsIllustrationChartService {
   constructor(private translationService: TranslationService) {}
 
-  getSalesIllustrationChartOptions(
+  getSavingsIllustrationChartOptions(
     salesIllustrationDiagramData: any
   ): Observable<EChartsOption> {
-    const labelTranslations = salesIllustrationChartTranslateKeys.map(
+    const labelTranslations = savingsIllustrationChartTranslateKeys.map(
       translateKey => this.translationService.translate(translateKey)
     );
 
@@ -27,7 +27,7 @@ export class SalesIllustrationChartService {
           interestLabel,
         };
 
-        return getSalesIllustrationChartConfig(
+        return getSavingsIllustrationChartConfig(
           labels,
           salesIllustrationDiagramData
         );

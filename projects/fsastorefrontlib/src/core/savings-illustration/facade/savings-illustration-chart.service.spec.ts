@@ -1,17 +1,17 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslationService } from '@spartacus/core';
 import { of } from 'rxjs';
-import { SalesIllustrationChartService } from './sales-illustration-chart.service';
+import { SavingsIllustrationChartService } from './savings-illustration-chart.service';
 
-const salesIllustrationDiagramDataMocked = {
+const savingsIllustrationDiagramDataMocked = {
   expectedSavingsSeries: [1050],
   contributionSeries: [1000],
   interestSeries: [50],
   years: [2022],
 };
 
-describe('SalesIllustrationChartService', () => {
-  let service: SalesIllustrationChartService;
+describe('SavingsIllustrationChartService', () => {
+  let service: SavingsIllustrationChartService;
   let translationServiceSpy: jasmine.SpyObj<TranslationService>;
 
   beforeEach(() => {
@@ -21,24 +21,24 @@ describe('SalesIllustrationChartService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        SalesIllustrationChartService,
+        SavingsIllustrationChartService,
         { provide: TranslationService, useValue: translationSpy },
       ],
     });
 
-    service = TestBed.inject(SalesIllustrationChartService);
+    service = TestBed.inject(SavingsIllustrationChartService);
     translationServiceSpy = TestBed.inject(
       TranslationService
     ) as jasmine.SpyObj<TranslationService>;
   });
 
   it(
-    'getSalesIllustrationChartOptions should get correct data',
+    'getSavingsIllustrationChartOptions should get correct data',
     waitForAsync(() => {
       translationServiceSpy.translate.and.returnValue(of('test'));
 
-      const chartOptions = service.getSalesIllustrationChartOptions(
-        salesIllustrationDiagramDataMocked
+      const chartOptions = service.getSavingsIllustrationChartOptions(
+        savingsIllustrationDiagramDataMocked
       );
       chartOptions.subscribe(eChartsOption => {
         expect(eChartsOption.series[0].data).toEqual([1050]);

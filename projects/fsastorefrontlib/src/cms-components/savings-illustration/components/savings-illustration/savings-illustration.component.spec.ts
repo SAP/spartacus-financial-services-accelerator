@@ -13,11 +13,11 @@ import {
   FSProductService,
   PricingService,
 } from '../../../../core';
-import { SalesIllustrationComponent } from './sales-illustration.component';
+import { SavingsIllustrationComponent } from './savings-illustration.component';
 
-describe('SalesIllustrationComponent', () => {
-  let component: SalesIllustrationComponent;
-  let fixture: ComponentFixture<SalesIllustrationComponent>;
+describe('SavingsIllustrationComponent', () => {
+  let component: SavingsIllustrationComponent;
+  let fixture: ComponentFixture<SavingsIllustrationComponent>;
 
   let FSProductServiceSpy: jasmine.SpyObj<FSProductService>;
   let formDataStorageServiceSpy: jasmine.SpyObj<FormDataStorageService>;
@@ -41,7 +41,7 @@ describe('SalesIllustrationComponent', () => {
       const FSCartSpy = jasmine.createSpyObj(['createCartForProduct']);
 
       TestBed.configureTestingModule({
-        declarations: [SalesIllustrationComponent],
+        declarations: [SavingsIllustrationComponent],
         providers: [
           { provide: FSProductService, useValue: FSProductSpy },
           {
@@ -68,7 +68,7 @@ describe('SalesIllustrationComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SalesIllustrationComponent);
+    fixture = TestBed.createComponent(SavingsIllustrationComponent);
     component = fixture.componentInstance;
 
     FSProductServiceSpy = TestBed.inject(FSProductService) as jasmine.SpyObj<
@@ -95,21 +95,12 @@ describe('SalesIllustrationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('ngOnInit called', () => {
-  // });
-
   it('ngAfterViewInit called', () => {
     spyOn(component, 'ngAfterViewInit').and.callThrough();
     component.tabNavigation = new QueryList<NgbNav>();
     component.ngAfterViewInit();
     expect(component.ngAfterViewInit).toHaveBeenCalled();
   });
-
-  // it('onChartInit', () => {
-  // });
-
-  // it('resizeChart', () => {
-  // });
 
   it('onPageChange called', () => {
     spyOn(component, 'onPageChange').and.callThrough();

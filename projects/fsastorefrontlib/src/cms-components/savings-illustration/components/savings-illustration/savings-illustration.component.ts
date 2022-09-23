@@ -32,17 +32,17 @@ import {
 } from 'rxjs/operators';
 import { FSCartService, FSProductService } from '../../../../core';
 import { PricingService } from '../../../../core/product-pricing/facade/pricing.service';
-import { SalesIllustrationChartService } from '../../../../core/sales-illustration/facade/sales-illustration-chart.service';
+import { SavingsIllustrationChartService } from '../../../../core/savings-illustration/facade/savings-illustration-chart.service';
 import { FSProduct } from '../../../../occ';
 import { PricingData } from '../../../../occ/occ-models/form-pricing.interface';
 import { PaginationHelper } from '../../../../shared/util/helpers/pagination/PaginationHelper';
 
 @Component({
-  selector: 'cx-fs-sales-illustration',
-  templateUrl: './sales-illustration.component.html',
-  providers: [SalesIllustrationChartService],
+  selector: 'cx-fs-savings-illustration',
+  templateUrl: './savings-illustration.component.html',
+  providers: [SavingsIllustrationChartService],
 })
-export class SalesIllustrationComponent
+export class SavingsIllustrationComponent
   implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('nav') tabNavigation: QueryList<NgbNav>;
 
@@ -83,7 +83,7 @@ export class SalesIllustrationComponent
     private formDataStorageService: FormDataStorageService,
     private formDataService: FormDataService,
     private pricingService: PricingService,
-    private chartService: SalesIllustrationChartService,
+    private chartService: SavingsIllustrationChartService,
     private cartService: FSCartService,
     private breakpointService: BreakpointService,
     public routingService: RoutingService
@@ -139,7 +139,7 @@ export class SalesIllustrationComponent
 
     this.chartOptions$ = this.product$.pipe(
       switchMap((product: any) =>
-        this.chartService.getSalesIllustrationChartOptions(
+        this.chartService.getSavingsIllustrationChartOptions(
           product.salesIllustrationDiagramData
         )
       )

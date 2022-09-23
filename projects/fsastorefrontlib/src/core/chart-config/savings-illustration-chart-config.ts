@@ -1,12 +1,12 @@
 import { EChartsOption } from 'echarts';
 
-export const salesIllustrationChartTranslateKeys = [
+export const savingsIllustrationChartTranslateKeys = [
   'salesIllustration.expectedSavings',
   'fscommon.contribution',
   'salesIllustration.interest',
 ];
 
-export const getSalesIllustrationChartConfig = (
+export const getSavingsIllustrationChartConfig = (
   labels,
   data
 ): EChartsOption => {

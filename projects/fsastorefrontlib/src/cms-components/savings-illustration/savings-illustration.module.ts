@@ -18,22 +18,22 @@ import {
 } from '@spartacus/storefront';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AccordionModule } from '../../shared';
-import { SalesIllustrationComponent } from './components/sales-illustration/sales-illustration.component';
+import { SavingsIllustrationComponent } from './components/savings-illustration/savings-illustration.component';
 
 const routes: Routes = [
   {
     path: null,
     canActivate: [CmsPageGuard],
     data: {
-      cxRoute: 'salesIllustration',
-      pageLabel: 'sales-illustration',
+      cxRoute: 'savingsIllustration',
+      pageLabel: 'savings-illustration',
     },
     component: PageLayoutComponent,
   },
 ];
 
 @NgModule({
-  declarations: [SalesIllustrationComponent],
+  declarations: [SavingsIllustrationComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -50,12 +50,12 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        SalesIllustrationFlex: {
-          component: SalesIllustrationComponent,
+        SavingsIllustrationFlex: {
+          component: SavingsIllustrationComponent,
         },
       },
     }),
   ],
-  exports: [SalesIllustrationComponent],
+  exports: [SavingsIllustrationComponent],
 })
-export class SalesIllustrationModule {}
+export class SavingsIllustrationModule {}

@@ -115,7 +115,7 @@ export interface FSProduct extends Product {
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
   dynamicAttributes?: Map<string, any>;
-  salesIllustrationDiagramData?: SalesIllustrationDiagramData;
+  salesIllustrationDiagramData?: SavingsIllustrationDiagramData;
 }
 
 export interface YFormConfiguratorSettings {
@@ -349,7 +349,7 @@ export interface DataByAssetType {
   }[];
 }
 
-export interface SalesIllustrationDiagramData {
+export interface SavingsIllustrationDiagramData {
   contributionSeries: number[];
   expectedSavingsSeries: number[];
   interestSeries: number[];
