@@ -48,7 +48,7 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       savings.checkComparisonPage();
       savings.checkSavingsComparisonTable();
-      savings.selecBalancedDeal();
+      savings.selectMainProduct('Balanced Deal');
     });
 
     it('Should check add options page', () => {

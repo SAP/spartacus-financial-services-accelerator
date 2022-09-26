@@ -7,6 +7,7 @@ import { selectPaymentMethodInvoice } from '../../helpers/checkout/insurance/pay
 import * as myPolicies from '../../helpers/my-account/policies';
 import * as fnol from '../../helpers/fnol';
 import testFilters from '../../support/filters';
+import { checkPageElements } from '../../helpers/homepage';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
@@ -65,7 +66,7 @@ testFilters([''], () => {
       //waiting for replication process to be completed
       cy.wait(200000);
       myPolicies.checkMyPoliciesPage();
-      autoIntegration.startFnolCheckout('Gold');
+      auto.clickMakeAClaim();
     });
 
     it('Should check and populate Incident Information page', () => {
@@ -108,6 +109,8 @@ testFilters([''], () => {
 
     it('Should check claim confirmation page', () => {
       fnol.checkConfirmationPage();
+      cy.get('.SiteLogo').should('be.visible').click();
+      checkPageElements();
       //replication proces to be completed
       cy.wait(3000);
     });

@@ -55,7 +55,7 @@ testFilters([''], () => {
     });
 
     it('Should submit a claim - Glass Damage', () => {
-      autoIntegration.startFnolCheckout('Bronze');
+      auto.clickMakeAClaim();
       autoIntegration.waitForIncidentInfoForm();
       fnol.checkFNOLCheckoutPage();
       fnol.checkFNOLSteps();
