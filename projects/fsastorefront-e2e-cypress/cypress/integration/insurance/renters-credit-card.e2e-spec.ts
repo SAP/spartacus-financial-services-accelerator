@@ -71,11 +71,11 @@ testFilters(['smoke'], () => {
       cy.get('.btn-primary').contains('Continue').click();
     });
 
-    it('Place order on final review page', () => {
+    it('Should place an order on final review page', () => {
       checkout.placeOrderOnFinalReview();
     });
 
-    it('Check order confirmation', () => {
+    it('Should check order confirmation', () => {
       checkout.checkAccordions('rentersFinalReview');
       checkout.checkOrderConfirmation();
     });

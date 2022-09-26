@@ -12,7 +12,7 @@ import {
 } from '../../helpers/checkout/banking/user-identification';
 
 testFilters([''], () => {
-  context('Savings Insurance Checkout', () => {
+  context('Banking and insurance checkout with progress bar checks', () => {
     before(() => {
       cy.visit('/');
     });
