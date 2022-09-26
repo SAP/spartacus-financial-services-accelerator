@@ -1,4 +1,4 @@
-import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
+import { CheckoutStep } from '@spartacus/checkout/root';
 import {
   B2BUser,
   Cart,
@@ -12,10 +12,10 @@ import {
   SortModel,
   User,
 } from '@spartacus/core';
-import { CheckoutStep } from '@spartacus/checkout/root';
-import { UserSignUp } from '@spartacus/user/profile/root';
-import { MediaContainer } from '@spartacus/storefront';
 import { Pagination } from '@spartacus/core/src/model/unused.model';
+import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
+import { MediaContainer } from '@spartacus/storefront';
+import { UserSignUp } from '@spartacus/user/profile/root';
 
 export enum OrganizationTableType {
   PRODUCT_ASSIGNMENTS = 'productAssignments',
@@ -115,6 +115,7 @@ export interface FSProduct extends Product {
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
   dynamicAttributes?: Map<string, any>;
+  salesIllustrationDiagramData?: SavingsIllustrationDiagramData;
 }
 
 export interface YFormConfiguratorSettings {
@@ -346,4 +347,11 @@ export interface DataByAssetType {
     startClaim?: boolean;
     classes?: string;
   }[];
+}
+
+export interface SavingsIllustrationDiagramData {
+  contributionSeries: number[];
+  expectedSavingsSeries: number[];
+  interestSeries: number[];
+  years: string[];
 }

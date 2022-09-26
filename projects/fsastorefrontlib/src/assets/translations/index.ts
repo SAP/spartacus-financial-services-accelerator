@@ -1,30 +1,31 @@
 import { TranslationResources } from '@spartacus/core';
+import { appointmentScheduling } from './en/appointment.en';
 import {
   b2b,
   organization,
-  productAssignments,
   potentialProductAssignments,
+  productAssignments,
 } from './en/b2b.en';
 import { changeRequest } from './en/changeRequest.en';
 import { claim } from './en/claim.en';
 import { fscommon } from './en/common.en';
 import { configureProduct } from './en/configureProduct.en';
+import { consent } from './en/consent.en';
+import { dashboard } from './en/dashboard.en';
+import { document } from './en/document.en';
 import { forms } from './en/forms.en';
 import { orderConfirmation } from './en/orderConfirmation.en';
 import { policy } from './en/policy.en';
 import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
 import { quoteReview } from './en/quoteReview.en';
+import { salesIllustration } from './en/sales-illustration.en';
 import { userRequest } from './en/userRequest.en';
-import { document } from './en/document.en';
-import { common } from './overrides/en/common';
-import { payment } from './overrides/en/payment';
-import { myAccount } from './overrides/en/my-account';
 import { address } from './overrides/en/address';
 import { cart } from './overrides/en/cart';
-import { consent } from './en/consent.en';
-import { dashboard } from './en/dashboard.en';
-import { appointmentScheduling } from './en/appointment.en';
+import { common } from './overrides/en/common';
+import { myAccount } from './overrides/en/my-account';
+import { payment } from './overrides/en/payment';
 
 export const fstranslations: TranslationResources = {
   b2b,
@@ -46,6 +47,7 @@ export const fstranslations: TranslationResources = {
   consent,
   dashboard,
   appointmentScheduling,
+  salesIllustration,
 };
 
 export const fsOverrides: TranslationResources = {
