@@ -67,6 +67,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   appointmentSchedulingConfirmationPage: {
     paths: ['appointmentSchedulingConfirmationPage'],
   },
+  savingsIllustration: { paths: ['savingsillustration/:savingsProductCode'] },
 };
 
 export const routingConfig: RoutingConfig = {

@@ -16,10 +16,15 @@
       <a
         class="link mt-1"
         [routerLink]="
-          {
-            cxRoute: 'category',
-            params: { code: product.defaultCategory?.parentCategory?.code }
-          } | cxUrl
+          product.investments?.length
+            ? ({
+                cxRoute: 'savingsIllustration',
+                params: { savingsProductCode: product.code }
+              } | cxUrl)
+            : ({
+                cxRoute: 'category',
+                params: { code: product.defaultCategory?.parentCategory?.code }
+              } | cxUrl)
         "
       >
         {{ 'fscommon.moreInfo' | cxTranslate }}
