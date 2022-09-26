@@ -17,7 +17,6 @@ export function selectAutoSilver() {
       cy.get('.primary-button').click();
     });
 }
-    
 
 export function checkReplicatedPolicy(product) {
   cy.get('.info-card')
