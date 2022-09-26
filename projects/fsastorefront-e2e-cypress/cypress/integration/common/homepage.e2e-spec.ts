@@ -8,25 +8,25 @@ testFilters([''], () => {
       cy.visit('/');
     });
 
-    it('Check homepage elements', () => {
+    it('Should check homepage elements', () => {
       homepage.checkPageElements();
       homepage.checkAssistanceAndSupport();
     });
 
-    it('Check header navigation with nav nodes', () => {
+    it('Should check header navigation with nav nodes', () => {
       homepage.checkHeaderNavigation();
     });
 
-    it('should have footer with footer navigation and notice', () => {
+    it('Should have footer with footer navigation and notice', () => {
       homepage.checkFooter();
     });
 
-    it('Check Consent Management', () => {
+    it('Should check Consent Management', () => {
       consentManagement.checkAnonymousConsent();
       consentManagement.clickAllowAll();
     });
 
-    it('Check Chatbot', () => {
+    it('Should check Chatbot', () => {
       homepage.checkChatbot();
     });
   });

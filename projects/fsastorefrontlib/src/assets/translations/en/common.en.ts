@@ -105,6 +105,7 @@ export const fscommon = {
     contribution: 'Contribution',
     creditCard: 'Credit Card',
     invoice: 'Invoice',
+    ticketCreated: 'Ticket has been created',
     recommendedProduct: 'Recommended product',
     payment: {
       CARD: 'Credit Card',

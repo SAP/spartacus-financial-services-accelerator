@@ -14,7 +14,7 @@ testFilters(['smoke'], () => {
       cy.visit('/');
     });
 
-    it('Start checkout for Current Account ', () => {
+    it('Should start checkout for Current Account ', () => {
       banking.startBankingCheckout('Current Account');
     });
 
@@ -46,13 +46,6 @@ testFilters(['smoke'], () => {
       register.loginInUser(registrationUser.email, registrationUser.password);
     });
 
-    //BUG: CXFSA-303 will be removed
-    it('Should retrieve quote', () => {
-      checkMyQuotesPage();
-      retrieveQuote('1', 'Current Account');
-      checkout.clickContinueButton();
-    });
-
     it('Should complete personal details step', () => {
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
       checkout.checkPersonalDetailsPage();
@@ -61,6 +54,7 @@ testFilters(['smoke'], () => {
       currentAccount.checkMiniCartCurrentAccount();
       // Needed for user registration/login to complete in the background
       cy.wait(5000);
+      checkout.checkBackAndContinueButtons();
       checkout.clickContinueButton();
     });
 

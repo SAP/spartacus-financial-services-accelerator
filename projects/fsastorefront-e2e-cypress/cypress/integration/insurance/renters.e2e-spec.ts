@@ -83,6 +83,10 @@ testFilters(['smoke'], () => {
     it('Should validate phone number and check empty my account pages', () => {
       register.validatePhoneNumber('');
       checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
+      checkout.checkMyAccountEmptyPages(
+        'My Documents',
+        'You have no Documents.'
+      );
     });
   });
 });

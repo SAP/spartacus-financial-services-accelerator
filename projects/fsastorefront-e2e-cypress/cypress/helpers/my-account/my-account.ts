@@ -59,8 +59,7 @@ export function checkPersonalDetails() {
 }
 
 export function orderHistoryPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: 'Order History',
   });
 }
@@ -85,8 +84,7 @@ export function checkOrderHistoryContent(price, status) {
 }
 
 export function retrieveQuote(length, product) {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: 'Quotes & Applications',
   });
   cy.get('h2').should('contain.text', 'Quotes & Applications');
@@ -97,4 +95,21 @@ export function retrieveQuote(length, product) {
     .within(() => {
       cy.get('.link').contains('Retrieve').click({ force: true });
     });
+}
+
+export function checkMyDocuments(documentNumber) {
+  cy.selectOptionFromMyAccount({
+    dropdownItem: 'My Documents',
+  });
+  cy.get('cx-fs-documents-overview').should('be.visible');
+  cy.get('.heading-headline').should('be.visible').contains('My Documents');
+  cy.get('h4').contains('Uploaded Documents');
+  cy.get('thead.d-none')
+    .should('be.visible')
+    .within(() => {
+      cy.get('th').contains('Document name');
+      cy.contains('Creation date');
+      cy.contains('Belonging to');
+    });
+  cy.get('tr').should('have.length', documentNumber);
 }

@@ -105,6 +105,7 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: 'Rechnung',
+    ticketCreated: '[DE] Ticket has been created',
     recommendedProduct: 'Dies ist Ihr empfohlenes Produkt!',
     payment: {
       CARD: 'Kreditkarte',

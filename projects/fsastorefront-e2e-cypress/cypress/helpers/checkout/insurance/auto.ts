@@ -82,6 +82,87 @@ export function populateMainDriverInfo() {
   cy.get('[name="driverLicenceDate"]').eq(0).type('2018-01-01');
 }
 
+export function checkAutoComparisonTable() {
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Auto Bronze',
+        price: '€4.98',
+      },
+      {
+        name: 'Auto Silver',
+        price: '€10.95',
+      },
+      {
+        name: 'Auto Gold',
+        price: '€20.74',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
+}
+
+export function selectAutoBronze() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(0)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Auto Bronze');
+      cy.get('.table-header-value').should('have.text', '€4.98');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function selectAutoSilver() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(1)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Auto Silver');
+      cy.get('.table-header-value').should('have.text', '€10.95');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function checkAutoSilverMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €10.95 ',
+    products: [
+      {
+        title: ' Start Date: ',
+        value: currentDate,
+      },
+      {
+        title: 'Vehicle Make:',
+        value: ' Audi ',
+      },
+      {
+        title: 'Vehicle Model:',
+        value: ' A5 ',
+      },
+      {
+        title: 'Vehicle Type:',
+        value: ' A5 Quattro ',
+      },
+      {
+        title: 'Vehicle Value:',
+        value: ' 12000 ',
+      },
+      {
+        title: 'Vehicle Year:',
+        value: ' 2017 ',
+      },
+      {
+        title: ' Third Party Liability: ',
+        value: ' €9.95 ',
+      },
+      {
+        title: ' Collision Coverage: ',
+        value: ' €1.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
 export function populateAdditionalDriverInfo() {
   cy.get('[name=dateOfBirth]').eq(1).type('1982-08-24');
   cy.get('[name="driverGender"]').eq(1).select('Male');
@@ -115,7 +196,7 @@ export function populateVehicleDetails() {
 export function populateMainDriverData() {
   cy.get('[name=mainDriverFirstName]').type('John');
   cy.get('[name=mainDriverLastName]').type('Moore');
-  cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
+  cy.get('[name=mainDriverLicenceNumber]').clear().type('BG-234-xx');
 }
 
 export function populateAdditionalData() {

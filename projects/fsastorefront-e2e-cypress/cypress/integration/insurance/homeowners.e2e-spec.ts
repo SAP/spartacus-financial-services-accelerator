@@ -69,16 +69,16 @@ testFilters([''], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details', () => {
+    it('Should select default payment details', () => {
       payment.selectPaymentMethodInvoice();
       checkout.clickContinueButton();
     });
 
-    it('Place order on final review page', () => {
+    it('Should place order on final review page', () => {
       checkout.placeOrderOnFinalReview();
     });
 
-    it('Check order confirmation', () => {
+    it('Should check order confirmation', () => {
       checkout.checkAccordions('homeownersFinalReview');
       checkout.checkOrderConfirmation();
     });

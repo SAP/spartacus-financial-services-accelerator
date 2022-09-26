@@ -8,6 +8,7 @@
       class="form-control"
       type="text"
       formControlName="subject"
+      [maxLength]="subjectMaxLength"
       placeholder="{{
         'appointmentScheduling.placeholder.subject' | cxTranslate
       }}"
@@ -23,7 +24,7 @@
       class="form-control"
       type="date"
       formControlName="appointmentDate"
-      min="{{ date | date: 'yyyy-MM-dd' }}"
+      [min]="tomorrow | date: 'yyyy-MM-dd'"
     />
     <cx-form-errors [control]="form.get('appointmentDate')"></cx-form-errors>
   </div>
@@ -51,7 +52,8 @@
     >
     <textarea
       id="description"
-      rows="10"
+      [maxLength]="descriptionMaxLength"
+      rows="5"
       class="form-control"
       type="text"
       formControlName="description"
@@ -62,14 +64,17 @@
     <cx-form-errors [control]="form.get('description')"></cx-form-errors>
   </div>
   <div class="form-check">
-    <input
-      class="form-check-input"
-      type="checkbox"
-      formControlName="consentGiven"
-    />
-    <span class="form-check-label cx-be-bold">{{
-      'appointmentScheduling.consent' | cxTranslate
-    }}</span>
+    <label for="consentGiven">
+      <input
+        id="consentGiven"
+        class="form-check-input"
+        type="checkbox"
+        formControlName="consentGiven"
+      />
+      <span class="form-check-label">{{
+        'appointmentScheduling.consent' | cxTranslate
+      }}</span>
+    </label>
   </div>
   <cx-form-errors [control]="form.get('consentGiven')"></cx-form-errors>
 
@@ -82,7 +87,7 @@
       {{ 'common.cancel' | cxTranslate }}
     </button>
     <button class="btn btn-block btn-primary" type="submit">
-      {{ 'common.save' | cxTranslate }}
+      {{ 'appointmentScheduling.schedule' | cxTranslate }}
     </button>
   </div>
 </form>

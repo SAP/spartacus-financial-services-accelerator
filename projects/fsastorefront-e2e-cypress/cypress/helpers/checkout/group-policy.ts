@@ -1,5 +1,4 @@
-import { createCustomer } from '../../sample-data/users';
-import * as register from '../register';
+import { createCustomer, createSeller } from '../../sample-data/users';
 import * as shared from './shared-checkout';
 
 export function checkGroupPolicyMainPage() {
@@ -63,7 +62,6 @@ export function checkMembersPage() {
 export function createNewMember() {
   cy.get('.button.primary').contains('Add').click();
   cy.get('cx-view').should('be.visible');
-  register.createB2bCustomer(createCustomer);
 }
 
 export function checkMemberIsDisabled() {
@@ -96,4 +94,18 @@ export function selectPremiumAccount() {
     cy.get('.table-header-title').should('contain.text', 'Premium Account');
     cy.get('.primary-button').click();
   });
+}
+
+export function enableSeller() {
+  cy.contains(createSeller.firstName)
+    .parentsUntil('table')
+    .within(() => {
+      cy.get('cx-org-status-cell').should('contain.text', 'Disabled').click();
+    });
+  cy.get('cx-view')
+    .should('be.visible')
+    .within(() => {
+      cy.get('button.active').contains('Enable').click();
+      cy.contains('enabled successfully');
+    });
 }

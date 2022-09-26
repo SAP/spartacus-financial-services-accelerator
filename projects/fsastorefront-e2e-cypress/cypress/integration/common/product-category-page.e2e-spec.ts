@@ -10,12 +10,12 @@ testFilters(['smoke'], () => {
       cy.visit('/');
     });
 
-    it('should check homeowners product category page', () => {
+    it('Should check homeowners product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Homeowners',
       });
-      checkout.checkPageURL(checkout.categoryPage.homeowners);
+      checkout.checkPageURL(checkout.pages.homeowners);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(insuranceButtons);
       productCategory.checkCategoryProductHeadings(
@@ -24,12 +24,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check renters product category page', () => {
+    it('Should check renters product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Renters',
       });
-      checkout.checkPageURL(checkout.categoryPage.renters);
+      checkout.checkPageURL(checkout.pages.renters);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(insuranceButtons);
       productCategory.checkCategoryProductHeadings(
@@ -38,12 +38,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Auto product category page', () => {
+    it('Should check Auto product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Auto',
       });
-      checkout.checkPageURL(checkout.categoryPage.auto);
+      checkout.checkPageURL(checkout.pages.auto);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(insuranceButtons);
       productCategory.checkCategoryProductHeadings(
@@ -53,12 +53,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Life product category page', () => {
+    it('Should check Life product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Life',
       });
-      checkout.checkPageURL(checkout.categoryPage.life);
+      checkout.checkPageURL(checkout.pages.life);
       productCategory.checkComponents();
       cy.get('cx-fs-cms-custom-container')
         .eq(1)
@@ -70,12 +70,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Travel product category page', () => {
+    it('Should check Travel product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Travel',
       });
-      checkout.checkPageURL(checkout.categoryPage.travel);
+      checkout.checkPageURL(checkout.pages.travel);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(insuranceButtons);
       productCategory.checkCategoryProductHeadings(
@@ -85,12 +85,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Event product category page', () => {
+    it('Should check Event product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Event',
       });
-      checkout.checkPageURL(checkout.categoryPage.event);
+      checkout.checkPageURL(checkout.pages.event);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(insuranceButtons);
       productCategory.checkCategoryProductHeadings(
@@ -100,12 +100,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Savings product category page', () => {
+    it('Should check Savings product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Savings',
       });
-      checkout.checkPageURL(checkout.categoryPage.savings);
+      checkout.checkPageURL(checkout.pages.savings);
       productCategory.checkComponents();
       cy.get('cx-fs-cms-custom-container')
         .eq(1)
@@ -118,12 +118,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Current Account product category page', () => {
+    it('Should check Current Account product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Current Account',
       });
-      checkout.checkPageURL(checkout.categoryPage.currentAccount);
+      checkout.checkPageURL(checkout.pages.currentAccount);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(bankingButtons);
       productCategory.checkCategoryProductHeadings(
@@ -133,12 +133,12 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Credit Card product category page', () => {
+    it('Should check Credit Card product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Credit Card',
       });
-      checkout.checkPageURL(checkout.categoryPage.creditCard);
+      checkout.checkPageURL(checkout.pages.creditCard);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(bankingButtons);
       productCategory.checkCategoryProductHeadings(
@@ -148,23 +148,23 @@ testFilters(['smoke'], () => {
       );
     });
 
-    it('should check Loan product category page', () => {
+    it('Should check Loan product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Loan',
       });
-      checkout.checkPageURL(checkout.categoryPage.loan);
+      checkout.checkPageURL(checkout.pages.loan);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(bankingButtons);
       productCategory.checkCategoryProductHeadings('Personal Loan');
     });
 
-    it('should check Fixed Term Deposit product category page', () => {
+    it('Should check Fixed Term Deposit product category page', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Banking',
         dropdownItem: 'Fixed Term Deposit',
       });
-      checkout.checkPageURL(checkout.categoryPage.ftd);
+      checkout.checkPageURL(checkout.pages.ftd);
       productCategory.checkComponents();
       productCategory.checkCategoryBannerButtons(bankingButtons);
       productCategory.checkCategoryProductHeadings('Fixed Term Deposit');

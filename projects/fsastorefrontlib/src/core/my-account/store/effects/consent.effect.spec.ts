@@ -5,7 +5,12 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './consent.effect';
 import * as fromReducer from './../../store/reducers/index';
-import { ConsentConnector } from '../../connectors/consent.connector';
+import {
+  ConsentConnector,
+  ClaimConnector,
+  PolicyConnector,
+  QuoteConnector,
+} from '../../connectors';
 import {
   Address,
   CartActions,
@@ -218,6 +223,24 @@ const claim3 = {
 };
 const claims = [claim1, claim2, claim3];
 
+class MockQuoteConnector {
+  getQuotes() {
+    return of(insuranceQuotes);
+  }
+}
+
+class MockPolicyConnector {
+  getPolicies() {
+    return of(insurancePolicies);
+  }
+}
+
+class MockClaimConnector {
+  getClaims() {
+    return of(claims);
+  }
+}
+
 class MockConsentConnector {
   getConsents() {
     return of(consentList);
@@ -225,18 +248,6 @@ class MockConsentConnector {
 
   getOBOCustomer() {
     return of(customer);
-  }
-
-  getQuotesForOBOCustomer() {
-    return of(insuranceQuotes);
-  }
-
-  getPoliciesForOBOCustomer() {
-    return of(insurancePolicies);
-  }
-
-  getClaimsForOBOCustomer() {
-    return of(claims);
   }
 
   transferCart() {
@@ -260,10 +271,16 @@ describe('Consent Effects', () => {
   let actions$: Observable<fromActions.ConsentAction>;
   let effects: fromEffects.ConsentEffects;
   let mockConsentConnector: MockConsentConnector;
+  let mockQuoteConnector: MockQuoteConnector;
+  let mockPolicyConnector: MockPolicyConnector;
+  let mockClaimConnector: MockClaimConnector;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockConsentConnector = new MockConsentConnector();
+    mockQuoteConnector = new MockQuoteConnector();
+    mockPolicyConnector = new MockPolicyConnector();
+    mockClaimConnector = new MockClaimConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -272,6 +289,9 @@ describe('Consent Effects', () => {
       ],
       providers: [
         { provide: ConsentConnector, useValue: mockConsentConnector },
+        { provide: QuoteConnector, useValue: mockQuoteConnector },
+        { provide: PolicyConnector, useValue: mockPolicyConnector },
+        { provide: ClaimConnector, useValue: mockClaimConnector },
         { provide: RoutingService, useClass: MockRoutingService },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         fromEffects.ConsentEffects,
@@ -356,7 +376,7 @@ describe('Consent Effects', () => {
     });
 
     it('should fail to return customer quotes', () => {
-      spyOn(mockConsentConnector, 'getQuotesForOBOCustomer').and.returnValue(
+      spyOn(mockQuoteConnector, 'getQuotes').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.LoadCustomerQuotes({
@@ -389,7 +409,7 @@ describe('Consent Effects', () => {
     });
 
     it('should fail to return customer policies', () => {
-      spyOn(mockConsentConnector, 'getPoliciesForOBOCustomer').and.returnValue(
+      spyOn(mockPolicyConnector, 'getPolicies').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.LoadCustomerPolicies({
@@ -420,7 +440,7 @@ describe('Consent Effects', () => {
     });
 
     it('should fail to return customer claims', () => {
-      spyOn(mockConsentConnector, 'getClaimsForOBOCustomer').and.returnValue(
+      spyOn(mockClaimConnector, 'getClaims').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.LoadCustomerClaims({

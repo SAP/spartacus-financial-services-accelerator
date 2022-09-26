@@ -17,6 +17,9 @@ const formData: YFormData = {
   type: 'DATA',
   content:
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
+  formDefinition: {
+    content: '{"testFormDefinitionContent":{}}',
+  },
 };
 
 const pricingData: PricingData = {
@@ -63,6 +66,10 @@ class MockFSProductService {
 }
 class MockPricingService {
   buildPricingData(): PricingData {
+    return pricingData;
+  }
+
+  buildPricingDataWithFormDefinition(): PricingData {
     return pricingData;
   }
 }

@@ -193,20 +193,23 @@ export interface FSOccEndpoints extends OccEndpoints {
   oboConsentCustomer?: string;
 
   /**
-   * Gets quotes of the particular customer created by consent holder
-   *
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link #quotes} instead.
    */
   oboConsentCustomerQuotes?: string;
 
   /**
-   * Gets policies of the particular customer created by consent holder
-   *
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link #policies} instead.
    */
   oboConsentCustomerPolicies?: string;
 
   /**
-   * Gets claims of the particular customer created by consent holder
-   *
+   * @deprecated since version 4.0.2
+   * No longer used.
+   * Use {@link #claims} instead.
    */
   oboConsentCustomerClaims?: string;
 

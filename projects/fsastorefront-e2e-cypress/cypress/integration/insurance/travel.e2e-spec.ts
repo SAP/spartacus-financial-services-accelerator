@@ -39,7 +39,7 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
     });
 
-    it('Populate personal details', () => {
+    it('Should populate personal details', () => {
       checkout.populatePersonalDetailsPage();
       travelCheckout.checkTravelMiniCart();
       checkout.clickContinueButton();
@@ -56,21 +56,21 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
     });
 
-    it('Select default payment details', () => {
+    it('Should select default payment details', () => {
       payment.selectPaymentMethodInvoice();
       checkout.clickContinueButton();
     });
 
-    it('Place order on final review pages', () => {
+    it('Should place an order on final review pages', () => {
       checkout.placeOrderOnFinalReview();
     });
 
-    it('Check order confirmation', () => {
+    it('Should check order confirmation', () => {
       checkout.checkOrderConfirmation();
       checkout.checkAccordions('travelFinalReview');
     });
 
-    it('Check inbox', () => {
+    it('Should check inbox', () => {
       cy.get('cx-fs-message-notification').within(() => {
         cy.get('.icon-envelope').click();
       });

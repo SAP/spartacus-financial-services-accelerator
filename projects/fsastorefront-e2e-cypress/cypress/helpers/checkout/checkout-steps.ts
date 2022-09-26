@@ -132,8 +132,7 @@ export function removeOptionalProduct(productName) {
 }
 
 export function checkMyAccountEmptyPages(myAccountPage, emptyPageMessage) {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
+  cy.selectOptionFromMyAccount({
     dropdownItem: myAccountPage,
   });
   cy.get('h2').should('contain.text', myAccountPage);
@@ -249,8 +248,8 @@ export function checkCouponsFields() {
   cy.get('.cx-cart-coupon-container')
     .should('be.visible')
     .within(() => {
-      cy.get('.form-control').should('be.visible');
-      cy.get('.primary-button').should('contain.text', 'Apply');
+      cy.get('[formcontrolname=couponCode]').should('be.visible');
+      cy.get('#apply-voucher').should('be.visible');
     });
 }
 
@@ -273,7 +272,7 @@ export function checkSyncPilotComparisonTable() {
     });
 }
 
-export const categoryPage = {
+export const pages = {
   homeowners: 'insurance_main_homeowners',
   renters: 'insurance_main_renters',
   auto: 'insurance_main_auto',
@@ -288,6 +287,9 @@ export const categoryPage = {
   userIdentification: 'user-identification',
   addressInfo: 'my-account/address-info',
   addOptions: 'checkout/add-options',
+  sellerDashboard: 'seller-dashboard',
+  personalDetails: 'checkout/personal-details',
+  documentsPage: 'my-account/my-documents',
 };
 
 export function checkPageURL(page: string) {
@@ -303,4 +305,10 @@ export function checkValidationPopUpAndClose() {
       cy.get('h3').should('contain.text', 'There are validation errors');
       cy.get('.close').click();
     });
+}
+
+export function populateCustomerDetails() {
+  cy.get('[name="title"]').select('mr');
+  cy.get('[name="firstName"]').type('Stephen');
+  cy.get('[name="lastName"]').type('Bailey');
 }

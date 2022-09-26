@@ -18,7 +18,7 @@ import { ComparisonTableService } from '../comparison-table.service';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
 import createSpy = jasmine.createSpy;
-import { PAY_NOW_BILLING_TIME_CODE } from '../../../core/general-config/defalut-general-config';
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../core/general-config/default-general-config';
 
 @Pipe({
   name: 'cxUrl',
