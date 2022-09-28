@@ -5,6 +5,8 @@ import {
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import {
+  CartAddEntrySuccessEvent,
+  CartUpdateEntrySuccessEvent,
   Command,
   CommandService,
   EventService,
@@ -64,6 +66,8 @@ export class QuoteService {
         LanguageSetEvent,
         QuoteApplicationUpdatedEvent,
         OrderPlacedEvent,
+        CartUpdateEntrySuccessEvent,
+        CartAddEntrySuccessEvent,
       ],
       resetOn: [LoginEvent, LogoutEvent],
     }

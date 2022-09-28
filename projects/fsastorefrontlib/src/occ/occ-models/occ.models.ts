@@ -116,8 +116,33 @@ export interface FSProduct extends Product {
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
   dynamicAttributes?: Map<string, any>;
-  investments?: any[];
+  investments?: FSInvestmentDistributionData[];
   salesIllustrationDiagramData?: SavingsIllustrationDiagramData;
+}
+
+export interface FSInvestmentDistributionData {
+  distributionPercentage: number;
+  investmentType: FSInvestmentTypeData;
+}
+
+export interface FSInvestmentTypeData {
+  fundName: string;
+  riskReturningRating: string;
+  isin: string;
+  fiveYearPerformance: number;
+  factSheetDocument: MediaData;
+}
+
+export interface MediaData {
+  uuid: string;
+  code: string;
+  catalogId: string;
+  catalogVersion: string;
+  mime: string;
+  altText: string;
+  description: string;
+  url: string;
+  downloadUrl: string;
 }
 
 export interface YFormConfiguratorSettings {

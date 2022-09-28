@@ -18,7 +18,7 @@ import {
   OneTimeChargeEntry,
 } from '../../../../occ/occ-models/occ.models';
 import { RoutingService, UserIdService } from '@spartacus/core';
-import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/defalut-general-config';
+import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/default-general-config';
 
 @Component({
   selector: 'cx-fs-quotes-applications-comparison',
