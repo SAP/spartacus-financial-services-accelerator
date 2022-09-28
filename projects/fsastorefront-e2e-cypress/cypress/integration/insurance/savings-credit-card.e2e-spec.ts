@@ -48,7 +48,7 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       savings.checkComparisonPage();
       savings.checkSavingsComparisonTable();
-      savings.selecBalancedDeal();
+      savings.selectMainProduct('Balanced Deal');
     });
 
     it('Should check add options page', () => {
@@ -104,7 +104,7 @@ testFilters([''], () => {
       savings.checkInvestmentDetails();
     });
 
-    it('Check premium calendar', () => {
+    it('Should check premium calendar', () => {
       cy.selectOptionFromMyAccount({
         dropdownItem: 'Premium Calendar',
       });

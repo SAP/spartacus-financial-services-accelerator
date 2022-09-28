@@ -312,3 +312,13 @@ export function populateCustomerDetails() {
   cy.get('[name="firstName"]').type('Stephen');
   cy.get('[name="lastName"]').type('Bailey');
 }
+
+export function checkActiveAndDisabledSteps(checkoutStep, disabledSteps) {
+  cy.get('p.label')
+    .contains(checkoutStep)
+    .parents('.d-flex.progress-node.is-active');
+  cy.get('.d-flex.progress-node.is-disabled').should(
+    'have.length',
+    disabledSteps
+  );
+}
