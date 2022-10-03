@@ -115,12 +115,6 @@ export function checkOpenClaimContent() {
   cy.get('.value').contains('OPEN');
 }
 
-export function startClaimFromHomepage() {
-  const claimsPage = waitForPage('claimsPage', 'claimsPage');
-  cy.get('.Section4 cx-banner').eq(1).click();
-  cy.wait(`@${claimsPage}`).its('status').should('eq', 200);
-}
-
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
   cy.get('h3').contains('Which car has been damaged?');

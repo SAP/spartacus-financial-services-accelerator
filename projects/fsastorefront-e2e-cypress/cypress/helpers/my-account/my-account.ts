@@ -101,7 +101,9 @@ export function checkMyDocuments(documentNumber) {
   cy.selectOptionFromMyAccount({
     dropdownItem: 'My Documents',
   });
-  cy.get('cx-fs-documents-overview').should('be.visible');
+  cy.get('cx-fs-documents-overview', { withinSubject: null }).should(
+    'be.visible'
+  );
   cy.get('.heading-headline').should('be.visible').contains('My Documents');
   cy.get('h4').contains('Uploaded Documents');
   cy.get('thead.d-none')

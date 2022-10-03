@@ -92,6 +92,8 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
               if (uploadedContent) {
                 claimCopy.documents = uploadedContent.files;
               }
+              // must be an array beacuse BE expects an array
+              claimCopy.documents = Array.from(claimCopy.documents);
               this.claimService.updateClaim(
                 claimCopy,
                 this.activeStepIndex,

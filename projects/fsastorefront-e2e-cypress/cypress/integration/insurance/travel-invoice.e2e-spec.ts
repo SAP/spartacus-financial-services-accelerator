@@ -29,12 +29,12 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
     });
 
-    it('Add main product to the cart', () => {
+    it('Should add main product to the cart', () => {
       travelCheckout.checkSingleTravelComparisonTable();
       travelCheckout.selectSingleBudgetPlan();
     });
 
-    it('Add optional product to the cart', () => {
+    it('Should add optional product to the cart', () => {
       travelCheckout.checkSingleOptionalProductsAndPick();
       checkout.clickContinueButton();
     });

@@ -9,26 +9,6 @@ dayjs.extend(customParseFormat);
 
 const currentDate = dayjs().format(' DD MMM YYYY ');
 
-export function checkAutoComparisonTableAudi() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
-    mainProducts: [
-      {
-        name: 'Auto Bronze',
-        price: '€213.06',
-      },
-      {
-        name: 'Auto Silver',
-        price: '€329.64',
-      },
-      {
-        name: 'Auto Gold',
-        price: '€505.84',
-      },
-    ],
-  };
-  shared.checkComparisonTable(comparisonTableContent);
-}
-
 export function selectAutoSilver() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
@@ -38,140 +18,14 @@ export function selectAutoSilver() {
     });
 }
 
-export function checkAutoSilverMiniCart() {
-  const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €329.64 ',
-    products: [
-      {
-        title: ' Start Date: ',
-        value: currentDate,
-      },
-      {
-        title: 'Vehicle Make:',
-        value: ' Audi ',
-      },
-      {
-        title: 'Vehicle Model:',
-        value: ' A5 ',
-      },
-      {
-        title: 'Vehicle Type:',
-        value: ' A5 Quattro ',
-      },
-      {
-        title: 'Vehicle Value:',
-        value: ' 12000 ',
-      },
-      {
-        title: 'Vehicle Year:',
-        value: ' 2017 ',
-      },
-      {
-        title: ' Third Party Liability: ',
-        value: ' €326.45 ',
-      },
-      {
-        title: ' Collision Coverage: ',
-        value: ' €3.19 ',
-      },
-    ],
-  };
-  shared.checkMiniCart(miniCartContent);
-}
-
-export function waitForBoundQuote() {
-  const boundQuote = waitForUserAssets(
-    'potentialProductPromotions',
-    'boundQuote'
-  );
-  cy.wait(`@${boundQuote}`).its('status').should('eq', 200);
-}
-
-export function addPaymentMethod(userId: string, cartId: string) {
-  cy.get('.short-overview-value')
-    .eq(0)
-    .then(() => {
-      cy.request({
-        method: 'POST',
-        url: `${Cypress.env(
-          'API_URL_INT'
-        )}/occ/v2/financial/users/${userId}/carts/${cartId}/paymentdetails`,
-        headers: {
-          Authorization: `bearer ${
-            JSON.parse(localStorage.getItem('spartacus-local-data')).auth
-              .userToken.token.access_token
-          }`,
-        },
-        body: {
-          accountHolderName: 'Test User',
-          cardNumber: '4111111111111111',
-          cardType: { code: 'visa' },
-          expiryMonth: '01',
-          expiryYear: '2125',
-          defaultPayment: true,
-          saved: true,
-          billingAddress: {
-            firstName: 'Test',
-            lastName: 'User',
-            titleCode: 'mr',
-            line1: 'Some address',
-            line2: '',
-            town: 'Town',
-            postalCode: 'H4B3L4',
-            country: { isocode: 'US' },
-          },
-        },
-      }).then(response => {
-        expect(response.status).to.eq(201);
-      });
-    });
-}
-
-export function checkReplicatedSilverPolicy() {
+export function checkReplicatedPolicy(product) {
   cy.get('.info-card')
     .should('have.length', 1)
     .within(() => {
       cy.get('.info-card-data').within(() => {
-        cy.get('.value').should('contain.text', 'Auto Silver');
-        cy.get('.label').should('contain.text', 'Premium');
-        cy.get('.value').should('contain.text', '€329.64 ');
+        cy.get('.value').contains(product);
       });
-      cy.get('.info-card-links .link')
-        .contains(' Details ')
-        //TODO: When cypress fix issue detached from the DOM remove force true
-        .click({ force: true });
-    });
-}
-
-export function checkReplicatedBronzePolicy() {
-  cy.get('.info-card')
-    .should('have.length', 1)
-    .within(() => {
-      cy.get('.info-card-data').within(() => {
-        cy.get('.value').contains('Auto Bronze');
-        cy.get('.label').contains('Premium');
-        cy.get('.value').contains('€2,024.41 ');
-      });
-      cy.get('.info-card-links .link')
-        .contains(' Details ')
-        //TODO: When cypress fix issue detached from the DOM remove force true
-        .click({ force: true });
-    });
-}
-
-export function checkReplicatedBronzeA5Policy() {
-  cy.get('.info-card')
-    .should('have.length', 1)
-    .within(() => {
-      cy.get('.info-card-data').within(() => {
-        cy.get('.value').should('contain.text', 'Auto Bronze');
-        cy.get('.label').should('contain.text', 'Premium');
-        cy.get('.value').should('contain.text', '€221.16 ');
-      });
-      cy.get('.info-card-links .link')
-        .contains(' Details ')
-        //TODO: When cypress fix issue detached from the DOM remove force true
-        .click({ force: true });
+      cy.get('.info-card-links').contains('Details').click({ force: true });
     });
 }
 
