@@ -19,6 +19,8 @@ import {
 } from '../../../../occ/occ-models/occ.models';
 import {
   LanguageService,
+  MultiCartService,
+  OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
@@ -46,7 +48,8 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
     protected quoteComparisonConfig: QuoteComparisonConfig,
     protected languageService: LanguageService,
     protected routingService: RoutingService,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected multiCartService: MultiCartService
   ) {}
 
   ngOnInit(): void {
@@ -143,7 +146,13 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
       ...cart.insuranceQuote,
       cartCode: cart.code,
     };
-
+    this.multiCartService.mergeToCurrentCart({
+      userId: OCC_USER_ID_CURRENT,
+      cartId: cart.guid,
+      extraData: {
+        active: true,
+      },
+    });
     this.subscription.add(
       this.quoteService.retrieveQuoteCheckout(quote).subscribe()
     );
