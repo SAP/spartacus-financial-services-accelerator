@@ -78,15 +78,15 @@ export class SavingsIllustrationComponent
 
   constructor(
     protected winRef: WindowRef,
-    private activatedRoute: ActivatedRoute,
-    private productService: FSProductService,
-    private formDataStorageService: FormDataStorageService,
-    private formDataService: FormDataService,
-    private pricingService: PricingService,
-    private chartService: SavingsIllustrationChartService,
-    private cartService: FSCartService,
-    private breakpointService: BreakpointService,
-    public routingService: RoutingService
+    protected activatedRoute: ActivatedRoute,
+    protected productService: FSProductService,
+    protected formDataStorageService: FormDataStorageService,
+    protected formDataService: FormDataService,
+    protected pricingService: PricingService,
+    protected chartService: SavingsIllustrationChartService,
+    protected cartService: FSCartService,
+    protected breakpointService: BreakpointService,
+    protected routingService: RoutingService
   ) {}
 
   ngAfterViewInit(): void {
