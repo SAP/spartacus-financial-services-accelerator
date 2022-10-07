@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
   LanguageService,
+  MultiCartService,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
@@ -182,6 +183,10 @@ class MockUserIdService {
   }
 }
 
+class MockMultiCartService {
+  mergeToCurrentCart() {}
+}
+
 describe('QuoteComparisonComponent', () => {
   let component: QuoteComparisonComponent;
   let fixture: ComponentFixture<QuoteComparisonComponent>;
@@ -190,6 +195,7 @@ describe('QuoteComparisonComponent', () => {
   let languageService: LanguageService;
   let fSTranslationService: FSTranslationService;
   let userIdService: UserIdService;
+  let multiCartService: MultiCartService;
 
   beforeEach(
     waitForAsync(() => {
@@ -221,6 +227,10 @@ describe('QuoteComparisonComponent', () => {
             provide: UserIdService,
             useClass: MockUserIdService,
           },
+          {
+            provide: MultiCartService,
+            useClass: MockMultiCartService,
+          },
         ],
       }).compileComponents();
     })
@@ -235,6 +245,7 @@ describe('QuoteComparisonComponent', () => {
     routingService = TestBed.inject(RoutingService);
     languageService = TestBed.inject(LanguageService);
     userIdService = TestBed.inject(UserIdService);
+    multiCartService = TestBed.inject(MultiCartService);
     spyOn(routingService, 'getRouterState').and.callThrough();
   });
 
