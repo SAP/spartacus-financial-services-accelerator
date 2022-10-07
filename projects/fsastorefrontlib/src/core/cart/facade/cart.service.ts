@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import {
   ActiveCartService,
   Cart,
+  EventService,
   MultiCartService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
@@ -12,6 +13,7 @@ import {
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { QuoteApplicationUpdatedEvent } from '../../../core/events/quotes-applications/quotesApplications.events';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import * as fromAction from './../../checkout/store/actions/index';
 
@@ -20,7 +22,8 @@ export class FSCartService extends ActiveCartService {
   constructor(
     protected store: Store<StateWithMultiCart>,
     protected userIdService: UserIdService,
-    protected multiCartService: MultiCartService
+    protected multiCartService: MultiCartService,
+    protected eventService: EventService
   ) {
     super(store, multiCartService, userIdService);
   }
@@ -90,6 +93,7 @@ export class FSCartService extends ActiveCartService {
     pricingData: PricingData
   ) {
     localStorage.removeItem('bindingState');
+    this.eventService.dispatch({}, QuoteApplicationUpdatedEvent);
     this.store.dispatch(
       new fromAction.StartBundle({
         userId: userId,

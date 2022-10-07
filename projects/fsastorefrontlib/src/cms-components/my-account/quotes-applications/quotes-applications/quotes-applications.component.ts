@@ -8,6 +8,7 @@ import { combineLatest, Observable, Subscription } from 'rxjs';
 import { tap, switchMap, shareReplay } from 'rxjs/operators';
 import {
   ActiveCartService,
+  Category,
   GlobalMessageService,
   GlobalMessageType,
   OccConfig,
@@ -43,11 +44,11 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   quoteCodesForCompare: string[] = [];
   disabledQuoteCodes: string[] = [];
   options: any[];
-  quotesByCategory: { name: string; code: string };
+  quotesByCategory: Record<string, Category>;
   selectedQuote: InsuranceQuote;
   quotesApplications$: Observable<
     InsuranceQuote[]
-  > = this.quoteService.getQuotesApplications().pipe(shareReplay());
+  > = this.quoteService.getQuotesApplications();
 
   ngOnInit() {
     this.groupQuotesByCategory();
@@ -59,8 +60,8 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
         .pipe(
           tap(quotes => {
             this.quotes = quotes;
-            this.quotesByCategory = <{ name: string; code: string }>(
-              quotes.reduce((quote, item) => {
+            this.quotesByCategory = <Record<string, Category>>quotes.reduce(
+              (quote, item) => {
                 const groupCriteria = this.policyChartDataService.getObjectValueByProperty(
                   'defaultCategory.name',
                   item
@@ -71,7 +72,8 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
                   code: item.defaultCategory.code,
                 });
                 return quote;
-              }, {})
+              },
+              {}
             );
           }),
           switchMap(_ => this.selectedQuoteFromQuoteDetails()),
@@ -106,10 +108,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   selectedQuoteFromQuoteDetails() {
     return this.quoteService.quoteForCompare$.pipe(
       tap(quote => {
-        if (
-          quote &&
-          this.quotesByCategory[quote.defaultCategory.name]?.length > 1
-        ) {
+        if (quote && this.quotesByCategory[quote.defaultCategory.name]) {
           this.selectedQuote = quote;
           this.quoteCodesForCompare.push(quote.cartCode);
           this.disableCheckboxes(this.quotes);
@@ -167,7 +166,7 @@ export class QuotesApplicationsComponent implements OnInit, OnDestroy {
   }
 
   goToDetailsPage(quote: InsuranceQuote) {
-    if (this.quotesByCategory[quote.defaultCategory.name]?.length > 1) {
+    if (this.quotesByCategory[quote.defaultCategory.name]) {
       sessionStorage.setItem('qouteCodeForCompare', quote.cartCode);
     }
     this.routingService.go({

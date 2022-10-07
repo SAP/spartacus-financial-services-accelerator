@@ -6,6 +6,7 @@ import {
 import { select, Store } from '@ngrx/store';
 import {
   CartAddEntrySuccessEvent,
+  CartRemoveEntrySuccessEvent,
   CartUpdateEntrySuccessEvent,
   Command,
   CommandService,
@@ -33,7 +34,7 @@ import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { QuoteConnector } from '../connectors/quote.connector';
-import { QuoteApplicationUpdatedEvent } from '../../events';
+import { QuoteApplicationUpdatedEvent } from '../../events/quotes-applications/quotesApplications.events';
 import { OrderPlacedEvent } from '@spartacus/checkout/root';
 
 @Injectable()
@@ -66,8 +67,9 @@ export class QuoteService {
         LanguageSetEvent,
         QuoteApplicationUpdatedEvent,
         OrderPlacedEvent,
-        CartUpdateEntrySuccessEvent,
         CartAddEntrySuccessEvent,
+        CartRemoveEntrySuccessEvent,
+        CartUpdateEntrySuccessEvent,
       ],
       resetOn: [LoginEvent, LogoutEvent],
     }
