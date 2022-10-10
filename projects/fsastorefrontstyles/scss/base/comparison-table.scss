@@ -54,6 +54,9 @@
         word-break: break-word;
         padding-inline-end: calc(15px + 5%);
       }
+      .fs-icon {
+        line-height: 1.6;
+      }
     }
     .special {
       @include media-breakpoint-down(lg) {
