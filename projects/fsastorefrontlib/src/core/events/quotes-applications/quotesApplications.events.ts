@@ -1,4 +1,5 @@
 import { CxEvent } from '@spartacus/core';
+import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import { InsuranceQuote } from '../../../occ/occ-models/occ.models';
 
 /**
@@ -17,5 +18,9 @@ export class QuoteApplicationUpdatedEvent extends QuoteApplicationEvent {
   /**
    * Event's type
    */
+  productCode?: string;
+  bundleTemplateId?: string;
+  quantity?: number;
+  pricingData?: PricingData;
   static readonly type = 'QuoteApplicationUpdatedEvent';
 }

@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import {
   ActiveCartService,
   Cart,
+  Command,
+  CommandService,
   EventService,
   MultiCartService,
   OCC_CART_ID_CURRENT,
@@ -12,9 +14,10 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { QuoteApplicationUpdatedEvent } from '../../../core/events/quotes-applications/quotesApplications.events';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
+import { CartConnector } from '../../cart/connectors/cart.connector';
 import * as fromAction from './../../checkout/store/actions/index';
 
 @Injectable()
@@ -23,7 +26,9 @@ export class FSCartService extends ActiveCartService {
     protected store: Store<StateWithMultiCart>,
     protected userIdService: UserIdService,
     protected multiCartService: MultiCartService,
-    protected eventService: EventService
+    protected eventService: EventService,
+    protected command: CommandService,
+    protected cartConnector: CartConnector
   ) {
     super(store, multiCartService, userIdService);
   }
@@ -83,6 +88,46 @@ export class FSCartService extends ActiveCartService {
       )
       .subscribe();
   }
+
+  protected startBundleForCartCommand: Command<{
+    userId: string;
+    cartId: string;
+    productCode: string;
+    bundleTemplateId: string;
+    quantity: number;
+    pricingData: PricingData;
+  }> = this.command.create(payload =>
+    this.userIdService.getUserId().pipe(
+      take(1),
+      switchMap(occUserId =>
+        this.cartConnector
+          .startBundle(
+            payload.userId,
+            payload.cartId,
+            payload.productCode,
+            payload.bundleTemplateId,
+            payload.quantity,
+            payload.pricingData
+          )
+          .pipe(
+            tap(_ => {
+              this.eventService.dispatch(
+                {
+                  userId: payload.userId,
+                  activeCartId: payload.cartId,
+                  productCode: payload.productCode,
+                  bundleTemplateId: payload.bundleTemplateId,
+                  quantity: payload.quantity,
+                  pricingData: payload.pricingData,
+                },
+                QuoteApplicationUpdatedEvent
+              );
+              return this.loadCart(payload.cartId, occUserId);
+            })
+          )
+      )
+    )
+  );
 
   protected startBundleForCart(
     userId: string,
