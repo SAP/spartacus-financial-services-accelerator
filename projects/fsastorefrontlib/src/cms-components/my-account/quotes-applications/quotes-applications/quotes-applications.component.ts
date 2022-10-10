@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { tap, switchMap, shareReplay } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 import {
   ActiveCartService,
   Category,
