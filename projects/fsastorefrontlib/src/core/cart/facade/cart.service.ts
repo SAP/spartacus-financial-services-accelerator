@@ -89,6 +89,7 @@ export class FSCartService extends ActiveCartService {
       .subscribe();
   }
 
+  // currently not used anywhere, just a placeholder for cart state refactoring
   protected startBundleForCartCommand: Command<{
     userId: string;
     cartId: string;
