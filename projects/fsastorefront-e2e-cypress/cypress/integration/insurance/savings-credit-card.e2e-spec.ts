@@ -29,9 +29,6 @@ testFilters([''], () => {
         'Premium Calendar',
         'You have no premiums awaiting payment'
       );
-    });
-
-    it('Should start Savings checkout', () => {
       checkout.startInsuranceCheckout('Savings');
     });
 
@@ -48,7 +45,12 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       savings.checkComparisonPage();
       savings.checkSavingsComparisonTable();
-      savings.selectMainProduct('Balanced Deal');
+    });
+
+    it('Should check sales illustration', () => {
+      savings.clickMoreInfo('Balanced Deal');
+      savings.checkSalesIllustrationPage();
+      cy.get('.fa-solid').should('be.visible').click();
     });
 
     it('Should check add options page', () => {
@@ -63,6 +65,8 @@ testFilters([''], () => {
       checkout.checkPersonalDetailsPage();
       savings.checkMiniCart();
       checkout.populatePersonalDetailsPage();
+      checkout.clickContinueButton();
+      checkout.checkValidationPopUpAndClose();
       savings.populateSavingsSpecific();
       checkout.clickContinueButton();
     });
