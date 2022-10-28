@@ -73,10 +73,7 @@
     ></cx-form-errors>
   </label>
 
-  <button
-    class="btn btn-block btn-secondary"
-    [routerLink]="{ cxRoute: 'sellerDashboard' } | cxUrl"
-  >
+  <button class="btn btn-block btn-secondary" (click)="back()">
     {{ 'common.back' | cxTranslate }}
   </button>
 
