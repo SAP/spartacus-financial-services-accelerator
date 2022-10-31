@@ -68,6 +68,7 @@
           >
             <div
               class="dashboard-overview-content"
+              [ngClass]="!showCustomerForm ? 'slide-out' : ''"
               [hidden]="showCustomerForm"
               #dashboardOverviewContent
             >
@@ -114,7 +115,11 @@
                 </div>
               </div>
             </div>
-            <div #createCustomer class="bg-white">
+            <div
+              #createCustomer
+              class="bg-white"
+              [ngClass]="showCustomerForm ? 'slide-in' : ''"
+            >
               <cx-fs-create-obo-customer
                 *ngIf="showCustomerForm"
                 (actionChange)="addedUser($event)"

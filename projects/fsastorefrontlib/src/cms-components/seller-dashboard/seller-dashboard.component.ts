@@ -41,18 +41,8 @@ export class SellerDashboardComponent {
   }
   showAddCustomerForm() {
     this.showCustomerForm = true;
-    this.renderer.removeClass(
-      this.dashboardOverviewContent.nativeElement,
-      'slide-out'
-    );
-    this.renderer.addClass(this.createCustomer.nativeElement, 'slide-in');
   }
-  addedUser(action: string) {
+  addedUser() {
     this.showCustomerForm = false;
-    this.renderer.addClass(
-      this.dashboardOverviewContent.nativeElement,
-      'slide-out'
-    );
-    this.renderer.removeClass(this.createCustomer.nativeElement, 'slide-in');
   }
 }
