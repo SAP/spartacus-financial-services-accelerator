@@ -22,7 +22,7 @@ const mockSeller: FSUser = {
   lastName: 'Moore',
   roles: [FSUserRole.SELLER],
 };
-const actionMock: string = "event";
+const actionMock: string = 'event';
 
 const mockOBOCustomer: OBOCustomerList = {
   entries: [
