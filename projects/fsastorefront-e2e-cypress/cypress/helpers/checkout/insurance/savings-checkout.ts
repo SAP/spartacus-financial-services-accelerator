@@ -174,3 +174,32 @@ export function checkOptionalProducts() {
   };
   shared.checkAddOptionsPageContent(addOptionsContent);
 }
+
+export function clickMoreInfo(mainProduct) {
+  cy.get('.table-header-title')
+    .contains(mainProduct)
+    .parent()
+    .within(() => {
+      cy.contains('More Info').click();
+    });
+}
+
+export function checkSalesIllustrationPage() {
+  cy.get('cx-fs-savings-illustration')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.heading-headline').contains(
+        'Savings - Balanced Deal Sales Illustration'
+      );
+      cy.get('cx-fs-accordion-item').contains('Your Savings Details');
+      cy.get('.accordion-item-wrapper').contains('Guaranteed Amount');
+      cy.get('.accordion-item-wrapper').contains('Expected Amount');
+      cy.get('.accordion-item-wrapper').contains('Monthly Annuity');
+      cy.get('.d-none').should('have.length', '2');
+    });
+  cy.get('.tab-content')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.text-center.p-3').contains('Your Savings Progress');
+    });
+}

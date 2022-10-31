@@ -86,7 +86,7 @@ export class SavingsIllustrationComponent
     protected chartService: SavingsIllustrationChartService,
     protected cartService: FSCartService,
     protected breakpointService: BreakpointService,
-    protected routingService: RoutingService
+    public routingService: RoutingService
   ) {}
 
   ngAfterViewInit(): void {
