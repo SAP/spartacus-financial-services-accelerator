@@ -139,7 +139,7 @@ describe('SellerDashboardComponent', () => {
   });
 
   it('should hide customer form when user is added', () => {
-    component.addedUser(actionMock);
+    component.addedUser();
     expect(component.showCustomerForm).toEqual(false);
   });
 });

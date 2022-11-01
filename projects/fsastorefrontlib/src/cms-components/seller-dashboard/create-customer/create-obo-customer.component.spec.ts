@@ -123,4 +123,9 @@ describe('CreateOBOCustomerComponent', () => {
     component.onSubmit();
     expect(createOBOCustomerComponentService.onSuccess).toHaveBeenCalled();
   });
+  it('should go back', () => {
+    component.back();
+    fixture.detectChanges();
+    expect(component.actionChange.emit).toHaveBeenCalledWith('Back');
+  });
 });
