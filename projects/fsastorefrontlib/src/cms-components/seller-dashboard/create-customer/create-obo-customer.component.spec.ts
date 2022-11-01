@@ -6,7 +6,7 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { CreateOBOCustomerComponent } from './create-obo-customer.component';
 import { CreateOBOCustomerComponentService } from './create-obo-customer-component.service';
 import { Observable, of } from 'rxjs';
@@ -123,9 +123,10 @@ describe('CreateOBOCustomerComponent', () => {
     component.onSubmit();
     expect(createOBOCustomerComponentService.onSuccess).toHaveBeenCalled();
   });
-  it('should go back', () => {
+  it('should go back and dispatch event', () => {
+    spyOn(component.actionChange, 'emit');
     component.back();
     fixture.detectChanges();
-    expect(component.actionChange.emit).toHaveBeenCalledWith('Back');
+    expect(component.actionChange.emit).toHaveBeenCalled();
   });
 });

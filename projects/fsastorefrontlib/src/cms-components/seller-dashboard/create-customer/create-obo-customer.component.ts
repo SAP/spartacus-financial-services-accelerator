@@ -44,7 +44,7 @@ export class CreateOBOCustomerComponent implements OnDestroy {
         .subscribe({
           next: () => {
             this.service.onSuccess();
-            this.actionChange.emit('Added');
+            this.actionChange.emit();
           },
           error: (error: Error) => this.service.onError(error),
         })
@@ -52,7 +52,7 @@ export class CreateOBOCustomerComponent implements OnDestroy {
   }
   back() {
     this.form.reset();
-    this.actionChange.emit('Back');
+    this.actionChange.emit();
   }
   ngOnDestroy() {
     if (this.subscription) {
