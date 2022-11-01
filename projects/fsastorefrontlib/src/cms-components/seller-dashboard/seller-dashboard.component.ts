@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { UserIdService } from '@spartacus/core';
@@ -26,8 +20,6 @@ export class SellerDashboardComponent {
     protected renderer: Renderer2
   ) {}
 
-  @ViewChild('dashboardOverviewContent') dashboardOverviewContent: ElementRef;
-  @ViewChild('createCustomer') createCustomer: ElementRef;
   seller$: Observable<FSUser> = this.userAccountFacade.get();
   customers$: Observable<OBOCustomerList> = this.userIdService.getUserId().pipe(
     take(1),
