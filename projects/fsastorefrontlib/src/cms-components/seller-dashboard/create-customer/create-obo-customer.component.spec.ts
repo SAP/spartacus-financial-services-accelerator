@@ -123,4 +123,10 @@ describe('CreateOBOCustomerComponent', () => {
     component.onSubmit();
     expect(createOBOCustomerComponentService.onSuccess).toHaveBeenCalled();
   });
+  it('should go back and dispatch event', () => {
+    spyOn(component.actionChange, 'emit');
+    component.back();
+    fixture.detectChanges();
+    expect(component.actionChange.emit).toHaveBeenCalled();
+  });
 });

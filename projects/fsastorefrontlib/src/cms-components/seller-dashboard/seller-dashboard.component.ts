@@ -25,8 +25,15 @@ export class SellerDashboardComponent {
     switchMap(userId => this.consentConnector.getOBOCustomerList(userId))
   );
   dashboardListVisible = false;
+  showCustomerForm = false;
 
   showDashboardList() {
     this.dashboardListVisible = true;
+  }
+  showAddCustomerForm() {
+    this.showCustomerForm = true;
+  }
+  addedUser() {
+    this.showCustomerForm = false;
   }
 }

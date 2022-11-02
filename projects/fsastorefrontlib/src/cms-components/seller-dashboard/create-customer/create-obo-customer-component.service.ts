@@ -7,7 +7,7 @@ import { Title, UserProfileFacade } from '@spartacus/user/profile/root';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CustomFormValidators } from '@spartacus/storefront';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CreateOBOCustomerComponentService {
   constructor(
     protected userProfile: UserProfileFacade,

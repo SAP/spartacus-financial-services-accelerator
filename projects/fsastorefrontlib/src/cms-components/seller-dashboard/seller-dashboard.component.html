@@ -63,52 +63,67 @@
           <h5 class="text-center py-3 mb-0">
             {{ 'dashboard.overview' | cxTranslate }}
           </h5>
-          <div class="dashboard-overview-wrapper background-color-4">
-            <ul
-              class="dashboard-overview-stats mb-0 bg-white border border-color-3 p-3"
+          <div
+            class="dashboard-overview-wrapper background-color-4 overflow-hidden"
+          >
+            <div
+              class="dashboard-overview-content"
+              [ngClass]="!showCustomerForm ? 'slide-out' : ''"
+              [hidden]="showCustomerForm"
+              #dashboardOverviewContent
             >
-              <li class="item text-break text-center text-uppercase">
-                <div class="number notice semi-bold">
-                  {{ customers.pagination?.totalCount }}
-                </div>
-                <span class="description">
-                  {{ 'dashboard.customers' | cxTranslate }}
-                </span>
-              </li>
-            </ul>
-            <div class="dashboard-overview-assets mt-3">
-              <a
-                class="asset bg-white p-2 align-items-center"
-                role="button"
-                tabindex="1"
-                [routerLink]="
-                  {
-                    cxRoute: 'createOBOCustomer'
-                  } | cxUrl
-                "
+              <ul
+                class="dashboard-overview-stats mb-0 bg-white border border-color-3 p-3"
               >
-                <span
-                  class="asset-image h6 text-center notice p-3 mb-0 fas fa-user-plus"
-                ></span>
-                <div class="asset-text">
-                  {{ 'dashboard.addCustomer' | cxTranslate }}
-                </div>
-              </a>
-              <div
-                [ngClass]="{ active: dashboardListVisible }"
-                class="asset bg-white p-2 align-items-center"
-                role="button"
-                tabindex="2"
-                (click)="showDashboardList()"
-                (keydown.enter)="showDashboardList()"
-              >
-                <span
-                  class="asset-image h6 text-center notice p-3 mb-0 fas fa-users"
-                ></span>
-                <div class="asset-text">
-                  {{ 'dashboard.checkCustomerList' | cxTranslate }}
+                <li class="item text-break text-center text-uppercase">
+                  <div class="number notice semi-bold">
+                    {{ customers.pagination?.totalCount }}
+                  </div>
+                  <span class="description">
+                    {{ 'dashboard.customers' | cxTranslate }}
+                  </span>
+                </li>
+              </ul>
+              <div class="dashboard-overview-assets mt-3">
+                <a
+                  class="asset bg-white p-2 align-items-center"
+                  role="button"
+                  tabindex="1"
+                  (click)="showAddCustomerForm()"
+                >
+                  <span
+                    class="asset-image h6 text-center notice p-3 mb-0 fas fa-user-plus"
+                  ></span>
+                  <div class="asset-text">
+                    {{ 'dashboard.addCustomer' | cxTranslate }}
+                  </div>
+                </a>
+                <div
+                  [ngClass]="{ active: dashboardListVisible }"
+                  class="asset bg-white p-2 align-items-center"
+                  role="button"
+                  tabindex="2"
+                  (click)="showDashboardList()"
+                  (keydown.enter)="showDashboardList()"
+                >
+                  <span
+                    class="asset-image h6 text-center notice p-3 mb-0 fas fa-users"
+                  ></span>
+                  <div class="asset-text">
+                    {{ 'dashboard.checkCustomerList' | cxTranslate }}
+                  </div>
                 </div>
               </div>
+            </div>
+            <div
+              #createCustomer
+              class="bg-white"
+              [ngClass]="showCustomerForm ? 'slide-in' : ''"
+            >
+              <cx-fs-create-obo-customer
+                *ngIf="showCustomerForm"
+                (actionChange)="addedUser()"
+              ></cx-fs-create-obo-customer>
             </div>
           </div>
         </div>
