@@ -12,7 +12,6 @@ import { CreateOBOCustomerComponentService } from './create-customer/create-obo-
   selector: 'cx-fs-seller-dashboard',
   templateUrl: './seller-dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CreateOBOCustomerComponentService],
 })
 export class SellerDashboardComponent {
   constructor(
