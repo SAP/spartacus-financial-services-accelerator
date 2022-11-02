@@ -6,7 +6,6 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 
 import { OBOCustomerList, FSUser } from '../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
-import { CreateOBOCustomerComponentService } from './create-customer/create-obo-customer-component.service';
 
 @Component({
   selector: 'cx-fs-seller-dashboard',
