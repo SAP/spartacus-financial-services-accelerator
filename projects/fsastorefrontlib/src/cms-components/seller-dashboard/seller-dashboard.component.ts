@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { UserIdService } from '@spartacus/core';
@@ -6,18 +6,19 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 
 import { OBOCustomerList, FSUser } from '../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../core/my-account/connectors/consent.connector';
+import { CreateOBOCustomerComponentService } from './create-customer/create-obo-customer-component.service';
 
 @Component({
   selector: 'cx-fs-seller-dashboard',
   templateUrl: './seller-dashboard.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [CreateOBOCustomerComponentService],
 })
 export class SellerDashboardComponent {
   constructor(
     protected consentConnector: ConsentConnector,
     protected userIdService: UserIdService,
-    protected userAccountFacade: UserAccountFacade,
-    protected renderer: Renderer2
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   seller$: Observable<FSUser> = this.userAccountFacade.get();

@@ -6,7 +6,7 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CreateOBOCustomerComponent } from './create-obo-customer.component';
 import { CreateOBOCustomerComponentService } from './create-obo-customer-component.service';
 import { Observable, of } from 'rxjs';

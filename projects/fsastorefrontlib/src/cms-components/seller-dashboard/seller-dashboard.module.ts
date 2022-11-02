@@ -68,7 +68,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   providers: [
-    CreateOBOCustomerComponentService,
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
         SellerDashboardFlex: {
