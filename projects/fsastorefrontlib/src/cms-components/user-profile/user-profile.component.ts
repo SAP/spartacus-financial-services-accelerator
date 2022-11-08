@@ -7,27 +7,48 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { User, UserAccountFacade } from '@spartacus/user/account/root';
 import {
+  CmsService,
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
-import { map } from 'rxjs/operators';
-
-import {
-  FSUserRole,
-  FSUser,
-  InsuranceQuoteList,
-  AssetTableType,
-} from '../../occ/occ-models/occ.models';
-import { ConsentService } from '../../core/my-account/facade/consent.service';
-import { QuoteService } from '../../core/my-account/facade';
-import { PolicyService } from '../../core/my-account/facade';
-import { ClaimService } from '../../core/my-account/facade';
+import { CmsComponentData } from '@spartacus/storefront';
+import { User, UserAccountFacade } from '@spartacus/user/account/root';
 import { UserProfileService } from '@spartacus/user/profile/core';
+import {
+  BehaviorSubject,
+  combineLatest,
+  from,
+  Observable,
+  Subscription,
+} from 'rxjs';
+import {
+  filter,
+  map,
+  mergeMap,
+  reduce,
+  shareReplay,
+  switchMap,
+  take,
+  toArray,
+} from 'rxjs/operators';
+import {
+  ClaimService,
+  PolicyService,
+  QuoteService,
+} from '../../core/my-account/facade';
+import { ConsentService } from '../../core/my-account/facade/consent.service';
+import { CMSUserProfileComponent } from '../../occ/occ-models/cms-component.models';
+import {
+  AssetTableType,
+  CmsComponent,
+  FSUser,
+  FSUserRole,
+  InsuranceQuoteList,
+  ProductOverviewCategory,
+} from '../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-user-profile',
@@ -45,7 +66,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected claimService: ClaimService,
     protected globalMessageService: GlobalMessageService,
-    protected renderer: Renderer2
+    protected renderer: Renderer2,
+    private componentData: CmsComponentData<CMSUserProfileComponent>,
+    protected cmsService: CmsService
   ) {}
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
@@ -58,11 +81,68 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   assets: { [key: string]: any }[];
   assetSelected: AssetTableType;
   showAddressForm = false;
+  showProductOverview = true;
   userId: string;
   customerId: string;
 
+  selectedProducts = new BehaviorSubject(ProductOverviewCategory.ALL);
+  selectedProducts$ = this.selectedProducts.asObservable();
+
+  allProducts$: Observable<CmsComponent[]>;
+  productsCountByCategory$: Observable<{
+    [key: string]: typeof ProductOverviewCategory;
+  }>;
+  filteredProducts$: Observable<CmsComponent[]>;
+
   ngOnInit(): void {
+    this.allProducts$ = this.componentData.data$.pipe(
+      map(data => data.children.split(' ')),
+      switchMap(children =>
+        from(children).pipe(
+          mergeMap(child => this.cmsService.getComponentData(child)),
+          take(children.length),
+          toArray()
+        )
+      )
+    );
+
+    const initialProductsCountObj = Object.values(
+      ProductOverviewCategory
+    ).reduce((prev, curr, i) => {
+      if (!prev[curr]) prev[curr] = 0;
+      return prev;
+    }, {});
+
+    this.productsCountByCategory$ = this.allProducts$.pipe(
+      mergeMap(components =>
+        from(components).pipe(
+          reduce((prev, curr) => {
+            prev[curr.category]++;
+            prev['all']++;
+            return prev;
+          }, initialProductsCountObj),
+          take(components.length)
+        )
+      ),
+      shareReplay()
+    );
+
+    this.filteredProducts$ = combineLatest([
+      this.selectedProducts$,
+      this.allProducts$,
+    ]).pipe(
+      map(([selectedProduct, products]) => {
+        if (selectedProduct === 'all') return products;
+        return products.filter(product => product.category === selectedProduct);
+      }),
+      filter(products => !!products.length)
+    );
+
     this.loadCustomerDetails();
+  }
+
+  productsSelected(type: ProductOverviewCategory) {
+    this.selectedProducts.next(type);
   }
 
   loadCustomerDetails() {
@@ -116,9 +196,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.customerClaims$ = this.claimService.getClaims();
   }
 
-  showAssetList(assetsChosen: { [key: string]: any }[], activeClass) {
+  showAssetList({
+    assetsChosen,
+    activeClass,
+  }: {
+    assetsChosen: { [key: string]: any }[];
+    activeClass: AssetTableType;
+  }) {
     this.assetSelected = activeClass;
     this.assets = assetsChosen;
+  }
+
+  toggleProductsOverview() {
+    this.showProductOverview = !this.showProductOverview;
+    this.selectedProducts.next(ProductOverviewCategory.ALL);
   }
 
   showUserAddressForm() {

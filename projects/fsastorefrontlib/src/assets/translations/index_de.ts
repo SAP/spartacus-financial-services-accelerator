@@ -16,6 +16,7 @@ import { forms } from './de/forms.de';
 import { orderConfirmation } from './de/orderConfirmation.de';
 import { policy } from './de/policy.de';
 import { premiumCalendar } from './de/premiumCalendar.de';
+import { productOverview } from './de/product-overview.de';
 import { quote } from './de/quote.de';
 import { quoteReview } from './de/quoteReview.de';
 import { salesIllustration } from './de/sales-illustration.de';
@@ -48,6 +49,7 @@ export const fstranslationsDe: TranslationResources = {
   dashboard,
   appointmentScheduling,
   salesIllustration,
+  productOverview,
 };
 
 export const fsOverridesDe: TranslationResources = {

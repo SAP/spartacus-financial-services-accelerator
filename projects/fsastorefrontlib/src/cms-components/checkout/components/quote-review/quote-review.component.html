@@ -1,7 +1,6 @@
 <ng-container
   *ngIf="{
-    cart: cart$ | async,
-    isCartTransferAllowedForSeller: isCartTransferAllowedForSeller$ | async
+    cart: cart$ | async
   } as quoteReview"
 >
   <ng-container *ngIf="isCartStable$ | async; else loading">
@@ -31,74 +30,6 @@
               }}
             </div>
           </h2>
-          <ng-container *ngIf="oboCustomers$ | async as oboCustomers">
-            <ng-container *ngIf="oboCustomers.entries.length > 0">
-              <cx-fs-accordion-item
-                [opened]="true"
-                [title]="'fscommon.oboCustomers' | cxTranslate"
-              >
-                <div class="position-absolute w-100 left top">
-                  <cx-fs-message
-                    [messageText]="
-                      selectedIndex !== -1
-                        ? ('quoteReview.message.selectedOboCustomer'
-                          | cxTranslate
-                            : {
-                                oboCustomer:
-                                  (oboCustomers?.entries)[selectedIndex]?.name
-                              })
-                        : ''
-                    "
-                    [type]="messageType.MSG_TYPE_CONFIRMATION"
-                    [timeout]="3000"
-                  ></cx-fs-message>
-                </div>
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <ul class="col-12 accordion-list">
-                      <ng-container
-                        *ngFor="
-                          let oboCustomer of oboCustomers.entries;
-                          let i = index
-                        "
-                      >
-                        <ng-container *ngIf="oboCustomer.active">
-                          <li class="accordion-list-item row">
-                            <div class="col-6 col-sm-8">
-                              <div class="row no-gutters">
-                                <span class="col-12 col-sm-6 item-label">
-                                  {{ oboCustomer.name }}
-                                </span>
-                                <span class="col-12 col-sm-6 notice">
-                                  {{ oboCustomer.uid }}
-                                </span>
-                              </div>
-                            </div>
-                            <span
-                              [ngClass]="{
-                                'is-disabled':
-                                  quoteReview.isCartTransferAllowedForSeller &&
-                                  selectedIndex === i
-                              }"
-                              class="col-6 col-sm-4 link text-right"
-                              (click)="selectOBOCustomer(oboCustomer, i)"
-                            >
-                              {{
-                                quoteReview.isCartTransferAllowedForSeller &&
-                                selectedIndex === i
-                                  ? ('fscommon.selected' | cxTranslate)
-                                  : ('fscommon.select' | cxTranslate)
-                              }}
-                            </span>
-                          </li>
-                        </ng-container>
-                      </ng-container>
-                    </ul>
-                  </div>
-                </div>
-              </cx-fs-accordion-item>
-            </ng-container>
-          </ng-container>
           <div #ref>
             <ng-container
               *ngIf="
@@ -369,15 +300,8 @@
               >
                 <button
                   class="primary-button btn-block"
-                  [disabled]="!quoteReview.isCartTransferAllowedForSeller"
                   type="button"
-                  (click)="
-                    navigateNext(
-                      nextCheckoutStep,
-                      quoteReview.cart,
-                      quoteReview.isCartTransferAllowedForSeller
-                    )
-                  "
+                  (click)="navigateNext(nextCheckoutStep, quoteReview.cart)"
                 >
                   {{ 'common.continue' | cxTranslate }}
                 </button>

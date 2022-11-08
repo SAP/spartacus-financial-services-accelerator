@@ -9,13 +9,16 @@ import {
   WindowRef,
 } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import {
-  FSCheckoutConfigService,
   CategoryService,
+  FSCheckoutConfigService,
 } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
+import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
@@ -25,15 +28,6 @@ import {
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
-import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
-import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
-import {
-  OBOCustomerList,
-  FSUserRole,
-  FSUser,
-} from '../../../../occ/occ-models/occ.models';
-import { UserAccountFacade } from '@spartacus/user/account/root';
-import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -53,7 +47,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected globalMessageService: GlobalMessageService,
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
-    protected oboConsentService: ConsentService,
     protected winRef?: WindowRef
   ) {}
 
@@ -69,18 +62,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   baseUrl: string;
   selectedIndex = -1;
   messageType = GlobalMessageType;
-
-  oboCustomers$: Observable<
-    OBOCustomerList
-  > = this.userAccountFacade.get().pipe(
-    filter(user => !!user && user.roles.includes(FSUserRole.SELLER)),
-    take(1),
-    switchMap(user => this.consentConnector.getOBOCustomerList(user.uid))
-  );
-
-  isCartTransferAllowedForSeller$: Observable<
-    boolean
-  > = this.oboConsentService.isCartTransferAllowedForSeller();
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
@@ -99,18 +80,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigateNext(
-    nextStep: FSSteps,
-    activeCart: Cart,
-    isCartTransferAllowedForSeller: boolean
-  ) {
+  navigateNext(nextStep: FSSteps, activeCart: Cart) {
     this.cartCode = activeCart.code;
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
     const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
       .quoteWorkflowStatus.code;
-    if (!isCartTransferAllowedForSeller) {
-      return;
-    }
     if (bindingState === BindingStateType.UNBIND) {
       this.openQuoteBindingModal(nextStep);
     } else if (
@@ -230,13 +204,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  selectOBOCustomer(oboCustomer: FSUser, index: number) {
-    this.oboConsentService.setSelectedOBOCustomer(oboCustomer);
-    this.selectedIndex = this.selectedIndex === index ? -1 : index;
-  }
-
   ngOnDestroy() {
-    this.oboConsentService.setSelectedOBOCustomer(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

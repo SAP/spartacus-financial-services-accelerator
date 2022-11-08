@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import * as fromAction from './../store/actions';
-import { StateWithMyAccount } from '../store/my-account-state';
 import { select, Store } from '@ngrx/store';
-import * as fromConsentStore from './../store';
 import {
-  UserIdService,
   Address,
   GlobalMessageService,
   GlobalMessageType,
+  UserIdService,
 } from '@spartacus/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject, combineLatest } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { map, tap } from 'rxjs/operators';
-import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
+import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
+import { StateWithMyAccount } from '../store/my-account-state';
+import * as fromConsentStore from './../store';
+import * as fromAction from './../store/actions';
 
 @Injectable({
   providedIn: 'root',
@@ -51,10 +51,11 @@ export class ConsentService {
       })
     );
   }
+
   transferCartToSelectedOBOCustomer(
     cart: FSCart,
     currentUser: FSUser,
-    oboConsentCustomer: FSUser
+    oboConsentCustomer: string
   ) {
     this.store.dispatch(
       new fromAction.TransferCart({

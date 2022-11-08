@@ -1,0 +1,16 @@
+%cx-fs-product-overview {
+  .product {
+    border: 1px solid var(--cx-color-3);
+  }
+
+  .product:hover {
+    box-shadow: none;
+    transform: scale(0.98);
+    border: 1px solid var(--cx-color-primary);
+  }
+
+  cx-media {
+    width: 50px;
+    height: 50px;
+  }
+}

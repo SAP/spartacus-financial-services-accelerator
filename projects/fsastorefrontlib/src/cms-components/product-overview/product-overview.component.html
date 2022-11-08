@@ -1,0 +1,50 @@
+<div
+  class="box-shadow border border-color-3"
+  *ngIf="products$ | async as products"
+>
+  <h5 class="text-center py-3 mb-0">
+    {{ 'productOverview.title' | cxTranslate }}
+  </h5>
+  <div class="p-4 background-color-4">
+    <ul
+      *ngIf="productsCount$ | async as productsCount"
+      class="d-flex p-3 justify-content-end align-items-center mb-0"
+    >
+      <cx-icon
+        (click)="customerDashboardSelected.emit()"
+        class="mr-auto link text-decoration-none"
+        type="CHEVRON_LEFT"
+      >
+      </cx-icon>
+      <li *ngFor="let filter of filters" (click)="emitSelectedProducts(filter)">
+        <a
+          [ngClass]="{
+            'text-white background-color-primary': filter.active,
+            'bg-white selected': !filter.active
+          }"
+          class="rounded-pill py-2 px-3 ml-1 px-sm-4 ml-sm-3 border border-color-primary pointer text-capitalize"
+        >
+          {{ 'productOverview.productCategories.' + filter.text | cxTranslate }}
+          ({{ productsCount[filter.text] }})
+        </a>
+      </li>
+    </ul>
+    <hr class="mx-2" />
+    <ul class="mb-0 row p-3">
+      <li class="col-12 col-md-6 px-0" *ngFor="let product of products">
+        <div
+          class="product bg-white pointer box-shadow m-2 p-3 d-flex align-items-center"
+          [routerLink]="[product.url]"
+        >
+          <cx-media [container]="product.image.media"></cx-media>
+          <div class="ml-3">
+            {{ 'productOverview.startCheckout' | cxTranslate }}
+            <br class="d-none d-md-block" /><span class="notice">{{
+              product.name
+            }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
