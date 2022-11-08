@@ -119,6 +119,13 @@ export const finalReviewAccordionSavings = [
   personalDetails,
 ];
 
+export const savingsAccordionsWithoutOptional = [
+  generalDetails,
+  whatsIncluded,
+  'Investments Details',
+  personalDetails,
+];
+
 export const policyDetailsSavings = [
   policySummary,
   whoOrWhatInsured,
@@ -250,6 +257,10 @@ export const Accordions = {
     {
       category: 'currentAccountSeller',
       accordionItems: this.sellerCurrentAccountAccordion,
+    },
+    {
+      category: 'savingsAccordions',
+      accordionItems: this.savingsAccordionsWithoutOptional,
     },
   ],
 };

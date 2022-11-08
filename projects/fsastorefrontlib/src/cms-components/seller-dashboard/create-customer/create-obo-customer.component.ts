@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Title, UserIdService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
@@ -19,6 +25,7 @@ export class CreateOBOCustomerComponent implements OnDestroy {
     protected userIdService: UserIdService
   ) {}
 
+  @Output() actionChange = new EventEmitter<string>();
   form: FormGroup = this.service.form;
   titles$: Observable<Title[]> = this.service.titles$;
   subscription = new Subscription();
@@ -35,12 +42,18 @@ export class CreateOBOCustomerComponent implements OnDestroy {
           )
         )
         .subscribe({
-          next: () => this.service.onSuccess(),
+          next: () => {
+            this.service.onSuccess();
+            this.actionChange.emit();
+          },
           error: (error: Error) => this.service.onError(error),
         })
     );
   }
-
+  back() {
+    this.form.reset();
+    this.actionChange.emit();
+  }
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

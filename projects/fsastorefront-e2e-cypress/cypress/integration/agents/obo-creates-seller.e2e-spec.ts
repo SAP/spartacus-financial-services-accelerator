@@ -2,14 +2,7 @@ import * as register from '../../helpers/register';
 import { createSeller, rootAdmin, newSeller } from '../../sample-data/users';
 import * as groupPolicy from '../../helpers/checkout/group-policy';
 import testFilters from '../../support/filters';
-import {
-  changePassword,
-  checkCustomerList,
-  checkDashboard,
-  checkDashboardOverview,
-  goToCustomerDashboard,
-  goToDashboard,
-} from '../../helpers/checkout/obo';
+import * as obo from '../../helpers/checkout/obo';
 import * as homepage from '../../helpers/homepage';
 import { sellerIndira } from '../../sample-data/users';
 
@@ -31,7 +24,7 @@ testFilters([''], () => {
       groupPolicy.checkGroupPolicyMainPage();
       groupPolicy.checkMembersPage();
       groupPolicy.enableSeller();
-      changePassword();
+      obo.changePassword();
       cy.get('.SiteLogo').should('be.visible').click();
       register.logout();
     });
@@ -40,15 +33,15 @@ testFilters([''], () => {
       cy.get('cx-login').should('be.visible').click();
       register.loginInUser(sellerIndira.email, sellerIndira.password);
       homepage.checkPageElements();
-      goToDashboard();
+      obo.goToDashboard();
       cy.get('h5').contains('Your Profile');
-      checkDashboard('Name', 'Indira Duffy');
-      checkDashboardOverview();
+      obo.checkDashboard('Name', 'Indira Duffy');
+      obo.checkDashboardOverview();
     });
 
     it('Should check customer dashboard', () => {
-      checkCustomerList();
-      goToCustomerDashboard('Stephen Bailey');
+      obo.checkCustomerList();
+      obo.goToCustomerDashboard('Stephen Bailey');
       cy.get('span.semi-bold').contains('Address Info:');
       cy.get('span.link').contains('Add address');
     });

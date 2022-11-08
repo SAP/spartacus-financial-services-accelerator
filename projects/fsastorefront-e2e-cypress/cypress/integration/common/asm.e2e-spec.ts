@@ -22,7 +22,7 @@ testFilters([''], () => {
     });
 
     it('Should open login as agent', () => {
-      register.loginInUser(amosAgent.email, amosAgent.password);
+      register.loginAgent(amosAgent.email, amosAgent.password);
       cy.get('cx-asm-session-timer').should('be.visible');
       cy.get('.logout').should('be.visible').click();
       asm.checkAsmHeader();

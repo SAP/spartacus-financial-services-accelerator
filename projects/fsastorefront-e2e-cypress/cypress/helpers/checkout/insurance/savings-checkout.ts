@@ -34,20 +34,11 @@ export function checkSavingsComparisonTable() {
   shared.checkComparisonTable(comparisonTableContent);
 }
 
-export function selecBalancedDeal() {
+export function selectMainProduct(mainProduct) {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('.table-header-title').should('contain.text', 'Balanced Deal');
-      cy.get('.primary-button').click();
-    });
-}
-
-export function selecSafeAndSteady() {
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(0)
-    .within(() => {
-      cy.get('.table-header-title').should('contain.text', 'Safe and Steady');
+      cy.get('.table-header-title').should('contain.text', mainProduct);
       cy.get('.primary-button').click();
     });
 }
@@ -161,4 +152,54 @@ export function checkMiniCart() {
     ],
   };
   shared.checkMiniCart(miniCartContent);
+}
+
+export function checkOptionalProducts() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Savings Insurance',
+    items: [
+      {
+        name: 'Dependent Children Pension',
+        available: true,
+      },
+      {
+        name: 'Disability Premium Waiver',
+        notAvailable: true,
+      },
+      {
+        name: 'Survivor Pension',
+        available: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function clickMoreInfo(mainProduct) {
+  cy.get('.table-header-title')
+    .contains(mainProduct)
+    .parent()
+    .within(() => {
+      cy.contains('More Info').click();
+    });
+}
+
+export function checkSalesIllustrationPage() {
+  cy.get('cx-fs-savings-illustration')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.heading-headline').contains(
+        'Savings - Balanced Deal Sales Illustration'
+      );
+      cy.get('cx-fs-accordion-item').contains('Your Savings Details');
+      cy.get('.accordion-item-wrapper').contains('Guaranteed Amount');
+      cy.get('.accordion-item-wrapper').contains('Expected Amount');
+      cy.get('.accordion-item-wrapper').contains('Monthly Annuity');
+      cy.get('.d-none').should('have.length', '2');
+    });
+  cy.get('.tab-content')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.text-center.p-3').contains('Your Savings Progress');
+    });
 }

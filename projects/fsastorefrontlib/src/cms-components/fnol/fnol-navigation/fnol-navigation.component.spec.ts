@@ -84,9 +84,7 @@ blob1['name'] = 'testFile1';
 blob1['code'] = 'DOC00002012';
 const mockFile = <File>blob1;
 const uploadedContent = {
-  content: {
-    files: [mockFile],
-  },
+  files: [mockFile],
 };
 
 export class MockUserRequestService {

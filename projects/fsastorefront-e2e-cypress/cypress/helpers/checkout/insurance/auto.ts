@@ -391,3 +391,13 @@ export function updateDateOfBirth() {
     cy.get('[name=dateOfBirth]').eq(0).type('1990-01-12');
   });
 }
+
+export function clickMakeAClaim() {
+  cy.get('.info-card')
+    .should('be.visible')
+    .within(() => {
+      cy.contains('Auto Insurance');
+      cy.get('a.link').contains('Details');
+      cy.get('a.link').contains('Make a Claim').click();
+    });
+}

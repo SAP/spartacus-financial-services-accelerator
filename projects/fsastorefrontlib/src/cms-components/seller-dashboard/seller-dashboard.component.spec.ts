@@ -22,6 +22,7 @@ const mockSeller: FSUser = {
   lastName: 'Moore',
   roles: [FSUserRole.SELLER],
 };
+const actionMock: string = 'event';
 
 const mockOBOCustomer: OBOCustomerList = {
   entries: [
@@ -130,5 +131,15 @@ describe('SellerDashboardComponent', () => {
   it('should show Dashboard list', () => {
     component.showDashboardList();
     expect(component.dashboardListVisible).toEqual(true);
+  });
+
+  it('should show customer Form', () => {
+    component.showAddCustomerForm();
+    expect(component.showCustomerForm).toEqual(true);
+  });
+
+  it('should hide customer form when user is added', () => {
+    component.addedUser();
+    expect(component.showCustomerForm).toEqual(false);
   });
 });
