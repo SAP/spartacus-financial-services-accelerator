@@ -81,7 +81,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   assets: { [key: string]: any }[];
   assetSelected: AssetTableType;
   showAddressForm = false;
-  showProductOverview = true;
+  showProductOverview = false;
   userId: string;
   customerId: string;
 
@@ -95,49 +95,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   filteredProducts$: Observable<CmsComponent[]>;
 
   ngOnInit(): void {
-    this.allProducts$ = this.componentData.data$.pipe(
-      map(data => data.children.split(' ')),
-      switchMap(children =>
-        from(children).pipe(
-          mergeMap(child => this.cmsService.getComponentData(child)),
-          take(children.length),
-          toArray()
-        )
-      )
-    );
-
-    const initialProductsCountObj = Object.values(
-      ProductOverviewCategory
-    ).reduce((prev, curr, i) => {
-      if (!prev[curr]) prev[curr] = 0;
-      return prev;
-    }, {});
-
-    this.productsCountByCategory$ = this.allProducts$.pipe(
-      mergeMap(components =>
-        from(components).pipe(
-          reduce((prev, curr) => {
-            prev[curr.category]++;
-            prev['all']++;
-            return prev;
-          }, initialProductsCountObj),
-          take(components.length)
-        )
-      ),
-      shareReplay()
-    );
-
-    this.filteredProducts$ = combineLatest([
-      this.selectedProducts$,
-      this.allProducts$,
-    ]).pipe(
-      map(([selectedProduct, products]) => {
-        if (selectedProduct === 'all') return products;
-        return products.filter(product => product.category === selectedProduct);
-      }),
-      filter(products => !!products.length)
-    );
-
+    this.setAllProducts();
+    this.setAllProductsCountByCategory();
+    this.setFilteredProducts();
     this.loadCustomerDetails();
   }
 
@@ -210,6 +170,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   toggleProductsOverview() {
     this.showProductOverview = !this.showProductOverview;
     this.selectedProducts.next(ProductOverviewCategory.ALL);
+    this.assetSelected = null;
   }
 
   showUserAddressForm() {
@@ -229,6 +190,55 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         GlobalMessageType.MSG_TYPE_CONFIRMATION
       );
     }
+  }
+
+  private setAllProducts() {
+    this.allProducts$ = this.componentData.data$.pipe(
+      map(data => data.children.split(' ')),
+      switchMap(children =>
+        from(children).pipe(
+          mergeMap(child => this.cmsService.getComponentData(child)),
+          take(children.length),
+          toArray()
+        )
+      )
+    );
+  }
+
+  private setAllProductsCountByCategory() {
+    const initialProductsCountObj = Object.values(
+      ProductOverviewCategory
+    ).reduce((prev, curr, i) => {
+      if (!prev[curr]) prev[curr] = 0;
+      return prev;
+    }, {});
+
+    this.productsCountByCategory$ = this.allProducts$.pipe(
+      mergeMap(components =>
+        from(components).pipe(
+          reduce((prev, curr) => {
+            prev[curr.category]++;
+            prev['all']++;
+            return prev;
+          }, initialProductsCountObj),
+          take(components.length)
+        )
+      ),
+      shareReplay()
+    );
+  }
+
+  private setFilteredProducts() {
+    this.filteredProducts$ = combineLatest([
+      this.selectedProducts$,
+      this.allProducts$,
+    ]).pipe(
+      map(([selectedProduct, products]) => {
+        if (selectedProduct === 'all') return products;
+        return products.filter(product => product.category === selectedProduct);
+      }),
+      filter(products => !!products.length)
+    );
   }
 
   ngOnDestroy(): void {

@@ -1,3 +1,5 @@
+import { inject, TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
 import {
   Address,
   GlobalMessageService,
@@ -6,16 +8,14 @@ import {
   Translatable,
   UserIdService,
 } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
-import { ConsentService } from './consent.service';
-import { StateWithMyAccount } from '../store/my-account-state';
-import { Store, StoreModule } from '@ngrx/store';
-import { inject, TestBed } from '@angular/core/testing';
-import { reducerProvider, reducerToken } from '../store/reducers';
-import * as fromAction from '../store/actions';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { Observable, of } from 'rxjs';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
 import { FSCart, FSUser, FSUserRole } from '../../../occ/occ-models/occ.models';
+import * as fromAction from '../store/actions';
+import { StateWithMyAccount } from '../store/my-account-state';
+import { reducerProvider, reducerToken } from '../store/reducers';
+import { ConsentService } from './consent.service';
 
 const userId = OCC_USER_ID_CURRENT;
 const customerId = 'testCustomerId';
@@ -211,13 +211,13 @@ describe('ConsentServiceTest', () => {
     service.transferCartToSelectedOBOCustomer(
       mockCart,
       mockUser,
-      mockOBOCustomer
+      mockOBOCustomer.uid
     );
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.TransferCart({
         cart: mockCart,
         consentHolder: mockUser,
-        oboCustomer: mockOBOCustomer,
+        oboCustomer: mockOBOCustomer.uid,
       })
     );
   });

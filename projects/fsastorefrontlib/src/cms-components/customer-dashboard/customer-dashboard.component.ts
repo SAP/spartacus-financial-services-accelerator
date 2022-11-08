@@ -8,14 +8,15 @@ import { AssetTableType } from '../../occ';
 export class CustomerDashboardComponent {
   @Input() customerAssets: any;
   @Input() seller: boolean;
+  @Input() assetSelected: AssetTableType;
   @Output() assetListSelected = new EventEmitter<{
-    assetsChosen: { [key: string]: any }[];
+    assetsChosen: Record<string, any>[];
     activeClass: AssetTableType;
   }>();
   @Output() productsOverviewSelected = new EventEmitter<void>();
 
   showAssetList(
-    assetsChosen: { [key: string]: any }[],
+    assetsChosen: Record<string, any>[],
     activeClass: AssetTableType
   ) {
     this.assetListSelected.emit({ assetsChosen, activeClass });

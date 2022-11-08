@@ -1,17 +1,20 @@
 import { DebugElement } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormDataStorageService } from '@spartacus/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
+import {
+  FormDataStorageService,
+  OboCustomerService,
+} from '@spartacus/dynamicforms';
 import { ModalService } from '@spartacus/storefront';
-import { of } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
+import { of } from 'rxjs';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
-import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
-import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 
 const cartCode = 'test001';
 const quoteId = 'testQuote001';
@@ -86,6 +89,12 @@ class MockUserAccountFacade {
   }
 }
 
+class MockOboCustomerService {
+  getOboCustomerUserId() {
+    return of('test@sap.com');
+  }
+}
+
 class MockConsentService {
   selectedOBOCustomer$ = of(mockOBOConsentCustomer);
   transferCartToSelectedOBOCustomer(mockCart, mockUser, oboConsentCustomer) {}
@@ -100,6 +109,7 @@ describe('BindQuoteDialogComponent', () => {
   let cartService: MockCartService;
   let formDataStorageService: MockFormDataStorageService;
   let oboConsentService: MockConsentService;
+  let oboCustomerService: MockOboCustomerService;
   let userAccountFacade: MockUserAccountFacade;
 
   beforeEach(
@@ -126,6 +136,7 @@ describe('BindQuoteDialogComponent', () => {
           },
           { provide: UserAccountFacade, useClass: MockUserAccountFacade },
           { provide: ConsentService, useClass: MockConsentService },
+          { provide: OboCustomerService, useClass: MockOboCustomerService },
         ],
       }).compileComponents();
     })
@@ -141,6 +152,7 @@ describe('BindQuoteDialogComponent', () => {
     cartService = TestBed.inject(FSCartService);
     formDataStorageService = TestBed.inject(FormDataStorageService);
     oboConsentService = TestBed.inject(ConsentService);
+    oboCustomerService = TestBed.inject(OboCustomerService);
     userAccountFacade = TestBed.inject(UserAccountFacade);
 
     spyOn(quoteService, 'bindQuote').and.callThrough();

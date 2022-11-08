@@ -19,8 +19,8 @@
       <li *ngFor="let filter of filters" (click)="emitSelectedProducts(filter)">
         <a
           [ngClass]="{
-            'text-white background-color-primary': filter.active,
-            'bg-white selected': !filter.active
+            'text-white background-color-primary': filter.activeStatus,
+            'bg-white selected': !filter.activeStatus
           }"
           class="rounded-pill py-2 px-3 ml-1 px-sm-4 ml-sm-3 border border-color-primary pointer text-capitalize"
         >

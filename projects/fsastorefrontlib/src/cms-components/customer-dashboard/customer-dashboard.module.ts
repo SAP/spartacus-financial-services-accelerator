@@ -7,6 +7,5 @@ import { CustomerDashboardComponent } from './customer-dashboard.component';
   imports: [I18nModule, CommonModule],
   exports: [CustomerDashboardComponent],
   declarations: [CustomerDashboardComponent],
-  providers: [],
 })
 export class CustomerDashboardModule {}

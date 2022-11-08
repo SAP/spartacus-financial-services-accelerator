@@ -3,6 +3,7 @@ import { CmsComponent } from '@spartacus/core';
 import { ICON_TYPE } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { ProductOverviewCategory } from '../../occ';
+import { productOverviewFilters } from './product-overview-filters.config';
 
 @Component({
   selector: 'cx-fs-product-overview',
@@ -19,33 +20,17 @@ export class ProductOverviewComponent {
   iconTypes: typeof ICON_TYPE;
   productOverviewCategory = ProductOverviewCategory;
 
-  filters = [
-    {
-      text: 'all',
-      emits: ProductOverviewCategory.ALL,
-      active: true,
-    },
-    {
-      text: 'insurances',
-      emits: ProductOverviewCategory.INSURANCE,
-      active: false,
-    },
-    {
-      text: 'banking',
-      emits: ProductOverviewCategory.BANKING,
-      active: false,
-    },
-  ];
+  filters = productOverviewFilters;
 
   emitSelectedProducts(selectedFilter: any) {
     this.typeOfProductsSelected.emit(selectedFilter.emits);
 
     this.filters = this.filters.map(filter => {
-      let active = false;
-      if (selectedFilter.text === filter.text) active = true;
+      let activeStatus = false;
+      if (selectedFilter.text === filter.text) activeStatus = true;
       return {
         ...filter,
-        active,
+        activeStatus,
       };
     });
   }
