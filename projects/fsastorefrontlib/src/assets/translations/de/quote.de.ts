@@ -26,6 +26,7 @@ export const quote = {
       APPROVED: 'Genehmigt',
       REJECTED: 'Abgelehnt',
       PENDING: 'Ausstehend',
+      SUBMITTED: 'Eingereicht',
       ERROR: 'Fehler',
       na: 'N/A',
     },
