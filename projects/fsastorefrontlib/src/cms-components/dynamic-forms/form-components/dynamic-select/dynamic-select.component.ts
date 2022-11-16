@@ -8,6 +8,9 @@ import { LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { Observable, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
+import { CategoryService } from '../../../../core';
+
+export const CATEGORY_CODE = 'categoryCode';
 
 @Component({
   selector: 'cx-fs-dynamic-select',
@@ -23,6 +26,7 @@ export class DynamicSelectComponent extends AbstractFormComponent
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormService,
+    protected categoryService: CategoryService,
     protected injector: Injector
   ) {
     super(formConfig, languageService, injector, formService);
@@ -33,7 +37,25 @@ export class DynamicSelectComponent extends AbstractFormComponent
   ngOnInit() {
     super.ngOnInit();
     if (this.config.apiValue) {
+      this.configureApiValueForCategory();
       this.setFormControlValuesFromAPI();
+    }
+  }
+
+  configureApiValueForCategory() {
+    if (!this.config.apiValue.url.includes(CATEGORY_CODE + '=')) {
+      this.subscription.add(
+        this.categoryService
+          .getActiveCategory()
+          .pipe(
+            map(activeCategory => {
+              console.log(activeCategory);
+              this.config.apiValue.url +=
+                '?' + CATEGORY_CODE + '=' + activeCategory;
+            })
+          )
+          .subscribe()
+      );
     }
   }
 
