@@ -48,18 +48,24 @@ export const getSavingsIllustrationChartConfig = (
         name: expectedSavingsLabel,
         type: 'line',
         itemStyle: {
-          color: '#01003B',
+          color: '#010032',
         },
         data: expectedSavingsSeries,
       },
       {
         name: contributionLabel,
         type: 'line',
+        itemStyle: {
+          color: '#0166cc',
+        },
         data: contributionSeries,
       },
       {
         name: interestLabel,
         type: 'line',
+        itemStyle: {
+          color: '#3498db',
+        },
         data: interestSeries,
       },
     ],
