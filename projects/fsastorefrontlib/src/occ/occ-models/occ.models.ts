@@ -94,6 +94,12 @@ export enum AssetTableType {
   QUOTES = 'quotes',
 }
 
+export enum ProductOverviewCategory {
+  ALL = 'all',
+  INSURANCE = 'insurances',
+  BANKING = 'banking',
+}
+
 export interface ContactAgentData {
   email?: string;
   interest?: string;
@@ -354,4 +360,9 @@ export interface SavingsIllustrationDiagramData {
   expectedSavingsSeries: number[];
   interestSeries: number[];
   years: string[];
+}
+
+export interface CmsComponent {
+  uid?: string;
+  category?: string;
 }

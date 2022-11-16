@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import {
-  catchError,
-  map,
-  switchMap,
-  concatMap,
-  mergeMap,
-} from 'rxjs/operators';
 import {
   CartActions,
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
 } from '@spartacus/core';
-import * as fromActions from '../actions';
-import { ConsentService } from '../../facade/consent.service';
+import { of } from 'rxjs';
 import {
-  ConsentConnector,
+  catchError,
+  concatMap,
+  map,
+  mergeMap,
+  switchMap,
+} from 'rxjs/operators';
+import {
   ClaimConnector,
+  ConsentConnector,
   PolicyConnector,
   QuoteConnector,
 } from '../../connectors';
+import { ConsentService } from '../../facade/consent.service';
+import * as fromActions from '../actions';
 
 @Injectable()
 export class ConsentEffects {
@@ -156,7 +156,7 @@ export class ConsentEffects {
           .transferCart(
             payload.cart.code,
             payload.consentHolder.uid,
-            payload.oboCustomer.uid
+            payload.oboCustomer
           )
           .pipe(
             switchMap(() => {
@@ -167,7 +167,7 @@ export class ConsentEffects {
                 {
                   key: 'quote.transferCartSuccess',
                   params: {
-                    customer: payload.oboCustomer.name,
+                    customer: payload.oboCustomer,
                   },
                 },
                 GlobalMessageType.MSG_TYPE_CONFIRMATION

@@ -91,3 +91,7 @@ export interface CMSConnectionComponent extends CmsComponent {
   stompUrl?: string;
   url?: string;
 }
+
+export interface CMSUserProfileComponent extends CmsComponent {
+  children?: string;
+}

@@ -16,6 +16,7 @@ export const iconConfig: IconConfig = {
       PHONE: 'fas fa-phone-alt',
       AGENT: 'fas fa-headset',
       PERSON: 'fas fa-user',
+      CHEVRON_LEFT: 'fas fa-chevron-left fa-2x',
     },
     resources: [
       {
@@ -35,4 +36,5 @@ export enum FS_ICON_TYPE {
   EVENT = 'EVENT',
   PHONE = 'PHONE',
   AGENT = 'AGENT',
+  CHEVRON_LEFT = 'CHEVRON_LEFT',
 }

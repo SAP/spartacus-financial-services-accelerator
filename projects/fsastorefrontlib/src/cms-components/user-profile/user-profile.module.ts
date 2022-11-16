@@ -14,10 +14,12 @@ import {
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { UserProfileGuard } from './guards/user-profile-guard';
 import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { AssetsTableModule } from '../assets-table/assets-table.module';
+import { CustomerDashboardModule } from '../customer-dashboard';
+import { ProductOverviewModule } from '../product-overview';
 import { UserChangeAddressModule } from '../user-change-address/user-change-address.module';
+import { UserProfileGuard } from './guards/user-profile-guard';
 import { UserProfileComponent } from './user-profile.component';
 
 const routes: Routes = [
@@ -43,6 +45,8 @@ const routes: Routes = [
     MediaModule,
     DateFormatConfigurationModule,
     UserChangeAddressModule,
+    CustomerDashboardModule,
+    ProductOverviewModule,
     RouterModule.forChild(routes),
   ],
   providers: [

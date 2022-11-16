@@ -1,11 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UserProfileComponent } from './user-profile.component';
-import { QuoteService } from '../../core/my-account/facade/quote.service';
-import { PolicyService } from '../../core/my-account/facade/policy.service';
-import { ClaimService } from '../../core/my-account/facade/claim.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   Address,
+  CmsService,
   GlobalMessage,
   GlobalMessageService,
   GlobalMessageType,
@@ -14,13 +12,22 @@ import {
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
+import { CmsComponentData } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { ConsentService } from '../../core/my-account/facade/consent.service';
-import { Observable, of } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
-import { FSUserRole } from '../../occ/occ-models/occ.models';
-import createSpy = jasmine.createSpy;
 import { UserProfileService } from '@spartacus/user/profile/core';
+import { Observable, of } from 'rxjs';
+import { ClaimService } from '../../core/my-account/facade/claim.service';
+import { ConsentService } from '../../core/my-account/facade/consent.service';
+import { PolicyService } from '../../core/my-account/facade/policy.service';
+import { QuoteService } from '../../core/my-account/facade/quote.service';
+import { CMSUserProfileComponent } from '../../occ';
+import {
+  AssetTableType,
+  FSUserRole,
+  ProductOverviewCategory,
+} from '../../occ/occ-models/occ.models';
+import { UserProfileComponent } from './user-profile.component';
+import createSpy = jasmine.createSpy;
 
 const customerName = 'customerName';
 const customerUid = 'customerUid';
@@ -161,6 +168,22 @@ const mockedClaims = {
   ],
 };
 
+const componentData: CMSUserProfileComponent = {
+  uid: 'test',
+  typeCode: 'test11',
+  name: 'test222',
+  children: 'test1, test2',
+};
+
+const mockCmsComponentData: CmsComponentData<CMSUserProfileComponent> = {
+  data$: of(componentData),
+  uid: 'test',
+};
+
+const MockCmsService = {
+  getComponentData: () => of(componentData),
+};
+
 let mockRouterState = {
   state: {
     params: {
@@ -291,6 +314,14 @@ describe('UserProfileComponent', () => {
             provide: GlobalMessageService,
             useClass: MockGlobalMessageService,
           },
+          {
+            provide: CmsComponentData,
+            useValue: mockCmsComponentData,
+          },
+          {
+            provide: CmsService,
+            useValue: MockCmsService,
+          },
         ],
         declarations: [UserProfileComponent, MockParseDatePipe],
       }).compileComponents();
@@ -326,7 +357,10 @@ describe('UserProfileComponent', () => {
   });
 
   it('should pick asset', () => {
-    component.showAssetList([mockUser], 'test-class');
+    component.showAssetList({
+      assetsChosen: [mockUser],
+      activeClass: AssetTableType.CLAIMS,
+    });
     expect(component.assets).toEqual([mockUser]);
   });
 
@@ -342,5 +376,17 @@ describe('UserProfileComponent', () => {
       { key: 'addressForm.successfullyAddAddress' },
       GlobalMessageType.MSG_TYPE_CONFIRMATION
     );
+  });
+
+  it('should toggle products overview', () => {
+    spyOn(component, 'toggleProductsOverview').and.callThrough();
+    component.toggleProductsOverview();
+    expect(component.toggleProductsOverview).toHaveBeenCalled();
+  });
+
+  it('should call productsSelected', () => {
+    spyOn(component, 'productsSelected').and.callThrough();
+    component.productsSelected(ProductOverviewCategory.ALL);
+    expect(component.productsSelected).toHaveBeenCalled();
   });
 });

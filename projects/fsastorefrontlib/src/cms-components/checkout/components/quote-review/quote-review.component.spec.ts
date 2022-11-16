@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessage,
@@ -10,9 +10,14 @@ import {
   WindowRef,
 } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
+import { UserAccountFacade } from '@spartacus/user/account/root';
+import { Observable, of } from 'rxjs';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
-import { of, Observable } from 'rxjs';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { FSCart, FSOrderEntry, FSSteps } from '../../../../occ/occ-models';
+import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -20,11 +25,6 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
-import { CategoryService } from '../../../../core/checkout/services/category/category.service';
-import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
-import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
-import { ConsentService } from '../../../../core/my-account/facade/consent.service';
-import { UserAccountFacade } from '@spartacus/user/account/root';
 
 const formDataContent = '{"content":"formContent"}';
 
@@ -154,7 +154,6 @@ const consent2 = {
 };
 
 const consentList = [consent1, consent2];
-let isCartTransferAllowedForSeller = true;
 
 const mockUser: FSUser = {
   firstName: 'Donna',
@@ -210,9 +209,6 @@ class MockUserAccountFacade {
 }
 
 class MockConsentService {
-  isCartTransferAllowedForSeller() {
-    return of(true);
-  }
   setSelectedOBOCustomer(oboConsentCustomer) {}
 }
 
@@ -331,11 +327,7 @@ describe('Quote Review Component', () => {
         },
       },
     };
-    component.navigateNext(
-      mockCategoryAndStep,
-      cart,
-      isCartTransferAllowedForSeller
-    );
+    component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).toHaveBeenCalled();
   });
 
@@ -353,11 +345,7 @@ describe('Quote Review Component', () => {
       },
     };
 
-    component.navigateNext(
-      mockCategoryAndStep,
-      cart,
-      isCartTransferAllowedForSeller
-    );
+    component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
       centered: true,
@@ -382,11 +370,7 @@ describe('Quote Review Component', () => {
       },
     };
 
-    component.navigateNext(
-      mockCategoryAndStep,
-      cart,
-      isCartTransferAllowedForSeller
-    );
+    component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(
       ReferredQuoteDialogComponent,
@@ -492,35 +476,5 @@ describe('Quote Review Component', () => {
     const result = component.checkIfRemoveableEntriesExists(mockCart);
     expect(mockCheckoutService.filterRemoveableEntries).toHaveBeenCalled();
     expect(result).toEqual(true);
-  });
-
-  it('should select customer for cart transfer', () => {
-    spyOn(oboConsentService, 'setSelectedOBOCustomer').and.callThrough();
-    const selectedCustomer = {
-      uid: 'selectedOBOCustomer',
-    };
-    component.selectOBOCustomer(selectedCustomer, 1);
-    expect(oboConsentService.setSelectedOBOCustomer).toHaveBeenCalled();
-  });
-
-  it('should NOT continue to next step when cart transfer is not allowed', () => {
-    const cart: FSCart = {
-      code: 'cartCode',
-      insuranceQuote: {
-        state: {
-          code: 'BIND',
-        },
-        quoteWorkflowStatus: {
-          code: 'APPROVED',
-        },
-      },
-    };
-    isCartTransferAllowedForSeller = false;
-    component.navigateNext(
-      mockCategoryAndStep,
-      cart,
-      isCartTransferAllowedForSeller
-    );
-    expect(routingService.go).not.toHaveBeenCalled();
   });
 });

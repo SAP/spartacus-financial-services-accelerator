@@ -131,114 +131,24 @@
       } as customerAssets"
     >
       <div class="col-md-7">
-        <div class="box-shadow border border-color-3">
-          <h5 class="text-center py-3 mb-0">
-            {{ 'dashboard.overview' | cxTranslate }}
-          </h5>
-          <div class="dashboard-overview-wrapper background-color-4">
-            <ul
-              class="dashboard-overview-stats mb-0 bg-white border border-color-3 p-3"
-            >
-              <li class="item text-break text-center text-uppercase">
-                <div class="number notice semi-bold">
-                  {{
-                    customerAssets.claims?.claims
-                      ? customerAssets.claims?.claims?.length
-                      : '0'
-                  }}
-                </div>
-                <span class="description">{{
-                  'claim.claims' | cxTranslate
-                }}</span>
-              </li>
-              <li class="item text-break text-center text-uppercase">
-                <div class="number notice semi-bold">
-                  {{
-                    customerAssets.policies?.insurancePolicies
-                      ? customerAssets.policies?.insurancePolicies?.length
-                      : '0'
-                  }}
-                </div>
-                <span class="description">{{
-                  'policy.policies' | cxTranslate
-                }}</span>
-              </li>
-              <li class="item text-break text-center text-uppercase">
-                <div class="number notice semi-bold">
-                  {{
-                    customerAssets?.quotes ? customerAssets.quotes?.length : '0'
-                  }}
-                </div>
-                <span class="description">
-                  {{ 'fscommon.quotesAndApplications' | cxTranslate }}
-                </span>
-              </li>
-            </ul>
-            <div class="dashboard-overview-assets mt-3">
-              <div
-                *ngFor="let asset of customerAssets | keyvalue; let i = index"
-                [ngClass]="assetSelected === asset.key ? 'active' : ''"
-                class="asset bg-white p-2 align-items-center"
-                role="button"
-                [tabindex]="i + 1"
-                (click)="
-                  showAssetList(
-                    asset.key === 'quotes'
-                      ? customerAssets?.quotes
-                      : asset.key === 'policies'
-                      ? customerAssets.policies?.insurancePolicies || []
-                      : asset.key === 'claims'
-                      ? customerAssets.claims?.claims || []
-                      : '',
-                    asset.key
-                  )
-                "
-                (keydown.enter)="
-                  showAssetList(
-                    asset.key === 'quotes'
-                      ? customerAssets?.quotes
-                      : asset.key === 'policies'
-                      ? customerAssets.policies?.insurancePolicies || []
-                      : asset.key === 'claims'
-                      ? customerAssets.claims?.claims || []
-                      : '',
-                    asset.key
-                  )
-                "
-              >
-                <span
-                  [ngClass]="
-                    asset.key === 'quotes'
-                      ? 'fa-envelope-open-text'
-                      : asset.key === 'policies'
-                      ? 'fa-file-invoice'
-                      : asset.key === 'claims'
-                      ? 'fa-stamp'
-                      : ''
-                  "
-                  class="asset-image h6 text-center notice p-3 mb-0 fas"
-                ></span>
-                <div class="asset-text">
-                  {{
-                    seller
-                      ? ('dashboard.checkCustomers' | cxTranslate)
-                      : ('dashboard.checkYour' | cxTranslate)
-                  }}
-                  <span class="notice">{{
-                    (asset.key === 'quotes'
-                      ? 'fscommon.quotesAndApplications'
-                      : asset.key === 'policies'
-                      ? 'policy.policies'
-                      : asset.key === 'claims'
-                      ? 'claim.claims'
-                      : ''
-                    ) | cxTranslate
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <cx-fs-customer-dashboard
+          *ngIf="!showProductOverview; else productOverview"
+          (assetListSelected)="showAssetList($event)"
+          (productsOverviewSelected)="toggleProductsOverview()"
+          [customerAssets]="customerAssets"
+          [seller]="seller"
+          [assetSelected]="assetSelected"
+        >
+        </cx-fs-customer-dashboard>
+        <ng-template #productOverview>
+          <cx-fs-product-overview
+            [products$]="filteredProducts$"
+            (customerDashboardSelected)="toggleProductsOverview()"
+            (typeOfProductsSelected)="productsSelected($event)"
+            [productsCount$]="productsCountByCategory$"
+          >
+          </cx-fs-product-overview>
+        </ng-template>
       </div>
     </ng-container>
   </div>

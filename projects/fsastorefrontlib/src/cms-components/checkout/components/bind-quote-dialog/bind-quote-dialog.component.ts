@@ -5,16 +5,19 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormDataStorageService } from '@spartacus/dynamicforms';
+import {
+  FormDataStorageService,
+  OboCustomerService,
+} from '@spartacus/dynamicforms';
 import { ModalService } from '@spartacus/storefront';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { combineLatest, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
-import { ConsentService } from '../../../../core/my-account/facade/consent.service';
-import { UserAccountFacade } from '@spartacus/user/account/root';
-import { FSUserRole, FSUser } from '../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-bind-quote-dialog',
@@ -36,7 +39,8 @@ export class BindQuoteDialogComponent {
     protected cartService: FSCartService,
     protected formDataStoragetService: FormDataStorageService,
     protected userAccountFacade: UserAccountFacade,
-    protected oboConsentService: ConsentService
+    protected oboConsentService: ConsentService,
+    protected oboCustomerService: OboCustomerService
   ) {}
 
   dismissModal(reason?: any): void {
@@ -50,7 +54,7 @@ export class BindQuoteDialogComponent {
         this.cartService.isStable(),
         this.cartService.getActive(),
         this.userAccountFacade.get(),
-        this.oboConsentService.selectedOBOCustomer$,
+        this.oboCustomerService.getOboCustomerUserId(),
       ])
         .pipe(
           filter(([stable]) => stable),
@@ -82,13 +86,13 @@ export class BindQuoteDialogComponent {
 
   private transferCartToOBOCustomer(
     user: FSUser,
-    oboConsentCustomer: FSUser,
+    oboConsentCustomer: string,
     cart: FSCart
   ) {
     if (
       !!user &&
       user.roles.includes(FSUserRole.SELLER) &&
-      !!oboConsentCustomer?.uid
+      !!oboConsentCustomer
     ) {
       this.oboConsentService.transferCartToSelectedOBOCustomer(
         cart,

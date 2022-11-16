@@ -23,6 +23,7 @@ export const dashboard = {
     customers: 'Kunden',
     checkCustomers: 'Kundendaten prüfen',
     checkYour: 'Prüfe dein',
+    products: 'Produkte',
     noAssets: 'Es gibt keine Vermögenswerte dieser Art',
     noClaims: 'Es bestehen keine Schadensfälle',
     noPolicies: 'Es bestehen keine Policen',
