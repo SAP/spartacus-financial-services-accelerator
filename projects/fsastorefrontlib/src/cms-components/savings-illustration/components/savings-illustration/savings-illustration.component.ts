@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -86,7 +87,8 @@ export class SavingsIllustrationComponent
     protected chartService: SavingsIllustrationChartService,
     protected cartService: FSCartService,
     protected breakpointService: BreakpointService,
-    public routingService: RoutingService
+    public routingService: RoutingService,
+    public location: Location
   ) {}
 
   ngAfterViewInit(): void {
