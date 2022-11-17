@@ -14,8 +14,9 @@ import {
 } from '@spartacus/dynamicforms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DynamicSelectComponent } from './dynamic-select.component';
+import { CategoryService } from '../../../../core';
 
 @Component({
   // eslint-disable-next-line
@@ -60,6 +61,12 @@ class MockFormService {
   }
 }
 
+class MockCategoryService {
+  getActiveCategory(): Observable<string> {
+    return of('testCategory');
+  }
+}
+
 const testUrl = 'testUrl';
 
 let mockField: FieldConfig;
@@ -93,6 +100,10 @@ describe('DynamicSelectComponent', () => {
             useValue: mockDynamicFormsConfig,
           },
           { provide: FormService, useClass: MockFormService },
+          {
+            provide: CategoryService,
+            useClass: MockCategoryService,
+          },
         ],
       }).compileComponents();
     })
