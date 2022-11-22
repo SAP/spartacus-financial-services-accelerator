@@ -4,6 +4,7 @@ import { Address, RoutingService, User } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import {
+  FSCart,
   FSOrderEntry,
   FSSteps,
   FSUserRole,
@@ -15,6 +16,7 @@ import { PricingService } from './../../../../core/product-pricing/facade/pricin
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade';
+import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -30,7 +32,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
     protected addressService: FSAddressService,
-    protected consentService: ConsentService
+    protected consentService: ConsentService,
+    protected fileService: FileService
   ) {}
 
   protected readonly PERSONAL_DETAILS_FORM_GROUP = 'personalDetails';
@@ -54,10 +57,11 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
         this.cartService.getActive(),
         this.userAccountFacade.get(),
         this.addressService.getAddresses(),
+        this.fileService.getUploadedDocuments(),
       ])
         .pipe(
           take(1),
-          switchMap(([cart, user, addresses]) => {
+          switchMap(([cart, user, addresses, uploadedDocuments]) => {
             if (cart?.code && cart?.entries?.length > 0) {
               this.cartId = cart.code;
               const entry: FSOrderEntry = cart.entries[0];
@@ -79,10 +83,21 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                       JSON.parse(formData.content)
                     )
                   );
-                  this.routingService.go({
-                    cxRoute: nextStep.step,
-                  });
+                  const quoteCopy = JSON.parse(
+                    JSON.stringify((<FSCart>cart).insuranceQuote)
+                  );
+                  if (uploadedDocuments) {
+                    quoteCopy.documents = uploadedDocuments.files;
+                  }
+                  quoteCopy.documents = Array.from(quoteCopy.documents);
+                  this.quoteService.updateQuoteWithContent(
+                    cart.code,
+                    quoteCopy
+                  );
                 }
+                this.routingService.go({
+                  cxRoute: nextStep.step,
+                });
               })
             );
           })

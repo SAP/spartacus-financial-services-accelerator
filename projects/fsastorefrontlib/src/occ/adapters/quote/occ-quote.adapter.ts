@@ -49,7 +49,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     userId: string,
     cartId: string,
     quoteAction: string,
-    body: any
+    quoteBody: any
   ): Observable<any> {
     const url = this.occEndpointService.buildUrl('quoteAction', {
       urlParams: {
@@ -62,11 +62,23 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
     const bindQuoteAction = {
       actionName: quoteAction,
-      body: body,
+      body: quoteBody ? this.convertQuoteBody(quoteBody) : quoteBody,
     };
     return this.http
       .post(url, bindQuoteAction, { headers })
       .pipe(catchError((error: any) => throwError(error.json)));
+  }
+
+  convertQuoteBody(body: any): any {
+    let priceAttributes: any[] = body?.priceAttributeGroups[0].priceAttributes;
+    priceAttributes = priceAttributes.filter(
+      item => !(item.value instanceof Array)
+    );
+
+    const convertedQuoteBody = JSON.parse(JSON.stringify(body));
+    convertedQuoteBody.priceAttributeGroups[0].priceAttributes = priceAttributes;
+
+    return convertedQuoteBody;
   }
 
   getQuote(userId: string, quoteId: string): Observable<any> {
