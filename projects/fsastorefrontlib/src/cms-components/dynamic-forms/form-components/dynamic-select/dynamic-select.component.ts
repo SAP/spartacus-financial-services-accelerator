@@ -37,7 +37,6 @@ export class DynamicSelectComponent extends AbstractFormComponent
   ngOnInit() {
     super.ngOnInit();
     if (this.config.apiValue) {
-      this.configureApiValueForCategory();
       this.setFormControlValuesFromAPI();
     }
   }
@@ -59,6 +58,7 @@ export class DynamicSelectComponent extends AbstractFormComponent
 
   setFormControlValuesFromAPI() {
     if (!this.config.apiValue.param) {
+      this.configureApiValueForCategory();
       this.subscription.add(
         this.occValueListService
           .getValuesFromAPI(this.config.apiValue.url)
