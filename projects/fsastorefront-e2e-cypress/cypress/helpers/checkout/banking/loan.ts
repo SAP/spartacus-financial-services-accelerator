@@ -65,7 +65,7 @@ export function checkMiniCartFirstStep() {
       },
       {
         title: 'Loan Amount:',
-        value: '18001',
+        value: '€18,001.00',
       },
       {
         title: 'Loan Start Date:',

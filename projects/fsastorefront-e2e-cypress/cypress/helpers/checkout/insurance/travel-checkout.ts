@@ -24,6 +24,7 @@ export function checkSingleTravelComparisonTable() {
   cy.get('cx-fs-comparison-table-container').within(() => {
     cy.get('.nav-link').contains('Single Trip').click();
   });
+  cy.get('.table-header').should('contains.text', 'Single - Gold Plan');
   const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {

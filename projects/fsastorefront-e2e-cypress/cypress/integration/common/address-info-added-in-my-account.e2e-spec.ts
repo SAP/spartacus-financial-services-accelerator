@@ -31,7 +31,7 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       savings.checkComparisonPage();
       savings.checkSavingsComparisonTable();
-      savings.selectMainProduct('Safe and Steady');
+      savings.selectMainProduct('Safe and Steady', '0');
       savings.checkOptionalProductsSafeAndSteady();
       checkout.clickContinueButton();
       checkout.checkCheckoutStep('Your Savings Insurance', '7');
