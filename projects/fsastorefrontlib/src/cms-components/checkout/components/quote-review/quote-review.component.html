@@ -271,6 +271,7 @@
             <div
               *ngIf="
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
+                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'ACCEPTED' ||
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
               "
               class="col-md-6"
