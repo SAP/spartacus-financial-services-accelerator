@@ -62,6 +62,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   baseUrl: string;
   selectedIndex = -1;
   messageType = GlobalMessageType;
+  acceptedWorkflowStates = ['APPROVED', 'ACCEPTED', 'REFERRED'];
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
