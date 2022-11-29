@@ -25,7 +25,7 @@ export function checkMiniCartFirstStep() {
     products: [
       {
         title: 'Term Amount:',
-        value: '500000',
+        value: '€500,000.00',
       },
       {
         title: 'Deposit Term:',

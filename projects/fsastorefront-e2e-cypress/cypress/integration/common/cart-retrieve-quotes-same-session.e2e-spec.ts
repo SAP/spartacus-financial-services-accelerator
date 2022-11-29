@@ -117,8 +117,7 @@ testFilters([''], () => {
     });
 
     it('Should check Quotes and Applications page', () => {
-      cy.selectOptionFromDropdown({
-        menuOption: 'My Account',
+      cy.selectOptionFromMyAccount({
         dropdownItem: 'Quotes & Applications',
       });
       cy.get('h2').should('contain.text', 'Quotes & Applications');

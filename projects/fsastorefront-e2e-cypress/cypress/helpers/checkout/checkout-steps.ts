@@ -290,6 +290,7 @@ export const pages = {
   sellerDashboard: 'seller-dashboard',
   personalDetails: 'checkout/personal-details',
   documentsPage: 'my-account/my-documents',
+  needAnalysis: 'questionnaire',
 };
 
 export function checkPageURL(page: string) {

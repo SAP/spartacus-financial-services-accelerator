@@ -34,9 +34,9 @@ export function checkSavingsComparisonTable() {
   shared.checkComparisonTable(comparisonTableContent);
 }
 
-export function selectMainProduct(mainProduct) {
+export function selectMainProduct(mainProduct, product) {
   cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
+    .eq(product)
     .within(() => {
       cy.get('.table-header-title').should('contain.text', mainProduct);
       cy.get('.primary-button').click();
