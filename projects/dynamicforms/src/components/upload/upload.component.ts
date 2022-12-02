@@ -52,7 +52,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
-    this.removeFromStorage(); // Removes files from BE, ensures same state in BackOffice
     this.resetFileList();
     this.individualProgress = {};
     this.uploadDisable = false;
@@ -141,7 +140,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
               this.cd.detectChanges();
             }
             if (event instanceof HttpResponse) {
-              this.setFileCode(file, event);
               this.handleFileResponse(event);
             }
             // when all files are finished uploading show the remove all button
