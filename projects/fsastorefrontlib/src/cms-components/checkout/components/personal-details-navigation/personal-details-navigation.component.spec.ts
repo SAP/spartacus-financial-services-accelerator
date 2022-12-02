@@ -1,6 +1,10 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, YFormData } from '@spartacus/dynamicforms';
+import {
+  FileService,
+  FormDataService,
+  YFormData,
+} from '@spartacus/dynamicforms';
 import {
   Address,
   Cart,
@@ -59,6 +63,9 @@ const mockCart = {
       },
     },
   ],
+  insuranceQuote: {
+    code: 'testQuote',
+  },
 };
 
 const formData: YFormData = {
@@ -70,6 +77,17 @@ const formData: YFormData = {
 
 const mockAddress = [defaultAddress];
 
+const mockDocuments = {
+  files: [
+    {
+      code: 'testFile1',
+    },
+    {
+      code: 'testFile2',
+    },
+  ],
+};
+
 class MockActivatedRoute {
   params = of();
 }
@@ -80,6 +98,7 @@ class MockRoutingService {
 class MockQuoteService {
   underwriteQuote = createSpy();
   updateQuote = createSpy();
+  updateQuoteWithContent = createSpy();
 }
 
 class MockCheckoutConfigService {
@@ -123,6 +142,12 @@ class MockFSAddressService {
   }
 }
 
+class MockFileService {
+  getUploadedDocuments(): Observable<any> {
+    return of(mockDocuments);
+  }
+}
+
 class MockConsentService {
   createAddressForUser() {}
 }
@@ -136,6 +161,7 @@ describe('PersonalDetailsNavigationComponent', () => {
   let mockedUserAccountFacade: UserAccountFacade;
   let cartService: FSCartService;
   let formService: FormDataService;
+  let fileService: MockFileService;
   let consentService: ConsentService;
 
   beforeEach(
@@ -181,6 +207,10 @@ describe('PersonalDetailsNavigationComponent', () => {
             useClass: MockUserAccountFacade,
           },
           {
+            provide: FileService,
+            useClass: MockFileService,
+          },
+          {
             provide: ConsentService,
             useClass: MockConsentService,
           },
@@ -200,6 +230,7 @@ describe('PersonalDetailsNavigationComponent', () => {
     mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     cartService = TestBed.inject(FSCartService);
     formService = TestBed.inject(FormDataService);
+    fileService = TestBed.inject(FileService);
     consentService = TestBed.inject(ConsentService);
     spyOn(routingService, 'go').and.stub();
   });
@@ -229,8 +260,27 @@ describe('PersonalDetailsNavigationComponent', () => {
     };
     spyOn(formService, 'getSubmittedForm').and.returnValue(of(testFormData));
     spyOn(cartService, 'getActive').and.returnValue(of(testCart));
+    spyOn(fileService, 'getUploadedDocuments').and.returnValue(
+      of(mockDocuments)
+    );
     component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).not.toHaveBeenCalled();
+  });
+
+  it('should call quote service to update content', () => {
+    spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
+    spyOn(fileService, 'getUploadedDocuments').and.returnValue(
+      of(mockDocuments)
+    );
+    component.navigateNext(mockCategoryAndStep);
+    expect(quoteService.updateQuoteWithContent).toHaveBeenCalled();
+  });
+
+  it('should not call quote service to update content', () => {
+    spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
+    spyOn(fileService, 'getUploadedDocuments').and.returnValue(of({}));
+    component.navigateNext(mockCategoryAndStep);
+    expect(quoteService.updateQuoteWithContent).not.toHaveBeenCalled();
   });
 
   it('should submit form data that already exist', () => {

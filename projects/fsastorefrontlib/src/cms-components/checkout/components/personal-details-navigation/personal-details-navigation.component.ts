@@ -50,7 +50,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.userAccountFacade.get();
   }
-
+  //This method should be refactored
   navigateNext(nextStep: FSSteps) {
     this.subscription
       .add(
@@ -87,6 +87,9 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                         JSON.parse(formData.content)
                       )
                     );
+                    this.routingService.go({
+                      cxRoute: nextStep.step,
+                    });
                   }
                 })
               );
@@ -101,12 +104,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
         ])
           .pipe(
             map(([cart, uploadedDocuments]) => {
-              if (uploadedDocuments) {
+              if (
+                JSON.stringify((<FSCart>cart).insuranceQuote) !== undefined &&
+                uploadedDocuments?.files !== undefined
+              ) {
                 this.updateQuoteWithDocuments(cart, uploadedDocuments);
               }
-              this.routingService.go({
-                cxRoute: nextStep.step,
-              });
             })
           )
           .subscribe()
@@ -119,7 +122,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateQuoteWithDocuments(cart: Cart, uploadedDocuments) {
+  updateQuoteWithDocuments(cart: Cart, uploadedDocuments) {
     const quoteCopy = JSON.parse(JSON.stringify((<FSCart>cart).insuranceQuote));
     quoteCopy.documents = uploadedDocuments.files;
     quoteCopy.documents = Array.from(quoteCopy.documents);
