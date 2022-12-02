@@ -1,5 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormDataService, YFormData, FileService } from '@spartacus/dynamicforms';
+import {
+  FormDataService,
+  YFormData,
+  FileService,
+} from '@spartacus/dynamicforms';
 import { Address, Cart, RoutingService, User } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
