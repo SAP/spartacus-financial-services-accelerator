@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormDataService, YFormData } from '@spartacus/dynamicforms';
+import { FormDataService, YFormData, FileService } from '@spartacus/dynamicforms';
 import { Address, Cart, RoutingService, User } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
@@ -16,7 +16,6 @@ import { PricingService } from './../../../../core/product-pricing/facade/pricin
 import { FSAddressService } from './../../../../core/user/facade/address.service';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { ConsentService } from '../../../../core/my-account/facade';
-import { FileService } from '@spartacus/dynamicforms';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
