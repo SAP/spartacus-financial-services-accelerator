@@ -308,12 +308,6 @@ export function checkValidationPopUpAndClose() {
     });
 }
 
-export function populateCustomerDetails() {
-  cy.get('[name="title"]').select('mr');
-  cy.get('[name="firstName"]').type('Stephen');
-  cy.get('[name="lastName"]').type('Bailey');
-}
-
 export function checkActiveAndDisabledSteps(checkoutStep, disabledSteps) {
   cy.get('p.label')
     .contains(checkoutStep)
@@ -322,4 +316,10 @@ export function checkActiveAndDisabledSteps(checkoutStep, disabledSteps) {
     'have.length',
     disabledSteps
   );
+}
+
+export function populateCustomerDetails(title, name, lastName) {
+  cy.get('[name="title"]').select(title);
+  cy.get('[name="firstName"]').type(name);
+  cy.get('[name="lastName"]').type(lastName);
 }

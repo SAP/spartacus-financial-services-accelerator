@@ -40,19 +40,16 @@ export function checkEventComparisonTable() {
   shared.checkComparisonTable(comparisonTableContent);
 }
 
-export function selectTwoStarEvent() {
+export function selectMainProductEvent(product, number) {
   cy.get('cx-fs-comparison-table-panel-item')
-    .eq(0)
+    .eq(number)
     .within(() => {
-      cy.get('.table-header-title').should(
-        'contain.text',
-        'Two Star Event Plan'
-      );
+      cy.get('.table-header-title').should('contain.text', product);
       cy.get('.primary-button').click();
     });
 }
 
-export function checkOptionalProducts() {
+export function checkOptionalProductsTwoStar() {
   const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Event Insurance',
     items: [
@@ -151,4 +148,25 @@ export function checkMiniCartWithoutOptional() {
     ],
   };
   shared.checkMiniCart(miniCartContent);
+}
+
+export function checkOptionalProductsFiveStar() {
+  const addOptionsContent: sharedCheckout.AddOptions = {
+    title: 'Your Event Insurance',
+    items: [
+      {
+        name: 'Excess Waiver',
+        available: true,
+      },
+      {
+        name: 'Increase supplier failure and public liability',
+        available: true,
+      },
+      {
+        name: 'Venue Cover',
+        available: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
 }

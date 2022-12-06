@@ -237,7 +237,7 @@ export function uploadDocuments() {
 }
 
 export function startClaimFromHomepage() {
-  cy.get('cx-banner').eq(2).click();
+  cy.get('cx-banner').should('be.visible').eq(2).click();
   cy.get('.section-header-heading').contains('Which car has been damaged?');
   cy.contains('The affected car is not listed? Contact an agent for help!');
   cy.get('.form-check-label').should('be.visible');

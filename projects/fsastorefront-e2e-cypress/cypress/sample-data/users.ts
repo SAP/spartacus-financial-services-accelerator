@@ -80,3 +80,11 @@ export const stephenCustomer = {
   email: 'stephen.bailey@sapfsa.com',
   password: '123456',
 };
+
+export const createOboCustomer = {
+  titleCode: 'mrs',
+  email: generateMail('Jenise'),
+  firstName: 'Jenise',
+  lastName: 'Moore',
+  dateOfBirth: '1984-01-12',
+};

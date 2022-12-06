@@ -74,7 +74,7 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       savings.checkComparisonPage();
       savings.checkSavingsComparisonTable();
-      savings.selectMainProduct('Balanced Deal');
+      savings.selectMainProduct('Balanced Deal', '1');
       checkout.checkCheckoutStep('Your Savings Insurance', '7');
       savings.checkOptionalProductsBalancedDeal();
       savings.checkMiniCart();

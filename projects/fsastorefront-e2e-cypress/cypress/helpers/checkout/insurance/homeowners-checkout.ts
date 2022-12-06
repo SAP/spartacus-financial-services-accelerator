@@ -22,14 +22,11 @@ export function checkHomeownersComparisonTable() {
   shared.checkComparisonTable(comparisonTableContent);
 }
 
-export function selectHomeownersAnnually() {
+export function selectHomeownersMainProduct(product, number) {
   cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
+    .eq(number)
     .within(() => {
-      cy.get('.table-header-title').should(
-        'contain.text',
-        'Homeowners Annually'
-      );
+      cy.get('.table-header-title').should('contain.text', product);
       cy.get('.primary-button').click();
     });
 }
