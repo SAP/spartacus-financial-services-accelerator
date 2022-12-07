@@ -7,7 +7,7 @@ import {
   Type,
   ViewContainerRef,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { DynamicFormsConfig } from '../core/config/form-config';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { AbstractFormComponent } from './abstract-form/abstract-form.component';
@@ -19,7 +19,7 @@ export class FormComponentDirective implements OnInit {
   @Input()
   config: FieldConfig;
   @Input()
-  group: FormGroup;
+  group: UntypedFormGroup;
   component: ComponentRef<AbstractFormComponent>;
   components: { [fieldType: string]: Type<AbstractFormComponent> } = {};
 

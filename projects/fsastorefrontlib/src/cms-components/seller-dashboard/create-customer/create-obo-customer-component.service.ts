@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';
@@ -19,15 +19,15 @@ export class CreateOBOCustomerComponentService {
 
   titles$: Observable<Title[]> = this.userProfile.getTitles();
 
-  form: FormGroup = new FormGroup({
-    email: new FormControl('', [
+  form: UntypedFormGroup = new UntypedFormGroup({
+    email: new UntypedFormControl('', [
       Validators.required,
       CustomFormValidators.emailValidator,
     ]),
-    titleCode: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', [
+    titleCode: new UntypedFormControl('', Validators.required),
+    firstName: new UntypedFormControl('', Validators.required),
+    lastName: new UntypedFormControl('', Validators.required),
+    dateOfBirth: new UntypedFormControl('', [
       DefaultFormValidators.required,
       DefaultFormValidators.dateOfBirthValidator(18),
       Validators.min(1900),

@@ -5,11 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  CheckoutProgressComponent,
-  CheckoutStepService,
-} from '@spartacus/checkout/components';
-import { CheckoutConfig } from '@spartacus/checkout/root';
+import { CheckoutProgressComponent, CheckoutStepService } from '@spartacus/checkout/base/components';
+import { CheckoutConfig } from '@spartacus/checkout/base/root';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';

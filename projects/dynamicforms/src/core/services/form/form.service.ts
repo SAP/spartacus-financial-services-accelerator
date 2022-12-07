@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 
 @Injectable()
 export class FormService {
@@ -21,7 +21,7 @@ export class FormService {
       if (key === formControlCode) {
         abstractFormControl = formGroup.get(key);
         break;
-      } else if (nestedFormGroup instanceof FormGroup) {
+      } else if (nestedFormGroup instanceof UntypedFormGroup) {
         abstractFormControl = this.getFormControlForCode(
           formControlCode,
           nestedFormGroup

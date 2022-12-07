@@ -6,25 +6,24 @@ import { FSCartCouponComponent } from './cart-coupon.component';
 import { CartCouponModule, FormErrorsModule } from '@spartacus/storefront';
 
 @NgModule({
-  declarations: [FSCartCouponComponent],
-  exports: [FSCartCouponComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    I18nModule,
-    FormErrorsModule,
-    CartCouponModule,
-  ],
-  providers: [
-    provideDefaultConfig(<CmsConfig>{
-      cmsComponents: {
-        CartCouponFlex: {
-          component: FSCartCouponComponent,
-        },
-      },
-    }),
-  ],
-  entryComponents: [FSCartCouponComponent],
+    declarations: [FSCartCouponComponent],
+    exports: [FSCartCouponComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        I18nModule,
+        FormErrorsModule,
+        CartCouponModule,
+    ],
+    providers: [
+        provideDefaultConfig(<CmsConfig>{
+            cmsComponents: {
+                CartCouponFlex: {
+                    component: FSCartCouponComponent,
+                },
+            },
+        }),
+    ]
 })
 export class FSCartCouponModule {}

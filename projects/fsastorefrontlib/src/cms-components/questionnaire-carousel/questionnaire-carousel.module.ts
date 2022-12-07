@@ -26,26 +26,25 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    RouterModule,
-    MediaModule,
-    CarouselModule,
-    FacetModule,
-    KeyboardFocusModule,
-    IconModule,
-    RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        QuestionnaireCarouselComponent: {
-          component: QuestionnaireCarouselComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [QuestionnaireCarouselComponent],
-  exports: [QuestionnaireCarouselComponent],
-  entryComponents: [QuestionnaireCarouselComponent],
+    imports: [
+        CommonModule,
+        I18nModule,
+        RouterModule,
+        MediaModule,
+        CarouselModule,
+        FacetModule,
+        KeyboardFocusModule,
+        IconModule,
+        RouterModule.forChild(routes),
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                QuestionnaireCarouselComponent: {
+                    component: QuestionnaireCarouselComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [QuestionnaireCarouselComponent],
+    exports: [QuestionnaireCarouselComponent]
 })
 export class QuestionnaireCarouselModule {}

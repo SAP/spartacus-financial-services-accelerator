@@ -11,7 +11,7 @@ import { filter, map, take, tap } from 'rxjs/operators';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { PricingService } from './../../../../../core/product-pricing/facade/pricing.service';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'cx-fs-product-configuration-navigation',
@@ -32,7 +32,7 @@ export class ProductConfigurationNavigationComponent
   productCode: string;
   bundleCode: string;
   categoryCode: string;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   continueToNextStep: boolean;
 
   ngOnInit() {

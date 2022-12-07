@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ActiveCartService,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
@@ -11,6 +10,7 @@ import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 import { FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from '../../../../../core/cart/facade';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 
 @Component({
   selector: 'cx-fs-select-identification',

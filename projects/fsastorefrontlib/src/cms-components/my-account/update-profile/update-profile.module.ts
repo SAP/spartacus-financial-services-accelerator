@@ -14,29 +14,28 @@ import { FSUpdateProfileComponentService } from './update-profile-component.serv
 import { FSUpdateProfileComponent } from './update-profile.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SpinnerModule,
-    I18nModule,
-    FormErrorsModule,
-    RouterModule,
-    UrlModule,
-  ],
-  providers: [
-    provideConfig(<CmsConfig>{
-      cmsComponents: {
-        UpdateProfileComponent: {
-          component: FSUpdateProfileComponent,
-          guards: [AuthGuard],
-        },
-      },
-    }),
-    FSUpdateProfileComponentService,
-  ],
-  declarations: [FSUpdateProfileComponent],
-  exports: [FSUpdateProfileComponent],
-  entryComponents: [FSUpdateProfileComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SpinnerModule,
+        I18nModule,
+        FormErrorsModule,
+        RouterModule,
+        UrlModule,
+    ],
+    providers: [
+        provideConfig(<CmsConfig>{
+            cmsComponents: {
+                UpdateProfileComponent: {
+                    component: FSUpdateProfileComponent,
+                    guards: [AuthGuard],
+                },
+            },
+        }),
+        FSUpdateProfileComponentService,
+    ],
+    declarations: [FSUpdateProfileComponent],
+    exports: [FSUpdateProfileComponent]
 })
 export class UpdateProfileModule {}

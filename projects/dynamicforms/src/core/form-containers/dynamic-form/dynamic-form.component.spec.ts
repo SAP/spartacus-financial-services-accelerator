@@ -1,8 +1,8 @@
 import { Directive, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -24,7 +24,7 @@ import { FormComponentService } from '../../../components/form-component.service
 })
 export class MockDynamicFieldDirective {
   @Input() config: FieldConfig;
-  @Input() group: FormGroup;
+  @Input() group: UntypedFormGroup;
 }
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
@@ -35,8 +35,8 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 
 let mockFormGroup;
 
-const mocFormGroupNested = new FormGroup({
-  testGroupNested: new FormControl('', Validators.required),
+const mocFormGroupNested = new UntypedFormGroup({
+  testGroupNested: new UntypedFormControl('', Validators.required),
 });
 export class MockFormBuilderService {
   createForm() {
@@ -119,8 +119,8 @@ describe('DynamicFormComponent', () => {
       component = fixture.componentInstance;
       component.config = config;
       component.formData = of(formData);
-      mockFormGroup = new FormGroup({
-        testGroupCode: new FormControl('', Validators.required),
+      mockFormGroup = new UntypedFormGroup({
+        testGroupCode: new UntypedFormControl('', Validators.required),
       });
       fixture.detectChanges();
     })

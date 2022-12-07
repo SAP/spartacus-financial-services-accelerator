@@ -36,9 +36,8 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 @NgModule({
-  declarations: [MockedButtonComponent],
-  entryComponents: [MockedButtonComponent],
-  exports: [MockedButtonComponent],
+    declarations: [MockedButtonComponent],
+    exports: [MockedButtonComponent]
 })
 class TestModule {}
 

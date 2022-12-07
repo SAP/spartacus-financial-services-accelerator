@@ -7,24 +7,23 @@ import { FSNavigationUIComponent } from './navigation-ui.component';
 import { FSNavigationComponent } from './navigation.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    I18nModule,
-    IconModule,
-    GenericLinkModule,
-  ],
-  providers: [
-    provideConfig(<CmsConfig>{
-      cmsComponents: {
-        NavigationComponent: {
-          component: FSNavigationComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [FSNavigationComponent, FSNavigationUIComponent],
-  entryComponents: [FSNavigationComponent],
-  exports: [FSNavigationComponent, FSNavigationUIComponent],
+    imports: [
+        CommonModule,
+        RouterModule,
+        I18nModule,
+        IconModule,
+        GenericLinkModule,
+    ],
+    providers: [
+        provideConfig(<CmsConfig>{
+            cmsComponents: {
+                NavigationComponent: {
+                    component: FSNavigationComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [FSNavigationComponent, FSNavigationUIComponent],
+    exports: [FSNavigationComponent, FSNavigationUIComponent]
 })
 export class NavigationModule {}

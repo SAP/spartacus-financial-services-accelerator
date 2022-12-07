@@ -30,39 +30,38 @@ const moduleComponents = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule,
-    CommonModule,
-    I18nModule,
-    FeaturesConfigModule,
-    UrlModule,
-    SpinnerModule,
-    MediaModule,
-    ListNavigationModule,
-    CardModule,
-    OrderOverviewModule,
-    CartCouponModule,
-  ],
-  providers: [
-    provideConfig(<CmsConfig | FeaturesConfig>{
-      cmsComponents: {
-        AccountOrderDetailsItemsComponent: {
-          component: FSOrderDetailItemsComponent,
-        },
-        AccountOrderDetailsTotalsComponent: {
-          component: FSOrderDetailTotalsComponent,
-        },
-        AccountOrderHistoryComponent: {
-          component: FSOrderHistoryComponent,
-        },
-      },
-      features: {
-        consignmentTracking: '1.2',
-      },
-    }),
-  ],
-  declarations: [...moduleComponents],
-  exports: [...moduleComponents],
-  entryComponents: [...moduleComponents],
+    imports: [
+        RouterModule,
+        CommonModule,
+        I18nModule,
+        FeaturesConfigModule,
+        UrlModule,
+        SpinnerModule,
+        MediaModule,
+        ListNavigationModule,
+        CardModule,
+        OrderOverviewModule,
+        CartCouponModule,
+    ],
+    providers: [
+        provideConfig(<CmsConfig | FeaturesConfig>{
+            cmsComponents: {
+                AccountOrderDetailsItemsComponent: {
+                    component: FSOrderDetailItemsComponent,
+                },
+                AccountOrderDetailsTotalsComponent: {
+                    component: FSOrderDetailTotalsComponent,
+                },
+                AccountOrderHistoryComponent: {
+                    component: FSOrderHistoryComponent,
+                },
+            },
+            features: {
+                consignmentTracking: '1.2',
+            },
+        }),
+    ],
+    declarations: [...moduleComponents],
+    exports: [...moduleComponents]
 })
 export class FSOrderModule {}

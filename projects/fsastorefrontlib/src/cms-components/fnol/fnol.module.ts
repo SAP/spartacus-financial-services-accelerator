@@ -81,59 +81,53 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MyAccountStoreModule,
-    I18nModule,
-    RouterModule,
-    MediaModule,
-    FormsModule,
-    NgSelectModule,
-    UrlModule,
-    SpinnerModule,
-    AccordionModule,
-    ProgressBarModule,
-    EffectsModule.forFeature(userRequestEffects),
-    RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-      cmsComponents: {
-        FNOLProgressBarFlex: {
-          component: FNOLProgressBarComponent,
-        },
-        FNOLSummaryFlex: {
-          component: FNOLSummaryComponent,
-        },
-        FNOLNavigationFlex: {
-          component: FNOLNavigationComponent,
-        },
-        FNOLConfirmationFlex: {
-          component: FNOLConfirmationComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [
-    FNOLProgressBarComponent,
-    FNOLNavigationComponent,
-    FNOLSummaryComponent,
-    FNOLConfirmationComponent,
-  ],
-  exports: [
-    FNOLProgressBarComponent,
-    FNOLNavigationComponent,
-    FNOLSummaryComponent,
-    FNOLConfirmationComponent,
-  ],
-  entryComponents: [
-    FNOLProgressBarComponent,
-    FNOLNavigationComponent,
-    FNOLSummaryComponent,
-    FNOLConfirmationComponent,
-  ],
-  providers: [
-    UserRequestService,
-    reducerProvider,
-    UserRequestNavigationService,
-  ],
+    imports: [
+        CommonModule,
+        MyAccountStoreModule,
+        I18nModule,
+        RouterModule,
+        MediaModule,
+        FormsModule,
+        NgSelectModule,
+        UrlModule,
+        SpinnerModule,
+        AccordionModule,
+        ProgressBarModule,
+        EffectsModule.forFeature(userRequestEffects),
+        RouterModule.forChild(routes),
+        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+            cmsComponents: {
+                FNOLProgressBarFlex: {
+                    component: FNOLProgressBarComponent,
+                },
+                FNOLSummaryFlex: {
+                    component: FNOLSummaryComponent,
+                },
+                FNOLNavigationFlex: {
+                    component: FNOLNavigationComponent,
+                },
+                FNOLConfirmationFlex: {
+                    component: FNOLConfirmationComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [
+        FNOLProgressBarComponent,
+        FNOLNavigationComponent,
+        FNOLSummaryComponent,
+        FNOLConfirmationComponent,
+    ],
+    exports: [
+        FNOLProgressBarComponent,
+        FNOLNavigationComponent,
+        FNOLSummaryComponent,
+        FNOLConfirmationComponent,
+    ],
+    providers: [
+        UserRequestService,
+        reducerProvider,
+        UserRequestNavigationService,
+    ]
 })
 export class FnolModule {}

@@ -16,25 +16,24 @@ import {
 import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    MediaModule,
-    RouterModule,
-    UrlModule,
-    CarouselModule,
-    CmsModule,
-    PageComponentModule,
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        FSCategoryFeatureCarouselComponent: {
-          component: CategoryFeatureCarouselComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [CategoryFeatureCarouselComponent],
-  exports: [CategoryFeatureCarouselComponent],
-  entryComponents: [CategoryFeatureCarouselComponent],
+    imports: [
+        CommonModule,
+        I18nModule,
+        MediaModule,
+        RouterModule,
+        UrlModule,
+        CarouselModule,
+        CmsModule,
+        PageComponentModule,
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                FSCategoryFeatureCarouselComponent: {
+                    component: CategoryFeatureCarouselComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [CategoryFeatureCarouselComponent],
+    exports: [CategoryFeatureCarouselComponent]
 })
 export class CategoryFeatureCarouselModule {}

@@ -66,61 +66,53 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    NgSelectModule,
-    ReactiveFormsModule,
-    UrlModule,
-    MediaModule,
-    NgbTooltipModule,
-    ProgressBarModule,
-    DateFormatConfigurationModule,
-    RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        ChangeRequestProgressBarFlex: {
-          component: ChangeProcessProgressBarComponent,
-        },
-        ChangeCoverageFlex: {
-          component: ChangeCoverageComponent,
-        },
-        ChangeCarDetailsNavigationFlex: {
-          component: ChangeCarDetailsNavigationComponent,
-        },
-        ChangeSimulationFlex: {
-          component: ChangeSimulationComponent,
-        },
-        ChangeRequestConfirmationFlex: {
-          component: ChangeProcessConfirmationComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [
-    ChangeCoverageComponent,
-    ChangeSimulationComponent,
-    ChangeProcessProgressBarComponent,
-    ChangeCarDetailsNavigationComponent,
-    AbstractChangeProcessStepComponent,
-    ChangeProcessConfirmationComponent,
-  ],
-  exports: [
-    ChangeCoverageComponent,
-    ChangeSimulationComponent,
-    ChangeProcessProgressBarComponent,
-    ChangeCarDetailsNavigationComponent,
-    AbstractChangeProcessStepComponent,
-    ChangeProcessConfirmationComponent,
-  ],
-  entryComponents: [
-    ChangeCoverageComponent,
-    ChangeSimulationComponent,
-    ChangeProcessProgressBarComponent,
-    ChangeCarDetailsNavigationComponent,
-    AbstractChangeProcessStepComponent,
-    ChangeProcessConfirmationComponent,
-  ],
-  providers: [DatePipe],
+    imports: [
+        CommonModule,
+        I18nModule,
+        NgSelectModule,
+        ReactiveFormsModule,
+        UrlModule,
+        MediaModule,
+        NgbTooltipModule,
+        ProgressBarModule,
+        DateFormatConfigurationModule,
+        RouterModule.forChild(routes),
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                ChangeRequestProgressBarFlex: {
+                    component: ChangeProcessProgressBarComponent,
+                },
+                ChangeCoverageFlex: {
+                    component: ChangeCoverageComponent,
+                },
+                ChangeCarDetailsNavigationFlex: {
+                    component: ChangeCarDetailsNavigationComponent,
+                },
+                ChangeSimulationFlex: {
+                    component: ChangeSimulationComponent,
+                },
+                ChangeRequestConfirmationFlex: {
+                    component: ChangeProcessConfirmationComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [
+        ChangeCoverageComponent,
+        ChangeSimulationComponent,
+        ChangeProcessProgressBarComponent,
+        ChangeCarDetailsNavigationComponent,
+        AbstractChangeProcessStepComponent,
+        ChangeProcessConfirmationComponent,
+    ],
+    exports: [
+        ChangeCoverageComponent,
+        ChangeSimulationComponent,
+        ChangeProcessProgressBarComponent,
+        ChangeCarDetailsNavigationComponent,
+        AbstractChangeProcessStepComponent,
+        ChangeProcessConfirmationComponent,
+    ],
+    providers: [DatePipe]
 })
 export class ChangeProcessModule {}

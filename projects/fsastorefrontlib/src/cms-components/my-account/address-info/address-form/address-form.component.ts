@@ -4,7 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import {
   GlobalMessageService,
   TranslationService,
@@ -13,7 +13,7 @@ import {
   UserService,
 } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
-import { AddressFormComponent, ModalService } from '@spartacus/storefront';
+import { AddressFormComponent, LaunchDialogService } from '@spartacus/storefront';
 import { FSAddressService } from 'projects/fsastorefrontlib/src/core/user/facade/address.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class FSAddressFormComponent extends AddressFormComponent
   user: User;
   buttonVisible = true;
 
-  addressForm: FormGroup = this.fb.group({
+  addressForm: UntypedFormGroup = this.fb.group({
     country: this.fb.group({
       isocode: [null, Validators.required],
     }),
@@ -51,12 +51,12 @@ export class FSAddressFormComponent extends AddressFormComponent
   });
 
   constructor(
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected userService: UserService,
     protected userAddressService: UserAddressService,
     protected globalMessageService: GlobalMessageService,
-    protected modalService: ModalService,
     protected translationService: TranslationService,
+    protected launchDialogService: LaunchDialogService,
     protected fSAddressService: FSAddressService
   ) {
     super(
@@ -64,8 +64,8 @@ export class FSAddressFormComponent extends AddressFormComponent
       userService,
       userAddressService,
       globalMessageService,
-      modalService,
-      translationService
+      translationService,
+      launchDialogService
     );
   }
 

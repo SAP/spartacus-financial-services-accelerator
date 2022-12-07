@@ -11,22 +11,21 @@ import { RouterModule } from '@angular/router';
 import { MediaModule } from '@spartacus/storefront';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    MediaModule,
-    RouterModule,
-    UrlModule,
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        CategoryFeatureComponent: {
-          component: CategoryFeatureComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [CategoryFeatureComponent],
-  exports: [CategoryFeatureComponent],
-  entryComponents: [CategoryFeatureComponent],
+    imports: [
+        CommonModule,
+        I18nModule,
+        MediaModule,
+        RouterModule,
+        UrlModule,
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                CategoryFeatureComponent: {
+                    component: CategoryFeatureComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [CategoryFeatureComponent],
+    exports: [CategoryFeatureComponent]
 })
 export class CategoryFeatureModule {}

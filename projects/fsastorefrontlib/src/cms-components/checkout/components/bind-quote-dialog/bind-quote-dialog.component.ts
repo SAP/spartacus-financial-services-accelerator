@@ -9,7 +9,7 @@ import {
   FormDataStorageService,
   OboCustomerService,
 } from '@spartacus/dynamicforms';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { combineLatest, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -34,9 +34,9 @@ export class BindQuoteDialogComponent {
   dialog: ElementRef;
 
   constructor(
-    protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected cartService: FSCartService,
+    protected launchDialogService: LaunchDialogService,
     protected formDataStoragetService: FormDataStorageService,
     protected userAccountFacade: UserAccountFacade,
     protected oboConsentService: ConsentService,
@@ -44,7 +44,7 @@ export class BindQuoteDialogComponent {
   ) {}
 
   dismissModal(reason?: any): void {
-    this.modalService.dismissActiveModal(reason);
+    this.launchDialogService.closeDialog(reason);
   }
 
   bindQuote() {

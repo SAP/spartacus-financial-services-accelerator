@@ -1,8 +1,8 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
@@ -27,10 +27,10 @@ const mockField: FieldConfig = {
   },
 };
 
-const formControl = new FormControl('formValue');
+const formControl = new UntypedFormControl('formValue');
 
-const mockFormGroup = new FormGroup({
-  testCurrency: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  testCurrency: new UntypedFormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {

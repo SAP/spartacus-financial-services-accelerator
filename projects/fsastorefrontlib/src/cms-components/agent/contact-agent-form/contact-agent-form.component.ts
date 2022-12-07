@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import {
@@ -32,7 +32,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     protected userAccountFacade: UserAccountFacade,
     protected userIdService: UserIdService,
     protected route: ActivatedRoute,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected globalMessageService: GlobalMessageService,
     protected router: RoutingService,
     protected csTicketService: CsTicketService
@@ -44,7 +44,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   agentId: string;
   userId: string;
 
-  contactAgentForm: FormGroup = this.fb.group({
+  contactAgentForm: UntypedFormGroup = this.fb.group({
     email: ['', [Validators.required, DefaultFormValidators.email]],
     interest: ['', [Validators.required]],
     contactType: ['', [Validators.required]],

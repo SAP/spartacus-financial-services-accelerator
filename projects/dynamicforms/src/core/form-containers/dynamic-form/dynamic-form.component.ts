@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
@@ -35,7 +35,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   submit: EventEmitter<any> = new EventEmitter<any>();
 
   populatedInvalid$: Observable<boolean>;
-  form: FormGroup;
+  form: UntypedFormGroup;
   subscription = new Subscription();
 
   get changes() {
@@ -130,13 +130,13 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  markInvalidControls(formGroup: FormGroup) {
+  markInvalidControls(formGroup: UntypedFormGroup) {
     for (const key of Object.keys(formGroup.controls)) {
       const formControl = formGroup.get(key);
-      if (formControl instanceof FormGroup) {
+      if (formControl instanceof UntypedFormGroup) {
         this.markInvalidControls(formControl);
       } else {
-        const control = <FormControl>formControl;
+        const control = <UntypedFormControl>formControl;
         if (!control.valid) {
           control.markAsTouched({ onlySelf: true });
         }

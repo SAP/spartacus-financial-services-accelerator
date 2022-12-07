@@ -5,7 +5,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   label: string;
   placeHolder: string;
   config: FieldConfig;
-  group: FormGroup;
+  group: UntypedFormGroup;
   subscription = new Subscription();
   activeLang$ = this.languageService.getActive();
 

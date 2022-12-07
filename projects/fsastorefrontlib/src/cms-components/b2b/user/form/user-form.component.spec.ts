@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  FormArray,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -23,16 +23,16 @@ import { FSUserFormComponent } from './user-form.component';
 import { DateConfig } from '../../../../core/date-config/date-config';
 import { FSUserItemService } from './user-item.service';
 
-const mockForm = new FormGroup({
-  titleCode: new FormControl(),
-  firstName: new FormControl(),
-  lastName: new FormControl(),
-  orgUnit: new FormGroup({
-    uid: new FormControl(),
+const mockForm = new UntypedFormGroup({
+  titleCode: new UntypedFormControl(),
+  firstName: new UntypedFormControl(),
+  lastName: new UntypedFormControl(),
+  orgUnit: new UntypedFormGroup({
+    uid: new UntypedFormControl(),
   }),
-  email: new FormControl(),
-  dateOfBirth: new FormControl(),
-  roles: new FormArray([]),
+  email: new UntypedFormControl(),
+  dateOfBirth: new UntypedFormControl(),
+  roles: new UntypedFormArray([]),
 });
 
 const MockDateConfig: DateConfig = {

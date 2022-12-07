@@ -15,7 +15,7 @@ import { FSUser } from '../../../occ/occ-models';
 import { FSUpdateProfileComponentService } from './update-profile-component.service';
 import { FSUpdateProfileComponent } from './update-profile.component';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 const mockUser = {
   firstName: 'Donna',
@@ -23,11 +23,11 @@ const mockUser = {
   dateOfBirth: '10-10-1988',
   contactInfos: ['3333'],
 };
-const mockForm: FormGroup = new FormGroup({
-  firstName: new FormControl(),
-  lastName: new FormControl(),
-  dateOfBirth: new FormControl(),
-  contactInfos: new FormControl(),
+const mockForm: UntypedFormGroup = new UntypedFormGroup({
+  firstName: new UntypedFormControl(),
+  lastName: new UntypedFormControl(),
+  dateOfBirth: new UntypedFormControl(),
+  contactInfos: new UntypedFormControl(),
 });
 const MockDateConfig: DateConfig = {
   date: {

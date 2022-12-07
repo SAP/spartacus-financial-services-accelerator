@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  ActiveCartService,
   AuthService,
   UserAddressService,
 } from '@spartacus/core';
@@ -17,6 +16,7 @@ import {
   FormDefinitionType,
 } from './../../../occ/occ-models/occ.models';
 import { combineLatest } from 'rxjs';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 
 @Component({
   selector: 'cx-fs-personal-details',

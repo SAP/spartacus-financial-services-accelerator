@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   FormsModule,
   Validators,
 } from '@angular/forms';
@@ -13,11 +13,11 @@ import { FSCheckoutService } from './../../../../../core/checkout/facade/checkou
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { LegalCheckboxesComponent } from './legal-checkboxes.component';
 
-const mockForm: FormGroup = new FormGroup({
-  actOnMyBehalf: new FormControl(true, Validators.required),
-  authorizedToAccept: new FormControl(true, Validators.required),
-  readAndAgree: new FormControl(true, Validators.required),
-  usePersonalData: new FormControl(true, Validators.required),
+const mockForm: UntypedFormGroup = new UntypedFormGroup({
+  actOnMyBehalf: new UntypedFormControl(true, Validators.required),
+  authorizedToAccept: new UntypedFormControl(true, Validators.required),
+  readAndAgree: new UntypedFormControl(true, Validators.required),
+  usePersonalData: new UntypedFormControl(true, Validators.required),
 });
 
 class MockActivatedRoute {

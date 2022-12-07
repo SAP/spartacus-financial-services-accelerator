@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormService } from './form.service';
 
-const mockFormGroup = new FormGroup({
-  testField1: new FormControl('6'),
-  testField2: new FormControl('8'),
+const mockFormGroup = new UntypedFormGroup({
+  testField1: new UntypedFormControl('6'),
+  testField2: new UntypedFormControl('8'),
 });
 
 describe('FormService', () => {
@@ -27,11 +27,11 @@ describe('FormService', () => {
   });
 
   it('should get form control in nested form group', () => {
-    const formGroup = new FormGroup({
-      testField1: new FormControl('6'),
-      nestedGroup: new FormGroup({
-        testField2: new FormControl(),
-        testField3: new FormControl(),
+    const formGroup = new UntypedFormGroup({
+      testField1: new UntypedFormControl('6'),
+      nestedGroup: new UntypedFormGroup({
+        testField2: new UntypedFormControl(),
+        testField3: new UntypedFormControl(),
       }),
     });
     const result = service.getFormControlForCode('testField3', formGroup);
@@ -39,11 +39,11 @@ describe('FormService', () => {
   });
 
   it('should not find form control', () => {
-    const formGroup = new FormGroup({
-      testField1: new FormControl('6'),
-      nestedGroup: new FormGroup({
-        testField2: new FormControl(),
-        testField3: new FormControl(),
+    const formGroup = new UntypedFormGroup({
+      testField1: new UntypedFormControl('6'),
+      nestedGroup: new UntypedFormGroup({
+        testField2: new UntypedFormControl(),
+        testField3: new UntypedFormControl(),
       }),
     });
     const result = service.getFormControlForCode(

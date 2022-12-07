@@ -83,71 +83,63 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    RouterModule,
-    FormsModule,
-    NgSelectModule,
-    SpinnerModule,
-    CardModule,
-    UrlModule,
-    MediaModule,
-    AccordionModule,
-    DateFormatConfigurationModule,
-    DocumentsTableModule,
-    RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-      cmsComponents: {
-        AccountMyClaimsFlex: {
-          component: ClaimsComponent,
-        },
-        ClaimActivePoliciesFlex: {
-          component: ClaimPoliciesComponent,
-          guards: [AuthGuard],
-        },
-        StartClaimFlex: {
-          component: CreateClaimComponent,
-          guards: [AuthGuard],
-        },
-        AccountClaimDetailsFlex: {
-          component: ClaimDetailsComponent,
-        },
-        ChangeClaimFlex: {
-          component: ChangeClaimNavigationComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [
-    ClaimsComponent,
-    DeleteClaimDialogComponent,
-    ClaimPoliciesComponent,
-    CreateClaimComponent,
-    ClaimDetailsComponent,
-    ChangeClaimNavigationComponent,
-  ],
-  exports: [
-    ClaimsComponent,
-    DeleteClaimDialogComponent,
-    ClaimPoliciesComponent,
-    CreateClaimComponent,
-    ClaimDetailsComponent,
-    ChangeClaimNavigationComponent,
-  ],
-  providers: [
-    ClaimService,
-    ClaimDataService,
-    ClaimPoliciesComponent,
-    ClaimConnector,
-  ],
-  entryComponents: [
-    ClaimsComponent,
-    DeleteClaimDialogComponent,
-    ClaimPoliciesComponent,
-    CreateClaimComponent,
-    ClaimDetailsComponent,
-    ChangeClaimNavigationComponent,
-  ],
+    imports: [
+        CommonModule,
+        I18nModule,
+        RouterModule,
+        FormsModule,
+        NgSelectModule,
+        SpinnerModule,
+        CardModule,
+        UrlModule,
+        MediaModule,
+        AccordionModule,
+        DateFormatConfigurationModule,
+        DocumentsTableModule,
+        RouterModule.forChild(routes),
+        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+            cmsComponents: {
+                AccountMyClaimsFlex: {
+                    component: ClaimsComponent,
+                },
+                ClaimActivePoliciesFlex: {
+                    component: ClaimPoliciesComponent,
+                    guards: [AuthGuard],
+                },
+                StartClaimFlex: {
+                    component: CreateClaimComponent,
+                    guards: [AuthGuard],
+                },
+                AccountClaimDetailsFlex: {
+                    component: ClaimDetailsComponent,
+                },
+                ChangeClaimFlex: {
+                    component: ChangeClaimNavigationComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [
+        ClaimsComponent,
+        DeleteClaimDialogComponent,
+        ClaimPoliciesComponent,
+        CreateClaimComponent,
+        ClaimDetailsComponent,
+        ChangeClaimNavigationComponent,
+    ],
+    exports: [
+        ClaimsComponent,
+        DeleteClaimDialogComponent,
+        ClaimPoliciesComponent,
+        CreateClaimComponent,
+        ClaimDetailsComponent,
+        ChangeClaimNavigationComponent,
+    ],
+    providers: [
+        ClaimService,
+        ClaimDataService,
+        ClaimPoliciesComponent,
+        ClaimConnector,
+    ]
 })
 export class ClaimModule {}

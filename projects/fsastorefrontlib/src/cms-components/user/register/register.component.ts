@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import {
   AnonymousConsentsConfig,
@@ -24,7 +24,7 @@ export class FSRegisterComponent extends RegisterComponent implements OnInit {
   constructor(
     protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected router: RoutingService,
     protected anonymousConsentsService: AnonymousConsentsService,
     protected anonymousConsentsConfig: AnonymousConsentsConfig,

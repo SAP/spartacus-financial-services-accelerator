@@ -1,5 +1,5 @@
+import { CheckoutStepType } from '@spartacus/checkout/base/root';
 import { FSCheckoutConfig } from './checkout-config';
-import { CheckoutStepType } from '@spartacus/checkout/root';
 
 export const checkoutConfig: FSCheckoutConfig = {
   checkout: {

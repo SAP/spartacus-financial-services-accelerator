@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { B2BUser, UserService } from '@spartacus/core';
 import {
   CurrentItemService,
@@ -11,6 +11,7 @@ import {
   B2BUserService,
   OrgUnitService,
 } from '@spartacus/organization/administration/core';
+import { UserProfileFacade } from '@spartacus/user/profile/root';
 import { DateConfig } from '../../../../core/date-config/date-config';
 import { FSUserItemService } from './user-item.service';
 
@@ -34,11 +35,12 @@ export class FSUserFormComponent extends UserFormComponent {
   constructor(
     itemService: ItemService<B2BUser>,
     unitService: OrgUnitService,
+    userProfileFacade: UserProfileFacade,
     userService: UserService,
     b2bUserService: B2BUserService,
     protected config: DateConfig
   ) {
-    super(itemService, unitService, userService, b2bUserService);
+    super(itemService, unitService, userProfileFacade, b2bUserService);
   }
 
   @Input() set unitKey(value: string) {
@@ -49,7 +51,7 @@ export class FSUserFormComponent extends UserFormComponent {
 
   updateRoles(event: MouseEvent) {
     this.roles.reset();
-    this.roles.push(new FormControl((<HTMLInputElement>event.target).value));
+    this.roles.push(new UntypedFormControl((<HTMLInputElement>event.target).value));
   }
 
   getDateFormat() {

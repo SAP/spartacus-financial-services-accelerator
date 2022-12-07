@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {
   Address,
@@ -82,7 +82,7 @@ class MockFSAddressService {
 describe('FSAddressFormComponent', () => {
   let component: FSAddressFormComponent;
   let fixture: ComponentFixture<FSAddressFormComponent>;
-  let controls: FormGroup['controls'];
+  let controls: UntypedFormGroup['controls'];
 
   let userAddressService: UserAddressService;
   let userService: UserService;

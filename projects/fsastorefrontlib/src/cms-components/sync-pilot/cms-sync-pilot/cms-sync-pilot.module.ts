@@ -11,22 +11,21 @@ import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog
 import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    UrlModule,
-    SyncPilotDialogModule,
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        CMSConnectionComponent: {
-          component: CmsSyncPilotComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [CmsSyncPilotComponent],
-  exports: [CmsSyncPilotComponent],
-  entryComponents: [CmsSyncPilotComponent],
-  providers: [Service],
+    imports: [
+        CommonModule,
+        I18nModule,
+        UrlModule,
+        SyncPilotDialogModule,
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                CMSConnectionComponent: {
+                    component: CmsSyncPilotComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [CmsSyncPilotComponent],
+    exports: [CmsSyncPilotComponent],
+    providers: [Service]
 })
 export class CmsSyncPilotModule {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import {
   ActiveCartService,
   CartVoucherService,
@@ -7,6 +7,7 @@ import {
 } from '@spartacus/core';
 import { CartCouponComponent } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
+import { CartCouponComponent } from '@spartacus/cart/base/components';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 
 @Component({
@@ -18,9 +19,10 @@ export class FSCartCouponComponent extends CartCouponComponent {
 
   constructor(
     protected cartVoucherService: CartVoucherService,
-    protected formBuilder: FormBuilder,
+    protected formBuilder: UntypedFormBuilder,
     protected customerCouponService: CustomerCouponService,
-    protected activeCartService: ActiveCartService,
+    protected activeCartService: ActiveCartService
+    ,
     protected cartService: FSCartService
   ) {
     super(cartVoucherService, formBuilder, customerCouponService, cartService);

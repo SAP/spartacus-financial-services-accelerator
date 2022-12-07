@@ -2,8 +2,8 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Input, Component, DebugElement } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormControl,
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
@@ -48,7 +48,7 @@ const mockField: FieldConfig = {
   },
 };
 
-const formControl = new FormControl('formValue');
+const formControl = new UntypedFormControl('formValue');
 
 class MockFormService {
   getFormControlForCode(): AbstractControl {
@@ -56,8 +56,8 @@ class MockFormService {
   }
 }
 
-const mockFormGroup = new FormGroup({
-  testcheckbox: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  testcheckbox: new UntypedFormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {

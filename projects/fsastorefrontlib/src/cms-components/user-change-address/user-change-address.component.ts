@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Address, Country, Region, UserAddressService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   countries$: Observable<Country[]>;
   regions$: Observable<Region[]>;
-  addressForm: FormGroup = this.fb.group({
+  addressForm: UntypedFormGroup = this.fb.group({
     country: this.fb.group({
       isocode: [null, Validators.required],
     }),
@@ -41,7 +41,7 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected fSAddressService: FSAddressService,
     protected userAddressService: UserAddressService,
     protected fsConsentService: ConsentService

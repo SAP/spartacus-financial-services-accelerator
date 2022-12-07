@@ -1,6 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, AbstractControl } from '@angular/forms';
 import { SeparatorComponent } from './separator.component';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
@@ -26,8 +26,8 @@ const mockField: FieldConfig = {
   ],
 };
 
-const mockFormGroup = new FormGroup({
-  testSeparator: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  testSeparator: new UntypedFormControl(),
 });
 
 class MockLanguageService {
@@ -36,7 +36,7 @@ class MockLanguageService {
   }
 }
 
-const formControl = new FormControl('formValue');
+const formControl = new UntypedFormControl('formValue');
 
 class MockFormService {
   getFormControlForCode(): AbstractControl {

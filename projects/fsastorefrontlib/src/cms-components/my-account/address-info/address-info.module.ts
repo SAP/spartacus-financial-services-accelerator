@@ -19,30 +19,29 @@ import { FSAddressInfoComponent } from './address-info.component';
 import { FSAddressFormComponent } from './address-form/address-form.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule,
-    NgSelectModule,
-    IconModule,
-    FormErrorsModule,
-    CardModule,
-    SpinnerModule,
-    I18nModule,
-  ],
-  providers: [
-    provideDefaultConfig(<CmsConfig>{
-      cmsComponents: {
-        AccountAddressInfoComponent: {
-          component: FSAddressInfoComponent,
-          guards: [AuthGuard],
-        },
-      },
-    }),
-  ],
-  declarations: [FSAddressInfoComponent, FSAddressFormComponent],
-  exports: [FSAddressInfoComponent, FSAddressFormComponent],
-  entryComponents: [FSAddressInfoComponent, FSAddressFormComponent],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule,
+        NgSelectModule,
+        IconModule,
+        FormErrorsModule,
+        CardModule,
+        SpinnerModule,
+        I18nModule,
+    ],
+    providers: [
+        provideDefaultConfig(<CmsConfig>{
+            cmsComponents: {
+                AccountAddressInfoComponent: {
+                    component: FSAddressInfoComponent,
+                    guards: [AuthGuard],
+                },
+            },
+        }),
+    ],
+    declarations: [FSAddressInfoComponent, FSAddressFormComponent],
+    exports: [FSAddressInfoComponent, FSAddressFormComponent]
 })
 export class FSAddressBookModule {}

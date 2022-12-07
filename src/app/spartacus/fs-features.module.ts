@@ -1,4 +1,13 @@
 import { NgModule } from '@angular/core';
+import { AsmModule } from '@spartacus/asm';
+import { AsmOccModule } from '@spartacus/asm/occ';
+import { CartPageEventModule } from "@spartacus/cart/base/core";
+import { CheckoutModule } from "@spartacus/checkout/base";
+import { CheckoutOccModule } from "@spartacus/checkout/base/occ";
+// TODO:Spartacus - // TODO:Spartacus - Class CartModule has been removed and is no longer part of the public API. The cart base feature is now extracted to a lazy loadable library @spartacus/cart/base.  See the release documentation for more information.  While it's not identical, the new module 'CartBaseCoreModule' in '@spartacus/cart/base/core' is the closest equivalent in the new cart library.
+// TODO:Spartacus - // TODO:Spartacus - Class CartOccModule has been removed and is no longer part of the public API. The cart base feature is now extracted to a lazy loadable library @spartacus/cart/base.  See the release documentation for more information.  While it's not identical, the new module 'CartBaseOccModule' in '@spartacus/cart/base/occ' is the closest equivalent in the new cart library.
+// TODO:Spartacus - // TODO:Spartacus - Class UserOccTransitionalModule has been removed and is no longer part of the public API. 
+// TODO:Spartacus - // TODO:Spartacus - Class UserTransitionalModule has been removed and is no longer part of the public API. 
 import {
   AnonymousConsentsModule,
   AuthModule,
@@ -7,13 +16,16 @@ import {
   CmsOccModule,
   CostCenterOccModule,
   ExternalRoutesModule,
-  OrderOccModule,
   ProductModule,
   ProductOccModule,
   UserOccModule,
   UserOccTransitionalModule,
-  UserTransitionalModule,
+  UserTransitionalModule
 } from '@spartacus/core';
+import { OrderCancellationModule, OrderConfirmationModule, OrderDetailsModule, OrderHistoryModule, OrderReturnModule, ReturnRequestDetailModule, ReturnRequestListModule } from "@spartacus/order/components";
+import { OrderOccModule } from "@spartacus/order/occ";
+import { SmartEditModule } from '@spartacus/smartedit';
+// TODO:Spartacus - // TODO:Spartacus - Class CartComponentModule has been removed and is no longer part of the public API. The cart base feature is now extracted to a lazy loadable library @spartacus/cart/base.  See the release documentation for more information.  
 import {
   AddressBookModule,
   AnonymousConsentManagementBannerModule,
@@ -22,7 +34,6 @@ import {
   BannerModule,
   BreadcrumbModule,
   CartComponentModule,
-  CartPageEventModule,
   CategoryNavigationModule,
   CmsParagraphModule,
   ConsentManagementModule,
@@ -37,10 +48,6 @@ import {
   MyCouponsModule,
   NavigationEventModule,
   NavigationModule,
-  OrderCancellationModule,
-  OrderDetailsModule,
-  OrderHistoryModule,
-  OrderReturnModule,
   PageTitleModule,
   PaymentMethodsModule,
   ProductCarouselModule,
@@ -54,16 +61,27 @@ import {
   ProductReferencesModule,
   ProductSummaryModule,
   ProductTabsModule,
-  ReturnRequestDetailModule,
-  ReturnRequestListModule,
   SiteContextSelectorModule,
   TabParagraphContainerModule,
-  UserComponentModule,
+  UserComponentModule
 } from '@spartacus/storefront';
+import { UserAccountModule } from '@spartacus/user/account';
+import { UserAccountComponentsModule } from '@spartacus/user/account/components';
+import { UserProfileModule } from '@spartacus/user/profile';
+import {
+  CloseAccountModule,
+  ForgotPasswordModule,
+  ResetPasswordModule,
+  UpdateEmailModule,
+  UpdatePasswordModule,
+  UpdateProfileModule
+} from '@spartacus/user/profile/components';
+import { environment } from '../../environments/environment';
 import { AdministrationFeatureModule } from './features/administration-feature.module';
 import { AsmFeatureModule } from './features/asm-feature.module';
 import { BulkPricingFeatureModule } from './features/bulk-pricing-feature.module';
 import { CheckoutFeatureModule } from './features/checkout-feature.module';
+import { DigitalPaymentsFeatureModule } from './features/digital-payments-feature.module';
 import { OrderApprovalFeatureModule } from './features/order-approval-feature.module';
 import { ProductConfiguratorTextfieldFeatureModule } from './features/product-configurator-textfield-feature.module';
 import { QuickOrderFeatureModule } from './features/quick-order-feature.module';
@@ -73,25 +91,6 @@ import { StorefinderFeatureModule } from './features/storefinder-feature.module'
 import { TrackingFeatureModule } from './features/tracking-feature.module';
 import { UserFeatureModule } from './features/user-feature.module';
 import { VariantsFeatureModule } from './features/variants-feature.module';
-import { UserAccountModule } from '@spartacus/user/account';
-import { UserProfileModule } from '@spartacus/user/profile';
-import { AsmModule } from '@spartacus/asm';
-import { SmartEditModule } from '@spartacus/smartedit';
-import { CheckoutModule } from '@spartacus/checkout';
-import { AsmOccModule } from '@spartacus/asm/occ';
-import { CheckoutOccModule } from '@spartacus/checkout/occ';
-import { OrderConfirmationModule } from '@spartacus/checkout/components';
-import {
-  CloseAccountModule,
-  ForgotPasswordModule,
-  ResetPasswordModule,
-  UpdateEmailModule,
-  UpdatePasswordModule,
-  UpdateProfileModule,
-} from '@spartacus/user/profile/components';
-import { UserAccountComponentsModule } from '@spartacus/user/account/components';
-import { DigitalPaymentsFeatureModule } from './features/digital-payments-feature.module';
-import { environment } from '../../environments/environment';
 
 const featureModules = [];
 
@@ -217,4 +216,4 @@ if (environment.digitalPayments) {
     ...featureModules,
   ],
 })
-export class FSFeaturesModule {}
+export class FSFeaturesModule { }

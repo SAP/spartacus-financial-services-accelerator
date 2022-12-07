@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   ValidatorFn,
 } from '@angular/forms';
 import { FormService } from '../form/form.service';
@@ -17,7 +17,7 @@ export class FieldDependencyResolverService {
   constructor(
     protected formValidationService: FormValidationService,
     protected formService: FormService,
-    protected fb: FormBuilder
+    protected fb: UntypedFormBuilder
   ) {}
 
   /**
@@ -30,7 +30,7 @@ export class FieldDependencyResolverService {
   resolveFormControlDependencies(
     controlConfig: any,
     dependentControl: AbstractControl,
-    formGroup: FormGroup
+    formGroup: UntypedFormGroup
   ) {
     controlConfig.dependsOn.controls.forEach(condition => {
       const mainFormControl = this.formService.getFormControlForCode(

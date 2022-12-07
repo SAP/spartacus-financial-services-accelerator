@@ -1,14 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cart } from '@spartacus/cart/base/root';
 import {
-  Cart,
   GlobalMessageService,
   GlobalMessageType,
   OccConfig,
   RoutingService,
   WindowRef,
 } from '@spartacus/core';
-import { ModalRef, ModalService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';

@@ -12,25 +12,24 @@ import { FSHighlightPipe } from '../../../shared/util/helpers/pipe/highlight.pip
 import { FSSearchBoxComponent } from './search-box.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    MediaModule,
-    IconModule,
-    UrlModule,
-    I18nModule,
-  ],
-  providers: [
-    provideDefaultConfig(<CmsConfig>{
-      cmsComponents: {
-        SearchBoxComponent: {
-          component: FSSearchBoxComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [FSSearchBoxComponent, FSHighlightPipe],
-  entryComponents: [FSSearchBoxComponent],
-  exports: [FSSearchBoxComponent, FSHighlightPipe],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MediaModule,
+        IconModule,
+        UrlModule,
+        I18nModule,
+    ],
+    providers: [
+        provideDefaultConfig(<CmsConfig>{
+            cmsComponents: {
+                SearchBoxComponent: {
+                    component: FSSearchBoxComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [FSSearchBoxComponent, FSHighlightPipe],
+    exports: [FSSearchBoxComponent, FSHighlightPipe]
 })
 export class FSSearchBoxModule {}

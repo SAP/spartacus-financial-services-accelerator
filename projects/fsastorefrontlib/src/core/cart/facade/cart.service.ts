@@ -1,15 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  ActiveCartService,
-  Cart,
-  MultiCartService,
-  OCC_CART_ID_CURRENT,
-  OCC_USER_ID_ANONYMOUS,
-  StateUtils,
-  StateWithMultiCart,
-  UserIdService,
-} from '@spartacus/core';
+import { ActiveCartService, MultiCartService, StateWithMultiCart } from '@spartacus/cart/base/core';
+import { Cart, MultiCartFacade } from '@spartacus/cart/base/root';
+import { OCC_CART_ID_CURRENT, OCC_USER_ID_ANONYMOUS, StateUtils, UserIdService } from '@spartacus/core';
+
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
@@ -20,9 +14,10 @@ export class FSCartService extends ActiveCartService {
   constructor(
     protected store: Store<StateWithMultiCart>,
     protected userIdService: UserIdService,
+    protected multiCartFacade: MultiCartFacade,
     protected multiCartService: MultiCartService
   ) {
-    super(store, multiCartService, userIdService);
+    super(multiCartFacade, userIdService);
   }
 
   setActiveCart(cart: Observable<Cart>) {

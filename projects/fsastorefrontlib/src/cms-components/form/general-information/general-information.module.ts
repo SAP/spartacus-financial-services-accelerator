@@ -6,20 +6,19 @@ import { SpinnerModule } from '@spartacus/storefront';
 import { GeneralInformationComponent } from './general-information.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    DynamicFormModule,
-    SpinnerModule,
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        GeneralInformationFlex: {
-          component: GeneralInformationComponent,
-        },
-      },
-    }),
-  ],
-  declarations: [GeneralInformationComponent],
-  exports: [GeneralInformationComponent],
-  entryComponents: [GeneralInformationComponent],
+    imports: [
+        CommonModule,
+        DynamicFormModule,
+        SpinnerModule,
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                GeneralInformationFlex: {
+                    component: GeneralInformationComponent,
+                },
+            },
+        }),
+    ],
+    declarations: [GeneralInformationComponent],
+    exports: [GeneralInformationComponent]
 })
 export class GeneralInformationModule {}

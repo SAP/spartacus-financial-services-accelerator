@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -59,10 +59,10 @@ const mockField: FieldConfig = {
   maxFileSize: 1048576,
 };
 
-const formControl = new FormControl('formValue');
+const formControl = new UntypedFormControl('formValue');
 
-const mockFormGroup = new FormGroup({
-  testUpload: new FormControl('', Validators.required),
+const mockFormGroup = new UntypedFormGroup({
+  testUpload: new UntypedFormControl('', Validators.required),
 });
 
 const blob1 = new Blob([''], { type: 'application/pdf' });
