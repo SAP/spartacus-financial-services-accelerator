@@ -1,7 +1,8 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, Order } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
+import { Order } from '@spartacus/order/root';
 import { of } from 'rxjs';
-import { OrderDetailsService } from '@spartacus/storefront';
+import { OrderDetailsService } from '@spartacus/order/components';
 import { FSOrderDetailTotalsComponent } from './order-detail-totals.component';
 
 const mockOrder: Order = {
