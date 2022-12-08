@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, Order } from '@spartacus/core';
+import { I18nTestingModule, OccConfig } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';

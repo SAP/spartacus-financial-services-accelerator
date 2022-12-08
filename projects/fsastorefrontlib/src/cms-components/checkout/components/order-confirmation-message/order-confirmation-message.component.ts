@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CheckoutFacade } from '@spartacus/checkout/root';
-import { Order } from '@spartacus/core';
+import { Order } from '@spartacus/order/root';
 import { Observable } from 'rxjs';
 
 @Component({
