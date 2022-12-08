@@ -10,7 +10,6 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  Cart,
   I18nTestingModule,
   OrderHistoryList,
   RoutingService,
@@ -18,6 +17,7 @@ import {
   UserOrderService,
   UserReplenishmentOrderService,
 } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSOrderHistoryComponent } from './order-history.component';
 

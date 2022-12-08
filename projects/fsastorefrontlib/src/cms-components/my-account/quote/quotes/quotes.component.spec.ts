@@ -1,7 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  Cart,
   GlobalMessage,
   GlobalMessageService,
   GlobalMessageType,
@@ -12,6 +11,7 @@ import {
   TranslationService,
   WindowRef,
 } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
