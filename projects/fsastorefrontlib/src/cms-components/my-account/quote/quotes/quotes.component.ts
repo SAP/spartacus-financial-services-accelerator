@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  ActiveCartService,
   GlobalMessageService,
   GlobalMessageType,
   LanguageService,
@@ -13,6 +12,7 @@ import {
   RoutingService,
   TranslationService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { combineLatest, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';

@@ -1,13 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
-  ActiveCartService,
   AuthGuard,
-  CartVoucherService,
   CustomerCouponService,
   I18nTestingModule,
-  UserIdService,
 } from '@spartacus/core';
+import { ActiveCartService, CartVoucherService } from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import { FSCartCouponComponent } from './cart-coupon.component';

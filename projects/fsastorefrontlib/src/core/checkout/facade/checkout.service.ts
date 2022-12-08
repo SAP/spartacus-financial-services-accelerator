@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
-  ActiveCartService,
   Order,
   RoutingService,
   UserIdService,
   StateWithProcess,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { Observable } from 'rxjs';
 import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';

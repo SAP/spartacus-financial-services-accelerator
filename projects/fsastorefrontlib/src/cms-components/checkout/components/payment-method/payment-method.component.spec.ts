@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FSPaymentMethodComponent } from './payment-method.component';
 import {
-  ActiveCartService,
   Cart,
   GlobalMessageService,
   PaymentDetails,
@@ -9,6 +8,7 @@ import {
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import {
   CheckoutDeliveryService,
   CheckoutPaymentService,

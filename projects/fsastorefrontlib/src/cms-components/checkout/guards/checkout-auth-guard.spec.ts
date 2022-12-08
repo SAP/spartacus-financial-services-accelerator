@@ -3,7 +3,6 @@ import { UrlTree } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CheckoutConfigService } from '@spartacus/checkout/components';
 import {
-  ActiveCartService,
   AuthRedirectService,
   AuthService,
   B2BUserRole,
@@ -11,6 +10,7 @@ import {
   GlobalMessageType,
   SemanticPathService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { User, UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutAuthGuard } from './checkout-auth-guard';

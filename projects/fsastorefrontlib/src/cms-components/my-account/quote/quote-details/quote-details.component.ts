@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Cart, RoutingService, UserIdService } from '@spartacus/core';
+import { RoutingService, UserIdService } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';

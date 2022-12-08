@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  ActiveCartService,
   Cart,
   GlobalMessageService,
   RoutingService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
 import { BindingStateType } from './../../../occ/occ-models/occ.models';
 import { QuoteNotBoundGuard } from './quote-not-bound.guard';

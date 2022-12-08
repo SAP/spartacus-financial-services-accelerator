@@ -1,11 +1,11 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  ActiveCartService,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import * as fromFSAction from '../store/actions/index';

@@ -3,9 +3,8 @@ import { UntypedFormBuilder } from '@angular/forms';
 import {
   ActiveCartService,
   CartVoucherService,
-  CustomerCouponService,
-} from '@spartacus/core';
-import { CartCouponComponent } from '@spartacus/storefront';
+} from '@spartacus/cart/base/core';
+import { CustomerCouponService } from '@spartacus/core'
 import { Observable } from 'rxjs';
 import { CartCouponComponent } from '@spartacus/cart/base/components';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';

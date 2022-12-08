@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  ActiveCartService,
   GlobalMessageService,
   PaymentDetails,
   PaymentType,
@@ -8,6 +7,7 @@ import {
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FSPaymentTypeEnum, FSSteps } from '../../../../occ/occ-models';
