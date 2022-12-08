@@ -4,7 +4,8 @@ import {
   YFormData,
   FileService,
 } from '@spartacus/dynamicforms';
-import { Address, Cart, RoutingService, User } from '@spartacus/core';
+import { Address, RoutingService, User } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import {
