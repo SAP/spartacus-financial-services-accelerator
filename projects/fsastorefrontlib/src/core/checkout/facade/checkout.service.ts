@@ -5,14 +5,12 @@ import {
   UserIdService,
   StateWithProcess,
 } from '@spartacus/core';
-import { Order } from '@spartacus/order/root';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { Observable } from 'rxjs';
 import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
-import { CheckoutActions } from '../store/actions/index';
 import {
   CheckoutDeliveryService,
   CheckoutService,
@@ -99,21 +97,5 @@ export class FSCheckoutService extends CheckoutService {
       cxRoute: initialStep.routeName,
       params: { code: routingParam },
     });
-  }
-
-  loadCheckoutDetails(cartId: string) {
-    let userId;
-    this.userIdService
-      .getUserId()
-      .subscribe((occUserId) => (userId = occUserId))
-      .unsubscribe();
-    if (userId) {
-      this.store.dispatch(
-        new CheckoutActions.LoadCheckoutDetails({
-          userId,
-          cartId,
-        })
-      );
-    }
   }
 }

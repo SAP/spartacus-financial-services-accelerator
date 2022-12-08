@@ -1,5 +1,4 @@
 export const FS_CHECKOUT_FEATURE = 'fscheckout';
-export const CHECKOUT_DETAILS = '[Checkout] Checkout Details';
 
 export interface StateWithFSCheckout {
   [FS_CHECKOUT_FEATURE]: FSCheckoutState;

@@ -81,6 +81,7 @@ class MockUserPaymentService {
 }
 
 class MockCheckoutService {
+  loadPaymentTypes = createSpy();
   clearCheckoutStep = createSpy();
   setPaymentType = createSpy();
   getPaymentType(): Observable<string> {
@@ -134,7 +135,6 @@ class MockCheckoutConfigService {
 }
 
 class MockCheckoutPaymentTypeFacade {
-  loadPaymentTypes = createSpy();
   getSelectedPaymentTypeState() {
     return of({});
   }

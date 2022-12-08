@@ -4,6 +4,7 @@ import {
   QueryState,
   RoutingService,
   TranslationService,
+  UserIdService,
   UserPaymentService,
 } from '@spartacus/core';
 import { PaymentDetails } from '@spartacus/cart/base/root';
@@ -21,6 +22,8 @@ import {
 import { CheckoutPaymentMethodComponent } from '@spartacus/checkout/base/components';
 import { CheckoutPaymentService } from '@spartacus/checkout/base/core';
 import { CheckoutPaymentTypeFacade } from '@spartacus/checkout/b2b/root';
+import { OccCheckoutAdapter } from '@spartacus/checkout/base/occ';
+import { OccCheckoutPaymentTypeAdapter } from '@spartacus/checkout/b2b/occ';
 
 @Component({
   selector: 'cx-fs-payment-method',
@@ -41,7 +44,10 @@ export class FSPaymentMethodComponent extends CheckoutPaymentMethodComponent
     protected checkoutConfigService: FSCheckoutConfigService,
     protected checkoutPaymentTypeFacade: CheckoutPaymentTypeFacade,
     protected routingService: RoutingService,
-    protected checkoutPaymentService: CheckoutPaymentService
+    protected checkoutPaymentService: CheckoutPaymentService,
+    protected occCheckoutAdapter: OccCheckoutAdapter,
+    protected occCheckoutPaymentTypeAdapter: OccCheckoutPaymentTypeAdapter,
+    protected userIdService: UserIdService,
   ) {
     super(
       userPaymentService,
@@ -73,7 +79,13 @@ export class FSPaymentMethodComponent extends CheckoutPaymentMethodComponent
           .pipe(
             filter(cart => !!cart),
             map(cart => {
-              this.fsCheckoutService.loadCheckoutDetails(cart.code);
+              this.userIdService.getUserId()
+              .pipe(take(1),
+              map(userId =>{
+                this.occCheckoutAdapter.getCheckoutDetails(userId, cart.code);
+              })
+              )
+              
             })
           )
           .subscribe()
@@ -88,7 +100,7 @@ export class FSPaymentMethodComponent extends CheckoutPaymentMethodComponent
           )
           .subscribe()
       );
-    this.checkoutPaymentTypeFacade.getPaymentTypes();
+    this.occCheckoutPaymentTypeAdapter.getPaymentTypes();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.paymentDetails$ = this.checkoutPaymentService
