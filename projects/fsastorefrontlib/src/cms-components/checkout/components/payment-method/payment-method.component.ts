@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   GlobalMessageService,
   PaymentDetails,
-  PaymentType,
   RoutingService,
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
+import { PaymentType } from '@spartacus/cart/base/root';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
