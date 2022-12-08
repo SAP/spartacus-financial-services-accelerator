@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import { CheckoutDeliveryAddressFacade } from '@spartacus/checkout/base/root';
 import {
   Address,
   CommandService,
@@ -20,9 +20,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class FSAddressService extends UserAddressService {
   constructor(
-    protected store: Store<StateWithUser | StateWithProcess<void>>,
+    protected store: Store<StateWithUser>,
     protected userIdService: UserIdService,
-    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected checkoutDeliveryAddressFacade: CheckoutDeliveryAddressFacade,
     protected userAddressConnector: UserAddressConnector,
     protected commandService: CommandService,
     protected occValueListService: OccValueListService
@@ -52,9 +52,9 @@ export class FSAddressService extends UserAddressService {
     defaultAddress: Address
   ) {
     if (!!defaultAddress) {
-      this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
+      this.checkoutDeliveryAddressFacade.setDeliveryAddress(defaultAddress);
     } else {
-      this.checkoutDeliveryService.createAndSetAddress(
+      this.checkoutDeliveryAddressFacade.createAndSetAddress(
         this.populateAddressFromFormData(formData)
       );
     }
@@ -62,9 +62,9 @@ export class FSAddressService extends UserAddressService {
 
   createAddress(formData: { [name: string]: Object }, defaultAddress: Address) {
     if (!!defaultAddress) {
-      this.checkoutDeliveryService.setDeliveryAddress(defaultAddress);
+      this.checkoutDeliveryAddressFacade.setDeliveryAddress(defaultAddress);
     } else {
-      this.checkoutDeliveryService.createAndSetAddress(
+      this.checkoutDeliveryAddressFacade.createAndSetAddress(
         this.populateAddressFromFormData(formData)
       );
     }
