@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import {
-  CartActions,
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
 } from '@spartacus/core';
+import { CartActions } from '@spartacus/cart/base/core';
 import { of } from 'rxjs';
 import {
   catchError,

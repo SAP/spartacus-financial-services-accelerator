@@ -3,10 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import {
-  CartActions,
   OCC_USER_ID_CURRENT,
   RoutingService,
 } from '@spartacus/core';
+import { CartActions } from '@spartacus/cart/base/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { QuoteConnector } from '../../connectors/quote.connector';
