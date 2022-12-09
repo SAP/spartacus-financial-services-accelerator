@@ -1,8 +1,8 @@
 import {
-  MultiCartService,
   OCC_USER_ID_ANONYMOUS,
   UserIdService,
 } from '@spartacus/core';
+import { MultiCartService } from '@spartacus/cart/base/core';
 import { SetActiveCartGuard } from './set-active-cart-guard';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FSCart } from '../../../occ/occ-models/occ.models';

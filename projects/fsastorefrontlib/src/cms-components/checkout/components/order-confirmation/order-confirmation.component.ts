@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { OccConfig } from '@spartacus/core';
+import { Order } from '@spartacus/order/root';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';

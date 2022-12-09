@@ -19,11 +19,11 @@ import {
 } from '../../../../occ/occ-models/occ.models';
 import {
   LanguageService,
-  MultiCartService,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
+import { MultiCartService } from '@spartacus/cart/base/core';
 import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/default-general-config';
 
 @Component({

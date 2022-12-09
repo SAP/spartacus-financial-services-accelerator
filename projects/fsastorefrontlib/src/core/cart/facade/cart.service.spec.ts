@@ -2,12 +2,11 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
   OCC_USER_ID_CURRENT,
-  MultiCartService,
-  StateWithMultiCart,
   OCC_USER_ID_ANONYMOUS,
   OCC_CART_ID_CURRENT,
   UserIdService,
 } from '@spartacus/core';
+import { MultiCartService, StateWithMultiCart } from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './cart.service';
 import * as fromAction from './../../checkout/store/actions/index';
