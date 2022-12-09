@@ -1,0 +1,16 @@
+<div class="mobile-label text-uppercase pr-2 d-md-none">
+  {{ mobileColumn | cxTranslate }}
+</div>
+<span
+  #tdValue
+  [class]="assetConfig.classes + ' text-break d-block position-relative'"
+>
+  {{ assetConfig | resolveAssetValue: asset | async }}
+  <cx-icon
+    [class]="'pointer ' + assetConfig.classes"
+    *ngIf="icon.show"
+    [type]="icon.type"
+    (click)="onIconClick(asset, assetConfig)"
+  >
+  </cx-icon>
+</span>

@@ -1,53 +1,27 @@
 <ng-container *ngIf="assets?.length > 0; else noAssets">
   <table class="box-shadow table table-hover border border-color-3 mt-5">
     <thead class="d-none d-md-table-row">
-      <th
-        *ngFor="let heading of dataByAssetType[selectedAsset].headings"
-        scope="col"
-      >
+      <th *ngFor="let heading of dataByAssetType.headings" scope="col">
         {{ heading | cxTranslate }}
       </th>
     </thead>
     <tbody>
-      <tr
-        class="position-relative"
-        [ngClass]="{ pointer: !isSeller }"
-        *ngFor="let asset of assets"
-        (click)="resolveAssetUrl(asset)"
-      >
-        <td
-          class="d-flex d-md-table-cell"
-          *ngFor="
-            let value of dataByAssetType[selectedAsset].values;
-            let i = index
-          "
+      <tr class="position-relative" *ngFor="let asset of assets">
+        <cx-fs-asset-td
+          *ngFor="let assetConfig of dataByAssetType.values; let i = index"
+          [asset]="asset"
+          [assetConfig]="dataByAssetType.values[i]"
+          [mobileColumn]="dataByAssetType.headings[i]"
+          [selectedAsset]="selectedAsset"
+          (resolveIconAction)="resolveIconAction($event)"
         >
-          <div class="mobile-label text-uppercase pr-2 d-md-none">
-            {{ dataByAssetType[selectedAsset].headings[i] | cxTranslate }}:
-          </div>
-          <span
-            class="notice text-break {{ value.classes ? value.classes : '' }}"
-            (click)="startClaim($event, asset, value)"
-            [ngClass]="{ pointer: value.startClaim }"
-          >
-            {{ value | resolveAssetValue: asset | async }}
-          </span>
-        </td>
+        </cx-fs-asset-td>
       </tr>
     </tbody>
   </table>
 </ng-container>
 <ng-template #noAssets>
   <h3 class="text-center mt-5">
-    {{
-      (selectedAsset === assetTableTypeRef.QUOTES
-        ? 'dashboard.noQuotesOrApplication'
-        : selectedAsset === assetTableTypeRef.POLICIES
-        ? 'dashboard.noPolicies'
-        : selectedAsset === assetTableTypeRef.CLAIMS
-        ? 'dashboard.noClaims'
-        : ''
-      ) | cxTranslate
-    }}
+    {{ noAssetsCase | cxTranslate }}
   </h3>
 </ng-template>

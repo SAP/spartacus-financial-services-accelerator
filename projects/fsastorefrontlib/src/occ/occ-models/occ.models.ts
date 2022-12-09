@@ -16,6 +16,7 @@ import { Pagination } from '@spartacus/core/src/model/unused.model';
 import { DocumentFile, YFormData } from '@spartacus/dynamicforms';
 import { MediaContainer } from '@spartacus/storefront';
 import { UserSignUp } from '@spartacus/user/profile/root';
+import { AssetColumn } from '../../core/assets-table-config/assets-table.config';
 
 export enum OrganizationTableType {
   PRODUCT_ASSIGNMENTS = 'productAssignments',
@@ -59,6 +60,14 @@ export enum ClaimStatus {
   ERROR = 'ERROR',
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
+}
+export enum PolicyStatus {
+  ACTIVE = 'ACTIVE',
+  REVERSED = 'REVERSED',
+  SUSPENDED = 'SUSPENDED',
+  DORMANT = 'DORMANT',
+  LAPSE = 'LAPSE',
+  DRAFT = 'DRAFT',
 }
 export enum ChangeRequestStatus {
   SUBMITTED = 'SUBMITTED',
@@ -303,6 +312,35 @@ export interface Claim extends FSUserRequest {
   properties?: any;
 }
 
+export interface CategoryWsDto {
+  allowedFSRequestTypes: AllowedFSRequestType[];
+  parentCategory: CategoryWsDto;
+  yformConfiguratorSettings: YFormConfiguratorSettings;
+}
+
+export interface InsurancePolicy {
+  categoryData: CategoryWsDto;
+  policyNumber: string;
+  orderNumber: string;
+  expiredPolicyNumber: string;
+  policyProduct: FSProduct;
+  // insuredObjectList: string;
+  // policyPremium: string;
+  paymentFrequency: string;
+  startDate: string;
+  endDate: string;
+  // paymentMethod: string;
+  contractNumber: string;
+  // mainProduct: string;
+  // optionalProducts: string;
+  // responsibleAgent: string;
+  // billingData: string;
+  // documents: string;
+  policyStatus: PolicyStatus;
+  cancellationDate: string;
+  cancellationReason: string;
+}
+
 export interface AllowedFSRequestType {
   requestType?: FSRequestType;
 }
@@ -345,14 +383,17 @@ export interface AppointmentData {
   consentGiven: boolean;
 }
 
+export interface DataAssetConfig {
+  propName: boolean;
+  value: string;
+  column: AssetColumn;
+  startClaim?: boolean;
+  classes?: string;
+}
+
 export interface DataByAssetType {
   headings: string[];
-  values: {
-    propName: boolean;
-    value: string;
-    startClaim?: boolean;
-    classes?: string;
-  }[];
+  values: DataAssetConfig[];
 }
 
 export interface SavingsIllustrationDiagramData {
