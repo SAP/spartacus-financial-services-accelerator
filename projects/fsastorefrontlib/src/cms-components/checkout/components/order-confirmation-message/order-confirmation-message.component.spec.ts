@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckoutFacade } from '@spartacus/checkout/root';
+import { OrderFacade } from '@spartacus/order/root';
 import { OrderConfirmationMessageComponent } from './order-confirmation-message.component';
 
 class MockCheckoutFacade {
@@ -9,7 +9,7 @@ class MockCheckoutFacade {
 describe('OrderConfirmationMessageComponent', () => {
   let component: OrderConfirmationMessageComponent;
   let fixture: ComponentFixture<OrderConfirmationMessageComponent>;
-  let checkoutService: CheckoutFacade;
+  let orderFacade: OrderFacade;
 
   beforeEach(
     waitForAsync(() => {
@@ -17,7 +17,7 @@ describe('OrderConfirmationMessageComponent', () => {
         declarations: [OrderConfirmationMessageComponent],
         providers: [
           {
-            provide: CheckoutFacade,
+            provide: OrderFacade,
             useClass: MockCheckoutFacade,
           },
         ],
@@ -29,7 +29,7 @@ describe('OrderConfirmationMessageComponent', () => {
     fixture = TestBed.createComponent(OrderConfirmationMessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    checkoutService = TestBed.inject(CheckoutFacade);
+    orderFacade = TestBed.inject(OrderFacade);
     component.ngOnInit();
   });
 
