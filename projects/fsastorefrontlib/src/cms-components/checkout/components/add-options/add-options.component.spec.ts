@@ -6,9 +6,9 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   CurrencyService,
   I18nTestingModule,
-  OrderEntry,
   RoutingService,
 } from '@spartacus/core';
+import {OrderEntry} from '@spartacus/cart/base/root';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
