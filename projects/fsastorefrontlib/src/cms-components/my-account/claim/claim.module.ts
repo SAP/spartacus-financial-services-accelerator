@@ -8,6 +8,7 @@ import {
   CmsConfig,
   ConfigModule,
   I18nModule,
+  provideDefaultConfig,
   RoutesConfig,
   RoutingConfig,
   UrlModule,
@@ -33,6 +34,7 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
 import { ChangeClaimNavigationComponent } from './change-claim/change-claim-navigation.component';
+import { defaultDeleteClaimDialogLayoutConfig } from './claims/default--delete-claim-dialog-layout.config';
 
 const routes: Routes = [
   {
@@ -140,6 +142,7 @@ const routes: Routes = [
         ClaimDataService,
         ClaimPoliciesComponent,
         ClaimConnector,
+        provideDefaultConfig(defaultDeleteClaimDialogLayoutConfig)
     ]
 })
 export class ClaimModule {}

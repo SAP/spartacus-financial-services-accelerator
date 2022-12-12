@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { LaunchDialogService, ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-referred-quote-dialog',

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { I18nModule } from '@spartacus/core';
+import { I18nModule, provideDefaultConfig } from '@spartacus/core';
 import { AbstractFormComponent } from './abstract-form/abstract-form.component';
 import { ButtonComponent } from './button/button.component';
 import { DatePickerComponent } from './datepicker/datepicker.component';
@@ -21,6 +21,7 @@ import { DataHolderComponent } from './data-holder/data-holder.component';
 import { UploadComponent } from './upload/upload.component';
 import { FormComponentService } from './form-component.service';
 import { CurrencyComponent } from './currency/currency.component';
+import { defaultFormPopupErrorDialogLayoutConfig } from './default-form-popup-error-dialog-layout.config';
 
 @NgModule({
     imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -64,6 +65,8 @@ import { CurrencyComponent } from './currency/currency.component';
         UploadComponent,
         CurrencyComponent,
     ],
-    providers: [FormComponentService]
+    providers: [FormComponentService,
+         provideDefaultConfig(defaultFormPopupErrorDialogLayoutConfig)
+    ]
 })
 export class ComponentsModule {}
