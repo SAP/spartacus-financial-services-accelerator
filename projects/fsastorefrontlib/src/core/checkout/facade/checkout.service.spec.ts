@@ -16,7 +16,7 @@ import { FSCheckoutStep } from '../../../occ/occ-models/occ.models';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
 
 import createSpy = jasmine.createSpy;
-import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import { CheckoutDeliveryModesFacade } from '@spartacus/checkout/base/root';
 import { StateWithFSCheckout } from '../store/checkout-state';
 
 const activeCartCode = 'testCartCode';
@@ -61,7 +61,7 @@ class MockRoutingService {
 describe('FSCheckoutService', () => {
   let service: FSCheckoutService;
   let store: Store<StateWithFSCheckout>;
-  let checkoutDeliveryService: CheckoutDeliveryService;
+  let checkoutDeliveryModesFacade: CheckoutDeliveryModesFacade;
   let userIdService: UserIdService;
   let cartService: ActiveCartService;
   let checkoutConfigService: FSCheckoutConfigService;
@@ -76,7 +76,7 @@ describe('FSCheckoutService', () => {
       providers: [
         FSCheckoutService,
         {
-          provide: CheckoutDeliveryService,
+          provide: CheckoutDeliveryModesFacade,
           useClass: CheckoutDeliveryServiceStub,
         },
         { provide: UserIdService, useClass: MockUserIdService },
@@ -92,13 +92,13 @@ describe('FSCheckoutService', () => {
       ],
     });
     service = TestBed.inject(FSCheckoutService);
-    checkoutDeliveryService = TestBed.inject(CheckoutDeliveryService);
+    checkoutDeliveryModesFacade = TestBed.inject(CheckoutDeliveryModesFacade);
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
     cartService = TestBed.inject(ActiveCartService);
     checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     routingService = TestBed.inject(RoutingService);
-    spyOn(checkoutDeliveryService, 'setDeliveryMode').and.callThrough();
+    spyOn(checkoutDeliveryModesFacade, 'setDeliveryMode').and.callThrough();
     spyOn(store, 'dispatch').and.callThrough();
   });
 
@@ -147,7 +147,7 @@ describe('FSCheckoutService', () => {
 
   it('should mock delivery mode', () => {
     service.mockDeliveryMode();
-    expect(checkoutDeliveryService.setDeliveryMode).toHaveBeenCalled();
+    expect(checkoutDeliveryModesFacade.setDeliveryMode).toHaveBeenCalled();
   });
 
   it('should filter out entries with removeable poperty set to true', () => {
