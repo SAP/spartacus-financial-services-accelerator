@@ -63,7 +63,7 @@ import { FSAddressService } from '../../core/user/facade/address.service';
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 import { FSMessageModule } from './../message/message.module';
 import { SetActiveCartGuard } from './guards/set-active-cart-guard';
-import { CheckoutPaymentFormModule } from '@spartacus/checkout/base/components';
+import { CartNotEmptyGuard, CheckoutPaymentFormModule } from '@spartacus/checkout/base/components';
 
 const routes: Routes = [
   {
