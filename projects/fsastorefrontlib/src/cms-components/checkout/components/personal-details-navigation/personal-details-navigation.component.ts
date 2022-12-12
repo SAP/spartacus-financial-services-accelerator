@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormDataService, YFormData } from '@spartacus/dynamicforms';
-import { Address, RoutingService, User } from '@spartacus/core';
+import {
+  FormDataService,
+  YFormData,
+  FileService,
+} from '@spartacus/dynamicforms';
+import { Address, Cart, RoutingService, User } from '@spartacus/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import {
+  FSCart,
   FSOrderEntry,
   FSSteps,
   FSUserRole,
@@ -30,7 +35,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected pricingService: PricingService,
     protected userAccountFacade: UserAccountFacade,
     protected addressService: FSAddressService,
-    protected consentService: ConsentService
+    protected consentService: ConsentService,
+    protected fileService: FileService
   ) {}
 
   protected readonly PERSONAL_DETAILS_FORM_GROUP = 'personalDetails';
@@ -47,54 +53,83 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.userAccountFacade.get();
   }
-
+  //This method should be refactored
   navigateNext(nextStep: FSSteps) {
-    this.subscription.add(
-      combineLatest([
-        this.cartService.getActive(),
-        this.userAccountFacade.get(),
-        this.addressService.getAddresses(),
-      ])
-        .pipe(
-          take(1),
-          switchMap(([cart, user, addresses]) => {
-            if (cart?.code && cart?.entries?.length > 0) {
-              this.cartId = cart.code;
-              const entry: FSOrderEntry = cart.entries[0];
-              const yFormData: YFormData = {
-                refId: cart.code + '_' + cart.entries[0].entryNumber,
-              };
-              yFormData.id =
-                entry?.formData?.length > 0 ? entry?.formData[0].id : null;
-              this.formService.submit(yFormData);
-            }
-            return this.formService.getSubmittedForm().pipe(
-              map(formData => {
-                if (formData && formData.content) {
-                  this.createDeliveryAddressForUser(user, formData, addresses);
-                  this.quoteService.underwriteQuote(cart.code);
-                  this.quoteService.updateQuote(
-                    this.cartId,
-                    this.pricingService.buildPricingData(
-                      JSON.parse(formData.content)
-                    )
-                  );
-                  this.routingService.go({
-                    cxRoute: nextStep.step,
-                  });
-                }
-              })
-            );
-          })
-        )
-        .subscribe()
-    );
+    this.subscription
+      .add(
+        combineLatest([
+          this.cartService.getActive(),
+          this.userAccountFacade.get(),
+          this.addressService.getAddresses(),
+        ])
+          .pipe(
+            take(1),
+            switchMap(([cart, user, addresses]) => {
+              if (cart?.code && cart?.entries?.length > 0) {
+                this.cartId = cart.code;
+                const entry: FSOrderEntry = cart.entries[0];
+                const yFormData: YFormData = {
+                  refId: cart.code + '_' + cart.entries[0].entryNumber,
+                };
+                yFormData.id =
+                  entry?.formData?.length > 0 ? entry?.formData[0].id : null;
+                this.formService.submit(yFormData);
+              }
+              return this.formService.getSubmittedForm().pipe(
+                map(formData => {
+                  if (formData && formData.content) {
+                    this.createDeliveryAddressForUser(
+                      user,
+                      formData,
+                      addresses
+                    );
+                    this.quoteService.underwriteQuote(cart.code);
+                    this.quoteService.updateQuote(
+                      this.cartId,
+                      this.pricingService.buildPricingData(
+                        JSON.parse(formData.content)
+                      )
+                    );
+                    this.routingService.go({
+                      cxRoute: nextStep.step,
+                    });
+                  }
+                })
+              );
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        combineLatest([
+          this.cartService.getActive(),
+          this.fileService.getUploadedDocuments(),
+        ])
+          .pipe(
+            map(([cart, uploadedDocuments]) => {
+              if (
+                JSON.stringify((<FSCart>cart).insuranceQuote) !== undefined &&
+                uploadedDocuments?.files !== undefined
+              ) {
+                this.updateQuoteWithDocuments(cart, uploadedDocuments);
+              }
+            })
+          )
+          .subscribe()
+      );
   }
 
   navigateBack(previousStep: FSSteps) {
     this.routingService.go({
       cxRoute: previousStep.step,
     });
+  }
+
+  updateQuoteWithDocuments(cart: Cart, uploadedDocuments) {
+    const quoteCopy = JSON.parse(JSON.stringify((<FSCart>cart).insuranceQuote));
+    quoteCopy.documents = uploadedDocuments.files;
+    quoteCopy.documents = Array.from(quoteCopy.documents);
+    this.quoteService.updateQuoteWithContent(cart.code, quoteCopy);
   }
 
   private createDeliveryAddressForUser(

@@ -12,9 +12,10 @@ export function checkPageElements() {
     });
   cy.get('cx-fs-category-carousel').should('be.visible');
   cy.get('cx-fs-category-feature').should('be.visible').and('have.length', 11);
-  cy.get('.Section3 cx-link')
-    .should('be.visible')
-    .should('contain', 'Find the Right Insurance Cover');
+  cy.get('.homepage-questionnaire').should(
+    'contain',
+    'Find the Right Insurance Cover'
+  );
 }
 
 export function checkAssistanceAndSupport() {

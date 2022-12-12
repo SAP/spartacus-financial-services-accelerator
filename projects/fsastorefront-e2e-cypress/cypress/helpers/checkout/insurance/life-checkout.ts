@@ -1,5 +1,12 @@
 import * as shared from '../shared-checkout';
 import * as sharedCheckout from '../shared-checkout.interface';
+import * as dayjs from 'dayjs';
+import * as customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
+const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
+const startDate = dayjs().add(2, 'day').format('DD MMM YYYY');
 
 export function populateFirstStep() {
   cy.get('cx-form-component').should('be.visible');
@@ -8,19 +15,16 @@ export function populateFirstStep() {
   cy.get('[name=lifeWhoCovered]').eq(0).click();
   cy.get('[name="lifeCoverageRequire"]').type('30000');
   cy.get('[name="lifeCoverageLast"]').type('24');
-  cy.get('[name="lifeCoverageStartDate"]').type('2022-09-25');
+  cy.get('[name=lifeCoverageStartDate]').type(tomorrowsDate);
   cy.get('[name="lifeMainDob"]').type('1987-09-25');
   cy.get('[name=lifeMainSmoke]').eq(1).click();
 }
 
-export function selectBasicLifeProduct() {
+export function selectLifeProduct(lifeProduct, number) {
   cy.get('cx-fs-comparison-table-panel-item')
-    .eq(0)
+    .eq(number)
     .within(() => {
-      cy.get('.table-header-title').should(
-        'contain.text',
-        'Basic Life Insurance'
-      );
+      cy.get('.table-header-title').should('contain.text', lifeProduct);
       cy.get('.primary-button').click();
     });
 }
@@ -74,7 +78,7 @@ export function checkLifeBasicMiniCart() {
     products: [
       {
         title: 'Start Date:',
-        value: '25 Sep 2022',
+        value: startDate,
       },
       {
         title: 'Coverage Period:',
@@ -146,7 +150,7 @@ export function checkLifeBasicMiniCartSecondPerson() {
     products: [
       {
         title: 'Start Date:',
-        value: '25 Sep 2022',
+        value: startDate,
       },
       {
         title: 'Coverage Period:',
@@ -185,5 +189,26 @@ export function addSecondPerson() {
     cy.get('h2').should('have.text', ' Your Life Insurance ');
   });
   cy.get('p.label').contains('Choose a Cover').click();
-  cy.get('[name=lifeWhoCovered]').eq(1).should('be.visible').click();
+  cy.contains('Yourself and Second Person').should('be.visible').click();
+}
+
+export function checkPremiumOptionalProducts() {
+  const addOptionsContent: sharedCheckout.AddOptions = {
+    title: 'Your Life Insurance',
+    items: [
+      {
+        name: 'Payment Protection Benefit',
+        available: true,
+      },
+      {
+        name: 'Premium Protection',
+        available: true,
+      },
+      {
+        name: 'Renewal Option',
+        available: true,
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
 }

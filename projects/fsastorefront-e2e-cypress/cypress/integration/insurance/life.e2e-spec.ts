@@ -25,7 +25,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       cy.get('cx-fs-cms-sync-pilot').should('not.exist');
       life.checkLifeComparisonTable();
-      life.selectBasicLifeProduct();
+      life.selectLifeProduct('Basic Life Insurance', '0');
       //check and add optional products
       life.checkOptionalProductsAddRenewalOption();
       life.checkLifeBasicMiniCart();
@@ -43,7 +43,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       checkout.checkSyncPilotComparisonTable();
       life.checkLifeComparisonTableSecondPerson();
-      life.selectBasicLifeProduct();
+      life.selectLifeProduct('Basic Life Insurance', '0');
     });
 
     it('Should check optional products', () => {

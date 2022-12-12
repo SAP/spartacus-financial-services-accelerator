@@ -212,6 +212,22 @@ export class QuoteService {
       .unsubscribe();
   }
 
+  updateQuoteWithContent(cartId: string, quoteContent: any) {
+    this.userIdService
+      .getUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.UpdateQuote({
+            userId: occUserId,
+            cartId: cartId,
+            quoteContent: quoteContent,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
   loadQuotesComparison(cartCodes: string[], userId?: string): void {
     this.store.dispatch(
       new fromAction.LoadQuoteComparison({ cartCodes, userId })

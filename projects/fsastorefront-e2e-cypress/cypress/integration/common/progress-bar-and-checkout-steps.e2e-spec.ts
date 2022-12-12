@@ -35,7 +35,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       savings.checkComparisonPage();
       savings.checkSavingsComparisonTable();
-      savings.selectMainProduct('Balanced Deal');
+      savings.selectMainProduct('Balanced Deal', '1');
       checkout.checkActiveAndDisabledSteps("What's Included", '5');
       checkout.checkCheckoutStep('Your Savings Insurance', '7');
       savings.checkOptionalProducts();
