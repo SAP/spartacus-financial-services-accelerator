@@ -11,26 +11,22 @@ import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
-import {
-  CheckoutDeliveryService,
-  CheckoutService,
-  StateWithCheckout,
-} from '@spartacus/checkout/core';
+import { CheckoutDeliveryModesFacade, CheckoutState } from '@spartacus/checkout/base/root';
+import { Order } from '@spartacus/order/root';
 
 @Injectable()
-export class FSCheckoutService extends CheckoutService {
+export class FSCheckoutService {
   constructor(
     protected fsStore: Store<StateWithFSCheckout>,
-    protected store: Store<StateWithCheckout>,
+    protected store: Store<CheckoutState>,
     protected activeCartService: ActiveCartService,
     protected userIdService: UserIdService,
-    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected checkoutDeliveryModesFacade: CheckoutDeliveryModesFacade,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected routingService: RoutingService,
     protected processStateStore: Store<StateWithProcess<void>>
-  ) {
-    super(store, processStateStore, activeCartService, userIdService);
-  }
+  ) {}
+
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
 
   orderPlaced: boolean;
@@ -73,7 +69,7 @@ export class FSCheckoutService extends CheckoutService {
   }
 
   mockDeliveryMode() {
-    this.checkoutDeliveryService.setDeliveryMode(this.mockedDeliveryMode);
+    this.checkoutDeliveryModesFacade.setDeliveryMode(this.mockedDeliveryMode);
   }
 
   filterRemoveableEntries(cart: FSCart | Order) {
