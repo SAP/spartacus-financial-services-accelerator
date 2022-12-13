@@ -77,6 +77,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
           this.checkoutService.placeOrder(true);
           this.checkoutService.orderPlaced = true;
           this.routingService.go({ cxRoute: 'orderConfirmation' });
+          this.cartService.removeCart(activeCartCode);
         })
       )
       .subscribe();
