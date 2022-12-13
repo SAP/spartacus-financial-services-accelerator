@@ -28,6 +28,7 @@ export const quote = {
       PENDING: 'Pending',
       SUBMITTED: 'Submitted',
       ERROR: 'Error',
+      ACCEPTED: 'Accepted',
       na: 'N/A',
     },
     quoteSummary: 'Quote Summary',
