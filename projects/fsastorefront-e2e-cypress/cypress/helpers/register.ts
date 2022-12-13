@@ -67,7 +67,7 @@ export function logout() {
   cy.findByText('Logout').click();
 }
 
-export function loginInUser(username: string, password: string) {
+export function loginUser(username: string, password: string) {
   cy.get('cx-fs-login-form').within(() => {
     cy.get('[formcontrolname="userId"]').should('be.visible');
     cy.get('[formcontrolname="userId"]').eq(0).type(username);
@@ -98,4 +98,14 @@ export function loginASMAgent() {
     cy.get('[formcontrolname="password"]').type('1234');
     cy.get('button[type=submit]').eq(0).click();
   });
+}
+
+export function createOBOUser(user: createOboCustomer) {
+  cy.get('[formcontrolname=titleCode]').select(user.titleCode);
+  cy.get('[formcontrolname=email]').type(user.email);
+  cy.get('[formcontrolname=firstName]').type(user.firstName);
+  cy.get('[formcontrolname=lastName]').type(user.lastName);
+  cy.get('[formcontrolname=dateOfBirth]').type('1991-01-01');
+  cy.get('.btn-primary').contains('Save').click();
+  cy.get('.alert-success').contains('User is successfully created');
 }

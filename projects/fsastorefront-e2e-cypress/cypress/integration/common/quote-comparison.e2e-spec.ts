@@ -52,8 +52,8 @@ testFilters([''], () => {
       event.checkProgressBarEvent();
       checkout.checkInsuranceComparisonPage('4');
       event.checkEventComparisonTable();
-      event.selectTwoStarEvent();
-      event.checkOptionalProducts();
+      event.selectMainProductEvent('Two Star Event Plan', '0');
+      event.checkOptionalProductsTwoStar();
       checkout.clickContinueButton();
       event.populatePersonalDetails();
       checkout.clickContinueButton();
@@ -92,8 +92,8 @@ testFilters([''], () => {
       event.checkProgressBarEvent();
       checkout.checkInsuranceComparisonPage('4');
       event.checkEventComparisonTable();
-      event.selectTwoStarEvent();
-      event.checkOptionalProducts();
+      event.selectMainProductEvent('Two Star Event Plan', '0');
+      event.checkOptionalProductsTwoStar();
       checkout.removeOptionalProduct('Excess Waiver');
     });
 

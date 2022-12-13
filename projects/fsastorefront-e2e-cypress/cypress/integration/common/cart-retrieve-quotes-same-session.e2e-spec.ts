@@ -41,9 +41,9 @@ testFilters([''], () => {
       event.checkProgressBarEvent();
       checkout.checkInsuranceComparisonPage('4');
       event.checkEventComparisonTable();
-      event.selectTwoStarEvent();
+      event.selectMainProductEvent('Two Star Event Plan', '0');
       event.checkEventMiniCart();
-      event.checkOptionalProducts();
+      event.checkOptionalProductsTwoStar();
       checkout.clickContinueButton();
       checkout.checkPersonalDetailsPage();
     });

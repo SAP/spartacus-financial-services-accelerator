@@ -15,7 +15,7 @@ testFilters(['smoke'], () => {
     });
 
     it('Should login as Car Group admin', () => {
-      register.loginInUser(carGroupAdmin.email, carGroupAdmin.password);
+      register.loginUser(carGroupAdmin.email, carGroupAdmin.password);
       cy.get('cx-category-navigation')
         .contains('Insurance')
         .should('not.exist');
@@ -61,7 +61,7 @@ testFilters(['smoke'], () => {
 
     it('Should login as Car Group Customer', () => {
       cy.visit('/login');
-      register.loginInUser(carGroupCustomer.email, carGroupCustomer.password);
+      register.loginUser(carGroupCustomer.email, carGroupCustomer.password);
       cy.get('cx-category-navigation')
         .contains('Insurance')
         .should('not.exist');
