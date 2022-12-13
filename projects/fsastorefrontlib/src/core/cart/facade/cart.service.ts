@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import {
   ActiveCartService,
   Cart,
+  CartActions,
   MultiCartService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
@@ -135,6 +136,10 @@ export class FSCartService extends ActiveCartService {
 
   getCart(cartId: string): Observable<Cart> {
     return this.multiCartService.getCart(cartId);
+  }
+
+  removeCart(cartId: string): void {
+    this.store.dispatch(new CartActions.RemoveCart({ cartId }));
   }
 
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {

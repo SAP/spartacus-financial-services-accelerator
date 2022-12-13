@@ -43,7 +43,9 @@ class MockFSCheckoutService {
   setIdentificationType() {}
 }
 
-class MockCartService {}
+class MockCartService {
+  removeCart() {}
+}
 
 class MockActiveCartService {
   getActiveCartId(): Observable<string> {
