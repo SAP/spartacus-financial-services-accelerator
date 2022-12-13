@@ -18,6 +18,7 @@ import { FSCheckoutConfigService } from '../../../core/checkout/services/checkou
 import createSpy = jasmine.createSpy;
 import { CheckoutDeliveryModesFacade } from '@spartacus/checkout/base/root';
 import { StateWithFSCheckout } from '../store/checkout-state';
+import { OccOrderAdapter } from '@spartacus/order/occ';
 
 const activeCartCode = 'testCartCode';
 const fsCheckout = 'fscheckout';
@@ -66,6 +67,7 @@ describe('FSCheckoutService', () => {
   let cartService: ActiveCartService;
   let checkoutConfigService: FSCheckoutConfigService;
   let routingService: RoutingService;
+  let occOrderAdapter: OccOrderAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -260,5 +262,10 @@ describe('FSCheckoutService', () => {
       cxRoute: productConfigureStep.routeName,
       params: { code: mockProduct.code },
     });
+  });
+
+  it('should place order', () => {
+    service.placeOrder(true);
+    expect(occOrderAdapter.placeOrder).toHaveBeenCalled();
   });
 });

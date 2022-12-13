@@ -7,8 +7,8 @@ import {
 import {
   CheckoutConfigService,
   CheckoutStepService,
-} from '@spartacus/checkout/components';
-import { CheckoutConfig } from '@spartacus/checkout/root';
+} from '@spartacus/checkout/base/components';
+import { CheckoutConfig } from '@spartacus/checkout/base/root';
 import { BehaviorSubject } from 'rxjs';
 import { FSSteps, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
 import { FSCartService } from '../../cart';

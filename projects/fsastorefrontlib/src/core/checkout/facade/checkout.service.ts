@@ -6,13 +6,15 @@ import {
   StateWithProcess,
 } from '@spartacus/core';
 import { ActiveCartService } from '@spartacus/cart/base/core';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
 import { CheckoutDeliveryModesFacade, CheckoutState } from '@spartacus/checkout/base/root';
 import { Order } from '@spartacus/order/root';
+import { map } from 'rxjs/operators';
+import { OccOrderAdapter } from '@spartacus/order/occ';
 
 @Injectable()
 export class FSCheckoutService {
@@ -24,7 +26,8 @@ export class FSCheckoutService {
     protected checkoutDeliveryModesFacade: CheckoutDeliveryModesFacade,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected routingService: RoutingService,
-    protected processStateStore: Store<StateWithProcess<void>>
+    protected processStateStore: Store<StateWithProcess<void>>,
+    protected occOrderAdapter: OccOrderAdapter
   ) {}
 
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
@@ -93,5 +96,16 @@ export class FSCheckoutService {
       cxRoute: initialStep.routeName,
       params: { code: routingParam },
     });
+  }
+
+  placeOrder(termsChecked: boolean){
+    combineLatest([
+      this.userIdService.getUserId(),
+      this.activeCartService.getActiveCartId()]
+    ).pipe(
+      map(([userId, cartId]) => {
+        this.occOrderAdapter.placeOrder(userId, cartId, termsChecked);
+      }
+    ));
   }
 }
