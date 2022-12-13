@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit, ViewContainerRef, ElementRef } from '@angular/core';
 
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
+import { map, take } from 'rxjs/operators';
 import { FormComponentService } from '../form-component.service';
 
 @Component({
@@ -19,11 +20,15 @@ export class FormPopupErrorComponent implements AfterViewInit {
   @ViewChild('content') modalContent : ElementRef;
 
   open() {
-    this.launchDialogService.openDialog(
+    const dialog = this.launchDialogService.openDialog(
       LAUNCH_CALLER.FORM_POPUP_ERROR,
       this.modalContent,
-      this.vcr,
+      this.vcr
     )
+
+    dialog?.pipe(take(1), map(resp => {
+      this.formComponentService.isPopulatedFormInvalidSource.next(false);
+    }))
     // this.modalService
     //   .open(this.modalContent, {
     //     centered: true,

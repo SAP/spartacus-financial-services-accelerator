@@ -9,8 +9,9 @@ import { CmsService, WindowRef } from '@spartacus/core';
 import {
   CmsComponentData,
   IconConfig,
-  ModalService,
 } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
+
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 
@@ -29,12 +30,12 @@ export class GenericSyncPilotComponent extends CmsSyncPilotComponent
     protected cmsService: CmsService,
     protected userAccountFacade: UserAccountFacade,
     protected syncPilotService: Service,
-    protected modalService: ModalService,
+    protected launchDialogService: LaunchDialogService,
     public componentData: CmsComponentData<CMSConnectionComponent>,
     protected iconConfig: IconConfig,
     protected winRef?: WindowRef
   ) {
-    super(userAccountFacade, syncPilotService, modalService, componentData);
+    super(userAccountFacade, syncPilotService, launchDialogService, componentData);
   }
 
   @Input() agent: any;

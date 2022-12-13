@@ -3,7 +3,7 @@ import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.com
 
 export const defaultFormPopupErrorDialogLayoutConfig: LayoutConfig = {
   launch: {
-    CLAIMS: {
+    FORM_POPUP_ERROR: {
       inlineRoot: true,
       component: FormPopupErrorComponent,
       dialogType: DIALOG_TYPE.POPOVER_CENTER,

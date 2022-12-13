@@ -80,8 +80,7 @@ export class ClaimsComponent implements OnInit, OnDestroy {
   // }
 
   private openModal(claimNumber: string) {
-    let modalInstanceData = {
-      DeleteClaimDialogComponent,
+    let modalInstanceData: any = {
       claimNumber
     };
 
@@ -92,9 +91,7 @@ export class ClaimsComponent implements OnInit, OnDestroy {
       modalInstanceData
     )
 
-    if(dialog) {
-      dialog.pipe(take(1)).subscribe();
-    }
+      dialog?.pipe(take(1)).subscribe();
   }
 
   resumeClaim(claimNumber: string) {

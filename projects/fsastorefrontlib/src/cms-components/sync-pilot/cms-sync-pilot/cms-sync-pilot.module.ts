@@ -5,10 +5,12 @@ import {
   CmsConfig,
   I18nModule,
   UrlModule,
+  provideDefaultConfig,
 } from '@spartacus/core';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog.module';
 import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
+import { defaultCmsSyncPilotDialogLayoutConfig } from '../default-cms-sync-pilot-dialog-layout.config';
 
 @NgModule({
     imports: [
@@ -26,6 +28,6 @@ import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
     ],
     declarations: [CmsSyncPilotComponent],
     exports: [CmsSyncPilotComponent],
-    providers: [Service]
+    providers: [Service, provideDefaultConfig(defaultCmsSyncPilotDialogLayoutConfig)]
 })
 export class CmsSyncPilotModule {}
