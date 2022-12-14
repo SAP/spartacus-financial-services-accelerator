@@ -21,7 +21,7 @@ import { DataHolderComponent } from './data-holder/data-holder.component';
 import { UploadComponent } from './upload/upload.component';
 import { FormComponentService } from './form-component.service';
 import { CurrencyComponent } from './currency/currency.component';
-import { defaultFormPopupErrorDialogLayoutConfig } from './default-form-popup-error-dialog-layout.config';
+import { defaultFormPopupErrorDialogLayoutConfig } from './form-popup-error/default-form-popup-error-dialog-layout.config';
 
 @NgModule({
     imports: [CommonModule, ReactiveFormsModule, I18nModule],

@@ -9,3 +9,4 @@ export * from './src/util/index';
 export * from './src/cms-components/index';
 export * from './src/assets/translations/index';
 export * from './src/assets/translations/index_de';
+export * from './src/model/augmented.model';

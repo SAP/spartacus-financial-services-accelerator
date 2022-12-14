@@ -10,7 +10,7 @@ import {
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog.module';
 import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
-import { defaultCmsSyncPilotDialogLayoutConfig } from '../default-cms-sync-pilot-dialog-layout.config';
+import { defaultCmsSyncPilotDialogLayoutConfig } from '../../sync-pilot-dialog/default-cms-sync-pilot-dialog-layout.config';
 
 @NgModule({
     imports: [

@@ -34,7 +34,7 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
 import { ChangeClaimNavigationComponent } from './change-claim/change-claim-navigation.component';
-import { defaultDeleteClaimDialogLayoutConfig } from './claims/default--delete-claim-dialog-layout.config';
+import { defaultDeleteClaimDialogLayoutConfig } from './delete-claim-dialog/default--delete-claim-dialog-layout.config';
 
 const routes: Routes = [
   {

@@ -1,5 +1,5 @@
 import { LayoutConfig, DIALOG_TYPE } from '@spartacus/storefront';
-import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.component';
+import { FormPopupErrorComponent } from './form-popup-error.component';
 
 export const defaultFormPopupErrorDialogLayoutConfig: LayoutConfig = {
   launch: {

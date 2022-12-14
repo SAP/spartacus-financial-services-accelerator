@@ -1,5 +1,5 @@
 import { LayoutConfig, DIALOG_TYPE } from '@spartacus/storefront';
-import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
+import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 
 export const defaultDeleteClaimDialogLayoutConfig: LayoutConfig = {
   launch: {

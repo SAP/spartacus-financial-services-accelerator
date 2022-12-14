@@ -1,5 +1,5 @@
 import { LayoutConfig, DIALOG_TYPE } from '@spartacus/storefront';
-import { SyncPilotDialogComponent } from '../sync-pilot-dialog/sync-pilot-dialog.component';
+import { SyncPilotDialogComponent } from './sync-pilot-dialog.component';
 
 export const defaultCmsSyncPilotDialogLayoutConfig: LayoutConfig = {
   launch: {
