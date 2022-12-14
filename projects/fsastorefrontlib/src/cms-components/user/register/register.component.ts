@@ -12,8 +12,7 @@ import {
 import { Subscription } from 'rxjs';
 import { FSUserSignUp } from '../../../occ/occ-models';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { RegisterComponent } from '@spartacus/user/profile/components';
-import { UserRegisterFacade } from '@spartacus/user/profile/root';
+import { RegisterComponent, RegisterComponentService } from '@spartacus/user/profile/components';
 import { CustomFormValidators } from '@spartacus/storefront';
 
 @Component({
@@ -22,23 +21,23 @@ import { CustomFormValidators } from '@spartacus/storefront';
 })
 export class FSRegisterComponent extends RegisterComponent implements OnInit {
   constructor(
-    protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
     protected fb: UntypedFormBuilder,
     protected router: RoutingService,
     protected anonymousConsentsService: AnonymousConsentsService,
     protected anonymousConsentsConfig: AnonymousConsentsConfig,
     protected config: DateConfig,
-    protected authConfigService: AuthConfigService
+    protected authConfigService: AuthConfigService,
+    protected registerComponentService: RegisterComponentService,
   ) {
     super(
-      userRegister,
       globalMessageService,
       fb,
       router,
       anonymousConsentsService,
       anonymousConsentsConfig,
-      authConfigService
+      authConfigService,
+      registerComponentService
     );
   }
 
