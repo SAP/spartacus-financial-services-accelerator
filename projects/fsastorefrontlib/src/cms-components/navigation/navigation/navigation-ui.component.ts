@@ -10,6 +10,7 @@ import {
   NavigationUIComponent,
 } from '@spartacus/storefront';
 import { Router } from '@angular/router';
+import { WindowRef } from '@spartacus/core';
 
 @Component({
   selector: 'cx-fs-navigation-ui',
@@ -23,9 +24,10 @@ export class FSNavigationUIComponent extends NavigationUIComponent {
     router: Router,
     protected renderer2: Renderer2,
     elemRef: ElementRef,
-    protected hamburgerMenuService: HamburgerMenuService
+    protected hamburgerMenuService: HamburgerMenuService, 
+    protected winRef: WindowRef
   ) {
-    super(router, renderer2, elemRef, hamburgerMenuService);
+    super(router, renderer2, elemRef, hamburgerMenuService, winRef);
   }
   setClassOnWrapper(event: UIEvent): void {
     if (!this.wrapper.nativeElement.classList.contains('was-opened')) {
