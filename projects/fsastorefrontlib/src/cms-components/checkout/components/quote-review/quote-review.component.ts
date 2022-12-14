@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart } from '@spartacus/cart/base/root';
 import {
@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import {
   CategoryService,
@@ -27,6 +27,8 @@ import {
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
+import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
+
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -40,20 +42,23 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
-    protected modalService: ModalService,
+    protected launchDialogService: LaunchDialogService,
     protected translationService: FSTranslationService,
     protected checkoutService: FSCheckoutService,
     protected globalMessageService: GlobalMessageService,
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
-    protected winRef?: WindowRef
+    protected vcr: ViewContainerRef,
+    protected winRef?: WindowRef,
+
   ) {}
+
+  @ViewChild('element') element: ElementRef;
 
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
-  subscription = new Subscription();
-  modalRef: ModalRef;
+  subscription = new Subscription();a
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
@@ -103,19 +108,30 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   private openQuoteBindingModal(nextStep) {
-    let modalInstance: any;
-    this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
-    modalInstance = this.modalRef.componentInstance;
-    modalInstance.cartCode = this.cartCode;
-    modalInstance.nextStepUrl = {
+    let modalInstanceData: any = {
+      cartCode: this.cartCode,
       cxRoute: nextStep.step,
     };
+    // this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
+    //   centered: true,
+    //   size: 'lg',
+    // });
+    // modalInstance = this.modalRef.componentInstance;
+    // modalInstance.cartCode = this.cartCode;
+    // modalInstance.nextStepUrl = {
+    //   cxRoute: nextStep.step,
+    // };
+    const dialog = this.launchDialogService.openDialog(
+      LAUNCH_CALLER.BIND_QUOTE,
+      this.element,
+      this.vcr,
+      modalInstanceData
+    )
+  
     this.subscription.add(
-      this.modalRef.componentInstance.quoteBinding$
+     dialog
         .pipe(
+          take(1),
           map(quoteBinding => {
             this.showContent$ = of(!quoteBinding);
           })
@@ -125,18 +141,30 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   private openReferredQuoteModal(nextStep) {
-    let modalInstance: any;
-    this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
-    modalInstance = this.modalRef.componentInstance;
-    modalInstance.nextStepUrl = {
-      cxRoute: nextStep.step,
+    //let modalInstance: any;
+    let modalInstanceData: any = {
+      cxRoute: nextStep.step
     };
+
+    const dialog = this.launchDialogService.openDialog(
+      LAUNCH_CALLER.OPEN_REFFERED_QUOTE,
+      this.element,
+      this.vcr,
+      modalInstanceData
+    )
+    
+    // this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
+    //   centered: true,
+    //   size: 'lg',
+    // });
+    // modalInstance = this.modalRef.componentInstance;
+    // modalInstance.nextStepUrl = {
+    //   cxRoute: nextStep.step,
+    // };
     this.subscription.add(
-      this.modalRef.componentInstance.referredQuote$
-        .pipe(
+      //this.modalRef.componentInstance.referredQuote$
+        dialog.pipe(
+          take(1),
           map(referredQuote => {
             this.showContent$ = of(!referredQuote);
           })

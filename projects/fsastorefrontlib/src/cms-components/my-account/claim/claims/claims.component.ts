@@ -15,7 +15,6 @@ import { map, take } from 'rxjs/operators';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/facade';
 import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
-import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 //import { ModalService } from '@spartacus/storefront';
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 
