@@ -6,8 +6,8 @@ import {
   RoutingService,
   TranslatePipe,
 } from '@spartacus/core';
+import { FileService } from '@spartacus/dynamicforms';
 import { of } from 'rxjs';
-import { FileService } from '../../../../dynamicforms/public_api';
 import { ClaimService } from '../../core';
 import { AssetTableType } from '../../occ';
 import { AssetsTableComponent } from './assets-table.component';

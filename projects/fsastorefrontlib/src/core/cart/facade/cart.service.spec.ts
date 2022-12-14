@@ -7,6 +7,7 @@ import {
   OCC_USER_ID_ANONYMOUS,
   OCC_CART_ID_CURRENT,
   UserIdService,
+  CartActions,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './cart.service';
@@ -140,6 +141,15 @@ describe('FSCartServiceTest', () => {
         productCode: productCode,
         quantity: 1,
         entryNumber: entryCode,
+      })
+    );
+  });
+
+  it('should dispatch RemoveCart action', () => {
+    service.removeCart('cartId');
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new CartActions.RemoveCart({
+        cartId: 'cartId',
       })
     );
   });

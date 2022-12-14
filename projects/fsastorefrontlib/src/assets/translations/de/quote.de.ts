@@ -28,6 +28,7 @@ export const quote = {
       PENDING: 'Ausstehend',
       SUBMITTED: 'Eingereicht',
       ERROR: 'Fehler',
+      ACCEPTED: 'Akzeptiert',
       na: 'N/A',
     },
     quoteSummary: 'Angebotszusammenfassung',

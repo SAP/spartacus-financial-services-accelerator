@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { UserIdService } from '@spartacus/core';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { OboCustomerService } from '../../../../../dynamicforms/public_api';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';

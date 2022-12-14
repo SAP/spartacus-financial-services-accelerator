@@ -84,15 +84,22 @@ export function checkEventQuoteAndRetrieve() {
     });
 }
 
-export function checkCurrentAccountAndRetrieve() {
+export function checkEmptyMyQuotesPage() {
+  cy.selectOptionFromMyAccount({
+    dropdownItem: 'Quotes & Applications',
+  });
+  cy.get('h2').should('be.visible', 'Quotes & Applications');
+  cy.get('h3').contains('You have no Quotes or Applications!');
+}
+
+export function checkQuote(product, status, price) {
   cy.get('.info-card')
-    .contains('Current Account')
+    .contains(product)
     .siblings('.info-card-wrapper')
     .within(() => {
-      cy.get('.label').contains('Family Account');
       cy.get('.value').contains('QREF');
-      cy.get('.value').contains('Approved');
-      cy.get('.value').contains('€9.99 / Monthly');
+      cy.get('.value').contains(status);
+      cy.get('.value').contains(price);
       cy.get('.link').contains('Retrieve').click({ force: true });
     });
 }

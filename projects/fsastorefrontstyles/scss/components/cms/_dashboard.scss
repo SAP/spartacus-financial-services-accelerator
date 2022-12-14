@@ -1,3 +1,13 @@
+%cx-fs-seller-dashboard-list {
+  cx-icon {
+    @include vertical-center;
+    color: var(--cx-color-6);
+    position: absolute;
+    right: 4%;
+    font-size: var(--cx-h1-font-size);
+  }
+}
+
 %cx-fs-seller-dashboard-list,
 %cx-fs-user-profile,
 %cx-fs-seller-dashboard {

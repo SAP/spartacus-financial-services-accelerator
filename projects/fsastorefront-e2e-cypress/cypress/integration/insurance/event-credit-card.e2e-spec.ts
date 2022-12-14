@@ -31,12 +31,12 @@ testFilters(['smoke'], () => {
       event.checkProgressBarEvent();
       checkout.checkInsuranceComparisonPage('4');
       event.checkEventComparisonTable();
-      event.selectTwoStarEvent();
+      event.selectMainProductEvent('Two Star Event Plan', '0');
     });
 
     it('Should check add options page', () => {
       checkout.checkCheckoutStep('Your Event Insurance', '6');
-      event.checkOptionalProducts();
+      event.checkOptionalProductsTwoStar();
       event.checkMiniCart();
       checkout.removeOptionalProduct('Excess Waiver');
       event.checkMiniCartRemovedProduct();

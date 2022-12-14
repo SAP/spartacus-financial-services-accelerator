@@ -10,7 +10,7 @@ testFilters([''], () => {
     });
 
     it('Should login as root admin', () => {
-      register.loginInUser(rootAdmin.email, rootAdmin.password);
+      register.loginUser(rootAdmin.email, rootAdmin.password);
       cy.get('cx-category-navigation').should('contain.text', 'Insurance');
       cy.get('cx-category-navigation').should('contain.text', 'Banking');
       cy.get('cx-fs-dashboard-link').contains('Dashboard');

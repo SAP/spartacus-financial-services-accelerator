@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
-import { OboCustomerService } from '../../../../../dynamicforms/public_api';
 import { StepStatus } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import { StateWithChangeRequest } from '../store/change-request-state';

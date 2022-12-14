@@ -9,6 +9,7 @@
     "cy:run:insurance": "cypress run --spec cypress/integration/insurance/**/*",
     "cy:run:banking": "cypress run --spec cypress/integration/banking/**/*",
     "cy:run:auto": "cypress run --spec cypress/integration/autoe2e/**/*",
+    "cy:run:agents": "cypress run --spec cypress/integration/agents/**/*",
     "cy:run:common": "cypress run --spec cypress/integration/common/**/*",
     "cy:run:local": "cypress run --config-file cypress.local.json",
     "cy:cli": "cypress run",
