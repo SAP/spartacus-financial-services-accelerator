@@ -31,7 +31,7 @@
 }
 %cx-fs-order-summary {
   padding-bottom: 16px;
-  @extend %cx-order-summary;
+  @extend %cx-order-summary !optional;
   %cx-applied-coupons {
     & > * {
       display: flex;

@@ -1,5 +1,5 @@
 %cx-fs-order-history {
-  @extend %cx-order-history;
+  @extend %cx-order-history !optional;
   .table {
     border-color: var(--cx-color-3);
     th,
