@@ -5,8 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { WindowRef, User } from '@spartacus/core';
-import { CmsComponentData } from '@spartacus/storefront';
-import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
+import { LaunchDialogService, CmsComponentData, LAUNCH_CALLER } from '@spartacus/storefront';
 import { from, Observable, Subscription } from 'rxjs';
 import { take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';

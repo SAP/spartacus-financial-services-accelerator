@@ -11,3 +11,4 @@ export * from './occ/index';
 export * from './occ/occ-models/index';
 export * from './recipes/index';
 export * from './shared/index';
+export * from './model/index';
