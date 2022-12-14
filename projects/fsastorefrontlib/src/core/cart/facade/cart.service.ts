@@ -43,12 +43,12 @@ export class FSCartService extends ActiveCartService {
                 },
               })
               .pipe(
-                filter(cartState => this.isCartCreated(cartState)),
+                //filter(cart => this.isCartCreated(cart)),
                 take(1),
-                map(cartState => {
-                  let newCartCode = cartState.value.code;
+                map(cart => {
+                  let newCartCode = cart.code;
                   if (userId === OCC_USER_ID_ANONYMOUS) {
-                    newCartCode = cartState.value.guid;
+                    newCartCode = cart.guid;
                   }
                   this.startBundleForCart(
                     userId,
@@ -132,7 +132,7 @@ export class FSCartService extends ActiveCartService {
     return this.multiCartService.getCart(cartId);
   }
 
-  private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
-    return cartState && cartState.success && !cartState.loading;
-  }
+  // private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
+  //   return cartState && cartState.success && !cartState.loading;
+  // }
 }
