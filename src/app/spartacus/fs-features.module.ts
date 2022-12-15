@@ -20,7 +20,7 @@ import {
 } from '@spartacus/core';
 import { CartBaseCoreModule } from '@spartacus/cart/base/core';
 import { CartBaseOccModule } from '@spartacus/cart/base/occ';
-import { OrderConfirmationModule } from '@spartacus/order/components/order-confirmation/order-confirmation.module';
+//import { OrderConfirmationModule } from '@spartacus/order/components';
 import { OrderCancellationModule, OrderDetailsModule, OrderHistoryModule, OrderReturnModule, ReturnRequestDetailModule, ReturnRequestListModule } from "@spartacus/order/components";
 import { OrderOccModule } from "@spartacus/order/occ";
 import { SmartEditModule } from '@spartacus/smartedit';
@@ -181,7 +181,7 @@ if (environment.digitalPayments) {
     ProductPageEventModule,
 
     /************************* Core My Account *************************/
-    OrderConfirmationModule,
+    //OrderConfirmationModule,
     UserComponentModule,
     CloseAccountModule,
     UpdateEmailModule,
