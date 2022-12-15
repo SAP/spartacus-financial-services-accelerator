@@ -67,6 +67,7 @@ import {
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 import { FSMessageModule } from './../message/message.module';
 import { SetActiveCartGuard } from './guards/set-active-cart-guard';
+import { ApplicationConfirmationComponent } from './components/application-confirmation/application-confirmation.component';
 
 const routes: Routes = [
   {
@@ -146,6 +147,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'orderConfirmation',
       pageLabel: 'orderConfirmationPage',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'applicationConfirmation',
+      pageLabel: 'applicationConfirmationPage',
     },
     component: PageLayoutComponent,
   },
@@ -234,6 +244,9 @@ const routes: Routes = [
           component: OrderConfirmationComponent,
           guards: [OrderConfirmationGuard],
         },
+        ApplicationConfirmationFlex: {
+          component: ApplicationConfirmationComponent,
+        },
         OrderConfirmationMessageFlex: {
           component: OrderConfirmationMessageComponent,
           guards: [OrderConfirmationGuard],
@@ -259,6 +272,7 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
+    ApplicationConfirmationComponent,
     FSPaymentMethodComponent,
   ],
   exports: [
@@ -272,6 +286,7 @@ const routes: Routes = [
     ReferredQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
+    ApplicationConfirmationComponent,
     FSPaymentMethodComponent,
   ],
   providers: [
