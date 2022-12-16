@@ -16,6 +16,7 @@ import {
   ExternalRoutesModule,
   ProductModule,
   ProductOccModule,
+  UserModule,
   UserOccModule
 } from '@spartacus/core';
 import { CartBaseCoreModule } from '@spartacus/cart/base/core';
@@ -48,6 +49,7 @@ import {
   NavigationModule,
   PageTitleModule,
   PaymentMethodsModule,
+  PDFModule,
   ProductCarouselModule,
   ProductDetailsPageModule,
   ProductFacetNavigationModule,
@@ -59,6 +61,7 @@ import {
   ProductReferencesModule,
   ProductSummaryModule,
   ProductTabsModule,
+  ScrollToTopModule,
   SiteContextSelectorModule,
   TabParagraphContainerModule,
   UserComponentModule
@@ -91,6 +94,7 @@ import { TrackingFeatureModule } from './features/tracking-feature.module';
 import { UserFeatureModule } from './features/user-feature.module';
 import { VariantsFeatureModule } from './features/variants-feature.module';
 import { CartBaseFeatureModule } from './features/cart-base-feature.module';
+import { VideoModule } from '@spartacus/storefront';
 
 const featureModules = [];
 
@@ -121,8 +125,13 @@ if (environment.digitalPayments) {
     TabParagraphContainerModule,
     BannerCarouselModule,
     PageTitleModule,
+    PDFModule,
+    ScrollToTopModule,
+    VideoModule,
 
     /************************* User Core *************************/
+    UserModule,
+    UserOccModule,
     UserAccountModule,
     UserProfileModule,
 
@@ -136,7 +145,6 @@ if (environment.digitalPayments) {
 
     /************************* Product Core *************************/
     ProductModule.forRoot(),
-    ProductOccModule,
     CheckoutModule,
 
     /************************* Product UI  *************************/
