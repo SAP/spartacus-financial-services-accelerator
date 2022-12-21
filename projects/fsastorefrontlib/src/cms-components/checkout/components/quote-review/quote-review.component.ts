@@ -18,7 +18,6 @@ import {
 } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
-import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
@@ -26,7 +25,6 @@ import {
   FSSteps,
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
-import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 
 
@@ -58,7 +56,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
-  subscription = new Subscription();a
+  subscription = new Subscription();
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
@@ -110,17 +108,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   private openQuoteBindingModal(nextStep) {
     let modalInstanceData: any = {
       cartCode: this.cartCode,
-      cxRoute: nextStep.step,
+      nextStepUrl:{
+          cxRoute: nextStep.step,
+      }
     };
-    // this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
-    //   centered: true,
-    //   size: 'lg',
-    // });
-    // modalInstance = this.modalRef.componentInstance;
-    // modalInstance.cartCode = this.cartCode;
-    // modalInstance.nextStepUrl = {
-    //   cxRoute: nextStep.step,
-    // };
+
     const dialog = this.launchDialogService.openDialog(
       LAUNCH_CALLER.BIND_QUOTE,
       this.element,
@@ -132,8 +124,16 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
      dialog
         .pipe(
           take(1),
-          map(quoteBinding => {
-            this.showContent$ = of(!quoteBinding);
+          map(dialog => {
+            this.subscription.add(
+              dialog.instance.quoteBinding$
+                .pipe(
+                map(quoteBinding => {
+              this.showContent$ = of(!quoteBinding);
+            })
+          )
+          .subscribe()
+          );
           })
         )
         .subscribe()
@@ -141,9 +141,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   private openReferredQuoteModal(nextStep) {
-    //let modalInstance: any;
     let modalInstanceData: any = {
-      cxRoute: nextStep.step
+      nextStepUrl:{
+        cxRoute: nextStep.step,
+    }
     };
 
     const dialog = this.launchDialogService.openDialog(
@@ -153,20 +154,19 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       modalInstanceData
     )
     
-    // this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
-    //   centered: true,
-    //   size: 'lg',
-    // });
-    // modalInstance = this.modalRef.componentInstance;
-    // modalInstance.nextStepUrl = {
-    //   cxRoute: nextStep.step,
-    // };
     this.subscription.add(
-      //this.modalRef.componentInstance.referredQuote$
         dialog.pipe(
           take(1),
-          map(referredQuote => {
-            this.showContent$ = of(!referredQuote);
+          map(dialog => {
+            this.subscription.add(
+              dialog.instance.referredQuote$
+                .pipe(
+                  map(referredQuote => {
+                    this.showContent$ = of(!referredQuote);
+                  })
+                )
+                .subscribe()
+            );
           })
         )
         .subscribe()
