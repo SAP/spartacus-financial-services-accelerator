@@ -29,9 +29,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   userIdentification: { paths: ['checkout/user-identification'] },
   orderConfirmation: { paths: ['checkout/order-confirmation'] },
   applicationConfirmation: {
-    paths: [
-      'checkout/application-confirmation/:quoteId/:productName/:quotePrice',
-    ],
+    paths: ['checkout/application-confirmation/:quoteId/:productName'],
   },
   paymentDetails: { paths: ['my-account/payment-details'] },
   consentManagment: { paths: ['my-account/consents'] },

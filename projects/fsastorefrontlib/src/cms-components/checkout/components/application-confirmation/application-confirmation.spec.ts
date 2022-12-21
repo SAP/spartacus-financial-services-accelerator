@@ -15,7 +15,6 @@ class MockDomSanitizer {
 
 class MockRoutingService {}
 
-//TEST NEED TO BE MODIFIED
 describe('ApplicationConfirmationComponent', () => {
   let component: ApplicationConfirmationComponent;
   let fixture: ComponentFixture<ApplicationConfirmationComponent>;
@@ -40,12 +39,5 @@ describe('ApplicationConfirmationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeDefined();
-  });
-
-  it('should check appointmentDate', () => {
-    const mockedDate = '2022-05-04 11:00';
-    history.pushState({ date: mockedDate }, '', '');
-    component.ngOnInit();
-    expect(component.appointmentDate).toEqual(mockedDate);
   });
 });

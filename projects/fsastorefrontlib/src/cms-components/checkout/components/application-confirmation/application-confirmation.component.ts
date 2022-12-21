@@ -32,14 +32,27 @@ export class ApplicationConfirmationComponent implements OnInit {
           map(routingData => {
             this.quoteId = routingData.state.params.quoteId;
             this.productName = routingData.state.params.productName;
-            this.quotePrice = routingData.state.params.quotePrice;
           })
         )
         .subscribe()
     );
+    this.quotePrice = localStorage.getItem('bankingApplicationPrice');
 
     if (!(this.quoteId && this.productName && this.quotePrice)) {
       this.routingService.go('/');
     }
+  }
+
+  navigateQuoteDetails() {
+    this.routingService.go({
+      cxRoute: 'quoteDetails',
+      params: { quoteId: this.quoteId },
+    });
+  }
+
+  navigateInbox() {
+    this.routingService.go({
+      cxRoute: 'inbox',
+    });
   }
 }

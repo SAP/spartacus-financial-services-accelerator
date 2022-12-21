@@ -77,12 +77,15 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
           );
           this.checkoutService.placeOrder(true);
           this.checkoutService.orderPlaced = true;
+          localStorage.setItem(
+            'bankingApplicationPrice',
+            fsCart.totalPrice?.formattedValue
+          );
           this.routingService.go({
             cxRoute: 'applicationConfirmation',
             params: {
               quoteId: fsCart.insuranceQuote?.quoteId,
-              productName: fsCart.entries[0]?.product.name,
-              quotePrice: fsCart.totalPrice?.formattedValue,
+              productName: fsCart.entries[0]?.product?.name,
             },
           });
         })
