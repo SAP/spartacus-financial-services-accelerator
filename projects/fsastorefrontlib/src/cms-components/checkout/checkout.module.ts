@@ -67,8 +67,6 @@ import { SetActiveCartGuard } from './guards/set-active-cart-guard';
 import { CartNotEmptyGuard, CheckoutPaymentFormModule } from '@spartacus/checkout/base/components';
 import { defaultBindQuoteDialogLayoutConfig } from './components/bind-quote-dialog/default-bind-quote-dialog-layout.config';
 import { defaultOpenRefferedQuoteDialogLayoutConfig } from './components/referred-quote/default-open-reffered-quote-dialog-layout.config';
-import { FSCheckoutService } from '../../core/checkout/facade/checkout.service';
-import { OccOrderAdapter } from '@spartacus/order/occ';
 
 const routes: Routes = [
   {
@@ -280,7 +278,7 @@ const routes: Routes = [
     FSCartService,
     FSTranslationService,
     CheckoutConnector,
-    OccOrderAdapter,
+    //OccOrderAdapter,
     CartConnector,
     QuoteConnector,
     CategoryService,
