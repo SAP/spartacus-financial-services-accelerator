@@ -12,6 +12,7 @@ export * from './mini-cart/mini-cart.component';
 export * from './mini-cart/mini-cart.module';
 export * from './order-confirmation-message/order-confirmation-message.component';
 export * from './order-confirmation/order-confirmation.component';
+export * from './application-confirmation/application-confirmation.component';
 export * from './personal-details-navigation/personal-details-navigation.component';
 export * from './quote-review/quote-review.component';
 export * from './referred-quote/referred-quote-dialog.component';
