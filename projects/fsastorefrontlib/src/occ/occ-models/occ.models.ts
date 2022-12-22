@@ -324,18 +324,10 @@ export interface InsurancePolicy {
   orderNumber: string;
   expiredPolicyNumber: string;
   policyProduct: FSProduct;
-  // insuredObjectList: string;
-  // policyPremium: string;
   paymentFrequency: string;
   startDate: string;
   endDate: string;
-  // paymentMethod: string;
   contractNumber: string;
-  // mainProduct: string;
-  // optionalProducts: string;
-  // responsibleAgent: string;
-  // billingData: string;
-  // documents: string;
   policyStatus: PolicyStatus;
   cancellationDate: string;
   cancellationReason: string;
