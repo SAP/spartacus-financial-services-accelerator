@@ -10,15 +10,6 @@ const defaultHeadings: string[] = [
   'fscommon.status',
 ];
 
-// export enum ClaimsColumns {
-//   NUMBER = 1,
-//   CATEGORY_NAME,
-//   PAYMENT_FREQUENCY,
-//   STATUS,
-// }
-// export enum PoliciesColumns {}
-// export enum QuotesColumns {}
-
 export enum AssetColumn {
   EMPTY,
   NUMBER,
@@ -26,8 +17,6 @@ export enum AssetColumn {
   PAYMENT_FREQUENCY,
   STATUS,
 }
-// = ClaimsColumns | PoliciesColumns | QuotesColumns;
-
 const assetTableConfig: { [key in AssetTableType]: DataByAssetType } = {
   claims: {
     headings: defaultHeadings,
