@@ -88,6 +88,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
               productName: fsCart.entries[0]?.product?.name,
             },
           });
+          this.cartService.removeCart(fsCart.code);
         })
       )
       .subscribe();
