@@ -32,13 +32,15 @@ export class ApplicationConfirmationComponent implements OnInit {
           map(routingData => {
             this.quoteId = routingData.state.params.quoteId;
             this.productName = routingData.state.params.productName;
+            if (this.quoteId && this.productName) {
+              this.quotePrice = localStorage.getItem('bankingApplicationPrice');
+            }
           })
         )
         .subscribe()
     );
-    this.quotePrice = localStorage.getItem('bankingApplicationPrice');
 
-    if (!(this.quoteId && this.productName && this.quotePrice)) {
+    if (!this.quotePrice) {
       this.routingService.go('/');
     }
   }

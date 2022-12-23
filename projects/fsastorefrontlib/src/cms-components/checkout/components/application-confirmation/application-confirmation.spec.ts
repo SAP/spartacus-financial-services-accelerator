@@ -1,8 +1,8 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RoutingService } from '@spartacus/core';
+import { RouterState, RoutingService } from '@spartacus/core';
 import { ApplicationConfirmationComponent } from './application-confirmation.component';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 const mockImageSrc = 'data:image/svg+xml;base64, sampleImageCode';
 
@@ -23,7 +23,7 @@ class MockDomSanitizer {
 }
 
 class MockRoutingService {
-  getRouterState() {
+  getRouterState(): Observable<any> {
     return of(mockRoutingData);
   }
   go() {}
@@ -50,20 +50,41 @@ describe('ApplicationConfirmationComponent', () => {
     component = fixture.componentInstance;
     routingService = TestBed.inject(RoutingService);
     localStorage.setItem('bankingApplicationPrice', '€100');
+    spyOn(routingService, 'go').and.callThrough();
+    component.ngOnInit();
   });
 
   it('should create', () => {
     expect(component).toBeDefined();
   });
 
+  it('should get price from localstorage', () => {
+    spyOn(routingService, 'getRouterState').and.callThrough();
+    spyOn(localStorage, 'getItem').and.callThrough();
+    component.ngOnInit();
+    expect(localStorage.getItem).toHaveBeenCalled();
+    expect(routingService.go).not.toHaveBeenCalled();
+  });
+
+  it('should check if quoteId and productName are not provided', () => {
+    spyOn(routingService, 'getRouterState').and.returnValue(
+      of({
+        state: {
+          params: {},
+        },
+      } as RouterState)
+    );
+    spyOn(localStorage, 'getItem').and.callThrough();
+    component.ngOnInit();
+    expect(localStorage.getItem).not.toHaveBeenCalled();
+  });
+
   it('should navigate to quote details page', () => {
-    spyOn(routingService, 'go').and.callThrough();
     component.navigateQuoteDetails();
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should navigate to inbox page', () => {
-    spyOn(routingService, 'go').and.callThrough();
     component.navigateInbox();
     expect(routingService.go).toHaveBeenCalled();
   });
