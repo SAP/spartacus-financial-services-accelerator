@@ -14,6 +14,7 @@ import { dashboard } from './de/dashboard.de';
 import { document } from './de/document.de';
 import { forms } from './de/forms.de';
 import { orderConfirmation } from './de/orderConfirmation.de';
+import { applicationConfirmation } from './de/applicationConfirmation.de';
 import { policy } from './de/policy.de';
 import { premiumCalendar } from './de/premiumCalendar.de';
 import { productOverview } from './de/product-overview.de';
@@ -42,6 +43,7 @@ export const fstranslationsDe: TranslationResources = {
   configureProduct,
   quoteReview,
   orderConfirmation,
+  applicationConfirmation,
   organization,
   productAssignments,
   potentialProductAssignments,
