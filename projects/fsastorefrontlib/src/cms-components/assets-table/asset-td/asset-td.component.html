@@ -7,7 +7,7 @@
 >
   {{ assetConfig | resolveAssetValue: asset | async }}
   <cx-icon
-    [class]="'pointer ' + assetConfig.classes"
+    [class]="'pointer h5 ' + assetConfig.classes"
     *ngIf="icon.show"
     [type]="icon.type"
     (click)="onIconClick(asset, assetConfig)"
