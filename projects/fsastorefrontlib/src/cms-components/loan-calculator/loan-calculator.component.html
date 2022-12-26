@@ -1,0 +1,84 @@
+<form [formGroup]="sliderForm" class="form">
+  <div class="section-header-heading mb-4">Loan Calculator</div>
+  <div class="step px-4">
+    <div class="step-part d-flex">
+      <div><p class="step-number m-0 box-shadow">1</p></div>
+      <div class="input-group mb-3 align-items-center">
+        <label for="loanAmount" class="col-8 title">{{
+          'loan.loanAmount' | cxTranslate
+        }}</label>
+        <div class="input-group-prepend">
+          <span class="input-group-text small-height">EUR</span>
+        </div>
+        <input
+          id="loanAmount"
+          formControlName="loanAmount"
+          type="text"
+          class="form-control small-height"
+          ng-reflect-name="lifeCoverageRequire"
+          name="lifeCoverageRequire"
+          placeholder="{{ sliderForm.get('loanAmount').value }}"
+        />
+      </div>
+    </div>
+    <div class="slidecontainer my-5">
+      <div class="d-flex justify-content-center align-items-start">
+        <div class="range box-shadow rounded mr-4 h6 pointer">-</div>
+        <div class="position-relative w-75">
+          <input
+            formControlName="loanAmount"
+            type="range"
+            ng-min="minimumValue"
+            ng-max="maximumValue"
+            value="0"
+            class="slider mx-auto w-100"
+            id="sliderRange"
+          />
+          <div class="d-flex">
+            <div>Min.</div>
+            <div class="ml-auto">Max.</div>
+          </div>
+        </div>
+        <div class="range box-shadow rounded ml-4 h6 pointer">
+          +
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="step px-4">
+    <div class="step-part d-flex">
+      <div><p class="step-number m-0 box-shadow">2</p></div>
+      <div class="input-group mb-3 align-items-center">
+        <label for="loanAmount" class="col title">{{
+          'loan.loanRepaymentFrequency.repaymentFrequency' | cxTranslate
+        }}</label>
+      </div>
+    </div>
+    <div class="slidecontainer my-5">
+      <div class="d-flex justify-content-center align-items-start">
+        <div class="range box-shadow rounded mr-4 h6 pointer">-</div>
+        <div class="position-relative w-75">
+          <input
+            formControlName="loanAmount"
+            type="range"
+            ng-min="minimumValue"
+            ng-max="maximumValue"
+            value="0"
+            class="slider mx-auto w-100"
+            id="sliderRange"
+          />
+          <div class="d-flex">
+            <div>Min.</div>
+            <div class="ml-auto">Max.</div>
+          </div>
+        </div>
+        <div class="range box-shadow rounded ml-4 h6 pointer">
+          +
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 m-0 text-center h3 background-color-4 box-shadow-inset">
+    {{ 'loan.loanAnnuity' | cxTranslate }}
+  </div>
+</form>
