@@ -8,12 +8,12 @@ import {
 } from '@spartacus/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
+import { FSCartService } from '../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
   FormDefinitionType,
   FSCart,
 } from '../../../occ/occ-models';
-import { FSCartService } from '../../../core/cart/facade/cart.service';
 
 @Component({
   selector: 'cx-fs-general-information',

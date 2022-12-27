@@ -4,14 +4,7 @@ import { of } from 'rxjs';
 import { getDataByAssetType } from '../../core/assets-table-config/assets-table.config';
 import { ResolveAssetValuePipe } from './resolve-asset-value.pipe';
 
-const mockedDefaultHeadings: string[] = [
-  'fscommon.application.number',
-  'dashboard.name',
-  'fscommon.paymentFrequency',
-  'fscommon.status',
-];
-
-const mockedDataByAssetType = getDataByAssetType(mockedDefaultHeadings);
+const mockedDataByAssetType = getDataByAssetType('claims');
 
 const mockedClaim = {
   claimNumber: 'CL00002019',
@@ -62,7 +55,7 @@ describe('ResolveAssetValuePipe', () => {
   });
 
   it('transforms claim to correct values', () => {
-    mockedDataByAssetType.claims.values.forEach((claimConfig, i) => {
+    mockedDataByAssetType.values.forEach((claimConfig, i) => {
       const stubValue = of(mockedClaimResult[i]);
       translationServiceSpy.translate.and.returnValue(stubValue);
 

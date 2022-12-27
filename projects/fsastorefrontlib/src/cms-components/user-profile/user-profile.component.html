@@ -153,12 +153,9 @@
     </ng-container>
   </div>
   <cx-fs-assets-table
-    *ngIf="assets"
+    *ngIf="assetSelected"
     [assets]="assets"
-    [assetSelected]="assetSelected"
-    [isSeller]="seller"
     [selectedAsset]="assetSelected"
-    [customerId]="customerId"
   >
   </cx-fs-assets-table>
 </ng-container>
