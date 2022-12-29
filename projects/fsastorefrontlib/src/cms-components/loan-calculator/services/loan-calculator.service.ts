@@ -11,11 +11,6 @@ export class LoanCalculatorService implements LoanCalculatorAdapter {
     private occEndpointService: OccEndpointsService
   ) {}
 
-  formValuesChanged = (prev, curr) =>
-    prev.loanAmount === curr.loanAmount &&
-    prev.loanDuration === curr.loanDuration &&
-    prev.repaymentFrequency === curr.repaymentFrequency;
-
   getAnnuity(
     { loanAmount, loanDuration, repaymentFrequency },
     product: string

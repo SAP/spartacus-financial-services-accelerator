@@ -3,13 +3,14 @@ import { I18nModule } from '@spartacus/core';
 import { LoanCalculatorComponent } from './loan-calculator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { IconModule } from '@spartacus/storefront';
+import { IconModule, SpinnerModule } from '@spartacus/storefront';
 
 @NgModule({
   imports: [
     I18nModule,
     CommonModule,
     FormsModule,
+    SpinnerModule,
     ReactiveFormsModule,
     IconModule,
   ],

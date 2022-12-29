@@ -25,7 +25,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   sliderForm: FormGroup;
   inputRangeSteps: number = 1000;
   annuityAmount: string = undefined;
-  resetCalculator: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -65,7 +64,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
               interestLoanRate: `${componentData.loanRate}%`,
             });
 
-            /* tslint:disable:no-string-literal */
             this.sliderForm.controls['loanAmount'].setValidators([
               Validators.required,
               Validators.min(+componentData.minAmount),
@@ -77,9 +75,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
               Validators.min(+componentData.minDuration),
               Validators.max(+componentData.maxDuration),
             ]);
-            /* tslint:enable:no-string-literal */
-
-            // this.sliderForm.updateValueAndValidity({ emitEvent: false });
 
             return this.loanCalculatorService.getAnnuity(
               this.sliderForm.value,
@@ -89,7 +84,7 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
           map(resp => this.getAnnuityAmount(resp.price.oneTimeChargeEntries))
         )
         .subscribe(res => {
-          this.sliderForm.patchValue({ annuity: `€0`});
+          this.sliderForm.patchValue({ annuity: `€0` });
         })
     );
   }
@@ -124,7 +119,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   calculateAnnuityAmount() {
-    this.resetCalculator = true;
     this.subscriptions.add(
       this.componentData.data$
         .pipe(
@@ -139,6 +133,7 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
         .subscribe(annuity => {
           this.annuityAmount = annuity;
           this.sliderForm.patchValue({ annuity }, { emitEvent: false });
+          console.log(this.annuityAmount);
         })
     );
   }
@@ -156,15 +151,8 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   sliderFormReset() {
-    this.resetCalculator = false;
     this.sliderFormPatch();
     this.annuityAmount = undefined;
-  }
-
-  toggleCalculateReset() {
-    this.resetCalculator === true
-      ? this.sliderFormReset()
-      : this.calculateAnnuityAmount();
   }
 
   private getAnnuityAmount(

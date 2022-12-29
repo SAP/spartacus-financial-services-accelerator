@@ -1,8 +1,15 @@
 cx-fs-loan-calculator {
-  flex: 0 1 33.333%;
-  margin: 0.75rem 0 0.75rem 2rem;
-  max-width: fit-content;
+  display: flex;
+  flex: 0 1 33.3333%;
+  margin: 0.75rem 0.5rem;
   @include fs-box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
+  @include media-breakpoint-down(md) {
+    flex: 0 1 calc(50% - 1rem);
+  }
+  @include media-breakpoint-down(xs) {
+    flex: 0 1 100%;
+    margin: 0.75rem 0;
+  }
 }
 
 .calculate {
