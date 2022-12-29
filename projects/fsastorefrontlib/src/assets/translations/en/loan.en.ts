@@ -1,14 +1,14 @@
 export const loan = {
   loan: {
     loanCalculatorTitle: 'Loan Calculator',
-    loanAmount: 'Choose loan amount',
+    loanAmount: 'Choose Loan amount',
     loanRepaymentFrequency: {
         repaymentFrequency: 'Choose Repayment Frequency',
         loanMonthlyRepayment: 'Monthly',
         loanYearlyRepayment: 'Yearly',
     },
     loanDuration: 'Choose Loan Duration',
-    loanInterestRate: 'Choose Loan Rate',
+    loanInterestRate: 'Interest Loan Rate',
     loanCalculate: 'Calculate',
     loanAnnuity: 'Annuity',
   },
