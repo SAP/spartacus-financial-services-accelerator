@@ -100,7 +100,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   validateInputRange(value, min, max): boolean {
-    console.log(value <= max || value >= min);
     return value <= max || value >= min;
   }
 
@@ -133,7 +132,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
         .subscribe(annuity => {
           this.annuityAmount = annuity;
           this.sliderForm.patchValue({ annuity }, { emitEvent: false });
-          console.log(this.annuityAmount);
         })
     );
   }
