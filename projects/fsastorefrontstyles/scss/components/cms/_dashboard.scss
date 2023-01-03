@@ -1,41 +1,68 @@
+%cx-fs-seller-dashboard-list {
+  cx-icon {
+    @include vertical-center;
+    color: var(--cx-color-6);
+    position: absolute;
+    right: 4%;
+    font-size: var(--cx-h1-font-size);
+  }
+}
+
 %cx-fs-seller-dashboard-list,
 %cx-fs-user-profile,
 %cx-fs-seller-dashboard {
   .table {
     thead {
       background-color: var(--cx-color-4);
-    }
-    th {
-      color: var(--cx-color-2);
-    }
-    td,
-    th {
-      border-color: var(--cx-color-3);
-      padding: 1.25rem;
-      text-align: left;
-      font-size: var(--cx-title-font-size);
-      cx-icon {
-        @include vertical-center;
-        color: var(--cx-color-6);
-        position: absolute;
-        right: 4%;
-        font-size: var(--cx-h1-font-size);
-      }
-      @include media-breakpoint-down(sm) {
-        align-items: flex-end;
-        border-top: 0;
-        padding: 0.25rem 1.75rem 0;
-        &:first-of-type {
-          padding-block-start: 1.25rem;
-        }
-        &:last-of-type {
-          padding-block-end: 1.25rem;
-        }
+      th {
+        color: var(--cx-color-2);
+        border-color: var(--cx-color-3);
+        padding: 1.25rem;
+        text-align: left;
+        font-size: var(--cx-title-font-size);
       }
     }
+
     tr {
       @include media-breakpoint-down(sm) {
         border-bottom: 1px solid var(--cx-color-3);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 180px;
+      }
+
+      &:hover .notice-hover {
+        color: var(--cx-color-primary);
+      }
+    }
+  }
+  cx-fs-asset-td {
+    border-bottom: 1px solid var(--cx-color-3);
+    padding: 1.25rem;
+    text-align: left;
+    font-size: var(--cx-title-font-size);
+    cx-icon {
+      @include vertical-center;
+      color: var(--cx-color-6);
+      position: absolute;
+      margin-left: 1rem;
+      font-size: var(--cx-h1-font-size);
+    }
+    @include media-breakpoint-down(sm) {
+      width: 70%;
+      border-bottom: 0;
+      align-items: center;
+      padding: 0;
+      flex: 1 1 24%;
+      margin-left: 5px;
+
+      &:last-of-type {
+        width: 26%;
+      }
+
+      span {
+        width: 100%;
       }
     }
   }
@@ -45,7 +72,8 @@
   }
 }
 %cx-fs-user-profile,
-%cx-fs-seller-dashboard {
+%cx-fs-seller-dashboard,
+%cx-fs-asset-td {
   .user-profile-wrapper,
   .dashboard-overview-wrapper {
     padding: 2rem;

@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
+import { LanguageService } from '@spartacus/core';
 import {
   AbstractFormComponent,
   DynamicFormsConfig,
   FormService,
 } from '@spartacus/dynamicforms';
-import { LanguageService } from '@spartacus/core';
-import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { Observable, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core';
+import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 
 export const CATEGORY_CODE = 'categoryCode';
 
