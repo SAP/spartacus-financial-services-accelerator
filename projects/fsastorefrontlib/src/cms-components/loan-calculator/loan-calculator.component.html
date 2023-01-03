@@ -165,13 +165,15 @@
     class="p-3 m-0 text-center background-color-4 box-shadow-inset position-relative grid"
     *ngIf="sliderForm.get('repaymentFrequency').value"
   >
-    <div class="position-absolute right p-3 pointer" *ngIf="clearAllowed" (click)="clearAll()">
+    <div
+      class="position-absolute right p-3 pointer"
+      *ngIf="clearAllowed"
+      (click)="clearAll()"
+    >
       {{ 'loan.clearAll' | cxTranslate }}
     </div>
     <button (click)="calculateAnnuityAmount()">
-      <cx-icon
-        class="fas fa-calculator h3 calculate"
-      ></cx-icon>
+      <cx-icon class="fas fa-calculator h3 calculate"></cx-icon>
     </button>
     <div class="d-flex loan-input-annuity align-items-center">
       <p class="h3">{{ 'loan.loanAnnuity' | cxTranslate }}</p>

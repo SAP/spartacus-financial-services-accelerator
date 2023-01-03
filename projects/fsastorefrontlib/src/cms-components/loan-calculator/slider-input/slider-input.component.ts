@@ -5,7 +5,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './slider-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class SliderComponent {
   constructor() {}
 }
