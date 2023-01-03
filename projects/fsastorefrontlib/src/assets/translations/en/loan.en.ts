@@ -7,5 +7,6 @@ export const loan = {
     loanInterestRate: 'Interest Loan Rate',
     loanCalculate: 'Calculate',
     loanAnnuity: 'Annuity',
+    clearAll: 'Clear All',
   },
 };

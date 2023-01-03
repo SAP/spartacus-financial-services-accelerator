@@ -51,8 +51,8 @@
             step="1000"
           />
           <div class="d-flex">
-            <div>Min. {{ cData.minAmount | number}}</div>
-            <div class="ml-auto">Max. {{ cData.maxAmount | number}}</div>
+            <div>Min. {{ cData.minAmount | number }}</div>
+            <div class="ml-auto">Max. {{ cData.maxAmount | number }}</div>
           </div>
         </div>
         <div
@@ -165,10 +165,12 @@
     class="p-3 m-0 text-center background-color-4 box-shadow-inset position-relative grid"
     *ngIf="sliderForm.get('repaymentFrequency').value"
   >
+    <div class="position-absolute right p-3 pointer" *ngIf="clearAllowed" (click)="clearAll()">
+      {{ 'loan.clearAll' | cxTranslate }}
+    </div>
     <button (click)="calculateAnnuityAmount()">
       <cx-icon
-        class="fas fa-calculator h3"
-        [ngClass]="resetCalculator === false ? 'calculate' : 'reset'"
+        class="fas fa-calculator h3 calculate"
       ></cx-icon>
     </button>
     <div class="d-flex loan-input-annuity align-items-center">

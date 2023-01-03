@@ -21,6 +21,7 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   repaymentFrequencies$: Observable<any>;
   iconTypes = ICON_TYPE;
   interestLoanRate: number;
+  clearAllowed: boolean = false;
 
   sliderForm: FormGroup;
   inputRangeSteps: number = 1000;
@@ -53,6 +54,7 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   sliderFormPatch() {
+    this.clearAllowed = false;
     this.sliderForm.patchValue({ repaymentFrequency: '' });
     this.subscriptions.add(
       this.componentData.data$
@@ -118,6 +120,7 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   calculateAnnuityAmount() {
+    this.clearAllowed = true;
     this.subscriptions.add(
       this.componentData.data$
         .pipe(
@@ -148,7 +151,7 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
     });
   }
 
-  sliderFormReset() {
+  clearAll() {
     this.sliderFormPatch();
     this.annuityAmount = undefined;
   }
