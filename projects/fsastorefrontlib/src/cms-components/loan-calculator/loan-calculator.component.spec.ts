@@ -1,38 +1,53 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, MockTranslatePipe } from '@spartacus/core';
 import { LoanCalculatorComponent } from './loan-calculator.component';
 import { LoanCalculatorService } from './services/loan-calculator.service';
-import { Observable, of } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { DebugElement } from '@angular/core';
+import {
+  FormDataService,
+  FormDataStorageService,
+} from '@spartacus/dynamicforms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CmsComponentData } from '@spartacus/storefront';
 
-class MockCreateLoanCalculatorComponentService {
+class MockLoanCalculatorService {
   getAnnuity() {}
   getRepaymentFrequencies() {}
 }
 
 describe('LoanCalculatorComponent', () => {
-  let component: LoanCalculatorComponent;
+  let loanCalculatorComponent: LoanCalculatorComponent;
+  let mockLoanCalculatorService: MockLoanCalculatorService;
   let fixture: ComponentFixture<LoanCalculatorComponent>;
+  let el: DebugElement;
 
   beforeEach(
     waitForAsync(() => {
+      mockLoanCalculatorService = new MockLoanCalculatorService();
       TestBed.configureTestingModule({
-        imports: [I18nTestingModule, CommonModule, ReactiveFormsModule],
+        imports: [ReactiveFormsModule, FormsModule],
         declarations: [LoanCalculatorComponent],
-        providers: [LoanCalculatorService],
+        providers: [
+          {
+            provide: LoanCalculatorService,
+            useValue: mockLoanCalculatorService,
+          },
+        ],
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoanCalculatorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    loanCalculatorComponent = fixture.componentInstance;
+    el = fixture.debugElement;
   });
 
-  it('should create', () => {
-    expect(component).toBeDefined();
+  it('should create loan calculator feature component', () => {
+    expect(loanCalculatorComponent).toBeTruthy();
   });
+
+  // it('should display product summary', () => {
+  //   fixture.detectChanges();
+  //   expect(el.query(By.css('.item-details'))).toBeTruthy();
+  // });
 });
