@@ -11,11 +11,12 @@ const defaultHeadings: string[] = [
 ];
 
 export enum AssetColumn {
-  EMPTY,
   NUMBER,
   CATEGORY_NAME,
   PAYMENT_FREQUENCY,
   STATUS,
+  CLAIM,
+  EMPTY,
 }
 const assetTableConfig: { [key in AssetTableType]: DataByAssetType } = {
   claims: {
@@ -41,7 +42,7 @@ const assetTableConfig: { [key in AssetTableType]: DataByAssetType } = {
     ],
   },
   policies: {
-    headings: [...defaultHeadings, 'fscommon.none'],
+    headings: [...defaultHeadings, 'claim.claim', 'fscommon.none'],
     values: [
       {
         column: AssetColumn.NUMBER,
@@ -64,6 +65,12 @@ const assetTableConfig: { [key in AssetTableType]: DataByAssetType } = {
         column: AssetColumn.EMPTY,
         propName: false,
         value: 'fscommon.none',
+        startClaim: true,
+      },
+      {
+        column: AssetColumn.CLAIM,
+        propName: true,
+        value: 'fscommon.create',
         startClaim: true,
         classes: 'notice-hover',
       },

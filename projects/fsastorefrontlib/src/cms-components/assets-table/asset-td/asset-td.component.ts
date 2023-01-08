@@ -43,7 +43,7 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
         this.icon.show = true;
       }
 
-      if (this.assetConfig.column === AssetColumn.EMPTY) {
+      if (this.assetConfig.column === AssetColumn.CLAIM) {
         this.icon = {
           show: true,
           type: FS_ICON_TYPE.CHEVRON_RIGHT,
