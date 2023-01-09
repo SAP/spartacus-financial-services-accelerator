@@ -14,6 +14,7 @@ import { FS_ICON_TYPE } from '../../../core/icon-config/icon-config';
 import {
   AssetTableType,
   DataAssetConfig,
+  RequestType,
 } from '../../../occ/occ-models/occ.models';
 
 @Component({
@@ -39,11 +40,11 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (this.selectedAsset === AssetTableType.POLICIES) {
-      if (this.assetConfig.column === AssetColumn.NUMBER) {
+      if (this.assetConfig.column === AssetColumn.NUMBER && this.allowedFSRequestTypesIsClaim(this.asset)) {
         this.icon.show = true;
       }
 
-      if (this.assetConfig.column === AssetColumn.CLAIM) {
+      if (this.assetConfig.column === AssetColumn.CLAIM && this.allowedFSRequestTypesIsClaim(this.asset)) {
         this.icon = {
           show: true,
           type: FS_ICON_TYPE.CHEVRON_RIGHT,
@@ -58,6 +59,18 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
     if (this.assetConfig.column === AssetColumn.STATUS) {
       if (el.innerText === 'Active') this.renderer.addClass(el, 'text-success');
     }
+  }
+
+  allowedFSRequestTypesIsClaim(asset) {
+    const allowedFSRequestTypes = asset.categoryData.allowedFSRequestTypes;
+
+    const claimRequestTypeSearch = allowedFSRequestTypes.findIndex(
+      allowedRequestType =>
+        allowedRequestType.requestType.code === RequestType.FSCLAIM
+    );
+
+    const claimRequestTypeFound = claimRequestTypeSearch > -1;
+    return claimRequestTypeFound;
   }
 
   onIconClick(asset, assetConfig) {

@@ -18,6 +18,7 @@ export enum AssetColumn {
   CLAIM,
   EMPTY,
 }
+
 const assetTableConfig: { [key in AssetTableType]: DataByAssetType } = {
   claims: {
     headings: defaultHeadings,
@@ -64,13 +65,14 @@ const assetTableConfig: { [key in AssetTableType]: DataByAssetType } = {
       {
         column: AssetColumn.EMPTY,
         propName: false,
-        value: 'fscommon.none',
+        value: 'fscommon.create',
         startClaim: true,
+        classes: 'notice-hover',
       },
       {
         column: AssetColumn.CLAIM,
         propName: true,
-        value: 'fscommon.create',
+        value: 'fscommon.none',
         startClaim: true,
         classes: 'notice-hover',
       },
