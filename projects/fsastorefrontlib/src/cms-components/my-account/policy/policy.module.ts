@@ -26,6 +26,7 @@ import { ChangeRequestService } from './../../../core/change-request/facade/chan
 import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
 import { DocumentsTableModule } from '../documents/documents-table/documents-table.module';
 import { PoliciesChartModule } from './policies-chart/policies-chart.module';
+import { GenericSyncPilotModule } from '../../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 
 const routes: Routes = [
   {
@@ -61,6 +62,7 @@ const routes: Routes = [
     MediaModule,
     DocumentsTableModule,
     PoliciesChartModule,
+    GenericSyncPilotModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
