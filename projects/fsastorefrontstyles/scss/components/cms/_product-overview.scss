@@ -1,6 +1,11 @@
 %cx-fs-product-overview {
   .product {
     border: 1px solid var(--cx-color-3);
+    cx-media {
+      border-radius: 50%;
+      border: 1px solid var(--cx-color-3);
+      padding: 0.6rem;
+    }
   }
 
   .product:hover {

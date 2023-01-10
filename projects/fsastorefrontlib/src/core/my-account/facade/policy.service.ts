@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { UserIdService } from '@spartacus/core';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
-import { UserIdService } from '@spartacus/core';
-import { take } from 'rxjs/operators';
 import { StateWithMyAccount } from '../store/my-account-state';
 
 @Injectable()
 export class PolicyService {
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected userIdService: UserIdService
+    protected userIdService: UserIdService,
+    protected oboCustomerService: OboCustomerService
   ) {}
 
   getPolicies(): Observable<any> {
@@ -56,15 +58,15 @@ export class PolicyService {
   }
 
   loadPolicyDetails(policyId, contractId) {
-    this.userIdService
-      .getUserId()
+    this.oboCustomerService
+      .getOboCustomerUserId()
       .pipe(take(1))
-      .subscribe(occUserId =>
+      .subscribe(userId =>
         this.store.dispatch(
           new fromAction.LoadPolicyDetails({
-            userId: occUserId,
-            policyId: policyId,
-            contractId: contractId,
+            userId,
+            policyId,
+            contractId,
           })
         )
       )
