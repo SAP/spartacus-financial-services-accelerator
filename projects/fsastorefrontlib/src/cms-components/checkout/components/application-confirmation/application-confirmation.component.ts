@@ -39,7 +39,7 @@ export class ApplicationConfirmationComponent implements OnInit {
         )
         .subscribe()
     );
-
+    localStorage.removeItem('applicationConfirmation');
     if (!this.quotePrice) {
       this.routingService.go('/');
     }
