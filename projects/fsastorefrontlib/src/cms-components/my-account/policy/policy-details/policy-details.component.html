@@ -455,14 +455,47 @@
       <div class="container-fluid">
         <div class="row">
           <div class="content-box col-xs-10 col-sm-4 col-md-3">
-            <img
-              class="circle-image"
-              [src]="baseUrl + policy.responsibleAgent?.thumbnail?.url"
-              [alt]="policy.responsibleAgent?.displayName"
-            />
+            <cx-media
+              class="cx-product-image-container"
+              [container]="policy.responsibleAgent.thumbnail"
+              format="thumbnail"
+            >
+            </cx-media>
             <p class="content-box-info">
               {{ policy.responsibleAgent?.displayName }}
             </p>
+            <a
+              class="fas fa-envelope px-2"
+              [routerLink]="
+                {
+                  cxRoute: 'contactAgent',
+                  params: { agent: policy.responsibleAgent.email }
+                } | cxUrl
+              "
+            >
+            </a>
+            <a
+              class="fas fa-map-marker-alt px-2"
+              [routerLink]="['/agent-locator']"
+              [queryParams]="{ query: policy.responsibleAgent.email }"
+            ></a>
+            <a
+              class="fas fa-calendar-alt px-2"
+              [routerLink]="
+                {
+                  cxRoute: 'appointmentSchedulingPage',
+                  params: { agent: policy.responsibleAgent.email }
+                } | cxUrl
+              "
+            ></a>
+            <cx-fs-generic-sync-pilot
+              #syncPilot
+              [ngClass]="{
+                'd-inline-block px-2': syncPilot?.user$ | async
+              }"
+              *ngIf="policy.responsibleAgent.participationStatus"
+              [agent]="policy.responsibleAgent"
+            ></cx-fs-generic-sync-pilot>
           </div>
         </div>
       </div>

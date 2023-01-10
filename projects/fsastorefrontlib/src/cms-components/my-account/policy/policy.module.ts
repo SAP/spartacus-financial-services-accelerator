@@ -15,6 +15,7 @@ import {
   CmsConfig,
   RoutesConfig,
   RoutingConfig,
+  UrlModule,
 } from '@spartacus/core';
 import { CmsPageGuard } from '@spartacus/storefront';
 import { PoliciesComponent } from './policies/policies.component';
@@ -52,6 +53,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule,
     I18nModule,
+    UrlModule,
     NgSelectModule,
     SpinnerModule,
     AccordionModule,
