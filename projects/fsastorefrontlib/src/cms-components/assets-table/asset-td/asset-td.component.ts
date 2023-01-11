@@ -40,11 +40,17 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (this.selectedAsset === AssetTableType.POLICIES) {
-      if (this.assetConfig.column === AssetColumn.NUMBER && this.allowedFSRequestTypesIsClaim(this.asset)) {
+      if (
+        this.assetConfig.column === AssetColumn.NUMBER &&
+        this.allowedFSRequestTypesIsClaim(this.asset)
+      ) {
         this.icon.show = true;
       }
 
-      if (this.assetConfig.column === AssetColumn.CLAIM && this.allowedFSRequestTypesIsClaim(this.asset)) {
+      if (
+        this.assetConfig.column === AssetColumn.CLAIM &&
+        this.allowedFSRequestTypesIsClaim(this.asset)
+      ) {
         this.icon = {
           show: true,
           type: FS_ICON_TYPE.CHEVRON_RIGHT,
