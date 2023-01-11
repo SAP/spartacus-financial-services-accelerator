@@ -8,7 +8,6 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { DashboardLinkComponent } from './dashboard-link.component';
-import { PageSlotModule } from '@spartacus/storefront';
 
 @NgModule({
   imports: [CommonModule, UrlModule, RouterModule, I18nModule],
