@@ -29,13 +29,12 @@ describe(`ApplicationConfirmationGuard`, () => {
   });
 
   it(`should redirect to homepage when application checkout is not active `, () => {
-    localStorage.setItem('applicationConfirmation', 'false');
+    spyOn(localStorage, 'getItem').and.returnValue('false');
     guard.canActivate();
     expect(routing.go).toHaveBeenCalled();
   });
 
   it(`should not redirect to the homepage when application checkout is active `, () => {
-    localStorage.setItem('applicationConfirmation', 'true');
     guard.canActivate();
     expect(routing.go).not.toHaveBeenCalled();
   });
