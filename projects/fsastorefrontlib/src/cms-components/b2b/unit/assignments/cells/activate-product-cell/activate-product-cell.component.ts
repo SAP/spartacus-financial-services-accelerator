@@ -15,8 +15,10 @@ import { ProductAssignmentService } from '../../../../../../core/product-assignm
   templateUrl: './activate-product-cell.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActivateProductCellComponent extends CellComponent
-  implements OnDestroy {
+export class ActivateProductCellComponent
+  extends CellComponent
+  implements OnDestroy
+{
   constructor(
     protected outlet: OutletContextData<TableDataOutletContext>,
     protected productAssignmentService: ProductAssignmentService,

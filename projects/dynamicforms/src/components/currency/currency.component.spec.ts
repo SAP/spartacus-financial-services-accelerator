@@ -113,8 +113,9 @@ describe('CurrencyComponent', () => {
   });
 
   it('should render currency component', () => {
-    const currencyComponent = el.query(By.css('input[type="text"]'))
-      .nativeElement;
+    const currencyComponent = el.query(
+      By.css('input[type="text"]')
+    ).nativeElement;
     expect(currencyComponent).toBeTruthy();
   });
 });

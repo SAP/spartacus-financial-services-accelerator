@@ -30,21 +30,21 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        SpinnerModule,
-        MediaModule,
-        RouterModule.forChild(routes),
-        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-            cmsComponents: {
-                AccountPremiumCalendarFlex: {
-                    component: PremiumCalendarComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [PremiumCalendarComponent],
-    exports: [PremiumCalendarComponent]
+  imports: [
+    CommonModule,
+    I18nModule,
+    SpinnerModule,
+    MediaModule,
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+      cmsComponents: {
+        AccountPremiumCalendarFlex: {
+          component: PremiumCalendarComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [PremiumCalendarComponent],
+  exports: [PremiumCalendarComponent],
 })
 export class PremiumCalendarModule {}

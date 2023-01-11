@@ -62,9 +62,9 @@ describe('AssetsTableComponent', () => {
 
     mockRoutingService = TestBed.inject(RoutingService);
     fileServiceSpy = TestBed.inject(FileService) as jasmine.SpyObj<FileService>;
-    claimServiceSpy = TestBed.inject(ClaimService) as jasmine.SpyObj<
+    claimServiceSpy = TestBed.inject(
       ClaimService
-    >;
+    ) as jasmine.SpyObj<ClaimService>;
   });
 
   beforeEach(() => {

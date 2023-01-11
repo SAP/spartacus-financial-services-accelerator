@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
 import { ActiveCartService } from '@spartacus/cart/base/core';
-import { CheckoutAuthGuard, CheckoutConfigService } from '@spartacus/checkout/base/components';
+import {
+  CheckoutAuthGuard,
+  CheckoutConfigService,
+} from '@spartacus/checkout/base/components';
 import {
   AuthRedirectService,
   AuthService,

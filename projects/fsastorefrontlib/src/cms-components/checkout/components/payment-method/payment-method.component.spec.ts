@@ -30,10 +30,10 @@ const mockPaymentTypes = [
     code: 'INVOICE',
   },
 ];
-const mockPaymentDetailsState: QueryState<PaymentDetails | undefined> = { 
+const mockPaymentDetailsState: QueryState<PaymentDetails | undefined> = {
   loading: false,
   error: false,
-  data:{
+  data: {
     id: 'mock payment id',
     accountHolderName: 'Name',
     cardNumber: '123456789',
@@ -44,7 +44,7 @@ const mockPaymentDetailsState: QueryState<PaymentDetails | undefined> = {
     expiryMonth: '01',
     expiryYear: '2022',
     cvn: '123',
-  }
+  },
 };
 
 const mockCategoryAndStep: FSSteps = {

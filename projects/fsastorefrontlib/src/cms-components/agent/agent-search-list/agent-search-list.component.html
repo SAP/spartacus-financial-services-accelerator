@@ -17,7 +17,14 @@
           "
         >
           <div
-            class="col-lg-6 col-12 mb-5 d-flex justify-content-center align-items-center semi-bold"
+            class="
+              col-lg-6 col-12
+              mb-5
+              d-flex
+              justify-content-center
+              align-items-center
+              semi-bold
+            "
           >
             {{ 'fscommon.totalResults' | cxTranslate }} :
             {{ pagination.totalResults }}
@@ -85,7 +92,14 @@
               "
             >
               <div
-                class="row no-gutters agent-list-item py-3 px-4 border-bottom border-color-3"
+                class="
+                  row
+                  no-gutters
+                  agent-list-item
+                  py-3
+                  px-4
+                  border-bottom border-color-3
+                "
                 [ngClass]="{
                   active: selectedIndex === i,
                   'd-none d-lg-flex': !initialActiveAgent && selectedIndex !== i

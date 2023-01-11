@@ -5,8 +5,8 @@ import { I18nModule, UrlModule } from '@spartacus/core';
 import { ProgressBarComponent } from './progress-bar.component';
 
 @NgModule({
-    imports: [CommonModule, I18nModule, UrlModule, RouterModule],
-    declarations: [ProgressBarComponent],
-    exports: [ProgressBarComponent]
+  imports: [CommonModule, I18nModule, UrlModule, RouterModule],
+  declarations: [ProgressBarComponent],
+  exports: [ProgressBarComponent],
 })
 export class ProgressBarModule {}

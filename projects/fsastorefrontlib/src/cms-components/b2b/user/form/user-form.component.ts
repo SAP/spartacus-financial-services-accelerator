@@ -51,7 +51,9 @@ export class FSUserFormComponent extends UserFormComponent {
 
   updateRoles(event: MouseEvent) {
     this.roles.reset();
-    this.roles.push(new UntypedFormControl((<HTMLInputElement>event.target).value));
+    this.roles.push(
+      new UntypedFormControl((<HTMLInputElement>event.target).value)
+    );
   }
 
   getDateFormat() {

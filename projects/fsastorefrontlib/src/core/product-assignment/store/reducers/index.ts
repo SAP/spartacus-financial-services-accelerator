@@ -9,9 +9,9 @@ export function getReducers(): ActionReducerMap<ProductAssignmentsState> {
     productAssignments: fromReducer.reducer,
   };
 }
-export const reducerToken: InjectionToken<ActionReducerMap<
-  ProductAssignmentsState
->> = new InjectionToken<ActionReducerMap<ProductAssignmentsState>>(
+export const reducerToken: InjectionToken<
+  ActionReducerMap<ProductAssignmentsState>
+> = new InjectionToken<ActionReducerMap<ProductAssignmentsState>>(
   'ProductAssignmentsReducers'
 );
 export const reducerProvider: Provider = {

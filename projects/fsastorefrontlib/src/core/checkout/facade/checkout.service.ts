@@ -11,7 +11,10 @@ import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
-import { CheckoutDeliveryModesFacade, CheckoutState } from '@spartacus/checkout/base/root';
+import {
+  CheckoutDeliveryModesFacade,
+  CheckoutState,
+} from '@spartacus/checkout/base/root';
 import { Order } from '@spartacus/order/root';
 import { map } from 'rxjs/operators';
 import { OccOrderAdapter } from '@spartacus/order/occ';
@@ -98,14 +101,14 @@ export class FSCheckoutService {
     });
   }
 
-  placeOrder(termsChecked: boolean){
+  placeOrder(termsChecked: boolean) {
     combineLatest([
       this.userIdService.getUserId(),
-      this.activeCartService.getActiveCartId()]
-    ).pipe(
+      this.activeCartService.getActiveCartId(),
+    ]).pipe(
       map(([userId, cartId]) => {
         this.occOrderAdapter.placeOrder(userId, cartId, termsChecked);
-      }
-    ));
+      })
+    );
   }
 }

@@ -18,7 +18,8 @@ import { UntypedFormGroup } from '@angular/forms';
   templateUrl: './product-configuration-navigation.component.html',
 })
 export class ProductConfigurationNavigationComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   constructor(
     protected formDataStorageService: FormDataStorageService,
     protected formDataService: FormDataService,

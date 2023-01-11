@@ -42,9 +42,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   getCurrentStepIndex(
     activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot
   ) {
-    const currentStepUrl: string = this.getUrlFromActivatedRoute(
-      activatedRoute
-    );
+    const currentStepUrl: string =
+      this.getUrlFromActivatedRoute(activatedRoute);
     let stepIndex: number;
     let index = 0;
     for (const step of this.steps) {

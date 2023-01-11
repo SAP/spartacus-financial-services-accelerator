@@ -41,7 +41,7 @@ class MockOrderFacade {
 }
 
 class MockEventService {
-  dispatch(){}
+  dispatch() {}
 }
 
 describe('OrderConfirmationComponent', () => {
@@ -50,7 +50,8 @@ describe('OrderConfirmationComponent', () => {
   let checkoutService: FSCheckoutService;
   let translationService: FSTranslationService;
   let orderFacade: OrderFacade;
-  let eventService; EventService;
+  let eventService;
+  EventService;
 
   beforeEach(
     waitForAsync(() => {

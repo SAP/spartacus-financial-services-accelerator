@@ -102,8 +102,9 @@ describe('CheckboxComponent', () => {
   });
 
   it('should checkbox component', () => {
-    const checkboxComponent = el.query(By.css('input[type="checkbox"]'))
-      .nativeElement;
+    const checkboxComponent = el.query(
+      By.css('input[type="checkbox"]')
+    ).nativeElement;
     expect(checkboxComponent).toBeTruthy();
   });
 });

@@ -15,26 +15,26 @@ import { LegalCheckboxesComponent } from './legal-checkboxes/legal-checkboxes.co
 import { LegalDocumentsComponent } from './legal-documents/legal-documents.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        I18nModule,
-        RouterModule,
-        NgSelectModule,
-        SpinnerModule,
-        MediaModule,
-        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-            cmsComponents: {
-                LegalDocumentsFlex: {
-                    component: LegalDocumentsComponent,
-                },
-                LegalChecksFlex: {
-                    component: LegalCheckboxesComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [LegalDocumentsComponent, LegalCheckboxesComponent],
-    exports: [LegalDocumentsComponent, LegalCheckboxesComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    I18nModule,
+    RouterModule,
+    NgSelectModule,
+    SpinnerModule,
+    MediaModule,
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+      cmsComponents: {
+        LegalDocumentsFlex: {
+          component: LegalDocumentsComponent,
+        },
+        LegalChecksFlex: {
+          component: LegalCheckboxesComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [LegalDocumentsComponent, LegalCheckboxesComponent],
+  exports: [LegalDocumentsComponent, LegalCheckboxesComponent],
 })
 export class LegalModule {}

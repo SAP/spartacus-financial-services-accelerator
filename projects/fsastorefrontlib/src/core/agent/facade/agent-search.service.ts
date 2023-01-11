@@ -26,18 +26,19 @@ export class AgentSearchService {
         this.clearWatchGeolocation();
       }
 
-      this.geolocationWatchId = this.winRef.nativeWindow.navigator.geolocation.watchPosition(
-        pos => {
-          position = {
-            longitude: pos.coords.longitude,
-            latitude: pos.coords.latitude,
-          };
-          this.getAgentsByQuery(searchQuery, pageNumber, position);
-        },
-        () => {
-          this.getAgentsByQuery(searchQuery, pageNumber);
-        }
-      );
+      this.geolocationWatchId =
+        this.winRef.nativeWindow.navigator.geolocation.watchPosition(
+          pos => {
+            position = {
+              longitude: pos.coords.longitude,
+              latitude: pos.coords.latitude,
+            };
+            this.getAgentsByQuery(searchQuery, pageNumber, position);
+          },
+          () => {
+            this.getAgentsByQuery(searchQuery, pageNumber);
+          }
+        );
     }
   }
 

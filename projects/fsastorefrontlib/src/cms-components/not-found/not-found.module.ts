@@ -5,19 +5,19 @@ import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        RouterModule,
-        ConfigModule.withConfig(<CmsConfig>{
-            cmsComponents: {
-                NotFoundFlex: {
-                    component: NotFoundComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [NotFoundComponent],
-    exports: [NotFoundComponent]
+  imports: [
+    CommonModule,
+    I18nModule,
+    RouterModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        NotFoundFlex: {
+          component: NotFoundComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [NotFoundComponent],
+  exports: [NotFoundComponent],
 })
 export class NotFoundModule {}

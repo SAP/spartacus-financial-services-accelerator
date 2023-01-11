@@ -42,9 +42,10 @@ export class FormComponentDirective implements OnInit {
         Supported types: ${supportedTypes}`
       );
     }
-    const component = this.resolver.resolveComponentFactory<
-      AbstractFormComponent
-    >(this.components[this.config.fieldType]);
+    const component =
+      this.resolver.resolveComponentFactory<AbstractFormComponent>(
+        this.components[this.config.fieldType]
+      );
     this.component = this.container.createComponent(component);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;

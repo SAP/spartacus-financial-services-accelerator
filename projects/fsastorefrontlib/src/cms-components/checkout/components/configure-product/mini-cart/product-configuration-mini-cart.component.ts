@@ -25,7 +25,8 @@ import { PAY_NOW_BILLING_TIME_CODE } from '../../../../../core/general-config/de
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductConfigurationMiniCartComponent
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   constructor(
     protected pricingService: PricingService,
     protected productService: FSProductService,
@@ -61,10 +62,11 @@ export class ProductConfigurationMiniCartComponent
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                this.pricingData = this.pricingService.buildPricingDataWithFormDefinition(
-                  JSON.parse(formData.content),
-                  JSON.parse(formData.formDefinition.content)
-                );
+                this.pricingData =
+                  this.pricingService.buildPricingDataWithFormDefinition(
+                    JSON.parse(formData.content),
+                    JSON.parse(formData.formDefinition.content)
+                  );
                 this.product$ = this.productService.getCalculatedProductData(
                   this.productId,
                   this.pricingData

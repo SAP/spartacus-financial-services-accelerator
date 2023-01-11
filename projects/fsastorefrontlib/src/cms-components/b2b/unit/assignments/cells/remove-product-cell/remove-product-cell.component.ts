@@ -20,7 +20,8 @@ import { ProductAssignmentService } from '../../../../../../core/product-assignm
 })
 export class RemoveProductCellComponent<FSProductAssignment>
   extends CellComponent
-  implements OnDestroy {
+  implements OnDestroy
+{
   constructor(
     protected outlet: OutletContextData<TableDataOutletContext>,
     protected productAssignmentService: ProductAssignmentService,

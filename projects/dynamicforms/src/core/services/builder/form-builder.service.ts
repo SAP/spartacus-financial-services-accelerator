@@ -49,9 +49,8 @@ export class FormBuilderService {
 
   createControl(fieldConfig: FieldConfig) {
     const { disabled, value } = fieldConfig;
-    const validations = this.formValidationService.getValidatorsForField(
-      fieldConfig
-    );
+    const validations =
+      this.formValidationService.getValidatorsForField(fieldConfig);
     return this.fb.control({ disabled, value }, validations);
   }
 

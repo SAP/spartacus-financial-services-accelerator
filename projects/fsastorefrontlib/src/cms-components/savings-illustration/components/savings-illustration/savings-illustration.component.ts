@@ -44,7 +44,8 @@ import { PaginationHelper } from '../../../../shared/util/helpers/pagination/Pag
   providers: [SavingsIllustrationChartService],
 })
 export class SavingsIllustrationComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChildren('nav') tabNavigation: QueryList<NgbNav>;
 
   private subscription: Subscription = new Subscription();
@@ -69,13 +70,11 @@ export class SavingsIllustrationComponent
     totalResults: 0,
   };
 
-  private paginationBehaviourSubject: BehaviorSubject<
-    PaginationModel
-  > = new BehaviorSubject(this.paginationRaw);
+  private paginationBehaviourSubject: BehaviorSubject<PaginationModel> =
+    new BehaviorSubject(this.paginationRaw);
 
-  pagination$: Observable<
-    PaginationModel
-  > = this.paginationBehaviourSubject.asObservable();
+  pagination$: Observable<PaginationModel> =
+    this.paginationBehaviourSubject.asObservable();
 
   constructor(
     protected winRef: WindowRef,
@@ -241,29 +240,30 @@ export class SavingsIllustrationComponent
 
     return {
       ...product,
-      salesIllustrationDiagramData: product?.salesIllustrationDiagramData?.reduce(
-        (accum, curr) => ({
-          contributionSeries: [
-            ...accum.contributionSeries,
-            curr.contribution.toFixed(2),
-          ],
-          expectedSavingsSeries: [
-            ...accum.expectedSavingsSeries,
-            curr.expectedSavingAmount.toFixed(2),
-          ],
-          interestSeries: [
-            ...accum.interestSeries,
-            (curr.expectedSavingAmount - curr.contribution).toFixed(2),
-          ],
-          years: [...accum.years, new Date(curr.date).getUTCFullYear()],
-        }),
-        {
-          contributionSeries: [],
-          expectedSavingsSeries: [],
-          interestSeries: [],
-          years: [],
-        }
-      ),
+      salesIllustrationDiagramData:
+        product?.salesIllustrationDiagramData?.reduce(
+          (accum, curr) => ({
+            contributionSeries: [
+              ...accum.contributionSeries,
+              curr.contribution.toFixed(2),
+            ],
+            expectedSavingsSeries: [
+              ...accum.expectedSavingsSeries,
+              curr.expectedSavingAmount.toFixed(2),
+            ],
+            interestSeries: [
+              ...accum.interestSeries,
+              (curr.expectedSavingAmount - curr.contribution).toFixed(2),
+            ],
+            years: [...accum.years, new Date(curr.date).getUTCFullYear()],
+          }),
+          {
+            contributionSeries: [],
+            expectedSavingsSeries: [],
+            interestSeries: [],
+            years: [],
+          }
+        ),
     };
   }
 

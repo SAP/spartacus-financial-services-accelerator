@@ -68,9 +68,10 @@ export class CartEffects {
                   ? cart.guid
                   : cart.cartCode;
               if (cart?.entry?.product?.defaultCategory) {
-                const formDataId = this.formDataStorageService.getFormDataIdByCategory(
-                  cart.entry.product.defaultCategory.code
-                );
+                const formDataId =
+                  this.formDataStorageService.getFormDataIdByCategory(
+                    cart.entry.product.defaultCategory.code
+                  );
                 if (formDataId) {
                   const insuranceQuote = {
                     quoteDetails: {

@@ -4,7 +4,11 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import {
   GlobalMessageService,
   TranslationService,
@@ -13,7 +17,10 @@ import {
   UserService,
 } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
-import { AddressFormComponent, LaunchDialogService } from '@spartacus/storefront';
+import {
+  AddressFormComponent,
+  LaunchDialogService,
+} from '@spartacus/storefront';
 import { FSAddressService } from 'projects/fsastorefrontlib/src/core/user/facade/address.service';
 
 @Component({
@@ -21,8 +28,10 @@ import { FSAddressService } from 'projects/fsastorefrontlib/src/core/user/facade
   templateUrl: './address-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FSAddressFormComponent extends AddressFormComponent
-  implements OnInit {
+export class FSAddressFormComponent
+  extends AddressFormComponent
+  implements OnInit
+{
   @Input()
   user: User;
   buttonVisible = true;

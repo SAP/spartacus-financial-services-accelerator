@@ -1,5 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { FormService } from './form.service';
 
 const mockFormGroup = new UntypedFormGroup({

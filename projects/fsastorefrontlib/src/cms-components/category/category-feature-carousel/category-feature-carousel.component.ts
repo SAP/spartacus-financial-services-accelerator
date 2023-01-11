@@ -13,9 +13,7 @@ import {
 })
 export class CategoryFeatureCarouselComponent implements OnInit, OnDestroy {
   constructor(
-    protected componentData: CmsComponentData<
-      CmsCategoryFeatureCarouselComponent
-    >,
+    protected componentData: CmsComponentData<CmsCategoryFeatureCarouselComponent>,
     protected cmsService: CmsService
   ) {}
 

@@ -6,19 +6,19 @@ import { DynamicFormModule } from '@spartacus/dynamicforms';
 import { PersonalDetailsComponent } from './personal-details.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        DynamicFormModule,
-        SpinnerModule,
-        ConfigModule.withConfig(<CmsConfig>{
-            cmsComponents: {
-                PersonalDetailsFlex: {
-                    component: PersonalDetailsComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [PersonalDetailsComponent],
-    exports: [PersonalDetailsComponent]
+  imports: [
+    CommonModule,
+    DynamicFormModule,
+    SpinnerModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        PersonalDetailsFlex: {
+          component: PersonalDetailsComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [PersonalDetailsComponent],
+  exports: [PersonalDetailsComponent],
 })
 export class PersonalDetailsModule {}

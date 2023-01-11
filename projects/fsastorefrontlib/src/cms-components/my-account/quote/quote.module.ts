@@ -63,45 +63,45 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        I18nModule,
-        FormsModule,
-        NgSelectModule,
-        SpinnerModule,
-        MediaModule,
-        UrlModule,
-        AccordionModule,
-        NgbTooltipModule,
-        RouterModule.forChild(routes),
-        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-            cmsComponents: {
-                AccountMyQuotesFlex: {
-                    component: QuotesComponent,
-                },
-                AccountQuoteDetailsFlex: {
-                    component: QuoteDetailsComponent,
-                },
-                AccountQuoteComparisonFlex: {
-                    component: QuoteComparisonComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [
-        QuotesComponent,
-        QuoteDetailsComponent,
-        QuoteComparisonComponent,
-        BillingEventValuePipe,
-        BankingEntryValuePipe,
-    ],
-    exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
-    providers: [
-        QuoteService,
-        QuoteConnector,
-        PolicyChartDataService,
-        TranslatePipe,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    I18nModule,
+    FormsModule,
+    NgSelectModule,
+    SpinnerModule,
+    MediaModule,
+    UrlModule,
+    AccordionModule,
+    NgbTooltipModule,
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+      cmsComponents: {
+        AccountMyQuotesFlex: {
+          component: QuotesComponent,
+        },
+        AccountQuoteDetailsFlex: {
+          component: QuoteDetailsComponent,
+        },
+        AccountQuoteComparisonFlex: {
+          component: QuoteComparisonComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [
+    QuotesComponent,
+    QuoteDetailsComponent,
+    QuoteComparisonComponent,
+    BillingEventValuePipe,
+    BankingEntryValuePipe,
+  ],
+  exports: [QuotesComponent, QuoteDetailsComponent, QuoteComparisonComponent],
+  providers: [
+    QuoteService,
+    QuoteConnector,
+    PolicyChartDataService,
+    TranslatePipe,
+  ],
 })
 export class QuoteModule {}

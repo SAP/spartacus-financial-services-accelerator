@@ -166,10 +166,11 @@ export class QuotesComponent implements OnInit, OnDestroy {
 
   protected getQuotesByCategory(quotes) {
     this.quotesByCategory = quotes.reduce((quote, item) => {
-      const groupCriteria = this.policyChartDataService.getObjectValueByProperty(
-        'defaultCategory.name',
-        item
-      );
+      const groupCriteria =
+        this.policyChartDataService.getObjectValueByProperty(
+          'defaultCategory.name',
+          item
+        );
       quote[groupCriteria] = quote[groupCriteria] || [];
       quote[groupCriteria].push({
         name: item.defaultCategory.name,

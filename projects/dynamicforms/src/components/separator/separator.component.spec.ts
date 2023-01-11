@@ -1,6 +1,10 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UntypedFormControl, UntypedFormGroup, AbstractControl } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  AbstractControl,
+} from '@angular/forms';
 import { SeparatorComponent } from './separator.component';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';

@@ -39,25 +39,25 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        RouterModule,
-        NgSelectModule,
-        SpinnerModule,
-        CmsModule,
-        ListNavigationModule,
-        RouterModule.forChild(routes),
-        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-            cmsComponents: {
-                CMSInboxComponent: {
-                    component: InboxComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
-    exports: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
-    providers: [InboxConnector, InboxDataService, InboxService]
+  imports: [
+    CommonModule,
+    I18nModule,
+    RouterModule,
+    NgSelectModule,
+    SpinnerModule,
+    CmsModule,
+    ListNavigationModule,
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+      cmsComponents: {
+        CMSInboxComponent: {
+          component: InboxComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
+  exports: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
+  providers: [InboxConnector, InboxDataService, InboxService],
 })
 export class InboxModule {}

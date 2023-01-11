@@ -37,9 +37,10 @@ export class FormCMSComponent implements OnInit, OnDestroy {
         if (definition.content) {
           this.formConfig = <FormDefinition>JSON.parse(definition.content);
         }
-        this.formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
-          definition.formId
-        );
+        this.formDataId =
+          this.formDataStorageService.getFormDataIdByDefinitionCode(
+            definition.formId
+          );
         if (this.formDataId) {
           this.formDataService.loadFormData(this.formDataId);
           this.formData$ = this.formDataService.getFormData();

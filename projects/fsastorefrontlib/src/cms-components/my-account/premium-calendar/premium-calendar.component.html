@@ -19,7 +19,13 @@
         *ngFor="let policy of premiumCalendar.insurancePolicies; let i = index"
       >
         <div
-          class="premium-data-row row border background-color-4 text-center text-lg-left"
+          class="
+            premium-data-row
+            row
+            border
+            background-color-4
+            text-center text-lg-left
+          "
           (click)="toggleActiveAccordion(i)"
           [ngClass]="{
             clickable: policy.billingData?.length > 1,
@@ -120,7 +126,13 @@
           </div>
         </div>
         <div
-          class="col d-lg-none border border-top-0 text-center payment-container"
+          class="
+            col
+            d-lg-none
+            border border-top-0
+            text-center
+            payment-container
+          "
         >
           <h5>
             {{ 'fscommon.paymentMethod' | cxTranslate }}

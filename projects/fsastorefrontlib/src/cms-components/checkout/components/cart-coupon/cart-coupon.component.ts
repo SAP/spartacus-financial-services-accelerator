@@ -4,7 +4,7 @@ import {
   ActiveCartService,
   CartVoucherService,
 } from '@spartacus/cart/base/core';
-import { CustomerCouponService } from '@spartacus/core'
+import { CustomerCouponService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CartCouponComponent } from '@spartacus/cart/base/components';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
@@ -20,8 +20,7 @@ export class FSCartCouponComponent extends CartCouponComponent {
     protected cartVoucherService: CartVoucherService,
     protected formBuilder: UntypedFormBuilder,
     protected customerCouponService: CustomerCouponService,
-    protected activeCartService: ActiveCartService
-    ,
+    protected activeCartService: ActiveCartService,
     protected cartService: FSCartService
   ) {
     super(cartVoucherService, formBuilder, customerCouponService, cartService);

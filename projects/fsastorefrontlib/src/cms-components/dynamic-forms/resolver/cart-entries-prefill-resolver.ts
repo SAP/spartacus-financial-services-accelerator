@@ -12,7 +12,7 @@ export class CartEntriesPrefillResolver implements PrefillResolver {
   getPrefillValue() {
     return this.cartService.getActive().pipe(
       map(cart => {
-      const productCodes = [];
+        const productCodes = [];
         cart.deliveryOrderGroups.forEach(deliveryOrderGroup => {
           deliveryOrderGroup.entries.forEach(entry => {
             if (entry.product) {

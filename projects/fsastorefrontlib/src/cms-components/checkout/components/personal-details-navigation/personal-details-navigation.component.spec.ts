@@ -5,11 +5,7 @@ import {
   FormDataService,
   YFormData,
 } from '@spartacus/dynamicforms';
-import {
-  Address,
-  I18nTestingModule,
-  RoutingService,
-} from '@spartacus/core';
+import { Address, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Cart } from '@spartacus/cart/base/root';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';

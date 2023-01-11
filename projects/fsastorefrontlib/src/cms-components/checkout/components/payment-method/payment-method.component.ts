@@ -15,10 +15,11 @@ import { FSPaymentTypeEnum, FSSteps } from '../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { filter, map, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../core/checkout/facade';
-import { CheckoutDeliveryAddressFacade, CheckoutPaymentFacade } from '@spartacus/checkout/base/root';
 import {
-  CheckoutStepService,
-} from '@spartacus/checkout/base/components';
+  CheckoutDeliveryAddressFacade,
+  CheckoutPaymentFacade,
+} from '@spartacus/checkout/base/root';
+import { CheckoutStepService } from '@spartacus/checkout/base/components';
 import { CheckoutPaymentMethodComponent } from '@spartacus/checkout/base/components';
 import { CheckoutPaymentService } from '@spartacus/checkout/base/core';
 import { CheckoutPaymentTypeFacade } from '@spartacus/checkout/b2b/root';
@@ -29,8 +30,10 @@ import { OccCheckoutPaymentTypeAdapter } from '@spartacus/checkout/b2b/occ';
   selector: 'cx-fs-payment-method',
   templateUrl: './payment-method.component.html',
 })
-export class FSPaymentMethodComponent extends CheckoutPaymentMethodComponent
-  implements OnInit, OnDestroy {
+export class FSPaymentMethodComponent
+  extends CheckoutPaymentMethodComponent
+  implements OnInit, OnDestroy
+{
   constructor(
     protected userPaymentService: UserPaymentService,
     protected fsCheckoutService: FSCheckoutService,
@@ -47,7 +50,7 @@ export class FSPaymentMethodComponent extends CheckoutPaymentMethodComponent
     protected checkoutPaymentService: CheckoutPaymentService,
     protected occCheckoutAdapter: OccCheckoutAdapter,
     protected occCheckoutPaymentTypeAdapter: OccCheckoutPaymentTypeAdapter,
-    protected userIdService: UserIdService,
+    protected userIdService: UserIdService
   ) {
     super(
       userPaymentService,
@@ -79,13 +82,12 @@ export class FSPaymentMethodComponent extends CheckoutPaymentMethodComponent
           .pipe(
             filter(cart => !!cart),
             map(cart => {
-              this.userIdService.getUserId()
-              .pipe(take(1),
-              map(userId =>{
-                this.occCheckoutAdapter.getCheckoutDetails(userId, cart.code);
-              })
-              )
-              
+              this.userIdService.getUserId().pipe(
+                take(1),
+                map(userId => {
+                  this.occCheckoutAdapter.getCheckoutDetails(userId, cart.code);
+                })
+              );
             })
           )
           .subscribe()

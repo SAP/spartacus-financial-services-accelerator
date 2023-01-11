@@ -139,9 +139,10 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     addresses: Address[]
   ) {
     if (user.roles.includes(FSUserRole.SELLER)) {
-      const oboCustomerAddress = this.addressService.populateAddressFromFormData(
-        JSON.parse(formData.content)
-      );
+      const oboCustomerAddress =
+        this.addressService.populateAddressFromFormData(
+          JSON.parse(formData.content)
+        );
       const customerId = JSON.parse(formData.content)[
         this.PERSONAL_DETAILS_FORM_GROUP
       ][this.EMAIL];

@@ -5,7 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { WindowRef, User } from '@spartacus/core';
-import { LaunchDialogService, CmsComponentData, LAUNCH_CALLER } from '@spartacus/storefront';
+import {
+  LaunchDialogService,
+  CmsComponentData,
+  LAUNCH_CALLER,
+} from '@spartacus/storefront';
 import { from, Observable, Subscription } from 'rxjs';
 import { take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -59,7 +63,7 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
     // return from(this.syncPilotService.connect(ownerID));
     const dialog = this.launchDialogService.openDialog(
       LAUNCH_CALLER.SYNC_PILOT
-    )
+    );
     dialog?.pipe(take(1)).subscribe();
 
     return from(this.syncPilotService.connect(ownerID));

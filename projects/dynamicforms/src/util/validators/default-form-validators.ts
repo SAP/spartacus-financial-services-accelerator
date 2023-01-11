@@ -7,7 +7,8 @@ import {
 
 // @dynamic
 export class DefaultFormValidators extends Validators {
-  static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
+  static passwordRegex =
+    /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
 
   static checkEmptyValue(control: AbstractControl) {

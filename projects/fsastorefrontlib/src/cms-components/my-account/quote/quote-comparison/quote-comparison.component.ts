@@ -63,9 +63,8 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
           .pipe(
             filter(([routingData, _]) => !routingData.nextState),
             map(([routingData, occUserId]) => {
-              this.quoteCodes = routingData.state.queryParams.cartCodes.split(
-                ','
-              );
+              this.quoteCodes =
+                routingData.state.queryParams.cartCodes.split(',');
               this.userId = occUserId;
               this.subheader = this.quoteCodes?.join(' / ');
               this.quoteService.loadQuotesComparison(

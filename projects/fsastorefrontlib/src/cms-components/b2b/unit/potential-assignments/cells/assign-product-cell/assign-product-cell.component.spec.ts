@@ -41,9 +41,9 @@ class MockListService {
 }
 describe('AssignProductCellComponent', () => {
   let component: AssignProductCellComponent<FSProductAssignment>;
-  let fixture: ComponentFixture<AssignProductCellComponent<
-    FSProductAssignment
-  >>;
+  let fixture: ComponentFixture<
+    AssignProductCellComponent<FSProductAssignment>
+  >;
   let productAssignmentService: ProductAssignmentService;
   let currentUnitService: CurrentUnitService;
   let organizationItemService: ItemService<FSProductAssignment>;

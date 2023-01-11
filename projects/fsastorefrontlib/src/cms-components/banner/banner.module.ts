@@ -6,19 +6,19 @@ import { ConfigModule, CmsConfig } from '@spartacus/core';
 import { MediaModule } from '@spartacus/storefront';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        MediaModule,
-        ConfigModule.withConfig(<CmsConfig>{
-            cmsComponents: {
-                EnrichedResponsiveBannerComponent: {
-                    component: EnrichedResponsiveBannerComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [EnrichedResponsiveBannerComponent],
-    exports: [EnrichedResponsiveBannerComponent]
+  imports: [
+    CommonModule,
+    RouterModule,
+    MediaModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        EnrichedResponsiveBannerComponent: {
+          component: EnrichedResponsiveBannerComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [EnrichedResponsiveBannerComponent],
+  exports: [EnrichedResponsiveBannerComponent],
 })
 export class BannerModule {}

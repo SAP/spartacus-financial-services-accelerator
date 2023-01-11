@@ -6,7 +6,10 @@ import {
   OCC_CART_ID_CURRENT,
   UserIdService,
 } from '@spartacus/core';
-import { MultiCartService, StateWithMultiCart } from '@spartacus/cart/base/core';
+import {
+  MultiCartService,
+  StateWithMultiCart,
+} from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './cart.service';
 import * as fromAction from './../../checkout/store/actions/index';

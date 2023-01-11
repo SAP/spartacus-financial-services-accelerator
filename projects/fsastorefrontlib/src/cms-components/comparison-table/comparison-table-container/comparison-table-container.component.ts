@@ -27,11 +27,10 @@ export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
     protected comparisonTableService: ComparisonTableService
   ) {}
 
-  component$: Observable<CmsMultiComparisonTabContainer> = this.componentData
-    .data$;
-  availableTabs$: Observable<
-    CMSComparisonTabComponent[]
-  > = this.getAvailableTabsSortedByTitle();
+  component$: Observable<CmsMultiComparisonTabContainer> =
+    this.componentData.data$;
+  availableTabs$: Observable<CMSComparisonTabComponent[]> =
+    this.getAvailableTabsSortedByTitle();
 
   initialTabs: string[];
   tabs: ComparisonPanelCMSComponent[] = [];

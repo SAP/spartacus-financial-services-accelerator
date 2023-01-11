@@ -24,7 +24,7 @@ export class FSNavigationUIComponent extends NavigationUIComponent {
     router: Router,
     protected renderer2: Renderer2,
     elemRef: ElementRef,
-    protected hamburgerMenuService: HamburgerMenuService, 
+    protected hamburgerMenuService: HamburgerMenuService,
     protected winRef: WindowRef
   ) {
     super(router, renderer2, elemRef, hamburgerMenuService, winRef);

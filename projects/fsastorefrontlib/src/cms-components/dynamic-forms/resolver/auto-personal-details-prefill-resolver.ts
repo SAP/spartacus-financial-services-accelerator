@@ -21,7 +21,7 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
     return combineLatest([
       this.cartService.getActive(),
       this.userAccountFacade.get(),
-  ]).pipe(
+    ]).pipe(
       map(([cart, user]) => {
         const fsCart: FSCart = cart;
         const policyHolderSameAsMainDriver =

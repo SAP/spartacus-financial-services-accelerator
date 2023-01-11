@@ -169,8 +169,9 @@ describe('BindQuoteDialogComponent', () => {
 
   it('should show quote binding components', () => {
     fixture.detectChanges();
-    const dialogTitleEl = el.query(By.css('.popup-content-wrapper'))
-      .nativeElement;
+    const dialogTitleEl = el.query(
+      By.css('.popup-content-wrapper')
+    ).nativeElement;
     expect(dialogTitleEl.textContent).toContain('quote.bindingConfirmation');
     expect(dialogTitleEl.textContent).toContain('quote.confirmInformation');
   });

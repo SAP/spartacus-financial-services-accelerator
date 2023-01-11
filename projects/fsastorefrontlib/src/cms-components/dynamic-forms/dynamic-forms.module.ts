@@ -13,45 +13,45 @@ import { FSUserPrefillResolver } from './resolver/user-prefill-resolver';
 import { FSUserAddressPrefillResolver } from './resolver/user-address-prefill-resolver';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        I18nModule,
-        DynamicFormModule,
-        ConfigModule.withConfig(<DynamicFormsConfig>{
-            dynamicForms: {
-                components: {
-                    calculateButton: {
-                        component: CalculationButtonComponent,
-                    },
-                    dynamicSelect: {
-                        component: DynamicSelectComponent,
-                    },
-                },
-                prefill: {
-                    cart: {
-                        prefillResolver: CartPrefillResolver,
-                    },
-                    autoPersonalDetails: {
-                        prefillResolver: AutoPersonalDetailsPrefillResolver,
-                    },
-                    cartEntries: {
-                        prefillResolver: CartEntriesPrefillResolver,
-                    },
-                    claim: {
-                        prefillResolver: ClaimPrefillResolver,
-                    },
-                    user: {
-                        prefillResolver: FSUserPrefillResolver,
-                    },
-                    address: {
-                        prefillResolver: FSUserAddressPrefillResolver,
-                    },
-                },
-            },
-        }),
-    ],
-    declarations: [CalculationButtonComponent, DynamicSelectComponent],
-    exports: [CalculationButtonComponent, DynamicSelectComponent]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    I18nModule,
+    DynamicFormModule,
+    ConfigModule.withConfig(<DynamicFormsConfig>{
+      dynamicForms: {
+        components: {
+          calculateButton: {
+            component: CalculationButtonComponent,
+          },
+          dynamicSelect: {
+            component: DynamicSelectComponent,
+          },
+        },
+        prefill: {
+          cart: {
+            prefillResolver: CartPrefillResolver,
+          },
+          autoPersonalDetails: {
+            prefillResolver: AutoPersonalDetailsPrefillResolver,
+          },
+          cartEntries: {
+            prefillResolver: CartEntriesPrefillResolver,
+          },
+          claim: {
+            prefillResolver: ClaimPrefillResolver,
+          },
+          user: {
+            prefillResolver: FSUserPrefillResolver,
+          },
+          address: {
+            prefillResolver: FSUserAddressPrefillResolver,
+          },
+        },
+      },
+    }),
+  ],
+  declarations: [CalculationButtonComponent, DynamicSelectComponent],
+  exports: [CalculationButtonComponent, DynamicSelectComponent],
 })
 export class FSDynamicformsModule {}

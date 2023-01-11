@@ -13,10 +13,8 @@ class MockConsentAdapter extends ConsentAdapter {
   getOBOCustomerList = createSpy(
     'ConsentAdapter.getOBOCustomerList'
   ).and.callFake(userId => of('getOBOCustomerList' + userId));
-  getOBOCustomer = createSpy(
-    'ConsentAdapter.getOBOCustomer'
-  ).and.callFake((userId, customerId) =>
-    of('getOBOCustomer' + userId + customerId)
+  getOBOCustomer = createSpy('ConsentAdapter.getOBOCustomer').and.callFake(
+    (userId, customerId) => of('getOBOCustomer' + userId + customerId)
   );
   getQuotesForOBOCustomer = createSpy(
     'ConsentAdapter.getQuotesForOBOCustomer'

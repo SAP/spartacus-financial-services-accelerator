@@ -1,9 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  RoutingService,
-  UserIdService,
-} from '@spartacus/core';
+import { RoutingService, UserIdService } from '@spartacus/core';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';

@@ -12,21 +12,21 @@ import { FSCheckoutConfig } from '../../config/checkout-config';
 import { FSCheckoutProgressComponent } from './checkout-progress.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        UrlModule,
-        I18nModule,
-        RouterModule,
-        ConfigModule.withConfig(<CmsConfig>{
-            cmsComponents: {
-                CheckoutProgress: {
-                    component: FSCheckoutProgressComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [FSCheckoutProgressComponent],
-    exports: [FSCheckoutProgressComponent],
-    providers: [{ provide: FSCheckoutConfig, useExisting: Config }]
+  imports: [
+    CommonModule,
+    UrlModule,
+    I18nModule,
+    RouterModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        CheckoutProgress: {
+          component: FSCheckoutProgressComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [FSCheckoutProgressComponent],
+  exports: [FSCheckoutProgressComponent],
+  providers: [{ provide: FSCheckoutConfig, useExisting: Config }],
 })
 export class FSCheckoutProgressModule {}

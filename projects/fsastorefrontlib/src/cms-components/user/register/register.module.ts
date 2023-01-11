@@ -21,26 +21,26 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        NgSelectModule,
-        I18nModule,
-        FormErrorsModule,
-        SpinnerModule,
-        UrlModule,
-        RouterModule.forChild(routes),
-        RegisterComponentModule,
-        ConfigModule.withConfig({
-            cmsComponents: {
-                RegisterCustomerComponent: {
-                    component: FSRegisterComponent,
-                    guards: [NotAuthGuard],
-                },
-            },
-        }),
-    ],
-    declarations: [FSRegisterComponent],
-    exports: [FSRegisterComponent]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+    I18nModule,
+    FormErrorsModule,
+    SpinnerModule,
+    UrlModule,
+    RouterModule.forChild(routes),
+    RegisterComponentModule,
+    ConfigModule.withConfig({
+      cmsComponents: {
+        RegisterCustomerComponent: {
+          component: FSRegisterComponent,
+          guards: [NotAuthGuard],
+        },
+      },
+    }),
+  ],
+  declarations: [FSRegisterComponent],
+  exports: [FSRegisterComponent],
 })
 export class FSRegisterModule {}

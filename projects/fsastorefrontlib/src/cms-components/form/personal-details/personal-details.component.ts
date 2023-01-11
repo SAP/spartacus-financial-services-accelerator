@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  AuthService,
-  UserAddressService,
-} from '@spartacus/core';
+import { AuthService, UserAddressService } from '@spartacus/core';
 import { filter, map, take } from 'rxjs/operators';
 import {
   FormCMSComponent,

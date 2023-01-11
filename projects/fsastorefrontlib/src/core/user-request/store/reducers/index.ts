@@ -20,9 +20,9 @@ export function getReducers(): ActionReducerMap<FSUserRequestState> {
   };
 }
 
-export const reducerToken: InjectionToken<ActionReducerMap<
-  FSUserRequestState
->> = new InjectionToken<ActionReducerMap<FSUserRequestState>>(
+export const reducerToken: InjectionToken<
+  ActionReducerMap<FSUserRequestState>
+> = new InjectionToken<ActionReducerMap<FSUserRequestState>>(
   'FSUserRequestReducers'
 );
 

@@ -13,21 +13,24 @@ import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
 import { defaultCmsSyncPilotDialogLayoutConfig } from '../../sync-pilot-dialog/default-cms-sync-pilot-dialog-layout.config';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        UrlModule,
-        SyncPilotDialogModule,
-        ConfigModule.withConfig(<CmsConfig>{
-            cmsComponents: {
-                CMSConnectionComponent: {
-                    component: CmsSyncPilotComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [CmsSyncPilotComponent],
-    exports: [CmsSyncPilotComponent],
-    providers: [Service, provideDefaultConfig(defaultCmsSyncPilotDialogLayoutConfig)]
+  imports: [
+    CommonModule,
+    I18nModule,
+    UrlModule,
+    SyncPilotDialogModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        CMSConnectionComponent: {
+          component: CmsSyncPilotComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [CmsSyncPilotComponent],
+  exports: [CmsSyncPilotComponent],
+  providers: [
+    Service,
+    provideDefaultConfig(defaultCmsSyncPilotDialogLayoutConfig),
+  ],
 })
 export class CmsSyncPilotModule {}

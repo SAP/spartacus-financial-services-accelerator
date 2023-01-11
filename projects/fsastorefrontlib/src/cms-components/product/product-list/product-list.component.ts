@@ -14,7 +14,6 @@ import { GlobalMessageService } from '@spartacus/core';
   templateUrl: './product-list.component.html',
 })
 export class FSProductListComponent extends ProductListComponent {
-  
   constructor(
     pageLayoutService: PageLayoutService,
     productListComponentService: ProductListComponentService,
@@ -22,7 +21,12 @@ export class FSProductListComponent extends ProductListComponent {
     globalMessageService: GlobalMessageService,
     protected checkoutService: FSCheckoutService
   ) {
-    super(pageLayoutService, productListComponentService, globalMessageService, scrollConfig);
+    super(
+      pageLayoutService,
+      productListComponentService,
+      globalMessageService,
+      scrollConfig
+    );
   }
 
   startCheckout(product: FSProduct) {

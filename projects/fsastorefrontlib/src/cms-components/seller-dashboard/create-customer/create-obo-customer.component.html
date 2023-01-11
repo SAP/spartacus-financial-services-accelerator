@@ -2,9 +2,9 @@
   <label>
     <span class="label-content">{{ 'fscommon.title' | cxTranslate }}</span>
     <select formControlName="titleCode" class="form-control">
-      <option value="" disabled>{{
-        'register.selectTitle' | cxTranslate
-      }}</option>
+      <option value="" disabled>
+        {{ 'register.selectTitle' | cxTranslate }}
+      </option>
       <option *ngFor="let title of titles$ | async" [value]="title.code">
         {{ title.name }}
       </option>

@@ -1,7 +1,6 @@
 import { StateUtils } from '@spartacus/core';
 import { MULTI_CART_DATA } from '@spartacus/cart/base/core';
 
-
 export const ADD_OPTIONAL_PRODUCT = '[Cart] Add Optional Product';
 export const START_BUNDLE = '[Cart] Start Bundle';
 export const START_BUNDLE_FAIL = '[Cart] Start Bundle Fail';

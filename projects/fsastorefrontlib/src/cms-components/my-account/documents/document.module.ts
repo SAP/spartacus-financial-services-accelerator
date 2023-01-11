@@ -11,17 +11,17 @@ import { DocumentsOverviewComponent } from './documents-overview/documents-overv
 import { DocumentsTableModule } from './documents-table/documents-table.module';
 
 @NgModule({
-    imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule],
-    providers: [
-        provideDefaultConfig(<CmsConfig>{
-            cmsComponents: {
-                AccountMyDocumentsFlex: {
-                    component: DocumentsOverviewComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [DocumentsOverviewComponent],
-    exports: [DocumentsOverviewComponent]
+  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule],
+  providers: [
+    provideDefaultConfig(<CmsConfig>{
+      cmsComponents: {
+        AccountMyDocumentsFlex: {
+          component: DocumentsOverviewComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [DocumentsOverviewComponent],
+  exports: [DocumentsOverviewComponent],
 })
 export class DocumentModule {}

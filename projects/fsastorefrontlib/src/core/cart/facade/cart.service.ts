@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ActiveCartService, MultiCartService, StateWithMultiCart } from '@spartacus/cart/base/core';
+import {
+  ActiveCartService,
+  MultiCartService,
+  StateWithMultiCart,
+} from '@spartacus/cart/base/core';
 import { Cart, MultiCartFacade } from '@spartacus/cart/base/root';
-import { OCC_CART_ID_CURRENT, OCC_USER_ID_ANONYMOUS, StateUtils, UserIdService } from '@spartacus/core';
+import {
+  OCC_CART_ID_CURRENT,
+  OCC_USER_ID_ANONYMOUS,
+  StateUtils,
+  UserIdService,
+} from '@spartacus/core';
 
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';

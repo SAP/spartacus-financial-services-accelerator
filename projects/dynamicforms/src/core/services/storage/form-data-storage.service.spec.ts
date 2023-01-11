@@ -41,9 +41,8 @@ describe('FormDataStorageService', () => {
   });
 
   it('should get form storage object by definition code', () => {
-    const formDataId = service.getFormDataIdByDefinitionCode(
-      'formDefinitionId'
-    );
+    const formDataId =
+      service.getFormDataIdByDefinitionCode('formDefinitionId');
     expect(formDataId).toEqual('formDataId');
   });
 

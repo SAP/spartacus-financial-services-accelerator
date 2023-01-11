@@ -12,20 +12,20 @@ import { SelectIdentificationTypeComponent } from './select-identification/selec
 import { FSCheckoutService } from '../../../../core/checkout/facade';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        RouterModule,
-        ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-            cmsComponents: {
-                SelectIdentificationTypeFlex: {
-                    component: SelectIdentificationTypeComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [SelectIdentificationTypeComponent],
-    exports: [SelectIdentificationTypeComponent],
-    providers: [FSCheckoutService]
+  imports: [
+    CommonModule,
+    I18nModule,
+    RouterModule,
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+      cmsComponents: {
+        SelectIdentificationTypeFlex: {
+          component: SelectIdentificationTypeComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [SelectIdentificationTypeComponent],
+  exports: [SelectIdentificationTypeComponent],
+  providers: [FSCheckoutService],
 })
 export class UserIdentificationModule {}

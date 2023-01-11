@@ -62,10 +62,11 @@ describe('FSProductService', () => {
 
   describe('getCalculatedProductData(productCode, pricingData)', () => {
     it('should be able to get product by code and price data', () => {
-      spyOnProperty(ngrxStore, 'select').and.returnValue(() => () =>
-        of({
-          value: mockProduct,
-        })
+      spyOnProperty(ngrxStore, 'select').and.returnValue(
+        () => () =>
+          of({
+            value: mockProduct,
+          })
       );
       let result: Product;
       service

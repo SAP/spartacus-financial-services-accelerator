@@ -90,7 +90,9 @@ describe('FSAddressService', () => {
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
     service = TestBed.inject(FSAddressService);
-    checkoutDeliveryAdressFacade = TestBed.inject(CheckoutDeliveryAddressFacade);
+    checkoutDeliveryAdressFacade = TestBed.inject(
+      CheckoutDeliveryAddressFacade
+    );
     occValueListService = TestBed.inject(OccValueListService);
   });
 
@@ -104,13 +106,16 @@ describe('FSAddressService', () => {
   it('should set delivery address for cart when user already has it', () => {
     spyOn(checkoutDeliveryAdressFacade, 'setDeliveryAddress').and.callThrough();
     service.createAddress(formContent, mockUser.defaultAddress);
-    expect(checkoutDeliveryAdressFacade.setDeliveryAddress).toHaveBeenCalledWith(
-      mockUser.defaultAddress
-    );
+    expect(
+      checkoutDeliveryAdressFacade.setDeliveryAddress
+    ).toHaveBeenCalledWith(mockUser.defaultAddress);
   });
 
   it('should create delivery address', () => {
-    spyOn(checkoutDeliveryAdressFacade, 'createAndSetAddress').and.callThrough();
+    spyOn(
+      checkoutDeliveryAdressFacade,
+      'createAndSetAddress'
+    ).and.callThrough();
     service.createAddress(formContent, null);
     expect(checkoutDeliveryAdressFacade.createAndSetAddress).toHaveBeenCalled();
   });

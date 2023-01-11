@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  QueryState,
-  RoutingService,
-} from '@spartacus/core';
+import { QueryState, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { filter, take } from 'rxjs/operators';
@@ -25,10 +22,12 @@ export class FinalReviewComponent implements OnInit {
 
   ngOnInit() {
     this.checkoutService.mockDeliveryMode();
-    this.paymentDetails$ = this.checkoutPaymentFacade.getPaymentDetailsState().pipe(
-      filter(payment => !!payment),
-      take(1)
-    );
+    this.paymentDetails$ = this.checkoutPaymentFacade
+      .getPaymentDetailsState()
+      .pipe(
+        filter(payment => !!payment),
+        take(1)
+      );
   }
 
   toggleTAndC(event: Event): void {

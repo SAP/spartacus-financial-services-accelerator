@@ -4,8 +4,8 @@ import { SyncPilotDialogComponent } from './sync-pilot-dialog.component';
 import { SpinnerModule } from '@spartacus/storefront';
 
 @NgModule({
-    imports: [I18nModule, SpinnerModule],
-    declarations: [SyncPilotDialogComponent],
-    exports: [SyncPilotDialogComponent]
+  imports: [I18nModule, SpinnerModule],
+  declarations: [SyncPilotDialogComponent],
+  exports: [SyncPilotDialogComponent],
 })
 export class SyncPilotDialogModule {}

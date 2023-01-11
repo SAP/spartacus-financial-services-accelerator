@@ -8,7 +8,7 @@ import {
   I18nTestingModule,
   RoutingService,
 } from '@spartacus/core';
-import {OrderEntry} from '@spartacus/cart/base/root';
+import { OrderEntry } from '@spartacus/cart/base/root';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';

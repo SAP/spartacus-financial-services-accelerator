@@ -16,24 +16,24 @@ import { FormComponent } from './form/form.component';
 import { FileService } from '../services/file/file.service';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        RouterModule,
-        ReactiveFormsModule,
-        ComponentsModule,
-    ],
-    declarations: [FormComponent, DynamicFormComponent],
-    exports: [FormComponent, DynamicFormComponent, ComponentsModule],
-    providers: [
-        FormService,
-        FormBuilderService,
-        FormValidationService,
-        FieldDependencyResolverService,
-        FormDataStorageService,
-        FormConnector,
-        FormDataService,
-        FileService,
-    ]
+  imports: [
+    CommonModule,
+    I18nModule,
+    RouterModule,
+    ReactiveFormsModule,
+    ComponentsModule,
+  ],
+  declarations: [FormComponent, DynamicFormComponent],
+  exports: [FormComponent, DynamicFormComponent, ComponentsModule],
+  providers: [
+    FormService,
+    FormBuilderService,
+    FormValidationService,
+    FieldDependencyResolverService,
+    FormDataStorageService,
+    FormConnector,
+    FormDataService,
+    FileService,
+  ],
 })
 export class FormContainerModule {}

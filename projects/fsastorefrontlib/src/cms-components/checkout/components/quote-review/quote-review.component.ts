@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart } from '@spartacus/cart/base/root';
 import {
@@ -27,7 +34,6 @@ import {
 } from './../../../../occ/occ-models/occ.models';
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 
-
 @Component({
   selector: 'cx-fs-quote-review',
   templateUrl: './quote-review.component.html',
@@ -47,8 +53,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
     protected vcr: ViewContainerRef,
-    protected winRef?: WindowRef,
-
+    protected winRef?: WindowRef
   ) {}
 
   @ViewChild('element') element: ElementRef;
@@ -108,9 +113,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   private openQuoteBindingModal(nextStep) {
     let modalInstanceData: any = {
       cartCode: this.cartCode,
-      nextStepUrl:{
-          cxRoute: nextStep.step,
-      }
+      nextStepUrl: {
+        cxRoute: nextStep.step,
+      },
     };
 
     const dialog = this.launchDialogService.openDialog(
@@ -118,22 +123,22 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       this.element,
       this.vcr,
       modalInstanceData
-    )
-  
+    );
+
     this.subscription.add(
-     dialog
+      dialog
         .pipe(
           take(1),
           map(dialog => {
             this.subscription.add(
               dialog.instance.quoteBinding$
                 .pipe(
-                map(quoteBinding => {
-              this.showContent$ = of(!quoteBinding);
-            })
-          )
-          .subscribe()
-          );
+                  map(quoteBinding => {
+                    this.showContent$ = of(!quoteBinding);
+                  })
+                )
+                .subscribe()
+            );
           })
         )
         .subscribe()
@@ -142,9 +147,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   private openReferredQuoteModal(nextStep) {
     let modalInstanceData: any = {
-      nextStepUrl:{
+      nextStepUrl: {
         cxRoute: nextStep.step,
-    }
+      },
     };
 
     const dialog = this.launchDialogService.openDialog(
@@ -152,10 +157,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       this.element,
       this.vcr,
       modalInstanceData
-    )
-    
+    );
+
     this.subscription.add(
-        dialog.pipe(
+      dialog
+        .pipe(
           take(1),
           map(dialog => {
             this.subscription.add(

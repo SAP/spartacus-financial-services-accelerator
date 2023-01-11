@@ -7,15 +7,15 @@ import { SyncPilotDialogModule } from '../../sync-pilot-dialog/sync-pilot-dialog
 import { IconModule } from '@spartacus/storefront';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        UrlModule,
-        SyncPilotDialogModule,
-        IconModule,
-    ],
-    declarations: [GenericSyncPilotComponent],
-    exports: [GenericSyncPilotComponent],
-    providers: [Service]
+  imports: [
+    CommonModule,
+    I18nModule,
+    UrlModule,
+    SyncPilotDialogModule,
+    IconModule,
+  ],
+  declarations: [GenericSyncPilotComponent],
+  exports: [GenericSyncPilotComponent],
+  providers: [Service],
 })
 export class GenericSyncPilotModule {}

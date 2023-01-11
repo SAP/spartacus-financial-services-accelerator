@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { GlobalMessageService } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { UpdateProfileComponentService } from '@spartacus/user/profile/components';

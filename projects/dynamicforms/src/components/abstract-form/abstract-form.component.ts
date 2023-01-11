@@ -70,9 +70,10 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
 
   protected controlPrefill() {
     if (this.config.prefillValue) {
-      const targetObject = this.appConfig.dynamicForms.prefill[
-        this.config.prefillValue.targetObject
-      ];
+      const targetObject =
+        this.appConfig.dynamicForms.prefill[
+          this.config.prefillValue.targetObject
+        ];
       if (targetObject && targetObject.prefillResolver) {
         const prefillResolver = this.injector.get<PrefillResolver>(
           targetObject.prefillResolver

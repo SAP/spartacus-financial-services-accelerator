@@ -5,7 +5,10 @@ import {
   CustomerCouponService,
   I18nTestingModule,
 } from '@spartacus/core';
-import { ActiveCartService, CartVoucherService } from '@spartacus/cart/base/core';
+import {
+  ActiveCartService,
+  CartVoucherService,
+} from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import { FSCartCouponComponent } from './cart-coupon.component';

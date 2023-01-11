@@ -5,9 +5,9 @@ import { UserRequestConnector } from './user-request.connector';
 import createSpy = jasmine.createSpy;
 
 class MockUserRequestAdapter implements UserRequestAdapter {
-  getUserRequest = createSpy(
-    'UserRequestAdapter.getUserRequest'
-  ).and.callFake((userId, request) => of('getUserRequest' + userId + request));
+  getUserRequest = createSpy('UserRequestAdapter.getUserRequest').and.callFake(
+    (userId, request) => of('getUserRequest' + userId + request)
+  );
   updateUserRequest = createSpy(
     'UserRequestAdapter.updateUserRequest'
   ).and.callFake((userId, request, stepData) =>

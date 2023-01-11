@@ -18,7 +18,6 @@ import { StateWithMyAccount } from '../../../../core/my-account/store/my-account
 //import { ModalService } from '@spartacus/storefront';
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 
-
 @Component({
   selector: 'cx-fs-claims',
   templateUrl: './claims.component.html',
@@ -80,7 +79,7 @@ export class ClaimsComponent implements OnInit, OnDestroy {
 
   private openModal(claimNumber: string) {
     let modalInstanceData: any = {
-      claimNumber
+      claimNumber,
     };
 
     const dialog = this.launchDialogService.openDialog(
@@ -88,9 +87,9 @@ export class ClaimsComponent implements OnInit, OnDestroy {
       this.element,
       this.vcr,
       modalInstanceData
-    )
+    );
 
-      dialog?.pipe(take(1)).subscribe();
+    dialog?.pipe(take(1)).subscribe();
   }
 
   resumeClaim(claimNumber: string) {

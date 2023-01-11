@@ -32,7 +32,8 @@ import { PAY_NOW_BILLING_TIME_CODE } from '../../../core/general-config/default-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComparisonTablePanelItemComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @Input()
   productCode: string;
   @Input()

@@ -106,8 +106,9 @@ describe('RadioComponent', () => {
   });
 
   it('should render radio component', () => {
-    const radioComponent = el.query(By.css('input[type="radio"]'))
-      .nativeElement;
+    const radioComponent = el.query(
+      By.css('input[type="radio"]')
+    ).nativeElement;
     expect(radioComponent).toBeTruthy();
   });
 });

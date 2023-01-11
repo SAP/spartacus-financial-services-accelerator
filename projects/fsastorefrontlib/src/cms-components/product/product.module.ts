@@ -12,25 +12,25 @@ import { RouterModule } from '@angular/router';
 import { MediaModule, ListNavigationModule } from '@spartacus/storefront';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        I18nModule,
-        UrlModule,
-        RouterModule,
-        MediaModule,
-        ListNavigationModule,
-        ConfigModule.withConfig(<CmsConfig>{
-            cmsComponents: {
-                FinancialServicesProductFeatureComponent: {
-                    component: ProductFeatureComponent,
-                },
-                SearchResultsListComponent: {
-                    component: FSProductListComponent,
-                },
-            },
-        }),
-    ],
-    declarations: [ProductFeatureComponent, FSProductListComponent],
-    exports: [ProductFeatureComponent, FSProductListComponent]
+  imports: [
+    CommonModule,
+    I18nModule,
+    UrlModule,
+    RouterModule,
+    MediaModule,
+    ListNavigationModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        FinancialServicesProductFeatureComponent: {
+          component: ProductFeatureComponent,
+        },
+        SearchResultsListComponent: {
+          component: FSProductListComponent,
+        },
+      },
+    }),
+  ],
+  declarations: [ProductFeatureComponent, FSProductListComponent],
+  exports: [ProductFeatureComponent, FSProductListComponent],
 })
 export class ProductModule {}

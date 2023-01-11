@@ -24,7 +24,7 @@ import { FSCart } from './../../../../occ/occ-models/occ.models';
   selector: 'cx-fs-bind-quote-dialog',
   templateUrl: './bind-quote-dialog.component.html',
 })
-export class BindQuoteDialogComponent implements OnInit{
+export class BindQuoteDialogComponent implements OnInit {
   cartCode: string;
   subscription = new Subscription();
 
@@ -46,7 +46,7 @@ export class BindQuoteDialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.subscription.add(
-      this.launchDialogService.data$.subscribe((data) => {
+      this.launchDialogService.data$.subscribe(data => {
         this.cartCode = data.cartCode;
       })
     );

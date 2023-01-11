@@ -5,14 +5,11 @@ import { CartConnector } from './cart.connector';
 import createSpy = jasmine.createSpy;
 
 class MockCartAdapter implements CartAdapter {
-  addToCart = createSpy(
-    'CartAdapter.addToCart'
-  ).and.callFake((userId, cartId, productCode, quantity, entryNum) =>
-    of('addToCart' + userId + cartId + productCode + quantity + entryNum)
+  addToCart = createSpy('CartAdapter.addToCart').and.callFake(
+    (userId, cartId, productCode, quantity, entryNum) =>
+      of('addToCart' + userId + cartId + productCode + quantity + entryNum)
   );
-  startBundle = createSpy(
-    'CartAdapter.startBundle'
-  ).and.callFake(
+  startBundle = createSpy('CartAdapter.startBundle').and.callFake(
     (userId, cartId, productCode, bundleTemplateId, quantity, pricingData) =>
       of(
         'addToCart' +

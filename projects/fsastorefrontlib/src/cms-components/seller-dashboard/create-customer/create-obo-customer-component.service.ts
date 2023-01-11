@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { ConsentConnector } from '../../../core/my-account/connectors/consent.connector';

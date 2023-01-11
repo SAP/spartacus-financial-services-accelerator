@@ -18,8 +18,10 @@ import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
   selector: 'cx-fs-button',
   templateUrl: './calculation-button.component.html',
 })
-export class CalculationButtonComponent extends AbstractFormComponent
-  implements OnInit {
+export class CalculationButtonComponent
+  extends AbstractFormComponent
+  implements OnInit
+{
   constructor(
     protected currentProductService: CurrentProductService,
     protected formDataStorageService: FormDataStorageService,

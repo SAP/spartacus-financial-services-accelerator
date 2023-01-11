@@ -45,9 +45,8 @@ export class FieldDependencyResolverService {
           this.changeControlEnabled(dependentControl, controlConfig, false);
         }
         mainFormControl.valueChanges.subscribe(fieldValue => {
-          const dependencyValidations = this.geValidationsForCondition(
-            condition
-          );
+          const dependencyValidations =
+            this.geValidationsForCondition(condition);
           const dependancyControl = this.fb.control(
             { disabled: false, value: fieldValue },
             dependencyValidations

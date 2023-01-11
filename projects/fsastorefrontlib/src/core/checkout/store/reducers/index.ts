@@ -11,11 +11,8 @@ export function getReducers(): ActionReducerMap<FSCheckoutState> {
   };
 }
 
-export const reducerToken: InjectionToken<ActionReducerMap<
-  FSCheckoutState
->> = new InjectionToken<ActionReducerMap<FSCheckoutState>>(
-  'FSCheckoutReducers'
-);
+export const reducerToken: InjectionToken<ActionReducerMap<FSCheckoutState>> =
+  new InjectionToken<ActionReducerMap<FSCheckoutState>>('FSCheckoutReducers');
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
