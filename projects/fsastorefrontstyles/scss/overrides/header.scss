@@ -75,6 +75,7 @@ header {
 
   // Styling specific to my account section
   .HeaderLinks .accNavComponent {
+    cursor: pointer;
     nav {
       h5 {
         font-weight: var(--cx-font-weight-semi);
@@ -163,9 +164,9 @@ header {
             border: 1px solid #ccc;
             @include hideWrapperDesktop();
             background-color: var(--cx-color-1);
+            cursor: default;
           }
           &:hover {
-            cursor: pointer;
             > .wrapper {
               @include showWrapperDesktop();
             }
