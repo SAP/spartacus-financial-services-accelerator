@@ -20,6 +20,9 @@ import { FSNavigationComponent } from './navigation.component';
         NavigationComponent: {
           component: FSNavigationComponent,
         },
+        CategoryNavigationComponent: {
+          component: FSNavigationComponent,
+        },
       },
     }),
   ],

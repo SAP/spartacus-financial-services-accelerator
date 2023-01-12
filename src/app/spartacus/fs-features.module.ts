@@ -180,7 +180,6 @@ if (environment.digitalPayments) {
     OrderDetailsModule,
     OrderCancellationModule,
     OrderReturnModule,
-    OrderOccModule,
 
     /************************* Page Events *************************/
     NavigationEventModule,
