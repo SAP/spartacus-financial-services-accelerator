@@ -6,6 +6,7 @@ import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { PolicyService } from './policy.service';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -23,10 +24,17 @@ class MockUserIdService {
   }
 }
 
+class MockOboCustomerService {
+  getOboCustomerUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('PolicyServiceTest', () => {
   let service: PolicyService;
   let store: Store<StateWithMyAccount>;
   let userIdService: MockUserIdService;
+  let oboCustomerService: MockOboCustomerService;
 
   beforeEach(() => {
     userIdService = new MockUserIdService();
@@ -39,11 +47,16 @@ describe('PolicyServiceTest', () => {
         PolicyService,
         reducerProvider,
         { provide: UserIdService, useClass: MockUserIdService },
+        {
+          provide: OboCustomerService,
+          useClass: MockOboCustomerService,
+        },
       ],
     });
 
     service = TestBed.inject(PolicyService);
     store = TestBed.inject(Store);
+    oboCustomerService = TestBed.inject(OboCustomerService);
 
     spyOn(store, 'dispatch').and.callThrough();
   });
