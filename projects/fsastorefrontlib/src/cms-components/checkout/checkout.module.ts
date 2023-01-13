@@ -68,6 +68,7 @@ import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 import { FSMessageModule } from './../message/message.module';
 import { SetActiveCartGuard } from './guards/set-active-cart-guard';
 import { ApplicationConfirmationComponent } from './components/application-confirmation/application-confirmation.component';
+import { ApplicationConfirmationGuard } from '../../core/checkout/guards/application-confirmation.guard';
 import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 
 const routes: Routes = [
@@ -153,7 +154,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ApplicationConfirmationGuard],
     data: {
       cxRoute: 'applicationConfirmation',
       pageLabel: 'applicationConfirmationPage',
