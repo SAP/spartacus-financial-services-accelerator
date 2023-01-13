@@ -138,6 +138,15 @@ header {
   }
   cx-fs-navigation-ui,
   cx-navigation-ui {
+    nav > ul {
+      > li {
+        @include media-breakpoint-up(lg) {
+          > .wrapper {
+            margin-top: $header-height - 7px;
+          }
+        }
+      }
+    }
     white-space: nowrap;
     &.is-open:focus-within {
       &.accNavComponent {
@@ -153,6 +162,9 @@ header {
         @include media-breakpoint-down(md) {
           text-transform: uppercase;
         }
+      }
+      nav > ul > li > .wrapper {
+        padding: 0 0;
       }
       &.accNavComponent {
         nav {
@@ -353,4 +365,12 @@ header {
 }
 %cx-fs-navigation-ui {
   @extend %cx-navigation-ui;
+}
+
+@include media-breakpoint-up(lg) {
+  cx-navigation-ui nav {
+    ul.childs > li > cx-generic-link > a {
+      padding: 12px 60px 12px 20px;
+    }
+  }
 }

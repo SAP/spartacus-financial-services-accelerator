@@ -69,7 +69,7 @@ export const common = {
   searchBox: {
     placeholder: 'Search here...',
     help: {
-      noMatch: 'We couldn\'t find any results',
+      noMatch: "We couldn't find any results",
     },
-  }
+  },
 };
