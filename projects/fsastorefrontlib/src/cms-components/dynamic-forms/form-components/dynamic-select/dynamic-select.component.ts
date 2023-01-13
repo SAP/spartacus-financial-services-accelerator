@@ -48,7 +48,9 @@ export class DynamicSelectComponent extends AbstractFormComponent
           .getActiveCategory()
           .pipe(
             map(activeCategory => {
-              this.config.apiValue.url += `?${CATEGORY_CODE}=${activeCategory}`;
+              if (activeCategory !== '') {
+                this.config.apiValue.url += `?${CATEGORY_CODE}=${activeCategory}`;
+              }
             })
           )
           .subscribe()
