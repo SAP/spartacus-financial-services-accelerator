@@ -69,6 +69,7 @@ import { FSMessageModule } from './../message/message.module';
 import { SetActiveCartGuard } from './guards/set-active-cart-guard';
 import { ApplicationConfirmationComponent } from './components/application-confirmation/application-confirmation.component';
 import { ApplicationConfirmationGuard } from '../../core/checkout/guards/application-confirmation.guard';
+import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 
 const routes: Routes = [
   {
@@ -215,6 +216,7 @@ const routes: Routes = [
     FSCheckoutStoreModule,
     FSCartCouponModule,
     FSMessageModule,
+    GenericSyncPilotModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
