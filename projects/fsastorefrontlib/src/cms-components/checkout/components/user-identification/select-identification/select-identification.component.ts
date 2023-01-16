@@ -81,6 +81,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
             'bankingApplicationPrice',
             fsCart.totalPrice?.formattedValue
           );
+          localStorage.setItem('applicationConfirmation', 'true');
           this.routingService.go({
             cxRoute: 'applicationConfirmation',
             params: {
