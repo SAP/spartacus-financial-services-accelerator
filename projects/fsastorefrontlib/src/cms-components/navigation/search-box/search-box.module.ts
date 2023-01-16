@@ -11,7 +11,7 @@ import { FSCheckoutService } from '../../../core/checkout/facade';
 import { IconModule, MediaModule } from '@spartacus/storefront';
 import { FSHighlightPipe } from '../../../shared/util/helpers/pipe/highlight.pipe';
 import { FSSearchBoxComponent } from './search-box.component';
-import { OccOrderAdapter } from '@spartacus/order/occ';
+import { OrderOccModule } from '@spartacus/order/occ';
 
 @NgModule({
   imports: [
@@ -21,10 +21,10 @@ import { OccOrderAdapter } from '@spartacus/order/occ';
     IconModule,
     UrlModule,
     I18nModule,
+    OrderOccModule,
   ],
   providers: [
     FSCheckoutService,
-    OccOrderAdapter,
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
         SearchBoxComponent: {

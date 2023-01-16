@@ -17,7 +17,7 @@ import {
 } from '@spartacus/checkout/base/root';
 import { Order } from '@spartacus/order/root';
 import { map } from 'rxjs/operators';
-import { OccOrderAdapter } from '@spartacus/order/occ';
+import { OrderAdapter } from '@spartacus/order/core';
 
 @Injectable()
 export class FSCheckoutService {
@@ -30,7 +30,7 @@ export class FSCheckoutService {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected routingService: RoutingService,
     protected processStateStore: Store<StateWithProcess<void>>,
-    protected occOrderAdapter: OccOrderAdapter
+    protected occOrderAdapter: OrderAdapter
   ) {}
 
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
