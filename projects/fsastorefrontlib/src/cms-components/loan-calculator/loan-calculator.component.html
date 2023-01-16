@@ -172,7 +172,7 @@
     >
       {{ 'loan.clearAll' | cxTranslate }}
     </div>
-    <button (click)="calculateAnnuityAmount()">
+    <button (click)="calculateAnnuityAmount()" class="mr-auto">
       <cx-icon class="fas fa-calculator h3 calculate"></cx-icon>
     </button>
     <div class="d-flex loan-input-annuity align-items-center">
@@ -182,7 +182,7 @@
         value="{{ sliderForm.value.annuity }}"
         formControlName="annuity"
         type="text"
-        class="form-control w-100"
+        class="form-control w-100 notice"
         ng-reflect-name="annuity"
         name="annuity"
       />
