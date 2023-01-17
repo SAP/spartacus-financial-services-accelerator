@@ -5,6 +5,7 @@ import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.ser
 import { filter, take } from 'rxjs/operators';
 import { CheckoutPaymentFacade } from '@spartacus/checkout/base/root';
 import { PaymentDetails } from '@spartacus/cart/base/root';
+import { OrderFacade } from '@spartacus/order/root';
 
 @Component({
   selector: 'cx-fs-final-review',
@@ -17,6 +18,7 @@ export class FinalReviewComponent implements OnInit {
   constructor(
     protected checkoutService: FSCheckoutService,
     protected checkoutPaymentFacade: CheckoutPaymentFacade,
+    protected orderFacade: OrderFacade,
     protected routingService: RoutingService
   ) {}
 
@@ -38,6 +40,7 @@ export class FinalReviewComponent implements OnInit {
     if (this.tAndCToggler) {
       this.checkoutService.placeOrder(this.tAndCToggler);
       this.checkoutService.orderPlaced = true;
+      this.orderFacade.placeOrder(true);
       this.routingService.go({ cxRoute: 'orderConfirmation' });
     }
   }

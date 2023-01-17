@@ -96,6 +96,7 @@ import { VariantsFeatureModule } from './features/variants-feature.module';
 import { CartBaseFeatureModule } from './features/cart-base-feature.module';
 import { VideoModule } from '@spartacus/storefront';
 import { CheckoutB2BOccModule } from '@spartacus/checkout/b2b/occ';
+import { OrderFeatureModule } from './features/order-feature.module';
 
 const featureModules = [];
 
@@ -207,6 +208,7 @@ if (environment.digitalPayments) {
     /************************* External features *************************/
     UserFeatureModule,
     CheckoutFeatureModule,
+    OrderFeatureModule,
     AsmFeatureModule,
     StorefinderFeatureModule,
     SmartEditFeatureModule,

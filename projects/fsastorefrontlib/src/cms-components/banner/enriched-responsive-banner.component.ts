@@ -32,7 +32,9 @@ export class EnrichedResponsiveBannerComponent implements OnInit, OnDestroy {
       this.component.data$
         .pipe(
           tap(data => {
-            this.configStyles = JSON.parse(data.configStyles).config;
+            if (data.configStyles) {
+              this.configStyles = JSON.parse(data.configStyles).config;
+            }
             const boxView = this.configStyles?.textBoxType === 'box';
             this.bannerStyles = {
               margin: this.configStyles?.textBoxMargin,
