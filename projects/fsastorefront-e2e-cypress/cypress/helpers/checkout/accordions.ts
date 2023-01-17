@@ -153,20 +153,7 @@ export const compareEventQuoteAccordion = [
   'Quote Optional Extras',
 ];
 
-export const sellerEventAccordion = [
-  'All Customers',
-  whatsIncluded,
-  addedByYou,
-  personalDetails,
-];
-
-export const sellerCurrentAccountAccordion = [
-  'All Customers',
-  generalDetails,
-  whatsIncluded,
-  addedByYou,
-  personalDetails,
-];
+export const eventAccordionWithoutOptional = [whatsIncluded, personalDetails];
 
 export const Accordions = {
   accordions: [
@@ -251,16 +238,12 @@ export const Accordions = {
       accordionItems: this.compareEventQuoteAccordion,
     },
     {
-      category: 'eventQuoteReviewSeller',
-      accordionItems: this.sellerEventAccordion,
-    },
-    {
-      category: 'currentAccountSeller',
-      accordionItems: this.sellerCurrentAccountAccordion,
-    },
-    {
       category: 'savingsAccordions',
       accordionItems: this.savingsAccordionsWithoutOptional,
+    },
+    {
+      category: 'eventAccordionsNoOptional',
+      accordionItems: this.eventAccordionWithoutOptional,
     },
   ],
 };

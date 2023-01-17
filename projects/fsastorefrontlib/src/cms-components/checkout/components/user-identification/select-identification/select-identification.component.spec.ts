@@ -8,7 +8,7 @@ import {
 } from '@spartacus/core';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
-import { FSSteps } from '../../../../../occ/occ-models';
+import { FSCart, FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
@@ -17,6 +17,21 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 const activeCartCode = 'testCartCode';
+
+const mockCart: FSCart = {
+  code: 'testCode',
+  insuranceQuote: {
+    quoteId: 'testQuoteId',
+  },
+  entries: [
+    {
+      product: {
+        name: 'testProductName',
+      },
+    },
+  ],
+};
+
 const mockCategoryAndStep: FSSteps = {
   stepParameter: 'insurances_travel',
   step: 'category',
@@ -43,11 +58,16 @@ class MockFSCheckoutService {
   setIdentificationType() {}
 }
 
-class MockCartService {}
+class MockCartService {
+  removeCart() {}
+}
 
 class MockActiveCartService {
   getActiveCartId(): Observable<string> {
     return of(activeCartCode);
+  }
+  getActive(): Observable<FSCart> {
+    return of(mockCart);
   }
 }
 
@@ -135,7 +155,11 @@ describe('SelectIdentificationTypeComponent', () => {
     const button = el.query(By.css('.primary-button')).nativeElement;
     button.click();
     expect(routingService.go).toHaveBeenCalledWith({
-      cxRoute: 'orderConfirmation',
+      cxRoute: 'applicationConfirmation',
+      params: {
+        quoteId: mockCart.insuranceQuote.quoteId,
+        productName: mockCart.entries[0].product.name,
+      },
     });
   });
 

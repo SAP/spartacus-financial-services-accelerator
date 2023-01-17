@@ -12,6 +12,11 @@ export const organization = {
     productAssignment: 'Product Assignment',
     userRoles: {
       sellergroup: 'Seller',
+      SAP: 'SAP',
+      CarCompany: 'Car Company',
+      AirlineCompany: 'Airline Company',
+      AirlineMen: 'Airline Men',
+      AirlineWomen: 'Airline Women',
     },
   },
   orgUnit: {

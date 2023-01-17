@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AssetTableType } from '../../occ';
+import { AssetTableType } from '../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-customer-dashboard',

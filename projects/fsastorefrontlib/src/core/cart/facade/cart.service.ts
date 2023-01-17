@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   ActiveCartService,
+  CartActions,
   MultiCartService,
   StateWithMultiCart,
 } from '@spartacus/cart/base/core';
@@ -14,7 +15,7 @@ import {
 } from '@spartacus/core';
 
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import * as fromAction from './../../checkout/store/actions/index';
 
@@ -141,7 +142,11 @@ export class FSCartService extends ActiveCartService {
     return this.multiCartService.getCart(cartId);
   }
 
-  // private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
-  //   return cartState && cartState.success && !cartState.loading;
-  // }
+  removeCart(cartId: string): void {
+    this.store.dispatch(new CartActions.RemoveCart({ cartId }));
+  }
+
+  private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
+    return cartState && cartState.success && !cartState.loading;
+  }
 }

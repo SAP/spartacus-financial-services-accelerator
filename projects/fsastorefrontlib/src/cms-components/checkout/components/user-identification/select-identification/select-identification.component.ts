@@ -5,7 +5,7 @@ import { Subscription, Observable, combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { FSSteps } from '../../../../../occ/occ-models';
+import { FSCart, FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from '../../../../../core/cart/facade';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 
@@ -59,21 +59,34 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
       return;
     }
     combineLatest([
-      this.activeCartService.getActiveCartId(),
+      this.activeCartService.getActive(),
       this.userIdService.getUserId(),
     ])
       .pipe(
-        filter(([activeCartCode]) => !!activeCartCode),
+        filter(([cart]) => !!cart),
         take(1),
-        map(([activeCartCode, occUserId]) => {
+        map(([cart, occUserId]) => {
+          const fsCart = <FSCart>cart;
           this.checkoutService.setIdentificationType(
-            activeCartCode,
+            fsCart.code,
             occUserId,
             this.selected
           );
           this.checkoutService.placeOrder(true);
           this.checkoutService.orderPlaced = true;
-          this.routingService.go({ cxRoute: 'orderConfirmation' });
+          localStorage.setItem(
+            'bankingApplicationPrice',
+            fsCart.totalPrice?.formattedValue
+          );
+          localStorage.setItem('applicationConfirmation', 'true');
+          this.routingService.go({
+            cxRoute: 'applicationConfirmation',
+            params: {
+              quoteId: fsCart.insuranceQuote?.quoteId,
+              productName: fsCart.entries[0]?.product?.name,
+            },
+          });
+          this.cartService.removeCart(fsCart.code);
         })
       )
       .subscribe();

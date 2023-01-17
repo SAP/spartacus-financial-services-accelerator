@@ -4,16 +4,16 @@ export const productOverviewFilters = [
   {
     text: 'all',
     emits: ProductOverviewCategory.ALL,
-    active: true,
+    activeStatus: true,
   },
   {
     text: 'insurances',
     emits: ProductOverviewCategory.INSURANCE,
-    active: false,
+    activeStatus: false,
   },
   {
     text: 'banking',
     emits: ProductOverviewCategory.BANKING,
-    active: false,
+    activeStatus: false,
   },
 ];

@@ -1,0 +1,27 @@
+<ng-container *ngIf="quoteId">
+  <div class="box-shadow p-4">
+    <div class="content860 d-flex flex-column align-content-center flex-wrap">
+      <div class="d-flex justify-content-center my-5">
+        <div class="image-wrapper">
+          <img class="image-item" [src]="imageLink" alt="" />
+        </div>
+      </div>
+      <h5 class="notice-text text-center py-2 px-4 mb-5">
+        {{
+          'applicationConfirmation.successfulCreation'
+            | cxTranslate: { quoteId: quoteId }
+        }}
+      </h5>
+      <hr class="w-100 border border-color-6 mb-5" />
+      <p>
+        {{
+          'applicationConfirmation.waitForStatus'
+            | cxTranslate: { productName: productName, quotePrice: quotePrice }
+        }}
+      </p>
+      <p>
+        {{ 'applicationConfirmation.confirmationEmail' | cxTranslate }}
+      </p>
+    </div>
+  </div>
+</ng-container>

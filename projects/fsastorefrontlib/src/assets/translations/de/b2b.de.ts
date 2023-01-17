@@ -16,6 +16,11 @@ export const organization = {
     },
     userRoles: {
       sellergroup: '[DE] Seller',
+      SAP: 'SAP',
+      CarCompany: '[DE] Car Company',
+      AirlineCompany: '[DE] Airline Company',
+      AirlineMen: '[DE] Airline Men',
+      AirlineWomen: '[DE] Airline Women',
     },
   },
   orgUnit: {

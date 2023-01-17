@@ -10,7 +10,8 @@ $fsSkipComponentStyles: () !default;
 // major version standard
 $fsSelectors: cx-fs-policy-details, cx-fs-claim-details, cx-fs-premium-calendar,
   cx-fs-checkout-progress, cx-fs-progress-bar, cx-fs-final-review,
-  cx-fs-mini-cart, cx-fs-product-configuration-mini-cart, cx-fs-quote-review,
+  cx-fs-order-confirmation, cx-fs-mini-cart,
+  cx-fs-product-configuration-mini-cart, cx-fs-quote-review,
   cx-fs-enriched-responsive-banner, cx-fs-agent-root, cx-fs-agent-search-box,
   cx-fs-agent-search-list, cx-fs-find-agent-navigation, cx-fs-inbox-messages,
   cx-fs-inbox, cx-fs-product-feature, cx-fs-category-feature, cx-fs-register,
@@ -27,7 +28,7 @@ $fsSelectors: cx-fs-policy-details, cx-fs-claim-details, cx-fs-premium-calendar,
   cx-payment-methods, cx-fs-seller-dashboard-list, cx-fs-user-profile,
   cx-fs-seller-dashboard, cx-fs-dashboard-link,
   cx-fs-appointment-scheduling-form, cx-fs-savings-illustration,
-  cx-fs-product-overview !default;
+  cx-fs-product-overview, cx-fs-asset-td !default;
 // future theme's, can be introduced during minors
 $theme: '' !default;
 

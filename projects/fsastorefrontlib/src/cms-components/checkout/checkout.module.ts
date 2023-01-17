@@ -70,6 +70,9 @@ import {
 } from '@spartacus/checkout/base/components';
 import { defaultBindQuoteDialogLayoutConfig } from './components/bind-quote-dialog/default-bind-quote-dialog-layout.config';
 import { defaultOpenRefferedQuoteDialogLayoutConfig } from './components/referred-quote/default-open-reffered-quote-dialog-layout.config';
+import { ApplicationConfirmationComponent } from './components/application-confirmation/application-confirmation.component';
+import { ApplicationConfirmationGuard } from '../../core/checkout/guards/application-confirmation.guard';
+import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
 
 const routes: Routes = [
   {
@@ -154,6 +157,15 @@ const routes: Routes = [
   },
   {
     path: null,
+    canActivate: [AuthGuard, CmsPageGuard, ApplicationConfirmationGuard],
+    data: {
+      cxRoute: 'applicationConfirmation',
+      pageLabel: 'applicationConfirmationPage',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
     canActivate: [
       AuthGuard,
       CmsPageGuard,
@@ -207,6 +219,7 @@ const routes: Routes = [
     FSCheckoutStoreModule,
     FSCartCouponModule,
     FSMessageModule,
+    GenericSyncPilotModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
     }),
@@ -237,6 +250,9 @@ const routes: Routes = [
           component: OrderConfirmationComponent,
           guards: [OrderConfirmationGuard],
         },
+        ApplicationConfirmationFlex: {
+          component: ApplicationConfirmationComponent,
+        },
         OrderConfirmationMessageFlex: {
           component: OrderConfirmationMessageComponent,
           guards: [OrderConfirmationGuard],
@@ -262,6 +278,7 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
+    ApplicationConfirmationComponent,
     FSPaymentMethodComponent,
   ],
   exports: [
@@ -275,6 +292,7 @@ const routes: Routes = [
     ReferredQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
+    ApplicationConfirmationComponent,
     FSPaymentMethodComponent,
   ],
   providers: [

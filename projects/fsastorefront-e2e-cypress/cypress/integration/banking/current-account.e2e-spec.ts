@@ -43,7 +43,7 @@ testFilters(['smoke'], () => {
 
     it('Should register user in checkout', () => {
       register.populateRegistrationForm(registrationUser);
-      register.loginInUser(registrationUser.email, registrationUser.password);
+      register.loginUser(registrationUser.email, registrationUser.password);
     });
 
     it('Should complete personal details step', () => {

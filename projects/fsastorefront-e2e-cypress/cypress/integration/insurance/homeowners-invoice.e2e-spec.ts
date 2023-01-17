@@ -43,7 +43,7 @@ testFilters([''], () => {
       checkout.checkProgressBarInsurance();
       checkout.checkInsuranceComparisonPage('2');
       homeowners.checkHomeownersComparisonTable();
-      homeowners.selectHomeownersAnnually();
+      homeowners.selectHomeownersMainProduct('Homeowners Annually', '1');
     });
 
     it('Should check add options page', () => {

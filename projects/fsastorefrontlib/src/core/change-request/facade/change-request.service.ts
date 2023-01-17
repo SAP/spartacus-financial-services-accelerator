@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { AuthService, UserIdService } from '@spartacus/core';
+import { select, Store } from '@ngrx/store';
+import { AuthService } from '@spartacus/core';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
-import * as fromAction from '../store/actions';
-import * as fromSelector from '../store/selectors';
-import { StateWithChangeRequest } from '../store/change-request-state';
 import { StepStatus } from '../../../occ/occ-models';
+import * as fromAction from '../store/actions';
+import { StateWithChangeRequest } from '../store/change-request-state';
+import * as fromSelector from '../store/selectors';
 import { getChangeRequestErrorFactory } from '../store/selectors';
 
 @Injectable()
@@ -15,12 +16,12 @@ export class ChangeRequestService {
   constructor(
     protected store: Store<StateWithChangeRequest>,
     protected authService: AuthService,
-    protected userIdService: UserIdService
+    protected oboCustomerService: OboCustomerService
   ) {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
       this.authService.isUserLoggedIn(),
-      this.userIdService.getUserId(),
+      this.oboCustomerService.getOboCustomerUserId(),
     ])
       .subscribe(([changeRequest, userloggedIn, userId]) => {
         let requestId: string;
@@ -39,16 +40,16 @@ export class ChangeRequestService {
     contractId: string,
     changeRequestType: string
   ) {
-    this.userIdService
-      .getUserId()
+    this.oboCustomerService
+      .getOboCustomerUserId()
       .pipe(take(1))
-      .subscribe(occUserId => {
+      .subscribe(userId => {
         this.store.dispatch(
           new fromAction.CreateChangeRequest({
-            policyId: policyId,
-            contractId: contractId,
-            changeRequestType: changeRequestType,
-            userId: occUserId,
+            policyId,
+            contractId,
+            changeRequestType,
+            userId,
           })
         );
       })
@@ -73,8 +74,8 @@ export class ChangeRequestService {
 
   simulateChangeRequest(changeRequest, stepIndex) {
     const stepData = this.buildStepData(changeRequest, stepIndex);
-    this.userIdService
-      .getUserId()
+    this.oboCustomerService
+      .getOboCustomerUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -90,8 +91,8 @@ export class ChangeRequestService {
   }
 
   cancelChangeRequest(requestId: string) {
-    this.userIdService
-      .getUserId()
+    this.oboCustomerService
+      .getOboCustomerUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -110,15 +111,15 @@ export class ChangeRequestService {
 
   updateChangeRequest(changeRequest, stepIndex) {
     const stepData = this.buildStepData(changeRequest, stepIndex);
-    this.userIdService
-      .getUserId()
+    this.oboCustomerService
+      .getOboCustomerUserId()
       .pipe(take(1))
-      .subscribe(occUserId => {
+      .subscribe(userId => {
         this.store.dispatch(
           new fromAction.UpdateChangeRequest({
-            userId: occUserId,
+            userId,
             requestId: changeRequest.requestId,
-            stepData: stepData,
+            stepData,
           })
         );
       })

@@ -7,7 +7,7 @@ import { registrationUser } from '../../sample-data/users';
 import testFilters from '../../support/filters';
 
 testFilters([''], () => {
-  context('Homepage', () => {
+  context('Need Analysis', () => {
     before(() => {
       cy.visit('/');
     });

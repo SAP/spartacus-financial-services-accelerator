@@ -12,7 +12,7 @@ testFilters(['smoke'], () => {
 
     it('Should be able to register user without phone number', () => {
       register.registerUser(registrationUserWithoutPhone);
-      register.loginInUser(
+      register.loginUser(
         registrationUserWithoutPhone.email,
         registrationUserWithoutPhone.password
       );
