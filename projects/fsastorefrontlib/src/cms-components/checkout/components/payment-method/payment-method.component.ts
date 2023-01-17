@@ -21,10 +21,12 @@ import {
 } from '@spartacus/checkout/base/root';
 import { CheckoutStepService } from '@spartacus/checkout/base/components';
 import { CheckoutPaymentMethodComponent } from '@spartacus/checkout/base/components';
-import { CheckoutPaymentService } from '@spartacus/checkout/base/core';
+import {
+  CheckoutAdapter,
+  CheckoutPaymentService,
+} from '@spartacus/checkout/base/core';
 import { CheckoutPaymentTypeFacade } from '@spartacus/checkout/b2b/root';
-import { OccCheckoutAdapter } from '@spartacus/checkout/base/occ';
-import { OccCheckoutPaymentTypeAdapter } from '@spartacus/checkout/b2b/occ';
+import { CheckoutPaymentTypeAdapter } from '@spartacus/checkout/b2b/core';
 
 @Component({
   selector: 'cx-fs-payment-method',
@@ -48,8 +50,8 @@ export class FSPaymentMethodComponent
     protected checkoutPaymentTypeFacade: CheckoutPaymentTypeFacade,
     protected routingService: RoutingService,
     protected checkoutPaymentService: CheckoutPaymentService,
-    protected occCheckoutAdapter: OccCheckoutAdapter,
-    protected occCheckoutPaymentTypeAdapter: OccCheckoutPaymentTypeAdapter,
+    protected occCheckoutAdapter: CheckoutAdapter,
+    protected occCheckoutPaymentTypeAdapter: CheckoutPaymentTypeAdapter,
     protected userIdService: UserIdService
   ) {
     super(
@@ -102,23 +104,25 @@ export class FSPaymentMethodComponent
           )
           .subscribe()
       );
-    this.occCheckoutPaymentTypeAdapter.getPaymentTypes();
+
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.paymentDetails$ = this.checkoutPaymentService
       .getPaymentDetailsState()
       .pipe(filter(payment => !!payment));
 
-    this.paymentTypes$ = this.checkoutPaymentTypeFacade.getPaymentTypes().pipe(
-      filter(paymentTypes => paymentTypes.length > 0),
-      take(1),
-      map(paymentTypes => {
-        const filteredPayments = paymentTypes.filter(
-          item => !this.NOT_ALLOWED_PAYMENTS.some(key => key === item.code)
-        );
-        return filteredPayments;
-      })
-    );
+    this.paymentTypes$ = this.occCheckoutPaymentTypeAdapter
+      .getPaymentTypes()
+      .pipe(
+        filter(paymentTypes => paymentTypes.length > 0),
+        take(1),
+        map(paymentTypes => {
+          const filteredPayments = paymentTypes.filter(
+            item => !this.NOT_ALLOWED_PAYMENTS.some(key => key === item.code)
+          );
+          return filteredPayments;
+        })
+      );
     this.paymentType$ = this.fsCheckoutService.getPaymentType();
   }
 

@@ -95,6 +95,7 @@ import { UserFeatureModule } from './features/user-feature.module';
 import { VariantsFeatureModule } from './features/variants-feature.module';
 import { CartBaseFeatureModule } from './features/cart-base-feature.module';
 import { VideoModule } from '@spartacus/storefront';
+import { CheckoutB2BOccModule } from '@spartacus/checkout/b2b/occ';
 
 const featureModules = [];
 
@@ -163,6 +164,7 @@ if (environment.digitalPayments) {
     AsmOccModule,
     CartBaseOccModule, // TODO:Spartacus CartModule.forRoot() replaced
     CheckoutOccModule,
+    CheckoutB2BOccModule,
     OrderOccModule,
     ProductOccModule,
     UserOccModule,
