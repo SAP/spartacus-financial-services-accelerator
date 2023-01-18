@@ -16,6 +16,7 @@ import {
   DataAssetConfig,
   RequestType,
 } from '../../../occ/occ-models/occ.models';
+import { ResolveAssetValuePipe } from '../resolve-asset-value.pipe';
 
 @Component({
   selector: 'cx-fs-asset-td',
@@ -36,20 +37,20 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
     type: FS_ICON_TYPE.EDIT,
   };
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private resolveAssetValuePipe: ResolveAssetValuePipe) {}
 
   ngOnInit(): void {
     if (this.selectedAsset === AssetTableType.POLICIES) {
       if (
         this.assetConfig.column === AssetColumn.NUMBER &&
-        this.allowedFSRequestTypesIsClaim(this.asset)
+        this.resolveAssetValuePipe.allowedFSRequestTypesIsClaim(this.asset)
       ) {
         this.icon.show = true;
       }
 
       if (
         this.assetConfig.column === AssetColumn.CLAIM &&
-        this.allowedFSRequestTypesIsClaim(this.asset)
+        this.resolveAssetValuePipe.allowedFSRequestTypesIsClaim(this.asset)
       ) {
         this.icon = {
           show: true,
@@ -65,18 +66,6 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
     if (this.assetConfig.column === AssetColumn.STATUS) {
       if (el.innerText === 'Active') this.renderer.addClass(el, 'text-success');
     }
-  }
-
-  allowedFSRequestTypesIsClaim(asset) {
-    const allowedFSRequestTypes = asset.categoryData.allowedFSRequestTypes;
-
-    const claimRequestTypeSearch = allowedFSRequestTypes.findIndex(
-      allowedRequestType =>
-        allowedRequestType.requestType.code === RequestType.FSCLAIM
-    );
-
-    const claimRequestTypeFound = claimRequestTypeSearch > -1;
-    return claimRequestTypeFound;
   }
 
   onIconClick(asset, assetConfig) {
