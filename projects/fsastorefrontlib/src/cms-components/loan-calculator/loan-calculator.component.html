@@ -116,7 +116,7 @@
       <div class="d-flex justify-content-center align-items-start">
         <div
           class="range box-shadow rounded mr-4 h6 pointer"
-          (click)="changeLoanDuration('decrease')"
+          (click)="changeLoanDuration('decrease', cData.minDuration, cData.maxDuration)"
         >
           -
         </div>
@@ -136,7 +136,7 @@
         </div>
         <div
           class="range box-shadow rounded ml-4 h6 pointer"
-          (click)="changeLoanDuration('increase')"
+          (click)="changeLoanDuration('increase', cData.minDuration, cData.maxDuration)"
         >
           +
         </div>
@@ -172,7 +172,7 @@
     >
       {{ 'loan.clearAll' | cxTranslate }}
     </div>
-    <button (click)="calculateAnnuityAmount()" class="mr-auto">
+    <button (click)="calculateAnnuityAmount()" class="mr-auto" id="calculate-annuity">
       <cx-icon class="fas fa-calculator h3 calculate"></cx-icon>
     </button>
     <div class="d-flex loan-input-annuity align-items-center">

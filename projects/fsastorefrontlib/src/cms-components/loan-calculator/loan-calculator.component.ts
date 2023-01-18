@@ -54,7 +54,6 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   sliderFormPatch() {
-    this.clearAllowed = false;
     this.sliderForm.patchValue({ repaymentFrequency: '' });
     this.subscriptions.add(
       this.componentData.data$
@@ -85,37 +84,39 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
           }),
           map(resp => this.getAnnuityAmount(resp.price.oneTimeChargeEntries))
         )
-        .subscribe(res => {
+        .subscribe(() => {
           this.sliderForm.patchValue({ annuity: `€0` });
         })
     );
   }
 
-  changeLoanDuration(change: string) {
+  changeLoanDuration(change: string, min: number, max: number) {
     change === 'decrease'
+      ? this.sliderForm.get('loanDuration').value - 1 >= min
+        ? this.sliderForm.patchValue({
+            loanDuration: this.sliderForm.get('loanDuration').value - 1,
+          })
+        : false
+      : this.sliderForm.get('loanDuration').value + 1 <= max
       ? this.sliderForm.patchValue({
-          loanDuration: this.sliderForm.get('loanDuration').value - 1,
-        })
-      : this.sliderForm.patchValue({
           loanDuration: this.sliderForm.get('loanDuration').value + 1,
-        });
-  }
-
-  validateInputRange(value, min, max): boolean {
-    return value <= max || value >= min;
+        })
+      : false;
   }
 
   changeLoanAmount(change: string, min: number, max: number) {
-    this.validateInputRange(this.sliderForm.get('loanAmount').value, min, max)
-      ? change === 'decrease'
+    change === 'decrease'
+      ? this.sliderForm.get('loanAmount').value - this.inputRangeSteps >= min
         ? this.sliderForm.patchValue({
             loanAmount:
               this.sliderForm.get('loanAmount').value - this.inputRangeSteps,
           })
-        : this.sliderForm.patchValue({
-            loanAmount:
-              this.sliderForm.get('loanAmount').value + this.inputRangeSteps,
-          })
+        : false
+      : this.sliderForm.get('loanAmount').value + this.inputRangeSteps <= max
+      ? this.sliderForm.patchValue({
+          loanAmount:
+            this.sliderForm.get('loanAmount').value + this.inputRangeSteps,
+        })
       : false;
   }
 
