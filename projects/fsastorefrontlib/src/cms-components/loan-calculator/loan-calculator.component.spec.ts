@@ -118,6 +118,24 @@ describe('LoanCalculatorComponent', () => {
     expect(subscriptions.unsubscribe).toHaveBeenCalled();
   });
 
+  it('should set duration amount', () => {
+    spyOn(loanCalculatorComponent, 'setDurationAmount');
+    loanCalculatorComponent.setDurationAmount();
+    expect(loanCalculatorComponent.setDurationAmount).toHaveBeenCalled();
+  });
+
+  it('should calculate annuity amount', () => {
+    spyOn(loanCalculatorComponent, 'calculateAnnuityAmount').and.callThrough();
+    loanCalculatorComponent.calculateAnnuityAmount();
+    expect(loanCalculatorComponent.calculateAnnuityAmount).toHaveBeenCalled();
+  });
+
+  it('should set loan amount', () => {
+    spyOn(loanCalculatorComponent, 'setLoanAmount');
+    loanCalculatorComponent.setLoanAmount();
+    expect(loanCalculatorComponent.setLoanAmount).toHaveBeenCalled();
+  });
+
   it('should clear all when the clear method is called', () => {
     spyOn(loanCalculatorComponent, 'clearAll');
     loanCalculatorComponent.clearAll();
