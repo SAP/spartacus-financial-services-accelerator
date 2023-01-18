@@ -37,7 +37,10 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
     type: FS_ICON_TYPE.EDIT,
   };
 
-  constructor(private renderer: Renderer2, private resolveAssetValuePipe: ResolveAssetValuePipe) {}
+  constructor(
+    private renderer: Renderer2,
+    private resolveAssetValuePipe: ResolveAssetValuePipe
+  ) {}
 
   ngOnInit(): void {
     if (this.selectedAsset === AssetTableType.POLICIES) {
