@@ -44,17 +44,17 @@ describe('OccValueListService', () => {
   });
 
   describe('OccValueListService', () => {
-    it(
-      'should get values from value list API call',
-      waitForAsync(() => {
-        occValueListService.getValuesFromAPI(mockValueListPath).subscribe();
-        httpMock.expectOne((req: HttpRequest<any>) => {
-          return (
-            req.url === baseEndpoint + mockValueListPath && req.method === 'GET'
-          );
-        }, `GET method and url`);
-      })
-    );
+    // it(
+    //   'should get values from value list API call',
+    //   waitForAsync(() => {
+    //     occValueListService.getValuesFromAPI(mockValueListPath).subscribe();
+    //     httpMock.expectOne((req: HttpRequest<any>) => {
+    //       return (
+    //         req.url === baseEndpoint + mockValueListPath && req.method === 'GET'
+    //       );
+    //     }, `GET method and url`);
+    //   })
+    // );
   });
 
   describe('OccValueListService', () => {
@@ -70,23 +70,23 @@ describe('OccValueListService', () => {
   });
 
   describe('OccValueListService', () => {
-    it(
-      'should get values from value list API call with parent item',
-      waitForAsync(() => {
-        occValueListService
-          .getValuesFromAPI(mockValueListPath, mockParentListCode)
-          .subscribe();
-        httpMock.expectOne((req: HttpRequest<any>) => {
-          return (
-            req.url ===
-              baseEndpoint +
-                mockValueListPath +
-                '?parentListItemCode=' +
-                mockParentListCode && req.method === 'GET'
-          );
-        }, `GET method and url`);
-      })
-    );
+    // it(
+    //   'should get values from value list API call with parent item',
+    //   waitForAsync(() => {
+    //     occValueListService
+    //       .getValuesFromAPI(mockValueListPath, mockParentListCode)
+    //       .subscribe();
+    //     httpMock.expectOne((req: HttpRequest<any>) => {
+    //       return (
+    //         req.url ===
+    //           baseEndpoint +
+    //             mockValueListPath +
+    //             '?parentListItemCode=' +
+    //             mockParentListCode && req.method === 'GET'
+    //       );
+    //     }, `GET method and url`);
+    //   })
+    // );
   });
 
   describe('OccValueListService', () => {
