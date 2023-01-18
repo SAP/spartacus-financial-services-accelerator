@@ -52,12 +52,6 @@ export function checkBackAndContinueButtons() {
   cy.get('.primary-button').should('contain.text', 'Continue');
 }
 
-export function checkOrderConfirmationBanking() {
-  cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5').eq(0).should('have.text', ' Thank you! ');
-  });
-}
-
 export function checkAccordions(category) {
   const accordion_item = 'cx-fs-accordion-item';
   const accordion = Accordions.accordions.find(
@@ -165,8 +159,7 @@ export function populateContentsCover() {
   cy.get('[name="propertyIsStandard50000ContentCover"]').eq(1).click();
   cy.get('[name=propertyMultipleOf10000ContentCover]').type('15000');
   cy.get('[name="accidentalDamageCoverContents"]').eq(0).click();
-  //BUG
-  cy.get('[name=carRenewalDate]').type('2023-01-01');
+  cy.get('[name=carRenewalDate]').type('2024-01-01');
 }
 
 export function populatePropertyAddress() {
@@ -291,6 +284,8 @@ export const pages = {
   personalDetails: 'checkout/personal-details',
   documentsPage: 'my-account/my-documents',
   needAnalysis: 'questionnaire',
+  noPolicyForClaimCreation: 'noClaims',
+  quoteReview: 'quote-review',
 };
 
 export function checkPageURL(page: string) {
@@ -322,4 +317,17 @@ export function populateCustomerDetails(title, name, lastName) {
   cy.get('[name="title"]').select(title);
   cy.get('[name="firstName"]').type(name);
   cy.get('[name="lastName"]').type(lastName);
+}
+
+export function addCoupon(couponCode) {
+  cy.get('cx-fs-cart-coupon').should('be.visible');
+  cy.get('[formcontrolname=couponCode]').type(couponCode);
+  cy.get('.primary-button').eq(1).click();
+}
+
+export function appliedCoupon() {
+  cy.get('.cx-cart-coupon-title')
+    .should('be.visible')
+    .contains('Applied coupons:');
+  cy.get('cx-applied-coupons').should('be.visible');
 }

@@ -41,6 +41,7 @@ testFilters(['smoke'], () => {
 
     it('Should populate personal details', () => {
       checkout.populatePersonalDetailsPage();
+      cy.wait(7000);
       travelCheckout.checkTravelMiniCart();
       checkout.clickContinueButton();
     });
@@ -67,6 +68,14 @@ testFilters(['smoke'], () => {
 
     it('Should check order confirmation', () => {
       checkout.checkOrderConfirmation();
+      cy.get('.enriched-banner-title')
+        .should('be.visible')
+        .contains(
+          "Don't worry while you're gone, secure your home too and enjoy your trip! Your coupon code for Homeowners insurance FSA-HOME-COUPON."
+        );
+      cy.get('.enriched-banner-styled-text')
+        .should('be.visible')
+        .contains('Get a Quote for Home insurance');
       checkout.checkAccordions('travelFinalReview');
     });
 
@@ -74,8 +83,7 @@ testFilters(['smoke'], () => {
       cy.get('cx-fs-message-notification').within(() => {
         cy.get('.icon-envelope').click();
       });
-      inbox.checkInboxComponets();
-      inbox.checkGeneralTab();
+      travelCheckout.checkInboxMessages();
     });
   });
 });

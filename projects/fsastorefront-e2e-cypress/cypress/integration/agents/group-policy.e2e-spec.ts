@@ -40,6 +40,7 @@ testFilters(['smoke'], () => {
       checkout.clickContinueButton();
       checkout.checkPersonalDetailsPage();
       banking.populatePersonalDetailsCCandLoan();
+      banking.uploadDocument();
       banking.populateAddressInfo();
       checkout.clickContinueButton();
       banking.checkProgressBarLoanAndFTD();
@@ -53,9 +54,7 @@ testFilters(['smoke'], () => {
       userIdentification.checkUserIdentificationPage();
       banking.checkProgressBarLoanAndFTD();
       userIdentification.selectUserIdentification('Legal Identification');
-      checkout.checkOrderConfirmation();
-      banking.checkOrderTotal('€140.00');
-      checkout.checkAccordions('LoanConfirmation');
+      banking.checkOrderConfirmation();
       register.logout();
     });
 
@@ -93,8 +92,7 @@ testFilters(['smoke'], () => {
       banking.checkBankingProgressBar();
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification(' Video Identification ');
-      checkout.checkOrderConfirmationBanking();
-      checkout.checkAccordions('confirmationCurrentAccount');
+      banking.checkOrderConfirmation();
     });
   });
 });

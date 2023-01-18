@@ -19,15 +19,15 @@ export function checkSavingsComparisonTable() {
     mainProducts: [
       {
         name: 'Safe and Steady',
-        price: '€181.10',
+        price: '€146.58',
       },
       {
         name: 'Balanced Deal',
-        price: '€240.22',
+        price: '€186.11',
       },
       {
         name: 'Flexi-Max',
-        price: '€414.40',
+        price: '€293.20',
       },
     ],
   };
@@ -105,9 +105,9 @@ export function populateCoverageInformation() {
   cy.get('[name=contributionFrequency]').select('Half_Yearly');
   cy.get('[name=contribution]').type('779');
   cy.get('[name=annualContributionIncrease]').select('1');
-  cy.get('[name=startDate]').type('2022-12-12');
+  cy.get('[name=startDate]').type('2024-12-12');
   cy.get('[name=retirementAge]').type('67');
-  cy.get('[name=dateOfBirth]').type('1981-11-12');
+  cy.get('[name=dateOfBirth]').type('1979-11-12');
 }
 
 export function checkInvestmentDetails() {
@@ -123,11 +123,11 @@ export function checkInvestmentDetails() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: '€822.19',
+    price: '€833.63',
     products: [
       {
         title: 'Start Date:',
-        value: '12 Dec 2022',
+        value: '12 Dec 2024',
       },
       {
         title: 'Annual Contribution Increase:',
@@ -147,7 +147,7 @@ export function checkMiniCart() {
       },
       {
         title: 'Survivor Pension:',
-        value: '€40.20',
+        value: '€51.64',
       },
     ],
   };

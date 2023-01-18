@@ -143,7 +143,7 @@ export function checkLoanApplication() {
     cy.get('h6').should('have.text', ' Loan ');
     cy.get('.label').contains('Personal Loan');
     cy.get('.label').contains('Quote status');
-    cy.get('.value').contains('Approved');
+    cy.get('.value').contains('Accepted');
     cy.get('.value').contains('€140.00');
   });
 }

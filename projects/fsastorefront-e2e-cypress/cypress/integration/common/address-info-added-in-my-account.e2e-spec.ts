@@ -83,6 +83,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       checkout.checkPersonalDetailsPage();
       addressInfo.checkPopulatedFieldsBanking();
+      banking.uploadDocument();
       addressInfo.addNewDataPersonalDetailsBanking();
       banking.populatePersonalDetailsCCandLoan();
       checkout.clickContinueButton();

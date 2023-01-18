@@ -95,10 +95,16 @@ testFilters([''], () => {
       cy.contains(
         'Insurance Quote/Application is successfully prepared for the customer stephen.bailey@sapfsa.com.'
       );
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       checkEmptyMyQuotesPage();
       register.logout();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
     });
 
     it('Should check that customer can complete event checkout', () => {
@@ -129,7 +135,7 @@ testFilters([''], () => {
 
     it('Should check that customer can complete current account checkout', () => {
       quotes.checkMyQuotesPage();
-      quotes.checkQuote('Current', 'ACCEPTED', '€9.99 / Monthly');
+      quotes.checkQuote('Current', 'Accepted', '€9.99 / Monthly');
       checkout.checkCheckoutStep('Your Current Account Application', '7');
       cy.get('p.label')
         .contains('Personal Details')
@@ -141,8 +147,8 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification(' Video Identification ');
-      //checkout.checkOrderConfirmationBanking();
-      //checkout.checkAccordions('confirmationCurrentAccount');
+      cy.wait(1000);
+      banking.checkOrderConfirmation();
     });
   });
 });
