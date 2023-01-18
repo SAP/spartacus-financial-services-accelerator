@@ -1,4 +1,10 @@
-import { waitForAsync, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import {
+  waitForAsync,
+  ComponentFixture,
+  TestBed,
+  tick,
+  fakeAsync,
+} from '@angular/core/testing';
 import { LoanCalculatorComponent } from './loan-calculator.component';
 import { LoanCalculatorService } from './services/loan-calculator.service';
 import { DebugElement } from '@angular/core';
@@ -15,8 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 class MockLoanCalculatorService {
   getAnnuity() {}
-  getRepaymentFrequencies() {
-  }
+  getRepaymentFrequencies() {}
 }
 
 const mockRepaymentFrequencies = {
@@ -116,7 +121,9 @@ describe('LoanCalculatorComponent', () => {
   it('should clear all when the clear method is called', () => {
     spyOn(loanCalculatorComponent, 'clearAll');
     loanCalculatorComponent.clearAll();
-    expect(loanCalculatorComponent.sliderFormPatch && loanCalculatorComponent.annuityAmount === undefined).toBeTruthy();
+    expect(
+      loanCalculatorComponent.sliderFormPatch &&
+        loanCalculatorComponent.annuityAmount === undefined
+    ).toBeTruthy();
   });
-
 });
