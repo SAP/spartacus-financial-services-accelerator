@@ -91,33 +91,37 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
   }
 
   changeLoanDuration(change: string, min: number, max: number) {
-    change === 'decrease'
-      ? this.sliderForm.get('loanDuration').value - 1 >= min
+    if (change === 'decrease') {
+      this.sliderForm.get('loanDuration').value - 1 >= min
         ? this.sliderForm.patchValue({
             loanDuration: this.sliderForm.get('loanDuration').value - 1,
           })
-        : () => false
-      : this.sliderForm.get('loanDuration').value + 1 <= max
-      ? this.sliderForm.patchValue({
-          loanDuration: this.sliderForm.get('loanDuration').value + 1,
-        })
-      : () => false;
+        : false;
+    } else {
+      this.sliderForm.get('loanDuration').value + 1 <= max
+        ? this.sliderForm.patchValue({
+            loanDuration: this.sliderForm.get('loanDuration').value + 1,
+          })
+        : false;
+    }
   }
 
   changeLoanAmount(change: string, min: number, max: number) {
-    change === 'decrease'
-      ? this.sliderForm.get('loanAmount').value - this.inputRangeSteps >= min
+    if (change === 'decrease') {
+      this.sliderForm.get('loanAmount').value - this.inputRangeSteps >= min
         ? this.sliderForm.patchValue({
             loanAmount:
               this.sliderForm.get('loanAmount').value - this.inputRangeSteps,
           })
-        : () => false
-      : this.sliderForm.get('loanAmount').value + this.inputRangeSteps <= max
-      ? this.sliderForm.patchValue({
-          loanAmount:
-            this.sliderForm.get('loanAmount').value + this.inputRangeSteps,
-        })
-      : () => false;
+        : false;
+    } else {
+      this.sliderForm.get('loanAmount').value + this.inputRangeSteps <= max
+        ? this.sliderForm.patchValue({
+            loanAmount:
+              this.sliderForm.get('loanAmount').value + this.inputRangeSteps,
+          })
+        : false;
+    }
   }
 
   calculateAnnuityAmount() {
