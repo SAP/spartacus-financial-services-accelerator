@@ -13,25 +13,27 @@
         <label for="loanAmount" class="col-8 title">{{
           'loan.loanAmount' | cxTranslate
         }}</label>
-        <div class="input-group-prepend">
-          <span class="input-group-text small-height">{{
-            currentCurrency$ | async
-          }}</span>
-        </div>
-        <input
-          (focusout)="setLoanAmount()"
-          id="loanAmount"
-          value="{{ sliderForm.value.loanAmount }}"
-          formControlName="loanAmount"
-          type="number"
-          class="form-control small-height"
-          ng-reflect-name="loanAmount"
-          name="loanAmount"
-          placeholder="{{ sliderForm.get('loanAmount').value }}"
-        />
       </div>
     </div>
-    <div class="slidecontainer my-5">
+    <div class="d-flex w-50 mx-auto mt-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text small-height">{{
+          currentCurrency$ | async
+        }}</span>
+      </div>
+      <input
+        (focusout)="setLoanAmount()"
+        id="loanAmount"
+        value="{{ sliderForm.value.loanAmount }}"
+        formControlName="loanAmount"
+        type="number"
+        class="form-control small-height"
+        ng-reflect-name="loanAmount"
+        name="loanAmount"
+        placeholder="{{ sliderForm.get('loanAmount').value }}"
+      />
+    </div>
+    <div class="slidecontainer mb-5 mt-4">
       <div class="d-flex justify-content-center align-items-start">
         <div
           class="range box-shadow rounded mr-4 h6 pointer"
@@ -97,6 +99,8 @@
           'loan.loanDuration' | cxTranslate
         }}</label>
       </div>
+    </div>
+    <div class="d-flex w-50 mx-auto mt-3">
       <div class="input-group-prepend">
         <span class="input-group-text small-height">Yrs</span>
       </div>
@@ -170,7 +174,7 @@
     *ngIf="sliderForm.get('repaymentFrequency').value"
   >
     <div
-      class="position-absolute right p-3 pointer"
+      class="position-absolute right p-3 pointer underline"
       *ngIf="clearAllowed"
       (click)="clearAll()"
     >

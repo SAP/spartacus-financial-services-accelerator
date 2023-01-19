@@ -18,11 +18,20 @@ cx-fs-loan-calculator {
   color: var(--cx-color-primary);
   padding: 1rem;
   border-radius: 50%;
+  &:hover {
+    background-color: var(--cx-color-7);
+    color: var(--cx-color-1);
+    border: 2px solid var(--cx-color-1);
+  }
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 35% 1fr;
+  grid-template-columns: 30% 1fr;
 }
 
 .reset {
