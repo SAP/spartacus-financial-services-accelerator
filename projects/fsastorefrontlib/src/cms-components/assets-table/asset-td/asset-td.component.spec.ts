@@ -7,15 +7,28 @@ import { AssetTableType } from '../../../occ';
 import { ResolveAssetValuePipe } from '../resolve-asset-value.pipe';
 import { AssetTdComponent } from './asset-td.component';
 
+class MockResolveAssetValuePipe {
+  allowedFSRequestTypesIsClaim() {
+    return true;
+  }
+}
+
 describe('AssetTdComponent', () => {
   let component: AssetTdComponent;
   let fixture: ComponentFixture<AssetTdComponent>;
+  let mockResolveAssetValuePipe: ResolveAssetValuePipe;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, CommonModule],
         declarations: [AssetTdComponent, ResolveAssetValuePipe],
+        providers: [
+          {
+            provide: ResolveAssetValuePipe,
+            useClass: MockResolveAssetValuePipe,
+          },
+        ],
       }).compileComponents();
     })
   );

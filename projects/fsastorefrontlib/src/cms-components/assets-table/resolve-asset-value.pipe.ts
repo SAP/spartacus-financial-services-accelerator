@@ -18,7 +18,7 @@ export class ResolveAssetValuePipe implements PipeTransform {
 
     return this.allowedFSRequestTypesIsClaim(asset)
       ? this.translation.translate(value.value)
-      : this.translation.translate('fscommon.none');
+      : this.translation.translate('fscommon.notAvailable');
   }
 
   allowedFSRequestTypesIsClaim(asset) {
