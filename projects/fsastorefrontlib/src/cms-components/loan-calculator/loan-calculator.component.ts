@@ -96,12 +96,12 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
         ? this.sliderForm.patchValue({
             loanDuration: this.sliderForm.get('loanDuration').value - 1,
           })
-        : false
+        : () => false
       : this.sliderForm.get('loanDuration').value + 1 <= max
       ? this.sliderForm.patchValue({
           loanDuration: this.sliderForm.get('loanDuration').value + 1,
         })
-      : false;
+      : () => false;
   }
 
   changeLoanAmount(change: string, min: number, max: number) {
@@ -111,13 +111,13 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
             loanAmount:
               this.sliderForm.get('loanAmount').value - this.inputRangeSteps,
           })
-        : false
+        : () => false
       : this.sliderForm.get('loanAmount').value + this.inputRangeSteps <= max
       ? this.sliderForm.patchValue({
           loanAmount:
             this.sliderForm.get('loanAmount').value + this.inputRangeSteps,
         })
-      : false;
+      : () => false;
   }
 
   calculateAnnuityAmount() {
