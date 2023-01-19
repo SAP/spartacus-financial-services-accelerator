@@ -136,16 +136,6 @@
               "src/**/*.html"
             ]
           }
-        },
-        "test": {
-          "options": {
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/"
-              ]
-            }
-          }
         }
       }
     },
