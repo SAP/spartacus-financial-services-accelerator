@@ -14,7 +14,9 @@ import { FS_ICON_TYPE } from '../../../core/icon-config/icon-config';
 import {
   AssetTableType,
   DataAssetConfig,
+  RequestType,
 } from '../../../occ/occ-models/occ.models';
+import { ResolveAssetValuePipe } from '../resolve-asset-value.pipe';
 
 @Component({
   selector: 'cx-fs-asset-td',
@@ -35,15 +37,24 @@ export class AssetTdComponent implements OnInit, AfterViewInit {
     type: FS_ICON_TYPE.EDIT,
   };
 
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private resolveAssetValuePipe: ResolveAssetValuePipe
+  ) {}
 
   ngOnInit(): void {
     if (this.selectedAsset === AssetTableType.POLICIES) {
-      if (this.assetConfig.column === AssetColumn.NUMBER) {
+      if (
+        this.assetConfig.column === AssetColumn.NUMBER &&
+        this.resolveAssetValuePipe.allowedFSRequestTypesIsClaim(this.asset)
+      ) {
         this.icon.show = true;
       }
 
-      if (this.assetConfig.column === AssetColumn.EMPTY) {
+      if (
+        this.assetConfig.column === AssetColumn.CLAIM &&
+        this.resolveAssetValuePipe.allowedFSRequestTypesIsClaim(this.asset)
+      ) {
         this.icon = {
           show: true,
           type: FS_ICON_TYPE.CHEVRON_RIGHT,

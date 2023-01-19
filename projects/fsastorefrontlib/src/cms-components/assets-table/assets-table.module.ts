@@ -16,6 +16,7 @@ import { ResolveAssetValuePipe } from './resolve-asset-value.pipe';
     RouterModule,
     IconModule,
   ],
+  providers: [ResolveAssetValuePipe],
   declarations: [AssetsTableComponent, AssetTdComponent, ResolveAssetValuePipe],
   exports: [AssetsTableComponent, AssetTdComponent, ResolveAssetValuePipe],
 })
