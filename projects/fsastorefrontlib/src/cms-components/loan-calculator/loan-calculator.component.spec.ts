@@ -125,6 +125,7 @@ describe('LoanCalculatorComponent', () => {
   });
 
   it('should calculate annuity amount', () => {
+    fixture.detectChanges();
     spyOn(loanCalculatorComponent, 'calculateAnnuityAmount').and.callThrough();
     loanCalculatorComponent.calculateAnnuityAmount();
     expect(loanCalculatorComponent.calculateAnnuityAmount).toHaveBeenCalled();
