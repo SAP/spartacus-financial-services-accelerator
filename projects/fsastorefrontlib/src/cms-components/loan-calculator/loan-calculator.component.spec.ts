@@ -121,6 +121,11 @@ describe('LoanCalculatorComponent', () => {
   it('should set duration amount', () => {
     spyOn(loanCalculatorComponent, 'setDurationAmount');
     loanCalculatorComponent.setDurationAmount();
+    fixture.detectChanges();
+    const form = loanCalculatorComponent.sliderForm;
+    form.patchValue({
+      loanDuration: form.get('loanDuration').value,
+    });
     expect(loanCalculatorComponent.setDurationAmount).toHaveBeenCalled();
   });
 
