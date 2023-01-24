@@ -170,3 +170,24 @@ export function checkOptionalProductsFiveStar() {
   };
   shared.checkAddOptionsPageContent(addOptionsContent);
 }
+
+export function checkMiniCartWithCoupon() {
+  const miniCartContent: sharedCheckout.MiniCart = {
+    price: '€43.20',
+    products: [
+      {
+        title: 'Two Star Event Plan:',
+        value: '€17.10',
+      },
+      {
+        title: 'Venue Cover:',
+        value: '€26.10',
+      },
+      {
+        title: 'You save',
+        value: '€4.79',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}

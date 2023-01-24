@@ -38,6 +38,9 @@ testFilters(['smoke'], () => {
     it('Should check optional products for Current Account', () => {
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
       currentAccount.checkOptionalFamilyAccountAddTransactionChest();
+      currentAccount.checkMiniCartCurrentAccount();
+      checkout.addCoupon('FSA10DISC');
+      cy.get('.alert-success').should('be.visible');
       checkout.clickContinueButton();
     });
 
@@ -51,9 +54,14 @@ testFilters(['smoke'], () => {
       checkout.checkPersonalDetailsPage();
       banking.populatePersonalDetailsLoanAndCA();
       banking.populateEmploymentData();
-      currentAccount.checkMiniCartCurrentAccount();
+      checkout.addCoupon('FSA10DISC');
+      cy.get('.alert-danger')
+        .should('be.visible')
+        .contains('This coupon code is already applied to the current cart.');
+      currentAccount.checkMiniCartWithCoupon();
+      checkout.appliedCoupon();
       // Needed for user registration/login to complete in the background
-      cy.wait(5000);
+      cy.wait(7000);
       checkout.checkBackAndContinueButtons();
       checkout.clickContinueButton();
     });
@@ -80,11 +88,11 @@ testFilters(['smoke'], () => {
       checkout.checkCheckoutStep(' Your Current Account Application ', '7');
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification(' Video Identification ');
+      cy.wait(1000);
     });
 
     it('Should check order confirmation', () => {
-      checkout.checkOrderConfirmationBanking();
-      checkout.checkAccordions('confirmationCurrentAccount');
+      banking.checkOrderConfirmation();
     });
 
     it('Should empty my account policies page', () => {

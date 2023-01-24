@@ -23,6 +23,11 @@ testFilters(['smoke'], () => {
     });
 
     it('Should open event category page', () => {
+      cy.get('.alert-success')
+        .should('be.visible')
+        .within(() => {
+          cy.get('cx-icon').click({ multiple: true });
+        });
       checkout.startInsuranceCheckout('Event');
     });
 
@@ -46,17 +51,24 @@ testFilters(['smoke'], () => {
     it('Should populate personal details page', () => {
       checkout.checkCheckoutStep('Your Event Insurance', '6');
       checkout.checkPersonalDetailsPage();
+      checkout.addCoupon('notValid');
+      cy.get('.alert-danger').should('be.visible');
       event.populatePersonalDetails();
-      checkout.populatePersonalDetailsPage();
       event.checkMiniCartRemovedProduct();
+      checkout.addCoupon('FSA10DISC');
+      cy.get('.alert-success').should('be.visible');
+      checkout.populatePersonalDetailsPage();
+      checkout.appliedCoupon();
+      cy.wait(3000);
       checkout.clickContinueButton();
     });
 
     it('Should check quote review page', () => {
+      checkout.checkPageURL(checkout.pages.quoteReview);
       checkout.checkCheckoutStep('Your Event Insurance', '6');
       event.checkProgressBarEvent();
-      event.checkMiniCartRemovedProduct();
       checkout.checkAccordions('threeAccordions');
+      event.checkMiniCartWithCoupon();
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
       checkout.checkAccordions('threeAccordions');

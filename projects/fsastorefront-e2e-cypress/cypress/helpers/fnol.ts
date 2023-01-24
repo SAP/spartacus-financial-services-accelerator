@@ -51,12 +51,6 @@ export function populateIncidentInformationStep(incidentType) {
   });
 }
 
-export function updateIncidentType() {
-  cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=whatHappened]').select('Glass Damage');
-  });
-}
-
 export function populateGeneralInformationStep() {
   cy.get('[name=phFault]').select('3rdParty');
   cy.get('[name=reportedToPolice]').eq(0).click();
@@ -105,98 +99,6 @@ export function checkConfirmationPage() {
     );
 }
 
-export function checkOpenClaimContent() {
-  cy.get('h6').contains(' Auto Insurance Claim ');
-  cy.get('.label').contains('Incident Type');
-  cy.get('.value').contains('Collision');
-  cy.get('.label').contains('Date of Loss');
-  cy.get('.value').contains('01 Jan 2018');
-  cy.get('.label').contains('Status');
-  cy.get('.value').contains('OPEN');
-}
-
-export function checkFnolEntryPage() {
-  cy.get('.heading-headline').contains('Make a Claim Online');
-  cy.get('h3').contains('Which car has been damaged?');
-  cy.get('cx-fs-cms-custom-container').within(() => {
-    cy.get('.cx-payment-card-inner').should('be.visible');
-  });
-}
-
-export function selectPolicyOnEntryPage() {
-  cy.get('.cx-payment-card')
-    .eq(0)
-    .within(() => {
-      cy.get('.cx-card-link').click();
-    });
-  cy.get('.form-check-input').click();
-}
-
-export function checkAndResumeSpecificClaim() {
-  const claims = waitForPage('my-claims', 'claims');
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Claims',
-  });
-  cy.wait(`@${claims}`).its('status').should('eq', 200);
-  cy.get('.info-card').within(() => {
-    cy.get('.info-card-content').contains(claimNumber);
-    this.checkOpenClaimContent();
-    cy.get('.link').contains('Resume').click({ force: true });
-  });
-}
-
-export function deleteClaimFromDialog() {
-  const claims = waitForPage('my-claims', 'claims');
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Claims',
-  });
-  cy.wait(`@${claims}`).its('status').should('eq', 200);
-  cy.contains('.info-card', claimNumber).within(() => {
-    cy.get('a.fs-icon').should('be.visible').click({ force: true });
-  });
-  cy.get('h3').should('contain.text', 'Delete started claim process');
-  cy.get('p').contains('The following claim process will be deleted');
-  cy.get('cx-fs-deleted-claim-dialog').within(() => {
-    cy.get('.primary-button').click();
-  });
-}
-
-export function clickContinueAndGetNewClaimID() {
-  const incidentInfoForm = waitForCMSComponent(
-    'AutoClaimIncidentFormComponent',
-    'incidentInfoForm'
-  );
-  cy.get('h3').contains('Which car has been damaged?');
-  cy.get('.primary-button').should('be.visible').click();
-  cy.wait(`@${incidentInfoForm}`)
-    .its('status')
-    .should('eq', 200)
-    .then(() => {
-      claimNumber = this.getClaimIdFromLocalStorage();
-    });
-}
-
-export function populateIncidentInformationSecondClaim() {
-  cy.get('[name=whatHappened]').select('AutoTheft');
-  cy.get('[name=whenHappened]').clear().type('2019-01-01');
-  cy.get('[name=whatTime]').clear().type('12:12:12');
-  cy.get('[name=country]').select('Serbia');
-  cy.get('[name=city]').clear().type('Belgräde');
-  cy.get('[name=postcode]').clear().type('11040');
-  cy.get('[name=address]').clear().type('Omladinskih Brigada 90g');
-  cy.get('[name=description]')
-    .clear()
-    .type('my tesla S was stolen while I was in the shopping center');
-}
-
-export function waitForfnolGeneralInformationStep() {
-  const generalInfoPage = waitForPage('fnolGeneralInfoPage', 'generalInfoPage');
-  cy.get('.Section4 cx-banner').eq(1).click();
-  cy.wait(`@${generalInfoPage}`).its('status').should('eq', 200);
-}
-
 export function populateIncidentReportStep() {
   const filePath = 'Claim.pdf';
   cy.get('[name=howAccidentOccurred]').type(
@@ -225,15 +127,6 @@ export function checkClaimReplication(incidetType) {
       cy.get('.info-card-links').contains('Details');
       cy.get('.info-card-links').contains('Add Documents');
     });
-}
-
-export function uploadDocuments() {
-  const filePath = 'Claim.pdf';
-  cy.get('.custom-file-input').attachFile(filePath);
-  cy.get('.btn-primary')
-    .should('contain.text', 'Upload')
-    .eq(0)
-    .click({ force: true });
 }
 
 export function startClaimFromHomepage() {
@@ -330,4 +223,19 @@ export function checkClaimDetails() {
       cy.get('.accordion-heading').contains('Documents').click();
       cy.get('.action-button').contains('Add Documents').click();
     });
+}
+
+export function checkNoClaimsPage() {
+  cy.get('.heading-headline').should('be.visible');
+  cy.get('.heading-headline').contains('Make a Claim Online');
+  cy.get('cx-fs-cms-custom-container')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.notice-text').contains(
+        'The affected car is not listed? Contact an agent for help!'
+      );
+    });
+  cy.get('h6.notice')
+    .should('be.visible')
+    .contains('You have no valid policies!');
 }

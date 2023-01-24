@@ -1,14 +1,10 @@
-export function checkPageElements() {
+export function checkPageElements(bannerTitle, bannerText) {
   cy.get('.SiteLogo').should('be.visible');
   cy.get('cx-fs-enriched-responsive-banner')
     .should('be.visible')
     .within(() => {
-      cy.get('.enriched-banner-title.box-title').contains(
-        'Choose a perfect product.'
-      );
-      cy.get('.enriched-banner-details-box').contains(
-        'Create long lasting benefits with our digital financial solutions.'
-      );
+      cy.get('.enriched-banner-title.box-title').contains(bannerTitle);
+      cy.get('.enriched-banner-details-box').contains(bannerText);
     });
   cy.get('cx-fs-category-carousel').should('be.visible');
   cy.get('cx-fs-category-feature').should('be.visible').and('have.length', 11);

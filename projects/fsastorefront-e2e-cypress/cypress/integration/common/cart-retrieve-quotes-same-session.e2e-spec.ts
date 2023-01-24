@@ -64,6 +64,7 @@ testFilters([''], () => {
       checkout.checkPersonalDetailsPage();
       banking.populateAddressInfo();
       banking.populatePersonalDetailsCCandLoan();
+      banking.uploadDocument();
       banking.populateAdditionalApplicantCCandLoan();
       checkout.clickContinueButton();
       checkout.checkCheckoutStep('Your Loan Application', '6');
