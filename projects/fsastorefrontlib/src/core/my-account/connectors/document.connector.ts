@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SignDocumentsAdapter } from './sign-documents.adapter';
+import { DocumentAdapter } from './document.adapter';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SignDocumentsConnector {
-  constructor(protected signDocumentsAdapter: SignDocumentsAdapter) {}
+export class DocumentConnector {
+  constructor(protected documentAdapter: DocumentAdapter) {}
 
   signDocuments(
     userId: string,
     documentCodes: string,
     signStatus: boolean
   ): Observable<any> {
-    return this.signDocumentsAdapter.signDocuments(
+    return this.documentAdapter.signDocuments(
       userId,
       documentCodes,
       signStatus

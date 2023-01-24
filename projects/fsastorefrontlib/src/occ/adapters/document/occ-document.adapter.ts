@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SignDocumentsAdapter } from '../../../core';
+import { DocumentAdapter } from '../../../core';
 
 @Injectable()
-export class OccSignDocumentsAdapter implements SignDocumentsAdapter {
+export class OccDocumentAdapter implements DocumentAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

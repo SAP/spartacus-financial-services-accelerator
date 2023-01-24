@@ -1,4 +1,4 @@
-export abstract class SignDocumentsAdapter {
+export abstract class DocumentAdapter {
   /**
    * Abstract method used to sign documents for customer
    *

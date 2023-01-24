@@ -9,4 +9,4 @@ export * from './adapters/user-request/default-occ-user-request-config';
 export * from './adapters/policy/default-occ-policy-config';
 export * from './adapters/claim/default-occ-claim-config';
 export * from './adapters/quote/default-occ-quote-config';
-export * from './adapters/sign-documents/default-occ-sign-documents-config';
+export * from './adapters/document/default-occ-document-config';

@@ -1,6 +1,6 @@
 import { FSOccConfig } from '../../config/fs-occ-config';
 
-export const defaultSignDocumentsConfig: FSOccConfig = {
+export const defaultDocumentConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {

@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { OccEndpointsService } from '@spartacus/core';
 import { of } from 'rxjs';
-import { OccSignDocumentsAdapter } from './occ-sign-documents.adapter';
+import { OccDocumentAdapter } from './occ-document.adapter';
 
 const userId = 'userId';
 const documentCodes = 'DOC0000001,DOC0000002';
 const signStatus = true;
 
-describe('OccSignDocumentsAdapter', () => {
-  let adapter: OccSignDocumentsAdapter;
+describe('OccDocumentAdapter', () => {
+  let adapter: OccDocumentAdapter;
   let occEndpointServiceSpy: jasmine.SpyObj<OccEndpointsService>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
@@ -18,7 +18,7 @@ describe('OccSignDocumentsAdapter', () => {
       'buildUrl',
     ]);
 
-    adapter = new OccSignDocumentsAdapter(httpClientSpy, occEndpointServiceSpy);
+    adapter = new OccDocumentAdapter(httpClientSpy, occEndpointServiceSpy);
   });
 
   it('should check if all services are injected', () => {
