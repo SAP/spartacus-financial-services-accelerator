@@ -235,6 +235,14 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   oboConsentUpdateAddress?: string;
-
+  /**
+   * Create appointment for customer
+   *
+   */
   createAppointment?: string;
+  /**
+   * Sign documents for status
+   *
+   */
+  signDocuments?: string;
 }
