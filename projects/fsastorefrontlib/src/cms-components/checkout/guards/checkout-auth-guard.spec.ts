@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { UrlTree } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CheckoutConfigService } from '@spartacus/checkout/components';
+import { CheckoutConfigService } from '@spartacus/checkout/base/components';
 import {
   AuthRedirectService,
   AuthService,
@@ -27,8 +27,8 @@ class ActiveCartServiceStub implements Partial<ActiveCartService> {
   getAssignedUser(): Observable<User> {
     return of();
   }
-  isGuestCart(): boolean {
-    return true;
+  isGuestCart(): Observable<boolean> {
+    return of(true);
   }
   isStable(): Observable<boolean> {
     return of(true);
