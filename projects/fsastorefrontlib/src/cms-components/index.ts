@@ -28,3 +28,4 @@ export * from './seller-dashboard/index';
 export * from './sync-pilot/index';
 export * from './user-profile/index';
 export * from './user/index';
+export * from './loan-calculator/index';
