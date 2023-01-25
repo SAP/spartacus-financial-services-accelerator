@@ -9,7 +9,8 @@ import {
   RoutingService,
   WindowRef,
 } from '@spartacus/core';
-import { ModalService, SpinnerModule } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
+import { SpinnerModule } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
@@ -224,7 +225,7 @@ const modalInstance: any = {
     referredQuote$: of(false),
   },
 };
-const modalService = jasmine.createSpyObj('ModalService', ['open']);
+const launchDialogService = jasmine.createSpyObj('LaunchDialogService', ['open']);
 
 describe('Quote Review Component', () => {
   let component: QuoteReviewComponent;
@@ -268,8 +269,8 @@ describe('Quote Review Component', () => {
             useClass: MockCartService,
           },
           {
-            provide: ModalService,
-            useValue: modalService,
+            provide: LaunchDialogService,
+            useValue: launchDialogService,
           },
           {
             provide: FSTranslationService,
@@ -332,7 +333,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should not continue to the next step when quote is in state UNBIND', () => {
-    modalService.open.and.returnValue(modalInstance);
+    launchDialogService.openDialog();
     const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
@@ -347,7 +348,7 @@ describe('Quote Review Component', () => {
 
     component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
-    expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
+    expect(launchDialogService.openDialog).toHaveBeenCalledWith(BindQuoteDialogComponent, {
       centered: true,
       size: 'lg',
     });
@@ -357,7 +358,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should open ReferredQuoteDialog popup', () => {
-    modalService.open.and.returnValue(modalInstance);
+    launchDialogService.openDialog();
     const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
@@ -372,7 +373,7 @@ describe('Quote Review Component', () => {
 
     component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
-    expect(modalService.open).toHaveBeenCalledWith(
+    expect(launchDialogService.openDialog).toHaveBeenCalledWith(
       ReferredQuoteDialogComponent,
       {
         centered: true,
