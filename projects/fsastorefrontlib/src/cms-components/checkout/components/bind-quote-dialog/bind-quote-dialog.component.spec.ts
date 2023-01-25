@@ -6,7 +6,7 @@ import {
   FormDataStorageService,
   OboCustomerService,
 } from '@spartacus/dynamicforms';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { of } from 'rxjs';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
@@ -75,8 +75,8 @@ class MockQuoteService {
   bindQuote(code: string): void {}
 }
 
-class MockModalService {
-  dismissActiveModal(): void {}
+class MockLaunchDialogService {
+  closeDialog(reason: String): void {}
 }
 
 class MockFormDataStorageService {
@@ -104,7 +104,7 @@ describe('BindQuoteDialogComponent', () => {
   let component: BindQuoteDialogComponent;
   let fixture: ComponentFixture<BindQuoteDialogComponent>;
   let el: DebugElement;
-  let modalService: MockModalService;
+  let launchDialogService: MockLaunchDialogService;
   let quoteService: MockQuoteService;
   let cartService: MockCartService;
   let formDataStorageService: MockFormDataStorageService;
@@ -119,8 +119,8 @@ describe('BindQuoteDialogComponent', () => {
         declarations: [BindQuoteDialogComponent],
         providers: [
           {
-            provide: ModalService,
-            useClass: MockModalService,
+            provide: LaunchDialogService,
+            useClass: MockLaunchDialogService,
           },
           {
             provide: QuoteService,
@@ -148,7 +148,7 @@ describe('BindQuoteDialogComponent', () => {
     component.cartCode = cartCode;
     el = fixture.debugElement;
     quoteService = TestBed.inject(QuoteService);
-    modalService = TestBed.inject(ModalService);
+    launchDialogService = TestBed.inject(LaunchDialogService);
     cartService = TestBed.inject(FSCartService);
     formDataStorageService = TestBed.inject(FormDataStorageService);
     oboConsentService = TestBed.inject(ConsentService);
@@ -156,7 +156,7 @@ describe('BindQuoteDialogComponent', () => {
     userAccountFacade = TestBed.inject(UserAccountFacade);
 
     spyOn(quoteService, 'bindQuote').and.callThrough();
-    spyOn(modalService, 'dismissActiveModal').and.callThrough();
+    spyOn(launchDialogService, 'closeDialog').and.callThrough();
     spyOn(
       formDataStorageService,
       'clearFormDataIdFromLocalStorage'
