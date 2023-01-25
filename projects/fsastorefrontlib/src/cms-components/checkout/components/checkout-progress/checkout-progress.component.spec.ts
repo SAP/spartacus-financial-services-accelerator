@@ -10,7 +10,7 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
-import { CheckoutConfig } from '@spartacus/checkout/root';
+import { CheckoutConfig } from '@spartacus/checkout/base/root';
 import { Observable, of } from 'rxjs';
 import { storefrontRoutesConfig } from '../../../../cms-structure/routing/default-routing-config';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
