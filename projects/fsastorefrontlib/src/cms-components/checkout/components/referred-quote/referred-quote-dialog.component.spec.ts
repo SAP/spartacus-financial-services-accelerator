@@ -2,7 +2,7 @@ import { DebugElement } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { ReferredQuoteDialogComponent } from './referred-quote-dialog.component';
 
 class MockModalService {
@@ -13,7 +13,7 @@ describe('ReferredQuoteDialogComponent', () => {
   let component: ReferredQuoteDialogComponent;
   let fixture: ComponentFixture<ReferredQuoteDialogComponent>;
   let el: DebugElement;
-  let modalService: MockModalService;
+  let launchDialogService: LaunchDialogService;
 
   beforeEach(
     waitForAsync(() => {
@@ -22,7 +22,7 @@ describe('ReferredQuoteDialogComponent', () => {
         declarations: [ReferredQuoteDialogComponent],
         providers: [
           {
-            provide: ModalService,
+            provide: LaunchDialogService,
             useClass: MockModalService,
           },
         ],
@@ -34,9 +34,9 @@ describe('ReferredQuoteDialogComponent', () => {
     fixture = TestBed.createComponent(ReferredQuoteDialogComponent);
     component = fixture.componentInstance;
     el = fixture.debugElement;
-    modalService = TestBed.inject(ModalService);
+    launchDialogService = TestBed.inject(LaunchDialogService);
 
-    spyOn(modalService, 'dismissActiveModal').and.callThrough();
+    spyOn(launchDialogService, 'closeDialog').and.callThrough();
   });
 
   it('should create popup', () => {
