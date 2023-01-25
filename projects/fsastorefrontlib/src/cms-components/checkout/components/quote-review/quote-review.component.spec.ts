@@ -333,7 +333,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should not continue to the next step when quote is in state UNBIND', () => {
-    launchDialogService.openDialog();
+    launchDialogService.openDialog().and.callThrough();
     const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
@@ -358,7 +358,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should open ReferredQuoteDialog popup', () => {
-    launchDialogService.openDialog();
+    launchDialogService.openDialog().and.callThrough();
     const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
