@@ -13,7 +13,7 @@ import {
   UserAddressService,
   UserService,
 } from '@spartacus/core';
-import { FormErrorsModule, ModalService } from '@spartacus/storefront';
+import { FormErrorsModule, LaunchDialogService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSAddressFormComponent } from './address-form.component';
 import createSpy = jasmine.createSpy;
@@ -69,8 +69,8 @@ class MockUserAddressService {
   }
 }
 
-class MockModalService {
-  open(): any {}
+class MockLaunchDialogService {
+  openDialog(): any {}
 }
 
 class MockFSAddressService {
@@ -87,7 +87,7 @@ describe('FSAddressFormComponent', () => {
   let userAddressService: UserAddressService;
   let userService: UserService;
   let mockGlobalMessageService: any;
-  let mockModalService: MockModalService;
+  let mockLaunchDialogService: MockLaunchDialogService;
   let fSAddressService: FSAddressService;
 
   beforeEach(
@@ -95,7 +95,7 @@ describe('FSAddressFormComponent', () => {
       mockGlobalMessageService = {
         add: createSpy(),
       };
-      mockModalService = new MockModalService();
+      mockLaunchDialogService = new MockLaunchDialogService();
 
       TestBed.configureTestingModule({
         imports: [
@@ -106,12 +106,12 @@ describe('FSAddressFormComponent', () => {
         ],
         declarations: [FSAddressFormComponent],
         providers: [
-          { provide: ModalService, useValue: { open: () => {} } },
+          { provide: LaunchDialogService, useValue: { openDialog: () => {} } },
           { provide: UserService, useClass: MockUserService },
           { provide: FSAddressService, useClass: MockFSAddressService },
           { provide: UserAddressService, useClass: MockUserAddressService },
           { provide: GlobalMessageService, useValue: mockGlobalMessageService },
-          { provide: ModalService, useClass: MockModalService },
+          { provide: LaunchDialogService, useClass: MockLaunchDialogService },
         ],
       })
         .overrideComponent(FSAddressFormComponent, {
