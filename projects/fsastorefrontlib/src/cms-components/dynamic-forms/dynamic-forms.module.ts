@@ -11,6 +11,7 @@ import { DynamicSelectComponent } from './form-components/dynamic-select/dynamic
 import { ClaimPrefillResolver } from './resolver/claim-prefill-resolver';
 import { FSUserPrefillResolver } from './resolver/user-prefill-resolver';
 import { FSUserAddressPrefillResolver } from './resolver/user-address-prefill-resolver';
+import { DynamicNumberInputComponent } from './form-components/dynamic-number-input/dynamic-number-input.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,9 @@ import { FSUserAddressPrefillResolver } from './resolver/user-address-prefill-re
           dynamicSelect: {
             component: DynamicSelectComponent,
           },
+          dynamicInput: {
+            component: DynamicNumberInputComponent,
+          }
         },
         prefill: {
           cart: {
@@ -51,8 +55,8 @@ import { FSUserAddressPrefillResolver } from './resolver/user-address-prefill-re
       },
     }),
   ],
-  declarations: [CalculationButtonComponent, DynamicSelectComponent],
-  entryComponents: [CalculationButtonComponent, DynamicSelectComponent],
-  exports: [CalculationButtonComponent, DynamicSelectComponent],
+  declarations: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
+  entryComponents: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
+  exports: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
 })
 export class FSDynamicformsModule {}

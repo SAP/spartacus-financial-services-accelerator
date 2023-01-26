@@ -22,6 +22,7 @@ import { FSProductOccModule } from './adapters/product-search/product-occ.module
 import { ConsentOccModule } from './adapters/consent-management';
 import { AppointmentSchedulingOccModule } from './adapters/appointment-scheduling';
 import { DocumentOccModule } from './adapters/document';
+import { OccDynamicNumberInputService } from './services/dynamic-number-input/occ-dynamic-number-input.service';
 
 @NgModule({
   imports: [
@@ -47,6 +48,6 @@ import { DocumentOccModule } from './adapters/document';
     FSProductOccModule,
     DocumentOccModule,
   ],
-  providers: [OccValueListService, { provide: OccConfig, useExisting: Config }],
+  providers: [OccValueListService, OccDynamicNumberInputService, { provide: OccConfig, useExisting: Config }],
 })
 export class OccModule {}
