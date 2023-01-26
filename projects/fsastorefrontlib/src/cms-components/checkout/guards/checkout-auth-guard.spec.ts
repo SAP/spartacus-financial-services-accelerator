@@ -122,7 +122,7 @@ describe('FSCheckoutAuthGuard', () => {
     describe('and cart does NOT have a user, ', () => {
       beforeEach(() => {
         spyOn(activeCartService, 'getAssignedUser').and.returnValue(of({}));
-        spyOn(activeCartService, 'isGuestCart').and.returnValue(false);
+        spyOn(activeCartService, 'isGuestCart').and.returnValue(of(false));
       });
 
       it('should return url to login with forced flag when guestCheckout feature enabled', () => {
@@ -172,7 +172,7 @@ describe('FSCheckoutAuthGuard', () => {
     it('should NOT redirect route when cart is unstable', () => {
       spyOn(authService, 'isUserLoggedIn').and.returnValue(of(false));
       spyOn(activeCartService, 'isStable').and.returnValue(of(false));
-      spyOn(activeCartService, 'isGuestCart').and.returnValue(false);
+      spyOn(activeCartService, 'isGuestCart').and.returnValue(of(false));
 
       checkoutGuard.canActivate().subscribe().unsubscribe();
       expect(

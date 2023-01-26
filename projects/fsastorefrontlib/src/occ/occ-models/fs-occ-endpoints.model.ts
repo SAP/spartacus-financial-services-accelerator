@@ -235,6 +235,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   oboConsentUpdateAddress?: string;
+  /**
+   * The users cart
+   *
+   */
+  cart?: string;
 
   createAppointment?: string;
 }
