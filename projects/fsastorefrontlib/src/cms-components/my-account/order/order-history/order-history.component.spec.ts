@@ -11,15 +11,13 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
-  OrderHistoryList,
   RoutingService,
   TranslationService,
-  UserOrderService,
-  UserReplenishmentOrderService,
 } from '@spartacus/core';
 import { Cart } from '@spartacus/cart/base/root';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSOrderHistoryComponent } from './order-history.component';
+import { OrderHistoryFacade, OrderHistoryList, ReplenishmentOrderHistoryFacade } from '@spartacus/order/root';
 
 const mockOrders: OrderHistoryList | Cart = <OrderHistoryList | Cart>{
   orders: [
@@ -90,7 +88,7 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
-class MockUserOrderService {
+class MockOrderHistoryFacade {
   getOrderHistoryList(): Observable<OrderHistoryList | Cart> {
     return mockOrderHistoryList$.asObservable();
   }
@@ -116,7 +114,7 @@ class MockTranslationService {
   }
 }
 
-class MockUserReplenishmentOrderService {
+class MockReplenishmentOrderHistoryFacade {
   getReplenishmentOrderDetails(): Observable<any> {
     return of();
   }
@@ -125,7 +123,7 @@ class MockUserReplenishmentOrderService {
 describe('FSOrderHistoryComponent', () => {
   let component: FSOrderHistoryComponent;
   let fixture: ComponentFixture<FSOrderHistoryComponent>;
-  let userService: UserOrderService | MockUserOrderService;
+  let orderHistoryFacade: OrderHistoryFacade | MockOrderHistoryFacade;
   let routingService: RoutingService;
 
   beforeEach(
@@ -140,16 +138,16 @@ describe('FSOrderHistoryComponent', () => {
         ],
         providers: [
           { provide: RoutingService, useClass: MockRoutingService },
-          { provide: UserOrderService, useClass: MockUserOrderService },
+          { provide: OrderHistoryFacade, useClass: MockOrderHistoryFacade },
           { provide: TranslationService, useClass: MockTranslationService },
           {
-            provide: UserReplenishmentOrderService,
-            useClass: MockUserReplenishmentOrderService,
+            provide: ReplenishmentOrderHistoryFacade,
+            useClass: MockReplenishmentOrderHistoryFacade,
           },
         ],
       }).compileComponents();
 
-      userService = TestBed.inject(UserOrderService);
+      orderHistoryFacade = TestBed.inject(OrderHistoryFacade);
       routingService = TestBed.inject(RoutingService);
     })
   );
@@ -164,12 +162,12 @@ describe('FSOrderHistoryComponent', () => {
   });
 
   it('should set correctly sort code', () => {
-    spyOn(userService, 'loadOrderList').and.stub();
+    spyOn(orderHistoryFacade, 'loadOrderList').and.stub();
 
     component.changeSortCode('byOrderNumber');
 
     expect(component.sortType).toBe('byOrderNumber');
-    expect(userService.loadOrderList).toHaveBeenCalledWith(
+    expect(orderHistoryFacade.loadOrderList).toHaveBeenCalledWith(
       5,
       0,
       'byOrderNumber'
@@ -177,12 +175,12 @@ describe('FSOrderHistoryComponent', () => {
   });
 
   it('should set correctly page', () => {
-    spyOn(userService, 'loadOrderList').and.stub();
+    spyOn(orderHistoryFacade, 'loadOrderList').and.stub();
 
     component.sortType = 'byDate';
     component.pageChange(1);
 
-    expect(userService.loadOrderList).toHaveBeenCalledWith(5, 1, 'byDate');
+    expect(orderHistoryFacade.loadOrderList).toHaveBeenCalledWith(5, 1, 'byDate');
   });
 
   it('should display pagination', () => {
@@ -208,9 +206,9 @@ describe('FSOrderHistoryComponent', () => {
   });
 
   it('should clear order history data when component destroy', () => {
-    spyOn(userService, 'clearOrderList').and.stub();
+    spyOn(orderHistoryFacade, 'clearOrderList').and.stub();
 
     component.ngOnDestroy();
-    expect(userService.clearOrderList).toHaveBeenCalledWith();
+    expect(orderHistoryFacade.clearOrderList).toHaveBeenCalledWith();
   });
 });
