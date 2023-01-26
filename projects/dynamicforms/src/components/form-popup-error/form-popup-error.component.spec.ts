@@ -2,10 +2,10 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of, BehaviorSubject } from 'rxjs';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { ModalService } from '@spartacus/storefront';
 import { FormComponentService } from '../form-component.service';
 import { FormPopupErrorComponent } from './form-popup-error.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LaunchDialogService } from '@spartacus/storefront';
 
 class MockLanguageService {
   getActive() {
@@ -28,7 +28,7 @@ describe('FormPopupErrorComponent', () => {
   let mockLanguageService: MockLanguageService;
   let mockFormComponentService: MockFormComponentService;
   const mockModalRef: MockNgbModalRef = new MockNgbModalRef();
-  let modalInstance: any;
+  let launchDialogInstance: any;
 
   beforeEach(
     waitForAsync(() => {
@@ -60,8 +60,8 @@ describe('FormPopupErrorComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormPopupErrorComponent);
-    modalInstance = TestBed.inject(ModalService);
-    spyOn(modalInstance, 'open').and.returnValue(mockModalRef);
+    launchDialogInstance = TestBed.inject(LaunchDialogService);
+    spyOn(launchDialogInstance, 'openDialog').and.callThrough();
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -73,6 +73,6 @@ describe('FormPopupErrorComponent', () => {
   it('should be able to open dialog', () => {
     mockFormComponentService.isPopulatedFormInvalidSource.next(true);
     fixture.detectChanges();
-    expect(modalInstance.open).toHaveBeenCalled();
+    expect(launchDialogInstance.openDialog).toHaveBeenCalled();
   });
 });
