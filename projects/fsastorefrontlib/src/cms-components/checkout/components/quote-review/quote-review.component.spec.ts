@@ -225,7 +225,9 @@ const modalInstance: any = {
     referredQuote$: of(false),
   },
 };
-const launchDialogService = jasmine.createSpyObj('LaunchDialogService', ['open']);
+const launchDialogService = jasmine.createSpyObj('LaunchDialogService', [
+  'open',
+]);
 
 describe('Quote Review Component', () => {
   let component: QuoteReviewComponent;
@@ -348,10 +350,13 @@ describe('Quote Review Component', () => {
 
     component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
-    expect(launchDialogService.openDialog).toHaveBeenCalledWith(BindQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
+    expect(launchDialogService.openDialog).toHaveBeenCalledWith(
+      BindQuoteDialogComponent,
+      {
+        centered: true,
+        size: 'lg',
+      }
+    );
     let result;
     component.showContent$.subscribe(showContent => (result = showContent));
     expect(result).toEqual(true);

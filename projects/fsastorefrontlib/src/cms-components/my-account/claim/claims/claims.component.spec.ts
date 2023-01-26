@@ -103,7 +103,9 @@ class MockDomSanitizer {
   bypassSecurityTrustUrl = createSpy();
 }
 
-const launchDialogService = jasmine.createSpyObj('LaunchDialogService', ['openDialog']);
+const launchDialogService = jasmine.createSpyObj('LaunchDialogService', [
+  'openDialog',
+]);
 
 describe('ClaimsComponent', () => {
   let component: ClaimsComponent;
@@ -173,10 +175,13 @@ describe('ClaimsComponent', () => {
   it('should delete claim', () => {
     launchDialogService.openDialog.and.callThrough();
     component.deleteClaim(claimNumber);
-    expect(launchDialogService.openDialog).toHaveBeenCalledWith(DeleteClaimDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
+    expect(launchDialogService.openDialog).toHaveBeenCalledWith(
+      DeleteClaimDialogComponent,
+      {
+        centered: true,
+        size: 'lg',
+      }
+    );
   });
 
   it('should resume claim and redirect', () => {

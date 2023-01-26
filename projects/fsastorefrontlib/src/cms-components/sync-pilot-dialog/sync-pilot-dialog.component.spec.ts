@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { SyncPilotDialogComponent } from './sync-pilot-dialog.component';
 
 class MockLaunchDialogService {
-  closeDialog(reason:String): void {}
+  closeDialog(reason: String): void {}
 }
 
 const mockGuestEndpoint = {

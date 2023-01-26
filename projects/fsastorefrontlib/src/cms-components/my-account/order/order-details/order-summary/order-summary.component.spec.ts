@@ -3,9 +3,7 @@ import { Component, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CartVoucherService } from '@spartacus/cart/base/core';
 import { Voucher } from '@spartacus/cart/base/root';
-import {
-  I18nTestingModule,
-} from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { PromotionsModule } from '@spartacus/storefront';
 import { FSOrderSummaryComponent } from './order-summary.component';
 

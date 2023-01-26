@@ -12,7 +12,7 @@ import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 
 class MockLaunchDialogService {
-  closeDialog(reason:String): void {}
+  closeDialog(reason: String): void {}
 }
 
 class MockUserIdService {

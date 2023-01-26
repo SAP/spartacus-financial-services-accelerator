@@ -17,7 +17,11 @@ import {
 import { Cart } from '@spartacus/cart/base/root';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSOrderHistoryComponent } from './order-history.component';
-import { OrderHistoryFacade, OrderHistoryList, ReplenishmentOrderHistoryFacade } from '@spartacus/order/root';
+import {
+  OrderHistoryFacade,
+  OrderHistoryList,
+  ReplenishmentOrderHistoryFacade,
+} from '@spartacus/order/root';
 
 const mockOrders: OrderHistoryList | Cart = <OrderHistoryList | Cart>{
   orders: [
@@ -180,7 +184,11 @@ describe('FSOrderHistoryComponent', () => {
     component.sortType = 'byDate';
     component.pageChange(1);
 
-    expect(orderHistoryFacade.loadOrderList).toHaveBeenCalledWith(5, 1, 'byDate');
+    expect(orderHistoryFacade.loadOrderList).toHaveBeenCalledWith(
+      5,
+      1,
+      'byDate'
+    );
   });
 
   it('should display pagination', () => {

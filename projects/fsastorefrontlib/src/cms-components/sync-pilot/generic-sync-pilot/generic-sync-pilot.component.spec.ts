@@ -34,7 +34,7 @@ class MockUserAccountFacade {
 
 class MockLaunchDialogService {
   openDialog() {}
-  closeDialog(reason:String): void {}
+  closeDialog(reason: String): void {}
 }
 
 class MockService {
