@@ -149,7 +149,6 @@ describe('DynamicNumberInputComponent', () => {
     expect(occDynamicNumberInputService.getValuesFromAPI).not.toHaveBeenCalled();
   });
 
-
   it('should call external API without parameter', () => {
     spyOn(component, 'assignResultToMinMax').and.callThrough();
     mockField.apiValue.param = undefined;
