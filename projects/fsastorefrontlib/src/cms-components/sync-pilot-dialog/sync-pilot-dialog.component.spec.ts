@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { of } from 'rxjs';
 
 import { SyncPilotDialogComponent } from './sync-pilot-dialog.component';
 
-class MockModalService {
-  dismissActiveModal(): void {}
+class MockLaunchDialogService {
+  closeDialog(reason:String): void {}
 }
 
 const mockGuestEndpoint = {
@@ -28,7 +28,7 @@ class MockService {
 describe('SyncPilotDialogComponent', () => {
   let component: SyncPilotDialogComponent;
   let fixture: ComponentFixture<SyncPilotDialogComponent>;
-  let modalService: ModalService;
+  let launchDialogService: LaunchDialogService;
   let service: Service;
 
   beforeEach(async () => {
@@ -37,8 +37,8 @@ describe('SyncPilotDialogComponent', () => {
       imports: [I18nTestingModule],
       providers: [
         {
-          provide: ModalService,
-          useClass: MockModalService,
+          provide: LaunchDialogService,
+          useClass: MockLaunchDialogService,
         },
         {
           provide: Service,
@@ -53,7 +53,7 @@ describe('SyncPilotDialogComponent', () => {
     service = TestBed.inject(Service);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    modalService = TestBed.inject(ModalService);
+    launchDialogService = TestBed.inject(LaunchDialogService);
 
     spyOn(service, 'abort').and.stub();
   });
@@ -63,9 +63,9 @@ describe('SyncPilotDialogComponent', () => {
   });
 
   it('should dismiss modal', () => {
-    spyOn(modalService, 'dismissActiveModal').and.callThrough();
+    spyOn(launchDialogService, 'closeDialog').and.callThrough();
     component.dismissModal('Cross click');
-    expect(modalService.dismissActiveModal).toHaveBeenCalled();
+    expect(launchDialogService.closeDialog).toHaveBeenCalled();
     expect(service.abort).toHaveBeenCalled();
   });
 });
