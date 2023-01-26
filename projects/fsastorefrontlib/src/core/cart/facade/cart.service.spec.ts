@@ -5,9 +5,9 @@ import {
   OCC_USER_ID_ANONYMOUS,
   OCC_CART_ID_CURRENT,
   UserIdService,
-  CartActions,
 } from '@spartacus/core';
 import {
+  CartActions,
   MultiCartService,
   StateWithMultiCart,
 } from '@spartacus/cart/base/core';
