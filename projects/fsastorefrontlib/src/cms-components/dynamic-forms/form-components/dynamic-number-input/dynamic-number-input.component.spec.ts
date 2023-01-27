@@ -12,11 +12,16 @@ import {
   FieldConfig,
   FormService,
 } from '@spartacus/dynamicforms';
-import { CurrencyService, I18nTestingModule, LanguageService } from '@spartacus/core';
+import {
+  CurrencyService,
+  I18nTestingModule,
+  LanguageService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { DynamicNumberInputComponent } from './dynamic-number-input.component';
 import { CategoryService } from '../../../../core';
 import { OccDynamicNumberInputService } from '../../../../occ/services/dynamic-number-input/occ-dynamic-number-input.service';
+import { DynamicFormsCategoryService } from '../../services/dynamic-forms-category.service';
 
 @Component({
   // eslint-disable-next-line
@@ -61,21 +66,23 @@ class MockFormService {
   }
 }
 
-class MockCategoryService {
-  getActiveCategory(): Observable<string> {
-    return of('testCategory');
+class MockCurrencyService {
+  getActive() {
+    return of('EUR');
   }
 }
+let mockField: FieldConfig;
 
-class MockCurrencyService {
-    getActive() {
-      return of('EUR');
-    }
-  }
+mockField = {
+  fieldType: 'input',
+  name: 'testInput'
+};
+
+class MockDynamicFormsCategoryService {
+  configureApiValueForCategory(mockField) {}
+}
 
 const testUrl = 'testUrl';
-
-let mockField: FieldConfig;
 
 const mockFormGroup = new FormGroup({
   testInput: new FormControl(),
@@ -98,18 +105,21 @@ describe('DynamicNumberInputComponent', () => {
         declarations: [DynamicNumberInputComponent, MockErrorNoticeComponent],
         imports: [ReactiveFormsModule, I18nTestingModule],
         providers: [
-          { provide: OccDynamicNumberInputService, useClass: MockOccDynamicNumberInputService },
+          {
+            provide: OccDynamicNumberInputService,
+            useClass: MockOccDynamicNumberInputService,
+          },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,
             useValue: mockDynamicFormsConfig,
           },
           { provide: FormService, useClass: MockFormService },
-          {
-            provide: CategoryService,
-            useClass: MockCategoryService,
-          },
           { provide: CurrencyService, useClass: MockCurrencyService },
+          {
+            provide: DynamicFormsCategoryService,
+            useClass: MockDynamicFormsCategoryService,
+          },
         ],
       }).compileComponents();
     })
@@ -129,7 +139,7 @@ describe('DynamicNumberInputComponent', () => {
         en: 'TestLabel',
       },
       apiValue: {
-        url: testUrl
+        url: testUrl,
       },
     };
     component.config = mockField;
@@ -146,7 +156,9 @@ describe('DynamicNumberInputComponent', () => {
     mockField.apiValue = undefined;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(occDynamicNumberInputService.getValuesFromAPI).not.toHaveBeenCalled();
+    expect(
+      occDynamicNumberInputService.getValuesFromAPI
+    ).not.toHaveBeenCalled();
   });
 
   it('should call external API without parameter', () => {

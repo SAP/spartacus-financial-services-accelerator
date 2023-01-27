@@ -12,6 +12,7 @@ import { ClaimPrefillResolver } from './resolver/claim-prefill-resolver';
 import { FSUserPrefillResolver } from './resolver/user-prefill-resolver';
 import { FSUserAddressPrefillResolver } from './resolver/user-address-prefill-resolver';
 import { DynamicNumberInputComponent } from './form-components/dynamic-number-input/dynamic-number-input.component';
+import { DynamicFormsCategoryService } from './services/dynamic-forms-category.service';
 
 @NgModule({
   imports: [
@@ -58,5 +59,6 @@ import { DynamicNumberInputComponent } from './form-components/dynamic-number-in
   declarations: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
   entryComponents: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
   exports: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
+  providers: [DynamicFormsCategoryService]
 })
 export class FSDynamicformsModule {}

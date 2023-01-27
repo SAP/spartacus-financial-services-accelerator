@@ -7,10 +7,8 @@ import {
 } from '@spartacus/dynamicforms';
 import { Observable, of } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { CategoryService } from '../../../../core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
-
-export const CATEGORY_CODE = 'categoryCode';
+import { DynamicFormsCategoryService } from '../../services/dynamic-forms-category.service';
 
 @Component({
   selector: 'cx-fs-dynamic-select',
@@ -26,8 +24,8 @@ export class DynamicSelectComponent extends AbstractFormComponent
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormService,
-    protected categoryService: CategoryService,
-    protected injector: Injector
+    protected injector: Injector,
+    protected dynamicFormsCategoryService: DynamicFormsCategoryService
   ) {
     super(formConfig, languageService, injector, formService);
   }
@@ -41,26 +39,9 @@ export class DynamicSelectComponent extends AbstractFormComponent
     }
   }
 
-  configureApiValueForCategory() {
-    if (!this.config.apiValue.url.includes(CATEGORY_CODE)) {
-      this.subscription.add(
-        this.categoryService
-          .getActiveCategory()
-          .pipe(
-            map(activeCategory => {
-              if (activeCategory !== '') {
-                this.config.apiValue.url += `?${CATEGORY_CODE}=${activeCategory}`;
-              }
-            })
-          )
-          .subscribe()
-      );
-    }
-  }
-
   setFormControlValuesFromAPI() {
     if (!this.config.apiValue.param) {
-      this.configureApiValueForCategory();
+      this.dynamicFormsCategoryService.configureApiValueForCategory(this.config);
       this.subscription.add(
         this.occValueListService
           .getValuesFromAPI(this.config.apiValue.url)
