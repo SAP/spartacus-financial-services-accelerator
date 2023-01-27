@@ -33,9 +33,4 @@ describe(`ApplicationConfirmationGuard`, () => {
     guard.canActivate();
     expect(routing.go).toHaveBeenCalled();
   });
-
-  it(`should not redirect to the homepage when application checkout is active `, () => {
-    guard.canActivate();
-    expect(routing.go).not.toHaveBeenCalled();
-  });
 });

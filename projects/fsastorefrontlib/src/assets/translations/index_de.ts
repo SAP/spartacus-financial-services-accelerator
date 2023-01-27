@@ -29,6 +29,7 @@ import { myAccount } from './overrides/de/my-account';
 import { payment } from './overrides/de/payment';
 import { product } from './overrides/de/product';
 import { user } from './overrides/de/user';
+import { loan } from './de/loan.de';
 
 export const fstranslationsDe: TranslationResources = {
   b2b,
@@ -52,6 +53,7 @@ export const fstranslationsDe: TranslationResources = {
   appointmentScheduling,
   salesIllustration,
   productOverview,
+  loan,
 };
 
 export const fsOverridesDe: TranslationResources = {
