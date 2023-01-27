@@ -6,7 +6,7 @@
   <div class="section-header-heading mb-4">
     {{ 'loan.loanCalculatorTitle' | cxTranslate }}
   </div>
-  <div class="step px-4 mb-5">
+  <div class="loan-step px-4 mb-5">
     <div class="step-part d-flex">
       <div><p class="loan-step-number m-0 box-shadow">1</p></div>
       <div class="input-group align-items-center">
@@ -68,7 +68,7 @@
       </div>
     </div>
   </div>
-  <div class="step px-4 mb-5 pt-5 position-relative border-separate">
+  <div class="loan-step px-4 mb-5 pt-5 position-relative border-separate">
     <div class="step-part d-flex">
       <div><p class="loan-step-number m-0 box-shadow">2</p></div>
       <div class="input-group align-items-center">
@@ -91,7 +91,7 @@
       </option>
     </select>
   </div>
-  <div class="step px-4 mb-5 pt-5 position-relative border-separate">
+  <div class="loan-step px-4 mb-5 pt-5 position-relative border-separate">
     <div class="step-part d-flex">
       <div><p class="loan-step-number m-0 box-shadow">3</p></div>
       <div class="input-group align-items-center col-8 max-width-fit-content">
@@ -152,7 +152,7 @@
     </div>
   </div>
   <div
-    class="step px-4 mb-5 pt-5 position-relative border-separate"
+    class="loan-step px-4 mb-5 pt-5 position-relative border-separate"
     *ngIf="sliderForm.get('repaymentFrequency').value"
   >
     <div class="step-part d-flex">
