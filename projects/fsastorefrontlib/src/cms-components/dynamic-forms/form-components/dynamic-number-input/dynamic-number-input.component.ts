@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
-import { LanguageService } from '@spartacus/core';
+import { LanguageService, CurrencyService } from '@spartacus/core';
 import {
   AbstractFormComponent,
   DynamicFormsConfig,
@@ -9,7 +9,6 @@ import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CategoryService } from '../../../../core';
 import { OccDynamicNumberInputService } from '../../../../occ/services/dynamic-number-input/occ-dynamic-number-input.service';
-import { CurrencyService } from '@spartacus/core';
 
 export const CATEGORY_CODE = 'categoryCode';
 
