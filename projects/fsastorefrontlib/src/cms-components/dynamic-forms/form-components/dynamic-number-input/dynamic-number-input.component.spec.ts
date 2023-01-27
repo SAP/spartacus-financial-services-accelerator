@@ -12,10 +12,15 @@ import {
   FieldConfig,
   FormService,
 } from '@spartacus/dynamicforms';
-import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
-import { of } from 'rxjs';
-import { DynamicSelectComponent } from './dynamic-select.component';
+import {
+  CurrencyService,
+  I18nTestingModule,
+  LanguageService,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import { DynamicNumberInputComponent } from './dynamic-number-input.component';
+import { CategoryService } from '../../../../core';
+import { OccDynamicNumberInputService } from '../../../../occ/services/dynamic-number-input/occ-dynamic-number-input.service';
 import { DynamicFormsCategoryService } from '../../services/dynamic-forms-category.service';
 
 @Component({
@@ -47,7 +52,7 @@ const apiValues = {
   ],
 };
 
-class MockOccValueListService {
+class MockOccDynamicNumberInputService {
   getValuesFromAPI() {
     return of(apiValues);
   }
@@ -61,8 +66,11 @@ class MockFormService {
   }
 }
 
-const testUrl = 'testUrl';
-
+class MockCurrencyService {
+  getActive() {
+    return of('EUR');
+  }
+}
 let mockField: FieldConfig;
 
 mockField = {
@@ -70,39 +78,44 @@ mockField = {
   name: 'testInput',
 };
 
+class MockDynamicFormsCategoryService {
+  configureApiValueForCategory(mockField) {}
+}
+
+const testUrl = 'testUrl';
+
 const mockFormGroup = new FormGroup({
-  dependentTestField: new FormControl(),
-  testSelect: new FormControl(),
+  testInput: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
-class MockDynamicFormsCategoryService {
-  configureApiValueForCategory(mockField) {}
-}
-
-describe('DynamicSelectComponent', () => {
-  let component: DynamicSelectComponent;
-  let fixture: ComponentFixture<DynamicSelectComponent>;
-  let occValueListService: OccValueListService;
+describe('DynamicNumberInputComponent', () => {
+  let component: DynamicNumberInputComponent;
+  let fixture: ComponentFixture<DynamicNumberInputComponent>;
+  let occDynamicNumberInputService: OccDynamicNumberInputService;
   let formService: FormService;
   let el: DebugElement;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [DynamicSelectComponent, MockErrorNoticeComponent],
+        declarations: [DynamicNumberInputComponent, MockErrorNoticeComponent],
         imports: [ReactiveFormsModule, I18nTestingModule],
         providers: [
-          { provide: OccValueListService, useClass: MockOccValueListService },
+          {
+            provide: OccDynamicNumberInputService,
+            useClass: MockOccDynamicNumberInputService,
+          },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,
             useValue: mockDynamicFormsConfig,
           },
           { provide: FormService, useClass: MockFormService },
+          { provide: CurrencyService, useClass: MockCurrencyService },
           {
             provide: DynamicFormsCategoryService,
             useClass: MockDynamicFormsCategoryService,
@@ -113,28 +126,26 @@ describe('DynamicSelectComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DynamicSelectComponent);
-    occValueListService = TestBed.inject(OccValueListService);
+    fixture = TestBed.createComponent(DynamicNumberInputComponent);
+    occDynamicNumberInputService = TestBed.inject(OccDynamicNumberInputService);
     formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     mockField = {
-      fieldType: 'select',
-      name: 'testSelect',
+      fieldType: 'input',
+      name: 'testInput',
       label: {
         default: 'testLabel',
         en: 'TestLabel',
       },
-      options: [],
       apiValue: {
         url: testUrl,
-        param: 'dependentTestField',
       },
     };
     component.config = mockField;
     el = fixture.debugElement;
     fixture.detectChanges();
-    spyOn(occValueListService, 'getValuesFromAPI').and.callThrough();
+    spyOn(occDynamicNumberInputService, 'getValuesFromAPI').and.callThrough();
   });
 
   it('should create', () => {
@@ -145,26 +156,21 @@ describe('DynamicSelectComponent', () => {
     mockField.apiValue = undefined;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(occValueListService.getValuesFromAPI).not.toHaveBeenCalled();
-  });
-
-  it('should call external API with parameter when value changes', () => {
-    spyOn(component, 'assignResultToOptions').and.callThrough();
-    formControl.setValue('testValue2');
-    fixture.detectChanges();
-    expect(component.assignResultToOptions).toHaveBeenCalled();
+    expect(
+      occDynamicNumberInputService.getValuesFromAPI
+    ).not.toHaveBeenCalled();
   });
 
   it('should call external API without parameter', () => {
-    spyOn(component, 'assignResultToOptions').and.callThrough();
+    spyOn(component, 'assignResultToMinMax').and.callThrough();
     mockField.apiValue.param = undefined;
     component.ngOnInit();
     fixture.detectChanges();
-    expect(component.assignResultToOptions).toHaveBeenCalled();
+    expect(component.assignResultToMinMax).toHaveBeenCalled();
   });
 
   it('should render select component', () => {
-    const selectComponent = el.query(By.css('select')).nativeElement;
-    expect(selectComponent).toBeTruthy();
+    const inputComponent = el.query(By.css('input')).nativeElement;
+    expect(inputComponent).toBeTruthy();
   });
 });
