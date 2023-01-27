@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { RoutingService } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from '@spartacus/core';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -12,7 +16,8 @@ import { Subscription } from 'rxjs';
 export class ApplicationConfirmationComponent implements OnInit {
   constructor(
     protected domSanitizer: DomSanitizer,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected globalMessageService: GlobalMessageService
   ) {}
 
   imageLink = this.domSanitizer.bypassSecurityTrustUrl(
@@ -34,6 +39,10 @@ export class ApplicationConfirmationComponent implements OnInit {
             this.productName = routingData.state.params.productName;
             if (this.quoteId && this.productName) {
               this.quotePrice = localStorage.getItem('bankingApplicationPrice');
+              this.globalMessageService.add(
+                { key: 'applicationConfirmation.documentsMessage' },
+                GlobalMessageType.MSG_TYPE_INFO
+              );
             }
           })
         )
