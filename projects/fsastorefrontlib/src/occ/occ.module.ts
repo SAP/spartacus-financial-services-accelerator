@@ -48,6 +48,10 @@ import { OccDynamicNumberInputService } from './services/dynamic-number-input/oc
     FSProductOccModule,
     DocumentOccModule,
   ],
-  providers: [OccValueListService, OccDynamicNumberInputService, { provide: OccConfig, useExisting: Config }],
+  providers: [
+    OccValueListService,
+    OccDynamicNumberInputService,
+    { provide: OccConfig, useExisting: Config },
+  ],
 })
 export class OccModule {}

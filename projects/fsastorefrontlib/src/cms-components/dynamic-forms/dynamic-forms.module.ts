@@ -31,7 +31,7 @@ import { DynamicFormsCategoryService } from './services/dynamic-forms-category.s
           },
           dynamicInput: {
             component: DynamicNumberInputComponent,
-          }
+          },
         },
         prefill: {
           cart: {
@@ -56,9 +56,21 @@ import { DynamicFormsCategoryService } from './services/dynamic-forms-category.s
       },
     }),
   ],
-  declarations: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
-  entryComponents: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
-  exports: [CalculationButtonComponent, DynamicSelectComponent, DynamicNumberInputComponent],
-  providers: [DynamicFormsCategoryService]
+  declarations: [
+    CalculationButtonComponent,
+    DynamicSelectComponent,
+    DynamicNumberInputComponent,
+  ],
+  entryComponents: [
+    CalculationButtonComponent,
+    DynamicSelectComponent,
+    DynamicNumberInputComponent,
+  ],
+  exports: [
+    CalculationButtonComponent,
+    DynamicSelectComponent,
+    DynamicNumberInputComponent,
+  ],
+  providers: [DynamicFormsCategoryService],
 })
 export class FSDynamicformsModule {}

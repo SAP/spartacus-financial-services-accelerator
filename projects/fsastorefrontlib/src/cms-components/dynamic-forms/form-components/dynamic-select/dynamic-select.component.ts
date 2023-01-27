@@ -41,7 +41,9 @@ export class DynamicSelectComponent extends AbstractFormComponent
 
   setFormControlValuesFromAPI() {
     if (!this.config.apiValue.param) {
-      this.dynamicFormsCategoryService.configureApiValueForCategory(this.config);
+      this.dynamicFormsCategoryService.configureApiValueForCategory(
+        this.config
+      );
       this.subscription.add(
         this.occValueListService
           .getValuesFromAPI(this.config.apiValue.url)

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { FieldConfig } from '@spartacus/dynamicforms';
 import { CategoryService } from '../../../core';
 
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 export const CATEGORY_CODE = 'categoryCode';
 
 @Injectable()
-export class DynamicFormsCategoryService {
+export class DynamicFormsCategoryService implements OnDestroy {
   constructor(protected categoryService: CategoryService) {}
 
   subscription = new Subscription();
@@ -27,6 +27,12 @@ export class DynamicFormsCategoryService {
           )
           .subscribe()
       );
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

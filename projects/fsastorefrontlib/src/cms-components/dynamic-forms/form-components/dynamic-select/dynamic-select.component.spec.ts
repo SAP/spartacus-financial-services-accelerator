@@ -67,7 +67,7 @@ let mockField: FieldConfig;
 
 mockField = {
   fieldType: 'input',
-  name: 'testInput'
+  name: 'testInput',
 };
 
 const mockFormGroup = new FormGroup({

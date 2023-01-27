@@ -15,9 +15,7 @@ export class OccDynamicNumberInputService {
 
   httpRegex = /(http(s?)):\/\//;
 
-  public getValuesFromAPI(
-    fieldUrl: string
-  ): Observable<any> {
+  public getValuesFromAPI(fieldUrl: string): Observable<any> {
     const url = this.getFullAPIUrl(fieldUrl);
 
     const cacheValues = this.dynamicNumberInputCache.get(url);

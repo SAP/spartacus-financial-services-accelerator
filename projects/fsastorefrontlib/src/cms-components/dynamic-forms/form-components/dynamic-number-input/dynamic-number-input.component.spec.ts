@@ -75,7 +75,7 @@ let mockField: FieldConfig;
 
 mockField = {
   fieldType: 'input',
-  name: 'testInput'
+  name: 'testInput',
 };
 
 class MockDynamicFormsCategoryService {

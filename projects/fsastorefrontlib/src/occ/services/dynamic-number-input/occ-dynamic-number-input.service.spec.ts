@@ -46,10 +46,13 @@ describe('OccDynamicNumberInputService', () => {
     it(
       'should get values from value list API call',
       waitForAsync(() => {
-        occDynamicNumberInputService.getValuesFromAPI(mockDynamicNumberInputPath).subscribe();
+        occDynamicNumberInputService
+          .getValuesFromAPI(mockDynamicNumberInputPath)
+          .subscribe();
         httpMock.expectOne((req: HttpRequest<any>) => {
           return (
-            req.url === baseEndpoint + mockDynamicNumberInputPath && req.method === 'GET'
+            req.url === baseEndpoint + mockDynamicNumberInputPath &&
+            req.method === 'GET'
           );
         }, `GET method and url`);
       })
@@ -77,9 +80,8 @@ describe('OccDynamicNumberInputService', () => {
           .subscribe();
         httpMock.expectOne((req: HttpRequest<any>) => {
           return (
-            req.url ===
-              baseEndpoint +
-              mockDynamicNumberInputPath && req.method === 'GET'
+            req.url === baseEndpoint + mockDynamicNumberInputPath &&
+            req.method === 'GET'
           );
         }, `GET method and url`);
       })

@@ -45,4 +45,3 @@ describe('DynamicFormsCategoryService', () => {
     expect(mockField.apiValue.url).toEqual(createdUrl);
   });
 });
-

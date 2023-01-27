@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Injector,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { LanguageService, CurrencyService } from '@spartacus/core';
 import {
   AbstractFormComponent,
@@ -15,7 +21,7 @@ import { DynamicFormsCategoryService } from '../../services/dynamic-forms-catego
   templateUrl: './dynamic-number-input.component.html',
 })
 export class DynamicNumberInputComponent extends AbstractFormComponent
-  implements OnInit {
+  implements OnInit, OnDestroy {
   currentCurrency$: Observable<string> = this.currencyService.getActive();
   min: number;
   max: number;
