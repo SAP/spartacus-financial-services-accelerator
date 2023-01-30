@@ -13,7 +13,7 @@ import { Cart } from '@spartacus/cart/base/root';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { CheckoutPaymentTypeFacade } from '@spartacus/checkout/b2b/root';
 import { CheckoutDeliveryAddressFacade } from '@spartacus/checkout/base/root';
-import { CheckoutPaymentService } from '@spartacus/checkout/base/core';
+import { CheckoutAdapter, CheckoutPaymentService } from '@spartacus/checkout/base/core';
 import { CheckoutStepService } from '@spartacus/checkout/base/components';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -21,6 +21,7 @@ import { Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
 import { FSCheckoutConfigService, FSCheckoutService } from '../../../../core';
 import { FSPaymentTypeEnum, FSSteps } from '../../../../occ';
+import { CheckoutPaymentTypeAdapter } from '@spartacus/checkout/b2b/core';
 
 const mockPaymentTypes = [
   {
@@ -101,6 +102,11 @@ class MockActiveCartService {
   getActive() {
     return of(mockCart);
   }
+}
+
+class MockCheckoutPaymentTypeAdapter implements Partial<CheckoutPaymentTypeAdapter> {
+  getPaymentTypes = createSpy().and.returnValue(of([]));
+  setPaymentType = createSpy().and.returnValue(of({}));
 }
 
 class MockCheckoutStepService {
@@ -186,6 +192,13 @@ describe('FSPaymentMethodComponent', () => {
         {
           provide: TranslationService,
           useClass: MockFSTranslationService,
+        },
+        {
+          provide: CheckoutAdapter
+        },
+        {
+          provide: CheckoutPaymentTypeAdapter,
+          useClass: MockCheckoutPaymentTypeAdapter,
         },
       ],
     }).compileComponents();
