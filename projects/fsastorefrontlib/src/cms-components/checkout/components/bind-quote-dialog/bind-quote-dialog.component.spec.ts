@@ -8,7 +8,7 @@ import {
 } from '@spartacus/dynamicforms';
 import { LaunchDialogService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ConsentService } from '../../../../core/my-account/facade/consent.service';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { FSUser, FSUserRole } from '../../../../occ/occ-models/occ.models';
@@ -77,6 +77,9 @@ class MockQuoteService {
 
 class MockLaunchDialogService {
   closeDialog(reason: String): void {}
+  get data$(): Observable<any> {
+    return new BehaviorSubject<any>(undefined).asObservable();
+  }
 }
 
 class MockFormDataStorageService {
