@@ -19,7 +19,7 @@ class MockCheckoutService {
 }
 
 class MockCheckoutPaymentFacade {
-  getPaymentDetails() {
+  getPaymentDetailsState() {
     return of({});
   }
 }
