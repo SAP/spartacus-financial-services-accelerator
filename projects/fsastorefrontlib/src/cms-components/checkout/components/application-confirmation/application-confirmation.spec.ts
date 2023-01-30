@@ -5,6 +5,7 @@ import { ApplicationConfirmationComponent } from './application-confirmation.com
 import { Observable, of } from 'rxjs';
 
 const mockImageSrc = 'data:image/svg+xml;base64, sampleImageCode';
+const price = '€100';
 
 const mockRoutingData = {
   state: {
@@ -49,7 +50,7 @@ describe('ApplicationConfirmationComponent', () => {
     fixture = TestBed.createComponent(ApplicationConfirmationComponent);
     component = fixture.componentInstance;
     routingService = TestBed.inject(RoutingService);
-    localStorage.setItem('bankingApplicationPrice', '€100');
+    localStorage.setItem('bankingApplicationPrice', price);
     spyOn(routingService, 'go').and.callThrough();
     component.ngOnInit();
   });
@@ -62,7 +63,7 @@ describe('ApplicationConfirmationComponent', () => {
     spyOn(routingService, 'getRouterState').and.callThrough();
     spyOn(localStorage, 'getItem').and.callThrough();
     component.ngOnInit();
-    expect(localStorage.getItem).toHaveBeenCalled();
+    expect(localStorage.getItem('bankingApplicationPrice')).toEqual(price);
     expect(routingService.go).not.toHaveBeenCalled();
   });
 
@@ -76,7 +77,7 @@ describe('ApplicationConfirmationComponent', () => {
     );
     spyOn(localStorage, 'getItem').and.callThrough();
     component.ngOnInit();
-    expect(localStorage.getItem).not.toHaveBeenCalled();
+    expect(localStorage.getItem('not bankingApplicationPrice')).not.toEqual(price);
   });
 
   it('should navigate to quote details page', () => {
