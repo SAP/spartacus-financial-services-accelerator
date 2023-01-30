@@ -86,7 +86,12 @@ describe('FSUserFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule, ReactiveFormsModule, NgSelectModule, UserProfileCoreModule,],
+      imports: [
+        I18nTestingModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        UserProfileCoreModule,
+      ],
       declarations: [FSUserFormComponent, FormErrorsComponent],
       providers: [
         { provide: OrgUnitService, useClass: MockOrgUnitService },

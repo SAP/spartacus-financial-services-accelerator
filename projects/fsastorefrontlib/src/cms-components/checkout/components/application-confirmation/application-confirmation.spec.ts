@@ -77,7 +77,9 @@ describe('ApplicationConfirmationComponent', () => {
     );
     spyOn(localStorage, 'getItem').and.callThrough();
     component.ngOnInit();
-    expect(localStorage.getItem('not bankingApplicationPrice')).not.toEqual(price);
+    expect(localStorage.getItem('not bankingApplicationPrice')).not.toEqual(
+      price
+    );
   });
 
   it('should navigate to quote details page', () => {

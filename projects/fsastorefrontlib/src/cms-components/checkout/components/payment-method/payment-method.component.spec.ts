@@ -13,8 +13,14 @@ import { ActiveCartFacade, PaymentDetails } from '@spartacus/cart/base/root';
 import { Cart } from '@spartacus/cart/base/root';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { CheckoutPaymentTypeFacade } from '@spartacus/checkout/b2b/root';
-import { CheckoutDeliveryAddressFacade, CheckoutPaymentFacade } from '@spartacus/checkout/base/root';
-import { CheckoutAdapter, CheckoutPaymentService } from '@spartacus/checkout/base/core';
+import {
+  CheckoutDeliveryAddressFacade,
+  CheckoutPaymentFacade,
+} from '@spartacus/checkout/base/root';
+import {
+  CheckoutAdapter,
+  CheckoutPaymentService,
+} from '@spartacus/checkout/base/core';
 import { CheckoutStepService } from '@spartacus/checkout/base/components';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -127,7 +133,9 @@ class MockActiveCartService implements Partial<ActiveCartFacade> {
   }
 }
 
-class MockCheckoutPaymentTypeAdapter implements Partial<CheckoutPaymentTypeAdapter> {
+class MockCheckoutPaymentTypeAdapter
+  implements Partial<CheckoutPaymentTypeAdapter>
+{
   getPaymentTypes = createSpy().and.returnValue(of([]));
   setPaymentType = createSpy().and.returnValue(of({}));
 }
@@ -219,7 +227,13 @@ describe('FSPaymentMethodComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [I18nTestingModule],
-      declarations: [FSPaymentMethodComponent, MockPaymentFormComponent, CardComponent, MockSpinnerComponent, MockCxIconComponent],
+      declarations: [
+        FSPaymentMethodComponent,
+        MockPaymentFormComponent,
+        CardComponent,
+        MockSpinnerComponent,
+        MockCxIconComponent,
+      ],
       providers: [
         { provide: UserPaymentService, useClass: MockUserPaymentService },
         { provide: FSCheckoutService, useClass: MockCheckoutService },
@@ -260,7 +274,7 @@ describe('FSPaymentMethodComponent', () => {
         },
         {
           provide: CheckoutAdapter,
-          useClass: MockOrderAdapter
+          useClass: MockOrderAdapter,
         },
         {
           provide: CheckoutPaymentTypeAdapter,

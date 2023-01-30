@@ -57,10 +57,10 @@ export class FSCheckoutAuthGuard extends CheckoutAuthGuard {
         user,
         isStable,
       })),
-      filter((data) => data.isStable),
+      filter(data => data.isStable),
       // if the user is authenticated and we have their data, OR if the user is anonymous
-      filter((data) => (!!data.user && data.isLoggedIn) || !data.isLoggedIn),
-      map((data) => {
+      filter(data => (!!data.user && data.isLoggedIn) || !data.isLoggedIn),
+      map(data => {
         if (!data.isLoggedIn) {
           return data.isGuestCart ? true : this.handleAnonymousUser();
         } else if (data.user && 'roles' in data.user) {

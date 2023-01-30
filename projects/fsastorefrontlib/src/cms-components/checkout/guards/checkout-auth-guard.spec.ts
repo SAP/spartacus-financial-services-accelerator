@@ -130,7 +130,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result?.toString()).toEqual(`/login?forced=true`);
       });
@@ -139,7 +139,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result?.toString()).toEqual(`/login`);
       });
@@ -161,7 +161,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -195,7 +195,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -212,7 +212,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value != null))
+          .subscribe(value => (result = value != null))
           .unsubscribe();
         expect(result).toBeTruthy();
       });
@@ -221,7 +221,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -239,7 +239,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -251,7 +251,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe((value) => (result = value))
+          .subscribe(value => (result = value))
           .unsubscribe();
         expect(result?.toString()).toBe('/home');
         expect(globalMessageService.add).toHaveBeenCalledWith(
