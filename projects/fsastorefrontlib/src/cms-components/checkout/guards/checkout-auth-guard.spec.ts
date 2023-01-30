@@ -10,12 +10,12 @@ import {
   GlobalMessageType,
   SemanticPathService,
 } from '@spartacus/core';
-import { ActiveCartService } from '@spartacus/cart/base/core';
 import { User, UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutAuthGuard } from './checkout-auth-guard';
 
 import createSpy = jasmine.createSpy;
+import { ActiveCartFacade } from '@spartacus/cart/base/root';
 
 class AuthServiceStub implements Partial<AuthService> {
   isUserLoggedIn(): Observable<boolean> {
@@ -23,7 +23,7 @@ class AuthServiceStub implements Partial<AuthService> {
   }
 }
 
-class ActiveCartServiceStub implements Partial<ActiveCartService> {
+class ActiveCartServiceStub implements Partial<ActiveCartFacade> {
   getAssignedUser(): Observable<User> {
     return of();
   }
@@ -65,7 +65,7 @@ describe('FSCheckoutAuthGuard', () => {
   let checkoutGuard: FSCheckoutAuthGuard;
   let authService: AuthService;
   let authRedirectService: AuthRedirectService;
-  let activeCartService: ActiveCartService;
+  let activeCartFacade: ActiveCartFacade;
   let checkoutConfigService: CheckoutConfigService;
   let userService: UserAccountFacade;
   let globalMessageService: GlobalMessageService;
@@ -87,7 +87,7 @@ describe('FSCheckoutAuthGuard', () => {
           useClass: AuthServiceStub,
         },
         {
-          provide: ActiveCartService,
+          provide: ActiveCartFacade,
           useClass: ActiveCartServiceStub,
         },
         {
@@ -108,7 +108,7 @@ describe('FSCheckoutAuthGuard', () => {
     checkoutGuard = TestBed.inject(FSCheckoutAuthGuard);
     authService = TestBed.inject(AuthService);
     authRedirectService = TestBed.inject(AuthRedirectService);
-    activeCartService = TestBed.inject(ActiveCartService);
+    activeCartFacade = TestBed.inject(ActiveCartFacade);
     checkoutConfigService = TestBed.inject(CheckoutConfigService);
     userService = TestBed.inject(UserAccountFacade);
     globalMessageService = TestBed.inject(GlobalMessageService);
@@ -121,8 +121,8 @@ describe('FSCheckoutAuthGuard', () => {
 
     describe('and cart does NOT have a user, ', () => {
       beforeEach(() => {
-        spyOn(activeCartService, 'getAssignedUser').and.returnValue(of({}));
-        spyOn(activeCartService, 'isGuestCart').and.returnValue(of(false));
+        spyOn(activeCartFacade, 'getAssignedUser').and.returnValue(of({}));
+        spyOn(activeCartFacade, 'isGuestCart').and.returnValue(of(false));
       });
 
       it('should return url to login with forced flag when guestCheckout feature enabled', () => {
@@ -130,7 +130,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
         expect(result?.toString()).toEqual(`/login?forced=true`);
       });
@@ -139,7 +139,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
         expect(result?.toString()).toEqual(`/login`);
       });
@@ -152,7 +152,7 @@ describe('FSCheckoutAuthGuard', () => {
 
     describe('and cart has a user, ', () => {
       beforeEach(() => {
-        spyOn(activeCartService, 'getAssignedUser').and.returnValue(
+        spyOn(activeCartFacade, 'getAssignedUser').and.returnValue(
           of({ uid: '1234|xxx@xxx.com', name: 'guest' } as User)
         );
       });
@@ -161,9 +161,9 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
-        expect(result).toBe(true);
+        expect(result?.toString()).toBe('/login');
       });
     });
   });
@@ -171,8 +171,8 @@ describe('FSCheckoutAuthGuard', () => {
   describe(', when user is in checkout pages,', () => {
     it('should NOT redirect route when cart is unstable', () => {
       spyOn(authService, 'isUserLoggedIn').and.returnValue(of(false));
-      spyOn(activeCartService, 'isStable').and.returnValue(of(false));
-      spyOn(activeCartService, 'isGuestCart').and.returnValue(of(false));
+      spyOn(activeCartFacade, 'isStable').and.returnValue(of(false));
+      spyOn(activeCartFacade, 'isGuestCart').and.returnValue(of(false));
 
       checkoutGuard.canActivate().subscribe().unsubscribe();
       expect(
@@ -188,14 +188,14 @@ describe('FSCheckoutAuthGuard', () => {
 
     describe('and cart does NOT have a user, ', () => {
       beforeEach(() => {
-        spyOn(activeCartService, 'getAssignedUser').and.returnValue(of({}));
+        spyOn(activeCartFacade, 'getAssignedUser').and.returnValue(of({}));
       });
 
       it('should return true', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -203,7 +203,7 @@ describe('FSCheckoutAuthGuard', () => {
 
     describe('and cart has a user, ', () => {
       beforeEach(() => {
-        spyOn(activeCartService, 'getAssignedUser').and.returnValue(
+        spyOn(activeCartFacade, 'getAssignedUser').and.returnValue(
           of({ uid: '1234|xxx@xxx.com', name: 'guest' } as User)
         );
       });
@@ -212,7 +212,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value != null))
+          .subscribe((value) => (result = value != null))
           .unsubscribe();
         expect(result).toBeTruthy();
       });
@@ -221,7 +221,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -229,7 +229,7 @@ describe('FSCheckoutAuthGuard', () => {
 
     describe('and user is b2b user, ', () => {
       beforeEach(() => {
-        spyOn(activeCartService, 'getAssignedUser').and.returnValue(of({}));
+        spyOn(activeCartFacade, 'getAssignedUser').and.returnValue(of({}));
       });
 
       it('should return true when user roles has b2bcustomergroup', () => {
@@ -239,7 +239,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
         expect(result).toBe(true);
       });
@@ -251,7 +251,7 @@ describe('FSCheckoutAuthGuard', () => {
         let result: boolean | UrlTree | undefined;
         checkoutGuard
           .canActivate()
-          .subscribe(value => (result = value))
+          .subscribe((value) => (result = value))
           .unsubscribe();
         expect(result?.toString()).toBe('/home');
         expect(globalMessageService.add).toHaveBeenCalledWith(
