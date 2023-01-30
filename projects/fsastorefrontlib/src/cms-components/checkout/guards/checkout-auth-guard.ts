@@ -31,6 +31,7 @@ export class FSCheckoutAuthGuard extends CheckoutAuthGuard {
     protected semanticPathService: SemanticPathService,
     protected router: Router,
     protected userService: UserAccountFacade,
+    protected userAccountFacade: UserAccountFacade,
     protected globalMessageService: GlobalMessageService
   ) {
     super(
@@ -46,40 +47,28 @@ export class FSCheckoutAuthGuard extends CheckoutAuthGuard {
   canActivate(): Observable<boolean | UrlTree> {
     return combineLatest([
       this.authService.isUserLoggedIn(),
-      this.activeCartFacade.getAssignedUser(),
-      this.userService.get(),
+      this.activeCartFacade.isGuestCart(),
+      this.userAccountFacade.get(),
       this.activeCartFacade.isStable(),
     ]).pipe(
-      filter(([, , _user, isStable]) => isStable),
+      map(([isLoggedIn, isGuestCart, user, isStable]) => ({
+        isLoggedIn,
+        isGuestCart,
+        user,
+        isStable,
+      })),
+      filter((data) => data.isStable),
       // if the user is authenticated and we have their data, OR if the user is anonymous
-      filter(([isLoggedIn, , user]) => (!!user && isLoggedIn) || !isLoggedIn),
-      map(([isLoggedIn, cartUser, user]) => {
-        if (!isLoggedIn) {
-          return this.handleAnonymousUser(cartUser);
-        } else if (user && 'roles' in user) {
-          return this.handleUserRole(user);
+      filter((data) => (!!data.user && data.isLoggedIn) || !data.isLoggedIn),
+      map((data) => {
+        if (!data.isLoggedIn) {
+          return data.isGuestCart ? true : this.handleAnonymousUser();
+        } else if (data.user && 'roles' in data.user) {
+          return this.handleUserRole(data.user);
         }
-        return isLoggedIn;
+        return data.isLoggedIn;
       })
     );
-  }
-
-  protected handleAnonymousUser(cartUser?: User): boolean | UrlTree {
-    this.activeCartFacade.isGuestCart().pipe(map(resp =>{
-      if(resp){
-        return !!cartUser;
-      }
-    }))
-
-    this.authRedirectService.saveCurrentNavigationUrl();
-    if (this.checkoutConfigService.isGuestCheckout()) {
-      return this.router.createUrlTree(
-        [this.semanticPathService.get('login')],
-        { queryParams: { forced: true } }
-      );
-    } else {
-      return this.router.parseUrl(this.semanticPathService.get('login'));
-    }
   }
 
   protected handleUserRole(user: User): boolean | UrlTree {
@@ -94,6 +83,6 @@ export class FSCheckoutAuthGuard extends CheckoutAuthGuard {
       { key: 'checkout.invalid.accountType' },
       GlobalMessageType.MSG_TYPE_WARNING
     );
-    return this.router.parseUrl(this.semanticPathService.get('home'));
+    return this.router.parseUrl(this.semanticPathService.get('home') ?? '');
   }
 }
