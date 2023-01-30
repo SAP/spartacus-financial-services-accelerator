@@ -150,6 +150,18 @@ class MockCheckoutPaymentTypeFacade {
   }
 }
 
+class MockOrderAdapter implements Partial<CheckoutAdapter> {
+  placeOrder = createSpy('CheckoutAdapter.placeOrder').and.callFake(
+    (userId: string, cartId: string, termsChecked: boolean) =>
+      of(`placedOrder-${userId}-${cartId}-${termsChecked}`)
+  );
+  getCheckoutDetails = createSpy(
+    'CheckoutAdapter.loadCheckoutDetails'
+  ).and.callFake((userId: string, cartId: string) =>
+    of(`loadCheckoutDetails-${userId}-${cartId}`)
+  );
+}
+
 describe('FSPaymentMethodComponent', () => {
   let component: FSPaymentMethodComponent;
   let fixture: ComponentFixture<FSPaymentMethodComponent>;
@@ -194,7 +206,8 @@ describe('FSPaymentMethodComponent', () => {
           useClass: MockFSTranslationService,
         },
         {
-          provide: CheckoutAdapter
+          provide: CheckoutAdapter,
+          useClass: MockOrderAdapter
         },
         {
           provide: CheckoutPaymentTypeAdapter,
