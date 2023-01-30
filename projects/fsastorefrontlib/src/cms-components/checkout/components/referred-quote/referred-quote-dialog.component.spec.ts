@@ -1,12 +1,20 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, ElementRef, ViewContainerRef } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
-import { LaunchDialogService } from '@spartacus/storefront';
+import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
+import { of } from 'rxjs';
 import { ReferredQuoteDialogComponent } from './referred-quote-dialog.component';
 
-class MockModalService {
-  dismissActiveModal(): void {}
+class MockLaunchDialogService implements Partial<LaunchDialogService> {
+  openDialog(
+    _caller: LAUNCH_CALLER,
+    _openElement?: ElementRef,
+    _vcr?: ViewContainerRef
+  ) {
+    return of();
+  }
+  closeDialog(_reason: string): void {}
 }
 
 describe('ReferredQuoteDialogComponent', () => {
@@ -23,7 +31,7 @@ describe('ReferredQuoteDialogComponent', () => {
         providers: [
           {
             provide: LaunchDialogService,
-            useClass: MockModalService,
+            useClass: MockLaunchDialogService,
           },
         ],
       }).compileComponents();
