@@ -3,16 +3,17 @@ import { FSPaymentMethodComponent } from './payment-method.component';
 import {
   Address,
   GlobalMessageService,
+  I18nTestingModule,
   QueryState,
   RoutingService,
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
-import { PaymentDetails } from '@spartacus/cart/base/root';
+import { ActiveCartFacade, PaymentDetails } from '@spartacus/cart/base/root';
 import { Cart } from '@spartacus/cart/base/root';
 import { ActiveCartService } from '@spartacus/cart/base/core';
 import { CheckoutPaymentTypeFacade } from '@spartacus/checkout/b2b/root';
-import { CheckoutDeliveryAddressFacade } from '@spartacus/checkout/base/root';
+import { CheckoutDeliveryAddressFacade, CheckoutPaymentFacade } from '@spartacus/checkout/base/root';
 import { CheckoutAdapter, CheckoutPaymentService } from '@spartacus/checkout/base/core';
 import { CheckoutStepService } from '@spartacus/checkout/base/components';
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +23,8 @@ import createSpy = jasmine.createSpy;
 import { FSCheckoutConfigService, FSCheckoutService } from '../../../../core';
 import { FSPaymentTypeEnum, FSSteps } from '../../../../occ';
 import { CheckoutPaymentTypeAdapter } from '@spartacus/checkout/b2b/core';
+import { CardComponent, ICON_TYPE } from '@spartacus/storefront';
+import { Component, Input } from '@angular/core';
 
 const mockPaymentTypes = [
   {
@@ -31,6 +34,19 @@ const mockPaymentTypes = [
     code: 'INVOICE',
   },
 ];
+const mockPaymentDetails: PaymentDetails = {
+  id: 'mock payment id',
+  accountHolderName: 'Name',
+  cardNumber: '123456789',
+  cardType: {
+    code: 'Visa',
+    name: 'Visa',
+  },
+  expiryMonth: '01',
+  expiryYear: '2022',
+  cvn: '123',
+};
+
 const mockPaymentDetailsState: QueryState<PaymentDetails | undefined> = {
   loading: false,
   error: false,
@@ -64,8 +80,14 @@ class MockGlobalMessageService {
 }
 
 class MockCheckoutPaymentService {
-  setPaymentDetails = createSpy();
-  createPaymentDetails = createSpy();
+  setPaymentDetails = createSpy().and.returnValue(of());
+  createPaymentDetails(_paymentDetails: PaymentDetails): Observable<unknown> {
+    return of();
+  }
+  getPaymentDetails(): Observable<PaymentDetails> {
+    return of(mockPaymentDetails);
+  }
+  paymentProcessSuccess() {}
   getPaymentDetailsState(): Observable<QueryState<PaymentDetails | undefined>> {
     return of(mockPaymentDetailsState);
   }
@@ -95,10 +117,11 @@ const mockCart: Cart = {
   code: 'test001',
 };
 
-class MockActiveCartService {
-  isGuestCart(): boolean {
-    return false;
+class MockActiveCartService implements Partial<ActiveCartFacade> {
+  isGuestCart(): Observable<boolean> {
+    return of(false);
   }
+
   getActive() {
     return of(mockCart);
   }
@@ -150,6 +173,31 @@ class MockCheckoutPaymentTypeFacade {
   }
 }
 
+@Component({
+  selector: 'cx-payment-form',
+  template: '',
+})
+class MockPaymentFormComponent {
+  @Input()
+  paymentMethodsCount: number;
+  @Input()
+  setAsDefaultField: boolean;
+}
+
+@Component({
+  selector: 'cx-spinner',
+  template: '',
+})
+class MockSpinnerComponent {}
+
+@Component({
+  selector: 'cx-icon',
+  template: '',
+})
+class MockCxIconComponent {
+  @Input() type: ICON_TYPE;
+}
+
 class MockOrderAdapter implements Partial<CheckoutAdapter> {
   placeOrder = createSpy('CheckoutAdapter.placeOrder').and.callFake(
     (userId: string, cartId: string, termsChecked: boolean) =>
@@ -170,7 +218,8 @@ describe('FSPaymentMethodComponent', () => {
   let paymentService: CheckoutPaymentTypeFacade;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FSPaymentMethodComponent],
+      imports: [I18nTestingModule],
+      declarations: [FSPaymentMethodComponent, MockPaymentFormComponent, CardComponent, MockSpinnerComponent, MockCxIconComponent],
       providers: [
         { provide: UserPaymentService, useClass: MockUserPaymentService },
         { provide: FSCheckoutService, useClass: MockCheckoutService },
@@ -197,6 +246,10 @@ describe('FSPaymentMethodComponent', () => {
         {
           provide: CheckoutPaymentTypeFacade,
           useClass: MockCheckoutPaymentTypeFacade,
+        },
+        {
+          provide: CheckoutPaymentFacade,
+          useClass: MockCheckoutPaymentService,
         },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         { provide: CheckoutStepService, useClass: MockCheckoutStepService },

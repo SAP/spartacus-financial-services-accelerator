@@ -22,6 +22,8 @@ import { Observable, of } from 'rxjs';
 import { FSUserFormComponent } from './user-form.component';
 import { DateConfig } from '../../../../core/date-config/date-config';
 import { FSUserItemService } from './user-item.service';
+import { UserProfileCoreModule } from '@spartacus/user/profile/core';
+import { UserProfileFacade } from '@spartacus/user/profile/root';
 
 const mockForm = new UntypedFormGroup({
   titleCode: new UntypedFormControl(),
@@ -65,6 +67,18 @@ class MockFSItemService {
   getForm() {}
 }
 
+class MockUserProfileFacade implements Partial<UserProfileFacade> {
+  get() {
+    return of({});
+  }
+
+  getTitles(): Observable<Title[]> {
+    return of();
+  }
+
+  loadTitles(): void {}
+}
+
 describe('FSUserFormComponent', () => {
   let component: FSUserFormComponent;
   let fixture: ComponentFixture<FSUserFormComponent>;
@@ -72,13 +86,14 @@ describe('FSUserFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule, ReactiveFormsModule, NgSelectModule],
+      imports: [I18nTestingModule, ReactiveFormsModule, NgSelectModule, UserProfileCoreModule,],
       declarations: [FSUserFormComponent, FormErrorsComponent],
       providers: [
         { provide: OrgUnitService, useClass: MockOrgUnitService },
         { provide: FSUserItemService, useClass: MockFSItemService },
         { provide: UserService, useClass: MockUserService },
         { provide: B2BUserService, useClass: MockB2BUserService },
+        { provide: UserProfileFacade, useClass: MockUserProfileFacade },
         {
           provide: DateConfig,
           useValue: MockDateConfig,
