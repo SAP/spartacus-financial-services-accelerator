@@ -1,9 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import {
-  AuthService,
-  OCC_USER_ID_CURRENT,
-} from '@spartacus/core';
+import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { OboCustomerService } from '@spartacus/dynamicforms';
 import { Observable, of } from 'rxjs';
 import * as fromAction from '../store/actions';

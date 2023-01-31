@@ -44,7 +44,7 @@ const mockOrder = {
   entries: [
     {
       entryNumber: 1,
-      product: mockProduct
+      product: mockProduct,
     },
   ],
 };
@@ -72,7 +72,7 @@ class MockRoutingService {
 }
 
 class MockOrderAdapter {
-  placeOrder(): Observable<Order>{
+  placeOrder(): Observable<Order> {
     return of(mockOrder);
   }
 }
@@ -290,8 +290,10 @@ describe('FSCheckoutService', () => {
   it('should place order', () => {
     spyOn(orderAdapter, 'placeOrder').and.callThrough();
     service.placeOrder(true);
-    service.placedOrder.subscribe(_ =>{
-      expect(orderAdapter.placeOrder).toHaveBeenCalled();
-    }).unsubscribe();
+    service.placedOrder
+      .subscribe(_ => {
+        expect(orderAdapter.placeOrder).toHaveBeenCalled();
+      })
+      .unsubscribe();
   });
 });

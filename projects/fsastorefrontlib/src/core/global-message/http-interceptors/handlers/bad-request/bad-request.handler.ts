@@ -6,7 +6,6 @@ import { BadRequestHandler, GlobalMessageType } from '@spartacus/core';
   providedIn: 'root',
 })
 export class FSBadRequestHandler extends BadRequestHandler {
-
   handleError(request: HttpRequest<any>, response: HttpErrorResponse): void {
     this.handleBadPassword(request, response);
     this.handleBadLoginResponse(request, response);
