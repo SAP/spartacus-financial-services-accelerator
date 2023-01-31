@@ -48,7 +48,7 @@
             {{ 'claim.dateOfLoss' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="claim.dateOfLoss != undefined; else na">
+            <ng-container *ngIf="claim.dateOfLoss !== undefined; else na">
               {{ claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy' }}
             </ng-container>
           </div>
@@ -59,7 +59,7 @@
           </div>
           <div class="col-6 col-sm-5 value notice">
             <ng-container
-              *ngIf="claim.claimHandler?.displayName != undefined; else na"
+              *ngIf="claim.claimHandler?.displayName !== undefined; else na"
             >
               {{ claim.claimHandler.displayName }}</ng-container
             >
@@ -71,7 +71,7 @@
           </div>
           <div class="col-6 col-sm-5 value notice">
             <ng-container
-              *ngIf="claim.claimHandler?.email != undefined; else na"
+              *ngIf="claim.claimHandler?.email !== undefined; else na"
               >{{ claim.claimHandler.email }}</ng-container
             >
           </div>
@@ -81,7 +81,7 @@
             {{ 'fscommon.status' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="claim.claimStatus != undefined; else na">
+            <ng-container *ngIf="claim.claimStatus !== undefined; else na">
               {{ claim.claimStatus }}
             </ng-container>
           </div>
