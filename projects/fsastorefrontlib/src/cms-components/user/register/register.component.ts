@@ -22,7 +22,7 @@ import { CustomFormValidators } from '@spartacus/storefront';
   selector: 'cx-fs-register',
   templateUrl: './register.component.html',
 })
-export class FSRegisterComponent extends RegisterComponent implements OnInit {
+export class FSRegisterComponent extends RegisterComponent implements OnInit, OnDestroy {
   constructor(
     protected globalMessageService: GlobalMessageService,
     protected fb: UntypedFormBuilder,
@@ -109,5 +109,11 @@ export class FSRegisterComponent extends RegisterComponent implements OnInit {
 
   getDateFormat() {
     return this.config.date.format || '';
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }
