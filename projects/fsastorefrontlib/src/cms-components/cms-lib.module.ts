@@ -32,6 +32,7 @@ import { CmsSyncPilotModule } from './sync-pilot/cms-sync-pilot/cms-sync-pilot.m
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { FSLoginFormModule } from './user/login-form/login-form.module';
 import { FSRegisterModule } from './user/register/register.module';
+import { LoanCalculatorModule } from './loan-calculator/loan-calculator.module';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { FSRegisterModule } from './user/register/register.module';
     AssetsTableModule,
     DashboardLinkModule,
     SavingsIllustrationModule,
+    LoanCalculatorModule,
   ],
   exports: [
     AgentModule,
@@ -94,6 +96,7 @@ import { FSRegisterModule } from './user/register/register.module';
     AssetsTableModule,
     DashboardLinkModule,
     SavingsIllustrationModule,
+    LoanCalculatorModule,
   ],
   providers: [reducerProvider],
 })

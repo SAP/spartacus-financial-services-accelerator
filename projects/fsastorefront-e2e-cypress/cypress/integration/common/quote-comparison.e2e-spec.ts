@@ -31,7 +31,9 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       checkout.checkPersonalDetailsPage();
       banking.populateAddressInfo();
+      banking.uploadDocument();
       banking.populatePersonalDetailsCCandLoan();
+      cy.wait(3000);
       checkout.clickContinueButton();
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();

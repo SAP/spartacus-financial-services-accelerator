@@ -1,0 +1,206 @@
+<form
+  [formGroup]="sliderForm"
+  class="form position-relative w-100"
+  *ngIf="componentData.data$ | async as cData; else loading"
+>
+  <div class="section-header-heading mb-4">
+    {{ 'loan.loanCalculatorTitle' | cxTranslate }}
+  </div>
+  <div class="loan-step px-4 mb-5">
+    <div class="step-part d-flex">
+      <div><p class="loan-step-number m-0 box-shadow">1</p></div>
+      <div class="input-group align-items-center">
+        <label for="loanAmount" class="col-8 title">{{
+          'loan.loanAmount' | cxTranslate
+        }}</label>
+      </div>
+    </div>
+    <div class="d-flex w-50 mx-auto mt-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text small-height">{{
+          currentCurrency$ | async
+        }}</span>
+      </div>
+      <input
+        (focusout)="setLoanAmount()"
+        id="loanAmount"
+        value="{{ sliderForm.value.loanAmount }}"
+        formControlName="loanAmount"
+        type="number"
+        class="form-control small-height"
+        ng-reflect-name="loanAmount"
+        name="loanAmount"
+        placeholder="{{ sliderForm.get('loanAmount').value }}"
+      />
+    </div>
+    <div class="slidecontainer mb-5 mt-4">
+      <div class="d-flex justify-content-center align-items-start">
+        <div
+          class="range box-shadow rounded mr-4 h6 pointer"
+          (click)="
+            changeLoanAmount('decrease', cData.minAmount, cData.maxAmount)
+          "
+        >
+          -
+        </div>
+        <div class="position-relative w-75">
+          <input
+            formControlName="loanAmount"
+            type="range"
+            class="slider mx-auto w-100"
+            min="{{ cData.minAmount }}"
+            max="{{ cData.maxAmount }}"
+            step="1000"
+          />
+          <div class="d-flex">
+            <div>Min. {{ cData.minAmount | number }}</div>
+            <div class="ml-auto">Max. {{ cData.maxAmount | number }}</div>
+          </div>
+        </div>
+        <div
+          class="range box-shadow rounded ml-4 h6 pointer"
+          (click)="
+            changeLoanAmount('increase', cData.minAmount, cData.maxAmount)
+          "
+        >
+          +
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loan-step px-4 mb-5 pt-5 position-relative border-separate">
+    <div class="step-part d-flex">
+      <div><p class="loan-step-number m-0 box-shadow">2</p></div>
+      <div class="input-group align-items-center">
+        <label for="loanRepaymentFrequency" class="col title">{{
+          'loan.loanRepaymentFrequency' | cxTranslate
+        }}</label>
+      </div>
+    </div>
+    <select
+      formControlName="repaymentFrequency"
+      class="select-inline-buttons box-shadow my-3 mx-auto"
+      id="repaymentFrequency"
+      size="3"
+    >
+      <option
+        *ngFor="let repFreq of (repaymentFrequencies$ | async)?.values"
+        value="{{ repFreq.key }}"
+      >
+        {{ repFreq.value }}
+      </option>
+    </select>
+  </div>
+  <div class="loan-step px-4 mb-5 pt-5 position-relative border-separate">
+    <div class="step-part d-flex">
+      <div><p class="loan-step-number m-0 box-shadow">3</p></div>
+      <div class="input-group align-items-center col-8 max-width-fit-content">
+        <label for="loanDuration" class="title">{{
+          'loan.loanDuration' | cxTranslate
+        }}</label>
+      </div>
+    </div>
+    <div class="d-flex w-50 mx-auto mt-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text small-height">Yrs</span>
+      </div>
+      <input
+        (focusout)="setDurationAmount()"
+        id="loanDuration"
+        value="{{ sliderForm.value.loanDuration }}"
+        formControlName="loanDuration"
+        type="number"
+        class="form-control small-height"
+        ng-reflect-name="loanDuration"
+        name="loanDuration"
+        placeholder="{{ sliderForm.get('loanDuration').value }}"
+      />
+    </div>
+    <div class="slidecontainer mt-5">
+      <div class="d-flex justify-content-center align-items-start">
+        <div
+          class="range box-shadow rounded mr-4 h6 pointer"
+          (click)="
+            changeLoanDuration('decrease', cData.minDuration, cData.maxDuration)
+          "
+        >
+          -
+        </div>
+        <div class="position-relative w-75">
+          <input
+            formControlName="loanDuration"
+            type="range"
+            class="slider mx-auto w-100"
+            min="{{ cData.minDuration }}"
+            max="{{ cData.maxDuration }}"
+            step="1"
+          />
+          <div class="d-flex">
+            <div>Min. {{ cData.minDuration }}</div>
+            <div class="ml-auto">Max. {{ cData.maxDuration }}</div>
+          </div>
+        </div>
+        <div
+          class="range box-shadow rounded ml-4 h6 pointer"
+          (click)="
+            changeLoanDuration('increase', cData.minDuration, cData.maxDuration)
+          "
+        >
+          +
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="loan-step px-4 mb-5 pt-5 position-relative border-separate"
+    *ngIf="sliderForm.get('repaymentFrequency').value"
+  >
+    <div class="step-part d-flex">
+      <div><p class="loan-step-number m-0 box-shadow">4</p></div>
+      <div class="input-group align-items-center col-8">
+        <label for="loanAmount" class="title">{{
+          'loan.loanInterestRate' | cxTranslate
+        }}</label>
+      </div>
+      <div class="form-control background-color-primary p-2 h-100">
+        <p class="text-white font-weight-bold text-center m-0 p-0">
+          {{ sliderForm.get('interestLoanRate').value }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="p-3 m-0 text-center background-color-4 box-shadow-inset position-relative grid"
+    *ngIf="sliderForm.get('repaymentFrequency').value"
+  >
+    <div
+      class="position-absolute right p-3 pointer underline"
+      *ngIf="clearAllowed"
+      (click)="clearAll()"
+    >
+      {{ 'loan.clearAll' | cxTranslate }}
+    </div>
+    <button
+      (click)="calculateAnnuityAmount()"
+      class="mr-auto"
+      id="calculate-annuity"
+    >
+      <cx-icon class="fas fa-calculator h3 calculate"></cx-icon>
+    </button>
+    <div class="d-flex loan-input-annuity align-items-center">
+      <p class="h3">{{ 'loan.loanAnnuity' | cxTranslate }}</p>
+      <input
+        id="annuity"
+        value="{{ sliderForm.value.annuity }}"
+        formControlName="annuity"
+        type="text"
+        class="form-control w-100 notice"
+        ng-reflect-name="annuity"
+        name="annuity"
+      />
+    </div>
+  </div>
+</form>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

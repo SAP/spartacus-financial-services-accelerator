@@ -8,4 +8,6 @@ export * from './quote.adapter';
 export * from './quote.connector';
 export * from './consent.adapter';
 export * from './consent.connector';
+export * from './document.adapter';
+export * from './document.connector';
 export * from './converters';

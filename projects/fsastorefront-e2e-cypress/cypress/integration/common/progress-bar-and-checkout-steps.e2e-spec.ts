@@ -42,6 +42,7 @@ testFilters([''], () => {
       checkout.checkActiveAndDisabledSteps('Add Options', '4');
       checkout.clickContinueButton();
       checkout.populatePersonalDetailsPage();
+      cy.wait(10000);
       checkout.checkActiveAndDisabledSteps('Personal Details', '3');
       checkout.clickContinueButton();
       checkout.checkAccordions('savingsAccordions');
@@ -77,6 +78,7 @@ testFilters([''], () => {
       checkout.clickContinueButton();
       checkout.checkPersonalDetailsPage();
       banking.populatePersonalDetailsCCandLoan();
+      banking.uploadDocument();
       checkout.checkActiveAndDisabledSteps('Personal Details', '3');
       checkout.clickContinueButton();
       checkout.checkAccordions('generalQuoteAccordions');
@@ -91,7 +93,7 @@ testFilters([''], () => {
       checkUserIdentificationPage();
       checkout.checkActiveAndDisabledSteps('User Identification', '5');
       selectUserIdentification('Legal Identification');
-      checkout.checkOrderConfirmation();
+      banking.checkOrderConfirmation();
     });
   });
 });

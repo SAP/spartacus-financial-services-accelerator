@@ -107,3 +107,36 @@ export function populateConfigureStep() {
   cy.get('[name=apply-for-debit-card]').select('yes');
   cy.get('[name=debit-card-design]').select('black');
 }
+
+export function checkMiniCartWithCoupon() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: '€9.00',
+    products: [
+      {
+        title: 'Number of Applicants:',
+        value: '1',
+      },
+      {
+        title: 'Debit Card:',
+        value: 'yes',
+      },
+      {
+        title: 'Debit Card Design:',
+        value: 'black',
+      },
+      {
+        title: 'Family Account:',
+        value: '€4.50',
+      },
+      {
+        title: 'Transaction Chest:',
+        value: '€4.50',
+      },
+      {
+        title: 'You save',
+        value: '€0.99',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}

@@ -22,6 +22,16 @@ testFilters([''], () => {
       checkout.waitConsent();
     });
 
+    it('Should try to create a claim without policy', () => {
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
+      cy.get('cx-banner').should('be.visible').eq(2).click();
+      checkout.checkPageURL(checkout.pages.noPolicyForClaimCreation);
+      fnol.checkNoClaimsPage();
+    });
+
     it('Should complete auto checkout', () => {
       checkout.startInsuranceCheckout('Auto');
       auto.populateAutoAnnuallyTesla();
@@ -82,7 +92,10 @@ testFilters([''], () => {
       cy.get('.primary-button').contains('Submit').click({ force: true });
       fnol.checkConfirmationPage();
       cy.get('.SiteLogo').should('be.visible').click();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
     });
 
     it('Should check documents page', () => {
@@ -111,9 +124,19 @@ testFilters([''], () => {
     });
 
     it('Should update existing claim', () => {
+      cy.get('.SiteLogo').should('be.visible').click();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       cy.selectOptionFromMyAccount({
         dropdownItem: 'Claims',
       });
+      cy.reload();
+      cy.selectOptionFromMyAccount({
+        dropdownItem: 'Claims',
+      });
+      cy.get('.heading-headline').should('be.visible').contains('Claims');
       fnol.claimAction('Add Documents');
       fnol.checkUpdateClaimPage();
       fnol.uploadNewDocument('fsaImageTest.png');

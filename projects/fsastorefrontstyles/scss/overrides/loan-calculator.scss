@@ -1,0 +1,149 @@
+cx-fs-loan-calculator {
+  display: flex;
+  flex: 0 1 33.3333%;
+  margin: 0.75rem 0.5rem;
+  @include fs-box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
+  @include media-breakpoint-down(md) {
+    flex: 0 1 calc(50% - 1rem);
+  }
+  @include media-breakpoint-down(xs) {
+    flex: 0 1 100%;
+    margin: 0.75rem 0;
+  }
+}
+
+.calculate {
+  border: 2px solid var(--cx-color-primary);
+  background-color: var(--cx-color-1);
+  color: var(--cx-color-primary);
+  padding: 1rem;
+  border-radius: 50%;
+  &:hover {
+    background-color: var(--cx-color-7);
+    color: var(--cx-color-1);
+    border: 2px solid var(--cx-color-1);
+  }
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+}
+
+.reset {
+  border: 2px solid var(--cx-color-1);
+  background-color: var(--cx-color-7);
+  color: var(--cx-color-1);
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.loan-step {
+  &:after {
+    content: '';
+    border-bottom: 1px solid var(--cx-color-6);
+    width: 75%;
+  }
+  label {
+    max-width: max-content;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button,
+  input[type='number'] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.border-separate {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 1px;
+    width: 80%;
+    left: 10%;
+    border-bottom: 1px solid var(--cx-color-3);
+  }
+}
+
+.loan-input-annuity input {
+  border: none;
+  display: inline;
+  font-family: inherit;
+  padding: none;
+  width: auto;
+  font-weight: 600;
+  font-size: 1.5rem;
+  &:disabled {
+    background-color: transparent;
+  }
+}
+
+.center {
+  @include vertical-center;
+}
+
+.input-label-calculator {
+  min-width: fit-content;
+}
+
+.max-width-fit-content {
+  max-width: fit-content;
+}
+
+#repaymentFrequency {
+  display: block;
+  margin: 0 auto;
+  height: 2.5rem;
+  border: var(--cx-color-6) solid 1px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  &:focus {
+    outline: none;
+  }
+  option {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.2em;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-right: var(--cx-color-6) solid 1px;
+    }
+    &:checked {
+      background: linear-gradient(#eeeeee, #eeeeee);
+      background-color: var(--cx-color-4) !important;
+      color: var(--cx-color-primary);
+      -webkit-text-fill-color: var(--cx-color-primary);
+    }
+    color: var(--cx-color-11);
+  }
+}
+
+.loan-step-number {
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--cx-color-primary);
+}
+
+.range {
+  border: 1px solid var(--cx-color-3);
+  padding: 0.2rem 0.6rem;
+}
+
+.small-height {
+  height: 2rem;
+}

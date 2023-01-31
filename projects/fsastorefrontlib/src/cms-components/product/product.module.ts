@@ -10,6 +10,7 @@ import {
 import { FSProductListComponent } from './product-list/product-list.component';
 import { RouterModule } from '@angular/router';
 import { MediaModule, ListNavigationModule } from '@spartacus/storefront';
+import { LoanCalculatorComponent } from '../loan-calculator/loan-calculator.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,9 @@ import { MediaModule, ListNavigationModule } from '@spartacus/storefront';
       cmsComponents: {
         FinancialServicesProductFeatureComponent: {
           component: ProductFeatureComponent,
+        },
+        LoanCalculatorComponent: {
+          component: LoanCalculatorComponent,
         },
         SearchResultsListComponent: {
           component: FSProductListComponent,

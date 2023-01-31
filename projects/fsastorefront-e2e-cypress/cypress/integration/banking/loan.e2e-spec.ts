@@ -41,6 +41,7 @@ testFilters(['smoke'], () => {
       checkout.checkCheckoutStep('Your Loan Application', '6');
       checkout.checkPersonalDetailsPage();
       banking.populateAddressInfo();
+      banking.uploadDocument();
       banking.populatePersonalDetailsCCandLoan();
       banking.populateAdditionalApplicantCCandLoan();
       checkout.clickContinueButton();
@@ -76,12 +77,11 @@ testFilters(['smoke'], () => {
       checkout.checkCheckoutStep('Your Loan Application', '6');
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification('Legal Identification');
+      cy.wait(1000);
     });
 
     it('Should check order confirmation', () => {
-      checkout.checkOrderConfirmation();
-      banking.checkOrderTotal('€140.00');
-      checkout.checkAccordions('LoanConfirmation');
+      banking.checkOrderConfirmation();
     });
   });
 });

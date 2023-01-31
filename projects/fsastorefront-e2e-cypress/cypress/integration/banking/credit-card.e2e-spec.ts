@@ -59,6 +59,7 @@ testFilters([''], () => {
       banking.populateAddressInfo();
       banking.populatePersonalDetailsCCandLoan();
       banking.populateAdditionalApplicantCCandLoan();
+      cy.wait(3000);
       checkout.clickContinueButton();
     });
 
@@ -85,26 +86,28 @@ testFilters([''], () => {
       checkout.checkCheckoutStep('Your Credit Card Application', '7');
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification('At the Nearest Branch');
+      cy.wait(2000);
     });
 
     it('Should check order confirmation', () => {
-      checkout.checkOrderConfirmation();
-      checkout.checkAccordions('creditCardConfirmation');
+      banking.checkOrderConfirmation();
       cy.wait(22000);
     });
 
-    it('Should check Pending message is received', () => {
+    it('Should check inbox message is received', () => {
       inbox.clickOnInbox();
       inbox.checkInboxComponets();
       inbox.checkBankingTabs();
       inbox.checkGeneralTab();
-      inbox.checkPendingMessage();
+      inbox.checkApplicationSubmittedMessage();
     });
 
     it('Should check Order History and Order Status', () => {
       myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('€89.00', 'Pending');
-      cy.get('.cx-order-history-status').should('contain.text', 'Pending');
+      cy.get('h3').should(
+        'contains.text',
+        'We have no order records for this account.'
+      );
     });
   });
 });

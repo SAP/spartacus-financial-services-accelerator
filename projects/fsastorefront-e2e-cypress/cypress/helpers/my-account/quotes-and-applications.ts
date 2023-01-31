@@ -28,7 +28,7 @@ export function checkBiweeklyLoanApplication() {
     cy.get('.label').contains('Personal Loan');
     cy.get('.value').contains('QREF');
     cy.get('.label').contains('Quote status');
-    cy.get('.value').contains('Approved');
+    cy.get('.value').contains('Accepted');
     cy.get('.value').contains('€140.00 / Biweekly');
   });
 }

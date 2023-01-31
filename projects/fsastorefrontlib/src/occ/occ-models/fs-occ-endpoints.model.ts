@@ -241,5 +241,14 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   cart?: string;
 
+  /**
+   * The create appointment 
+   *
+   */
   createAppointment?: string;
+  /**
+   * Sign documents for status
+   *
+   */
+  signDocuments?: string;
 }

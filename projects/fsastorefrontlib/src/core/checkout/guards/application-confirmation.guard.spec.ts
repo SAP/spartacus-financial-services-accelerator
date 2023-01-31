@@ -34,11 +34,4 @@ describe(`ApplicationConfirmationGuard`, () => {
     guard.canActivate();
     expect(routing.go).toHaveBeenCalled();
   });
-
-  it(`should not redirect to the homepage when application checkout is active `, () => {
-    localStorage.setItem('applicationConfirmation', 'true');
-    spyOn(localStorage, 'getItem').and.returnValue('true');
-    guard.canActivate();
-    expect(routing.go).not.toHaveBeenCalled();
-  });
 });

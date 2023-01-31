@@ -23,6 +23,7 @@ import { quote } from './en/quote.en';
 import { quoteReview } from './en/quoteReview.en';
 import { salesIllustration } from './en/sales-illustration.en';
 import { userRequest } from './en/userRequest.en';
+import { loan } from './en/loan.en';
 import { address } from './overrides/en/address';
 import { cart } from './overrides/en/cart';
 import { common } from './overrides/en/common';
@@ -38,6 +39,7 @@ export const fstranslations: TranslationResources = {
   policy,
   premiumCalendar,
   userRequest,
+  loan,
   document,
   changeRequest,
   configureProduct,

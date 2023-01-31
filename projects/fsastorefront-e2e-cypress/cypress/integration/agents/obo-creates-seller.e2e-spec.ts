@@ -39,13 +39,19 @@ testFilters([''], () => {
       cy.contains('No sufficient permissions to access this page');
       obo.checkDashboard('Dashboard Overview', 'Thomas Schmidt');
       register.logout();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
     });
 
     it('Should check dashoboard as newly created seller', () => {
       cy.get('cx-login').should('be.visible').click();
       register.loginUser(newSeller.email, newSeller.password);
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       obo.goToDashboard();
       cy.get('h5').contains('Your Profile');
       obo.checkDashboard('Dashboard Overview', 'Jones');
@@ -60,7 +66,10 @@ testFilters([''], () => {
 
     it('Should check customer dashboard', () => {
       cy.get('.SiteLogo').should('be.visible').click();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       obo.goToDashboard();
       obo.checkCustomerList('Jenise Moore', 'user_jenise');
       obo.goToCustomerDashboard('Jenise');

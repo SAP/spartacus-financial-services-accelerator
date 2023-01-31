@@ -84,25 +84,6 @@ export const finalReviewAccordionRenters = [
   personalDetails,
 ];
 
-export const confirmationAccordionCreditCard = [
-  'Credit Card Information',
-  whatsIncluded,
-  personalDetails,
-];
-
-export const confirmationAccordionCurrentAccount = [
-  'Current Account Information',
-  whatsIncluded,
-  addedByYou,
-  personalDetails,
-];
-export const confirmationAccordionLoan = [
-  'Loan Information',
-  whatsIncluded,
-  addedByYou,
-  personalDetails,
-];
-
 export const quoteReviewAccordionSavings = [
   generalDetails,
   whatsIncluded,
@@ -135,13 +116,6 @@ export const policyDetailsSavings = [
   'What Does It Cost Me',
 ];
 
-export const confirmationAccordionFTD = [
-  'Fixed Term Deposit Information',
-  whatsIncluded,
-  addedByYou,
-  personalDetails,
-];
-
 export const compareQuoteAccordion = [
   'Quote General Information',
   'Quote Billing Events',
@@ -170,10 +144,6 @@ export const Accordions = {
       accordionItems: this.quoteReviewAccordionGroup1,
     },
     {
-      category: 'creditCardConfirmation',
-      accordionItems: this.confirmationAccordionCreditCard,
-    },
-    {
       category: 'lifeFinalReview',
       accordionItems: this.finalReviewAccordionLife,
     },
@@ -198,14 +168,6 @@ export const Accordions = {
       accordionItems: this.finalReviewAccordionRenters,
     },
     {
-      category: 'LoanConfirmation',
-      accordionItems: this.confirmationAccordionLoan,
-    },
-    {
-      category: 'FTDConfirmation',
-      accordionItems: this.confirmationAccordionFTD,
-    },
-    {
       category: 'savingsQuoteReview',
       accordionItems: this.quoteReviewAccordionSavings,
     },
@@ -224,10 +186,6 @@ export const Accordions = {
     {
       category: 'quoteReviewWithoutOptional',
       accordionItems: this.quoteReviewWithoutOptionalProducts,
-    },
-    {
-      category: 'confirmationCurrentAccount',
-      accordionItems: this.confirmationAccordionCurrentAccount,
     },
     {
       category: 'compareQuote',

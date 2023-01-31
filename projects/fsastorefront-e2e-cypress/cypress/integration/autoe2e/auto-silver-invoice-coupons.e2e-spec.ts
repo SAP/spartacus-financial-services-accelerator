@@ -33,9 +33,7 @@ testFilters([''], () => {
       autoIntegration.selectAutoSilver();
       cy.get('cx-fs-cart-coupon').should('be.visible');
       auto.addOptionalProductsSilver();
-      cy.get('[formcontrolname=couponCode]').type('FSA10DISC');
-      cy.get('.primary-button').eq(1).click();
-      cy.get('.alert-success').should('be.visible');
+      checkout.addCoupon('FSA10DISC');
       checkout.clickContinueButton();
     });
 
@@ -44,6 +42,7 @@ testFilters([''], () => {
       auto.populatePersonalDetails();
       auto.populateVehicleDetails();
       auto.populateMainDriverData();
+      checkout.appliedCoupon();
       checkout.clickContinueButton();
     });
 

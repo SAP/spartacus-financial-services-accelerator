@@ -5,6 +5,7 @@ import * as customParseFormat from 'dayjs/plugin/customParseFormat';
 
 dayjs.extend(customParseFormat);
 
+const todaysDate = dayjs().format('DD MMM YYYY');
 const tomorrowsDate = dayjs().add(2, 'day').format('YYYY-MM-DD');
 const returnDate = dayjs().add(10, 'day').format('YYYY-MM-DD');
 const startDate = dayjs().add(2, 'day').format('DD MMM YYYY');
@@ -215,4 +216,13 @@ export function checkBackpackersOptionalProducts() {
     ],
   };
   shared.checkAddOptionsPageContent(addOptionsContent);
+}
+
+export function checkInboxMessages() {
+  cy.get('.fs-tab').should('be.visible').contains('General');
+  cy.get('.message').should('not.have.class', 'read');
+  cy.get('.col-6.col-md-3').should('have.length', '2');
+  cy.contains('Welcome');
+  cy.contains('Coupon promotion');
+  cy.contains(todaysDate);
 }

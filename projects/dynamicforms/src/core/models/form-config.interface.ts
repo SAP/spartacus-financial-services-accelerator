@@ -21,6 +21,7 @@ export interface FieldConfig {
   apiValue?: ApiConfig;
   placeholder?: LocalizedString;
   fieldType: string;
+  valueType?: string;
   value?: any;
   hidden?: boolean;
   error?: LocalizedString;

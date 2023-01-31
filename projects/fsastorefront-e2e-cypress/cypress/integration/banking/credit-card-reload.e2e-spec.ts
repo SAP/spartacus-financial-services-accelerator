@@ -5,6 +5,7 @@ import * as banking from '../../helpers/checkout/banking/checkout-banking';
 import * as creditCard from '../../helpers/checkout/banking/credit-card';
 import * as userIdentification from '../../helpers/checkout/banking/user-identification';
 import testFilters from '../../support/filters';
+import * as homepage from '../../helpers/homepage';
 
 testFilters([''], () => {
   context('Banking Checkout Steps Reload', () => {
@@ -85,17 +86,16 @@ testFilters([''], () => {
       checkout.checkCheckoutStep('Your Credit Card Application', '7');
       userIdentification.checkUserIdentificationPage();
       cy.reload();
-      //BUG: CXFSA-307
       checkout.checkCheckoutStep('Your Credit Card Application', '7');
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification('At the Nearest Branch');
       //Order Confirmation
-      checkout.checkOrderConfirmation();
-      checkout.checkAccordions('creditCardConfirmation');
+      banking.checkOrderConfirmation();
       cy.reload();
-      //User is redirected to homepage
-      cy.get('.SiteLogo').should('be.visible');
-      cy.get('cx-fs-enriched-responsive-banner').should('be.visible');
+      homepage.checkPageElements(
+        'Everything is well planned!',
+        'Finish your quote or application in a few steps.'
+      );
     });
   });
 });
