@@ -19,6 +19,8 @@ import createSpy = jasmine.createSpy;
 import { CheckoutDeliveryModesFacade } from '@spartacus/checkout/base/root';
 import { StateWithFSCheckout } from '../store/checkout-state';
 import { OccOrderAdapter } from '@spartacus/order/occ';
+import { OrderAdapter } from '@spartacus/order/core';
+import { Order } from '@spartacus/order/root';
 
 const activeCartCode = 'testCartCode';
 const fsCheckout = 'fscheckout';
@@ -35,6 +37,16 @@ const mockProduct = {
   defaultCategory: {
     code: 'testCategory',
   },
+};
+
+const mockOrder = {
+  code: 'testOrder',
+  entries: [
+    {
+      entryNumber: 1,
+      product: mockProduct
+    },
+  ],
 };
 
 class CheckoutDeliveryServiceStub {
@@ -59,15 +71,21 @@ class MockRoutingService {
   go = createSpy();
 }
 
+class MockOrderAdapter {
+  placeOrder(): Observable<Order>{
+    return of(mockOrder);
+  }
+}
+
 describe('FSCheckoutService', () => {
   let service: FSCheckoutService;
   let store: Store<StateWithFSCheckout>;
   let checkoutDeliveryModesFacade: CheckoutDeliveryModesFacade;
   let userIdService: UserIdService;
-  let cartService: ActiveCartService;
+  let activeCartService: ActiveCartService;
   let checkoutConfigService: FSCheckoutConfigService;
   let routingService: RoutingService;
-  let occOrderAdapter: OccOrderAdapter;
+  let orderAdapter: OrderAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -88,6 +106,10 @@ describe('FSCheckoutService', () => {
           useClass: MockCheckoutConfigService,
         },
         {
+          provide: OrderAdapter,
+          useClass: MockOrderAdapter,
+        },
+        {
           provide: RoutingService,
           useClass: MockRoutingService,
         },
@@ -97,9 +119,10 @@ describe('FSCheckoutService', () => {
     checkoutDeliveryModesFacade = TestBed.inject(CheckoutDeliveryModesFacade);
     store = TestBed.inject(Store);
     userIdService = TestBed.inject(UserIdService);
-    cartService = TestBed.inject(ActiveCartService);
+    activeCartService = TestBed.inject(ActiveCartService);
     checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     routingService = TestBed.inject(RoutingService);
+    orderAdapter = TestBed.inject(OrderAdapter);
     spyOn(checkoutDeliveryModesFacade, 'setDeliveryMode').and.callThrough();
     spyOn(store, 'dispatch').and.callThrough();
   });
@@ -265,7 +288,10 @@ describe('FSCheckoutService', () => {
   });
 
   it('should place order', () => {
+    spyOn(orderAdapter, 'placeOrder').and.callThrough();
     service.placeOrder(true);
-    expect(occOrderAdapter.placeOrder).toHaveBeenCalled();
+    service.placedOrder.subscribe(_ =>{
+      expect(orderAdapter.placeOrder).toHaveBeenCalled();
+    }).unsubscribe();
   });
 });

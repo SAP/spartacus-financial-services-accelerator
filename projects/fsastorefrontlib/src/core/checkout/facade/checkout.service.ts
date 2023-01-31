@@ -30,13 +30,14 @@ export class FSCheckoutService {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected routingService: RoutingService,
     protected processStateStore: Store<StateWithProcess<void>>,
-    protected occOrderAdapter: OrderAdapter
+    protected orderAdapter: OrderAdapter
   ) {}
 
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
 
   orderPlaced: boolean;
   mockedDeliveryMode = 'financial-default';
+  placedOrder: Observable<any>;
 
   setIdentificationType(
     activeCartCode: string,
@@ -102,12 +103,12 @@ export class FSCheckoutService {
   }
 
   placeOrder(termsChecked: boolean) {
-    combineLatest([
+    this.placedOrder = combineLatest([
       this.userIdService.getUserId(),
       this.activeCartService.getActiveCartId(),
     ]).pipe(
       map(([userId, cartId]) => {
-        this.occOrderAdapter.placeOrder(userId, cartId, termsChecked);
+        this.orderAdapter.placeOrder(userId, cartId, termsChecked);
       })
     );
   }
