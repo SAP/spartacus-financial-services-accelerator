@@ -14,6 +14,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './cart.service';
 import * as fromAction from './../../checkout/store/actions/index';
+import { MultiCartFacade } from '@spartacus/cart/base/root';
 
 const productCode = 'testProduct';
 const bundleCode = 'bundleCode';
@@ -37,6 +38,35 @@ class MultiCartServiceStub {
   }
 }
 
+class MultiCartFacadStub {
+  loadCart() {}
+  deleteCart() {}
+  initAddEntryProcess() {}
+  getCartEntity() {
+    return of();
+  }
+  assignEmail() {}
+  getEntry() {
+    return of();
+  }
+  getLastEntry() {
+    return of();
+  }
+  updateEntry() {}
+  removeEntry() {}
+  getEntries() {
+    return of([]);
+  }
+  createCart() {}
+  mergeToCurrentCart() {}
+  addEntry() {}
+  addEntries() {}
+  isStable() {}
+  getCartIdByType(): Observable<string> {
+    return of('');
+  }
+}
+
 class MockUserIdService {
   getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
@@ -55,6 +85,7 @@ describe('FSCartServiceTest', () => {
       providers: [
         FSCartService,
         { provide: MultiCartService, useClass: MultiCartServiceStub },
+        { provide: MultiCartFacade, useClass: MultiCartFacadStub },
         {
           provide: UserIdService,
           useClass: MockUserIdService,
