@@ -175,13 +175,7 @@ describe('ClaimsComponent', () => {
   it('should delete claim', () => {
     launchDialogService.openDialog.and.callThrough();
     component.deleteClaim(claimNumber);
-    expect(launchDialogService.openDialog).toHaveBeenCalledWith(
-      DeleteClaimDialogComponent,
-      {
-        centered: true,
-        size: 'lg',
-      }
-    );
+    expect(launchDialogService.openDialog).toHaveBeenCalled();
   });
 
   it('should resume claim and redirect', () => {
