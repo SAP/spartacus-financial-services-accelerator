@@ -129,9 +129,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       dialog
         .pipe(
           take(1),
-          map(dialog => {
+          map(dialogInstance => {
             this.subscription.add(
-              dialog.instance.quoteBinding$
+              dialogInstance.instance.quoteBinding$
                 .pipe(
                   map(quoteBinding => {
                     this.showContent$ = of(!quoteBinding);
@@ -163,9 +163,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       dialog
         .pipe(
           take(1),
-          map(dialog => {
+          map(dialogInstance => {
             this.subscription.add(
-              dialog.instance.referredQuote$
+              dialogInstance.instance.referredQuote$
                 .pipe(
                   map(referredQuote => {
                     this.showContent$ = of(!referredQuote);

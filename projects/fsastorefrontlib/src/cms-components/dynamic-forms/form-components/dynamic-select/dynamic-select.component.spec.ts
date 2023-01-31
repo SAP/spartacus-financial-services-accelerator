@@ -63,9 +63,7 @@ class MockFormService {
 
 const testUrl = 'testUrl';
 
-let mockField: FieldConfig;
-
-mockField = {
+ let mockField: FieldConfig = {
   fieldType: 'input',
   name: 'testInput',
 };
@@ -80,7 +78,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 class MockDynamicFormsCategoryService {
-  configureApiValueForCategory(mockField) {}
+  configureApiValueForCategory(_mockField) {}
 }
 
 describe('DynamicSelectComponent', () => {

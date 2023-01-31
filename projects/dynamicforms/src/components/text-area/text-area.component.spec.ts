@@ -98,7 +98,7 @@ describe('TextAreaComponent', () => {
   });
 
   it('should render textarea component', () => {
-    const TextAreaComponent = el.query(By.css('textarea')).nativeElement;
-    expect(TextAreaComponent).toBeTruthy();
+    const textAreaComponent = el.query(By.css('textarea')).nativeElement;
+    expect(textAreaComponent).toBeTruthy();
   });
 });

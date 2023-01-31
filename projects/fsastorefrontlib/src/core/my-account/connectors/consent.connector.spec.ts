@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Address } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { FSSearchConfig } from '../services/inbox-data.service';
 import { ConsentAdapter } from './consent.adapter';
 import { ConsentConnector } from './consent.connector';
@@ -34,13 +34,13 @@ class MockConsentAdapter extends ConsentAdapter {
 
   transferCartToOboCustomer = createSpy(
     'ConsentAdapter.transferCartToOboCustomer'
-  ).and.callFake((cartId, userId, oboCustomer) =>
-    of('transferCartToOboCustomer' + cartId + userId + oboCustomer)
+  ).and.callFake((cartId, userId, oboUser) =>
+    of('transferCartToOboCustomer' + cartId + userId + oboUser)
   );
   createAddressForUser = createSpy(
     'ConsentAdapter.createAddressForUser'
-  ).and.callFake((userId, oboCustomerId, address) =>
-    of('createAddressForUser' + userId + oboCustomerId + address)
+  ).and.callFake((userId, oboCustomerId, userAddress) =>
+    of('createAddressForUser' + userId + oboCustomerId + userAddress)
   );
   createOBOCustomer = createSpy(
     'ConsentAdapter.createOBOCustomer'
@@ -50,19 +50,19 @@ class MockConsentAdapter extends ConsentAdapter {
   updateOBOPermission = createSpy(
     'ConsentAdapter.updateOBOPermission'
   ).and.callFake(
-    (userId, oboConsentHolderUid, oboPermissionName, oboPermissionValue) =>
+    (userId, oboConsentHolderEmail, oboPermission, oboPermissionVal) =>
       of(
         'updateOBOPermission' +
           userId +
-          oboConsentHolderUid +
-          oboPermissionName +
-          oboPermissionValue
+          oboConsentHolderEmail +
+          oboPermission +
+          oboPermissionVal
       )
   );
   updateAddressForUser = createSpy(
     'ConsentAdapter.updateAddressForUser'
-  ).and.callFake((userId, oboCustomerId, addressId, address) =>
-    of('updateAddressForUser' + userId + oboCustomerId + addressId + address)
+  ).and.callFake((userId, oboCustomerId, addressCode, addressObject) =>
+    of('updateAddressForUser' + userId + oboCustomerId + addressCode + addressObject)
   );
 }
 

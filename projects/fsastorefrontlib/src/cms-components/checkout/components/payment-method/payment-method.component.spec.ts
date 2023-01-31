@@ -182,6 +182,7 @@ class MockCheckoutPaymentTypeFacade {
 }
 
 @Component({
+  // eslint-disable-next-line
   selector: 'cx-payment-form',
   template: '',
 })
@@ -193,12 +194,14 @@ class MockPaymentFormComponent {
 }
 
 @Component({
+  // eslint-disable-next-line
   selector: 'cx-spinner',
   template: '',
 })
 class MockSpinnerComponent {}
 
 @Component({
+  // eslint-disable-next-line
   selector: 'cx-icon',
   template: '',
 })

@@ -16,7 +16,7 @@
                 ' is-active': i === activeStepIndex,
                 ' is-disabled':
                   i > activeStepIndex ||
-                  (i < activeStepIndex && (isQuoteBound() | async) == true)
+                  (i < activeStepIndex && (isQuoteBound() | async) === true)
               }"
               [routerLink]="
                 {

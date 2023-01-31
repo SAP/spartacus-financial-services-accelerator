@@ -173,9 +173,9 @@ describe('AgentSearchListComponent', () => {
   });
 
   it('should show list of all agents on the back to list button', () => {
-    const selectedIndex = -1;
+    const selectedIndexValue = -1;
     spyOn(mockSearchService, 'search').and.callThrough();
-    component.setActiveAgentIndex(selectedIndex);
+    component.setActiveAgentIndex(selectedIndexValue);
     expect(mockSearchService.search).toHaveBeenCalled();
   });
 });

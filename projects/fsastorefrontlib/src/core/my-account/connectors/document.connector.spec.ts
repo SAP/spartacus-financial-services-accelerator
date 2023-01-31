@@ -5,8 +5,8 @@ import { DocumentAdapter, DocumentConnector } from '@spartacus/fsa-storefront';
 
 class MockDocumentAdapter implements DocumentAdapter {
   signDocuments = createSpy('DocumentAdapter.signDocuments').and.callFake(
-    (userId, documentCodes, signStatus) =>
-      of('signDocuments' + userId + documentCodes + signStatus)
+    (userID, documentIds, documentSignStatus) =>
+      of('signDocuments' + userID + documentIds + documentSignStatus)
   );
 }
 

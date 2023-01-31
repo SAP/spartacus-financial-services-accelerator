@@ -17,9 +17,8 @@ import {
   I18nTestingModule,
   LanguageService,
 } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { DynamicNumberInputComponent } from './dynamic-number-input.component';
-import { CategoryService } from '../../../../core';
 import { OccDynamicNumberInputService } from '../../../../occ/services/dynamic-number-input/occ-dynamic-number-input.service';
 import { DynamicFormsCategoryService } from '../../services/dynamic-forms-category.service';
 
@@ -71,15 +70,14 @@ class MockCurrencyService {
     return of('EUR');
   }
 }
-let mockField: FieldConfig;
 
-mockField = {
+ let mockField: FieldConfig = {
   fieldType: 'input',
   name: 'testInput',
 };
 
 class MockDynamicFormsCategoryService {
-  configureApiValueForCategory(mockField) {}
+  configureApiValueForCategory(_mockField) {}
 }
 
 const testUrl = 'testUrl';

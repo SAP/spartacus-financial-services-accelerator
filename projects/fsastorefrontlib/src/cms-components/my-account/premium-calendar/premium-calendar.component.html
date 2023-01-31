@@ -59,7 +59,7 @@
           <div
             class="col text-left align-self-stretch background-color-4"
             [ngClass]="
-              policy.billingData[0]?.paymentStatus == 'Overdue'
+              policy.billingData[0]?.paymentStatus === 'Overdue'
                 ? 'warn'
                 : 'notice'
             "
@@ -70,7 +70,7 @@
             {{ policy.billingData[0]?.dueDate | cxDate: 'dd MMM yyyy' }}
             <div
               class="warn"
-              *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'"
+              *ngIf="policy.billingData[0]?.paymentStatus === 'Overdue'"
             >
               {{ 'premiumCalendar.overdue' | cxTranslate }}
             </div>
@@ -78,7 +78,7 @@
           <div
             class="col text-left align-self-stretch background-color-4"
             [ngClass]="
-              policy.billingData[0]?.paymentStatus == 'Overdue'
+              policy.billingData[0]?.paymentStatus === 'Overdue'
                 ? 'warn'
                 : 'notice'
             "

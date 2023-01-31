@@ -154,9 +154,9 @@ describe('DynamicFormComponent', () => {
 
   it('should submit in case form content is not defined', () => {
     component.form.controls.testGroupCode.setValue('test string');
-    spyOn(component.submit, 'emit').and.callThrough();
+    spyOn(component.submitEvent, 'emit').and.callThrough();
     formData.content = undefined;
     component.ngOnInit();
-    expect(component.submit.emit).toHaveBeenCalled();
+    expect(component.submitEvent.emit).toHaveBeenCalled();
   });
 });

@@ -216,7 +216,7 @@ describe('ComparisonTablePanelComponent', () => {
     fixture = TestBed.createComponent(ComparisonTablePanelComponent);
     comparisonTablePanelComponent = fixture.componentInstance;
 
-    pricingData = {
+    pricingData  = {
       priceAttributeGroups: [
         {
           name: 'test',
@@ -250,7 +250,7 @@ describe('ComparisonTablePanelComponent', () => {
 
     let result;
     comparisonTablePanelComponent.pricingData$.subscribe(
-      pricingData => (result = pricingData)
+      pricingDataObject => (result = pricingDataObject)
     );
     expect(result).toEqual(pricingData);
   });

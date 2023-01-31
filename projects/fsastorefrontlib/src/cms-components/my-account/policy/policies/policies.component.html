@@ -1,6 +1,6 @@
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
-    <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
+    <div class="row" *ngIf="(policies | json) !== '{}'; else noPolicies">
       <div
         *ngFor="let policy of policies.insurancePolicies"
         class="col-12 col-md-6 d-flex"

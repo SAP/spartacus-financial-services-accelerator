@@ -100,7 +100,7 @@ class MockOboCustomerService {
 
 class MockConsentService {
   selectedOBOCustomer$ = of(mockOBOConsentCustomer);
-  transferCartToSelectedOBOCustomer(mockCart, mockUser, oboConsentCustomer) {}
+  transferCartToSelectedOBOCustomer(_mockCart, _mockUser, oboConsentCustomer) {}
 }
 
 describe('BindQuoteDialogComponent', () => {
