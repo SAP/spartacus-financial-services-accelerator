@@ -15,7 +15,6 @@ import { map, take } from 'rxjs/operators';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/facade';
 import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
-//import { ModalService } from '@spartacus/storefront';
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 
 @Component({
@@ -68,14 +67,6 @@ export class ClaimsComponent implements OnInit, OnDestroy {
   getImagelink() {
     return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.naIcon);
   }
-
-  // private openModal(claimNumber: string) {
-  //   this.modalInstance = this.modalService.open(DeleteClaimDialogComponent, {
-  //     centered: true,
-  //     size: 'lg',
-  //   }).componentInstance;
-  //   this.modalInstance.claimNumber = claimNumber;
-  // }
 
   private openModal(claimNumber: string) {
     let modalInstanceData: any = {
