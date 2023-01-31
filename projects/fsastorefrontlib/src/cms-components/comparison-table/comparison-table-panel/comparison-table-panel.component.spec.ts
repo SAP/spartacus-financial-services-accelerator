@@ -216,7 +216,7 @@ describe('ComparisonTablePanelComponent', () => {
     fixture = TestBed.createComponent(ComparisonTablePanelComponent);
     comparisonTablePanelComponent = fixture.componentInstance;
 
-    pricingData  = {
+    pricingData = {
       priceAttributeGroups: [
         {
           name: 'test',

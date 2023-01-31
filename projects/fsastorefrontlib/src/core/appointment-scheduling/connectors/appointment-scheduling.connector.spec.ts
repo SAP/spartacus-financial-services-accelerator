@@ -9,7 +9,9 @@ class MockAppointmentSchedulingAdapter implements AppointmentSchedulingAdapter {
   createAppointmentForAgent = createSpy(
     'AppointmentSchedulingAdapter.createAppointmentForAgent'
   ).and.callFake((agentCode, userCode, appointmentDataObject) =>
-    of('createAppointmentForAgent' + agentCode + userCode + appointmentDataObject)
+    of(
+      'createAppointmentForAgent' + agentCode + userCode + appointmentDataObject
+    )
   );
 }
 

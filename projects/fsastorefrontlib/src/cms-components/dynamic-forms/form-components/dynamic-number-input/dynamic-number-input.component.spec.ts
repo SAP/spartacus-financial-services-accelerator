@@ -71,7 +71,7 @@ class MockCurrencyService {
   }
 }
 
- let mockField: FieldConfig = {
+let mockField: FieldConfig = {
   fieldType: 'input',
   name: 'testInput',
 };

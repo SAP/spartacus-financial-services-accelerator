@@ -68,10 +68,7 @@
                   >:
                   <span class="value"
                     ><ng-container
-                      *ngIf="
-                        claim.claimHandler?.displayName != undefined; 
-                        else na
-                      "
+                      *ngIf="checkClaimHandlerDisplayName(claim); else na"
                     >
                       {{ claim.claimHandler.displayName }}</ng-container
                     >
@@ -84,7 +81,7 @@
                   >:
                   <span class="value">
                     <ng-container
-                      *ngIf="claim.claimHandler?.email != undefined; else na"
+                      *ngIf="checkClaimHandlerDisplayEmail(claim); else na"
                       >{{ claim.claimHandler.email }}</ng-container
                     >
                   </span>
@@ -94,7 +91,9 @@
                     'fscommon.status' | cxTranslate
                   }}</span
                   >:
-                  <ng-container *ngIf="claim.claimStatus !== undefined; else na">
+                  <ng-container
+                    *ngIf="claim.claimStatus !== undefined; else na"
+                  >
                     <span class="value">{{ claim.claimStatus }}</span>
                   </ng-container>
                 </div>
@@ -102,7 +101,10 @@
               <div class="info-card-image">
                 <span class="image-wrapper">
                   <img
-                    *ngIf="claim.incidentType !== undefined; else noIncidentType"
+                    *ngIf="
+                      claim.incidentType !== undefined;
+                      else noIncidentType
+                    "
                     class="image-item"
                     [src]="baseUrl + claim.incidentType?.icon.url"
                     alt="{{ claim.incidentType?.icon.alt }}"

@@ -24,7 +24,6 @@ import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 })
 export class ClaimsComponent implements OnInit, OnDestroy {
   constructor(
-    //protected modalService: ModalService,
     protected launchDialogService: LaunchDialogService,
     protected config: OccConfig,
     protected domSanitizer: DomSanitizer,
@@ -99,6 +98,16 @@ export class ClaimsComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  checkClaimHandlerDisplayName(claim: any): boolean {
+    //eslint-disable-next-line
+    return claim.claimHandler?.displayName != undefined;
+  }
+
+  checkClaimHandlerDisplayEmail(claim: any): boolean {
+    //eslint-disable-next-line
+    return claim.claimHandler?.email != undefined;
   }
 
   ngOnDestroy() {

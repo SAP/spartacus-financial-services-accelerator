@@ -62,7 +62,13 @@ class MockConsentAdapter extends ConsentAdapter {
   updateAddressForUser = createSpy(
     'ConsentAdapter.updateAddressForUser'
   ).and.callFake((userId, oboCustomerId, addressCode, addressObject) =>
-    of('updateAddressForUser' + userId + oboCustomerId + addressCode + addressObject)
+    of(
+      'updateAddressForUser' +
+        userId +
+        oboCustomerId +
+        addressCode +
+        addressObject
+    )
   );
 }
 
