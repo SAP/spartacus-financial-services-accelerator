@@ -299,7 +299,6 @@ const routes: Routes = [
     FSCartService,
     FSTranslationService,
     CheckoutConnector,
-    //OccOrderAdapter,
     CartConnector,
     QuoteConnector,
     CategoryService,

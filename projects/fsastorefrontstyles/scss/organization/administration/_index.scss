@@ -11,11 +11,6 @@ cx-org-unit-list {
 }
 
 cx-org-list {
-  // https://yoksel.github.io/url-encoder/
-  // <?xml version="1.0" encoding="utf-8"?>
-  // <svg version="1.1"  viewBox="0 0 44.21 69.76" >
-  //   <polyline fill="none" stroke="#D3D6DA" stroke-width="10" points="5,5 35,35 5,65 "/>
-  // </svg>
   --list-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 44.21 69.76'%3E%3Cpolyline fill='none' stroke='%23D3D6DA' stroke-width='10' points='5,5 35,35 5,65 '/%3E%3C/svg%3E%0A");
   --list-bg-pos: calc(100% - 26px) 50%;
 

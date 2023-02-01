@@ -4,10 +4,6 @@ import { AsmOccModule } from '@spartacus/asm/occ';
 import { CartPageEventModule } from "@spartacus/cart/base/core";
 import { CheckoutModule } from "@spartacus/checkout/base";
 import { CheckoutOccModule } from "@spartacus/checkout/base/occ";
-// check TODO:Spartacus - // TODO:Spartacus - Class CartModule has been removed and is no longer part of the public API. The cart base feature is now extracted to a lazy loadable library @spartacus/cart/base.  See the release documentation for more information.  While it's not identical, the new module 'CartBaseCoreModule' in '@spartacus/cart/base/core' is the closest equivalent in the new cart library.
-// check TODO:Spartacus - // TODO:Spartacus - Class CartOccModule has been removed and is no longer part of the public API. The cart base feature is now extracted to a lazy loadable library @spartacus/cart/base.  See the release documentation for more information.  While it's not identical, the new module 'CartBaseOccModule' in '@spartacus/cart/base/occ' is the closest equivalent in the new cart library.
-// removed TODO:Spartacus - // TODO:Spartacus - Class UserOccTransitionalModule has been removed and is no longer part of the public API.
-// removed TODO:Spartacus - // TODO:Spartacus - Class UserTransitionalModule has been removed and is no longer part of the public API.
 import {
   AnonymousConsentsModule,
   AuthModule,
@@ -21,11 +17,9 @@ import {
 } from '@spartacus/core';
 import { CartBaseCoreModule } from '@spartacus/cart/base/core';
 import { CartBaseOccModule } from '@spartacus/cart/base/occ';
-//import { OrderConfirmationModule } from '@spartacus/order/components';
 import { OrderCancellationModule, OrderDetailsModule, OrderHistoryModule, OrderReturnModule, ReturnRequestDetailModule, ReturnRequestListModule } from "@spartacus/order/components";
 import { OrderOccModule } from "@spartacus/order/occ";
 import { SmartEditModule } from '@spartacus/smartedit';
-// removed TODO:Spartacus - // TODO:Spartacus - Class CartComponentModule has been removed and is no longer part of the public API. The cart base feature is now extracted to a lazy loadable library @spartacus/cart/base.  See the release documentation for more information.
 import {
   AddressBookModule,
   AnonymousConsentManagementBannerModule,

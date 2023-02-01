@@ -242,7 +242,7 @@ export interface FSOccEndpoints extends OccEndpoints {
   cart?: string;
 
   /**
-   * The create appointment
+   * Create appointment for customer
    *
    */
   createAppointment?: string;
