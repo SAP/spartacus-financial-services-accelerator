@@ -44,6 +44,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   noClaims: { paths: ['noClaims'] },
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
+  myLoans: { paths: ['my-account/my-loans'] },
   myDocuments: { paths: ['my-account/my-documents'] },
   sellerDashboard: { paths: ['seller-dashboard'] },
   createOBOCustomer: { paths: ['seller-dashboard/create-customer'] },

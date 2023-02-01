@@ -1,0 +1,74 @@
+<ng-container *ngIf="activeLoans$ | async as activeLoans; else loading">
+  <ng-container *ngIf="activeLoans.loans.length; else noLoans">
+    <h1 class="text-center">{{ 'loans.loansOverviewTitle' | cxTranslate }}</h1>
+    <div class="table-responsive">
+      <cx-pagination
+        class="mt-2 justify-content-end"
+        [pagination]="pagination"
+        (viewPageEvent)="refreshTableData($event)"
+      >
+      </cx-pagination>
+      <table class="table table-striped table-hover mt-5">
+        <thead>
+          <tr class="table-dark">
+            <th
+              class="header-sortable"
+              scope="col"
+              appSortable="code"
+              (sort)="onSort($event)"
+            >
+              {{ 'loans.loanId' | cxTranslate }}
+            </th>
+            <th
+              class="header-sortable"
+              scope="col"
+              appSortable="loanPurpose"
+              (sort)="onSort($event)"
+            >
+              {{ 'loans.loanPurpose' | cxTranslate }}
+            </th>
+            <th scope="col">{{ 'loans.disbursementDate' | cxTranslate }}</th>
+            <th scope="col">{{ 'loans.loanTerm' | cxTranslate }}</th>
+            <th
+              class="header-sortable"
+              scope="col"
+              appSortable="loanAmount"
+              (sort)="onSort($event)"
+            >
+              {{ 'loans.loanAmount' | cxTranslate }}
+            </th>
+            <th scope="col">{{ 'loans.installmentAmount' | cxTranslate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center" *ngFor="let loan of loans">
+            <th scope="row">{{ loan.code }}</th>
+            <td>{{ loan.loanPurpose }}</td>
+            <td>{{ loan.startDate | date }}</td>
+            <td>{{ loan.loanTerm }}</td>
+            <td>
+              {{ loan.loanAmount | currency: (currentCurrency$ | async) }}
+            </td>
+            <td>
+              {{ loan.instalmentAmount | currency: (currentCurrency$ | async) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <cx-pagination
+        class="justify-content-end"
+        [pagination]="pagination"
+        (viewPageEvent)="refreshTableData($event)"
+      >
+      </cx-pagination>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #noLoans>
+  <h1 class="text-center">{{ 'loans.dontHaveLoans' | cxTranslate }}</h1>
+</ng-template>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>
