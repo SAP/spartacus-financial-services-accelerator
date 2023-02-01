@@ -57,10 +57,6 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
   }
 
   setConnection(ownerID: number): Observable<void> {
-    // this.modalService.open(SyncPilotDialogComponent, {
-    //   centered: true,
-    // });
-    // return from(this.syncPilotService.connect(ownerID));
     const dialog = this.launchDialogService.openDialog(
       LAUNCH_CALLER.SYNC_PILOT
     );

@@ -53,7 +53,6 @@ export class FSCartService extends ActiveCartService {
                 },
               })
               .pipe(
-                //filter(cart => this.isCartCreated(cart)),
                 take(1),
                 map(cart => {
                   let newCartCode = cart.code;

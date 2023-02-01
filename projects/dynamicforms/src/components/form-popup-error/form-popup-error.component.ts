@@ -38,14 +38,6 @@ export class FormPopupErrorComponent implements AfterViewInit {
         this.formComponentService.isPopulatedFormInvalidSource.next(false);
       })
     );
-    // this.modalService
-    //   .open(this.modalContent, {
-    //     centered: true,
-    //     size: 'lg',
-    //   })
-    //   .result.catch(() => {
-    //     this.formComponentService.isPopulatedFormInvalidSource.next(false);
-    //   });
   }
 
   ngAfterViewInit() {
