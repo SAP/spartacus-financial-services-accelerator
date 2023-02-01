@@ -1,5 +1,6 @@
 export const loan = {
   loan: {
+    loanTitle: ' Loan',
     loanCalculatorTitle: 'Loan Calculator',
     loanAmount: 'Choose Loan Amount',
     loanRepaymentFrequency: 'Choose Repayment Frequency',
@@ -8,5 +9,10 @@ export const loan = {
     loanCalculate: 'Calculate',
     loanAnnuity: 'Annuity',
     clearAll: 'Clear All',
+    loanAmountTitle: 'Loan Amount',
+    loanStartDate: 'Loan Start Date',
+    typeOfPricing: 'Price/Repayment Frequency',
+    loanStatus: 'Loan Status',
+    noLoans: 'You have no loans',
   },
 };
