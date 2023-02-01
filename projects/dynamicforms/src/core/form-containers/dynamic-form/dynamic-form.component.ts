@@ -30,9 +30,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   formData: Observable<YFormData>;
   @Input()
   config: FormDefinition;
-  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output()
-  submitEvent: EventEmitter<any> = new EventEmitter<any>();
+  //eslint-disable-next-line
+  submit: EventEmitter<any> = new EventEmitter<any>();
 
   populatedInvalid$: Observable<boolean>;
   form: UntypedFormGroup;
@@ -118,7 +118,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
               this.value !== undefined &&
               this.valid
             ) {
-              this.submitEvent.emit({
+              //eslint-disable-next-line
+              this.submit.emit({
                 id: form.id,
                 refId: form.refId,
                 content: this.value,
