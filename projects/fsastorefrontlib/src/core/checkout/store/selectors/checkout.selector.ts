@@ -34,7 +34,5 @@ export const getLegalInformation: MemoizedSelector<
   boolean
 > = createSelector(getCheckoutState, getLegalInformationTypeSelector);
 
-export const getPaymentType: MemoizedSelector<
-  StateWithFSCheckout,
-  string
-> = createSelector(getCheckoutState, getPaymentTypeSelector);
+export const getPaymentType: MemoizedSelector<StateWithFSCheckout, string> =
+  createSelector(getCheckoutState, getPaymentTypeSelector);

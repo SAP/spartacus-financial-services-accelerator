@@ -77,9 +77,8 @@ describe('Product Assignment Reducer', () => {
 
   describe('CREATE_PRODUCT_ASSIGNMENT_SUCCESS', () => {
     it('should create product assignment', () => {
-      const loadProductAssignments = new fromAction.LoadProductAssignmentsSuccess(
-        mockProductAssignments
-      );
+      const loadProductAssignments =
+        new fromAction.LoadProductAssignmentsSuccess(mockProductAssignments);
       const createSuccess = new fromAction.CreateProductAssignmentSuccess(
         createdProductAssignment
       );
@@ -92,9 +91,8 @@ describe('Product Assignment Reducer', () => {
 
   describe('REMOVE_PRODUCT_ASSIGNMENT', () => {
     it('should remove product assignments', () => {
-      const loadProductAssignments = new fromAction.LoadProductAssignmentsSuccess(
-        mockProductAssignments
-      );
+      const loadProductAssignments =
+        new fromAction.LoadProductAssignmentsSuccess(mockProductAssignments);
       const action = new fromAction.RemoveProductAssignment(
         productAssignmentPayload
       );

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '@spartacus/core';
+import { Order } from '@spartacus/order/root';
 import { Observable } from 'rxjs';
-import { OrderDetailsService } from '@spartacus/storefront';
+import { OrderDetailsService } from '@spartacus/order/components';
 
 @Component({
   selector: 'cx-fs-order-details-items',

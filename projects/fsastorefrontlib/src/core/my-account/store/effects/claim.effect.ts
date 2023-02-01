@@ -127,8 +127,8 @@ export class ClaimEffects {
           }
           if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
             claimDataWithLocation = Object.assign(updateClaimData, {
-              locationOfLoss: this.claimServiceData.claimData.locationOfLoss
-                .code,
+              locationOfLoss:
+                this.claimServiceData.claimData.locationOfLoss.code,
             });
           }
         }

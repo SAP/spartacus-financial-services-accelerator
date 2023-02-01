@@ -4,10 +4,9 @@ import createSpy = jasmine.createSpy;
 import { DocumentAdapter, DocumentConnector } from '@spartacus/fsa-storefront';
 
 class MockDocumentAdapter implements DocumentAdapter {
-  signDocuments = createSpy(
-    'DocumentAdapter.signDocuments'
-  ).and.callFake((userId, documentCodes, signStatus) =>
-    of('signDocuments' + userId + documentCodes + signStatus)
+  signDocuments = createSpy('DocumentAdapter.signDocuments').and.callFake(
+    (userID, documentIds, documentSignStatus) =>
+      of('signDocuments' + userID + documentIds + documentSignStatus)
   );
 }
 

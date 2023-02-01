@@ -7,9 +7,11 @@ import {
   provideDefaultConfig,
   UrlModule,
 } from '@spartacus/core';
+import { FSCheckoutService } from '../../../core/checkout/facade';
 import { IconModule, MediaModule } from '@spartacus/storefront';
 import { FSHighlightPipe } from '../../../shared/util/helpers/pipe/highlight.pipe';
 import { FSSearchBoxComponent } from './search-box.component';
+import { OrderOccModule } from '@spartacus/order/occ';
 
 @NgModule({
   imports: [
@@ -19,8 +21,10 @@ import { FSSearchBoxComponent } from './search-box.component';
     IconModule,
     UrlModule,
     I18nModule,
+    OrderOccModule,
   ],
   providers: [
+    FSCheckoutService,
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
         SearchBoxComponent: {
@@ -30,7 +34,6 @@ import { FSSearchBoxComponent } from './search-box.component';
     }),
   ],
   declarations: [FSSearchBoxComponent, FSHighlightPipe],
-  entryComponents: [FSSearchBoxComponent],
   exports: [FSSearchBoxComponent, FSHighlightPipe],
 })
 export class FSSearchBoxModule {}

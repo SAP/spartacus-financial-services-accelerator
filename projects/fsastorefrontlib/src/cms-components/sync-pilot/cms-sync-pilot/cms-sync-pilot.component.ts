@@ -5,9 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { WindowRef, User } from '@spartacus/core';
-import { CmsComponentData, ModalService } from '@spartacus/storefront';
+import {
+  LaunchDialogService,
+  CmsComponentData,
+  LAUNCH_CALLER,
+} from '@spartacus/storefront';
 import { from, Observable, Subscription } from 'rxjs';
-import { tap, withLatestFrom } from 'rxjs/operators';
+import { take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
 import { GuestEndpoint } from '@syncpilot/bpool-guest-lib/models/guestEndpoint';
@@ -16,7 +20,6 @@ import {
   GuestInfo,
 } from '@syncpilot/bpool-guest-lib/models/guestinfo';
 import { SyncPilotGender } from '../../../occ/occ-models/occ.models';
-import { SyncPilotDialogComponent } from '../../sync-pilot-dialog/sync-pilot-dialog.component';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
 import {
   GROUP_ID,
@@ -32,7 +35,7 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected syncPilotService: Service,
-    protected modalService: ModalService,
+    protected launchDialogService: LaunchDialogService,
     public componentData: CmsComponentData<CMSConnectionComponent>,
     protected winRef?: WindowRef
   ) {}
@@ -54,9 +57,11 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
   }
 
   setConnection(ownerID: number): Observable<void> {
-    this.modalService.open(SyncPilotDialogComponent, {
-      centered: true,
-    });
+    const dialog = this.launchDialogService.openDialog(
+      LAUNCH_CALLER.SYNC_PILOT
+    );
+    dialog?.pipe(take(1)).subscribe();
+
     return from(this.syncPilotService.connect(ownerID));
   }
 
@@ -114,7 +119,7 @@ export class CmsSyncPilotComponent implements OnInit, OnDestroy {
                 this.GENDER_URL_PARAM,
                 ''
               );
-              this.modalService.closeActiveModal();
+              this.launchDialogService.closeDialog('Redirect to agent');
               this.winRef.nativeWindow.open(url, '_blank');
             }
           })

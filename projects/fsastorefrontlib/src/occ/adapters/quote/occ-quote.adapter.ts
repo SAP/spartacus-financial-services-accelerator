@@ -76,7 +76,8 @@ export class OccQuoteAdapter implements QuoteAdapter {
     );
 
     const convertedQuoteBody = JSON.parse(JSON.stringify(body));
-    convertedQuoteBody.priceAttributeGroups[0].priceAttributes = priceAttributes;
+    convertedQuoteBody.priceAttributeGroups[0].priceAttributes =
+      priceAttributes;
 
     return convertedQuoteBody;
   }

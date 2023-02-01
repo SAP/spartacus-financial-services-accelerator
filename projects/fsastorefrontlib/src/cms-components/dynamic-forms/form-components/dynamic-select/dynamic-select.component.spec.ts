@@ -2,8 +2,8 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -53,7 +53,7 @@ class MockOccValueListService {
   }
 }
 
-let formControl = new FormControl('formValue');
+let formControl = new UntypedFormControl('formValue');
 
 class MockFormService {
   getFormControlForCode(): AbstractControl {
@@ -63,16 +63,14 @@ class MockFormService {
 
 const testUrl = 'testUrl';
 
-let mockField: FieldConfig;
-
-mockField = {
+let mockField: FieldConfig = {
   fieldType: 'input',
   name: 'testInput',
 };
 
-const mockFormGroup = new FormGroup({
-  dependentTestField: new FormControl(),
-  testSelect: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  dependentTestField: new UntypedFormControl(),
+  testSelect: new UntypedFormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
@@ -80,7 +78,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 class MockDynamicFormsCategoryService {
-  configureApiValueForCategory(mockField) {}
+  configureApiValueForCategory(_mockField) {}
 }
 
 describe('DynamicSelectComponent', () => {

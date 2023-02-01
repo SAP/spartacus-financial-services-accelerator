@@ -13,6 +13,7 @@ import {
 } from '@spartacus/storefront';
 import createSpy = jasmine.createSpy;
 import { FSCheckoutService } from './../../../core/checkout/facade/checkout.service';
+import { GlobalMessageService } from '@spartacus/core';
 
 const mockProduct = {
   code: 'testProduct',
@@ -67,6 +68,10 @@ export class MockViewConfig {
   };
 }
 
+class MockGlobalMessageService {
+  add = createSpy();
+}
+
 describe('ProductListComponent', () => {
   let component: FSProductListComponent;
   let fixture: ComponentFixture<FSProductListComponent>;
@@ -93,6 +98,10 @@ describe('ProductListComponent', () => {
           {
             provide: FSCheckoutService,
             useClass: MockCheckoutService,
+          },
+          {
+            provide: GlobalMessageService,
+            useClass: MockGlobalMessageService,
           },
         ],
       }).compileComponents();

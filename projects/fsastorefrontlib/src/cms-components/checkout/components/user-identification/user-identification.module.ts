@@ -26,7 +26,6 @@ import { FSCheckoutService } from '../../../../core/checkout/facade';
   ],
   declarations: [SelectIdentificationTypeComponent],
   exports: [SelectIdentificationTypeComponent],
-  entryComponents: [SelectIdentificationTypeComponent],
   providers: [FSCheckoutService],
 })
 export class UserIdentificationModule {}

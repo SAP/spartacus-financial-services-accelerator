@@ -4,7 +4,7 @@ import { DebugElement } from '@angular/core';
 import { of } from 'rxjs';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
-import { CmsComponentData, ModalService } from '@spartacus/storefront';
+import { CmsComponentData, LaunchDialogService } from '@spartacus/storefront';
 import { CMSConnectionComponent } from '../../../occ/occ-models/cms-component.models';
 import { CmsSyncPilotComponent } from './cms-sync-pilot.component';
 
@@ -27,9 +27,9 @@ class MockUserAccountFacade {
   }
 }
 
-class MockModalService {
-  open() {}
-  closeActiveModal() {}
+class MockLaunchDialogService {
+  openDialog() {}
+  closeDialog(reason: String): void {}
 }
 
 class MockService {
@@ -60,7 +60,7 @@ describe('CmsSyncPilotComponent', () => {
   let fixture: ComponentFixture<CmsSyncPilotComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
-  let modalService: ModalService;
+  let launchDialogService: LaunchDialogService;
   let componentData: CmsComponentData<CMSConnectionComponent>;
   let winRef: WindowRef;
   let el: DebugElement;
@@ -79,8 +79,8 @@ describe('CmsSyncPilotComponent', () => {
           useClass: MockService,
         },
         {
-          provide: ModalService,
-          useClass: MockModalService,
+          provide: LaunchDialogService,
+          useClass: MockLaunchDialogService,
         },
         {
           provide: CmsComponentData,
@@ -94,7 +94,7 @@ describe('CmsSyncPilotComponent', () => {
     fixture = TestBed.createComponent(CmsSyncPilotComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
-    modalService = TestBed.inject(ModalService);
+    launchDialogService = TestBed.inject(LaunchDialogService);
     winRef = TestBed.inject(WindowRef);
     componentData = TestBed.inject(CmsComponentData);
     el = fixture.debugElement;

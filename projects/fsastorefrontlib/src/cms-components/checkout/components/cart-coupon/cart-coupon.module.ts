@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CmsConfig, I18nModule, provideDefaultConfig } from '@spartacus/core';
 import { FSCartCouponComponent } from './cart-coupon.component';
-import { CartCouponModule, FormErrorsModule } from '@spartacus/storefront';
+import { FormErrorsModule } from '@spartacus/storefront';
+import { CartCouponModule } from '@spartacus/cart/base/components';
 
 @NgModule({
   declarations: [FSCartCouponComponent],
@@ -25,6 +26,5 @@ import { CartCouponModule, FormErrorsModule } from '@spartacus/storefront';
       },
     }),
   ],
-  entryComponents: [FSCartCouponComponent],
 })
 export class FSCartCouponModule {}

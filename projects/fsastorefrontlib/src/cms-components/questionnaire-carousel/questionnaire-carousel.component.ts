@@ -39,9 +39,7 @@ export class QuestionnaireCarouselComponent implements OnInit {
   language: string;
 
   constructor(
-    protected componentData: CmsComponentData<
-      CmsQuestionnaireCarouselComponent
-    >,
+    protected componentData: CmsComponentData<CmsQuestionnaireCarouselComponent>,
     protected productSearchService: ProductSearchService,
     protected facetService: FacetService,
     protected checkoutService: FSCheckoutService,

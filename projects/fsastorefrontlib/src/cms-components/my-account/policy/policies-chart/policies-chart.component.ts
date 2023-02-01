@@ -43,10 +43,11 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
               this.policyService.loadPolicies();
             }
             this.language = lang;
-            this.policiesByPaymentFrequency = this.policyChartDataService.groupPoliciesByAttribute(
-              policies.insurancePolicies,
-              'paymentFrequency'
-            );
+            this.policiesByPaymentFrequency =
+              this.policyChartDataService.groupPoliciesByAttribute(
+                policies.insurancePolicies,
+                'paymentFrequency'
+              );
             this.chartOption = { ...this.chartConfig.chartOption };
             this.setPaymentFrequencyDropdown();
             this.setChartSeriesData();
@@ -67,10 +68,11 @@ export class PoliciesChartComponent implements OnInit, OnDestroy {
   }
 
   setChartSeriesData() {
-    const policiesByCategory = this.policyChartDataService.groupPoliciesByAttribute(
-      this.policiesByPaymentFrequency[this.selectedFrequency.frequency],
-      'categoryData.name'
-    );
+    const policiesByCategory =
+      this.policyChartDataService.groupPoliciesByAttribute(
+        this.policiesByPaymentFrequency[this.selectedFrequency.frequency],
+        'categoryData.name'
+      );
     this.policyChartDataService.calculatePremiumAmountByCategory(
       policiesByCategory,
       this.chartOption,

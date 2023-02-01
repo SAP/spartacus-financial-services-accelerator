@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { CreateCartFail } from '@spartacus/core/src/cart/store/actions/cart.action';
+import { CartActions } from '@spartacus/cart/base/core';
 export const LOAD_CONSENTS = '[Consent] Load Consents';
 export const LOAD_CONSENTS_SUCCESS = '[Consent] Load Consents Success';
 export const LOAD_CONSENTS_FAIL = '[Consent] Load Consents Fail';
@@ -158,4 +158,4 @@ export type ConsentAction =
   | TransferCartFail
   | CreateAddress
   | CreateAddressSuccess
-  | CreateCartFail;
+  | CartActions.CreateCartFail;

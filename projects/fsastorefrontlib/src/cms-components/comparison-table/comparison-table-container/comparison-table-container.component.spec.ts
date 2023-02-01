@@ -49,14 +49,14 @@ describe('ComparisonTableContainerComponent', () => {
   let fixture: ComponentFixture<ComparisonTableContainerComponent>;
   let el: DebugElement;
 
-  const componentData: CmsMultiComparisonTabContainer = {
+  const componentDataInstance: CmsMultiComparisonTabContainer = {
     uid: 'TestMultiComparisonTabContainer',
     typeCode: 'CmsMultiComparisonTabContainer',
     simpleCMSComponents: 'tab1,tab2,tab3',
   };
 
   const mockCmsComponentData = <CmsComponentData<CmsComponent>>{
-    data$: of(componentData),
+    data$: of(componentDataInstance),
     uid: 'test',
   };
 

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -67,10 +67,10 @@ const testField3: FieldConfig = {
   fieldType: fieldType,
 };
 
-const mockFormGroup = new FormGroup({
-  testField1: new FormControl(''),
-  testField2: new FormControl(''),
-  testField3: new FormControl(''),
+const mockFormGroup = new UntypedFormGroup({
+  testField1: new UntypedFormControl(''),
+  testField2: new UntypedFormControl(''),
+  testField3: new UntypedFormControl(''),
 });
 
 class MockFormValidationService {

@@ -7,6 +7,7 @@ import {
 } from '@spartacus/storefront';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { FSCheckoutService } from './../../../core/checkout/facade/checkout.service';
+import { GlobalMessageService } from '@spartacus/core';
 
 @Component({
   selector: 'cx-fs-product-list',
@@ -17,9 +18,15 @@ export class FSProductListComponent extends ProductListComponent {
     pageLayoutService: PageLayoutService,
     productListComponentService: ProductListComponentService,
     scrollConfig: ViewConfig,
+    globalMessageService: GlobalMessageService,
     protected checkoutService: FSCheckoutService
   ) {
-    super(pageLayoutService, productListComponentService, scrollConfig);
+    super(
+      pageLayoutService,
+      productListComponentService,
+      globalMessageService,
+      scrollConfig
+    );
   }
 
   startCheckout(product: FSProduct) {

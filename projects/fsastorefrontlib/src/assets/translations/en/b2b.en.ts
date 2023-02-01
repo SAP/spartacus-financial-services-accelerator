@@ -23,13 +23,11 @@ export const organization = {
     header: 'All organizations ({{count}})',
     unit: 'Organization',
     parentUnit: 'Parent Organization',
-    hint:
-      'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
+    hint: 'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members have access to all child organizations of their primary organization.',
     details: {
       title: 'Organization Details',
       subtitle: 'Organization: {{ item.name }}',
-      hint:
-        'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling an organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
+      hint: 'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Disabling an organization disables all children of the organization, including child organizations and members. Disabled organizations cannot be edited.',
     },
     edit: {
       title: 'Edit Organization',
@@ -77,8 +75,7 @@ export const organization = {
   orgUnitChildren: {
     title: 'Child organization',
     subtitle: 'Organization: {{item.name}}',
-    hint:
-      'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members "inherit" child organizations.',
+    hint: 'Organizations represent departments, stores, regions, or any other logical grouping that makes sense to you. Members "inherit" child organizations.',
   },
   orgUnitApprovers: {
     subtitle: 'Organization: {{item.name}}',
@@ -91,15 +88,13 @@ export const organization = {
   },
   orgUnitUsers: {
     subtitle: 'Organization: {{item.name}}',
-    hint:
-      'Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Members "inherit" child organizations.',
+    hint: 'Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Members "inherit" child organizations.',
   },
   orgUser: {
     unit: 'Organization',
     orgUnit: 'Organization',
     assignApprover: 'Add the user to approvers for the organization',
-    hint:
-      'Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to an organization, and they have access to all child organizations of their primary organization.',
+    hint: 'Members are the buyers and administrators of your organization. Each member is assigned a role for making purchases or administrating organization. Each member belongs to an organization, and they have access to all child organizations of their primary organization.',
     header: 'All members ({{count}})',
     details: {
       title: 'Member Details',

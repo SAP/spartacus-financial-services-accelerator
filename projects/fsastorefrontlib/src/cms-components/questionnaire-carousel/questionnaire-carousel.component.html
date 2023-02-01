@@ -2,7 +2,7 @@
   <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
     {{ searchResults.component.title }}
   </h2>
-  <ng-container *ngIf="(searchResults.breadcrumbs | json) != '{}'">
+  <ng-container *ngIf="(searchResults.breadcrumbs | json) !== '{}'">
     <div class="mb-5">
       <h4 class="mb-4">
         {{ 'productList.appliedFilter' | cxTranslate }}

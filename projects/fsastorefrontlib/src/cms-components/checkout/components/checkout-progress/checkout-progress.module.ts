@@ -26,7 +26,6 @@ import { FSCheckoutProgressComponent } from './checkout-progress.component';
     }),
   ],
   declarations: [FSCheckoutProgressComponent],
-  entryComponents: [FSCheckoutProgressComponent],
   exports: [FSCheckoutProgressComponent],
   providers: [{ provide: FSCheckoutConfig, useExisting: Config }],
 })

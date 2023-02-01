@@ -1,6 +1,5 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { CheckoutActions } from '@spartacus/checkout/core';
 import { AuthActions } from '@spartacus/core';
 import { FSCheckoutState } from '../checkout-state';
 import * as fromCheckoutReducer from './checkout.reducer';
@@ -12,11 +11,8 @@ export function getReducers(): ActionReducerMap<FSCheckoutState> {
   };
 }
 
-export const reducerToken: InjectionToken<ActionReducerMap<
-  FSCheckoutState
->> = new InjectionToken<ActionReducerMap<FSCheckoutState>>(
-  'FSCheckoutReducers'
-);
+export const reducerToken: InjectionToken<ActionReducerMap<FSCheckoutState>> =
+  new InjectionToken<ActionReducerMap<FSCheckoutState>>('FSCheckoutReducers');
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
@@ -29,7 +25,7 @@ export function clearCheckoutState(
   return function (state, action) {
     if (
       action.type === AuthActions.LOGOUT ||
-      action.type === CheckoutActions.PLACE_ORDER ||
+      // TODO:Spartacus Upgrade action.type === CheckoutActions.PLACE_ORDER ||
       action.type === fromCartAction.START_BUNDLE
     ) {
       state = undefined;

@@ -66,4 +66,10 @@ export const common = {
     cxInvalidPhoneRegex:
       'Phone number should be between minimum 6 characters and maximum 20',
   },
+  searchBox: {
+    placeholder: 'Search here...',
+    help: {
+      noMatch: "We couldn't find any results",
+    },
+  },
 };

@@ -6,8 +6,10 @@ import { AbstractChangeProcessStepComponent } from '../abstract-change-process-s
   selector: 'cx-fs-change-coverage',
   templateUrl: './change-coverage.component.html',
 })
-export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
-  implements OnInit, OnDestroy {
+export class ChangeCoverageComponent
+  extends AbstractChangeProcessStepComponent
+  implements OnInit, OnDestroy
+{
   currentDate = new Date();
   optionalCoverages = [];
   checkCoverageChanged = [];
@@ -18,9 +20,10 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
       this.changeRequest$
         .pipe(
           map(changeRequestData => {
-            const optionalProducts = changeRequestData?.insurancePolicy?.optionalProducts.filter(
-              optionalProduct => !optionalProduct.isMandatory
-            );
+            const optionalProducts =
+              changeRequestData?.insurancePolicy?.optionalProducts.filter(
+                optionalProduct => !optionalProduct.isMandatory
+              );
             if (optionalProducts && !this.isSimulated(changeRequestData)) {
               this.optionalCoverages = [...optionalProducts];
             }

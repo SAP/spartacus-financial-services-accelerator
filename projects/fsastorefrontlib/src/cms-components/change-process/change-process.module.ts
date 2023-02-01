@@ -113,14 +113,6 @@ const routes: Routes = [
     AbstractChangeProcessStepComponent,
     ChangeProcessConfirmationComponent,
   ],
-  entryComponents: [
-    ChangeCoverageComponent,
-    ChangeSimulationComponent,
-    ChangeProcessProgressBarComponent,
-    ChangeCarDetailsNavigationComponent,
-    AbstractChangeProcessStepComponent,
-    ChangeProcessConfirmationComponent,
-  ],
   providers: [DatePipe],
 })
 export class ChangeProcessModule {}

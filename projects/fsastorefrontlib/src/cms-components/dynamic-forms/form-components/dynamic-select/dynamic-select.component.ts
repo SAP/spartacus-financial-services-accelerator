@@ -14,8 +14,10 @@ import { DynamicFormsCategoryService } from '../../services/dynamic-forms-catego
   selector: 'cx-fs-dynamic-select',
   templateUrl: './dynamic-select.component.html',
 })
-export class DynamicSelectComponent extends AbstractFormComponent
-  implements OnInit {
+export class DynamicSelectComponent
+  extends AbstractFormComponent
+  implements OnInit
+{
   options$: Observable<any>;
 
   constructor(

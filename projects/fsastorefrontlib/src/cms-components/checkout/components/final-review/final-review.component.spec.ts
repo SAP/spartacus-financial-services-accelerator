@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { CheckoutPaymentFacade } from '@spartacus/checkout/root';
+import { CheckoutPaymentFacade } from '@spartacus/checkout/base/root';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FinalReviewComponent } from './final-review.component';
 import { of } from 'rxjs';
@@ -19,7 +19,7 @@ class MockCheckoutService {
 }
 
 class MockCheckoutPaymentFacade {
-  getPaymentDetails() {
+  getPaymentDetailsState() {
     return of({});
   }
 }
@@ -33,7 +33,7 @@ describe('FinalReviewComponent', () => {
   let component: FinalReviewComponent;
   let fixture: ComponentFixture<FinalReviewComponent>;
   let checkoutService: FSCheckoutService;
-  let checkoutPaymentService: CheckoutPaymentFacade;
+  let checkoutPaymentFacade: CheckoutPaymentFacade;
   let routingService: RoutingService;
   let el: DebugElement;
 
@@ -70,8 +70,8 @@ describe('FinalReviewComponent', () => {
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutPaymentService = TestBed.inject(CheckoutPaymentFacade);
-    spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
+    checkoutPaymentFacade = TestBed.inject(CheckoutPaymentFacade);
+    spyOn(checkoutPaymentFacade, 'getPaymentDetailsState').and.callThrough();
 
     routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();

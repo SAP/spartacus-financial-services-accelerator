@@ -23,13 +23,11 @@ export const getPremiumCalendarState: MemoizedSelector<
  * @deprecated since version 4.0.2
  * Use connector directly, as we remove store for this feature.
  */
-export const getPremiumCalendarData: MemoizedSelector<
-  StateWithMyAccount,
-  any
-> = createSelector(
-  getPremiumCalendarState,
-  fromPremiumCalendar.getPremiumCalendarData
-);
+export const getPremiumCalendarData: MemoizedSelector<StateWithMyAccount, any> =
+  createSelector(
+    getPremiumCalendarState,
+    fromPremiumCalendar.getPremiumCalendarData
+  );
 
 /**
  * @deprecated since version 4.0.2

@@ -202,12 +202,11 @@ describe('Claim Effects', () => {
         requestId: requestId3,
         claimData: policyId1,
       });
-      const loadUserRequestCompletion = new fromUserRequestActions.LoadUserRequestSuccess(
-        {
+      const loadUserRequestCompletion =
+        new fromUserRequestActions.LoadUserRequestSuccess({
           userId: OCC_USER_ID_CURRENT,
           requestId: requestId3,
-        }
-      );
+        });
       const createClaimCompletion = new fromActions.CreateClaimSuccess(claim3);
       actions$ = hot('-a', { a: action });
       const expected = cold('-(bc)', {

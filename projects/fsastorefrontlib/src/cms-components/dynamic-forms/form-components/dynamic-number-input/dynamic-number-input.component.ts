@@ -20,8 +20,10 @@ import { DynamicFormsCategoryService } from '../../services/dynamic-forms-catego
   selector: 'cx-fs-dynamic-number-input',
   templateUrl: './dynamic-number-input.component.html',
 })
-export class DynamicNumberInputComponent extends AbstractFormComponent
-  implements OnInit, OnDestroy {
+export class DynamicNumberInputComponent
+  extends AbstractFormComponent
+  implements OnInit, OnDestroy
+{
   currentCurrency$: Observable<string> = this.currencyService.getActive();
   min: number;
   max: number;

@@ -42,6 +42,5 @@ const routes: Routes = [
   ],
   declarations: [FSRegisterComponent],
   exports: [FSRegisterComponent],
-  entryComponents: [FSRegisterComponent],
 })
 export class FSRegisterModule {}

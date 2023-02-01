@@ -11,12 +11,8 @@ export const getSavingsIllustrationChartConfig = (
   data
 ): EChartsOption => {
   const { expectedSavingsLabel, contributionLabel, interestLabel } = labels;
-  const {
-    years,
-    expectedSavingsSeries,
-    contributionSeries,
-    interestSeries,
-  } = data;
+  const { years, expectedSavingsSeries, contributionSeries, interestSeries } =
+    data;
 
   return {
     tooltip: {

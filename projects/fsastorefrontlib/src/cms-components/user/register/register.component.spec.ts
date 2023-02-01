@@ -22,6 +22,7 @@ import createSpy = jasmine.createSpy;
 import { DateConfig } from './../../../core/date-config/date-config';
 import { UserProfileCoreModule } from '@spartacus/user/profile/core';
 import { UserRegisterFacade } from '@spartacus/user/profile/root';
+import { RegisterComponentService } from '@spartacus/user/profile/components';
 const isLevelBool: BehaviorSubject<boolean> = new BehaviorSubject(false);
 const registerUserIsSuccess: BehaviorSubject<boolean> = new BehaviorSubject(
   false
@@ -114,6 +115,15 @@ class MockAnonymousConsentsService {
     return true;
   }
 }
+
+class MockRegisterComponentService
+  implements Partial<RegisterComponentService>
+{
+  getTitles = createSpy().and.returnValue(of(mockTitlesList));
+  register = createSpy().and.returnValue(of(undefined));
+  postRegisterMessage = createSpy();
+}
+
 @Pipe({
   name: 'cxUrl',
 })
@@ -173,6 +183,10 @@ describe('FSRegisterComponent', () => {
           {
             provide: DateConfig,
             useValue: MockDateConfig,
+          },
+          {
+            provide: RegisterComponentService,
+            useClass: MockRegisterComponentService,
           },
         ],
       }).compileComponents();

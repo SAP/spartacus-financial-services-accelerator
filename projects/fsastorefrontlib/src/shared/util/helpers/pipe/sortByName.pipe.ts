@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { OrderEntry } from '@spartacus/core';
+import { OrderEntry } from '@spartacus/cart/base/root';
 
 @Pipe({ name: 'cxSortByName' })
 export class SortByNamePipe implements PipeTransform {

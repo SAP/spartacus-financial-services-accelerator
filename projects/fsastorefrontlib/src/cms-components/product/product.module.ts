@@ -36,6 +36,5 @@ import { LoanCalculatorComponent } from '../loan-calculator/loan-calculator.comp
   ],
   declarations: [ProductFeatureComponent, FSProductListComponent],
   exports: [ProductFeatureComponent, FSProductListComponent],
-  entryComponents: [ProductFeatureComponent, FSProductListComponent],
 })
 export class ProductModule {}

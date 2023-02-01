@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { StateUtils } from '@spartacus/core';
 
 export const SET_IDENTIFICATION_TYPE = '[FSCheckout] Set Identification Type';
 export const SET_IDENTIFICATION_TYPE_SUCCESS =
@@ -33,6 +34,7 @@ export class SetPaymentTypeSuccess implements Action {
   readonly type = SET_PAYMENT_TYPE_SUCCESS;
   constructor(public payload: any) {}
 }
+
 export type CheckoutAction =
   | SetIdentificationType
   | SetIdentificationTypeSuccess

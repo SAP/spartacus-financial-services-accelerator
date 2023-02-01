@@ -75,9 +75,10 @@ export class ChangePolicyService {
           const insuredObject =
             changeRequestData.insurancePolicy.insuredObjectList
               .insuredObjects[0];
-          const changeableInsuredObjectItems = insuredObject.insuredObjectItems.filter(
-            insuredObjectItem => insuredObjectItem.changeable === true
-          );
+          const changeableInsuredObjectItems =
+            insuredObject.insuredObjectItems.filter(
+              insuredObjectItem => insuredObjectItem.changeable === true
+            );
           if (changeableInsuredObjectItems.length > 0) {
             changeableInsuredObjectItems.forEach(insuredObjectItem => {
               const newVal = this.getChangedValue(
@@ -98,9 +99,10 @@ export class ChangePolicyService {
           break;
         }
         case RequestType.COVERAGE_CHANGE: {
-          const optionalProducts = changeRequestData?.insurancePolicy?.optionalProducts?.filter(
-            optionalProduct => !optionalProduct.isMandatory
-          );
+          const optionalProducts =
+            changeRequestData?.insurancePolicy?.optionalProducts?.filter(
+              optionalProduct => !optionalProduct.isMandatory
+            );
           if (optionalProducts) {
             optionalProducts.forEach(optionalProduct => {
               const newVal = this.getChangedCoverageValue(
@@ -145,9 +147,10 @@ export class ChangePolicyService {
   }
 
   getChangedValue(label: string, changedPolicy: any): string {
-    const changedInsuredObjectItem = changedPolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.find(
-      insuredObjectItem => insuredObjectItem.label === label
-    );
+    const changedInsuredObjectItem =
+      changedPolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.find(
+        insuredObjectItem => insuredObjectItem.label === label
+      );
     return changedInsuredObjectItem.value;
   }
 

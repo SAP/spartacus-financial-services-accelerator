@@ -9,22 +9,20 @@ class MockClaimAdapter extends ClaimAdapter {
     of('getClaims' + userId)
   );
 
-  getClaim = createSpy(
-    'ClaimAdapter.getClaim'
-  ).and.callFake((userId, claimId) => of('getClaim' + userId + claimId));
-  deleteClaim = createSpy(
-    'ClaimAdapter.deleteClaim'
-  ).and.callFake((userId, claimId) => of('deleteClaim' + userId + claimId));
-  createClaim = createSpy(
-    'ClaimAdapter.createClaim'
-  ).and.callFake((userId, policyId, contractId) =>
-    of('createClaim' + userId + policyId + contractId)
+  getClaim = createSpy('ClaimAdapter.getClaim').and.callFake(
+    (userId, claimId) => of('getClaim' + userId + claimId)
+  );
+  deleteClaim = createSpy('ClaimAdapter.deleteClaim').and.callFake(
+    (userId, claimId) => of('deleteClaim' + userId + claimId)
+  );
+  createClaim = createSpy('ClaimAdapter.createClaim').and.callFake(
+    (userId, policyId, contractId) =>
+      of('createClaim' + userId + policyId + contractId)
   );
 
-  updateClaim = createSpy(
-    'ClaimAdapter.updateClaim'
-  ).and.callFake((userId, claimId, claimData) =>
-    of('updateClaim' + userId + claimId + claimData)
+  updateClaim = createSpy('ClaimAdapter.updateClaim').and.callFake(
+    (userId, claimId, claimData) =>
+      of('updateClaim' + userId + claimId + claimData)
   );
 }
 const user = 'user';

@@ -1,12 +1,11 @@
-import { CheckoutStep } from '@spartacus/checkout/root';
+import { Cart, OrderEntry } from '@spartacus/cart/base/root';
+import { CheckoutStep } from '@spartacus/checkout/base/root';
 import {
   B2BUser,
-  Cart,
   Category,
   Consent,
   ConsentTemplate,
   Occ,
-  OrderEntry,
   Price,
   Product,
   SortModel,

@@ -6,6 +6,5 @@ import { AccordionItemComponent } from './accordion-item.component';
   imports: [CommonModule],
   declarations: [AccordionItemComponent],
   exports: [AccordionItemComponent],
-  entryComponents: [AccordionItemComponent],
 })
 export class AccordionModule {}

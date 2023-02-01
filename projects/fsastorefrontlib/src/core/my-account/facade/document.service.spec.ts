@@ -22,9 +22,9 @@ describe('DocumentServiceTest', () => {
     });
 
     documentService = TestBed.inject(DocumentService);
-    documentConnectorSpy = TestBed.inject(DocumentConnector) as jasmine.SpyObj<
+    documentConnectorSpy = TestBed.inject(
       DocumentConnector
-    >;
+    ) as jasmine.SpyObj<DocumentConnector>;
   });
 
   it('should check if all services are injected', () => {

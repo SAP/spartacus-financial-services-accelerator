@@ -1,3 +1,4 @@
+import { ElementRef, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -9,7 +10,8 @@ import {
   RoutingService,
   WindowRef,
 } from '@spartacus/core';
-import { ModalService, SpinnerModule } from '@spartacus/storefront';
+import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
+import { SpinnerModule } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
@@ -216,6 +218,17 @@ class MockGlobalMessageService {
   add(_message: GlobalMessage): void {}
 }
 
+class MockLaunchDialogService implements Partial<LaunchDialogService> {
+  openDialog(
+    _caller: LAUNCH_CALLER,
+    _openElement?: ElementRef,
+    _vcr?: ViewContainerRef
+  ) {
+    return of();
+  }
+  closeDialog(_reason: string): void {}
+}
+
 const modalInstance: any = {
   componentInstance: {
     cartCode: '',
@@ -224,7 +237,6 @@ const modalInstance: any = {
     referredQuote$: of(false),
   },
 };
-const modalService = jasmine.createSpyObj('ModalService', ['open']);
 
 describe('Quote Review Component', () => {
   let component: QuoteReviewComponent;
@@ -238,6 +250,7 @@ describe('Quote Review Component', () => {
   let mockConsentConnector: MockConsentConnector;
   let userAccountFacade: MockUserAccountFacade;
   let oboConsentService: ConsentService;
+  let launchDialogService: LaunchDialogService;
 
   beforeEach(
     waitForAsync(() => {
@@ -268,8 +281,8 @@ describe('Quote Review Component', () => {
             useClass: MockCartService,
           },
           {
-            provide: ModalService,
-            useValue: modalService,
+            provide: LaunchDialogService,
+            useClass: MockLaunchDialogService,
           },
           {
             provide: FSTranslationService,
@@ -295,6 +308,7 @@ describe('Quote Review Component', () => {
   );
 
   beforeEach(() => {
+    launchDialogService = TestBed.inject(LaunchDialogService);
     fixture = TestBed.createComponent(QuoteReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -332,7 +346,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should not continue to the next step when quote is in state UNBIND', () => {
-    modalService.open.and.returnValue(modalInstance);
+    spyOn(launchDialogService, 'openDialog').and.callThrough();
     const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
@@ -347,17 +361,14 @@ describe('Quote Review Component', () => {
 
     component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
-    expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
+    expect(launchDialogService.openDialog).toHaveBeenCalled();
     let result;
     component.showContent$.subscribe(showContent => (result = showContent));
     expect(result).toEqual(true);
   });
 
   it('should open ReferredQuoteDialog popup', () => {
-    modalService.open.and.returnValue(modalInstance);
+    spyOn(launchDialogService, 'openDialog').and.callThrough();
     const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
@@ -372,13 +383,7 @@ describe('Quote Review Component', () => {
 
     component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
-    expect(modalService.open).toHaveBeenCalledWith(
-      ReferredQuoteDialogComponent,
-      {
-        centered: true,
-        size: 'lg',
-      }
-    );
+    expect(launchDialogService.openDialog).toHaveBeenCalled();
     let result;
     component.showContent$.subscribe(showContent => (result = showContent));
     expect(result).toEqual(true);

@@ -5,7 +5,7 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Title, UserIdService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
@@ -26,7 +26,7 @@ export class CreateOBOCustomerComponent implements OnDestroy {
   ) {}
 
   @Output() actionChange = new EventEmitter<string>();
-  form: FormGroup = this.service.form;
+  form: UntypedFormGroup = this.service.form;
   titles$: Observable<Title[]> = this.service.titles$;
   subscription = new Subscription();
   dateFormat: string = this.config.date.format || '';

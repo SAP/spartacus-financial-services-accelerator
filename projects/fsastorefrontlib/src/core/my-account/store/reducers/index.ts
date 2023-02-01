@@ -20,9 +20,8 @@ export function getReducers(): ActionReducerMap<MyAccountState> {
     consents: fromConsentReducer.reducer,
   };
 }
-export const reducerToken: InjectionToken<ActionReducerMap<
-  MyAccountState
->> = new InjectionToken<ActionReducerMap<MyAccountState>>('UserReducers');
+export const reducerToken: InjectionToken<ActionReducerMap<MyAccountState>> =
+  new InjectionToken<ActionReducerMap<MyAccountState>>('UserReducers');
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,

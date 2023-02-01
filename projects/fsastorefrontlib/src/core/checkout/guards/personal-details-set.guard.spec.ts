@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActiveCartService, Cart, RoutingService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { Observable, of } from 'rxjs';
 import { BindingStateType, FSCart } from './../../../occ/occ-models/occ.models';
 import { PersonalDetailsSetGuard } from './personal-details-set.guard';

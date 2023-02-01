@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-import {
-  checkoutTranslationChunksConfig,
-  checkoutTranslations,
-} from '@spartacus/checkout/assets';
-import { CheckoutRootModule, CHECKOUT_FEATURE } from '@spartacus/checkout/root';
+import { checkoutTranslationChunksConfig, checkoutTranslations } from "@spartacus/checkout/base/assets";
+import { CheckoutRootModule, CHECKOUT_FEATURE } from "@spartacus/checkout/base/root";
 import { provideConfig } from '@spartacus/core';
 
 @NgModule({
@@ -13,7 +10,7 @@ import { provideConfig } from '@spartacus/core';
       featureModules: {
         [CHECKOUT_FEATURE]: {
           module: () =>
-            import('@spartacus/checkout').then((m) => m.CheckoutModule),
+            import('@spartacus/checkout/base').then((m) => m.CheckoutModule),
         },
       },
       i18n: {
@@ -23,4 +20,4 @@ import { provideConfig } from '@spartacus/core';
     }),
   ],
 })
-export class CheckoutFeatureModule {}
+export class CheckoutFeatureModule { }

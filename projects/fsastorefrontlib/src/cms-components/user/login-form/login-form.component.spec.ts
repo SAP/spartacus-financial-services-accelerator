@@ -1,6 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   FeaturesConfigModule,
@@ -22,9 +26,9 @@ class MockUrlPipe implements PipeTransform {
 }
 
 class MockLoginFormComponentService {
-  form: FormGroup = new FormGroup({
-    userId: new FormControl(),
-    password: new FormControl(),
+  form: UntypedFormGroup = new UntypedFormGroup({
+    userId: new UntypedFormControl(),
+    password: new UntypedFormControl(),
   });
   isUpdating$ = isBusySubject;
   login = createSpy().and.stub();

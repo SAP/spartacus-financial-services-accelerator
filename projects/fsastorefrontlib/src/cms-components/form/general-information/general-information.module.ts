@@ -20,6 +20,5 @@ import { GeneralInformationComponent } from './general-information.component';
   ],
   declarations: [GeneralInformationComponent],
   exports: [GeneralInformationComponent],
-  entryComponents: [GeneralInformationComponent],
 })
 export class GeneralInformationModule {}

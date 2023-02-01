@@ -15,3 +15,7 @@ export class CategoryComparisonConfig {
   optionalProducts: boolean;
   visibleInsuredObjects: string[];
 }
+
+declare module '@spartacus/core' {
+  interface Config extends QuoteComparisonConfig {}
+}

@@ -13,10 +13,10 @@ import {
   SpinnerModule,
   MediaModule,
   CardModule,
-  OrderOverviewModule,
   ListNavigationModule,
-  CartCouponModule,
 } from '@spartacus/storefront';
+import { CartCouponModule } from '@spartacus/cart/base/components';
+import { OrderOverviewModule } from '@spartacus/order/components';
 import { FSOrderDetailItemsComponent } from './order-details/order-detail-items/order-detail-items.component';
 import { FSOrderDetailTotalsComponent } from './order-details/order-detail-totals/order-detail-totals.component';
 import { FSOrderSummaryComponent } from './order-details/order-summary/order-summary.component';
@@ -63,6 +63,5 @@ const moduleComponents = [
   ],
   declarations: [...moduleComponents],
   exports: [...moduleComponents],
-  entryComponents: [...moduleComponents],
 })
 export class FSOrderModule {}

@@ -61,7 +61,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 class MockConsentConnector {
-  getOBOCustomerList(OCC_USER_ID_CURRENT) {
+  getOBOCustomerList(_OCC_USER_ID_CURRENT) {
     return of(mockOBOCustomer);
   }
 }

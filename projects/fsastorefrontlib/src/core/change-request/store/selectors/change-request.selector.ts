@@ -16,24 +16,20 @@ export const getChangeRequestState: MemoizedSelector<
     changeRequestsState.changeRequest
 );
 
-export const getChangeRequest: MemoizedSelector<
-  StateWithChangeRequest,
-  any
-> = createSelector(
-  getChangeRequestState,
-  (state: StateUtils.LoaderState<ChangeRequestState>) => {
-    return StateUtils.loaderValueSelector(state).content;
-  }
-);
+export const getChangeRequest: MemoizedSelector<StateWithChangeRequest, any> =
+  createSelector(
+    getChangeRequestState,
+    (state: StateUtils.LoaderState<ChangeRequestState>) => {
+      return StateUtils.loaderValueSelector(state).content;
+    }
+  );
 
-export const getLoaded: MemoizedSelector<
-  StateWithChangeRequest,
-  any
-> = createSelector(
-  getChangeRequestState,
-  (state: StateUtils.LoaderState<ChangeRequestState>) =>
-    StateUtils.loaderValueSelector(state).loaded
-);
+export const getLoaded: MemoizedSelector<StateWithChangeRequest, any> =
+  createSelector(
+    getChangeRequestState,
+    (state: StateUtils.LoaderState<ChangeRequestState>) =>
+      StateUtils.loaderValueSelector(state).loaded
+  );
 
 export const getChangeRequestErrorFactory: MemoizedSelector<
   StateWithChangeRequest,

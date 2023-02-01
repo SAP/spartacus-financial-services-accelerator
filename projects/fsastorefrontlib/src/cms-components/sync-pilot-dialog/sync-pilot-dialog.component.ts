@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { Service } from '@syncpilot/bpool-guest-lib';
 
 @Component({
@@ -8,12 +8,12 @@ import { Service } from '@syncpilot/bpool-guest-lib';
 })
 export class SyncPilotDialogComponent {
   constructor(
-    protected modalService: ModalService,
+    protected launchDialogService: LaunchDialogService,
     protected syncPilotService: Service
   ) {}
 
   dismissModal(reason?: any): void {
     this.syncPilotService.abort();
-    this.modalService.dismissActiveModal(reason);
+    this.launchDialogService.closeDialog(reason);
   }
 }

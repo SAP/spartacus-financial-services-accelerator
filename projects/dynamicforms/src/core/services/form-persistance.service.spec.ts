@@ -13,10 +13,8 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { FormsState, FORM_FEATURE, StateWithForm } from '../store/state';
 
-export const getFormsState: MemoizedSelector<
-  StateWithForm,
-  FormsState
-> = createFeatureSelector<FormsState>(FORM_FEATURE);
+export const getFormsState: MemoizedSelector<StateWithForm, FormsState> =
+  createFeatureSelector<FormsState>(FORM_FEATURE);
 const blob1 = new Blob([''], { type: 'application/pdf' });
 blob1['lastModifiedDate'] = '';
 blob1['name'] = 'testFile1';

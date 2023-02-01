@@ -8,8 +8,10 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
   selector: 'cx-fs-agent-search-box',
   templateUrl: './agent-search-box.component.html',
 })
-export class AgentSearchBoxComponent extends StoreFinderSearchComponent
-  implements OnInit, OnDestroy {
+export class AgentSearchBoxComponent
+  extends StoreFinderSearchComponent
+  implements OnInit, OnDestroy
+{
   subscription = new Subscription();
 
   constructor(

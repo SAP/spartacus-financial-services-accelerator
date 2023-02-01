@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CheckoutFacade } from '@spartacus/checkout/root';
-import { Order } from '@spartacus/core';
+import { Order, OrderFacade } from '@spartacus/order/root';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,9 +10,9 @@ import { Observable } from 'rxjs';
 export class OrderConfirmationMessageComponent implements OnInit {
   order$: Observable<Order>;
 
-  constructor(protected checkoutService: CheckoutFacade) {}
+  constructor(protected orderFacade: OrderFacade) {}
 
   ngOnInit() {
-    this.order$ = this.checkoutService.getOrderDetails();
+    this.order$ = this.orderFacade.getOrderDetails();
   }
 }

@@ -10,12 +10,8 @@ export const getFormDefinitionState: MemoizedSelector<
   FormDefinitionState
 > = createSelector(getFormState, (state: FormsState) => state.formDefinition);
 
-export const getFormDefinition: MemoizedSelector<
-  StateWithForm,
-  any
-> = createSelector(getFormDefinitionState, formDefinitionContent);
+export const getFormDefinition: MemoizedSelector<StateWithForm, any> =
+  createSelector(getFormDefinitionState, formDefinitionContent);
 
-export const getFormDefinitionLoaded: MemoizedSelector<
-  StateWithForm,
-  any
-> = createSelector(getFormDefinitionState, formDefinitionLoaded);
+export const getFormDefinitionLoaded: MemoizedSelector<StateWithForm, any> =
+  createSelector(getFormDefinitionState, formDefinitionLoaded);

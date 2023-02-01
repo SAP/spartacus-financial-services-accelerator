@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
-import { StateUtils, MULTI_CART_DATA } from '@spartacus/core';
+import { StateUtils } from '@spartacus/core';
+import { MULTI_CART_DATA } from '@spartacus/cart/base/core';
 
 export const LOAD_QUOTES = '[Quote] Load Quotes';
 export const LOAD_QUOTES_SUCCESS = '[Quote] Load Quotes Success';

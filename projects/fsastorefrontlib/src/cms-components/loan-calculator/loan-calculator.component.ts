@@ -43,7 +43,8 @@ export class LoanCalculatorComponent implements OnInit, OnDestroy {
       repaymentFrequency: ['', Validators.required],
     });
 
-    this.repaymentFrequencies$ = this.loanCalculatorService.getRepaymentFrequencies();
+    this.repaymentFrequencies$ =
+      this.loanCalculatorService.getRepaymentFrequencies();
 
     this.subscriptions.add(
       this.currencyService

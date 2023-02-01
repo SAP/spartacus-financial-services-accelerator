@@ -8,7 +8,8 @@ import { AbstractChangeProcessStepComponent } from '../abstract-change-process-s
 })
 export class ChangeSimulationComponent
   extends AbstractChangeProcessStepComponent
-  implements OnInit {
+  implements OnInit
+{
   currentDate: Date = new Date();
 
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {

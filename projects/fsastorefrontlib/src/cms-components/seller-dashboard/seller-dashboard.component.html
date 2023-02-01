@@ -64,7 +64,11 @@
             {{ 'dashboard.overview' | cxTranslate }}
           </h5>
           <div
-            class="dashboard-overview-wrapper background-color-4 overflow-hidden"
+            class="
+              dashboard-overview-wrapper
+              background-color-4
+              overflow-hidden
+            "
           >
             <div
               class="dashboard-overview-content"
@@ -73,7 +77,13 @@
               #dashboardOverviewContent
             >
               <ul
-                class="dashboard-overview-stats mb-0 bg-white border border-color-3 p-3"
+                class="
+                  dashboard-overview-stats
+                  mb-0
+                  bg-white
+                  border border-color-3
+                  p-3
+                "
               >
                 <li class="item text-break text-center text-uppercase">
                   <div class="number notice semi-bold">
@@ -92,7 +102,16 @@
                   (click)="showAddCustomerForm()"
                 >
                   <span
-                    class="asset-image h6 text-center notice p-3 mb-0 fas fa-user-plus"
+                    class="
+                      asset-image
+                      h6
+                      text-center
+                      notice
+                      p-3
+                      mb-0
+                      fas
+                      fa-user-plus
+                    "
                   ></span>
                   <div class="asset-text">
                     {{ 'dashboard.addCustomer' | cxTranslate }}
@@ -107,7 +126,16 @@
                   (keydown.enter)="showDashboardList()"
                 >
                   <span
-                    class="asset-image h6 text-center notice p-3 mb-0 fas fa-users"
+                    class="
+                      asset-image
+                      h6
+                      text-center
+                      notice
+                      p-3
+                      mb-0
+                      fas
+                      fa-users
+                    "
                   ></span>
                   <div class="asset-text">
                     {{ 'dashboard.checkCustomerList' | cxTranslate }}
