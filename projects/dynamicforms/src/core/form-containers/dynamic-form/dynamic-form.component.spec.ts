@@ -154,9 +154,11 @@ describe('DynamicFormComponent', () => {
 
   it('should submit in case form content is not defined', () => {
     component.form.controls.testGroupCode.setValue('test string');
-    spyOn(component.submitEvent, 'emit').and.callThrough();
+    //eslint-disable-next-line
+    spyOn(component.submit, 'emit').and.callThrough();
     formData.content = undefined;
     component.ngOnInit();
-    expect(component.submitEvent.emit).toHaveBeenCalled();
+    //eslint-disable-next-line
+    expect(component.submit.emit).toHaveBeenCalled();
   });
 });
