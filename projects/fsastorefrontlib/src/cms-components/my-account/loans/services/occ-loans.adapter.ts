@@ -28,20 +28,4 @@ export class OccLoansAdapter implements LoansAdapter {
       .get(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
-
-  // getLoanDetailsById(id: string): Observable<Loan> {
-  //   return this.userIdService.getUserId().pipe(
-  //     take(1),
-  //     switchMap(userId => {
-  //       const url = this.occEndpointService.buildUrl('loanDetails', {
-  //         urlParams: {
-  //           loanCode: id,
-  //           userId,
-  //         },
-  //       });
-
-  //       return this.http.get<Loan>(url);
-  //     })
-  //   );
-  // }
 }

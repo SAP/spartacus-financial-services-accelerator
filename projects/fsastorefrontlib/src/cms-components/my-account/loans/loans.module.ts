@@ -31,16 +31,6 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
-  // To be determined
-  // {
-  //   path: null,
-  //   canActivate: [AuthGuard, CmsPageGuard],
-  //   data: {
-  //     cxRoute: 'loansDetails',
-  //     pageLabel: 'loans-details',
-  //   },
-  //   component: PageLayoutComponent,
-  // },
 ];
 
 @NgModule({

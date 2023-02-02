@@ -1,6 +1,5 @@
-import { Order, SearchConfig } from '@spartacus/core';
+import { SearchConfig, Order } from '@spartacus/core';
 import { Pagination } from '@spartacus/core/src/model/unused.model';
-import { Instalment } from './loan-instalment.interface';
 
 export interface Loan {
   code: string;
@@ -29,3 +28,9 @@ export interface LoanSearchData {
   loans: Loan[];
   pagination: Pagination;
 }
+
+export interface Instalment {
+  dueDate: string;
+  paymentAmount: string;
+}
+
