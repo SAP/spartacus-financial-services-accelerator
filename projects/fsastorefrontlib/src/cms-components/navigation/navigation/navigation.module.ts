@@ -24,7 +24,6 @@ import { FSNavigationComponent } from './navigation.component';
     }),
   ],
   declarations: [FSNavigationComponent, FSNavigationUIComponent],
-  entryComponents: [FSNavigationComponent],
   exports: [FSNavigationComponent, FSNavigationUIComponent],
 })
 export class NavigationModule {}

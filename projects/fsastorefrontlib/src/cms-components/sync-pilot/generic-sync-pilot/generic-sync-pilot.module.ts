@@ -16,7 +16,6 @@ import { IconModule } from '@spartacus/storefront';
   ],
   declarations: [GenericSyncPilotComponent],
   exports: [GenericSyncPilotComponent],
-  entryComponents: [GenericSyncPilotComponent],
   providers: [Service],
 })
 export class GenericSyncPilotModule {}

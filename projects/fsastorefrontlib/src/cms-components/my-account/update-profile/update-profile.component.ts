@@ -18,8 +18,10 @@ import { DateConfig } from './../../../core/date-config/date-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'user-form' },
 })
-export class FSUpdateProfileComponent extends UpdateProfileComponent
-  implements OnInit, OnDestroy {
+export class FSUpdateProfileComponent
+  extends UpdateProfileComponent
+  implements OnInit, OnDestroy
+{
   constructor(
     protected service: FSUpdateProfileComponentService,
     protected routingService: RoutingService,

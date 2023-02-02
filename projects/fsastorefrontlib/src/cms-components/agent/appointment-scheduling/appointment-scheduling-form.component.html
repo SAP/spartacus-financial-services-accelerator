@@ -37,12 +37,12 @@
       class="form-control"
       formControlName="appointmentTime"
     >
-      <option value="" disabled hidden selected
-        >{{ 'appointmentScheduling.timeSlot' | cxTranslate }}:</option
-      >
-      <option *ngFor="let time of availableTimes" value="{{ time.value }}">{{
-        time.label
-      }}</option>
+      <option value="" disabled hidden selected>
+        {{ 'appointmentScheduling.timeSlot' | cxTranslate }}:
+      </option>
+      <option *ngFor="let time of availableTimes" value="{{ time.value }}">
+        {{ time.label }}
+      </option>
     </select>
     <cx-form-errors [control]="form.get('appointmentTime')"></cx-form-errors>
   </div>

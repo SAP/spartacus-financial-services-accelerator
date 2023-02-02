@@ -3,7 +3,7 @@
     <h3 class="section-header-heading text-center">
       {{ 'paymentForm.payment' | cxTranslate }}
     </h3>
-    <ng-container *ngIf="!(isLoading$ | async); else loading">
+    <ng-container *ngIf="!(isUpdating$ | async); else loading">
       <div class="py-3 px-4">
         <h4 class="mb-4">
           {{ 'fscommon.paymentMethod' | cxTranslate }}

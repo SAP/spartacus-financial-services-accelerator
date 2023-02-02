@@ -13,11 +13,11 @@ import {
 } from '../../connectors';
 import {
   Address,
-  CartActions,
   GlobalMessageService,
   OCC_USER_ID_CURRENT,
   RoutingService,
 } from '@spartacus/core';
+import { CartActions } from '@spartacus/cart/base/core';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
 import createSpy = jasmine.createSpy;

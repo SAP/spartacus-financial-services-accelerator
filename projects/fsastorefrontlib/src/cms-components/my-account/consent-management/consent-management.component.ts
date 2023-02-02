@@ -20,8 +20,10 @@ import {
   selector: 'cx-fs-consent-management',
   templateUrl: './consent-management.component.html',
 })
-export class FSConsentManagementComponent extends ConsentManagementComponent
-  implements OnInit, OnDestroy {
+export class FSConsentManagementComponent
+  extends ConsentManagementComponent
+  implements OnInit, OnDestroy
+{
   constructor(
     protected userConsentService: UserConsentService,
     protected globalMessageService: GlobalMessageService,

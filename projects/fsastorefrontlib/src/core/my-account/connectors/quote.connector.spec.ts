@@ -6,26 +6,21 @@ import { QuoteConnector } from './quote.connector';
 import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
-  getQuote = createSpy(
-    'QuoteAdapter.getQuote'
-  ).and.callFake((userId, quoteId) => of('getQuote' + userId + quoteId));
+  getQuote = createSpy('QuoteAdapter.getQuote').and.callFake(
+    (userId, quoteId) => of('getQuote' + userId + quoteId)
+  );
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
-  updateQuote = createSpy(
-    'QuoteAdapter.updateQuote'
-  ).and.callFake((userId, cart, quote) =>
-    of('updateQuote' + userId + cart + quote)
+  updateQuote = createSpy('QuoteAdapter.updateQuote').and.callFake(
+    (userId, cart, quote) => of('updateQuote' + userId + cart + quote)
   );
-  invokeQuoteAction = createSpy(
-    'QuoteAdapter.invokeQuoteAction'
-  ).and.callFake((userId, policyId, contractId) =>
-    of('invokeQuoteAction' + userId + policyId + contractId)
+  invokeQuoteAction = createSpy('QuoteAdapter.invokeQuoteAction').and.callFake(
+    (userId, policyId, contractId) =>
+      of('invokeQuoteAction' + userId + policyId + contractId)
   );
-  compareQuotes = createSpy(
-    'QuoteAdapter.invokeQuoteAction'
-  ).and.callFake((cartCodes, userId) =>
-    of('compareQuotes' + cartCodes + userId)
+  compareQuotes = createSpy('QuoteAdapter.invokeQuoteAction').and.callFake(
+    (cartCodes, userId) => of('compareQuotes' + cartCodes + userId)
   );
 }
 const user = 'user';

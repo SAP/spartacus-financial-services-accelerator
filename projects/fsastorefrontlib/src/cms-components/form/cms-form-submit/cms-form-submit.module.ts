@@ -22,6 +22,5 @@ import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
   ],
   declarations: [CMSFormSubmitComponent],
   exports: [CMSFormSubmitComponent],
-  entryComponents: [CMSFormSubmitComponent],
 })
 export class CmsFormSubmitModule {}

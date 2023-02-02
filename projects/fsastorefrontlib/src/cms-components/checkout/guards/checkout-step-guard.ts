@@ -23,9 +23,8 @@ export class CheckoutStepGuard implements CanActivate {
   currentCategory: string;
 
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
-    const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
-      route
-    );
+    const currentStepIndex =
+      this.fsCheckoutConfigService.getCurrentStepIndex(route);
     const currentStep = this.fsCheckoutConfigService.steps[currentStepIndex];
     const nextStep = this.fsCheckoutConfigService.steps[currentStepIndex + 1];
     return this.cartService.getActive().pipe(

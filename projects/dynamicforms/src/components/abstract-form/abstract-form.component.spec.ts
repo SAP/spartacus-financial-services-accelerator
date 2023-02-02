@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
@@ -51,8 +51,8 @@ class MockUserPrefillResolver {
   }
 }
 
-const mockFormGroup = new FormGroup({
-  testTitle: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  testTitle: new UntypedFormControl(),
 });
 
 class MockFormService {

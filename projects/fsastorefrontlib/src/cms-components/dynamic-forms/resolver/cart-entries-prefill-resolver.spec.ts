@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
-import { Cart, I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { of } from 'rxjs';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { CartEntriesPrefillResolver } from './cart-entries-prefill-resolver';

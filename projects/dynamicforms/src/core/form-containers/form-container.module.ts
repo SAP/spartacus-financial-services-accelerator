@@ -25,7 +25,6 @@ import { FileService } from '../services/file/file.service';
   ],
   declarations: [FormComponent, DynamicFormComponent],
   exports: [FormComponent, DynamicFormComponent, ComponentsModule],
-  entryComponents: [FormComponent, DynamicFormComponent],
   providers: [
     FormService,
     FormBuilderService,

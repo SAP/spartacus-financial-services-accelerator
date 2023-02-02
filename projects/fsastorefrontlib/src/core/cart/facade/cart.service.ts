@@ -2,17 +2,20 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   ActiveCartService,
-  Cart,
   CartActions,
   MultiCartService,
+  StateWithMultiCart,
+} from '@spartacus/cart/base/core';
+import { Cart, MultiCartFacade } from '@spartacus/cart/base/root';
+import {
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
   StateUtils,
-  StateWithMultiCart,
   UserIdService,
 } from '@spartacus/core';
+
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import * as fromAction from './../../checkout/store/actions/index';
 
@@ -21,9 +24,10 @@ export class FSCartService extends ActiveCartService {
   constructor(
     protected store: Store<StateWithMultiCart>,
     protected userIdService: UserIdService,
+    protected multiCartFacade: MultiCartFacade,
     protected multiCartService: MultiCartService
   ) {
-    super(store, multiCartService, userIdService);
+    super(multiCartFacade, userIdService);
   }
 
   setActiveCart(cart: Observable<Cart>) {
@@ -49,12 +53,11 @@ export class FSCartService extends ActiveCartService {
                 },
               })
               .pipe(
-                filter(cartState => this.isCartCreated(cartState)),
                 take(1),
-                map(cartState => {
-                  let newCartCode = cartState.value.code;
+                map(cart => {
+                  let newCartCode = cart.code;
                   if (userId === OCC_USER_ID_ANONYMOUS) {
-                    newCartCode = cartState.value.guid;
+                    newCartCode = cart.guid;
                   }
                   this.startBundleForCart(
                     userId,

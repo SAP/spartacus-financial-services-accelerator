@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslationService, User } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  TranslationService,
+  User,
+} from '@spartacus/core';
 import {
   AddressBookComponent,
   AddressBookComponentService,
@@ -10,16 +14,19 @@ import { UserAccountFacade } from '@spartacus/user/account/root';
 @Component({
   templateUrl: './address-info.component.html',
 })
-export class FSAddressInfoComponent extends AddressBookComponent
-  implements OnInit {
+export class FSAddressInfoComponent
+  extends AddressBookComponent
+  implements OnInit
+{
   user$: Observable<User>;
 
   constructor(
     public service: AddressBookComponentService,
     protected translation: TranslationService,
+    protected globalMessageService: GlobalMessageService,
     protected userAccountFacade: UserAccountFacade
   ) {
-    super(service, translation);
+    super(service, translation, globalMessageService);
   }
 
   ngOnInit() {

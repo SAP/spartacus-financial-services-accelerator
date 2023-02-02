@@ -15,9 +15,8 @@ export function getReducers(): ActionReducerMap<FormsState> {
   };
 }
 
-export const reducerToken: InjectionToken<ActionReducerMap<
-  FormsState
->> = new InjectionToken<ActionReducerMap<FormsState>>('FormReducers');
+export const reducerToken: InjectionToken<ActionReducerMap<FormsState>> =
+  new InjectionToken<ActionReducerMap<FormsState>>('FormReducers');
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,

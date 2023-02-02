@@ -27,9 +27,8 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
   ) {}
 
   subscription = new Subscription();
-  formDefinition$: Observable<
-    YFormDefinition
-  > = this.formDataService.getFormDefinition();
+  formDefinition$: Observable<YFormDefinition> =
+    this.formDataService.getFormDefinition();
   formData$: Observable<YFormData>;
   formConfig: YFormDefinition;
   applicationId: string;
@@ -79,9 +78,10 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
                           this.applicationId,
                           this.formDefinitionId
                         );
-                        const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
-                          this.formDefinitionId
-                        );
+                        const formDataId =
+                          this.formDataStorageService.getFormDataIdByDefinitionCode(
+                            this.formDefinitionId
+                          );
                         if (formDataId) {
                           this.formDataService.loadFormData(formDataId);
                           this.formData$ = this.formDataService.getFormData();

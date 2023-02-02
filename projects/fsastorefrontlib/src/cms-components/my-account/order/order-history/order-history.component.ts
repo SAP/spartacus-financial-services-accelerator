@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { OrderHistoryComponent } from '@spartacus/storefront';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { OrderHistoryComponent } from '@spartacus/order/components';
 
 @Component({
   selector: 'cx-fs-order-history',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, OccConfig } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
+import { OccConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 

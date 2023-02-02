@@ -23,9 +23,14 @@
               "src/assets",
               "src/webApplicationInjector.js"
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./projects/fsastorefrontstyles/scss"]
+              "includePaths": [
+                "./projects/fsastorefrontstyles/scss",
+                "node_modules/"
+              ]
             },
             "scripts": []
           },
@@ -126,7 +131,10 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
@@ -155,9 +163,13 @@
             "main": "projects/fsastorefrontlib/src/test.ts",
             "tsConfig": "projects/fsastorefrontlib/tsconfig.spec.json",
             "karmaConfig": "projects/fsastorefrontlib/karma.conf.js",
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./projects/fsastorefrontstyles/scss"]
+              "includePaths": [
+                "./projects/fsastorefrontstyles/scss"
+              ]
             },
             "codeCoverageExclude": [
               "**/index.ts",
@@ -224,13 +236,14 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["projects/schematics/**/*.ts"]
+            "lintFilePatterns": [
+              "projects/schematics/**/*.ts"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "fsastorefrontapp",
   "cli": {
     "analytics": false
   },

@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
+import { AsmModule } from '@spartacus/asm';
+import { AsmOccModule } from '@spartacus/asm/occ';
+import { CartPageEventModule } from "@spartacus/cart/base/core";
+import { CheckoutModule } from "@spartacus/checkout/base";
+import { CheckoutOccModule } from "@spartacus/checkout/base/occ";
 import {
   AnonymousConsentsModule,
   AuthModule,
-  CartModule,
-  CartOccModule,
   CmsOccModule,
   CostCenterOccModule,
   ExternalRoutesModule,
-  OrderOccModule,
   ProductModule,
   ProductOccModule,
-  UserOccModule,
-  UserOccTransitionalModule,
-  UserTransitionalModule,
+  UserModule,
+  UserOccModule
 } from '@spartacus/core';
+import { CartBaseCoreModule } from '@spartacus/cart/base/core';
+import { CartBaseOccModule } from '@spartacus/cart/base/occ';
+import { OrderCancellationModule, OrderDetailsModule, OrderHistoryModule, OrderReturnModule, ReturnRequestDetailModule, ReturnRequestListModule } from "@spartacus/order/components";
+import { OrderOccModule } from "@spartacus/order/occ";
+import { SmartEditModule } from '@spartacus/smartedit';
 import {
   AddressBookModule,
   AnonymousConsentManagementBannerModule,
@@ -21,8 +27,6 @@ import {
   BannerCarouselModule,
   BannerModule,
   BreadcrumbModule,
-  CartComponentModule,
-  CartPageEventModule,
   CategoryNavigationModule,
   CmsParagraphModule,
   ConsentManagementModule,
@@ -37,12 +41,9 @@ import {
   MyCouponsModule,
   NavigationEventModule,
   NavigationModule,
-  OrderCancellationModule,
-  OrderDetailsModule,
-  OrderHistoryModule,
-  OrderReturnModule,
   PageTitleModule,
   PaymentMethodsModule,
+  PDFModule,
   ProductCarouselModule,
   ProductDetailsPageModule,
   ProductFacetNavigationModule,
@@ -54,16 +55,29 @@ import {
   ProductReferencesModule,
   ProductSummaryModule,
   ProductTabsModule,
-  ReturnRequestDetailModule,
-  ReturnRequestListModule,
+  ScrollToTopModule,
   SiteContextSelectorModule,
   TabParagraphContainerModule,
-  UserComponentModule,
+  UserComponentModule
 } from '@spartacus/storefront';
+
+import { UserAccountModule } from '@spartacus/user/account';
+import { UserAccountComponentsModule } from '@spartacus/user/account/components';
+import { UserProfileModule } from '@spartacus/user/profile';
+import {
+  CloseAccountModule,
+  ForgotPasswordModule,
+  ResetPasswordModule,
+  UpdateEmailModule,
+  UpdatePasswordModule,
+  UpdateProfileModule
+} from '@spartacus/user/profile/components';
+import { environment } from '../../environments/environment';
 import { AdministrationFeatureModule } from './features/administration-feature.module';
 import { AsmFeatureModule } from './features/asm-feature.module';
 import { BulkPricingFeatureModule } from './features/bulk-pricing-feature.module';
 import { CheckoutFeatureModule } from './features/checkout-feature.module';
+import { DigitalPaymentsFeatureModule } from './features/digital-payments-feature.module';
 import { OrderApprovalFeatureModule } from './features/order-approval-feature.module';
 import { ProductConfiguratorTextfieldFeatureModule } from './features/product-configurator-textfield-feature.module';
 import { QuickOrderFeatureModule } from './features/quick-order-feature.module';
@@ -73,25 +87,10 @@ import { StorefinderFeatureModule } from './features/storefinder-feature.module'
 import { TrackingFeatureModule } from './features/tracking-feature.module';
 import { UserFeatureModule } from './features/user-feature.module';
 import { VariantsFeatureModule } from './features/variants-feature.module';
-import { UserAccountModule } from '@spartacus/user/account';
-import { UserProfileModule } from '@spartacus/user/profile';
-import { AsmModule } from '@spartacus/asm';
-import { SmartEditModule } from '@spartacus/smartedit';
-import { CheckoutModule } from '@spartacus/checkout';
-import { AsmOccModule } from '@spartacus/asm/occ';
-import { CheckoutOccModule } from '@spartacus/checkout/occ';
-import { OrderConfirmationModule } from '@spartacus/checkout/components';
-import {
-  CloseAccountModule,
-  ForgotPasswordModule,
-  ResetPasswordModule,
-  UpdateEmailModule,
-  UpdatePasswordModule,
-  UpdateProfileModule,
-} from '@spartacus/user/profile/components';
-import { UserAccountComponentsModule } from '@spartacus/user/account/components';
-import { DigitalPaymentsFeatureModule } from './features/digital-payments-feature.module';
-import { environment } from '../../environments/environment';
+import { CartBaseFeatureModule } from './features/cart-base-feature.module';
+import { VideoModule } from '@spartacus/storefront';
+import { CheckoutB2BOccModule } from '@spartacus/checkout/b2b/occ';
+import { OrderFeatureModule } from './features/order-feature.module';
 
 const featureModules = [];
 
@@ -122,10 +121,13 @@ if (environment.digitalPayments) {
     TabParagraphContainerModule,
     BannerCarouselModule,
     PageTitleModule,
+    PDFModule,
+    ScrollToTopModule,
+    VideoModule,
 
     /************************* User Core *************************/
-    UserTransitionalModule,
-    UserOccTransitionalModule,
+    UserModule,
+    UserOccModule,
     UserAccountModule,
     UserProfileModule,
 
@@ -139,7 +141,6 @@ if (environment.digitalPayments) {
 
     /************************* Product Core *************************/
     ProductModule.forRoot(),
-    ProductOccModule,
     CheckoutModule,
 
     /************************* Product UI  *************************/
@@ -156,8 +157,9 @@ if (environment.digitalPayments) {
 
     /************************* OCC *************************/
     AsmOccModule,
-    CartOccModule,
+    CartBaseOccModule, // TODO:Spartacus CartModule.forRoot() replaced
     CheckoutOccModule,
+    CheckoutB2BOccModule,
     OrderOccModule,
     ProductOccModule,
     UserOccModule,
@@ -165,9 +167,9 @@ if (environment.digitalPayments) {
     CmsOccModule,
 
     /************************* Cart & Order *************************/
-    CartModule.forRoot(),
-    CartOccModule,
-    CartComponentModule,
+    CartBaseCoreModule,
+    CartBaseOccModule,
+    CartBaseFeatureModule, // TODO:Spartacus replaced CartComponentModule
     MyCouponsModule,
     CostCenterOccModule,
 
@@ -175,7 +177,6 @@ if (environment.digitalPayments) {
     OrderDetailsModule,
     OrderCancellationModule,
     OrderReturnModule,
-    OrderOccModule,
 
     /************************* Page Events *************************/
     NavigationEventModule,
@@ -184,7 +185,7 @@ if (environment.digitalPayments) {
     ProductPageEventModule,
 
     /************************* Core My Account *************************/
-    OrderConfirmationModule,
+    //OrderConfirmationModule,
     UserComponentModule,
     CloseAccountModule,
     UpdateEmailModule,
@@ -201,6 +202,7 @@ if (environment.digitalPayments) {
     /************************* External features *************************/
     UserFeatureModule,
     CheckoutFeatureModule,
+    OrderFeatureModule,
     AsmFeatureModule,
     StorefinderFeatureModule,
     SmartEditFeatureModule,
@@ -217,4 +219,4 @@ if (environment.digitalPayments) {
     ...featureModules,
   ],
 })
-export class FSFeaturesModule {}
+export class FSFeaturesModule { }

@@ -251,9 +251,8 @@ describe('Change Request Effects', () => {
         changeRequest,
       });
       const loadUserRequest = new fromActions.LoadChangeRequest(changeRequest);
-      const submitUserRequestSuccess = new fromActions.SubmitChangeRequestSuccess(
-        changeRequest
-      );
+      const submitUserRequestSuccess =
+        new fromActions.SubmitChangeRequestSuccess(changeRequest);
       actions$ = hot('-a', { a: action });
       const expected = cold('-(bc)', {
         b: loadUserRequest,

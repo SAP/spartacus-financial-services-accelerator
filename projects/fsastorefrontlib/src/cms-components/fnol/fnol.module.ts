@@ -124,12 +124,6 @@ const routes: Routes = [
     FNOLSummaryComponent,
     FNOLConfirmationComponent,
   ],
-  entryComponents: [
-    FNOLProgressBarComponent,
-    FNOLNavigationComponent,
-    FNOLSummaryComponent,
-    FNOLConfirmationComponent,
-  ],
   providers: [
     UserRequestService,
     reducerProvider,

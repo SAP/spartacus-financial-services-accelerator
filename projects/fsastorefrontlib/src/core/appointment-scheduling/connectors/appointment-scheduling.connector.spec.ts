@@ -8,8 +8,10 @@ import createSpy = jasmine.createSpy;
 class MockAppointmentSchedulingAdapter implements AppointmentSchedulingAdapter {
   createAppointmentForAgent = createSpy(
     'AppointmentSchedulingAdapter.createAppointmentForAgent'
-  ).and.callFake((agentId, userId, appointmentData) =>
-    of('createAppointmentForAgent' + agentId + userId + appointmentData)
+  ).and.callFake((agentCode, userCode, appointmentDataObject) =>
+    of(
+      'createAppointmentForAgent' + agentCode + userCode + appointmentDataObject
+    )
   );
 }
 

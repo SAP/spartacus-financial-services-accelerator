@@ -58,7 +58,6 @@ const routes: Routes = [
   ],
   declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   exports: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
-  entryComponents: [InboxComponent, InboxTabComponent],
   providers: [InboxConnector, InboxDataService, InboxService],
 })
 export class InboxModule {}

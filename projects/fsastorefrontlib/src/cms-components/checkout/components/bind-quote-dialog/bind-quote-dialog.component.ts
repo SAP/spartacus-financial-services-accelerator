@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -9,7 +10,7 @@ import {
   FormDataStorageService,
   OboCustomerService,
 } from '@spartacus/dynamicforms';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { combineLatest, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -23,7 +24,7 @@ import { FSCart } from './../../../../occ/occ-models/occ.models';
   selector: 'cx-fs-bind-quote-dialog',
   templateUrl: './bind-quote-dialog.component.html',
 })
-export class BindQuoteDialogComponent {
+export class BindQuoteDialogComponent implements OnInit {
   cartCode: string;
   subscription = new Subscription();
 
@@ -34,17 +35,25 @@ export class BindQuoteDialogComponent {
   dialog: ElementRef;
 
   constructor(
-    protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected cartService: FSCartService,
+    protected launchDialogService: LaunchDialogService,
     protected formDataStoragetService: FormDataStorageService,
     protected userAccountFacade: UserAccountFacade,
     protected oboConsentService: ConsentService,
     protected oboCustomerService: OboCustomerService
   ) {}
 
+  ngOnInit(): void {
+    this.subscription.add(
+      this.launchDialogService.data$.subscribe(data => {
+        this.cartCode = data.cartCode;
+      })
+    );
+  }
+
   dismissModal(reason?: any): void {
-    this.modalService.dismissActiveModal(reason);
+    this.launchDialogService.closeDialog(reason);
   }
 
   bindQuote() {

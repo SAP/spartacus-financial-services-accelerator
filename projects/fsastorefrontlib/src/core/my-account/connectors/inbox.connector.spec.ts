@@ -12,10 +12,9 @@ class MockInboxAdapter implements InboxAdapter {
       'getSiteMessagesForUserAndGroup' + userId + msgGroup + searchConfig + read
     )
   );
-  setMessagesState = createSpy(
-    'InboxAdapter.setMessagesState'
-  ).and.callFake((userId, messagesUidList, readStatus) =>
-    of('setMessagesState' + userId + messagesUidList + readStatus)
+  setMessagesState = createSpy('InboxAdapter.setMessagesState').and.callFake(
+    (userId, messagesUidList, readStatus) =>
+      of('setMessagesState' + userId + messagesUidList + readStatus)
   );
 }
 const user = 'user';

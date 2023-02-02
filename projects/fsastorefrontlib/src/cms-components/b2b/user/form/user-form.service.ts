@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { UserFormService } from '@spartacus/organization/administration/components';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 
@@ -11,7 +11,7 @@ export class FSUserFormService extends UserFormService {
     super.build();
     this.form.setControl(
       'dateOfBirth',
-      new FormControl('', [
+      new UntypedFormControl('', [
         Validators.required,
         DefaultFormValidators.dateOfBirthValidator(18),
       ])

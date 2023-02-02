@@ -15,17 +15,11 @@ export const getPoliciesState: MemoizedSelector<
   (policyState: MyAccountState) => policyState.policies
 );
 
-export const getPolicies: MemoizedSelector<
-  StateWithMyAccount,
-  any
-> = createSelector(getPoliciesState, fromPolicy.getPolicies);
+export const getPolicies: MemoizedSelector<StateWithMyAccount, any> =
+  createSelector(getPoliciesState, fromPolicy.getPolicies);
 
-export const getPolicyDetails: MemoizedSelector<
-  StateWithMyAccount,
-  any
-> = createSelector(getPoliciesState, fromPolicy.getPolicyData);
+export const getPolicyDetails: MemoizedSelector<StateWithMyAccount, any> =
+  createSelector(getPoliciesState, fromPolicy.getPolicyData);
 
-export const getPoliciesLoaded: MemoizedSelector<
-  StateWithMyAccount,
-  boolean
-> = createSelector(getPoliciesState, fromPolicy.getLoaded);
+export const getPoliciesLoaded: MemoizedSelector<StateWithMyAccount, boolean> =
+  createSelector(getPoliciesState, fromPolicy.getLoaded);

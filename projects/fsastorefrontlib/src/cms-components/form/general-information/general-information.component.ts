@@ -19,8 +19,10 @@ import {
   selector: 'cx-fs-general-information',
   templateUrl: './general-information.component.html',
 })
-export class GeneralInformationComponent extends FormCMSComponent
-  implements OnInit {
+export class GeneralInformationComponent
+  extends FormCMSComponent
+  implements OnInit
+{
   constructor(
     protected componentData: CmsComponentData<YFormCmsComponent>,
     protected formDataService: FormDataService,

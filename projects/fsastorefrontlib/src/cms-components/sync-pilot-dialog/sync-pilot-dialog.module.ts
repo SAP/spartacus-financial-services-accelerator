@@ -7,6 +7,5 @@ import { SpinnerModule } from '@spartacus/storefront';
   imports: [I18nModule, SpinnerModule],
   declarations: [SyncPilotDialogComponent],
   exports: [SyncPilotDialogComponent],
-  entryComponents: [SyncPilotDialogComponent],
 })
 export class SyncPilotDialogModule {}

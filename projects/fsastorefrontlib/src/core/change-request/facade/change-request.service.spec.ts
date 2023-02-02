@@ -1,10 +1,7 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import {
-  AuthService,
-  OCC_USER_ID_CURRENT,
-  UserIdService,
-} from '@spartacus/core';
+import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { OboCustomerService } from '@spartacus/dynamicforms';
 import { Observable, of } from 'rxjs';
 import * as fromAction from '../store/actions';
 import { StateWithChangeRequest } from '../store/change-request-state';
@@ -35,8 +32,8 @@ const stepData = {
   status: 'COMPLETED',
 };
 
-class MockUserIdService {
-  getUserId(): Observable<string> {
+class MockOboCustomerService {
+  getOboCustomerUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -49,12 +46,9 @@ describe('ChangeRequestServiceTest', () => {
   let service: ChangeRequestService;
   let store: Store<StateWithChangeRequest>;
   let authService: MockAuthService;
-  let userIdService: MockUserIdService;
+  let userIdService: MockOboCustomerService;
 
   beforeEach(() => {
-    authService = new MockAuthService();
-    userIdService = new MockUserIdService();
-
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -63,12 +57,14 @@ describe('ChangeRequestServiceTest', () => {
       providers: [
         ChangeRequestService,
         reducerProvider,
-        { provide: AuthService, useValue: authService },
-        { provide: UserIdService, useValue: userIdService },
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: OboCustomerService, useClass: MockOboCustomerService },
       ],
     });
     service = TestBed.inject(ChangeRequestService);
     store = TestBed.inject(Store);
+    authService = TestBed.inject(AuthService);
+    userIdService = TestBed.inject(OboCustomerService);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

@@ -35,6 +35,5 @@ import { CategoryFeatureCarouselComponent } from './category-feature-carousel.co
   ],
   declarations: [CategoryFeatureCarouselComponent],
   exports: [CategoryFeatureCarouselComponent],
-  entryComponents: [CategoryFeatureCarouselComponent],
 })
 export class CategoryFeatureCarouselModule {}

@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  ActiveCartService,
   GlobalMessageService,
   GlobalMessageType,
   LanguageService,
@@ -13,6 +12,7 @@ import {
   RoutingService,
   TranslationService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { combineLatest, Subscription } from 'rxjs';
 import { PolicyChartDataService } from '../../../../core/my-account/services/policy-chart-data.service';
@@ -166,10 +166,11 @@ export class QuotesComponent implements OnInit, OnDestroy {
 
   protected getQuotesByCategory(quotes) {
     this.quotesByCategory = quotes.reduce((quote, item) => {
-      const groupCriteria = this.policyChartDataService.getObjectValueByProperty(
-        'defaultCategory.name',
-        item
-      );
+      const groupCriteria =
+        this.policyChartDataService.getObjectValueByProperty(
+          'defaultCategory.name',
+          item
+        );
       quote[groupCriteria] = quote[groupCriteria] || [];
       quote[groupCriteria].push({
         name: item.defaultCategory.name,

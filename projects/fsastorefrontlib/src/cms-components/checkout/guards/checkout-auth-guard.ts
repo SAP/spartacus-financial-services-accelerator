@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router, UrlTree } from '@angular/router';
+import { ActiveCartFacade } from '@spartacus/cart/base/root';
 import {
   CheckoutAuthGuard,
   CheckoutConfigService,
-} from '@spartacus/checkout/components';
+} from '@spartacus/checkout/base/components';
 import {
-  ActiveCartService,
   AuthRedirectService,
   AuthService,
   B2BUser,
@@ -16,7 +16,8 @@ import {
   User,
 } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -26,26 +27,48 @@ export class FSCheckoutAuthGuard extends CheckoutAuthGuard {
     protected authService: AuthService,
     protected authRedirectService: AuthRedirectService,
     protected checkoutConfigService: CheckoutConfigService,
-    protected activeCartService: ActiveCartService,
+    protected activeCartFacade: ActiveCartFacade,
     protected semanticPathService: SemanticPathService,
     protected router: Router,
     protected userService: UserAccountFacade,
+    protected userAccountFacade: UserAccountFacade,
     protected globalMessageService: GlobalMessageService
   ) {
     super(
       authService,
       authRedirectService,
       checkoutConfigService,
-      activeCartService,
+      activeCartFacade,
       semanticPathService,
-      router,
-      userService,
-      globalMessageService
+      router
     );
   }
 
   canActivate(): Observable<boolean | UrlTree> {
-    return super.canActivate();
+    return combineLatest([
+      this.authService.isUserLoggedIn(),
+      this.activeCartFacade.isGuestCart(),
+      this.userAccountFacade.get(),
+      this.activeCartFacade.isStable(),
+    ]).pipe(
+      map(([isLoggedIn, isGuestCart, user, isStable]) => ({
+        isLoggedIn,
+        isGuestCart,
+        user,
+        isStable,
+      })),
+      filter(data => data.isStable),
+      // if the user is authenticated and we have their data, OR if the user is anonymous
+      filter(data => (!!data.user && data.isLoggedIn) || !data.isLoggedIn),
+      map(data => {
+        if (!data.isLoggedIn) {
+          return data.isGuestCart ? true : this.handleAnonymousUser();
+        } else if (data.user && 'roles' in data.user) {
+          return this.handleUserRole(data.user);
+        }
+        return data.isLoggedIn;
+      })
+    );
   }
 
   protected handleUserRole(user: User): boolean | UrlTree {
@@ -60,6 +83,6 @@ export class FSCheckoutAuthGuard extends CheckoutAuthGuard {
       { key: 'checkout.invalid.accountType' },
       GlobalMessageType.MSG_TYPE_WARNING
     );
-    return this.router.parseUrl(this.semanticPathService.get('home'));
+    return this.router.parseUrl(this.semanticPathService.get('home') ?? '');
   }
 }

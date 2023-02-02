@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import {
   CheckoutProgressComponent,
   CheckoutStepService,
-} from '@spartacus/checkout/components';
-import { CheckoutConfig } from '@spartacus/checkout/root';
+} from '@spartacus/checkout/base/components';
+import { CheckoutConfig } from '@spartacus/checkout/base/root';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
@@ -28,8 +28,10 @@ import {
   templateUrl: './checkout-progress.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FSCheckoutProgressComponent extends CheckoutProgressComponent
-  implements OnInit, OnDestroy {
+export class FSCheckoutProgressComponent
+  extends CheckoutProgressComponent
+  implements OnInit, OnDestroy
+{
   constructor(
     protected config: CheckoutConfig,
     protected activatedRoute: ActivatedRoute,

@@ -27,13 +27,11 @@ export const organization = {
     header: 'Alle Organisationen ({{count}})',
     unit: 'Organisation',
     parentUnit: 'Übergeordnete Organisation',
-    hint:
-      'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Mitglieder haben Zugriff auf alle untergeordneten Organisationen ihrer Hauptorganisation.',
+    hint: 'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Mitglieder haben Zugriff auf alle untergeordneten Organisationen ihrer Hauptorganisation.',
     details: {
       title: 'Organisationsdetails',
       subtitle: 'Organisation: {{ item.name }}',
-      hint:
-        'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Durch das Deaktivieren einer Organisation werden alle untergeordneten Organisationen der Organisation deaktiviert, einschließlich untergeordneter Organisationen und Mitglieder. Deaktivierte Organisationen können nicht bearbeitet werden.',
+      hint: 'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Durch das Deaktivieren einer Organisation werden alle untergeordneten Organisationen der Organisation deaktiviert, einschließlich untergeordneter Organisationen und Mitglieder. Deaktivierte Organisationen können nicht bearbeitet werden.',
     },
     edit: {
       title: 'Organisation bearbeiten',
@@ -81,8 +79,7 @@ export const organization = {
   orgUnitChildren: {
     title: 'Untergeordnete Organisation',
     subtitle: 'Organisation: {{item.name}}',
-    hint:
-      'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Mitglieder übernehmen untergeordnete Organisationen.',
+    hint: 'Organisationen repräsentieren Abteilungen, Geschäfte, Regionen oder jede andere logische Gruppierung, die für Sie sinnvoll ist. Mitglieder übernehmen untergeordnete Organisationen.',
   },
   orgUnitApprovers: {
     subtitle: '[DE] Organization: {{item.name}}',
@@ -96,15 +93,13 @@ export const organization = {
   orgUnitUsers: {
     title: 'Organisation: {{item.name}}',
     subtitle: 'Organisation: {{item.name}}',
-    hint:
-      'Mitglieder sind die Käufer und Administratoren Ihrer Organisation. Jedem Mitglied wird eine Rolle für den Einkauf oder die Verwaltung der Organisation zugewiesen. Mitglieder übernehmen untergeordnete Organisationen.',
+    hint: 'Mitglieder sind die Käufer und Administratoren Ihrer Organisation. Jedem Mitglied wird eine Rolle für den Einkauf oder die Verwaltung der Organisation zugewiesen. Mitglieder übernehmen untergeordnete Organisationen.',
   },
   orgUser: {
     unit: 'Organisation',
     orgUnit: 'Organisation',
     assignApprover: 'Nutzer als Administrator hinzufügen',
-    hint:
-      'Mitglieder sind die Käufer und Administratoren Ihrer Organisation. Jedem Mitglied wird eine Rolle für den Einkauf oder die Verwaltung der Organisation zugewiesen. Jedes Mitglied gehört einer Organisation an und hat Zugriff auf alle untergeordneten Organisationen seiner primären Organisation.',
+    hint: 'Mitglieder sind die Käufer und Administratoren Ihrer Organisation. Jedem Mitglied wird eine Rolle für den Einkauf oder die Verwaltung der Organisation zugewiesen. Jedes Mitglied gehört einer Organisation an und hat Zugriff auf alle untergeordneten Organisationen seiner primären Organisation.',
     header: 'Alle Mitglieder ({{count}})',
     links: {
       password: 'Passwort ändern',

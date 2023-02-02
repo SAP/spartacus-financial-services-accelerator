@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { By, DomSanitizer } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
@@ -103,13 +103,9 @@ class MockDomSanitizer {
   bypassSecurityTrustUrl = createSpy();
 }
 
-const modalInstance: any = {
-  componentInstance: {
-    claimNumber: claimNumber,
-  },
-};
-
-const modalService = jasmine.createSpyObj('ModalService', ['open']);
+const launchDialogService = jasmine.createSpyObj('LaunchDialogService', [
+  'openDialog',
+]);
 
 describe('ClaimsComponent', () => {
   let component: ClaimsComponent;
@@ -132,8 +128,8 @@ describe('ClaimsComponent', () => {
           { provide: RoutingService, useClass: MockRoutingService },
           { provide: DomSanitizer, useClass: MockDomSanitizer },
           {
-            provide: ModalService,
-            useValue: modalService,
+            provide: LaunchDialogService,
+            useValue: launchDialogService,
           },
         ],
         declarations: [
@@ -177,12 +173,9 @@ describe('ClaimsComponent', () => {
   });
 
   it('should delete claim', () => {
-    modalService.open.and.returnValue(modalInstance);
+    launchDialogService.openDialog.and.callThrough();
     component.deleteClaim(claimNumber);
-    expect(modalService.open).toHaveBeenCalledWith(DeleteClaimDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
+    expect(launchDialogService.openDialog).toHaveBeenCalled();
   });
 
   it('should resume claim and redirect', () => {

@@ -5,7 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
+import { OrderEntry } from '@spartacus/cart/base/root';
+import { CurrencyService, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';

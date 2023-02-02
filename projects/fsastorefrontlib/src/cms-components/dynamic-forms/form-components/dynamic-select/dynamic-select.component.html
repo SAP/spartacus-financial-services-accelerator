@@ -12,9 +12,9 @@
         [attr.name]="config.name"
         [formControlName]="config.name"
       >
-        <option [selected]="true" disabled value="null">{{
-          'dynamicforms.pleaseSelect' | cxTranslate
-        }}</option>
+        <option [selected]="true" disabled value="null">
+          {{ 'dynamicforms.pleaseSelect' | cxTranslate }}
+        </option>
         <option
           *ngFor="let option of options$ | async as options"
           value="{{ option.name }}"

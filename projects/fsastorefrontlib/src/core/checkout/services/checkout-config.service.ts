@@ -7,8 +7,8 @@ import {
 import {
   CheckoutConfigService,
   CheckoutStepService,
-} from '@spartacus/checkout/components';
-import { CheckoutConfig } from '@spartacus/checkout/root';
+} from '@spartacus/checkout/base/components';
+import { CheckoutConfig } from '@spartacus/checkout/base/root';
 import { BehaviorSubject } from 'rxjs';
 import { FSSteps, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
 import { FSCartService } from '../../cart';
@@ -42,9 +42,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   getCurrentStepIndex(
     activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot
   ) {
-    const currentStepUrl: string = this.getUrlFromActivatedRoute(
-      activatedRoute
-    );
+    const currentStepUrl: string =
+      this.getUrlFromActivatedRoute(activatedRoute);
     let stepIndex: number;
     let index = 0;
     for (const step of this.steps) {

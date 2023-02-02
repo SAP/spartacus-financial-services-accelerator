@@ -26,6 +26,5 @@ import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
   ],
   declarations: [CmsCustomContainerComponent],
   exports: [CmsCustomContainerComponent],
-  entryComponents: [CmsCustomContainerComponent],
 })
 export class CustomContainerModule {}

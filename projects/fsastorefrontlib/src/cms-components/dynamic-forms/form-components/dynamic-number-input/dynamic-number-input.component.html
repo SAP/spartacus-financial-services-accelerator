@@ -10,7 +10,10 @@
         </label>
       </div>
       <div class="input-group">
-        <div class="input-group-prepend" *ngIf="config.valueType == 'currency'">
+        <div
+          class="input-group-prepend"
+          *ngIf="config.valueType === 'currency'"
+        >
           <span class="input-group-text">{{ currentCurrency$ | async }}</span>
         </div>
         <input

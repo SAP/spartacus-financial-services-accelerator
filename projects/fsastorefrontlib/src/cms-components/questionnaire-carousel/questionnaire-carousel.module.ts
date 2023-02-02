@@ -46,6 +46,5 @@ const routes: Routes = [
   ],
   declarations: [QuestionnaireCarouselComponent],
   exports: [QuestionnaireCarouselComponent],
-  entryComponents: [QuestionnaireCarouselComponent],
 })
 export class QuestionnaireCarouselModule {}

@@ -94,7 +94,8 @@ describe('OccDynamicNumberInputService', () => {
       waitForAsync(() => {
         const dynamicNumberInputCache = new Map();
         dynamicNumberInputCache.set(cachedUrl, cachedValue);
-        occDynamicNumberInputService.dynamicNumberInputCache = dynamicNumberInputCache;
+        occDynamicNumberInputService.dynamicNumberInputCache =
+          dynamicNumberInputCache;
         let cachedResult;
         occDynamicNumberInputService
           .getValuesFromAPI(mockDynamicNumberInputPath)

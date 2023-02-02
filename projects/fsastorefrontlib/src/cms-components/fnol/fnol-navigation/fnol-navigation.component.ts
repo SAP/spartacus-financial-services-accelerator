@@ -44,10 +44,11 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
               claimData.configurationSteps.length > 0
             ) {
               this.configurationSteps = claimData.configurationSteps;
-              this.activeStepData = this.userRequestNavigationService.getActiveStep(
-                this.configurationSteps,
-                this.activatedRoute.routeConfig.path
-              );
+              this.activeStepData =
+                this.userRequestNavigationService.getActiveStep(
+                  this.configurationSteps,
+                  this.activatedRoute.routeConfig.path
+                );
               this.activeStepIndex = this.configurationSteps.indexOf(
                 this.activeStepData
               );

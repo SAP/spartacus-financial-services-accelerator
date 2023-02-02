@@ -18,9 +18,9 @@ export function getReducers(): ActionReducerMap<ChangeRequestsState> {
   };
 }
 
-export const reducerToken: InjectionToken<ActionReducerMap<
-  ChangeRequestsState
->> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
+export const reducerToken: InjectionToken<
+  ActionReducerMap<ChangeRequestsState>
+> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
   'ChangeRequestReducers'
 );
 export const reducerProvider: Provider = {

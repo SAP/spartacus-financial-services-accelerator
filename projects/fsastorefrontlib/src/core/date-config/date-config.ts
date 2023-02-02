@@ -10,3 +10,7 @@ export abstract class DateConfig {
     format?: string;
   };
 }
+
+declare module '@spartacus/core' {
+  interface Config extends DateConfig {}
+}

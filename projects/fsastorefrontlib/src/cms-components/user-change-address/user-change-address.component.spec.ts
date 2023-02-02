@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import {
   Address,
   Country,
@@ -87,7 +87,7 @@ describe('UserChangeAddressComponent', () => {
       imports: [CommonModule, I18nTestingModule],
       declarations: [UserChangeAddressComponent],
       providers: [
-        FormBuilder,
+        UntypedFormBuilder,
         {
           provide: FSAddressService,
           useClass: MockFSAddressService,
