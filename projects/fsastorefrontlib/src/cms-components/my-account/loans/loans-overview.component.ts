@@ -76,7 +76,6 @@ export class LoansOverviewComponent implements OnInit {
           totalResults: loansObj.pagination.totalCount,
           totalPages: loansObj.pagination.totalPages,
         };
-        console.log(loansObj.results);
         this.loans = loansObj.results;
         return loansObj;
       })

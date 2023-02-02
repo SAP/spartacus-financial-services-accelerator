@@ -1,4 +1,5 @@
-import { SearchConfig, Order } from '@spartacus/core';
+import { SearchConfig } from '@spartacus/core';
+import { Order } from '@spartacus/order/root';
 import { Pagination } from '@spartacus/core/src/model/unused.model';
 
 export interface Loan {
@@ -33,4 +34,3 @@ export interface Instalment {
   dueDate: string;
   paymentAmount: string;
 }
-
