@@ -1,9 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import {
-  CurrencyService,
-  PaginationModel,
-  UserIdService,
-} from '@spartacus/core';
+import { CurrencyService, PaginationModel } from '@spartacus/core';
 import { OboCustomerService } from '@spartacus/dynamicforms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,19 +9,15 @@ import {
   LoanSearchData,
 } from './models/loan-interface';
 import { OccLoansAdapter } from './services/occ-loans.adapter';
-import { SortDirective, SortEvent } from './sort.directive';
 
 @Component({
   selector: 'cx-fs-app-loans-overview',
   templateUrl: './loans-overview.component.html',
-  styleUrls: ['./loans-overview.component.scss'],
 })
 export class LoansOverviewComponent implements OnInit {
   activeLoans$: Observable<LoanSearchData>;
   loans: Loan[];
   currentCurrency$: Observable<any>;
-
-  @ViewChildren(SortDirective) headers: QueryList<SortDirective>;
 
   pagination: PaginationModel = {
     currentPage: 0,
@@ -33,6 +25,8 @@ export class LoansOverviewComponent implements OnInit {
     totalPages: 0,
     totalResults: 0,
   };
+
+  userId: string;
 
   currentSortOder = 'asc';
 
@@ -43,20 +37,30 @@ export class LoansOverviewComponent implements OnInit {
     sortOrder: this.currentSortOder,
   };
 
-  userId: string;
-
   constructor(
     private currencyService: CurrencyService,
-    private loansService: OccLoansAdapter,
-    private customerService: OboCustomerService
+    private loansService: OccLoansAdapter
   ) {}
 
   ngOnInit(): void {
     this.currentCurrency$ = this.currencyService.getActive();
-    this.refreshTableData();
+    this.refreshTableData(this.getPaginationPage());
   }
 
-  refreshTableData(pageIndex: number = 0) {
+  getPaginationPage() {
+    this.loansService.getLoans('current').pipe(
+      map(loansObj => {
+        this.pagination = {
+          ...this.pagination,
+          totalResults: loansObj.pagination.totalCount,
+          totalPages: loansObj.pagination.totalPages,
+        };
+      })
+    );
+    return this.pagination.currentPage;
+  }
+
+  refreshTableData(pageIndex: number) {
     this.pagination = {
       ...this.pagination,
       currentPage: pageIndex,
@@ -72,21 +76,9 @@ export class LoansOverviewComponent implements OnInit {
           totalResults: loansObj.pagination.totalCount,
           totalPages: loansObj.pagination.totalPages,
         };
-        this.loans = loansObj.loans;
+        this.loans = loansObj.results;
         return loansObj;
       })
     );
-  }
-  onSort({ column }: SortEvent) {
-    if (this.currentSortOder === 'asc') {
-      this.currentSortOder = 'desc';
-    } else {
-      this.currentSortOder = 'asc';
-    }
-    this.pagination.currentPage = 0;
-    this.searchConfig.sort = column;
-    this.searchConfig.sortOrder = this.currentSortOder;
-
-    this.refreshTableData();
   }
 }

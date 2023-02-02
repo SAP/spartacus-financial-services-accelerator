@@ -8,21 +8,18 @@ import {
   ConfigModule,
   I18nModule,
   provideConfig,
-  RoutesConfig,
-  RoutingConfig,
 } from '@spartacus/core';
 import {
   CmsPageGuard,
+  MediaModule,
   PageLayoutComponent,
   PaginationModule,
   SpinnerModule,
 } from '@spartacus/storefront';
 import { LoansOverviewComponent } from './loans-overview.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
-import { config } from './loans.config';
 import { occLoansConfig } from './occ-loans-config';
 import { OccLoansAdapter } from './services/occ-loans.adapter';
-import { SortDirective } from './sort.directive';
 
 const routes: Routes = [
   {
@@ -47,7 +44,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SortDirective],
+  declarations: [LoansOverviewComponent],
   imports: [
     CommonModule,
     I18nModule,
@@ -56,14 +53,16 @@ const routes: Routes = [
     AccordionModule,
     RouterModule.forChild(routes),
     PaginationModule,
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+    MediaModule,
+    ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        AccountMyloansFlexComponent: {
-          LoansOverviewComponent,
+        AccountMyLoansFlex: {
+          component: LoansOverviewComponent,
         },
       },
     }),
   ],
+  exports: [LoansOverviewComponent],
   providers: [OccLoansAdapter, provideConfig(occLoansConfig)],
 })
 export class LoansModule {}
