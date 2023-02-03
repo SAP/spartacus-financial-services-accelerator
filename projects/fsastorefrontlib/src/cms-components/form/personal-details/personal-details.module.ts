@@ -20,6 +20,5 @@ import { PersonalDetailsComponent } from './personal-details.component';
   ],
   declarations: [PersonalDetailsComponent],
   exports: [PersonalDetailsComponent],
-  entryComponents: [PersonalDetailsComponent],
 })
 export class PersonalDetailsModule {}

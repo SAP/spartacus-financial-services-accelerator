@@ -5,22 +5,20 @@ import { FileConnector } from './file.connector';
 import createSpy = jasmine.createSpy;
 
 class MockFileAdapter implements FileAdapter {
-  getFilesForCodes = createSpy(
-    'FileAdapter.getFilesForCodes'
-  ).and.callFake((userId, fileCodes) =>
-    of('getFilesForCodes' + userId + fileCodes)
+  getFilesForCodes = createSpy('FileAdapter.getFilesForCodes').and.callFake(
+    (userId, fileCodes) => of('getFilesForCodes' + userId + fileCodes)
   );
   getFileForCodeAndType = createSpy(
     'FileAdapter.getFileForCodeAndType'
   ).and.callFake((userId, fileCode, fileType) =>
     of('getFileForCodeAndType' + userId + fileCode + fileType)
   );
-  getFilesForUser = createSpy(
-    'FileAdapter.getFilesForUser'
-  ).and.callFake(userId => of('getFilesForUser' + userId));
-  uploadFile = createSpy(
-    'FileAdapter.uploadFile'
-  ).and.callFake((userId, file) => of('uploadFile' + userId + file));
+  getFilesForUser = createSpy('FileAdapter.getFilesForUser').and.callFake(
+    userId => of('getFilesForUser' + userId)
+  );
+  uploadFile = createSpy('FileAdapter.uploadFile').and.callFake(
+    (userId, file) => of('uploadFile' + userId + file)
+  );
   removeFileForUserAndCode = createSpy(
     'FileAdapter.removeFileForUserAndCode'
   ).and.callFake((userId, fileCode) =>

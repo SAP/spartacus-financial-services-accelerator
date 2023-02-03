@@ -3,12 +3,9 @@ import { ActivatedRouteSnapshot, CanActivate, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FSCartService } from '../../../core';
 import { map } from 'rxjs/operators';
-import {
-  MultiCartService,
-  OCC_USER_ID_ANONYMOUS,
-  UserIdService,
-  Cart,
-} from '@spartacus/core';
+import { OCC_USER_ID_ANONYMOUS, UserIdService } from '@spartacus/core';
+import { MultiCartService } from '@spartacus/cart/base/core';
+import { Cart } from '@spartacus/cart/base/root';
 
 @Injectable({
   providedIn: 'root',

@@ -9,7 +9,10 @@ testFilters([''], () => {
     });
 
     it('Should check homepage elements', () => {
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       homepage.checkAssistanceAndSupport();
     });
 

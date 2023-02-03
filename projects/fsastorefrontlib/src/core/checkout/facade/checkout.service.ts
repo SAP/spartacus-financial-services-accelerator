@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
-  ActiveCartService,
-  Order,
   RoutingService,
   UserIdService,
   StateWithProcess,
 } from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { ActiveCartService } from '@spartacus/cart/base/core';
+import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, StateWithFSCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../services/checkout-config.service';
 import {
-  CheckoutDeliveryService,
-  CheckoutService,
-  StateWithCheckout,
-} from '@spartacus/checkout/core';
+  CheckoutDeliveryModesFacade,
+  CheckoutState,
+} from '@spartacus/checkout/base/root';
+import { Order } from '@spartacus/order/root';
+import { map } from 'rxjs/operators';
+import { OrderAdapter } from '@spartacus/order/core';
 
 @Injectable()
-export class FSCheckoutService extends CheckoutService {
+export class FSCheckoutService {
   constructor(
     protected fsStore: Store<StateWithFSCheckout>,
-    protected store: Store<StateWithCheckout>,
+    protected store: Store<CheckoutState>,
     protected activeCartService: ActiveCartService,
     protected userIdService: UserIdService,
-    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected checkoutDeliveryModesFacade: CheckoutDeliveryModesFacade,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected routingService: RoutingService,
-    protected processStateStore: Store<StateWithProcess<void>>
-  ) {
-    super(store, processStateStore, activeCartService, userIdService);
-  }
+    protected processStateStore: Store<StateWithProcess<void>>,
+    protected orderAdapter: OrderAdapter
+  ) {}
+
   protected categoryBasedSteps = ['chooseCoverStep', 'comparisonCheckoutStep'];
 
   orderPlaced: boolean;
   mockedDeliveryMode = 'financial-default';
+  placedOrder: Observable<any>;
 
   setIdentificationType(
     activeCartCode: string,
@@ -74,7 +76,7 @@ export class FSCheckoutService extends CheckoutService {
   }
 
   mockDeliveryMode() {
-    this.checkoutDeliveryService.setDeliveryMode(this.mockedDeliveryMode);
+    this.checkoutDeliveryModesFacade.setDeliveryMode(this.mockedDeliveryMode);
   }
 
   filterRemoveableEntries(cart: FSCart | Order) {
@@ -98,5 +100,16 @@ export class FSCheckoutService extends CheckoutService {
       cxRoute: initialStep.routeName,
       params: { code: routingParam },
     });
+  }
+
+  placeOrder(termsChecked: boolean) {
+    this.placedOrder = combineLatest([
+      this.userIdService.getUserId(),
+      this.activeCartService.getActiveCartId(),
+    ]).pipe(
+      map(([userId, cartId]) => {
+        this.orderAdapter.placeOrder(userId, cartId, termsChecked);
+      })
+    );
   }
 }

@@ -6,13 +6,13 @@ import {
 } from '@spartacus/dynamicforms';
 
 import {
-  ActiveCartService,
   AuthService,
-  Cart,
   CmsComponent,
   I18nTestingModule,
   UserAddressService,
 } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FormDefinitionType } from '../../../occ/occ-models';

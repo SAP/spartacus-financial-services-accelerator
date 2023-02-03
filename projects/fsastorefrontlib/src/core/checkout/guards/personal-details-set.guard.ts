@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
-import { ActiveCartService, RoutingService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { FSCart } from './../../../occ/occ-models/occ.models';

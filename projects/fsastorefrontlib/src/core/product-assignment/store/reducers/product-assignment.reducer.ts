@@ -35,12 +35,13 @@ export function reducer(
       if (content && content.assignments.length > 0) {
         assignmentsContent.potentialAssignments = content.assignments;
       }
-      assignmentsContent.potentialAssignments = assignmentsContent.potentialAssignments.filter(
-        elem =>
-          !assignmentsContent.assignments
-            .map(data => data.product.code)
-            .includes(elem.product.code)
-      );
+      assignmentsContent.potentialAssignments =
+        assignmentsContent.potentialAssignments.filter(
+          elem =>
+            !assignmentsContent.assignments
+              .map(data => data.product.code)
+              .includes(elem.product.code)
+        );
       content = assignmentsContent;
       return {
         ...state,
@@ -59,13 +60,16 @@ export function reducer(
           ...productAssignmentContent.assignments,
           content,
         ];
-        const potentialAssignment = productAssignmentContent.potentialAssignments.find(
-          productAssignment =>
-            productAssignment.product.code === content.product.code
-        );
-        productAssignmentContent.potentialAssignments = productAssignmentContent.potentialAssignments.filter(
-          elem => !potentialAssignment.product.code.includes(elem.product.code)
-        );
+        const potentialAssignment =
+          productAssignmentContent.potentialAssignments.find(
+            productAssignment =>
+              productAssignment.product.code === content.product.code
+          );
+        productAssignmentContent.potentialAssignments =
+          productAssignmentContent.potentialAssignments.filter(
+            elem =>
+              !potentialAssignment.product.code.includes(elem.product.code)
+          );
       }
       content = productAssignmentContent;
       return {
@@ -84,9 +88,10 @@ export function reducer(
           currentProductAssignment =>
             currentProductAssignment.code === content.productAssignmentCode
         );
-        productAssignmentContent.assignments = productAssignmentContent.assignments.filter(
-          elem => !assignments.code.includes(elem.code)
-        );
+        productAssignmentContent.assignments =
+          productAssignmentContent.assignments.filter(
+            elem => !assignments.code.includes(elem.code)
+          );
       }
       content = productAssignmentContent;
       return {
@@ -107,14 +112,13 @@ export function reducer(
         JSON.stringify(state.content)
       );
       if (content && content.code) {
-        productAssignmentContent.assignments = productAssignmentContent.assignments.map(
-          assignment => {
+        productAssignmentContent.assignments =
+          productAssignmentContent.assignments.map(assignment => {
             if (content.code === assignment.code) {
               assignment = content;
             }
             return assignment;
-          }
-        );
+          });
       }
       content = productAssignmentContent;
       return {

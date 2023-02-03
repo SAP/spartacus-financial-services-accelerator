@@ -10,7 +10,7 @@ export const common = {
     done: 'Erledigt',
   },
   searchBox: {
-    placeholder: 'Suche',
+    placeholder: 'Suche hier...',
     help: {
       noMatch: 'Wir konnten keine Ergebnisse finden',
     },

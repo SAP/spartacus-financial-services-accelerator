@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DefaultFormValidators } from './default-form-validators';
 
 const field1 = 'field1';
@@ -12,17 +12,17 @@ const testNumberRegex = /^[0-9]*$/;
 const testPostalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
 describe('FormValidationService', () => {
-  let form: FormGroup;
+  let form: UntypedFormGroup;
 
   beforeEach(() => {
-    form = new FormGroup({
-      field1: new FormControl(),
-      field2: new FormControl(),
-      dateOfBirth: new FormControl(),
-      date1: new FormControl(),
-      date2: new FormControl(),
-      trip: new FormGroup({
-        testTravellers: new FormControl(),
+    form = new UntypedFormGroup({
+      field1: new UntypedFormControl(),
+      field2: new UntypedFormControl(),
+      dateOfBirth: new UntypedFormControl(),
+      date1: new UntypedFormControl(),
+      date2: new UntypedFormControl(),
+      trip: new UntypedFormGroup({
+        testTravellers: new UntypedFormControl(),
       }),
     });
   });

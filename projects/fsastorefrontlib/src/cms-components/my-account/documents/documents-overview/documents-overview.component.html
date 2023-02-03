@@ -1,6 +1,6 @@
 <ng-container *ngIf="documentList$ | async as documentList; else loading">
   <!-- ng-container needs check if documents are uploaded by user or they came from external system -->
-  <ng-container *ngIf="(documentList | json) != '{}'; else noDocuments">
+  <ng-container *ngIf="(documentList | json) !== '{}'; else noDocuments">
     <ng-container
       *ngIf="getDocumentsBySource(documentList?.documents, false)?.length > 0"
     >

@@ -13,7 +13,10 @@ testFilters([''], () => {
     });
 
     it('Should check need analysis elements', () => {
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       homepage.checkAssistanceAndSupport();
       cy.get('.homepage-questionnaire')
         .should('contain', 'Find the Right Insurance Cover')
@@ -30,7 +33,10 @@ testFilters([''], () => {
 
     it('Should select a product - life premium', () => {
       cy.get('.SiteLogo').should('be.visible').click();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       cy.reload();
 
       cy.get('.homepage-questionnaire')

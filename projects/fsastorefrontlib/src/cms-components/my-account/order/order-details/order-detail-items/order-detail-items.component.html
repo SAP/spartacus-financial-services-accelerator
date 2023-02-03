@@ -15,7 +15,14 @@
       <div class="container-fluid">
         <!-- DESKTOP TABLE HEAD START-->
         <div
-          class="row d-none d-md-flex text-uppercase py-4 background-color-4 border-color-3 border-bottom border-top"
+          class="
+            row
+            d-none d-md-flex
+            text-uppercase
+            py-4
+            background-color-4
+            border-color-3 border-bottom border-top
+          "
         >
           <div class="title col-6">
             {{ 'cartItems.description' | cxTranslate }}
@@ -96,7 +103,13 @@
               *ngIf="
                 entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
               "
-              class="col-12 col-md-3 text-right text-uppercase semi-bold ml-auto my-2"
+              class="
+                col-12 col-md-3
+                text-right text-uppercase
+                semi-bold
+                ml-auto
+                my-2
+              "
             >
               <button class="action-button btn-block">
                 {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}

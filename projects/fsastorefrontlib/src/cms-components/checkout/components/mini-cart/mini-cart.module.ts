@@ -7,7 +7,6 @@ import { MiniCartComponent } from './mini-cart.component';
 @NgModule({
   imports: [CommonModule, I18nModule, RouterModule],
   declarations: [MiniCartComponent],
-  entryComponents: [MiniCartComponent],
   exports: [MiniCartComponent],
   providers: [],
 })

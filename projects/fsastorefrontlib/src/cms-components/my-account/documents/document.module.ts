@@ -23,6 +23,5 @@ import { DocumentsTableModule } from './documents-table/documents-table.module';
   ],
   declarations: [DocumentsOverviewComponent],
   exports: [DocumentsOverviewComponent],
-  entryComponents: [DocumentsOverviewComponent],
 })
 export class DocumentModule {}

@@ -43,7 +43,7 @@ testFilters([''], () => {
       checkout.checkCheckoutStep('Your Fixed Term Deposit Application', '6');
       checkout.checkPersonalDetailsPage();
       checkMyQuotesPage();
-      ftd.checkFtdApplication();
+      ftd.checkFtdApplication('Pending');
     });
 
     it('Should retrieve not bind quote', () => {
@@ -59,6 +59,7 @@ testFilters([''], () => {
       checkout.checkPersonalDetailsPage();
       banking.populatePersonalDetailsLoanAndCA();
       banking.populateEmploymentData();
+      cy.wait(3000);
       checkout.clickContinueButton();
     });
 
@@ -69,6 +70,10 @@ testFilters([''], () => {
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
       checkout.ConfirmBindQuote();
+      checkout.checkAccordions('generalQuoteAccordions');
+      checkMyQuotesPage();
+      ftd.checkFtdApplication('Accepted');
+      cy.get('.link').contains('Retrieve').click({ force: true });
       checkout.checkAccordions('generalQuoteAccordions');
       checkout.clickContinueButton();
     });
@@ -84,21 +89,13 @@ testFilters([''], () => {
       banking.checkProgressBarLoanAndFTD();
       userIdentification.checkUserIdentificationPage();
       userIdentification.selectUserIdentification('Legal Identification');
+      cy.wait(1000);
     });
 
-    it('Should check order confirmation', () => {
-      checkout.checkOrderConfirmation();
-      banking.checkOrderTotal('€503,125.00');
-      cy.get('.short-overview-title')
-        .contains('Order total')
-        .parent()
-        .contains('€503,125.00');
-      checkout.checkAccordions('FTDConfirmation');
-    });
-
-    it('Should check order history page', () => {
-      myAccount.orderHistoryPage();
-      myAccount.checkOrderHistoryContent('503,125.00', 'Pending Approval');
+    it('Should check order confirmation and application', () => {
+      banking.checkOrderConfirmation();
+      checkMyQuotesPage();
+      ftd.checkFtdApplication('Submitted');
     });
   });
 });

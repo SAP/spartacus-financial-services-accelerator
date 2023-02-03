@@ -1,12 +1,12 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
-  ActiveCartService,
   I18nTestingModule,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
+import { ActiveCartService } from '@spartacus/cart/base/core';
 import { Observable, of } from 'rxjs';
 import { FSCart, FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';

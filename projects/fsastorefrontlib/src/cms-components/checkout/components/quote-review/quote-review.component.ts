@@ -1,17 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import {
-  Cart,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Cart } from '@spartacus/cart/base/root';
+import {
   GlobalMessageService,
   GlobalMessageType,
   OccConfig,
   RoutingService,
   WindowRef,
 } from '@spartacus/core';
-import { ModalRef, ModalService } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import {
   CategoryService,
@@ -19,7 +25,6 @@ import {
 } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { ConsentConnector } from '../../../../core/my-account/connectors/consent.connector';
-import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
@@ -27,7 +32,7 @@ import {
   FSSteps,
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
-import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
+import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -41,20 +46,22 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
-    protected modalService: ModalService,
+    protected launchDialogService: LaunchDialogService,
     protected translationService: FSTranslationService,
     protected checkoutService: FSCheckoutService,
     protected globalMessageService: GlobalMessageService,
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
+    protected vcr: ViewContainerRef,
     protected winRef?: WindowRef
   ) {}
+
+  @ViewChild('element') element: ElementRef;
 
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
   subscription = new Subscription();
-  modalRef: ModalRef;
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
@@ -104,21 +111,34 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   private openQuoteBindingModal(nextStep) {
-    let modalInstance: any;
-    this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
-    modalInstance = this.modalRef.componentInstance;
-    modalInstance.cartCode = this.cartCode;
-    modalInstance.nextStepUrl = {
-      cxRoute: nextStep.step,
+    let modalInstanceData: any = {
+      cartCode: this.cartCode,
+      nextStepUrl: {
+        cxRoute: nextStep.step,
+      },
     };
+
+    const dialog = this.launchDialogService.openDialog(
+      LAUNCH_CALLER.BIND_QUOTE,
+      this.element,
+      this.vcr,
+      modalInstanceData
+    );
+
     this.subscription.add(
-      this.modalRef.componentInstance.quoteBinding$
+      dialog
         .pipe(
-          map(quoteBinding => {
-            this.showContent$ = of(!quoteBinding);
+          take(1),
+          map(dialogInstance => {
+            this.subscription.add(
+              dialogInstance.instance.quoteBinding$
+                .pipe(
+                  map(quoteBinding => {
+                    this.showContent$ = of(!quoteBinding);
+                  })
+                )
+                .subscribe()
+            );
           })
         )
         .subscribe()
@@ -126,20 +146,33 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   private openReferredQuoteModal(nextStep) {
-    let modalInstance: any;
-    this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
-    modalInstance = this.modalRef.componentInstance;
-    modalInstance.nextStepUrl = {
-      cxRoute: nextStep.step,
+    let modalInstanceData: any = {
+      nextStepUrl: {
+        cxRoute: nextStep.step,
+      },
     };
+
+    const dialog = this.launchDialogService.openDialog(
+      LAUNCH_CALLER.OPEN_REFFERED_QUOTE,
+      this.element,
+      this.vcr,
+      modalInstanceData
+    );
+
     this.subscription.add(
-      this.modalRef.componentInstance.referredQuote$
+      dialog
         .pipe(
-          map(referredQuote => {
-            this.showContent$ = of(!referredQuote);
+          take(1),
+          map(dialogInstance => {
+            this.subscription.add(
+              dialogInstance.instance.referredQuote$
+                .pipe(
+                  map(referredQuote => {
+                    this.showContent$ = of(!referredQuote);
+                  })
+                )
+                .subscribe()
+            );
           })
         )
         .subscribe()

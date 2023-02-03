@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import {
   AnonymousConsentsConfig,
@@ -12,33 +12,38 @@ import {
 import { Subscription } from 'rxjs';
 import { FSUserSignUp } from '../../../occ/occ-models';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { RegisterComponent } from '@spartacus/user/profile/components';
-import { UserRegisterFacade } from '@spartacus/user/profile/root';
+import {
+  RegisterComponent,
+  RegisterComponentService,
+} from '@spartacus/user/profile/components';
 import { CustomFormValidators } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-register',
   templateUrl: './register.component.html',
 })
-export class FSRegisterComponent extends RegisterComponent implements OnInit {
+export class FSRegisterComponent
+  extends RegisterComponent
+  implements OnInit, OnDestroy
+{
   constructor(
-    protected userRegister: UserRegisterFacade,
     protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected router: RoutingService,
     protected anonymousConsentsService: AnonymousConsentsService,
     protected anonymousConsentsConfig: AnonymousConsentsConfig,
     protected config: DateConfig,
-    protected authConfigService: AuthConfigService
+    protected authConfigService: AuthConfigService,
+    protected registerComponentService: RegisterComponentService
   ) {
     super(
-      userRegister,
       globalMessageService,
       fb,
       router,
       anonymousConsentsService,
       anonymousConsentsConfig,
-      authConfigService
+      authConfigService,
+      registerComponentService
     );
   }
 
@@ -107,5 +112,11 @@ export class FSRegisterComponent extends RegisterComponent implements OnInit {
 
   getDateFormat() {
     return this.config.date.format || '';
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

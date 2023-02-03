@@ -36,6 +36,5 @@ import { LegalDocumentsComponent } from './legal-documents/legal-documents.compo
   ],
   declarations: [LegalDocumentsComponent, LegalCheckboxesComponent],
   exports: [LegalDocumentsComponent, LegalCheckboxesComponent],
-  entryComponents: [LegalDocumentsComponent, LegalCheckboxesComponent],
 })
 export class LegalModule {}

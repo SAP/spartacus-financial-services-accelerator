@@ -110,7 +110,10 @@ testFilters([''], () => {
     it('Should check claim confirmation page', () => {
       fnol.checkConfirmationPage();
       cy.get('.SiteLogo').should('be.visible').click();
-      checkPageElements();
+      checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       //replication proces to be completed
       cy.wait(3000);
     });

@@ -46,6 +46,5 @@ const routes: Routes = [
   ],
   declarations: [PremiumCalendarComponent],
   exports: [PremiumCalendarComponent],
-  entryComponents: [PremiumCalendarComponent],
 })
 export class PremiumCalendarModule {}

@@ -28,8 +28,7 @@ class MockActivatedRoute {
 const mockComponentList = of([
   {
     uid: 'ClaimActivePoliciesFlexComponent',
-    uuid:
-      'eyJpdGVtSWQiOiJDbGFpbUFjdGl2ZVBvbGljaWVzRmxleENvbXBvbmVudCIsImNhdGFsb2dJZCI6ImZpbmFuY2lhbENvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ==',
+    uuid: 'eyJpdGVtSWQiOiJDbGFpbUFjdGl2ZVBvbGljaWVzRmxleENvbXBvbmVudCIsImNhdGFsb2dJZCI6ImZpbmFuY2lhbENvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ==',
     typeCode: 'CMSFlexComponent',
     modifiedTime: '2020-02-11T10:19:23+0000',
     name: 'ClaimActivePoliciesFlexComponent',

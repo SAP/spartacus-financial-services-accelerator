@@ -250,7 +250,7 @@ describe('ComparisonTablePanelComponent', () => {
 
     let result;
     comparisonTablePanelComponent.pricingData$.subscribe(
-      pricingData => (result = pricingData)
+      pricingDataObject => (result = pricingDataObject)
     );
     expect(result).toEqual(pricingData);
   });
@@ -271,15 +271,17 @@ describe('ComparisonTablePanelComponent', () => {
 
   it('should render billing times help content', () => {
     fixture.detectChanges();
-    const billingTimeHelpContent = el.query(By.css('.table-cell-wrapper'))
-      .nativeElement;
+    const billingTimeHelpContent = el.query(
+      By.css('.table-cell-wrapper')
+    ).nativeElement;
     expect(billingTimeHelpContent).toBeTruthy();
   });
 
   it('should not render comparison table panel item', () => {
     fixture.detectChanges();
-    const comparisonTablePanelItem = el.query(By.css('cx-spinner'))
-      .nativeElement;
+    const comparisonTablePanelItem = el.query(
+      By.css('cx-spinner')
+    ).nativeElement;
     expect(comparisonTablePanelItem).toBeTruthy();
   });
 

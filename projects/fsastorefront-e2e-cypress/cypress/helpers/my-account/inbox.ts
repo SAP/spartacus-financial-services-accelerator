@@ -53,14 +53,15 @@ export function checkSavingsMessage() {
   cy.get('.message').should('have.class', 'read');
 }
 
-export function checkPendingMessage() {
+export function checkApplicationSubmittedMessage() {
   cy.get('.fs-tab').contains('Application').click();
   cy.get('.message').should('not.have.class', 'read');
   cy.get('.message')
     .click()
     .within(() => {
-      cy.contains('Application Pending');
-      cy.contains('Dear Ben Moore , Thank you for your application');
+      cy.contains('Application');
+      cy.contains('Dear Mr. Ben Moore');
+      cy.contains('Your Premium Card application');
       cy.contains(todaysDate);
       cy.get('.box-shadow').should('be.visible');
     });

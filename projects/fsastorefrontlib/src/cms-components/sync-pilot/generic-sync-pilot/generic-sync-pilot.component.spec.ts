@@ -4,7 +4,7 @@ import { CmsService, MockTranslatePipe, WindowRef } from '@spartacus/core';
 import {
   CmsComponentData,
   IconConfig,
-  ModalService,
+  LaunchDialogService,
 } from '@spartacus/storefront';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { Service } from '@syncpilot/bpool-guest-lib';
@@ -32,9 +32,9 @@ class MockUserAccountFacade {
   }
 }
 
-class MockModalService {
-  open() {}
-  closeActiveModal() {}
+class MockLaunchDialogService {
+  openDialog() {}
+  closeDialog(reason: String): void {}
 }
 
 class MockService {
@@ -78,7 +78,7 @@ describe('GenericSyncPilotComponent', () => {
   let fixture: ComponentFixture<GenericSyncPilotComponent>;
   let mockUserAccountFacade: UserAccountFacade;
   let service: Service;
-  let modalService: ModalService;
+  let launchDialogService: LaunchDialogService;
   let componentData: CmsComponentData<CMSConnectionComponent>;
   let winRef: WindowRef;
   let el: DebugElement;
@@ -96,8 +96,8 @@ describe('GenericSyncPilotComponent', () => {
           useClass: MockService,
         },
         {
-          provide: ModalService,
-          useClass: MockModalService,
+          provide: LaunchDialogService,
+          useClass: MockLaunchDialogService,
         },
         {
           provide: CmsService,
@@ -119,7 +119,7 @@ describe('GenericSyncPilotComponent', () => {
     fixture = TestBed.createComponent(GenericSyncPilotComponent);
     mockUserAccountFacade = TestBed.inject(UserAccountFacade);
     service = TestBed.inject(Service);
-    modalService = TestBed.inject(ModalService);
+    launchDialogService = TestBed.inject(LaunchDialogService);
     winRef = TestBed.inject(WindowRef);
     componentData = TestBed.inject(CmsComponentData);
     el = fixture.debugElement;

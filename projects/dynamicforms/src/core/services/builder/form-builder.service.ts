@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { UserAccountFacade } from '@spartacus/user/account/root';
 import { FormValidationService } from '../form-validation/form-validation.service';
 import { FieldConfig } from './../../models/form-config.interface';
@@ -8,7 +8,7 @@ import { FieldDependencyResolverService } from './../form-dependencies/field-dep
 @Injectable()
 export class FormBuilderService {
   constructor(
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected formValidationService: FormValidationService,
     protected fieldDependencyResolverService: FieldDependencyResolverService,
     protected userAccountFacade: UserAccountFacade
@@ -49,9 +49,8 @@ export class FormBuilderService {
 
   createControl(fieldConfig: FieldConfig) {
     const { disabled, value } = fieldConfig;
-    const validations = this.formValidationService.getValidatorsForField(
-      fieldConfig
-    );
+    const validations =
+      this.formValidationService.getValidatorsForField(fieldConfig);
     return this.fb.control({ disabled, value }, validations);
   }
 
@@ -60,7 +59,7 @@ export class FormBuilderService {
    * This is temporary solution. Control property should be defined in the form defintion's JSON metadata.
    */
   private enableFieldsForSellerUserGroup(
-    fieldControl: FormControl,
+    fieldControl: UntypedFormControl,
     fieldConfig
   ) {
     this.userAccountFacade

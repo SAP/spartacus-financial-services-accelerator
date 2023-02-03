@@ -19,7 +19,6 @@ import { FormContainerModule } from '../../core/form-containers/form-container.m
       },
     }),
   ],
-  entryComponents: [FormCMSComponent],
   exports: [FormCMSComponent],
 })
 export class FormCMSModule {}

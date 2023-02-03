@@ -19,9 +19,8 @@ export class CategoryStepGuard implements CanActivate {
 
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     let currentCategory;
-    const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
-      route
-    );
+    const currentStepIndex =
+      this.fsCheckoutConfigService.getCurrentStepIndex(route);
 
     const currentStep = this.fsCheckoutConfigService.steps[currentStepIndex];
 

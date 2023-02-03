@@ -3,7 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule } from '@spartacus/core';
 import { reducerProvider, reducerToken } from '../../store/reducers';
 import { FormBuilderService } from './form-builder.service';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { FormValidationService } from '../form-validation/form-validation.service';
 import { FieldConfig } from '../../models/form-config.interface';
 import { FieldDependencyResolverService } from '../form-dependencies/field-dependency-resolver.service';
@@ -46,7 +46,7 @@ describe('FormDataService', () => {
       providers: [
         FormBuilderService,
         reducerProvider,
-        FormBuilder,
+        UntypedFormBuilder,
         { provide: FormValidationService, useClass: MockFormValidationService },
         {
           provide: FieldDependencyResolverService,

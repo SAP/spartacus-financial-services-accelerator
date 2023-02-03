@@ -85,9 +85,8 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   }
 
   populateSteps(changeRequest: any) {
-    this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
-      changeRequest
-    );
+    this.configurationSteps =
+      this.userRequestNavigationService.getConfigurationSteps(changeRequest);
     const activeStepData = this.userRequestNavigationService.getActiveStep(
       this.configurationSteps,
       this.activatedRoute.routeConfig.path

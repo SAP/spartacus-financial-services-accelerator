@@ -103,6 +103,5 @@ const routes: Routes = [
     PolicyChartDataService,
     TranslatePipe,
   ],
-  entryComponents: [QuotesComponent],
 })
 export class QuoteModule {}

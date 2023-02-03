@@ -148,13 +148,6 @@ export function checkConfigurationMiniCart() {
   });
 }
 
-export function checkOrderTotal(price) {
-  cy.get('.short-overview-title')
-    .contains('Order total')
-    .parent()
-    .contains(price);
-}
-
 export function populateAddressInfo() {
   cy.get('[name="street"]').eq(0).type('Omladinskih Brigada');
   cy.get('[name="streetNumber"]').eq(0).type('90g');
@@ -167,4 +160,31 @@ export function populateEmploymentData() {
   cy.get('[name="employmentStatus"]').select('unemployed');
   cy.get('[name="incomeFrequency"]').select('yearly');
   cy.get('[name="netIncomeAmount"]').type('560');
+}
+
+export function uploadDocument() {
+  const filePath = 'ClaimDocument.pdf';
+  cy.get('h4').contains('Upload Documents');
+  cy.get('.custom-file-input').attachFile(filePath);
+  cy.get('.btn-primary')
+    .should('contain.text', 'Upload')
+    .eq(0)
+    .click({ force: true });
+}
+
+export function checkOrderConfirmation() {
+  cy.get('.heading-headline')
+    .should('be.visible')
+    .should('contain', 'Application Confirmation');
+  cy.get('cx-fs-application-confirmation')
+    .should('be.visible')
+    .within(() => {
+      cy.get('.image-wrapper').should('be.visible');
+      cy.get('.notice-text')
+        .should('be.visible')
+        .contains(
+          'You have successfully created and sent request for application number'
+        );
+      cy.get('p').should('have.length', '2');
+    });
 }

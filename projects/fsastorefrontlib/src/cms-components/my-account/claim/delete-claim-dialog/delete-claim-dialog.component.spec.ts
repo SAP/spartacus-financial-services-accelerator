@@ -6,13 +6,13 @@ import {
   OCC_USER_ID_CURRENT,
   UserIdService,
 } from '@spartacus/core';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 
-class MockModalService {
-  dismissActiveModal(): void {}
+class MockLaunchDialogService {
+  closeDialog(reason: String): void {}
 }
 
 class MockUserIdService {
@@ -38,8 +38,8 @@ describe('DeleteClaimDialogComponent', () => {
         declarations: [DeleteClaimDialogComponent],
         providers: [
           {
-            provide: ModalService,
-            useClass: MockModalService,
+            provide: LaunchDialogService,
+            useClass: MockLaunchDialogService,
           },
           {
             provide: ClaimService,

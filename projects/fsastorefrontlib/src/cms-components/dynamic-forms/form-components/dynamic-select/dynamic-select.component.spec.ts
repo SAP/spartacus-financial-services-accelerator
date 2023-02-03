@@ -2,8 +2,8 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -14,9 +14,9 @@ import {
 } from '@spartacus/dynamicforms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { DynamicSelectComponent } from './dynamic-select.component';
-import { CategoryService } from '../../../../core';
+import { DynamicFormsCategoryService } from '../../services/dynamic-forms-category.service';
 
 @Component({
   // eslint-disable-next-line
@@ -53,7 +53,7 @@ class MockOccValueListService {
   }
 }
 
-let formControl = new FormControl('formValue');
+let formControl = new UntypedFormControl('formValue');
 
 class MockFormService {
   getFormControlForCode(): AbstractControl {
@@ -61,24 +61,25 @@ class MockFormService {
   }
 }
 
-class MockCategoryService {
-  getActiveCategory(): Observable<string> {
-    return of('testCategory');
-  }
-}
-
 const testUrl = 'testUrl';
 
-let mockField: FieldConfig;
+let mockField: FieldConfig = {
+  fieldType: 'input',
+  name: 'testInput',
+};
 
-const mockFormGroup = new FormGroup({
-  dependentTestField: new FormControl(),
-  testSelect: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  dependentTestField: new UntypedFormControl(),
+  testSelect: new UntypedFormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
+
+class MockDynamicFormsCategoryService {
+  configureApiValueForCategory(_mockField) {}
+}
 
 describe('DynamicSelectComponent', () => {
   let component: DynamicSelectComponent;
@@ -101,8 +102,8 @@ describe('DynamicSelectComponent', () => {
           },
           { provide: FormService, useClass: MockFormService },
           {
-            provide: CategoryService,
-            useClass: MockCategoryService,
+            provide: DynamicFormsCategoryService,
+            useClass: MockDynamicFormsCategoryService,
           },
         ],
       }).compileComponents();

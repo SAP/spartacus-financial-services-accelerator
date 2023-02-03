@@ -7,7 +7,8 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class OccAppointmentSchedulingAdapter
-  implements AppointmentSchedulingAdapter {
+  implements AppointmentSchedulingAdapter
+{
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

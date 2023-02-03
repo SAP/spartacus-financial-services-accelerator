@@ -88,13 +88,13 @@ export function configureAProduct() {
   cy.get('[name=startDate]').type('2023-12-12');
 }
 
-export function checkFtdApplication() {
+export function checkFtdApplication(status) {
   cy.get('cx-fs-quotes').within(() => {
     cy.get('.info-card').should('have.length', 1);
     cy.get('h6').should('have.text', ' Fixed Term Deposit ');
     cy.get('.label').contains('Fixed Term Deposit');
     cy.get('.label').contains('Quote status');
-    cy.get('.value').contains('Pending');
+    cy.get('.value').contains(status);
     cy.get('.value').contains('€503,125.00');
   });
 }

@@ -185,10 +185,13 @@ describe('Product Assignment Effects', () => {
         productCode: '0001555',
         parentOrgUnit: 'SAP',
       });
-      const removeProductAssignmentAction = new fromActions.RemoveProductAssignmentSuccess();
-      const loadPotentialProductAssignmentsAction = new fromActions.LoadPotentialProductAssignments(
-        { occUserId: OCC_USER_ID_CURRENT, orgUnitId: mockedOrgUnitId }
-      );
+      const removeProductAssignmentAction =
+        new fromActions.RemoveProductAssignmentSuccess();
+      const loadPotentialProductAssignmentsAction =
+        new fromActions.LoadPotentialProductAssignments({
+          occUserId: OCC_USER_ID_CURRENT,
+          orgUnitId: mockedOrgUnitId,
+        });
       actions$ = hot('-a', { a: action });
       const expected = cold('-(bc)', {
         b: removeProductAssignmentAction,

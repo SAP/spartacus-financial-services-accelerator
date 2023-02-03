@@ -27,6 +27,5 @@ import { MediaModule } from '@spartacus/storefront';
   ],
   declarations: [CategoryFeatureComponent],
   exports: [CategoryFeatureComponent],
-  entryComponents: [CategoryFeatureComponent],
 })
 export class CategoryFeatureModule {}

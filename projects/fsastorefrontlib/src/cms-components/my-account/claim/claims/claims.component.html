@@ -7,7 +7,7 @@
       <div *ngFor="let claim of claims.claims" class="col-12 col-md-6 d-flex">
         <div class="info-card">
           <h6 class="title background-color-4">
-            <ng-container *ngIf="claim.incidentType != undefined; else na">
+            <ng-container *ngIf="claim.incidentType !== undefined; else na">
               {{ claim.insurancePolicy?.categoryData?.name }}
               {{ 'claim.claim' | cxTranslate }}
               <ng-container
@@ -55,7 +55,7 @@
                   >:
                   <span class="value">
                     <ng-container
-                      *ngIf="claim.dateOfLoss != undefined; else na"
+                      *ngIf="claim.dateOfLoss !== undefined; else na"
                     >
                       {{ claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy' }}
                     </ng-container></span
@@ -68,10 +68,7 @@
                   >:
                   <span class="value"
                     ><ng-container
-                      *ngIf="
-                        claim.claimHandler?.displayName != undefined;
-                        else na
-                      "
+                      *ngIf="checkClaimHandlerDisplayName(claim); else na"
                     >
                       {{ claim.claimHandler.displayName }}</ng-container
                     >
@@ -84,7 +81,7 @@
                   >:
                   <span class="value">
                     <ng-container
-                      *ngIf="claim.claimHandler?.email != undefined; else na"
+                      *ngIf="checkClaimHandlerDisplayEmail(claim); else na"
                       >{{ claim.claimHandler.email }}</ng-container
                     >
                   </span>
@@ -94,7 +91,9 @@
                     'fscommon.status' | cxTranslate
                   }}</span
                   >:
-                  <ng-container *ngIf="claim.claimStatus != undefined; else na">
+                  <ng-container
+                    *ngIf="claim.claimStatus !== undefined; else na"
+                  >
                     <span class="value">{{ claim.claimStatus }}</span>
                   </ng-container>
                 </div>
@@ -102,7 +101,10 @@
               <div class="info-card-image">
                 <span class="image-wrapper">
                   <img
-                    *ngIf="claim.incidentType != undefined; else noIncidentType"
+                    *ngIf="
+                      claim.incidentType !== undefined;
+                      else noIncidentType
+                    "
                     class="image-item"
                     [src]="baseUrl + claim.incidentType?.icon.url"
                     alt="{{ claim.incidentType?.icon.alt }}"
@@ -113,8 +115,8 @@
             <div class="info-card-links">
               <ng-container
                 *ngIf="
-                  claim.claimStatus == 'OPEN' ||
-                    claim.claimStatus == 'REJECTED';
+                  claim.claimStatus === 'OPEN' ||
+                    claim.claimStatus === 'REJECTED';
                   else details
                 "
               >

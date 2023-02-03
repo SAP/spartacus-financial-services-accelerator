@@ -60,10 +60,11 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
             ) {
               switch (requestType) {
                 case RequestType.INSURED_OBJECT_CHANGE: {
-                  const changedInsuredObject = this.changePolicyService.getChangedInsuredObject(
-                    changeRequest,
-                    changeProcessForm
-                  );
+                  const changedInsuredObject =
+                    this.changePolicyService.getChangedInsuredObject(
+                      changeRequest,
+                      changeProcessForm
+                    );
                   this.simulateChangeRequest({
                     requestId: changeRequest.requestId,
                     insurancePolicy: {
@@ -86,9 +87,8 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
                       insuredObjectList: {
                         insuredObjects: [
                           {
-                            insuredObjectId: this.getMainInsuredObjectId(
-                              changeRequest
-                            ),
+                            insuredObjectId:
+                              this.getMainInsuredObjectId(changeRequest),
                             childInsuredObjectList: {
                               insuredObjects: [addedInsuredObject],
                             },
@@ -120,12 +120,10 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
           [key]: changeProcessForm[key],
         };
       }, {});
-    const addedInsuredObject = this.changePolicyService.createInsuredObject(
-      filteredForm
-    );
-    addedInsuredObject.insuredObjectType = this.getTypeOfChidlInsuredObject(
-      changeRequest
-    );
+    const addedInsuredObject =
+      this.changePolicyService.createInsuredObject(filteredForm);
+    addedInsuredObject.insuredObjectType =
+      this.getTypeOfChidlInsuredObject(changeRequest);
     return addedInsuredObject;
   }
 

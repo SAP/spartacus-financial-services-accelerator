@@ -36,6 +36,5 @@ import { FSLoginRegisterComponent } from './login-register.component';
   ],
   declarations: [FSLoginFormComponent, FSLoginRegisterComponent],
   exports: [FSLoginFormComponent, FSLoginRegisterComponent],
-  entryComponents: [FSLoginFormComponent, FSLoginRegisterComponent],
 })
 export class FSLoginFormModule {}

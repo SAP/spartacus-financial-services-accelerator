@@ -8,6 +8,7 @@ import {
   CmsConfig,
   ConfigModule,
   I18nModule,
+  provideDefaultConfig,
   RoutesConfig,
   RoutingConfig,
   UrlModule,
@@ -18,6 +19,7 @@ import {
   MediaModule,
   PageComponentModule,
   PageLayoutComponent,
+  PaymentMethodsModule,
   SpinnerModule,
 } from '@spartacus/storefront';
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
@@ -59,14 +61,15 @@ import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
 import { FSCartCouponModule } from './components/cart-coupon/cart-coupon.module';
 import { FSAddressService } from '../../core/user/facade/address.service';
-import {
-  CartNotEmptyGuard,
-  PaymentFormModule,
-  PaymentMethodModule,
-} from '@spartacus/checkout/components';
 import { FSCheckoutAuthGuard } from './guards/checkout-auth-guard';
 import { FSMessageModule } from './../message/message.module';
 import { SetActiveCartGuard } from './guards/set-active-cart-guard';
+import {
+  CartNotEmptyGuard,
+  CheckoutPaymentFormModule,
+} from '@spartacus/checkout/base/components';
+import { defaultBindQuoteDialogLayoutConfig } from './components/bind-quote-dialog/default-bind-quote-dialog-layout.config';
+import { defaultOpenRefferedQuoteDialogLayoutConfig } from './components/referred-quote/default-open-reffered-quote-dialog-layout.config';
 import { ApplicationConfirmationComponent } from './components/application-confirmation/application-confirmation.component';
 import { ApplicationConfirmationGuard } from '../../core/checkout/guards/application-confirmation.guard';
 import { GenericSyncPilotModule } from '../sync-pilot/generic-sync-pilot/generic-sync-pilot.module';
@@ -208,8 +211,8 @@ const routes: Routes = [
     AccordionModule,
     UserIdentificationModule,
     LegalModule,
-    PaymentMethodModule,
-    PaymentFormModule,
+    PaymentMethodsModule,
+    CheckoutPaymentFormModule,
     CardModule,
     UrlModule,
     FSCheckoutProgressModule,
@@ -282,8 +285,8 @@ const routes: Routes = [
     I18nModule,
     LegalModule,
     UserIdentificationModule,
-    PaymentMethodModule,
-    PaymentFormModule,
+    PaymentMethodsModule,
+    CheckoutPaymentFormModule,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     ReferredQuoteDialogComponent,
@@ -301,6 +304,8 @@ const routes: Routes = [
     CategoryService,
     FSAddressService,
     reducerProvider,
+    provideDefaultConfig(defaultBindQuoteDialogLayoutConfig),
+    provideDefaultConfig(defaultOpenRefferedQuoteDialogLayoutConfig),
   ],
 })
 export class CheckoutModule {}

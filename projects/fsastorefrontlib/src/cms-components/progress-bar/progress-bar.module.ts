@@ -8,6 +8,5 @@ import { ProgressBarComponent } from './progress-bar.component';
   imports: [CommonModule, I18nModule, UrlModule, RouterModule],
   declarations: [ProgressBarComponent],
   exports: [ProgressBarComponent],
-  entryComponents: [ProgressBarComponent],
 })
 export class ProgressBarModule {}

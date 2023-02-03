@@ -13,10 +13,9 @@ class MockPolicyAdapter implements PolicyAdapter {
   ).and.callFake((userId, policyCategoryCode) =>
     of('getPoliciesByCategory' + userId + policyCategoryCode)
   );
-  getPolicy = createSpy(
-    'PolicyAdapter.getPolicy'
-  ).and.callFake((userId, policyId, contractId) =>
-    of('getPolicy' + userId + policyId + contractId)
+  getPolicy = createSpy('PolicyAdapter.getPolicy').and.callFake(
+    (userId, policyId, contractId) =>
+      of('getPolicy' + userId + policyId + contractId)
   );
   getPremiumCalendar = createSpy(
     'PolicyAdapter.getPremiumCalendar'

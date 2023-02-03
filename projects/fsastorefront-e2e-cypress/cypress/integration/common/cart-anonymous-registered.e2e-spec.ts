@@ -26,7 +26,10 @@ testFilters([''], () => {
       travelCheckout.checkBackpackersOptionalProducts();
       checkout.clickContinueButton();
       cy.get('.SiteLogo').should('be.visible').click();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
     });
 
     it('Should register a new user', () => {
@@ -57,7 +60,10 @@ testFilters([''], () => {
 
     it('Should logout and login again', () => {
       register.logout();
-      homepage.checkPageElements();
+      homepage.checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       cy.get('cx-login').click();
       register.login(registrationUser.email, registrationUser.password);
       quotes.checkMyQuotesPage();

@@ -37,6 +37,5 @@ import { FSUpdateProfileComponent } from './update-profile.component';
   ],
   declarations: [FSUpdateProfileComponent],
   exports: [FSUpdateProfileComponent],
-  entryComponents: [FSUpdateProfileComponent],
 })
 export class UpdateProfileModule {}

@@ -4,25 +4,28 @@ import {
   EventEmitter,
   Input,
   Output,
-  Type,
 } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   Address,
+  GlobalMessageService,
   I18nTestingModule,
   User,
-  UserAddressService,
 } from '@spartacus/core';
 import {
   AddressBookComponentService,
   CardModule,
   SpinnerModule,
 } from '@spartacus/storefront';
+import { UserAccountFacade } from '@spartacus/user/account/root';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSAddressInfoComponent } from './address-info.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { UserAccountFacade } from '@spartacus/user/account/root';
+
+class MockGlobalMessageService {
+  add = jasmine.createSpy();
+}
 
 const mockAddress: Address = {
   id: 'addressMockId',
@@ -38,7 +41,7 @@ const mockAddress: Address = {
 };
 
 const mockUser: User = {
-  uid: 'mockUser',
+  uid: '1234',
 };
 
 const isLoading = new BehaviorSubject<boolean>(false);
@@ -47,7 +50,8 @@ class MockComponentService {
   loadAddresses = jasmine.createSpy();
   addUserAddress = jasmine.createSpy();
   updateUserAddress = jasmine.createSpy();
-  deleteAddress = jasmine.createSpy();
+  deleteUserAddress = jasmine.createSpy();
+  setAddressAsDefault = jasmine.createSpy();
   getAddressesStateLoading(): Observable<boolean> {
     return isLoading.asObservable();
   }
@@ -59,20 +63,11 @@ class MockComponentService {
   }
 }
 
-class MockUserAccountFacade {
-  get(): Observable<User> {
-    return of(mockUser);
-  }
-}
-
 @Component({
   selector: 'cx-fs-address-form',
   template: '',
 })
 class MockAddressFormComponent {
-  @Input()
-  user: User;
-
   @Input()
   addressData: Address;
 
@@ -98,17 +93,16 @@ class MockAddressFormComponent {
   backToAddress = new EventEmitter<any>();
 }
 
-class MockUserAddressService {
-  deleteUserAddress() {}
-  setAddressAsDefault() {}
+class MockUserAccountFacade {
+  get() {
+    return of(mockUser);
+  }
 }
 
 describe('FSAddressInfoComponent', () => {
   let component: FSAddressInfoComponent;
   let fixture: ComponentFixture<FSAddressInfoComponent>;
   let el: DebugElement;
-  let userAddressService: UserAddressService;
-  let mockedUserAccountFacade: UserAccountFacade;
   let addressBookComponentService: AddressBookComponentService;
 
   beforeEach(
@@ -125,7 +119,7 @@ describe('FSAddressInfoComponent', () => {
             provide: AddressBookComponentService,
             useClass: MockComponentService,
           },
-          { provide: UserAddressService, useClass: MockUserAddressService },
+          { provide: GlobalMessageService, useClass: MockGlobalMessageService },
           {
             provide: UserAccountFacade,
             useClass: MockUserAccountFacade,
@@ -141,11 +135,6 @@ describe('FSAddressInfoComponent', () => {
     component = fixture.componentInstance;
     spyOn(component, 'addAddressButtonHandle');
     el = fixture.debugElement;
-    userAddressService = TestBed.inject(
-      UserAddressService as Type<UserAddressService>
-    );
-
-    mockedUserAccountFacade = TestBed.inject(UserAccountFacade);
     addressBookComponentService = TestBed.inject(AddressBookComponentService);
 
     isLoading.next(false);
@@ -157,20 +146,59 @@ describe('FSAddressInfoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show spinner if address is loading', () => {
+  it('should show spinner if addresses are loading', () => {
     isLoading.next(true);
     fixture.detectChanges();
     expect(el.query(By.css('cx-spinner'))).toBeTruthy();
   });
 
-  it('should show address card after loading', () => {
+  it('should show address cards after loading', () => {
     expect(el.query(By.css('cx-card'))).toBeTruthy();
+  });
+
+  it('should address cards number to be equal with addresses count', () => {
+    expect(el.queryAll(By.css('cx-card')).length).toEqual(3);
+  });
+
+  it('should call addAddressButtonHandle()', () => {
+    component.addAddressButtonHandle();
+
+    expect(component.addAddressButtonHandle).toHaveBeenCalledWith();
   });
 
   it('should call editAddressButtonHandle(address: Address)', () => {
     spyOn(component, 'editAddressButtonHandle');
     component.editAddressButtonHandle(mockAddress);
+
     expect(component.editAddressButtonHandle).toHaveBeenCalledWith(mockAddress);
+  });
+
+  it('should call addAddressSubmit(address: Address)', () => {
+    spyOn(component, 'addAddressSubmit');
+    component.addAddressSubmit(mockAddress);
+
+    expect(component.addAddressSubmit).toHaveBeenCalledWith(mockAddress);
+  });
+
+  it('should call addAddressCancel()', () => {
+    spyOn(component, 'addAddressCancel');
+    component.addAddressCancel();
+
+    expect(component.addAddressCancel).toHaveBeenCalledWith();
+  });
+
+  it('should call editAddressSubmit(address: Address)', () => {
+    spyOn(component, 'editAddressSubmit');
+    component.editAddressSubmit(mockAddress);
+
+    expect(component.editAddressSubmit).toHaveBeenCalledWith(mockAddress);
+  });
+
+  it('should call editAddressCancel()', () => {
+    spyOn(component, 'editAddressCancel');
+    component.editAddressCancel();
+
+    expect(component.editAddressCancel).toHaveBeenCalledWith();
   });
 
   it('should display address data', () => {
@@ -184,5 +212,32 @@ describe('FSAddressInfoComponent', () => {
         mockAddress.country.isocode &&
         mockAddress.postalCode
     );
+  });
+
+  it('should display default label on address default', () => {
+    mockAddress.defaultAddress = true;
+    fixture.detectChanges();
+    const element = el.query(By.css('.card-header'));
+    expect(element.nativeElement.textContent).toContain(
+      ' ✓ addressCard.default '
+    );
+  });
+
+  describe('setAddressAsDefault', () => {
+    it('should set Address as default', () => {
+      component.setAddressAsDefault(mockAddress);
+      expect(
+        addressBookComponentService.setAddressAsDefault
+      ).toHaveBeenCalledWith(mockAddress.id);
+    });
+  });
+
+  describe('deleteAddress', () => {
+    it('should set delete user Address', () => {
+      component.deleteAddress('1');
+      expect(
+        addressBookComponentService.deleteUserAddress
+      ).toHaveBeenCalledWith('1');
+    });
   });
 });

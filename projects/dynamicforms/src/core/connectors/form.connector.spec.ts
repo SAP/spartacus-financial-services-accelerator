@@ -7,24 +7,20 @@ import createSpy = jasmine.createSpy;
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 
 class MockFormAdapter implements FormAdapter {
-  getFormDefinitions = createSpy(
-    'FormAdapter.getFormDefinitions'
-  ).and.callFake((categoryCode, formDefType) =>
-    of('getFormDefinitions' + categoryCode + formDefType)
+  getFormDefinitions = createSpy('FormAdapter.getFormDefinitions').and.callFake(
+    (categoryCode, formDefType) =>
+      of('getFormDefinitions' + categoryCode + formDefType)
   );
-  getFormDefinition = createSpy(
-    'FormAdapter.getFormDefinition'
-  ).and.callFake((applicationID, formDataID) =>
-    of('getFormDefinition' + applicationID + formDataID)
+  getFormDefinition = createSpy('FormAdapter.getFormDefinition').and.callFake(
+    (applicationID, formDataID) =>
+      of('getFormDefinition' + applicationID + formDataID)
   );
-  getFormData = createSpy(
-    'FormAdapter.getFormData'
-  ).and.callFake((formDataID, userId) =>
-    of('getFormData' + formDataID + userId)
+  getFormData = createSpy('FormAdapter.getFormData').and.callFake(
+    (formDataID, userId) => of('getFormData' + formDataID + userId)
   );
-  saveFormData = createSpy(
-    'FormAdapter.saveFormData'
-  ).and.callFake((formData, userId) => of('saveFormData' + formData + userId));
+  saveFormData = createSpy('FormAdapter.saveFormData').and.callFake(
+    (formData, userId) => of('saveFormData' + formData + userId)
+  );
 }
 const formDefinitionId = 'formDef';
 const formDataId = 'formData';

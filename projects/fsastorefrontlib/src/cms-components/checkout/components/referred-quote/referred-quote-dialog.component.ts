@@ -5,7 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { ModalService } from '@spartacus/storefront';
+import { LaunchDialogService } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-referred-quote-dialog',
@@ -18,10 +18,10 @@ export class ReferredQuoteDialogComponent {
   @ViewChild('dialog', { static: false, read: ElementRef })
   dialog: ElementRef;
 
-  constructor(protected modalService: ModalService) {}
+  constructor(protected launchDialogService: LaunchDialogService) {}
 
   dismissModal(reason?: any): void {
-    this.modalService.dismissActiveModal(reason);
+    this.launchDialogService.closeDialog(reason);
     this.referredQuote$.emit(false);
   }
 }

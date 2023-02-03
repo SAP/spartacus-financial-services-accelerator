@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { provideConfig, I18nConfig } from '@spartacus/core';
+import { I18nConfig, provideConfig } from '@spartacus/core';
 import { DigitalPaymentsModule } from '@spartacus/digital-payments';
-import {
-  dpTranslationChunksConfig,
-  dpTranslations,
-} from '@spartacus/digital-payments';
+import { dpTranslationChunksConfig, dpTranslations } from "@spartacus/digital-payments/assets";
+
 @NgModule({
   imports: [DigitalPaymentsModule],
   providers: [
@@ -17,4 +15,4 @@ import {
     }),
   ],
 })
-export class DigitalPaymentsFeatureModule {}
+export class DigitalPaymentsFeatureModule { }

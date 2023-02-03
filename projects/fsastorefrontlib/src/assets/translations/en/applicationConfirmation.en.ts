@@ -6,5 +6,6 @@ export const applicationConfirmation = {
       'Wait for our service to inform you what is the current status for your {{ productName }} for required {{ quotePrice }}.',
     confirmationEmail:
       'Confirmation email and every status upgrade regarding your application request, you can easily find in your self service portal inbox and your mailbox.',
+    documentsMessage: 'Signature will be required soon! Check My Documents.',
   },
 };

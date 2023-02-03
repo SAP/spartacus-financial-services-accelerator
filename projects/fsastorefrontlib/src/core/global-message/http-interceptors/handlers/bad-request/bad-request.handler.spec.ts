@@ -32,7 +32,7 @@ class MockGlobalMessageService {
   remove() {}
 }
 
-describe('BadRequestHandler', () => {
+describe('FSBadRequestHandler', () => {
   let service: FSBadRequestHandler;
   let globalMessageService: GlobalMessageService;
 

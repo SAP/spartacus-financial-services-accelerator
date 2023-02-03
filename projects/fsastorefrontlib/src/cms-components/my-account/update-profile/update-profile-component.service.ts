@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { GlobalMessageService } from '@spartacus/core';
 import { DefaultFormValidators } from '@spartacus/dynamicforms';
 import { UpdateProfileComponentService } from '@spartacus/user/profile/components';
@@ -15,18 +19,18 @@ export class FSUpdateProfileComponentService extends UpdateProfileComponentServi
     super(userProfile, globalMessageService);
   }
 
-  form: FormGroup = new FormGroup({
-    titleCode: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', [
+  form: UntypedFormGroup = new UntypedFormGroup({
+    titleCode: new UntypedFormControl('', Validators.required),
+    firstName: new UntypedFormControl('', Validators.required),
+    lastName: new UntypedFormControl('', Validators.required),
+    dateOfBirth: new UntypedFormControl('', [
       DefaultFormValidators.required,
       DefaultFormValidators.dateOfBirthValidator(18),
       Validators.min(1900),
     ]),
-    contactInfos: new FormGroup({
-      code: new FormControl(''),
-      phoneNumber: new FormControl(
+    contactInfos: new UntypedFormGroup({
+      code: new UntypedFormControl(''),
+      phoneNumber: new UntypedFormControl(
         '',
         DefaultFormValidators.regexValidator(
           DefaultFormValidators.phoneNumberRegex

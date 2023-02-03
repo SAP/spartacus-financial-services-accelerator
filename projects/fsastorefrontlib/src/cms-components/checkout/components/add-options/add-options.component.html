@@ -64,7 +64,7 @@
               *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
             >
               <ng-container
-                *ngIf="orderEntryData.product?.bundleTemplates?.length == 3"
+                *ngIf="orderEntryData.product?.bundleTemplates?.length === 3"
               >
                 {{ 'fscommon.included' | cxTranslate }}
               </ng-container>

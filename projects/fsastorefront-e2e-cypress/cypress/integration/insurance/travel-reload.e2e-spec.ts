@@ -4,6 +4,7 @@ import { registrationUser } from '../../sample-data/users';
 import * as checkout from '../../helpers/checkout/checkout-steps';
 import * as payment from '../../helpers/checkout/insurance/payment';
 import testFilters from '../../support/filters';
+import { checkPageElements } from '../../helpers/homepage';
 
 testFilters([''], () => {
   context('Insurance Checkout Steps Reload', () => {
@@ -97,8 +98,22 @@ testFilters([''], () => {
       checkout.checkAccordions('travelFinalReview');
       cy.reload();
       //User is redirected to homepage
-      cy.get('.SiteLogo').should('be.visible');
-      cy.get('cx-fs-enriched-responsive-banner').should('be.visible');
+      checkPageElements(
+        'Everything is well planned!',
+        'Finish your quote or application in a few steps.'
+      );
+      cy.selectOptionFromDropdown({
+        menuOption: 'Insurance',
+        dropdownItem: 'Travel',
+      });
+      cy.wait(1000);
+      cy.get('.enriched-banner-title')
+        .eq(0)
+        .should(
+          'have.text',
+          'Finish your travel quote and get discount for Homeowners insurance.'
+        );
+      cy.get('.enriched-banner-styled-text').contains('Finish a quote');
     });
   });
 });

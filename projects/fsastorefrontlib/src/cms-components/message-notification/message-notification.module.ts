@@ -17,6 +17,5 @@ import { MessageNotificationComponent } from './message-notification.component';
   ],
   declarations: [MessageNotificationComponent],
   exports: [MessageNotificationComponent],
-  entryComponents: [MessageNotificationComponent],
 })
 export class MessageNotificationModule {}

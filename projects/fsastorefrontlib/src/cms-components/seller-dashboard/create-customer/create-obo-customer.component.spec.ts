@@ -6,7 +6,7 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { DateConfig } from './../../../core/date-config/date-config';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { CreateOBOCustomerComponent } from './create-obo-customer.component';
 import { CreateOBOCustomerComponentService } from './create-obo-customer-component.service';
 import { Observable, of } from 'rxjs';
@@ -25,11 +25,11 @@ const mockUser = {
   dateOfBirth: '10-10-1988',
 };
 
-const mockForm: FormGroup = new FormGroup({
-  email: new FormControl(),
-  firstName: new FormControl(),
-  lastName: new FormControl(),
-  dateOfBirth: new FormControl(),
+const mockForm: UntypedFormGroup = new UntypedFormGroup({
+  email: new UntypedFormControl(),
+  firstName: new UntypedFormControl(),
+  lastName: new UntypedFormControl(),
+  dateOfBirth: new UntypedFormControl(),
 });
 const MockDateConfig: DateConfig = {
   date: {

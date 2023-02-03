@@ -1,8 +1,8 @@
 import { DebugElement } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
@@ -43,8 +43,8 @@ class MockLanguageService {
   }
 }
 
-const mockFormGroup = new FormGroup({
-  testButton: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  testButton: new UntypedFormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {

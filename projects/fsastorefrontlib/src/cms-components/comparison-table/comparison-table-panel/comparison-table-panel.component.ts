@@ -34,7 +34,8 @@ import { FS_ICON_TYPE } from '../../../core/icon-config/icon-config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComparisonTablePanelComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   private subscription = new Subscription();
   iconType = FS_ICON_TYPE;
   comparisonPanel$: Observable<ComparisonPanelCMSComponent>;
@@ -67,9 +68,8 @@ export class ComparisonTablePanelComponent
           .pipe(
             map(data => {
               const productCodes = data.products.split(' ');
-              this.billingData$ = this.billingTimeConnector.getBillingTimes(
-                productCodes
-              );
+              this.billingData$ =
+                this.billingTimeConnector.getBillingTimes(productCodes);
             })
           )
           .subscribe()

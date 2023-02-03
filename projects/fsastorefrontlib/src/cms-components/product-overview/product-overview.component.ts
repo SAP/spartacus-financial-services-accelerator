@@ -13,9 +13,8 @@ export class ProductOverviewComponent {
   @Input() products$: Observable<CmsComponent[]>;
   @Input() productsCount$: Observable<any>;
   @Output() customerDashboardSelected = new EventEmitter<void>();
-  @Output() typeOfProductsSelected = new EventEmitter<
-    ProductOverviewCategory
-  >();
+  @Output() typeOfProductsSelected =
+    new EventEmitter<ProductOverviewCategory>();
 
   iconTypes: typeof ICON_TYPE;
   productOverviewCategory = ProductOverviewCategory;

@@ -7,7 +7,7 @@ import {
   User,
   UserAddressConnector,
 } from '@spartacus/core';
-import { CheckoutDeliveryService } from '@spartacus/checkout/core';
+import { CheckoutDeliveryAddressFacade } from '@spartacus/checkout/base/root';
 import { FSAddressService } from './address.service';
 import { of } from 'rxjs';
 import createSpy = jasmine.createSpy;
@@ -65,7 +65,7 @@ class MockOccValueListService {
 describe('FSAddressService', () => {
   let service: FSAddressService;
   let store: Store<StateWithUser>;
-  let checkoutDeliveryService: CheckoutDeliveryService;
+  let checkoutDeliveryAdressFacade: CheckoutDeliveryAddressFacade;
   let occValueListService: OccValueListService;
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -73,7 +73,7 @@ describe('FSAddressService', () => {
       providers: [
         FSAddressService,
         {
-          provide: CheckoutDeliveryService,
+          provide: CheckoutDeliveryAddressFacade,
           useClass: MockCheckoutDeliveryService,
         },
         {
@@ -90,7 +90,9 @@ describe('FSAddressService', () => {
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
     service = TestBed.inject(FSAddressService);
-    checkoutDeliveryService = TestBed.inject(CheckoutDeliveryService);
+    checkoutDeliveryAdressFacade = TestBed.inject(
+      CheckoutDeliveryAddressFacade
+    );
     occValueListService = TestBed.inject(OccValueListService);
   });
 
@@ -102,17 +104,20 @@ describe('FSAddressService', () => {
   ));
 
   it('should set delivery address for cart when user already has it', () => {
-    spyOn(checkoutDeliveryService, 'setDeliveryAddress').and.callThrough();
+    spyOn(checkoutDeliveryAdressFacade, 'setDeliveryAddress').and.callThrough();
     service.createAddress(formContent, mockUser.defaultAddress);
-    expect(checkoutDeliveryService.setDeliveryAddress).toHaveBeenCalledWith(
-      mockUser.defaultAddress
-    );
+    expect(
+      checkoutDeliveryAdressFacade.setDeliveryAddress
+    ).toHaveBeenCalledWith(mockUser.defaultAddress);
   });
 
   it('should create delivery address', () => {
-    spyOn(checkoutDeliveryService, 'createAndSetAddress').and.callThrough();
+    spyOn(
+      checkoutDeliveryAdressFacade,
+      'createAndSetAddress'
+    ).and.callThrough();
     service.createAddress(formContent, null);
-    expect(checkoutDeliveryService.createAndSetAddress).toHaveBeenCalled();
+    expect(checkoutDeliveryAdressFacade.createAndSetAddress).toHaveBeenCalled();
   });
 
   it('should get countries', () => {

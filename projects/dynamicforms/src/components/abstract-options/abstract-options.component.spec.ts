@@ -3,8 +3,8 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractOptionsComponent } from './abstract-options.component';
 import {
   ReactiveFormsModule,
-  FormGroup,
-  FormControl,
+  UntypedFormGroup,
+  UntypedFormControl,
   AbstractControl,
 } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
@@ -42,7 +42,7 @@ const mockField: FieldConfig = {
   ],
 };
 
-const formControl = new FormControl('formValue');
+const formControl = new UntypedFormControl('formValue');
 
 class MockFormService {
   getFormControlForCode(): AbstractControl {
@@ -50,8 +50,8 @@ class MockFormService {
   }
 }
 
-const mockFormGroup = new FormGroup({
-  testRadio: new FormControl(),
+const mockFormGroup = new UntypedFormGroup({
+  testRadio: new UntypedFormControl(),
 });
 
 const mockLocalizationObj = {

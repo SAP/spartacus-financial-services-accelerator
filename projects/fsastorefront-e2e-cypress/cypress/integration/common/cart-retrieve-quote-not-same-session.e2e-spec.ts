@@ -39,7 +39,10 @@ testFilters([''], () => {
     it('Should logout / login and change main product ', () => {
       cy.get('.SiteLogo').should('be.visible').click();
       register.logout();
-      checkPageElements();
+      checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       cy.get('cx-login').click();
       register.login(registrationUser.email, registrationUser.password);
       checkMyQuotesPage();
@@ -84,7 +87,10 @@ testFilters([''], () => {
     it('Should logout / login and retrieve quotes ', () => {
       cy.get('.SiteLogo').should('be.visible').click();
       register.logout();
-      checkPageElements();
+      checkPageElements(
+        'Choose a perfect product.',
+        'Create long lasting benefits with our digital financial solutions.'
+      );
       cy.get('cx-login').should('be.visible').click();
       register.login(registrationUser.email, registrationUser.password);
       checkMyQuotesPage();

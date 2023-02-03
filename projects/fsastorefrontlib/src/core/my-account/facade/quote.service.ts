@@ -4,7 +4,8 @@ import {
   FormDataStorageService,
 } from '@spartacus/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { OrderEntry, RoutingService, UserIdService } from '@spartacus/core';
+import { RoutingService, UserIdService } from '@spartacus/core';
+import { OrderEntry } from '@spartacus/cart/base/root';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   FSCart,

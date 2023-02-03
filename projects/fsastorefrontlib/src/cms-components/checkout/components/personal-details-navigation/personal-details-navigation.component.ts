@@ -4,7 +4,8 @@ import {
   YFormData,
   FileService,
 } from '@spartacus/dynamicforms';
-import { Address, Cart, RoutingService, User } from '@spartacus/core';
+import { Address, RoutingService, User } from '@spartacus/core';
+import { Cart } from '@spartacus/cart/base/root';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import {
@@ -138,9 +139,10 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     addresses: Address[]
   ) {
     if (user.roles.includes(FSUserRole.SELLER)) {
-      const oboCustomerAddress = this.addressService.populateAddressFromFormData(
-        JSON.parse(formData.content)
-      );
+      const oboCustomerAddress =
+        this.addressService.populateAddressFromFormData(
+          JSON.parse(formData.content)
+        );
       const customerId = JSON.parse(formData.content)[
         this.PERSONAL_DETAILS_FORM_GROUP
       ][this.EMAIL];

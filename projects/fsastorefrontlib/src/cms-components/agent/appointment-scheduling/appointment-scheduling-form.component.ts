@@ -4,7 +4,11 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import {
   GlobalMessageService,
@@ -28,7 +32,7 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
   constructor(
     protected userIdService: UserIdService,
     protected route: ActivatedRoute,
-    protected fb: FormBuilder,
+    protected fb: UntypedFormBuilder,
     protected globalMessageService: GlobalMessageService,
     protected routingService: RoutingService,
     protected appointmentSchedulingService: AppointmentSchedulingService,
@@ -50,7 +54,7 @@ export class AppointmentSchedulingFormComponent implements OnInit, OnDestroy {
   subjectMaxLength: number = 50;
   descriptionMaxLength: number = 250;
 
-  form: FormGroup = this.fb.group({
+  form: UntypedFormGroup = this.fb.group({
     subject: [
       '',
       [Validators.required, Validators.maxLength(this.subjectMaxLength)],

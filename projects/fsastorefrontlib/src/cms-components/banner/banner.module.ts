@@ -20,6 +20,5 @@ import { MediaModule } from '@spartacus/storefront';
   ],
   declarations: [EnrichedResponsiveBannerComponent],
   exports: [EnrichedResponsiveBannerComponent],
-  entryComponents: [EnrichedResponsiveBannerComponent],
 })
 export class BannerModule {}

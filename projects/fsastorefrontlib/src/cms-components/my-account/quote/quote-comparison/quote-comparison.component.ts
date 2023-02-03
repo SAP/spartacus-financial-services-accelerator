@@ -19,11 +19,11 @@ import {
 } from '../../../../occ/occ-models/occ.models';
 import {
   LanguageService,
-  MultiCartService,
   OCC_USER_ID_CURRENT,
   RoutingService,
   UserIdService,
 } from '@spartacus/core';
+import { MultiCartService } from '@spartacus/cart/base/core';
 import { PAY_NOW_BILLING_TIME_CODE } from '../../../../core/general-config/default-general-config';
 
 @Component({
@@ -63,9 +63,8 @@ export class QuoteComparisonComponent implements OnInit, OnDestroy {
           .pipe(
             filter(([routingData, _]) => !routingData.nextState),
             map(([routingData, occUserId]) => {
-              this.quoteCodes = routingData.state.queryParams.cartCodes.split(
-                ','
-              );
+              this.quoteCodes =
+                routingData.state.queryParams.cartCodes.split(',');
               this.userId = occUserId;
               this.subheader = this.quoteCodes?.join(' / ');
               this.quoteService.loadQuotesComparison(

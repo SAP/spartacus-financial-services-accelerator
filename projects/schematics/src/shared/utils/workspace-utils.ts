@@ -34,10 +34,10 @@ function getAngularJsonFile(
   }
 
   const angularJsonContent = configBuffer.toString();
-  return (parseJson(
+  return parseJson(
     angularJsonContent,
     JsonParseMode.Loose
-  ) as unknown) as experimental.workspace.WorkspaceSchema;
+  ) as unknown as experimental.workspace.WorkspaceSchema;
 }
 
 export function getProjectFromWorkspace(

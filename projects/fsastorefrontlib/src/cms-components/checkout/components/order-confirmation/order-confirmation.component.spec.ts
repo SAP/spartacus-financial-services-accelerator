@@ -1,5 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, Order } from '@spartacus/core';
+import { EventService, I18nTestingModule, OccConfig } from '@spartacus/core';
+import { OrderFacade } from '@spartacus/order/root';
 import { SpinnerModule } from '@spartacus/storefront';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
@@ -17,8 +18,6 @@ const mockEntries = [
 ];
 class FSCheckoutServiceStub {
   orderPlaced: boolean;
-  getOrderDetails() {}
-  clearCheckoutData() {}
   filterRemoveableEntries() {
     return mockEntries;
   }
@@ -37,11 +36,22 @@ class MockFSTranslationService {
   getTranslationValue() {}
 }
 
+class MockOrderFacade {
+  getOrderDetails() {}
+}
+
+class MockEventService {
+  dispatch() {}
+}
+
 describe('OrderConfirmationComponent', () => {
   let component: OrderConfirmationComponent;
   let fixture: ComponentFixture<OrderConfirmationComponent>;
   let checkoutService: FSCheckoutService;
   let translationService: FSTranslationService;
+  let orderFacade: OrderFacade;
+  let eventService;
+  EventService;
 
   beforeEach(
     waitForAsync(() => {
@@ -61,6 +71,14 @@ describe('OrderConfirmationComponent', () => {
             provide: FSTranslationService,
             useClass: MockFSTranslationService,
           },
+          {
+            provide: OrderFacade,
+            useClass: MockOrderFacade,
+          },
+          {
+            provide: EventService,
+            useClass: MockEventService,
+          },
         ],
       }).compileComponents();
     })
@@ -72,8 +90,10 @@ describe('OrderConfirmationComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     checkoutService = TestBed.inject(FSCheckoutService);
-    spyOn(checkoutService, 'getOrderDetails').and.stub();
-    spyOn(checkoutService, 'clearCheckoutData').and.stub();
+    orderFacade = TestBed.inject(OrderFacade);
+    eventService = TestBed.inject(EventService);
+    spyOn(orderFacade, 'getOrderDetails').and.stub();
+    spyOn(eventService, 'dispatch').and.stub();
   });
 
   it('should create', () => {

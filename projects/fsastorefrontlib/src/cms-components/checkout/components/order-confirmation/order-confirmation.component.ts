@@ -4,7 +4,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { OccConfig, Order } from '@spartacus/core';
+import { CheckoutQueryResetEvent } from '@spartacus/checkout/base/root';
+import { EventService, OccConfig } from '@spartacus/core';
+import { Order, OrderFacade } from '@spartacus/order/root';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
@@ -22,17 +24,19 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
   constructor(
     protected checkoutService: FSCheckoutService,
     protected config: OccConfig,
-    protected translationService: FSTranslationService
+    protected translationService: FSTranslationService,
+    protected orderFacade: OrderFacade,
+    protected eventService: EventService
   ) {}
 
   ngOnInit() {
-    this.order$ = this.checkoutService.getOrderDetails();
+    this.order$ = this.orderFacade.getOrderDetails();
     this.baseUrl = this.config.backend.occ.baseUrl || '';
   }
 
   ngOnDestroy() {
     this.checkoutService.orderPlaced = false;
-    this.checkoutService.clearCheckoutData();
+    this.eventService.dispatch(CheckoutQueryResetEvent);
   }
 
   getFormContent(order: any): any {

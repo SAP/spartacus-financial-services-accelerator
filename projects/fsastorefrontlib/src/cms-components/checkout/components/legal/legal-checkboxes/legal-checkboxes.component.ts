@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
@@ -32,7 +32,7 @@ export class LegalCheckboxesComponent implements OnInit {
     });
   }
 
-  navigateNext(nextStep: FSSteps, form: FormGroup) {
+  navigateNext(nextStep: FSSteps, form: UntypedFormGroup) {
     if (!form.valid) {
       return;
     }

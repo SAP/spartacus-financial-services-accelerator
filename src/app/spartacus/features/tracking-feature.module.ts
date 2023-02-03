@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
+import { CartAddEntrySuccessEvent, CartRemoveEntrySuccessEvent } from "@spartacus/cart/base/root";
 import {
-  CartAddEntrySuccessEvent,
-  CartRemoveEntrySuccessEvent,
   CmsConfig,
-  provideConfig,
+  provideConfig
 } from '@spartacus/core';
 import { NavigationEvent } from '@spartacus/storefront';
 import {
   PersonalizationRootModule,
-  PERSONALIZATION_FEATURE,
+  PERSONALIZATION_FEATURE
 } from '@spartacus/tracking/personalization/root';
 import { AepModule } from '@spartacus/tracking/tms/aep';
 import { BaseTmsModule, TmsConfig } from '@spartacus/tracking/tms/core';
@@ -44,4 +43,4 @@ import { GtmModule } from '@spartacus/tracking/tms/gtm';
     }),
   ],
 })
-export class TrackingFeatureModule {}
+export class TrackingFeatureModule { }
