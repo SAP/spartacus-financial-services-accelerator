@@ -7,10 +7,13 @@
         </div>
       </div>
       <h5 class="notice-text text-center py-2 px-4 mb-5">
-        {{
-          'applicationConfirmation.successfulCreation'
-            | cxTranslate: { quoteId: quoteId }
-        }}
+        {{ 'applicationConfirmation.successfulCreation' | cxTranslate }}
+        <a class="link text-capitalize" (click)="navigateQuoteDetails()">
+          {{
+            'applicationConfirmation.successfulCreationQuoteIdLink'
+              | cxTranslate: { quoteId: quoteId }
+          }}
+        </a>
       </h5>
       <hr class="w-100 border border-color-6 mb-5" />
       <p>
@@ -20,7 +23,11 @@
         }}
       </p>
       <p>
-        {{ 'applicationConfirmation.confirmationEmail' | cxTranslate }}
+        {{ 'applicationConfirmation.confirmationEmailStart' | cxTranslate }}
+        <a class="link text-capitalize" (click)="navigateInbox()">
+          {{ 'applicationConfirmation.confirmationEmailInbox' | cxTranslate }}
+        </a>
+        {{ 'applicationConfirmation.confirmationEmailEnd' | cxTranslate }}
       </p>
     </div>
   </div>
