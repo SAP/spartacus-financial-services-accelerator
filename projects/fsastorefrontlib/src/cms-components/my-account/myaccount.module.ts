@@ -22,6 +22,7 @@ import { UpdateProfileModule } from './update-profile/update-profile.module';
 import { FSUpdateProfileComponent } from './update-profile/update-profile.component';
 import { FSConsentManagementComponent } from './consent-management/consent-management.component';
 import { FSConsentManagementModule } from './consent-management/consent-management.module';
+import { LoansModule } from './loans/loans.module';
 
 const routes: Routes = [
   {
@@ -105,6 +106,16 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'myLoans',
+      pageLabel: 'my-loans',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -115,6 +126,7 @@ const routes: Routes = [
     UpdateProfileModule,
     InboxModule,
     PolicyModule,
+    LoansModule,
     QuoteModule,
     FSConsentManagementModule,
     ClaimModule,
