@@ -17,6 +17,7 @@ import {
 import { DateFormatConfigurationModule } from '../../shared/util/helpers/pipe/dateFormatConfiguration.module';
 import { AssetsTableModule } from '../assets-table/assets-table.module';
 import { CustomerDashboardModule } from '../customer-dashboard';
+import { FSAddressBookModule } from '../my-account';
 import { ProductOverviewModule } from '../product-overview';
 import { UserChangeAddressModule } from '../user-change-address/user-change-address.module';
 import { UserProfileGuard } from './guards/user-profile-guard';
@@ -47,6 +48,7 @@ const routes: Routes = [
     UserChangeAddressModule,
     CustomerDashboardModule,
     ProductOverviewModule,
+    FSAddressBookModule,
     RouterModule.forChild(routes),
   ],
   providers: [

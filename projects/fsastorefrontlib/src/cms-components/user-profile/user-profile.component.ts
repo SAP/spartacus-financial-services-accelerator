@@ -8,15 +8,17 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
+  Address,
   CmsService,
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
+  UserAddressService,
   UserIdService,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { User, UserAccountFacade } from '@spartacus/user/account/root';
-import { UserProfileService } from '@spartacus/user/profile/core';
+import { UserProfileFacade } from '@spartacus/user/profile/root';
 import {
   BehaviorSubject,
   combineLatest,
@@ -60,7 +62,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected userAccountFacade: UserAccountFacade,
     protected fsConsentService: ConsentService,
     protected routingService: RoutingService,
-    protected userProfileService: UserProfileService,
+    protected userProfileFacade: UserProfileFacade,
     protected userIdService: UserIdService,
     protected quoteService: QuoteService,
     protected policyService: PolicyService,
@@ -68,12 +70,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     protected globalMessageService: GlobalMessageService,
     protected renderer: Renderer2,
     private componentData: CmsComponentData<CMSUserProfileComponent>,
-    protected cmsService: CmsService
+    protected cmsService: CmsService,
+    protected userAddressService: UserAddressService,
   ) {}
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
+  user: FSUser;
   seller: boolean;
   customerQuotes$: Observable<InsuranceQuoteList>;
   customerPolicies$: Observable<any>;
@@ -109,7 +113,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.subscription.add(
       combineLatest([
         this.routingService.getRouterState(),
-        this.userProfileService.get(),
+        this.userProfileFacade.get(),
         this.userIdService.getUserId(),
         this.userAccountFacade.get(),
       ])
@@ -142,6 +146,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
       this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
       this.customerClaims$ = this.fsConsentService.getCustomerClaims();
+      this.subscription.add(
+      this.customer$.pipe().subscribe((customer: FSUser)=>{
+        this.user = customer;
+      }));
     }
   }
 
@@ -154,6 +162,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.customerQuotes$ = this.quoteService.getQuotes();
     this.customerPolicies$ = this.policyService.getPolicies();
     this.customerClaims$ = this.claimService.getClaims();
+    this.subscription.add(
+    this.customer$.pipe().subscribe((customer: FSUser)=>{
+      this.user = customer;
+    }));
   }
 
   showAssetList({
@@ -178,7 +190,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.renderer.removeClass(this.customerProfile.nativeElement, 'slide-out');
   }
 
-  changedAddress(action: string) {
+  changedAddressBySeller(action: string) {
     this.showAddressForm = false;
     this.renderer.addClass(this.customerProfile.nativeElement, 'slide-out');
     if (action) {
@@ -190,6 +202,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         GlobalMessageType.MSG_TYPE_CONFIRMATION
       );
     }
+  }
+
+  changedAddressByCustomer(address: Address) {
+     if(address){
+       this.user.defaultAddress = address;
+     }
+    this.showAddressForm = false;
+    this.renderer.addClass(this.customerProfile.nativeElement, 'slide-out');
   }
 
   private setAllProducts() {

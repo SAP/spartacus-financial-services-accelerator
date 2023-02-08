@@ -1,4 +1,4 @@
-<ng-container *ngIf="customer$ | async as user; else loading">
+<ng-container *ngIf="user; else loading">
   <div class="position-relative text-center">
     <ng-container *ngIf="seller">
       <a
@@ -118,7 +118,8 @@
             *ngIf="showAddressForm"
             [customer]="user"
             [userId]="userId"
-            (actionChange)="changedAddress($event)"
+            (actionChangeBySeller)="changedAddressBySeller($event)"
+            (actionChangeByCustomer)="changedAddressByCustomer($event)"
           ></cx-fs-user-change-address-dialog>
         </div>
       </div>
