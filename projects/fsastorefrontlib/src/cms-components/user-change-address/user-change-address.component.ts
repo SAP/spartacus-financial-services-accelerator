@@ -12,7 +12,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Address, Country, Region, User, UserActions, UserAddressService } from '@spartacus/core';
+import {
+  Address,
+  Country,
+  Region,
+  User,
+  UserActions,
+  UserAddressService,
+} from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { ConsentService } from '../../core/my-account/facade/consent.service';
@@ -30,7 +37,7 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
   @Input() customer: FSUser;
   @Input() userId: string;
   @Output() actionChangeBySeller = new EventEmitter<string>();
-  @Output() actionChangeByCustomer = new EventEmitter<Address>();
+  @Output() actionChangeByCustomer = new EventEmitter<string>();
   private subscription = new Subscription();
   countries$: Observable<Country[]>;
   regions$: Observable<Region[]>;
@@ -53,7 +60,7 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
     protected fSAddressService: FSAddressService,
     protected userAddressService: UserAddressService,
     protected fsConsentService: ConsentService,
-    protected userAccountFacade: UserAccountFacade,
+    protected userAccountFacade: UserAccountFacade
   ) {}
 
   ngOnInit(): void {
@@ -106,18 +113,22 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
     const address: Address = Object.assign(this.addressForm.value);
     address.firstName = this.customer.firstName;
     address.lastName = this.customer.lastName;
-    
+
     this.subscription.add(
-    this.userAccountFacade.get().pipe(take(1)).subscribe((user: User) =>{
-      if(user.roles.includes(FSUserRole.SELLER)){
-        this.changeAddressAsSeller(address);
-      }else{
-        this.changeAddressAsCustomer(address);
-      }
-    }));
+      this.userAccountFacade
+        .get()
+        .pipe(take(1))
+        .subscribe((user: User) => {
+          if (user.roles.includes(FSUserRole.SELLER)) {
+            this.changeAddressAsSeller(address);
+          } else {
+            this.changeAddressAsCustomer(address);
+          }
+        })
+    );
   }
 
-  changeAddressAsSeller(address: Address){
+  changeAddressAsSeller(address: Address) {
     if (!this.customer.defaultAddress) {
       this.fsConsentService.createAddressForUser(
         this.userId,
@@ -138,42 +149,30 @@ export class UserChangeAddressComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeAddressAsCustomer(address: Address){
+  changeAddressAsCustomer(address: Address) {
     if (!this.customer.defaultAddress) {
       address.defaultAddress = true;
       this.userAddressService.addUserAddress(address);
       this.subscription.add(
-      this.actions$.pipe(
-        ofType(UserActions.ADD_USER_ADDRESS_SUCCESS),
-        take(1) 
-      ).subscribe(_ =>{
-        this.actionChangeByCustomer.emit(address);
-      }));
-    } else {
-      if(address.id){
-        this.updateAddressAsCustomer(address);
-      }else{
-        this.userAddressService.getAddresses().pipe(take(1)).subscribe((addresses : Address[]) =>{
-          addresses.forEach((oldAddress: Address)=>{
-            if(oldAddress.defaultAddress){
-              address.id = oldAddress.id;
-              this.updateAddressAsCustomer(address);
-            }
+        this.actions$
+          .pipe(ofType(UserActions.ADD_USER_ADDRESS_SUCCESS), take(1))
+          .subscribe(_ => {
+            this.actionChangeByCustomer.emit('Add');
           })
-        })
-      }        
+      );
+    } else {
+      this.userAddressService.updateUserAddress(
+        this.customer.defaultAddress.id,
+        address
+      );
+      this.subscription.add(
+        this.actions$
+          .pipe(ofType(UserActions.UPDATE_USER_ADDRESS_SUCCESS), take(1))
+          .subscribe(_ => {
+            this.actionChangeByCustomer.emit('Edit');
+          })
+      );
     }
-  }
-
-  updateAddressAsCustomer(address: Address){
-    this.userAddressService.updateUserAddress(address.id ,address);
-        this.subscription.add(
-        this.actions$.pipe(
-          ofType(UserActions.UPDATE_USER_ADDRESS_SUCCESS),
-          take(1)
-        ).subscribe(_ =>{
-          this.actionChangeByCustomer.emit(address);
-        }));
   }
 
   ngOnDestroy(): void {

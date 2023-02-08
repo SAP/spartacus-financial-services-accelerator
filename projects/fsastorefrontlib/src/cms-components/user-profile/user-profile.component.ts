@@ -7,8 +7,8 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { EventService } from '@spartacus/core';
 import {
-  Address,
   CmsService,
   GlobalMessageService,
   GlobalMessageType,
@@ -17,7 +17,11 @@ import {
   UserIdService,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { User, UserAccountFacade } from '@spartacus/user/account/root';
+import {
+  User,
+  UserAccountChangedEvent,
+  UserAccountFacade,
+} from '@spartacus/user/account/root';
 import { UserProfileFacade } from '@spartacus/user/profile/root';
 import {
   BehaviorSubject,
@@ -72,12 +76,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private componentData: CmsComponentData<CMSUserProfileComponent>,
     protected cmsService: CmsService,
     protected userAddressService: UserAddressService,
+    protected eventService: EventService
   ) {}
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
-  user: FSUser;
   seller: boolean;
   customerQuotes$: Observable<InsuranceQuoteList>;
   customerPolicies$: Observable<any>;
@@ -103,6 +107,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.setAllProductsCountByCategory();
     this.setFilteredProducts();
     this.loadCustomerDetails();
+    this.refreshCurrentCustomer();
   }
 
   productsSelected(type: ProductOverviewCategory) {
@@ -121,13 +126,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           map(([routingData, customer, userId, user]) => {
             this.userId = userId;
             this.customerId = routingData?.state?.params?.customerId;
-            if (
-              customer.roles.includes(FSUserRole.SELLER) &&
-              this.customerId !== customer.uid
-            ) {
-              this.getSellerAssets(user, userId, this.customerId);
-            } else {
-              this.getAssetsforCurrentUser();
+            if (customer) {
+              if (
+                customer.roles.includes(FSUserRole.SELLER) &&
+                this.customerId !== customer.uid
+              ) {
+                this.getSellerAssets(user, userId, this.customerId);
+              } else {
+                this.getAssetsforCurrentUser();
+              }
             }
           })
         )
@@ -146,10 +153,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.customerQuotes$ = this.fsConsentService.getCustomerQuotes();
       this.customerPolicies$ = this.fsConsentService.getCustomerPolicies();
       this.customerClaims$ = this.fsConsentService.getCustomerClaims();
-      this.subscription.add(
-      this.customer$.pipe().subscribe((customer: FSUser)=>{
-        this.user = customer;
-      }));
     }
   }
 
@@ -162,10 +165,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.customerQuotes$ = this.quoteService.getQuotes();
     this.customerPolicies$ = this.policyService.getPolicies();
     this.customerClaims$ = this.claimService.getClaims();
-    this.subscription.add(
-    this.customer$.pipe().subscribe((customer: FSUser)=>{
-      this.user = customer;
-    }));
   }
 
   showAssetList({
@@ -204,12 +203,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  changedAddressByCustomer(address: Address) {
-     if(address){
-       this.user.defaultAddress = address;
-     }
+  changedAddressByCustomer(action: string) {
+    this.refreshCurrentCustomer();
     this.showAddressForm = false;
     this.renderer.addClass(this.customerProfile.nativeElement, 'slide-out');
+  }
+
+  private refreshCurrentCustomer() {
+    this.eventService.dispatch({ user: {} }, UserAccountChangedEvent);
   }
 
   private setAllProducts() {

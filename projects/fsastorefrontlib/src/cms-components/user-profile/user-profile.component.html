@@ -1,4 +1,4 @@
-<ng-container *ngIf="user; else loading">
+<ng-container *ngIf="customer$ | async as user; else loading">
   <div class="position-relative text-center">
     <ng-container *ngIf="seller">
       <a
