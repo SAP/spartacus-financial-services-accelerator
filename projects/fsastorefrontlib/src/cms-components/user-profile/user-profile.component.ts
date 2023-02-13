@@ -1,11 +1,14 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
   Renderer2,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import {
   CmsService,
@@ -55,7 +58,7 @@ import {
   templateUrl: 'user-profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserProfileComponent implements OnInit, OnDestroy {
+export class UserProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     protected userAccountFacade: UserAccountFacade,
     protected fsConsentService: ConsentService,
@@ -72,6 +75,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
+  @ViewChildren('smoothScrolling', { read: ElementRef })
+  smoothScrollingList: QueryList<ElementRef>;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
   seller: boolean;
@@ -99,6 +104,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.setAllProductsCountByCategory();
     this.setFilteredProducts();
     this.loadCustomerDetails();
+  }
+
+  ngAfterViewInit() {
+    this.smoothScrollingList.changes.subscribe(() => {
+      if (this.smoothScrollingList.length > 0) {
+        (
+          this.smoothScrollingList.first.nativeElement as HTMLElement
+        ).scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    });
   }
 
   productsSelected(type: ProductOverviewCategory) {

@@ -8,6 +8,8 @@ import {
   I18nTestingModule,
   OccConfig,
   RoutingService,
+  Title,
+  UserService,
   WindowRef,
 } from '@spartacus/core';
 import { LaunchDialogService, LAUNCH_CALLER } from '@spartacus/storefront';
@@ -31,6 +33,13 @@ import { QuoteReviewComponent } from './quote-review.component';
 const formDataContent = '{"content":"formContent"}';
 
 const mockOrderEntries: FSOrderEntry[] = [{ removeable: true }];
+
+class MockUserService {
+  getTitles(): Observable<Title[]> {
+    return of();
+  }
+  loadTitles(): void {}
+}
 
 const mockCart: any = {
   code: 'test001',
@@ -268,6 +277,7 @@ describe('Quote Review Component', () => {
             provide: ActivatedRoute,
             useValue: MockActivatedRoute,
           },
+          { provide: UserService, useClass: MockUserService },
           {
             provide: FSCheckoutConfigService,
             useClass: FSCheckoutConfigServiceStub,

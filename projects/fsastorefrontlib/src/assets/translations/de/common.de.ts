@@ -82,6 +82,7 @@ export const fscommon = {
     isin: 'ISIN',
     personalDetails: 'Persönliche Angaben',
     generalDetails: 'Allgemeine Informationen',
+    customerDetails: '[DE] Customer Details',
     optionalExtras: 'Optionale Extras',
     whoOrWhatIsInsured: 'Wer oder was ist versichert',
     investmentDetails: 'Investment Informationen',

@@ -13,6 +13,8 @@ import {
   GlobalMessageType,
   OccConfig,
   RoutingService,
+  User,
+  UserService,
   WindowRef,
 } from '@spartacus/core';
 import { UserAccountFacade } from '@spartacus/user/account/root';
@@ -53,11 +55,13 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected consentConnector: ConsentConnector,
     protected userAccountFacade: UserAccountFacade,
     protected vcr: ViewContainerRef,
-    protected winRef?: WindowRef
+    protected winRef?: WindowRef,
+    protected userService?: UserService
   ) {}
 
   @ViewChild('element') element: ElementRef;
 
+  user$: Observable<User> = this.userAccountFacade.get();
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
