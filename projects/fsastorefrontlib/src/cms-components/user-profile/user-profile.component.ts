@@ -108,7 +108,9 @@ export class UserProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.step2List.changes.subscribe(() => {
       if (this.step2List.length > 0) {
-        (this.step2List.first.nativeElement as HTMLElement).scrollIntoView({ behavior: 'smooth' });;
+        (this.step2List.first.nativeElement as HTMLElement).scrollIntoView({
+          behavior: 'smooth',
+        });
       }
     });
   }
