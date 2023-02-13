@@ -71,6 +71,41 @@
                   </div>
                 </div>
               </cx-fs-accordion-item>
+              <cx-fs-accordion-item
+                *ngIf="user$ | async as user"
+                [title]="'fscommon.customerDetails' | cxTranslate"
+              >
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <ul class="col-12 accordion-list">
+                      <li class="accordion-list-item row">
+                        <div class="col-6 item-label">{{ 'fscommon.title' | cxTranslate }}:</div>
+                        <div class="col-6 value notice">
+                          {{ user.title }}
+                        </div>
+                      </li>
+                      <li class="accordion-list-item row">
+                        <div class="col-6 item-label">{{ 'fscommon.fundName' | cxTranslate }}:</div>
+                        <div class="col-6 value notice">
+                          {{ user.name }}
+                        </div>
+                      </li>
+                      <li class="accordion-list-item row">
+                        <div class="col-6 item-label">{{ 'fscommon.lifeMainDob' | cxTranslate }}:</div>
+                        <div class="col-6 value notice">
+                          {{ user.dateOfBirth }}
+                        </div>
+                      </li>
+                      <li class="accordion-list-item row">
+                        <div class="col-6 item-label">{{ 'dashboard.email' | cxTranslate }}:</div>
+                        <div class="col-6 value notice">
+                          {{ user.customerId }}
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </cx-fs-accordion-item>
             </ng-container>
           </div>
           <cx-fs-accordion-item
