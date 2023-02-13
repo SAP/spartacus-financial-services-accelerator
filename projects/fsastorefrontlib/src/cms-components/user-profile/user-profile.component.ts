@@ -75,7 +75,8 @@ export class UserProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   @ViewChild('customerProfile') customerProfile: ElementRef;
-  @ViewChildren('step2', { read: ElementRef }) step2List: QueryList<ElementRef>;
+  @ViewChildren('smoothScrolling', { read: ElementRef })
+  smoothScrollingList: QueryList<ElementRef>;
   private subscription = new Subscription();
   customer$: Observable<FSUser>;
   seller: boolean;
@@ -106,9 +107,11 @@ export class UserProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.step2List.changes.subscribe(() => {
-      if (this.step2List.length > 0) {
-        (this.step2List.first.nativeElement as HTMLElement).scrollIntoView({
+    this.smoothScrollingList.changes.subscribe(() => {
+      if (this.smoothScrollingList.length > 0) {
+        (
+          this.smoothScrollingList.first.nativeElement as HTMLElement
+        ).scrollIntoView({
           behavior: 'smooth',
         });
       }
