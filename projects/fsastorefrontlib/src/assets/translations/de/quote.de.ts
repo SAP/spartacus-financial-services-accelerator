@@ -1,6 +1,7 @@
 export const quote = {
   quote: {
     quote: 'Antrag',
+    quoteAndApplication: '[DE] Quote/Application',
     quotes: 'Anträge',
     quoteId: 'Antrags ID',
     quoteReview: 'Antragsüberprüfung',

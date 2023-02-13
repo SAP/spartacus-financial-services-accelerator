@@ -1,6 +1,7 @@
 export const quote = {
   quote: {
     quote: 'Quote',
+    quoteAndApplication: 'Quote/Application',
     quotes: 'Quotes',
     quoteId: 'Quote ID',
     quoteReview: 'Quote Review',
