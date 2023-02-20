@@ -4,8 +4,9 @@
     width: 100%;
   }
   .enriched-banner-text {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: var(--cx-color-1);
     position: absolute;
+    border-radius: 10px;
   }
   .enriched-banner-text-strip {
     display: flex;

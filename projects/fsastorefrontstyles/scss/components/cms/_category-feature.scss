@@ -1,6 +1,13 @@
 %cx-fs-category-feature {
   display: flex;
   .category-feature-wrapper {
+    border-radius: 10px;
+    cx-media {
+      img {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+    }
     @include fs-box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
     .category-feature-text {
       color: var(--cx-color-text);
