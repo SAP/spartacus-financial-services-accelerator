@@ -18,6 +18,7 @@ export class DocumentsTableComponent implements OnDestroy {
   @Input()
   referredObjectColumnVisible = true;
   subscription = new Subscription();
+  selectedDocuments = [];
 
   constructor(protected fileService: FileService) {}
 
@@ -27,6 +28,21 @@ export class DocumentsTableComponent implements OnDestroy {
 
   isDocumentValid(document) {
     return !!document.code && !!document.mime;
+  }
+
+  checkDocumentByExternalSystem(document) {
+    if (document) return 'External';
+    return 'Internal';
+  }
+
+  checkAllCheckBox(ev: any) {
+    // Angular 13
+    this.documentSource.forEach(x => (x.checked = ev.target.checked));
+    console.log(ev);
+  }
+
+  isAllCheckBoxChecked() {
+    return this.documentSource.every(p => p.checked);
   }
 
   ngOnDestroy() {

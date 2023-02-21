@@ -1,3 +1,12 @@
+<div class="ml-auto fit-content mb-5">
+  <span class="text-uppercase notice link">
+    {{ 'document.signSelected' | cxTranslate }}
+  </span>
+  |
+  <span class="text-uppercase notice link">
+    {{ 'document.signAll' | cxTranslate }}
+  </span>
+</div>
 <table
   class="table"
   [attr.aria-label]="'document.uploadedDocuments' | cxTranslate"
@@ -13,19 +22,28 @@
       {{ 'document.referredInsuranceObject' | cxTranslate }}
     </th>
     <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
+    <th scope="col">{{ 'document.signature' | cxTranslate }}</th>
   </thead>
   <tbody>
-    <tr *ngFor="let document of documentSource">
-      <ng-container *ngIf="isDocumentValid(document)">
+    <tr *ngFor="let document of documentSource; let i = index">
+      <ng-container>
         <td class="pointer">
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
             {{ 'document.name' | cxTranslate }}:
           </div>
-          <span
-            class="td-value text-right notice"
-            (click)="downloadDocument(document)"
-            >{{ document.name }}</span
-          >
+          <div class="">
+            <input
+              class="rounded"
+              type="checkbox"
+              value="{{ document.code }}"
+              [(ngModel)]="documentSource[i].checked"
+            />
+            <span
+              class="td-value text-right notice"
+              (click)="downloadDocument(document)"
+              >{{ document.name }}</span
+            >
+          </div>
         </td>
         <td>
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
@@ -73,6 +91,14 @@
         <td>
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
             {{ 'document.documentType' | cxTranslate }}:
+          </div>
+          <span class="td-value text-right">{{
+            checkDocumentByExternalSystem(document.createdByExternalSystem)
+          }}</span>
+        </td>
+        <td>
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ document.signed }}
           </div>
         </td>
       </ng-container>

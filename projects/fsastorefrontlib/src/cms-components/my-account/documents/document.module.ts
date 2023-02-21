@@ -9,9 +9,10 @@ import {
 import { SpinnerModule } from '@spartacus/storefront';
 import { DocumentsOverviewComponent } from './documents-overview/documents-overview.component';
 import { DocumentsTableModule } from './documents-table/documents-table.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule],
+  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule, FormsModule],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
