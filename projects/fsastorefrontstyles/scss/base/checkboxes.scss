@@ -1,7 +1,7 @@
 input[type='checkbox'],
 input[type='radio'] {
-  -webkit-appearance: none;
-  appearance: none;
+  // -webkit-appearance: none;
+  // appearance: none;
 }
 .form-check input[type='checkbox']:checked {
   border-color: var(--cx-color-primary);

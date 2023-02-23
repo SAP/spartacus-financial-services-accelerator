@@ -6,13 +6,14 @@ import {
   I18nModule,
   provideDefaultConfig,
 } from '@spartacus/core';
-import { SpinnerModule } from '@spartacus/storefront';
+import { SpinnerModule, IconModule } from '@spartacus/storefront';
 import { DocumentsOverviewComponent } from './documents-overview/documents-overview.component';
 import { DocumentsTableModule } from './documents-table/documents-table.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule, FormsModule],
+  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule, FormsModule, IconModule, HttpClientModule],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
