@@ -66,7 +66,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let document of documentSource; let i = index">
-      <ng-container>
+      <ng-container *ngIf="isDocumentValid(document)">
         <td>
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
             {{ 'document.name' | cxTranslate }}:
