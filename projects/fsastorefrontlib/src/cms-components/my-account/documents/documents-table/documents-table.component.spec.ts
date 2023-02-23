@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { FileService } from '@spartacus/dynamicforms';
+import { DocumentAdapter } from '@spartacus/fsa-storefront';
+import { DocumentService } from 'projects/fsastorefrontlib/src/core/my-account/facade';
 import { of } from 'rxjs';
 import { DocumentsTableComponent } from './documents-table.component';
 
@@ -17,6 +19,10 @@ class MockFileService {
   }
 }
 
+class MockDocumentService {
+  signDocuments() {}
+}
+
 describe('DocumentsTableComponent', () => {
   let component: DocumentsTableComponent;
   let fixture: ComponentFixture<DocumentsTableComponent>;
@@ -27,7 +33,11 @@ describe('DocumentsTableComponent', () => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule],
         declarations: [DocumentsTableComponent],
-        providers: [{ provide: FileService, useClass: MockFileService }],
+        providers: [
+          { provide: FileService, useClass: MockFileService },
+          { provide: DocumentService, useClass: MockDocumentService },
+          { provide: DocumentAdapter },
+        ],
       }).compileComponents();
     })
   );
