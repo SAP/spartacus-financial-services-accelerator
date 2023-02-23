@@ -22,6 +22,7 @@ export class DocumentsTableComponent implements OnDestroy {
   subscription = new Subscription();
   selectedDocuments = [];
   signAllSelected = false;
+  signSelectedDocuments = false;
   selectDocumentsWarning = '';
   noSelectedDocuments = undefined;
 
@@ -45,6 +46,7 @@ export class DocumentsTableComponent implements OnDestroy {
 
   consentDenied() {
     this.signAllSelected = false;
+    this.signSelectedDocuments = false;
   }
 
   selectDocument(documentCode) {
@@ -75,6 +77,11 @@ export class DocumentsTableComponent implements OnDestroy {
   }
 
   signSelected() {
+    this.signSelectedDocuments = true;
+  }
+
+  signSelectedConfirmed() {
+    this.signSelectedDocuments = false;
     if (this.selectedDocuments.length === 0) {
       this.noSelectedDocuments = true;
     } else {

@@ -14,6 +14,39 @@
     {{ 'document.signSelectedWarn' | cxTranslate }}
   </p>
 </div>
+<div class="popup-wrapper" *ngIf="signSelectedDocuments">
+  <div class="w-50 popup-content rounded-large p-4 border-bottom">
+    <div class="d-flex border-bottom">
+      <p class="mx-auto title">{{ 'document.signDocuments' | cxTranslate}}</p>
+      <span class="pointer" (click)="consentDenied()">X</span>
+    </div>
+    <p class="mx-auto text-center font-weight-bold my-5">
+      {{ 'document.consentSelected' | cxTranslate }}
+    </p>
+    <div
+      class="
+        d-lg-flex d-block
+        w-80
+        mx-auto
+        justify-content-space-evenly
+        actions
+      "
+    >
+      <button
+        class="btn btn-secondary px-5 d-block mx-auto mt-3"
+        (click)="consentDenied()"
+      >
+        {{ 'common.cancel' | cxTranslate }}
+      </button>
+      <button
+        class="btn btn-primary px-5 d-block mx-auto mt-3"
+        (click)="signSelectedConfirmed()"
+      >
+        {{ 'document.signSelected' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</div>
 <div class="popup-wrapper" *ngIf="signAllSelected">
   <div class="w-50 popup-content rounded-large p-4 border-bottom">
     <div class="d-flex border-bottom">
