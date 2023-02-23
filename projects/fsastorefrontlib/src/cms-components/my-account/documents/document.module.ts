@@ -13,7 +13,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  imports: [CommonModule, SpinnerModule, I18nModule, DocumentsTableModule, FormsModule, IconModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    SpinnerModule,
+    I18nModule,
+    DocumentsTableModule,
+    FormsModule,
+    IconModule,
+    HttpClientModule,
+  ],
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
