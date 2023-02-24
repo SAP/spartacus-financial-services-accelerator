@@ -56,10 +56,11 @@
           [routerLink]="[product.url]"
         >
           <cx-media [container]="product.image.media"></cx-media>
-          <div class="ml-3 align-self-baseline">
-            <br class="d-none d-md-block" /><span class="notice">{{
-              product.name
-            }}</span>
+          <div class="ml-3 d-flex align-items-center">
+            <br class="d-none d-md-block" /><span class="notice underline"
+              >{{ product.name }}
+              {{ 'productOverview.checkout' | cxTranslate }}</span
+            >
           </div>
         </div>
       </li>

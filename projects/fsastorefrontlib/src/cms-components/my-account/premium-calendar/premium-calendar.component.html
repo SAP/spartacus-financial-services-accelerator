@@ -23,7 +23,7 @@
             premium-data-row
             row
             border
-            background-color-4
+            background-color-1
             text-center text-lg-left
           "
           (click)="toggleActiveAccordion(i)"
@@ -57,7 +57,7 @@
             {{ policy.paymentFrequency }}
           </div>
           <div
-            class="col text-left align-self-stretch background-color-4"
+            class="col text-left align-self-stretch background-color-1"
             [ngClass]="
               policy.billingData[0]?.paymentStatus === 'Overdue'
                 ? 'warn'
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div
-            class="col text-left align-self-stretch background-color-4"
+            class="col text-left align-self-stretch background-color-1"
             [ngClass]="
               policy.billingData[0]?.paymentStatus === 'Overdue'
                 ? 'warn'

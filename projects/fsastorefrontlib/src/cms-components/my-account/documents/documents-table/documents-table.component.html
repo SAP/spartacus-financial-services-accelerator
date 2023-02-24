@@ -85,17 +85,17 @@
   [attr.aria-label]="'document.uploadedDocuments' | cxTranslate"
 >
   <thead class="d-none d-md-table-row">
-    <th scope="col">
+    <th scope="col text-black">
       {{ 'document.name' | cxTranslate }}
     </th>
-    <th scope="col">
+    <th scope="col text-black">
       {{ 'document.creationDate' | cxTranslate }}
     </th>
     <th *ngIf="referredObjectColumnVisible" scope="col">
       {{ 'document.referredInsuranceObject' | cxTranslate }}
     </th>
-    <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
-    <th scope="col">{{ 'document.signature' | cxTranslate }}</th>
+    <th scope="col text-black">{{ 'document.documentType' | cxTranslate }}</th>
+    <th scope="col text-black">{{ 'document.signature' | cxTranslate }}</th>
   </thead>
   <tbody>
     <tr *ngFor="let document of documentSource; let i = index">
