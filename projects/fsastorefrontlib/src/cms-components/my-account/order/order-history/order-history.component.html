@@ -42,7 +42,7 @@
           </div>
           <!-- TABLE -->
           <table class="table cx-order-history-table">
-            <thead class="cx-order-history-thead-mobile">
+            <thead class="cx-order-history-thead-mobile d-md-table-row d-none">
               <th scope="col">
                 {{ 'orderDetails.orderId' | cxTranslate }}
               </th>
@@ -71,7 +71,7 @@
                         params: order
                       } | cxUrl
                     "
-                    class="cx-order-history-value"
+                    class="cx-order-history-value pl-3 pl-md-0 ml-auto ml-md-0"
                   >
                     {{ order?.code }}</a
                   >
@@ -87,7 +87,7 @@
                         params: order
                       } | cxUrl
                     "
-                    class="cx-order-history-value"
+                    class="cx-order-history-value pl-3 pl-md-0 ml-auto ml-md-0"
                     >{{ (order?.entries)[0]?.product?.name }}</a
                   >
                 </td>
@@ -102,7 +102,7 @@
                         params: order
                       } | cxUrl
                     "
-                    class="cx-order-history-value"
+                    class="cx-order-history-value pl-3 pl-md-0 ml-auto ml-md-0"
                     >{{ order?.placed | cxDate: 'longDate' }}</a
                   >
                 </td>
@@ -117,7 +117,7 @@
                         params: order
                       } | cxUrl
                     "
-                    class="cx-order-history-value"
+                    class="cx-order-history-value pl-3 pl-md-0 ml-auto ml-md-0"
                   >
                     {{
                       'orderDetails.statusDisplay_' + order?.statusDisplay
@@ -136,7 +136,7 @@
                         params: order
                       } | cxUrl
                     "
-                    class="cx-order-history-value"
+                    class="cx-order-history-value pl-3 pl-md-0 ml-auto ml-md-0"
                   >
                     {{ order?.total.formattedValue }}</a
                   >

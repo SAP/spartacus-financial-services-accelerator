@@ -85,40 +85,45 @@
   [attr.aria-label]="'document.uploadedDocuments' | cxTranslate"
 >
   <thead class="d-none d-md-table-row">
-    <th scope="col text-black">
+    <th class="checkbox-table-heading"></th>
+    <th scope="col documents-table-heading">
       {{ 'document.name' | cxTranslate }}
     </th>
-    <th scope="col text-black">
+    <th scope="col documents-table-heading">
       {{ 'document.creationDate' | cxTranslate }}
     </th>
     <th *ngIf="referredObjectColumnVisible" scope="col">
       {{ 'document.referredInsuranceObject' | cxTranslate }}
     </th>
-    <th scope="col text-black">{{ 'document.documentType' | cxTranslate }}</th>
-    <th scope="col text-black">{{ 'document.signature' | cxTranslate }}</th>
+    <th scope="col documents-table-heading">
+      {{ 'document.documentType' | cxTranslate }}
+    </th>
+    <th scope="col documents-table-heading">
+      {{ 'document.signature' | cxTranslate }}
+    </th>
   </thead>
   <tbody>
-    <tr *ngFor="let document of documentSource; let i = index">
+    <tr *ngFor="let document of documentSource; let i = index" class="position-relative">
       <ng-container *ngIf="isDocumentValid(document)">
+        <td>
+          <input
+            *ngIf="isDocumentSignableBool(document)"
+            class="rounded checkbox-size"
+            type="checkbox"
+            value="{{ document.code }}"
+            name="{{ document.code }}"
+            (click)="selectDocument(document.code)"
+          />
+        </td>
         <td>
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
             {{ 'document.name' | cxTranslate }}:
           </div>
-          <form class="ml-4 pl-1 d-flex align-items-center">
-            <input
-              *ngIf="isDocumentSignableBool(document)"
-              class="rounded checkbox-size"
-              type="checkbox"
-              value="{{ document.code }}"
-              name="{{ document.code }}"
-              (click)="selectDocument(document.code)"
-            />
-            <span
-              class="td-value text-right notice pointer"
-              (click)="downloadDocument(document)"
-              >{{ document.name }}</span
-            >
-          </form>
+          <span
+            class="td-value text-right notice pointer"
+            (click)="downloadDocument(document)"
+            >{{ document.name }}</span
+          >
         </td>
         <td>
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">

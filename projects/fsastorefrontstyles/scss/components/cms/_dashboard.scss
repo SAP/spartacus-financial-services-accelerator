@@ -10,8 +10,7 @@
 
 %cx-fs-seller-dashboard-list,
 %cx-fs-user-profile,
-%cx-fs-seller-dashboard,
-%cx-fs-documents-table {
+%cx-fs-seller-dashboard {
   .table {
     thead {
       background-color: var(--cx-color-4);
@@ -72,12 +71,12 @@
     flex: 0 1 30%;
   }
 }
+.policies:last-child {
+  padding-right: 3rem;
+}
 %cx-fs-user-profile,
 %cx-fs-seller-dashboard,
 %cx-fs-asset-td {
-  :last-child {
-    padding: 0;
-  }
   .user-profile-wrapper,
   .dashboard-overview-wrapper {
     padding: 2rem;

@@ -6,7 +6,6 @@
   }
   th,
   td {
-    width: 25%;
     padding: 1.625rem 0.625rem;
     color: var(--cx-color-secondary);
     &:last-of-type {
@@ -48,6 +47,27 @@
       &:first-child {
         border-width: 0;
         padding: 1.25rem 0 0 0;
+      }
+    }
+  }
+}
+cx-fs-documents-table {
+  .table {
+    th {
+      color: var(--cx-color-2);
+    }
+    td {
+      @include media-breakpoint-down(sm) {
+        padding-left: 4rem;
+      }
+      .checkbox-size {
+        height: 16px;
+        position: relative;
+        margin-left: 0;
+        @include media-breakpoint-down(sm) {
+          position: absolute;
+          top: 40%;
+        }
       }
     }
   }
