@@ -142,6 +142,10 @@ cx-fs-loan-calculator {
 .range {
   border: 1px solid var(--cx-color-3);
   padding: 0.2rem 0.6rem;
+  &:hover {
+    border: 1px solid var(--cx-color-primary);
+    color: var(--cx-color-primary);
+  }
 }
 
 .small-height {

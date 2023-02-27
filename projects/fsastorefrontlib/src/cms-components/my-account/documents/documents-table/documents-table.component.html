@@ -1,28 +1,126 @@
+<div class="ml-auto fit-content mb-5">
+  <span class="text-uppercase notice link" (click)="signSelected()">
+    {{ 'document.signSelected' | cxTranslate }}
+  </span>
+  |
+  <span class="text-uppercase notice link" (click)="signAll()">
+    {{ 'document.signAll' | cxTranslate }}
+  </span>
+  <p
+    class="text-right mt-2 text-danger"
+    style="text-align: right"
+    *ngIf="noSelectedDocuments"
+  >
+    {{ 'document.signSelectedWarn' | cxTranslate }}
+  </p>
+</div>
+<div class="popup-wrapper" *ngIf="signSelectedDocuments">
+  <div class="w-50 popup-content rounded-large p-4 border-bottom">
+    <div class="d-flex border-bottom">
+      <p class="mx-auto title">{{ 'document.signDocuments' | cxTranslate }}</p>
+      <span class="pointer" (click)="consentDenied()">X</span>
+    </div>
+    <p class="mx-auto text-center font-weight-bold my-5">
+      {{ 'document.consentSelected' | cxTranslate }}
+    </p>
+    <div
+      class="
+        d-lg-flex d-block
+        w-80
+        mx-auto
+        justify-content-space-evenly
+        actions
+      "
+    >
+      <button
+        class="btn btn-secondary px-5 d-block mx-auto mt-3"
+        (click)="consentDenied()"
+      >
+        {{ 'common.cancel' | cxTranslate }}
+      </button>
+      <button
+        class="btn btn-primary px-5 d-block mx-auto mt-3"
+        (click)="signSelectedConfirmed()"
+      >
+        {{ 'document.signSelected' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="popup-wrapper" *ngIf="signAllSelected">
+  <div class="w-50 popup-content rounded-large p-4 border-bottom">
+    <div class="d-flex border-bottom">
+      <p class="mx-auto title">{{ 'document.signDocuments' | cxTranslate }}</p>
+      <span class="pointer" (click)="consentDenied()">X</span>
+    </div>
+    <p class="mx-auto text-center font-weight-bold my-5">
+      {{ 'document.consent' | cxTranslate }}
+    </p>
+    <div
+      class="
+        d-lg-flex d-block
+        w-80
+        mx-auto
+        justify-content-space-evenly
+        actions
+      "
+    >
+      <button
+        class="btn btn-secondary px-5 d-block mx-auto mt-3"
+        (click)="consentDenied()"
+      >
+        {{ 'common.cancel' | cxTranslate }}
+      </button>
+      <button
+        class="btn btn-primary px-5 d-block mx-auto mt-3"
+        (click)="signAllConfirmed()"
+      >
+        {{ 'document.signAll' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</div>
 <table
   class="table"
   [attr.aria-label]="'document.uploadedDocuments' | cxTranslate"
 >
   <thead class="d-none d-md-table-row">
-    <th scope="col">
+    <th class="checkbox-table-heading"></th>
+    <th scope="col documents-table-heading">
       {{ 'document.name' | cxTranslate }}
     </th>
-    <th scope="col">
+    <th scope="col documents-table-heading">
       {{ 'document.creationDate' | cxTranslate }}
     </th>
     <th *ngIf="referredObjectColumnVisible" scope="col">
       {{ 'document.referredInsuranceObject' | cxTranslate }}
     </th>
-    <th scope="col">{{ 'document.documentType' | cxTranslate }}</th>
+    <th scope="col documents-table-heading">
+      {{ 'document.documentType' | cxTranslate }}
+    </th>
+    <th scope="col documents-table-heading">
+      {{ 'document.signature' | cxTranslate }}
+    </th>
   </thead>
   <tbody>
-    <tr *ngFor="let document of documentSource">
+    <tr *ngFor="let document of documentSource; let i = index" class="position-relative">
       <ng-container *ngIf="isDocumentValid(document)">
-        <td class="pointer">
+        <td>
+          <input
+            *ngIf="isDocumentSignableBool(document)"
+            class="rounded checkbox-size"
+            type="checkbox"
+            value="{{ document.code }}"
+            name="{{ document.code }}"
+            (click)="selectDocument(document.code)"
+          />
+        </td>
+        <td>
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
             {{ 'document.name' | cxTranslate }}:
           </div>
           <span
-            class="td-value text-right notice"
+            class="td-value text-right notice pointer"
             (click)="downloadDocument(document)"
             >{{ document.name }}</span
           >
@@ -74,6 +172,24 @@
           <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
             {{ 'document.documentType' | cxTranslate }}:
           </div>
+          <span class="td-value text-right">{{
+            checkDocumentByExternalSystem(document.createdByExternalSystem)
+          }}</span>
+        </td>
+        <td>
+          <div class="d-md-none w-50 text-uppercase semi-bold mr-2">
+            {{ 'document.signature' | cxTranslate }}:
+          </div>
+          <span
+            class="td-value text-right font-weight-bold"
+            [ngClass]="
+              isDocumentSignableBool(document)
+                ? 'pointer notice text-uppercase link'
+                : ''
+            "
+            (click)="signDocument(document.code)"
+            >{{ isDocumentSignable(document) }}</span
+          >
         </td>
       </ng-container>
     </tr>

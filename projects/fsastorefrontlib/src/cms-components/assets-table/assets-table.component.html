@@ -14,6 +14,7 @@
           [mobileColumn]="dataByAssetType.headings[i]"
           [selectedAsset]="selectedAsset"
           (resolveIconAction)="resolveIconAction($event)"
+          [ngClass]="selectedAsset"
         >
         </cx-fs-asset-td>
       </tr>

@@ -1,58 +1,72 @@
-%cx-fs-documents-table {
-  .table {
-    border-width: 1px 0 1px 0;
-    border-style: solid;
-    border-color: var(--cx-color-3);
-    .accordion-list & {
-      border-width: 0;
+.table {
+  border-style: solid;
+  border-color: var(--cx-color-3);
+  .accordion-list & {
+    border-width: 0;
+  }
+  th,
+  td {
+    padding: 1.625rem 0.625rem;
+    color: var(--cx-color-secondary);
+    &:last-of-type {
+      padding-right: 1.25rem;
     }
-    th,
-    td {
-      width: 25%;
-      padding: 1.625rem 0.625rem;
-      color: var(--cx-color-secondary);
-      &:last-of-type {
-        padding-right: 1.25rem;
-      }
-      &:first-of-type {
-        padding-left: 1.25rem;
-      }
-      @include media-breakpoint-down(sm) {
-        width: 100%;
-        display: flex;
-        border-width: 0;
-        padding: 0 1.25rem;
-        &:first-child {
-          padding-top: 1.25rem;
-        }
-        &:last-child {
-          padding-bottom: 1.25rem;
-        }
-      }
-      .td-value {
-        word-break: break-word;
-        @include media-breakpoint-down(md) {
-          width: 50%;
-        }
-      }
+    &:first-of-type {
+      padding-left: 1.25rem;
     }
-    thead {
-      background-color: var(--cx-color-4);
-    }
-    th {
-      text-align: start;
-      &:last-child {
-        text-align: end;
-      }
-    }
-    tr {
+    @include media-breakpoint-down(sm) {
       width: 100%;
+      display: flex;
+      border-width: 0;
+      padding: 0 1.25rem;
+      &:first-child {
+        padding-top: 1.25rem;
+      }
+      &:last-child {
+        padding-bottom: 1.25rem;
+      }
+    }
+    .td-value {
+      word-break: break-word;
+      @include media-breakpoint-down(md) {
+        width: 50%;
+      }
+    }
+  }
+  thead {
+    background-color: var(--cx-color-4);
+  }
+  th {
+    text-align: start;
+  }
+  tr {
+    width: 100%;
+    @include media-breakpoint-down(sm) {
+      border-width: 1px 0 0 0;
+      border-style: solid;
+      &:first-child {
+        border-width: 0;
+        padding: 1.25rem 0 0 0;
+      }
+    }
+  }
+}
+cx-fs-documents-table {
+  .table {
+    th {
+      color: var(--cx-color-2);
+    }
+    td {
       @include media-breakpoint-down(sm) {
-        border-width: 1px 0 0 0;
-        border-style: solid;
-        &:first-child {
-          border-width: 0;
-          padding: 1.25rem 0 0 0;
+        padding-left: 4rem;
+      }
+      .checkbox-size {
+        height: 16px;
+        position: relative;
+        margin-left: 0;
+        @include media-breakpoint-down(sm) {
+          position: absolute;
+          top: 40%;
         }
       }
     }
